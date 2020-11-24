@@ -1,0 +1,39 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+# random comment
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '9.7.1'
+  displayName: 'Install Node'
+- script: |
+   cd SoftServeCarMobile
+   npm install
+  displayName: 'Install dependencies'
+  
+# - script: |
+#     cd SoftServeCarMobile
+#     npm run lint
+#   displayName: 'Run lint'
+
+- script: |
+    cd SoftServeCarMobile
+    npm run test
+  displayName: 'Run unit tests'
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: 'SoftServeCarMobile/android'
+    gradleWrapperFile: 'SoftServeCarMobile/android/gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'assembleRelease'
