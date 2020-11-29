@@ -8,7 +8,7 @@
 
 import React,{Component, useState} from 'react';
 import ReactNative from 'react-native'
-//import {Component} from 'react';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,43 +28,17 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Component1 = (props) => {
-  return (
-    <View>
-      <Text>Value of string: {props.name}</Text>
-    </View>
-  );
-}
+
 
 class App extends Component{
   someVariable: number = 100;
-  inputString: string = "str1";
-  public isPressed : boolean = false;
 
-  // <Component1 name = {this.inputString}/>
   render(){
     return (
       <>
       <View style={styles.body}>
         <View style={styles.sectionContainer}>
-        
-        <TextInput
-          style={{height: 40}}
-          placeholder="Type here some text"
-          onChangeText={inputString => inputString = inputString}
-          defaultValue={this.inputString}
-        />
-       <Button
-        onPress={() => {
-          //this.inputString="Button pressed";
-          this.isPressed  =true;
-        }}
-        title={!this.isPressed 
-          ? this.inputString : "Button pressed" }
-        />
           <Text style={styles.sectionTitle}>Variable: {this.someVariable}</Text>
-          <Text style={styles.sectionTitle}>Variable: {!this.isPressed 
-          ? this.inputString : "Button pressed" }</Text>
         </View>
       </View>
       </>
