@@ -28,8 +28,6 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-
-
 class App extends Component{
   someVariable: number = 100;
 
@@ -46,7 +44,6 @@ class App extends Component{
   }
 
 }
-
 
 const styles = StyleSheet.create({
   scrollView: {
