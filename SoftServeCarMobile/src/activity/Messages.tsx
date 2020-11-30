@@ -5,7 +5,7 @@ export default class Messages extends Component {
     render() {
         return (
             <View>
-                <Text>  </Text>
+                <Text>Messages</Text>
             </View>
         )
     }
