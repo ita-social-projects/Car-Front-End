@@ -21,5 +21,5 @@ import Journey from '../src/activity/Journey';
 */
 
 it('renders correctly', () => {
-   expect(1===1).toEqual();
+   expect(1==1).toEqual();
 });
