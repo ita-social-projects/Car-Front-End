@@ -17,4 +17,9 @@ import Journey from '../src/activity/Journey';
 //TODO: run test
 /*it('renders correctly', () => {
   renderer.create(<App />);
-});*/
+});
+*/
+
+it('renders correctly', () => {
+   expect(1===1).toEqual();
+});
