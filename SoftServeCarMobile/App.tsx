@@ -1,4 +1,14 @@
-import { Provider } from "react";
 import { Providers } from "./src/components/navigation/Providers";
+import React,{Component} from 'react';
 
-export default Providers;
+
+class App extends Component{
+    render(){
+        return (
+            <Providers/>
+        );
+      }
+}
+
+
+export default App;
