@@ -13,13 +13,18 @@ import renderer from 'react-test-renderer';
 import { Login } from '../src/activity/Login';
 import Journey from '../src/activity/Journey';
 
-
 //TODO: run test
 /*it('renders correctly', () => {
   renderer.create(<App />);
 });
 */
 
-it('renders correctly', () => {
-   expect(1===1).toEqual();
+/*test('renders correctly', () => {
+   //expect(1===1).toEqual();
+   expect(sum(1,1)).toBe(2)
+});*/
+
+test('2 + 3 = 5', () => {
+  expect(2+3).toBe(5);
 });
+
