@@ -24,6 +24,10 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
 }
 
 
+
+
+
+
 /*const styles = StyleSheet.create({
     container:{
         position: "absolute",
