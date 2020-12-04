@@ -7,6 +7,7 @@ import { ActivityIndicator,View, StyleSheet, Text } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {AuthContext} from "./AuthProvider";
 import { AppTabs } from "./AppTabs";
+import { centerStyle } from "../styles/centerStyle";
 
 
 interface RoutesProps
@@ -39,7 +40,7 @@ export const Routes: React.FC<RoutesProps> = ({})=>{
   
     if (loading) {
       return (
-        <View style={styles.container}>
+        <View style={centerStyle.container}>
           <ActivityIndicator size="large" />
         </View>
       );
@@ -59,13 +60,3 @@ export const Routes: React.FC<RoutesProps> = ({})=>{
         </NavigationContainer>
     );
 }
-
-
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems:"center",
-        justifyContent:"center"
-    }
-})
-
