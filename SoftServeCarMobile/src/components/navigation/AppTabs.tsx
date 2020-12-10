@@ -7,6 +7,9 @@ import Journey from "../../activity/Journey";
 import Notifications from "../../activity/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { NavigationContainer } from "@react-navigation/native";
+import { Stack } from "react-native-router-flux";
+import { createStackNavigator } from '@react-navigation/stack';
 
 interface AppTabsProps{
 
@@ -58,5 +61,6 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
             <Tabs.Screen name="Journey" component={Journey}/>
             <Tabs.Screen name="Notifications" component={Notifications}/>
         </Tabs.Navigator>
+        
     )
 }
