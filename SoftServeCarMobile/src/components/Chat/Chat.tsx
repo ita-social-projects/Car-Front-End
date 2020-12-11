@@ -1,67 +1,74 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import * as signalR from '@microsoft/signalr';
-import SimpleMessage from './SimpleMesage';
+import styles from './ChatStyles/ChatStyles';
 
 import {
     View,
     Text,
     TextInput,
     Button,
-    StyleSheet
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
-class Chat extends React.Component{
+let currentUserId: number = 0;
+export interface ChatState {
+    message: string,
+    messages: string[],
+    hubConnection: signalR.HubConnection,
+    recievedUserId: string
 
-    constructor(props){
+}
+class Chat extends React.Component<ChatState, ChatState>{
+
+    constructor(props: ChatState) {
         super(props);
 
-        this.state = {
-            message: null,
-            messages: [],
-            hubConnection: null
-        }
+        this.setState({ messages: [] })
     }
 
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
-        this.setState({hubConnection}, () => {
-            this.state.hubConnection.start().then(() => "Connection started!"); 
+        this.setState({ hubConnection }, () => {
+            this.state.hubConnection.start().then(() => "Connection started!");
 
-            hubConnection.on("RecieveMessage", receivedMessage => {
-                const text = receivedMessage;
-                const messages = this.state.messages.concat([text]);
-                this.setState( {messages} );
+            hubConnection.on("RecieveMessage", (UserId, receivedMessage) => {
+                this.setState({ messages: [...this.state.messages, receivedMessage], recievedUserId: UserId });
             })
         });
     }
 
-        onSubmit = () => {
-            console.log("here");
-            console.log(this.state.message);
-            console.log(this.state.messages);
-        this.state.hubConnection.invoke("SendMessage", this.state.message);
+    onSubmit = () => {
+        console.log(this.state.message);
 
-        this.setState({message: ''});
-   };
+        this.state.hubConnection.invoke("SendMessage", currentUserId, this.state.message);
 
-   render() {
-       return (
-           <>
-            <View>
-                <TextInput value={this.state.message}
-                placeholder="type text here"
-                onChangeText={(message) => {this.setState({message: message})}} />
-                <Button onPress={this.onSubmit} title="Send" />
-                {this.state.messages.map((message: string, index: number) => {
-                    return (
-                    <Text key={index}>{message}</Text>
-                    );
-                })}
-            </View>
-           </>
-       );
-   }
+        this.setState({ message: '' });
+    };
+
+    render() {
+        return (
+            <>
+                <View style={styles.container}>
+                    <View style={styles.chatMessage}>
+                        <View>
+                            {this.state.messages && this.state.messages.map((message: string, index: number) => {
+                                return (
+                                    <Text style={styles.message} key={index}>{message}</Text>
+                                );
+                            })}
+                        </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <TextInput style={styles.input} value={this.state.message}
+                            placeholder="Aa"
+                            onChangeText={(message) => { this.setState({ message: message }) }} />
+                        <View>
+                            <Button onPress={this.onSubmit} title="Send" />
+                        </View>
+                    </View>
+                </View>
+            </>
+        );
+    }
 
 
 }
