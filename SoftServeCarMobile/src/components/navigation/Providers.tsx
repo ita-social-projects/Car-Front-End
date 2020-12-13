@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthProvider } from "./AuthProvider";
 import { Routes } from "./Routes";
+import MessageStack from '../routes/MessageStack'
 
 interface ProvidersProps {}
 

@@ -2,6 +2,7 @@ import React from 'react';
 import * as signalR from '@microsoft/signalr';
 import styles from './ChatStyles/ChatStyles';
 
+
 import {
     View,
     Text,
@@ -9,66 +10,76 @@ import {
     Button,
 } from 'react-native';
 
-let currentUserId: number = 0;
+
 export interface ChatState {
-    message: string,
-    messages: string[],
-    hubConnection: signalR.HubConnection,
-    recievedUserId: string
+            message: string,
+            messages: string[],
+            hubConnection: signalR.HubConnection,
+            recievedUserId: string
 
 }
 class Chat extends React.Component<ChatState, ChatState>{
 
-    constructor(props: ChatState) {
+    constructor(props: ChatState){
         super(props);
 
-        this.setState({ messages: [] })
+        this.state = {
+            message: '',
+            messages: [],
+            hubConnection: null,
+            recievedUserId: ''
+        }
+
+        
+        
     }
+    
 
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
-        this.setState({ hubConnection }, () => {
-            this.state.hubConnection.start().then(() => "Connection started!");
+        this.setState({hubConnection}, () => {
+            this.state.hubConnection.start().then(() => "Connection started!"); 
 
-            hubConnection.on("RecieveMessage", (UserId, receivedMessage) => {
-                this.setState({ messages: [...this.state.messages, receivedMessage], recievedUserId: UserId });
+            hubConnection.on("RecieveMessage", (receivedMessage) => {
+                this.setState( { messages: [...this.state.messages, receivedMessage] } );
             })
         });
     }
 
-    onSubmit = () => {
-        console.log(this.state.message);
+        onSubmit = () => {
+            console.log(this.state.message);
+            
+        this.state.hubConnection.invoke("SendMessage", this.state.message);
 
-        this.state.hubConnection.invoke("SendMessage", currentUserId, this.state.message);
+        this.setState({message: ''});
+   };
 
-        this.setState({ message: '' });
-    };
-
-    render() {
-        return (
-            <>
-                <View style={styles.container}>
-                    <View style={styles.chatMessage}>
-                        <View>
-                            {this.state.messages && this.state.messages.map((message: string, index: number) => {
-                                return (
-                                    <Text style={styles.message} key={index}>{message}</Text>
-                                );
-                            })}
-                        </View>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <TextInput style={styles.input} value={this.state.message}
-                            placeholder="Aa"
-                            onChangeText={(message) => { this.setState({ message: message }) }} />
-                        <View>
-                            <Button onPress={this.onSubmit} title="Send" />
-                        </View>
+   render() {
+       return (
+           <>
+            <View style={styles.container}>
+                <View style={styles.chatMessage}>
+                    <View>
+                        {this.state.messages.map((message: string, index: number) => {
+                            return (
+                            <Text style={styles.message} key={index}>{message}</Text>
+                            );
+                        })}
                     </View>
                 </View>
-            </>
-        );
-    }
+                <View style={styles.buttonContainer}>
+                    <TextInput style={styles.input} value={this.state.message}
+                    placeholder="Aa"
+                    onChangeText={(message) => {this.setState({message: message})}} />
+                    <View>
+                        <Button onPress={this.onSubmit} title="Send" />
+                    </View>
+                </View>
+            </View>
+           
+           </>
+       );
+   }
 
 
 }
