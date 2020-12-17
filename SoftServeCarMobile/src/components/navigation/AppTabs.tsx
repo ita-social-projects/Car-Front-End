@@ -2,11 +2,12 @@ import React from "react";
 import {Platform, StyleSheet} from "react-native";
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import Messages from "../../activity/Messages";
-import MyProfile from "../../activity/MyProfile";
+import MyProfile from "../../activity/MyProfile/MyProfile";
 import Journey from "../../activity/Journey";
 import Notifications from "../../activity/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import MyProfileTabs from "../../activity/MyProfile/MyProfileTabs";
 
 interface AppTabsProps{
 
@@ -26,7 +27,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
                 case "Messages": 
                     iconName = 'chatbubbles';
                     break;
-                case "MyProfile": 
+                case "MyProfileTabs": 
                     iconName = 'person';
                     break;
                 case "Journey": 
@@ -54,7 +55,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
           }}
         >
             <Tabs.Screen name="Messages" component={Messages}/>
-            <Tabs.Screen options={{tabBarLabel: "My Profile"}} name="MyProfile" component={MyProfile}/>
+            <Tabs.Screen options={{tabBarLabel: "My Profile"}} name="MyProfileTabs" component={MyProfileTabs}/>
             <Tabs.Screen name="Journey" component={Journey}/>
             <Tabs.Screen name="Notifications" component={Notifications}/>
         </Tabs.Navigator>
