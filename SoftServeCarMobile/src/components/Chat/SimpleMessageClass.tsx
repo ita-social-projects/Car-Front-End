@@ -15,16 +15,10 @@ export default class SimpleMessageClass extends React.Component {
     }
     componentDidMount() {
         axios.get('http://10.0.2.2:61658/api/FakeUser')
-        .then(res => {
-            const chats = res.data.chats;
-            this.setState({data: chats});
-        })
-        // fetch('http://10.0.2.2:61658/api/FakeUser')
-        //     .then((response) => response.json())
-        //     .then((json) => this.setState({
-        //         data: json.chats,
-        //     })).then(() => console.log(this.state.data));
-
+            .then(res => {
+                const chats = res.data.chats;
+                this.setState({ data: chats });
+            })
     }
 
     render() {
