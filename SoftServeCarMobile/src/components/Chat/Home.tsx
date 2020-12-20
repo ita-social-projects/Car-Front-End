@@ -21,7 +21,7 @@ const Home = (props) => {
     // })
         
         return (
-           <Navigator />
+           //<Navigator />
         );
     }
 
