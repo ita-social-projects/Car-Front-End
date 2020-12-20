@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
+import axios from 'axios';
+import { runInThisContext } from 'vm';
 
 
 export default class SimpleMessageClass extends React.Component {
@@ -12,11 +14,16 @@ export default class SimpleMessageClass extends React.Component {
         }
     }
     componentDidMount() {
-        fetch('http://10.0.2.2:61658/api/FakeUser')
-            .then((response) => response.json())
-            .then((json) => this.setState({
-                data: json.chats,
-            })).then(() => console.log(this.state.data));
+        axios.get('http://10.0.2.2:61658/api/FakeUser')
+        .then(res => {
+            const chats = res.data.chats;
+            this.setState({data: chats});
+        })
+        // fetch('http://10.0.2.2:61658/api/FakeUser')
+        //     .then((response) => response.json())
+        //     .then((json) => this.setState({
+        //         data: json.chats,
+        //     })).then(() => console.log(this.state.data));
 
     }
 
@@ -30,7 +37,7 @@ export default class SimpleMessageClass extends React.Component {
                         <View style={styles.main}>
 
                             <View style={styles.button}>
-                                <View style={{ flexDirection: 'row' }}>https
+                                <View style={{ flexDirection: 'row' }}>
                                     <Image style={styles.image} source={{ uri: item.imageURL.toString() }} />
                                     <View>
                                         <Text style={styles.fonts}>{item.name}</Text>
