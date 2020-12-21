@@ -12,7 +12,7 @@ export default class Messages extends React.Component {
     render() {
 
         return (
-            <View style={{ flex: 1, alignSelf: "stretch" }}>
+            <View style={{ flex: 1, alignSelf: "stretch", backgroundColor: 'white' }}>
 
                 <Stack.Navigator screenOptions={{
                     headerTitleAlign: 'center',

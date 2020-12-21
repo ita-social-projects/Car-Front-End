@@ -3,14 +3,14 @@ import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
-import { runInThisContext } from 'vm';
 
 
 export default class SimpleMessageClass extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            isLoading: false
         }
     }
     componentDidMount() {
@@ -22,14 +22,14 @@ export default class SimpleMessageClass extends React.Component {
     }
 
     render() {
+        const { visible } = this.state.isLoading;
         return (
-            <View>
+            <View style={{ marginTop: 24 }}>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={({ id }, index) => id.toString()}
                     renderItem={({ item }) => (
                         <View style={styles.main}>
-
                             <View style={styles.button}>
                                 <View style={{ flexDirection: 'row' }}>
                                     <Image style={styles.image} source={{ uri: item.imageURL.toString() }} />
@@ -42,7 +42,6 @@ export default class SimpleMessageClass extends React.Component {
                                     <View><Ionicons name={'chatbubbles'} size={20}></Ionicons></View>
                                 </TouchableOpacity>
                             </View>
-
                         </View>
                     )}
                 />
@@ -63,8 +62,11 @@ export const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         borderBottomWidth: 1,
+        borderBottomColor: '#C1C1C5',
         height: 68,
-        alignContent: 'center'
+        alignContent: 'center',
+        width: 344,
+        alignSelf: 'center',
     },
     button: {
         flexDirection: 'row',
@@ -81,6 +83,10 @@ export const styles = StyleSheet.create({
         width: 56,
         height: 56,
         borderRadius: 50
+    },
+    lottie: {
+        width: 100,
+        height: 100
     }
 
 })
