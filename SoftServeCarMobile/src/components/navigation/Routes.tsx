@@ -7,15 +7,23 @@ import { ActivityIndicator,View, StyleSheet, Text } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {AuthContext} from "./AuthProvider";
 import { AppTabs } from "./AppTabs";
+import Home from '../Chat/Home';
+import Chat from '../Chat/Chat';
+
 import { centerStyle } from "../styles/centerStyle";
+import {
+  Router,
+  Scene
+} from 'react-native-router-flux'
+
 
 
 interface RoutesProps
 {
 
 }
-
-const Stack  = createStackNavigator<AuthParamList>();
+// AuthParamList insert below
+const Stack  = createStackNavigator();
 
 // headerTitleAlign:"center"
 
@@ -49,14 +57,18 @@ export const Routes: React.FC<RoutesProps> = ({})=>{
 
 
     return(
+      
         <NavigationContainer>
-            {user ? (<AppTabs/>): 
-            (
-                <Stack.Navigator screenOptions={{headerShown:false}}>
-                    <Stack.Screen name="Login" component={Login}/>
-                </Stack.Navigator>
-            )
-            }
+             {user ? (<AppTabs/>): 
+             (
+                 <Stack.Navigator screenOptions={{headerShown:false}}>
+                     <Stack.Screen name="Login" component={Login}/>
+                 </Stack.Navigator>
+             )
+             }
         </NavigationContainer>
+        
+        
+        
     );
 }

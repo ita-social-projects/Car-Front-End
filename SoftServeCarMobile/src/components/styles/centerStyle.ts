@@ -6,4 +6,5 @@ export const centerStyle = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center"
     }
+    
 })
