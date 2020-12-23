@@ -16,7 +16,8 @@ const cardStyle = StyleSheet.create({
         justifyContent: 'space-between'
     },
     cardInformationContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     cardIcon: {
         marginRight: 20

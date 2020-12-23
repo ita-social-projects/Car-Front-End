@@ -1,4 +1,4 @@
-export default interface UserDTO {
+export default interface UserWithAvatarDTO {
     id: number,
     name: string,
     surname: string,
