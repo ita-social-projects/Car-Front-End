@@ -1,5 +1,4 @@
 import APIService from '../APIService';
-import UserWithAvatarDTO from '../../../models/UserWithAvatarDTO';
 import "reflect-metadata";
 import User from '../../../models/User';
 import { injectable } from 'tsyringe';
@@ -7,22 +6,27 @@ import { injectable } from 'tsyringe';
 @injectable()
 class UserService {
     constructor(private apiService: APIService) { }
+    
     routePrefix: string = 'user';
 
-    getUserWithAvatarById(userId: number, includeAvatar = false) {
-        return this.apiService.get<UserWithAvatarDTO>(this.routePrefix + '/withAvatar/' + userId);
+    getUser(userId: number) {
+        return this.apiService.get<User>(this.routePrefix + '/withAvatar/' + userId);
     }
-    getUserAvatarBytesById(userId: number) {
+
+    getAvatar(userId: number) {
         return this.apiService.get<string>(this.routePrefix + '/' + userId + '/avatar');
     }
-    createUser(user: User) {
-        return this.apiService.post<User>(this.routePrefix, { data: user });
+
+    create(user: User) {
+        return this.apiService.post<User>(this.routePrefix, user);
     }
-    updateUser(user: User) {
-        return this.apiService.putRequest<User>(this.routePrefix, { data: user });
+
+    update(user: User) {
+        return this.apiService.put<User>(this.routePrefix, user);
     }
-    deleteUser(user: User) {
-        return this.apiService.deleteRequest<User>(this.routePrefix, { data: user })
+
+    delete(user: User) {
+        return this.apiService.delete<User>(this.routePrefix, user)
     }
 }
 

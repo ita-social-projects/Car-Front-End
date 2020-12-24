@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ActivityIndicator } from 'react-native'
-import UserWithAvatarDTO from '../../models/UserWithAvatarDTO';
+import { View, Text, Image, ActivityIndicator } from 'react-native';
 import headerStyle from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../services/APIService/UserService/UserService';
+import User from '../../models/User';
 
 function AvatarLogoTitle(props: any) {
     const userService = container.resolve(UserService);
-    
-    const [user, setUser] = useState({} as UserWithAvatarDTO);
+
+    const [user, setUser] = useState({} as User);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        userService.getUserAvatarBytesById(3)
+        userService.getAvatar(3)
             .then(res => {
-                setUser({ ...props.user, byteOfImage: res.data });
+                setUser({ ...props.user, byteOfImage: JSON.stringify(res.request._response) });
                 setLoading(false);
-            })
+            }).then(res => res)
             .catch(e => console.log(e));
     }, []);
 
@@ -35,10 +35,11 @@ function AvatarLogoTitle(props: any) {
             {userAvatar}
             <View style={headerStyle.headerUserInformation}>
                 <Text style={headerStyle.headerUserName}>
-                    {props.user.name ? (props.user.name + " " + props.user.surname) : null}
+                    {Object.entries(props.user).length ?
+                        (props.user.name + " " + props.user.surname) : null}
                 </Text>
                 <Text style={headerStyle.headerUserAdditionalData}>
-                    {props.user.position ? props.user.position : null}
+                    {Object.entries(props.user).length ? props.user.position : null}
                 </Text>
                 <Text style={headerStyle.headerUserAdditionalData}>
                     123 rides, 2 badges

@@ -5,5 +5,6 @@ export default interface User {
     position: string,
     location: string,
     hireDate: Date,
-    email: string
+    email: string,
+    byteOfImage: string
 }

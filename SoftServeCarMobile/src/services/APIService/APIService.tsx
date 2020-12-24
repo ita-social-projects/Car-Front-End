@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import "reflect-metadata";
 import { injectable } from 'tsyringe';
 import { environment } from '../../environments/environment';
@@ -7,20 +7,28 @@ import { environment } from '../../environments/environment';
 class APIService {
     baseUrl: string = environment.apiUrl;
 
-    get<T>(url: string, config?: AxiosRequestConfig) {
-        return axios.get<T>(this.baseUrl + url, config);
+    baseHeaders = {
+        headers: {
+            'Context-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        responseType: 'json'
+    };
+
+    get<T>(url: string, params?: any) {
+        return axios.get<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
 
-    post<T>(url: string, config?: AxiosRequestConfig) {
-        return axios.post<T>(this.baseUrl + url, config);
+    post<T>(url: string, params?: any) {
+        return axios.post<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
 
-    putRequest<T>(url: string, config?: AxiosRequestConfig) {
-        return axios.put<T>(this.baseUrl + url, config);
+    put<T>(url: string, params?: any) {
+        return axios.put<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
     
-    deleteRequest<T>(url: string, config?: AxiosRequestConfig) {
-        return axios.delete<T>(this.baseUrl + url, config);
+    delete<T>(url: string, params?: any) {
+        return axios.delete<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
 }
 export default APIService;
