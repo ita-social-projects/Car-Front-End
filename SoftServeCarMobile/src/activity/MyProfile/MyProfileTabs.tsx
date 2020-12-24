@@ -8,14 +8,17 @@ import AddressBook from './MyProfileActivity/AddressBook/AddressBook';
 import MyProfile from './MyProfile';
 import AvatarLogoTitle from './AvatarLogoTitle';
 import Settings from './MyProfileActivity/Settings/Settings';
-import { store } from '../../store/store';
 import UserWithAvatarDTO from '../../models/UserWithAvatarDTO';
+import "reflect-metadata";
+import { container } from 'tsyringe';
+import UserService from '../../services/APIService/UserService/UserService';
 
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = (props: any) => {
+    const userServices = container.resolve(UserService);
+
     const [user, setUser] = useState({} as UserWithAvatarDTO);
-    const userServices = store.getState().userService;
 
     useEffect(()=>{
         userServices.getUserWithAvatarById(3)

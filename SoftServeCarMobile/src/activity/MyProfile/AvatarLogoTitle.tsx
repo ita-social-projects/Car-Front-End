@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator } from 'react-native'
 import UserWithAvatarDTO from '../../models/UserWithAvatarDTO';
-import { store } from '../../store/store';
 import headerStyle from './AvatarLogoTitleStyle';
+import "reflect-metadata";
+import { container } from 'tsyringe';
+import UserService from '../../services/APIService/UserService/UserService';
 
 function AvatarLogoTitle(props: any) {
+    const userService = container.resolve(UserService);
+    
     const [user, setUser] = useState({} as UserWithAvatarDTO);
     const [loading, setLoading] = useState(true);
-    const userService = store.getState().userService;
 
     useEffect(() => {
         userService.getUserAvatarBytesById(3)
