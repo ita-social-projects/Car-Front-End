@@ -3,7 +3,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type AuthParamList = 
 {
-    Login: undefined
+    AppTabs: undefined,
+    Exception: undefined,
+    Login: undefined,
+    Logout: undefined,
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {

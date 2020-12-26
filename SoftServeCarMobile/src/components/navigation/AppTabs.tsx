@@ -1,5 +1,4 @@
 import React from "react";
-import {Platform, StyleSheet} from "react-native";
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import Messages from "../../activity/Messages";
 import MyProfile from "../../activity/MyProfile";

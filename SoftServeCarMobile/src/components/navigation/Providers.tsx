@@ -6,9 +6,8 @@ interface ProvidersProps {}
 
 export const Providers: React.FC<ProvidersProps> = ({}) => {
   return (
-    <AuthProvider>
+    <AuthProvider>      
       <Routes />
     </AuthProvider>
   );
 };
-
