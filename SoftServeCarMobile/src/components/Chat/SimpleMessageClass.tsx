@@ -3,7 +3,10 @@ import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
+import { axiosInstance } from "../../api/Interceptor";
 
+
+const axiosInst = axiosInstance;
 
 export default class SimpleMessageClass extends React.Component {
     constructor(props: any) {
@@ -14,7 +17,7 @@ export default class SimpleMessageClass extends React.Component {
         }
     }
     componentDidMount() {
-        axios.get('http://10.0.2.2:61658/api/FakeUser')
+        axiosInst.get('http://10.0.2.2:61658/api/FakeUser')
             .then(res => {
                 const chats = res.data.chats;
                 this.setState({ data: chats });
