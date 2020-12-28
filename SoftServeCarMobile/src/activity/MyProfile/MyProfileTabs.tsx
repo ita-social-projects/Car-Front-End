@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
 import Details from './MyProfileActivity/Details/Details';
@@ -12,17 +12,18 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../services/APIService/UserService/UserService';
 import User from '../../models/User';
+import { AuthContext } from "../../components/auth/AuthProvider"
 
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = (props: any) => {
     const userServices = container.resolve(UserService);
-
-    const [user, setUser] = useState({} as User);
+    const [currentUser, setCurrentUser] = useState({} as User);
+    const {user} = useContext(AuthContext);  
 
     useEffect(()=>{
-        userServices.getUser(3)
-        .then(res => setUser(res.data))
+        userServices.getUser(Number(user?.id))
+        .then(res => setCurrentUser(res.data))
         .catch(e => console.log(e));
     }, []);
 
@@ -32,7 +33,7 @@ const MyProfileTabs = (props: any) => {
                 <StackTabs.Screen name="MyProfile"
                     component={MyProfile}
                     options={{ headerStyle: { height: 120 }, 
-                    headerTitle: props => <AvatarLogoTitle {...props} user={user} /> }}></StackTabs.Screen>
+                    headerTitle: props => <AvatarLogoTitle {...props} user={currentUser} /> }}></StackTabs.Screen>
                 <StackTabs.Screen name="Preferences" component={Preferences}></StackTabs.Screen>
                 <StackTabs.Screen name="Details" component={Details}></StackTabs.Screen>
                 <StackTabs.Screen name="YourCars" component={Cars}></StackTabs.Screen>

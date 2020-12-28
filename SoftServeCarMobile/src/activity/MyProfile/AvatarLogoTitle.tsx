@@ -13,7 +13,7 @@ function AvatarLogoTitle(props: any) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        userService.getAvatar(3)
+        userService.getAvatar(props.user.id)
             .then(res => {
                 setUser({ ...props.user, byteOfImage: JSON.stringify(res.request._response) });
                 setLoading(false);
