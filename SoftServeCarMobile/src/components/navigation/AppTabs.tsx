@@ -1,5 +1,5 @@
 import React from "react";
-import { createBottomTabNavigator} from "@react-navigation/bottom-tabs"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Messages from "../../activity/Messages";
 import Journey from "../../activity/Journey";
 import Notifications from "../../activity/Notifications";
@@ -7,7 +7,7 @@ import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MyProfileTabs from "../../activity/MyProfile/MyProfileTabs";
 
-interface AppTabsProps{
+interface AppTabsProps {
 
 }
 
