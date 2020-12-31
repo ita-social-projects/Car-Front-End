@@ -1,38 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator } from 'react-native';
 import headerStyle from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../services/APIService/UserService/UserService';
-import User from '../../models/User';
+import { AuthContext } from '../../components/auth/AuthProvider';
 
 function AvatarLogoTitle(props: any) {
     const userService = container.resolve(UserService);
-
-    const [user, setUser] = useState({} as User);
-    const [loading, setLoading] = useState(true);
+    const { user } = useContext(AuthContext);
+    const [avatar, setAvatar] = useState(
+        <ActivityIndicator style={headerStyle.headerUserAvatar} size="large" color="black" />);
 
     useEffect(() => {
-        userService.getAvatar(props.user.id)
-            .then(res => {
-                setUser({ ...props.user, byteOfImage: JSON.stringify(res.request._response) });
-                setLoading(false);
-            }).then(res => res)
-            .catch(e => console.log(e));
+        userService.getAvatar(Number(user?.id))
+            .then(result => {
+                const byteOfImage = JSON.stringify(result.request._response);
+                if (!result.data) {
+                    setAvatar(<Image source={{ uri: 'data:image/png;base64,' + byteOfImage }}
+                        style={headerStyle.headerUserAvatar} />)
+                }
+                else {
+                    setAvatar(<Image source={require('../../../images/default-user-photo.jpg')}
+                        style={headerStyle.headerUserAvatar} />)
+                }
+            })
+            .catch(e => {
+                console.log(e); 
+                setAvatar(<Image source={require('../../../images/default-user-photo.jpg')}
+                    style={headerStyle.headerUserAvatar} />)
+            });
     }, []);
-
-    let userAvatar: Element;
-    if (loading) {
-        userAvatar = <ActivityIndicator style={headerStyle.headerUserAvatar} size="large" color="black" />
-    }
-    else {
-        userAvatar = <Image source={{ uri: 'data:image/png;base64,' + user.byteOfImage }}
-            style={headerStyle.headerUserAvatar} />
-    }
 
     return (
         <View style={headerStyle.headerContainer}>
-            {userAvatar}
+            {avatar}
             <View style={headerStyle.headerUserInformation}>
                 <Text style={headerStyle.headerUserName}>
                     {Object.entries(props.user).length ?
