@@ -46,5 +46,4 @@ export const centerStyle = StyleSheet.create({
         fontSize:40,
         color:'blue'
     }
-    
 })

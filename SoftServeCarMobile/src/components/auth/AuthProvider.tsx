@@ -49,6 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                       AzureId: userGraph.id,
                       OfficeLocation: userGraph.officeLocation,
                     }
+                    console.log(userGraph.id, + " " + userGraph.surname);
                     axiosInst.post(loginUrl,params)
                     .then(response => {
                       AuthManager.saveAPIToken(response.data.token);        
