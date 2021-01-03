@@ -18,7 +18,7 @@ function MyProfile(props: any) {
                 angle="90" />
 
             <TouchableNavigationCard navigation={props.navigation}
-                navigationName="YourCars"
+                navigationName="CarTabs"
                 cardName="Your cars"
                 iconName="car"
                 angle="0" />

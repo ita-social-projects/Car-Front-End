@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
 import Details from './MyProfileActivity/Details/Details';
 import Preferences from './MyProfileActivity/Preferences/Preferences';
-import Cars from './MyProfileActivity/Cars/Cars';
 import AddressBook from './MyProfileActivity/AddressBook/AddressBook';
 import MyProfile from './MyProfile';
 import AvatarLogoTitle from './AvatarLogoTitle';
@@ -12,7 +11,9 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../services/APIService/UserService/UserService';
 import User from '../../models/User';
-import { AuthContext } from "../../components/auth/AuthProvider"
+import { AuthContext } from "../../components/auth/AuthProvider";
+import CarTabs from './MyProfileActivity/CarTabs/CarTabs';
+
 
 const StackTabs = createStackNavigator();
 
@@ -36,7 +37,7 @@ const MyProfileTabs = (props: any) => {
                     headerTitle: props => <AvatarLogoTitle {...props} user={currentUser} /> }}></StackTabs.Screen>
                 <StackTabs.Screen name="Preferences" component={Preferences}></StackTabs.Screen>
                 <StackTabs.Screen name="Details" component={Details}></StackTabs.Screen>
-                <StackTabs.Screen name="YourCars" component={Cars}></StackTabs.Screen>
+                <StackTabs.Screen name="CarTabs" options={{headerShown: false}} component={CarTabs}></StackTabs.Screen>
                 <StackTabs.Screen name="AddressBook" component={AddressBook}></StackTabs.Screen>
                 <StackTabs.Screen name="Settings" component={Settings}></StackTabs.Screen>
             </StackTabs.Navigator>
