@@ -35,8 +35,8 @@ class Chat extends React.Component<ChatState, ChatState>{
 
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
-        this.setState({ hubConnection }, () => {
-            this.state.hubConnection.start().then(() => "Connection started!");
+        this.setState({ hubConnection: hubConnection }, () => {
+            this.state.hubConnection.start().then(() => "Connection started!").catch((err) => console.log(err));
 
             hubConnection.on("RecieveMessage", (receivedMessage) => {
                 this.setState({ messages: [...this.state.messages, receivedMessage] });
@@ -45,10 +45,7 @@ class Chat extends React.Component<ChatState, ChatState>{
     }
 
     onSubmit = () => {
-        console.log(this.state.message);
-
-        this.state.hubConnection.invoke("SendMessage", this.state.message);
-
+        this.state.hubConnection.invoke("SendMessage", this.state.message).catch((err) => console.log(err));
         this.setState({ message: '' });
     };
 

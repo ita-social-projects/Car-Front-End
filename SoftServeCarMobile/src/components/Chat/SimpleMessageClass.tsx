@@ -5,24 +5,23 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
 
 
+
 export default class SimpleMessageClass extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
             data: [],
-            isLoading: false
         }
     }
     componentDidMount() {
-        axios.get('http://10.0.2.2:61658/api/FakeUser')
+        axios.get('http://10.0.2.2:61658/api/UserChats/5')
             .then(res => {
-                const chats = res.data.chats;
+                const chats = res.data;
                 this.setState({ data: chats });
-            })
+            });
     }
 
     render() {
-        const { visible } = this.state.isLoading;
         return (
             <View style={{ marginTop: 24 }}>
                 <FlatList
@@ -32,13 +31,13 @@ export default class SimpleMessageClass extends React.Component {
                         <View style={styles.main}>
                             <View style={styles.button}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Image style={styles.image} source={{ uri: item.imageURL.toString() }} />
+                                    <Image style={styles.image} source={{ uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg' }} />
                                     <View>
-                                        <Text style={styles.fonts}>{item.name}</Text>
-                                        <Text style={{ fontSize: 11, paddingTop: 10 }}>{item.position} </Text>
+                                        <Text style={styles.fonts}>{item.chatName}</Text>
+                                        <Text style={{ fontSize: 11, paddingTop: 10, fontFamily: 'sans-serif' }}>{item.chatName} </Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity style={{ paddingTop: 12, }} onPress={() => this.props.navigation.navigate("Chat", item.name)}>
+                                <TouchableOpacity style={{ paddingTop: 12, }} onPress={() => this.props.navigation.navigate("Chat")}>
                                     <View><Ionicons name={'chatbubbles'} size={20}></Ionicons></View>
                                 </TouchableOpacity>
                             </View>
@@ -67,6 +66,7 @@ export const styles = StyleSheet.create({
         alignContent: 'center',
         width: 344,
         alignSelf: 'center',
+
     },
     button: {
         flexDirection: 'row',
@@ -74,15 +74,17 @@ export const styles = StyleSheet.create({
         padding: 10,
     },
     fonts: {
-        fontFamily: 'opensans',
+        fontFamily: 'OpenSans-Italic',
         fontWeight: 'bold',
-        fontSize: 13
+        fontSize: 13,
     },
     image: {
 
         width: 56,
         height: 56,
-        borderRadius: 50
+        borderRadius: 50,
+        marginRight: 7,
+        bottom: 5
     },
     lottie: {
         width: 100,
