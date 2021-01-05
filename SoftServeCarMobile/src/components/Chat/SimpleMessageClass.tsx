@@ -4,8 +4,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
 
-
-
 export default class SimpleMessageClass extends React.Component {
     constructor(props: any) {
         super(props);
