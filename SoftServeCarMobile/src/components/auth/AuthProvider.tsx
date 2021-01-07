@@ -58,6 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                       , email: userGraph.mail! || userGraph.userPrincipalName!, azureId: userGraph.id };
                       AsyncStorage.setItem("user", JSON.stringify(currentUser));                                           
                       setUser(currentUser);
+                      RootNavigation.navigate("AppTabs", {}); 
                     })
                     .catch((error) => {
                       console.log('Login failed: ' + error);
