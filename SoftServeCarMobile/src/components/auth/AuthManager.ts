@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import { authorize, AuthConfiguration } from 'react-native-app-auth';
 import { Platform } from 'react-native';
-import { axiosInstance } from "../../api/Interceptor";
 
 
 const AuthConfig = {
@@ -26,7 +25,6 @@ const config: AuthConfiguration = {
     tokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
   }
 };
-const axiosInst = axiosInstance;
 export class AuthManager {    
 
   static signInAsync = async () => {
@@ -42,7 +40,6 @@ export class AuthManager {
     await AsyncStorage.removeItem('refreshToken');
     await AsyncStorage.removeItem('expireTime');
     await AsyncStorage.removeItem('idToken');    
-    await AsyncStorage.removeItem('UserId');
     await AsyncStorage.removeItem("user");
     await AsyncStorage.removeItem("APIToken");
   }
@@ -60,17 +57,13 @@ export class AuthManager {
   }
   static getAPIToken=async()=>{
     return await AsyncStorage.getItem('APIToken');
-  }
-
-  static saveUserId = async(Id:string)=>{
-    await AsyncStorage.setItem('UserId', Id);
-  }
-
-  static getUserId=async()=>{
-    return await AsyncStorage.getItem('UserId');
   }  
  
   static getUser = async() => {
     return await AsyncStorage.getItem("user");
   }  
+
+  static setUser = async (user: any) => {
+    await AsyncStorage.setItem('user', user);
+  }
 }

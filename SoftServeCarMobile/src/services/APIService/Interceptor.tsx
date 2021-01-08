@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
-import { AuthManager } from '../components/auth/AuthManager';
-import * as RootNavigation from '../components/navigation/RootNavigation';
+import { AuthManager } from '../../components/auth/AuthManager';
+import * as RootNavigation from '../../components/navigation/RootNavigation';
 
 
 export let axiosInstance = axios.create();
@@ -30,7 +30,12 @@ axiosInstance.interceptors.request.use(
     axiosInstance.interceptors.response.use(
     (response: AxiosResponse<JSON>) => { return response; },
     function (error: { response: { status: number; }; }) {
-        RootNavigation.navigate("Exception",{ errorMessage: error.response.status });     
+        let errorCode: any = 'Network error';
+        if(error.response)
+        {
+            errorCode = error.response.status;
+        }
+        RootNavigation.navigate("Exception",{ errorMessage: errorCode });     
         return Promise.reject(error);
     }
 );
