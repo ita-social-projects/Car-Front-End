@@ -15,7 +15,7 @@ interface RoutesProps
 const Stack  = createStackNavigator<AuthParamList>();
 
 export const Routes: React.FC<RoutesProps> = ({})=>{
-    const { user,loadStorageUser } = useContext(AuthContext);   
+    const { user, loadStorageUser } = useContext(AuthContext);   
 
     useEffect(() => {     
       loadStorageUser(); 

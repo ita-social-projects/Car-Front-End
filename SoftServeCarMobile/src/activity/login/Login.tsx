@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React, { useContext, useEffect, useState } from 'react'
 import { ActivityIndicator, Button, Text, View } from 'react-native'
 import {AuthContext} from "../../components/auth/AuthProvider";
@@ -9,7 +8,6 @@ export function Login(props: any){
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
-
 
     useEffect(() => {
         if(props.route.params && props.route.params.resetConnection){
@@ -23,24 +21,27 @@ export function Login(props: any){
     }    
 
     let loader: any;
+
     if (loading) {
         loader = <ActivityIndicator style={loginStyle.loadingIcon} size="large" color="black" />
     }
-    else{
+    else {
         loader = null;
     }
 
-    return (
-        <View style={loginStyle.container}>
-            <Text style = {loginStyle.loginPageTextGreeting}>Welcome to</Text>
-            <Text style = {loginStyle.loginPageTextName}>Softserve Journeys</Text>
+    return (        
+        <View style={{ flex: 1, justifyContent: "space-around", alignItems: "center" }}>
+            <View style={loginStyle.container}>
+                <Text style = {loginStyle.loginPageTextGreeting}>Welcome to</Text>
+                <Text style = {loginStyle.loginPageTextName}>Softserve Journeys</Text>
+            </View>
             <View style = {loginStyle.loginButton} >
-            {loader}
-            <Button color="black" title="Login" disabled={buttonDisabled}
-            onPress={()=>{
-                 login();
-                loadingProcess(true);
-            }} />
+                {loader}
+                <Button color="black" title="Login" disabled={buttonDisabled}
+                onPress={()=>{
+                    login();
+                    loadingProcess(true);
+                }} />
             </View>
         </View>
     )

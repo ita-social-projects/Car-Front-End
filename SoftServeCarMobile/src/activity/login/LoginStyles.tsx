@@ -5,18 +5,31 @@ const loginStyle = StyleSheet.create({
     container:{
         flex:1,
         alignItems:"center",
-        justifyContent:"center"
+        margin: 30,
     },
     loginPageTextGreeting: {
-        fontSize: 35,        
+        fontFamily: "Proxima-Nova-Reg",
+        fontWeight: "bold",
+        fontSize: 21,
+        textTransform: "uppercase",
+        margin: 5,
+        letterSpacing: 0.2        
     },
     loginPageTextName: {
-        fontSize: 40,  
-        fontWeight: "bold",      
+        fontFamily: "Proxima-Nova-Reg",
+        fontWeight: "bold",
+        fontSize: 30,
+        textTransform: "uppercase",
+        margin: 5,
+        letterSpacing: 0.2 
     },
     loginButton: {  
-        borderRadius: 2,
-        margin: 30,       
+        margin: 30, 
+        padding: 15,
+        alignSelf: "flex-end",
+        fontFamily: "Proxima-Nova-Reg",
+        fontWeight: "bold",
+        fontSize: 16,      
     },
     preferencesText: {
         padding: 30,

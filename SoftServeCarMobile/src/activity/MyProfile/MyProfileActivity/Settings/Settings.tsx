@@ -5,7 +5,7 @@ export default class Settings extends Component {
     render() {
         return (
           <View>
-              <Text>Settigns</Text>
+              <Text>Settings</Text>
           </View>  
         );
     }

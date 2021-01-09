@@ -4,10 +4,12 @@ import { AuthManager } from "./AuthManager";
 import {GraphManager} from './GraphAuthProvider';
 import * as RootNavigation from '../navigation/RootNavigation';
 import {User} from "../../models/User";
-import { store } from "../../store/store";
+import "reflect-metadata";
+import { container } from 'tsyringe';
+import LoginService from '../../services/APIService/loginService/LoginService'
 
 
-const loginService = store.getState().LoginService;
+const loginService = container.resolve(LoginService);
 
 export const AuthContext = React.createContext<{
   user: User;
@@ -49,6 +51,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               position: userGraph.jobTitle,
               id: 0,
               token: '',
+              byteOfImage: '',
+              hireDate: new Date(),
             }
             const dbUser = await loginService.loginUser(user); 
             if(!dbUser.data?.token){

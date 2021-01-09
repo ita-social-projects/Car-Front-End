@@ -4,12 +4,12 @@ export const exceptionStyle = StyleSheet.create({
     container:{
         flex:1,
         alignItems:"center",
-        justifyContent:"center"
+        justifyContent:"center",
     },
     exceptionMessage: {
         fontSize:40,
         padding:20,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     exceptionCode: {
         fontWeight:"bold",
@@ -17,7 +17,6 @@ export const exceptionStyle = StyleSheet.create({
     },
     exceptionLink: {
         fontSize:40,
-        color:'blue'
-    }
-    
+        color:'blue',
+    }    
 })

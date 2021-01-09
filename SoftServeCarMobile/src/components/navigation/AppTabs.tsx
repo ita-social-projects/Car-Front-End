@@ -7,9 +7,7 @@ import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MyProfileTabs from "../../activity/MyProfile/MyProfileTabs";
 
-interface AppTabsProps{
-
-}
+interface AppTabsProps{}
 
 const Tabs = createBottomTabNavigator<AppTabsList>();
 

@@ -1,4 +1,4 @@
-export default interface UserPreferences {
+export type UserPreferences = null | {
     id: number,    
     userId: number,
     doAllowSmoking: boolean,

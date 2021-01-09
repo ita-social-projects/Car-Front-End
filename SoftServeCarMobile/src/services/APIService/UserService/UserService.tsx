@@ -1,27 +1,33 @@
-import React from 'react';
 import APIService from '../APIService';
-import UserWithAvatarDTO from '../../../models/UserWithAvatarDTO';
+import "reflect-metadata";
 import {User} from '../../../models/User';
+import { injectable } from 'tsyringe';
 
+@injectable()
 class UserService {
     constructor(private apiService: APIService) { }
+    
     routePrefix: string = 'user';
 
-    getUserWithAvatarById(userId: number) {
-        return this.apiService.getRequest<UserWithAvatarDTO>(this.routePrefix + '/'+ userId);
+    getUser(userId: number) {
+        return this.apiService.get<User>(this.routePrefix + '/withAvatar/' + userId);
     }
-    getUserAvatarBytesById(userId: number) {
-        return this.apiService.getRequest<string>(this.routePrefix + '/' + userId);
+
+    getAvatar(userId: number) {
+        return this.apiService.get<string>(this.routePrefix + '/' + userId + '/avatar');
     }
-    createUser(user: User) {
-        return this.apiService.postRequest<User>(this.routePrefix, { data: user });
+
+    create(user: User) {
+        return this.apiService.post<User>(this.routePrefix, user);
     }
-    updateUser(user: User) {
-        return this.apiService.putRequest<User>(this.routePrefix, { data: user });
+
+    update(user: User) {
+        return this.apiService.put<User>(this.routePrefix, user);
     }
-    deleteUser(user: User) {
-        return this.apiService.deleteRequest<User>(this.routePrefix, { data: user })
+
+    delete(user: User) {
+        return this.apiService.delete<User>(this.routePrefix, user)
     }
 }
-export const UserServiceContext = React.createContext(new UserService(new APIService));
+
 export default UserService;

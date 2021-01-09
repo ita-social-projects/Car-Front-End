@@ -6,4 +6,6 @@ export  type User= null | {
     location: string,    
     email: string,
     token: string
+    hireDate: Date,
+    byteOfImage: string
 }
