@@ -9,16 +9,6 @@ export default class Journey extends Component {
         return (
             <View>
                 <Text>Journey</Text>
-                <Button color="black" title="401 exception"
-                    onPress={function note() {
-                        axiosInst.get(baseUrl+"/ExceptionTest/exception401")
-                            .then(response => {
-                                return response;
-                            })
-                            .catch((error) => {
-                                return error;
-                            });
-                    }}></Button>
             </View>
         )
     }

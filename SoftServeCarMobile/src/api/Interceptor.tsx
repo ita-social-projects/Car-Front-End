@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { AuthManager } from '../components/auth/AuthManager';
 import * as RootNavigation from '../components/navigation/RootNavigation';
-import SomeComponent from "../api/NotificationService"
+import notificate from "../api/NotificationService"
 
 export let axiosInstance = axios.create({ timeout: 4000 });
 
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
     },
     (error: AxiosError) => {
         if (error.response === undefined) {
-            SomeComponent(
+            notificate(
                 "There isn't server response",
                 'error');
         }
@@ -48,11 +48,11 @@ axiosInstance.interceptors.response.use(
         }
         else {
             if (error.response?.data.StatusCode === undefined) {
-                SomeComponent(
+                notificate(
                     "Status " + error.response?.status + ": " + error.response?.data.title,
                     'error');
             } else {
-                SomeComponent(
+                notificate(
                     "Status " + error.response?.data.StatusCode + ": " + error.response?.data.Message,
                     error.response?.data.Severity == 1 ? 'error' : 'warning');
             }

@@ -1,8 +1,6 @@
-import { NativeModules } from 'react-native';
 import { RNToasty } from 'react-native-toasty'
 
-const { } = NativeModules;
-export default function SomeComponent(message: string, type: string) {
+export default function notificate(message: string, type: string) {
     switch (type) {
         case 'warning': {
             RNToasty.Warn({
