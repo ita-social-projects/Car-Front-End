@@ -31,8 +31,6 @@ const carStyle = StyleSheet.create({
         marginVertical: 24,
     },
     dropDownPicker: {
-        borderWidth: 2,
-        borderColor: '#000000',
         marginBottom: 16
     },
     saveButtonContainer: {

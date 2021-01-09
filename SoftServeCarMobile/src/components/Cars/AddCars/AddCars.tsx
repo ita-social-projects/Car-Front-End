@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { KeyboardAvoidingView } from 'react-native';
-import { Platform } from 'react-native';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import DropDownPicker from '../../../shared/DropDownPicker/DropDownPicker';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import BrandService from '../../../services/APIService/BrandService/BrandService';
@@ -14,13 +13,21 @@ import { ImagePickerResponse, launchImageLibrary } from 'react-native-image-pick
 import CarService from '../../../services/APIService/CarService/CarService';
 import DropDownItem from '../../../shared/DropDownPicker/DropDownItem';
 import carStyle from './AddCarsStyle';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Color } from '../../../models/Color';
+import CarTextInput from '../../../shared/DropDownPicker/CarTextInput/CarTextInput';
 
 function AddCars(props: any) {
     const [brands, setBrands] = useState({} as Brand[]);
     const [models, setModels] = useState({} as Model[]);
+    const [colors, setColors] = useState<Array<DropDownItem>>(Object.values(Color)
+        .filter(value => isNaN(Number(value)))
+        .map((item, index) => ({ id: index.toString(), title: item.toString() })));
     const [selectedBrand, setBrand] = useState({} as DropDownItem);
     const [selectedModel, setModel] = useState({} as DropDownItem);
+    const [selectedColor, setColor] = useState<String>();
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
+    const [showTextInput, setShowTextInput] = useState(false);
 
     const brandService = container.resolve(BrandService);
     const modelSerivce = container.resolve(ModelService);
@@ -37,7 +44,7 @@ function AddCars(props: any) {
     }, []);
 
     const uploadPhotoHandle = () => {
-        launchImageLibrary({ mediaType: 'photo' }, response => {
+        launchImageLibrary({ mediaType: 'photo', }, response => {
             if (!response.didCancel) {
                 setPhoto(response);
                 const imageData = new FormData();
@@ -60,8 +67,7 @@ function AddCars(props: any) {
             ({ ...{ id: String(model.id), title: model.name } })) : null;
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={{ flex: 1 }}>
+        <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={carStyle.carAvatarContainer}>
                 {photo && (<Image source={{ uri: photo.uri }} style={carStyle.carAvatar} />)}
                 <TouchableOpacity style={carStyle.carButtonUpload}
@@ -74,12 +80,14 @@ function AddCars(props: any) {
             <View style={carStyle.inputsContainer}>
                 <View style={carStyle.dropDownContainer}>
                     <DropDownPicker
+                        zIndex={3000}
                         style={carStyle.dropDownPicker}
                         placeHolder="Brand"
                         items={brandItems ? brandItems : []}
                         onSelectedItem={setBrand}>
                     </DropDownPicker>
                     <DropDownPicker
+                        zIndex={2000}
                         style={carStyle.dropDownPicker}
                         placeHolder="Model"
                         items={modelItems ?
@@ -89,15 +97,25 @@ function AddCars(props: any) {
                                 : modelItems) : []}
                         onSelectedItem={setModel}>
                     </DropDownPicker>
+                    <DropDownPicker
+                        zIndex={1000}
+                        style={carStyle.dropDownPicker}
+                        placeHolder="Color"
+                        items={colors}
+                        onSelectedItem={setColor}>
+                    </DropDownPicker>
+                    <CarTextInput placeHolder="Plate number" />
                 </View>
                 <View style={carStyle.saveButtonContainer}>
-                    <Text style={{ color: 'red' }}>*<Text style={{ color: '#414045' }} > - mandatory information</Text></Text>
-                    <TouchableOpacity style={carStyle.carButtonSave}>
+                    <Text style={{ color: 'red' }}>*
+                        <Text style={{ color: '#414045' }} > - mandatory information</Text>
+                    </Text>
+                    <TouchableOpacity style={[carStyle.carButtonSave]}>
                         <Text style={carStyle.carButtonSaveText}>Save</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView >
     );
 }
 export default AddCars;

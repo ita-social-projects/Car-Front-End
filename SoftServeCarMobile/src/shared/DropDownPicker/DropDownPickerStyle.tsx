@@ -30,10 +30,15 @@ const dropDownStyles = StyleSheet.create({
     },
     searchArea: {
         borderTopColor: '#DCDCDC',
-        borderTopWidth: 2
+        borderTopWidth: 2,
+        backgroundColor: 'white'
     },
     scrollView: {
-        maxHeight: 100
+        maxHeight: 100,
+    },
+    dropDownArea: {
+        position: 'absolute',
+        width: '100%',
     }
 });
 export default dropDownStyles;
