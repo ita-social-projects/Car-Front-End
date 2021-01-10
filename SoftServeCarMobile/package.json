@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -23,10 +23,13 @@
     "@react-navigation/material-top-tabs": "5.3.10",
     "@react-navigation/native": "5.8.10",
     "@react-navigation/stack": "5.12.8",
-    "axios": "0.21.0",
+    "axios": "0.21.1",
     "babel-plugin-transform-typescript-metadata": "0.3.1",
+    "isomorphic-fetch": "3.0.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-animated-loader": "0.0.8",
+    "react-native-app-auth": "6.0.1",
     "react-native-gesture-handler": "1.9.0",
     "react-native-reanimated": "1.13.2",
     "react-native-safe-area-context": "3.1.9",
@@ -36,8 +39,6 @@
     "redux": "4.0.5",
     "reflect-metadata": "0.1.13",
     "tsyringe": "4.4.0",
-    "react-native-animated-loader": "0.0.8",
-    "react-native-app-auth": "^6.0.1",
     "react-native-router-flux": "4.2.0",
     "react-navigation-stack": "2.10.2"
   },
@@ -53,8 +54,8 @@
     "@types/react-test-renderer": "17.0.0",
     "babel-jest": "25.1.0",
     "eslint": "6.5.1",
-    "jest": "^25.1.0",
-    "jest-mock-axios": "^4.2.1",
+    "jest": "25.1.0",
+    "jest-mock-axios": "4.2.1",
     "metro-react-native-babel-preset": "0.59.0",
     "react-test-renderer": "16.13.1",
     "typescript": "4.1.2"

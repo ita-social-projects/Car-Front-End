@@ -1,5 +1,5 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import Messages from "../../activity/Messages";
 import Journey from "../../activity/Journey";
 import Notifications from "../../activity/Notifications";
@@ -7,9 +7,7 @@ import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MyProfileTabs from "../../activity/MyProfile/MyProfileTabs";
 
-interface AppTabsProps {
-
-}
+interface AppTabsProps{}
 
 const Tabs = createBottomTabNavigator<AppTabsList>();
 
@@ -35,8 +33,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
                     iconName = 'notifications';
                     break;
             }
-            // https://github.com/oblador/react-native-vector-icons 
-            // this library has additional in root conditions for each OS
+           
             return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}
@@ -45,7 +42,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
                 fontStyle: 'normal',
                 fontSize: 10,
                 fontWeight: '800',
-                fontFamily: 'OpenSans-Bold', //doesn't work because react native have not easy way to use custom fonts
+                fontFamily: 'OpenSans-Bold', 
                 lineHeight: 16
             },
             activeTintColor: 'black',

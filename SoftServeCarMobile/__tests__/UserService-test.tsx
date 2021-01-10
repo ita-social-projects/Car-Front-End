@@ -2,7 +2,7 @@ import 'react-native';
 import UserService from '../src/services/APIService/UserService/UserService';
 import { AxiosResponse } from 'axios';
 import APIService from '../src/services/APIService/APIService'
-import User from '../src/models/User';
+import {User} from '../src/models/User';
 
 
 describe('UserService', () => {
@@ -14,7 +14,8 @@ describe('UserService', () => {
         byteOfImage: './dd124lam-112_0!1dxxkd',
         location: 'Lviv',
         hireDate: new Date('2020-04-09'),
-        email: 'tom@gmail.com'
+        email: 'tom@gmail.com',
+        token: '',
     }
 
     let apiService: APIService = new APIService();

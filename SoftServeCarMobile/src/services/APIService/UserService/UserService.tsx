@@ -1,6 +1,6 @@
 import APIService from '../APIService';
 import "reflect-metadata";
-import User from '../../../models/User';
+import {User} from '../../../models/User';
 import { injectable } from 'tsyringe';
 
 @injectable()

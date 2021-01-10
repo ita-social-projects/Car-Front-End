@@ -1,10 +1,11 @@
-export default interface User {
+export  type User= null | {
     id: number,
     name: string,
     surname: string,
     position: string,
-    location: string,
-    hireDate: Date,
+    location: string,    
     email: string,
+    token: string
+    hireDate: Date,
     byteOfImage: string
 }

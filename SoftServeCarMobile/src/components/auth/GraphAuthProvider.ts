@@ -1,5 +1,6 @@
 import { Client } from '@microsoft/microsoft-graph-client';
 import { AuthManager } from './AuthManager';
+require('isomorphic-fetch');
 
 class GraphAuthProvider {
     getAccessToken = async() => {
@@ -19,7 +20,7 @@ class GraphAuthProvider {
       
       return await graphClient
         .api('/me')
-        .select('id,displayName,givenName,mail,mailboxSettings,userPrincipalName,officeLocation,surname')
+        .select('id,displayName,givenName,mail,position,mailboxSettings,userPrincipalName,officeLocation,surname')
         .get();
     } 
   }
