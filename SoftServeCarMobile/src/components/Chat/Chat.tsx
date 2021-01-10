@@ -32,7 +32,6 @@ class Chat extends React.Component<ChatState, ChatState>{
 
     }
 
-
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
         this.setState({ hubConnection: hubConnection }, () => {

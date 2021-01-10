@@ -4,8 +4,8 @@ import Chat from '../components/Chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessageClass from '../components/Chat/SimpleMessageClass';
 import SimpleMessage from '../components/Chat/SimpleMesage';
+import ChatFunc from '../components/Chat/ChatFunc';
 
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
@@ -28,7 +28,7 @@ export default class Messages extends React.Component {
                                 </TouchableOpacity>
                             )
                         }} />
-                    <Stack.Screen name="Chat" component={Chat} />
+                    <Stack.Screen name="Chat" component={ChatFunc} />
                 </Stack.Navigator>
             </View>
         )
