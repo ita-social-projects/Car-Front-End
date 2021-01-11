@@ -70,9 +70,9 @@ jobs:
 
           args: >
 
-            -Dsonar.organization=testcar
+            -Dsonar.organization=ita-social-projects
 
-            -Dsonar.projectKey=SplinterRAT_Car-Front-End
+            -Dsonar.projectKey=ita-social-projects_Car-Front-End
 
             -Dsonar.javascript.lcov.reportPaths=SoftServeCarMobile/coverage/lcov.info 
 
