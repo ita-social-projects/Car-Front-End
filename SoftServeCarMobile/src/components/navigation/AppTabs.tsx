@@ -1,11 +1,14 @@
 import React from "react";
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import Messages from "../../activity/Messages";
-import Journey from "../../activity/Journey";
 import Notifications from "../../activity/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
 import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";
+
+import JourneyTabs from "../../activity/journey/JourneyTabs";
+
 
 interface AppTabsProps{}
 
@@ -13,8 +16,8 @@ const Tabs = createBottomTabNavigator<AppTabsList>();
 
 export const AppTabs: React.FC<AppTabsProps> =({})=>{
     return(
-        <Tabs.Navigator
-        initialRouteName="Journey"
+        <Tabs.Navigator 
+        initialRouteName="JourneyTabs" 
         sceneContainerStyle={{alignItems:"center"}}
         screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -26,7 +29,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
                 case "MyProfileTabs":
                     iconName = 'person';
                     break;
-                case "Journey":
+                case "JourneyTabs": 
                     iconName = 'car';
                     break;
                 case "Notifications":
@@ -51,7 +54,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
         >
             <Tabs.Screen name="Messages" component={Messages}/>
             <Tabs.Screen options={{tabBarLabel: "My Profile"}} name="MyProfileTabs" component={MyProfileTabs}/>
-            <Tabs.Screen name="Journey" component={Journey}/>
+            <Tabs.Screen options={{tabBarLabel: "Journey"}} name="JourneyTabs" component={JourneyTabs}/>
             <Tabs.Screen name="Notifications" component={Notifications}/>
         </Tabs.Navigator>
     )

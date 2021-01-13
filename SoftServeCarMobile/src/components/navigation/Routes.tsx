@@ -8,7 +8,6 @@ import { AppTabs } from "./AppTabs";
 import { navigationRef } from "./RootNavigation";
 import { Exception } from "../../activity/exception/Exception";
 
-
 interface RoutesProps
 {}
 
@@ -29,14 +28,14 @@ export const Routes: React.FC<RoutesProps> = ({})=>{
                 <Stack.Screen name = 'AppTabs' component = {AppTabs} options={{headerShown:false}}/>
                 <Stack.Screen name = 'Exception' component = {Exception}/>
               </Stack.Navigator>
-           ):
-          (
-            <Stack.Navigator screenOptions={{headerShown:false}} >
-               <Stack.Screen name = 'Login' component = {Login} />
+           ): 
+          (             
+            <Stack.Navigator screenOptions={{headerShown:false}} >              
+               <Stack.Screen name = 'Login' component = {Login} />  
                <Stack.Screen name = 'Exception' component = {Exception}/>
             </Stack.Navigator>
           )
-          }
-      </NavigationContainer>
+      }
+    </NavigationContainer>
   );
 }

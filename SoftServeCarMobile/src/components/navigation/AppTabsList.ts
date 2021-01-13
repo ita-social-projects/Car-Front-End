@@ -2,6 +2,6 @@ export type AppTabsList =
 {
     Messages: undefined,
     MyProfileTabs: undefined,
-    Journey: undefined,
+    JourneyTabs: undefined,
     Notifications: undefined
 };
