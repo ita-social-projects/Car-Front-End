@@ -1,6 +1,6 @@
 import React from 'react';
 import * as signalR from '@microsoft/signalr';
-import styles from './ChatStyles/ChatStyles';
+import styles from './chat-styles/ChatStyle';
 
 
 import {

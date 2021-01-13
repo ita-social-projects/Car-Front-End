@@ -1,8 +1,8 @@
 import 'react-native';
 import { AxiosResponse } from 'axios';
-import APIService from '../src/services/APIService/APIService'
-import {User} from '../src/models/User';
-import LoginService from '../src/services/APIService/loginService/LoginService';
+import APIService from '../APIService/APIService'
+import {User} from '../models/User';
+import LoginService from '../APIService/loginService/LoginService';
 
 
 describe('UserService', () => {
@@ -20,7 +20,7 @@ describe('UserService', () => {
 
     let apiService: APIService = new APIService();
     let loginService = new LoginService(apiService);
-    
+
     test('It should login user', () => {
         jest.spyOn(apiService, 'post').mockImplementation(() => new Promise<AxiosResponse<User>>
         (function (resolve) {

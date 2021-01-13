@@ -1,8 +1,8 @@
 import React, {  } from 'react';
 import { useContext } from 'react';
 import { Button, Text, View } from 'react-native';
-import {AuthContext} from "../../../../components/auth/AuthProvider";
-import {DetailsStyle} from './DetailsStyles';
+import {AuthContext} from "../../../auth/AuthProvider";
+import {DetailsStyle} from './DetailsStyle';
 
 
 const Details = () => {
@@ -10,7 +10,7 @@ const Details = () => {
 
     return (
 
-        <View style={DetailsStyle.mainContainer}>   
+        <View style={DetailsStyle.mainContainer}>
             <View style={DetailsStyle.detailsContainer}>
                 <Text style={DetailsStyle.captionView}>Position</Text>
                 <Text style={DetailsStyle.valueView}>{user?.position}</Text>
@@ -25,13 +25,13 @@ const Details = () => {
                 <Text style={DetailsStyle.captionView}>Workspace</Text>
                 <Text style={DetailsStyle.valueColorView}>{user?.location}</Text>
             </View>
-          
+
             <View style = {DetailsStyle.logoutButton}>
             <Button title = 'Logout' onPress= {()=>{
                     logout();
                 }}></Button>
-            </View>           
-        </View>    
+            </View>
+        </View>
     )
 }
 

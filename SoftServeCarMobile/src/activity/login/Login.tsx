@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ActivityIndicator, Button, Text, View } from 'react-native'
-import {AuthContext} from "../../components/auth/AuthProvider";
+import {AuthContext} from "../auth/AuthProvider";
 import loginStyle from './LoginStyles';
 
 
@@ -11,14 +11,14 @@ export function Login(props: any){
 
     useEffect(() => {
         if(props.route.params && props.route.params.resetConnection){
-            loadingProcess(false);            
+            loadingProcess(false);
         }
     })
 
     function loadingProcess (value: boolean)  {
         setButtonDisabled(value);
-        setLoading(value);      
-    }    
+        setLoading(value);
+    }
 
     let loader: any;
 
@@ -29,7 +29,7 @@ export function Login(props: any){
         loader = null;
     }
 
-    return (        
+    return (
         <View style={{ flex: 1, justifyContent: "space-around", alignItems: "center" }}>
             <View style={loginStyle.container}>
                 <Text style = {loginStyle.loginPageTextGreeting}>Welcome to</Text>

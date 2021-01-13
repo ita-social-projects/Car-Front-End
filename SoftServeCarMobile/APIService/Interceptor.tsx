@@ -1,13 +1,14 @@
+// @ts-ignore
 import axios, { AxiosResponse } from 'axios'
-import { AuthManager } from '../../components/auth/AuthManager';
-import * as RootNavigation from '../../components/navigation/RootNavigation';
+import { AuthManager } from '../src/activity/auth/AuthManager';
+import * as RootNavigation from '../src/components/navigation/RootNavigation';
 
 
 export let axiosInstance = axios.create();
- 
+
 axiosInstance.interceptors.request.use(
-    async function (req) {
-        const token = await AuthManager.getAPIToken(); 
+    async function (req: { headers: { Accept: string; "Content-Type": string; Authorization?: string; }; }) {
+        const token = await AuthManager.getAPIToken();
         if (token) {
             req.headers = {
                 Accept: 'application/json',
@@ -18,13 +19,13 @@ axiosInstance.interceptors.request.use(
         else{
             req.headers = {
                 Accept: 'application/json',
-        'Content-Type': 'application/json',        
+        'Content-Type': 'application/json',
             };
-        }     
+        }
         return req;
     },
     (error: any) => {
-        
+
         return Promise.reject(error);
     })
     axiosInstance.interceptors.response.use(
@@ -35,7 +36,7 @@ axiosInstance.interceptors.request.use(
         {
             errorCode = error.response.status;
         }
-        RootNavigation.navigate("Exception",{ errorMessage: errorCode });     
+        RootNavigation.navigate("Exception",{ errorMessage: errorCode });
         return Promise.reject(error);
     }
 );

@@ -3,7 +3,7 @@ import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
-import { axiosInstance } from "../../services/APIService/Interceptor";
+import { axiosInstance } from "../../../APIService/Interceptor";
 
 
 const axiosInst = axiosInstance;
