@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1610233407415" clover="3.2.0">
+  <project timestamp="1610233407415" name="All files">
+    <metrics statements="62" coveredstatements="25" conditionals="6" coveredconditionals="1" methods="28" coveredmethods="8" elements="96" coveredelements="34" complexity="0" loc="62" ncloc="62" packages="7" files="8" classes="8"/>
+    <package name="components.auth">
+      <metrics statements="27" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="0"/>
+      <file name="AuthManager.ts" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\components\auth\AuthManager.ts">
+        <metrics statements="27" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="0"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.navigation">
+      <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="RootNavigation.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\components\navigation\RootNavigation.tsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="environments">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="environment.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\environments\environment.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.APIService">
+      <metrics statements="21" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <file name="APIService.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\services\APIService\APIService.tsx">
+        <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+      </file>
+      <file name="Interceptor.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\services\APIService\Interceptor.tsx">
+        <metrics statements="15" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.APIService.UserService">
+      <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
+      <file name="UserService.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\services\APIService\UserService\UserService.tsx">
+        <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.APIService.loginService">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="LoginService.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\services\APIService\loginService\LoginService.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.APIService.preferencesServise">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="PreferencesService.tsx" path="C:\Users\User\source\test1\temp2\Car-Front-End\SoftServeCarMobile\src\services\APIService\preferencesServise\PreferencesService.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
