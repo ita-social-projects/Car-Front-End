@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, Button, Alert } from 'react-native';
-import Chat from '../components/chat/Chat';
+import Chat from './chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessageClass from '../components/chat/SimpleMessageClass';
+import SimpleMessageClass from './chat/SimpleMessageClass';
 
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
