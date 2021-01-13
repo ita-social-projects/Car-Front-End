@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import * as signalR from '@microsoft/signalr';
-import { View, Text, TextInput, Button } from 'react-native';
-import styles from './ChatStyles/ChatStyles';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 
 const ChatFunc = (props) => {
@@ -11,7 +10,7 @@ const ChatFunc = (props) => {
 
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
-        console.log(connection)
+        console.log(connection);
         setHubConnection(connection);
         console.log(hubConnection);
 
@@ -54,3 +53,42 @@ const ChatFunc = (props) => {
 }
 
 export default ChatFunc;
+
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginBottom: 20,
+      },
+     
+    message: {
+        borderWidth: 1,
+        borderColor: "#20232a",
+        borderRadius: 8,
+        textAlign: 'center',
+        padding: 8,
+    },
+    input: {
+        padding: 10,
+        width: '80%',
+        borderWidth: 4,
+        borderColor: "#20232a",
+        borderRadius: 4,
+      },
+
+    buttonContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: 5,
+        flexDirection: 'row',
+        height: 40,
+        justifyContent: 'space-between'
+    },
+    chatMessage: {
+        //flex: 1,
+        backgroundColor: 'powderblue'
+    },    
+});

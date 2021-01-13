@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View, Button, Alert } from 'react-native';
-import Chat from '../components/Chat/Chat';
+import Chat from '../components/сhat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessage from '../components/Chat/SimpleMesage';
-import ChatFunc from '../components/Chat/ChatFunc';
+import SimpleMessage from '../components/сhat/SimpleMesage';
+import ChatFunc from '../components/сhat/ChatFunc';
 
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
@@ -28,7 +28,7 @@ export default class Messages extends React.Component {
                                 </TouchableOpacity>
                             )
                         }} />
-                    <Stack.Screen name="Chat" component={ChatFunc} />
+                    <Stack.Screen name="Chat" component={Chat} />
                 </Stack.Navigator>
             </View>
         )

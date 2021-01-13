@@ -1,10 +1,9 @@
-import React, { ComponentProps, useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
 import { environment } from '../../environments/environment';
-import { AuthContext } from '../../components/auth/AuthProvider';
-import { string } from 'prop-types';
+import { AuthContext } from '../auth/AuthProvider';
 
 
 const SimpleMessage = (props) => {
@@ -17,6 +16,7 @@ const SimpleMessage = (props) => {
         axios.get(environment.apiUrl + 'UserChats/' + user.id.toString())
         .then(res => {
             const chats = res.data;
+            console.log(chats);
             setData(chats);
         })
     }, []);

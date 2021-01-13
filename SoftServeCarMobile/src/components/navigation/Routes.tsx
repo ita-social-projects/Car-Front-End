@@ -7,8 +7,7 @@ import { ActivityIndicator,View, StyleSheet, Text } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {AuthContext} from "../auth/AuthProvider";
 import { AppTabs } from "./AppTabs";
-import Home from '../Chat/Home';
-import Chat from '../Chat/Chat';
+import Chat from '../сhat/Chat';
 
 import { centerStyle } from "../styles/centerStyle";
 import {
