@@ -1,31 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Text, View } from 'react-native'
-import "reflect-metadata";
-import { container } from 'tsyringe';
-import UserService from '../../services/APIService/UserService/UserService';
-import User from '../../models/User';
-import { AuthContext } from "../../components/auth/AuthProvider"
-import CurrentJourney from './JourneyActivity/CurrentJourney';
-import CreateJourney from './JourneyActivity/CreateJourney';
-import SearchJourney from './JourneyActivity/SearchJourney';
-import JourneyInformation from './JourneyActivity/JourneyInformation';
+import { View } from 'react-native'
+import CreateJourney from './journeyActivity/CreateJourney';
+import SearchJourney from './journeyActivity/SearchJourney';
 import Journey from './Journey';
+import JourneyPage from './journeyActivity/segmentControlActivities/JourneyPage';
+import JourneyStyle from './JourneyStyle';
 
 const StackTabs = createStackNavigator();
 
 const JourneyTabs = (props: any) => {
-
-
     return (
-        <View style={{ flex: 1, alignSelf: 'stretch' }}>
+        <View style={JourneyStyle.tabsStyle}>
             <StackTabs.Navigator>
                 <StackTabs.Screen name="Journey"
-                        component={Journey} options={{headerTitleAlign:"center"}}/>
-                <StackTabs.Screen name="CurrentJourney" component={CurrentJourney}></StackTabs.Screen>
-                <StackTabs.Screen name="CreateJourney" component={CreateJourney}></StackTabs.Screen>
-                <StackTabs.Screen name="SearchJourney" component={SearchJourney}></StackTabs.Screen>
-                <StackTabs.Screen name="JourneyInformation" component={JourneyInformation}></StackTabs.Screen>
+                    component={Journey} options={{ headerTitleAlign: "center" }} />
+                <StackTabs.Screen name="Create Journey" component={CreateJourney}></StackTabs.Screen>
+                <StackTabs.Screen name="Search Journey" component={SearchJourney}></StackTabs.Screen>
+                <StackTabs.Screen name="Journey Page" component={JourneyPage}></StackTabs.Screen>
             </StackTabs.Navigator>
         </View>
     );

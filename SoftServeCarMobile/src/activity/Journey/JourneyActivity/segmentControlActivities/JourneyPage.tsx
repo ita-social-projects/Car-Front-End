@@ -1,10 +1,11 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
-export default function SearchJourney() {
+const JourneyPage = () => {
     return (
         <View>
-            <Text>Search Journey</Text>
+            <Text>Journey</Text>
         </View>
     )
 }
+export default JourneyPage;

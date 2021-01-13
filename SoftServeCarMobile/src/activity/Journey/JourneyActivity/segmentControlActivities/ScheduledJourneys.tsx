@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
-export default function SearchJourney() {
+export default function ScheduledJourney() {
     return (
         <View>
-            <Text>Search Journey</Text>
+            <Text>Scheduled Journeys</Text>
         </View>
-    )
+    );
 }
