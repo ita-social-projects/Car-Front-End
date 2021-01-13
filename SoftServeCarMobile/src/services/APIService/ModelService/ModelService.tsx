@@ -12,6 +12,11 @@ class ModelService {
     getModels() {
         return this.apiService.get<Model[]>(this.routePrefix);
     }
+
+    getModelsByBrandId(brandId: number) {
+        console.log(brandId);
+        return this.apiService.get<Model[]>(this.routePrefix + '/brand/' + brandId);
+    }
 }
 
 export default ModelService;
