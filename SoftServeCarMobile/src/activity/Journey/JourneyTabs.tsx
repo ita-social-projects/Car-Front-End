@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
-import CreateJourney from './journeyActivity/CreateJourney';
-import SearchJourney from './journeyActivity/SearchJourney';
+import CreateJourney from './journey-activity/CreateJourney';
+import SearchJourney from './journey-activity/SearchJourney';
 import Journey from './Journey';
-import JourneyPage from './journeyActivity/segmentControlActivities/JourneyPage';
+import JourneyPage from './journey-activity/segment-control-activities/JourneyPage';
 import JourneyStyle from './JourneyStyle';
 
 const StackTabs = createStackNavigator();

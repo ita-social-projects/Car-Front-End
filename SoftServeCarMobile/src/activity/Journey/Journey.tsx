@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import TouchableNavigationBlock from './TouchableNavigationBlock'
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import AllJourney from './journeyActivity/segmentControlActivities/AllJourneys'
-import PastJourney from './journeyActivity/segmentControlActivities/PastJourneys'
-import UpcomingJourney from './journeyActivity/segmentControlActivities/UpcomingJormeys'
-import ScheduledJourney from './journeyActivity/segmentControlActivities/ScheduledJourneys'
+import AllJourney from './journey-activity/segment-control-activities/AllJourneys'
+import PastJourney from './journey-activity/segment-control-activities/PastJourneys'
+import UpcomingJourney from './journey-activity/segment-control-activities/UpcomingJormeys'
+import ScheduledJourney from './journey-activity/segment-control-activities/ScheduledJourneys'
 import JourneyStyle from './JourneyStyle';
 
 function Journey(props: any) {
