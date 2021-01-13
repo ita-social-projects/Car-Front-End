@@ -30,7 +30,7 @@ const TouchableNavigationBlock = (props: PropsType) => {
                     colors={[props.from, props.to]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}>
-                    {props.reverse == true ? (
+                    {props.reverse ? (
                         <View style={TouchableNavigationBlockStyle.viewContainer}>
                             <Text style={TouchableNavigationBlockStyle.textStyle}>{props.blockName}</Text>
                             <Image style={{ width: props.width, height: props.height, marginTop: 15 }}

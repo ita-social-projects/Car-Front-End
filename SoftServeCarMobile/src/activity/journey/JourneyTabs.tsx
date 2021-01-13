@@ -15,9 +15,9 @@ const JourneyTabs = (props: any) => {
             <StackTabs.Navigator>
                 <StackTabs.Screen name="Journey"
                     component={Journey} options={{ headerTitleAlign: "center" }} />
-                <StackTabs.Screen name="Create Journey" component={CreateJourney}></StackTabs.Screen>
-                <StackTabs.Screen name="Search Journey" component={SearchJourney}></StackTabs.Screen>
-                <StackTabs.Screen name="Journey Page" component={JourneyPage}></StackTabs.Screen>
+                <StackTabs.Screen name="Create Journey" component={CreateJourney}/>
+                <StackTabs.Screen name="Search Journey" component={SearchJourney}/>
+                <StackTabs.Screen name="Journey Page" component={JourneyPage}/>
             </StackTabs.Navigator>
         </View>
     );
