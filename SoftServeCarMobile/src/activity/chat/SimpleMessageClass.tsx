@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import axios from 'axios';
 import { axiosInstance } from "../../../APIService/Interceptor";
+import {environment} from '../../../environment';
 
 
 const axiosInst = axiosInstance;
@@ -17,7 +17,7 @@ export default class SimpleMessageClass extends React.Component {
         }
     }
     componentDidMount() {
-        axiosInst.get('http://10.0.2.2:61658/api/FakeUser')
+        axiosInst.get(environment.fakeUserUrl)
             .then(res => {
                 const chats = res.data.chats;
                 this.setState({ data: chats });
@@ -25,12 +25,11 @@ export default class SimpleMessageClass extends React.Component {
     }
 
     render() {
-        const { visible } = this.state.isLoading;
         return (
             <View style={{ marginTop: 24 }}>
                 <FlatList
                     data={this.state.data}
-                    keyExtractor={({ id }, index) => id.toString()}
+                    keyExtractor={({ id }) => id.toString()}
                     renderItem={({ item }) => (
                         <View style={styles.main}>
                             <View style={styles.button}>
@@ -42,7 +41,7 @@ export default class SimpleMessageClass extends React.Component {
                                     </View>
                                 </View>
                                 <TouchableOpacity style={{ paddingTop: 12, }} onPress={() => this.props.navigation.navigate("Chat", item.name)}>
-                                    <View><Ionicons name={'chatbubbles'} size={20}></Ionicons></View>
+                                    <View><Ionicons name={'chatbubbles'} size={20}/></View>
                                 </TouchableOpacity>
                             </View>
                         </View>

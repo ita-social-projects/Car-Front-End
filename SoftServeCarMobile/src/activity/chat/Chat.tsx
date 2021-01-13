@@ -1,6 +1,7 @@
 import React from 'react';
 import * as signalR from '@microsoft/signalr';
 import styles from './chat-styles/ChatStyle';
+import {environment} from '../../../environment';
 
 
 import {
@@ -15,7 +16,7 @@ export interface ChatState {
     message: string,
     messages: string[],
     hubConnection: signalR.HubConnection,
-    recievedUserId: string
+    receivedUserId: string
 
 }
 class Chat extends React.Component<ChatState, ChatState>{
@@ -27,14 +28,14 @@ class Chat extends React.Component<ChatState, ChatState>{
             message: '',
             messages: [],
             hubConnection: null,
-            recievedUserId: ''
+            receivedUserId: ''
         }
 
     }
 
 
     componentDidMount() {
-        const hubConnection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
+        const hubConnection = new signalR.HubConnectionBuilder().withUrl(environment.chatUrl).build();
         this.setState({ hubConnection }, () => {
             this.state.hubConnection.start().then(() => "Connection started!");
 

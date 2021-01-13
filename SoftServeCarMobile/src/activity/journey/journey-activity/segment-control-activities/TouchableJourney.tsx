@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TouchableJourneyStyle } from './TouchableJourneyStyle';
 import * as RootNavigation from '../../../../components/navigation/RootNavigation';
 
-export default function TouchableJourney(props: any) {
+export default function TouchableJourney() {
     return (
         <View>
             <TouchableOpacity
