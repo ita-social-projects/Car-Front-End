@@ -5,7 +5,7 @@ import Notifications from "../../activity/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MyProfileTabs from "../../activity/MyProfile/MyProfileTabs";
-import JourneyTabs from "../../activity/journey/JourneyTabs";
+import JourneyTabs from "../../activity/Journey/JourneyTabs";
 
 interface AppTabsProps{}
 
