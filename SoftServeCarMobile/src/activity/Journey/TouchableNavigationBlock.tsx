@@ -2,7 +2,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import React from "react"
 import { Image, ImageSourcePropType, Text, TouchableOpacity, View } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
-import blockStyle from "./TouchableNavigationBlockStyle"
+import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle"
 
 type ManageJourneys = {
     CreateJourney: any,
@@ -26,22 +26,22 @@ const TouchableNavigationBlock = (props: PropsType) => {
         <View>
             <TouchableOpacity
                 onPress={() => props.navigation.navigate(props.navigationName)}>
-                <LinearGradient style={blockStyle.blockContainer}
+                <LinearGradient style={TouchableNavigationBlockStyle.blockContainer}
                     colors={[props.from, props.to]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}>
                     {props.reverse == true ? (
-                        <View style={blockStyle.viewContainer}>
-                            <Text style={blockStyle.textStyle}>{props.blockName}</Text>
+                        <View style={TouchableNavigationBlockStyle.viewContainer}>
+                            <Text style={TouchableNavigationBlockStyle.textStyle}>{props.blockName}</Text>
                             <Image style={{ width: props.width, height: props.height, marginTop: 15 }}
                                 source={props.blockImage} />
                         </View>
                     ) :
                         (
-                            <View style={blockStyle.viewContainer}>
+                            <View style={TouchableNavigationBlockStyle.viewContainer}>
                                 <Image style={{ width: props.width, height: props.height, marginTop: 15 }}
                                     source={props.blockImage} />
-                                <Text style={blockStyle.textStyle}>{props.blockName}</Text>
+                                <Text style={TouchableNavigationBlockStyle.textStyle}>{props.blockName}</Text>
                             </View>
                         )}
                 </LinearGradient>

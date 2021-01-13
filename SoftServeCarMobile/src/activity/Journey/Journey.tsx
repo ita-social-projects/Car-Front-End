@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import TouchableNavigationBlock from './TouchableNavigationBlock'
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import AllJourney from './journey-activity/segment-control-activities/AllJourneys'
-import PastJourney from './journey-activity/segment-control-activities/PastJourneys'
-import UpcomingJourney from './journey-activity/segment-control-activities/UpcomingJormeys'
-import ScheduledJourney from './journey-activity/segment-control-activities/ScheduledJourneys'
+import AllJourneys from './journey-activity/segment-control-activities/AllJourneys'
+import PastJourneys from './journey-activity/segment-control-activities/PastJourneys'
+import UpcomingJourneys from './journey-activity/segment-control-activities/UpcomingJormeys'
+import ScheduledJourneys from './journey-activity/segment-control-activities/ScheduledJourneys'
 import JourneyStyle from './JourneyStyle';
 
 function Journey(props: any) {
@@ -38,10 +38,10 @@ function Journey(props: any) {
           setSelectedIndex(index);
         }}
       />
-      {selectedIndex === 0 && (<View><AllJourney /></View>)}
-      {selectedIndex === 1 && (<View><PastJourney /></View>)}
-      {selectedIndex === 2 && (<View><UpcomingJourney /></View>)}
-      {selectedIndex === 3 && (<View><ScheduledJourney /></View>)}
+      {selectedIndex === 0 && (<View><AllJourneys /></View>)}
+      {selectedIndex === 1 && (<View><PastJourneys /></View>)}
+      {selectedIndex === 2 && (<View><UpcomingJourneys /></View>)}
+      {selectedIndex === 3 && (<View><ScheduledJourneys /></View>)}
     </ScrollView>
   )
 }
