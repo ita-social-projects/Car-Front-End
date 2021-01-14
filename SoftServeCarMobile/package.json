@@ -29,11 +29,7 @@
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-animated-loader": "0.0.8",
-<<<<<<< HEAD
-    "react-native-app-auth": "^6.0.1",
-=======
     "react-native-app-auth": "6.0.1",
->>>>>>> 159cdcf9a60c8c1a43b7b559adfd93d9026a42ac
     "react-native-gesture-handler": "1.9.0",
     "react-native-linear-gradient": "2.5.6",
     "react-native-reanimated": "1.13.2",
