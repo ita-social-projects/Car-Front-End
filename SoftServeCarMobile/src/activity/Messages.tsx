@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View, Button, Alert } from 'react-native';
-import Chat from '../components/сhat/Chat';
+import Chat from '../components/chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessage from '../components/сhat/SimpleMesage';
-import ChatFunc from '../components/сhat/ChatFunc';
+import SimpleMessage from '../components/chat/SimpleMesage';
+import ChatFunc from '../components/chat/ChatFunc';
 
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
