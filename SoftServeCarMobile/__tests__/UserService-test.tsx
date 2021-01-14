@@ -1,8 +1,8 @@
 import 'react-native';
-import UserService from '../src/services/APIService/UserService/UserService';
+import UserService from '../APIService/UserService/UserService';
 import { AxiosResponse } from 'axios';
-import APIService from '../src/services/APIService/APIService'
-import {User} from '../src/models/User';
+import APIService from '../APIService/APIService'
+import {User} from '../models/User';
 
 
 describe('UserService', () => {
@@ -20,10 +20,10 @@ describe('UserService', () => {
 
     let apiService: APIService = new APIService();
     let userService = new UserService(apiService);
-    
+
 
     test('should get user', () => {
-       
+
         jest.spyOn(apiService, 'get').mockImplementation(() => new Promise<AxiosResponse<User>>
             (function (resolve) {
                 resolve(
@@ -76,7 +76,7 @@ describe('UserService', () => {
         let newName = 'Mark';
 
         let newUser = {...userData, name: newName};
-        
+
         jest.spyOn(apiService, 'put').mockImplementation(() => new Promise<AxiosResponse<User>>
             (function (resolve) {
                 resolve(

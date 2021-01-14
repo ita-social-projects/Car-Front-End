@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { AuthContext } from "../components/auth/AuthProvider";
 import { ButtonStyle } from '../components/styles/ButtonStyle';
-import { centerStyle } from '../components/styles/centerStyle';
+import { centerStyle } from '../components/styles/CenterStyle';
 
 export function Login() {
     const { login } = useContext(AuthContext);

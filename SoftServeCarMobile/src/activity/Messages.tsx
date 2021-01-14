@@ -7,6 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleMessage from '../components/chat/SimpleMesage';
 import ChatFunc from '../components/chat/ChatFunc';
 
+
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
 

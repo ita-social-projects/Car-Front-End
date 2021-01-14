@@ -1,6 +1,7 @@
 import React from 'react';
 import * as signalR from '@microsoft/signalr';
 //import signalR from '@aspnet/signalr';
+import {routes} from '../../../environment';
 
 
 import {
@@ -16,10 +17,11 @@ export interface ChatState {
     message: string,
     messages: string[],
     hubConnection: signalR.HubConnection,
-    recievedUserId: string
+    receivedUserId: string
 
 }
-class Chat extends React.Component<ChatState, ChatState>{
+
+class Chat extends React.Component<ChatState, ChatState> {
 
     constructor(props: ChatState) {
         super(props);
@@ -28,18 +30,18 @@ class Chat extends React.Component<ChatState, ChatState>{
             message: '',
             messages: [],
             hubConnection: null,
-            recievedUserId: ''
+            receivedUserId: ''
         }
 
     }
 
     componentDidMount() {
-        const connection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
-        this.setState({ hubConnection: connection }, () => {
-            this.state.hubConnection.start().then(() => "Connection started!").catch((err) => console.log(err));
+        const hubConnection = new signalR.HubConnectionBuilder().withUrl(routes.chatUrl).build();
+        this.setState({hubConnection}, () => {
+            this.state.hubConnection.start().then(() => "Connection started!");
 
-            this.state.hubConnection.on("RecieveMessage", (receivedMessage) => {
-                this.setState({ messages: [...this.state.messages, receivedMessage] });
+            hubConnection.on("RecieveMessage", (receivedMessage) => {
+                this.setState({messages: [...this.state.messages, receivedMessage]});
             })
         });
     }
@@ -47,6 +49,7 @@ class Chat extends React.Component<ChatState, ChatState>{
     onSubmit = () => {
         this.state.hubConnection.invoke("SendMessage", this.state.message).catch((err) => console.log(err));
         this.setState({ message: '' });
+
     };
 
     render() {
@@ -64,10 +67,12 @@ class Chat extends React.Component<ChatState, ChatState>{
                     </View>
                     <View style={styles.buttonContainer}>
                         <TextInput style={styles.input} value={this.state.message}
-                            placeholder="Aa"
-                            onChangeText={(message) => { this.setState({ message: message }) }} />
+                                   placeholder="Aa"
+                                   onChangeText={(message) => {
+                                       this.setState({message: message})
+                                   }}/>
                         <View>
-                            <Button onPress={this.onSubmit} title="Send" />
+                            <Button onPress={this.onSubmit} title="Send"/>
                         </View>
                     </View>
                 </View>
@@ -80,6 +85,7 @@ class Chat extends React.Component<ChatState, ChatState>{
 }
 
 export default Chat;
+
 
 
 const styles = StyleSheet.create({
@@ -119,3 +125,4 @@ const styles = StyleSheet.create({
         backgroundColor: 'powderblue'
     },    
 });
+

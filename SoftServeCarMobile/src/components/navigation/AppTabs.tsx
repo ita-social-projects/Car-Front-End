@@ -4,8 +4,11 @@ import Messages from "../../activity/Messages";
 import Notifications from "../../activity/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import MyProfileTabs from "../../activity/MyProfile/MyProfileTabs";
-import JourneyTabs from "../../activity/Journey/JourneyTabs";
+
+import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";
+
+import JourneyTabs from "../../activity/journey/JourneyTabs";
+
 
 interface AppTabsProps{}
 
@@ -20,20 +23,20 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
             tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             switch (route.name){
-                case "Messages": 
+                case "Messages":
                     iconName = 'chatbubbles';
                     break;
-                case "MyProfileTabs": 
+                case "MyProfileTabs":
                     iconName = 'person';
                     break;
                 case "JourneyTabs": 
                     iconName = 'car';
                     break;
-                case "Notifications": 
+                case "Notifications":
                     iconName = 'notifications';
                     break;
             }
-           
+
             return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}
@@ -42,7 +45,7 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
                 fontStyle: 'normal',
                 fontSize: 10,
                 fontWeight: '800',
-                fontFamily: 'OpenSans-Bold', 
+                fontFamily: 'OpenSans-Bold',
                 lineHeight: 16
             },
             activeTintColor: 'black',
