@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import axios from 'axios';
 import { AuthContext } from '../auth/AuthProvider';
 import "reflect-metadata";
 import { container } from 'tsyringe';
@@ -11,7 +10,6 @@ import ChatService from '../../../APIService/ChatService/ChatService';
 const SimpleMessage = (props) => {
     const chatService = container.resolve(ChatService);
     const [data, setData] = useState([])
-    const [number, setNumber] = useState(0);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {

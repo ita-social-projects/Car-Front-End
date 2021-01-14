@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as signalR from '@microsoft/signalr';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { routes } from '../../../environment';
@@ -8,7 +8,6 @@ const ChatFunc = (props) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [hubConnection, setHubConnection] = useState();
-    const routePrefix = 'chat';
 
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder()
@@ -21,8 +20,8 @@ const ChatFunc = (props) => {
 
         hubConnection.start().then(() => console.log('connection started')).catch((err) => console.log(err));
 
-        hubConnection.on('ReceiveMessage', (message: string) => {
-            setMessages(messages.push(message));
+        hubConnection.on('ReceiveMessage', (recievedMessage : string) => {
+            setMessages(messages.push(recievedMessage));
         })
     }, []);
 
