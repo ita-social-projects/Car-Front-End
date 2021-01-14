@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Text, View } from 'react-native'
-import { AuthContext } from '../../components/auth/AuthProvider';
+import { AuthContext } from '../auth/AuthProvider';
 import * as RootNavigation from '../../components/navigation/RootNavigation';
 import {exceptionStyle} from './ExceptionStyles';
 
 export function Exception(props: any){
-    const { user, logout } = useContext(AuthContext);   
+    const { user, logout } = useContext(AuthContext);
     const userMessage = props.route.params.errorMessage == 401 ?
      'You are unauthorized. You have to log in to the app.'
     : props.route.params.errorMessage == 'Network error' ? 'The site can’t be reached' : 'Internal Server Error';
@@ -22,7 +22,7 @@ export function Exception(props: any){
         return(
             <View >
                 <Text style={exceptionStyle.exceptionLink} onPress={()=>{
-                    RootNavigation.navigate("AppTabs", {});          
+                    RootNavigation.navigate("AppTabs", {});
                 }}>Back to app</Text>
             </View>
             )
@@ -32,7 +32,7 @@ export function Exception(props: any){
         <View style={exceptionStyle.container}>
             <Text style={exceptionStyle.exceptionCode}>{props.route.params.errorMessage}</Text>
             <Text style={exceptionStyle.exceptionMessage}>{userMessage}</Text>
-            {action()}          
+            {action()}
         </View>
     )
 }

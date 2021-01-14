@@ -1,8 +1,8 @@
 import 'react-native';
 import { AxiosResponse } from 'axios';
-import APIService from '../src/services/APIService/APIService'
-import {UserPreferences} from '../src/models/UserPreferences';
-import PreferencesService from '../src/services/APIService/preferencesServise/PreferencesService'
+import APIService from '../APIService/APIService'
+import {UserPreferences} from '../models/UserPreferences';
+import PreferencesService from '../APIService/preferencesServise/PreferencesService'
 
 
 describe('UserService', () => {
@@ -11,13 +11,13 @@ describe('UserService', () => {
         userId: 14,
         doAllowEating: false,
         doAllowSmoking: false,
-        comments: 'what a lovely day',        
+        comments: 'what a lovely day',
     }
 
     let apiService: APIService = new APIService();
-    let preferencesService = new PreferencesService(apiService);    
+    let preferencesService = new PreferencesService(apiService);
 
-    test('should get preferences', () => {       
+    test('should get preferences', () => {
         jest.spyOn(apiService, 'get').mockImplementation(() => new Promise<AxiosResponse<UserPreferences>>
             (function (resolve) {
                 resolve(
@@ -44,10 +44,10 @@ describe('UserService', () => {
             }
         );
     }),
-       
+
     test('It should update preferences', () => {
         let newComments = 'Hello world!';
-        let newPreferences = {...preferencesData, comments: newComments};        
+        let newPreferences = {...preferencesData, comments: newComments};
         jest.spyOn(apiService, 'put').mockImplementation(() => new Promise<AxiosResponse<UserPreferences>>
             (function (resolve) {
                 resolve({
