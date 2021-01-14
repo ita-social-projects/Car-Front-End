@@ -11,7 +11,7 @@ import Settings from './MyProfileActivity/Settings/Settings';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../services/APIService/UserService/UserService';
-import User from '../../models/User';
+import {User} from '../../models/User';
 import { AuthContext } from "../../components/auth/AuthProvider"
 
 const StackTabs = createStackNavigator();

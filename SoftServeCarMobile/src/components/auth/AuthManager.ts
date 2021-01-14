@@ -24,7 +24,6 @@ const config: AuthConfiguration = {
     tokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
   }
 };
-
 export class AuthManager {    
 
   static signInAsync = async () => {
@@ -40,7 +39,6 @@ export class AuthManager {
     await AsyncStorage.removeItem('refreshToken');
     await AsyncStorage.removeItem('expireTime');
     await AsyncStorage.removeItem('idToken');    
-    await AsyncStorage.removeItem('UserId');
     await AsyncStorage.removeItem("user");
     await AsyncStorage.removeItem("APIToken");
   }
@@ -58,17 +56,13 @@ export class AuthManager {
   }
   static getAPIToken=async()=>{
     return await AsyncStorage.getItem('APIToken');
-  }
-
-  static saveUserId = async(Id:string)=>{
-    await AsyncStorage.setItem('UserId', Id);
-  }
-
-  static getUserId=async()=>{
-    return await AsyncStorage.getItem('UserId');
   }  
  
   static getUser = async() => {
     return await AsyncStorage.getItem("user");
   }  
+
+  static setUser = async (user: any) => {
+    await AsyncStorage.setItem('user', user);
+  }
 }

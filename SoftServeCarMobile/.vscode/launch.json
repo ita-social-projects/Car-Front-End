@@ -23,6 +23,7 @@
             "type": "reactnative",
             "request": "launch",
             "platform": "android"
+
         },
         {
             "type": "node",

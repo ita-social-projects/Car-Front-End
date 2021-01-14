@@ -1,21 +1,32 @@
 import { StyleSheet } from "react-native";
 
 export const centerStyle = StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems:"center",
-        justifyContent:"center"
+    container: {
+        flex: 1,
+        alignItems: "center",
+        margin: 30
     },
     loginPageTextGreeting: {
-        fontSize: 35,        
+        fontFamily: "Proxima-Nova-Reg",
+        fontWeight: "bold",
+        fontSize: 21,
+        textTransform: "uppercase",
+        margin: 5,
+        letterSpacing: 0.2
     },
     loginPageTextName: {
-        fontSize: 40,  
-        fontWeight: "bold",      
+        fontFamily: "Proxima-Nova-Reg",
+        fontWeight: "bold",
+        fontSize: 30,
+        textTransform: "uppercase",
+        margin: 5,
+        letterSpacing: 0.2
     },
-    loginButton: {  
-        borderRadius: 2,
-        margin: 30,       
+    loginButton: {
+        display: "flex",
+        paddingHorizontal: 14,
+        paddingVertical: 16,
+        alignSelf: "flex-end"
     },
     preferencesText: {
         padding: 30,
@@ -26,7 +37,7 @@ export const centerStyle = StyleSheet.create({
         flex: 1,
         flexDirection: "row"
     },
-    TextInputStyleClass:{ 
+    TextInputStyleClass: {
         height: 100,
         borderWidth: 2,
         borderColor: 'black',
@@ -34,16 +45,16 @@ export const centerStyle = StyleSheet.create({
         paddingLeft: 10,
     },
     exceptionMessage: {
-        fontSize:40,
-        padding:20,
+        fontSize: 40,
+        padding: 20,
         textAlign: 'center'
     },
     exceptionCode: {
-        fontWeight:"bold",
-        fontSize:45
+        fontWeight: "bold",
+        fontSize: 45
     },
     exceptionLink: {
-        fontSize:40,
-        color:'blue'
+        fontSize: 40,
+        color: 'blue'
     }
 })

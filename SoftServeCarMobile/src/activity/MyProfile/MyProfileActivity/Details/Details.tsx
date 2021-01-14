@@ -1,31 +1,37 @@
-import React, { Component, useState } from 'react';
+import React, {  } from 'react';
 import { useContext } from 'react';
 import { Button, Text, View } from 'react-native';
-import {AuthManager} from '../../../../components/auth/AuthManager';
 import {AuthContext} from "../../../../components/auth/AuthProvider";
+import {DetailsStyle} from './DetailsStyles';
 
-type UserId= null | string;
+
 const Details = () => {
-    const {user, logout } = useContext(AuthContext);   
-  
+    const { user, logout } = useContext(AuthContext);
+
     return (
-        <View>
-            <Text style={{textAlign: 'center'}}>Details</Text>
-            <View style = {{ justifyContent: 'space-between', alignItems: 'flex-start',padding:10}}>               
-                <Text>  Id:  {user?.id}  </Text>              
-                <Text>  Name:  {user?.username}  </Text>
-                <Text>  Surname:  {user?.surname}  </Text>
-                <Text>  Email:  {user?.email}  </Text>
-                <Text>  AzureId:  {user?.azureId}  </Text>
-               
+
+        <View style={DetailsStyle.mainContainer}>   
+            <View style={DetailsStyle.detailsContainer}>
+                <Text style={DetailsStyle.captionView}>Position</Text>
+                <Text style={DetailsStyle.valueView}>{user?.position}</Text>
             </View>
-            <View style = {{margin:30}}>
+
+            <View style={DetailsStyle.detailsContainer}>
+                <Text style={DetailsStyle.captionView}>Location</Text>
+                <Text style={DetailsStyle.valueColorView}>{user?.location}</Text>
+            </View>
+
+            <View style={DetailsStyle.detailsContainer}>
+                <Text style={DetailsStyle.captionView}>Workspace</Text>
+                <Text style={DetailsStyle.valueColorView}>{user?.location}</Text>
+            </View>
+          
+            <View style = {DetailsStyle.logoutButton}>
             <Button title = 'Logout' onPress= {()=>{
                     logout();
                 }}></Button>
-            </View>
-           
-        </View>
+            </View>           
+        </View>    
     )
 }
 
