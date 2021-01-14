@@ -1,5 +1,6 @@
 import React from 'react';
 import * as signalR from '@microsoft/signalr';
+//import signalR from '@aspnet/signalr';
 
 
 import {
@@ -33,11 +34,11 @@ class Chat extends React.Component<ChatState, ChatState>{
     }
 
     componentDidMount() {
-        const hubConnection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
-        this.setState({ hubConnection: hubConnection }, () => {
+        const connection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
+        this.setState({ hubConnection: connection }, () => {
             this.state.hubConnection.start().then(() => "Connection started!").catch((err) => console.log(err));
 
-            hubConnection.on("RecieveMessage", (receivedMessage) => {
+            this.state.hubConnection.on("RecieveMessage", (receivedMessage) => {
                 this.setState({ messages: [...this.state.messages, receivedMessage] });
             })
         });

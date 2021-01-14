@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
     "@babel/helper-regex": "7.10.5",
     "@babel/plugin-proposal-decorators": "7.12.1",
     "@expo/vector-icons": "12.0.1",

@@ -1,15 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
 import * as signalR from '@microsoft/signalr';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { environment } from '../../environments/environment';
 
 
 const ChatFunc = (props) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [hubConnection, setHubConnection] = useState();
+    const routePrefix = 'chat';
 
     useEffect(() => {
-        const connection = new signalR.HubConnectionBuilder().withUrl('http://10.0.2.2:61658/chat').build();
+        const connection = new signalR.HubConnectionBuilder()
+                            .withUrl(environment.Url + routePrefix)
+                            .configureLogging(signalR.LogLevel.Information)
+                            .build();
         console.log(connection);
         setHubConnection(connection);
         console.log(hubConnection);
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     chatMessage: {
-        //flex: 1,
+        flex: 1,
         backgroundColor: 'powderblue'
     },    
 });

@@ -28,7 +28,7 @@ export default class Messages extends React.Component {
                                 </TouchableOpacity>
                             )
                         }} />
-                    <Stack.Screen name="Chat" component={Chat} />
+                    <Stack.Screen name="Chat" component={ChatFunc} />
                 </Stack.Navigator>
             </View>
         )
