@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {environment} from '../../../environment';
+import {routes} from '../../../environment';
 
 
 const SimpleMessage = () => {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch(environment.valueUrl)
+        fetch(routes.valueUrl)
             .then((response) => response.json())
             .then((json) => {
                 setData(json.chats as []);

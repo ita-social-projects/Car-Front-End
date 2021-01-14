@@ -35,7 +35,7 @@
     "react-native-router-flux": "4.2.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "2.15.0",
-    "react-native-segmented-control-tab": "3.4.1",
+    "react-native-segmented-control-tab": "^3.4.1",
     "react-native-vector-icons": "7.1.0",
     "react-navigation-stack": "2.10.2",
     "react-redux": "7.2.2",

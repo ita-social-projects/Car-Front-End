@@ -1,12 +1,12 @@
 import "reflect-metadata";
-import { injectable } from 'tsyringe';
-import { environment } from '../environment';
-import { axiosInstance } from "./Interceptor";
+import {injectable} from 'tsyringe';
+import {routes} from '../environment';
+import {axiosInstance} from "./Interceptor";
 
 
 @injectable()
 class APIService {
-    baseUrl: string = environment.apiUrl;
+    baseUrl: string = routes.apiUrl;
     baseHeaders = {
         headers: {
             'Context-Type': 'application/json',
@@ -31,4 +31,5 @@ class APIService {
         return axiosInstance.delete<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
 }
+
 export default APIService;

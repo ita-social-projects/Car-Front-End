@@ -1,7 +1,7 @@
 import React from 'react';
 import * as signalR from '@microsoft/signalr';
 import styles from './chat-styles/ChatStyle';
-import {environment} from '../../../environment';
+import {routes} from '../../../environment';
 
 
 import {
@@ -19,7 +19,8 @@ export interface ChatState {
     receivedUserId: string
 
 }
-class Chat extends React.Component<ChatState, ChatState>{
+
+class Chat extends React.Component<ChatState, ChatState> {
 
     constructor(props: ChatState) {
         super(props);
@@ -35,12 +36,12 @@ class Chat extends React.Component<ChatState, ChatState>{
 
 
     componentDidMount() {
-        const hubConnection = new signalR.HubConnectionBuilder().withUrl(environment.chatUrl).build();
-        this.setState({ hubConnection }, () => {
+        const hubConnection = new signalR.HubConnectionBuilder().withUrl(routes.chatUrl).build();
+        this.setState({hubConnection}, () => {
             this.state.hubConnection.start().then(() => "Connection started!");
 
             hubConnection.on("RecieveMessage", (receivedMessage) => {
-                this.setState({ messages: [...this.state.messages, receivedMessage] });
+                this.setState({messages: [...this.state.messages, receivedMessage]});
             })
         });
     }
@@ -50,7 +51,7 @@ class Chat extends React.Component<ChatState, ChatState>{
 
         this.state.hubConnection.invoke("SendMessage", this.state.message);
 
-        this.setState({ message: '' });
+        this.setState({message: ''});
     };
 
     render() {
@@ -68,10 +69,12 @@ class Chat extends React.Component<ChatState, ChatState>{
                     </View>
                     <View style={styles.buttonContainer}>
                         <TextInput style={styles.input} value={this.state.message}
-                            placeholder="Aa"
-                            onChangeText={(message) => { this.setState({ message: message }) }} />
+                                   placeholder="Aa"
+                                   onChangeText={(message) => {
+                                       this.setState({message: message})
+                                   }}/>
                         <View>
-                            <Button onPress={this.onSubmit} title="Send" />
+                            <Button onPress={this.onSubmit} title="Send"/>
                         </View>
                     </View>
                 </View>

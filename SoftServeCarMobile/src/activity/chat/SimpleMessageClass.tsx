@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { axiosInstance } from "../../../APIService/Interceptor";
-import {environment} from '../../../environment';
+import {axiosInstance} from "../../../APIService/Interceptor";
+import {routes} from '../../../environment';
 
 
 const axiosInst = axiosInstance;
@@ -16,31 +16,33 @@ export default class SimpleMessageClass extends React.Component {
             isLoading: false
         }
     }
+
     componentDidMount() {
-        axiosInst.get(environment.fakeUserUrl)
+        axiosInst.get(routes.fakeUserUrl)
             .then(res => {
                 const chats = res.data.chats;
-                this.setState({ data: chats });
+                this.setState({data: chats});
             })
     }
 
     render() {
         return (
-            <View style={{ marginTop: 24 }}>
+            <View style={{marginTop: 24}}>
                 <FlatList
                     data={this.state.data}
-                    keyExtractor={({ id }) => id.toString()}
-                    renderItem={({ item }) => (
+                    keyExtractor={({id}) => id.toString()}
+                    renderItem={({item}) => (
                         <View style={styles.main}>
                             <View style={styles.button}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Image style={styles.image} source={{ uri: item.imageURL.toString() }} />
+                                <View style={{flexDirection: 'row'}}>
+                                    <Image style={styles.image} source={{uri: item.imageURL.toString()}}/>
                                     <View>
                                         <Text style={styles.fonts}>{item.name}</Text>
-                                        <Text style={{ fontSize: 11, paddingTop: 10 }}>{item.position} </Text>
+                                        <Text style={{fontSize: 11, paddingTop: 10}}>{item.position} </Text>
                                     </View>
                                 </View>
-                                <TouchableOpacity style={{ paddingTop: 12, }} onPress={() => this.props.navigation.navigate("Chat", item.name)}>
+                                <TouchableOpacity style={{paddingTop: 12,}}
+                                                  onPress={() => this.props.navigation.navigate("Chat", item.name)}>
                                     <View><Ionicons name={'chatbubbles'} size={20}/></View>
                                 </TouchableOpacity>
                             </View>
@@ -51,12 +53,6 @@ export default class SimpleMessageClass extends React.Component {
         );
     }
 }
-
-
-
-
-
-
 
 
 export const styles = StyleSheet.create({

@@ -1,7 +1,9 @@
 export const environment = {
     url: 'http://10.0.2.2:61658/'
-    , apiUrl: exports.url.toString() + 'api/'
-    , chatUrl: exports.url.toString() + 'Chat/'
-    , valueUrl: exports.url.toString() + 'Value/'
-    , fakeUserUrl: exports.url.toString() + 'FakeUser/'
+}
+export const routes = {
+    apiUrl: environment.url + 'api/'
+    , chatUrl: environment.url + 'Chat/'
+    , valueUrl: environment.url + 'Value/'
+    , fakeUserUrl: environment.url + 'FakeUser/'
 }
