@@ -21,13 +21,13 @@ function AvatarLogoTitle(props: any) {
                         style={headerStyle.headerUserAvatar} />)
                 }
                 else {
-                    setAvatar(<Image source={require('../../../images/default-user-photo.jpg')}
+                    setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
                         style={headerStyle.headerUserAvatar} />)
                 }
             })
             .catch(e => {
                 console.log(e);
-                setAvatar(<Image source={require('../../../images/default-user-photo.jpg')}
+                setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
                     style={headerStyle.headerUserAvatar} />)
             });
     }, []);
