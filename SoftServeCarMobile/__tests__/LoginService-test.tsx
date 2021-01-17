@@ -2,7 +2,7 @@ import 'react-native';
 import { AxiosResponse } from 'axios';
 import APIService from '../api-service/APIService'
 import {User} from '../models/User';
-import LoginService from '../api-service/loginService/LoginService';
+import LoginService from '../api-service/login-service/LoginService';
 
 
 describe('UserService', () => {
