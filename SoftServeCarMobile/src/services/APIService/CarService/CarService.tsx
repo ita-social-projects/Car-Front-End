@@ -1,8 +1,11 @@
 import APIService from '../APIService';
 import "reflect-metadata";
 import { injectable } from 'tsyringe';
-import Car from '../../../models/Car';
 import { environment } from '../../../environments/environment';
+import CarDTO from '../../../models/CarDTO';
+import Car from '../../../models/Car';
+import CarImage from '../../../models/CarInfoDTO';
+import CarInfoDTO from '../../../models/CarInfoDTO';
 
 @injectable()
 class CarService {
@@ -10,16 +13,25 @@ class CarService {
     
     routePrefix: string = 'car';
 
-    uploadPhoto(formData: FormData) {
-        return fetch(environment.apiUrl + 'car/2/photo',
+    uploadPhoto(carId: number, formData: FormData) {
+        return fetch(environment.apiUrl + this.routePrefix + '/' + carId + '/photo',
         {
             method: 'PUT',
             headers: { "Content-Type": "multipart/form-data" },
             body: formData
         })
-        .then(res => console.log(res))
-        .catch(e => console.log(e));
+    }
+
+    add(car: CarDTO) {
+        return this.apiService.post<Car>(this.routePrefix, car);
+    }
+
+    getAll(userId: number) {
+        return this.apiService.get<Array<CarInfoDTO>>(this.routePrefix + '/byUser/' + userId);
+    }
+
+    getAvatar(carId: number) {
+        return this.apiService.get<string>(this.routePrefix + '/' + carId + '/photo');
     }
 }
-
 export default CarService;

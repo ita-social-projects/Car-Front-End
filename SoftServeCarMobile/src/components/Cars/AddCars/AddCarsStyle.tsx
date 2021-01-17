@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const carStyle = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
     carAvatarContainer: {
         height: 200,
         backgroundColor: '#C4C4C4',
@@ -41,7 +45,9 @@ const carStyle = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 14,
         backgroundColor: '#000000',
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-around'
     },
     carButtonSaveText: {
         color: 'white',
@@ -57,6 +63,9 @@ const carStyle = StyleSheet.create({
         left: 0,
         borderWidth: 2,
         position: 'absolute'
+    },
+    spinner: {
+        marginLeft: 5
     }
 });
 export default carStyle;
