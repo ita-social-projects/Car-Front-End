@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {axiosInstance} from "../../../APIService/Interceptor";
+import {axiosInstance} from "../../../api-service/Interceptor";
 import {routes} from '../../../environment';
 
 

@@ -1,7 +1,7 @@
 import 'react-native';
-import UserService from '../APIService/UserService/UserService';
+import UserService from '../api-service/user-service/UserService';
 import { AxiosResponse } from 'axios';
-import APIService from '../APIService/APIService'
+import APIService from '../api-service/APIService'
 import {User} from '../models/User';
 
 
@@ -46,7 +46,7 @@ describe('UserService', () => {
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(userData);
             });
-    }),
+    })
 
         test('should add user', () => {
             jest.spyOn(apiService, 'post').mockImplementation(() => new Promise<AxiosResponse<User>>

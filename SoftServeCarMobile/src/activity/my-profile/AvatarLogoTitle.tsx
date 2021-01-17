@@ -3,7 +3,7 @@ import { View, Text, Image, ActivityIndicator } from 'react-native';
 import headerStyle from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import UserService from '../../../APIService/UserService/UserService';
+import UserService from '../../../api-service/user-service/UserService';
 import { AuthContext } from '../auth/AuthProvider';
 
 function AvatarLogoTitle(props: any) {

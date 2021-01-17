@@ -1,8 +1,8 @@
 import 'react-native';
 import { AxiosResponse } from 'axios';
-import APIService from '../APIService/APIService'
+import APIService from '../api-service/APIService'
 import {UserPreferences} from '../models/UserPreferences';
-import PreferencesService from '../APIService/preferencesServise/PreferencesService'
+import PreferencesService from '../api-service/preferences-service/PreferencesService'
 
 
 describe('UserService', () => {
@@ -43,7 +43,7 @@ describe('UserService', () => {
                 expect(response).toEqual(preferencesData);
             }
         );
-    }),
+    })
 
     test('It should update preferences', () => {
         let newComments = 'Hello world!';
