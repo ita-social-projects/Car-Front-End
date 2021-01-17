@@ -1,5 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import TouchableNavigationCard from './TouchableNavigationCard';
 
 function MyProfile(props: any) {
@@ -8,32 +9,52 @@ function MyProfile(props: any) {
             <TouchableNavigationCard navigation={props.navigation}
                 navigationName="Details"
                 cardName="Details"
-                iconName="person-circle-outline"
-                angle="0" />
+                picture={<Ionicons name={'person-circle-outline'} size={20} color="#414045" />}>
+                <Text style={{ fontWeight: 'bold' }}>
+                    Details
+                </Text>
+            </TouchableNavigationCard>
 
             <TouchableNavigationCard navigation={props.navigation}
                 navigationName="Preferences"
                 cardName="Preferences"
-                iconName="options-outline"
-                angle="90" />
+                picture={
+                    <Ionicons name={'options-outline'}
+                        size={20}
+                        style={{ transform: [{ rotate: '90deg' }] }}
+                        color="#414045" />}
+            >
+                <Text style={{ fontWeight: 'bold' }}>
+                    Preferences
+                </Text>
+            </TouchableNavigationCard>
 
             <TouchableNavigationCard navigation={props.navigation}
                 navigationName="CarTabs"
                 cardName="Your cars"
-                iconName="car"
-                angle="0" />
+                picture={<Ionicons name={'car'} size={20} color="#414045" />}>
+                <Text style={{ fontWeight: 'bold' }}>
+                    Your cars
+                </Text>
+            </TouchableNavigationCard>
 
             <TouchableNavigationCard navigation={props.navigation}
                 navigationName="AddressBook"
                 cardName="Address book"
-                iconName="bookmark-outline"
-                angle="0" />
+                picture={<Ionicons name={'bookmark-outline'} size={20} color="#414045" />}>
+                <Text style={{ fontWeight: 'bold' }}>
+                    Address book
+                </Text>
+            </TouchableNavigationCard>
 
             <TouchableNavigationCard navigation={props.navigation}
                 navigationName="Settings"
                 cardName="Settings"
-                iconName="settings-outline"
-                angle="0" />
+                picture={<Ionicons name={'settings-outline'} size={20} color="#414045" />}>
+                <Text style={{ fontWeight: 'bold' }}>
+                    Settings
+                </Text>
+            </TouchableNavigationCard>
         </View>
     );
 }
