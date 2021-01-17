@@ -1,7 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
-export const PreferencesStyle = StyleSheet.create({  
-   
+export const PreferencesStyle = StyleSheet.create({
+
     mainContainer: {
         margin: 20
     },
@@ -11,11 +11,11 @@ export const PreferencesStyle = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 30
     },
-    
+
     captionView: {
         flex: 9,
-        fontWeight: 'bold',        
-        fontSize: 17,       
+        fontWeight: 'bold',
+        fontSize: 17,
         alignItems: 'flex-start',
         justifyContent: 'space-between'
     },
@@ -40,13 +40,13 @@ export const PreferencesStyle = StyleSheet.create({
         marginTop:50
     },
 
-    TextInputStyle:{ 
+    TextInputStyle:{
         height: 100,
         borderWidth: 2,
         borderColor: 'black',
         fontSize: 15,
         paddingLeft: 10,
-        textAlignVertical: 'top',        
+        textAlignVertical: 'top',
     },
 
     commentsCaption: {

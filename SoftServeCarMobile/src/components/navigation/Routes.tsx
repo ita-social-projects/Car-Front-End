@@ -13,7 +13,7 @@ interface RoutesProps
 
 const Stack  = createStackNavigator<AuthParamList>();
 
-export const Routes: React.FC<RoutesProps> = ({})=>{
+export const Routes: React.FC<RoutesProps> = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -28,10 +28,10 @@ export const Routes: React.FC<RoutesProps> = ({})=>{
                 <Stack.Screen name = 'AppTabs' component = {AppTabs} options={{headerShown:false}}/>
                 <Stack.Screen name = 'Exception' component = {Exception}/>
               </Stack.Navigator>
-           ): 
-          (             
-            <Stack.Navigator screenOptions={{headerShown:false}} >              
-               <Stack.Screen name = 'Login' component = {Login} />  
+           ):
+          (
+            <Stack.Navigator screenOptions={{headerShown:false}} >
+               <Stack.Screen name = 'Login' component = {Login} />
                <Stack.Screen name = 'Exception' component = {Exception}/>
             </Stack.Navigator>
           )

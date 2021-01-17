@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, View, Button, Alert } from 'react-native';
+import React from 'react'
+import { View, Alert } from 'react-native';
 import Chat from './chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
