@@ -3,7 +3,7 @@ import { View, Text, Image, ActivityIndicator } from 'react-native';
 import headerStyle from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import UserService from '../../../APIService/UserService/UserService';
+import UserService from '../../../api-service/user-service/UserService';
 import { AuthContext } from '../auth/AuthProvider';
 
 function AvatarLogoTitle(props: any) {
@@ -21,13 +21,13 @@ function AvatarLogoTitle(props: any) {
                         style={headerStyle.headerUserAvatar} />)
                 }
                 else {
-                    setAvatar(<Image source={require('../../../images/default-user-photo.jpg')}
+                    setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
                         style={headerStyle.headerUserAvatar} />)
                 }
             })
             .catch(e => {
                 console.log(e);
-                setAvatar(<Image source={require('../../../images/default-user-photo.jpg')}
+                setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
                     style={headerStyle.headerUserAvatar} />)
             });
     }, []);
