@@ -3,7 +3,6 @@ import {injectable} from 'tsyringe';
 import {routes} from '../environment';
 import {axiosInstance} from "./Interceptor";
 
-
 @injectable()
 class APIService {
     baseUrl: string = routes.apiUrl;
