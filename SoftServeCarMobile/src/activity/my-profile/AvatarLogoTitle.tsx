@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator } from 'react-native';
-import headerStyle from './AvatarLogoTitleStyle';
+import {AvatarLogoTitleStyle} from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../../api-service/user-service/UserService';
@@ -10,7 +10,7 @@ function AvatarLogoTitle(props: any) {
     const userService = container.resolve(UserService);
     const { user } = useContext(AuthContext);
     const [avatar, setAvatar] = useState(
-        <ActivityIndicator style={headerStyle.headerUserAvatar} size="large" color="black" />);
+        <ActivityIndicator style={AvatarLogoTitleStyle.headerUserAvatar} size="large" color="black" />);
 
     useEffect(() => {
         userService.getAvatar(Number(user?.id))
@@ -18,32 +18,32 @@ function AvatarLogoTitle(props: any) {
                 const byteOfImage = JSON.stringify(result.request._response);
                 if (!result.data) {
                     setAvatar(<Image source={{ uri: 'data:image/png;base64,' + byteOfImage }}
-                        style={headerStyle.headerUserAvatar} />)
+                        style={AvatarLogoTitleStyle.headerUserAvatar} />)
                 }
                 else {
                     setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
-                        style={headerStyle.headerUserAvatar} />)
+                        style={AvatarLogoTitleStyle.headerUserAvatar} />)
                 }
             })
             .catch(e => {
                 console.log(e);
                 setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
-                    style={headerStyle.headerUserAvatar} />)
+                    style={AvatarLogoTitleStyle.headerUserAvatar} />)
             });
     }, []);
 
     return (
-        <View style={headerStyle.headerContainer}>
+        <View style={AvatarLogoTitleStyle.headerContainer}>
             {avatar}
-            <View style={headerStyle.headerUserInformation}>
-                <Text style={headerStyle.headerUserName}>
+            <View style={AvatarLogoTitleStyle.headerUserInformation}>
+                <Text style={AvatarLogoTitleStyle.headerUserName}>
                     {Object.entries(props.user).length ?
                         (props.user.name + " " + props.user.surname) : null}
                 </Text>
-                <Text style={headerStyle.headerUserAdditionalData}>
+                <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
                     {Object.entries(props.user).length ? props.user.position : null}
                 </Text>
-                <Text style={headerStyle.headerUserAdditionalData}>
+                <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
                     123 rides, 2 badges
                 </Text>
             </View>

@@ -4,7 +4,7 @@ import TouchableNavigationBlock from './TouchableNavigationBlock'
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import AllJourneys from './journey-activity/segment-control-activities/AllJourneys'
 import PastJourneys from './journey-activity/segment-control-activities/PastJourneys'
-import UpcomingJourneys from './journey-activity/segment-control-activities/UpcomingJormeys'
+import UpcomingJourneys from './journey-activity/segment-control-activities/UpcomingJourneys'
 import ScheduledJourneys from './journey-activity/segment-control-activities/ScheduledJourneys'
 import JourneyStyle from './JourneyStyle';
 

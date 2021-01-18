@@ -34,7 +34,7 @@ const MyProfileTabs = () => {
                                   component={MyProfile}
                                   options={{
                                       headerStyle: {height: 120},
-                                      headerTitle: props => <AvatarLogoTitle {...props} user={currentUser}/>
+                                      headerTitle: args => <AvatarLogoTitle {...args} user={currentUser}/>
                                   }}/>
                 <StackTabs.Screen name="Preferences" component={Preferences}/>
                 <StackTabs.Screen name="Details" component={Details}/>
