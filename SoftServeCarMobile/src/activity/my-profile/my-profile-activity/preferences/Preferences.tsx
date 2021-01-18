@@ -6,7 +6,7 @@ import ChooseOptionComponent from './ChooseOptionComponent';
 import {UserPreferences} from '../../../../../models/UserPreferences';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import PreferencesService from '../../../../../APIService/preferencesServise/PreferencesService';
+import PreferencesService from '../../../../../api-service/preferences-service/PreferencesService';
 
 
 export default function Preferences(props:any){

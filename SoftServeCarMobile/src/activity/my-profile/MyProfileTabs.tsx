@@ -10,7 +10,7 @@ import AvatarLogoTitle from './AvatarLogoTitle';
 import Settings from './my-profile-activity/settings/Settings';
 import "reflect-metadata";
 import {container} from 'tsyringe';
-import UserService from '../../../APIService/UserService/UserService';
+import UserService from '../../../api-service/user-service/UserService';
 import {User} from '../../../models/User';
 import {AuthContext} from "../auth/AuthProvider"
 

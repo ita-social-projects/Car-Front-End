@@ -6,7 +6,8 @@ import * as RootNavigation from '../../components/navigation/RootNavigation';
 import {User} from "../../../models/User";
 import "reflect-metadata";
 import {container} from 'tsyringe';
-import LoginService from '../../../APIService/loginService/LoginService'
+import LoginService from '../../../api-service/login-service/LoginService'
+
 
 
 const loginService = container.resolve(LoginService);

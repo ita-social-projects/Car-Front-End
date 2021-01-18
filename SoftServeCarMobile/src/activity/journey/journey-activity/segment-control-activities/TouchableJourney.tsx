@@ -12,7 +12,7 @@ export default function TouchableJourney() {
                 <View style={TouchableJourneyStyle.component}>
                     <View style={TouchableJourneyStyle.header}>
                         <Image style={TouchableJourneyStyle.image}
-                            source={require("../../../../../images/default-user-photo.jpg")} />
+                            source={require("../../../../../assets/images/default-user-photo.jpg")} />
                         <View style={TouchableJourneyStyle.driverBlock}>
                             <Text style={TouchableJourneyStyle.driverName}>
                                 Maria Kruselnytska's journey
