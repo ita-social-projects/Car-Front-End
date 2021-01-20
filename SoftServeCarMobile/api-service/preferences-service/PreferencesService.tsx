@@ -7,10 +7,10 @@ import { injectable } from 'tsyringe';
 
 class PreferencesService {
     constructor(private apiService: APIService) { }
-    routePrefix: string = 'UserPreferences';
+    routePrefix: string = 'user-preferences';
 
-    getUserPreferences(userId: number) {
-        return this.apiService.get<UserPreferences>(this.routePrefix + '/'+ userId);
+    getUserPreferences(id: number) {
+        return this.apiService.get<UserPreferences>(this.routePrefix + '/'+ id);
     }
 
     updateUserPreferences(preferences: UserPreferences) {

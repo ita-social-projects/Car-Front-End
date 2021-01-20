@@ -7,14 +7,14 @@ import { injectable } from 'tsyringe';
 class UserService {
     constructor(private apiService: APIService) { }
 
-    routePrefix: string = 'user';
+    routePrefix: string = 'users';
 
-    getUser(userId: number) {
-        return this.apiService.get<User>(this.routePrefix + '/withAvatar/' + userId);
+    getUser(id: number) {
+        return this.apiService.get<User>(this.routePrefix + '/users-with-avatar/' + id);
     }
 
-    getAvatar(userId: number) {
-        return this.apiService.get<string>(this.routePrefix + '/' + userId + '/avatar');
+    getAvatar(id: number) {
+        return this.apiService.get<string>(this.routePrefix + '/' + id + '/avatar');
     }
 
     create(user: User) {
