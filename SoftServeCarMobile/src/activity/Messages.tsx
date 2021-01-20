@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, Button, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import Chat from './chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessage from '../activity/chat/SimpleMessage'
+import MessagesList from './chat/MessagesList'
 
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
@@ -18,7 +18,7 @@ export default class Messages extends React.Component {
                     headerTitleAlign: 'center',
                 }}>
                     <Stack.Screen name="Messages"
-                        component={SimpleMessage}
+                        component={MessagesList}
                         options={{
                             headerTitle: "Messages",
                             headerRight: () => (

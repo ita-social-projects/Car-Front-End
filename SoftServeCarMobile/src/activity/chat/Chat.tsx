@@ -2,7 +2,6 @@ import React from 'react';
 import * as signalR from '@microsoft/signalr';
 import { routes } from '../../../environment';
 
-
 import {
     View,
     Text,
@@ -10,7 +9,6 @@ import {
     Button,
     StyleSheet,
 } from 'react-native';
-
 
 export interface ChatState {
     message: string,
@@ -36,11 +34,11 @@ class Chat extends React.Component<ChatState, ChatState> {
 
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder().withUrl(routes.chatUrl).build();
-        this.setState({hubConnection}, () => {
+        this.setState({ hubConnection }, () => {
             this.state.hubConnection.start().then(() => "Connection started!");
 
             hubConnection.on("RecieveMessage", (receivedMessage) => {
-                this.setState({messages: [...this.state.messages, receivedMessage]});
+                this.setState({ messages: [...this.state.messages, receivedMessage] });
             })
         });
     }
@@ -66,16 +64,15 @@ class Chat extends React.Component<ChatState, ChatState> {
                     </View>
                     <View style={styles.buttonContainer}>
                         <TextInput style={styles.input} value={this.state.message}
-                                   placeholder="Aa"
-                                   onChangeText={(message) => {
-                                       this.setState({message: message})
-                                   }}/>
+                            placeholder="Aa"
+                            onChangeText={(message) => {
+                                this.setState({ message: message })
+                            }} />
                         <View>
-                            <Button onPress={this.onSubmit} title="Send"/>
+                            <Button onPress={this.onSubmit} title="Send" />
                         </View>
                     </View>
                 </View>
-
             </>
         );
     }
@@ -94,8 +91,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginBottom: 20,
-      },
-     
+    },
+
     message: {
         borderWidth: 1,
         borderColor: "#20232a",
@@ -109,7 +106,7 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: "#20232a",
         borderRadius: 4,
-      },
+    },
 
     buttonContainer: {
         display: 'flex',
@@ -120,7 +117,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     chatMessage: {
-        //flex: 1,
         backgroundColor: 'powderblue'
-    },    
+    },
 });
