@@ -8,7 +8,6 @@ import JourneyPage from './journey-activity/segment-control-activities/JourneyPa
 import JourneyStyle from './JourneyStyle';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import JourneyPageMoreOptions from './journey-activity/segment-control-activities/JourneyPage'
 const StackTabs = createStackNavigator();
 
 

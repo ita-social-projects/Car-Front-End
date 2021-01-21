@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import MenuButton from '../../../../components/bottom-popup/MenuButton';
-import BottomPopup from '../../../../components/bottom-popup/BottomPopup'
+import BottomPopup from '../../../../components/bottom-popup/BottomPopup';
 
 const JourneyPage = (props: any) => {
 
@@ -72,18 +72,18 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     headerTitleStyle: {
-      paddingLeft: 24,
-      paddingBottom: 20,
-      backgroundColor: "white",
-  
+        paddingLeft: 24,
+        paddingBottom: 20,
+        backgroundColor: "white",
+
     },
     headerTextStyle: {
-      fontSize: 14,
-      lineHeight: 16,
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
-      letterSpacing: 0.2,
-      alignItems: 'center'
+        fontSize: 14,
+        lineHeight: 16,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        letterSpacing: 0.2,
+        alignItems: 'center'
     }
 })
 

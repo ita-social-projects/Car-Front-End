@@ -16,7 +16,6 @@ function BottomPopup(props: any) {
     </>
   );
 
-
   return (
     <BottomSheet
       ref={props.refForChild}
@@ -26,7 +25,6 @@ function BottomPopup(props: any) {
       initialSnap={props.initialSnap}
       enabledInnerScrolling={props.enabledInnerScrolling}
       onCloseEnd={props.onCloseEnd}
-
     />
   );
 }
