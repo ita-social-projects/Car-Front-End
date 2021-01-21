@@ -1,138 +1,90 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     Text,
     View,
-    Dimensions,
-    FlatList,
-    TouchableHighlight
+    StyleSheet
 } from 'react-native';
-import BottomPopup from '../../../../components/bottom-popup/BottomPopup';
 import BottomSheet from 'reanimated-bottom-sheet';
-
-
-
-
-
-const data = [
-    {
-        id: 1,
-        name: 'View profile'
-    },
-    {
-        id: 2,
-        name: 'Message'
-    },
-    {
-        id: 2,
-        name: 'Message'
-    },
-    {
-        id: 2,
-        name: 'Message'
-    }
-]
-
-
-
-const renderSeparator = () => {
-    return (
-        <View
-            style={{
-                opacity: 0.3,
-                backgroundColor: 'grey',
-                height: 2
-            }}
-        />
-    )
-}
-
-
+import MenuButton from '../../../../components/bottom-popup/MenuButton';
+import BottomPopup from '../../../../components/bottom-popup/BottomPopup'
 
 const JourneyPage = (props: any) => {
 
     const myRef = React.useRef<BottomSheet>(null);
 
+    const renderInner = () => (
+        <View style={styles.panel}>
+            <MenuButton text="View profile"></MenuButton>
+            <MenuButton text="Message"></MenuButton>
+        </View>
+    )
 
-    const renderContent = () => {
-        return (
-            <View>
-                <FlatList
-                    style={{ marginBottom: 20 }}
-                    showsVerticalScrollIndicator={false}
-                    data={data}
-                    renderItem={renderItem}
-                    extraData={data}
-                    keyExtractor={(item, index) => index.toString()}
-                    contentContainerStyle={{
-                        paddingBottom: 40
-                    }}
-                />
-    
-            </View>
-        )
-    }
-    
-    const renderItem = () => {
-        return (
-            <TouchableHighlight
-                activeOpacity={0.6}
-                underlayColor="#000000"
-    
-                onPress={() => console.log('Pressed!')}>
-                <View style={{
-                    width: '100%',
-                    height: 44,
-                    flex: 1,
-                    alignItems: 'flex-start',
-                    justifyContent: 'center',
-                    marginLeft: 24
-                }}>
-                    <Text style={{
-                        fontSize: 18,
-                        color: '#000000',
-                        fontWeight: 'bold',
-                    }}>dsa</Text>
-                </View>
-            </TouchableHighlight>
-    
-        )
-    }
-
-    const content = () => {
-        return (
-            <View style={{ backgroundColor: 'white', height: Dimensions.get('window').height / 2 }}>
-                <Text>Example</Text>
-                <Text>Example2</Text>
-            </View>
-        );
-    };
-
-    if (props.isOpen == false) {
+    if (props.isOpen == true) {
         myRef?.current?.snapTo(1)
     } else {
         myRef?.current?.snapTo(0)
     }
 
+    const renderHeader = () => (
+        <View style={styles.headerTitleStyle}>
+            <Text style={styles.headerTextStyle}>More options</Text>
+        </View>
+    )
 
     return (
-        <>
-            <View
-                style={{
-                    flex: 1,
-                    backgroundColor: 'papayawhip',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-            </View>
+        <View style={styles.container}>
             <BottomPopup
-                style={{ backgroundColor: 'white' }}
                 refForChild={myRef}
-                snapPoints={['0%', '30%']}
-                renderContent={renderContent}
-                initialSnap={0}>
-            </BottomPopup>
-        </>
+                snapPoints={[0, 200]}
+                renderContent={renderInner}
+                initialSnap={0}
+                renderHeader={renderHeader}
+                enabledInnerScrolling={false}
+                onCloseEnd={() => props.setIsOpen(false)}
+            />
+        </View>
     );
 };
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+
+    },
+    item: {
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontSize: 32,
+    },
+    panelContainer: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    },
+    panel: {
+        height: 200,
+        backgroundColor: "white",
+    },
+    headerTitleStyle: {
+      paddingLeft: 24,
+      paddingBottom: 20,
+      backgroundColor: "white",
+  
+    },
+    headerTextStyle: {
+      fontSize: 14,
+      lineHeight: 16,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      letterSpacing: 0.2,
+      alignItems: 'center'
+    }
+})
+
 export default JourneyPage;

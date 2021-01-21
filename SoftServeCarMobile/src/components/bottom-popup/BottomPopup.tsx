@@ -1,18 +1,21 @@
 import * as React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import BottomPopupStyle from '../styles/BottomPopupStyle';
 
-
-
 function BottomPopup(props: any) {
+
   const renderHeader = () => (
-    <View style={BottomPopupStyle.headerContainer}>
-      <View style={BottomPopupStyle.headerBlackline} />
-    </View>
+    <>
+      <View style={BottomPopupStyle.header}>
+        <View style={BottomPopupStyle.panelHeader}>
+          <View style={BottomPopupStyle.panelHandle} />
+        </View>
+      </View>
+      {props?.renderHeader()}
+    </>
   );
 
-  const sheetRef = React.useRef<BottomSheet>(null);
 
   return (
     <BottomSheet
@@ -21,6 +24,9 @@ function BottomPopup(props: any) {
       renderContent={props.renderContent}
       renderHeader={renderHeader}
       initialSnap={props.initialSnap}
+      enabledInnerScrolling={props.enabledInnerScrolling}
+      onCloseEnd={props.onCloseEnd}
+
     />
   );
 }

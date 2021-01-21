@@ -23,14 +23,13 @@ const JourneyTabs = (props: any) => {
                 <StackTabs.Screen name="Search Journey" component={SearchJourney} />
                 <StackTabs.Screen name="Journey Page" 
                     options={{
-                        
                         headerRight: () => (
                             <TouchableWithoutFeedback onPress={() => setOpen(!isOpen)}>
                                 <Ionicons name={'ellipsis-horizontal'} size={30} style={{ paddingRight: 12 }} />
                             </TouchableWithoutFeedback>
                         ),
                     }} >
-                    {props => <JourneyPage {...props} isOpen={isOpen} />}
+                    {props => <JourneyPage {...props} isOpen={isOpen} setIsOpen={setOpen} />}
                 </StackTabs.Screen>
             </StackTabs.Navigator>
         </View>

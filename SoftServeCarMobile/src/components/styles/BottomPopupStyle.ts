@@ -1,21 +1,23 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const BottomPopupStyle = StyleSheet.create({
-  headerContainer: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderTopRightRadius: 16,
-    borderTopLeftRadius: 16,
+  header: {
+    backgroundColor: "white",
+    shadowColor: '#000000',
+    paddingTop: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
-  headerBlackline: {
-    justifyContent: 'center',
+  panelHeader: {
     alignItems: 'center',
+  },
+  panelHandle: {
     width: 74,
-    backgroundColor: 'black',
     height: 4,
-    marginTop: 15,
     borderRadius: 2,
-  },
+    backgroundColor: '#000000',
+    marginBottom: 26
+  }
 });
 
 export default BottomPopupStyle;
