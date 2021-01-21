@@ -6,6 +6,7 @@ import SearchJourney from './journey-activity/SearchJourney';
 import Journey from './Journey';
 import JourneyPage from './journey-activity/segment-control-activities/JourneyPage';
 import JourneyStyle from './JourneyStyle';
+import JourneyApplicant from './journey-activity/segment-control-activities/JourneyApplicant';
 
 const StackTabs = createStackNavigator();
 
@@ -18,6 +19,7 @@ const JourneyTabs = (props: any) => {
                 <StackTabs.Screen name="Create Journey" component={CreateJourney}/>
                 <StackTabs.Screen name="Search Journey" component={SearchJourney}/>
                 <StackTabs.Screen name="Journey Page" component={JourneyPage}/>
+                <StackTabs.Screen name="Applicant Page" component={JourneyApplicant}/>
             </StackTabs.Navigator>
         </View>
     );
