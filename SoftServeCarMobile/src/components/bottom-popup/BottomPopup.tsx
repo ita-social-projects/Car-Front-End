@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import BottomPopupStyle from '../styles/BottomPopupStyle';
 
-function BottomPopup(props: any) {
+export default function BottomPopup(props: any) {
 
   const renderHeader = () => (
     <>
@@ -28,5 +28,3 @@ function BottomPopup(props: any) {
     />
   );
 }
-
-export default BottomPopup;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import {
     Text,
     View,
@@ -8,7 +8,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import MenuButton from '../../../../components/bottom-popup/MenuButton';
 import BottomPopup from '../../../../components/bottom-popup/BottomPopup';
 
-const JourneyPage = (props: any) => {
+export default function JourneyPage(props: any) {
 
     const myRef = React.useRef<BottomSheet>(null);
 
@@ -19,11 +19,8 @@ const JourneyPage = (props: any) => {
         </View>
     )
 
-    if (props.isOpen == true) {
-        myRef?.current?.snapTo(1)
-    } else {
-        myRef?.current?.snapTo(0)
-    }
+    let index = props.isOpen ? 1 : 0;
+    myRef?.current?.snapTo(index);
 
     const renderHeader = () => (
         <View style={styles.headerTitleStyle}>
@@ -45,7 +42,6 @@ const JourneyPage = (props: any) => {
         </View>
     );
 };
-
 
 const styles = StyleSheet.create({
     container: {
@@ -85,6 +81,4 @@ const styles = StyleSheet.create({
         letterSpacing: 0.2,
         alignItems: 'center'
     }
-})
-
-export default JourneyPage;
+});
