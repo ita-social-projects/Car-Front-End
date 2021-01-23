@@ -23,9 +23,6 @@ const MenuButton = (props: any) => {
         setColorSeparator('#C1C1C5');
     }
 
-
-
-
     return (
         <TouchableHighlight
             style={{ ...styles.panelButton, backgroundColor: colorButton }}
@@ -45,14 +42,11 @@ const MenuButton = (props: any) => {
                     backgroundColor: colorSeparator,
                     width: '100%',
                     height: 1,
-
                 }} />
             </View>
         </TouchableHighlight>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -73,7 +67,5 @@ const styles = StyleSheet.create({
         paddingLeft: 24,
     },
 })
-
-
 
 export default MenuButton;
