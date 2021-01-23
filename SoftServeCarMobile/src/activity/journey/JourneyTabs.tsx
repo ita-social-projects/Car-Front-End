@@ -10,8 +10,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const StackTabs = createStackNavigator();
 
-
-const JourneyTabs = (props: any) => {
+export default function JourneyTabs(props: any) {
     const [isOpen, setOpen] = useState(false);
     return (
         <View style={JourneyStyle.tabsStyle}>
@@ -20,7 +19,7 @@ const JourneyTabs = (props: any) => {
                     component={Journey} options={{ headerTitleAlign: "center" }} />
                 <StackTabs.Screen name="Create Journey" component={CreateJourney} />
                 <StackTabs.Screen name="Search Journey" component={SearchJourney} />
-                <StackTabs.Screen name="Journey Page" 
+                <StackTabs.Screen name="Journey Page"
                     options={{
                         headerRight: () => (
                             <TouchableWithoutFeedback onPress={() => setOpen(!isOpen)}>
@@ -28,10 +27,9 @@ const JourneyTabs = (props: any) => {
                             </TouchableWithoutFeedback>
                         ),
                     }} >
-                    {props => <JourneyPage {...props} isOpen={isOpen} setIsOpen={setOpen} />}
+                    {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
                 </StackTabs.Screen>
             </StackTabs.Navigator>
         </View>
     );
 }
-export default JourneyTabs;

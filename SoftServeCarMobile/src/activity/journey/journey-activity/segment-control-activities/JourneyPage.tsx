@@ -41,7 +41,7 @@ export default function JourneyPage(props: any) {
             />
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
