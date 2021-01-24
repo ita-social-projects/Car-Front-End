@@ -1,34 +1,35 @@
 import React from 'react';
-import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import BottomPopup from '../../../../components/bottom-popup/BottomPopup';
-import {TouchableJourneyStyle} from './TouchableJourneyStyle';
-import * as RootNavigation from '../../../../components/navigation/RootNavigation';
 
 const JourneyPage = () => {
   const content = () => {
     return (
-      <View
-        style={{
-          backgroundColor: 'white',
-          height: Dimensions.get('window').height / 2,
-        }}>
-        <View>
-          <TouchableOpacity>
-            <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between'}}>
-              <Image
-                style={TouchableJourneyStyle.image}
-                source={require('../../../../../images/default-user-photo.jpg')}
-              />
-              <View style={{flexDirection: 'column'}}>
-                <Text>Maria Kruselnytska's journey</Text>
-                <Text>Experience Designer</Text>
-              </View>
-              <View>
-                <Text>Today at 19:15</Text>
-              </View>
+      <View style={styles.contentView}>
+        <TouchableOpacity style={styles.organizerBlock}>
+          <View style={styles.organizerImageBlock}>
+            <Image
+              style={styles.organizerImage}
+              source={require('../../../../../images/default-user-photo.jpg')}
+            />
+          </View>
+          <View style={styles.organizerInfoBlock}>
+            <Text style={styles.organizerNameText}>
+              Maria Kruselnytska's journey
+            </Text>
+            <View style={styles.organizerSecondaryInfoBlock}>
+              <Text style={styles.organizerRoleText}>Experience Designer</Text>
+              <Text style={styles.dateText}>Today at 19:15</Text>
             </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -55,3 +56,51 @@ const JourneyPage = () => {
 };
 
 export default JourneyPage;
+
+const styles = StyleSheet.create({
+  contentView: {
+    backgroundColor: 'white',
+    height: Dimensions.get('window').height / 2,
+    alignItems: 'center',
+  },
+  organizerBlock: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '90%',
+  },
+  organizerImageBlock: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  organizerImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+  },
+  organizerInfoBlock: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    flex: 5,
+  },
+  organizerNameText: {
+    fontSize: 15,
+    fontWeight: '700',
+    fontFamily: 'Open-Sans-Regular'
+  },
+  organizerSecondaryInfoBlock: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  organizerRoleText: {
+    fontSize: 13,
+    color: '#909095', 
+    fontWeight: '100',
+    fontFamily: 'Open-Sans-Regular'
+  },
+  dateText: {
+    fontSize: 13,
+    color: '#02A2CF',
+    fontWeight: '700',
+    fontFamily: 'Open-Sans-Regular'
+  },
+});
