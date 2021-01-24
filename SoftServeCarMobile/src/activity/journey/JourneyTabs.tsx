@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {View, Text, Button, Image, Pressable} from 'react-native';
+import {View, Text, Button, Image, Pressable, StyleSheet} from 'react-native';
 import CreateJourney from './journey-activity/CreateJourney';
 import SearchJourney from './journey-activity/SearchJourney';
 import Journey from './Journey';
@@ -8,10 +8,13 @@ import JourneyPage from './journey-activity/segment-control-activities/JourneyPa
 import JourneyStyle from './JourneyStyle';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {navigate} from '../../components/navigation/RootNavigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useWindowDimensions} from 'react-native';
 
 const StackTabs = createStackNavigator();
 
 const JourneyTabs = (props: any) => {
+  const {width, height} = useWindowDimensions();
   return (
     <View style={JourneyStyle.tabsStyle}>
       <StackTabs.Navigator>
@@ -27,34 +30,23 @@ const JourneyTabs = (props: any) => {
           component={JourneyPage}
           options={{
             title: 'Journey',
-            headerStyle: {},
             headerTitleAlign: 'center',
-            headerTitleStyle: {
-              fontFamily: 'Open-Sans-Regular',
-              fontWeight: '700',
-              fontSize: 16,
-            },
+            headerTitleStyle: styles.headerTitleStyle,
             headerLeft: () => (
-              <Pressable
-                style={{marginLeft: 10, flexDirection: 'row'}}
+              <TouchableOpacity
+                style={styles.backButtonOpacity}
                 onPress={() => {
                   navigate('Journey', {});
                 }}>
-                <Image
-                  source={require('../../../images/left-arrow.png')}
-                  style={{height: 20, padding: 1, marginTop: 1}}
+                <Ionicons
+                  name={'chevron-back-outline'}
+                  size={35}
+                  color={'#02A2CF'}
                 />
-                <Text
-                  style={{
-                    color: '#02A2CF',
-                    fontFamily: 'Open-Sans-Regular',
-                    fontSize: 16,
-                    fontWeight: '700',
-                    marginLeft: 3,
-                  }}>
-                  Back
-                </Text>
-              </Pressable>
+                <View style={styles.backButtonTextView}>
+                  <Text style={styles.backButtonText}>Back</Text>
+                </View>
+              </TouchableOpacity>
             ),
           }}
         />
@@ -63,3 +55,25 @@ const JourneyTabs = (props: any) => {
   );
 };
 export default JourneyTabs;
+
+const styles = StyleSheet.create({
+  backButtonOpacity: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  backButtonTextView: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  backButtonText: {
+    color: '#02A2CF',
+    fontFamily: 'Open-Sans-Regular',
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  headerTitleStyle: {
+    fontFamily: 'Open-Sans-Regular',
+    fontWeight: '700',
+    fontSize: 20,
+  },
+});
