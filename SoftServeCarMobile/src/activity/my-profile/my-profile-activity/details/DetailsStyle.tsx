@@ -1,11 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
-export const DetailsStyle = StyleSheet.create({  
-   
-    logoutButton: {  
+export const DetailsStyle = StyleSheet.create({
+
+    logoutButton: {
         borderRadius: 2,
-        margin: 160,       
-    },   
+        margin: 160,
+    },
 
     mainContainer: {
         marginTop: 30
@@ -15,13 +15,13 @@ export const DetailsStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    
+
     captionView: {
         flex: 1,
         marginLeft: 10,
         padding: 10,
-        fontSize: 18, 
-        fontWeight: 'bold',      
+        fontSize: 18,
+        fontWeight: 'bold',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
     },
@@ -30,7 +30,7 @@ export const DetailsStyle = StyleSheet.create({
         flex: 2,
         marginLeft: 10,
         padding: 10,
-        fontSize: 18,       
+        fontSize: 18,
         alignItems: 'flex-start',
         justifyContent: 'space-between'
     },

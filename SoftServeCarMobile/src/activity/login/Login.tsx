@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ActivityIndicator, Button, Text, View } from 'react-native'
 import {AuthContext} from "../auth/AuthProvider";
-import loginStyle from './LoginStyles';
+import LoginStyle from './LoginStyle';
 
 
 export function Login(props: any){
@@ -23,7 +23,7 @@ export function Login(props: any){
     let loader: any;
 
     if (loading) {
-        loader = <ActivityIndicator style={loginStyle.loadingIcon} size="large" color="black" />
+        loader = <ActivityIndicator style={LoginStyle.loadingIcon} size="large" color="black" />
     }
     else {
         loader = null;
@@ -31,11 +31,11 @@ export function Login(props: any){
 
     return (
         <View style={{ flex: 1, justifyContent: "space-around", alignItems: "center" }}>
-            <View style={loginStyle.container}>
-                <Text style = {loginStyle.loginPageTextGreeting}>Welcome to</Text>
-                <Text style = {loginStyle.loginPageTextName}>Softserve Journeys</Text>
+            <View style={LoginStyle.container}>
+                <Text style = {LoginStyle.loginPageTextGreeting}>Welcome to</Text>
+                <Text style = {LoginStyle.loginPageTextName}>Softserve Journeys</Text>
             </View>
-            <View style = {loginStyle.loginButton} >
+            <View style = {LoginStyle.loginButton} >
                 {loader}
                 <Button color="black" title="Login" disabled={buttonDisabled}
                 onPress={()=>{

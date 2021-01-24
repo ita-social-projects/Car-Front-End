@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
-const loginStyle = StyleSheet.create({   
-    
+const LoginStyle = StyleSheet.create({
+
     container:{
         flex:1,
         alignItems:"center",
@@ -13,7 +13,7 @@ const loginStyle = StyleSheet.create({
         fontSize: 21,
         textTransform: "uppercase",
         margin: 5,
-        letterSpacing: 0.2        
+        letterSpacing: 0.2
     },
     loginPageTextName: {
         fontFamily: "Proxima-Nova-Reg",
@@ -21,15 +21,15 @@ const loginStyle = StyleSheet.create({
         fontSize: 30,
         textTransform: "uppercase",
         margin: 5,
-        letterSpacing: 0.2 
+        letterSpacing: 0.2
     },
-    loginButton: {  
-        margin: 30, 
+    loginButton: {
+        margin: 30,
         padding: 15,
         alignSelf: "flex-end",
         fontFamily: "Proxima-Nova-Reg",
         fontWeight: "bold",
-        fontSize: 16,      
+        fontSize: 16,
     },
     preferencesText: {
         padding: 30,
@@ -44,4 +44,4 @@ const loginStyle = StyleSheet.create({
         borderColor: '#EEEEEE'
     },
 });
-export default loginStyle;
+export default LoginStyle;
