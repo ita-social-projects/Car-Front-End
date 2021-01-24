@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import cardStyle from './TouchableNavigationCardStyle';
+import cardStyle  from './TouchableNavigationCardStyle';
 
 const TouchableNavigationCard = (props: any) => {
   return (
@@ -32,4 +32,5 @@ const TouchableNavigationCard = (props: any) => {
     </View>
   );
 };
+
 export default TouchableNavigationCard;

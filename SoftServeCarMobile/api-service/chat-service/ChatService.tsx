@@ -10,7 +10,7 @@ class ChatService {
 
     routePrefix: string = 'userchats/';
 
-    getChat(userId: number) {
+    getChat(userId: number | undefined) {
         return this.apiService.get<Chat>(this.routePrefix + userId);
     }
 

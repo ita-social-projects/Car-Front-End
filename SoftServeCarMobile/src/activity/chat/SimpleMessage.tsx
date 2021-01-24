@@ -1,19 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import React, {useEffect, useState, useContext} from 'react';
+import {Text, View, TouchableOpacity, Image, StyleSheet, FlatList} from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { AuthContext } from '../auth/AuthProvider';
+import {AuthContext} from '../auth/AuthProvider';
 import "reflect-metadata";
-import { container } from 'tsyringe';
-import ChatService from '../../../APIService/ChatService/ChatService';
+import {container} from 'tsyringe';
+import ChatService from '../../../api-service/chat-service/ChatService';
 
-
-const SimpleMessage = (props) => {
+const SimpleMessage = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
     const chatService = container.resolve(ChatService);
     const [data, setData] = useState([])
-    const { user } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
 
     useEffect(() => {
-        chatService.getChat(user ?.id)
+        chatService.getChat(user?.id)
             .then(res => {
                 const chats = res.data;
                 console.log(chats);
@@ -22,24 +21,29 @@ const SimpleMessage = (props) => {
     }, []);
 
 
-
     return (
-        <View style={{ marginTop: 24 }}>
+        <View style={{marginTop: 24}}>
             <FlatList
                 data={data}
-                keyExtractor={({ id }, index) => id.toString()}
-                renderItem={({ item }) => (
+                keyExtractor={({id}) => id.toString()}
+                renderItem={({item}) => (
                     <View style={styles.main}>
                         <View style={styles.button}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image style={styles.image} source={{ uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg' }} />
+                            <View style={{flexDirection: 'row'}}>
+                                <Image style={styles.image}
+                                       source={{uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'}}/>
                                 <View>
                                     <Text style={styles.fonts}>{item.chatName}</Text>
-                                    <Text style={{ fontSize: 11, paddingTop: 10, fontFamily: 'sans-serif' }}>{item.chatName} </Text>
+                                    <Text style={{
+                                        fontSize: 11,
+                                        paddingTop: 10,
+                                        fontFamily: 'sans-serif'
+                                    }}>{item.chatName} </Text>
                                 </View>
                             </View>
-                            <TouchableOpacity style={{ paddingTop: 12, }} onPress={() => props.navigation.navigate("Chat")}>
-                                <View><Ionicons name={'chatbubbles'} size={20}></Ionicons></View>
+                            <TouchableOpacity style={{paddingTop: 12,}}
+                                              onPress={() => props.navigation.navigate("Chat")}>
+                                <View><Ionicons name={'chatbubbles'} size={20}/></View>
                             </TouchableOpacity>
                         </View>
                     </View>

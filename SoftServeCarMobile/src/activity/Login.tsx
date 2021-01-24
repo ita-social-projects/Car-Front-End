@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { AuthContext } from "../components/auth/AuthProvider";
+import { AuthContext } from "./auth/AuthProvider";
 import { ButtonStyle } from '../components/styles/ButtonStyle';
 import { centerStyle } from '../components/styles/CenterStyle';
 
