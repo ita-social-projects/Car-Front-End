@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const carStyle = StyleSheet.create({
+const addCarsStyle = StyleSheet.create({
     wrapper: {
         flex: 1,
         backgroundColor: 'white'
@@ -68,4 +68,4 @@ const carStyle = StyleSheet.create({
         marginLeft: 5
     }
 });
-export default carStyle;
+export default addCarsStyle;
