@@ -1,5 +1,4 @@
-import React from 'react'
-import { Controller, useForm } from 'react-hook-form';
+import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';

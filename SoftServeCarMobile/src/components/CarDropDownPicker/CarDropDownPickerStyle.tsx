@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const carDropDownStyle = StyleSheet.create({
+const carDropDownPickerStyle = StyleSheet.create({
     container: {
         borderWidth: 2,
         borderColor: 'black',
@@ -39,4 +39,4 @@ const carDropDownStyle = StyleSheet.create({
         color: '#909095'
     }
 }); 
-export default carDropDownStyle;
+export default carDropDownPickerStyle;

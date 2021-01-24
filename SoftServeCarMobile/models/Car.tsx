@@ -7,7 +7,7 @@ export default interface Car {
     brand: Brand,
     model: Model,
     color: Color,
-    plateNumber: String,
+    plateNumber: string,
     userId: number,
     byteOfImage: string
 }

@@ -4,6 +4,6 @@ export default interface CarDTO {
     brandId: number,
     modelId: number,
     color: Color,
-    plateNumber: String,
+    plateNumber: string,
     userId: number,
 }

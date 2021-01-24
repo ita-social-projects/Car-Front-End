@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import { ImagePickerResponse, launchImageLibrary } from 'react-native-image-picker/src';
-import carStyle from './AddCarsStyle';
+import addCarsStyle from './AddCarsStyle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../../activity/auth/AuthProvider';
 import { CarDropDownPickerItem } from '../../CarDropDownPicker/CarDropDownItem';
@@ -24,7 +24,7 @@ function AddCars(props: any) {
 
     const [brands, setBrands] = useState({} as Brand[]);
     const [models, setModels] = useState({} as Model[]);
-    const [colors, setColors] = useState<Array<{ value: string, label: string }>>(Object.values(Color)
+    const [colors] = useState<Array<{ value: string, label: string }>>(Object.values(Color)
         .filter(value => isNaN(Number(value)))
         .map((item, index) => ({ value: index.toString(), label: item.toString() })));
 
@@ -32,12 +32,11 @@ function AddCars(props: any) {
     const [selectedModel, setModel] = useState<CarDropDownPickerItem | null>(null);
     const [selectedColor, setColor] = useState<CarDropDownPickerItem | null>(null);
 
-    const [plateNumber, setPlateNumber] = useState<String>('');
+    const [plateNumber, setPlateNumber] = useState<string>('');
 
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
     const [imageData, setImageData] = useState<FormData>({} as FormData);
 
-    const [error, setError] = useState<boolean>(false);
     const [loading, setLoading] = useState(false);
 
     const brandService = container.resolve(BrandService);
@@ -54,13 +53,13 @@ function AddCars(props: any) {
         launchImageLibrary({ mediaType: 'photo', }, response => {
             if (!response.didCancel) {
                 setPhoto(response);
-                const imageData = new FormData();
-                imageData.append("image", {
+                const selectedImageData = new FormData();
+                selectedImageData.append("image", {
                     name: response.fileName,
                     type: response.type,
                     uri: response?.uri
                 });
-                setImageData(imageData);
+                setImageData(selectedImageData);
             }
         });
     }
@@ -89,27 +88,27 @@ function AddCars(props: any) {
             ({ ...{ value: String(model.id), label: model.name } })) : null;
 
     return (
-        <KeyboardAwareScrollView style={carStyle.wrapper}>
-            <View style={carStyle.carAvatarContainer}>
-                {photo && (<Image source={{ uri: photo.uri }} style={carStyle.carAvatar} />)}
-                <TouchableOpacity style={carStyle.carButtonUpload}
+        <KeyboardAwareScrollView style={addCarsStyle.wrapper}>
+            <View style={addCarsStyle.carAvatarContainer}>
+                {photo && (<Image source={{ uri: photo.uri }} style={addCarsStyle.carAvatar} />)}
+                <TouchableOpacity style={addCarsStyle.carButtonUpload}
                     onPress={() => uploadPhotoHandle()}>
-                    <Text style={carStyle.carButtonUploadText}>
+                    <Text style={addCarsStyle.carButtonUploadText}>
                         {Object.entries(photo).length ? "Change photo" : "Upload photo"}
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={carStyle.inputsContainer}>
-                <View style={carStyle.dropDownContainer}>
+            <View style={addCarsStyle.inputsContainer}>
+                <View style={addCarsStyle.dropDownContainer}>
                     <CarDropDownPicker
-                        style={carStyle.dropDownPicker}
+                        style={addCarsStyle.dropDownPicker}
                         placeHolder="Brand"
                         items={brandItems}
                         zIndex={3000}
                         required={true}
                         selectHandle={(item: CarDropDownPickerItem) => selectBrandHandle(item)} />
                     <CarDropDownPicker
-                        style={carStyle.dropDownPicker}
+                        style={addCarsStyle.dropDownPicker}
                         placeHolder="Model"
                         items={modelItems}
                         zIndex={2000}
@@ -117,7 +116,7 @@ function AddCars(props: any) {
                         disabled={modelItems ? false : true}
                         selectHandle={(item: CarDropDownPickerItem) => setModel(item)} />
                     <CarDropDownPicker
-                        style={carStyle.dropDownPicker}
+                        style={addCarsStyle.dropDownPicker}
                         placeHolder="Color"
                         items={colors}
                         zIndex={1000}
@@ -135,18 +134,17 @@ function AddCars(props: any) {
                             },
                         }}
                         onChangeText={(text: string, error: boolean) => {
-                            setError(error);
                             setPlateNumber(text);
                         }}
                         placeHolder='Plate number'
                     />
                 </View>
-                <View style={carStyle.saveButtonContainer}>
+                <View style={addCarsStyle.saveButtonContainer}>
                     <Text style={{ color: 'red' }}>*
                         <Text style={{ color: '#414045' }} > - mandatory information</Text>
                     </Text>
                     <TouchableOpacity
-                        style={[carStyle.carButtonSave]}
+                        style={[addCarsStyle.carButtonSave]}
                         onPress={() => saveCarHandle({
                             brandId: Number(selectedBrand?.value),
                             modelId: Number(selectedModel?.value),
@@ -154,9 +152,9 @@ function AddCars(props: any) {
                             plateNumber: plateNumber,
                             userId: Number(user?.id)
                         })}>
-                        <Text style={carStyle.carButtonSaveText}>Save</Text>
+                        <Text style={addCarsStyle.carButtonSaveText}>Save</Text>
                         {loading ?
-                            <ActivityIndicator style={carStyle.spinner} size={20} color="white" />
+                            <ActivityIndicator style={addCarsStyle.spinner} size={20} color="white" />
                             : <></>}
                     </TouchableOpacity>
                 </View>
