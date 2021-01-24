@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native'
 
 const carsStyle = StyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: 'white',
     },
     loading: {
         flex: 1,
     },
     carContainer: {
-        flex: 1,
         alignSelf: 'stretch',
         justifyContent: 'center',
         padding: 8
