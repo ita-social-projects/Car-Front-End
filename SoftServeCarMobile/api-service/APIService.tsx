@@ -19,11 +19,11 @@ class APIService {
     }
 
     post<T>(url: string, params?: any) {
-        return axiosInstance.post<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params.data));
+        return axiosInstance.post<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
 
     put<T>(url: string, params?: any) {
-        return axiosInstance.put<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params.data));
+        return axiosInstance.put<T>(this.baseUrl + url, Object.assign({}, this.baseHeaders, params));
     }
 
     delete<T>(url: string, params?: any) {
