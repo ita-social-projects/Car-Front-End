@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Text } from 'react-native';
 import carButtonStyle from './CarButtonStyle';
 
-function CarButton(props: any) {
+function CarButton() {
     return (
         <TouchableOpacity
             style={[carButtonStyle.button, carButtonStyle.whiteButton]}
