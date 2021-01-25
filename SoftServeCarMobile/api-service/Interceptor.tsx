@@ -4,7 +4,7 @@ import { AuthManager } from '../src/activity/auth/AuthManager';
 import * as RootNavigation from '../src/components/navigation/RootNavigation';
 
 
-export let axiosInstance = axios.create();
+export let axiosInstance = axios.create({timeout: 4000});
 
 axiosInstance.interceptors.request.use(
     async function (req: { headers: { Accept: string; "Content-Type": string; Authorization?: string; }; }) {
