@@ -14,7 +14,7 @@ class PreferencesService {
     }
 
     updateUserPreferences(preferences: UserPreferences) {
-        return this.apiService.put<UserPreferences>(this.routePrefix, { data: preferences });
+        return this.apiService.put<UserPreferences>(this.routePrefix, preferences );
     }
 }
 export default PreferencesService;
