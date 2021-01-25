@@ -54,10 +54,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
                             hireDate: new Date(),
                         }
                         const dbUser = await loginService.loginUser(userData);
-                        // if (!dbUser.data?.token) {
-                        //     RootNavigation.navigate("Login", {resetIndicator: true});
-                        //     return;
-                        // }
+                        if (!dbUser.data?.token) {
+                            RootNavigation.navigate("Login", {resetIndicator: true});
+                            return;
+                        }
                         const token: any = dbUser.data?.token;
                         AuthManager.saveAPIToken(token);
                         AsyncStorage.setItem('user', JSON.stringify(dbUser.data));
