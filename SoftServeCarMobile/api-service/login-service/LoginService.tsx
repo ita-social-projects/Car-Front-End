@@ -9,7 +9,7 @@ class LoginService {
     routePrefix: string = 'Login';
 
     async loginUser(user: User) {
-        return await this.apiService.post<User>(this.routePrefix, { data: user });
+        return await this.apiService.post<User>(this.routePrefix, user );
     }
 }
 export default LoginService;
