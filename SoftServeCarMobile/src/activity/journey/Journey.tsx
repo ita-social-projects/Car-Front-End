@@ -4,7 +4,7 @@ import TouchableNavigationBlock from './TouchableNavigationBlock'
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import AllJourneys from './journey-activity/segment-control-activities/AllJourneys'
 import PastJourneys from './journey-activity/segment-control-activities/PastJourneys'
-import UpcomingJourneys from './journey-activity/segment-control-activities/UpcomingJormeys'
+import UpcomingJourneys from './journey-activity/segment-control-activities/UpcomingJourneys'
 import ScheduledJourneys from './journey-activity/segment-control-activities/ScheduledJourneys'
 import JourneyStyle from './JourneyStyle';
 
@@ -14,7 +14,7 @@ function Journey(props: any) {
     <ScrollView style={JourneyStyle.page}>
       <TouchableNavigationBlock navigation={props.navigation}
         navigationName="Search Journey"
-        blockImage={require("../../../images/journey/bermuda-searching.png")}
+        blockImage={require("../../../assets/images/journey/bermuda-searching.png")}
         blockName="Search for a Journey"
         from="#A5C500"
         to="#00A977"
@@ -23,7 +23,7 @@ function Journey(props: any) {
         height={140} />
       <TouchableNavigationBlock navigation={props.navigation}
         navigationName="Create Journey"
-        blockImage={require("../../../images/journey/bermuda-delivery-car-service.png")}
+        blockImage={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
         blockName="Create a Journey"
         from="#00A3CF"
         to="#5552A0"

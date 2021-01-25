@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const exceptionStyle = StyleSheet.create({
+export const ExceptionStyle = StyleSheet.create({
     container:{
         flex:1,
         alignItems:"center",

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const headerStyle = StyleSheet.create({
+export const AvatarLogoTitleStyle = StyleSheet.create({
     headerContainer: {
         flex: 1,
         flexDirection: 'row'
@@ -30,4 +30,4 @@ const headerStyle = StyleSheet.create({
         marginBottom: 8
     }
 });
-export default headerStyle;
+

@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 20,
     },
-
     message: {
         borderWidth: 1,
         borderColor: "#20232a",
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
         borderColor: "#20232a",
         borderRadius: 4,
     },
-
     buttonContainer: {
         display: 'flex',
         alignItems: 'center',

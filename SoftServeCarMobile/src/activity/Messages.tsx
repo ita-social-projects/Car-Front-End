@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MessagesList from './chat/MessagesList'
 
+
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
 

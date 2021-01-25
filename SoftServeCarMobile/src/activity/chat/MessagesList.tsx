@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthContext } from '../auth/AuthProvider';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import ChatService from '../../../APIService/ChatService/ChatService';
+import ChatService from '../../../api-service/chat-service/ChatService';
 
 const SimpleMessage = (props) => {
     const chatService = container.resolve(ChatService);

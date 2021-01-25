@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
-const cardStyle = StyleSheet.create({
-    cardCointainer: {
+export const TouchableNavigationCardStyle = StyleSheet.create({
+    cardContainer: {
         paddingBottom: 26,
         paddingLeft: 27,
         paddingTop: 26,
@@ -26,4 +26,3 @@ const cardStyle = StyleSheet.create({
         fontWeight: 'bold'
     }
 });
-export default cardStyle;

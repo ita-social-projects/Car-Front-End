@@ -1,4 +1,26 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/.idea
+.idea/
+.vscode/
+
+build/
+.gradle/
+SoftServeCarMobile/.gradle/
+SoftServeCarMobile/.eslingrc.js
+SoftServeCarMobile/.prettierrc.jsbundle
+SoftServeCarMobile/.watchmanconfig
+SoftServeCarMobile/react-native-config.js
+
+SoftServeCarMobile/node_modules/
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+!debug.keystore
+
+
+
+
+
