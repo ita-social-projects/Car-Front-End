@@ -3,9 +3,11 @@ import { Text, View } from 'react-native'
 import { AuthContext } from '../auth/AuthProvider';
 import * as RootNavigation from '../../components/navigation/RootNavigation';
 import {ExceptionStyle} from './ExceptionStyle';
+import { useNavigation } from '@react-navigation/native';
 
 export function Exception(props: any){
-    const { user, logout } = useContext(AuthContext);
+    const navigation = useNavigation();
+    const { logout } = useContext(AuthContext);
     const userMessage = props.route.params.errorMessage == 401 ?
      'You are unauthorized. You have to log in to the app.'
     : props.route.params.errorMessage == 'Network error' ? 'The site can’t be reached' : 'Internal Server Error';
@@ -13,7 +15,8 @@ export function Exception(props: any){
         return(
         <View >
             <Text style={ExceptionStyle.exceptionLink} onPress={()=>{
-                user ? logout() : RootNavigation.navigate("Login", {resetConnection: true});
+                 logout();
+                 navigation.navigate("Login");
                 }}>Login </Text>
         </View>
         )

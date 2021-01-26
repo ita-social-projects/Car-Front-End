@@ -16,7 +16,7 @@ const AuthConfig = {
 
 const config: AuthConfiguration = {
   clientId: AuthConfig.appId,
-  redirectUrl: Platform.OS === 'ios' ? 'urn:ietf:wg:oauth:2.0:oob' : 'softserve-car://react-native-auth',
+  redirectUrl: 'softserve-car://react-native-auth',
   scopes: AuthConfig.appScopes,
   additionalParameters: { prompt: 'select_account' },
   serviceConfiguration: {

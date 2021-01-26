@@ -12,6 +12,8 @@ import { container } from "tsyringe";
 import { AuthContext } from "../../../auth/AuthProvider";
 import JourneyService from "../../../../../api-service/journeyService/JourneyService";
 import { Journey } from "../../../../../models/Journey";
+import { Button } from 'react-native';
+import * as RootNavigation from '../../../../components/navigation/RootNavigation';
 
 const JourneyPage = () => {
   const journeyService = container.resolve(JourneyService);
@@ -43,6 +45,13 @@ const JourneyPage = () => {
             </View>
           </View>
         </TouchableOpacity>
+        <View>
+            <View style={{padding: 40}}>
+                <TouchableOpacity>
+                    <Button  title = 'Applicant' color= 'black' onPress= {() => { RootNavigation.navigate("Applicant Page", {}); }} />
+             </TouchableOpacity>
+            </View>
+        </View>
       </View>
     );
   };
@@ -68,6 +77,7 @@ const JourneyPage = () => {
     </>
   );
 };
+
 
 export default JourneyPage;
 

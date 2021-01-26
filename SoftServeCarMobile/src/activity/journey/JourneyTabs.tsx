@@ -11,6 +11,8 @@ import {navigate} from '../../components/navigation/RootNavigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useWindowDimensions} from 'react-native';
 
+import JourneyApplicant from './journey-activity/segment-control-activities/JourneyApplicant';
+
 const StackTabs = createStackNavigator();
 
 const JourneyTabs = (props: any) => {
@@ -51,9 +53,11 @@ const JourneyTabs = (props: any) => {
           }}
         />
       </StackTabs.Navigator>
+      <StackTabs.Screen name="Applicant Page" component={JourneyApplicant}/>
     </View>
   );
 };
+
 export default JourneyTabs;
 
 const styles = StyleSheet.create({

@@ -1,0 +1,6 @@
+module Pods_SoftServeCarMobile_tvOS {
+  umbrella header "Pods-SoftServeCarMobile-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

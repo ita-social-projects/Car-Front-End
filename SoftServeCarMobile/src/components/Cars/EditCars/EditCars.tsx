@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-function EditCars(props: any) {
+function EditCars() {
     return (
        <Text>Edit a car</Text>
     );

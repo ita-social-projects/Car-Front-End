@@ -19,7 +19,7 @@ import CarDTO from '../../../../models/CarDTO';
 import CarDropDownPicker from '../../CarDropDownPicker/CarDropDownPicker';
 import CarTextInput from '../../CarTextInput/CarTextInput';
 
-function AddCars(props: any) {
+function AddCars() {
     const { user } = useContext(AuthContext);
 
     const [brands, setBrands] = useState({} as Brand[]);
@@ -113,7 +113,7 @@ function AddCars(props: any) {
                         items={modelItems}
                         zIndex={2000}
                         required={true}
-                        disabled={modelItems ? false : true}
+                        disabled={!modelItems}
                         selectHandle={(item: CarDropDownPickerItem) => setModel(item)} />
                     <CarDropDownPicker
                         style={addCarsStyle.dropDownPicker}
@@ -133,7 +133,7 @@ function AddCars(props: any) {
                                     'letters, hyphens'
                             },
                         }}
-                        onChangeText={(text: string, error: boolean) => {
+                        onChangeText={(text: string) => {
                             setPlateNumber(text);
                         }}
                         placeHolder='Plate number'
