@@ -11,30 +11,31 @@ const TouchableMapBarStyle = StyleSheet.create({
         backgroundColor: 'white',
         fontFamily:'OpenSans'
     },
+    
     insideText: {
         flex:1,
         color: '#909095',
         marginLeft: 5,
         fontSize: 16,
-        //backgroundColor: 'green'
     },
+
     directionText: {
         flex:5,
         color: 'black',
         marginLeft: 5,
         fontSize: 16,
-       // backgroundColor: 'red'
     },
+
     textInputStyle: {
         paddingVertical: 8,
         fontSize: 16,
         lineHeight: 24,
         zIndex: 0,
     },
+
     barIcon: {
         flex:1,
         borderColor: '#EEEEEE',
-      //  backgroundColor: 'blue'
     }
 
 });
