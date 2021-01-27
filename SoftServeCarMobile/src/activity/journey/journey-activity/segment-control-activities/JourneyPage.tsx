@@ -48,14 +48,14 @@ const JourneyPage = () => {
         <View>
             <View style={{padding: 40}}>
                 <TouchableOpacity>
-                    <Button  title = 'Applicant' color= 'black' onPress= {() => { RootNavigation.navigate("Applicant Page", {}); }} />
+                    <Button  title = 'Applicant' color= 'black' onPress= {() => {  }} />
              </TouchableOpacity>
             </View>
         </View>
       </View>
     );
   };
-
+//RootNavigation.navigate("Applicant Page", {});
   return (
     <>
       <BottomPopup
