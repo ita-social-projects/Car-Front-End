@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import {
   Dimensions,
   Image,
@@ -13,10 +12,12 @@ import { container } from "tsyringe";
 import { AuthContext } from "../../../auth/AuthProvider";
 import JourneyService from "../../../../../api-service/journeyService/JourneyService";
 import { Journey } from "../../../../../models/Journey";
-import { Button } from 'react-native';
-import * as RootNavigation from '../../../../components/navigation/RootNavigation';
+import { Button } from "react-native";
+import * as RootNavigation from "../../../../components/navigation/RootNavigation";
+import BottomSheet from 'reanimated-bottom-sheet'
+import MenuButton from '../../../../components/BottomPopup/MenuButton'
 
-const JourneyPage = () => {
+const JourneyPage = (props: any) => {
   const journeyService = container.resolve(JourneyService);
   const { user } = useContext(AuthContext);
   const [currentJourney, setJourney] = useState({} as Journey);
@@ -24,6 +25,24 @@ const JourneyPage = () => {
     .getJourney(1)
     .then((res) => setJourney(res.data))
     .catch((e) => console.log(e));
+
+  const myRef = useRef<BottomSheet>(null);
+  const renderInner = () => (
+    <View style={styles.panel}>
+      <MenuButton text="View profile"></MenuButton>
+      <MenuButton text="Message"></MenuButton>
+    
+    </View>
+  );
+
+  let index = props.isOpen ? 1 : 0;
+  myRef?.current?.snapTo(index);
+
+  const renderHeader = () => (
+    <View style={styles.headerTitleStyle}>
+      <Text style={styles.headerTextStyle}>More options</Text>
+    </View>
+  );
 
   const content = () => {
     return (
@@ -47,67 +66,38 @@ const JourneyPage = () => {
           </View>
         </TouchableOpacity>
         <View>
-            <View style={{padding: 40}}>
-                <TouchableOpacity>
-                    <Button  title = 'Applicant' color= 'black' onPress= {() => {  }} />
-             </TouchableOpacity>
-=======
-import React from 'react';
-import {
-    Text,
-    View,
-    StyleSheet,
-    Button
-} from 'react-native';
-import BottomSheet from 'reanimated-bottom-sheet';
-import MenuButton from '../../../../components/BottomPopup/MenuButton';
-import BottomPopup from '../../../../components/BottomPopup/BottomPopup';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import * as RootNavigation from '../../../../components/navigation/RootNavigation';
-
-const JourneyPage = (props: any) => {
-
-    const myRef = React.useRef<BottomSheet>(null);
-    const renderInner = () => (
-        <View style={styles.panel}>
-            <MenuButton text="View profile"></MenuButton>
-            <MenuButton text="Message"></MenuButton>
+          <View style={{ padding: 40 }}>
+            <TouchableOpacity>
+              <Button title="Applicant" color="black" onPress={() => {}} />
+            </TouchableOpacity>
+          </View>
         </View>
-    )
-    
-    let index = props.isOpen ? 1 : 0;
-    myRef?.current?.snapTo(index);
-
-    const renderHeader = () => (
-        <View style={styles.headerTitleStyle}>
-            <Text style={styles.headerTextStyle}>More options</Text>
+        <View>
+          <View style={{ padding: 40 }}>
+            <TouchableOpacity>
+              <Button
+                title="Applicant"
+                color="black"
+                onPress={() => {
+                  RootNavigation.navigate("Applicant Page", {});
+                }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-    )
-
-    return (
-        <View style={styles.container}>
-            <View>
-                <View style={{ padding: 40 }}>
-                    <TouchableOpacity>
-                        <Button title='Applicant' color='black' onPress={() => { RootNavigation.navigate("Applicant Page", {}); }} />
-                    </TouchableOpacity>
-                </View>
->>>>>>> origin/develop
-            </View>
-            <BottomPopup
-                refForChild={myRef}
-                snapPoints={[0, 200]}
-                renderContent={renderInner}
-                initialSnap={0}
-                renderHeader={renderHeader}
-                enabledInnerScrolling={false}
-                onCloseEnd={() => props.setIsOpen(false)}
-            />
-        </View>
+        <BottomPopup
+          refForChild={myRef}
+          snapPoints={[0, 200]}
+          renderContent={renderInner}
+          initialSnap={0}
+          renderHeader={renderHeader}
+          enabledInnerScrolling={false}
+          onCloseEnd={() => props.setIsOpen(false)}
+        />
       </View>
     );
   };
-//RootNavigation.navigate("Applicant Page", {});
+  //RootNavigation.navigate("Applicant Page", {});
   return (
     <>
       <BottomPopup
@@ -130,11 +120,9 @@ const JourneyPage = (props: any) => {
   );
 };
 
-
 export default JourneyPage;
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
   contentView: {
     backgroundColor: "white",
     height: Dimensions.get("window").height / 2,
@@ -180,44 +168,39 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontFamily: "Open-Sans-Regular",
   },
+  container: {
+    flex: 1,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+  panelContainer: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  panel: {
+    height: 200,
+    backgroundColor: "white",
+  },
+  headerTitleStyle: {
+    paddingLeft: 24,
+    paddingBottom: 20,
+    backgroundColor: "white",
+  },
+  headerTextStyle: {
+    fontSize: 14,
+    lineHeight: 16,
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    letterSpacing: 0.2,
+    alignItems: "center",
+  },
 });
-=======
-    container: {
-        flex: 1,
-
-    },
-    item: {
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
-    },
-    panelContainer: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    panel: {
-        height: 200,
-        backgroundColor: "white",
-    },
-    headerTitleStyle: {
-        paddingLeft: 24,
-        paddingBottom: 20,
-        backgroundColor: "white",
-
-    },
-    headerTextStyle: {
-        fontSize: 14,
-        lineHeight: 16,
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        letterSpacing: 0.2,
-        alignItems: 'center'
-    }
-});
->>>>>>> origin/develop
