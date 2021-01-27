@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 const TouchableMapBarStyle = StyleSheet.create({
     container: {
@@ -11,7 +10,7 @@ const TouchableMapBarStyle = StyleSheet.create({
         backgroundColor: 'white',
         fontFamily:'OpenSans'
     },
-    
+
     insideText: {
         flex:1,
         color: '#909095',
