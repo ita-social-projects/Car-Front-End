@@ -7,6 +7,7 @@ import { injectable } from 'tsyringe';
 
 class PreferencesService {
     constructor(private apiService: APIService) { }
+    
     routePrefix: string = 'UserPreferences';
 
     getUserPreferences(userId: number) {

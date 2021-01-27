@@ -1,7 +1,7 @@
 import APIService from '../APIService';
 import "reflect-metadata";
 import { injectable } from 'tsyringe';
-import Brand from '../../../models/Brand';
+import Brand from '../../models/Brand';
 
 @injectable()
 class BrandService {
