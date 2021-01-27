@@ -10,10 +10,10 @@ import CarInfoDTO from '../../models/CarInfoDTO';
 class CarService {
     constructor(private apiService: APIService) { }
     
-    routePrefix: string = 'cars';
+    routePrefix: string = 'car';
 
-    uploadPhoto(id: number, formData: FormData) {
-        return fetch(routes.apiUrl + this.routePrefix + '/' + id + '/photo',
+    uploadPhoto(carId: number, formData: FormData) {
+        return fetch(routes.apiUrl + this.routePrefix + '/' + carId + '/photo',
         {
             method: 'PUT',
             headers: { "Content-Type": "multipart/form-data" },
@@ -25,12 +25,12 @@ class CarService {
         return this.apiService.post<Car>(this.routePrefix, car);
     }
 
-    getAll(id: number) {
-        return this.apiService.get<Array<CarInfoDTO>>(this.routePrefix + '/by-user/' + id);
+    getAll(userId: number) {
+        return this.apiService.get<Array<CarInfoDTO>>(this.routePrefix + '/byUser/' + userId);
     }
 
-    getAvatar(id: number) {
-        return this.apiService.get<string>(this.routePrefix + '/' + id + '/photo');
+    getAvatar(carId: number) {
+        return this.apiService.get<string>(this.routePrefix + '/' + carId + '/photo');
     }
 }
 export default CarService;
