@@ -7,14 +7,14 @@ import Model from '../../models/Model';
 class ModelService {
     constructor(private apiService: APIService) { }
     
-    routePrefix: string = 'models';
+    routePrefix: string = 'model';
 
     getModels() {
         return this.apiService.get<Model[]>(this.routePrefix);
     }
 
-    getModelsByBrandId(id: number) {
-        return this.apiService.get<Model[]>(this.routePrefix + '/by-brand/' + id);
+    getModelsByBrandId(brandId: number) {
+        return this.apiService.get<Model[]>(this.routePrefix + '/brand/' + brandId);
     }
 }
 
