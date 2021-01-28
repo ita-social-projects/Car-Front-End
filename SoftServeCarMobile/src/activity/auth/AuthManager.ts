@@ -16,7 +16,7 @@ const AuthConfig = {
 
 const config: AuthConfiguration = {
   clientId: AuthConfig.appId,
-  redirectUrl: 'softserve-car://react-native-auth',
+  redirectUrl: 'softserve-car://react-native-auth/',
   scopes: AuthConfig.appScopes,
   additionalParameters: { prompt: 'select_account' },
   serviceConfiguration: {
