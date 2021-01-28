@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import { authorize, AuthConfiguration } from 'react-native-app-auth';
-import { Platform } from 'react-native';
 
 const AuthConfig = {
   appId: '6d6543bc-f0a6-4312-a919-53f757516d63',
