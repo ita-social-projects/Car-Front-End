@@ -4,7 +4,7 @@ import { View, Text, Button, Image } from 'react-native'
 const JourneyApplicant = () => {
     return(
         <View>
-            <Text></Text>
+            <Text>"Journey Applicant"</Text>
         </View>
     )
 } 

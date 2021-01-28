@@ -8,7 +8,6 @@ const LoginStyle = StyleSheet.create({
         margin: 30,
     },
     loginPageTextGreeting: {
-        fontFamily: "Proxima-Nova-Reg",
         fontWeight: "bold",
         fontSize: 21,
         textTransform: "uppercase",
@@ -16,7 +15,6 @@ const LoginStyle = StyleSheet.create({
         letterSpacing: 0.2
     },
     loginPageTextName: {
-        fontFamily: "Proxima-Nova-Reg",
         fontWeight: "bold",
         fontSize: 30,
         textTransform: "uppercase",
@@ -27,7 +25,6 @@ const LoginStyle = StyleSheet.create({
         margin: 30,
         padding: 15,
         alignSelf: "flex-end",
-        fontFamily: "Proxima-Nova-Reg",
         fontWeight: "bold",
         fontSize: 16,
     },

@@ -13,7 +13,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     textStyle: {
         marginLeft: 20,
         flex: 1,
-        fontFamily: "Proxima-Nova-Reg",
+        fontFamily: 'OpenSans-Regular',
         fontWeight: "bold",
         fontSize: 24,
         justifyContent: "center",
