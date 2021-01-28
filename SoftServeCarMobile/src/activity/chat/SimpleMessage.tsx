@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {AuthContext} from '../auth/AuthProvider';
+import { AuthContext } from '../auth/AuthProvider';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import ChatService from '../../../api-service/chat-service/ChatService';
