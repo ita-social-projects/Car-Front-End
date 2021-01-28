@@ -7,7 +7,7 @@ import {Journey} from '../../models/Journey';
 class JourneyService {
     constructor(private apiService: APIService) { }
 
-    routePrefix: string = 'journey';
+    routePrefix: string = 'journeys/';
 
     getJourney(journeyId: number) {
         return this.apiService.get<Journey>(this.routePrefix + journeyId);

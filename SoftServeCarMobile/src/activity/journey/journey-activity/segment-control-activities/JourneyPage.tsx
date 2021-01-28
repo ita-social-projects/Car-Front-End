@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import {
   Dimensions,
   Image,
@@ -14,36 +14,36 @@ import JourneyService from "../../../../../api-service/journeyService/JourneySer
 import { Journey } from "../../../../../models/Journey";
 import { Button } from "react-native";
 import * as RootNavigation from "../../../../components/navigation/RootNavigation";
-import BottomSheet from 'reanimated-bottom-sheet'
-import MenuButton from '../../../../components/BottomPopup/MenuButton'
+import BottomSheet from "reanimated-bottom-sheet";
+import MenuButton from "../../../../components/BottomPopup/MenuButton";
+import Moment from "moment";
+import { FlatList } from "react-native";
+import { User } from "../../../../../models/User";
 
 const JourneyPage = (props: any) => {
   const journeyService = container.resolve(JourneyService);
   const { user } = useContext(AuthContext);
   const [currentJourney, setJourney] = useState({} as Journey);
-  journeyService
-    .getJourney(1)
-    .then((res) => setJourney(res.data))
-    .catch((e) => console.log(e));
 
-  const myRef = useRef<BottomSheet>(null);
-  const renderInner = () => (
-    <View style={styles.panel}>
-      <MenuButton text="View profile"></MenuButton>
-      <MenuButton text="Message"></MenuButton>
-    
-    </View>
-  );
-
-  let index = props.isOpen ? 1 : 0;
-  myRef?.current?.snapTo(index);
-
-  const renderHeader = () => (
-    <View style={styles.headerTitleStyle}>
-      <Text style={styles.headerTextStyle}>More options</Text>
-    </View>
-  );
-
+  useEffect(() => {
+    journeyService
+      .getJourney(1)
+      .then((res) => setJourney(res.data))
+      .catch((e) => console.log(e));
+  }, []);
+  var participants: User[] = [
+    {
+      id: 5,
+      name: "Tanya",
+      surname: "Lysak",
+      position: "",
+      location: "Lviv",
+      hireDate: new Date(),
+      email: "sat",
+      token: "",
+      byteOfImage: "",
+    },
+  ];
   const content = () => {
     return (
       <View style={styles.contentView}>
@@ -56,48 +56,34 @@ const JourneyPage = (props: any) => {
           </View>
           <View style={styles.organizerInfoBlock}>
             <Text style={styles.organizerNameText}>
-              Maria Kruselnytska's journey
+              {currentJourney?.driver?.name} {currentJourney?.driver?.surname}'s
+              journey
             </Text>
             <View style={styles.organizerSecondaryInfoBlock}>
-              <Text style={styles.organizerRoleText}>Experience Designer</Text>
-              <Text style={styles.dateText}>Today at 14:15</Text>
-              <Text>{currentJourney?.id}</Text>
+              <Text style={styles.organizerRoleText}>
+                {currentJourney?.driver?.position}
+              </Text>
+              <Text style={styles.dateText}>
+                {Moment(currentJourney?.departureTime).calendar()}
+              </Text>
             </View>
           </View>
         </TouchableOpacity>
         <View>
-          <View style={{ padding: 40 }}>
-            <TouchableOpacity>
-              <Button title="Applicant" color="black" onPress={() => {}} />
-            </TouchableOpacity>
-          </View>
+          <FlatList
+            data={currentJourney?.participants}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+                <Text style={{color: 'black', fontSize: 40}}>{item?.name}</Text>
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
-        <View>
-          <View style={{ padding: 40 }}>
-            <TouchableOpacity>
-              <Button
-                title="Applicant"
-                color="black"
-                onPress={() => {
-                  RootNavigation.navigate("Applicant Page", {});
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <BottomPopup
-          refForChild={myRef}
-          snapPoints={[0, 200]}
-          renderContent={renderInner}
-          initialSnap={0}
-          renderHeader={renderHeader}
-          enabledInnerScrolling={false}
-          onCloseEnd={() => props.setIsOpen(false)}
-        />
       </View>
     );
   };
-  //RootNavigation.navigate("Applicant Page", {});
+
   return (
     <>
       <BottomPopup

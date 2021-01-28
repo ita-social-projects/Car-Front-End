@@ -1,3 +1,6 @@
+import { User } from "./User";
+import { Stop } from "./Stop";
+
 export type Journey = null | {
   id: number;
   routeDistance: number;
@@ -5,6 +8,8 @@ export type Journey = null | {
   countOfSeats: number;
   comments: string;
   isFree: boolean;
-  driverId: number;
   scheduleId: number;
-}
+  participants: User[];
+  stops: Stop[];
+  driver: User;
+};
