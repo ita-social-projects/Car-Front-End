@@ -18,6 +18,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		82DC1EB56F5680D27CF2C00C /* libPods-SoftServeCarMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13D9EF937B19FD179A992E /* libPods-SoftServeCarMobile.a */; };
 		85A5C98B25C2D41B008B7BC5 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85A5C98A25C2D41B008B7BC5 /* OpenSans-Regular.ttf */; };
+		85A5C9B425C3116C008B7BC5 /* Proxima-Nova-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85A5C9B325C3116C008B7BC5 /* Proxima-Nova-Reg.ttf */; };
 		9FC8A33DFAE24DB295754790 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA90836B6617406191BF3CB0 /* OpenSans-Italic.ttf */; };
 		CFE94A88FABBB7BC96445DEF /* libPods-SoftServeCarMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C196AAF167B4526D4488E1C0 /* libPods-SoftServeCarMobile-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SoftServeCarMobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85A5C86625C01C10008B7BC5 /* SoftServeCarMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SoftServeCarMobile.entitlements; path = SoftServeCarMobile/SoftServeCarMobile.entitlements; sourceTree = "<group>"; };
 		85A5C98A25C2D41B008B7BC5 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		85A5C9B325C3116C008B7BC5 /* Proxima-Nova-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima-Nova-Reg.ttf"; path = "../assets/fonts/Proxima-Nova-Reg.ttf"; sourceTree = "<group>"; };
 		99282FA7FB1C1D36BE9DFAD7 /* Pods-SoftServeCarMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoftServeCarMobile.debug.xcconfig"; path = "Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		B13ADAD4D6EF5B51DED45624 /* libPods-SoftServeCarMobile-SoftServeCarMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SoftServeCarMobile-SoftServeCarMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C196AAF167B4526D4488E1C0 /* libPods-SoftServeCarMobile-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SoftServeCarMobile-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +205,7 @@
 		EC614EAA683A425A92AE60A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				85A5C9B325C3116C008B7BC5 /* Proxima-Nova-Reg.ttf */,
 				85A5C98A25C2D41B008B7BC5 /* OpenSans-Regular.ttf */,
 				FA90836B6617406191BF3CB0 /* OpenSans-Italic.ttf */,
 			);
@@ -354,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85A5C9B425C3116C008B7BC5 /* Proxima-Nova-Reg.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				85A5C98B25C2D41B008B7BC5 /* OpenSans-Regular.ttf in Resources */,
 				9FC8A33DFAE24DB295754790 /* OpenSans-Italic.ttf in Resources */,

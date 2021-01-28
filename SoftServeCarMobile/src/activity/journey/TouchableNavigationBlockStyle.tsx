@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
     blockContainer: {
@@ -13,7 +13,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     textStyle: {
         marginLeft: 20,
         flex: 1,
-        fontFamily: 'OpenSans-Regular',
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
         fontWeight: "bold",
         fontSize: 24,
         justifyContent: "center",
