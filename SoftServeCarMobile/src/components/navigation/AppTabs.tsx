@@ -1,13 +1,14 @@
 import React from "react";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Messages from "../../activity/Messages";
 import Notifications from "../../activity/Notifications";
-import {AppTabsList} from "./AppTabsList";
+import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";
 
 import JourneyTabs from "../../activity/journey/JourneyTabs";
+import { Platform } from "react-native";
 
 
 interface AppTabsProps {
@@ -46,7 +47,7 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                     fontStyle: 'normal',
                     fontSize: 10,
                     fontWeight: '800',
-                    fontFamily: 'OpenSans-Bold',
+                    fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Bold',
                     lineHeight: 16
                 },
                 activeTintColor: 'black',

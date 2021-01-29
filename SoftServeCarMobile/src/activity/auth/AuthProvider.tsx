@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
-import {AuthManager} from "./AuthManager";
-import {GraphManager} from './GraphAuthProvider';
+import { AuthManager } from "./AuthManager";
+import { GraphManager } from './GraphAuthProvider';
 import * as RootNavigation from '../../components/navigation/RootNavigation';
-import {User} from "../../../models/User";
+import { User } from "../../../models/User";
 import "reflect-metadata";
-import {container} from 'tsyringe';
+import { container } from 'tsyringe';
 import LoginService from '../../../api-service/login-service/LoginService'
 
 
@@ -26,7 +26,7 @@ export const AuthContext =
 interface AuthProviderProps {
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User>(null);
 
     return (

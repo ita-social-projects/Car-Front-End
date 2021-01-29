@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import {injectable} from 'tsyringe';
-import {routes} from '../environment';
-import {axiosInstance} from "./Interceptor";
+import { injectable } from 'tsyringe';
+import { routes } from '../environment';
+import { axiosInstance } from "./Interceptor";
 
 @injectable()
 class APIService {

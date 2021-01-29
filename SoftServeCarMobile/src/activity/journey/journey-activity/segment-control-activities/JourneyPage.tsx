@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    Text,
-    View,
-    StyleSheet,
-    Button
-} from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import MenuButton from '../../../../components/BottomPopup/MenuButton';
 import BottomPopup from '../../../../components/BottomPopup/BottomPopup';

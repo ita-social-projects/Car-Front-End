@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const AvatarLogoTitleStyle = StyleSheet.create({
     headerContainer: {
@@ -14,7 +14,7 @@ export const AvatarLogoTitleStyle = StyleSheet.create({
     },
     headerUserInformation: {
         marginLeft: 15,
-        fontFamily: 'ProximaNova',
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
         fontWeight: 'bold'
     },
     headerUserName: {
