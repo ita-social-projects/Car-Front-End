@@ -6,7 +6,7 @@ import { injectable } from 'tsyringe';
 class LoginService {
     constructor(private apiService: APIService) { }
     
-    routePrefix: string = 'Login';
+    routePrefix: string = 'login';
 
     async loginUser(user: User) {
         return await this.apiService.post<User>(this.routePrefix, user);
