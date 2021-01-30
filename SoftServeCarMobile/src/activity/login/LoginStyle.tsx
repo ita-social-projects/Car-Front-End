@@ -1,4 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
+import {ProximaNova} from "../../../font-manager";
 
 const LoginStyle = StyleSheet.create({
 
@@ -8,16 +9,14 @@ const LoginStyle = StyleSheet.create({
         margin: 30,
     },
     loginPageTextGreeting: {
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
-        fontWeight: "bold",
+        fontFamily: ProximaNova.Bold,
         fontSize: 21,
         textTransform: "uppercase",
         margin: 5,
         letterSpacing: 0.2
     },
     loginPageTextName: {
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
-        fontWeight: "bold",
+        fontFamily: ProximaNova.Bold,
         fontSize: 30,
         textTransform: "uppercase",
         margin: 5,
@@ -27,8 +26,7 @@ const LoginStyle = StyleSheet.create({
         margin: 30,
         padding: 15,
         alignSelf: "flex-end",
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
-        fontWeight: "bold",
+        fontFamily: ProximaNova.Bold,
         fontSize: 16,
     },
     preferencesText: {
