@@ -25,7 +25,11 @@ export const Routes: React.FC<RoutesProps> = () => {
           {
            user ? (
               <Stack.Navigator screenOptions={{ headerShown:false }}>
+<<<<<<< HEAD
                 <Stack.Screen name = 'AppTabs' component = {AppTabs} options={{ headerShown:false }} />
+=======
+                <Stack.Screen name = 'AppTabs' component = {AppTabs} options={{ headerShown:false }}/>
+>>>>>>> develop
                 <Stack.Screen name = 'Login' component = {Login} />
                 <Stack.Screen name = 'Exception' component = {Exception} />
               </Stack.Navigator>
