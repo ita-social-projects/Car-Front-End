@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import CreateJourney from './journey-activity/CreateJourney';
 import SearchJourney from './journey-activity/search-journey/SearchJourney';
 import Journey from './Journey';
-import JourneyPage from './journey-activity/segment-control-activities/JourneyPage';
+import JourneyPage from './journey-activity/segment-control-activities/journey-page/JourneyPage';
 import JourneyStyle from './JourneyStyle';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
