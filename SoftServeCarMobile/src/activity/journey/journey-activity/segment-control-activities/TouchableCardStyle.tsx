@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const TouchableCardStyle = StyleSheet.create({
     cardContainer: {
@@ -29,7 +29,7 @@ export const TouchableCardStyle = StyleSheet.create({
     cardName: {
         flex:2,
         fontWeight: 'bold',
-        fontFamily: 'OpenSans',
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
         fontStyle: 'normal',
         fontSize: 14,
         lineHeight: 16,

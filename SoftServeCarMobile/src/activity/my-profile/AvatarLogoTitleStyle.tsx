@@ -14,7 +14,7 @@ export const AvatarLogoTitleStyle = StyleSheet.create({
     },
     headerUserInformation: {
         marginLeft: 15,
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
         fontWeight: 'bold'
     },
     headerUserName: {

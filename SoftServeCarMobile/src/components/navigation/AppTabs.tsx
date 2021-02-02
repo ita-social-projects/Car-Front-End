@@ -4,12 +4,9 @@ import Messages from "../../activity/Messages";
 import Notifications from "../../activity/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
 import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";
-
 import JourneyTabs from "../../activity/journey/JourneyTabs";
 import { Platform } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 
 
 interface AppTabsProps {

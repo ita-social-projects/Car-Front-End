@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const TouchableJourneyStyle = StyleSheet.create({
     component: {
@@ -28,7 +28,7 @@ export const TouchableJourneyStyle = StyleSheet.create({
     },
 
     driverName: {
-        fontFamily: "OpenSans-Regular",
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
         fontWeight: "bold",
         fontSize: 16,
         lineHeight: 16,
@@ -37,7 +37,7 @@ export const TouchableJourneyStyle = StyleSheet.create({
     },
 
     driverPosition: {
-        fontFamily: "OpenSans-Regular",
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
         fontSize: 14,
         lineHeight: 16,
         color: "#909095",
@@ -50,7 +50,7 @@ export const TouchableJourneyStyle = StyleSheet.create({
     },
 
     time: {
-        fontFamily: "OpenSans-Regular",
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
         fontSize: 14,
         lineHeight: 16,
         textAlign: "right",
