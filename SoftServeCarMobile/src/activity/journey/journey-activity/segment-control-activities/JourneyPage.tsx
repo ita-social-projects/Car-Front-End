@@ -31,19 +31,7 @@ const JourneyPage = (props: any) => {
       .then((res) => setJourney(res.data))
       .catch((e) => console.log(e));
   }, []);
-  var participants: User[] = [
-    {
-      id: 5,
-      name: "Tanya",
-      surname: "Lysak",
-      position: "",
-      location: "Lviv",
-      hireDate: new Date(),
-      email: "sat",
-      token: "",
-      byteOfImage: "",
-    },
-  ];
+ 
   const content = () => {
     return (
       <View style={styles.contentView}>
@@ -74,7 +62,7 @@ const JourneyPage = (props: any) => {
             data={currentJourney?.participants}
             renderItem={({ item }) => (
               <TouchableOpacity>
-                <Text style={{color: 'black', fontSize: 40}}>{item?.name}</Text>
+                <Text style={{color: 'black', fontSize: 40}}>{item?.name} {item?.surname}</Text>
               </TouchableOpacity>
             )}
             keyExtractor={(item, index) => index.toString()}
