@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-community/async-storage';
 import { authorize, AuthConfiguration } from 'react-native-app-auth';
 import { Platform } from 'react-native';
 
@@ -10,59 +10,60 @@ const AuthConfig = {
     'profile',
     'User.Read',
     'MailboxSettings.Read',
-    'Calendars.ReadWrite'
-  ]
+    'Calendars.ReadWrite',
+  ],
 };
 
 const config: AuthConfiguration = {
   clientId: AuthConfig.appId,
-  redirectUrl: Platform.OS === 'ios' ? 'urn:ietf:wg:oauth:2.0:oob' : 'softserve-car://react-native-auth',
+  redirectUrl:
+    Platform.OS === 'ios' ? 'urn:ietf:wg:oauth:2.0:oob' : 'softserve-car://react-native-auth',
   scopes: AuthConfig.appScopes,
   additionalParameters: { prompt: 'select_account' },
   serviceConfiguration: {
     authorizationEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
     tokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
-  }
+  },
 };
-export class AuthManager {    
-
+export class AuthManager {
   static signInAsync = async () => {
     const result = await authorize(config);
     await AsyncStorage.setItem('userToken', result.accessToken);
     await AsyncStorage.setItem('idToken', result.idToken);
     await AsyncStorage.setItem('refreshToken', result.refreshToken);
     await AsyncStorage.setItem('expireTime', result.accessTokenExpirationDate);
-  }
-  
+  };
+
   static signOutAsync = async () => {
     await AsyncStorage.removeItem('userToken');
     await AsyncStorage.removeItem('refreshToken');
     await AsyncStorage.removeItem('expireTime');
-    await AsyncStorage.removeItem('idToken');    
-    await AsyncStorage.removeItem("user");
-    await AsyncStorage.removeItem("APIToken");
-  }
+    await AsyncStorage.removeItem('idToken');
+    await AsyncStorage.removeItem('user');
+    await AsyncStorage.removeItem('APIToken');
+  };
 
-  static getIdToken=async()=>{
+  static getIdToken = async () => {
     return await AsyncStorage.getItem('idToken');
-  }
+  };
 
-  static getAccessTokenAsync = async() => {
+  static getAccessTokenAsync = async () => {
     return await AsyncStorage.getItem('userToken');
-  }
-  
-  static saveAPIToken=async(token:string)=>{
+  };
+
+  static saveAPIToken = async (token: string) => {
     await AsyncStorage.setItem('APIToken', token);
-  }
-  static getAPIToken=async()=>{
+  };
+
+  static getAPIToken = async () => {
     return await AsyncStorage.getItem('APIToken');
-  }  
- 
-  static getUser = async() => {
-    return await AsyncStorage.getItem("user");
-  }  
+  };
+
+  static getUser = async () => {
+    return await AsyncStorage.getItem('user');
+  };
 
   static setUser = async (user: any) => {
     await AsyncStorage.setItem('user', user);
-  }
+  };
 }
