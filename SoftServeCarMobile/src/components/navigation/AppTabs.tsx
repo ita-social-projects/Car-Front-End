@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import Messages from "../../activity/Messages";
-import Notifications from "../../activity/Notifications";
+import Messages from "../../activity/messages/Messages";
+import Notifications from "../../activity/notifications/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";

@@ -5,7 +5,7 @@ import Details from './my-profile-activity/details/Details';
 import Preferences from './my-profile-activity/preferences/Preferences';
 import AddressBook from './my-profile-activity/address-book/AddressBook';
 import MyProfile from './MyProfile';
-import AvatarLogoTitle from './AvatarLogoTitle';
+import AvatarLogoTitle from './my-profile-activity/avatar-logo/AvatarLogoTitle';
 import Settings from './my-profile-activity/settings/Settings';
 import "reflect-metadata";
 import { container } from 'tsyringe';

@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TouchableJourneyStyle } from './TouchableJourneyStyle';
-import * as RootNavigation from '../../../../components/navigation/RootNavigation';
+import * as RootNavigation from '../../../../../../components/navigation/RootNavigation';
 
 export default function TouchableJourney() {
     return (
@@ -12,7 +12,7 @@ export default function TouchableJourney() {
                 <View style={TouchableJourneyStyle.component}>
                     <View style={TouchableJourneyStyle.header}>
                         <Image style={TouchableJourneyStyle.image}
-                            source={require("../../../../../assets/images/default-user-photo.jpg")} />
+                            source={require("../../../../../../../assets/images/default-user-photo.jpg")} />
                         <View style={TouchableJourneyStyle.driverBlock}>
                             <Text style={TouchableJourneyStyle.driverName}>
                                 Maria Kruselnytska's journey

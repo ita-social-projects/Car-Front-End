@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
-import MenuButton from '../../../../components/BottomPopup/MenuButton';
-import BottomPopup from '../../../../components/BottomPopup/BottomPopup';
+import MenuButton from '../../../../../components/BottomPopup/menu-button/MenuButton';
+import BottomPopup from '../../../../../components/BottomPopup/BottomPopup';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import * as RootNavigation from '../../../../components/navigation/RootNavigation';
+import * as RootNavigation from '../../../../../components/navigation/RootNavigation';
 
 const JourneyPage = (props: any) => {
 

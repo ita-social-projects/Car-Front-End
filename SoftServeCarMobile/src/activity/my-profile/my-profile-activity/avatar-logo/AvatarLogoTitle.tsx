@@ -3,8 +3,8 @@ import { View, Text, Image, ActivityIndicator } from 'react-native';
 import {AvatarLogoTitleStyle} from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import UserService from '../../../api-service/user-service/UserService';
-import { AuthContext } from '../auth/AuthProvider';
+import UserService from '../../../../../api-service/user-service/UserService';
+import { AuthContext } from '../../../auth/AuthProvider';
 
 function AvatarLogoTitle(props: any) {
     const userService = container.resolve(UserService);
@@ -21,13 +21,13 @@ function AvatarLogoTitle(props: any) {
                         style={AvatarLogoTitleStyle.headerUserAvatar} />)
                 }
                 else {
-                    setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
+                    setAvatar(<Image source={require('../../../../../assets/images/default-user-photo.jpg')}
                         style={AvatarLogoTitleStyle.headerUserAvatar} />)
                 }
             })
             .catch(e => {
                 console.log(e);
-                setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
+                setAvatar(<Image source={require('../../../../../assets/images/default-user-photo.jpg')}
                     style={AvatarLogoTitleStyle.headerUserAvatar} />)
             });
     }, []);
