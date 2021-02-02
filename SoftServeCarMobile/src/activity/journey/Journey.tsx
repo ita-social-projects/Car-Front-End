@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
-import TouchableNavigationBlock from './TouchableNavigationBlock'
+import TouchableNavigationBlock from './touchable-navigation-block/TouchableNavigationBlock'
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import AllJourneys from './journey-activity/segment-control-activities/AllJourneys'
 import PastJourneys from './journey-activity/segment-control-activities/PastJourneys'

@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../../activity/auth/AuthProvider';
 import CarInfoDTO from '../../../models/CarInfoDTO';
 import carsStyle from './CarsStyle'
-import TouchableNavigationCard from '../../activity/my-profile/TouchableNavigationCard';
+import TouchableNavigationCard from '../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
 import CarService from '../../../api-service/car-service/CarService';
 
 export default function Cars(props: any) {
@@ -29,7 +29,7 @@ export default function Cars(props: any) {
                     Add a car
                 </Text>
             </TouchableNavigationCard>
-            { cars.length ? <></> :
+            { cars?.length ? <></> :
                 <Text style={carsStyle.message}>
                     Currently you don’t have any car in the list.
                     You have to add a car if you want to create Journeys with personal one.

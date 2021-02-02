@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
 import CreateJourney from './journey-activity/CreateJourney';
-import SearchJourney from './journey-activity/SearchJourney';
+import SearchJourney from './journey-activity/search-journey/SearchJourney';
 import Journey from './Journey';
 import JourneyPage from './journey-activity/segment-control-activities/JourneyPage';
 import JourneyStyle from './JourneyStyle';
