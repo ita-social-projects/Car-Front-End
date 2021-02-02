@@ -1,4 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
+
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
 	blockContainer: {
@@ -9,19 +10,18 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
 		height: 160,
 		marginVertical: 5,
 	},
-
-	textStyle: {
-		marginLeft: 20,
-		flex: 1,
-		fontFamily: 'Proxima-Nova-Reg',
-		fontWeight: 'bold',
-		fontSize: 24,
-		justifyContent: 'center',
-		textTransform: 'uppercase',
-		textAlignVertical: 'center',
-		color: '#FFFFFF',
-		width: Dimensions.get('window').width / 3,
-	},
+    textStyle: {
+        marginLeft: 20,
+        flex: 1,
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontWeight: "bold",
+        fontSize: 24,
+        justifyContent: "center",
+        textTransform: "uppercase",
+        textAlignVertical: "center",
+        color: "#FFFFFF",
+        width: Dimensions.get('window').width / 3
+    },
 
 	imageStyle: {
 		justifyContent: "flex-end",

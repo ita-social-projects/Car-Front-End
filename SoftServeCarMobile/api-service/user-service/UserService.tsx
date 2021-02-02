@@ -1,20 +1,20 @@
 import APIService from '../APIService';
 import "reflect-metadata";
-import {User} from '../../models/User';
+import { User } from '../../models/User';
 import { injectable } from 'tsyringe';
 
 @injectable()
 class UserService {
     constructor(private apiService: APIService) { }
 
-    routePrefix: string = 'user';
+    routePrefix: string = 'users';
 
-    getUser(userId: number) {
-        return this.apiService.get<User>(this.routePrefix + '/withAvatar/' + userId);
+    getUser(id: number) {
+        return this.apiService.get<User>(this.routePrefix + '/with-avatar/' + id);
     }
 
-    getAvatar(userId: number) {
-        return this.apiService.get<string>(this.routePrefix + '/' + userId + '/avatar');
+    getAvatar(id: number) {
+        return this.apiService.get<string>(this.routePrefix + '/' + id + '/avatar');
     }
 
     create(user: User) {

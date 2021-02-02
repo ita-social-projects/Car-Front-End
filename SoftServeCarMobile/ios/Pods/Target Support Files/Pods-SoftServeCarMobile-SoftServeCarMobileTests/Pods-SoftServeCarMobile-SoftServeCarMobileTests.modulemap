@@ -1,0 +1,6 @@
+module Pods_SoftServeCarMobile_SoftServeCarMobileTests {
+  umbrella header "Pods-SoftServeCarMobile-SoftServeCarMobileTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

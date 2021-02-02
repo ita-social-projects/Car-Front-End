@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { AuthManager } from './AuthManager';
@@ -7,6 +8,19 @@ import { User } from '../../../models/User';
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 import LoginService from '../../../api-service/login-service/LoginService';
+=======
+import React, { useState } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
+import { AuthManager } from "./AuthManager";
+import { GraphManager } from './GraphAuthProvider';
+import * as RootNavigation from '../../components/navigation/RootNavigation';
+import { User } from "../../../models/User";
+import "reflect-metadata";
+import { container } from 'tsyringe';
+import LoginService from '../../../api-service/login-service/LoginService'
+
+
+>>>>>>> eb78af03583987d6aee14b8eb0767d20fa32a143
 
 const loginService = container.resolve(LoginService);
 
@@ -25,7 +39,11 @@ export const AuthContext = React.createContext<{
 interface AuthProviderProps {}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+<<<<<<< HEAD
 	const [user, setUser] = useState<User>(null);
+=======
+    const [user, setUser] = useState<User>(null);
+>>>>>>> eb78af03583987d6aee14b8eb0767d20fa32a143
 
 	return (
 		<AuthContext.Provider

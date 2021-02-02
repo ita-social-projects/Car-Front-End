@@ -13,37 +13,25 @@ function AvatarLogoTitle(props: any) {
 		<ActivityIndicator style={AvatarLogoTitleStyle.headerUserAvatar} size="large" color="black" />,
 	);
 
-	useEffect(() => {
-		userService
-			.getAvatar(Number(user?.id))
-			.then((result) => {
-				const byteOfImage = JSON.stringify(result.request._response);
-				if (!result.data) {
-					setAvatar(
-						<Image
-							source={{ uri: `data:image/png;base64,${byteOfImage}` }}
-							style={AvatarLogoTitleStyle.headerUserAvatar}
-						/>,
-					);
-				} else {
-					setAvatar(
-						<Image
-							source={require('../../../assets/images/default-user-photo.jpg')}
-							style={AvatarLogoTitleStyle.headerUserAvatar}
-						/>,
-					);
-				}
-			})
-			.catch((e) => {
-				console.log(e);
-				setAvatar(
-					<Image
-						source={require('../../../assets/images/default-user-photo.jpg')}
-						style={AvatarLogoTitleStyle.headerUserAvatar}
-					/>,
-				);
-			});
-	}, []);
+    useEffect(() => {
+        userService.getAvatar(Number(user?.id))
+            .then(result => {
+                const byteOfImage = JSON.stringify(result.request._response);
+                if (Object.entries(props.user).length) {
+                    setAvatar(<Image source={{ uri: 'data:image/png;base64,' + byteOfImage }}
+                        style={AvatarLogoTitleStyle.headerUserAvatar} />)
+                }
+                else {
+                    setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
+                        style={AvatarLogoTitleStyle.headerUserAvatar} />)
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}
+                    style={AvatarLogoTitleStyle.headerUserAvatar} />)
+            });
+    }, []);
 
 	return (
 		<View style={AvatarLogoTitleStyle.headerContainer}>

@@ -6,12 +6,13 @@ import { Chat } from "../../models/Chat";
 
 @injectable()
 class ChatService {
-  constructor(private apiService: APIService){ }
+    constructor(private apiService: APIService){ }
 
-  routePrefix = "userchats/";
-  getChat(userId: number) {
-    return this.apiService.get<Chat>(this.routePrefix + userId);
-  }
+    routePrefix: string = 'user-chats/';
+
+    getChat(id: number | undefined) {
+        return this.apiService.get<Chat>(this.routePrefix + id);
+    }
 }
 
 export default ChatService;

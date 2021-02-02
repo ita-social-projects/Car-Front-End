@@ -4,15 +4,15 @@ import { View } from 'react-native';
 import { container } from 'tsyringe';
 import Details from './my-profile-activity/details/Details';
 import Preferences from './my-profile-activity/preferences/Preferences';
-import Cars from './my-profile-activity/cars/Cars';
 import AddressBook from './my-profile-activity/address-book/AddressBook';
 import MyProfile from './MyProfile';
 import AvatarLogoTitle from './AvatarLogoTitle';
 import Settings from './my-profile-activity/settings/Settings';
 import 'reflect-metadata';
 import UserService from '../../../api-service/user-service/UserService';
-import { User } from '../../../models/User';
-import { AuthContext } from '../auth/AuthProvider';
+import {User} from '../../../models/User';
+import {AuthContext} from "../auth/AuthProvider"
+import CarTabs from './my-profile-activity/cars/CarTabs';
 
 const StackTabs = createStackNavigator();
 
@@ -28,24 +28,23 @@ const MyProfileTabs = () => {
 			.catch((e: any) => console.log(e));
 	}, []);
 
-	return (
-		<View style={{ flex: 1, alignSelf: "stretch" }}>
-			<StackTabs.Navigator>
-				<StackTabs.Screen
-					name="MyProfile"
-					component={MyProfile}
-					options={{
-						headerStyle: { height: 120 },
-						headerTitle: (args) => <AvatarLogoTitle {...args} user={currentUser} />,
-					}}
-				/>
-				<StackTabs.Screen name="Preferences" component={Preferences} />
-				<StackTabs.Screen name="Details" component={Details} />
-				<StackTabs.Screen name="YourCars" component={Cars} />
-				<StackTabs.Screen name="AddressBook" component={AddressBook} />
-				<StackTabs.Screen name="Settings" component={Settings} />
-			</StackTabs.Navigator>
-		</View>
-	);
-};
+    return (
+        <View style={{flex: 1, alignSelf: 'stretch'}}>
+            <StackTabs.Navigator>
+                <StackTabs.Screen name="MyProfile"
+                                  component={MyProfile}
+                                  options={{
+                                      headerStyle: {height: 120},
+                                      headerTitle: args => <AvatarLogoTitle {...args} user={currentUser}/>
+                                  }}/>
+                <StackTabs.Screen name="Preferences" component={Preferences}/>
+                <StackTabs.Screen name="Details" component={Details}/>
+                <StackTabs.Screen name="CarTabs" component={CarTabs} options={{headerShown: false}}/>
+                <StackTabs.Screen name="AddressBook" component={AddressBook}/>
+                <StackTabs.Screen name="Settings" component={Settings}/>
+            </StackTabs.Navigator>
+        </View>
+    );
+}
+
 export default MyProfileTabs;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+<<<<<<< HEAD
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../auth/AuthProvider';
 import 'reflect-metadata';
@@ -10,6 +11,18 @@ const SimpleMessage = (props: { navigation: { navigate: (arg0: string) => void }
 	const chatService = container.resolve(ChatService);
 	const [data, setData] = useState([]);
 	const { user } = useContext(AuthContext);
+=======
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { AuthContext } from '../auth/AuthProvider';
+import "reflect-metadata";
+import { container } from 'tsyringe';
+import ChatService from '../../../api-service/chat-service/ChatService';
+
+const SimpleMessage = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
+    const chatService = container.resolve(ChatService);
+    const [data, setData] = useState([])
+    const { user } = useContext(AuthContext);
+>>>>>>> eb78af03583987d6aee14b8eb0767d20fa32a143
 
 	useEffect(() => {
 		chatService.getChat(user?.id).then((res) => {

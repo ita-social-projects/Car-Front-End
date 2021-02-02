@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { authorize, AuthConfiguration } from 'react-native-app-auth';
-import { Platform } from 'react-native';
 
 const AuthConfig = {
   appId: '6d6543bc-f0a6-4312-a919-53f757516d63',
@@ -16,8 +15,12 @@ const AuthConfig = {
 
 const config: AuthConfiguration = {
   clientId: AuthConfig.appId,
+<<<<<<< HEAD
   redirectUrl:
     Platform.OS === 'ios' ? 'urn:ietf:wg:oauth:2.0:oob' : 'softserve-car://react-native-auth',
+=======
+  redirectUrl: 'softserve-car://react-native-auth/',
+>>>>>>> eb78af03583987d6aee14b8eb0767d20fa32a143
   scopes: AuthConfig.appScopes,
   additionalParameters: { prompt: 'select_account' },
   serviceConfiguration: {

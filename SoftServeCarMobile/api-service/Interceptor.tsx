@@ -1,10 +1,9 @@
-// @ts-ignore
 import axios, { AxiosResponse } from 'axios'
 import { AuthManager } from '../src/activity/auth/AuthManager';
 import * as RootNavigation from '../src/components/navigation/RootNavigation';
 
 
-export let axiosInstance = axios.create();
+export let axiosInstance = axios.create({timeout: 4000});
 
 axiosInstance.interceptors.request.use(
     async function (req: { headers: { Accept: string; "Content-Type": string; Authorization?: string; }; }) {
@@ -36,7 +35,7 @@ axiosInstance.interceptors.request.use(
         {
             errorCode = error.response.status;
         }
-        RootNavigation.navigate("Exception",{ errorMessage: errorCode });
+        RootNavigation.navigate("Exception", { errorMessage: errorCode });
         return Promise.reject(error);
     }
 );
