@@ -19,7 +19,6 @@ const Tabs = createBottomTabNavigator<AppTabsList>();
 
 export const AppTabs: React.FC<AppTabsProps> = () => {
     return (
-        <NavigationContainer>
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
             sceneContainerStyle={{ alignItems: "center" }}
@@ -61,6 +60,5 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
             <Tabs.Screen options={{ tabBarLabel: "Journey" }} name="JourneyTabs" component={JourneyTabs}/>
             <Tabs.Screen name="Notifications" component={Notifications}/>
         </Tabs.Navigator>
-        </NavigationContainer>
     )
 }
