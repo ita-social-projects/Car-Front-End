@@ -9,6 +9,7 @@ import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";
 
 import JourneyTabs from "../../activity/journey/JourneyTabs";
 import { Platform } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
 
 interface AppTabsProps {
@@ -18,6 +19,7 @@ const Tabs = createBottomTabNavigator<AppTabsList>();
 
 export const AppTabs: React.FC<AppTabsProps> = () => {
     return (
+        <NavigationContainer>
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
             sceneContainerStyle={{ alignItems: "center" }}
@@ -59,5 +61,6 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
             <Tabs.Screen options={{ tabBarLabel: "Journey" }} name="JourneyTabs" component={JourneyTabs}/>
             <Tabs.Screen name="Notifications" component={Notifications}/>
         </Tabs.Navigator>
+        </NavigationContainer>
     )
 }
