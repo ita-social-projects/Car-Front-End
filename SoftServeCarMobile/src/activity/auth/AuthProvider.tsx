@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                         AuthManager.saveAPIToken(token);
                         AsyncStorage.setItem('user', JSON.stringify(dbUser.data));
                         setUser(dbUser.data);
-                        RootNavigation.navigate("AppTabs", {});
+                        RootNavigation.navigate('AppTabs', {});
                     }
                 },
                 logout: async () => {

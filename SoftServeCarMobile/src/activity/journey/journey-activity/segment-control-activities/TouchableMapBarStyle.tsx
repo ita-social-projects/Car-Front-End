@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const TouchableMapBarStyle = StyleSheet.create({
     container: {
@@ -8,7 +8,7 @@ const TouchableMapBarStyle = StyleSheet.create({
         marginRight:20,
         marginLeft:20,
         backgroundColor: 'white',
-        fontFamily:'OpenSans'
+        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
     },
 
     insideText: {
