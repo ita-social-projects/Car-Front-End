@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
-import CreateJourney from './journey-activity/CreateJourney';
+import CreateJourney from './journey-activity/create-journey/CreateJourney';
 import SearchJourney from './journey-activity/search-journey/SearchJourney';
 import Journey from './Journey';
 import JourneyPage from './journey-activity/segment-control-activities/journey-page/JourneyPage';
@@ -31,7 +31,6 @@ const JourneyTabs = (props: any) => {
                     }} >
                     {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
                 </StackTabs.Screen>
-                <StackTabs.Screen name="Applicant Page" options={{ title: 'SoftServian'}} component={JourneyApplicant}/>
             </StackTabs.Navigator>
         </View>
     );

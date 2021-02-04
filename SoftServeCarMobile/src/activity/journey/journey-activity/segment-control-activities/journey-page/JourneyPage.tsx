@@ -4,14 +4,18 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import MenuButton from '../../../../../components/BottomPopup/menu-button/MenuButton';
 import BottomPopup from '../../../../../components/BottomPopup/BottomPopup';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import * as RootNavigation from '../../../../../components/navigation/RootNavigation';
 import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack'
+import JourneyApplicant from '../journey-applicant/JourneyApplicant';
+import { JourneyPageStyle } from './JourneyPageStyle';
+
+const StackTabs = createStackNavigator();
 
 const JourneyPage = (props: any) => {
 
     const myRef = React.useRef<BottomSheet>(null);
     const renderInner = () => (
-        <View style={styles.panel}>
+        <View style={JourneyPageStyle.panel}>
             <MenuButton text="View profile"></MenuButton>
             <MenuButton text="Message"></MenuButton>
         </View>
@@ -21,15 +25,18 @@ const JourneyPage = (props: any) => {
     myRef?.current?.snapTo(index);
 
     const renderHeader = () => (
-        <View style={styles.headerTitleStyle}>
-            <Text style={styles.headerTextStyle}>More options</Text>
+        <View style={JourneyPageStyle.headerTitleStyle}>
+            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
         </View>
     )
 
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
+        <View style={JourneyPageStyle.container}>
+            <StackTabs.Navigator>
+                <StackTabs.Screen name='Applicant Page' options={{title: 'SoftServian'}} component={JourneyApplicant}/>
+            </StackTabs.Navigator>
             <View>
                 <View style={{ padding: 40 }}>
                     <TouchableOpacity>
@@ -50,43 +57,3 @@ const JourneyPage = (props: any) => {
     )
 }
 export default JourneyPage;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-
-    },
-    item: {
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
-    },
-    panelContainer: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    panel: {
-        height: 200,
-        backgroundColor: "white",
-    },
-    headerTitleStyle: {
-        paddingLeft: 24,
-        paddingBottom: 20,
-        backgroundColor: "white",
-
-    },
-    headerTextStyle: {
-        fontSize: 14,
-        lineHeight: 16,
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        letterSpacing: 0.2,
-        alignItems: 'center'
-    }
-});
