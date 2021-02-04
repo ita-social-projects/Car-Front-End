@@ -1,12 +1,38 @@
-import {Platform, StyleSheet, View} from "react-native";
+import {View} from "react-native";
 import {OpenSans, ProximaNova} from "../../../font-manager";
 import EStyleSheet from "react-native-extended-stylesheet";
+import React from "react";
+
 
 export let item = function (percent: number) {
     return {
         width: percent + '%'
     }
 }
+
+export function Circle(props: { color: string, radius: string, children?: React.ReactNode, base?:boolean, marginTop?:string}) {
+    let style = EStyleSheet.create({
+        circle: {
+            backgroundColor: props.color
+            , borderRadius: 90
+            , height: props.radius
+            , width: props.radius
+            , display: "flex"
+            , alignItems: "center"
+            , justifyContent: 'center'
+            , zIndex: 5
+        }
+        , circlePos: {
+            marginTop: props.marginTop
+        }
+    })
+    return (
+        <View style={[style.circle, (props.base? style.circlePos: '')]}>
+            {props.children}
+        </View>
+    );
+}
+
 export const style = EStyleSheet.create({
     container: {
         backgroundColor: "#FFFFFF"
@@ -43,12 +69,22 @@ export const style = EStyleSheet.create({
         , justifyContent: 'center'
         , marginTop: 5
     }
+    , circleGrad: {
+        backgroundColor: '#ffffff'
+        , borderRadius: 90
+        , height: '0.8rem'
+        , width: '0.8rem'
+        , display: "flex"
+        , alignItems: "center"
+        , justifyContent: 'center'
+        //, marginTop: 5
+        , zIndex: 5
+    }
     , row: {
         flex: 0
         , flexDirection: 'row'
         , flexWrap: 'wrap'
         , alignItems: 'flex-start'
-
     }
     , title: {
         marginTop: 32
@@ -89,8 +125,7 @@ export const style = EStyleSheet.create({
         , color: '#ffffff'
     }
     , profile: {
-        //alignItems: "center"
-         textAlign: 'left'
+        textAlign: 'left'
         , marginLeft: 10
     }
     , name: {
@@ -105,7 +140,6 @@ export const style = EStyleSheet.create({
         , lineHeight: 14
         , color: '#000000'
         , opacity: 0.5
-        //, mixBlendMode: 'normal'
         , marginTop: '0.7rem'
     }
     , achievements: {
@@ -114,15 +148,12 @@ export const style = EStyleSheet.create({
         , lineHeight: 14
         , color: '#000000'
         , opacity: 0.5
-        //, mixBlendMode: 'normal'
         , marginTop: '0.7rem'
     }
     , more: {
         fontFamily: OpenSans.ExtraBold
         , fontSize: 20
-        //, fontWeight: '900'
         , letterSpacing: 3
-        //, lineHeight: 50
         , marginTop: -10
         , paddingTop: 0
         , color: '#000000'
@@ -134,14 +165,12 @@ export const style = EStyleSheet.create({
         , backgroundColor: '#ffffff'
         , marginTop: '1.5rem'
     }
-    , commentsBoxAfter:{
+    , commentsBoxAfter: {
         position: 'absolute'
         , width: '1rem'
         , height: '1rem'
-        , borderWidth:1
+        , borderWidth: 1
         , borderStyle: 'solid'
-        //, borderColor: '#000000'
-        //, borderTopColor: '#ffffff'
         , borderTopColor: 'rgba(0,0,0,0)'
         , borderLeftColor: 'rgba(0,0,0,0)'
         , borderRightColor: 'rgba(151, 151, 151, 0.3)'
@@ -153,11 +182,10 @@ export const style = EStyleSheet.create({
         , transform: [
             {rotateZ: '-135deg'}
         ]
-        //, marginTop: '-2.8rem'
         , backgroundColor: '#ffffff'
         , opacity: 1
     }
-    , commentsText:{
+    , commentsText: {
         margin: '1.5rem'
         , textAlign: 'center'
         , fontFamily: ProximaNova.Regular
@@ -165,23 +193,23 @@ export const style = EStyleSheet.create({
         , paddingLeft: '1rem'
         , paddingRight: '1rem'
     }
-    , options:{
+    , options: {
         marginTop: '1.5rem'
     }
-    , optionsHeader:{
+    , optionsHeader: {
         fontFamily: OpenSans.Bold
         , lineHeight: '1.1rem'
         , fontSize: '1rem'
     }
-    , optionsValue:{
+    , optionsValue: {
         fontFamily: OpenSans.Regular
         , lineHeight: '1.2rem'
         , fontSize: '1rem'
         , marginTop: '0.5rem'
     }
-    , optionsLine:{
-        minHeight:10
-        , minWidth:'99%'
+    , optionsLine: {
+        minHeight: 7
+        , minWidth: '99%'
         , borderWidth: 1
         , borderTopColor: 'rgba(0,0,0,0)'
         , borderLeftColor: 'rgba(0,0,0,0)'
@@ -192,13 +220,58 @@ export const style = EStyleSheet.create({
         , marginLeft: 'auto'
         , marginRight: 'auto'
     }
-    , stopsHeader:{
+    , stopsHeader: {
         fontFamily: OpenSans.Bold
         , lineHeight: '1.1rem'
         , fontSize: '1rem'
     }
-
-
+    , stops: {
+        marginTop: '1.1rem'
+    }
+    , stop: {
+        minHeight: '2rem'
+    }
+    , stopName: {
+        textAlignVertical: 'center' // ANDROID
+        , justifyContent: 'center' // IOS
+        , flex: 1
+        , fontFamily: OpenSans.Regular
+        , fontSize: '1rem'
+        , lineHeight: '1.1rem'
+        , color: '#909095'
+        //, paddingTop: '0.3rem' // Circle's Border Compensation
+    }
+    , activeStopName: {
+        textAlignVertical: 'center' // ANDROID
+        , justifyContent: 'center' // IOS
+        , flex: 1
+        , fontFamily: OpenSans.Bold
+        , fontSize: '1rem'
+        , lineHeight: '1.1rem'
+        , color: '#909095'
+        , paddingTop: '0.3rem' // Circle's Border Compensation
+    }
+    , stopLine: {
+        borderStyle: 'dotted'
+        , position: 'absolute'
+        , height: '2rem'
+        , top: '1.3rem'
+        , marginRight: '0.1435rem'
+        , borderLeftWidth: '0.1435rem'
+        , borderColor: '#C1C1C5'
+    }
+    , stopsRows: {
+    }
+    , tripColumn: {
+        flex: 1
+        , justifyContent: 'center'
+        , alignItems: 'center'
+        , flexDirection: 'column'
+        //, marginTop: '0.65rem'
+    }
+    , tripPoint: {
+        paddingLeft: '0.6rem'
+    }
 
 });
 
