@@ -3,11 +3,8 @@ import { Text, View, Button } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import MenuButton from '../../../../../components/BottomPopup/menu-button/MenuButton';
 import BottomPopup from '../../../../../components/BottomPopup/BottomPopup';
-import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack'
+import * as RootNavigation from '../../../../../components/navigation/RootNavigation';
 import { JourneyPageStyle } from './JourneyPageStyle';
-
-const StackTabs = createStackNavigator();
 
 const JourneyPage = (props: any) => {
 
@@ -27,14 +24,12 @@ const JourneyPage = (props: any) => {
             <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
         </View>
     )
-    
-    const navigation = useNavigation();
-    
+
     return (
         <View style={JourneyPageStyle.container}>
             <View>
                 <View style={{ padding: 40 }}>
-                    <Button title='Applicant' color='black' onPress={() => { navigation.navigate("Applicant Page", {userId: 52}); }} />
+                    <Button title='Applicant' color='black' onPress={() => { RootNavigation.navigate("Applicant Page", {userId: 17}); }} />
                 </View>
             </View>
             <BottomPopup
