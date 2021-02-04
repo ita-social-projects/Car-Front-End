@@ -10,7 +10,7 @@ class UserService {
     routePrefix: string = 'users';
 
     getUser(id: number) {
-        return this.apiService.get<User>(this.routePrefix + '/with-avatar/' + id);
+        return this.apiService.get<User>(this.routePrefix + '/' + id);
     }
 
     getAvatar(id: number) {

@@ -5,6 +5,7 @@ import MenuButton from '../../../../../components/BottomPopup/menu-button/MenuBu
 import BottomPopup from '../../../../../components/BottomPopup/BottomPopup';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as RootNavigation from '../../../../../components/navigation/RootNavigation';
+import { useNavigation } from '@react-navigation/native';
 
 const JourneyPage = (props: any) => {
 
@@ -25,12 +26,14 @@ const JourneyPage = (props: any) => {
         </View>
     )
 
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View>
                 <View style={{ padding: 40 }}>
                     <TouchableOpacity>
-                        <Button title='Applicant' color='black' onPress={() => { RootNavigation.navigate("Applicant Page", {}); }} />
+                        <Button title='Applicant' color='black' onPress={() => { navigation.navigate("Applicant Page", {userId: 52}); }} />
                     </TouchableOpacity>
                 </View>
             </View>
