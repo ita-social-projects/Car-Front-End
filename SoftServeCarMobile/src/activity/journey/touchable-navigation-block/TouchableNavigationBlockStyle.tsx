@@ -1,5 +1,5 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
-import {ProximaNova} from "../../../font-manager";
+import { Dimensions, StyleSheet } from "react-native";
+import {ProximaNova} from "../../../../font-manager";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
     blockContainer: {

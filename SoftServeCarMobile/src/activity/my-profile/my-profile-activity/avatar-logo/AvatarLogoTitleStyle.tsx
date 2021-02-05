@@ -1,5 +1,5 @@
-import { Platform, StyleSheet } from "react-native";
-import {ProximaNova} from "../../../font-manager";
+import { StyleSheet } from "react-native";
+import {ProximaNova} from "../../../../../font-manager";
 
 export const AvatarLogoTitleStyle = StyleSheet.create({
     headerContainer: {
