@@ -6,7 +6,6 @@ const JourneyPageStyle = StyleSheet.create({
         flex: 1,
 
     },
-
     item: {
         padding: 20,
         marginVertical: 8,
@@ -24,19 +23,16 @@ const JourneyPageStyle = StyleSheet.create({
         left: 0,
         right: 0,
     },
-
     panel: {
         height: 200,
         backgroundColor: "white",
     },
-
     headerTitleStyle: {
         paddingLeft: 24,
         paddingBottom: 20,
         backgroundColor: "white",
 
     },
-
     headerTextStyle: {
         fontSize: 14,
         lineHeight: 16,
