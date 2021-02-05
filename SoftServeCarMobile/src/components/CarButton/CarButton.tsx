@@ -1,6 +1,6 @@
-import React from 'react'
-import { TouchableOpacity, Text } from 'react-native';
-import carButtonStyle from './CarButtonStyle';
+import React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import carButtonStyle from "./CarButtonStyle";
 
 function CarButton() {
     return (

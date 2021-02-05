@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const DetailsStyle = StyleSheet.create({
-
     logoutButton: {
         borderRadius: 2,
-        margin: 160,
+        margin: 160
     },
 
     mainContainer: {
@@ -12,8 +11,8 @@ export const DetailsStyle = StyleSheet.create({
     },
 
     detailsContainer: {
-        flexDirection: 'row',
-        alignItems: 'center'
+        flexDirection: "row",
+        alignItems: "center"
     },
 
     captionView: {
@@ -21,9 +20,9 @@ export const DetailsStyle = StyleSheet.create({
         marginLeft: 10,
         padding: 10,
         fontSize: 18,
-        fontWeight: 'bold',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
+        fontWeight: "bold",
+        alignItems: "flex-start",
+        justifyContent: "space-between"
     },
 
     valueView: {
@@ -31,8 +30,8 @@ export const DetailsStyle = StyleSheet.create({
         marginLeft: 10,
         padding: 10,
         fontSize: 18,
-        alignItems: 'flex-start',
-        justifyContent: 'space-between'
+        alignItems: "flex-start",
+        justifyContent: "space-between"
     },
 
     valueColorView: {
@@ -40,9 +39,9 @@ export const DetailsStyle = StyleSheet.create({
         marginLeft: 10,
         padding: 10,
         fontSize: 18,
-        fontWeight: 'bold',
-        color: '#02A2CF',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between'
+        fontWeight: "bold",
+        color: "#02A2CF",
+        alignItems: "flex-start",
+        justifyContent: "space-between"
     }
-})
+});

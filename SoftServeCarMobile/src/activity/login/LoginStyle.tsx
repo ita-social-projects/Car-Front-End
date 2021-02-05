@@ -1,14 +1,14 @@
 import { Platform, StyleSheet } from "react-native";
 
 const LoginStyle = StyleSheet.create({
-
-    container:{
-        flex:1,
-        alignItems:"center",
-        margin: 30,
+    container: {
+        flex: 1,
+        alignItems: "center",
+        margin: 30
     },
     loginPageTextGreeting: {
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily:
+            Platform.OS === "ios" ? "Proxima Nova" : "Proxima-Nova-Reg.ttf",
         fontWeight: "bold",
         fontSize: 21,
         textTransform: "uppercase",
@@ -16,7 +16,8 @@ const LoginStyle = StyleSheet.create({
         letterSpacing: 0.2
     },
     loginPageTextName: {
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily:
+            Platform.OS === "ios" ? "Proxima Nova" : "Proxima-Nova-Reg.ttf",
         fontWeight: "bold",
         fontSize: 30,
         textTransform: "uppercase",
@@ -27,21 +28,22 @@ const LoginStyle = StyleSheet.create({
         margin: 30,
         padding: 15,
         alignSelf: "flex-end",
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily:
+            Platform.OS === "ios" ? "Proxima Nova" : "Proxima-Nova-Reg.ttf",
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 16
     },
     preferencesText: {
         padding: 30,
         textAlign: "left",
-        fontSize: 15,
+        fontSize: 15
     },
     loadingIcon: {
         width: 56,
         height: 56,
         borderRadius: 50,
         borderWidth: 3,
-        borderColor: '#EEEEEE'
-    },
+        borderColor: "#EEEEEE"
+    }
 });
 export default LoginStyle;

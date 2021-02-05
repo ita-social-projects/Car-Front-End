@@ -1,8 +1,8 @@
-import React from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler'
-import carTextInputStyle from './CarTextInputStyle';
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Text, View } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import carTextInputStyle from "./CarTextInputStyle";
 
 function Input(props: any) {
     return (
@@ -13,12 +13,12 @@ function Input(props: any) {
                     {...props}
                     style={[
                         carTextInputStyle.textInputStyle,
-                        props.error && { borderColor: 'red' }
-                    ]}>
-                </TextInput>
+                        props.error && { borderColor: "red" }
+                    ]}
+                ></TextInput>
             </View>
             {props.errorText && (
-                <Text style={{ color: 'red' }}>{props.errorText}</Text>
+                <Text style={{ color: "red" }}>{props.errorText}</Text>
             )}
         </>
     );
@@ -35,8 +35,11 @@ function CarTextInput(props: any) {
             name="name"
             render={({ onChange, value }) => (
                 <Input
-                    onChangeText={(text: string) => { onChange(text); props.onChangeText(text, Boolean(errors?.name));}}
-                    onBlur={handleSubmit(() => { })}
+                    onChangeText={(text: string) => {
+                        onChange(text);
+                        props.onChangeText(text, Boolean(errors?.name));
+                    }}
+                    onBlur={handleSubmit(() => {})}
                     value={value}
                     placeholder={props.placeHolder}
                     error={errors?.name}
@@ -44,6 +47,6 @@ function CarTextInput(props: any) {
                 />
             )}
         />
-    )
+    );
 }
 export default CarTextInput;

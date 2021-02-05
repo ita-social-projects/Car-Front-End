@@ -13,27 +13,28 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     textStyle: {
         marginLeft: 20,
         flex: 1,
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily:
+            Platform.OS === "ios" ? "Open Sans" : "OpenSans-Regular.ttf",
         fontWeight: "bold",
         fontSize: 24,
         justifyContent: "center",
         textTransform: "uppercase",
         textAlignVertical: "center",
         color: "#FFFFFF",
-        width: Dimensions.get('window').width / 3
+        width: Dimensions.get("window").width / 3
     },
 
     imageStyle: {
         justifyContent: "flex-end",
         marginTop: 10
     },
-    
+
     viewContainer: {
         paddingHorizontal: 10,
         justifyContent: "center",
         flexDirection: "row",
         height: 150,
-        width: Dimensions.get('window').width
-    },
-})
+        width: Dimensions.get("window").width
+    }
+});
 export default TouchableNavigationBlockStyle;

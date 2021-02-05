@@ -1,30 +1,28 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { AuthManager } from "./AuthManager";
-import { GraphManager } from './GraphAuthProvider';
-import * as RootNavigation from '../../components/navigation/RootNavigation';
+import { GraphManager } from "./GraphAuthProvider";
+import * as RootNavigation from "../../components/navigation/RootNavigation";
 import { User } from "../../../models/User";
 import "reflect-metadata";
-import { container } from 'tsyringe';
-import LoginService from '../../../api-service/login-service/LoginService'
-
-
+import { container } from "tsyringe";
+import LoginService from "../../../api-service/login-service/LoginService";
 
 const loginService = container.resolve(LoginService);
 
-export const AuthContext =
-    React.createContext<{ user: User, login: () => void, logout: () => void, loadStorageUser: () => void, }>({
-        user: null
-        , login: () => {
-        }
-        , logout: () => {
-        }
-        , loadStorageUser: () => {
-        }
-    });
+export const AuthContext = React.createContext<{
+    user: User;
+    login: () => void;
+    logout: () => void;
+    loadStorageUser: () => void;
+}>({
+    user: null,
+    login: () => {},
+    logout: () => {},
+    loadStorageUser: () => {}
+});
 
-interface AuthProviderProps {
-}
+interface AuthProviderProps {}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User>(null);
@@ -39,30 +37,38 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     if (accessToken) {
                         const userGraph = await GraphManager.getUserAsync();
                         if (!userGraph) {
-                            RootNavigation.navigate("Login", {resetIndicator: true});
+                            RootNavigation.navigate("Login", {
+                                resetIndicator: true
+                            });
                             return;
                         }
                         const userData: User = {
-                            email: userGraph.mail! || userGraph.userPrincipalName!,
+                            email:
+                                userGraph.mail! || userGraph.userPrincipalName!,
                             name: userGraph.givenName,
                             surname: userGraph.surname,
                             location: userGraph.officeLocation,
                             position: userGraph.jobTitle,
                             id: 0,
-                            token: '',
-                            byteOfImage: '',
-                            hireDate: new Date(),
-                        }
+                            token: "",
+                            byteOfImage: "",
+                            hireDate: new Date()
+                        };
                         const dbUser = await loginService.loginUser(userData);
                         if (!dbUser.data?.token) {
-                            RootNavigation.navigate("Login", {resetIndicator: true});
+                            RootNavigation.navigate("Login", {
+                                resetIndicator: true
+                            });
                             return;
                         }
                         const token: any = dbUser.data?.token;
                         AuthManager.saveAPIToken(token);
-                        AsyncStorage.setItem('user', JSON.stringify(dbUser.data));
+                        AsyncStorage.setItem(
+                            "user",
+                            JSON.stringify(dbUser.data)
+                        );
                         setUser(dbUser.data);
-                        RootNavigation.navigate('AppTabs', {});
+                        RootNavigation.navigate("AppTabs", {});
                     }
                 },
                 logout: async () => {

@@ -1,15 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const carTextInputStyle = StyleSheet.create({
     container: {
         borderWidth: 2,
-        justifyContent: 'center',
+        justifyContent: "center",
         paddingLeft: 24
     },
     requiredPointer: {
-        position: 'absolute',
+        position: "absolute",
         zIndex: 10,
-        color: 'red',
+        color: "red",
         marginLeft: 16
     },
     textInputStyle: {
