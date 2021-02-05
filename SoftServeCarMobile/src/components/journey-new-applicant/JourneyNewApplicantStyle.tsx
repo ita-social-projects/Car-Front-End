@@ -11,7 +11,7 @@ export let item = function (percent: number) {
 }
 
 export function Circle(props: { color: string, radius: string, children?: React.ReactNode, base?:boolean, marginTop?:string}) {
-    let style = EStyleSheet.create({
+    let innerStyle = EStyleSheet.create({
         circle: {
             backgroundColor: props.color
             , borderRadius: 90
@@ -27,7 +27,7 @@ export function Circle(props: { color: string, radius: string, children?: React.
         }
     })
     return (
-        <View style={[style.circle, (props.base? style.circlePos: '')]}>
+        <View style={[innerStyle.circle, (props.base? innerStyle.circlePos: '')]}>
             {props.children}
         </View>
     );
