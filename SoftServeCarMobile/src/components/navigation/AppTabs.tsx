@@ -44,9 +44,8 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                 labelStyle: {
                     fontStyle: "normal",
                     fontSize: 10,
-                    fontWeight: "800",
-                    fontFamily:
-                        Platform.OS === "ios" ? "Open Sans" : "OpenSans-Bold",
+                    fontWeight: '800',
+                    fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Bold.ttf',
                     lineHeight: 16
                 },
                 activeTintColor: "black",

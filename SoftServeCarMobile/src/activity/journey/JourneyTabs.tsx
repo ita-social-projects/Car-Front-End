@@ -48,10 +48,12 @@ const JourneyTabs = (props: any) => {
                 >
                     {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
                 </StackTabs.Screen>
-                <StackTabs.Screen
-                    name="Applicant Page"
-                    component={JourneyApplicant}
-                />
+                <StackTabs.Screen name="Applicant Page" 
+                options={{ 
+                    title: 'SoftServian', 
+                    headerTitleAlign: "center", 
+                    headerTitleStyle: { fontSize: 16, fontWeight: 'bold' } }} 
+                    component={JourneyApplicant} />
             </StackTabs.Navigator>
         </View>
     );

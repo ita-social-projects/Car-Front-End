@@ -1,13 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import {
-    Text,
-    View,
-    TouchableOpacity,
-    Image,
-    StyleSheet,
-    FlatList,
-    ActivityIndicator
-} from "react-native";
+import React, { useEffect, useState, useContext } from 'react';
+import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthContext } from "../auth/AuthProvider";
 import "reflect-metadata";
@@ -23,16 +15,17 @@ const SimpleMessage = (props: {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        chatService.getChat(user?.id).then((res) => {
-            const chats = res.data;
-            console.log(chats);
-            setData(chats);
-            setLoading(false);
-        });
+        chatService.getChat(user?.id)
+            .then(res => {
+                const chats = res.data;
+                console.log(chats);
+                setData(chats);
+                setLoading(false);
+            })
     }, []);
 
-    if (isLoading) {
-        return (
+    if(isLoading) {
+        return(
             <View>
                 <ActivityIndicator size="large" color="#5500dc" />
             </View>
@@ -56,18 +49,12 @@ const SimpleMessage = (props: {
                                     }}
                                 />
                                 <View>
-                                    <Text style={styles.fonts}>
-                                        {item.name}
-                                    </Text>
-                                    <Text
-                                        style={{
-                                            fontSize: 11,
-                                            paddingTop: 10,
-                                            fontFamily: "sans-serif"
-                                        }}
-                                    >
-                                        {item.name}{" "}
-                                    </Text>
+                                    <Text style={styles.fonts}>{item.name}</Text>
+                                    <Text style={{
+                                        fontSize: 11,
+                                        paddingTop: 10,
+                                        fontFamily: 'sans-serif'
+                                    }}>{item.name} </Text>
                                 </View>
                             </View>
                             <TouchableOpacity
