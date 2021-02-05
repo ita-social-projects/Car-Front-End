@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TouchableCardStyle } from './TouchableCardStyle';
+import TouchableCardStyle from './TouchableCardStyle';
 
 const TouchableCard = (props: any) => {
     return (

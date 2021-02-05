@@ -1,12 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import Messages from "../../activity/messages/Messages";
-import Notifications from "../../activity/notifications/Notifications";
+import Messages from "../../../activity/messages/Messages";
+import Notifications from "../../../activity/notifications/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import MyProfileTabs from "../../activity/my-profile/MyProfileTabs";
-import JourneyTabs from "../../activity/journey/JourneyTabs";
-import { Platform } from "react-native";
+import MyProfileTabs from "../../../activity/my-profile/MyProfileTabs";
+import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
+import AppTabsStyle from "./AppTabsStyle";
 
 
 interface AppTabsProps {
@@ -18,7 +18,7 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
     return (
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
-            sceneContainerStyle={{ alignItems: "center" }}
+            sceneContainerStyle={AppTabsStyle.navigator}
             screenOptions={({ route} ) => ({
                 tabBarIcon: ({ color, size }) => {
                     let iconName;
@@ -41,13 +41,7 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                 },
             })}
             tabBarOptions={{
-                labelStyle: {
-                    fontStyle: 'normal',
-                    fontSize: 10,
-                    fontWeight: '800',
-                    fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Bold.ttf',
-                    lineHeight: 16
-                },
+                labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: 'black',
                 inactiveTintColor: '#AAA9AE',
             }}

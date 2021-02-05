@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
-import CreateJourney from './journey-activity/create-journey/CreateJourney';
-import SearchJourney from './journey-activity/search-journey/SearchJourney';
-import Journey from './Journey';
-import JourneyPage from './journey-activity/segment-control-activities/journey-page/JourneyPage';
-import JourneyStyle from './JourneyStyle';
+import CreateJourney from '../journey-activity/create-journey/CreateJourney';
+import SearchJourney from '../journey-activity/search-journey/SearchJourney';
+import Journey from '../Journey';
+import JourneyPage from '../journey-activity/segment-control-activities/journey-page/JourneyPage';
+import JourneyStyle from '../JourneyStyle';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import JourneyApplicant from './journey-activity/segment-control-activities/journey-applicant/JourneyApplicant';
+import JourneyApplicant from '../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant';
+import JourneyTabsStyle from './JourneyTabsStyle';
 
 const StackTabs = createStackNavigator();
 
@@ -25,7 +26,7 @@ const JourneyTabs = (props: any) => {
                     options={{
                         headerRight: () => (
                             <TouchableWithoutFeedback onPress={() => setOpen(!isOpen)}>
-                                <Ionicons name={'ellipsis-horizontal'} size={30} style={{ paddingRight: 12 }} />
+                                <Ionicons name={'ellipsis-horizontal'} size={30} style={JourneyTabsStyle.journeyPageIcon} />
                             </TouchableWithoutFeedback>
                         ),
                     }} >
@@ -35,7 +36,7 @@ const JourneyTabs = (props: any) => {
                 options={{ 
                     title: 'SoftServian', 
                     headerTitleAlign: "center", 
-                    headerTitleStyle: { fontSize: 16, fontWeight: 'bold' } }} 
+                    headerTitleStyle: JourneyTabsStyle.applicantPage }} 
                     component={JourneyApplicant} />
             </StackTabs.Navigator>
         </View>

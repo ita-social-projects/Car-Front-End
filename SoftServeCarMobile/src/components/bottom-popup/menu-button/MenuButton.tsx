@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { TouchableHighlight, Text, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import MenuButtonStyle from './MenuButtonStyle';
 
 const MenuButton = (props: any) => {
 
@@ -25,47 +26,22 @@ const MenuButton = (props: any) => {
 
     return (
         <TouchableHighlight
-            style={{ ...styles.panelButton, backgroundColor: colorButton }}
+            style={[MenuButtonStyle.panelButton, {backgroundColor: colorButton }]}
             onPressIn={changeColorToBlack.bind(this)}
             onPressOut={changeColorToWhite.bind(this)}>
             <View>
-                <View style={styles.wrapper}>
-                    <View style={{ justifyContent: 'center' }}>
-                        <Text style={{ ...styles.panelButtonTitle, color: colorText }}>{props.text}</Text>
+                <View style={MenuButtonStyle.wrapper}>
+                    <View style={MenuButtonStyle.container}>
+                        <Text style={[MenuButtonStyle.panelButton, { color: colorText }]}>{props.text}</Text>
                     </View>
-                    <View style={{ justifyContent: 'center' }}>
-                        <Icon color={colorIcon} name='chevron-right' size={30} style={{ paddingRight: 12 }} />
+                    <View style={MenuButtonStyle.container}>
+                        <Icon color={colorIcon} name='chevron-right' size={30} style={MenuButtonStyle.Icon} />
                     </View>
                 </View>
-                <View style={{
-                    flexWrap: 'wrap',
-                    backgroundColor: colorSeparator,
-                    width: '100%',
-                    height: 1,
-                }} />
+                <View style={[MenuButtonStyle.separator, { backgroundColor: colorSeparator }]} />
             </View>
         </TouchableHighlight>
     )
 }
-
-const styles = StyleSheet.create({
-    wrapper: {
-        justifyContent: 'space-between',
-        flexDirection: 'row'
-    },
-    panelButton: {
-        height: 44,
-        justifyContent: 'center',
-        flexDirection: 'column'
-    },
-    panelButtonTitle: {
-        fontSize: 13,
-        lineHeight: 42,
-        fontWeight: 'bold',
-        color: 'black',
-        alignItems: "center",
-        paddingLeft: 24,
-    },
-})
 
 export default MenuButton;

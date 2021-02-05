@@ -1,16 +1,19 @@
 import { StyleSheet } from "react-native";
 
-const addCarsStyle = StyleSheet.create({
+const AddCarsStyle = StyleSheet.create({
+    
     wrapper: {
         flex: 1,
         backgroundColor: 'white'
     },
+
     carAvatarContainer: {
         height: 200,
         backgroundColor: '#C4C4C4',
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
     },
+
     carButtonUpload: {
         paddingHorizontal: 16,
         paddingVertical: 14,
@@ -21,26 +24,32 @@ const addCarsStyle = StyleSheet.create({
         marginRight: 24,
         marginBottom: 19
     },
+
     carButtonUploadText: {
         textTransform: 'uppercase',
         fontWeight: 'bold',
         fontSize: 16,
         lineHeight: 20,
     },
+
     inputsContainer: {
         marginRight: 24,
         marginLeft: 24
     },
+
     dropDownContainer: {
         marginVertical: 24,
     },
+
     dropDownPicker: {
         marginBottom: 16
     },
+
     saveButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+
     carButtonSave: {
         paddingHorizontal: 16,
         paddingVertical: 14,
@@ -49,6 +58,7 @@ const addCarsStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around'
     },
+
     carButtonSaveText: {
         color: 'white',
         textTransform: 'uppercase',
@@ -56,6 +66,7 @@ const addCarsStyle = StyleSheet.create({
         fontSize: 16,
         lineHeight: 20,
     },
+
     carAvatar: {
         top: 0,
         right: 0,
@@ -64,8 +75,10 @@ const addCarsStyle = StyleSheet.create({
         borderWidth: 2,
         position: 'absolute'
     },
+
     spinner: {
         marginLeft: 5
     }
 });
-export default addCarsStyle;
+
+export default AddCarsStyle;

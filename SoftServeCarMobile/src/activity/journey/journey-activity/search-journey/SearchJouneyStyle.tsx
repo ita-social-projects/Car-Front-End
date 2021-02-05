@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
-export const SearchJouneyStyle = StyleSheet.create({
+const SearchJouneyStyle = StyleSheet.create({
+    
     container: {
         backgroundColor:'#F2F2F2'
     },
+
     recentJourneyText:{
-    //    borderTopColor: '#C1C1C5',
-     //   borderTopWidth:1,
         paddingBottom: 5,
         paddingLeft: 10,
         paddingTop: 8,
@@ -15,8 +15,11 @@ export const SearchJouneyStyle = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:12
     },
+
     topInputContainer:{
         borderBottomColor: '#C1C1C5',
         borderBottomWidth:1,
-    }
+    },
 });
+
+export default SearchJouneyStyle;

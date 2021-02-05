@@ -4,7 +4,6 @@ import { AuthManager } from '../auth/AuthManager';
 import { AuthContext } from "../auth/AuthProvider";
 import LoginStyle from './LoginStyle';
 
-
 export function Login(props: any){
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);

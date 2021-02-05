@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import TouchableNavigationBlock from './touchable-navigation-block/TouchableNavigationBlock'
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import AllJourneys from './journey-activity/segment-control-activities/journey-page/tabs/AllJourneys'
-import PastJourneys from './journey-activity/segment-control-activities/journey-page/tabs/PastJourneys'
-import UpcomingJourneys from './journey-activity/segment-control-activities/journey-page/tabs/UpcomingJourneys'
-import ScheduledJourneys from './journey-activity/segment-control-activities/journey-page/tabs/ScheduledJourneys'
+import AllJourneys from './journey-activity/segment-control-activities/journey-page/tabs/all-journeys/AllJourneys'
+import PastJourneys from './journey-activity/segment-control-activities/journey-page/tabs/past-journeys/PastJourneys'
+import UpcomingJourneys from './journey-activity/segment-control-activities/journey-page/tabs/upcoming-journeys/UpcomingJourneys'
+import ScheduledJourneys from './journey-activity/segment-control-activities/journey-page/tabs/scheduled-journeys/ScheduledJourneys'
 import JourneyStyle from './JourneyStyle';
 
 function Journey(props: any) {
+  
   const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <ScrollView style={JourneyStyle.page}>
       <TouchableNavigationBlock navigation={props.navigation}

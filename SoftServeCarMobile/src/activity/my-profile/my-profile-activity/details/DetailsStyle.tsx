@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const DetailsStyle = StyleSheet.create({
+const DetailsStyle = StyleSheet.create({
 
     logoutButton: {
         borderRadius: 2,
@@ -45,4 +45,6 @@ export const DetailsStyle = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-between'
     }
-})
+});
+
+export default DetailsStyle;

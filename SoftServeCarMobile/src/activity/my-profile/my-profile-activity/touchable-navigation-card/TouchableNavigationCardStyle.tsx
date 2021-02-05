@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const TouchableNavigationCardStyle = StyleSheet.create({
+    
     cardContainer: {
         paddingBottom: 26,
         paddingLeft: 10,
@@ -16,19 +17,24 @@ const TouchableNavigationCardStyle = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
+
     cardInformationContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         alignContent: 'space-between',
         justifyContent: 'space-between'
     },
+
     pictureContainer: {
         width: 55,
         alignItems: 'center',
         justifyContent: 'center'
     },
+
     cardName: {
         fontWeight: 'bold'
-    }
+    },
+
 });
+
 export default TouchableNavigationCardStyle;

@@ -1,6 +1,7 @@
 import { Platform, StyleSheet } from 'react-native';
 
 const TouchableMapBarStyle = StyleSheet.create({
+    
     container: {
         flexDirection:'row',
         borderWidth: 2,
@@ -35,7 +36,8 @@ const TouchableMapBarStyle = StyleSheet.create({
     barIcon: {
         flex:1,
         borderColor: '#EEEEEE',
-    }
+    },
 
 });
+
 export default TouchableMapBarStyle;

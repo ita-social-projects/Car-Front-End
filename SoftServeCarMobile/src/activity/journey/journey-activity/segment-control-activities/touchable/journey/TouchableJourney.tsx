@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TouchableJourneyStyle } from './TouchableJourneyStyle';
+import TouchableJourneyStyle from './TouchableJourneyStyle';
 import * as RootNavigation from '../../../../../../components/navigation/RootNavigation';
 
 export default function TouchableJourney() {
