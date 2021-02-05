@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const AllJourneysStyle = StyleSheet.create({
     
-    container: {
+    text: {
         flex:1,
         alignItems: 'center',
         justifyContent: 'center',

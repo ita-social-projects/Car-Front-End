@@ -5,9 +5,13 @@ import AllJourneysStyle from './AllJourneysStyle';
 
 export default function AllJourneys() {
     return (
-        <View style={AllJourneysStyle.container}>
-            <Text>All Journeys</Text>
-            <TouchableJourney />
+        <View>
+            <View style={AllJourneysStyle.text}>
+                <Text >All Journeys</Text>
+            </View>
+            <View>
+                <TouchableJourney />
+            </View>
         </View>
     );
 }
