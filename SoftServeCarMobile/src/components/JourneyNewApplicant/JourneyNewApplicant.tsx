@@ -1,14 +1,29 @@
-import React from 'react'
-import {View, Text, Button, Image, Platform} from 'react-native'
+import React, {useState} from 'react'
+import {View, Text, TouchableOpacity, Modal} from 'react-native'
 import {style, item, Circle} from './JourneyNewApplicantStyle'
-import TouchableNavigationBlockStyle from "../../activity/journey/TouchableNavigationBlockStyle";
 import LinearGradient from "react-native-linear-gradient";
 import {LinearTextGradient} from 'react-native-text-gradient';
 import {OpenSans} from "../../../font-manager";
 
 export const JourneyNewApplicant = () => {
+    let [modalVisible, setModalVisible] = useState(false);
     return (
-        <View style={style.container}>
+        <View>
+            <TouchableOpacity
+                style={[style.button, style.acceptButton]}
+                onPress={() => {
+                    setModalVisible(!modalVisible);
+                }}>
+                <Text style={style.acceptButtonText}>
+                    Show
+                </Text>
+            </TouchableOpacity>
+        <Modal visible={modalVisible}
+               animationType="fade"
+               transparent={true}
+               >
+            <View style={style.body}>
+            <View style={style.container} >
             <View style={style.row}>
                 <View style={item(50)}>
                     <Text style={style.header}>
@@ -16,9 +31,14 @@ export const JourneyNewApplicant = () => {
                     </Text>
                 </View>
                 <View style={item(50)}>
-                    <Text style={style.snooze}>
-                        Snooze
-                    </Text>
+                    <TouchableOpacity
+                        onPress={() => {
+                            setModalVisible(!modalVisible);
+                        }}>
+                        <Text style={style.snooze}>
+                            Snooze
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={[style.row, style.title]}>
@@ -45,9 +65,11 @@ export const JourneyNewApplicant = () => {
                 </View>
                 <View style={item(10)}>
                     <View>
-                        <Text style={style.more}>
-                            ...
-                        </Text>
+                        <TouchableOpacity>
+                            <Text style={style.more}>
+                                ...
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -148,6 +170,22 @@ export const JourneyNewApplicant = () => {
                     </View>
                 </View>
             </View>
+            <View style={style.buttons}>
+                <TouchableOpacity style={[style.button, style.acceptButton]}>
+                    <Text style={style.acceptButtonText}>
+                        Accept
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[style.button, style.declineButton]}>
+                    <Text style={style.declineButtonText}>
+                        Decline
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+            </View>
+        </Modal>
         </View>
     )
 }

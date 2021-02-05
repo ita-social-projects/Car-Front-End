@@ -43,7 +43,7 @@ export const style = EStyleSheet.create({
         , borderTopRightRadius: 16
         , borderBottomRightRadius: 16
         , borderBottomLeftRadius: 16
-        , minHeight: '90%'
+        , height: '95%'
         , margin: 10
         , paddingTop: 23
         , paddingBottom: 23
@@ -56,8 +56,11 @@ export const style = EStyleSheet.create({
         }
         , shadowOpacity: 0.2
         , shadowRadius: 6.27
-
         , elevation: 10
+    }
+    , body:{
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+        , height: '100%'
     }
     , circle: {
         backgroundColor: "#A5C500"
@@ -261,6 +264,7 @@ export const style = EStyleSheet.create({
         , borderColor: '#C1C1C5'
     }
     , stopsRows: {
+        marginTop:'0.6rem'
     }
     , tripColumn: {
         flex: 1
@@ -272,6 +276,31 @@ export const style = EStyleSheet.create({
     , tripPoint: {
         paddingLeft: '0.6rem'
     }
-
+    , buttons:{
+        flex: 1
+        //, alignItems: 'center'
+        , justifyContent: 'flex-end'
+    }
+    , button: {
+        height: '3.75rem'
+        , width: '100%'
+        , justifyContent: 'center'
+        , alignItems: 'center'
+    }
+    , acceptButton: {
+        backgroundColor: 'black'
+    }
+    , acceptButtonText: {
+        color: 'white'
+        , fontFamily: ProximaNova.Bold
+        , fontSize: '1.1rem'
+        , letterSpacing: '0.05rem'
+    }
+    , declineButtonText: {
+        color: '#EC6400'
+        , fontFamily: ProximaNova.Bold
+        , fontSize: '1.1rem'
+        , letterSpacing: '0.05rem'
+    }
 });
 

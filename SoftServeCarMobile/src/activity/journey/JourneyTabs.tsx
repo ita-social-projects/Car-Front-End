@@ -8,12 +8,11 @@ import JourneyPage from './journey-activity/segment-control-activities/JourneyPa
 import JourneyStyle from './JourneyStyle';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import JourneyApplicant from './journey-activity/segment-control-activities/JourneyApplicant';
 import {JourneyNewApplicant} from '../../components/JourneyNewApplicant/JourneyNewApplicant';
 
 const StackTabs = createStackNavigator();
 
-const JourneyTabs = (props: any) => {
+const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
     return (
         <View style={JourneyStyle.tabsStyle}>
@@ -32,7 +31,7 @@ const JourneyTabs = (props: any) => {
                     }} >
                     {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
                 </StackTabs.Screen>
-                <StackTabs.Screen name="Applicant Page" component={JourneyNewApplicant}/>
+                <StackTabs.Screen  name="Applicant Page" component={JourneyNewApplicant} />
             </StackTabs.Navigator>
         </View>
     );
