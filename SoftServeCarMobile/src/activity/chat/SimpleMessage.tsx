@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthContext } from '../auth/AuthProvider';
 import "reflect-metadata";
@@ -8,7 +8,8 @@ import ChatService from '../../../api-service/chat-service/ChatService';
 
 const SimpleMessage = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
     const chatService = container.resolve(ChatService);
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const [isLoading, setLoading] = useState(true);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -17,9 +18,17 @@ const SimpleMessage = (props: { navigation: { navigate: (arg0: string) => void; 
                 const chats = res.data;
                 console.log(chats);
                 setData(chats);
+                setLoading(false);
             })
     }, []);
 
+    if(isLoading) {
+        return(
+            <View>
+                <ActivityIndicator size="large" color="#5500dc" />
+            </View>
+        );
+    }
 
     return (
         <View style={{marginTop: 24}}>
@@ -33,12 +42,12 @@ const SimpleMessage = (props: { navigation: { navigate: (arg0: string) => void; 
                                 <Image style={styles.image}
                                        source={{uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'}}/>
                                 <View>
-                                    <Text style={styles.fonts}>{item.chatName}</Text>
+                                    <Text style={styles.fonts}>{item.name}</Text>
                                     <Text style={{
                                         fontSize: 11,
                                         paddingTop: 10,
                                         fontFamily: 'sans-serif'
-                                    }}>{item.chatName} </Text>
+                                    }}>{item.name} </Text>
                                 </View>
                             </View>
                             <TouchableOpacity style={{paddingTop: 12,}}

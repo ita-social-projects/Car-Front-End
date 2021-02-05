@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native'
-import CreateJourney from './journey-activity/CreateJourney';
-import SearchJourney from './journey-activity/SearchJourney';
+import CreateJourney from './journey-activity/create-journey/CreateJourney';
+import SearchJourney from './journey-activity/search-journey/SearchJourney';
 import Journey from './Journey';
-import JourneyPage from './journey-activity/segment-control-activities/JourneyPage';
+import JourneyPage from './journey-activity/segment-control-activities/journey-page/JourneyPage';
 import JourneyStyle from './JourneyStyle';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import {JourneyNewApplicant} from '../../components/JourneyNewApplicant/JourneyNewApplicant';
+import JourneyApplicant from './journey-activity/segment-control-activities/journey-applicant/JourneyApplicant';
 
 const StackTabs = createStackNavigator();
 
-const JourneyTabs = () => {
+const JourneyTabs = (props: any) => {
     const [isOpen, setOpen] = useState(false);
     return (
         <View style={JourneyStyle.tabsStyle}>
@@ -31,7 +31,13 @@ const JourneyTabs = () => {
                     }} >
                     {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
                 </StackTabs.Screen>
-                <StackTabs.Screen  name="Applicant Page" component={JourneyNewApplicant} />
+                <StackTabs.Screen name="Applicant Page"
+                options={{
+                    title: 'SoftServian',
+                    headerTitleAlign: "center",
+                    headerTitleStyle: { fontSize: 16, fontWeight: 'bold' } }}
+                    component={JourneyApplicant} />
+                <StackTabs.Screen  name="New Applicant Page" component={JourneyNewApplicant} />
             </StackTabs.Navigator>
         </View>
     );

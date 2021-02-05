@@ -8,10 +8,10 @@ import { Chat } from '../../models/Chat';
 class ChatService {
     constructor(private apiService: APIService){ }
 
-    routePrefix: string = 'userchats/';
+    routePrefix: string = 'user-chats/';
 
-    getChat(userId: number | undefined) {
-        return this.apiService.get<Chat>(this.routePrefix + userId);
+    getChat(id: number | undefined) {
+        return this.apiService.get<Chat>(this.routePrefix + id);
     }
 
 }
