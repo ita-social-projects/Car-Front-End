@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { Text, View, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthContext } from '../../auth/AuthProvider';
 import "reflect-metadata";
