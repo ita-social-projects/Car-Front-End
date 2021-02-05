@@ -11,11 +11,11 @@ const JourneyPage = (props: any) => {
     const myRef = React.useRef<BottomSheet>(null);
     const renderInner = () => (
         <View style={JourneyPageStyle.panel}>
-            <MenuButton text="View profile"></MenuButton>
-            <MenuButton text="Message"></MenuButton>
+            <MenuButton text="View profile"/>
+            <MenuButton text="Message"/>
         </View>
     )
-    
+
     let index = props.isOpen ? 1 : 0;
     myRef?.current?.snapTo(index);
 
@@ -30,6 +30,8 @@ const JourneyPage = (props: any) => {
             <View>
                 <View style={{ padding: 40 }}>
                     <Button title='Applicant' color='black' onPress={() => { RootNavigation.navigate("Applicant Page", {userId: 17}); }} />
+                    <Button title='New Applicant' color='black' onPress={() => { RootNavigation.navigate("New Applicant Page", {}); }} />
+
                 </View>
             </View>
             <BottomPopup

@@ -12,6 +12,8 @@ target 'SoftServeCarMobile' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
   
+  pod 'RNTextGradientView', :path => '../node_modules/react-native-text-gradient'
+
   target 'SoftServeCarMobileTests' do
     inherit! :complete
     # Pods for testing

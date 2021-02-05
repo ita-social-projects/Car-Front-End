@@ -1,4 +1,5 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import {ProximaNova} from "../../../../../font-manager";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
     
@@ -17,8 +18,7 @@ const AvatarLogoTitleStyle = StyleSheet.create({
 
     headerUserInformation: {
         marginLeft: 15,
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
-        fontWeight: 'bold'
+        fontFamily: ProximaNova.Bold
     },
 
     headerUserName: {
