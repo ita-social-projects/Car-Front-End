@@ -1,6 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
-export const TouchableCardStyle = StyleSheet.create({
+const TouchableCardStyle = StyleSheet.create({
+    
     cardContainer: {
         paddingBottom: 18,
         paddingLeft: 27,
@@ -46,3 +47,5 @@ export const TouchableCardStyle = StyleSheet.create({
         color: '#909095'
     },
 });
+
+export default TouchableCardStyle;

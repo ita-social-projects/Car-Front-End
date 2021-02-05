@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Login } from "../../activity/login/Login";
 import { AuthParamList } from "../../activity/auth/AuthParamList";
 import { AuthContext } from "../../activity/auth/AuthProvider";
-import { AppTabs } from "./AppTabs";
+import { AppTabs } from "./app-tabs/AppTabs";
 import { navigationRef } from "./RootNavigation";
 import { Exception } from "../../activity/exception/Exception";
 

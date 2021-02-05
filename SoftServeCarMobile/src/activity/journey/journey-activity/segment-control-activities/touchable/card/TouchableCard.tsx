@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TouchableCardStyle } from './TouchableCardStyle';
+import TouchableCardStyle from './TouchableCardStyle';
 
 const TouchableCard = (props: any) => {
     return (
@@ -9,12 +9,7 @@ const TouchableCard = (props: any) => {
             <TouchableOpacity style={TouchableCardStyle.cardContainer}
                 onPress={() => { }}>
                 <View style={TouchableCardStyle.cardInformationContainer}>
-                    <Ionicons style={
-                        [TouchableCardStyle.cardIcon]}
-                        name={props?.iconName}
-                        size={22}
-                        color={'#414045'}
-                    />
+                    <Ionicons style={TouchableCardStyle.cardIcon} name={props?.iconName} size={22} color={'#414045'} />
                     <View style={TouchableCardStyle.cardTextContainer}>
                         <Text style={TouchableCardStyle.cardName}>{props.cardName}</Text>
                         <Text style={[TouchableCardStyle.cardAddress, { color: props?.addressFontColor }]}>{props.address}</Text>

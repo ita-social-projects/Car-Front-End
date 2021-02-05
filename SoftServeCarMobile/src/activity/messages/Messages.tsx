@@ -4,7 +4,8 @@ import Chat from '../chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessage from '../chat/SimpleMessage'
+import SimpleMessage from '../chat/simple-message/SimpleMessage'
+import MessagesStyle from './MessagesStyle';
 
 const Stack = createStackNavigator();
 export default class Messages extends React.Component {
@@ -12,7 +13,7 @@ export default class Messages extends React.Component {
     render() {
 
         return (
-            <View style={{ flex: 1, alignSelf: "stretch", backgroundColor: 'white' }}>
+            <View style={MessagesStyle.container}>
 
                 <Stack.Navigator screenOptions={{
                     headerTitleAlign: 'center',
@@ -22,7 +23,7 @@ export default class Messages extends React.Component {
                         options={{
                             headerTitle: "Messages",
                             headerRight: () => (
-                                <TouchableOpacity style={{ right: 10 }} onPress={() => Alert.alert("Search button was clicked")}>
+                                <TouchableOpacity style={MessagesStyle.messages} onPress={() => Alert.alert("Search button was clicked")}>
                                     <Ionicons name={'search'} size={30} />
                                 </TouchableOpacity>
                             )

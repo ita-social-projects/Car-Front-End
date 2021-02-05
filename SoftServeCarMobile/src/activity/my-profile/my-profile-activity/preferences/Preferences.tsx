@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, TextInput } from 'react-native'
 import { AuthContext } from '../../../auth/AuthProvider';
-import { PreferencesStyle } from './PreferencesStyle';
+import PreferencesStyle from './PreferencesStyle';
 import ChooseOptionComponent from './ChooseOptionComponent';
 import {UserPreferences} from '../../../../../models/UserPreferences';
 import "reflect-metadata";

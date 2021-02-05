@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const PreferencesStyle = StyleSheet.create({
+const PreferencesStyle = StyleSheet.create({
 
     mainContainer: {
         margin: 20
@@ -53,4 +53,6 @@ export const PreferencesStyle = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold'
     }
-})
+});
+
+export default PreferencesStyle;

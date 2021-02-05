@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import {ProximaNova} from "../../../../font-manager";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
+    
     blockContainer: {
         borderRadius: 8,
         borderColor: "#FFFFFF",
@@ -35,5 +36,6 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
         height: 150,
         width: Dimensions.get('window').width
     },
-})
+});
+
 export default TouchableNavigationBlockStyle;
