@@ -14,8 +14,7 @@ export const AuthContext = React.createContext<{
     user: User;
     login: () => void;
     logout: () => void;
-    loadStorageUser: () => void;
-}>({
+    loadStorageUser: () => void;}>({
     user: null,
     login: () => {},
     logout: () => {},
