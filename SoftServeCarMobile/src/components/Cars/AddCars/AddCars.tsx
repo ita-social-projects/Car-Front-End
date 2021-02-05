@@ -5,10 +5,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import { ImagePickerResponse, launchImageLibrary } from 'react-native-image-picker/src';
-import addCarsStyle from './AddCarsStyle';
+import AddCarsStyle from './AddCarsStyle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../../activity/auth/AuthProvider';
-import { CarDropDownPickerItem } from '../../CarDropDownPicker/CarDropDownItem';
+import { CarDropDownPickerItem } from '../../car-drop-down-picker/CarDropDownItem';
 import Model from '../../../../models/Model';
 import Brand from '../../../../models/Brand';
 import { Color } from '../../../../models/Color';
@@ -16,8 +16,8 @@ import BrandService from '../../../../api-service/brand-service/BrandService';
 import ModelService from '../../../../api-service/model-service/ModelService';
 import CarService from '../../../../api-service/car-service/CarService';
 import CarDTO from '../../../../models/CarDTO';
-import CarDropDownPicker from '../../CarDropDownPicker/CarDropDownPicker';
-import CarTextInput from '../../CarTextInput/CarTextInput';
+import CarDropDownPicker from '../../car-drop-down-picker/CarDropDownPicker';
+import CarTextInput from '../../car-text-input/CarTextInput';
 
 function AddCars() {
     const { user } = useContext(AuthContext);
@@ -88,27 +88,27 @@ function AddCars() {
             ({ ...{ value: String(model.id), label: model.name } })) : null;
 
     return (
-        <KeyboardAwareScrollView style={addCarsStyle.wrapper}>
-            <View style={addCarsStyle.carAvatarContainer}>
-                {photo && (<Image source={{ uri: photo.uri }} style={addCarsStyle.carAvatar} />)}
-                <TouchableOpacity style={addCarsStyle.carButtonUpload}
+        <KeyboardAwareScrollView style={AddCarsStyle.wrapper}>
+            <View style={AddCarsStyle.carAvatarContainer}>
+                {photo && (<Image source={{ uri: photo.uri }} style={AddCarsStyle.carAvatar} />)}
+                <TouchableOpacity style={AddCarsStyle.carButtonUpload}
                     onPress={() => uploadPhotoHandle()}>
-                    <Text style={addCarsStyle.carButtonUploadText}>
+                    <Text style={AddCarsStyle.carButtonUploadText}>
                         {Object.entries(photo).length ? "Change photo" : "Upload photo"}
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={addCarsStyle.inputsContainer}>
-                <View style={addCarsStyle.dropDownContainer}>
+            <View style={AddCarsStyle.inputsContainer}>
+                <View style={AddCarsStyle.dropDownContainer}>
                     <CarDropDownPicker
-                        style={addCarsStyle.dropDownPicker}
+                        style={AddCarsStyle.dropDownPicker}
                         placeHolder="Brand"
                         items={brandItems}
                         zIndex={3000}
                         required={true}
                         selectHandle={(item: CarDropDownPickerItem) => selectBrandHandle(item)} />
                     <CarDropDownPicker
-                        style={addCarsStyle.dropDownPicker}
+                        style={AddCarsStyle.dropDownPicker}
                         placeHolder="Model"
                         items={modelItems}
                         zIndex={2000}
@@ -116,7 +116,7 @@ function AddCars() {
                         disabled={!modelItems}
                         selectHandle={(item: CarDropDownPickerItem) => setModel(item)} />
                     <CarDropDownPicker
-                        style={addCarsStyle.dropDownPicker}
+                        style={AddCarsStyle.dropDownPicker}
                         placeHolder="Color"
                         items={colors}
                         zIndex={1000}
@@ -139,12 +139,12 @@ function AddCars() {
                         placeHolder='Plate number'
                     />
                 </View>
-                <View style={addCarsStyle.saveButtonContainer}>
+                <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: 'red' }}>*
                         <Text style={{ color: '#414045' }} > - mandatory information</Text>
                     </Text>
                     <TouchableOpacity
-                        style={[addCarsStyle.carButtonSave]}
+                        style={[AddCarsStyle.carButtonSave]}
                         onPress={() => saveCarHandle({
                             brandId: Number(selectedBrand?.value),
                             modelId: Number(selectedModel?.value),
@@ -152,9 +152,9 @@ function AddCars() {
                             plateNumber: plateNumber,
                             userId: Number(user?.id)
                         })}>
-                        <Text style={addCarsStyle.carButtonSaveText}>Save</Text>
+                        <Text style={AddCarsStyle.carButtonSaveText}>Save</Text>
                         {loading ?
-                            <ActivityIndicator style={addCarsStyle.spinner} size={20} color="white" />
+                            <ActivityIndicator style={AddCarsStyle.spinner} size={20} color="white" />
                             : <></>}
                     </TouchableOpacity>
                 </View>

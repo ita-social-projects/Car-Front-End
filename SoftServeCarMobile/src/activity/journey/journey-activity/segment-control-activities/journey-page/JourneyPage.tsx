@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
-import MenuButton from '../../../../../components/BottomPopup/menu-button/MenuButton';
-import BottomPopup from '../../../../../components/BottomPopup/BottomPopup';
+import MenuButton from '../../../../../components/bottom-popup/menu-button/MenuButton';
+import BottomPopup from '../../../../../components/bottom-popup/BottomPopup';
 import * as RootNavigation from '../../../../../components/navigation/RootNavigation';
-import { JourneyPageStyle } from './JourneyPageStyle';
+import JourneyPageStyle from './JourneyPageStyle';
 
 const JourneyPage = (props: any) => {
 

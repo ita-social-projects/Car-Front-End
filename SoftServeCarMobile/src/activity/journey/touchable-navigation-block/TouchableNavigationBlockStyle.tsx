@@ -1,6 +1,7 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
+    
     blockContainer: {
         borderRadius: 8,
         borderColor: "#FFFFFF",
@@ -35,5 +36,6 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
         height: 150,
         width: Dimensions.get('window').width
     },
-})
+});
+
 export default TouchableNavigationBlockStyle;

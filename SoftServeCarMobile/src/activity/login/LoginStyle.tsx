@@ -7,6 +7,7 @@ const LoginStyle = StyleSheet.create({
         alignItems:"center",
         margin: 30,
     },
+
     loginPageTextGreeting: {
         fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
         fontWeight: "bold",
@@ -15,6 +16,7 @@ const LoginStyle = StyleSheet.create({
         margin: 5,
         letterSpacing: 0.2
     },
+
     loginPageTextName: {
         fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
         fontWeight: "bold",
@@ -23,6 +25,7 @@ const LoginStyle = StyleSheet.create({
         margin: 5,
         letterSpacing: 0.2
     },
+
     loginButton: {
         margin: 30,
         padding: 15,
@@ -31,11 +34,13 @@ const LoginStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 16,
     },
+
     preferencesText: {
         padding: 30,
         textAlign: "left",
         fontSize: 15,
     },
+
     loadingIcon: {
         width: 56,
         height: 56,
@@ -44,4 +49,5 @@ const LoginStyle = StyleSheet.create({
         borderColor: '#EEEEEE'
     },
 });
+
 export default LoginStyle;

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Image, ActivityIndicator } from 'react-native';
-import {AvatarLogoTitleStyle} from './AvatarLogoTitleStyle';
+import AvatarLogoTitleStyle from './AvatarLogoTitleStyle';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../../../../api-service/user-service/UserService';

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Text, View } from 'react-native'
 import { AuthContext } from '../auth/AuthProvider';
 import * as RootNavigation from '../../components/navigation/RootNavigation';
-import { ExceptionStyle } from './ExceptionStyle';
+import ExceptionStyle from './ExceptionStyle';
 import { useNavigation } from '@react-navigation/native';
 
 export function Exception(props: any){

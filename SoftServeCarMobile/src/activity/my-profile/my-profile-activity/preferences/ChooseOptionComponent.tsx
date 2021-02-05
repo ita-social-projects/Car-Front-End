@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Switch } from 'react-native'
-import { PreferencesStyle } from './PreferencesStyle'
+import PreferencesStyle from './PreferencesStyle'
 
 const ChooseOptionComponent = (props:any) => {
     return (

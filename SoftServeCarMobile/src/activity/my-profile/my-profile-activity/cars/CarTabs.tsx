@@ -1,9 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import AddCars from '../../../../components/Cars/AddCars/AddCars';
-import Cars from '../../../../components/Cars/Cars';
-import EditCars from '../../../../components/Cars/EditCars/EditCars';
+import AddCars from '../../../../components/cars/AddCars/AddCars';
+import Cars from '../../../../components/cars/Cars';
+import EditCars from '../../../../components/cars/EditCars/EditCars';
+import CarTabsStyle from './CarTabsStyle';
 
 const StackTabs = createStackNavigator();
 
@@ -17,18 +18,14 @@ export default function CarTabs() {
                     options={{
                         title: 'Your Cars',
                         headerTitleAlign: 'center',
-                        headerTitleStyle: {
-                            textAlign: 'center'
-                        }
+                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
                     }}/>
                 <StackTabs.Screen name="AddCars"
                                   component={AddCars}
                                   options={{
                                       title: 'Add a Car',
                                       headerTitleAlign: 'center',
-                                      headerTitleStyle: {
-                                          textAlign: 'center'
-                                      }
+                                      headerTitleStyle: CarTabsStyle.headerTitleStyle,
                                   }}/>
                 <StackTabs.Screen
                     name="EditCars"
@@ -36,9 +33,7 @@ export default function CarTabs() {
                     options={{
                         title: 'Edit a Car',
                         headerTitleAlign: 'center',
-                        headerTitleStyle: {
-                            textAlign: 'center'
-                        }
+                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
                     }}/>
             </StackTabs.Navigator>
         </View>

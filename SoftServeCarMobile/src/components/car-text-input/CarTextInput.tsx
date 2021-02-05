@@ -2,23 +2,23 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler'
-import carTextInputStyle from './CarTextInputStyle';
+import CarTextInputStyle from './CarTextInputStyle';
 
 function Input(props: any) {
     return (
         <>
-            <View style={carTextInputStyle.container}>
-                <Text style={carTextInputStyle.requiredPointer}>*</Text>
+            <View style={CarTextInputStyle.container}>
+                <Text style={CarTextInputStyle.requiredPointer}>*</Text>
                 <TextInput
                     {...props}
                     style={[
-                        carTextInputStyle.textInputStyle,
+                        CarTextInputStyle.textInputStyle,
                         props.error && { borderColor: 'red' }
                     ]}>
                 </TextInput>
             </View>
             {props.errorText && (
-                <Text style={{ color: 'red' }}>{props.errorText}</Text>
+                <Text style={CarTextInputStyle.errorText}>{props.errorText}</Text>
             )}
         </>
     );

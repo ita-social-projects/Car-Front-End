@@ -3,14 +3,14 @@ import { View } from 'react-native';
 import { Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import carDropDownStyle from './CarDropDownPickerStyle';
+import CarDropDownPickerStyle from './CarDropDownPickerStyle';
 
 function CarDropDownPicker(props: any) {
     return (
         <View style={props.required && { justifyContent: 'center' }}>
             {props.required && <Text
                 style={[
-                    carDropDownStyle.requiredPointer,
+                    CarDropDownPickerStyle.requiredPointer,
                     { zIndex: props.zIndex + 10 }
                 ]}>*</Text>}
             <DropDownPicker
@@ -26,21 +26,21 @@ function CarDropDownPicker(props: any) {
                 defaultValue={''}
                 style={
                     [
-                        carDropDownStyle.container,
-                        props.disabled && carDropDownStyle.disabledStyle,
+                        CarDropDownPickerStyle.container,
+                        props.disabled && CarDropDownPickerStyle.disabledStyle,
                     ]}
-                dropDownStyle={carDropDownStyle.dropDownStyle}
+                dropDownStyle={CarDropDownPickerStyle.dropDownStyle}
                 containerStyle={[{ height: 48 }, props.style]}
                 placeholderStyle={[
-                    carDropDownStyle.placeholderStyle,
+                    CarDropDownPickerStyle.placeholderStyle,
                     props.required && { paddingLeft: 12 },
-                    carDropDownStyle.initialPlaceHolder
+                    CarDropDownPickerStyle.initialPlaceHolder
                 ]}
                 selectedLabelStyle={
-                    [carDropDownStyle.placeholderStyle,
+                    [CarDropDownPickerStyle.placeholderStyle,
                     props.required && { paddingLeft: 12 }
                     ]}
-                itemStyle={carDropDownStyle.itemStyle}
+                itemStyle={CarDropDownPickerStyle.itemStyle}
                 onChangeItem={props.selectHandle ?
                     (item) => {
                         props.selectHandle(item);

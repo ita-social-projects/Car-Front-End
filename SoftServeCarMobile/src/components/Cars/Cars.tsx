@@ -6,7 +6,7 @@ import { container } from 'tsyringe';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../../activity/auth/AuthProvider';
 import CarInfoDTO from '../../../models/CarInfoDTO';
-import carsStyle from './CarsStyle'
+import CarsStyle from './CarsStyle'
 import TouchableNavigationCard from '../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
 import CarService from '../../../api-service/car-service/CarService';
 
@@ -30,7 +30,7 @@ export default function Cars(props: any) {
                 </Text>
             </TouchableNavigationCard>
             { cars?.length ? <></> :
-                <Text style={carsStyle.message}>
+                <Text style={CarsStyle.message}>
                     Currently you don’t have any car in the list.
                     You have to add a car if you want to create Journeys with personal one.
                 </Text>
@@ -45,9 +45,9 @@ export default function Cars(props: any) {
     }, []);
 
     return (
-        <View style={carsStyle.container}>
-            <ScrollView contentContainerStyle={[carsStyle.container, loading && carsStyle.loading]}>
-                <View style={[carsStyle.carContainer, loading && carsStyle.loading]}>
+        <View style={CarsStyle.container}>
+            <ScrollView contentContainerStyle={[CarsStyle.container, loading && CarsStyle.loading]}>
+                <View style={[CarsStyle.carContainer, loading && CarsStyle.loading]}>
                     {loading ? <ActivityIndicator size={40} color="black" /> :
                         cars.length ?
                             <>
@@ -59,12 +59,12 @@ export default function Cars(props: any) {
                                                 cardName="Add a car"
                                                 picture={item.byteOfImage ?
                                                     <Image source={{ uri: 'data:image/png;base64,' + item.byteOfImage }}
-                                                        style={[carsStyle.carAvatar]} /> :
+                                                        style={[CarsStyle.carAvatar]} /> :
                                                     <Ionicons name={'car'} size={20} color="#414045" />}>
-                                                <Text style={carsStyle.brand}>
+                                                <Text style={CarsStyle.brand}>
                                                     {item.brandName}
                                                 </Text>
-                                                <Text style={carsStyle.model}>
+                                                <Text style={CarsStyle.model}>
                                                     {item.modelName}
                                                 </Text>
                                             </TouchableNavigationCard>

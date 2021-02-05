@@ -1,6 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
-export const TouchableJourneyStyle = StyleSheet.create({
+const TouchableJourneyStyle = StyleSheet.create({
+    
     component: {
         margin: 10,
         padding: 10,
@@ -55,5 +56,7 @@ export const TouchableJourneyStyle = StyleSheet.create({
         lineHeight: 16,
         textAlign: "right",
         color: "#909095",
-    }
+    },
 });
+
+export default TouchableJourneyStyle;
