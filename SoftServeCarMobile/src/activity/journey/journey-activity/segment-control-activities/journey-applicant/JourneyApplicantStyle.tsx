@@ -93,7 +93,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     detailsText: {
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 18,
         color: 'black',
@@ -101,7 +101,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     positionText: {
         flex :133,
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: 'black',
@@ -110,7 +110,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     locationText: {
         flex: 133,
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: 'black',
@@ -118,7 +118,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     positionData: {
         flex: 194,
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: OpenSans.Bold,
         fontSize: 13,
         lineHeight: 18,
         color: '#414045',
@@ -127,7 +127,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     locationData: {
         flex: 194,
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: '#02A2CF',
