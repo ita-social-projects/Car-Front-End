@@ -1,4 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
+import { OpenSans, ProximaNova } from "../../../../../../font-manager";
 
 export const JourneyApplicantStyle = StyleSheet.create({
 
@@ -24,13 +25,13 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     userInformation: {
         marginLeft: 15,
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily: ProximaNova.Bold,
         fontWeight: 'bold'
     },
 
     userName: {
         lineHeight: 21,
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily: ProximaNova.Bold,
         fontSize: 18,
         marginBottom: 8,
         fontWeight: 'bold'
@@ -40,7 +41,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
         lineHeight: 14,
         fontSize: 14,
         opacity: 0.5,
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily: ProximaNova.Regular,
         marginBottom: 8
     },
 
@@ -61,7 +62,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     buttonText: {
-        fontFamily: Platform.OS === "ios" ? 'Proxima Nova' : 'Proxima-Nova-Reg.ttf',
+        fontFamily: ProximaNova.Bold,
         fontWeight: 'bold',
         fontSize: 16,
         textTransform: 'uppercase',
@@ -92,7 +93,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     detailsText: {
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 18,
         color: 'black',
@@ -100,7 +101,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     positionText: {
         flex :133,
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: 'black',
@@ -109,7 +110,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     locationText: {
         flex: 133,
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: 'black',
@@ -117,7 +118,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     positionData: {
         flex: 194,
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily: OpenSans.Bold,
         fontSize: 13,
         lineHeight: 18,
         color: '#414045',
@@ -126,7 +127,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     locationData: {
         flex: 194,
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
+        fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: '#02A2CF',
