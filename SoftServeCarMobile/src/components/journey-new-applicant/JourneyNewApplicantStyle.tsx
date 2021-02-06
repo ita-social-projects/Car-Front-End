@@ -1,5 +1,5 @@
-import {View} from "react-native";
-import {OpenSans, ProximaNova} from "../../../font-manager";
+import { View } from "react-native";
+import { OpenSans, ProximaNova } from "../../../font-manager";
 import EStyleSheet from "react-native-extended-stylesheet";
 import React from "react";
 
