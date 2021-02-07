@@ -1,28 +1,20 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
+import React, { useState, useEffect } from "react";
+import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
+import BottomPopup from "../../../../components/BottomPopup/BottomPopup";
 import { container } from "tsyringe";
-import { AuthContext } from "../../../auth/AuthProvider";
 import JourneyService from "../../../../../api-service/journeyService/JourneyService";
 import { Journey } from "../../../../../models/Journey";
-import { Button } from "react-native";
 import * as RootNavigation from "../../../../components/navigation/RootNavigation";
-import BottomSheet from "reanimated-bottom-sheet";
-import MenuButton from "../../../../components/BottomPopup/MenuButton";
 import Moment from "moment";
-import { FlatList } from "react-native";
 import { User } from "../../../../../models/User";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { Divider } from "react-native-elements";
+import { StopType } from "../../../../../models/StopType";
+import { Stop } from "../../../../../models/Stop";
+import JourneyPageStyle from "./JourneyPageStyle";
 
 const JourneyPage = (props: any) => {
   const journeyService = container.resolve(JourneyService);
-  const { user } = useContext(AuthContext);
   const [currentJourney, setJourney] = useState({} as Journey);
 
   useEffect(() => {
@@ -31,150 +23,165 @@ const JourneyPage = (props: any) => {
       .then((res) => setJourney(res.data))
       .catch((e) => console.log(e));
   }, []);
- 
-  const content = () => {
+
+  const Separator = () => {
+    return <Divider style={JourneyPageStyle.separator} />;
+  };
+
+  const Organizer = () => {
     return (
-      <View style={styles.contentView}>
-        <TouchableOpacity style={styles.organizerBlock}>
-          <View style={styles.organizerImageBlock}>
+      <View style={JourneyPageStyle.userBlock}>
+        <View style={JourneyPageStyle.userImageBlock}>
+          <Image
+            style={JourneyPageStyle.userImage}
+            source={require("../../../../../assets/images/default-user-photo.jpg")}
+          />
+        </View>
+        <View style={JourneyPageStyle.userInfoBlock}>
+          <Text style={JourneyPageStyle.userNameText}>
+            {currentJourney?.organizer?.name}{" "}
+            {currentJourney?.organizer?.surname}'s journey
+          </Text>
+          <View style={JourneyPageStyle.userSecondaryInfoBlock}>
+            <Text style={JourneyPageStyle.userRoleText}>
+              {currentJourney?.organizer?.position}
+            </Text>
+            <Text style={JourneyPageStyle.dateText}>
+              {Moment(currentJourney?.departureTime).calendar()}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const StopListItem = (item: Stop) => {
+    return (
+      <View style={JourneyPageStyle.stopListItem}>
+        <View style={JourneyPageStyle.stopListItemRow}>
+          <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+          {item?.type !== StopType.Finish && (
+            <View style={JourneyPageStyle.stopCustomLineIcon} />
+          )}
+        </View>
+        <Text>
+          {item?.address.city} {item?.address.street} street
+        </Text>
+      </View>
+    );
+  };
+
+  const StopsBlock = () => {
+    return (
+      <View style={JourneyPageStyle.stopsBlock}>
+        <FlatList
+          data={currentJourney?.stops}
+          renderItem={({ item }) => StopListItem(item)}
+          keyExtractor={(item) => item!.id.toString()}
+        />
+      </View>
+    );
+  };
+
+  const Applicant = (item: User) => {
+    return (
+      <>
+        <View style={JourneyPageStyle.userBlock}>
+          <View style={JourneyPageStyle.userImageBlock}>
             <Image
-              style={styles.organizerImage}
+              style={JourneyPageStyle.userImage}
               source={require("../../../../../assets/images/default-user-photo.jpg")}
             />
           </View>
-          <View style={styles.organizerInfoBlock}>
-            <Text style={styles.organizerNameText}>
-              {currentJourney?.driver?.name} {currentJourney?.driver?.surname}'s
-              journey
+          <View style={JourneyPageStyle.userInfoBlock}>
+            <Text style={JourneyPageStyle.applicantNameText}>
+              {item?.name} {item?.surname}
             </Text>
-            <View style={styles.organizerSecondaryInfoBlock}>
-              <Text style={styles.organizerRoleText}>
-                {currentJourney?.driver?.position}
-              </Text>
-              <Text style={styles.dateText}>
-                {Moment(currentJourney?.departureTime).calendar()}
+            <View style={JourneyPageStyle.userSecondaryInfoBlock}>
+              <Text style={JourneyPageStyle.userRoleText}>
+                {item?.position}
               </Text>
             </View>
           </View>
+          <TouchableOpacity
+            style={JourneyPageStyle.ellipsisButton}
+            onPress={() =>
+              RootNavigation.navigate("Applicant Page", { userId: item?.id })
+            }
+          >
+            <Ionicons name={"ellipsis-horizontal"} color={"black"} size={25} />
+          </TouchableOpacity>
+        </View>
+        <Separator />
+      </>
+    );
+  };
+
+  const ApplicantsBlock = () => {
+    return (
+      <View style={JourneyPageStyle.applicantsBlock}>
+        <Text style={JourneyPageStyle.applicantsHeader}>
+          SOFTSERVIANS {currentJourney?.participants?.length}/
+          {currentJourney?.countOfSeats}
+        </Text>
+        <FlatList
+          data={currentJourney?.participants}
+          renderItem={({ item }) => Applicant(item)}
+          keyExtractor={(item) => item!.id.toString()}
+        />
+      </View>
+    );
+  };
+
+  const ButtonsBlock = () => {
+    return (
+      <View style={{ flexDirection: "row", justifyContent: 'space-between'  }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            borderColor: "black",
+            borderWidth: 3,
+            width: '40%'
+          }}
+        >
+          <Text style={{ color: "black", fontWeight: '700', textAlign: 'center', height: 45, fontSize: 18, textAlignVertical: 'center' }}>MESSAGE ALL</Text>
         </TouchableOpacity>
-        <View>
-          <FlatList
-            data={currentJourney?.participants}
-            renderItem={({ item }) => (
-              <TouchableOpacity>
-                <Text style={{color: 'black', fontSize: 40}}>{item?.name} {item?.surname}</Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
+        <TouchableOpacity
+          style={{
+            backgroundColor: "black",
+            width: '55%',
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: '700', textAlign: 'center', height: 45, fontSize: 18, textAlignVertical: 'center' }}>START THE JOURNEY</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const content = () => {
+    return (
+      <View style={JourneyPageStyle.mainContainer}>
+        <View style={JourneyPageStyle.contentView}>
+          <Organizer />
+          <StopsBlock />
+          <Separator />
+          <ApplicantsBlock />
+          <ButtonsBlock />
         </View>
       </View>
     );
   };
 
   return (
-    <>
-      <BottomPopup
-        style={{ backgroundColor: "white" }}
-        snapPoints={[
-          "50%",
-          "45%",
-          "40%",
-          "35%",
-          "30%",
-          "25%",
-          "20%",
-          "15%",
-          "10%",
-        ]}
-        renderContent={content}
-        initialSnap={0}
-      ></BottomPopup>
-    </>
+    <BottomPopup
+      style={JourneyPageStyle.bottomPopup}
+      snapPoints={["80%", "45%", "40%", "35%", "30%", "25%", "20%", "15%"]}
+      renderContent={content}
+      initialSnap={0}
+      renderHeader={() => {}}
+      enabledInnerScrolling={false}
+    ></BottomPopup>
   );
 };
 
 export default JourneyPage;
-
-const styles = StyleSheet.create({
-  contentView: {
-    backgroundColor: "white",
-    height: Dimensions.get("window").height / 2,
-    alignItems: "center",
-  },
-  organizerBlock: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "90%",
-  },
-  organizerImageBlock: {
-    flex: 1,
-    alignItems: "flex-start",
-  },
-  organizerImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 100,
-  },
-  organizerInfoBlock: {
-    flexDirection: "column",
-    justifyContent: "space-around",
-    flex: 5,
-  },
-  organizerNameText: {
-    fontSize: 15,
-    fontWeight: "700",
-    fontFamily: "Open-Sans-Regular",
-  },
-  organizerSecondaryInfoBlock: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  organizerRoleText: {
-    fontSize: 13,
-    color: "#909095",
-    fontWeight: "100",
-    fontFamily: "Open-Sans-Regular",
-  },
-  dateText: {
-    fontSize: 13,
-    color: "#02A2CF",
-    fontWeight: "700",
-    fontFamily: "Open-Sans-Regular",
-  },
-  container: {
-    flex: 1,
-  },
-  item: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-  panelContainer: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  panel: {
-    height: 200,
-    backgroundColor: "white",
-  },
-  headerTitleStyle: {
-    paddingLeft: 24,
-    paddingBottom: 20,
-    backgroundColor: "white",
-  },
-  headerTextStyle: {
-    fontSize: 14,
-    lineHeight: 16,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: 0.2,
-    alignItems: "center",
-  },
-});

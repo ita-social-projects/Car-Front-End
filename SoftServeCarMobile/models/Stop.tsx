@@ -1,6 +1,8 @@
+import Address from "./Address";
+import { StopType } from "./StopType";
+
 export type Stop = null | {
-    id: number;
-    journeyId: number; 
-    userId: number;
-    addressId: number;
-  }
+  id: number;
+  type: StopType;
+  address: Address;
+};

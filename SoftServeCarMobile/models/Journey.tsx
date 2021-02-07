@@ -11,5 +11,5 @@ export type Journey = null | {
   scheduleId: number;
   participants: User[];
   stops: Stop[];
-  driver: User;
+  organizer: User;
 };
