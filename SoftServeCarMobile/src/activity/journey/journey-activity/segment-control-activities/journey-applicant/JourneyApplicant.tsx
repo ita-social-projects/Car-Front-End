@@ -84,14 +84,14 @@ const JourneyApplicant = ({ route }: any) => {
                         navigation.navigate("Messages", {});
                     }}
                 >
+                    <Ionicons
+                        name={"mail"}
+                        style={JourneyApplicantStyle.buttonText}
+                        color="#414045"
+                    />
                     <Text style={JourneyApplicantStyle.buttonText}>
-                        <Ionicons
-                            name={"mail"}
-                            style={JourneyApplicantStyle.buttonText}
-                            color="#414045"
-                        />
-            Message
-          </Text>
+                        Message
+                    </Text>
                 </TouchableOpacity>
             </View>
             <View style={JourneyApplicantStyle.separator} />
