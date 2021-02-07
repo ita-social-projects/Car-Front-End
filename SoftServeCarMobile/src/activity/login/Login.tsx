@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ActivityIndicator, Button, Text, View } from 'react-native'
 import { AuthManager } from '../auth/AuthManager';
-import {AuthContext} from "../auth/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import LoginStyle from './LoginStyle';
-
 
 export function Login(props: any){
     const { login } = useContext(AuthContext);

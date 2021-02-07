@@ -1,4 +1,3 @@
-// @ts-ignore
 import axios, { AxiosResponse } from 'axios'
 import { AuthManager } from '../src/activity/auth/AuthManager';
 import * as RootNavigation from '../src/components/navigation/RootNavigation';
@@ -36,7 +35,7 @@ axiosInstance.interceptors.request.use(
         {
             errorCode = error.response.status;
         }
-        RootNavigation.navigate("Exception",{ errorMessage: errorCode });
+        RootNavigation.navigate("Exception", { errorMessage: errorCode });
         return Promise.reject(error);
     }
 );

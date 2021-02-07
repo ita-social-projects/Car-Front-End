@@ -7,7 +7,7 @@ import Brand from '../../models/Brand';
 class BrandService {
     constructor(private apiService: APIService) { }
     
-    routePrefix: string = 'brand';
+    routePrefix: string = 'brands';
 
     getBrands() {
         return this.apiService.get<Brand[]>(this.routePrefix);

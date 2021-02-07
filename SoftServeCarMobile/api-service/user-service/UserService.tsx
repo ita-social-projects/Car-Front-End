@@ -1,6 +1,6 @@
 import APIService from '../APIService';
 import "reflect-metadata";
-import {User} from '../../models/User';
+import { User } from '../../models/User';
 import { injectable } from 'tsyringe';
 
 @injectable()
@@ -9,12 +9,12 @@ class UserService {
 
     routePrefix: string = 'users';
 
-    getUser(userId: number) {
-        return this.apiService.get<User>(this.routePrefix + '/with-avatar/' + userId);
+    getUser(id: number) {
+        return this.apiService.get<User>(this.routePrefix + '/' + id);
     }
 
-    getAvatar(userId: number) {
-        return this.apiService.get<string>(this.routePrefix + '/' + userId + '/avatar');
+    getAvatar(id: number) {
+        return this.apiService.get<string>(this.routePrefix + '/' + id + '/avatar');
     }
 
     create(user: User) {

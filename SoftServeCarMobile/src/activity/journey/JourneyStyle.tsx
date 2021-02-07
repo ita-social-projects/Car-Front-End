@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const JourneyStyle = StyleSheet.create({
+    
     page: {
         backgroundColor: "white",
     },
@@ -10,4 +11,5 @@ const JourneyStyle = StyleSheet.create({
         alignSelf: 'stretch'
     },
 });
+
 export default JourneyStyle;

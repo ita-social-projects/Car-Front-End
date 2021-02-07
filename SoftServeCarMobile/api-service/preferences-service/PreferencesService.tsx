@@ -1,6 +1,5 @@
-import React from 'react';
 import APIService from '../APIService';
-import {UserPreferences} from '../../models/UserPreferences';
+import { UserPreferences } from '../../models/UserPreferences';
 import { injectable } from 'tsyringe';
 
 @injectable()
@@ -8,14 +7,14 @@ import { injectable } from 'tsyringe';
 class PreferencesService {
     constructor(private apiService: APIService) { }
     
-    routePrefix: string = 'UserPreferences';
+    routePrefix: string = 'user-preferences';
 
-    getUserPreferences(userId: number) {
-        return this.apiService.get<UserPreferences>(this.routePrefix + '/'+ userId);
+    getUserPreferences(id: number) {
+        return this.apiService.get<UserPreferences>(this.routePrefix + '/'+ id);
     }
 
     updateUserPreferences(preferences: UserPreferences) {
-        return this.apiService.put<UserPreferences>(this.routePrefix, preferences );
+        return this.apiService.put<UserPreferences>(this.routePrefix, preferences);
     }
 }
 export default PreferencesService;

@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc1cf92e-4dfe-48b3-a7ff-45fe6ead38c6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/__tests__/ChatService-test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/open_sans_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/open_sans_extrabold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/open_sans_light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/open_sans_regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/open_sans_semibold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/proxima_nova_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/AntDesign.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Entypo.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/EvilIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Feather.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/FontAwesome.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/FontAwesome5_Brands.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/FontAwesome5_Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/FontAwesome5_Solid.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Fontisto.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Foundation.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Ionicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/MaterialCommunityIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/MaterialIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Octicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/SimpleLineIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/Zocial.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/open_sans_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/open_sans_extrabold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/open_sans_light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/open_sans_regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/open_sans_semibold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/proxima_nova_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/proxima_nova_reg.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/font-manager.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Headers/Private/lottie-react-native/Bridging.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Headers/Public/Lottie/lottie-ios-umbrella.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Headers/Public/Lottie/lottie-ios.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Headers/Public/lottie-react-native/Bridging.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Headers/Public/lottie_react_native/lottie-react-native-umbrella.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Headers/Public/lottie_react_native/lottie-react-native.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/lottie-react-native.podspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/lottie-ios.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/lottie-react-native.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-resources-Debug-input-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-resources-Debug-output-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-resources-Release-input-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-resources-Release-output-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-resources-Debug-input-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-resources-Debug-output-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-resources-Release-input-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-resources-Release-output-files.xcfilelist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-ios/lottie-ios-dummy.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-ios/lottie-ios-prefix.pch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-ios/lottie-ios-umbrella.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-ios/lottie-ios.debug.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-ios/lottie-ios.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-ios/lottie-ios.release.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-react-native/lottie-react-native-dummy.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-react-native/lottie-react-native-prefix.pch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-react-native/lottie-react-native-umbrella.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-react-native/lottie-react-native.debug.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-react-native/lottie-react-native.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/lottie-react-native/lottie-react-native.release.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/AnimationContainer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/CompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/ImageCompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/MaskContainerLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/NullCompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/PreCompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/ShapeCompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/SolidCompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/CompLayers/TextCompositionLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/CompositionLayersInitializer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/InvertedMatteLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/LayerFontProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/LayerImageProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/LayerTextProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/LayerTransformNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/LayerContainers/Utility/TextLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Animation.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Assets/Asset.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Assets/AssetLibrary.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Assets/ImageAsset.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Assets/PrecompAsset.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Extensions/KeyedDecodingContainerExtensions.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Keyframes/Keyframe.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Keyframes/KeyframeGroup.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Layers/ImageLayerModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Layers/LayerModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Layers/PreCompLayerModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Layers/ShapeLayerModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Layers/SolidLayerModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Layers/TextLayerModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Objects/DashPattern.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Objects/Marker.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Objects/Mask.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Objects/Transform.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Ellipse.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/FillI.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/GradientFill.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/GradientStroke.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Group.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Merge.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Rectangle.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Repeater.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Shape.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/ShapeItem.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/ShapeTransform.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Star.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Stroke.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/ShapeItems/Trim.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Text/Font.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Text/Glyph.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Text/TextAnimator.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Model/Text/TextDocument.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Extensions/ItemsExtension.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/NodeProperty.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/Protocols/AnyNodeProperty.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/Protocols/AnyValueContainer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/Protocols/KeypathSearchable.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/Protocols/NodePropertyMap.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/ValueContainer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/ValueProviders/GroupInterpolator.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/ValueProviders/KeyframeInterpolator.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/NodeProperties/ValueProviders/SingleValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/ModifierNodes/TrimPathNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/GroupOutputNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/PassThroughOutputNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/PathOutputNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/Renderables/FillRenderer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/Renderables/GradientFillRenderer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/Renderables/GradientStrokeRenderer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/OutputNodes/Renderables/StrokeRenderer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/PathNodes/EllipseNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/PathNodes/PolygonNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/PathNodes/RectNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/PathNodes/ShapeNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/PathNodes/StarNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/RenderContainers/GroupNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/RenderNodes/FillNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/RenderNodes/GradientFillNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/RenderNodes/GradientStrokeNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/RenderNodes/StrokeNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Nodes/Text/TextAnimatorNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Protocols/AnimatorNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Protocols/PathNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/Protocols/RenderNode.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/RenderLayers/ShapeContainerLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/NodeRenderSystem/RenderLayers/ShapeRenderLayer.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Debugging/AnimatorNodeDebugging.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Debugging/LayerDebugging.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Extensions/AnimationKeypathExtension.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Extensions/CGFloatExtensions.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Extensions/MathKit.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Extensions/StringExtensions.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Helpers/AnimationContext.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Interpolatable/Interpolatable.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Interpolatable/InterpolatableExtensions.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Interpolatable/KeyframeExtensions.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Primitives/BezierPath.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Primitives/ColorExtension.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Primitives/CompoundBezierPath.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Primitives/CurveVertex.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Primitives/PathElement.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Private/Utility/Primitives/VectorsExtensions.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/Animation/AnimationPublic.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/Animation/AnimationView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/Animation/AnimationViewInitializers.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/AnimationCache/AnimationCacheProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/AnimationCache/LRUAnimationCache.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/AnimationKeypath.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/AnyValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/ValueProviders/ColorValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/ValueProviders/FloatValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/ValueProviders/GradientValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/ValueProviders/PointValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/DynamicProperties/ValueProviders/SizeValueProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/FontProvider/AnimationFontProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/ImageProvider/AnimationImageProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/Primitives/AnimationTime.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/Primitives/Color.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/Primitives/Vectors.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/TextProvider/AnimationTextProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/AnimatedButton.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/AnimatedControl.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/AnimatedSwitch.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/AnimationSubview.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/BundleImageProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/Compatibility/CompatibleAnimationKeypath.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/Compatibility/CompatibleAnimationView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/FilepathImageProvider.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/LottieView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/lottie-ios/lottie-swift/src/Public/iOS/UIColorExtension.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/react-native.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/chat/ChatStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/chat/simple-message/SimpleMessage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/chat/simple-message/SimpleMessageStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/create-journey/CreateJourneyStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/search-journey/SearchJouneyStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/search-journey/SearchJourney.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-applicant/JourneyApplicant.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-applicant/JourneyApplicantStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/JourneyPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/JourneyPageStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/all-journeys/AllJourneys.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/all-journeys/AllJourneysStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/past-journeys/PastJourneysStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/scheduled-journeys/ShceduledJourneysStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/upcoming-journeys/UpcomingJourneysStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/touchable/card/TouchableCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/touchable/card/TouchableCardStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/touchable/map-bar/TouchableMapBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/touchable/map-bar/TouchableMapBarStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-tabs/JourneyTabsStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/messages/MessagesStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/MyProfileStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/address-book/AddressBookStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/cars/CarTabsStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/settings/SettingsStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/notifications/NotificationsStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/bottom-popup/menu-button/MenuButtonStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-button/CarButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/cars/edit-cars/EditCars.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/cars/edit-cars/EditCarsStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/journey-new-applicant/JourneyNewApplicant.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/journey-new-applicant/JourneyNewApplicantStyle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/app-tabs/AppTabsStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/Fontisto.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/Fontisto.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/OpenSans-Italic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/OpenSans-Italic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/Proxima-Nova-Reg.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets/fonts/proxima_nova_reg.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/java/com/softservecarmobile/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/java/com/softservecarmobile/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/APIService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/APIService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/Interceptor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/Interceptor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/brand-service/BrandService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/brand-service/BrandService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/car-service/CarService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/car-service/CarService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/chat-service/ChatService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/chat-service/ChatService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/login-service/LoginService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/login-service/LoginService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/model-service/ModelService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/model-service/ModelService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/preferences-service/PreferencesService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/preferences-service/PreferencesService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/api-service/user-service/UserService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/api-service/user-service/UserService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/OpenSans-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/OpenSans-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/assets/fonts/Proxima-Nova-Reg.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/android/app/src/main/assets_/fonts/proxima_nova_reg.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/environment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/environment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/RNCAsyncStorage.podspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/RNCAsyncStorage.podspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/RNCMaskedView.podspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/RNCMaskedView.podspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/react-native-app-auth.podspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/react-native-app-auth.podspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/react-native-image-picker.podspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/react-native-image-picker.podspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/react-native-safe-area-context.podspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Local Podspecs/react-native-safe-area-context.podspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Manifest.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/AppAuth.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/AppAuth.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/BVLinearGradient.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/BVLinearGradient.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/CocoaAsyncSocket.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/CocoaAsyncSocket.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/CocoaLibEvent.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/CocoaLibEvent.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/DoubleConversion.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/DoubleConversion.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/FBLazyVector.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/FBLazyVector.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/FBReactNativeSpec.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/FBReactNativeSpec.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-DoubleConversion.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-DoubleConversion.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-Folly.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-Folly.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-Glog.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-Glog.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-PeerTalk.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-PeerTalk.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-RSocket.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper-RSocket.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Flipper.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/FlipperKit.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/FlipperKit.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Folly.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Folly.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/OpenSSL-Universal.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/OpenSSL-Universal.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile-SoftServeCarMobileTests.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile-SoftServeCarMobileTests.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile-tvOS.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile-tvOS.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile-tvOSTests.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile-tvOSTests.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Pods-SoftServeCarMobile.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RCTRequired.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RCTRequired.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RCTTypeSafety.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RCTTypeSafety.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNCAsyncStorage.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNCAsyncStorage.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNCMaskedView.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNCMaskedView.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNGestureHandler.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNGestureHandler.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNReanimated.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNReanimated.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNScreens.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNScreens.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNVectorIcons.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/RNVectorIcons.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-Core-AccessibilityResources.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-Core-AccessibilityResources.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-Core.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-Core.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-CoreModules.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-CoreModules.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTActionSheet.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTActionSheet.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTAnimation.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTAnimation.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTBlob.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTBlob.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTImage.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTImage.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTLinking.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTLinking.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTNetwork.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTNetwork.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTSettings.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTSettings.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTText.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTText.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTVibration.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-RCTVibration.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-callinvoker.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-callinvoker.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-cxxreact.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-cxxreact.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-jsi.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-jsi.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-jsiexecutor.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-jsiexecutor.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-jsinspector.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React-jsinspector.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/React.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/ReactCommon.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/ReactCommon.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Yoga.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/Yoga.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/YogaKit.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/YogaKit.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/boost-for-react-native.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/boost-for-react-native.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/glog.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/glog.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/react-native-app-auth.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/react-native-app-auth.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/react-native-image-picker.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/react-native-image-picker.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/react-native-safe-area-context.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/react-native-safe-area-context.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Pods.xcodeproj/xcuserdata/reverend.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-acknowledgements.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests-acknowledgements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-SoftServeCarMobileTests/Pods-SoftServeCarMobile-SoftServeCarMobileTests.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOS/Pods-SoftServeCarMobile-tvOS.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOS/Pods-SoftServeCarMobile-tvOS.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOS/Pods-SoftServeCarMobile-tvOS.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOS/Pods-SoftServeCarMobile-tvOS.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOSTests/Pods-SoftServeCarMobile-tvOSTests.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOSTests/Pods-SoftServeCarMobile-tvOSTests.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOSTests/Pods-SoftServeCarMobile-tvOSTests.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile-tvOSTests/Pods-SoftServeCarMobile-tvOSTests.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-acknowledgements.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile-acknowledgements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/Pods/Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile.xcworkspace/xcuserdata/reverend.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile.xcworkspace/xcuserdata/reverend.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile/AppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile/AppDelegate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/ios/SoftServeCarMobile/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/metro.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/metro.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/models/Chat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/models/Chat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/Messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/messages/Messages.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/Notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/notifications/Notifications.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/auth/AuthManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/auth/AuthManager.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/auth/AuthProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/auth/AuthProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/chat/Chat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/chat/Chat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/chat/SimpleMessage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/exception/Exception.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/exception/Exception.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/exception/ExceptionStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/exception/ExceptionStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/Journey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/Journey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/JourneyStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/JourneyStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/JourneyTabs.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/TouchableNavigationBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/touchable-navigation-block/TouchableNavigationBlock.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/TouchableNavigationBlockStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/touchable-navigation-block/TouchableNavigationBlockStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/CreateJourney.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/create-journey/CreateJourney.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/SearchJourney.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/AllJourneys.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/JourneyApplicant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/JourneyApplicant.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/JourneyPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/JourneyPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/JourneyPageStyle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/PastJourneys.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/past-journeys/PastJourneys.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/ScheduledJourneys.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/scheduled-journeys/ScheduledJourneys.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/TouchableJourney.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/touchable/journey/TouchableJourney.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/TouchableJourneyStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/touchable/journey/TouchableJourneyStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/UpcomingJourneys.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-activity/segment-control-activities/journey-page/tabs/upcoming-journeys/UpcomingJourneys.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-tabs/JourneyTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/journey/journey-tabs/JourneyTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/login/LoginStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/login/LoginStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/AvatarLogoTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/avatar-logo/AvatarLogoTitle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/AvatarLogoTitleStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/avatar-logo/AvatarLogoTitleStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/MyProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/MyProfileTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/MyProfileTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/TouchableNavigationCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/TouchableNavigationCardStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCardStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/address-book/AddressBook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/address-book/AddressBook.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/cars/CarTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/cars/CarTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/details/Details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/details/Details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/details/DetailsStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/details/DetailsStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/preferences/ChooseOptionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/preferences/ChooseOptionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/preferences/Preferences.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/preferences/Preferences.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/preferences/PreferencesStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/preferences/PreferencesStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/settings/Settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/activity/my-profile/my-profile-activity/settings/Settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/BottomPopup/BottomPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/bottom-popup/BottomPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/BottomPopup/BottomPopupStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/bottom-popup/BottomPopupStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/BottomPopup/MenuButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/bottom-popup/menu-button/MenuButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarButton/CarButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarButton/CarButtonStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-button/CarButtonStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarDropDownPicker/CarDropDownItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-drop-down-picker/CarDropDownItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarDropDownPicker/CarDropDownPicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-drop-down-picker/CarDropDownPicker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarDropDownPicker/CarDropDownPickerStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-drop-down-picker/CarDropDownPickerStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarTextInput/CarTextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-text-input/CarTextInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/CarTextInput/CarTextInputStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/car-text-input/CarTextInputStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/Cars/AddCars/AddCars.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/cars/add-cars/AddCars.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/Cars/AddCars/AddCarsStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/cars/add-cars/AddCarsStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/Cars/Cars.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/cars/Cars.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/Cars/CarsStyle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/cars/CarsStyle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/Cars/EditCars/EditCars.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/AppTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/app-tabs/AppTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/AppTabsList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/app-tabs/AppTabsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/Providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/Providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/RootNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/RootNavigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/Routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/src/components/navigation/Routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftServeCarMobile/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/SoftServeCarMobile/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1nepxDb18lLkvhVaiOjgcySQBGc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Front" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc1cf92e-4dfe-48b3-a7ff-45fe6ead38c6" name="Default Changelist" comment="" />
+      <created>1611760655192</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611760655192</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="208" y="92" width="1200" height="584" key="AVDManager" timestamp="1612699915750">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="208" y="92" width="1200" height="584" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1612699915750" />
+    <state x="240" y="88" key="SettingsEditor" timestamp="1612097824985">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="240" y="88" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1612097824985" />
+    <state x="398" y="195" key="run.anything.popup" timestamp="1611760827033">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="398" y="195" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1611760827033" />
+  </component>
+</project>

@@ -1,16 +1,17 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import TouchableNavigationCard from './TouchableNavigationCard';
+import TouchableNavigationCard from './my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
+import MyProfileStyle from './MyProfileStyle';
 
 function MyProfile(props: any) {
     return (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={MyProfileStyle.container}>
             <TouchableNavigationCard navigation={props.navigation}
                 navigationName="Details"
                 cardName="Details"
                 picture={<Ionicons name={'person-circle-outline'} size={20} color="#414045" />}>
-                <Text style={{ fontWeight: 'bold' }}>
+                <Text style={MyProfileStyle.text}>
                     Details
                 </Text>
             </TouchableNavigationCard>
@@ -21,10 +22,10 @@ function MyProfile(props: any) {
                 picture={
                     <Ionicons name={'options-outline'}
                         size={20}
-                        style={{ transform: [{ rotate: '90deg' }] }}
+                        style={MyProfileStyle.optionIcon}
                         color="#414045" />}
             >
-                <Text style={{ fontWeight: 'bold' }}>
+                <Text style={MyProfileStyle.text}>
                     Preferences
                 </Text>
             </TouchableNavigationCard>
@@ -33,7 +34,7 @@ function MyProfile(props: any) {
                 navigationName="CarTabs"
                 cardName="Your cars"
                 picture={<Ionicons name={'car'} size={20} color="#414045" />}>
-                <Text style={{ fontWeight: 'bold' }}>
+                <Text style={MyProfileStyle.text}>
                     Your cars
                 </Text>
             </TouchableNavigationCard>
@@ -42,7 +43,7 @@ function MyProfile(props: any) {
                 navigationName="AddressBook"
                 cardName="Address book"
                 picture={<Ionicons name={'bookmark-outline'} size={20} color="#414045" />}>
-                <Text style={{ fontWeight: 'bold' }}>
+                <Text style={MyProfileStyle.text}>
                     Address book
                 </Text>
             </TouchableNavigationCard>
@@ -51,7 +52,7 @@ function MyProfile(props: any) {
                 navigationName="Settings"
                 cardName="Settings"
                 picture={<Ionicons name={'settings-outline'} size={20} color="#414045" />}>
-                <Text style={{ fontWeight: 'bold' }}>
+                <Text style={MyProfileStyle.text}>
                     Settings
                 </Text>
             </TouchableNavigationCard>
