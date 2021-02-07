@@ -1,49 +1,216 @@
-import React from 'react';
-import { Text, View, Button } from 'react-native';
-import BottomSheet from 'reanimated-bottom-sheet';
-import MenuButton from '../../../../../components/bottom-popup/menu-button/MenuButton';
-import BottomPopup from '../../../../../components/bottom-popup/BottomPopup';
-import * as RootNavigation from '../../../../../components/navigation/RootNavigation';
-import JourneyPageStyle from './JourneyPageStyle';
+import React, { useEffect, useState } from "react";
+import BottomSheet from "reanimated-bottom-sheet";
+import MenuButton from "../../../../../components/bottom-popup/menu-button/MenuButton";
+import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
+import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
+import { container } from "tsyringe";
+import Moment from "moment";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { Divider } from "react-native-elements";
+import JourneyService from "../../../../../../api-service/journeyService/JourneyService";
+import { Stop } from "../../../../../../models/Stop";
+import { StopType } from "../../../../../../models/StopType";
+import { User } from "../../../../../../models/User";
+import JourneyPageStyle from "./JourneyPageStyle";
+import { Journey } from "../../../../../../models/Journey";
+import { useNavigation } from "@react-navigation/native";
 
 const JourneyPage = (props: any) => {
+  const [moreOptionsState, setMoreOptionsState] = useState(0);
+  const journeyService = container.resolve(JourneyService);
+  const [currentJourney, setJourney] = useState({} as Journey);
+  const navigation = useNavigation();
 
-    const myRef = React.useRef<BottomSheet>(null);
-    const renderInner = () => (
-        <View style={JourneyPageStyle.panel}>
-            <MenuButton text="View profile"/>
-            <MenuButton text="Message"/>
-        </View>
-    )
+  const moreOptionsRef = React.useRef<BottomSheet>(null);
 
-    let index = props.isOpen ? 1 : 0;
-    myRef?.current?.snapTo(index);
+  const moreOptionsContent = () => (
+    <View style={JourneyPageStyle.panel}>
+      <MenuButton
+        text="View profile"
+        onPress={() =>
+          navigation.navigate("Applicant Page", { userId: moreOptionsState })
+        }
+      />
+      <MenuButton
+        text="Message"
+        onPress={() => navigation.navigate("Messages", {})}
+      />
+    </View>
+  );
 
-    const renderHeader = () => (
-        <View style={JourneyPageStyle.headerTitleStyle}>
-            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
-        </View>
-    )
+  const moreOptionsHeader = () => (
+    <View style={JourneyPageStyle.headerTitleStyle}>
+      <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
+    </View>
+  );
 
+  useEffect(() => {
+    journeyService
+      .getJourney(1)
+      .then((res) => setJourney(res.data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  const Separator = () => {
+    return <Divider style={JourneyPageStyle.separator} />;
+  };
+
+  const Organizer = () => {
     return (
-        <View style={JourneyPageStyle.container}>
-            <View>
-                <View style={{ padding: 40 }}>
-                    <Button title='Applicant' color='black' onPress={() => { RootNavigation.navigate("Applicant Page", {userId: 17}); }} />
-                    <Button title='New Applicant' color='black' onPress={() => { RootNavigation.navigate("New Applicant Page", {}); }} />
-
-                </View>
-            </View>
-            <BottomPopup
-                refForChild={myRef}
-                snapPoints={[0, 200]}
-                renderContent={renderInner}
-                initialSnap={0}
-                renderHeader={renderHeader}
-                enabledInnerScrolling={false}
-                onCloseEnd={() => props.setIsOpen(false)}
-            />
+      <View style={JourneyPageStyle.userBlock}>
+        <View style={JourneyPageStyle.userImageBlock}>
+          <Image
+            style={JourneyPageStyle.userImage}
+            source={require("../../../../../../assets/images/default-user-photo.jpg")}
+          />
         </View>
-    )
-}
+        <View style={JourneyPageStyle.userInfoBlock}>
+          <Text style={JourneyPageStyle.userNameText}>
+            {currentJourney?.organizer?.name}{" "}
+            {currentJourney?.organizer?.surname}'s journey
+          </Text>
+          <View style={JourneyPageStyle.userSecondaryInfoBlock}>
+            <Text style={JourneyPageStyle.userRoleText}>
+              {currentJourney?.organizer?.position}
+            </Text>
+            <Text style={JourneyPageStyle.dateText}>
+              {Moment(currentJourney?.departureTime).calendar()}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const StopListItem = (item: Stop) => {
+    return (
+      <View style={JourneyPageStyle.stopListItem}>
+        <View style={JourneyPageStyle.stopListItemRow}>
+          <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+          {item?.type !== StopType.Finish && (
+            <View style={JourneyPageStyle.stopCustomLineIcon} />
+          )}
+        </View>
+        <Text>
+          {item?.address.city} {item?.address.street} street
+        </Text>
+      </View>
+    );
+  };
+
+  const StopsBlock = () => {
+    return (
+      <View style={JourneyPageStyle.stopsBlock}>
+        <FlatList
+          data={currentJourney?.stops}
+          renderItem={({ item }) => StopListItem(item)}
+          keyExtractor={(item) => item!.id.toString()}
+        />
+      </View>
+    );
+  };
+
+  const Applicant = (item: User) => {
+    return (
+      <>
+        <View style={JourneyPageStyle.userBlock}>
+          <View style={JourneyPageStyle.userImageBlock}>
+            <Image
+              style={JourneyPageStyle.userImage}
+              source={require("../../../../../../assets/images/default-user-photo.jpg")}
+            />
+          </View>
+          <View style={JourneyPageStyle.userInfoBlock}>
+            <Text style={JourneyPageStyle.applicantNameText}>
+              {item?.name} {item?.surname}
+            </Text>
+            <View style={JourneyPageStyle.userSecondaryInfoBlock}>
+              <Text style={JourneyPageStyle.userRoleText}>
+                {item?.position}
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity
+            style={JourneyPageStyle.ellipsisButton}
+            onPress={() => {
+              setMoreOptionsState(item!.id);
+              moreOptionsRef.current?.snapTo(1);
+            }}
+          >
+            <Ionicons name={"ellipsis-horizontal"} color={"black"} size={25} />
+          </TouchableOpacity>
+        </View>
+        <Separator />
+      </>
+    );
+  };
+
+  const ApplicantsBlock = () => {
+    return (
+      <View style={JourneyPageStyle.applicantsBlock}>
+        <Text style={JourneyPageStyle.applicantsHeader}>
+          SOFTSERVIANS {currentJourney?.participants?.length}/
+          {currentJourney?.countOfSeats}
+        </Text>
+        <FlatList
+          data={currentJourney?.participants}
+          renderItem={({ item }) => Applicant(item)}
+          keyExtractor={(item) => item!.id.toString()}
+        />
+      </View>
+    );
+  };
+
+  const ButtonsBlock = () => {
+    return (
+      <View style={JourneyPageStyle.buttonsBlock}>
+        <TouchableOpacity style={JourneyPageStyle.messageAllButton}>
+          <Text style={JourneyPageStyle.messageAllButtonText}>MESSAGE ALL</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={JourneyPageStyle.startJourneyButton}>
+          <Text style={JourneyPageStyle.startJourneyButtonText}>
+            START THE JOURNEY
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const journeyInfoContent = () => {
+    return (
+      <View style={JourneyPageStyle.mainContainer}>
+        <View style={JourneyPageStyle.contentView}>
+          <Organizer />
+          <StopsBlock />
+          <Separator />
+          <ApplicantsBlock />
+          <ButtonsBlock />
+        </View>
+      </View>
+    );
+  };
+
+  return (
+    <>
+      <BottomPopup
+        style={JourneyPageStyle.bottomPopup}
+        snapPoints={["80%", "45%", "40%", "35%", "30%", "25%", "20%", "15%"]}
+        renderContent={journeyInfoContent}
+        initialSnap={0}
+        renderHeader={() => {}}
+        enabledInnerScrolling={false}
+      />
+      <BottomPopup
+        refForChild={moreOptionsRef}
+        snapPoints={[0, 200]}
+        renderContent={moreOptionsContent}
+        initialSnap={0}
+        renderHeader={moreOptionsHeader}
+        enabledInnerScrolling={false}
+        onCloseEnd={() => props.setIsOpen(false)}
+      />
+    </>
+  );
+};
+
 export default JourneyPage;
