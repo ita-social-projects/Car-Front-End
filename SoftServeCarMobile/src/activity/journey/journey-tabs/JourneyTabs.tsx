@@ -1,10 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { Text, View } from "react-native";
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from "react-native-gesture-handler";
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { JourneyNewApplicant } from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import { navigate } from "../../../components/navigation/RootNavigation";
@@ -69,9 +66,35 @@ const JourneyTabs = () => {
         <StackTabs.Screen
           name="Applicant Page"
           options={{
-            title: "SoftServian",
+            title: "Journey",
             headerTitleAlign: "center",
-            headerTitleStyle: JourneyTabsStyle.applicantPage,
+            headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+            headerLeft: () => (
+              <TouchableOpacity
+                style={JourneyTabsStyle.backButtonOpacity}
+                onPress={() => {
+                  navigate("Journey", {});
+                }}
+              >
+                <Ionicons
+                  name={"chevron-back-outline"}
+                  size={35}
+                  color={"#02A2CF"}
+                />
+                <View style={JourneyTabsStyle.backButtonTextView}>
+                  <Text style={JourneyTabsStyle.backButtonText}>Back</Text>
+                </View>
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableWithoutFeedback onPress={() => setOpen(!isOpen)}>
+                <Ionicons
+                  name={"ellipsis-horizontal"}
+                  size={30}
+                  style={JourneyTabsStyle.journeyPageIcon}
+                />
+              </TouchableWithoutFeedback>
+            ),
           }}
           component={JourneyApplicant}
         />
