@@ -1,9 +1,9 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import SearchJouneyStyle from './SearchJouneyStyle';
 import TouchableCard from '../segment-control-activities/touchable/card/TouchableCard';
 import TouchableMapBar from '../segment-control-activities/touchable/map-bar/TouchableMapBar';
+import SearchJouneyStyle from './SearchJouneyStyle';
 
 function SearchJourney() {
     return (

@@ -3,6 +3,8 @@ import { Platform } from "react-native";
 export const ProximaNova = {
     Regular: Platform.OS === "ios" ? 'Proxima Nova' : 'proxima_nova_reg',
     Bold: Platform.OS === "ios" ? 'Proxima Nova' : 'proxima_nova_bold',
+    ExtraBold: Platform.OS === "ios" ? 'Proxima Nova' : 'proxima_nova_extrabold',
+    Black: Platform.OS === "ios" ? 'Proxima Nova' : 'proxima_nova_black',
 };
 
 export const OpenSans = {

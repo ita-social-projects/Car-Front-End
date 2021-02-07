@@ -1,14 +1,12 @@
-import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
-import { AuthManager } from "./AuthManager";
-import { GraphManager } from './GraphAuthProvider';
-import * as RootNavigation from '../../components/navigation/RootNavigation';
-import { User } from "../../../models/User";
+import React, { useState } from "react";
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import LoginService from '../../../api-service/login-service/LoginService'
-
-
+import LoginService from '../../../api-service/login-service/LoginService';
+import { User } from "../../../models/User";
+import * as RootNavigation from '../../components/navigation/RootNavigation';
+import { AuthManager } from "./AuthManager";
+import { GraphManager } from './GraphAuthProvider';
 
 const loginService = container.resolve(LoginService);
 
@@ -39,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     if (accessToken) {
                         const userGraph = await GraphManager.getUserAsync();
                         if (!userGraph) {
-                            RootNavigation.navigate("Login", {resetIndicator: true});
+                            RootNavigation.navigate("Login", { resetIndicator: true });
                             return;
                         }
                         const userData: User = {
@@ -55,7 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                         }
                         const dbUser = await loginService.loginUser(userData);
                         if (!dbUser.data?.token) {
-                            RootNavigation.navigate("Login", {resetIndicator: true});
+                            RootNavigation.navigate("Login", { resetIndicator: true });
                             return;
                         }
                         const token: any = dbUser.data?.token;

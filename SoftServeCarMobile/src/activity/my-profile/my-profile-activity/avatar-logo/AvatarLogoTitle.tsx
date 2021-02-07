@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, Image, ActivityIndicator } from 'react-native';
-import AvatarLogoTitleStyle from './AvatarLogoTitleStyle';
+import { ActivityIndicator, Image, Text, View } from 'react-native';
 import "reflect-metadata";
 import { container } from 'tsyringe';
 import UserService from '../../../../../api-service/user-service/UserService';
 import { AuthContext } from '../../../auth/AuthProvider';
+import AvatarLogoTitleStyle from './AvatarLogoTitleStyle';
 
 function AvatarLogoTitle(props: any) {
     const userService = container.resolve(UserService);

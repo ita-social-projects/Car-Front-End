@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const TouchableNavigationCardStyle = StyleSheet.create({
-    
+
     cardContainer: {
         paddingBottom: 26,
         paddingLeft: 10,

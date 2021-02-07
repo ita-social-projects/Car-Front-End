@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableHighlight, Text, View } from "react-native";
+import { Text, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import MenuButtonStyle from "./MenuButtonStyle";
 

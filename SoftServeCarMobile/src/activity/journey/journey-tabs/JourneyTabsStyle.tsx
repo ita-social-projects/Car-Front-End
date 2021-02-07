@@ -1,13 +1,10 @@
 import { StyleSheet } from "react-native";
+import { OpenSans } from "../../../../font-manager";
 
 const JourneyTabsStyle = StyleSheet.create({
+
   journeyPageIcon: {
     paddingRight: 12,
-  },
-
-  applicantPage: {
-    fontSize: 16,
-    fontWeight: "bold",
   },
 
   backButtonOpacity: {
@@ -22,13 +19,17 @@ const JourneyTabsStyle = StyleSheet.create({
 
   backButtonText: {
     color: "#02A2CF",
-    fontFamily: "Open-Sans-Regular",
+    fontFamily: OpenSans.ExtraBold,
     fontSize: 20,
     fontWeight: "700",
   },
 
+  blackButtonText: {
+    color: 'black',
+  },
+
   headerTitleStyle: {
-    fontFamily: "Open-Sans-Regular",
+    fontFamily: OpenSans.ExtraBold,
     fontWeight: "700",
     fontSize: 20,
   }

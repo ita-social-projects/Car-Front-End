@@ -1,7 +1,6 @@
-import React from 'react';
-import {useContext} from 'react';
-import {Button, Text, View} from 'react-native';
-import {AuthContext} from "../../../auth/AuthProvider";
+import React, { useContext } from 'react';
+import { Button, Text, View } from 'react-native';
+import { AuthContext } from "../../../auth/AuthProvider";
 import DetailsStyle from './DetailsStyle';
 
 
@@ -26,10 +25,10 @@ const Details = () => {
                 <Text style={DetailsStyle.valueColorView}>{user?.location}</Text>
             </View>
 
-            <View style = {DetailsStyle.logoutButton}>
-            <Button title = 'Logout' onPress= {()=>{
+            <View style={DetailsStyle.logoutButton}>
+                <Button title='Logout' onPress={() => {
                     logout();
-                }}/>
+                }} />
             </View>
         </View>
     )

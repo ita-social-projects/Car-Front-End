@@ -1,15 +1,16 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { OpenSans } from "../../../../font-manager";
 
 const AppTabsStyle = StyleSheet.create({
-    
+
     labelStyle: {
         fontStyle: 'normal',
         fontSize: 10,
         fontWeight: '800',
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Bold.ttf',
+        fontFamily: OpenSans.Bold,
         lineHeight: 16
     },
-    
+
     navigator: {
         alignItems: "center"
     },

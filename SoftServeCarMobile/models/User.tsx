@@ -1,9 +1,9 @@
-export  type User= null | {
+export type User = null | {
     id: number,
     name: string,
     surname: string,
     position: string,
-    location: string,    
+    location: string,
     email: string,
     token: string
     hireDate: Date,

@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CarDropDownPickerStyle from './CarDropDownPickerStyle';

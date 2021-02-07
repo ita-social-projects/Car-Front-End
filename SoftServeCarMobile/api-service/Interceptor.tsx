@@ -1,9 +1,9 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios';
 import { AuthManager } from '../src/activity/auth/AuthManager';
 import * as RootNavigation from '../src/components/navigation/RootNavigation';
 
 
-export let axiosInstance = axios.create({timeout: 4000});
+export let axiosInstance = axios.create({ timeout: 20000 });
 
 axiosInstance.interceptors.request.use(
     async function (req: { headers: { Accept: string; "Content-Type": string; Authorization?: string; }; }) {
@@ -15,10 +15,10 @@ axiosInstance.interceptors.request.use(
                 Authorization: 'Bearer ' + token,
             };
         }
-        else{
+        else {
             req.headers = {
                 Accept: 'application/json',
-        'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             };
         }
         return req;
@@ -27,12 +27,11 @@ axiosInstance.interceptors.request.use(
 
         return Promise.reject(error);
     })
-    axiosInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
     (response: AxiosResponse<JSON>) => { return response; },
     function (error: { response: { status: number; }; }) {
         let errorCode: any = 'Network error';
-        if(error.response)
-        {
+        if (error.response) {
             errorCode = error.response.status;
         }
         RootNavigation.navigate("Exception", { errorMessage: errorCode });

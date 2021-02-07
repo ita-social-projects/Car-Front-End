@@ -1,7 +1,7 @@
-import APIService from '../APIService';
 import "reflect-metadata";
 import { injectable } from 'tsyringe';
-import {Journey} from '../../models/Journey';
+import { Journey } from '../../models/Journey';
+import APIService from '../APIService';
 
 @injectable()
 class JourneyService {

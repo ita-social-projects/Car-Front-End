@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, Modal } from 'react-native'
-import JourneyNewApplicantStyle, { item, Circle } from './JourneyNewApplicantStyle'
+import React, { useState } from 'react';
+import { Modal, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from 'react-native-text-gradient';
 import { OpenSans } from "../../../font-manager";
+import JourneyNewApplicantStyle, { Circle, item } from './JourneyNewApplicantStyle';
 
 export const JourneyNewApplicant = () => {
     let [modalVisible, setModalVisible] = useState(false);
-    
+
     return (
         <View>
             <TouchableOpacity
@@ -20,8 +20,8 @@ export const JourneyNewApplicant = () => {
                 </Text>
             </TouchableOpacity>
             <Modal visible={modalVisible}
-                   animationType="fade"
-                   transparent={true}
+                animationType="fade"
+                transparent={true}
             >
                 <View style={JourneyNewApplicantStyle.body}>
                     <View style={JourneyNewApplicantStyle.container}>
@@ -78,7 +78,7 @@ export const JourneyNewApplicant = () => {
                             <Text style={JourneyNewApplicantStyle.commentsText}>
                                 Hey! Do you mind if I throw my suitcase in the trunk?
                             </Text>
-                            <View style={JourneyNewApplicantStyle.commentsBoxAfter}/>
+                            <View style={JourneyNewApplicantStyle.commentsBoxAfter} />
                         </View>
                         <View style={[JourneyNewApplicantStyle.row, JourneyNewApplicantStyle.options]}>
                             <Text style={JourneyNewApplicantStyle.optionsHeader}>
@@ -87,7 +87,7 @@ export const JourneyNewApplicant = () => {
                             <Text style={JourneyNewApplicantStyle.optionsValue}>
                                 The baggage is allowed in your car
                             </Text>
-                            <View style={JourneyNewApplicantStyle.optionsLine}/>
+                            <View style={JourneyNewApplicantStyle.optionsLine} />
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
                             <Text style={JourneyNewApplicantStyle.optionsHeader}>
@@ -96,13 +96,13 @@ export const JourneyNewApplicant = () => {
                             <View style={[JourneyNewApplicantStyle.stop, JourneyNewApplicantStyle.row, JourneyNewApplicantStyle.stopsRows]}>
                                 <View style={[item(5), JourneyNewApplicantStyle.tripColumn]}>
                                     <Circle color='#FFFFFF'
-                                            radius='1.3rem'
-                                            base={true}
-                                            marginTop={'0.3rem'}>
+                                        radius='1.3rem'
+                                        base={true}
+                                        marginTop={'0.3rem'}>
                                         <Circle color='#C1C1C5'
-                                                radius='1rem'/>
+                                            radius='1rem' />
                                     </Circle>
-                                    <View style={[JourneyNewApplicantStyle.stopLine]}/>
+                                    <View style={[JourneyNewApplicantStyle.stopLine]} />
                                 </View>
                                 <View style={[item(95), JourneyNewApplicantStyle.tripPoint]}>
                                     <Text style={JourneyNewApplicantStyle.stopName}>
@@ -114,13 +114,13 @@ export const JourneyNewApplicant = () => {
                             <View style={[JourneyNewApplicantStyle.stop, JourneyNewApplicantStyle.row]}>
                                 <View style={[item(5), JourneyNewApplicantStyle.tripColumn]}>
                                     <Circle color='#FFFFFF'
-                                            radius='0.75rem'
-                                            base={true}
-                                            marginTop={'0.5rem'}>
+                                        radius='0.75rem'
+                                        base={true}
+                                        marginTop={'0.5rem'}>
                                         <Circle color='#C1C1C5'
-                                                radius='0.35rem'/>
+                                            radius='0.35rem' />
                                     </Circle>
-                                    <View style={JourneyNewApplicantStyle.stopLine}/>
+                                    <View style={JourneyNewApplicantStyle.stopLine} />
                                 </View>
                                 <View style={[item(95), JourneyNewApplicantStyle.tripPoint]}>
                                     <Text style={JourneyNewApplicantStyle.stopName}>
@@ -131,28 +131,28 @@ export const JourneyNewApplicant = () => {
                             <View style={[JourneyNewApplicantStyle.stop, JourneyNewApplicantStyle.row]}>
                                 <View style={[item(5), JourneyNewApplicantStyle.tripColumn]}>
                                     <Circle color='#FFFFFF'
-                                            radius='1.1rem'
-                                            base={true}
-                                            marginTop={'0.3rem'}>
+                                        radius='1.1rem'
+                                        base={true}
+                                        marginTop={'0.3rem'}>
                                         <LinearGradient style={JourneyNewApplicantStyle.circleGrad}
-                                                        colors={['#00A3CF', '#5552A0']}
-                                                        start={{x: 0, y: 0}}
-                                                        end={{x: 1, y: 1}}/>
+                                            colors={['#00A3CF', '#5552A0']}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }} />
                                     </Circle>
-                                    <View style={JourneyNewApplicantStyle.stopLine}/>
+                                    <View style={JourneyNewApplicantStyle.stopLine} />
                                 </View>
                                 <View style={[item(95), JourneyNewApplicantStyle.tripPoint]}>
                                     <LinearTextGradient
                                         style={[JourneyNewApplicantStyle.stopName]}
                                         locations={[0, 1]}
                                         colors={['#00A3CF', '#5552A0']}
-                                        start={{x: 0, y: 0}}
-                                        end={{x: 1, y: 0}}
+                                        start={{ x: 0, y: 0 }}
+                                        end={{ x: 1, y: 0 }}
                                     >
                                         <Text style={[JourneyNewApplicantStyle.activeStopName]}>
                                             Jaylon's stop A.2 ‏
                                         </Text>
-                                        <Text style={{fontFamily: OpenSans.Regular}}>
+                                        <Text style={{ fontFamily: OpenSans.Regular }}>
                                             (view on the map)
                                         </Text>
                                     </LinearTextGradient>
@@ -161,7 +161,7 @@ export const JourneyNewApplicant = () => {
                             <View style={[JourneyNewApplicantStyle.stop, JourneyNewApplicantStyle.row]}>
                                 <View style={[item(5), JourneyNewApplicantStyle.tripColumn]}>
                                     <Circle color='#FFFFFF' radius='1.3rem' base={true} marginTop={'0.3rem'}>
-                                        <Circle color='#C1C1C5' radius='1rem'/>
+                                        <Circle color='#C1C1C5' radius='1rem' />
                                     </Circle>
                                 </View>
                                 <View style={[item(95), JourneyNewApplicantStyle.tripPoint]}>

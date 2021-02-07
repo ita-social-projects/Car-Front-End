@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import BottomSheet from "reanimated-bottom-sheet";
-import MenuButton from "../../../../../components/bottom-popup/menu-button/MenuButton";
-import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
-import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
-import { container } from "tsyringe";
+import { useNavigation } from "@react-navigation/native";
 import Moment from "moment";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { useEffect, useState } from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { Divider } from "react-native-elements";
-import JourneyService from "../../../../../../api-service/journeyService/JourneyService";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import BottomSheet from "reanimated-bottom-sheet";
+import { container } from "tsyringe";
+import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
+import { Journey } from "../../../../../../models/Journey";
 import { Stop } from "../../../../../../models/Stop";
 import { StopType } from "../../../../../../models/StopType";
 import { User } from "../../../../../../models/User";
+import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
+import MenuButton from "../../../../../components/bottom-popup/menu-button/MenuButton";
 import JourneyPageStyle from "./JourneyPageStyle";
-import { Journey } from "../../../../../../models/Journey";
-import { useNavigation } from "@react-navigation/native";
 
 const JourneyPage = (props: any) => {
   const [moreOptionsState, setMoreOptionsState] = useState(0);
@@ -197,7 +197,7 @@ const JourneyPage = (props: any) => {
         snapPoints={["80%", "45%", "40%", "35%", "30%", "25%", "20%", "15%"]}
         renderContent={journeyInfoContent}
         initialSnap={0}
-        renderHeader={() => {}}
+        renderHeader={() => { }}
         enabledInnerScrolling={false}
       />
       <BottomPopup

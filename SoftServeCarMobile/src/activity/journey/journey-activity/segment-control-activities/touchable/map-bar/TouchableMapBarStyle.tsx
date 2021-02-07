@@ -1,26 +1,26 @@
 import { Platform, StyleSheet } from 'react-native';
 
 const TouchableMapBarStyle = StyleSheet.create({
-    
+
     container: {
-        flexDirection:'row',
+        flexDirection: 'row',
         borderWidth: 2,
         padding: 10,
-        marginRight:20,
-        marginLeft:20,
+        marginRight: 20,
+        marginLeft: 20,
         backgroundColor: 'white',
         fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
     },
 
     insideText: {
-        flex:1,
+        flex: 1,
         color: '#909095',
         marginLeft: 5,
         fontSize: 16,
     },
 
     directionText: {
-        flex:5,
+        flex: 5,
         color: 'black',
         marginLeft: 5,
         fontSize: 16,
@@ -34,7 +34,7 @@ const TouchableMapBarStyle = StyleSheet.create({
     },
 
     barIcon: {
-        flex:1,
+        flex: 1,
         borderColor: '#EEEEEE',
     },
 
