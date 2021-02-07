@@ -24,6 +24,8 @@
 		85C271B725CEC817008C047B /* open_sans_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271B025CEC817008C047B /* open_sans_regular.ttf */; };
 		85C271B825CEC817008C047B /* proxima_nova_reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271B125CEC817008C047B /* proxima_nova_reg.ttf */; };
 		85C271B925CEC817008C047B /* open_sans_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271B225CEC817008C047B /* open_sans_light.ttf */; };
+		85D90D6225D0633D00090E13 /* proxima_nova_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D90D6025D0633D00090E13 /* proxima_nova_black.ttf */; };
+		85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D90D6125D0633D00090E13 /* proxima_nova_extrabold.ttf */; };
 		CFE94A88FABBB7BC96445DEF /* libPods-SoftServeCarMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C196AAF167B4526D4488E1C0 /* libPods-SoftServeCarMobile-tvOS.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,8 @@
 		85C271B025CEC817008C047B /* open_sans_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = open_sans_regular.ttf; path = ../assets/fonts/open_sans_regular.ttf; sourceTree = "<group>"; };
 		85C271B125CEC817008C047B /* proxima_nova_reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = proxima_nova_reg.ttf; path = ../assets/fonts/proxima_nova_reg.ttf; sourceTree = "<group>"; };
 		85C271B225CEC817008C047B /* open_sans_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = open_sans_light.ttf; path = ../assets/fonts/open_sans_light.ttf; sourceTree = "<group>"; };
+		85D90D6025D0633D00090E13 /* proxima_nova_black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = proxima_nova_black.ttf; path = ../assets/fonts/proxima_nova_black.ttf; sourceTree = "<group>"; };
+		85D90D6125D0633D00090E13 /* proxima_nova_extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = proxima_nova_extrabold.ttf; path = ../assets/fonts/proxima_nova_extrabold.ttf; sourceTree = "<group>"; };
 		99282FA7FB1C1D36BE9DFAD7 /* Pods-SoftServeCarMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoftServeCarMobile.debug.xcconfig"; path = "Target Support Files/Pods-SoftServeCarMobile/Pods-SoftServeCarMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		996EA420ABAA4ABBA27214B5 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		99D3A35B67BB4738AE86668E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				85C271B225CEC817008C047B /* open_sans_light.ttf */,
 				85C271B025CEC817008C047B /* open_sans_regular.ttf */,
 				85C271AC25CEC817008C047B /* open_sans_semibold.ttf */,
+				85D90D6025D0633D00090E13 /* proxima_nova_black.ttf */,
+				85D90D6125D0633D00090E13 /* proxima_nova_extrabold.ttf */,
 				85C271AE25CEC817008C047B /* proxima_nova_bold.ttf */,
 				85C271B125CEC817008C047B /* proxima_nova_reg.ttf */,
 				CD79BC24948A4631973889F4 /* Ionicons.ttf */,
@@ -438,8 +444,10 @@
 				85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */,
 				85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */,
 				85C271B925CEC817008C047B /* open_sans_light.ttf in Resources */,
+				85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				85C271B725CEC817008C047B /* open_sans_regular.ttf in Resources */,
+				85D90D6225D0633D00090E13 /* proxima_nova_black.ttf in Resources */,
 				85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
