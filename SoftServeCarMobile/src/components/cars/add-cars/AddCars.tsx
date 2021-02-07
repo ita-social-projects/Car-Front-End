@@ -1,23 +1,22 @@
-import React, { useContext, useEffect } from 'react';
-import { useState } from 'react';
-import { View, Text, Image, ActivityIndicator } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator, Image, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ImagePickerResponse, launchImageLibrary } from 'react-native-image-picker/src';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import { ImagePickerResponse, launchImageLibrary } from 'react-native-image-picker/src';
-import AddCarsStyle from './AddCarsStyle';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import BrandService from '../../../../api-service/brand-service/BrandService';
+import CarService from '../../../../api-service/car-service/CarService';
+import ModelService from '../../../../api-service/model-service/ModelService';
+import Brand from '../../../../models/Brand';
+import CarDTO from '../../../../models/CarDTO';
+import { Color } from '../../../../models/Color';
+import Model from '../../../../models/Model';
 import { AuthContext } from '../../../activity/auth/AuthProvider';
 import { CarDropDownPickerItem } from '../../car-drop-down-picker/CarDropDownItem';
-import Model from '../../../../models/Model';
-import Brand from '../../../../models/Brand';
-import { Color } from '../../../../models/Color';
-import BrandService from '../../../../api-service/brand-service/BrandService';
-import ModelService from '../../../../api-service/model-service/ModelService';
-import CarService from '../../../../api-service/car-service/CarService';
-import CarDTO from '../../../../models/CarDTO';
 import CarDropDownPicker from '../../car-drop-down-picker/CarDropDownPicker';
 import CarTextInput from '../../car-text-input/CarTextInput';
+import AddCarsStyle from './AddCarsStyle';
 
 function AddCars() {
     const { user } = useContext(AuthContext);

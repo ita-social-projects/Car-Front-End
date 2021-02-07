@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AuthContext } from '../../activity/auth/AuthProvider';
-import CarInfoDTO from '../../../models/CarInfoDTO';
-import CarsStyle from './CarsStyle'
-import TouchableNavigationCard from '../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
 import CarService from '../../../api-service/car-service/CarService';
+import CarInfoDTO from '../../../models/CarInfoDTO';
+import { AuthContext } from '../../activity/auth/AuthProvider';
+import TouchableNavigationCard from '../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
+import CarsStyle from './CarsStyle';
 
 export default function Cars(props: any) {
 

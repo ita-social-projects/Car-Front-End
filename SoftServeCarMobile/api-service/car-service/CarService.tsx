@@ -1,24 +1,24 @@
-import APIService from '../APIService';
 import "reflect-metadata";
 import { injectable } from 'tsyringe';
 import { routes } from '../../environment';
-import CarDTO from '../../models/CarDTO';
 import Car from '../../models/Car';
+import CarDTO from '../../models/CarDTO';
 import CarInfoDTO from '../../models/CarInfoDTO';
+import APIService from '../APIService';
 
 @injectable()
 class CarService {
     constructor(private apiService: APIService) { }
-    
+
     routePrefix: string = 'cars';
 
     uploadPhoto(id: number, formData: FormData) {
         return fetch(routes.apiUrl + this.routePrefix + '/' + id + '/photo',
-        {
-            method: 'PUT',
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        })
+            {
+                method: 'PUT',
+                headers: { "Content-Type": "multipart/form-data" },
+                body: formData
+            })
     }
 
     add(car: CarDTO) {

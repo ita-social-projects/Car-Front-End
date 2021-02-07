@@ -1,7 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
 const TouchableJourneyStyle = StyleSheet.create({
-    
+
     component: {
         margin: 10,
         padding: 10,

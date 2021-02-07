@@ -37,10 +37,10 @@ const PreferencesStyle = StyleSheet.create({
     },
 
     commentsView: {
-        marginTop:50
+        marginTop: 50
     },
 
-    TextInputStyle:{
+    TextInputStyle: {
         height: 100,
         borderWidth: 2,
         borderColor: 'black',

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const JourneyStyle = StyleSheet.create({
-    
+
     page: {
         backgroundColor: "white",
     },

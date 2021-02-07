@@ -1,10 +1,10 @@
-import React from 'react'
-import { View, Alert } from 'react-native';
-import Chat from '../chat/Chat';
 import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { Alert, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SimpleMessage from '../chat/simple-message/SimpleMessage'
+import Chat from '../chat/Chat';
+import SimpleMessage from '../chat/simple-message/SimpleMessage';
 import MessagesStyle from './MessagesStyle';
 
 const Stack = createStackNavigator();

@@ -1,20 +1,20 @@
-import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
-import CreateJourney from "../journey-activity/create-journey/CreateJourney";
-import SearchJourney from "../journey-activity/search-journey/SearchJourney";
-import Journey from "../Journey";
-import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
-import JourneyStyle from "../JourneyStyle";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import {
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
 } from "react-native-gesture-handler";
-import JourneyTabsStyle from "./JourneyTabsStyle";
-import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { JourneyNewApplicant } from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import { navigate } from "../../../components/navigation/RootNavigation";
+import Journey from "../Journey";
+import CreateJourney from "../journey-activity/create-journey/CreateJourney";
+import SearchJourney from "../journey-activity/search-journey/SearchJourney";
+import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
+import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
+import JourneyStyle from "../JourneyStyle";
+import JourneyTabsStyle from "./JourneyTabsStyle";
 
 const StackTabs = createStackNavigator();
 

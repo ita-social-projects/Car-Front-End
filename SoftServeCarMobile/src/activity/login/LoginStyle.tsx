@@ -1,5 +1,5 @@
-import {StyleSheet} from "react-native";
-import {ProximaNova} from "../../../font-manager";
+import { StyleSheet } from "react-native";
+import { ProximaNova } from "../../../font-manager";
 
 const LoginStyle = StyleSheet.create({
 

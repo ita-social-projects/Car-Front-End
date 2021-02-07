@@ -1,7 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
 const AppTabsStyle = StyleSheet.create({
-    
+
     labelStyle: {
         fontStyle: 'normal',
         fontSize: 10,
@@ -9,7 +9,7 @@ const AppTabsStyle = StyleSheet.create({
         fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Bold.ttf',
         lineHeight: 16
     },
-    
+
     navigator: {
         alignItems: "center"
     },

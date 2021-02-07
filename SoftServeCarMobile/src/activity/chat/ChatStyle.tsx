@@ -8,8 +8,8 @@ const ChatStyle = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginBottom: 20,
-      },
-     
+    },
+
     message: {
         borderWidth: 1,
         borderColor: "#20232a",
@@ -37,7 +37,7 @@ const ChatStyle = StyleSheet.create({
 
     chatMessage: {
         backgroundColor: 'powderblue'
-    },    
+    },
 });
 
 export default ChatStyle;

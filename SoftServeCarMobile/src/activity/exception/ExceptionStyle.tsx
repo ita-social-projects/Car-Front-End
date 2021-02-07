@@ -1,28 +1,28 @@
 import { StyleSheet } from "react-native";
 
 const ExceptionStyle = StyleSheet.create({
-    
-    container:{
-        flex:1,
-        alignItems:"center",
-        justifyContent:"center",
+
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
     },
 
     exceptionMessage: {
-        fontSize:40,
-        padding:20,
+        fontSize: 40,
+        padding: 20,
         textAlign: 'center',
     },
 
     exceptionCode: {
-        fontWeight:"bold",
-        fontSize:45
+        fontWeight: "bold",
+        fontSize: 45
     },
 
     exceptionLink: {
-        fontSize:40,
-        color:'blue',
-    },  
+        fontSize: 40,
+        color: 'blue',
+    },
 })
 
 export default ExceptionStyle;

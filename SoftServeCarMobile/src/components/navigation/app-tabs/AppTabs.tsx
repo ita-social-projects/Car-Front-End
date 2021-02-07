@@ -1,11 +1,11 @@
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import Ionicons from "react-native-vector-icons/Ionicons";
+import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import Messages from "../../../activity/messages/Messages";
+import MyProfileTabs from "../../../activity/my-profile/MyProfileTabs";
 import Notifications from "../../../activity/notifications/Notifications";
 import { AppTabsList } from "./AppTabsList";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MyProfileTabs from "../../../activity/my-profile/MyProfileTabs";
-import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import AppTabsStyle from "./AppTabsStyle";
 
 
@@ -19,7 +19,7 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
             sceneContainerStyle={AppTabsStyle.navigator}
-            screenOptions={({ route} ) => ({
+            screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
                     let iconName;
                     switch (route.name) {
@@ -37,7 +37,7 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                             break;
                     }
 
-                    return <Ionicons name={iconName} size={size} color={color}/>;
+                    return <Ionicons name={iconName} size={size} color={color} />;
                 },
             })}
             tabBarOptions={{
@@ -46,10 +46,10 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                 inactiveTintColor: '#AAA9AE',
             }}
         >
-            <Tabs.Screen name="Messages" component={Messages}/>
-            <Tabs.Screen options={{ tabBarLabel: "My Profile" }} name="MyProfileTabs" component={MyProfileTabs}/>
-            <Tabs.Screen options={{ tabBarLabel: "Journey" }} name="JourneyTabs" component={JourneyTabs}/>
-            <Tabs.Screen name="Notifications" component={Notifications}/>
+            <Tabs.Screen name="Messages" component={Messages} />
+            <Tabs.Screen options={{ tabBarLabel: "My Profile" }} name="MyProfileTabs" component={MyProfileTabs} />
+            <Tabs.Screen options={{ tabBarLabel: "Journey" }} name="JourneyTabs" component={JourneyTabs} />
+            <Tabs.Screen name="Notifications" component={Notifications} />
         </Tabs.Navigator>
     )
 }

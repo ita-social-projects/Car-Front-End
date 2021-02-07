@@ -1,7 +1,7 @@
-import React from 'react';
 import * as signalR from '@microsoft/signalr';
+import React from 'react';
+import { Button, Text, TextInput, View } from 'react-native';
 import { routes } from '../../../environment';
-import { View, Text, TextInput, Button, } from 'react-native';
 import ChatStyle from './ChatStyle';
 
 export interface ChatState {
@@ -26,11 +26,11 @@ class Chat extends React.Component<ChatState, ChatState> {
 
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder().withUrl(routes.chatUrl).build();
-        this.setState({hubConnection}, () => {
+        this.setState({ hubConnection }, () => {
             this.state.hubConnection.start().then(() => "Connection started!");
 
             hubConnection.on("RecieveMessage", (receivedMessage) => {
-                this.setState({messages: [...this.state.messages, receivedMessage]});
+                this.setState({ messages: [...this.state.messages, receivedMessage] });
             })
         });
     }
@@ -56,12 +56,12 @@ class Chat extends React.Component<ChatState, ChatState> {
                     </View>
                     <View style={ChatStyle.buttonContainer}>
                         <TextInput style={ChatStyle.input} value={this.state.message}
-                                   placeholder="Aa"
-                                   onChangeText={(message) => {
-                                       this.setState({message: message})
-                                   }}/>
+                            placeholder="Aa"
+                            onChangeText={(message) => {
+                                this.setState({ message: message })
+                            }} />
                         <View>
-                            <Button onPress={this.onSubmit} title="Send"/>
+                            <Button onPress={this.onSubmit} title="Send" />
                         </View>
                     </View>
                 </View>

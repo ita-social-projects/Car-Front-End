@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const BottomPopupStyle = StyleSheet.create({
-  
+
   header: {
     backgroundColor: "white",
     shadowColor: '#000000',
@@ -13,7 +13,7 @@ const BottomPopupStyle = StyleSheet.create({
   panelHeader: {
     alignItems: 'center',
   },
-  
+
   panelHandle: {
     width: 74,
     height: 4,

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const AddCarsStyle = StyleSheet.create({
-    
+
     wrapper: {
         flex: 1,
         backgroundColor: 'white'

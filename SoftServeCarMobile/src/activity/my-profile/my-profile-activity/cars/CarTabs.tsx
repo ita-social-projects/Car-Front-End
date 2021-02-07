@@ -19,14 +19,14 @@ export default function CarTabs() {
                         title: 'Your Cars',
                         headerTitleAlign: 'center',
                         headerTitleStyle: CarTabsStyle.headerTitleStyle,
-                    }}/>
+                    }} />
                 <StackTabs.Screen name="AddCars"
-                                  component={AddCars}
-                                  options={{
-                                      title: 'Add a Car',
-                                      headerTitleAlign: 'center',
-                                      headerTitleStyle: CarTabsStyle.headerTitleStyle,
-                                  }}/>
+                    component={AddCars}
+                    options={{
+                        title: 'Add a Car',
+                        headerTitleAlign: 'center',
+                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
+                    }} />
                 <StackTabs.Screen
                     name="EditCars"
                     component={EditCars}
@@ -34,7 +34,7 @@ export default function CarTabs() {
                         title: 'Edit a Car',
                         headerTitleAlign: 'center',
                         headerTitleStyle: CarTabsStyle.headerTitleStyle,
-                    }}/>
+                    }} />
             </StackTabs.Navigator>
         </View>
     )

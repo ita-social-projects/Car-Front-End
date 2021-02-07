@@ -1,5 +1,5 @@
 export type UserPreferences = null | {
-    id: number,    
+    id: number,
     userId: number,
     doAllowSmoking: boolean,
     doAllowEating: boolean,

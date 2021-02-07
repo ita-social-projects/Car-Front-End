@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import { OpenSans, ProximaNova } from "../../../font-manager";
-import EStyleSheet from "react-native-extended-stylesheet";
 import React from "react";
+import { View } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
+import { OpenSans, ProximaNova } from "../../../font-manager";
 
 
 export let item = function (percent: number) {
@@ -10,9 +10,9 @@ export let item = function (percent: number) {
     }
 }
 
-export function Circle(props: { color: string, radius: string, children?: React.ReactNode, base?:boolean, marginTop?:string}) {
+export function Circle(props: { color: string, radius: string, children?: React.ReactNode, base?: boolean, marginTop?: string }) {
     let innerStyle = EStyleSheet.create({
-        
+
         circle: {
             backgroundColor: props.color,
             borderRadius: 90,
@@ -30,14 +30,14 @@ export function Circle(props: { color: string, radius: string, children?: React.
     });
 
     return (
-        <View style={[innerStyle.circle, (props.base? innerStyle.circlePos: '')]}>
+        <View style={[innerStyle.circle, (props.base ? innerStyle.circlePos : '')]}>
             {props.children}
         </View>
     );
 }
 
 const JourneyNewApplicantStyle = EStyleSheet.create({
-    
+
     container: {
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
@@ -58,9 +58,9 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 6.27,
         elevation: 10,
-    }, 
+    },
 
-    body:{
+    body: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         height: '100%',
     },
@@ -125,7 +125,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         width: 100,
         height: 100,
     },
-    
+
     icon: {
         fontFamily: OpenSans.Bold,
         fontSize: '0.9375rem',
@@ -288,7 +288,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     stopsRows: {
-        marginTop:'0.6rem',
+        marginTop: '0.6rem',
     },
 
     tripColumn: {
@@ -302,7 +302,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         paddingLeft: '0.6rem',
     },
 
-    buttons:{
+    buttons: {
         flex: 1,
         justifyContent: 'flex-end',
     },

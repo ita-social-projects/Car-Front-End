@@ -1,9 +1,9 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { OpenSans, ProximaNova } from "../../../../../../font-manager";
 
 export const JourneyApplicantStyle = StyleSheet.create({
 
-    mainContainer:{
+    mainContainer: {
         flex: 1,
         backgroundColor: '#FFFFFF'
     },
@@ -52,7 +52,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     button: {
-        height:36,
+        height: 36,
         width: 139,
         justifyContent: 'center',
         alignItems: 'center',
@@ -100,7 +100,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     positionText: {
-        flex :133,
+        flex: 133,
         fontFamily: OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,

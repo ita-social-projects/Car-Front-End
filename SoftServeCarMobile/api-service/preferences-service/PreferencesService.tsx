@@ -1,16 +1,16 @@
-import APIService from '../APIService';
-import { UserPreferences } from '../../models/UserPreferences';
 import { injectable } from 'tsyringe';
+import { UserPreferences } from '../../models/UserPreferences';
+import APIService from '../APIService';
 
 @injectable()
 
 class PreferencesService {
     constructor(private apiService: APIService) { }
-    
+
     routePrefix: string = 'user-preferences';
 
     getUserPreferences(id: number) {
-        return this.apiService.get<UserPreferences>(this.routePrefix + '/'+ id);
+        return this.apiService.get<UserPreferences>(this.routePrefix + '/' + id);
     }
 
     updateUserPreferences(preferences: UserPreferences) {

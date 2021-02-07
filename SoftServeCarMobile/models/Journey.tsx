@@ -1,5 +1,5 @@
-import { User } from "./User";
 import { Stop } from "./Stop";
+import { User } from "./User";
 
 export type Journey = null | {
   id: number;

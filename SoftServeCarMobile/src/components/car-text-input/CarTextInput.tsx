@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler'
+import { TextInput } from 'react-native-gesture-handler';
 import CarTextInputStyle from './CarTextInputStyle';
 
 function Input(props: any) {
@@ -35,7 +35,7 @@ function CarTextInput(props: any) {
             name="name"
             render={({ onChange, value }) => (
                 <Input
-                    onChangeText={(text: string) => { onChange(text); props.onChangeText(text, Boolean(errors?.name));}}
+                    onChangeText={(text: string) => { onChange(text); props.onChangeText(text, Boolean(errors?.name)); }}
                     onBlur={handleSubmit(() => { })}
                     value={value}
                     placeholder={props.placeHolder}

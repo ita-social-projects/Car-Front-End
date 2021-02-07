@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const CarButtonStyle = StyleSheet.create({
-   
+
     button: {
         paddingHorizontal: 16,
         paddingVertical: 14,
