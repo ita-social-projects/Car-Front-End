@@ -66,34 +66,26 @@ const JourneyTabs = () => {
         <StackTabs.Screen
           name="Applicant Page"
           options={{
-            title: "Journey",
+            title: "SoftServian",
             headerTitleAlign: "center",
             headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
             headerLeft: () => (
               <TouchableOpacity
                 style={JourneyTabsStyle.backButtonOpacity}
                 onPress={() => {
-                  navigate("Journey", {});
+                  navigate("Journey Page", {});
                 }}
               >
                 <Ionicons
                   name={"chevron-back-outline"}
                   size={35}
                   color={"#02A2CF"}
+                  style={JourneyTabsStyle.blackButtonText}
                 />
                 <View style={JourneyTabsStyle.backButtonTextView}>
-                  <Text style={JourneyTabsStyle.backButtonText}>Back</Text>
+                  <Text style={[JourneyTabsStyle.backButtonText, JourneyTabsStyle.blackButtonText]}>Back</Text>
                 </View>
               </TouchableOpacity>
-            ),
-            headerRight: () => (
-              <TouchableWithoutFeedback onPress={() => setOpen(!isOpen)}>
-                <Ionicons
-                  name={"ellipsis-horizontal"}
-                  size={30}
-                  style={JourneyTabsStyle.journeyPageIcon}
-                />
-              </TouchableWithoutFeedback>
             ),
           }}
           component={JourneyApplicant}
