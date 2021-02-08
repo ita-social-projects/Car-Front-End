@@ -26,10 +26,18 @@ export default function TouchableJourney() {
                         </View>
                     </View>
                     <View>
-                        <Text>Location A</Text>
-                        <Text>Stop A.1</Text>
-                        <Text>Stop A.2</Text>
-                        <Text>Location B (Your Stop)</Text>
+                            <Text style={TouchableJourneyStyle.stopsText}>
+                                Location A
+                            </Text>
+                            <Text style={TouchableJourneyStyle.stopsText}>
+                                Stop A.1
+                            </Text>
+                            <Text style={TouchableJourneyStyle.stopsText}>
+                                Stop A.2
+                            </Text>
+                            <Text style={TouchableJourneyStyle.stopsText}>
+                                Location B (Your Stop)
+                        </Text>
                     </View>
                 </View>
             </TouchableOpacity>

@@ -1,4 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
+import Font from "../../../../../../components/fonts/Font";
 
 const TouchableJourneyStyle = StyleSheet.create({
 
@@ -29,17 +30,17 @@ const TouchableJourneyStyle = StyleSheet.create({
     },
 
     driverName: {
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
-        fontWeight: "bold",
+        fontFamily: Font.OpenSans.Extrabold,
         fontSize: 16,
+        fontWeight: '700',
         lineHeight: 16,
         display: "flex",
         alignItems: "center",
     },
 
     driverPosition: {
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
-        fontSize: 14,
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: 11,
         lineHeight: 16,
         color: "#909095",
         display: "flex",
@@ -51,12 +52,19 @@ const TouchableJourneyStyle = StyleSheet.create({
     },
 
     time: {
-        fontFamily: Platform.OS === "ios" ? 'Open Sans' : 'OpenSans-Regular.ttf',
-        fontSize: 14,
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: 11,
         lineHeight: 16,
-        textAlign: "right",
+        textAlign: 'right',
         color: "#909095",
     },
+
+    stopsText: {
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: 11,
+        lineHeight: 16,
+        color: '#414045',
+    }
 });
 
 export default TouchableJourneyStyle;

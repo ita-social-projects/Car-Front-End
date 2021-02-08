@@ -26,15 +26,13 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
 
     imageStyle: {
         justifyContent: "flex-end",
-        marginTop: 10
+        marginTop: 10,
     },
 
     viewContainer: {
         paddingHorizontal: 10,
         justifyContent: "center",
         flexDirection: "row",
-        height: 150,
-        width: Dimensions.get('window').width
     },
 });
 
