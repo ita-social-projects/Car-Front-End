@@ -1,8 +1,8 @@
-import 'react-native';
 import { AxiosResponse } from 'axios';
-import APIService from '../api-service/APIService'
-import {UserPreferences} from '../models/UserPreferences';
-import PreferencesService from '../api-service/preferences-service/PreferencesService'
+import 'react-native';
+import APIService from '../api-service/APIService';
+import PreferencesService from '../api-service/preferences-service/PreferencesService';
+import { UserPreferences } from '../models/UserPreferences';
 
 
 describe('UserService', () => {
@@ -42,12 +42,12 @@ describe('UserService', () => {
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(preferencesData);
             }
-        );
+            );
     })
 
     test('It should update preferences', () => {
         let newComments = 'Hello world!';
-        let newPreferences = {...preferencesData, comments: newComments};
+        let newPreferences = { ...preferencesData, comments: newComments };
         jest.spyOn(apiService, 'put').mockImplementation(() => new Promise<AxiosResponse<UserPreferences>>
             (function (resolve) {
                 resolve({
@@ -56,7 +56,7 @@ describe('UserService', () => {
                     status: 200,
                     config: {},
                     headers: {
-                     'Context-Type': 'application/json',
+                        'Context-Type': 'application/json',
                     }
                 });
             })
@@ -68,6 +68,6 @@ describe('UserService', () => {
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(preferencesData);
             }
-        );
+            );
     })
 });
