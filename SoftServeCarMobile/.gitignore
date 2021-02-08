@@ -13,6 +13,9 @@ SoftServeCarMobile/.watchmanconfig
 SoftServeCarMobile/react-native-config.js
 SoftServeCarMobile/yarn.lock
 SoftServeCarMobile/node_modules/
+SoftServeCarMobile/.idea/
+.vscode/
+.idea/
 
 # BUCK
 buck-out/
