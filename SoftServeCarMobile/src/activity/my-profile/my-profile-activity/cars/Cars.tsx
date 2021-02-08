@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Text, View } from 'react-native';
+import { ListItem } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import "reflect-metadata";
 import { container } from 'tsyringe';
-import CarService from '../../../api-service/car-service/CarService';
-import CarInfoDTO from '../../../models/CarInfoDTO';
-import { AuthContext } from '../../activity/auth/AuthProvider';
-import TouchableNavigationCard from '../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
+import CarService from '../../../../../api-service/car-service/CarService';
+import CarInfoDTO from '../../../../../models/CarInfoDTO';
+import { AuthContext } from '../../../../activity/auth/AuthProvider';
+import TouchableNavigationCard from '../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
 import CarsStyle from './CarsStyle';
 
 export default function Cars(props: any) {
@@ -54,9 +55,10 @@ export default function Cars(props: any) {
                                 {cars.map(item => {
                                     return (
                                         <View key={item.id}>
-                                            <TouchableNavigationCard navigation={props.navigation}
+                                            <TouchableNavigationCard   
+                                                carId={item.id}                                              
                                                 navigationName="EditCars"
-                                                cardName="Add a car"
+                                                cardName="Edit a car"
                                                 picture={item.byteOfImage ?
                                                     <Image source={{ uri: 'data:image/png;base64,' + item.byteOfImage }}
                                                         style={[CarsStyle.carAvatar]} /> :

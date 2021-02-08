@@ -8,7 +8,7 @@ import { User } from '../../../models/User';
 import { AuthContext } from "../auth/AuthProvider";
 import AddressBook from './my-profile-activity/address-book/AddressBook';
 import AvatarLogoTitle from './my-profile-activity/avatar-logo/AvatarLogoTitle';
-import CarTabs from './my-profile-activity/cars/CarTabs';
+import CarTabs from './my-profile-activity/cars/car-tabs/CarTabs';
 import Details from './my-profile-activity/details/Details';
 import Preferences from './my-profile-activity/preferences/Preferences';
 import Settings from './my-profile-activity/settings/Settings';
