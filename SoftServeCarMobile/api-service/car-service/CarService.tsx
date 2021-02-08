@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { injectable } from 'tsyringe';
-import { routes } from '../../environment';
+import { routes } from '../../Environment';
 import Car from '../../models/Car';
 import CarDTO from '../../models/CarDTO';
 import CarInfoDTO from '../../models/CarInfoDTO';

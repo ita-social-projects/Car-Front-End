@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { OpenSans, ProximaNova } from "../../../font-manager";
+import Font from "../fonts/Font";
 
 
 export let item = function (percent: number) {
@@ -99,7 +99,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     header: {
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: '1rem',
         lineHeight: 16,
         display: "flex",
@@ -110,7 +110,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     snooze: {
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: '1rem',
         lineHeight: 16,
         display: "flex",
@@ -127,7 +127,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     icon: {
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontSize: '0.9375rem',
         lineHeight: 16,
         display: "flex",
@@ -143,14 +143,14 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     name: {
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: '1.1rem',
         lineHeight: 21,
         color: '#000000',
     },
 
     bio: {
-        fontFamily: ProximaNova.Regular,
+        fontFamily: Font.ProximaNova.Regular,
         fontSize: '0.85rem',
         lineHeight: 14,
         color: '#000000',
@@ -159,7 +159,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     achievements: {
-        fontFamily: ProximaNova.Regular,
+        fontFamily: Font.ProximaNova.Regular,
         fontSize: 15,
         lineHeight: 14,
         color: '#000000',
@@ -168,7 +168,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     more: {
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: Font.OpenSans.ExtraBold,
         fontSize: 20,
         letterSpacing: 3,
         marginTop: -10,
@@ -205,7 +205,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     commentsText: {
         margin: '1.5rem',
         textAlign: 'center',
-        fontFamily: ProximaNova.Regular,
+        fontFamily: Font.ProximaNova.Regular,
         fontSize: '1.2rem',
         paddingLeft: '1rem',
         paddingRight: '1rem',
@@ -216,13 +216,13 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     optionsHeader: {
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         lineHeight: '1.1rem',
         fontSize: '1rem',
     },
 
     optionsValue: {
-        fontFamily: OpenSans.Regular,
+        fontFamily: Font.OpenSans.Regular,
         lineHeight: '1.2rem',
         fontSize: '1rem',
         marginTop: '0.5rem',
@@ -243,7 +243,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     stopsHeader: {
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         lineHeight: '1.1rem',
         fontSize: '1rem',
     },
@@ -260,7 +260,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         textAlignVertical: 'center', // ANDROID
         justifyContent: 'center', // IOS
         flex: 1,
-        fontFamily: OpenSans.Regular,
+        fontFamily: Font.OpenSans.Regular,
         fontSize: '1rem',
         lineHeight: '1.1rem',
         color: '#909095',
@@ -270,7 +270,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         textAlignVertical: 'center', // ANDROID
         justifyContent: 'center', // IOS
         flex: 1,
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontSize: '1rem',
         lineHeight: '1.1rem',
         color: '#909095',
@@ -320,14 +320,14 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
 
     acceptButtonText: {
         color: 'white',
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: '1.1rem',
         letterSpacing: '0.05rem',
     },
 
     declineButtonText: {
         color: '#EC6400',
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: '1.1rem',
         letterSpacing: '0.05rem',
     },

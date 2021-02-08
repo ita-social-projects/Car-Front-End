@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { ProximaNova } from "../../../../../font-manager";
+import Font from "../../../../components/fonts/Font";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
 
@@ -18,7 +18,7 @@ const AvatarLogoTitleStyle = StyleSheet.create({
 
     headerUserInformation: {
         marginLeft: 15,
-        fontFamily: ProximaNova.Bold
+        fontFamily: Font.ProximaNova.Bold
     },
 
     headerUserName: {

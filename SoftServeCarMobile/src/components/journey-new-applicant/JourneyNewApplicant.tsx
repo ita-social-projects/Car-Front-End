@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from 'react-native-text-gradient';
-import { OpenSans } from "../../../font-manager";
+import Font from '../fonts/Font';
 import JourneyNewApplicantStyle, { Circle, item } from './JourneyNewApplicantStyle';
 
 export const JourneyNewApplicant = () => {
@@ -152,7 +152,7 @@ export const JourneyNewApplicant = () => {
                                         <Text style={[JourneyNewApplicantStyle.activeStopName]}>
                                             Jaylon's stop A.2 ‏
                                         </Text>
-                                        <Text style={{ fontFamily: OpenSans.Regular }}>
+                                        <Text style={{ fontFamily: Font.OpenSans.Regular }}>
                                             (view on the map)
                                         </Text>
                                     </LinearTextGradient>

@@ -1,5 +1,3 @@
-import { Platform } from "react-native";
-
 export const ProximaNova = {
     Regular: 'Proxima Nova',
     Bold: 'Proxima Nova',
