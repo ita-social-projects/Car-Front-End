@@ -16,6 +16,7 @@ SoftServeCarMobile/node_modules/
 SoftServeCarMobile/.idea/
 .vscode/
 .idea/
+../.idea/
 
 # BUCK
 buck-out/
