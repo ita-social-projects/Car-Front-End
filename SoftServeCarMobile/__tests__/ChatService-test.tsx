@@ -38,11 +38,12 @@ describe('ChatService', () => {
                     });
             }));
 
-            let response: Chat;
-            chatService.getChat(userData.id)
+        let response: Chat;
+        chatService.getChat(userData.id)
             .then(res => {
                 response = res.data;
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(userData);
+            })
     })
-})})
+})

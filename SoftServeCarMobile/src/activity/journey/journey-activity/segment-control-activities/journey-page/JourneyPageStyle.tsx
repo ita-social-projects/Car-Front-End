@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { OpenSans, ProximaNova } from "../../../../../../font-manager";
+import Font from "../../../../../components/fonts/Font";
 
 const JourneyPageStyle = StyleSheet.create({
   container: {
@@ -81,13 +81,13 @@ const JourneyPageStyle = StyleSheet.create({
   userNameText: {
     fontSize: 15,
     fontWeight: "700",
-    fontFamily: OpenSans.Regular,
+    fontFamily: Font.OpenSans.Regular,
   },
 
   applicantNameText: {
     fontSize: 15,
     fontWeight: "700",
-    fontFamily: OpenSans.ExtraBold,
+    fontFamily: Font.OpenSans.ExtraBold,
     color: "#00A3CF",
   },
 
@@ -100,14 +100,14 @@ const JourneyPageStyle = StyleSheet.create({
     fontSize: 13,
     color: "#909095",
     fontWeight: "100",
-    fontFamily: OpenSans.Regular,
+    fontFamily: Font.OpenSans.Regular,
   },
 
   dateText: {
     fontSize: 13,
     color: "#02A2CF",
     fontWeight: "700",
-    fontFamily: OpenSans.ExtraBold,
+    fontFamily: Font.OpenSans.ExtraBold,
   },
   separator: {
     backgroundColor: "#C1C1C5",
@@ -127,7 +127,7 @@ const JourneyPageStyle = StyleSheet.create({
   },
 
   applicantsHeader: {
-    fontFamily: ProximaNova.Bold,
+    fontFamily: Font.ProximaNova.Bold,
     fontWeight: "bold",
     fontSize: 16,
     justifyContent: "flex-start",

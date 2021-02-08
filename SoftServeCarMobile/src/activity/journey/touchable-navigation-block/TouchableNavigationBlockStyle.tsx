@@ -1,8 +1,8 @@
 import { Dimensions, StyleSheet } from "react-native";
-import {ProximaNova} from "../../../../font-manager";
+import Font from "../../../components/fonts/Font";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
-    
+
     blockContainer: {
         borderRadius: 8,
         borderColor: "#FFFFFF",
@@ -15,7 +15,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     textStyle: {
         marginLeft: 20,
         flex: 1,
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: 24,
         justifyContent: "center",
         textTransform: "uppercase",
@@ -26,15 +26,13 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
 
     imageStyle: {
         justifyContent: "flex-end",
-        marginTop: 10
+        marginTop: 10,
     },
 
     viewContainer: {
         paddingHorizontal: 10,
         justifyContent: "center",
         flexDirection: "row",
-        height: 150,
-        width: Dimensions.get('window').width
     },
 });
 

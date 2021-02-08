@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { OpenSans, ProximaNova } from "../../../../../../font-manager";
+import Font from "../../../../../components/fonts/Font";
 
 export const JourneyApplicantStyle = StyleSheet.create({
 
@@ -25,13 +25,13 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     userInformation: {
         marginLeft: 15,
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontWeight: 'bold'
     },
 
     userName: {
         lineHeight: 21,
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: 18,
         marginBottom: 8,
         fontWeight: 'bold'
@@ -41,7 +41,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
         lineHeight: 14,
         fontSize: 14,
         opacity: 0.5,
-        fontFamily: ProximaNova.Regular,
+        fontFamily: Font.ProximaNova.Regular,
         marginBottom: 8
     },
 
@@ -63,7 +63,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     buttonText: {
-        fontFamily: ProximaNova.ExtraBold,
+        fontFamily: Font.ProximaNova.ExtraBold,
         fontWeight: '700',
         fontSize: 16,
         lineHeight: 20,
@@ -96,7 +96,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
     },
 
     detailsText: {
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 18,
         color: 'black',
@@ -104,7 +104,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     positionText: {
         flex: 133,
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: 'black',
@@ -113,7 +113,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     locationText: {
         flex: 133,
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: 'black',
@@ -121,7 +121,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     positionData: {
         flex: 194,
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
         lineHeight: 18,
         color: '#414045',
@@ -130,7 +130,7 @@ export const JourneyApplicantStyle = StyleSheet.create({
 
     locationData: {
         flex: 194,
-        fontFamily: OpenSans.Bold,
+        fontFamily: Font.OpenSans.Bold,
         fontWeight: 'bold',
         fontSize: 13,
         color: '#02A2CF',
