@@ -1,15 +1,9 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
-const JourneyTabsStyle = StyleSheet.create({
-    journeyPageIcon: {
-        paddingRight: 12
-    },
-
-    requestButton: {
-        paddingRight: 17,
-        justifyContent: "center",
-        alignItems: "center"
+const MyProfileTabsStyle = StyleSheet.create({
+    headerStyle: {
+        height: 120
     },
 
     backButtonOpacity: {
@@ -29,6 +23,10 @@ const JourneyTabsStyle = StyleSheet.create({
         fontWeight: "700"
     },
 
+    moreOptionsIcon: {
+        paddingRight: 12
+    },
+
     blackButtonText: {
         color: "black"
     },
@@ -40,4 +38,4 @@ const JourneyTabsStyle = StyleSheet.create({
     }
 });
 
-export default JourneyTabsStyle;
+export default MyProfileTabsStyle;

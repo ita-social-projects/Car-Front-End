@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import LoginService from "../../../api-service/login-service/LoginService";
 import { User } from "../../../models/User";
-import * as RootNavigation from "../../components/navigation/RootNavigation";
+import * as navigation from "../../components/navigation/Navigation";
 import { AuthManager } from "./AuthManager";
 import { GraphManager } from "./GraphAuthProvider";
 
@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     if (accessToken) {
                         const userGraph = await GraphManager.getUserAsync();
                         if (!userGraph) {
-                            RootNavigation.navigate("Login", {
+                            navigation.navigate("Login", {
                                 resetIndicator: true
                             });
                             return;
@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                         };
                         const dbUser = await loginService.loginUser(userData);
                         if (!dbUser.data?.token) {
-                            RootNavigation.navigate("Login", {
+                            navigation.navigate("Login", {
                                 resetIndicator: true
                             });
                             return;
@@ -68,7 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                             JSON.stringify(dbUser.data)
                         );
                         setUser(dbUser.data);
-                        RootNavigation.navigate("AppTabs", {});
+                        navigation.navigate("AppTabs", {});
                     }
                 },
                 logout: async () => {

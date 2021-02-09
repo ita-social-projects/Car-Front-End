@@ -3,7 +3,7 @@ import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import Messages from "../../../activity/messages/Messages";
-import MyProfileTabs from "../../../activity/my-profile/MyProfileTabs";
+import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import Notifications from "../../../activity/notifications/Notifications";
 import { AppTabsList } from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
@@ -47,16 +47,8 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
             }}
         >
             <Tabs.Screen name="Messages" component={Messages} />
-            <Tabs.Screen
-                options={{ tabBarLabel: "My Profile" }}
-                name="MyProfileTabs"
-                component={MyProfileTabs}
-            />
-            <Tabs.Screen
-                options={{ tabBarLabel: "Journey" }}
-                name="JourneyTabs"
-                component={JourneyTabs}
-            />
+            <Tabs.Screen name="MyProfileTabs" component={MyProfileTabs} />
+            <Tabs.Screen name="JourneyTabs" component={JourneyTabs} />
             <Tabs.Screen name="Notifications" component={Notifications} />
         </Tabs.Navigator>
     );

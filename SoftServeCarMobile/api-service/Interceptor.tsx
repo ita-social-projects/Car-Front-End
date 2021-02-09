@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { AuthManager } from "../src/activity/auth/AuthManager";
-import * as RootNavigation from "../src/components/navigation/RootNavigation";
+import * as navigation from "../src/components/navigation/Navigation";
 
 export let axiosInstance = axios.create({ timeout: 20000 });
 
@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
         if (error.response) {
             errorCode = error.response.status;
         }
-        RootNavigation.navigate("Exception", { errorMessage: errorCode });
+        navigation.navigate("Exception", { errorMessage: errorCode });
         return Promise.reject(error);
     }
 );
