@@ -1,73 +1,72 @@
-import { AxiosResponse } from 'axios';
-import 'react-native';
-import APIService from '../api-service/APIService';
-import PreferencesService from '../api-service/preferences-service/PreferencesService';
-import { UserPreferences } from '../models/UserPreferences';
+import { AxiosResponse } from "axios";
+import "react-native";
+import APIService from "../api-service/APIService";
+import PreferencesService from "../api-service/preferences-service/PreferencesService";
+import { UserPreferences } from "../models/UserPreferences";
 
-
-describe('UserService', () => {
+describe("UserService", () => {
     let preferencesData = {
         id: 3,
         userId: 14,
         doAllowEating: false,
         doAllowSmoking: false,
-        comments: 'what a lovely day',
-    }
+        comments: "what a lovely day"
+    };
 
     let apiService: APIService = new APIService();
     let preferencesService = new PreferencesService(apiService);
 
-    test('should get preferences', () => {
-        jest.spyOn(apiService, 'get').mockImplementation(() => new Promise<AxiosResponse<UserPreferences>>
-            (function (resolve) {
-                resolve(
-                    {
+    test("should get preferences", () => {
+        jest.spyOn(apiService, "get").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<UserPreferences>>(function (resolve) {
+                    resolve({
                         data: preferencesData,
-                        statusText: 'Ok',
+                        statusText: "Ok",
                         status: 200,
                         config: {},
                         headers: {
-                            'Context-Type': 'application/json',
+                            "Context-Type": "application/json"
                         }
-                    }
-                );
-            })
+                    });
+                })
         );
 
         let response: UserPreferences;
 
-        preferencesService.getUserPreferences(preferencesData.userId)
-            .then(res => {
+        preferencesService
+            .getUserPreferences(preferencesData.userId)
+            .then((res) => {
                 response = res.data;
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(preferencesData);
-            }
-            );
-    })
+            });
+    });
 
-    test('It should update preferences', () => {
-        let newComments = 'Hello world!';
+    test("It should update preferences", () => {
+        let newComments = "Hello world!";
         let newPreferences = { ...preferencesData, comments: newComments };
-        jest.spyOn(apiService, 'put').mockImplementation(() => new Promise<AxiosResponse<UserPreferences>>
-            (function (resolve) {
-                resolve({
-                    data: newPreferences,
-                    statusText: 'Ok',
-                    status: 200,
-                    config: {},
-                    headers: {
-                        'Context-Type': 'application/json',
-                    }
-                });
-            })
+        jest.spyOn(apiService, "put").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<UserPreferences>>(function (resolve) {
+                    resolve({
+                        data: newPreferences,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
         );
         let response: UserPreferences;
-        preferencesService.updateUserPreferences(preferencesData)
-            .then(res => {
+        preferencesService
+            .updateUserPreferences(preferencesData)
+            .then((res) => {
                 response = res.data;
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(preferencesData);
-            }
-            );
-    })
+            });
+    });
 });

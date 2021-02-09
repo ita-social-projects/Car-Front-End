@@ -2,10 +2,9 @@ import { StyleSheet } from "react-native";
 import Font from "../../../../components/fonts/Font";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
-
     headerContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: "row"
     },
 
     headerUserAvatar: {
@@ -13,7 +12,7 @@ const AvatarLogoTitleStyle = StyleSheet.create({
         height: 56,
         borderRadius: 50,
         borderWidth: 3,
-        borderColor: '#EEEEEE'
+        borderColor: "#EEEEEE"
     },
 
     headerUserInformation: {
@@ -25,7 +24,7 @@ const AvatarLogoTitleStyle = StyleSheet.create({
         lineHeight: 21,
         fontSize: 18,
         marginBottom: 8,
-        fontWeight: 'bold'
+        fontWeight: "bold"
     },
 
     headerUserAdditionalData: {

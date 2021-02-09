@@ -2,11 +2,10 @@ import { StyleSheet } from "react-native";
 import Font from "../../components/fonts/Font";
 
 const LoginStyle = StyleSheet.create({
-
     container: {
         flex: 1,
         alignItems: "center",
-        margin: 30,
+        margin: 30
     },
 
     loginPageTextGreeting: {
@@ -30,13 +29,13 @@ const LoginStyle = StyleSheet.create({
         padding: 15,
         alignSelf: "flex-end",
         fontFamily: Font.ProximaNova.Bold,
-        fontSize: 16,
+        fontSize: 16
     },
 
     preferencesText: {
         padding: 30,
         textAlign: "left",
-        fontSize: 15,
+        fontSize: 15
     },
 
     loadingIcon: {
@@ -44,8 +43,8 @@ const LoginStyle = StyleSheet.create({
         height: 56,
         borderRadius: 50,
         borderWidth: 3,
-        borderColor: '#EEEEEE'
-    },
+        borderColor: "#EEEEEE"
+    }
 });
 
 export default LoginStyle;

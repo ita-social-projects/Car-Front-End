@@ -2,28 +2,26 @@ import { StyleSheet } from "react-native";
 
 const SimpleMessageStyle = StyleSheet.create({
     main: {
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         borderBottomWidth: 1,
-        borderBottomColor: '#C1C1C5',
+        borderBottomColor: "#C1C1C5",
         height: 68,
-        alignContent: 'center',
+        alignContent: "center",
         width: 344,
-        alignSelf: 'center',
-
+        alignSelf: "center"
     },
     button: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10
     },
     fonts: {
-        fontFamily: 'OpenSans-Italic',
-        fontWeight: 'bold',
-        fontSize: 13,
+        fontFamily: "OpenSans-Italic",
+        fontWeight: "bold",
+        fontSize: 13
     },
     image: {
-
         width: 56,
         height: 56,
         borderRadius: 50,
@@ -38,7 +36,7 @@ const SimpleMessageStyle = StyleSheet.create({
     text: {
         fontSize: 11,
         paddingTop: 10,
-        fontFamily: 'sans-serif'
+        fontFamily: "sans-serif"
     }
 });
 
