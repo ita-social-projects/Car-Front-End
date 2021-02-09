@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const MessagesStyle = StyleSheet.create({
-
     container: {
         flex: 1,
         alignSelf: "stretch",
-        backgroundColor: 'white',
+        backgroundColor: "white"
     },
 
     messages: {

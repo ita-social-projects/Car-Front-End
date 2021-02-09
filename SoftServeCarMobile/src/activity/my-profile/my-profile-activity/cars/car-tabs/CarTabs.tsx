@@ -10,32 +10,36 @@ const StackTabs = createStackNavigator();
 
 export default function CarTabs() {
     return (
-        <View style={{ flex: 1, alignSelf: 'stretch' }}>
+        <View style={{ flex: 1, alignSelf: "stretch" }}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Cars"
                     component={Cars}
                     options={{
-                        title: 'Your Cars',
-                        headerTitleAlign: 'center',
-                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
-                    }} />
-                <StackTabs.Screen name="AddCars"
+                        title: "Your Cars",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: CarTabsStyle.headerTitleStyle
+                    }}
+                />
+                <StackTabs.Screen
+                    name="AddCars"
                     component={AddCars}
                     options={{
-                        title: 'Add a Car',
-                        headerTitleAlign: 'center',
-                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
-                    }} />
+                        title: "Add a Car",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: CarTabsStyle.headerTitleStyle
+                    }}
+                />
                 <StackTabs.Screen
                     name="EditCars"
                     component={EditCars}
                     options={{
-                        title: 'Edit a Car',
-                        headerTitleAlign: 'center',
-                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
-                    }} />
+                        title: "Edit a Car",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: CarTabsStyle.headerTitleStyle
+                    }}
+                />
             </StackTabs.Navigator>
         </View>
-    )
+    );
 }

@@ -1,19 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const CarDropDownPickerStyle = StyleSheet.create({
-
     container: {
         borderWidth: 2,
-        borderColor: 'black',
+        borderColor: "black",
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
+        borderBottomRightRadius: 0
     },
 
     dropDownStyle: {
         borderWidth: 2,
-        borderColor: 'black',
+        borderColor: "black",
         borderTopWidth: 0,
         paddingHorizontal: 4
     },
@@ -22,28 +21,29 @@ const CarDropDownPickerStyle = StyleSheet.create({
         paddingVertical: 10,
         fontSize: 16,
         lineHeight: 24,
-        color: 'black',
+        color: "black"
     },
 
     itemStyle: {
-        justifyContent: 'flex-start',
-        backgroundColor: '#F0F0F0',
+        justifyContent: "flex-start",
+        backgroundColor: "#F0F0F0",
         marginTop: 5,
-        paddingLeft: 8,
+        paddingLeft: 8
     },
 
     disabledStyle: {
-        borderColor: 'gray'
+        borderColor: "gray"
     },
 
     requiredPointer: {
-        color: 'red',
-        position: 'absolute',
-        left: 18, top: 15
+        color: "red",
+        position: "absolute",
+        left: 18,
+        top: 15
     },
 
     initialPlaceHolder: {
-        color: '#909095'
+        color: "#909095"
     }
 });
 

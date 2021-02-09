@@ -12,7 +12,6 @@ import TouchableNavigationCard from '../../../../activity/my-profile/my-profile-
 import CarsStyle from './CarsStyle';
 
 export default function Cars(props: any) {
-
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarInfoDTO>>([]);
     const [loading, setLoading] = useState(true);
@@ -21,28 +20,42 @@ export default function Cars(props: any) {
 
     let addCarElement = (
         <View>
-            <TouchableNavigationCard navigation={props.navigation}
+            <TouchableNavigationCard
+                navigation={props.navigation}
                 navigationName="AddCars"
                 cardName="Add a car"
-                picture={<Ionicons name={'add-circle-outline'} size={20} color={'#414045'} />}
-                angle="0">
-                <Text style={{ fontWeight: 'bold', color: '#02A2CF' }}>
+                picture={
+                    <Ionicons
+                        name={"add-circle-outline"}
+                        size={20}
+                        color={"#414045"}
+                    />
+                }
+                angle="0"
+            >
+                <Text style={{ fontWeight: "bold", color: "#02A2CF" }}>
                     Add a car
                 </Text>
             </TouchableNavigationCard>
-            { cars?.length ? <></> :
+            {cars?.length ? (
+                <></>
+            ) : (
                 <Text style={CarsStyle.message}>
-                    Currently you don’t have any car in the list.
-                    You have to add a car if you want to create Journeys with personal one.
+                    Currently you don’t have any car in the list. You have to
+                    add a car if you want to create Journeys with personal one.
                 </Text>
-            }
+            )}
         </View>
     );
 
     useEffect(() => {
-        carService.getAll(Number(user?.id))
-            .then(res => { setCars(res.data); setLoading(false); })
-            .catch(e => console.log(e));
+        carService
+            .getAll(Number(user?.id))
+            .then((res) => {
+                setCars(res.data);
+                setLoading(false);
+            })
+            .catch((e) => console.log(e));
     }, []);
 
     return (
@@ -78,5 +91,5 @@ export default function Cars(props: any) {
                 </View>
             </ScrollView>
         </View>
-    )
+    );
 }

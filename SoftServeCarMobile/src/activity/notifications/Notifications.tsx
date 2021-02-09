@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-import NotificationsStyle from './NotificationsStyle'
+import React, { Component } from "react";
+import { Text, View } from "react-native";
+import NotificationsStyle from "./NotificationsStyle";
 
 export default class Notifications extends Component {
     render() {
@@ -8,6 +8,6 @@ export default class Notifications extends Component {
             <View style={NotificationsStyle.container}>
                 <Text>Notifications</Text>
             </View>
-        )
+        );
     }
 }

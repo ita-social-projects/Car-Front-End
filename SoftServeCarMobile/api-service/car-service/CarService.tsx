@@ -1,24 +1,23 @@
 import "reflect-metadata";
-import { injectable } from 'tsyringe';
-import { routes } from '../../Environment';
-import Car from '../../models/Car';
-import CarDTO from '../../models/CarDTO';
-import CarInfoDTO from '../../models/CarInfoDTO';
-import APIService from '../APIService';
+import { injectable } from "tsyringe";
+import { routes } from "../../Environment";
+import Car from "../../models/Car";
+import CarDTO from "../../models/CarDTO";
+import CarInfoDTO from "../../models/CarInfoDTO";
+import APIService from "../APIService";
 
 @injectable()
 class CarService {
-    constructor(private apiService: APIService) { }
+    constructor(private apiService: APIService) {}
 
-    routePrefix: string = 'cars';
+    routePrefix: string = "cars";
 
     uploadPhoto(id: number, formData: FormData) {
-        return fetch(routes.apiUrl + this.routePrefix + '/' + id + '/photo',
-            {
-                method: 'PUT',
-                headers: { "Content-Type": "multipart/form-data" },
-                body: formData
-            })
+        return fetch(routes.apiUrl + this.routePrefix + "/" + id + "/photo", {
+            method: "PUT",
+            headers: { "Content-Type": "multipart/form-data" },
+            body: formData
+        });
     }
 
     add(car: CarDTO) {
@@ -34,11 +33,15 @@ class CarService {
     }
 
     getAll(id: number) {
-        return this.apiService.get<Array<CarInfoDTO>>(this.routePrefix + '/by-user/' + id);
+        return this.apiService.get<Array<CarInfoDTO>>(
+            this.routePrefix + "/by-user/" + id
+        );
     }
 
     getAvatar(id: number) {
-        return this.apiService.get<string>(this.routePrefix + '/' + id + '/photo');
+        return this.apiService.get<string>(
+            this.routePrefix + "/" + id + "/photo"
+        );
     }
 }
 export default CarService;

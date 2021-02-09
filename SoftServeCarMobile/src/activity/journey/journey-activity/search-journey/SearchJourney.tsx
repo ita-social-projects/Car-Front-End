@@ -20,8 +20,14 @@ function SearchJourney() {
     useEffect(() => {
         journeyService
             .getJourney(1)
-            .then((res) => {
-                setJourneys([res.data, res.data, res.data, res.data, res.data, res.data])
+            .then((res1) => {
+                journeyService.getJourney(2).then((res2) => {
+                    journeyService.getJourney(4).then((res3) => {
+                        journeyService.getJourney(5).then((res4) => {
+                            setJourneys([res1.data, res2.data, res3.data, res4.data, res1.data, res2.data])
+                        })
+                    })
+                })
             })
             .catch((e) => console.log(e));
     }, []);
@@ -56,32 +62,39 @@ function SearchJourney() {
                 iconName="home-outline"
                 angle="0"
                 address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095" />
+                addressFontColor="#909095"
+            />
             <TouchableCard
                 cardName="Work"
                 iconName="briefcase-outline"
                 angle="0"
                 address="SoftServe, Bld. 'Bulgaria' 49"
-                addressFontColor="#909095" />
-            <Text style={SearchJouneyStyle.recentJourneyText}>Recent Journeys</Text>
+                addressFontColor="#909095"
+            />
+            <Text style={SearchJouneyStyle.recentJourneyText}>
+                Recent Journeys
+            </Text>
             <TouchableCard
                 cardName="Bld. 'Bulgaria' 49"
                 iconName="ios-time-outline"
                 angle="0"
                 address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095" />
+                addressFontColor="#909095"
+            />
             <TouchableCard
                 cardName="Bld. 'Bulgaria' 49"
                 iconName="ios-time-outline"
                 angle="0"
                 address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095" />
+                addressFontColor="#909095"
+            />
             <TouchableCard
                 cardName="Bld. 'Bulgaria' 49"
                 iconName="ios-time-outline"
                 angle="0"
                 address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095" />
+                addressFontColor="#909095"
+            />
             <TouchableCard
                 cardName="Bld. 'Bulgaria' 49"
                 iconName="ios-time-outline"
@@ -97,7 +110,7 @@ function SearchJourney() {
                 </View>
             </View>
         </ScrollView>
-    )
+    );
 }
 
 export default SearchJourney;

@@ -37,7 +37,9 @@ const JourneyApplicant = ({ route }: any) => {
                 if (byteOfImage !== '""') {
                     setAvatar(
                         <Image
-                            source={{ uri: "data:image/png;base64," + byteOfImage }}
+                            source={{
+                                uri: "data:image/png;base64," + byteOfImage
+                            }}
                             style={JourneyApplicantStyle.userAvatar}
                         />
                     );
@@ -74,7 +76,7 @@ const JourneyApplicant = ({ route }: any) => {
                     </Text>
                     <Text style={JourneyApplicantStyle.userAdditionalData}>
                         123 rides, 2 badges
-          </Text>
+                    </Text>
                 </View>
             </View>
             <View style={JourneyApplicantStyle.buttonContainer}>
@@ -98,13 +100,17 @@ const JourneyApplicant = ({ route }: any) => {
             <View style={JourneyApplicantStyle.bottomContainer}>
                 <Text style={JourneyApplicantStyle.detailsText}>Details</Text>
                 <View style={JourneyApplicantStyle.positionContainer}>
-                    <Text style={JourneyApplicantStyle.positionText}>Position:</Text>
+                    <Text style={JourneyApplicantStyle.positionText}>
+                        Position:
+                    </Text>
                     <Text style={JourneyApplicantStyle.positionData}>
                         {user?.position}
                     </Text>
                 </View>
                 <View style={JourneyApplicantStyle.locationContainer}>
-                    <Text style={JourneyApplicantStyle.locationText}>Location:</Text>
+                    <Text style={JourneyApplicantStyle.locationText}>
+                        Location:
+                    </Text>
                     <Text style={JourneyApplicantStyle.locationData}>
                         {user?.location}
                     </Text>

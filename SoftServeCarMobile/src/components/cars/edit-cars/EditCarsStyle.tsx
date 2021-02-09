@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const CreateJourneyStyle = StyleSheet.create({
+const EditCarsStyle = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
@@ -8,4 +8,4 @@ const CreateJourneyStyle = StyleSheet.create({
     }
 });
 
-export default CreateJourneyStyle;
+export default EditCarsStyle;
