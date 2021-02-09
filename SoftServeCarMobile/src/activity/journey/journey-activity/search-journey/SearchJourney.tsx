@@ -1,7 +1,10 @@
-import { useNavigation, useNavigationState } from '@react-navigation/native';
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { container } from 'tsyringe';
+import JourneyService from '../../../../../api-service/journey-service/JourneyService';
+import { Journey } from '../../../../../models/Journey';
 import TouchableCard from '../segment-control-activities/touchable/card/TouchableCard';
 import TouchableMapBar from '../segment-control-activities/touchable/map-bar/TouchableMapBar';
 import SearchJouneyStyle from './SearchJouneyStyle';
@@ -9,6 +12,19 @@ import SearchJouneyStyle from './SearchJouneyStyle';
 function SearchJourney() {
 
     const navigation = useNavigation();
+
+    const [journeys, setJourneys] = useState<Array<Journey>>([]);
+
+    const journeyService = container.resolve(JourneyService);
+
+    useEffect(() => {
+        journeyService
+            .getJourney(1)
+            .then((res) => {
+                setJourneys([res.data, res.data, res.data, res.data, res.data, res.data])
+            })
+            .catch((e) => console.log(e));
+    }, []);
 
     return (
         <ScrollView style={SearchJouneyStyle.container}>
@@ -74,10 +90,10 @@ function SearchJourney() {
                 addressFontColor="#909095" />
             <View style={SearchJouneyStyle.buttonsContainer}>
                 <View style={SearchJouneyStyle.button}>
-                    <Button color='#000000' title='OK' onPress={() => { navigation.navigate('OK Search Result') }}/>
+                    <Button color='#000000' title='OK' onPress={() => { navigation.navigate('OK Search Result', { journeys: journeys }) }} />
                 </View>
                 <View style={SearchJouneyStyle.button}>
-                    <Button color='#000000' title='BAD' onPress={() => { navigation.navigate('Bad Search Result') }}/>
+                    <Button color='#000000' title='BAD' onPress={() => { navigation.navigate('Bad Search Result') }} />
                 </View>
             </View>
         </ScrollView>

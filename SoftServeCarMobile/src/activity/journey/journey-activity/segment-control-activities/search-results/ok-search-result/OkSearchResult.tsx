@@ -1,38 +1,21 @@
 import { useNavigation } from "@react-navigation/native"
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
 import Ionicons from "react-native-vector-icons/Ionicons"
-import { container } from "tsyringe"
-import JourneyService from "../../../../../../../api-service/journey-service/JourneyService"
-import Address from "../../../../../../../models/Address"
 import { Journey } from "../../../../../../../models/Journey"
-import { Stop } from "../../../../../../../models/Stop"
-import { StopType } from "../../../../../../../models/StopType"
-import { User } from "../../../../../../../models/User"
 import OkSearchResultStyle from "./OkSearchResultStyle"
 
 const OkSearchResult = ({ route }: any) => {
 
-    const journeyService = container.resolve(JourneyService);
-    const [journeys, setJourneys] = useState<Array<Journey>>([]);
-
-    useEffect(() => {
-        journeyService
-            .getJourney(1)
-            .then((res) => {
-                setJourneys([res.data, res.data])
-            })
-            .catch((e) => console.log(e));
-    }, []);
-
+    const journeys: Array<Journey> = route.params.journeys;
     const navigation = useNavigation();
 
     return (
         <View style={OkSearchResultStyle.container}>
             <FlatList
                 data={journeys}
-                keyExtractor={(item, index)=> '' + item + index}
+                keyExtractor={(item, index) => '' + item + index}
                 renderItem={({ item }) => (
                     <View>
                         <TouchableOpacity
