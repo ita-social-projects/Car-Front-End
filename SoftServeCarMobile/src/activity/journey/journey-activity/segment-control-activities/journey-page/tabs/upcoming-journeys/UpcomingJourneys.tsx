@@ -7,7 +7,7 @@ export default function UpcomingJourneys() {
     return (
         <View>
             <View style={UpcomingJourneysStyle.container}>
-                <Text style={UpcomingJourneysStyle.text}>Past</Text>
+                <Text style={UpcomingJourneysStyle.text}>Upcoming</Text>
             </View>
             <View>
                 <TouchableJourney />

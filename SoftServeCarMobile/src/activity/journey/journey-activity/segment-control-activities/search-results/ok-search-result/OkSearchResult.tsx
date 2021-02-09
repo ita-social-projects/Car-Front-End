@@ -1,65 +1,30 @@
 import { useNavigation } from "@react-navigation/native"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { container } from "tsyringe"
+import JourneyService from "../../../../../../../api-service/journey-service/JourneyService"
+import Address from "../../../../../../../models/Address"
 import { Journey } from "../../../../../../../models/Journey"
 import { Stop } from "../../../../../../../models/Stop"
+import { StopType } from "../../../../../../../models/StopType"
 import { User } from "../../../../../../../models/User"
 import OkSearchResultStyle from "./OkSearchResultStyle"
 
 const OkSearchResult = ({ route }: any) => {
 
-    const [journeys, setJourneys] = useState<Array<Journey>>([
-        {
-            id: 1,
-            routeDistance: 3,
-            departureTime: null as unknown as Date,
-            countOfSeats: 3,
-            comments: '',
-            isFree: true,
-            scheduleId: 1,
-            participants: null as unknown as Array<User>,
-            stops: [null as Stop, null as Stop],
-            organizer: { id: 52, name: 'Roman', surname: 'Danylevych', position: 'Student of SoftServe IT Academy', location: '', email: '', token: '', hireDate: Date.prototype, byteOfImage: '' }
-        },
-        {
-            id: 2,
-            routeDistance: 3,
-            departureTime: null as unknown as Date,
-            countOfSeats: 3,
-            comments: '',
-            isFree: true,
-            scheduleId: 1,
-            participants: null as unknown as Array<User>,
-            stops: [null as Stop, null as Stop],
-            organizer: { id: 52, name: 'Roman', surname: 'Danylevych', position: 'Student of SoftServe IT Academy', location: '', email: '', token: '', hireDate: Date.prototype, byteOfImage: '' }
-        },
-        {
-            id: 3,
-            routeDistance: 3,
-            departureTime: null as unknown as Date,
-            countOfSeats: 3,
-            comments: '',
-            isFree: true,
-            scheduleId: 1,
-            participants: null as unknown as Array<User>,
-            stops: [null as Stop, null as Stop],
-            organizer: { id: 52, name: 'Roman', surname: 'Danylevych', position: 'Student of SoftServe IT Academy', location: '', email: '', token: '', hireDate: Date.prototype, byteOfImage: '' }
-        },
-        {
-            id: 4,
-            routeDistance: 3,
-            departureTime: null as unknown as Date,
-            countOfSeats: 3,
-            comments: '',
-            isFree: true,
-            scheduleId: 1,
-            participants: null as unknown as Array<User>,
-            stops: [null as Stop, null as Stop],
-            organizer: { id: 52, name: 'Roman', surname: 'Danylevych', position: 'Student of SoftServe IT Academy', location: '', email: '', token: '', hireDate: Date.prototype, byteOfImage: '' }
-        },
-    ]);
+    const journeyService = container.resolve(JourneyService);
+    const [journeys, setJourneys] = useState<Array<Journey>>([]);
+
+    useEffect(() => {
+        journeyService
+            .getJourney(1)
+            .then((res) => {
+                setJourneys([res.data, res.data])
+            })
+            .catch((e) => console.log(e));
+    }, []);
 
     const navigation = useNavigation();
 
@@ -67,10 +32,11 @@ const OkSearchResult = ({ route }: any) => {
         <View style={OkSearchResultStyle.container}>
             <FlatList
                 data={journeys}
+                keyExtractor={(item, index)=> '' + item + index}
                 renderItem={({ item }) => (
                     <View>
                         <TouchableOpacity
-                            onPress={() => { navigation.navigate("Journey Page", {}); }}>
+                            onPress={() => { navigation.navigate("Journey Page", { journeyId: item?.id }); }}>
                             <View style={OkSearchResultStyle.component}>
                                 <View style={OkSearchResultStyle.driverInfoBlock}>
                                     <View style={OkSearchResultStyle.imageBlock}>
@@ -96,24 +62,23 @@ const OkSearchResult = ({ route }: any) => {
                                                 {item?.organizer?.position}
                                             </Text>
                                             <Text style={OkSearchResultStyle.timeText}>
-                                                {item?.departureTime === null ? 'Today at 19:15' : item?.departureTime}
+                                                {item?.departureTime === undefined ? 'Today at 19:15' : item?.departureTime}
                                             </Text>
                                         </View>
                                     </View>
                                 </View>
                                 <View style={OkSearchResultStyle.stopsBlock}>
-
                                     <View style={OkSearchResultStyle.firstStopBlock}>
                                         <View style={OkSearchResultStyle.stopCircleIcon} />
                                         <Text style={OkSearchResultStyle.stopsText}>
-                                            Location A
+                                            {item?.stops[0]?.address.street === undefined ? 'Location A' : item?.stops[0]?.address.street}
                                         </Text>
                                     </View>
-                                    <View style={OkSearchResultStyle.stopStickIcon}/>
+                                    <View style={OkSearchResultStyle.stopStickIcon} />
                                     <View style={OkSearchResultStyle.lastStopBlock}>
                                         <View style={OkSearchResultStyle.stopCircleIcon} />
                                         <Text style={OkSearchResultStyle.stopsText}>
-                                            Location B
+                                            {item?.stops[item?.stops.length - 1]?.address.street === undefined ? 'Location B' : item?.stops[item?.stops.length - 1]?.address.street}
                                         </Text>
                                     </View>
                                 </View>

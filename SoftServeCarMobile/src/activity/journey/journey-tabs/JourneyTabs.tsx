@@ -34,6 +34,7 @@ const JourneyTabs = () => {
 
         <StackTabs.Screen
           name="Journey Page"
+          component={JourneyPage}
           options={{
             title: "Journey",
             headerTitleAlign: "center",
@@ -65,9 +66,9 @@ const JourneyTabs = () => {
               </TouchableWithoutFeedback>
             ),
           }}
-        >
-          {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
-        </StackTabs.Screen>
+        />
+          {//() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} journeyId={0} />
+          }
 
         <StackTabs.Screen
           name="OK Search Result"

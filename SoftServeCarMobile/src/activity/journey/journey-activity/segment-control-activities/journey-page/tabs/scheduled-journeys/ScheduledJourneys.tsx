@@ -7,7 +7,7 @@ export default function ScheduledJourneys() {
     return (
         <View>
             <View style={ShceduledJourneysStyle.container}>
-                <Text style={ShceduledJourneysStyle.text}>Past</Text>
+                <Text style={ShceduledJourneysStyle.text}>Scheduled</Text>
             </View>
             <View>
                 <TouchableJourney />
