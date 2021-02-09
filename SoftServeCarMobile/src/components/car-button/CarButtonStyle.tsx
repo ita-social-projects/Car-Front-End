@@ -1,21 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const CarButtonStyle = StyleSheet.create({
-
     button: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        alignItems: 'center',
+        alignItems: "center"
     },
 
     whiteButton: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF",
         borderWidth: 2,
-        borderColor: '#000000',
+        borderColor: "#000000"
     },
 
     blackButton: {
-        backgroundColor: '#000000',
+        backgroundColor: "#000000"
     },
 
     disabled: {
@@ -23,18 +22,18 @@ const CarButtonStyle = StyleSheet.create({
     },
 
     title: {
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
+        textTransform: "uppercase",
+        fontWeight: "bold",
         fontSize: 16,
-        lineHeight: 20,
+        lineHeight: 20
     },
 
     whiteTitle: {
-        color: 'white',
+        color: "white"
     },
 
     blackTitle: {
-        color: 'black'
+        color: "black"
     }
 });
 

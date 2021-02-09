@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import EditCarsStyle from './EditCarsStyle';
+import React from "react";
+import { Text, View } from "react-native";
+import EditCarsStyle from "./EditCarsStyle";
 
 function EditCars() {
     return (

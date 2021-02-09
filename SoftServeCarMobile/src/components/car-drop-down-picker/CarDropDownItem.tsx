@@ -1,4 +1,4 @@
 export interface CarDropDownPickerItem {
-    label: string,
-    value: string
+    label: string;
+    value: string;
 }

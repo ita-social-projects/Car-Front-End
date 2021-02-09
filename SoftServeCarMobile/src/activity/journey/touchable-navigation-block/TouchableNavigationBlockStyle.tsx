@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
-
     blockContainer: {
         borderRadius: 8,
         borderColor: "#FFFFFF",
@@ -21,19 +20,19 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
         textTransform: "uppercase",
         textAlignVertical: "center",
         color: "#FFFFFF",
-        width: Dimensions.get('window').width / 3
+        width: Dimensions.get("window").width / 3
     },
 
     imageStyle: {
         justifyContent: "flex-end",
-        marginTop: 10,
+        marginTop: 10
     },
 
     viewContainer: {
         paddingHorizontal: 10,
         justifyContent: "center",
-        flexDirection: "row",
-    },
+        flexDirection: "row"
+    }
 });
 
 export default TouchableNavigationBlockStyle;
