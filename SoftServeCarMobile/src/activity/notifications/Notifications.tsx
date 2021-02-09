@@ -45,15 +45,6 @@ export default function Notifications(props: any) {
 
     return (
         <ScrollView style={headerStyle.headerContainer}>
-            <View
-                style={{
-                    padding: 10,
-                    borderBottomColor: "#909095",
-                    borderWidth: 1
-                }}
-            >
-                <Text style={headerStyle.pageTitle}>Notifications</Text>
-            </View>
             {notifications.map((item, key) => (
                 <>
                     <NotificationComponent item={item} key={key} />
