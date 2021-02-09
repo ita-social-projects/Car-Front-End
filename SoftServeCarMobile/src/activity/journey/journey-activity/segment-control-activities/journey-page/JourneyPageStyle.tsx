@@ -164,6 +164,7 @@ const JourneyPageStyle = StyleSheet.create({
   buttonsBlock: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 15
   },
 
   messageAllButton: {
@@ -180,11 +181,13 @@ const JourneyPageStyle = StyleSheet.create({
     height: 45,
     fontSize: 18,
     textAlignVertical: "center",
+    fontFamily: ProximaNova.Bold
   },
 
   startJourneyButton: {
     backgroundColor: "black",
     width: "55%",
+    borderWidth: 3,
   },
 
   startJourneyButtonText: {
@@ -194,6 +197,7 @@ const JourneyPageStyle = StyleSheet.create({
     height: 45,
     fontSize: 18,
     textAlignVertical: "center",
+    fontFamily: ProximaNova.Bold
   },
 });
 

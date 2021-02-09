@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Text, View } from "react-native";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
@@ -15,11 +15,33 @@ import JourneyTabsStyle from "./JourneyTabsStyle";
 import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
 import { JourneyNewApplicant } from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import { navigate } from "../../../components/navigation/RootNavigation";
+import BottomSheet from "reanimated-bottom-sheet";
+import BottomPopup from "../../../components/bottom-popup/BottomPopup";
+import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
+import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
 
 const StackTabs = createStackNavigator();
+const moreOptionsHeader = () => (
+  <View style={JourneyPageStyle.headerTitleStyle}>
+    <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
+  </View>
+);
 
+const moreOptionsContent = () => {
+  return (
+    <View style={JourneyPageStyle.panel}>
+      <MenuButton text="Add Stop" onPress={() => {}} />
+      <MenuButton text="Edit the Journey" onPress={() => {}} />
+      <MenuButton text="Invite Softservian" onPress={() => {}} />
+      <MenuButton text="Cancel the Journey" onPress={() => {}} />
+    </View>
+  );
+};
 const JourneyTabs = () => {
   const [isOpen, setOpen] = useState(false);
+
+  const moreOptionsRef = useRef<BottomSheet>(null);
+
   return (
     <View style={JourneyStyle.tabsStyle}>
       <StackTabs.Navigator>
@@ -54,7 +76,12 @@ const JourneyTabs = () => {
               </TouchableOpacity>
             ),
             headerRight: () => (
-              <TouchableWithoutFeedback onPress={() => setOpen(!isOpen)}>
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  moreOptionsRef?.current?.snapTo(isOpen ? 0 : 1);
+                  setOpen(!isOpen);
+                }}
+              >
                 <Ionicons
                   name={"ellipsis-horizontal"}
                   size={30}
@@ -64,7 +91,22 @@ const JourneyTabs = () => {
             ),
           }}
         >
-          {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
+          {(route: any) => {
+            return (
+              <>
+                <JourneyPage route={route}/>
+                <BottomPopup
+                  refForChild={moreOptionsRef}
+                  snapPoints={[0, 300]}
+                  renderContent={moreOptionsContent}
+                  initialSnap={0}
+                  renderHeader={moreOptionsHeader}
+                  enabledInnerScrolling={false}
+                  onCloseEnd={() => setOpen(false)}
+                />
+              </>
+            );
+          }}
         </StackTabs.Screen>
         <StackTabs.Screen
           name="Applicant Page"
