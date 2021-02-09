@@ -1,8 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useContext, useEffect } from "react";
-import { View, Alert } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { View } from "react-native";
 import { container } from "tsyringe";
 import UserService from "../../../../api-service/user-service/UserService";
 import { User } from "../../../../models/User";

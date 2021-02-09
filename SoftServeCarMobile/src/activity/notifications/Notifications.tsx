@@ -1,6 +1,5 @@
 import * as signalR from "@microsoft/signalr";
 import React, { useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import "reflect-metadata";
 import { container } from "tsyringe";
