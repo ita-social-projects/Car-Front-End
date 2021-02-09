@@ -7,6 +7,22 @@
             "./assets/fonts/"
         ]
     },
+    "babel": {
+        "plugins": [
+            [
+                "@babel/plugin-proposal-decorators",
+                {
+                    "legacy": true
+                }
+            ],
+            [
+                "@babel/plugin-proposal-class-properties",
+                {
+                    "loose": true
+                }
+            ]
+        ]
+    },
     "scripts": {
         "android": "react-native run-android",
         "ios": "react-native run-ios",
@@ -44,7 +60,7 @@
         "react-native-app-auth": "6.0.1",
         "react-native-bootstrap": "0.1.0",
         "react-native-dropdown-picker": "3.7.6",
-        "react-native-elements": "^3.1.0",
+        "react-native-elements": "^3.2.0",
         "react-native-extended-stylesheet": "0.12.0",
         "react-native-form-validator": "0.3.5",
         "react-native-gesture-handler": "1.9.0",

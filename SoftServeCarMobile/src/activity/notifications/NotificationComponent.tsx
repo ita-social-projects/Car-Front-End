@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import { headerStyle } from './NotificationStyle';
-import Modal from 'react-native-modal';
+import { Modal } from 'react-native';
 import { Notification, NotificationType } from '../../../models/Notification';
 import AvatarComponent from './AvatarComponent';
 import "reflect-metadata";
@@ -14,26 +14,26 @@ const NotificationComponent = (props:any) => {
     const [modalTitle, setModalTitle] = useState('default title');
     const notificationService = container.resolve(NotificationsService);
     const [requestType, setRequestType] = useState('');
-    const [isModalVisible, setModalVisible] = useState(false);  
+    const [isModalVisible, setModalVisible] = useState(false);
 
-    const getNotificationDescription = () => {        
+    const getNotificationDescription = () => {
         switch(props.item.notificationType) {
- 
+
             case NotificationType.PassengerApply:
                 setModalTitle('NEW APPLICANT');
                 setRequestType('asked to join your journey');
                 break;
-            
+
             case NotificationType.ApplicationApproval:
                 setModalTitle('APPLICATION APPROVAL');
                 setRequestType('approved your application');
                 break;
-       
+
             case NotificationType.AcceptedInvitation:
                 setModalTitle('NEW PARTICIPANT');
                 setRequestType('accepted your invitation');
                 break;
-       
+
             case NotificationType.HRMarketingMessage:
                 setModalTitle('HR NEWS');
                 setRequestType('marketing news');
@@ -47,7 +47,7 @@ const NotificationComponent = (props:any) => {
             case NotificationType.JourneyCancellation:
                 setModalTitle('JOURNEY CANCELLATION');
                 setRequestType('canceled the journey');
-                break;  
+                break;
 
             case NotificationType.JourneyDetailsUpdate:
                 setModalTitle('JOURNEY UPDATE');
@@ -67,20 +67,20 @@ const NotificationComponent = (props:any) => {
             case NotificationType.RejectedInvitation:
                 setModalTitle('INVITATION REJECTION');
                 setRequestType('rejected your invitation');
-                break;    
-       
+                break;
+
             default:
-                Alert.alert("WRONG NOTIFICATION TYPE");          
+                Alert.alert("WRONG NOTIFICATION TYPE");
         }
     }
 
-    useEffect(() => {   
-        getNotificationDescription();       
+    useEffect(() => {
+        getNotificationDescription();
     });
 
-    const updateNotification =() => {   
-        let notification: Notification = null;
-        notification = {            
+    const updateNotification =() => {
+        let notification: Notification;
+        notification = {
             id: props.item.id,
             userId: 0,
             userName: '',
@@ -91,15 +91,15 @@ const NotificationComponent = (props:any) => {
             receiverId: 0,
             journeyId: 0,
             userColor: '',
-            notificationType: 1               
+            notificationType: 1
         }
-        notificationService.updateNotification(notification);           
-    }         
+        notificationService.updateNotification(notification);
+    }
 
     const showUserInfo = () => {
-        toggleModal();        
+        toggleModal();
     };
-  
+
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
         updateNotification();
@@ -107,39 +107,39 @@ const NotificationComponent = (props:any) => {
 
     return (
         <View style={[headerStyle.baseContainer, props.item.isRead == true ? headerStyle.readContainer: headerStyle.unreadContainer]} >
-            <AvatarComponent             
+            <AvatarComponent
             userId = {props.item.userId}
             userName = {props.item.userName}
             userColor = {props.item.userColor}
-            />           
+            />
             <View style = {headerStyle.headerContainer}>
                 <View style = {headerStyle.innerContainer}>
                     <Text style={headerStyle.valueView} onPress={ showUserInfo.bind(this, props) }>{props.item.userName}</Text>
                     <TouchableOpacity>
                         <Ionicons
                             name={"ellipsis-horizontal"}
-                            size={30}                  
+                            size={30}
                         />
                     </TouchableOpacity>
                 </View>
                 <View style = {headerStyle.innerContainer}>
                     <Text style={headerStyle.captionView}>{requestType}</Text>
                     <Text style={[headerStyle.dateBase, props.item.isRead == true ? headerStyle.dateBase : headerStyle.dateUnread]}>{props.item.createAt}</Text>
-                </View>                
+                </View>
             </View>
-            <View >                
-                <Modal isVisible={isModalVisible} coverScreen={true} backdropColor= {'white'} backdropOpacity ={1} style={{borderRadius: 15,borderWidth: 1, borderColor: 'grey'}}>
+            <View >
+                <Modal visible={isModalVisible} style={{borderRadius: 15,borderWidth: 1, borderColor: 'grey'}}>
                     <View style={{flex: 1, alignSelf: 'stretch'}}>
                         <View style= {headerStyle.baseContainer}>
                             <Text style ={{fontWeight:'bold', fontSize: 20, flex:1 }}>{modalTitle}</Text>
                             <Text style ={{fontWeight:'bold', fontSize: 20, color: 'cadetblue' }}>Snooze</Text>
                         </View>
-                        <View style= {headerStyle.baseContainer}>                    
+                        <View style= {headerStyle.baseContainer}>
                             <AvatarComponent
-                            userId = {props.item.userId}                            
+                            userId = {props.item.userId}
                             userName = {props.item.userName}
                             userColor = {props.item.userColor}
-                            />                        
+                            />
                             <View >
                                 <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'stretch'}}>
                                     <Text style ={{fontWeight:'bold', fontSize: 20, color: 'cadetblue', paddingLeft: 10}}>{props.item.userName} </Text>
@@ -147,7 +147,7 @@ const NotificationComponent = (props:any) => {
                                     <Ionicons
                                         name={"ellipsis-horizontal"}
                                         size={30}
-                                        style = {{marginLeft: 80}}                  
+                                        style = {{marginLeft: 80}}
                                     />
                                     </TouchableOpacity>
                                 </View>
@@ -163,11 +163,11 @@ const NotificationComponent = (props:any) => {
                         </View>
                         <View>
                             <Text style={{textAlign: 'center', fontSize: 16, color: '#EC6400', fontWeight: 'bold'}} onPress={toggleModal}>Decline</Text>
-                        </View>                    
+                        </View>
                     </View>
                 </Modal>
-            </View>                
-        </View>   
+            </View>
+        </View>
     )
 }
 

@@ -38,6 +38,10 @@ const JourneyPage = ({ route }: any) => {
         text="Message"
         onPress={() => navigation.navigate("Messages", {})}
       />
+        <MenuButton
+            text="New Applicant"
+            onPress={() => navigation.navigate("New Applicant Page", {})}
+        />
     </View>
   );
 
