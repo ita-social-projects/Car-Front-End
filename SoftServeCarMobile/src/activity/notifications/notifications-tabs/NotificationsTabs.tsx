@@ -5,7 +5,6 @@ import { container } from "tsyringe";
 import UserService from "../../../../api-service/user-service/UserService";
 import { User } from "../../../../models/User";
 import { AuthContext } from "../../auth/AuthProvider";
-import MyProfileTabsStyle from "../../my-profile/my-profile-tabs/MyProfileTabsStyle";
 import Notifications from "../Notifications";
 import NotificationsTabsStyle from "./NotificationsTabsStyle";
 
@@ -26,7 +25,7 @@ const ChatTabs = () => {
     }, []);
 
     return (
-        <View style={MyProfileTabsStyle.container}>
+        <View style={NotificationsTabsStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Notifications"

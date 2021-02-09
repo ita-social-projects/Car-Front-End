@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 const ChatStyle = StyleSheet.create({
+    page: {
+        flex: 1,
+        backgroundColor: "#FFFFFF"
+    },
+
     container: {
         width: "100%",
         flex: 1,
@@ -21,7 +26,7 @@ const ChatStyle = StyleSheet.create({
         padding: 10,
         width: "80%",
         borderWidth: 4,
-        borderColor: "#20232a",
+        borderColor: "#20232A",
         borderRadius: 4
     },
 

@@ -40,7 +40,7 @@ const SimpleMessage = (props: {
     }
 
     return (
-        <View style={{ marginTop: 24 }}>
+        <View style={SimpleMessageStyle.container}>
             <FlatList
                 data={data}
                 keyExtractor={({ id }) => id.toString()}

@@ -2,7 +2,10 @@ import { StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
 const MessagesTabsStyle = StyleSheet.create({
-    container: { flex: 1, alignSelf: "stretch" },
+    container: {
+        flex: 1,
+        alignSelf: "stretch"
+    },
 
     headerStyle: {
         height: 120
