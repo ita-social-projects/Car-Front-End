@@ -15,7 +15,10 @@ import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
 import MenuButton from "../../../../../components/bottom-popup/menu-button/MenuButton";
 import JourneyPageStyle from "./JourneyPageStyle";
 
-const JourneyPage = (props: any) => {
+const JourneyPage = ({ route }: any) => {
+
+  const { journeyId } = route.params;
+
   const [moreOptionsState, setMoreOptionsState] = useState(0);
   const journeyService = container.resolve(JourneyService);
   const [currentJourney, setJourney] = useState({} as Journey);
@@ -46,7 +49,7 @@ const JourneyPage = (props: any) => {
 
   useEffect(() => {
     journeyService
-      .getJourney(1)
+      .getJourney(journeyId)
       .then((res) => setJourney(res.data))
       .catch((e) => console.log(e));
   }, []);
@@ -207,7 +210,7 @@ const JourneyPage = (props: any) => {
         initialSnap={0}
         renderHeader={moreOptionsHeader}
         enabledInnerScrolling={false}
-        onCloseEnd={() => props.setIsOpen(false)}
+      //onCloseEnd={() => props.setIsOpen(false)}
       />
     </>
   );

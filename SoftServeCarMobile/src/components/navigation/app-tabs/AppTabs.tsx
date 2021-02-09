@@ -79,5 +79,5 @@ export const AppTabs: React.FC<AppTabsProps> =({})=>{
                 <Tabs.Screen name="Notifications" component={Notifications} options = {{tabBarBadge: Number(unreadNumber) }}/>
             )}
         </Tabs.Navigator>
-    )
-}
+    );
+};

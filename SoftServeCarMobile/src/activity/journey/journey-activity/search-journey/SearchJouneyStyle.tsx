@@ -20,6 +20,15 @@ const SearchJouneyStyle = StyleSheet.create({
         borderBottomColor: '#C1C1C5',
         borderBottomWidth: 1,
     },
+
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+
+    button: {
+        width: 150,
+    }
 });
 
 export default SearchJouneyStyle;

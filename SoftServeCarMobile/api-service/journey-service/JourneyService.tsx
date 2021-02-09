@@ -1,13 +1,13 @@
 import "reflect-metadata";
-import { injectable } from 'tsyringe';
-import { Journey } from '../../models/Journey';
-import APIService from '../APIService';
+import { injectable } from "tsyringe";
+import { Journey } from "../../models/Journey";
+import APIService from "../APIService";
 
 @injectable()
 class JourneyService {
-    constructor(private apiService: APIService) { }
+    constructor(private apiService: APIService) {}
 
-    routePrefix: string = 'journeys/';
+    routePrefix: string = "journeys/";
 
     getJourney(journeyId: number) {
         return this.apiService.get<Journey>(this.routePrefix + journeyId);
@@ -22,7 +22,7 @@ class JourneyService {
     }
 
     delete(journey: Journey) {
-        return this.apiService.delete<Journey>(this.routePrefix, journey)
+        return this.apiService.delete<Journey>(this.routePrefix, journey);
     }
 }
 

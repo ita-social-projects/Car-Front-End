@@ -1,44 +1,48 @@
-import * as signalR from '@microsoft/signalr';
-import React from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
-import { routes } from '../../../environment';
-import ChatStyle from './ChatStyle';
+import * as signalR from "@microsoft/signalr";
+import React from "react";
+import { View, Button, Text, TextInput } from "react-native";
+import { routes } from "../../../Environment";
+import ChatStyle from "./ChatStyle";
 
 export interface ChatState {
-    message: string,
-    messages: string[],
-    hubConnection: signalR.HubConnection,
-    receivedUserId: string
+    message: string;
+    messages: string[];
+    hubConnection: signalR.HubConnection;
+    receivedUserId: string;
 }
 
 class Chat extends React.Component<ChatState, ChatState> {
-
     constructor(props: ChatState) {
         super(props);
 
         this.state = {
-            message: '',
+            message: "",
             messages: [],
             hubConnection: null,
-            receivedUserId: ''
-        }
+            receivedUserId: ""
+        };
     }
 
     componentDidMount() {
-        const hubConnection = new signalR.HubConnectionBuilder().withUrl(routes.chatUrl).build();
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl(routes.chatUrl)
+            .build();
         this.setState({ hubConnection }, () => {
             this.state.hubConnection.start().then(() => "Connection started!");
 
             hubConnection.on("RecieveMessage", (receivedMessage) => {
-                this.setState({ messages: [...this.state.messages, receivedMessage] });
-            })
+                this.setState({
+                    messages: [...this.state.messages, receivedMessage]
+                });
+            });
         });
     }
 
     onSubmit = () => {
-        this.state.hubConnection.invoke("SendMessage", this.state.message).catch((err) => console.log(err));
-        this.setState({ message: '' });
-
+        this.state.hubConnection
+            .invoke("SendMessage", this.state.message)
+            .catch((err) => console.log(err));
+        this.setState({ message: "" });
     };
 
     render() {
@@ -47,19 +51,29 @@ class Chat extends React.Component<ChatState, ChatState> {
                 <View style={ChatStyle.container}>
                     <View style={ChatStyle.chatMessage}>
                         <View>
-                            {this.state.messages.map((message: string, index: number) => {
-                                return (
-                                    <Text style={ChatStyle.message} key={index}>{message}</Text>
-                                );
-                            })}
+                            {this.state.messages.map(
+                                (message: string, index: number) => {
+                                    return (
+                                        <Text
+                                            style={ChatStyle.message}
+                                            key={index}
+                                        >
+                                            {message}
+                                        </Text>
+                                    );
+                                }
+                            )}
                         </View>
                     </View>
                     <View style={ChatStyle.buttonContainer}>
-                        <TextInput style={ChatStyle.input} value={this.state.message}
+                        <TextInput
+                            style={ChatStyle.input}
+                            value={this.state.message}
                             placeholder="Aa"
                             onChangeText={(message) => {
-                                this.setState({ message: message })
-                            }} />
+                                this.setState({ message: message });
+                            }}
+                        />
                         <View>
                             <Button onPress={this.onSubmit} title="Send" />
                         </View>

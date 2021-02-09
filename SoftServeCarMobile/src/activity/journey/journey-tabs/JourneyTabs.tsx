@@ -10,6 +10,8 @@ import CreateJourney from "../journey-activity/create-journey/CreateJourney";
 import SearchJourney from "../journey-activity/search-journey/SearchJourney";
 import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
 import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
+import BadSearchResult from "../journey-activity/segment-control-activities/search-results/bad-search-result/BadSearchResult";
+import OkSearchResult from "../journey-activity/segment-control-activities/search-results/ok-search-result/OkSearchResult";
 import JourneyStyle from "../JourneyStyle";
 import JourneyTabsStyle from "./JourneyTabsStyle";
 
@@ -25,10 +27,14 @@ const JourneyTabs = () => {
           component={Journey}
           options={{ headerTitleAlign: "center" }}
         />
+
         <StackTabs.Screen name="Create Journey" component={CreateJourney} />
+
         <StackTabs.Screen name="Search Journey" component={SearchJourney} />
+
         <StackTabs.Screen
           name="Journey Page"
+          component={JourneyPage}
           options={{
             title: "Journey",
             headerTitleAlign: "center",
@@ -46,7 +52,7 @@ const JourneyTabs = () => {
                   color={"#02A2CF"}
                 />
                 <View style={JourneyTabsStyle.backButtonTextView}>
-                  <Text style={JourneyTabsStyle.backButtonText}>Back</Text>
+                  <Text style={JourneyTabsStyle.buttonText}>Back</Text>
                 </View>
               </TouchableOpacity>
             ),
@@ -60,9 +66,78 @@ const JourneyTabs = () => {
               </TouchableWithoutFeedback>
             ),
           }}
-        >
-          {() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} />}
-        </StackTabs.Screen>
+        />
+          {//() => <JourneyPage isOpen={isOpen} setIsOpen={setOpen} journeyId={0} />
+          }
+
+        <StackTabs.Screen
+          name="OK Search Result"
+          component={OkSearchResult}
+          options={{
+            title: "Search result",
+            headerTitleAlign: "center",
+            headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+            headerLeft: () => (
+              <TouchableOpacity
+                style={JourneyTabsStyle.backButtonOpacity}
+                onPress={() => {
+                  navigate("Search Journey", {});
+                }}
+              >
+                <Ionicons
+                  name={"chevron-back-outline"}
+                  size={35}
+                  color={"#02A2CF"}
+                />
+                <View style={JourneyTabsStyle.backButtonTextView}>
+                  <Text style={JourneyTabsStyle.buttonText}>Back</Text>
+                </View>
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity style={JourneyTabsStyle.requestButton} onPress={() => { navigate('Search Journey', {}) }}>
+                <Text style={JourneyTabsStyle.buttonText}>
+                  Request
+                </Text>
+              </TouchableOpacity>
+            ),
+          }}
+        />
+
+        <StackTabs.Screen
+          name="Bad Search Result"
+          component={BadSearchResult}
+          options={{
+            title: "Search result",
+            headerTitleAlign: "center",
+            headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+            headerLeft: () => (
+              <TouchableOpacity
+                style={JourneyTabsStyle.backButtonOpacity}
+                onPress={() => {
+                  navigate("Search Journey", {});
+                }}
+              >
+                <Ionicons
+                  name={"chevron-back-outline"}
+                  size={35}
+                  color={"#02A2CF"}
+                />
+                <View style={JourneyTabsStyle.backButtonTextView}>
+                  <Text style={JourneyTabsStyle.buttonText}>Back</Text>
+                </View>
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity style={JourneyTabsStyle.requestButton} onPress={() => { navigate('Search Journey', {}) }}>
+                <Text style={JourneyTabsStyle.buttonText}>
+                  Request
+                </Text>
+              </TouchableOpacity>
+            ),
+          }}
+        />
+
         <StackTabs.Screen
           name="Applicant Page"
           options={{
@@ -83,17 +158,19 @@ const JourneyTabs = () => {
                   style={JourneyTabsStyle.blackButtonText}
                 />
                 <View style={JourneyTabsStyle.backButtonTextView}>
-                  <Text style={[JourneyTabsStyle.backButtonText, JourneyTabsStyle.blackButtonText]}>Back</Text>
+                  <Text style={[JourneyTabsStyle.buttonText, JourneyTabsStyle.blackButtonText]}>Back</Text>
                 </View>
               </TouchableOpacity>
             ),
           }}
           component={JourneyApplicant}
         />
+
         <StackTabs.Screen
           name="New Applicant Page"
           component={JourneyNewApplicant}
         />
+
       </StackTabs.Navigator>
     </View>
   );

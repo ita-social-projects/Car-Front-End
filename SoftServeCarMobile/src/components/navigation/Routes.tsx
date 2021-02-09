@@ -8,34 +8,35 @@ import { Login } from "../../activity/login/Login";
 import { AppTabs } from "./app-tabs/AppTabs";
 import { navigationRef } from "./RootNavigation";
 
-interface RoutesProps { }
+interface RoutesProps {}
 
 const Stack = createStackNavigator<AuthParamList>();
 
 export const Routes: React.FC<RoutesProps> = () => {
-  const { user, loadStorageUser } = useContext(AuthContext);
+    const { user, loadStorageUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    loadStorageUser();
-  }, []);
+    useEffect(() => {
+        loadStorageUser();
+    }, []);
 
-  return (
-    <NavigationContainer ref={navigationRef}>
-      {
-        user ? (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='AppTabs' component={AppTabs} options={{ headerShown: false }} />
-            <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen name='Exception' component={Exception} />
-          </Stack.Navigator>
-        ) :
-          (
-            <Stack.Navigator screenOptions={{ headerShown: false }} >
-              <Stack.Screen name='Login' component={Login} />
-              <Stack.Screen name='Exception' component={Exception} />
-            </Stack.Navigator>
-          )
-      }
-    </NavigationContainer>
-  );
-}
+    return (
+        <NavigationContainer ref={navigationRef}>
+            {user ? (
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen
+                        name="AppTabs"
+                        component={AppTabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Exception" component={Exception} />
+                </Stack.Navigator>
+            ) : (
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Exception" component={Exception} />
+                </Stack.Navigator>
+            )}
+        </NavigationContainer>
+    );
+};
