@@ -30,17 +30,74 @@ const JourneyTabs = () => {
                 <StackTabs.Screen
                     name="Journey"
                     component={Journey}
-                    options={{ headerTitleAlign: "center" }}
+                    options={{
+                        headerTitle: "Journey",
+                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleAlign: "center",
+                        headerLeft: () => <View />
+                    }}
                 />
 
                 <StackTabs.Screen
                     name="Create Journey"
                     component={CreateJourney}
+                    options={{
+                        headerTitle: "Create a Journey",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                style={JourneyTabsStyle.backButtonOpacity}
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Ionicons
+                                    name={"chevron-back-outline"}
+                                    size={35}
+                                    color={"#02A2CF"}
+                                />
+                                <View
+                                    style={JourneyTabsStyle.backButtonTextView}
+                                >
+                                    <Text style={JourneyTabsStyle.buttonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
                 />
 
                 <StackTabs.Screen
                     name="Search Journey"
                     component={SearchJourney}
+                    options={{
+                        headerTitle: "Search for a Journey",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                style={JourneyTabsStyle.backButtonOpacity}
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Ionicons
+                                    name={"chevron-back-outline"}
+                                    size={35}
+                                    color={"#02A2CF"}
+                                />
+                                <View
+                                    style={JourneyTabsStyle.backButtonTextView}
+                                >
+                                    <Text style={JourneyTabsStyle.buttonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
                 />
 
                 <StackTabs.Screen

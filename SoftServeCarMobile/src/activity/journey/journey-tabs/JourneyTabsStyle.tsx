@@ -12,6 +12,16 @@ const JourneyTabsStyle = StyleSheet.create({
         alignItems: "center"
     },
 
+    blackButtonText: {
+        color: "black"
+    },
+
+    headerTitleStyle: {
+        textAlign: "center",
+        fontFamily: Font.ProximaNova.Bold,
+        fontWeight: "700"
+    },
+
     backButtonOpacity: {
         flexDirection: "row",
         justifyContent: "space-between"
@@ -29,14 +39,8 @@ const JourneyTabsStyle = StyleSheet.create({
         fontWeight: "700"
     },
 
-    blackButtonText: {
-        color: "black"
-    },
-
-    headerTitleStyle: {
-        fontFamily: Font.OpenSans.ExtraBold,
-        fontWeight: "700",
-        fontSize: 20
+    moreOptionsIcon: {
+        paddingRight: 12
     }
 });
 

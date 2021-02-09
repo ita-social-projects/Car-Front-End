@@ -40,7 +40,7 @@ const MyProfileTabs = () => {
                     name="MyProfile"
                     component={MyProfile}
                     options={{
-                        title: "",
+                        headerTitle: "",
                         headerStyle: MyProfileTabsStyle.headerStyle,
                         headerLeft: (args) => (
                             <AvatarLogoTitle {...args} user={currentUser} />
@@ -51,7 +51,7 @@ const MyProfileTabs = () => {
                     name="Preferences"
                     component={Preferences}
                     options={{
-                        title: "Preferences",
+                        headerTitle: "Preferences",
                         headerTitleAlign: "center",
                         headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
                         headerLeft: () => (
@@ -89,7 +89,7 @@ const MyProfileTabs = () => {
                     name="Details"
                     component={Details}
                     options={{
-                        title: "Details",
+                        headerTitle: "Details",
                         headerTitleAlign: "center",
                         headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
                         headerLeft: () => (
@@ -132,7 +132,7 @@ const MyProfileTabs = () => {
                     name="AddressBook"
                     component={AddressBook}
                     options={{
-                        title: "Address Book",
+                        headerTitle: "Address Book",
                         headerTitleAlign: "center",
                         headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
                         headerLeft: () => (
@@ -164,7 +164,7 @@ const MyProfileTabs = () => {
                     name="Settings"
                     component={Settings}
                     options={{
-                        title: "Settings",
+                        headerTitle: "Settings",
                         headerTitleAlign: "center",
                         headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
                         headerLeft: () => (

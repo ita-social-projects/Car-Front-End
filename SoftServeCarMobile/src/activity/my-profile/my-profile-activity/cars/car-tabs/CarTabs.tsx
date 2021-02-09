@@ -18,7 +18,7 @@ export default function CarTabs() {
                     name="Cars"
                     component={Cars}
                     options={{
-                        title: "Your Cars",
+                        headerTitle: "Your Cars",
                         headerTitleAlign: "center",
                         headerTitleStyle: CarTabsStyle.headerTitleStyle,
                         headerLeft: () => (
@@ -46,7 +46,7 @@ export default function CarTabs() {
                     name="AddCars"
                     component={AddCars}
                     options={{
-                        title: "Add a Car",
+                        headerTitle: "Add a Car",
                         headerTitleAlign: "center",
                         headerTitleStyle: CarTabsStyle.headerTitleStyle,
                         headerLeft: () => (
@@ -83,7 +83,7 @@ export default function CarTabs() {
                     name="EditCars"
                     component={EditCars}
                     options={{
-                        title: "Your Car",
+                        headerTitle: "Your Car",
                         headerTitleAlign: "center",
                         headerTitleStyle: CarTabsStyle.headerTitleStyle,
                         headerLeft: () => (
