@@ -217,15 +217,16 @@ function EditCars(navigation: any) {
                     </Text>
                     <TouchableOpacity
                         style={[EditCarsStyle.carButtonSave]}
-                        onPress={() =>
+                        onPress={() => {
                             saveCarHandle({
                                 brandId: Number(selectedBrand?.value),
                                 modelId: Number(selectedModel?.value),
                                 color: Number(selectedColor?.value),
                                 plateNumber: plateNumber,
                                 userId: Number(user?.id)
-                            })
-                        }
+                            });
+                            navigation.goBack();
+                        }}
                     >
                         <Text style={EditCarsStyle.carButtonSaveText}>
                             Save

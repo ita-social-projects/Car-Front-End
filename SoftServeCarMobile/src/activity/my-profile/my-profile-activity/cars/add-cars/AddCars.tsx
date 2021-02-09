@@ -20,6 +20,7 @@ import { CarDropDownPickerItem } from "../../../../../components/car-drop-down-p
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
+import * as navigation from "../../../../../components/navigation/Navigation";
 
 function AddCars() {
     const { user } = useContext(AuthContext);
@@ -199,15 +200,16 @@ function AddCars() {
                     </Text>
                     <TouchableOpacity
                         style={[AddCarsStyle.carButtonSave]}
-                        onPress={() =>
+                        onPress={() => {
                             saveCarHandle({
                                 brandId: Number(selectedBrand?.value),
                                 modelId: Number(selectedModel?.value),
                                 color: Number(selectedColor?.value),
                                 plateNumber: plateNumber,
                                 userId: Number(user?.id)
-                            })
-                        }
+                            });
+                            navigation.goBack();
+                        }}
                     >
                         <Text style={AddCarsStyle.carButtonSaveText}>Save</Text>
                         {loading ? (

@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useContext, useEffect } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { container } from "tsyringe";
@@ -32,23 +32,26 @@ const ChatTabs = () => {
         <View style={MyProfileTabsStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
-                        name="Messages"
-                        component={SimpleMessage}
-                        options={{
-                            headerTitle: "Messages",
-                            headerRight: () => (
-                                <TouchableOpacity
-                                    style={MessagesTabsStyle.messages}
-                                    onPress={() =>
-                                        Alert.alert("Search button was clicked")
-                                    }
-                                >
-                                    <Ionicons name={"search"} size={30} />
-                                </TouchableOpacity>
-                            )
-                        }}
-                    />
-                    <StackTabs.Screen name="Chat" component={Chat} />
+                    name="Messages"
+                    component={SimpleMessage}
+                    options={{
+                        headerTitle: "Messages",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: MessagesTabsStyle.headerTitleStyle,
+                        headerLeft: () => <View />,
+                        headerRight: () => (
+                            <TouchableOpacity
+                                style={MessagesTabsStyle.messages}
+                                onPress={() =>
+                                    Alert.alert("Search button was clicked")
+                                }
+                            >
+                                <Ionicons name={"search"} size={30} />
+                            </TouchableOpacity>
+                        )
+                    }}
+                />
+                <StackTabs.Screen name="Chat" component={Chat} />
             </StackTabs.Navigator>
         </View>
     );
