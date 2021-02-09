@@ -1,12 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
-import * as RootNavigation from "../../components/navigation/RootNavigation";
+import * as navigation from "../../components/navigation/Navigation";
 import { AuthContext } from "../auth/AuthProvider";
 import ExceptionStyle from "./ExceptionStyle";
 
 export function Exception(props: any) {
-    const navigation = useNavigation();
     const { logout } = useContext(AuthContext);
     const userMessage =
         props.route.params.errorMessage == 401
@@ -21,7 +19,7 @@ export function Exception(props: any) {
                     style={ExceptionStyle.exceptionLink}
                     onPress={() => {
                         logout();
-                        navigation.navigate("Login");
+                        navigation.navigate("Login", {});
                     }}
                 >
                     Login{" "}
@@ -35,7 +33,7 @@ export function Exception(props: any) {
                 <Text
                     style={ExceptionStyle.exceptionLink}
                     onPress={() => {
-                        RootNavigation.navigate("AppTabs", {});
+                        navigation.navigate("AppTabs", {});
                     }}
                 >
                     Back to app

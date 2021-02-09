@@ -1,15 +1,16 @@
 import { StyleSheet } from "react-native";
 
-export const headerStyle = StyleSheet.create({  
+export const headerStyle = StyleSheet.create({
     headerContainer: {
         flex: 100,
-        alignSelf: 'stretch',
+        alignSelf: "stretch"
     },
+
     pageTitle: {
         fontSize: 25,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        padding: 10,
+        textAlign: "center",
+        fontWeight: "bold",
+        padding: 10
     },
 
     headerUserAvatar: {
@@ -17,18 +18,18 @@ export const headerStyle = StyleSheet.create({
         height: 56,
         borderRadius: 50,
         borderWidth: 3,
-        borderColor: '#EEEEEE'
+        borderColor: "#EEEEEE"
     },
     headerUserInformation: {
         marginLeft: 15,
-        fontFamily: 'ProximaNova',
-        fontWeight: 'bold'
+        fontFamily: "ProximaNova",
+        fontWeight: "bold"
     },
     headerUserName: {
         lineHeight: 21,
         fontSize: 18,
         marginBottom: 8,
-        fontWeight: 'bold'
+        fontWeight: "bold"
     },
     headerUserAdditionalData: {
         lineHeight: 14,
@@ -42,71 +43,71 @@ export const headerStyle = StyleSheet.create({
     },
 
     baseContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,       
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 10
     },
 
     innerContainer: {
-        alignItems: 'center',
-        flexDirection: 'row',        
+        alignItems: "center",
+        flexDirection: "row"
     },
 
-    unreadContainer: {        
-        backgroundColor: 'lightblue',        
-        borderBottomColor: 'cornflowerblue',
-        borderBottomWidth: 1,      
+    unreadContainer: {
+        backgroundColor: "lightblue",
+        borderBottomColor: "cornflowerblue",
+        borderBottomWidth: 1
     },
 
-    readContainer: {        
+    readContainer: {
         borderBottomWidth: 1,
-        borderBottomColor: 'grey',
+        borderBottomColor: "grey"
     },
 
     captionView: {
         flex: 1,
         fontSize: 17,
         paddingLeft: 10,
-        color: '#909095',       
+        color: "#909095"
     },
 
     valueView: {
         flex: 1,
         paddingLeft: 10,
         fontSize: 20,
-        color: 'cornflowerblue',        
+        color: "cornflowerblue"
     },
 
     options: {
-       fontSize: 30,
-       fontWeight: 'bold',      
+        fontSize: 30,
+        fontWeight: "bold"
     },
 
     dateBase: {
         fontSize: 17,
-        fontWeight: 'bold',
-        color: '#909095',
+        fontWeight: "bold",
+        color: "#909095"
     },
 
     dateUnread: {
-        color: 'cornflowerblue',
+        color: "cornflowerblue"
     },
 
     commentsView: {
-        marginTop:50
+        marginTop: 50
     },
 
-    TextInputStyle:{ 
+    TextInputStyle: {
         height: 100,
         borderWidth: 2,
-        borderColor: 'black',
+        borderColor: "black",
         fontSize: 15,
         paddingLeft: 10,
-        textAlignVertical: 'top',        
+        textAlignVertical: "top"
     },
 
     commentsCaption: {
         fontSize: 17,
-        fontWeight: 'bold'
+        fontWeight: "bold"
     }
-})
+});

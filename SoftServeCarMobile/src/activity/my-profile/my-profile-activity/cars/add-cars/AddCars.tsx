@@ -7,19 +7,20 @@ import {
 } from "react-native-image-picker/src";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import "reflect-metadata";
-import { container } from 'tsyringe';
-import BrandService from '../../../../../../api-service/brand-service/BrandService';
-import CarService from '../../../../../../api-service/car-service/CarService';
-import ModelService from '../../../../../../api-service/model-service/ModelService';
-import Brand from '../../../../../../models/Brand';
-import CarDTO from '../../../../../../models/CarDTO';
-import { Color } from '../../../../../../models/Color';
-import Model from '../../../../../../models/Model';
-import { AuthContext } from '../../../../auth/AuthProvider';
-import { CarDropDownPickerItem } from '../../../../../components/car-drop-down-picker/CarDropDownItem';
-import CarDropDownPicker from '../../../../../components/car-drop-down-picker/CarDropDownPicker';
-import CarTextInput from '../../../../../components/car-text-input/CarTextInput';
-import AddCarsStyle from './AddCarsStyle';
+import { container } from "tsyringe";
+import BrandService from "../../../../../../api-service/brand-service/BrandService";
+import CarService from "../../../../../../api-service/car-service/CarService";
+import ModelService from "../../../../../../api-service/model-service/ModelService";
+import Brand from "../../../../../../models/Brand";
+import CarDTO from "../../../../../../models/CarDTO";
+import { Color } from "../../../../../../models/Color";
+import Model from "../../../../../../models/Model";
+import { AuthContext } from "../../../../auth/AuthProvider";
+import { CarDropDownPickerItem } from "../../../../../components/car-drop-down-picker/CarDropDownItem";
+import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
+import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
+import AddCarsStyle from "./AddCarsStyle";
+import * as navigation from "../../../../../components/navigation/Navigation";
 
 function AddCars() {
     const { user } = useContext(AuthContext);
@@ -199,15 +200,16 @@ function AddCars() {
                     </Text>
                     <TouchableOpacity
                         style={[AddCarsStyle.carButtonSave]}
-                        onPress={() =>
+                        onPress={() => {
                             saveCarHandle({
                                 brandId: Number(selectedBrand?.value),
                                 modelId: Number(selectedModel?.value),
                                 color: Number(selectedColor?.value),
                                 plateNumber: plateNumber,
                                 userId: Number(user?.id)
-                            })
-                        }
+                            });
+                            navigation.goBack();
+                        }}
                     >
                         <Text style={AddCarsStyle.carButtonSaveText}>Save</Text>
                         {loading ? (

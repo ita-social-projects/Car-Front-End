@@ -2,6 +2,11 @@ import { StyleSheet } from "react-native";
 import Font from "../../../../components/fonts/Font";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
+    container: {
+        paddingTop: 20,
+        paddingLeft: 17
+    },
+
     headerContainer: {
         flex: 1,
         flexDirection: "row"

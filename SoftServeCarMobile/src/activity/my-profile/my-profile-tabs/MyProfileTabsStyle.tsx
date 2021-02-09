@@ -1,25 +1,11 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
-const JourneyTabsStyle = StyleSheet.create({
-    journeyPageIcon: {
-        paddingRight: 12
-    },
+const MyProfileTabsStyle = StyleSheet.create({
+    container: { flex: 1, alignSelf: "stretch" },
 
-    requestButton: {
-        paddingRight: 17,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-
-    blackButtonText: {
-        color: "black"
-    },
-
-    headerTitleStyle: {
-        textAlign: "center",
-        fontFamily: Font.ProximaNova.Bold,
-        fontWeight: "700"
+    headerStyle: {
+        height: 120
     },
 
     backButtonOpacity: {
@@ -41,7 +27,17 @@ const JourneyTabsStyle = StyleSheet.create({
 
     moreOptionsIcon: {
         paddingRight: 12
+    },
+
+    blackButtonText: {
+        color: "black"
+    },
+
+    headerTitleStyle: {
+        fontFamily: Font.OpenSans.ExtraBold,
+        fontWeight: "700",
+        fontSize: 20
     }
 });
 
-export default JourneyTabsStyle;
+export default MyProfileTabsStyle;

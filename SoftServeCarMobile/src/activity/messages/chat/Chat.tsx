@@ -1,7 +1,7 @@
 import * as signalR from "@microsoft/signalr";
 import React from "react";
 import { View, Button, Text, TextInput } from "react-native";
-import { routes } from "../../../Environment";
+import { routes } from "../../../../Environment";
 import ChatStyle from "./ChatStyle";
 
 export interface ChatState {

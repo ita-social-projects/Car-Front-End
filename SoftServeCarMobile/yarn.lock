@@ -1716,15 +1716,15 @@
   "resolved" "https://registry.npmjs.org/acorn-walk/-/acorn-walk-6.2.0.tgz"
   "version" "6.2.0"
 
-"acorn@^6.0.0 || ^7.0.0 || ^8.0.0", "acorn@^7.1.0", "acorn@^7.4.0":
-  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
-  "resolved" "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
-  "version" "7.4.1"
-
 "acorn@^6.0.1":
   "integrity" "sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ=="
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-6.4.2.tgz"
   "version" "6.4.2"
+
+"acorn@^7.1.0", "acorn@^7.4.0":
+  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
+  "resolved" "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
+  "version" "7.4.1"
 
 "add@^2.0.6":
   "integrity" "sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU="
@@ -1984,16 +1984,6 @@
     "call-bind" "^1.0.0"
     "define-properties" "^1.1.3"
     "es-abstract" "^1.18.0-next.1"
-
-"array.prototype.flatmap@^1.2.3":
-  "integrity" "sha512-r9Z0zYoxqHz60vvQbWEdXIEtCwHF0yxaWfno9qzXeNHvfyl3BZqygmGzb84dsubyaXLH4husF+NFgMSdpZhk2Q=="
-  "resolved" "https://registry.npmjs.org/array.prototype.flatmap/-/array.prototype.flatmap-1.2.4.tgz"
-  "version" "1.2.4"
-  dependencies:
-    "call-bind" "^1.0.0"
-    "define-properties" "^1.1.3"
-    "es-abstract" "^1.18.0-next.1"
-    "function-bind" "^1.1.1"
 
 "asap@~2.0.3", "asap@~2.0.6":
   "integrity" "sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY="
@@ -3553,7 +3543,7 @@
   dependencies:
     "prettier-linter-helpers" "^1.0.0"
 
-"eslint-plugin-react-hooks@^3.0.0", "eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0":
+"eslint-plugin-react-hooks@^3.0.0":
   "integrity" "sha512-EjxTHxjLKIBWFgDJdhKKzLh5q+vjTFrqNZX36uIxWS4OfyXe5DawqPj3U5qeJ1ngLwatjzQnmR0Lz0J0YH3kxw=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-3.0.0.tgz"
   "version" "3.0.0"
@@ -3588,23 +3578,6 @@
     "string.prototype.matchall" "^4.0.2"
     "xregexp" "^4.3.0"
 
-"eslint-plugin-react@^7.21.5":
-  "integrity" "sha512-p30tuX3VS+NWv9nQot9xIGAHBXR0+xJVaZriEsHoJrASGCJZDJ8JLNM0YqKqI0AKm6Uxaa1VUHoNEibxRCMQHA=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-react/-/eslint-plugin-react-7.22.0.tgz"
-  "version" "7.22.0"
-  dependencies:
-    "array-includes" "^3.1.1"
-    "array.prototype.flatmap" "^1.2.3"
-    "doctrine" "^2.1.0"
-    "has" "^1.0.3"
-    "jsx-ast-utils" "^2.4.1 || ^3.0.0"
-    "object.entries" "^1.1.2"
-    "object.fromentries" "^2.0.2"
-    "object.values" "^1.1.1"
-    "prop-types" "^15.7.2"
-    "resolve" "^1.18.1"
-    "string.prototype.matchall" "^4.0.2"
-
 "eslint-scope@^5.0.0", "eslint-scope@^5.1.1":
   "integrity" "sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw=="
   "resolved" "https://registry.npmjs.org/eslint-scope/-/eslint-scope-5.1.1.tgz"
@@ -3630,7 +3603,7 @@
   "resolved" "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz"
   "version" "2.0.0"
 
-"eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0", "eslint@^3 || ^4 || ^5 || ^6 || ^7", "eslint@^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^5.16.0 || ^6.8.0 || ^7.2.0", "eslint@^7.19.0":
+"eslint@^7.19.0":
   "integrity" "sha512-CGlMgJY56JZ9ZSYhJuhow61lMPPjUzWmChFya71Z/jilVos7mR/jPgaEfVGgMBY5DshbKdG8Ezb8FDCHcoMEMg=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-7.19.0.tgz"
   "version" "7.19.0"
@@ -3967,14 +3940,13 @@
     "semver" "^5.1.0"
     "through2" "^2.0.0"
 
-"fbjs@*", "fbjs@^1.0.0":
-  "integrity" "sha512-MUgcMEJaFhCaF1QtWGnmq9ZDRAzECTCRAF7O6UZIlAlkTs1SasiX9aP0Iw7wfD2mJ7wDTNfg2w7u5fSCwJk1OA=="
-  "resolved" "https://registry.npmjs.org/fbjs/-/fbjs-1.0.0.tgz"
-  "version" "1.0.0"
+"fbjs@*":
+  "integrity" "sha512-dJd4PiDOFuhe7vk4F80Mba83Vr2QuK86FoxtgPmzBqEJahncp+13YCmfoa53KHCo6OnlXLG7eeMWPfB5CrpVKg=="
+  "resolved" "https://registry.npmjs.org/fbjs/-/fbjs-3.0.0.tgz"
+  "version" "3.0.0"
   dependencies:
-    "core-js" "^2.4.1"
+    "cross-fetch" "^3.0.4"
     "fbjs-css-vars" "^1.0.0"
-    "isomorphic-fetch" "^2.1.1"
     "loose-envify" "^1.0.0"
     "object-assign" "^4.1.0"
     "promise" "^7.1.1"
@@ -3987,6 +3959,20 @@
   "version" "0.8.17"
   dependencies:
     "core-js" "^1.0.0"
+    "isomorphic-fetch" "^2.1.1"
+    "loose-envify" "^1.0.0"
+    "object-assign" "^4.1.0"
+    "promise" "^7.1.1"
+    "setimmediate" "^1.0.5"
+    "ua-parser-js" "^0.7.18"
+
+"fbjs@^1.0.0":
+  "integrity" "sha512-MUgcMEJaFhCaF1QtWGnmq9ZDRAzECTCRAF7O6UZIlAlkTs1SasiX9aP0Iw7wfD2mJ7wDTNfg2w7u5fSCwJk1OA=="
+  "resolved" "https://registry.npmjs.org/fbjs/-/fbjs-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "core-js" "^2.4.1"
+    "fbjs-css-vars" "^1.0.0"
     "isomorphic-fetch" "^2.1.1"
     "loose-envify" "^1.0.0"
     "object-assign" "^4.1.0"
@@ -5783,7 +5769,7 @@
     "json-schema" "0.2.3"
     "verror" "1.10.0"
 
-"jsx-ast-utils@^2.2.3", "jsx-ast-utils@^2.4.1 || ^3.0.0":
+"jsx-ast-utils@^2.2.3":
   "integrity" "sha512-z1xSldJ6imESSzOjd3NNkieVJKRlKYSOtMG8SFyCj2FIrvSaSuli/WjpBkEzCBoR9bYYYFgqJw61Xhu7Lcgk+w=="
   "resolved" "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-2.4.1.tgz"
   "version" "2.4.1"
@@ -7522,6 +7508,13 @@
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
+"react-native-animatable@1.3.3":
+  "integrity" "sha512-2ckIxZQAsvWn25Ho+DK3d1mXIgj7tITkrS4pYDvx96WyOttSvzzFeQnM2od0+FUMzILbdHDsDEqZvnz1DYNQ1w=="
+  "resolved" "https://registry.npmjs.org/react-native-animatable/-/react-native-animatable-1.3.3.tgz"
+  "version" "1.3.3"
+  dependencies:
+    "prop-types" "^15.7.2"
+
 "react-native-animated-loader@0.0.8":
   "integrity" "sha512-NFdAbMABoS1Gfv4BGYmVKAAK++y1cAPjooJefRAAOVC0ehUGsWpzu+AwvgJPmbTCAJ6xwXGzpDdvP1n/Bw/6ZA=="
   "resolved" "https://registry.npmjs.org/react-native-animated-loader/-/react-native-animated-loader-0.0.8.tgz"
@@ -7637,6 +7630,14 @@
   dependencies:
     "deprecated-react-native-listview" "0.0.5"
     "prop-types" "^15.6.0"
+
+"react-native-modal@^11.6.1":
+  "integrity" "sha512-Xsd79nuBvbLOYwpRuur4btwJFQ3WkV9zp5LbAREidUtjl/Ajlp4QbNBx888FOPjo+EpOO3+U0riCRqs1dkdIzQ=="
+  "resolved" "https://registry.npmjs.org/react-native-modal/-/react-native-modal-11.6.1.tgz"
+  "version" "11.6.1"
+  dependencies:
+    "prop-types" "^15.6.2"
+    "react-native-animatable" "1.3.3"
 
 "react-native-paper@4.7.1":
   "integrity" "sha512-37xJgCcTAELFBvE7+l9xcMW3wh2/dvrOs7TeRLIpnHsjfa+m4h+vvzb8q0YIUJOKtHcJ4cY77NHUr6JMGzNHFw=="
@@ -8127,7 +8128,7 @@
   "resolved" "https://registry.npmjs.org/resolve-url/-/resolve-url-0.2.1.tgz"
   "version" "0.2.1"
 
-"resolve@^1.10.0", "resolve@^1.12.0", "resolve@^1.13.1", "resolve@^1.15.1", "resolve@^1.17.0", "resolve@^1.18.1", "resolve@^1.3.2", "resolve@^1.5.0", "resolve@^1.8.1":
+"resolve@^1.10.0", "resolve@^1.12.0", "resolve@^1.13.1", "resolve@^1.15.1", "resolve@^1.17.0", "resolve@^1.3.2", "resolve@^1.5.0", "resolve@^1.8.1":
   "integrity" "sha512-rArEXAgsBG4UgRGcynxWIWKFvh/XZCcS8UJdHhwy91zwAvCZIbcs+vAbflgBnNjYMs/i/i+/Ux6IZhML1yPvxg=="
   "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.19.0.tgz"
   "version" "1.19.0"

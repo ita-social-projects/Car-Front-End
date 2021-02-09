@@ -1,14 +1,17 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import * as RootNavigation from "../../../../../../components/navigation/RootNavigation";
+import * as navigation from "../../../../../../components/navigation/Navigation";
 import TouchableJourneyStyle from "./TouchableJourneyStyle";
 
 export default function TouchableJourney() {
     return (
         <View>
             <TouchableOpacity
-                onPress={() => { RootNavigation.navigate("Journey Page", { journeyId: 1 }); }}>
+                onPress={() => {
+                    navigation.navigate("Journey Page", { journeyId: 1 });
+                }}
+            >
                 <View style={TouchableJourneyStyle.component}>
                     <View style={TouchableJourneyStyle.header}>
                         <Image
@@ -17,7 +20,7 @@ export default function TouchableJourney() {
                         />
                         <View style={TouchableJourneyStyle.driverBlock}>
                             <Text style={TouchableJourneyStyle.driverName}>
-                                Maria Kruselnytska's journey
+                                Maria Kruselnytska"s journey
                             </Text>
                             <Text style={TouchableJourneyStyle.driverPosition}>
                                 Experience Designer
