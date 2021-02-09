@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { AuthContext } from "../../../auth/AuthProvider";
 import DetailsStyle from "./DetailsStyle";
 
@@ -7,7 +8,7 @@ const Details = () => {
     const { user, logout } = useContext(AuthContext);
 
     return (
-        <View style={DetailsStyle.mainContainer}>
+        <ScrollView style={DetailsStyle.mainContainer}>
             <View style={DetailsStyle.detailsContainer}>
                 <Text style={DetailsStyle.captionView}>Position</Text>
                 <Text style={DetailsStyle.valueView}>{user?.position}</Text>
@@ -35,7 +36,7 @@ const Details = () => {
                     }}
                 />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
