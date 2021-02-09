@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import AvatarInitials from "./AvatarInitials";
-import { headerStyle } from "./NotificationStyle";
+import NotificationStyle from "./NotificationStyle";
 
 const AvatarComponent = (props: any) => {
     const userService = container.resolve(UserService);
@@ -12,7 +12,7 @@ const AvatarComponent = (props: any) => {
 
     const [avatar, setAvatar] = useState(
         <ActivityIndicator
-            style={headerStyle.headerUserAvatar}
+            style={NotificationStyle.headerUserAvatar}
             size="large"
             color="black"
         />
@@ -28,7 +28,7 @@ const AvatarComponent = (props: any) => {
                             source={{
                                 uri: "data:image/png;base64," + byteOfImage
                             }}
-                            style={headerStyle.headerUserAvatar}
+                            style={NotificationStyle.headerUserAvatar}
                         />
                     );
                     setIsImage(false);
@@ -36,7 +36,7 @@ const AvatarComponent = (props: any) => {
                     setAvatar(
                         <Image
                             source={require("../../../assets/images/default-user-photo.jpg")}
-                            style={headerStyle.headerUserAvatar}
+                            style={NotificationStyle.headerUserAvatar}
                         />
                     );
                 }
@@ -46,7 +46,7 @@ const AvatarComponent = (props: any) => {
                 setAvatar(
                     <Image
                         source={require("../../../assets/images/default-user-photo.jpg")}
-                        style={headerStyle.headerUserAvatar}
+                        style={NotificationStyle.headerUserAvatar}
                     />
                 );
             });

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const headerStyle = StyleSheet.create({
+const NotificationStyle = StyleSheet.create({
     headerContainer: {
         flex: 100,
         alignSelf: "stretch",
@@ -114,3 +114,5 @@ export const headerStyle = StyleSheet.create({
         fontWeight: "bold"
     }
 });
+
+export default NotificationStyle;

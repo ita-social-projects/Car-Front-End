@@ -8,7 +8,7 @@ import { routes } from "../../../Environment";
 import { Notification } from "../../../models/Notification";
 import { AuthContext } from "../../activity/auth/AuthProvider";
 import NotificationComponent from "./NotificationComponent";
-import { headerStyle } from "./NotificationStyle";
+import NotificationStyle from "./NotificationStyle";
 
 export default function Notifications(props: any) {
     const { user, unreadNumber } = useContext(AuthContext);
@@ -43,7 +43,7 @@ export default function Notifications(props: any) {
     }, []);
 
     return (
-        <ScrollView style={headerStyle.headerContainer}>
+        <ScrollView style={NotificationStyle.headerContainer}>
             {notifications.map((item, key) => (
                 <>
                     <NotificationComponent item={item} key={key} />
