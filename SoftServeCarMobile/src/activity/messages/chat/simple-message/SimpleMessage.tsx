@@ -43,10 +43,16 @@ const SimpleMessage = (props: {
 
     return (
         <View style={SimpleMessageStyle.container}>
-            <Button title="Chat" color="#000000" onPress={()=>{navigation.navigate("Chat", { })}}/>
+            <Button
+                title="Chat"
+                color="#000000"
+                onPress={() => {
+                    navigation.navigate("Chat", {});
+                }}
+            />
             <FlatList
                 data={data}
-                keyExtractor={({ id }) => '' + id}
+                keyExtractor={({ id }) => "" + id}
                 renderItem={({ item }) => (
                     <View style={SimpleMessageStyle.main}>
                         <View style={SimpleMessageStyle.button}>
