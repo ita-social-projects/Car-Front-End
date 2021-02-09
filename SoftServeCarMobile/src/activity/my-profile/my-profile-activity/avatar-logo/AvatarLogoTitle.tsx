@@ -52,22 +52,24 @@ function AvatarLogoTitle(props: any) {
     }, []);
 
     return (
-        <View style={AvatarLogoTitleStyle.headerContainer}>
-            {avatar}
-            <View style={AvatarLogoTitleStyle.headerUserInformation}>
-                <Text style={AvatarLogoTitleStyle.headerUserName}>
-                    {Object.entries(props.user).length
-                        ? props.user.name + " " + props.user.surname
-                        : null}
-                </Text>
-                <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
-                    {Object.entries(props.user).length
-                        ? props.user.position
-                        : null}
-                </Text>
-                <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
-                    123 rides, 2 badges
-                </Text>
+        <View style={AvatarLogoTitleStyle.container}>
+            <View style={AvatarLogoTitleStyle.headerContainer}>
+                {avatar}
+                <View style={AvatarLogoTitleStyle.headerUserInformation}>
+                    <Text style={AvatarLogoTitleStyle.headerUserName}>
+                        {Object.entries(props.user).length
+                            ? props.user.name + " " + props.user.surname
+                            : null}
+                    </Text>
+                    <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
+                        {Object.entries(props.user).length
+                            ? props.user.position
+                            : null}
+                    </Text>
+                    <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
+                        123 rides, 2 badges
+                    </Text>
+                </View>
             </View>
         </View>
     );

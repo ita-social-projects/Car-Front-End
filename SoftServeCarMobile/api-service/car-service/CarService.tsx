@@ -25,11 +25,11 @@ class CarService {
     }
 
     update(id: CarDTO) {
-        return this.apiService.put<Car>(this.routePrefix + '/' + id);
+        return this.apiService.put<Car>(this.routePrefix + "/" + id);
     }
 
     getById(id: number) {
-        return this.apiService.get<Car>(this.routePrefix + '/' + id);
+        return this.apiService.get<Car>(this.routePrefix + "/" + id);
     }
 
     getAll(id: number) {

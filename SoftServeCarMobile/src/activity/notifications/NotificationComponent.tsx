@@ -2,77 +2,76 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Alert, TouchableOpacity } from 'react-native';
 import { headerStyle } from './NotificationStyle';
 import { Modal } from 'react-native';
-import { Notification, NotificationType } from '../../../models/Notification';
-import AvatarComponent from './AvatarComponent';
+import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
-import { container } from 'tsyringe';
-import NotificationsService from '../../../api-service/notificationsService/NotificationsService';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { container } from "tsyringe";
+import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import { Notification, NotificationType } from "../../../models/Notification";
+import AvatarComponent from "./AvatarComponent";
+import { headerStyle } from "./NotificationStyle";
 
-
-const NotificationComponent = (props:any) => {
-    const [modalTitle, setModalTitle] = useState('default title');
+const NotificationComponent = (props: any) => {
+    const [modalTitle, setModalTitle] = useState("default title");
     const notificationService = container.resolve(NotificationsService);
-    const [requestType, setRequestType] = useState('');
+    const [requestType, setRequestType] = useState("");
     const [isModalVisible, setModalVisible] = useState(false);
 
     const getNotificationDescription = () => {
-        switch(props.item.notificationType) {
-
+        switch (props.item.notificationType) {
             case NotificationType.PassengerApply:
-                setModalTitle('NEW APPLICANT');
-                setRequestType('asked to join your journey');
+                setModalTitle("NEW APPLICANT");
+                setRequestType("asked to join your journey");
                 break;
 
             case NotificationType.ApplicationApproval:
-                setModalTitle('APPLICATION APPROVAL');
-                setRequestType('approved your application');
+                setModalTitle("APPLICATION APPROVAL");
+                setRequestType("approved your application");
                 break;
 
             case NotificationType.AcceptedInvitation:
-                setModalTitle('NEW PARTICIPANT');
-                setRequestType('accepted your invitation');
+                setModalTitle("NEW PARTICIPANT");
+                setRequestType("accepted your invitation");
                 break;
 
             case NotificationType.HRMarketingMessage:
-                setModalTitle('HR NEWS');
-                setRequestType('marketing news');
+                setModalTitle("HR NEWS");
+                setRequestType("marketing news");
                 break;
 
             case NotificationType.HRMarketingSurvey:
-                setModalTitle('HR SURVEY');
-                setRequestType('marketing survey');
+                setModalTitle("HR SURVEY");
+                setRequestType("marketing survey");
                 break;
 
             case NotificationType.JourneyCancellation:
-                setModalTitle('JOURNEY CANCELLATION');
-                setRequestType('canceled the journey');
+                setModalTitle("JOURNEY CANCELLATION");
+                setRequestType("canceled the journey");
                 break;
 
             case NotificationType.JourneyDetailsUpdate:
-                setModalTitle('JOURNEY UPDATE');
-                setRequestType('updated journey details');
+                setModalTitle("JOURNEY UPDATE");
+                setRequestType("updated journey details");
                 break;
 
             case NotificationType.JourneyInvitation:
-                setModalTitle('JOURNEY INVITATION');
-                setRequestType('invites you to join the journey');
+                setModalTitle("JOURNEY INVITATION");
+                setRequestType("invites you to join the journey");
                 break;
 
             case NotificationType.PassengerWithdrawal:
-                setModalTitle('PASSENGER WITHDRAWAL');
-                setRequestType('withdrawn from the journey');
+                setModalTitle("PASSENGER WITHDRAWAL");
+                setRequestType("withdrawn from the journey");
                 break;
 
             case NotificationType.RejectedInvitation:
-                setModalTitle('INVITATION REJECTION');
-                setRequestType('rejected your invitation');
+                setModalTitle("INVITATION REJECTION");
+                setRequestType("rejected your invitation");
                 break;
 
             default:
                 Alert.alert("WRONG NOTIFICATION TYPE");
         }
-    }
+    };
 
     useEffect(() => {
         getNotificationDescription();
@@ -83,11 +82,11 @@ const NotificationComponent = (props:any) => {
         notification = {
             id: props.item.id,
             userId: 0,
-            userName: '',
-            position: '',
-            description: '',
+            userName: "",
+            position: "",
+            description: "",
             isRead: true,
-            createAt: '',
+            createAt: "",
             receiverId: 0,
             journeyId: 0,
             userColor: '',
@@ -106,23 +105,32 @@ const NotificationComponent = (props:any) => {
     };
 
     return (
-        <View style={[headerStyle.baseContainer, props.item.isRead == true ? headerStyle.readContainer: headerStyle.unreadContainer]} >
+        <View
+            style={[
+                headerStyle.baseContainer,
+                props.item.isRead == true
+                    ? headerStyle.readContainer
+                    : headerStyle.unreadContainer
+            ]}
+        >
             <AvatarComponent
-            userId = {props.item.userId}
-            userName = {props.item.userName}
-            userColor = {props.item.userColor}
+                userId={props.item.userId}
+                userName={props.item.userName}
+                userColor={props.item.userColor}
             />
-            <View style = {headerStyle.headerContainer}>
-                <View style = {headerStyle.innerContainer}>
-                    <Text style={headerStyle.valueView} onPress={ showUserInfo.bind(this, props) }>{props.item.userName}</Text>
+            <View style={headerStyle.headerContainer}>
+                <View style={headerStyle.innerContainer}>
+                    <Text
+                        style={headerStyle.valueView}
+                        onPress={showUserInfo.bind(this, props)}
+                    >
+                        {props.item.userName}
+                    </Text>
                     <TouchableOpacity>
-                        <Ionicons
-                            name={"ellipsis-horizontal"}
-                            size={30}
-                        />
+                        <Ionicons name={"ellipsis-horizontal"} size={30} />
                     </TouchableOpacity>
                 </View>
-                <View style = {headerStyle.innerContainer}>
+                <View style={headerStyle.innerContainer}>
                     <Text style={headerStyle.captionView}>{requestType}</Text>
                     <Text style={[headerStyle.dateBase, props.item.isRead == true ? headerStyle.dateBase : headerStyle.dateUnread]}>{props.item.createAt}</Text>
                 </View>
@@ -151,24 +159,66 @@ const NotificationComponent = (props:any) => {
                                     />
                                     </TouchableOpacity>
                                 </View>
-                            <Text style ={{fontSize: 14, color:'grey', paddingLeft: 10 }}>{props.item.position} </Text>
-                            <Text style ={{fontSize: 14, color:'grey', paddingLeft: 10 }}>7 rides 1 badge</Text>
+                                <Text
+                                    style={{
+                                        fontSize: 14,
+                                        color: "grey",
+                                        paddingLeft: 10
+                                    }}
+                                >
+                                    {props.item.position}{" "}
+                                </Text>
+                                <Text
+                                    style={{
+                                        fontSize: 14,
+                                        color: "grey",
+                                        paddingLeft: 10
+                                    }}
+                                >
+                                    7 rides 1 badge
+                                </Text>
                             </View>
                         </View>
-                        <View style ={{margin: 30, padding:20, borderColor: 'grey', borderWidth: 1, height: 80, width: 300, alignSelf: 'center'}}>
-                            <Text style ={{fontSize: 16, color: 'black'}}>{props.item.description}</Text>
+                        <View
+                            style={{
+                                margin: 30,
+                                padding: 20,
+                                borderColor: "grey",
+                                borderWidth: 1,
+                                height: 80,
+                                width: 300,
+                                alignSelf: "center"
+                            }}
+                        >
+                            <Text style={{ fontSize: 16, color: "black" }}>
+                                {props.item.description}
+                            </Text>
                         </View>
-                        <View style={{padding: 50}}>
-                            <Button color = 'black' title="Accept" onPress={toggleModal} />
+                        <View style={{ padding: 50 }}>
+                            <Button
+                                color="black"
+                                title="Accept"
+                                onPress={toggleModal}
+                            />
                         </View>
                         <View>
-                            <Text style={{textAlign: 'center', fontSize: 16, color: '#EC6400', fontWeight: 'bold'}} onPress={toggleModal}>Decline</Text>
+                            <Text
+                                style={{
+                                    textAlign: "center",
+                                    fontSize: 16,
+                                    color: "#EC6400",
+                                    fontWeight: "bold"
+                                }}
+                                onPress={toggleModal}
+                            >
+                                Decline
+                            </Text>
                         </View>
                     </View>
                 </Modal>
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default NotificationComponent
+export default NotificationComponent;

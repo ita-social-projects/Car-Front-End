@@ -16,7 +16,7 @@ const PreferencesStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 17,
         alignItems: "flex-start",
-        justifyContent: "space-between",
+        justifyContent: "space-between"
     },
 
     valueView: {

@@ -1,4 +1,4 @@
-export const environment = {
+export const environment = 
     url: 'https://car-project.azurewebsites.net/'
 };
 

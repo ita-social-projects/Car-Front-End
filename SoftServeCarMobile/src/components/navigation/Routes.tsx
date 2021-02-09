@@ -6,7 +6,7 @@ import { AuthContext } from "../../activity/auth/AuthProvider";
 import { Exception } from "../../activity/exception/Exception";
 import { Login } from "../../activity/login/Login";
 import { AppTabs } from "./app-tabs/AppTabs";
-import { navigationRef } from "./RootNavigation";
+import { navigationRef } from "./Navigation";
 
 interface RoutesProps {}
 

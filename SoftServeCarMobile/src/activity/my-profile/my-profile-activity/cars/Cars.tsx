@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, Image, Text, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React, { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, Image, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
-import { container } from 'tsyringe';
-import CarService from '../../../../../api-service/car-service/CarService';
-import CarInfoDTO from '../../../../../models/CarInfoDTO';
-import { AuthContext } from '../../../../activity/auth/AuthProvider';
-import TouchableNavigationCard from '../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard';
-import CarsStyle from './CarsStyle';
+import { container } from "tsyringe";
+import CarService from "../../../../../api-service/car-service/CarService";
+import CarInfoDTO from "../../../../../models/CarInfoDTO";
+import { AuthContext } from "../../../../activity/auth/AuthProvider";
+import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
+import CarsStyle from "./CarsStyle";
 
 export default function Cars(props: any) {
     const { user } = useContext(AuthContext);
@@ -59,37 +58,61 @@ export default function Cars(props: any) {
     }, []);
 
     return (
-        <View style={CarsStyle.container}>
-            <ScrollView contentContainerStyle={[CarsStyle.container, loading && CarsStyle.loading]}>
-                <View style={[CarsStyle.carContainer, loading && CarsStyle.loading]}>
-                    {loading ? <ActivityIndicator size={40} color="black" /> :
-                        cars.length ?
-                            <>
-                                {cars.map(item => {
-                                    return (
-                                        <View key={item.id}>
-                                            <TouchableNavigationCard   
-                                                carId={item.id}                                              
-                                                navigationName="EditCars"
-                                                cardName="Edit a car"
-                                                picture={item.byteOfImage ?
-                                                    <Image source={{ uri: 'data:image/png;base64,' + item.byteOfImage }}
-                                                        style={[CarsStyle.carAvatar]} /> :
-                                                    <Ionicons name={'car'} size={20} color="#414045" />}>
-                                                <Text style={CarsStyle.brand}>
-                                                    {item.brandName}
-                                                </Text>
-                                                <Text style={CarsStyle.model}>
-                                                    {item.modelName}
-                                                </Text>
-                                            </TouchableNavigationCard>
-                                        </View>
-                                    )
-                                })}
-                                {addCarElement}
-                            </> : addCarElement}
-                </View>
-            </ScrollView>
-        </View>
+        <ScrollView
+            style={CarsStyle.container}
+            contentContainerStyle={loading && CarsStyle.loading}
+        >
+            <View
+                style={[CarsStyle.carContainer, loading && CarsStyle.loading]}
+            >
+                {loading ? (
+                    <ActivityIndicator size={40} color="black" />
+                ) : cars.length ? (
+                    <>
+                        {cars.map((item) => {
+                            return (
+                                <View key={item.id}>
+                                    <TouchableNavigationCard
+                                        carId={item.id}
+                                        navigationName="EditCars"
+                                        cardName="Edit a car"
+                                        picture={
+                                            item.byteOfImage ? (
+                                                <Image
+                                                    source={{
+                                                        uri:
+                                                            "data:image/png;base64," +
+                                                            item.byteOfImage
+                                                    }}
+                                                    style={[
+                                                        CarsStyle.carAvatar
+                                                    ]}
+                                                />
+                                            ) : (
+                                                <Ionicons
+                                                    name={"car"}
+                                                    size={20}
+                                                    color="#414045"
+                                                />
+                                            )
+                                        }
+                                    >
+                                        <Text style={CarsStyle.brand}>
+                                            {item.brandName}
+                                        </Text>
+                                        <Text style={CarsStyle.model}>
+                                            {item.modelName}
+                                        </Text>
+                                    </TouchableNavigationCard>
+                                </View>
+                            );
+                        })}
+                        {addCarElement}
+                    </>
+                ) : (
+                    addCarElement
+                )}
+            </View>
+        </ScrollView>
     );
 }
