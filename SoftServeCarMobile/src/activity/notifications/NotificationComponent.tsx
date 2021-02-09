@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Button, Text, TouchableOpacity, View } from "react-native";
-import Modal from "react-native-modal";
+import React, { useEffect, useState } from 'react';
+import { View, Text, Button, Alert, TouchableOpacity } from 'react-native';
+import { headerStyle } from './NotificationStyle';
+import { Modal } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
@@ -76,8 +77,8 @@ const NotificationComponent = (props: any) => {
         getNotificationDescription();
     });
 
-    const updateNotification = () => {
-        let notification: Notification = null;
+    const updateNotification =() => {
+        let notification: Notification;
         notification = {
             id: props.item.id,
             userId: 0,
@@ -88,11 +89,11 @@ const NotificationComponent = (props: any) => {
             createAt: "",
             receiverId: 0,
             journeyId: 0,
-            userColor: "",
+            userColor: '',
             notificationType: 1
-        };
+        }
         notificationService.updateNotification(notification);
-    };
+    }
 
     const showUserInfo = () => {
         toggleModal();
@@ -131,81 +132,31 @@ const NotificationComponent = (props: any) => {
                 </View>
                 <View style={headerStyle.innerContainer}>
                     <Text style={headerStyle.captionView}>{requestType}</Text>
-                    <Text
-                        style={[
-                            headerStyle.dateBase,
-                            props.item.isRead == true
-                                ? headerStyle.dateBase
-                                : headerStyle.dateUnread
-                        ]}
-                    >
-                        {props.item.createAt}
-                    </Text>
+                    <Text style={[headerStyle.dateBase, props.item.isRead == true ? headerStyle.dateBase : headerStyle.dateUnread]}>{props.item.createAt}</Text>
                 </View>
             </View>
-            <View>
-                <Modal
-                    isVisible={isModalVisible}
-                    coverScreen={true}
-                    backdropColor={"white"}
-                    backdropOpacity={1}
-                    style={{
-                        borderRadius: 15,
-                        borderWidth: 1,
-                        borderColor: "grey"
-                    }}
-                >
-                    <View style={{ flex: 1, alignSelf: "stretch" }}>
-                        <View style={headerStyle.baseContainer}>
-                            <Text
-                                style={{
-                                    fontWeight: "bold",
-                                    fontSize: 20,
-                                    flex: 1
-                                }}
-                            >
-                                {modalTitle}
-                            </Text>
-                            <Text
-                                style={{
-                                    fontWeight: "bold",
-                                    fontSize: 20,
-                                    color: "cadetblue"
-                                }}
-                            >
-                                Snooze
-                            </Text>
+            <View >
+                <Modal visible={isModalVisible} style={{borderRadius: 15,borderWidth: 1, borderColor: 'grey'}}>
+                    <View style={{flex: 1, alignSelf: 'stretch'}}>
+                        <View style= {headerStyle.baseContainer}>
+                            <Text style ={{fontWeight:'bold', fontSize: 20, flex:1 }}>{modalTitle}</Text>
+                            <Text style ={{fontWeight:'bold', fontSize: 20, color: 'cadetblue' }}>Snooze</Text>
                         </View>
-                        <View style={headerStyle.baseContainer}>
+                        <View style= {headerStyle.baseContainer}>
                             <AvatarComponent
-                                userId={props.item.userId}
-                                userName={props.item.userName}
-                                userColor={props.item.userColor}
+                            userId = {props.item.userId}
+                            userName = {props.item.userName}
+                            userColor = {props.item.userColor}
                             />
-                            <View>
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        alignSelf: "stretch"
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                            fontWeight: "bold",
-                                            fontSize: 20,
-                                            color: "cadetblue",
-                                            paddingLeft: 10
-                                        }}
-                                    >
-                                        {props.item.userName}{" "}
-                                    </Text>
+                            <View >
+                                <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'stretch'}}>
+                                    <Text style ={{fontWeight:'bold', fontSize: 20, color: 'cadetblue', paddingLeft: 10}}>{props.item.userName} </Text>
                                     <TouchableOpacity>
-                                        <Ionicons
-                                            name={"ellipsis-horizontal"}
-                                            size={30}
-                                            style={{ marginLeft: 80 }}
-                                        />
+                                    <Ionicons
+                                        name={"ellipsis-horizontal"}
+                                        size={30}
+                                        style = {{marginLeft: 80}}
+                                    />
                                     </TouchableOpacity>
                                 </View>
                                 <Text
