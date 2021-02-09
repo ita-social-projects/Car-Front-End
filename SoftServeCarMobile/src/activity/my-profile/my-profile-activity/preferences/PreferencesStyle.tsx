@@ -12,24 +12,23 @@ const PreferencesStyle = StyleSheet.create({
     },
 
     captionView: {
-        flex: 9,
+        flex: 8,
         fontWeight: "bold",
         fontSize: 17,
         alignItems: "flex-start",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
 
     valueView: {
         flex: 1,
-        paddingLeft: 10,
+        paddingLeft: 5,
         fontSize: 20,
-        alignItems: "flex-start",
+        alignItems: "flex-end",
         justifyContent: "space-between"
     },
 
     switchStyle: {
         flex: 1,
-        fontSize: 20,
         alignItems: "flex-start",
         justifyContent: "space-between",
         transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
@@ -44,7 +43,7 @@ const PreferencesStyle = StyleSheet.create({
         borderWidth: 2,
         borderColor: "black",
         fontSize: 15,
-        paddingLeft: 10,
+        paddingLeft: 5,
         textAlignVertical: "top"
     },
 
