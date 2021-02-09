@@ -13,9 +13,9 @@ function Input(props: any) {
                     {...props}
                     style={[
                         CarTextInputStyle.textInputStyle,
-                        props.error && { borderColor: "red" }
+                        props.error && {borderColor: "red"}
                     ]}
-                ></TextInput>
+                />
             </View>
             {props.errorText && (
                 <Text style={CarTextInputStyle.errorText}>
@@ -27,7 +27,7 @@ function Input(props: any) {
 }
 
 function CarTextInput(props: any) {
-    const { handleSubmit, control, errors } = useForm();
+    const {handleSubmit, control, errors} = useForm();
 
     return (
         <Controller
@@ -35,13 +35,14 @@ function CarTextInput(props: any) {
             rules={props.rules}
             defaultValue=""
             name="name"
-            render={({ onChange, value }) => (
+            render={({onChange, value}) => (
                 <Input
                     onChangeText={(text: string) => {
                         onChange(text);
                         props.onChangeText(text, Boolean(errors?.name));
                     }}
-                    onBlur={handleSubmit(() => {})}
+                    onBlur={handleSubmit(() => {
+                    })}
                     value={value}
                     placeholder={props.placeHolder}
                     error={errors?.name}
@@ -51,4 +52,5 @@ function CarTextInput(props: any) {
         />
     );
 }
+
 export default CarTextInput;
