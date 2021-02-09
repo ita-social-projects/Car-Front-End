@@ -46,9 +46,23 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                 inactiveTintColor: "#AAA9AE"
             }}
         >
-            <Tabs.Screen name="Messages" component={Messages} />
-            <Tabs.Screen name="MyProfileTabs" component={MyProfileTabs} />
-            <Tabs.Screen name="JourneyTabs" component={JourneyTabs} />
+            <Tabs.Screen
+                name="Messages"
+                component={Messages}
+                options={{ tabBarLabel: "Messages" }}
+            />
+            <Tabs.Screen
+                options={{ tabBarLabel: "My Profile" }}
+                name="MyProfileTabs"
+                component={MyProfileTabs}
+            />
+            <Tabs.Screen
+                options={{
+                    tabBarLabel: "Journey"
+                }}
+                name="JourneyTabs"
+                component={JourneyTabs}
+            />
             <Tabs.Screen name="Notifications" component={Notifications} />
         </Tabs.Navigator>
     );
