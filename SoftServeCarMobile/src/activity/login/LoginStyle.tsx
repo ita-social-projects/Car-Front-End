@@ -19,7 +19,7 @@ const LoginStyle = StyleSheet.create({
 
     loginPageTextName: {
         fontFamily: ProximaNova.Bold,
-        fontSize: 30,
+        fontSize: 28,
         textTransform: "uppercase",
         margin: 5,
         letterSpacing: 0.2
