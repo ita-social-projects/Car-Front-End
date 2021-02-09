@@ -7,6 +7,12 @@ const JourneyTabsStyle = StyleSheet.create({
     paddingRight: 12,
   },
 
+  requestButton: {
+    paddingRight: 17,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   backButtonOpacity: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -17,7 +23,7 @@ const JourneyTabsStyle = StyleSheet.create({
     justifyContent: "center",
   },
 
-  backButtonText: {
+  buttonText: {
     color: "#02A2CF",
     fontFamily: Font.OpenSans.ExtraBold,
     fontSize: 20,

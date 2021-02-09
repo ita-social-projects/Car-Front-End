@@ -1,11 +1,15 @@
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import TouchableCard from '../segment-control-activities/touchable/card/TouchableCard';
 import TouchableMapBar from '../segment-control-activities/touchable/map-bar/TouchableMapBar';
 import SearchJouneyStyle from './SearchJouneyStyle';
 
 function SearchJourney() {
+
+    const navigation = useNavigation();
+
     return (
         <ScrollView style={SearchJouneyStyle.container}>
             <View style={SearchJouneyStyle.topInputContainer}>
@@ -68,6 +72,14 @@ function SearchJourney() {
                 angle="0"
                 address="Trifon Kunev 26, Sofia"
                 addressFontColor="#909095" />
+            <View style={SearchJouneyStyle.buttonsContainer}>
+                <View style={SearchJouneyStyle.button}>
+                    <Button color='#000000' title='OK' onPress={() => { navigation.navigate('OK Search Result') }}/>
+                </View>
+                <View style={SearchJouneyStyle.button}>
+                    <Button color='#000000' title='BAD' onPress={() => { navigation.navigate('Bad Search Result') }}/>
+                </View>
+            </View>
         </ScrollView>
     )
 }
