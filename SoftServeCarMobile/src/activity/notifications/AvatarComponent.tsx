@@ -19,7 +19,7 @@ const AvatarComponent = (props:any) => {
                     if (!result.data) {
                         setAvatar(<Image source={{ uri: 'data:image/png;base64,' + byteOfImage }}
                             style={headerStyle.headerUserAvatar} />)
-                        //setIsImage(true)
+                        setIsImage(false)
                     }
                     else {
                         setAvatar(<Image source={require('../../../assets/images/default-user-photo.jpg')}

@@ -15,14 +15,14 @@ const notificationsService = container.resolve(NotificationsService);
 
 export const AuthContext = React.createContext<{
   user: User;
-  unreadNumber: String;
+  unreadNumber: number;
   login: () => void;
   logout: () => void;
   loadStorageUser: () => void;
   getUnreadNumber: () => void;
 }>({
   user: null,
-  unreadNumber: '',
+  unreadNumber: 0,
   login: () => {},
   logout: () => {},
   loadStorageUser: () => {},
@@ -33,7 +33,7 @@ interface AuthProviderProps {}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>(null);
-  const [unreadNumber, setUnreadNumber] = useState<String>('');
+  const [unreadNumber, setUnreadNumber] = useState(0);
 
   return (
     <AuthContext.Provider
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               RootNavigation.navigate("Login", {resetIndicator: true});
               return;
             }                    
-            const user: User = {
+            const tempUser: User = {
               email: userGraph.mail! || userGraph.userPrincipalName!,
               name: userGraph.givenName,
               surname: userGraph.surname,
@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               byteOfImage: '',
               hireDate: new Date(),
             }
-            const dbUser = await loginService.loginUser(user); 
+            const dbUser = await loginService.loginUser(tempUser); 
             if(!dbUser.data?.token){
               RootNavigation.navigate("Login", {resetIndicator: true});
               return;
@@ -91,7 +91,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           if(user)
           {
             const number = await notificationsService.getUnreadNotificationsNumber(Number(user?.id));
-            let testNumber: String = number.data as String;
+            let testNumber = number.data as number;
             setUnreadNumber(testNumber);
           }          
         }
