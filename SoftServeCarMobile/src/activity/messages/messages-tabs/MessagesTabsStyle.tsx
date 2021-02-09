@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
-const MyProfileTabsStyle = StyleSheet.create({
+const MessagesTabsStyle = StyleSheet.create({
     container:{ flex: 1, alignSelf: "stretch" },
     
     headerStyle: {
@@ -37,7 +37,10 @@ const MyProfileTabsStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",
         fontSize: 20
+    },
+    messages: {
+        right: 10
     }
 });
 
-export default MyProfileTabsStyle;
+export default MessagesTabsStyle;

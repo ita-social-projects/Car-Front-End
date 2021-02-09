@@ -34,7 +34,7 @@ const MyProfileTabs = () => {
     }, []);
 
     return (
-        <View style={{ flex: 1, alignSelf: "stretch" }}>
+        <View style={MyProfileTabsStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="MyProfile"

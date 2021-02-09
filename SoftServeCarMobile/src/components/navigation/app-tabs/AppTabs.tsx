@@ -3,6 +3,7 @@ import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import Messages from "../../../activity/messages/Messages";
+import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import Notifications from "../../../activity/notifications/Notifications";
 import { AppTabsList } from "./AppTabsList";
@@ -21,7 +22,7 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
                 tabBarIcon: ({ color, size }) => {
                     let iconName;
                     switch (route.name) {
-                        case "Messages":
+                        case "MessagesTabs":
                             iconName = "chatbubbles";
                             break;
                         case "MyProfileTabs":
@@ -47,8 +48,8 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
             }}
         >
             <Tabs.Screen
-                name="Messages"
-                component={Messages}
+                name="MessagesTabs"
+                component={MessagesTabs}
                 options={{ tabBarLabel: "Messages" }}
             />
             <Tabs.Screen

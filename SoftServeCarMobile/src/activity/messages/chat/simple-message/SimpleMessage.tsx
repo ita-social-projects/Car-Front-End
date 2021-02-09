@@ -10,8 +10,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
-import ChatService from "../../../../api-service/chat-service/ChatService";
-import { AuthContext } from "../../auth/AuthProvider";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import { AuthContext } from "../../../auth/AuthProvider";
 import SimpleMessageStyle from "./SimpleMessageStyle";
 
 const SimpleMessage = (props: {
