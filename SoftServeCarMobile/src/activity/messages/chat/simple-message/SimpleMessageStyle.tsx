@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const SimpleMessageStyle = StyleSheet.create({
     container: {
-        marginTop: 24,
+        flex:1,
         backgroundColor: "#FFFFFF"
     },
 
