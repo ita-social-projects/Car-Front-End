@@ -1,10 +1,10 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-import { View } from "react-native";
-import AddCars from "../../../../components/cars/add-cars/AddCars";
-import Cars from "../../../../components/cars/Cars";
-import EditCars from "../../../../components/cars/edit-cars/EditCars";
-import CarTabsStyle from "./CarTabsStyle";
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { View } from 'react-native';
+import AddCars from '../add-cars/AddCars';
+import Cars from '../Cars';
+import EditCars from '../edit-cars/EditCars';
+import CarTabsStyle from './CarTabsStyle';
 
 const StackTabs = createStackNavigator();
 

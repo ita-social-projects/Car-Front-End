@@ -2,36 +2,43 @@ import { StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
 const JourneyTabsStyle = StyleSheet.create({
-    journeyPageIcon: {
-        paddingRight: 12
-    },
 
-    backButtonOpacity: {
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
+  journeyPageIcon: {
+    paddingRight: 12,
+  },
 
-    backButtonTextView: {
-        flexDirection: "column",
-        justifyContent: "center"
-    },
+  requestButton: {
+    paddingRight: 17,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-    backButtonText: {
-        color: "#02A2CF",
-        fontFamily: Font.OpenSans.ExtraBold,
-        fontSize: 20,
-        fontWeight: "700"
-    },
+  backButtonOpacity: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 
-    blackButtonText: {
-        color: "black"
-    },
+  backButtonTextView: {
+    flexDirection: "column",
+    justifyContent: "center",
+  },
 
-    headerTitleStyle: {
-        fontFamily: Font.OpenSans.ExtraBold,
-        fontWeight: "700",
-        fontSize: 20
-    }
+  buttonText: {
+    color: "#02A2CF",
+    fontFamily: Font.OpenSans.ExtraBold,
+    fontSize: 20,
+    fontWeight: "700",
+  },
+
+  blackButtonText: {
+    color: 'black',
+  },
+
+  headerTitleStyle: {
+    fontFamily: Font.OpenSans.ExtraBold,
+    fontWeight: "700",
+    fontSize: 20,
+  }
 });
 
 export default JourneyTabsStyle;

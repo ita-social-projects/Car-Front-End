@@ -6,13 +6,13 @@ import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import { User } from "../../../models/User";
 import { AuthContext } from "../auth/AuthProvider";
-import AddressBook from "./my-profile-activity/address-book/AddressBook";
-import AvatarLogoTitle from "./my-profile-activity/avatar-logo/AvatarLogoTitle";
-import CarTabs from "./my-profile-activity/cars/CarTabs";
-import Details from "./my-profile-activity/details/Details";
-import Preferences from "./my-profile-activity/preferences/Preferences";
-import Settings from "./my-profile-activity/settings/Settings";
-import MyProfile from "./MyProfile";
+import AddressBook from './my-profile-activity/address-book/AddressBook';
+import AvatarLogoTitle from './my-profile-activity/avatar-logo/AvatarLogoTitle';
+import CarTabs from './my-profile-activity/cars/car-tabs/CarTabs';
+import Details from './my-profile-activity/details/Details';
+import Preferences from './my-profile-activity/preferences/Preferences';
+import Settings from './my-profile-activity/settings/Settings';
+import MyProfile from './MyProfile';
 
 const StackTabs = createStackNavigator();
 

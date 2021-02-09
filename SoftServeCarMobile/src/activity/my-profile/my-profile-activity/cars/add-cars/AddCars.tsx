@@ -7,19 +7,19 @@ import {
 } from "react-native-image-picker/src";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import "reflect-metadata";
-import { container } from "tsyringe";
-import BrandService from "../../../../api-service/brand-service/BrandService";
-import CarService from "../../../../api-service/car-service/CarService";
-import ModelService from "../../../../api-service/model-service/ModelService";
-import Brand from "../../../../models/Brand";
-import CarDTO from "../../../../models/CarDTO";
-import { Color } from "../../../../models/Color";
-import Model from "../../../../models/Model";
-import { AuthContext } from "../../../activity/auth/AuthProvider";
-import { CarDropDownPickerItem } from "../../car-drop-down-picker/CarDropDownItem";
-import CarDropDownPicker from "../../car-drop-down-picker/CarDropDownPicker";
-import CarTextInput from "../../car-text-input/CarTextInput";
-import AddCarsStyle from "./AddCarsStyle";
+import { container } from 'tsyringe';
+import BrandService from '../../../../../../api-service/brand-service/BrandService';
+import CarService from '../../../../../../api-service/car-service/CarService';
+import ModelService from '../../../../../../api-service/model-service/ModelService';
+import Brand from '../../../../../../models/Brand';
+import CarDTO from '../../../../../../models/CarDTO';
+import { Color } from '../../../../../../models/Color';
+import Model from '../../../../../../models/Model';
+import { AuthContext } from '../../../../auth/AuthProvider';
+import { CarDropDownPickerItem } from '../../../../../components/car-drop-down-picker/CarDropDownItem';
+import CarDropDownPicker from '../../../../../components/car-drop-down-picker/CarDropDownPicker';
+import CarTextInput from '../../../../../components/car-text-input/CarTextInput';
+import AddCarsStyle from './AddCarsStyle';
 
 function AddCars() {
     const { user } = useContext(AuthContext);
@@ -225,4 +225,5 @@ function AddCars() {
         </KeyboardAwareScrollView>
     );
 }
+
 export default AddCars;
