@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 const PreferencesStyle = StyleSheet.create({
     mainContainer: {
-        margin: 20
+        margin: 20,
+        backgroundColor:"#FFFFFF"
     },
 
     detailsContainer: {
