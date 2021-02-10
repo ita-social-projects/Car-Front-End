@@ -91,10 +91,10 @@ const JourneyTabs = () => {
             ),
           }}
         >
-          {(route: any) => {
+          {(props: any) => {
             return (
               <>
-                <JourneyPage route={route}/>
+                <JourneyPage props={props}/>
                 <BottomPopup
                   refForChild={moreOptionsRef}
                   snapPoints={[0, 300]}

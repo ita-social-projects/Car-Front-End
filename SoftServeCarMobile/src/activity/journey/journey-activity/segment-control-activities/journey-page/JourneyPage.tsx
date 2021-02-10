@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import BottomSheet from "reanimated-bottom-sheet";
-import MenuButton from "../../../../../components/bottom-popup/menu-button/MenuButton";
 import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
 import {
   Image,
@@ -8,9 +6,6 @@ import {
   TouchableOpacity,
   View,
   FlatList,
-  Modal,
-  Alert,
-  Button,
 } from "react-native";
 import { container } from "tsyringe";
 import Moment from "moment";
@@ -25,51 +20,15 @@ import { Journey } from "../../../../../../models/Journey";
 import { useNavigation } from "@react-navigation/native";
 import { LinearTextGradient } from "react-native-text-gradient";
 
-const JourneyPage = (props: any) => {
-  const [moreOptionsState, setMoreOptionsState] = useState(0);
+const JourneyPage = ({props}: any) => {
   const journeyService = container.resolve(JourneyService);
   const [currentJourney, setJourney] = useState({} as Journey);
   const navigation = useNavigation();
-
-  const profileMoreOptionsRef = useRef<BottomSheet>(null);
-  
-  console.log(props.route);
-
-  const profileMoreOptionsContent = () => (
-    <View style={JourneyPageStyle.panel}>
-      <MenuButton
-        text="View profile"
-        onPress={() =>
-          navigation.navigate("Applicant Page", { userId: moreOptionsState })
-        }
-      />
-      <MenuButton
-        text="Message"
-        onPress={() => navigation.navigate("Messages", {})}
-      />
-    </View>
-  );
-
-  const moreOptionsHeader = () => (
-    <View style={JourneyPageStyle.headerTitleStyle}>
-      <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
-    </View>
-  );
-
-  const moreOptionsContent = () => {
-    return (
-      <View style={JourneyPageStyle.panel}>
-        <MenuButton text="Add Stop" onPress={() => {}} />
-        <MenuButton text="Edit the Journey" onPress={() => {}} />
-        <MenuButton text="Invite Softservian" onPress={() => {}} />
-        <MenuButton text="Cancel the Journey" onPress={() => {}} />
-      </View>
-    );
-  };
+  const { journeyId } = props.route.params;
 
   useEffect(() => {
     journeyService
-      .getJourney(1)
+      .getJourney(journeyId)
       .then((res) => setJourney(res.data))
       .catch((e) => console.log(e));
   }, []);
@@ -136,7 +95,12 @@ const JourneyPage = (props: any) => {
   const Applicant = (item: User) => {
     return (
       <>
-        <View style={JourneyPageStyle.userBlock}>
+        <TouchableOpacity
+          style={JourneyPageStyle.userBlock}
+          onPress={() =>
+            navigation.navigate("Applicant Page", { userId: item?.id })
+          }
+        >
           <View style={JourneyPageStyle.userImageBlock}>
             <Image
               style={JourneyPageStyle.userImage}
@@ -160,16 +124,7 @@ const JourneyPage = (props: any) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity
-            style={JourneyPageStyle.ellipsisButton}
-            onPress={() => {
-              setMoreOptionsState(item!.id);
-              profileMoreOptionsRef.current?.snapTo(1);
-            }}
-          >
-            <Ionicons name={"ellipsis-horizontal"} color={"black"} size={25} />
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
         <Separator />
       </>
     );
@@ -230,16 +185,6 @@ const JourneyPage = (props: any) => {
         renderHeader={() => {}}
         enabledInnerScrolling={false}
       />
-      <BottomPopup
-        refForChild={profileMoreOptionsRef}
-        snapPoints={[0, 200]}
-        renderContent={profileMoreOptionsContent}
-        initialSnap={0}
-        renderHeader={moreOptionsHeader}
-        enabledInnerScrolling={false}
-      />
-      
-    
     </>
   );
 };

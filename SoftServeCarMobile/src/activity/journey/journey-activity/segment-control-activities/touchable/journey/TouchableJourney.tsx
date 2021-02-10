@@ -8,7 +8,7 @@ export default function TouchableJourney() {
     return (
         <View>
             <TouchableOpacity
-                onPress={() => { RootNavigation.navigate("Journey Page", {}); }}>
+                onPress={() => { RootNavigation.navigate("Journey Page", {journeyId: 1}); }}>
                 <View style={TouchableJourneyStyle.component}>
                     <View style={TouchableJourneyStyle.header}>
                         <Image style={TouchableJourneyStyle.image}
