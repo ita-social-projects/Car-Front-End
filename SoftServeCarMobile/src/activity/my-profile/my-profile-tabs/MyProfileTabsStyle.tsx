@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
 const MyProfileTabsStyle = StyleSheet.create({
     container: { flex: 1, alignSelf: "stretch" },
 
     headerStyle: {
-        height: 120
+        height: Platform.OS === "ios" ? 144 : 120,
     },
 
     backButtonOpacity: {
