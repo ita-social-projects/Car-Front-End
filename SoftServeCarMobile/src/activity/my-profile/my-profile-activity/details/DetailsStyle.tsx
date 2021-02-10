@@ -7,7 +7,8 @@ const DetailsStyle = StyleSheet.create({
     },
 
     mainContainer: {
-        marginTop: 30
+        marginTop: 30,
+        backgroundColor: "#FFFFFF"
     },
 
     detailsContainer: {

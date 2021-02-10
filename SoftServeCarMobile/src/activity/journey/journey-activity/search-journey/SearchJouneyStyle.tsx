@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const SearchJouneyStyle = StyleSheet.create({
     container: {
-        backgroundColor: "#F2F2F2"
+        backgroundColor: "#FFFFFF"
     },
 
     recentJourneyText: {
