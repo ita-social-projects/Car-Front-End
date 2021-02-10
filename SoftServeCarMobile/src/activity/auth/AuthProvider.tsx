@@ -8,7 +8,6 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import LoginService from '../../../APIService/loginService/LoginService'
 
-
 const loginService = container.resolve(LoginService);
 
 export const AuthContext = React.createContext<{
@@ -49,20 +48,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               surname: userGraph.surname,
               location: userGraph.officeLocation,
               position: userGraph.jobTitle,
-              id: 0,
+              id: 2,
               token: '',
               byteOfImage: '',
               hireDate: new Date(),
             }
-            const dbUser = await loginService.loginUser(user);
-            if(!dbUser.data?.token){
+            const dbUser = user;//await loginService.loginUser(user);
+            /*if(!dbUser.data?.token){
               RootNavigation.navigate("Login", {resetIndicator: true});
               return;
             }
             const token: any = dbUser.data?.token;
             AuthManager.saveAPIToken(token);
             AsyncStorage.setItem('user', JSON.stringify(dbUser.data));
-            setUser(dbUser.data);
+            setUser(dbUser.data);*/
+            setUser(dbUser);
             RootNavigation.navigate("AppTabs", {});
           }
         },

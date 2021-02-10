@@ -13,6 +13,7 @@ import { container } from 'tsyringe';
 import UserService from '../../../APIService/UserService/UserService';
 import {User} from '../../../models/User';
 import { AuthContext } from "../auth/AuthProvider"
+import AddressBookTabs from './my-profile-activity/address-book/AddressBookTabs';
 
 const StackTabs = createStackNavigator();
 
@@ -37,7 +38,7 @@ const MyProfileTabs = (props: any) => {
                 <StackTabs.Screen name="Preferences" component={Preferences}></StackTabs.Screen>
                 <StackTabs.Screen name="Details" component={Details}></StackTabs.Screen>
                 <StackTabs.Screen name="YourCars" component={Cars}></StackTabs.Screen>
-                <StackTabs.Screen name="AddressBook" component={AddressBook}></StackTabs.Screen>
+                <StackTabs.Screen name="AddressBookTabs" component={AddressBookTabs}></StackTabs.Screen>
                 <StackTabs.Screen name="Settings" component={Settings}></StackTabs.Screen>
             </StackTabs.Navigator>
         </View>

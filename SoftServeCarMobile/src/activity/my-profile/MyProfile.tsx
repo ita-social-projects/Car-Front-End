@@ -24,7 +24,7 @@ function MyProfile(props: any) {
                 angle="0" />
 
             <TouchableNavigationCard navigation={props.navigation}
-                navigationName="AddressBook"
+                navigationName="AddressBookTabs"
                 cardName="Address book"
                 iconName="bookmark-outline"
                 angle="0" />
