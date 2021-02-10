@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
 
-export const headerStyle = StyleSheet.create({
+const NotificationStyle = StyleSheet.create({
     headerContainer: {
         flex: 100,
-        alignSelf: "stretch"
+        alignSelf: "stretch",
+        backgroundColor: "#FFFFFF"
     },
 
     pageTitle: {
@@ -20,11 +21,13 @@ export const headerStyle = StyleSheet.create({
         borderWidth: 3,
         borderColor: "#EEEEEE"
     },
+
     headerUserInformation: {
         marginLeft: 15,
         fontFamily: "ProximaNova",
         fontWeight: "bold"
     },
+
     headerUserName: {
         lineHeight: 21,
         fontSize: 18,
@@ -111,3 +114,5 @@ export const headerStyle = StyleSheet.create({
         fontWeight: "bold"
     }
 });
+
+export default NotificationStyle;

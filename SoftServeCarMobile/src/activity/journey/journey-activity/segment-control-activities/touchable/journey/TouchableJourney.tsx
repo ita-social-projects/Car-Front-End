@@ -20,7 +20,7 @@ export default function TouchableJourney() {
                         />
                         <View style={TouchableJourneyStyle.driverBlock}>
                             <Text style={TouchableJourneyStyle.driverName}>
-                                Maria Kruselnytska"s journey
+                                Maria Kruselnytska's journey
                             </Text>
                             <Text style={TouchableJourneyStyle.driverPosition}>
                                 Experience Designer

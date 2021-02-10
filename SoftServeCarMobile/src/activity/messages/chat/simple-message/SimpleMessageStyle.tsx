@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 const SimpleMessageStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#FFFFFF"
+    },
+
     main: {
         display: "flex",
         flexDirection: "column",

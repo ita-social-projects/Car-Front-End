@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
     ActivityIndicator,
+    Button,
     FlatList,
     Image,
     Text,
@@ -13,6 +14,7 @@ import { container } from "tsyringe";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import { AuthContext } from "../../../auth/AuthProvider";
 import SimpleMessageStyle from "./SimpleMessageStyle";
+import * as navigation from "../../../../components/navigation/Navigation";
 
 const SimpleMessage = (props: {
     navigation: { navigate: (arg0: string) => void };
@@ -40,10 +42,17 @@ const SimpleMessage = (props: {
     }
 
     return (
-        <View style={{ marginTop: 24 }}>
+        <View style={SimpleMessageStyle.container}>
+            <Button
+                title="Chat"
+                color="#000000"
+                onPress={() => {
+                    navigation.navigate("Chat", {});
+                }}
+            />
             <FlatList
                 data={data}
-                keyExtractor={({ id }) => id.toString()}
+                keyExtractor={({ id }) => "" + id}
                 renderItem={({ item }) => (
                     <View style={SimpleMessageStyle.main}>
                         <View style={SimpleMessageStyle.button}>

@@ -1,6 +1,5 @@
 import * as signalR from "@microsoft/signalr";
 import React, { useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import "reflect-metadata";
 import { container } from "tsyringe";
@@ -9,7 +8,7 @@ import { routes } from "../../../Environment";
 import { Notification } from "../../../models/Notification";
 import { AuthContext } from "../../activity/auth/AuthProvider";
 import NotificationComponent from "./NotificationComponent";
-import { headerStyle } from "./NotificationStyle";
+import NotificationStyle from "./NotificationStyle";
 
 export default function Notifications(props: any) {
     const { user, unreadNumber } = useContext(AuthContext);
@@ -44,16 +43,7 @@ export default function Notifications(props: any) {
     }, []);
 
     return (
-        <ScrollView style={headerStyle.headerContainer}>
-            <View
-                style={{
-                    padding: 10,
-                    borderBottomColor: "#909095",
-                    borderWidth: 1
-                }}
-            >
-                <Text style={headerStyle.pageTitle}>Notifications</Text>
-            </View>
+        <ScrollView style={NotificationStyle.headerContainer}>
             {notifications.map((item, key) => (
                 <>
                     <NotificationComponent item={item} key={key} />

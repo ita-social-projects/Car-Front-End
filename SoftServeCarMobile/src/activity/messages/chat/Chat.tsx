@@ -47,7 +47,7 @@ class Chat extends React.Component<ChatState, ChatState> {
 
     render() {
         return (
-            <>
+            <View style={ChatStyle.page}>
                 <View style={ChatStyle.container}>
                     <View style={ChatStyle.chatMessage}>
                         <View>
@@ -79,7 +79,7 @@ class Chat extends React.Component<ChatState, ChatState> {
                         </View>
                     </View>
                 </View>
-            </>
+            </View>
         );
     }
 }

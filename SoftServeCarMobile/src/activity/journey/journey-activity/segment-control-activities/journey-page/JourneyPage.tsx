@@ -16,7 +16,6 @@ import MenuButton from "../../../../../components/bottom-popup/menu-button/MenuB
 import JourneyPageStyle from "./JourneyPageStyle";
 
 const JourneyPage = ({ route }: any) => {
-
     const { journeyId } = route.params;
 
     const [moreOptionsState, setMoreOptionsState] = useState(0);

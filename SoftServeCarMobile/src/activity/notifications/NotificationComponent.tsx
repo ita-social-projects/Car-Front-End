@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Alert, TouchableOpacity } from 'react-native';
-import { headerStyle } from './NotificationStyle';
-import { Modal } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { View, Text, Button, Alert, TouchableOpacity } from "react-native";
+import NotificationStyle from "./NotificationStyle";
+import { Modal } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import { Notification, NotificationType } from "../../../models/Notification";
 import AvatarComponent from "./AvatarComponent";
-import { headerStyle } from "./NotificationStyle";
 
 const NotificationComponent = (props: any) => {
     const [modalTitle, setModalTitle] = useState("default title");
@@ -77,7 +76,7 @@ const NotificationComponent = (props: any) => {
         getNotificationDescription();
     });
 
-    const updateNotification =() => {
+    const updateNotification = () => {
         let notification: Notification;
         notification = {
             id: props.item.id,
@@ -89,11 +88,11 @@ const NotificationComponent = (props: any) => {
             createAt: "",
             receiverId: 0,
             journeyId: 0,
-            userColor: '',
+            userColor: "",
             notificationType: 1
-        }
+        };
         notificationService.updateNotification(notification);
-    }
+    };
 
     const showUserInfo = () => {
         toggleModal();
@@ -107,10 +106,10 @@ const NotificationComponent = (props: any) => {
     return (
         <View
             style={[
-                headerStyle.baseContainer,
+                NotificationStyle.baseContainer,
                 props.item.isRead == true
-                    ? headerStyle.readContainer
-                    : headerStyle.unreadContainer
+                    ? NotificationStyle.readContainer
+                    : NotificationStyle.unreadContainer
             ]}
         >
             <AvatarComponent
@@ -118,10 +117,10 @@ const NotificationComponent = (props: any) => {
                 userName={props.item.userName}
                 userColor={props.item.userColor}
             />
-            <View style={headerStyle.headerContainer}>
-                <View style={headerStyle.innerContainer}>
+            <View style={NotificationStyle.headerContainer}>
+                <View style={NotificationStyle.innerContainer}>
                     <Text
-                        style={headerStyle.valueView}
+                        style={NotificationStyle.valueView}
                         onPress={showUserInfo.bind(this, props)}
                     >
                         {props.item.userName}
@@ -130,33 +129,82 @@ const NotificationComponent = (props: any) => {
                         <Ionicons name={"ellipsis-horizontal"} size={30} />
                     </TouchableOpacity>
                 </View>
-                <View style={headerStyle.innerContainer}>
-                    <Text style={headerStyle.captionView}>{requestType}</Text>
-                    <Text style={[headerStyle.dateBase, props.item.isRead == true ? headerStyle.dateBase : headerStyle.dateUnread]}>{props.item.createAt}</Text>
+                <View style={NotificationStyle.innerContainer}>
+                    <Text style={NotificationStyle.captionView}>
+                        {requestType}
+                    </Text>
+                    <Text
+                        style={[
+                            NotificationStyle.dateBase,
+                            props.item.isRead == true
+                                ? NotificationStyle.dateBase
+                                : NotificationStyle.dateUnread
+                        ]}
+                    >
+                        {props.item.createAt}
+                    </Text>
                 </View>
             </View>
-            <View >
-                <Modal visible={isModalVisible} style={{borderRadius: 15,borderWidth: 1, borderColor: 'grey'}}>
-                    <View style={{flex: 1, alignSelf: 'stretch'}}>
-                        <View style= {headerStyle.baseContainer}>
-                            <Text style ={{fontWeight:'bold', fontSize: 20, flex:1 }}>{modalTitle}</Text>
-                            <Text style ={{fontWeight:'bold', fontSize: 20, color: 'cadetblue' }}>Snooze</Text>
+            <View>
+                <Modal
+                    visible={isModalVisible}
+                    style={{
+                        borderRadius: 15,
+                        borderWidth: 1,
+                        borderColor: "grey"
+                    }}
+                >
+                    <View style={{ flex: 1, alignSelf: "stretch" }}>
+                        <View style={NotificationStyle.baseContainer}>
+                            <Text
+                                style={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    flex: 1
+                                }}
+                            >
+                                {modalTitle}
+                            </Text>
+                            <Text
+                                style={{
+                                    fontWeight: "bold",
+                                    fontSize: 20,
+                                    color: "cadetblue"
+                                }}
+                            >
+                                Snooze
+                            </Text>
                         </View>
-                        <View style= {headerStyle.baseContainer}>
+                        <View style={NotificationStyle.baseContainer}>
                             <AvatarComponent
-                            userId = {props.item.userId}
-                            userName = {props.item.userName}
-                            userColor = {props.item.userColor}
+                                userId={props.item.userId}
+                                userName={props.item.userName}
+                                userColor={props.item.userColor}
                             />
-                            <View >
-                                <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'stretch'}}>
-                                    <Text style ={{fontWeight:'bold', fontSize: 20, color: 'cadetblue', paddingLeft: 10}}>{props.item.userName} </Text>
+                            <View>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        alignSelf: "stretch"
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            fontWeight: "bold",
+                                            fontSize: 20,
+                                            color: "cadetblue",
+                                            paddingLeft: 10
+                                        }}
+                                    >
+                                        {props.item.userName}{" "}
+                                    </Text>
                                     <TouchableOpacity>
-                                    <Ionicons
-                                        name={"ellipsis-horizontal"}
-                                        size={30}
-                                        style = {{marginLeft: 80}}
-                                    />
+                                        <Ionicons
+                                            name={"ellipsis-horizontal"}
+                                            size={30}
+                                            style={{ marginLeft: 80 }}
+                                        />
                                     </TouchableOpacity>
                                 </View>
                                 <Text

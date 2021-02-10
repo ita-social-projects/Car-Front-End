@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../components/fonts/Font";
 
-const MessagesTabsStyle = StyleSheet.create({
+const NotificationsTabsStyle = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: "stretch"
@@ -46,4 +46,4 @@ const MessagesTabsStyle = StyleSheet.create({
     }
 });
 
-export default MessagesTabsStyle;
+export default NotificationsTabsStyle;
