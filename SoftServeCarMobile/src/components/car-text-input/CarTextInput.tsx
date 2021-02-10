@@ -1,8 +1,8 @@
-import React from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler'
-import CarTextInputStyle from './CarTextInputStyle';
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Text, View } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import CarTextInputStyle from "./CarTextInputStyle";
 
 function Input(props: any) {
     return (
@@ -13,12 +13,14 @@ function Input(props: any) {
                     {...props}
                     style={[
                         CarTextInputStyle.textInputStyle,
-                        props.error && { borderColor: 'red' }
-                    ]}>
-                </TextInput>
+                        props.error && { borderColor: "red" }
+                    ]}
+                />
             </View>
             {props.errorText && (
-                <Text style={CarTextInputStyle.errorText}>{props.errorText}</Text>
+                <Text style={CarTextInputStyle.errorText}>
+                    {props.errorText}
+                </Text>
             )}
         </>
     );
@@ -35,8 +37,11 @@ function CarTextInput(props: any) {
             name="name"
             render={({ onChange, value }) => (
                 <Input
-                    onChangeText={(text: string) => { onChange(text); props.onChangeText(text, Boolean(errors?.name));}}
-                    onBlur={handleSubmit(() => { })}
+                    onChangeText={(text: string) => {
+                        onChange(text);
+                        props.onChangeText(text, Boolean(errors?.name));
+                    }}
+                    onBlur={handleSubmit(() => {})}
                     value={value}
                     placeholder={props.placeHolder}
                     error={errors?.name}
@@ -44,6 +49,7 @@ function CarTextInput(props: any) {
                 />
             )}
         />
-    )
+    );
 }
+
 export default CarTextInput;

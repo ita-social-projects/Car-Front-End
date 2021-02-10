@@ -1,18 +1,22 @@
-import { View } from "react-native";
-import { OpenSans, ProximaNova } from "../../../font-manager";
-import EStyleSheet from "react-native-extended-stylesheet";
 import React from "react";
-
+import { View } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
+import Font from "../fonts/Font";
 
 export let item = function (percent: number) {
     return {
-        width: percent + '%'
-    }
-}
+        width: percent + "%"
+    };
+};
 
-export function Circle(props: { color: string, radius: string, children?: React.ReactNode, base?:boolean, marginTop?:string}) {
+export function Circle(props: {
+    color: string;
+    radius: string;
+    children?: React.ReactNode;
+    base?: boolean;
+    marginTop?: string;
+}) {
     let innerStyle = EStyleSheet.create({
-        
         circle: {
             backgroundColor: props.color,
             borderRadius: 90,
@@ -20,24 +24,25 @@ export function Circle(props: { color: string, radius: string, children?: React.
             width: props.radius,
             display: "flex",
             alignItems: "center",
-            justifyContent: 'center',
-            zIndex: 5,
+            justifyContent: "center",
+            zIndex: 5
         },
 
         circlePos: {
-            marginTop: props.marginTop,
+            marginTop: props.marginTop
         }
     });
 
     return (
-        <View style={[innerStyle.circle, (props.base? innerStyle.circlePos: '')]}>
+        <View
+            style={[innerStyle.circle, props.base ? innerStyle.circlePos : ""]}
+        >
             {props.children}
         </View>
     );
 }
 
 const JourneyNewApplicantStyle = EStyleSheet.create({
-    
     container: {
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
@@ -47,22 +52,22 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         borderTopRightRadius: 16,
         borderBottomRightRadius: 16,
         borderBottomLeftRadius: 16,
-        height: '95%',
+        height: "95%",
         margin: 10,
         paddingTop: 23,
         paddingBottom: 23,
         paddingLeft: 25,
         paddingRight: 25,
         shadowColor: "#414045",
-        shadowOffset: { width: 0, height: 16, },
+        shadowOffset: { width: 0, height: 16 },
         shadowOpacity: 0.2,
         shadowRadius: 6.27,
-        elevation: 10,
-    }, 
+        elevation: 10
+    },
 
-    body:{
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        height: '100%',
+    body: {
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        height: "100%"
     },
 
     circle: {
@@ -72,265 +77,265 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         width: 57,
         display: "flex",
         alignItems: "center",
-        justifyContent: 'center',
-        marginTop: 5,
+        justifyContent: "center",
+        marginTop: 5
     },
 
     circleGrad: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: "#FFFFFF",
         borderRadius: 90,
-        height: '0.8rem',
-        width: '0.8rem',
+        height: "0.8rem",
+        width: "0.8rem",
         display: "flex",
         alignItems: "center",
-        justifyContent: 'center',
-        zIndex: 5,
+        justifyContent: "center",
+        zIndex: 5
     },
 
     row: {
         flex: 0,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "flex-start"
     },
 
     title: {
-        marginTop: 32,
+        marginTop: 32
     },
 
     header: {
-        fontFamily: ProximaNova.Bold,
-        fontSize: '1rem',
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: "1rem",
         lineHeight: 16,
         display: "flex",
         alignItems: "center",
         letterSpacing: 0.2,
         textTransform: "uppercase",
-        color: "#000000",
+        color: "#000000"
     },
 
     snooze: {
-        fontFamily: ProximaNova.Bold,
-        fontSize: '1rem',
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: "1rem",
         lineHeight: 16,
         display: "flex",
         alignItems: "center",
-        textAlign: 'right',
+        textAlign: "right",
         letterSpacing: 0.875,
         textTransform: "capitalize",
-        color: "#02A2CF",
+        color: "#02A2CF"
     },
 
     ellipse: {
         width: 100,
-        height: 100,
+        height: 100
     },
-    
+
     icon: {
-        fontFamily: OpenSans.Bold,
-        fontSize: '0.9375rem',
+        fontFamily: Font.OpenSans.Bold,
+        fontSize: "0.9375rem",
         lineHeight: 16,
         display: "flex",
         alignItems: "center",
-        textAlign: 'center',
+        textAlign: "center",
         textTransform: "uppercase",
-        color: '#ffffff',
+        color: "#ffffff"
     },
 
     profile: {
-        textAlign: 'left',
-        marginLeft: 10,
+        textAlign: "left",
+        marginLeft: 10
     },
 
     name: {
-        fontFamily: ProximaNova.Bold,
-        fontSize: '1.1rem',
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: "1.1rem",
         lineHeight: 21,
-        color: '#000000',
+        color: "#000000"
     },
 
     bio: {
-        fontFamily: ProximaNova.Regular,
-        fontSize: '0.85rem',
+        fontFamily: Font.ProximaNova.Regular,
+        fontSize: "0.85rem",
         lineHeight: 14,
-        color: '#000000',
+        color: "#000000",
         opacity: 0.5,
-        marginTop: '0.7rem',
+        marginTop: "0.7rem"
     },
 
     achievements: {
-        fontFamily: ProximaNova.Regular,
+        fontFamily: Font.ProximaNova.Regular,
         fontSize: 15,
         lineHeight: 14,
-        color: '#000000',
+        color: "#000000",
         opacity: 0.5,
-        marginTop: '0.7rem',
+        marginTop: "0.7rem"
     },
 
     more: {
-        fontFamily: OpenSans.ExtraBold,
+        fontFamily: Font.OpenSans.ExtraBold,
         fontSize: 20,
         letterSpacing: 3,
         marginTop: -10,
         paddingTop: 0,
-        color: '#000000',
+        color: "#000000"
     },
 
     commentsBox: {
         borderWidth: 1,
-        borderColor: 'rgba(151, 151, 151, 0.3)',
+        borderColor: "rgba(151, 151, 151, 0.3)",
         borderStyle: "solid",
-        backgroundColor: '#ffffff',
-        marginTop: '1.5rem',
+        backgroundColor: "#ffffff",
+        marginTop: "1.5rem"
     },
 
     commentsBoxAfter: {
-        position: 'absolute',
-        width: '1rem',
-        height: '1rem',
+        position: "absolute",
+        width: "1rem",
+        height: "1rem",
         borderWidth: 1,
-        borderStyle: 'solid',
-        borderTopColor: 'rgba(0,0,0,0)',
-        borderLeftColor: 'rgba(0,0,0,0)',
-        borderRightColor: 'rgba(151, 151, 151, 0.3)',
-        borderBottomColor: 'rgba(151, 151, 151, 0.3)',
-        top: '-0.5rem',
-        left: '50%',
-        marginLeft: '-1rem',
-        transform: [{ rotateZ: '-135deg' }],
-        backgroundColor: '#FFFFFF',
-        opacity: 1,
+        borderStyle: "solid",
+        borderTopColor: "rgba(0,0,0,0)",
+        borderLeftColor: "rgba(0,0,0,0)",
+        borderRightColor: "rgba(151, 151, 151, 0.3)",
+        borderBottomColor: "rgba(151, 151, 151, 0.3)",
+        top: "-0.5rem",
+        left: "50%",
+        marginLeft: "-1rem",
+        transform: [{ rotateZ: "-135deg" }],
+        backgroundColor: "#FFFFFF",
+        opacity: 1
     },
 
     commentsText: {
-        margin: '1.5rem',
-        textAlign: 'center',
-        fontFamily: ProximaNova.Regular,
-        fontSize: '1.2rem',
-        paddingLeft: '1rem',
-        paddingRight: '1rem',
+        margin: "1.5rem",
+        textAlign: "center",
+        fontFamily: Font.ProximaNova.Regular,
+        fontSize: "1.2rem",
+        paddingLeft: "1rem",
+        paddingRight: "1rem"
     },
 
     options: {
-        marginTop: '1.5rem',
+        marginTop: "1.5rem"
     },
 
     optionsHeader: {
-        fontFamily: OpenSans.Bold,
-        lineHeight: '1.1rem',
-        fontSize: '1rem',
+        fontFamily: Font.OpenSans.Bold,
+        lineHeight: "1.1rem",
+        fontSize: "1rem"
     },
 
     optionsValue: {
-        fontFamily: OpenSans.Regular,
-        lineHeight: '1.2rem',
-        fontSize: '1rem',
-        marginTop: '0.5rem',
+        fontFamily: Font.OpenSans.Regular,
+        lineHeight: "1.2rem",
+        fontSize: "1rem",
+        marginTop: "0.5rem"
     },
 
     optionsLine: {
         minHeight: 7,
-        minWidth: '99%',
+        minWidth: "99%",
         borderWidth: 1,
-        borderTopColor: 'rgba(0,0,0,0)',
-        borderLeftColor: 'rgba(0,0,0,0)',
-        borderRightColor: 'rgba(0,0,0,0)',
-        borderBottomColor: '#C1C1C5',
+        borderTopColor: "rgba(0,0,0,0)",
+        borderLeftColor: "rgba(0,0,0,0)",
+        borderRightColor: "rgba(0,0,0,0)",
+        borderBottomColor: "#C1C1C5",
         borderStyle: "solid",
-        backgroundColor: '#FFFFFF',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        backgroundColor: "#FFFFFF",
+        marginLeft: "auto",
+        marginRight: "auto"
     },
 
     stopsHeader: {
-        fontFamily: OpenSans.Bold,
-        lineHeight: '1.1rem',
-        fontSize: '1rem',
+        fontFamily: Font.OpenSans.Bold,
+        lineHeight: "1.1rem",
+        fontSize: "1rem"
     },
 
     stops: {
-        marginTop: '1.1rem',
+        marginTop: "1.1rem"
     },
 
     stop: {
-        minHeight: '2rem',
+        minHeight: "2rem"
     },
 
     stopName: {
-        textAlignVertical: 'center', // ANDROID
-        justifyContent: 'center', // IOS
+        textAlignVertical: "center", // ANDROID
+        justifyContent: "center", // IOS
         flex: 1,
-        fontFamily: OpenSans.Regular,
-        fontSize: '1rem',
-        lineHeight: '1.1rem',
-        color: '#909095',
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: "1rem",
+        lineHeight: "1.1rem",
+        color: "#909095"
     },
 
     activeStopName: {
-        textAlignVertical: 'center', // ANDROID
-        justifyContent: 'center', // IOS
+        textAlignVertical: "center", // ANDROID
+        justifyContent: "center", // IOS
         flex: 1,
-        fontFamily: OpenSans.Bold,
-        fontSize: '1rem',
-        lineHeight: '1.1rem',
-        color: '#909095',
-        paddingTop: '0.3rem', // Circle's Border Compensation
+        fontFamily: Font.OpenSans.Bold,
+        fontSize: "1rem",
+        lineHeight: "1.1rem",
+        color: "#909095",
+        paddingTop: "0.3rem" // Circle's Border Compensation
     },
 
     stopLine: {
-        borderStyle: 'dotted',
-        position: 'absolute',
-        height: '2rem',
-        top: '1.3rem',
-        marginRight: '0.1435rem',
-        borderLeftWidth: '0.1435rem',
-        borderColor: '#C1C1C5',
+        borderStyle: "dotted",
+        position: "absolute",
+        height: "2rem",
+        top: "1.3rem",
+        marginRight: "0.1435rem",
+        borderLeftWidth: "0.1435rem",
+        borderColor: "#C1C1C5"
     },
 
     stopsRows: {
-        marginTop:'0.6rem',
+        marginTop: "0.6rem"
     },
 
     tripColumn: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column"
     },
 
     tripPoint: {
-        paddingLeft: '0.6rem',
+        paddingLeft: "0.6rem"
     },
 
-    buttons:{
+    buttons: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: "flex-end"
     },
 
     button: {
-        height: '3.75rem',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
+        height: "3.75rem",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center"
     },
 
     acceptButton: {
-        backgroundColor: 'black',
+        backgroundColor: "black"
     },
 
     acceptButtonText: {
-        color: 'white',
-        fontFamily: ProximaNova.Bold,
-        fontSize: '1.1rem',
-        letterSpacing: '0.05rem',
+        color: "white",
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: "1.1rem",
+        letterSpacing: "0.05rem"
     },
 
     declineButtonText: {
-        color: '#EC6400',
-        fontFamily: ProximaNova.Bold,
-        fontSize: '1.1rem',
-        letterSpacing: '0.05rem',
-    },
+        color: "#EC6400",
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: "1.1rem",
+        letterSpacing: "0.05rem"
+    }
 });
 
 export default JourneyNewApplicantStyle;

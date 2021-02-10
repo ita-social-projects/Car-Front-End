@@ -1,18 +1,23 @@
-import React from 'react'
-import { Image, Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import TouchableJourneyStyle from './TouchableJourneyStyle';
-import * as RootNavigation from '../../../../../../components/navigation/RootNavigation';
+import React from "react";
+import { Image, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import * as navigation from "../../../../../../components/navigation/Navigation";
+import TouchableJourneyStyle from "./TouchableJourneyStyle";
 
 export default function TouchableJourney() {
     return (
         <View>
             <TouchableOpacity
-                onPress={() => { RootNavigation.navigate("Journey Page", {journeyId: 1}); }}>
+                onPress={() => {
+                    navigation.navigate("Journey Page", { journeyId: 1 });
+                }}
+            >
                 <View style={TouchableJourneyStyle.component}>
                     <View style={TouchableJourneyStyle.header}>
-                        <Image style={TouchableJourneyStyle.image}
-                            source={require("../../../../../../../assets/images/default-user-photo.jpg")} />
+                        <Image
+                            style={TouchableJourneyStyle.image}
+                            source={require("../../../../../../../assets/images/default-user-photo.jpg")}
+                        />
                         <View style={TouchableJourneyStyle.driverBlock}>
                             <Text style={TouchableJourneyStyle.driverName}>
                                 Maria Kruselnytska's journey
@@ -26,10 +31,18 @@ export default function TouchableJourney() {
                         </View>
                     </View>
                     <View>
-                        <Text>Location A</Text>
-                        <Text>Stop A.1</Text>
-                        <Text>Stop A.2</Text>
-                        <Text>Location B (Your Stop)</Text>
+                        <Text style={TouchableJourneyStyle.stopsText}>
+                            Location A
+                        </Text>
+                        <Text style={TouchableJourneyStyle.stopsText}>
+                            Stop A.1
+                        </Text>
+                        <Text style={TouchableJourneyStyle.stopsText}>
+                            Stop A.2
+                        </Text>
+                        <Text style={TouchableJourneyStyle.stopsText}>
+                            Location B (Your Stop)
+                        </Text>
                     </View>
                 </View>
             </TouchableOpacity>

@@ -1,16 +1,14 @@
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import Messages from "../../../activity/messages/Messages";
-import Notifications from "../../../activity/notifications/Notifications";
-import { AppTabsList } from "./AppTabsList";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import MyProfileTabs from "../../../activity/my-profile/MyProfileTabs";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
+import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
+import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
+import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
+import { AppTabsList } from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 
-
-interface AppTabsProps {
-}
+interface AppTabsProps {}
 
 const Tabs = createBottomTabNavigator<AppTabsList>();
 
@@ -19,37 +17,59 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
             sceneContainerStyle={AppTabsStyle.navigator}
-            screenOptions={({ route} ) => ({
+            screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
                     let iconName;
                     switch (route.name) {
-                        case "Messages":
-                            iconName = 'chatbubbles';
+                        case "MessagesTabs":
+                            iconName = "chatbubbles";
                             break;
                         case "MyProfileTabs":
-                            iconName = 'person';
+                            iconName = "person";
                             break;
                         case "JourneyTabs":
-                            iconName = 'car';
+                            iconName = "car";
                             break;
-                        case "Notifications":
-                            iconName = 'notifications';
+                        case "NotificationsTabs":
+                            iconName = "notifications";
                             break;
                     }
 
-                    return <Ionicons name={iconName} size={size} color={color}/>;
-                },
+                    return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                    );
+                }
             })}
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
-                activeTintColor: 'black',
-                inactiveTintColor: '#AAA9AE',
+                activeTintColor: "black",
+                inactiveTintColor: "#AAA9AE"
             }}
         >
-            <Tabs.Screen name="Messages" component={Messages}/>
-            <Tabs.Screen options={{ tabBarLabel: "My Profile" }} name="MyProfileTabs" component={MyProfileTabs}/>
-            <Tabs.Screen options={{ tabBarLabel: "Journey" }} name="JourneyTabs" component={JourneyTabs}/>
-            <Tabs.Screen name="Notifications" component={Notifications}/>
+            <Tabs.Screen
+                name="MessagesTabs"
+                component={MessagesTabs}
+                options={{ tabBarLabel: "Messages" }}
+            />
+            <Tabs.Screen
+                options={{ tabBarLabel: "My Profile" }}
+                name="MyProfileTabs"
+                component={MyProfileTabs}
+            />
+            <Tabs.Screen
+                options={{
+                    tabBarLabel: "Journey"
+                }}
+                name="JourneyTabs"
+                component={JourneyTabs}
+            />
+            <Tabs.Screen
+                options={{
+                    tabBarLabel: "Notifications"
+                }}
+                name="NotificationsTabs"
+                component={NotificationsTabs}
+            />
         </Tabs.Navigator>
-    )
-}
+    );
+};

@@ -1,16 +1,15 @@
-import {StyleSheet} from "react-native";
-import {ProximaNova} from "../../../font-manager";
+import { StyleSheet } from "react-native";
+import Font from "../../components/fonts/Font";
 
 const LoginStyle = StyleSheet.create({
-
     container: {
         flex: 1,
         alignItems: "center",
-        margin: 30,
+        margin: 30
     },
 
     loginPageTextGreeting: {
-        fontFamily: ProximaNova.Bold,
+        fontFamily: Font.ProximaNova.Bold,
         fontSize: 21,
         textTransform: "uppercase",
         margin: 5,
@@ -18,8 +17,8 @@ const LoginStyle = StyleSheet.create({
     },
 
     loginPageTextName: {
-        fontFamily: ProximaNova.Bold,
-        fontSize: 30,
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: 28,
         textTransform: "uppercase",
         margin: 5,
         letterSpacing: 0.2
@@ -29,14 +28,14 @@ const LoginStyle = StyleSheet.create({
         margin: 30,
         padding: 15,
         alignSelf: "flex-end",
-        fontFamily: ProximaNova.Bold,
-        fontSize: 16,
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: 16
     },
 
     preferencesText: {
         padding: 30,
         textAlign: "left",
-        fontSize: 15,
+        fontSize: 15
     },
 
     loadingIcon: {
@@ -44,8 +43,8 @@ const LoginStyle = StyleSheet.create({
         height: 56,
         borderRadius: 50,
         borderWidth: 3,
-        borderColor: '#EEEEEE'
-    },
+        borderColor: "#EEEEEE"
+    }
 });
 
 export default LoginStyle;
