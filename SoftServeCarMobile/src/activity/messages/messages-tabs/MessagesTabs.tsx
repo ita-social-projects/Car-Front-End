@@ -19,6 +19,11 @@ const ChatTabs = () => {
     const userServices = container.resolve(UserService);
     const [currentUser, setCurrentUser] = useState({} as User);
     const { user } = useContext(AuthContext);
+    const [isOpenFilter, setIsOpenFilter] = useState(false);
+
+    const setIsOpen = () => {
+        setIsOpenFilter(!isOpenFilter);
+    }
 
     useEffect(() => {
         userServices
@@ -34,23 +39,17 @@ const ChatTabs = () => {
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Messages"
-                    component={SimpleMessage}
                     options={{
                         headerTitle: "Messages",
                         headerTitleAlign: "center",
                         headerTitleStyle: MessagesTabsStyle.headerTitleStyle,
-                        headerLeft: () => <View />,
                         headerRight: () => (
-                            <TouchableOpacity
-                                style={MessagesTabsStyle.messages}
-                                onPress={() =>
-                                    Alert.alert("Search button was clicked")
-                                }
-                            >
-                                <Ionicons name={"search"} size={30} />
+                            <TouchableOpacity style={{ right: 10 }} onPress={() => setIsOpen()}>
+                                <Ionicons name={'search'} size={30} />
                             </TouchableOpacity>
                         )
                     }}
+                    children={(props) => <SimpleMessage {...props} component={Chat} isOpenFilter={isOpenFilter} />}
                 />
                 <StackTabs.Screen
                     name="Chat"
@@ -81,10 +80,10 @@ const ChatTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => { }}>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
-                                    size={30}
+                                    size={10}
                                     style={MessagesTabsStyle.moreOptionsIcon}
                                 />
                             </TouchableOpacity>
