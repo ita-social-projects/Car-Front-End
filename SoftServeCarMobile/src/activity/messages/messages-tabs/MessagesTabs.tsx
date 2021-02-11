@@ -80,10 +80,10 @@ const ChatTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => { }}>
+                            <TouchableOpacity onPress={() => {}}>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
-                                    size={10}
+                                    size={30}
                                     style={MessagesTabsStyle.moreOptionsIcon}
                                 />
                             </TouchableOpacity>
