@@ -1,5 +1,5 @@
 export const environment = {
-       url: "https://car-project.azurewebsites.net/"
+    url: "https://car-project.azurewebsites.net/"
 };
 
 export const routes = {
