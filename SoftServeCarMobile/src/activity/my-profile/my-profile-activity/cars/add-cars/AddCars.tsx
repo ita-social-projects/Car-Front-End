@@ -199,7 +199,7 @@ function AddCars() {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        style={[AddCarsStyle.carButtonSave]}
+                        style={AddCarsStyle.carButtonSave}
                         onPress={() => {
                             saveCarHandle({
                                 brandId: Number(selectedBrand?.value),
