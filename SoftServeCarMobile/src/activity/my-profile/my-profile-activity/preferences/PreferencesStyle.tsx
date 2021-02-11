@@ -1,57 +1,80 @@
 import { StyleSheet } from "react-native";
+import Font from "../../../../components/fonts/Font";
 
 const PreferencesStyle = StyleSheet.create({
-    mainContainer: {
-        margin: 20,
+    container: {
+        flex: 1,
+        paddingTop: 5,
+        paddingHorizontal: 18,
         backgroundColor:"#FFFFFF"
     },
 
-    detailsContainer: {
+    preferencesContainer: {
+        paddingTop: 46,
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: 30
     },
 
-    captionView: {
-        flex: 8,
-        fontWeight: "bold",
-        fontSize: 17,
-        alignItems: "flex-start",
-        justifyContent: "space-between"
-    },
-
-    valueView: {
+    preferenceNameContainer: {
         flex: 1,
-        paddingLeft: 5,
-        fontSize: 20,
-        alignItems: "flex-end",
-        justifyContent: "space-between"
     },
 
-    switchStyle: {
-        flex: 1,
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
+    switchContainer:{
+        paddingRight: 8,
     },
 
-    commentsView: {
-        marginTop: 50
+    switch:{
+        height: 20,
+        width: 36,
     },
 
-    TextInputStyle: {
-        height: 100,
+    preferenceValueContainer: {
+        width: 26,
+    },
+
+    preferenceNameText: {
+        fontFamily: Font.OpenSans.Bold,
+        fontWeight: "700",
+        lineHeight: 16,
+        fontSize: 13,
+    },
+
+    preferenceValueText: {
+        fontFamily: Font.OpenSans.Regular,
+        lineHeight: 24,
+        fontSize: 16,
+    },
+
+    commentsContainer: {
+        paddingTop: 40,
+    },
+
+    commentsText:{
+        fontFamily: Font.OpenSans.Bold,
+        fontWeight: "700",
+        color: "#414045",
+        paddingBottom: 4,
+    },
+
+    TextInput: {
+        height: 80,
         borderWidth: 2,
         borderColor: "black",
-        fontSize: 15,
-        paddingLeft: 5,
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: 16,
+        lineHeight: 24,
+        color: "#000000",
+        padding: 16,
         textAlignVertical: "top"
     },
 
-    commentsCaption: {
-        fontSize: 17,
-        fontWeight: "bold"
-    }
+    hintText: {
+        paddingTop: 4,
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: 13,
+        lineHeight: 18,
+        color: "#000000"
+    },
 });
 
 export default PreferencesStyle;

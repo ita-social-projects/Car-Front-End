@@ -9,17 +9,11 @@ import ChooseOptionComponent from "./ChooseOptionComponent";
 import PreferencesStyle from "./PreferencesStyle";
 
 export default function Preferences(props: any) {
-    const [isSmokingAllowed, setSmokingAllowed] = useState(() => {
-        return false;
-    });
+    const [isSmokingAllowed, setSmokingAllowed] = useState(false);
 
-    const [isEatingAllowed, setEatingAllowed] = useState(() => {
-        return false;
-    });
+    const [isEatingAllowed, setEatingAllowed] = useState(false);
 
-    const [comments, setComments] = useState(() => {
-        return "";
-    });
+    const [comments, setComments] = useState("");
 
     const { user } = useContext(AuthContext);
 
@@ -65,7 +59,7 @@ export default function Preferences(props: any) {
     }, [updatePreferences]);
 
     return (
-        <View style={PreferencesStyle.mainContainer}>
+        <View style={PreferencesStyle.container}>
             <ChooseOptionComponent
                 text={"Do you allow smoking in your car?"}
                 value={isSmokingAllowed}
@@ -76,17 +70,19 @@ export default function Preferences(props: any) {
                 value={isEatingAllowed}
                 onValueChanged={(value: any) => setEatingAllowed(value)}
             />
-            <View style={PreferencesStyle.commentsView}>
-                <Text style={PreferencesStyle.commentsCaption}>Comments</Text>
+            <View style={PreferencesStyle.commentsContainer}>
+                <Text style={PreferencesStyle.commentsText}>Comments</Text>
                 <TextInput
-                    style={PreferencesStyle.TextInputStyle}
+                    style={PreferencesStyle.TextInput}
                     multiline={true}
                     maxLength={100}
                     numberOfLines={10}
                     value={comments}
                     onChangeText={(text) => setComments(text)}
                 />
-                <Text>Up to 100 symbols</Text>
+                <Text style={PreferencesStyle.hintText}>
+                    Up to 100 symbols
+                </Text>
             </View>
         </View>
     );
