@@ -163,7 +163,8 @@ const JourneyPageStyle = StyleSheet.create({
 
     buttonsBlock: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginTop: 20
     },
 
     messageAllButton: {

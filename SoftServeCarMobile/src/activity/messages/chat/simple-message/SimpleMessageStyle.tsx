@@ -1,30 +1,24 @@
 import { StyleSheet } from "react-native";
-
+import Font from "../../../../components/fonts/Font";
 const SimpleMessageStyle = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#FFFFFF"
-    },
-
     main: {
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         borderBottomWidth: 1,
-        borderBottomColor: "#C1C1C5",
+        borderBottomColor: '#C1C1C5',
         height: 68,
-        alignContent: "center",
+        alignContent: 'center',
         width: 344,
-        alignSelf: "center"
+        alignSelf: 'center',
     },
     button: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        padding: 10
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
     },
     fonts: {
-        fontFamily: "OpenSans-Italic",
-        fontWeight: "bold",
-        fontSize: 13
+        fontFamily: Font.OpenSans.Bold,
+        fontSize: 13,
     },
     image: {
         width: 56,
@@ -37,12 +31,31 @@ const SimpleMessageStyle = StyleSheet.create({
         width: 100,
         height: 100
     },
-
-    text: {
+    container: {
+        backgroundColor: 'white',
+    },
+    containerStyle: {
+        height: 44,
+        backgroundColor: 'white',
+        borderBottomColor: 'transparent',
+        borderTopColor: 'transparent',
+        marginTop: 5,
+        marginBottom: 20
+    },
+    inputContainerStyle: {
+        backgroundColor: "white",
+        borderColor: 'black',
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderBottomColor: 'black',
+        paddingLeft: 5
+    },
+    textStyle:{
         fontSize: 11,
         paddingTop: 10,
-        fontFamily: "sans-serif"
+        fontFamily: Font.OpenSans.SemiBold,
     }
-});
+})
+
 
 export default SimpleMessageStyle;
