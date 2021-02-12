@@ -6,10 +6,10 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import { Notification } from "../../../models/Notification";
-import AvatarComponent from "./AvatarComponent";
 import {JourneyNewApplicant} from "../../components/journey-new-applicant/JourneyNewApplicant";
 import {ComponentsEnum} from "../../common/interfaces/ComponentsEnum";
 import {NotificationProps} from "../../common/interfaces/NotificationProps";
+import {UserAvatar} from "../../components/user-avatar/UserAvatar";
 
 const NotificationComponent = (props: any) => {
     const notificationService = container.resolve(NotificationsService);
@@ -64,11 +64,9 @@ const NotificationComponent = (props: any) => {
                     : NotificationStyle.unreadContainer
             ]}
         >
-            <AvatarComponent
-                userId={props.item.userId}
-                userName={props.item.userName}
-                userColor={props.item.userColor}
-            />
+            <UserAvatar userId={props.item.userId}
+                        flexBox={{width:20}}/>
+
             <View style={NotificationStyle.headerContainer}>
                 <View style={NotificationStyle.innerContainer}>
                     <Text

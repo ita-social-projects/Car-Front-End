@@ -6,12 +6,10 @@ import UserService from "../../../api-service/user-service/UserService";
 import NotificationStyle from "../../activity/notifications/NotificationStyle";
 import {AccentColors} from "../../common/enums/AccentColors";
 
-//<UserAvatar color={"#000000"}
-//            userId={64}
+//<UserAvatar userId={64}
 //            flexBox={{width:20}}/>
 
 export function UserAvatar(props: {
-    color: string;
     userId: number;
     flexBox?: { width: number }
 }) {
