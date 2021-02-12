@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import Font from "../../components/fonts/Font";
 
 const LoginStyle = StyleSheet.create({
 
     pageContainer: {
         flex: 1,
-        paddingTop: 37,
+        paddingTop: Platform.OS === "ios" ? 74 : 37,
         paddingHorizontal: 16,
         paddingBottom: 22,
     },
@@ -43,6 +43,8 @@ const LoginStyle = StyleSheet.create({
 
     buttonContainer: {
         alignItems: "center",
+        paddingHorizontal: Platform.OS === "ios" ? 16 : 0,
+        paddingBottom: Platform.OS === "ios" ? 22 : 0,
     },
 
     button: {

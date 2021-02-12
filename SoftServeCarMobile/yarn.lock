@@ -7476,7 +7476,7 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-devtools@^4.10.1":
+"react-devtools@4.10.1":
   "integrity" "sha512-gGOu0tcpCdm2+LZNrFgyimImtkYDoi6z5aKMRxxfuRM0VrJpmZakxAwaLs0BMRA9+UUF22Emzku366+m5eBtIQ=="
   "resolved" "https://registry.npmjs.org/react-devtools/-/react-devtools-4.10.1.tgz"
   "version" "4.10.1"
@@ -7488,7 +7488,7 @@
     "react-devtools-core" "4.10.1"
     "update-notifier" "^2.1.0"
 
-"react-hook-form@^6.14.2":
+"react-hook-form@6.14.2":
   "integrity" "sha512-GgDUuT3Yfhl1BOcMl862uAFbCixSomtm3CVlQQ1qVu9Tq5BN2uUIRUIXP8l2Gy99eLUrBqU9x4E7N+si9cnvaw=="
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-6.14.2.tgz"
   "version" "6.14.2"
@@ -7557,10 +7557,10 @@
   dependencies:
     "react-native-vector-icons" "^7.0.0"
 
-"react-native-elements@^3.1.0":
-  "integrity" "sha512-U4CuyO+q2JlduPht4P0xz+oIbw3W53uYPpkMqvlwjJiVoFfwnpbAu+JZL01/7VMe98G4Y8nJImcBh7zK9cb3Uw=="
-  "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.1.0.tgz"
-  "version" "3.1.0"
+"react-native-elements@3.2.0":
+  "integrity" "sha512-DgilI1P/S8xV3Uh6sjS7v1H7DsBXhlivG1IwHGJCO3OV3aFNh90bcdcmlKzxLZXWghQItqh9hQR3TLmgaZbU1w=="
+  "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.2.0.tgz"
+  "version" "3.2.0"
   dependencies:
     "@types/react-native-vector-icons" "^6.4.6"
     "color" "^3.1.2"
@@ -7570,7 +7570,6 @@
     "opencollective-postinstall" "^2.0.3"
     "prop-types" "^15.7.2"
     "react-native-ratings" "^7.3.0"
-    "react-native-safe-area-context" "^3.1.9"
     "react-native-size-matters" "^0.3.1"
 
 "react-native-extended-stylesheet@0.12.0":
@@ -7631,7 +7630,7 @@
     "deprecated-react-native-listview" "0.0.5"
     "prop-types" "^15.6.0"
 
-"react-native-modal@^11.6.1":
+"react-native-modal@11.6.1":
   "integrity" "sha512-Xsd79nuBvbLOYwpRuur4btwJFQ3WkV9zp5LbAREidUtjl/Ajlp4QbNBx888FOPjo+EpOO3+U0riCRqs1dkdIzQ=="
   "resolved" "https://registry.npmjs.org/react-native-modal/-/react-native-modal-11.6.1.tgz"
   "version" "11.6.1"
@@ -7724,7 +7723,7 @@
   "resolved" "https://registry.npmjs.org/react-native-text-gradient/-/react-native-text-gradient-0.1.7.tgz"
   "version" "0.1.7"
 
-"react-native-vector-icons@^7.0.0", "react-native-vector-icons@7.1.0":
+"react-native-vector-icons@^7.0.0", "react-native-vector-icons@>7.0.0", "react-native-vector-icons@7.1.0":
   "integrity" "sha512-V2a1zJ4i+kS8O4j183gIwX14St9AxxXabxwYpFBgRhvr2NDXyFcjHDEAgrOYYlt2W57e20aN1tBDU/I+wn9WtQ=="
   "resolved" "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-7.1.0.tgz"
   "version" "7.1.0"
@@ -7738,7 +7737,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^15.0.2"
 
-"react-native@^0.63.4":
+"react-native@0.63.4":
   "integrity" "sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.63.4.tgz"
   "version" "0.63.4"
