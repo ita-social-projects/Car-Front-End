@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import NotificationStyle from "./NotificationStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -19,14 +19,6 @@ const NotificationComponent = (props: any) => {
     let componentsEnum: ComponentsEnum<NotificationProps> = {
         1 : JourneyNewApplicant
     }
-
-    const getNotificationDescription = () => {
-
-    };
-
-    useEffect(() => {
-        getNotificationDescription();
-    });
 
     const updateNotification = () => {
         let notification: Notification;
