@@ -63,7 +63,7 @@ export function UserAvatar(props: {
         userService.getUser(props.userId).then(user => setUserFullName([user.data!.name, user.data!.surname]));
     }, []);
 
-    let avatarColour = (userId: number, ) => AccentColors[Math.floor(userId%8)];
+    let avatarColour = (userId: number, ) => AccentColors[Math.floor(userId%Object.keys(AccentColors).length)];
 
 
     return (
