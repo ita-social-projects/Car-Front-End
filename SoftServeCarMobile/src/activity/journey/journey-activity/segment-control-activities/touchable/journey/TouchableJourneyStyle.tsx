@@ -1,5 +1,5 @@
-import { Platform, StyleSheet } from "react-native";
-import Font from "../../../../../../components/fonts/Font";
+import { StyleSheet } from "react-native";
+import Font from "../../../../../../data/fonts/Font";
 
 const TouchableJourneyStyle = StyleSheet.create({
     component: {

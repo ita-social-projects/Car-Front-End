@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
-import Font from "../fonts/Font";
+import Font from "../../data/fonts/Font";
 
 export let item = function (percent: number) {
     return {

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import Font from "../../fonts/Font";
+import Font from "../../../data/fonts/Font";
 
 const AppTabsStyle = StyleSheet.create({
     labelStyle: {
