@@ -11,7 +11,7 @@ import {UserAvatar} from "../user-avatar/UserAvatar";
 import {container} from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
-import {NotificationProps} from "../../common/interfaces/INotificationProps";
+import {NotificationProps} from "../../common/interfaces/NotificationProps";
 
 
 
@@ -98,19 +98,6 @@ export const JourneyNewApplicant : React.FC<NotificationProps> = (props:Notifica
                                     </Text>
                                 </View>
                             </View>
-                            {/*<View style={item(10)}>*/}
-                            {/*    <View>*/}
-                            {/*        <TouchableOpacity>*/}
-                            {/*            <Text*/}
-                            {/*                style={*/}
-                            {/*                    JourneyNewApplicantStyle.more*/}
-                            {/*                }*/}
-                            {/*            >*/}
-                            {/*                ...*/}
-                            {/*            </Text>*/}
-                            {/*        </TouchableOpacity>*/}
-                            {/*    </View>*/}
-                            {/*</View>*/}
                         </View>
                         {(message != null) ? (
                             <View
@@ -143,9 +130,6 @@ export const JourneyNewApplicant : React.FC<NotificationProps> = (props:Notifica
                                 >
                                     I’m Traveling with a baggage.
                                 </Text>) : <View/>}
-                            {/*<Text style={JourneyNewApplicantStyle.optionsValue}>*/}
-                            {/*    The baggage is allowed in your car*/}
-                            {/*</Text>*/}
                             <View
                                 style={JourneyNewApplicantStyle.optionsLine}
                             />

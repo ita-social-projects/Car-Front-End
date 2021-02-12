@@ -44,15 +44,6 @@ export default function Notifications(props: any) {
     return (
         <ScrollView style={NotificationStyle.headerContainer}>
             {notifications.map((item, key) => (
-                /*<JourneyNewApplicant participant={
-                    {
-                        userId: item!.userId,
-                        hasLuggage : item!.isRead,
-                        journeyId : item!.journeyId,
-                        message : item!.description
-                    }}
-                    visible={}
-                />*/
                 <NotificationComponent item={item} key={key}/>
             ))}
         </ScrollView>

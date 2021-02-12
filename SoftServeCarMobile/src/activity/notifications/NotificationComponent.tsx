@@ -8,15 +8,15 @@ import NotificationsService from "../../../api-service/notifications-service/Not
 import { Notification } from "../../../models/Notification";
 import AvatarComponent from "./AvatarComponent";
 import {JourneyNewApplicant} from "../../components/journey-new-applicant/JourneyNewApplicant";
-import {IComponentsEnum} from "../../common/interfaces/IComponentsEnum";
-import {INotificationProps} from "../../common/interfaces/INotificationProps";
+import {ComponentsEnum} from "../../common/interfaces/ComponentsEnum";
+import {NotificationProps} from "../../common/interfaces/NotificationProps";
 
 const NotificationComponent = (props: any) => {
     const notificationService = container.resolve(NotificationsService);
     const [requestType] = useState("");
     const [isModalVisible, setModalVisible] = useState(false);
 
-    let componentsEnumDict: IComponentsEnum<INotificationProps> = {
+    let componentsEnum: ComponentsEnum<NotificationProps> = {
         1 : JourneyNewApplicant
     }
 
@@ -98,7 +98,7 @@ const NotificationComponent = (props: any) => {
                 </View>
             </View>
             <View>
-                {React.createElement(componentsEnumDict[props.item.notificationType],
+                {React.createElement(componentsEnum[props.item.notificationType],
                         {
                             participant : {
                                 userId: props.item!.userId,

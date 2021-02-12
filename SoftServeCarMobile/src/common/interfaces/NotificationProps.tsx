@@ -1,7 +1,7 @@
 // @ts-ignore
 import {Participant} from "../../../models/Participant";
 
-export interface INotificationProps {
+export interface NotificationProps {
     participant: Participant;
     visible?: boolean;
 }// @ts-ignore
