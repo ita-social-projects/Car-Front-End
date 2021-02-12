@@ -1,49 +1,76 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
 const LoginStyle = StyleSheet.create({
-    container: {
+
+    pageContainer: {
         flex: 1,
+        paddingTop: Platform.OS === "ios" ? 74 : 37,
+        paddingHorizontal: 16,
+        paddingBottom: 22,
+    },
+
+    greetingTextContainer: {
         alignItems: "center",
-        margin: 30
     },
 
-    loginPageTextGreeting: {
+    greetingText: {
         fontFamily: Font.ProximaNova.Bold,
-        fontSize: 21,
+        fontSize: 14,
+        lineHeight: 16,
         textTransform: "uppercase",
-        margin: 5,
+        letterSpacing: 0.2
+    },
+    
+
+    applicationNameTextContainer: {
+        paddingTop: 18,
+        alignItems: "center",
+    },
+
+    applicationNameText: {
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: 20,
+        textTransform: "uppercase",
         letterSpacing: 0.2
     },
 
-    loginPageTextName: {
+    loginContainer: {
+        flex: 1,
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
+    },
+
+    buttonContainer: {
+        alignItems: "center",
+        paddingHorizontal: Platform.OS === "ios" ? 16 : 0,
+        paddingBottom: Platform.OS === "ios" ? 22 : 0,
+    },
+
+    button: {
+        width: 81,
+        height: 48,
+        backgroundColor: "#000000",
         fontFamily: Font.ProximaNova.Bold,
-        fontSize: 28,
+        fontSize: 16,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    buttonText: {
+        fontFamily: Font.ProximaNova.Bold,
+        fontSize: 16,
+        color: "#FFFFFF",
         textTransform: "uppercase",
-        margin: 5,
-        letterSpacing: 0.2
     },
 
-    loginButton: {
-        margin: 30,
-        padding: 15,
-        alignSelf: "flex-end",
-        fontFamily: Font.ProximaNova.Bold,
-        fontSize: 16
-    },
-
-    preferencesText: {
-        padding: 30,
-        textAlign: "left",
-        fontSize: 15
+    pressedButton: {
+        backgroundColor:"#888888",
     },
 
     loadingIcon: {
         width: 56,
         height: 56,
-        borderRadius: 50,
-        borderWidth: 3,
-        borderColor: "#EEEEEE"
     }
 });
 

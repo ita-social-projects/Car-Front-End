@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Button, Text, View } from "react-native";
+import { ActivityIndicator, Button, Text, TouchableOpacity, View } from "react-native";
 import { AuthManager } from "../auth/AuthManager";
 import { AuthContext } from "../auth/AuthProvider";
 import LoginStyle from "./LoginStyle";
@@ -57,30 +57,33 @@ export function Login(props: any) {
     }
 
     return (
-        <View
-            style={{
-                flex: 1,
-                justifyContent: "space-around",
-                alignItems: "center"
-            }}
-        >
-            <View style={LoginStyle.container}>
-                <Text style={LoginStyle.loginPageTextGreeting}>Welcome to</Text>
-                <Text style={LoginStyle.loginPageTextName}>
+        <View style={LoginStyle.pageContainer}>
+            <View style={LoginStyle.greetingTextContainer}>
+                <Text style={LoginStyle.greetingText}>
+                    Welcome to
+                </Text>
+            </View>
+
+            <View style={LoginStyle.applicationNameTextContainer}>
+                <Text style={LoginStyle.applicationNameText}>
                     Softserve Journeys
                 </Text>
             </View>
-            <View style={LoginStyle.loginButton}>
-                {loader}
-                <Button
-                    color="black"
-                    title="Login"
-                    disabled={buttonDisabled}
-                    onPress={() => {
-                        login();
-                        loadingProcess(true);
-                    }}
-                />
+
+            <View style={LoginStyle.loginContainer}>
+                <View style={LoginStyle.buttonContainer}>
+                    {loader}
+                    <TouchableOpacity style={[LoginStyle.button, buttonDisabled && LoginStyle.pressedButton]}
+                        disabled={buttonDisabled}
+                        activeOpacity={1}
+                        onPress={() => {
+                            login();
+                            loadingProcess(true);
+                            setButtonDisabled(true);
+                        }}>
+                        <Text style={LoginStyle.buttonText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );

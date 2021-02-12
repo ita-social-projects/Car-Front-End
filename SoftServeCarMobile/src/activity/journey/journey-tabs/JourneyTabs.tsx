@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Text, View } from "react-native";
 import {
     TouchableOpacity,
@@ -18,11 +18,33 @@ import OkSearchResult from "../journey-activity/segment-control-activities/searc
 import JourneyStyle from "../JourneyStyle";
 import JourneyTabsStyle from "./JourneyTabsStyle";
 import * as navigation from "../../../components/navigation/Navigation";
+import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
+import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
+import BottomPopup from "../../../components/bottom-popup/BottomPopup";
+import BottomSheet from "reanimated-bottom-sheet";
 
 const StackTabs = createStackNavigator();
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
+
+    const moreOptionsHeader = () => (
+        <View style={JourneyPageStyle.headerTitleStyle}>
+            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
+        </View>
+    );
+
+    const moreOptionsContent = () => {
+        return (
+            <View style={JourneyPageStyle.panel}>
+                <MenuButton text="Add Stop" onPress={() => {}} />
+                <MenuButton text="Edit the Journey" onPress={() => {}} />
+                <MenuButton text="Invite Softservian" onPress={() => {}} />
+                <MenuButton text="Cancel the Journey" onPress={() => {}} />
+            </View>
+        );
+    };
+    const moreOptionsRef = useRef<BottomSheet>(null);
 
     return (
         <View style={JourneyStyle.tabsStyle}>
@@ -102,7 +124,6 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Journey Page"
-                    component={JourneyPage}
                     options={{
                         title: "Journey",
                         headerTitleAlign: "center",
@@ -130,7 +151,12 @@ const JourneyTabs = () => {
                         ),
                         headerRight: () => (
                             <TouchableWithoutFeedback
-                                onPress={() => setOpen(!isOpen)}
+                                onPress={() => {
+                                    setOpen(!isOpen);
+                                    moreOptionsRef?.current?.snapTo(
+                                        isOpen ? 0 : 1
+                                    );
+                                }}
                             >
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
@@ -140,7 +166,24 @@ const JourneyTabs = () => {
                             </TouchableWithoutFeedback>
                         )
                     }}
-                />
+                >
+                    {(props: any) => {
+                        return (
+                            <>
+                                <JourneyPage props={props} />
+                                <BottomPopup
+                                    refForChild={moreOptionsRef}
+                                    snapPoints={[0, 300]}
+                                    renderContent={moreOptionsContent}
+                                    initialSnap={0}
+                                    renderHeader={moreOptionsHeader}
+                                    enabledInnerScrolling={false}
+                                    onCloseEnd={() => setOpen(false)}
+                                />
+                            </>
+                        );
+                    }}
+                </StackTabs.Screen>
                 <StackTabs.Screen
                     name="OK Search Result"
                     component={OkSearchResult}
