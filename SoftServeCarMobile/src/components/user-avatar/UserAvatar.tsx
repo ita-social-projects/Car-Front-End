@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, View } from "react-native";
-import "reflect-metadata";
-import { container } from "tsyringe";
+import JourneyNewApplicantStyle, {item} from "../journey-new-applicant/JourneyNewApplicantStyle";
+import {ActivityIndicator, Image, Text, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {container} from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
-import AvatarInitials from "./AvatarInitials";
-import NotificationStyle from "./NotificationStyle";
+import NotificationStyle from "../../activity/notifications/NotificationStyle";
+import {AccentColors} from "../../common/enums/AccentColors";
 
-const AvatarComponent = (props: any) => {
+export function UserAvatar(props: {
+    userId: number;
+    flexBox?: { width: number }
+}) {
     const userService = container.resolve(UserService);
+    let [userFullName, setUserFullName] = useState([' ',' ']);
     const [isImage, setIsImage] = useState(false);
 
-    const [avatar, setAvatar] = useState(
+    let [avatar, setAvatar] = useState(
         <ActivityIndicator
             style={NotificationStyle.headerUserAvatar}
             size="large"
             color="black"
         />
     );
+
     useEffect(() => {
         userService
             .getAvatar(Number(props.userId))
@@ -50,20 +55,23 @@ const AvatarComponent = (props: any) => {
                     />
                 );
             });
+        userService.getUser(props.userId).then(user => setUserFullName([user.data!.name, user.data!.surname]));
     }, []);
 
+    let avatarColour = (userId: number, ) => AccentColors[Math.floor(userId%Object.keys(AccentColors).length)];
+
+
     return (
-        <View>
+        <View style={props.flexBox == null ? {} : item(props.flexBox.width)}>
             {isImage ? (
                 <View>{avatar}</View>
             ) : (
-                <AvatarInitials
-                    userName={props.userName}
-                    userColor={props.userColor}
-                ></AvatarInitials>
+                <View style={[JourneyNewApplicantStyle.circle, {backgroundColor:avatarColour(props.userId)}]}>
+                    <Text style={JourneyNewApplicantStyle.icon}>
+                        {userFullName[0][0]+userFullName[1][0]}
+                    </Text>
+                </View>
             )}
         </View>
-    );
-};
-
-export default AvatarComponent;
+    )
+}

@@ -1,16 +1,35 @@
-import React, { useState } from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState} from "react";
+import {Modal, Text, TouchableOpacity, View} from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { LinearTextGradient } from "react-native-text-gradient";
-import Font from "../fonts/Font";
+import {LinearTextGradient} from "react-native-text-gradient";
+import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle, {
     Circle,
     item
 } from "./JourneyNewApplicantStyle";
+import {UserAvatar} from "../user-avatar/UserAvatar";
+import {container} from "tsyringe";
+import UserService from "../../../api-service/user-service/UserService";
+import JourneyService from "../../../api-service/journey-service/JourneyService";
+import {NotificationProps} from "../../common/interfaces/NotificationProps";
 
-export const JourneyNewApplicant = () => {
-    let [modalVisible, setModalVisible] = useState(false);
 
+
+export const JourneyNewApplicant : React.FC<NotificationProps> = (props:NotificationProps) => {
+    let [modalVisible, setModalVisible] = useState(props.visible);
+    let [userName, setUserName] = useState(' ');
+    let [userSurName, setUserSurName] = useState(' ');
+    let [userPosition, setUserPosition] = useState(' ');
+    let message = props.participant?.message == '' ? null : props.participant?.message;
+    const userService = container.resolve(UserService);
+    const journeyService = container.resolve(JourneyService);
+    useEffect(() => {
+        userService.getUser(props.participant!.userId).then(user => {
+            setUserName(user?.data!.name);
+            setUserSurName(user?.data!.surname);
+            setUserPosition(user?.data!.position);
+        });
+    })
     return (
         <View>
             <TouchableOpacity
@@ -59,20 +78,16 @@ export const JourneyNewApplicant = () => {
                                 JourneyNewApplicantStyle.title
                             ]}
                         >
-                            <View style={item(20)}>
-                                <View style={JourneyNewApplicantStyle.circle}>
-                                    <Text style={JourneyNewApplicantStyle.icon}>
-                                        JB
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={item(70)}>
+                            <UserAvatar color={"#000000"}
+                                        userId={props.participant!.userId}
+                                        flexBox={{width: 20}}/>
+                            <View style={item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
-                                        Jaylon Ekstrom Bothman
+                                        {userName + ' ' + userSurName}
                                     </Text>
                                     <Text style={JourneyNewApplicantStyle.bio}>
-                                        Experience Design Intermediate
+                                        {userPosition}
                                     </Text>
                                     <Text
                                         style={
@@ -83,50 +98,38 @@ export const JourneyNewApplicant = () => {
                                     </Text>
                                 </View>
                             </View>
-                            <View style={item(10)}>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Text
-                                            style={
-                                                JourneyNewApplicantStyle.more
-                                            }
-                                        >
-                                            ...
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
                         </View>
-                        <View
-                            style={[
-                                JourneyNewApplicantStyle.row,
-                                JourneyNewApplicantStyle.commentsBox
-                            ]}
-                        >
-                            <Text style={JourneyNewApplicantStyle.commentsText}>
-                                Hey! Do you mind if I throw my suitcase in the
-                                trunk?
-                            </Text>
+                        {(message != null) ? (
                             <View
-                                style={
-                                    JourneyNewApplicantStyle.commentsBoxAfter
-                                }
-                            />
-                        </View>
+                                style={[
+                                    JourneyNewApplicantStyle.row,
+                                    JourneyNewApplicantStyle.commentsBox
+                                ]}
+                            >
+                                <Text style={JourneyNewApplicantStyle.commentsText}>
+                                    {message}
+                                </Text>
+                                <View
+                                    style={
+                                        JourneyNewApplicantStyle.commentsBoxAfter
+                                    }
+                                />
+                            </View>
+                        ) : (
+                            <View/>
+                        )}
+
                         <View
                             style={[
                                 JourneyNewApplicantStyle.row,
                                 JourneyNewApplicantStyle.options
-                            ]}
-                        >
-                            <Text
-                                style={JourneyNewApplicantStyle.optionsHeader}
-                            >
-                                I’m Traveling with a baggage.
-                            </Text>
-                            <Text style={JourneyNewApplicantStyle.optionsValue}>
-                                The baggage is allowed in your car
-                            </Text>
+                            ]}>
+                            {props.participant!.hasLuggage ? (
+                                <Text
+                                    style={JourneyNewApplicantStyle.optionsHeader}
+                                >
+                                    I’m Traveling with a baggage.
+                                </Text>) : <View/>}
                             <View
                                 style={JourneyNewApplicantStyle.optionsLine}
                             />
@@ -156,7 +159,7 @@ export const JourneyNewApplicant = () => {
                                         base={true}
                                         marginTop={"0.3rem"}
                                     >
-                                        <Circle color="#C1C1C5" radius="1rem" />
+                                        <Circle color="#C1C1C5" radius="1rem"/>
                                     </Circle>
                                     <View
                                         style={[
@@ -247,8 +250,8 @@ export const JourneyNewApplicant = () => {
                                                 JourneyNewApplicantStyle.circleGrad
                                             }
                                             colors={["#00A3CF", "#5552A0"]}
-                                            start={{ x: 0, y: 0 }}
-                                            end={{ x: 1, y: 1 }}
+                                            start={{x: 0, y: 0}}
+                                            end={{x: 1, y: 1}}
                                         />
                                     </Circle>
                                     <View
@@ -269,8 +272,8 @@ export const JourneyNewApplicant = () => {
                                         ]}
                                         locations={[0, 1]}
                                         colors={["#00A3CF", "#5552A0"]}
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 0 }}
+                                        start={{x: 0, y: 0}}
+                                        end={{x: 1, y: 0}}
                                     >
                                         <Text
                                             style={[
@@ -282,7 +285,7 @@ export const JourneyNewApplicant = () => {
                                         <Text
                                             style={{
                                                 fontFamily:
-                                                    Font.OpenSans.Regular
+                                                Font.OpenSans.Regular
                                             }}
                                         >
                                             (view on the map)
@@ -308,7 +311,7 @@ export const JourneyNewApplicant = () => {
                                         base={true}
                                         marginTop={"0.3rem"}
                                     >
-                                        <Circle color="#C1C1C5" radius="1rem" />
+                                        <Circle color="#C1C1C5" radius="1rem"/>
                                     </Circle>
                                 </View>
                                 <View
@@ -333,7 +336,14 @@ export const JourneyNewApplicant = () => {
                                     JourneyNewApplicantStyle.button,
                                     JourneyNewApplicantStyle.acceptButton
                                 ]}
-                            >
+                                onPress={() => {
+                                    journeyService.addParticipant({
+                                        journeyId: props.participant!.journeyId,
+                                        userId: props.participant!.userId,
+                                        hasLuggage: props.participant!.hasLuggage
+                                    } as unknown as FormData);
+                                    setModalVisible(!modalVisible);
+                                }}>
                                 <Text
                                     style={
                                         JourneyNewApplicantStyle.acceptButtonText
@@ -348,7 +358,9 @@ export const JourneyNewApplicant = () => {
                                     JourneyNewApplicantStyle.button,
                                     JourneyNewApplicantStyle.declineButton
                                 ]}
-                            >
+                                onPress={() => {
+                                    setModalVisible(!modalVisible);
+                                }}>
                                 <Text
                                     style={
                                         JourneyNewApplicantStyle.declineButtonText
