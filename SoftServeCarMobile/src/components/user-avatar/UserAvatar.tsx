@@ -60,14 +60,14 @@ export function UserAvatar(props: {
                     />
                 );
             });
-        userService.getUser(props.userId).then(user => setUserFullName([user!.data!.name, user!.data!.surname]));
+        userService.getUser(props.userId).then(user => setUserFullName([user.data!.name, user.data!.surname]));
     }, []);
 
     let avatarColour = (userId: number, ) => AccentColors[Math.floor(userId%8)];
 
 
     return (
-        <View style={props.flexBox == null ? {} : item(props.flexBox!.width)}>
+        <View style={props.flexBox == null ? {} : item(props.flexBox.width)}>
             {isImage ? (
                 <View>{avatar}</View>
             ) : (

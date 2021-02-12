@@ -16,11 +16,11 @@ import {NotificationProps} from "../../common/interfaces/INotificationProps";
 
 
 export const JourneyNewApplicant : React.FC<NotificationProps> = (props:NotificationProps) => {
-    let [modalVisible, setModalVisible] = useState(props!.visible);
+    let [modalVisible, setModalVisible] = useState(props.visible);
     let [userName, setUserName] = useState(' ');
     let [userSurName, setUserSurName] = useState(' ');
     let [userPosition, setUserPosition] = useState(' ');
-    let message = props!.participant?.message == '' ? null : props!.participant?.message;
+    let message = props.participant?.message == '' ? null : props.participant?.message;
     const userService = container.resolve(UserService);
     const journeyService = container.resolve(JourneyService);
     useEffect(() => {
