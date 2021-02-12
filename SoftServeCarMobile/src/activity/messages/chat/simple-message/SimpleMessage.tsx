@@ -26,7 +26,7 @@ const SimpleMessage = (props: any) => {
             })
     }, []);
 
-    const searchFilterFunction = (text) => {
+    const setSearchFilter = (text) => {
         if (text) {
             const newData = masterDataSource.filter(function (item) {
                 const itemData = item.name
@@ -47,8 +47,8 @@ const SimpleMessage = (props: any) => {
         return (props.isOpenFilter) ? (
             <SearchBar
                 searchIcon={{ color: "black", size: 28 }}
-                onChangeText={(text) => searchFilterFunction(text)}
-                onClear={() => searchFilterFunction('')}
+                onChangeText={(text) => setSearchFilter(text)}
+                onClear={() => setSearchFilter('')}
                 placeholder={'Search in Messages'}
                 value={search}
                 containerStyle={SimpleMessageStyle.containerStyle}

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-
+import Font from "../../../../components/fonts/Font";
 const SimpleMessageStyle = StyleSheet.create({
     main: {
         display: 'flex',
@@ -17,8 +17,7 @@ const SimpleMessageStyle = StyleSheet.create({
         padding: 10,
     },
     fonts: {
-        fontFamily: 'OpenSans-Italic',
-        fontWeight: 'bold',
+        fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
     },
     image: {
@@ -54,7 +53,7 @@ const SimpleMessageStyle = StyleSheet.create({
     textStyle:{
         fontSize: 11,
         paddingTop: 10,
-        fontFamily: 'sans-serif'
+        fontFamily: Font.OpenSans.SemiBold,
     }
 })
 
