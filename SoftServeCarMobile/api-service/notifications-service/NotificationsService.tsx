@@ -32,7 +32,7 @@ class NotificationsService {
 
     markAsRead(notificationId: number){
         return this.apiService.post(
-            this.routePrefix + notificationId
+            this.routePrefix + `\\${notificationId}`
         )
     }
 }
