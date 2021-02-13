@@ -3,10 +3,7 @@ import Font from "../../data/fonts/Font";
 
 export const NewNotificationStyle = EStyleSheet.create({
     content: {
-        //backgroundColor:'red',
-        //paddingTop:'0.5rem',
-        //paddingBottom:'0.5rem'
-
+        
     },
     notificationContainer: {
         marginTop:'0.95rem',
@@ -14,7 +11,6 @@ export const NewNotificationStyle = EStyleSheet.create({
     },
     unread: {
         backgroundColor:'rgba(0,161,206,0.1)',
-        //opacity:0.1
     },
     name: {
         color: "#02A2CF",
