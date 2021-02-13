@@ -9,7 +9,7 @@ import {NewNotificationStyle} from "./NewNotificationStyle";
 
 export const NewNotification : React.FC<NewNotificationProps> = (props:NewNotificationProps) => {
     return (
-        <View style={props!.read ? null : NewNotificationStyle.unread}>
+        <View style={props.read ? null : NewNotificationStyle.unread}>
             <View style={[ContainerStyle.container, NewNotificationStyle.notificationContainer]}>
                 <View style={[RowStyle.row, NewNotificationStyle.center]}>
                     <UserAvatar userId={props.userId}
@@ -23,13 +23,13 @@ export const NewNotification : React.FC<NewNotificationProps> = (props:NewNotifi
                         </Text>
                     </View>
                     <View style={[item(15), NewNotificationStyle.time]}>
-                        <Text style={props!.read ? NewNotificationStyle.dateRead : NewNotificationStyle.dateUnread}>
+                        <Text style={props.read ? NewNotificationStyle.dateRead : NewNotificationStyle.dateUnread}>
                             {getTimeDifference(new Date(), props.date)}
                         </Text>
                     </View>
                 </View>
             </View>
-            <View style={props!.read ? NewNotificationStyle.optionsLineRead : NewNotificationStyle.optionsLineUnread}/>
+            <View style={props.read ? NewNotificationStyle.optionsLineRead : NewNotificationStyle.optionsLineUnread}/>
         </View>
     )
     function getTimeDifference(minuendTime: Date, subtrahendTime: Date){
@@ -37,8 +37,8 @@ export const NewNotification : React.FC<NewNotificationProps> = (props:NewNotifi
         const minutes = Math.floor((diff/1000)/60);
         const hours = Math.floor((diff/1000)/60/60);
         const days = Math.floor((diff/1000)/60/60/24);
-        const month = Math.floor((diff/1000)/60/60/24/30);
-        const year = Math.floor((diff/1000)/60/60/24/30/12);
+        const months = Math.floor((diff/1000)/60/60/24/30);
+        const years = Math.floor((diff/1000)/60/60/24/30/12);
         if (minutes < 60) {
             if (minutes == 0){
                 return "now";
@@ -51,10 +51,10 @@ export const NewNotification : React.FC<NewNotificationProps> = (props:NewNotifi
         if (days < daysRemainingInMonth(new Date())){
             return days + " d";
         }
-        if (month < 12){
-            return month + " m";
+        if (months < 12){
+            return months + " m";
         }
-        return year + " y";
+        return years + " y";
 
 
         function daysRemainingInMonth(date: Date) {
