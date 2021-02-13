@@ -7,11 +7,9 @@ import {NotificationProps} from "../../common/interfaces/NotificationProps";
 
 const NotificationComponent = (props: any) => {
     const [isModalVisible] = useState(false);
-
     let componentsEnum: ComponentsEnum<NotificationProps> = {
         1 : JourneyNewApplicant
     }
-
     return (
         <View>
             {React.createElement(componentsEnum[props.item.notificationType],
@@ -27,6 +25,7 @@ const NotificationComponent = (props: any) => {
                     read : props.item!.isRead,
                     date : new Date(props.item!.createAt)
                 })}
+
         </View>
     );
 };
