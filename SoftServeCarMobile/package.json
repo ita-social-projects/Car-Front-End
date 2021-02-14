@@ -24,9 +24,9 @@
         ]
     },
     "scripts": {
-        "android": "react-native run-android",
-        "ios": "react-native run-ios",
-        "start": "react-native start",
+        "android": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json} && react-native run-android",
+        "ios": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json} && react-native run-ios",
+        "start": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json} && react-native start",
         "test": "jest --coverage",
         "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
         "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}"

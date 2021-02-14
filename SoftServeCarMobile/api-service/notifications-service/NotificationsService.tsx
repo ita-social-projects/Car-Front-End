@@ -29,5 +29,9 @@ class NotificationsService {
             notification
         );
     }
+
+    markAsRead(notificationId: number) {
+        return this.apiService.post(this.routePrefix + `\\${notificationId}`);
+    }
 }
 export default NotificationsService;

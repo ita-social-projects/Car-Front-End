@@ -1,29 +1,13 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import { AuthConfiguration, authorize } from "react-native-app-auth";
-
-const AuthConfig = {
-    appId: "6d6543bc-f0a6-4312-a919-53f757516d63",
-    appScopes: [
-        "openid",
-        "offline_access",
-        "profile",
-        "User.Read",
-        "MailboxSettings.Read",
-        "Calendars.ReadWrite"
-    ]
-};
+import AuthConfig from "./AuthConfig";
 
 const config: AuthConfiguration = {
-    clientId: AuthConfig.appId,
-    redirectUrl: "softserve-car://react-native-auth/",
+    clientId: AuthConfig.clientId,
+    redirectUrl: AuthConfig.redirectUrl,
     scopes: AuthConfig.appScopes,
     additionalParameters: { prompt: "select_account" },
-    serviceConfiguration: {
-        authorizationEndpoint:
-            "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-        tokenEndpoint:
-            "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-    }
+    serviceConfiguration: AuthConfig.serviceConfiguration
 };
 export class AuthManager {
     static signInAsync = async () => {

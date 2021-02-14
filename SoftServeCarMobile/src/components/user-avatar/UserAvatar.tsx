@@ -5,7 +5,6 @@ import { ActivityIndicator, Image, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
-import NotificationStyle from "../../activity/notifications/NotificationStyle";
 import { AccentColors } from "../../common/enums/AccentColors";
 
 export function UserAvatar(props: {
@@ -17,11 +16,7 @@ export function UserAvatar(props: {
     const [isImage, setIsImage] = useState(false);
 
     let [avatar, setAvatar] = useState(
-        <ActivityIndicator
-            style={NotificationStyle.headerUserAvatar}
-            size="large"
-            color="black"
-        />
+        <ActivityIndicator size="large" color="black" />
     );
 
     useEffect(() => {
@@ -35,7 +30,6 @@ export function UserAvatar(props: {
                             source={{
                                 uri: "data:image/png;base64," + byteOfImage
                             }}
-                            style={NotificationStyle.headerUserAvatar}
                         />
                     );
                     setIsImage(false);
@@ -43,7 +37,6 @@ export function UserAvatar(props: {
                     setAvatar(
                         <Image
                             source={require("../../../assets/images/default-user-photo.jpg")}
-                            style={NotificationStyle.headerUserAvatar}
                         />
                     );
                 }
@@ -53,7 +46,6 @@ export function UserAvatar(props: {
                 setAvatar(
                     <Image
                         source={require("../../../assets/images/default-user-photo.jpg")}
-                        style={NotificationStyle.headerUserAvatar}
                     />
                 );
             });

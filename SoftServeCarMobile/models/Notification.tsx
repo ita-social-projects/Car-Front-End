@@ -7,9 +7,8 @@ export type Notification = null | {
     position: string;
     description: string;
     isRead: boolean;
-    createAt: string;
+    createAt: Date;
     receiverId: number;
     journeyId: number;
-    userColor: string;
     notificationType: NotificationType;
 };

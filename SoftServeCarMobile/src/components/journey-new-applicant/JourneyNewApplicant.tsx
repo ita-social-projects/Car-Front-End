@@ -12,6 +12,8 @@ import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import { NotificationProps } from "../../common/interfaces/NotificationProps";
+import { NewNotification } from "../new-notification/NewNotification";
+import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 
 export const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
@@ -24,6 +26,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
         props.participant?.message == "" ? null : props.participant?.message;
     const userService = container.resolve(UserService);
     const journeyService = container.resolve(JourneyService);
+    const notificationService = container.resolve(NotificationsService);
     useEffect(() => {
         userService.getUser(props.participant!.userId).then((user) => {
             setUserName(user?.data!.name);
@@ -34,17 +37,18 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
     return (
         <View>
             <TouchableOpacity
-                style={[
-                    JourneyNewApplicantStyle.button,
-                    JourneyNewApplicantStyle.acceptButton
-                ]}
                 onPress={() => {
                     setModalVisible(!modalVisible);
+                    notificationService.markAsRead(props.notificationId);
                 }}
             >
-                <Text style={JourneyNewApplicantStyle.acceptButtonText}>
-                    Show
-                </Text>
+                <NewNotification
+                    userId={props.participant!.userId}
+                    fullName={`${userName} ${userSurName}`}
+                    notificationTitle={"asked to join to your journey"}
+                    read={props.read}
+                    date={new Date(props.date)}
+                />
             </TouchableOpacity>
             <Modal
                 visible={modalVisible}
@@ -80,7 +84,6 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             ]}
                         >
                             <UserAvatar
-                                color={"#000000"}
                                 userId={props.participant!.userId}
                                 flexBox={{ width: 20 }}
                             />
