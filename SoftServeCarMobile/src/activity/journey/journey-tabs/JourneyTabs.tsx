@@ -1,10 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useRef, useState } from "react";
 import { Text, View } from "react-native";
-import {
-    TouchableOpacity,
-    TouchableWithoutFeedback
-} from "react-native-gesture-handler";
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { JourneyNewApplicant } from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import { navigate } from "../../../components/navigation/Navigation";
@@ -16,12 +13,12 @@ import JourneyPage from "../journey-activity/segment-control-activities/journey-
 import BadSearchResult from "../journey-activity/segment-control-activities/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/segment-control-activities/search-results/ok-search-result/OkSearchResult";
 import JourneyStyle from "../JourneyStyle";
-import JourneyTabsStyle from "./JourneyTabsStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
 import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
+import HeaderStyle from "../../../components/styles/HeaderStyle";
 
 const StackTabs = createStackNavigator();
 
@@ -54,7 +51,7 @@ const JourneyTabs = () => {
                     component={Journey}
                     options={{
                         headerTitle: "Journey",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerTitleAlign: "center",
                         headerLeft: () => <View />
                     }}
@@ -66,10 +63,10 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Create a Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -80,9 +77,9 @@ const JourneyTabs = () => {
                                     color={"#02A2CF"}
                                 />
                                 <View
-                                    style={JourneyTabsStyle.backButtonTextView}
+                                    style={HeaderStyle.backButtonTextView}
                                 >
-                                    <Text style={JourneyTabsStyle.buttonText}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -97,10 +94,10 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Search for a Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -111,9 +108,9 @@ const JourneyTabs = () => {
                                     color={"#02A2CF"}
                                 />
                                 <View
-                                    style={JourneyTabsStyle.backButtonTextView}
+                                    style={HeaderStyle.backButtonTextView}
                                 >
-                                    <Text style={JourneyTabsStyle.buttonText}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -127,10 +124,10 @@ const JourneyTabs = () => {
                     options={{
                         title: "Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -140,10 +137,8 @@ const JourneyTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={JourneyTabsStyle.backButtonTextView}
-                                >
-                                    <Text style={JourneyTabsStyle.buttonText}>
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -161,7 +156,7 @@ const JourneyTabs = () => {
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
-                                    style={JourneyTabsStyle.journeyPageIcon}
+                                    style={HeaderStyle.moreOptionsIcon}
                                 />
                             </TouchableWithoutFeedback>
                         )
@@ -190,10 +185,10 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search result",
                         headerTitleAlign: "center",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -204,9 +199,9 @@ const JourneyTabs = () => {
                                     color={"#02A2CF"}
                                 />
                                 <View
-                                    style={JourneyTabsStyle.backButtonTextView}
+                                    style={HeaderStyle.backButtonTextView}
                                 >
-                                    <Text style={JourneyTabsStyle.buttonText}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -214,12 +209,12 @@ const JourneyTabs = () => {
                         ),
                         headerRight: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.requestButton}
+                                style={HeaderStyle.requestButton}
                                 onPress={() => {
                                     navigate("Search Journey", {});
                                 }}
                             >
-                                <Text style={JourneyTabsStyle.buttonText}>
+                                <Text style={HeaderStyle.buttonText}>
                                     Request
                                 </Text>
                             </TouchableOpacity>
@@ -233,10 +228,10 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search result",
                         headerTitleAlign: "center",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -247,9 +242,9 @@ const JourneyTabs = () => {
                                     color={"#02A2CF"}
                                 />
                                 <View
-                                    style={JourneyTabsStyle.backButtonTextView}
+                                    style={HeaderStyle.backButtonTextView}
                                 >
-                                    <Text style={JourneyTabsStyle.buttonText}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -257,12 +252,12 @@ const JourneyTabs = () => {
                         ),
                         headerRight: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.requestButton}
+                                style={HeaderStyle.requestButton}
                                 onPress={() => {
                                     navigate("Search Journey", {});
                                 }}
                             >
-                                <Text style={JourneyTabsStyle.buttonText}>
+                                <Text style={HeaderStyle.buttonText}>
                                     Request
                                 </Text>
                             </TouchableOpacity>
@@ -275,10 +270,10 @@ const JourneyTabs = () => {
                     options={{
                         title: "SoftServian",
                         headerTitleAlign: "center",
-                        headerTitleStyle: JourneyTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={JourneyTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -287,15 +282,15 @@ const JourneyTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={JourneyTabsStyle.blackButtonText}
+                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View
-                                    style={JourneyTabsStyle.backButtonTextView}
+                                    style={HeaderStyle.backButtonTextView}
                                 >
                                     <Text
                                         style={[
-                                            JourneyTabsStyle.buttonText,
-                                            JourneyTabsStyle.blackButtonText
+                                            HeaderStyle.buttonText,
+                                            HeaderStyle.blackButtonText
                                         ]}
                                     >
                                         Back

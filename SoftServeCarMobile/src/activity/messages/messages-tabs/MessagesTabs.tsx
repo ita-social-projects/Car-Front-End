@@ -7,11 +7,10 @@ import { container } from "tsyringe";
 import UserService from "../../../../api-service/user-service/UserService";
 import { User } from "../../../../models/User";
 import { AuthContext } from "../../auth/AuthProvider";
-import MyProfileTabsStyle from "../../my-profile/my-profile-tabs/MyProfileTabsStyle";
-import MessagesTabsStyle from "./MessagesTabsStyle";
 import Chat from "../chat/Chat";
 import SimpleMessage from "../chat/simple-message/SimpleMessage";
 import * as navigation from "../../../components/navigation/Navigation";
+import HeaderStyle from "../../../components/styles/HeaderStyle";
 
 const StackTabs = createStackNavigator();
 
@@ -35,14 +34,14 @@ const ChatTabs = () => {
     }, []);
 
     return (
-        <View style={MyProfileTabsStyle.container}>
+        <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Messages"
                     options={{
                         headerTitle: "Messages",
                         headerTitleAlign: "center",
-                        headerTitleStyle: MessagesTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerRight: () => (
                             <TouchableOpacity style={{ right: 10 }} onPress={() => setIsOpen()}>
                                 <Ionicons name={'search'} size={30} />
@@ -57,10 +56,10 @@ const ChatTabs = () => {
                     options={{
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
-                        headerTitleStyle: MessagesTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={MessagesTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -71,9 +70,9 @@ const ChatTabs = () => {
                                     color={"#02A2CF"}
                                 />
                                 <View
-                                    style={MessagesTabsStyle.backButtonTextView}
+                                    style={HeaderStyle.backButtonTextView}
                                 >
-                                    <Text style={MessagesTabsStyle.buttonText}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -84,7 +83,7 @@ const ChatTabs = () => {
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
-                                    style={MessagesTabsStyle.moreOptionsIcon}
+                                    style={HeaderStyle.moreOptionsIcon}
                                 />
                             </TouchableOpacity>
                         )

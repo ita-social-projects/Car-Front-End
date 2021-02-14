@@ -4,9 +4,9 @@ import { View } from "react-native";
 import { container } from "tsyringe";
 import UserService from "../../../../api-service/user-service/UserService";
 import { User } from "../../../../models/User";
+import HeaderStyle from "../../../components/styles/HeaderStyle";
 import { AuthContext } from "../../auth/AuthProvider";
 import Notifications from "../Notifications";
-import NotificationsTabsStyle from "./NotificationsTabsStyle";
 
 const StackTabs = createStackNavigator();
 
@@ -25,7 +25,7 @@ const ChatTabs = () => {
     }, []);
 
     return (
-        <View style={NotificationsTabsStyle.container}>
+        <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Notifications"
@@ -34,7 +34,7 @@ const ChatTabs = () => {
                         headerTitle: "Notifications",
                         headerTitleAlign: "center",
                         headerTitleStyle:
-                            NotificationsTabsStyle.headerTitleStyle,
+                        HeaderStyle.headerTitleStyle,
                         headerLeft: () => <View />
                     }}
                 />

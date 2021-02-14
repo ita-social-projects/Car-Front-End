@@ -6,5 +6,5 @@ export enum AccentColors {
     "#932f8c", // Violet
     "#5552a0", // Navy
     "#d80056", // Red
-    "#000000", // Black
+    "#000000" // Black
 }
