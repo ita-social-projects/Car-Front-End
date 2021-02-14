@@ -2,6 +2,7 @@
 /workspace.xml
 .idea/
 .vscode/
+.vs/
 
 build/
 .gradle/
