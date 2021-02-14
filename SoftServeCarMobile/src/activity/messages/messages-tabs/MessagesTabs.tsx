@@ -22,7 +22,7 @@ const ChatTabs = () => {
 
     const setIsOpen = () => {
         setIsOpenFilter(!isOpenFilter);
-    }
+    };
 
     useEffect(() => {
         userServices
@@ -43,12 +43,22 @@ const ChatTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerRight: () => (
-                            <TouchableOpacity style={{ right: 10 }} onPress={() => setIsOpen()}>
-                                <Ionicons name={'search'} size={30} />
+                            <TouchableOpacity
+                                style={{ right: 10 }}
+                                onPress={() => setIsOpen()}
+                            >
+                                <Ionicons name={"search"} size={30} />
                             </TouchableOpacity>
-                        )
+                        ),
+                        headerLeft: () => <View />
                     }}
-                    children={(props) => <SimpleMessage {...props} component={Chat} isOpenFilter={isOpenFilter} />}
+                    children={(props) => (
+                        <SimpleMessage
+                            {...props}
+                            component={Chat}
+                            isOpenFilter={isOpenFilter}
+                        />
+                    )}
                 />
                 <StackTabs.Screen
                     name="Chat"
@@ -69,9 +79,7 @@ const ChatTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={HeaderStyle.backButtonTextView}
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>

@@ -33,8 +33,7 @@ const ChatTabs = () => {
                     options={{
                         headerTitle: "Notifications",
                         headerTitleAlign: "center",
-                        headerTitleStyle:
-                        HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => <View />
                     }}
                 />

@@ -6,10 +6,10 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import { Notification } from "../../../models/Notification";
-import {JourneyNewApplicant} from "../../components/journey-new-applicant/JourneyNewApplicant";
-import {ComponentsEnum} from "../../common/interfaces/ComponentsEnum";
-import {NotificationProps} from "../../common/interfaces/NotificationProps";
-import {UserAvatar} from "../../components/user-avatar/UserAvatar";
+import { JourneyNewApplicant } from "../../components/journey-new-applicant/JourneyNewApplicant";
+import { ComponentsEnum } from "../../common/interfaces/ComponentsEnum";
+import { NotificationProps } from "../../common/interfaces/NotificationProps";
+import { UserAvatar } from "../../components/user-avatar/UserAvatar";
 
 const NotificationComponent = (props: any) => {
     const notificationService = container.resolve(NotificationsService);
@@ -17,8 +17,8 @@ const NotificationComponent = (props: any) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
     let componentsEnum: ComponentsEnum<NotificationProps> = {
-        1 : JourneyNewApplicant
-    }
+        1: JourneyNewApplicant
+    };
 
     const updateNotification = () => {
         let notification: Notification;
@@ -56,8 +56,7 @@ const NotificationComponent = (props: any) => {
                     : NotificationStyle.unreadContainer
             ]}
         >
-            <UserAvatar userId={props.item.userId}
-                        flexBox={{width:20}}/>
+            <UserAvatar userId={props.item.userId} flexBox={{ width: 20 }} />
 
             <View style={NotificationStyle.headerContainer}>
                 <View style={NotificationStyle.innerContainer}>
@@ -88,16 +87,18 @@ const NotificationComponent = (props: any) => {
                 </View>
             </View>
             <View>
-                {React.createElement(componentsEnum[props.item.notificationType],
-                        {
-                            participant : {
-                                userId: props.item!.userId,
-                                hasLuggage : props.item!.isRead,
-                                journeyId : props.item!.journeyId,
-                                message : props.item!.description
-                            },
-                            visible : isModalVisible
-                        })}
+                {React.createElement(
+                    componentsEnum[props.item.notificationType],
+                    {
+                        participant: {
+                            userId: props.item!.userId,
+                            hasLuggage: props.item!.isRead,
+                            journeyId: props.item!.journeyId,
+                            message: props.item!.description
+                        },
+                        visible: isModalVisible
+                    }
+                )}
             </View>
         </View>
     );

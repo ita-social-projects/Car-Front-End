@@ -1,7 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useRef, useState } from "react";
 import { Text, View } from "react-native";
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+    TouchableOpacity,
+    TouchableWithoutFeedback
+} from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { JourneyNewApplicant } from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import { navigate } from "../../../components/navigation/Navigation";
@@ -76,9 +79,7 @@ const JourneyTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={HeaderStyle.backButtonTextView}
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
@@ -107,9 +108,7 @@ const JourneyTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={HeaderStyle.backButtonTextView}
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
@@ -198,9 +197,7 @@ const JourneyTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={HeaderStyle.backButtonTextView}
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
@@ -241,9 +238,7 @@ const JourneyTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={HeaderStyle.backButtonTextView}
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
@@ -284,9 +279,7 @@ const JourneyTabs = () => {
                                     color={"#02A2CF"}
                                     style={HeaderStyle.blackButtonText}
                                 />
-                                <View
-                                    style={HeaderStyle.backButtonTextView}
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text
                                         style={[
                                             HeaderStyle.buttonText,

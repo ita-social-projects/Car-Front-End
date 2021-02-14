@@ -1,17 +1,19 @@
-import JourneyNewApplicantStyle, {item} from "../journey-new-applicant/JourneyNewApplicantStyle";
-import {ActivityIndicator, Image, Text, View} from "react-native";
-import React, {useEffect, useState} from "react";
-import {container} from "tsyringe";
+import JourneyNewApplicantStyle, {
+    item
+} from "../journey-new-applicant/JourneyNewApplicantStyle";
+import { ActivityIndicator, Image, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import NotificationStyle from "../../activity/notifications/NotificationStyle";
-import {AccentColors} from "../../common/enums/AccentColors";
+import { AccentColors } from "../../common/enums/AccentColors";
 
 export function UserAvatar(props: {
     userId: number;
-    flexBox?: { width: number }
+    flexBox?: { width: number };
 }) {
     const userService = container.resolve(UserService);
-    let [userFullName, setUserFullName] = useState([' ',' ']);
+    let [userFullName, setUserFullName] = useState([" ", " "]);
     const [isImage, setIsImage] = useState(false);
 
     let [avatar, setAvatar] = useState(
@@ -55,23 +57,32 @@ export function UserAvatar(props: {
                     />
                 );
             });
-        userService.getUser(props.userId).then(user => setUserFullName([user.data!.name, user.data!.surname]));
+        userService
+            .getUser(props.userId)
+            .then((user) =>
+                setUserFullName([user.data!.name, user.data!.surname])
+            );
     }, []);
 
-    let avatarColour = (userId: number, ) => AccentColors[Math.floor(userId%Object.keys(AccentColors).length)];
-
+    let avatarColour = (userId: number) =>
+        AccentColors[Math.floor(userId % Object.keys(AccentColors).length)];
 
     return (
         <View style={props.flexBox == null ? {} : item(props.flexBox.width)}>
             {isImage ? (
                 <View>{avatar}</View>
             ) : (
-                <View style={[JourneyNewApplicantStyle.circle, {backgroundColor:avatarColour(props.userId)}]}>
+                <View
+                    style={[
+                        JourneyNewApplicantStyle.circle,
+                        { backgroundColor: avatarColour(props.userId) }
+                    ]}
+                >
                     <Text style={JourneyNewApplicantStyle.icon}>
-                        {userFullName[0][0]+userFullName[1][0]}
+                        {userFullName[0][0] + userFullName[1][0]}
                     </Text>
                 </View>
             )}
         </View>
-    )
+    );
 }

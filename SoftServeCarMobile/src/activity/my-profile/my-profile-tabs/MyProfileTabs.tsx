@@ -67,11 +67,7 @@ const MyProfileTabs = () => {
                                     color={"#02A2CF"}
                                     style={HeaderStyle.blackButtonText}
                                 />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text
                                         style={[
                                             HeaderStyle.buttonText,
@@ -172,11 +168,7 @@ const MyProfileTabs = () => {
                                     color={"#02A2CF"}
                                     style={HeaderStyle.blackButtonText}
                                 />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text
                                         style={[
                                             HeaderStyle.buttonText,

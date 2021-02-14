@@ -2,16 +2,15 @@ import { Platform, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
 const LoginStyle = StyleSheet.create({
-
     pageContainer: {
         flex: 1,
         paddingTop: Platform.OS === "ios" ? 74 : 37,
         paddingHorizontal: 16,
-        paddingBottom: 22,
+        paddingBottom: 22
     },
 
     greetingTextContainer: {
-        alignItems: "center",
+        alignItems: "center"
     },
 
     greetingText: {
@@ -21,11 +20,10 @@ const LoginStyle = StyleSheet.create({
         textTransform: "uppercase",
         letterSpacing: 0.2
     },
-    
 
     applicationNameTextContainer: {
         paddingTop: 18,
-        alignItems: "center",
+        alignItems: "center"
     },
 
     applicationNameText: {
@@ -38,13 +36,13 @@ const LoginStyle = StyleSheet.create({
     loginContainer: {
         flex: 1,
         justifyContent: "flex-end",
-        alignItems: "flex-end",
+        alignItems: "flex-end"
     },
 
     buttonContainer: {
         alignItems: "center",
         paddingHorizontal: Platform.OS === "ios" ? 16 : 0,
-        paddingBottom: Platform.OS === "ios" ? 22 : 0,
+        paddingBottom: Platform.OS === "ios" ? 22 : 0
     },
 
     button: {
@@ -54,23 +52,23 @@ const LoginStyle = StyleSheet.create({
         fontFamily: Font.ProximaNova.Bold,
         fontSize: 16,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center"
     },
 
     buttonText: {
         fontFamily: Font.ProximaNova.Bold,
         fontSize: 16,
         color: "#FFFFFF",
-        textTransform: "uppercase",
+        textTransform: "uppercase"
     },
 
     pressedButton: {
-        backgroundColor:"#888888",
+        backgroundColor: "#888888"
     },
 
     loadingIcon: {
         width: 56,
-        height: 56,
+        height: 56
     }
 });
 

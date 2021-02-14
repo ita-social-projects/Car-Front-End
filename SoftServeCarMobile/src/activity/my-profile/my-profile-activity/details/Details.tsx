@@ -11,9 +11,7 @@ const Details = () => {
         <View style={DetailsStyle.container}>
             <View style={DetailsStyle.detailsContainer}>
                 <View style={DetailsStyle.detailContainer}>
-                    <Text style={DetailsStyle.detailNameText}>
-                        Position
-                    </Text>
+                    <Text style={DetailsStyle.detailNameText}>Position</Text>
                 </View>
                 <View style={DetailsStyle.detailContainer}>
                     <Text style={DetailsStyle.detailValueGrayText}>
@@ -24,9 +22,7 @@ const Details = () => {
 
             <View style={DetailsStyle.detailsContainer}>
                 <View style={DetailsStyle.detailContainer}>
-                    <Text style={DetailsStyle.detailNameText}>
-                        Location
-                    </Text>
+                    <Text style={DetailsStyle.detailNameText}>Location</Text>
                 </View>
                 <View style={DetailsStyle.detailContainer}>
                     <Text style={DetailsStyle.detailValueBlueText}>
@@ -37,9 +33,7 @@ const Details = () => {
 
             <View style={DetailsStyle.detailsContainer}>
                 <View style={DetailsStyle.detailContainer}>
-                    <Text style={DetailsStyle.detailNameText}>
-                        Workspace
-                    </Text>
+                    <Text style={DetailsStyle.detailNameText}>Workspace</Text>
                 </View>
                 <View style={DetailsStyle.detailContainer}>
                     <Text style={DetailsStyle.detailValueBlueText}>

@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Button, Text, TouchableOpacity, View } from "react-native";
+import {
+    ActivityIndicator,
+    Button,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import { AuthManager } from "../auth/AuthManager";
 import { AuthContext } from "../auth/AuthProvider";
 import LoginStyle from "./LoginStyle";
@@ -59,9 +65,7 @@ export function Login(props: any) {
     return (
         <View style={LoginStyle.pageContainer}>
             <View style={LoginStyle.greetingTextContainer}>
-                <Text style={LoginStyle.greetingText}>
-                    Welcome to
-                </Text>
+                <Text style={LoginStyle.greetingText}>Welcome to</Text>
             </View>
 
             <View style={LoginStyle.applicationNameTextContainer}>
@@ -73,14 +77,19 @@ export function Login(props: any) {
             <View style={LoginStyle.loginContainer}>
                 <View style={LoginStyle.buttonContainer}>
                     {loader}
-                    <TouchableOpacity style={[LoginStyle.button, buttonDisabled && LoginStyle.pressedButton]}
+                    <TouchableOpacity
+                        style={[
+                            LoginStyle.button,
+                            buttonDisabled && LoginStyle.pressedButton
+                        ]}
                         disabled={buttonDisabled}
                         activeOpacity={1}
                         onPress={() => {
                             login();
                             loadingProcess(true);
                             setButtonDisabled(true);
-                        }}>
+                        }}
+                    >
                         <Text style={LoginStyle.buttonText}>Login</Text>
                     </TouchableOpacity>
                 </View>

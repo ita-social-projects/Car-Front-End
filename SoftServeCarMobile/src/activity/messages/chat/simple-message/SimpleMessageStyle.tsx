@@ -2,24 +2,28 @@ import { StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 const SimpleMessageStyle = StyleSheet.create({
     main: {
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         borderBottomWidth: 1,
-        borderBottomColor: '#C1C1C5',
+        borderBottomColor: "#C1C1C5",
         height: 68,
-        alignContent: 'center',
+        alignContent: "center",
         width: 344,
-        alignSelf: 'center',
+        alignSelf: "center",
+        backgroundColor: "#FFFFFF"
     },
+
     button: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10
     },
+
     fonts: {
         fontFamily: Font.OpenSans.Bold,
-        fontSize: 13,
+        fontSize: 13
     },
+
     image: {
         width: 56,
         height: 56,
@@ -27,35 +31,39 @@ const SimpleMessageStyle = StyleSheet.create({
         marginRight: 7,
         bottom: 5
     },
+
     lottie: {
         width: 100,
         height: 100
     },
+
     container: {
-        backgroundColor: 'white',
+        backgroundColor: "white"
     },
+
     containerStyle: {
         height: 44,
-        backgroundColor: 'white',
-        borderBottomColor: 'transparent',
-        borderTopColor: 'transparent',
+        backgroundColor: "#FFFFFF",
+        borderBottomColor: "transparent",
+        borderTopColor: "transparent",
         marginTop: 5,
         marginBottom: 20
     },
+
     inputContainerStyle: {
-        backgroundColor: "white",
-        borderColor: 'black',
+        backgroundColor: "#FFFFFF",
+        borderColor: "black",
         borderWidth: 2,
         borderBottomWidth: 2,
-        borderBottomColor: 'black',
+        borderBottomColor: "black",
         paddingLeft: 5
     },
-    textStyle:{
+
+    textStyle: {
         fontSize: 11,
         paddingTop: 10,
-        fontFamily: Font.OpenSans.SemiBold,
+        fontFamily: Font.OpenSans.SemiBold
     }
-})
-
+});
 
 export default SimpleMessageStyle;

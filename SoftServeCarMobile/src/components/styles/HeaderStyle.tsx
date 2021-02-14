@@ -4,7 +4,8 @@ import Font from "../../data/fonts/Font";
 const HeaderStyle = StyleSheet.create({
     container: {
         flex: 1,
-        alignSelf: "stretch"
+        alignSelf: "stretch",
+        backgroundColor: "#FFFFFF"
     },
 
     requestButton: {
@@ -14,7 +15,7 @@ const HeaderStyle = StyleSheet.create({
     },
 
     myProfileHeaderStyle: {
-        height: Platform.OS === "ios" ? 144 : 120,
+        height: Platform.OS === "ios" ? 144 : 120
     },
 
     backButtonOpacity: {
@@ -47,6 +48,7 @@ const HeaderStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 20
     },
+
     messages: {
         right: 10
     }
