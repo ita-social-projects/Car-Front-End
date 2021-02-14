@@ -2,6 +2,9 @@
 import {Participant} from "../../../models/Participant";
 
 export interface NotificationProps {
+    notificationId: number
     participant: Participant;
-    visible?: boolean;
+    visible: boolean;
+    read: boolean;
+    date: Date;
 }// @ts-ignore
