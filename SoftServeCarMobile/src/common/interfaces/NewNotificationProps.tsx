@@ -3,5 +3,5 @@ export interface NewNotificationProps {
     fullName: string;
     notificationTitle: string;
     read: boolean;
-    date: Date
+    date: Date;
 }

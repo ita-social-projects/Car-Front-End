@@ -1,4 +1,4 @@
-import {NotificationType} from "../src/common/enums/NotificationType";
+import { NotificationType } from "../src/common/enums/NotificationType";
 
 export type Notification = null | {
     id: number;

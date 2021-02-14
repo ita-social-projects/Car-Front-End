@@ -6,54 +6,54 @@ const PreferencesStyle = StyleSheet.create({
         flex: 1,
         paddingTop: 5,
         paddingHorizontal: 18,
-        backgroundColor:"#FFFFFF"
+        backgroundColor: "#FFFFFF"
     },
 
     preferencesContainer: {
         paddingTop: 46,
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "center"
     },
 
     preferenceNameContainer: {
-        flex: 1,
+        flex: 1
     },
 
-    switchContainer:{
-        paddingRight: 8,
+    switchContainer: {
+        paddingRight: 8
     },
 
-    switch:{
+    switch: {
         height: 20,
-        width: 36,
+        width: 36
     },
 
     preferenceValueContainer: {
-        width: 26,
+        width: 26
     },
 
     preferenceNameText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
         lineHeight: 16,
-        fontSize: 13,
+        fontSize: 13
     },
 
     preferenceValueText: {
         fontFamily: Font.OpenSans.Regular,
         lineHeight: 24,
-        fontSize: 16,
+        fontSize: 16
     },
 
     commentsContainer: {
-        paddingTop: 40,
+        paddingTop: 40
     },
 
-    commentsText:{
+    commentsText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
         color: "#414045",
-        paddingBottom: 4,
+        paddingBottom: 4
     },
 
     TextInput: {
@@ -74,7 +74,7 @@ const PreferencesStyle = StyleSheet.create({
         fontSize: 13,
         lineHeight: 18,
         color: "#000000"
-    },
+    }
 });
 
 export default PreferencesStyle;

@@ -5,6 +5,6 @@ export const RowStyle = EStyleSheet.create({
         flex: 0,
         flexDirection: "row",
         flexWrap: "wrap",
-        alignItems: "flex-start",
-    },
+        alignItems: "flex-start"
+    }
 });

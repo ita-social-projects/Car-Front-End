@@ -9,9 +9,9 @@ const NotificationsTabsStyle = EStyleSheet.create({
 
     headerTitleStyle: {
         fontFamily: Font.OpenSans.Bold,
-        fontSize: '1.1rem',
-        paddingTop: '0.3rem'
-    },
+        fontSize: "1.1rem",
+        paddingTop: "0.3rem"
+    }
 });
 
 export default NotificationsTabsStyle;

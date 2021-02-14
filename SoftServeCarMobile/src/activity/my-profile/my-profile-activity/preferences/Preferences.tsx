@@ -80,9 +80,7 @@ export default function Preferences(props: any) {
                     value={comments}
                     onChangeText={(text) => setComments(text)}
                 />
-                <Text style={PreferencesStyle.hintText}>
-                    Up to 100 symbols
-                </Text>
+                <Text style={PreferencesStyle.hintText}>Up to 100 symbols</Text>
             </View>
         </View>
     );

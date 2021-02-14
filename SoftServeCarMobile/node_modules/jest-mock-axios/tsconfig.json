@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        // module resolution strategy ('node','classic')
+        "moduleResolution": "node",
+        //  ECMAScript target version ('ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT')
+        "target": "es2015",
+        // module code generation ('commonjs', 'amd', 'system', 'umd' or 'es2015')
+        "module": "commonjs",
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "./dist/",
+        "isolatedModules": false
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "include": [
+       "lib/*.ts",
+       "test",
+       "__mocks__"
+    ]
+}

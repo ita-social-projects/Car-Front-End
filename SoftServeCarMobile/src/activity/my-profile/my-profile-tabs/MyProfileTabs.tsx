@@ -14,8 +14,8 @@ import Details from "../my-profile-activity/details/Details";
 import Preferences from "../my-profile-activity/preferences/Preferences";
 import Settings from "../my-profile-activity/settings/Settings";
 import MyProfile from "../MyProfile";
-import MyProfileTabsStyle from "./MyProfileTabsStyle";
 import * as navigation from "../../../components/navigation/Navigation";
+import HeaderStyle from "../../../components/styles/HeaderStyle";
 
 const StackTabs = createStackNavigator();
 
@@ -34,14 +34,14 @@ const MyProfileTabs = () => {
     }, []);
 
     return (
-        <View style={MyProfileTabsStyle.container}>
+        <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="MyProfile"
                     component={MyProfile}
                     options={{
                         headerTitle: "",
-                        headerStyle: MyProfileTabsStyle.headerStyle,
+                        headerStyle: HeaderStyle.myProfileHeaderStyle,
                         headerLeft: (args) => (
                             <AvatarLogoTitle {...args} user={currentUser} />
                         )
@@ -53,10 +53,10 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Preferences",
                         headerTitleAlign: "center",
-                        headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={MyProfileTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -65,17 +65,13 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={MyProfileTabsStyle.blackButtonText}
+                                    style={HeaderStyle.blackButtonText}
                                 />
-                                <View
-                                    style={
-                                        MyProfileTabsStyle.backButtonTextView
-                                    }
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text
                                         style={[
-                                            MyProfileTabsStyle.buttonText,
-                                            MyProfileTabsStyle.blackButtonText
+                                            HeaderStyle.buttonText,
+                                            HeaderStyle.blackButtonText
                                         ]}
                                     >
                                         Back
@@ -91,10 +87,10 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Details",
                         headerTitleAlign: "center",
-                        headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={MyProfileTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -103,17 +99,13 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={MyProfileTabsStyle.blackButtonText}
+                                    style={HeaderStyle.blackButtonText}
                                 />
-                                <View
-                                    style={
-                                        MyProfileTabsStyle.backButtonTextView
-                                    }
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text
                                         style={[
-                                            MyProfileTabsStyle.buttonText,
-                                            MyProfileTabsStyle.blackButtonText
+                                            HeaderStyle.buttonText,
+                                            HeaderStyle.blackButtonText
                                         ]}
                                     >
                                         Back
@@ -134,10 +126,10 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Address Book",
                         headerTitleAlign: "center",
-                        headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={MyProfileTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -147,12 +139,8 @@ const MyProfileTabs = () => {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View
-                                    style={
-                                        MyProfileTabsStyle.backButtonTextView
-                                    }
-                                >
-                                    <Text style={MyProfileTabsStyle.buttonText}>
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -166,10 +154,10 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: MyProfileTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={MyProfileTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -178,17 +166,13 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={MyProfileTabsStyle.blackButtonText}
+                                    style={HeaderStyle.blackButtonText}
                                 />
-                                <View
-                                    style={
-                                        MyProfileTabsStyle.backButtonTextView
-                                    }
-                                >
+                                <View style={HeaderStyle.backButtonTextView}>
                                     <Text
                                         style={[
-                                            MyProfileTabsStyle.buttonText,
-                                            MyProfileTabsStyle.blackButtonText
+                                            HeaderStyle.buttonText,
+                                            HeaderStyle.blackButtonText
                                         ]}
                                     >
                                         Back

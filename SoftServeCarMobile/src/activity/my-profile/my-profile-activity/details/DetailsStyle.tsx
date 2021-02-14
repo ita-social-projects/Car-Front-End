@@ -11,11 +11,11 @@ const DetailsStyle = StyleSheet.create({
 
     detailsContainer: {
         paddingBottom: 16,
-        flexDirection: "row",
+        flexDirection: "row"
     },
 
     detailContainer: {
-        flex: 1,
+        flex: 1
     },
 
     detailNameText: {
@@ -23,7 +23,7 @@ const DetailsStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
-        color: "#000000",
+        color: "#000000"
     },
 
     detailValueGrayText: {
@@ -39,7 +39,7 @@ const DetailsStyle = StyleSheet.create({
         fontSize: 13,
         lineHeight: 16,
         color: "#02A2CF"
-    },
+    }
 });
 
 export default DetailsStyle;

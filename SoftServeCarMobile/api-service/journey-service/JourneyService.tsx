@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { injectable } from "tsyringe";
 import { Journey } from "../../models/Journey";
 import APIService from "../APIService";
-import {routes} from "../../Environment";
+import { routes } from "../../Environment";
 
 @injectable()
 class JourneyService {
@@ -26,12 +26,15 @@ class JourneyService {
         return this.apiService.delete<Journey>(this.routePrefix, journey);
     }
 
-    addParticipant(formData: FormData){
-        return this.apiService.post<Journey>(routes.apiUrl + this.routePrefix + "/participant", {
-            method: "POST",
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        });
+    addParticipant(formData: FormData) {
+        return this.apiService.post<Journey>(
+            routes.apiUrl + this.routePrefix + "/participant",
+            {
+                method: "POST",
+                headers: { "Content-Type": "multipart/form-data" },
+                body: formData
+            }
+        );
     }
 }
 
