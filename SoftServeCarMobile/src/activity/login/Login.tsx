@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Button,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { AuthManager } from "../auth/AuthManager";
 import { AuthContext } from "../auth/AuthProvider";
 import LoginStyle from "./LoginStyle";
