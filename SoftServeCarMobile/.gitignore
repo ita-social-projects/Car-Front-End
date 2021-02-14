@@ -17,6 +17,7 @@ SoftServeCarMobile/.idea/
 .vscode/
 .idea/
 ../.idea/
+../.DS_Store
 
 # BUCK
 buck-out/
