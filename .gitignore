@@ -6,7 +6,6 @@
 .vs/
 build/
 .gradle/
-node_modules/
 .DS_Store
 
 # BUCK
