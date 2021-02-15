@@ -23,12 +23,12 @@ jobs:
       - name: Install npm dependencies
 
         run: |
-          cd SoftServeCarMobile
+          cd Car
           npm install
       - name: Run tests
 
         run: |
-          cd SoftServeCarMobile
+          cd Car
           npm test -- --coverage
   sonarcloud:
 
@@ -43,7 +43,7 @@ jobs:
       - name: Install npm dependencies
 
         run: |
-          cd SoftServeCarMobile
+          cd Car
           npm install
            npm test -- --coverage
       - name: SonarCloudScan
@@ -61,8 +61,8 @@ jobs:
           args: >
             -Dsonar.organization=ita-social-projects
             -Dsonar.projectKey=ita-social-projects_Car-Front-End
-            -Dsonar.javascript.lcov.reportPaths=SoftServeCarMobile/coverage/lcov.info 
-            -Dsonar.sources=./SoftServeCarMobile
+            -Dsonar.javascript.lcov.reportPaths=Car/coverage/lcov.info 
+            -Dsonar.sources=./Car
             -Dsonar.exclusions=**/coverage/**,**/__tests__/**,**/ios/**,**/android/**,,**/*config.js,**/*Style.tsx
             -Dsonar.verbose=false
             -Dsonar.coverage.exclusions=**/__tests__/**,**/coverage/**,**/*config.js,**/styles/**,**/ChatStyles/**,**/ios/**,**/android/**,**/*Style.tsx
