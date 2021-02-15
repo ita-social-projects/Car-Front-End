@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-text-gradient/ios/RNTextGradientUtils.h

@@ -1,0 +1,22 @@
+{
+  "name": "RNTextGradientView",
+  "version": "0.1.7",
+  "summary": "Text gradient for React-Native",
+  "authors": {
+    "iyegoroff": "iegoroff@gmail.com"
+  },
+  "homepage": "https://github.com/iyegoroff/react-native-text-gradient",
+  "license": "MIT",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/iyegoroff/react-native-text-gradient.git"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}
