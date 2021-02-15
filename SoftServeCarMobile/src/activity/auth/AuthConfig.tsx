@@ -1,5 +1,5 @@
 const AuthConfig = {
-    clientId: "6d6543bc-f0a6-4312-a919-53f757516d63",
+    clientId: "16cd707a-5326-4c1f-8b79-f2f25597d4df",
     appScopes: [
         "openid",
         "offline_access",
@@ -8,7 +8,7 @@ const AuthConfig = {
         "MailboxSettings.Read",
         "Calendars.ReadWrite"
     ],
-    redirectUrl: "softserve-car://react-native-auth/",
+    redirectUrl: "car://auth/",
     serviceConfiguration: {
         authorizationEndpoint:
             "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
