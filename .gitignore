@@ -1,0 +1,18 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+.idea/
+.vscode/
+.vs/
+build/
+.gradle/
+.DS_Store
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+!debug.keystore
+
+/SoftServeCarMobile/coverage/
+node_modules/
