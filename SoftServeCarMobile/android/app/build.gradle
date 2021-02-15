@@ -135,7 +135,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [appAuthRedirectScheme: 'softserve-car']
+        manifestPlaceholders = [appAuthRedirectScheme: "car"]
 
     }
     splits {
