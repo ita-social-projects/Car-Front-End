@@ -1,67 +1,71 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, Button, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { container } from "tsyringe";
-import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import { Journey } from "../../../../../models/Journey";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
+import { container } from "tsyringe";
+import StopService from "../../../../../api-service/stop-service/StopService";
+import { AuthContext } from "../../../auth/AuthProvider";
 import SearchJouneyStyle from "./SearchJouneyStyle";
+import { StopType } from "../../../../../models/StopType";
+import { Stop } from "../../../../../models/Stop";
 
 function SearchJourney() {
-    const navigation = useNavigation();
+    const { user } = useContext(AuthContext);
+    const stopService = container.resolve(StopService);
 
-    const [journeys, setJourneys] = useState<Array<Journey>>([]);
-
-    const journeyService = container.resolve(JourneyService);
+    const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
+    const [fromDirection, setFromDirection] = useState("Your location");
+    const [toDirection, setToDirection] = useState("");
+    const [isOpen, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        journeyService
-            .getJourney(1)
-            .then((res1) => {
-                journeyService.getJourney(2).then((res2) => {
-                    journeyService.getJourney(4).then((res3) => {
-                        journeyService.getJourney(5).then((res4) => {
-                            setJourneys([
-                                res1.data,
-                                res2.data,
-                                res3.data,
-                                res4.data,
-                                res1.data,
-                                res2.data
-                            ]);
-                        });
-                    });
-                });
+        stopService
+            .getRecentJourneyStops(Number(user?.id))
+            .then((res) => {
+                setStop(res.data);
+                setLoading(false);
             })
             .catch((e) => console.log(e));
     }, []);
+
+    function getFullAddress(stopDto: Stop | undefined | null) {
+        return stopDto?.address.city + ", " + stopDto?.address.street;
+    }
 
     return (
         <ScrollView style={SearchJouneyStyle.container}>
             <View style={SearchJouneyStyle.topInputContainer}>
                 <TouchableMapBar
                     directionType="From"
-                    iconName="disc-outline"
-                    defaultInputValue="Your Location"
-                    marB="5"
-                    marT="23"
+                    iconName="location"
+                    defaultInputValue={fromDirection}
+                    marginBottom="15"
+                    marginTop="30"
+                    flex="6"
                 />
-                <TouchableMapBar
-                    directionType="To"
-                    iconName="map"
-                    defaultInputValue=""
-                    marB="10"
-                    marT="10"
-                />
+                {isOpen ? (
+                    <TouchableMapBar
+                        directionType="To"
+                        iconName="map"
+                        defaultInputValue={toDirection}
+                        marginBottom="12"
+                        marginTop="3"
+                        flex="10"
+                    />
+                ) : (
+                    <></>
+                )}
             </View>
             <TouchableCard
                 cardName="Map"
                 iconName="location"
                 angle="0"
-                address="Choose starting point on the map"
+                address="Choose starting point on the Map"
                 addressFontColor="black"
+                iconColor="#414045"
+                size={25}
             />
             <TouchableCard
                 cardName="Home"
@@ -69,6 +73,12 @@ function SearchJourney() {
                 angle="0"
                 address="Trifon Kunev 26, Sofia"
                 addressFontColor="#909095"
+                onPress={() => {
+                    setFromDirection("Home");
+                    setOpen(true);
+                }}
+                iconColor="#414045"
+                size={25}
             />
             <TouchableCard
                 cardName="Work"
@@ -76,60 +86,48 @@ function SearchJourney() {
                 angle="0"
                 address="SoftServe, Bld. 'Bulgaria' 49"
                 addressFontColor="#909095"
+                iconColor="#414045"
+                onPress={() => {
+                    setToDirection("Work");
+                }}
+                size={25}
             />
             <Text style={SearchJouneyStyle.recentJourneyText}>
                 Recent Journeys
             </Text>
-            <TouchableCard
-                cardName="Bld. 'Bulgaria' 49"
-                iconName="ios-time-outline"
-                angle="0"
-                address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095"
-            />
-            <TouchableCard
-                cardName="Bld. 'Bulgaria' 49"
-                iconName="ios-time-outline"
-                angle="0"
-                address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095"
-            />
-            <TouchableCard
-                cardName="Bld. 'Bulgaria' 49"
-                iconName="ios-time-outline"
-                angle="0"
-                address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095"
-            />
-            <TouchableCard
-                cardName="Bld. 'Bulgaria' 49"
-                iconName="ios-time-outline"
-                angle="0"
-                address="Trifon Kunev 26, Sofia"
-                addressFontColor="#909095"
-            />
-            <View style={SearchJouneyStyle.buttonsContainer}>
-                <View style={SearchJouneyStyle.button}>
-                    <Button
-                        color="#000000"
-                        title="OK"
-                        onPress={() => {
-                            navigation.navigate("OK Search Result", {
-                                journeys: journeys
-                            });
-                        }}
+            {loading ? (
+                <ActivityIndicator
+                    style={SearchJouneyStyle.spinner}
+                    size={30}
+                    color="black"
+                />
+            ) : (
+                <></>
+            )}
+            {stops?.length ? (
+                stops?.map((item) => (
+                    <TouchableCard
+                        key={item.map((i) => i?.id)}
+                        cardName={getFullAddress(
+                            item.find(
+                                (address) => address?.type === StopType.Start
+                            )
+                        )}
+                        iconName="ios-time-outline"
+                        angle="0"
+                        address={getFullAddress(
+                            item.find(
+                                (address) => address?.type === StopType.Finish
+                            )
+                        )}
+                        addressFontColor="#909095"
+                        iconColor="#909095"
+                        size={30}
                     />
-                </View>
-                <View style={SearchJouneyStyle.button}>
-                    <Button
-                        color="#000000"
-                        title="BAD"
-                        onPress={() => {
-                            navigation.navigate("Bad Search Result");
-                        }}
-                    />
-                </View>
-            </View>
+                ))
+            ) : (
+                <></>
+            )}
         </ScrollView>
     );
 }

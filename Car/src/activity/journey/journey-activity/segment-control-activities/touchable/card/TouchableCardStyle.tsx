@@ -1,4 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
+import Font from "../../../../../../data/fonts/Font";
 
 const TouchableCardStyle = StyleSheet.create({
     cardContainer: {
@@ -29,8 +30,7 @@ const TouchableCardStyle = StyleSheet.create({
     cardName: {
         flex: 2,
         fontWeight: "bold",
-        fontFamily:
-            Platform.OS === "ios" ? "Open Sans" : "OpenSans-Regular.ttf",
+        fontFamily: Font.OpenSans.Regular,
         fontStyle: "normal",
         fontSize: 14,
         lineHeight: 16,
@@ -41,10 +41,12 @@ const TouchableCardStyle = StyleSheet.create({
     cardTextContainer: {
         flexDirection: "column"
     },
+
     cardAddress: {
         flex: 4,
-        fontSize: 11,
-        color: "#909095"
+        fontSize: 12,
+        color: "#909095",
+        fontFamily: Font.OpenSans.Regular
     }
 });
 

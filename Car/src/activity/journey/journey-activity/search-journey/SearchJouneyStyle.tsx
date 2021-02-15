@@ -1,18 +1,24 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
+import Font from "../../../../data/fonts/Font";
 
 const SearchJouneyStyle = StyleSheet.create({
     container: {
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#FAFAFA"
     },
 
     recentJourneyText: {
-        paddingBottom: 5,
-        paddingLeft: 10,
+        paddingBottom: 7,
+        paddingLeft: 15,
         paddingTop: 8,
         paddingRight: 10,
         marginRight: 10,
         fontWeight: "bold",
-        fontSize: 12
+        fontSize: 14,
+        fontFamily: Font.OpenSans.Bold
+    },
+
+    spinner: {
+        marginTop: 60
     },
 
     topInputContainer: {
