@@ -9,8 +9,10 @@ import { AuthContext } from "../../../auth/AuthProvider";
 import SearchJouneyStyle from "./SearchJouneyStyle";
 import { StopType } from "../../../../../models/StopType";
 import { Stop } from "../../../../../models/Stop";
+import { useNavigation } from "@react-navigation/native";
 
 function SearchJourney() {
+    const navigation = useNavigation();
     const { user } = useContext(AuthContext);
     const stopService = container.resolve(StopService);
 
@@ -66,6 +68,9 @@ function SearchJourney() {
                 addressFontColor="black"
                 iconColor="#414045"
                 size={25}
+                onPress={() => {
+                    navigation.navigate("Get Location From Map");
+                }}
             />
             <TouchableCard
                 cardName="Home"

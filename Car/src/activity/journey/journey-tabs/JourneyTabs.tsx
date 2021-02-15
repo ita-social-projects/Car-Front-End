@@ -15,6 +15,7 @@ import JourneyApplicant from "../journey-activity/segment-control-activities/jou
 import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/segment-control-activities/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/segment-control-activities/search-results/ok-search-result/OkSearchResult";
+import MapGetAddress from "../journey-activity/segment-control-activities/map-address/MapGetAddress";
 import JourneyStyle from "../JourneyStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
@@ -256,6 +257,42 @@ const JourneyTabs = () => {
                                     Request
                                 </Text>
                             </TouchableOpacity>
+                        )
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Get Location From Map"
+                    component={MapGetAddress}
+                    options={{
+                        title: "Search Journey",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                style={HeaderStyle.backButtonOpacity}
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Ionicons
+                                    name={"chevron-back-outline"}
+                                    size={35}
+                                    color={"#02A2CF"}
+                                />
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        ),
+                        headerRight: () => (
+                            <TouchableOpacity
+                                style={HeaderStyle.requestButton}
+                                onPress={() => {
+                                    navigate("Search Journey", {});
+                                }}
+                            ></TouchableOpacity>
                         )
                     }}
                 />
