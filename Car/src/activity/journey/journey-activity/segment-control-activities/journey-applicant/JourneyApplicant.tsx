@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, View } from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { container } from "tsyringe";
@@ -64,7 +64,7 @@ const JourneyApplicant = ({ route }: any) => {
     }, []);
 
     return (
-        <View style={JourneyApplicantStyle.mainContainer}>
+        <ScrollView style={JourneyApplicantStyle.mainContainer}>
             <View style={JourneyApplicantStyle.topContainer}>
                 {avatar}
                 <View style={JourneyApplicantStyle.userInformation}>
@@ -116,7 +116,7 @@ const JourneyApplicant = ({ route }: any) => {
                     </Text>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
