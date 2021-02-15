@@ -1,0 +1,119 @@
+{
+    "name": "Car",
+    "version": "0.0.1",
+    "private": true,
+    "rnpm": {
+        "assets": [
+            "./assets/fonts/"
+        ]
+    },
+    "babel": {
+        "plugins": [
+            [
+                "@babel/plugin-proposal-decorators",
+                {
+                    "legacy": true
+                }
+            ],
+            [
+                "@babel/plugin-proposal-class-properties",
+                {
+                    "loose": true
+                }
+            ]
+        ]
+    },
+    "scripts": {
+        "android": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && react-native run-android",
+        "ios": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && react-native run-ios",
+        "start": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && react-native start",
+        "test": "jest --coverage",
+        "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
+        "prettier:write": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json}"
+    },
+    "dependencies": {
+        "@babel/helper-regex": "7.10.5",
+        "@babel/plugin-proposal-decorators": "7.12.1",
+        "@expo/vector-icons": "12.0.1",
+        "@microsoft/microsoft-graph-client": "2.1.1",
+        "@microsoft/signalr": "5.0.1",
+        "@react-native-community/async-storage": "^1.12.1",
+        "@react-native-community/masked-view": "0.1.10",
+        "@react-navigation/bottom-tabs": "5.11.2",
+        "@react-navigation/drawer": "5.11.4",
+        "@react-navigation/material-bottom-tabs": "5.3.10",
+        "@react-navigation/native": "5.8.10",
+        "@react-navigation/stack": "5.12.8",
+        "axios": "0.21.1",
+        "babel-plugin-transform-typescript-metadata": "0.3.1",
+        "form-data": "3.0.0",
+        "isomorphic-fetch": "3.0.0",
+        "jquery": "^3.5.1",
+        "lottie-react-native": "3.5.0",
+        "moment": "^2.29.1",
+        "popper.js": "^1.16.1",
+        "react": "16.13.1",
+        "react-devtools": "4.10.1",
+        "react-hook-form": "6.14.2",
+        "react-native": "0.63.4",
+        "react-native-animated-loader": "0.0.8",
+        "react-native-app-auth": "^6.0.1",
+        "react-native-bootstrap": "0.1.0",
+        "react-native-dropdown-picker": "3.7.6",
+        "react-native-elements": "3.2.0",
+        "react-native-extended-stylesheet": "0.12.0",
+        "react-native-form-validator": "0.3.5",
+        "react-native-gesture-handler": "1.9.0",
+        "react-native-image-picker": "3.1.2",
+        "react-native-keyboard-aware-scroll-view": "0.9.3",
+        "react-native-modal": "11.6.1",
+        "react-native-modal-dropdown": "0.7.0",
+        "react-native-paper": "4.7.1",
+        "react-native-reanimated": "1.13.2",
+        "react-native-rename": "^2.7.0",
+        "react-native-router-flux": "4.2.0",
+        "react-native-safe-area-context": "3.1.9",
+        "react-native-screens": "2.15.0",
+        "react-native-segmented-control-tab": "3.4.1",
+        "react-native-text-gradient": "0.1.7",
+        "react-native-vector-icons": "7.1.0",
+        "react-navigation-stack": "2.10.2",
+        "react-redux": "7.2.2",
+        "reanimated-bottom-sheet": "1.0.0-alpha.22",
+        "redux": "4.0.5",
+        "reflect-metadata": "0.1.13",
+        "tsyringe": "4.4.0"
+    },
+    "devDependencies": {
+        "@babel/core": "7.8.4",
+        "@babel/plugin-transform-flow-strip-types": "7.12.10",
+        "@babel/runtime": "7.8.4",
+        "@react-native-community/eslint-config": "1.1.0",
+        "@types/jest": "26.0.15",
+        "@types/react": "17.0.0",
+        "@types/react-native": "0.63.37",
+        "@types/react-native-modal-dropdown": "0.7.0",
+        "@types/react-native-vector-icons": "6.4.6",
+        "@types/react-redux": "7.1.12",
+        "@types/react-test-renderer": "17.0.0",
+        "@typescript-eslint/eslint-plugin": "^2.34.0",
+        "babel-jest": "25.1.0",
+        "eslint": "^7.19.0",
+        "eslint-config-airbnb-typescript": "^12.3.1",
+        "eslint-config-prettier": "^6.15.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.19.0",
+        "jest": "25.1.0",
+        "jest-mock-axios": "4.2.1",
+        "metro-react-native-babel-preset": "0.59.0",
+        "prettier": "^2.2.1",
+        "react-native-cli": "^2.0.1",
+        "react-native-linear-gradient": "^2.5.6",
+        "react-test-renderer": "16.13.1",
+        "typescript": "4.1.2"
+    },
+    "jest": {
+        "preset": "react-native"
+    }
+}

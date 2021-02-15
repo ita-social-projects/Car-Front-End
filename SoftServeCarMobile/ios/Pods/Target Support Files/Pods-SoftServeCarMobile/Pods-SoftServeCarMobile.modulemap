@@ -1,6 +1,0 @@
-module Pods_SoftServeCarMobile {
-  umbrella header "Pods-SoftServeCarMobile-umbrella.h"
-
-  export *
-  module * { export * }
-}
