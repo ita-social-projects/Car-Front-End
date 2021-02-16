@@ -1,32 +1,15 @@
 import React from "react";
 import { Text, View } from "react-native";
-import TouchableJourney from "../../../touchable/journey/TouchableJourney";
-import AllJourneysStyle from "./AllJourneysStyle";
+import PastJourneys from "../past-journeys/PastJourneys";
+import ScheduledJourneys from "../scheduled-journeys/ScheduledJourneys";
+import UpcomingJourneys from "../upcoming-journeys/UpcomingJourneys";
 
 export default function AllJourneys() {
     return (
         <View>
-            <View style={AllJourneysStyle.container}>
-                <Text style={AllJourneysStyle.text}>Upcoming</Text>
-            </View>
-            <View>
-                <TouchableJourney />
-                <TouchableJourney />
-            </View>
-            <View style={AllJourneysStyle.container}>
-                <Text style={AllJourneysStyle.text}>Past</Text>
-            </View>
-            <View>
-                <TouchableJourney />
-                <TouchableJourney />
-            </View>
-            <View style={AllJourneysStyle.container}>
-                <Text style={AllJourneysStyle.text}>Scheduled</Text>
-            </View>
-            <View>
-                <TouchableJourney />
-                <TouchableJourney />
-            </View>
+            <UpcomingJourneys />
+            <PastJourneys />
+            <ScheduledJourneys />
         </View>
     );
 }

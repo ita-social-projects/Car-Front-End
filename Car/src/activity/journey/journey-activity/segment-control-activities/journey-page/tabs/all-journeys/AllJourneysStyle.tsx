@@ -14,6 +14,7 @@ const AllJourneysStyle = StyleSheet.create({
     container: {
         paddingTop: 24
     }
+    
 });
 
 export default AllJourneysStyle;
