@@ -18,6 +18,8 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		82DC1EB56F5680D27CF2C00C /* libPods-Car.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13D9EF937B19FD179A992E /* libPods-Car.a */; };
 		854D378725DBF45B000FA61B /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
+		854D390525DDDA91000FA61B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 854D390425DDDA90000FA61B /* Images.xcassets */; };
+		854D390625DDDA91000FA61B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 854D390425DDDA90000FA61B /* Images.xcassets */; };
 		85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271AC25CEC817008C047B /* open_sans_semibold.ttf */; };
 		85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271AD25CEC817008C047B /* open_sans_extrabold.ttf */; };
 		85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271AE25CEC817008C047B /* proxima_nova_bold.ttf */; };
@@ -82,6 +84,7 @@
 		7B13D9EF937B19FD179A992E /* libPods-Car.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Car.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7C9BD1E1064E8A9E966BEE /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Car/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		854D390425DDDA90000FA61B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Car/Images.xcassets; sourceTree = "<group>"; };
 		85A5C86625C01C10008B7BC5 /* Car.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Car.entitlements; path = Car/Car.entitlements; sourceTree = "<group>"; };
 		85C271AC25CEC817008C047B /* open_sans_semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = open_sans_semibold.ttf; path = ../assets/fonts/open_sans_semibold.ttf; sourceTree = "<group>"; };
 		85C271AD25CEC817008C047B /* open_sans_extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = open_sans_extrabold.ttf; path = ../assets/fonts/open_sans_extrabold.ttf; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 		13B07FAE1A68108700A75B9A /* Car */ = {
 			isa = PBXGroup;
 			children = (
+				854D390425DDDA90000FA61B /* Images.xcassets */,
 				85A5C86625C01C10008B7BC5 /* Car.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -449,6 +453,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				85C271B725CEC817008C047B /* open_sans_regular.ttf in Resources */,
 				854D378725DBF45B000FA61B /* main.jsbundle in Resources */,
+				854D390525DDDA91000FA61B /* Images.xcassets in Resources */,
 				85D90D6225D0633D00090E13 /* proxima_nova_black.ttf in Resources */,
 				85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */,
 			);
@@ -458,6 +463,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854D390625DDDA91000FA61B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
