@@ -1,14 +1,12 @@
 import { NotificationType } from "../src/common/enums/NotificationType";
+import { User } from "./User";
 
 export type Notification = null | {
     id: number;
-    userId: number;
-    userName: string;
-    position: string;
-    description: string;
+    receiver: User;
+    data: string;
     isRead: boolean;
-    createAt: Date;
-    receiverId: number;
-    journeyId: number;
-    notificationType: NotificationType;
+    createdAt: Date;
+    sender: User;
+    type: NotificationType;
 };
