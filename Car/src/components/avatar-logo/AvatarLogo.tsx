@@ -43,13 +43,13 @@ const AvatarLogo = (props: any) => {
                                 avatarStyle,
                                 {
                                     backgroundColor: stc(
-                                        user!?.name + " " + user!?.surname
+                                        user?.name + " " + user?.surname
                                     )
                                 }
                             ]}
                         >
                             <Text style={AvatarLogoStyle.userAvatarText}>
-                                {user!?.name[0] + user!?.surname[0]}
+                                {user?.name[0] + user?.surname[0]}
                             </Text>
                         </View>
                     );
@@ -62,13 +62,13 @@ const AvatarLogo = (props: any) => {
                         avatarStyle,
                         {
                             backgroundColor: stc(
-                                user!?.name + " " + user!?.surname
+                                user?.name + " " + user?.surname
                             )
                         }
                     ]}
                 >
                     <Text style={AvatarLogoStyle.userAvatarText}>
-                        {user!?.name[0] + user!?.surname[0]}
+                        {user?.name[0] + user?.surname[0]}
                     </Text>
                 </View>;
             });

@@ -34,7 +34,17 @@ const JourneyCard = (props: any) => {
                                     </Text>
                                 </View>
                                 <View style={JourneyCardStyle.moreOptionsBlock}>
-                                    <TouchableOpacity onPress={() => {}}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            navigation.navigate(
+                                                "Applicant Page",
+                                                {
+                                                    userId:
+                                                        journey?.organizer?.id
+                                                }
+                                            );
+                                        }}
+                                    >
                                         <Ionicons
                                             name={"ellipsis-horizontal"}
                                             color={"black"}
