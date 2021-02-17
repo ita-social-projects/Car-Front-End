@@ -17,6 +17,7 @@
 		31DC366353AAEFC38948B0EC /* libPods-Car-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C45CC52B11EB4B1FF3DB6D8 /* libPods-Car-tvOSTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		82DC1EB56F5680D27CF2C00C /* libPods-Car.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13D9EF937B19FD179A992E /* libPods-Car.a */; };
+		854D378725DBF45B000FA61B /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271AC25CEC817008C047B /* open_sans_semibold.ttf */; };
 		85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271AD25CEC817008C047B /* open_sans_extrabold.ttf */; };
 		85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C271AE25CEC817008C047B /* proxima_nova_bold.ttf */; };
@@ -447,6 +448,7 @@
 				85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				85C271B725CEC817008C047B /* open_sans_regular.ttf in Resources */,
+				854D378725DBF45B000FA61B /* main.jsbundle in Resources */,
 				85D90D6225D0633D00090E13 /* proxima_nova_black.ttf in Resources */,
 				85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */,
 			);
@@ -777,6 +779,7 @@
 				CODE_SIGN_ENTITLEMENTS = Car/Car.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Car/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -806,6 +809,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Car/Car.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Car/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
