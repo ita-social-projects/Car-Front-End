@@ -1,8 +1,9 @@
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
 
 const JourneyCard = (props: any) => {
     const journey = props.journey;
@@ -18,10 +19,7 @@ const JourneyCard = (props: any) => {
                 <View style={JourneyCardStyle.component}>
                     <View style={JourneyCardStyle.driverInfoBlock}>
                         <View style={JourneyCardStyle.imageBlock}>
-                            <Image
-                                style={JourneyCardStyle.image}
-                                source={require("../../../assets/images/default-user-photo.jpg")}
-                            />
+                            <AvatarLogo user={journey?.organizer} size={38.5} />
                         </View>
                         <View style={JourneyCardStyle.driverTextBlock}>
                             <View style={JourneyCardStyle.driverNameBlock}>

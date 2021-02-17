@@ -1,13 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { Text, View } from "react-native";
+import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
+import { AuthContext } from "../../../auth/AuthProvider";
 import SettingsStyle from "./SettingsStyle";
 
-export default class Settings extends Component {
-    render() {
-        return (
-            <View style={SettingsStyle.container}>
-                <Text>Settigns</Text>
-            </View>
-        );
-    }
-}
+const Settings = () => {
+    const { user } = useContext(AuthContext);
+
+    return (
+        <View style={SettingsStyle.container}>
+            <Text>Settigns</Text>
+        </View>
+    );
+};
+
+export default Settings;

@@ -1,25 +1,18 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { container } from "tsyringe";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import { User } from "../../../../../../models/User";
+import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import { JourneyApplicantStyle } from "./JourneyApplicantStyle";
+import * as navigation from "../../../../../components/navigation/Navigation";
 
 const JourneyApplicant = ({ route }: any) => {
     const { userId } = route.params;
     const userService = container.resolve(UserService);
-    const navigation = useNavigation();
     const [user, setUser] = useState({} as User);
-    const [avatar, setAvatar] = useState(
-        <ActivityIndicator
-            style={JourneyApplicantStyle.userAvatar}
-            size="large"
-            color="black"
-        />
-    );
 
     useEffect(() => {
         userService
@@ -28,45 +21,10 @@ const JourneyApplicant = ({ route }: any) => {
             .catch((e) => console.log(e));
     }, []);
 
-    useEffect(() => {
-        userService
-            .getAvatar(userId)
-            .then((result) => {
-                const byteOfImage = JSON.stringify(result.request._response);
-
-                if (byteOfImage !== '""') {
-                    setAvatar(
-                        <Image
-                            source={{
-                                uri: "data:image/png;base64," + byteOfImage
-                            }}
-                            style={JourneyApplicantStyle.userAvatar}
-                        />
-                    );
-                } else {
-                    setAvatar(
-                        <Image
-                            source={require("../../../../../../assets/images/default-user-photo.jpg")}
-                            style={JourneyApplicantStyle.userAvatar}
-                        />
-                    );
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-                setAvatar(
-                    <Image
-                        source={require("../../../../../../assets/images/default-user-photo.jpg")}
-                        style={JourneyApplicantStyle.userAvatar}
-                    />
-                );
-            });
-    }, []);
-
     return (
         <ScrollView style={JourneyApplicantStyle.mainContainer}>
             <View style={JourneyApplicantStyle.topContainer}>
-                {avatar}
+                <AvatarLogo user={user} size={49} />
                 <View style={JourneyApplicantStyle.userInformation}>
                     <Text style={JourneyApplicantStyle.userName}>
                         {user?.name + " " + user?.surname}

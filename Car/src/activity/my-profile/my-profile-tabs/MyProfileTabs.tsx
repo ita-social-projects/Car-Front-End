@@ -8,7 +8,7 @@ import UserService from "../../../../api-service/user-service/UserService";
 import { User } from "../../../../models/User";
 import { AuthContext } from "../../auth/AuthProvider";
 import AddressBook from "../my-profile-activity/address-book/AddressBook";
-import AvatarLogoTitle from "../my-profile-activity/avatar-logo/AvatarLogoTitle";
+import AvatarLogoTitle from "../my-profile-activity/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
 import Preferences from "../my-profile-activity/preferences/Preferences";
@@ -42,9 +42,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "",
                         headerStyle: HeaderStyle.myProfileHeaderStyle,
-                        headerLeft: (args) => (
-                            <AvatarLogoTitle {...args} user={currentUser} />
-                        )
+                        headerLeft: () => <AvatarLogoTitle />
                     }}
                 />
                 <StackTabs.Screen
