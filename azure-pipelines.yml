@@ -15,7 +15,7 @@ steps:
     versionSpec: '9.7.1'
   displayName: 'Install Node'
 - script: |
-   cd SoftServeCarMobile
+   cd Car
    npm install
   displayName: 'Install dependencies'
   
@@ -25,14 +25,14 @@ steps:
 #   displayName: 'Run lint'
 
 - script: |
-    cd SoftServeCarMobile
+    cd Car
     npm run test
   displayName: 'Run unit tests'
 
 - task: Gradle@2
   inputs:
-    workingDirectory: 'SoftServeCarMobile/android'
-    gradleWrapperFile: 'SoftServeCarMobile/android/gradlew'
+    workingDirectory: 'Car/android'
+    gradleWrapperFile: 'Car/android/gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
