@@ -1,4 +1,4 @@
-package com.softservecarmobile;
+package com.car;
 
 import com.facebook.react.ReactActivity;
 
