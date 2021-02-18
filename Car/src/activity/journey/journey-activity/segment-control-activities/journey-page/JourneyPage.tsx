@@ -26,9 +26,11 @@ const JourneyPage = ({ props }: any) => {
     useEffect(() => {
         journeyService
             .getJourney(journeyId)
-            .then((res) => setJourney(res.data))
+            .then((res) => {
+                setJourney(res.data);
+                setLoading(false);
+            })
             .catch((e) => console.log(e));
-        setLoading(false);
     }, []);
 
     const Separator = () => {

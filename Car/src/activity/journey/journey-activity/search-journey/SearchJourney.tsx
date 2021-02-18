@@ -11,6 +11,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 
 function SearchJourney() {
     const [journeys, setJourneys] = useState<Array<Journey>>([]);
+    const [isLoading, setLoading] = useState(true);
 
     const journeyService = container.resolve(JourneyService);
 
@@ -35,6 +36,7 @@ function SearchJourney() {
                                     res5.data,
                                     res1.data
                                 ]);
+                                setLoading(false);
                             });
                         });
                     });
@@ -118,6 +120,7 @@ function SearchJourney() {
                 <View style={SearchJouneyStyle.buttonsContainer}>
                     <View style={SearchJouneyStyle.button}>
                         <Button
+                            disabled={isLoading}
                             color="#000000"
                             title="OK"
                             onPress={() => {
