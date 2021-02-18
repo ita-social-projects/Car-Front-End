@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import AllJourneys from "./journey-activity/segment-control-activities/tabs/all-journeys/AllJourneys";
 import PastJourneys from "./journey-activity/segment-control-activities/tabs/past-journeys/PastJourneys";
 import ScheduledJourneys from "./journey-activity/segment-control-activities/tabs/scheduled-journeys/ScheduledJourneys";

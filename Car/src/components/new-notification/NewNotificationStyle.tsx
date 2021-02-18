@@ -1,7 +1,7 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 
-export const NewNotificationStyle = EStyleSheet.create({
+const NewNotificationStyle = EStyleSheet.create({
     content: {},
 
     notificationContainer: {
@@ -81,3 +81,5 @@ export const NewNotificationStyle = EStyleSheet.create({
         alignItems: "center"
     }
 });
+
+export default NewNotificationStyle;

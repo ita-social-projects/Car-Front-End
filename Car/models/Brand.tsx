@@ -1,7 +1,9 @@
-import { Model } from "./Model";
+import Model from "./Model";
 
-export type Brand = null | {
+type Brand = null | {
     id: number;
     name: string;
     models: Model[];
 };
+
+export default Brand;

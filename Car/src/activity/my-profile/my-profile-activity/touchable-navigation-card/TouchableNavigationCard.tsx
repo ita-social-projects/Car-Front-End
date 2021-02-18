@@ -1,12 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import cardStyle from "./TouchableNavigationCardStyle";
+import * as navigation from "../../../../components/navigation/Navigation";
 
 const TouchableNavigationCard = (props: any) => {
-    const navigation = useNavigation();
-
     return (
         <View>
             <TouchableOpacity

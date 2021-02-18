@@ -3,7 +3,7 @@ import { Button, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import { Journey } from "../../../../../models/Journey";
+import Journey from "../../../../../models/Journey";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
 import SearchJouneyStyle from "./SearchJouneyStyle";

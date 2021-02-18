@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../../../api-service/journey-service/JourneyService";
-import { Journey } from "../../../../../../../models/Journey";
+import Journey from "../../../../../../../models/Journey";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
-import { AuthContext } from "../../../../../auth/AuthProvider";
+import AuthContext from "../../../../../auth/AuthContext";
 
-export default function PastJourneys() {
+const PastJourneys = () => {
     const { user } = useContext(AuthContext);
     const [pastJourneys, setJourneys] = useState<Array<Journey>>([]);
 
@@ -30,4 +30,6 @@ export default function PastJourneys() {
             ))}
         </View>
     );
-}
+};
+
+export default PastJourneys;

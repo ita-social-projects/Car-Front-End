@@ -1,8 +1,10 @@
-import { User } from "./User";
+import User from "./User";
 
-export type Message = null | {
+type Message = null | {
     id: number;
     text: string;
     sender: User;
     createdAt: Date;
 };
+
+export default Message;

@@ -7,6 +7,7 @@ const BottomPopupStyle = StyleSheet.create({
         borderTopRightRadius: 16,
         borderTopLeftRadius: 16
     },
+
     headerBlackline: {
         justifyContent: "center",
         alignItems: "center",

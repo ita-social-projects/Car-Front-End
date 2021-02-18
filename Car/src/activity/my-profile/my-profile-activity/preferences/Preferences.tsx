@@ -4,8 +4,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
-import { UserPreferences } from "../../../../../models/UserPreferences";
-import { AuthContext } from "../../../auth/AuthProvider";
+import UserPreferences from "../../../../../models/UserPreferences";
+import AuthContext from "../../../auth/AuthContext";
 import ChooseOptionComponent from "./ChooseOptionComponent";
 import PreferencesStyle from "./PreferencesStyle";
 

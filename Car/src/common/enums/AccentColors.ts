@@ -1,4 +1,4 @@
-export enum AccentColors {
+enum AccentColors {
     "#a5c500", // Lime
     "#e74394", // Rose
     "#02a2cf", // Blue
@@ -8,3 +8,5 @@ export enum AccentColors {
     "#d80056", // Red
     "#000000" // Black
 }
+
+export default AccentColors;

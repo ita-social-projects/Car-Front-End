@@ -1,13 +1,13 @@
 import React from "react";
-import { NewNotificationProps } from "../../common/interfaces/NewNotificationProps";
-import { UserAvatar } from "../user-avatar/UserAvatar";
+import NewNotificationProps from "../../common/interfaces/NewNotificationProps";
+import UserAvatar from "../user-avatar/UserAvatar";
 import { Text, View } from "react-native";
-import { ContainerStyle } from "../styles/flex/Container";
-import { RowStyle } from "../styles/flex/RowStyle";
-import { item } from "../styles/flex/ItemStyle";
-import { NewNotificationStyle } from "./NewNotificationStyle";
+import ContainerStyle from "../styles/flex/Container";
+import RowStyle from "../styles/flex/RowStyle";
+import item from "../styles/flex/ItemStyle";
+import NewNotificationStyle from "./NewNotificationStyle";
 
-export const NewNotification: React.FC<NewNotificationProps> = (
+const NewNotification: React.FC<NewNotificationProps> = (
     props: NewNotificationProps
 ) => {
     return (
@@ -81,3 +81,5 @@ export const NewNotification: React.FC<NewNotificationProps> = (
         }
     }
 };
+
+export default NewNotification;

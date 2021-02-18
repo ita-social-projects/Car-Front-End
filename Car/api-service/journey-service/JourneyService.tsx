@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import { Journey } from "../../models/Journey";
+import Journey from "../../models/Journey";
 import APIService from "../APIService";
-import { routes } from "../../Environment";
+import EnvironmentRoutes from "../EnvironmentRoutes";
 
 @injectable()
 class JourneyService {
@@ -46,7 +46,7 @@ class JourneyService {
 
     addParticipant(formData: FormData) {
         return this.apiService.post<Journey>(
-            routes.apiUrl + this.routePrefix + "/participant",
+            EnvironmentRoutes.apiUrl + this.routePrefix + "/participant",
             {
                 method: "POST",
                 headers: { "Content-Type": "multipart/form-data" },

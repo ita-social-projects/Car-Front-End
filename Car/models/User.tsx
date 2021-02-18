@@ -1,4 +1,4 @@
-export type User = null | {
+type User = null | {
     id: number;
     name: string;
     surname: string;
@@ -10,3 +10,5 @@ export type User = null | {
     imageId: string;
     journeyCount: number;
 };
+
+export default User;

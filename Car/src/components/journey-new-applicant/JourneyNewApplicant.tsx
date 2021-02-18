@@ -3,20 +3,19 @@ import { Modal, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
-import JourneyNewApplicantStyle, {
-    Circle,
-    item
-} from "./JourneyNewApplicantStyle";
+import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
-import { NotificationProps } from "../../common/interfaces/NotificationProps";
-import { NewNotification } from "../new-notification/NewNotification";
+import NotificationProps from "../../common/interfaces/NotificationProps";
+import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
-import { User } from "../../../models/User";
+import User from "../../../models/User";
+import item from "../styles/flex/ItemStyle";
+import Circle from "../styles/Circle";
 
-export const JourneyNewApplicant: React.FC<NotificationProps> = (
+const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
@@ -393,3 +392,5 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
         </View>
     );
 };
+
+export default JourneyNewApplicant;

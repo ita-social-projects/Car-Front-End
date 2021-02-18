@@ -1,5 +1,7 @@
-export let item = function (percent: number) {
+const item = (percent: number) => {
     return {
         width: percent + "%"
     };
 };
+
+export default item;

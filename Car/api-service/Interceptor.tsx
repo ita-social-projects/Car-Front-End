@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
-import { AuthManager } from "../src/activity/auth/AuthManager";
+import AuthManager from "../src/activity/auth/AuthManager";
 import * as navigation from "../src/components/navigation/Navigation";
 
-export let axiosInstance = axios.create({ timeout: 20000 });
+const axiosInstance = axios.create({ timeout: 20000 });
 
 axiosInstance.interceptors.request.use(
     async function (req: {
@@ -44,3 +44,5 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+export default axiosInstance;

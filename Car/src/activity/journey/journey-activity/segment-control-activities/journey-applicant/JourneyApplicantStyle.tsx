@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../../../data/fonts/Font";
 
-export const JourneyApplicantStyle = StyleSheet.create({
+const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: "#FFFFFF"
@@ -135,3 +135,5 @@ export const JourneyApplicantStyle = StyleSheet.create({
         color: "#02A2CF"
     }
 });
+
+export default JourneyApplicantStyle;

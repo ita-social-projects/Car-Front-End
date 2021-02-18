@@ -7,6 +7,7 @@ import AvatarLogo from "../avatar-logo/AvatarLogo";
 
 const JourneyCard = (props: any) => {
     const journey = props.journey;
+
     return (
         <View>
             <TouchableOpacity

@@ -15,15 +15,15 @@ import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
+import CarDto from "../../../../../../dto/CarDto";
 import Brand from "../../../../../../models/Brand";
 import Car from "../../../../../../models/Car";
-import CarDTO from "../../../../../../models/CarDTO";
-import { Color } from "../../../../../../models/Color";
+import Color from "../../../../../../models/Color";
 import Model from "../../../../../../models/Model";
-import { CarDropDownPickerItem } from "../../../../../components/car-drop-down-picker/CarDropDownItem";
+import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
-import { AuthContext } from "../../../../auth/AuthProvider";
+import AuthContext from "../../../../auth/AuthContext";
 import EditCarsStyle from "./EditCarsStyle";
 
 function EditCars(navigation: any) {
@@ -108,7 +108,7 @@ function EditCars(navigation: any) {
             .catch((e) => console.log(e));
     };
 
-    const saveCarHandle = async (car: CarDTO) => {
+    const saveCarHandle = async (car: CarDto) => {
         setLoading(true);
         console.log(car);
         const newCar = await carService.update(car).then((res) => res.data);
@@ -119,14 +119,14 @@ function EditCars(navigation: any) {
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
         .length
         ? brands.map((brand) => ({
-              ...{ value: String(brand.id), label: brand.name }
+              ...{ value: String(brand!.id), label: brand!.name }
           }))
         : null;
 
     let modelItems: CarDropDownPickerItem[] | null = Object.entries(models)
         .length
         ? models.map((model) => ({
-              ...{ value: String(model.id), label: model.name }
+              ...{ value: String(model!.id), label: model!.name }
           }))
         : null;
 
@@ -216,14 +216,18 @@ function EditCars(navigation: any) {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        style={[EditCarsStyle.carButtonSave]}
+                        style={EditCarsStyle.carButtonSave}
                         onPress={() => {
                             saveCarHandle({
-                                brandId: Number(selectedBrand?.value),
                                 modelId: Number(selectedModel?.value),
                                 color: Number(selectedColor?.value),
                                 plateNumber: plateNumber,
-                                userId: Number(user?.id)
+                                ownerId: Number(user?.id),
+                                imageId:
+                                    photo.uri !== undefined
+                                        ? String(photo.uri)
+                                        : null,
+                                id: 0
                             });
                             navigation.goBack();
                         }}

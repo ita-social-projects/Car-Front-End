@@ -1,22 +1,20 @@
 import * as signalR from "@microsoft/signalr";
-import React, { useContext, useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import React, { useContext, useState, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import "reflect-metadata";
 import { container } from "tsyringe";
+import EnvironmentRoutes from "../../../api-service/EnvironmentRoutes";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
-import { routes } from "../../../Environment";
-import { Notification } from "../../../models/Notification";
-import { AuthContext } from "../auth/AuthProvider";
+import Notification from "../../../models/Notification";
+import AuthContext from "../auth/AuthContext";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
 
 const Notifications = (props: any) => {
-    const { user, unreadNumber } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const notificationsService = container.resolve(NotificationsService);
     const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(routes.notificationUrl)
+        .withUrl(EnvironmentRoutes.notificationUrl)
         .build();
     hubConnection.start();
 
@@ -33,7 +31,7 @@ const Notifications = (props: any) => {
 
     useEffect(() => {
         refreshNotification();
-    }, [unreadNumber]);
+    }, [0]);
 
     useEffect(() => {
         refreshNotification();

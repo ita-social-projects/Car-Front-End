@@ -5,8 +5,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import CarService from "../../../../../api-service/car-service/CarService";
-import { Car } from "../../../../../models/Car";
-import { AuthContext } from "../../../../activity/auth/AuthProvider";
+import Car from "../../../../../models/Car";
+import AuthContext from "../../../../activity/auth/AuthContext";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
 import CarsStyle from "./CarsStyle";
 
