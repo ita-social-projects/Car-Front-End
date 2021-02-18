@@ -12,7 +12,7 @@ import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import User from "../../../models/User";
-import item from "../styles/flex/ItemStyle";
+import Item from "../styles/flex/Item";
 import Circle from "../styles/Circle";
 
 const JourneyNewApplicant: React.FC<NotificationProps> = (
@@ -58,12 +58,12 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                 <View style={JourneyNewApplicantStyle.body}>
                     <View style={JourneyNewApplicantStyle.container}>
                         <View style={JourneyNewApplicantStyle.row}>
-                            <View style={item(50)}>
+                            <View style={Item(50)}>
                                 <Text style={JourneyNewApplicantStyle.header}>
                                     New Applicant
                                 </Text>
                             </View>
-                            <View style={item(50)}>
+                            <View style={Item(50)}>
                                 <TouchableOpacity
                                     onPress={() => {
                                         setModalVisible(!modalVisible);
@@ -84,7 +84,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             ]}
                         >
                             <AvatarLogo user={user} size={49} />
-                            <View style={item(80)}>
+                            <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
                                         {user?.name + " " + user?.surname}
@@ -162,7 +162,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -182,7 +182,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -204,7 +204,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -227,7 +227,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -248,7 +248,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -275,7 +275,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -314,7 +314,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -329,7 +329,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >

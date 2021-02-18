@@ -53,9 +53,6 @@ function EditCars(navigation: any) {
             }))
     );
 
-    const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
-        null
-    );
     const [selectedModel, setModel] = useState<CarDropDownPickerItem | null>(
         null
     );
@@ -99,7 +96,6 @@ function EditCars(navigation: any) {
     };
 
     const selectBrandHandle = (brand: any) => {
-        setBrand(brand);
         modelSerivce
             .getModelsByBrandId(Number(brand.value))
             .then((res) => {

@@ -2,9 +2,9 @@ import axios, { AxiosResponse } from "axios";
 import AuthManager from "../src/activity/auth/AuthManager";
 import * as navigation from "../src/components/navigation/Navigation";
 
-const axiosInstance = axios.create({ timeout: 20000 });
+const Interceptor = axios.create({ timeout: 20000 });
 
-axiosInstance.interceptors.request.use(
+Interceptor.interceptors.request.use(
     async function (req: {
         headers: {
             Accept: string;
@@ -31,7 +31,8 @@ axiosInstance.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-axiosInstance.interceptors.response.use(
+
+Interceptor.interceptors.response.use(
     (response: AxiosResponse<JSON>) => {
         return response;
     },
@@ -45,4 +46,4 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-export default axiosInstance;
+export default Interceptor;

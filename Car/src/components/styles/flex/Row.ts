@@ -1,6 +1,6 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 
-const RowStyle = EStyleSheet.create({
+const Row = EStyleSheet.create({
     row: {
         flex: 0,
         flexDirection: "row",
@@ -9,4 +9,4 @@ const RowStyle = EStyleSheet.create({
     }
 });
 
-export default RowStyle;
+export default Row;

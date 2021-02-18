@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import AccentColors from "../../common/enums/AccentColors";
-import item from "../styles/flex/ItemStyle";
+import Item from "../styles/flex/Item";
 
 export const UserAvatar = (props: {
     userId: number;
@@ -59,7 +59,7 @@ export const UserAvatar = (props: {
         AccentColors[Math.floor(userId % Object.keys(AccentColors).length)];
 
     return (
-        <View style={props.flexBox == null ? {} : item(props.flexBox.width)}>
+        <View style={props.flexBox == null ? {} : Item(props.flexBox.width)}>
             {isImage ? (
                 <View>{avatar}</View>
             ) : (

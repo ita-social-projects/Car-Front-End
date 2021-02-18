@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import AuthManager from "./AuthManager";
-import GraphManager from "./GraphAuthProvider";
+import GraphManager from "./GraphManager";
 import * as navigation from "../../components/navigation/Navigation";
 import User from "../../../models/User";
 import "reflect-metadata";

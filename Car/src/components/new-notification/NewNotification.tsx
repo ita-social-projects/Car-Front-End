@@ -3,9 +3,9 @@ import NewNotificationProps from "../../common/interfaces/NewNotificationProps";
 import UserAvatar from "../user-avatar/UserAvatar";
 import { Text, View } from "react-native";
 import ContainerStyle from "../styles/flex/Container";
-import RowStyle from "../styles/flex/RowStyle";
-import item from "../styles/flex/ItemStyle";
+import RowStyle from "../styles/flex/Row";
 import NewNotificationStyle from "./NewNotificationStyle";
+import Item from "../styles/flex/Item";
 
 const NewNotification: React.FC<NewNotificationProps> = (
     props: NewNotificationProps
@@ -20,7 +20,7 @@ const NewNotification: React.FC<NewNotificationProps> = (
             >
                 <View style={[RowStyle.row, NewNotificationStyle.center]}>
                     <UserAvatar userId={props.userId} flexBox={{ width: 20 }} />
-                    <View style={[item(65), NewNotificationStyle.content]}>
+                    <View style={[Item(65), NewNotificationStyle.content]}>
                         <Text style={NewNotificationStyle.name}>
                             {props.fullName}
                         </Text>
@@ -28,7 +28,7 @@ const NewNotification: React.FC<NewNotificationProps> = (
                             {props.notificationTitle}
                         </Text>
                     </View>
-                    <View style={[item(15), NewNotificationStyle.time]}>
+                    <View style={[Item(15), NewNotificationStyle.time]}>
                         <Text
                             style={
                                 props.read

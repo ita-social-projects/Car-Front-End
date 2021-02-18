@@ -1,6 +1,6 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 
-const ContainerStyle = EStyleSheet.create({
+const Container = EStyleSheet.create({
     container: {
         paddingLeft: "1.2rem",
         paddingRight: "1.2rem",
@@ -13,4 +13,4 @@ const ContainerStyle = EStyleSheet.create({
     }
 });
 
-export default ContainerStyle;
+export default Container;
