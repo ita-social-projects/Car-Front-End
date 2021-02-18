@@ -14,12 +14,8 @@ const NotificationComponent = (props: any) => {
         <View>
             {React.createElement(componentsEnum[props.item.notificationType], {
                 notificationId: props.item!.id,
-                participant: {
-                    userId: props.item!.userId,
-                    hasLuggage: props.item!.isRead,
-                    journeyId: props.item!.journeyId,
-                    message: props.item!.description
-                },
+                notificationData: props.item!.notificationData,
+                user: props.item!.user,
                 visible: isModalVisible,
                 read: props.item!.isRead,
                 date: new Date(props.item!.createAt)

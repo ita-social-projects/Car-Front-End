@@ -1,5 +1,7 @@
+import {User} from "./User";
+
 export type Participant = null | {
-    userId: number;
+    user: User;
     hasLuggage: boolean;
     journeyId: number;
     message?: string;

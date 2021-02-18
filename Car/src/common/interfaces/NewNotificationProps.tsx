@@ -1,6 +1,7 @@
+import {User} from "../../../models/User";
+
 export interface NewNotificationProps {
-    userId: number;
-    fullName: string;
+    user: User;
     notificationTitle: string;
     read: boolean;
     date: Date;

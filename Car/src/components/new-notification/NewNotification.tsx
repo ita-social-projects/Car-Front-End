@@ -19,10 +19,11 @@ export const NewNotification: React.FC<NewNotificationProps> = (
                 ]}
             >
                 <View style={[RowStyle.row, NewNotificationStyle.center]}>
-                    <UserAvatar userId={props.userId} flexBox={{ width: 20 }} />
+                    <UserAvatar user={props.user}
+                                flexBox={{ width: 20 }}/>
                     <View style={[item(65), NewNotificationStyle.content]}>
                         <Text style={NewNotificationStyle.name}>
-                            {props.fullName}
+                            {props.user!.name+" "+props.user!.surname}
                         </Text>
                         <Text style={NewNotificationStyle.title}>
                             {props.notificationTitle}
@@ -51,7 +52,16 @@ export const NewNotification: React.FC<NewNotificationProps> = (
         </View>
     );
     function getTimeDifference(minuendTime: Date, subtrahendTime: Date) {
-        const diff = Math.abs(minuendTime.getTime() - subtrahendTime.getTime());
+        const diff = Math.abs(
+            Date.UTC(
+                minuendTime.getUTCFullYear(),
+                minuendTime.getUTCMonth(),
+                minuendTime.getUTCDate(),
+                minuendTime.getUTCHours(),
+                minuendTime.getUTCMinutes(),
+                minuendTime.getUTCSeconds()
+            )
+            - subtrahendTime.getTime());
         const minutes = Math.floor(diff / 1000 / 60);
         const hours = Math.floor(diff / 1000 / 60 / 60);
         const days = Math.floor(diff / 1000 / 60 / 60 / 24);
