@@ -1,4 +1,7 @@
+import { Message } from "./Message";
+
 export type Chat = null | {
     id: number;
-    Name: string;
+    name: string;
+    messages: Message[];
 };

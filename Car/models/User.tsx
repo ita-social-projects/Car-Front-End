@@ -7,5 +7,6 @@ export type User = null | {
     email: string;
     token: string;
     hireDate: Date;
-    byteOfImage: string;
+    imageId: string;
+    journeyCount: number;
 };

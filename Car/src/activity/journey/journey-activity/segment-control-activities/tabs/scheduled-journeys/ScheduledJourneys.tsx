@@ -23,12 +23,11 @@ export default function ScheduledJourneys() {
 
     return (
         <View>
-            {scheduledJourneys.map((item) =>
+            {scheduledJourneys.map((item) => (
                 <View key={item?.id}>
                     <JourneyCard journey={item} />
                 </View>
-
-            )}
+            ))}
         </View>
     );
 }

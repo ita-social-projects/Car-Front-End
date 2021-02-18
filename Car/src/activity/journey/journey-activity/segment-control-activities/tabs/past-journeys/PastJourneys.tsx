@@ -23,11 +23,11 @@ export default function PastJourneys() {
 
     return (
         <View>
-            {pastJourneys.map((item) =>
+            {pastJourneys.map((item) => (
                 <View key={item?.id}>
                     <JourneyCard journey={item} />
                 </View>
-            )}
+            ))}
         </View>
     );
 }

@@ -23,11 +23,11 @@ export default function UpcomingJourneys() {
 
     return (
         <View>
-            {upcomingJourneys.map((item) =>
+            {upcomingJourneys.map((item) => (
                 <View key={item?.id}>
                     <JourneyCard journey={item} />
                 </View>
-            )}
+            ))}
         </View>
     );
 }

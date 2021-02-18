@@ -7,6 +7,9 @@ import stc from "string-to-color";
 
 const AvatarLogo = (props: any) => {
     const user = props?.user;
+
+    console.log("Avatar logo User: " + JSON.stringify(user));
+
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
         { height: props?.size, width: props?.size }

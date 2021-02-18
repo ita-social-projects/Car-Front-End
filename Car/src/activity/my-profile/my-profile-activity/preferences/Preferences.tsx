@@ -29,7 +29,6 @@ export default function Preferences(props: any) {
         if (userPreferences) {
             preferences = {
                 id: userPreferences.id,
-                userId: userPreferences.userId,
                 doAllowSmoking: isSmokingAllowed,
                 doAllowEating: isEatingAllowed,
                 comments: comments
