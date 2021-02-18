@@ -1,16 +1,15 @@
-import JourneyNewApplicantStyle, {
-    item
-} from "../journey-new-applicant/JourneyNewApplicantStyle";
+import JourneyNewApplicantStyle from "../journey-new-applicant/JourneyNewApplicantStyle";
 import { ActivityIndicator, Image, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
-import { AccentColors } from "../../common/enums/AccentColors";
+import AccentColors from "../../common/enums/AccentColors";
+import Item from "../styles/flex/Item";
 
-export function UserAvatar(props: {
+export const UserAvatar = (props: {
     userId: number;
     flexBox?: { width: number };
-}) {
+}) => {
     const userService = container.resolve(UserService);
     let [userFullName, setUserFullName] = useState([" ", " "]);
     const [isImage, setIsImage] = useState(false);
@@ -60,7 +59,7 @@ export function UserAvatar(props: {
         AccentColors[Math.floor(userId % Object.keys(AccentColors).length)];
 
     return (
-        <View style={props.flexBox == null ? {} : item(props.flexBox.width)}>
+        <View style={props.flexBox == null ? {} : Item(props.flexBox.width)}>
             {isImage ? (
                 <View>{avatar}</View>
             ) : (
@@ -77,4 +76,6 @@ export function UserAvatar(props: {
             )}
         </View>
     );
-}
+};
+
+export default UserAvatar;

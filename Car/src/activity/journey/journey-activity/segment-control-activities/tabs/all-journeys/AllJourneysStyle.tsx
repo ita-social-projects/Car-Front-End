@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import Font from "../../../../../../../data/fonts/Font";
+import Font from "../../../../../../data/fonts/Font";
 
 const AllJourneysStyle = StyleSheet.create({
     text: {

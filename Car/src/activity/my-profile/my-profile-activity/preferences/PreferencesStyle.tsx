@@ -9,6 +9,10 @@ const PreferencesStyle = StyleSheet.create({
         backgroundColor: "#FFFFFF"
     },
 
+    whitespaceBlock: {
+        height: 20
+    },
+
     preferencesContainer: {
         paddingTop: 46,
         flexDirection: "row",

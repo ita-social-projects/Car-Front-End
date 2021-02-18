@@ -1,4 +1,4 @@
-export type CarDto = {
+type CarDto = {
     id: number;
     modelId: number;
     ownerId: number;
@@ -6,3 +6,5 @@ export type CarDto = {
     color: number;
     plateNumber: string;
 };
+
+export default CarDto;

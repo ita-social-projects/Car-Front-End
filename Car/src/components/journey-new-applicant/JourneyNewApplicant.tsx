@@ -3,36 +3,36 @@ import { Modal, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
-import JourneyNewApplicantStyle, {
-    Circle,
-    item
-} from "./JourneyNewApplicantStyle";
-import { UserAvatar } from "../user-avatar/UserAvatar";
+import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
-import { NotificationProps } from "../../common/interfaces/NotificationProps";
-import { NewNotification } from "../new-notification/NewNotification";
+import NotificationProps from "../../common/interfaces/NotificationProps";
+import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
+import User from "../../../models/User";
+import Item from "../styles/flex/Item";
+import Circle from "../styles/Circle";
 
-export const JourneyNewApplicant: React.FC<NotificationProps> = (
+const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
-    let [modalVisible, setModalVisible] = useState(props.visible);
-    let [userName, setUserName] = useState(" ");
-    let [userSurName, setUserSurName] = useState(" ");
-    let [userPosition, setUserPosition] = useState(" ");
-    let message =
-        props.participant?.message == "" ? null : props.participant?.message;
+    const [modalVisible, setModalVisible] = useState(props.visible);
+    const [user, setUser] = useState(null as User);
+
+    const message = props.participant?.message ?? "";
     const userService = container.resolve(UserService);
     const journeyService = container.resolve(JourneyService);
     const notificationService = container.resolve(NotificationsService);
+
     useEffect(() => {
-        userService.getUser(props.participant!.userId).then((user) => {
-            setUserName(user?.data!.name);
-            setUserSurName(user?.data!.surname);
-            setUserPosition(user?.data!.position);
-        });
+        userService
+            .getUser(props.participant!.userId)
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((e) => console.log(e));
     });
     return (
         <View>
@@ -44,7 +44,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
             >
                 <NewNotification
                     userId={props.participant!.userId}
-                    fullName={`${userName} ${userSurName}`}
+                    fullName={`${user?.name} ${user?.surname}`}
                     notificationTitle={"asked to join to your journey"}
                     read={props.read}
                     date={new Date(props.date)}
@@ -58,12 +58,12 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                 <View style={JourneyNewApplicantStyle.body}>
                     <View style={JourneyNewApplicantStyle.container}>
                         <View style={JourneyNewApplicantStyle.row}>
-                            <View style={item(50)}>
+                            <View style={Item(50)}>
                                 <Text style={JourneyNewApplicantStyle.header}>
                                     New Applicant
                                 </Text>
                             </View>
-                            <View style={item(50)}>
+                            <View style={Item(50)}>
                                 <TouchableOpacity
                                     onPress={() => {
                                         setModalVisible(!modalVisible);
@@ -83,17 +83,14 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 JourneyNewApplicantStyle.title
                             ]}
                         >
-                            <UserAvatar
-                                userId={props.participant!.userId}
-                                flexBox={{ width: 20 }}
-                            />
-                            <View style={item(80)}>
+                            <AvatarLogo user={user} size={49} />
+                            <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
-                                        {userName + " " + userSurName}
+                                        {user?.name + " " + user?.surname}
                                     </Text>
                                     <Text style={JourneyNewApplicantStyle.bio}>
-                                        {userPosition}
+                                        {user?.position}
                                     </Text>
                                     <Text
                                         style={
@@ -165,7 +162,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -185,7 +182,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -207,7 +204,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -230,7 +227,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -251,7 +248,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -278,7 +275,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -317,7 +314,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -332,7 +329,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -395,3 +392,5 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
         </View>
     );
 };
+
+export default JourneyNewApplicant;

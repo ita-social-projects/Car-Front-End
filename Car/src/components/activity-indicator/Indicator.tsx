@@ -6,7 +6,7 @@ const Indicator = (props: any) => {
     return (
         <View style={IndicatorStyle.container}>
             <ActivityIndicator size={props.size} color={props.color} />
-            <Text style={IndicatorStyle.text}>{props.text}</Text>
+            <Text style={IndicatorStyle.text}>{props.text ?? ""}</Text>
         </View>
     );
 };

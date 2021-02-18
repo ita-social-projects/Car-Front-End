@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
-import { AuthManager } from "../auth/AuthManager";
-import { AuthContext } from "../auth/AuthProvider";
+import AuthManager from "../auth/AuthManager";
+import AuthContext from "../auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 
-export function Login(props: any) {
+const Login = (props: any) => {
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -90,4 +90,6 @@ export function Login(props: any) {
             </View>
         </View>
     );
-}
+};
+
+export default Login;

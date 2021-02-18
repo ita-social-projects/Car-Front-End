@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
+import { Text, TouchableOpacity, View, FlatList } from "react-native";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
-import { Stop } from "../../../../../../models/Stop";
-import { StopType } from "../../../../../../models/StopType";
-import { User } from "../../../../../../models/User";
+import Stop from "../../../../../../models/Stop";
+import StopType from "../../../../../../models/StopType";
+import User from "../../../../../../models/User";
 import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
 import JourneyPageStyle from "./JourneyPageStyle";
-import { Journey } from "../../../../../../models/Journey";
+import Journey from "../../../../../../models/Journey";
 import { useNavigation } from "@react-navigation/native";
 import { LinearTextGradient } from "react-native-text-gradient";
 import { Divider } from "react-native-elements";
 import Moment from "moment";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyPage = ({ props }: any) => {
@@ -25,9 +26,11 @@ const JourneyPage = ({ props }: any) => {
     useEffect(() => {
         journeyService
             .getJourney(journeyId)
-            .then((res) => setJourney(res.data))
+            .then((res) => {
+                setJourney(res.data);
+                setLoading(false);
+            })
             .catch((e) => console.log(e));
-        setLoading(false);
     }, []);
 
     const Separator = () => {
@@ -38,10 +41,7 @@ const JourneyPage = ({ props }: any) => {
         return (
             <View style={JourneyPageStyle.userBlock}>
                 <View style={JourneyPageStyle.userImageBlock}>
-                    <Image
-                        style={JourneyPageStyle.userImage}
-                        source={require("../../../../../../assets/images/default-user-photo.jpg")}
-                    />
+                    <AvatarLogo user={currentJourney?.organizer} size={38.5} />
                 </View>
                 <View style={JourneyPageStyle.userInfoBlock}>
                     <Text style={JourneyPageStyle.userNameText}>
@@ -73,10 +73,7 @@ const JourneyPage = ({ props }: any) => {
                     }
                 >
                     <View style={JourneyPageStyle.userImageBlock}>
-                        <Image
-                            style={JourneyPageStyle.userImage}
-                            source={require("../../../../../../assets/images/default-user-photo.jpg")}
-                        />
+                        <AvatarLogo user={item} size={38.5} />
                     </View>
                     <View style={JourneyPageStyle.userInfoBlock}>
                         <LinearTextGradient

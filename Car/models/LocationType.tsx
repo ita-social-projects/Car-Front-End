@@ -1,4 +1,6 @@
-export type LocationType = null | {
+type LocationType = null | {
     id: number;
     name: string;
 };
+
+export default LocationType;

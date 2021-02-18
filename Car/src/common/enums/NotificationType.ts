@@ -1,4 +1,4 @@
-export enum NotificationType {
+enum NotificationType {
     PassengerApply = 1,
     ApplicationApproval = 2,
     JourneyCancellation = 3,
@@ -10,3 +10,5 @@ export enum NotificationType {
     HRMarketingMessage = 9,
     HRMarketingSurvey = 10
 }
+
+export default NotificationType;

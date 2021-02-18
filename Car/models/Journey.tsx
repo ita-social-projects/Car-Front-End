@@ -1,9 +1,9 @@
-import { Car } from "./Car";
-import { Schedule } from "./Schedule";
-import { Stop } from "./Stop";
-import { User } from "./User";
+import Car from "./Car";
+import Schedule from "./Schedule";
+import Stop from "./Stop";
+import User from "./User";
 
-export type Journey = null | {
+type Journey = null | {
     id: number;
     routeDistance: number;
     departureTime: Date;
@@ -16,3 +16,5 @@ export type Journey = null | {
     organizer: User;
     car: Car;
 };
+
+export default Journey;

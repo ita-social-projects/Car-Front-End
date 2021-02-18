@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, TextInput, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
-import { UserPreferences } from "../../../../../models/UserPreferences";
-import { AuthContext } from "../../../auth/AuthProvider";
+import UserPreferences from "../../../../../models/UserPreferences";
+import AuthContext from "../../../auth/AuthContext";
 import ChooseOptionComponent from "./ChooseOptionComponent";
 import PreferencesStyle from "./PreferencesStyle";
 
@@ -58,7 +59,7 @@ export default function Preferences(props: any) {
     }, [updatePreferences]);
 
     return (
-        <View style={PreferencesStyle.container}>
+        <ScrollView style={PreferencesStyle.container}>
             <ChooseOptionComponent
                 text={"Do you allow smoking in your car?"}
                 value={isSmokingAllowed}
@@ -80,7 +81,8 @@ export default function Preferences(props: any) {
                     onChangeText={(text) => setComments(text)}
                 />
                 <Text style={PreferencesStyle.hintText}>Up to 100 symbols</Text>
+                <View style={PreferencesStyle.whitespaceBlock} />
             </View>
-        </View>
+        </ScrollView>
     );
 }

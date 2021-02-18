@@ -1,7 +1,9 @@
-import { Message } from "./Message";
+import Message from "./Message";
 
-export type Chat = null | {
+type Chat = null | {
     id: number;
     name: string;
     messages: Message[];
 };
+
+export default Chat;

@@ -5,7 +5,7 @@ import ScheduledJourneys from "../scheduled-journeys/ScheduledJourneys";
 import UpcomingJourneys from "../upcoming-journeys/UpcomingJourneys";
 import AllJourneysStyle from "./AllJourneysStyle";
 
-export default function AllJourneys() {
+const AllJourneys = () => {
     return (
         <View style={AllJourneysStyle.container}>
             <Text style={AllJourneysStyle.text}>Upcoming</Text>
@@ -18,4 +18,6 @@ export default function AllJourneys() {
             <ScheduledJourneys />
         </View>
     );
-}
+};
+
+export default AllJourneys;

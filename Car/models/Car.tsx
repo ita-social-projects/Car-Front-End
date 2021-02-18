@@ -1,7 +1,7 @@
-import { Color } from "./Color";
-import { Model } from "./Model";
+import Color from "./Color";
+import Model from "./Model";
 
-export type Car = null | {
+type Car = null | {
     id: number;
     model: Model;
     color: Color;
@@ -9,3 +9,5 @@ export type Car = null | {
     ownerId: number;
     imageId: string | null;
 };
+
+export default Car;

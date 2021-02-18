@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import { Chat } from "../../models/Chat";
+import Chat from "../../models/Chat";
 import APIService from "../APIService";
 
 @injectable()

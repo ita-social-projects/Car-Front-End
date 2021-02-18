@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
-import JourneyCard from "../../../../../../../components/journey-card/JourneyCard";
-import JourneyService from "../../../../../../../../api-service/journey-service/JourneyService";
-import { AuthContext } from "../../../../../../auth/AuthProvider";
-import { Journey } from "../../../../../../../../models/Journey";
 import { container } from "tsyringe";
+import JourneyService from "../../../../../../../api-service/journey-service/JourneyService";
+import Journey from "../../../../../../../models/Journey";
+import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
+import AuthContext from "../../../../../auth/AuthContext";
 
-export default function PastJourneys(props: any) {
+const PastJourneys = () => {
     const { user } = useContext(AuthContext);
     const [pastJourneys, setJourneys] = useState<Array<Journey>>([]);
 
@@ -23,13 +23,13 @@ export default function PastJourneys(props: any) {
 
     return (
         <View>
-            {pastJourneys.map((item) => {
-                return (
-                    <View key={item?.id}>
-                        <JourneyCard journey={item} />
-                    </View>
-                );
-            })}
+            {pastJourneys.map((item) => (
+                <View key={item?.id}>
+                    <JourneyCard journey={item} />
+                </View>
+            ))}
         </View>
     );
-}
+};
+
+export default PastJourneys;
