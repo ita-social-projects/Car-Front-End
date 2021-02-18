@@ -206,7 +206,10 @@ function AddCars() {
                                 color: Number(selectedColor?.value),
                                 plateNumber: plateNumber,
                                 ownerId: Number(user?.id),
-                                imageId: photo.uri !== undefined ? String(photo.uri) : null,
+                                imageId:
+                                    photo.uri !== undefined
+                                        ? String(photo.uri)
+                                        : null,
                                 id: 0
                             });
                             navigation.goBack();

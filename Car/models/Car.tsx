@@ -7,5 +7,5 @@ export type Car = null | {
     color: Color;
     plateNumber: string;
     ownerId: number;
-    imageId: string;
+    imageId: string | null;
 };
