@@ -8,10 +8,28 @@ import { routes } from "../../Environment";
 class JourneyService {
     constructor(private apiService: APIService) {}
 
-    routePrefix: string = "journeys/";
+    routePrefix: string = "journeys";
 
     getJourney(journeyId: number) {
-        return this.apiService.get<Journey>(this.routePrefix + journeyId);
+        return this.apiService.get<Journey>(this.routePrefix + "/" + journeyId);
+    }
+
+    getPastJourneys(userId: number) {
+        return this.apiService.get<Array<Journey>>(
+            this.routePrefix + "/past/" + userId
+        );
+    }
+
+    getUpcomingJourneys(userId: number) {
+        return this.apiService.get<Array<Journey>>(
+            this.routePrefix + "/upcoming/" + userId
+        );
+    }
+
+    getScheduledJourneys(userId: number) {
+        return this.apiService.get<Array<Journey>>(
+            this.routePrefix + "/scheduled/" + userId
+        );
     }
 
     create(journey: Journey) {

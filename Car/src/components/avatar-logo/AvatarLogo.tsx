@@ -29,27 +29,29 @@ const AvatarLogo = (props: any) => {
         </View>
     );
 
-    if(user?.id !== undefined)
-    useEffect(() => {
-        userService
-            .getAvatar(Number(user?.id))
-            .then((result) => {
-                const byteOfImage = JSON.stringify(result.request._response);
-                if (byteOfImage !== '""') {
-                    setAvatar(
-                        <Image
-                            source={{
-                                uri: "data:image/png;base64," + byteOfImage
-                            }}
-                            style={avatarStyle}
-                        />
+    if (user?.id !== undefined)
+        useEffect(() => {
+            userService
+                .getAvatar(Number(user?.id))
+                .then((result) => {
+                    const byteOfImage = JSON.stringify(
+                        result.request._response
                     );
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, []);
+                    if (byteOfImage !== '""') {
+                        setAvatar(
+                            <Image
+                                source={{
+                                    uri: "data:image/png;base64," + byteOfImage
+                                }}
+                                style={avatarStyle}
+                            />
+                        );
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }, []);
 
     return <View>{avatar}</View>;
 };

@@ -79,5 +79,5 @@ export const NewNotificationStyle = EStyleSheet.create({
 
     center: {
         alignItems: "center"
-    },
+    }
 });

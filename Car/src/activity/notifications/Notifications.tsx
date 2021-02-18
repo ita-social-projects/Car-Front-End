@@ -44,14 +44,12 @@ const Notifications = (props: any) => {
     }, []);
 
     return (
-        <FlatList 
+        <FlatList
             style={NotificationStyle.headerContainer}
             data={notifications}
-            renderItem={({item})=>(
-                <NotificationComponent item={item} />
-            )}
+            renderItem={({ item }) => <NotificationComponent item={item} />}
         />
     );
-}
+};
 
 export default Notifications;

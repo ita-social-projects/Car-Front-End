@@ -21,6 +21,8 @@ const JourneyApplicant = ({ route }: any) => {
             .catch((e) => console.log(e));
     }, []);
 
+    console.log(user);
+
     return (
         <ScrollView style={JourneyApplicantStyle.mainContainer}>
             <View style={JourneyApplicantStyle.topContainer}>

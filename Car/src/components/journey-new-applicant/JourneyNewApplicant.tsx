@@ -28,9 +28,12 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
     const notificationService = container.resolve(NotificationsService);
 
     useEffect(() => {
-        userService.getUser(props.participant!.userId).then((res) => {
-            setUser(res.data);
-        }).catch((e) => console.log(e));
+        userService
+            .getUser(props.participant!.userId)
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((e) => console.log(e));
     });
     return (
         <View>
@@ -121,8 +124,8 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 />
                             </View>
                         ) : (
-                                <View />
-                            )}
+                            <View />
+                        )}
 
                         <View
                             style={[
@@ -139,8 +142,8 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                     I’m Traveling with a baggage.
                                 </Text>
                             ) : (
-                                    <View />
-                                )}
+                                <View />
+                            )}
                             <View
                                 style={JourneyNewApplicantStyle.optionsLine}
                             />

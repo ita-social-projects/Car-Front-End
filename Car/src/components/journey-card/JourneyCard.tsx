@@ -71,9 +71,9 @@ const JourneyCard = (props: any) => {
                         <View style={JourneyCardStyle.firstStopBlock}>
                             <View style={JourneyCardStyle.stopCircleIcon} />
                             <Text style={JourneyCardStyle.stopsText}>
-                                {journey?.stops[0]?.address.street === undefined
+                                {journey?.stops[0]?.address?.street === undefined
                                     ? "Location A"
-                                    : journey?.stops[0]?.address.street}
+                                    : journey?.stops[0]?.address?.street}
                             </Text>
                         </View>
                         <View style={JourneyCardStyle.stopStickIcon} />
@@ -81,10 +81,10 @@ const JourneyCard = (props: any) => {
                             <View style={JourneyCardStyle.stopCircleIcon} />
                             <Text style={JourneyCardStyle.stopsText}>
                                 {journey?.stops[journey?.stops.length - 1]
-                                    ?.address.street === undefined
+                                    ?.address?.street === undefined
                                     ? "Location B"
                                     : journey?.stops[journey?.stops.length - 1]
-                                          ?.address.street}
+                                          ?.address?.street}
                             </Text>
                         </View>
                     </View>
