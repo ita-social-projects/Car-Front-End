@@ -12,13 +12,13 @@ const NotificationComponent = (props: any) => {
     };
     return (
         <View>
-            {React.createElement(componentsEnum[props.item.notificationType], {
+            {React.createElement(componentsEnum[props.item.type], {
                 notificationId: props.item!.id,
-                notificationData: props.item!.notificationData,
-                user: props.item!.user,
+                notificationData: props.item!.jsonData,
+                user: props.item!.sender,
                 visible: isModalVisible,
                 read: props.item!.isRead,
-                date: new Date(props.item!.createAt)
+                date: new Date(props.item!.createdAt)
             })}
         </View>
     );

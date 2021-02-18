@@ -30,7 +30,7 @@ export function UserAvatar(props: {
                     ]}
                 >
                     <Text style={JourneyNewApplicantStyle.icon}>
-                        {props.user!.name[0][0] + props.user!.surname[1][0]}
+                        {props.user!.name[0] + props.user!.surname[0]}
                     </Text>
                 </View>
             )}

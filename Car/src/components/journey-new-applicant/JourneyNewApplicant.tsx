@@ -39,7 +39,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
             <TouchableOpacity
                 onPress={() => {
                     setModalVisible(!modalVisible);
-                    notificationService.markAsRead(props.notificationId);
+                    //notificationService.markAsRead(props.notificationId);
                 }}
             >
                 <NewNotification
