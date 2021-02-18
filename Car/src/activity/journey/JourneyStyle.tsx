@@ -83,6 +83,10 @@ const JourneyStyle = StyleSheet.create({
 
     touchableNavigationBlocks: {
         paddingTop: 16
+    },
+
+    tabStyle: {
+        paddingTop: 24
     }
 });
 

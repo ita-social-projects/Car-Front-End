@@ -1,14 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
-import { container } from "tsyringe";
-import UserService from "../../../../api-service/user-service/UserService";
-import { User } from "../../../../models/User";
-import { AuthContext } from "../../auth/AuthProvider";
 import AddressBook from "../my-profile-activity/address-book/AddressBook";
-import AvatarLogoTitle from "../my-profile-activity/avatar-logo/AvatarLogoTitle";
+import AvatarLogoTitle from "../my-profile-activity/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
 import Preferences from "../my-profile-activity/preferences/Preferences";
@@ -20,19 +16,6 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = () => {
-    const userServices = container.resolve(UserService);
-    const [currentUser, setCurrentUser] = useState({} as User);
-    const { user } = useContext(AuthContext);
-
-    useEffect(() => {
-        userServices
-            .getUser(Number(user?.id))
-            .then((res: { data: React.SetStateAction<User> }) =>
-                setCurrentUser(res.data)
-            )
-            .catch((e: any) => console.log(e));
-    }, []);
-
     return (
         <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
@@ -42,9 +25,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "",
                         headerStyle: HeaderStyle.myProfileHeaderStyle,
-                        headerLeft: (args) => (
-                            <AvatarLogoTitle {...args} user={currentUser} />
-                        )
+                        headerLeft: () => <AvatarLogoTitle />
                     }}
                 />
                 <StackTabs.Screen

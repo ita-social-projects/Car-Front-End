@@ -130,17 +130,17 @@ function Journey(props: any) {
                 </View>
             )}
             {selectedIndex === 1 && (
-                <View>
+                <View style={JourneyStyle.tabStyle}>
                     <PastJourneys />
                 </View>
             )}
             {selectedIndex === 2 && (
-                <View>
+                <View style={JourneyStyle.tabStyle}>
                     <UpcomingJourneys />
                 </View>
             )}
             {selectedIndex === 3 && (
-                <View>
+                <View style={JourneyStyle.tabStyle}>
                     <ScheduledJourneys />
                 </View>
             )}
