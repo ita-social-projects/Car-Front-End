@@ -34,7 +34,7 @@ export default function Notifications(props: any) {
     }, [unreadNumber]);
 
     useEffect(() => {
-        refreshNotification();
+        hubConnection.on("sendToReact", refreshNotification);
         props.navigation.addListener("focus", refreshNotification);
         return () => {
             props.navigation.removeListener("focus", refreshNotification);

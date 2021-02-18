@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
@@ -9,37 +9,22 @@ import JourneyNewApplicantStyle, {
 } from "./JourneyNewApplicantStyle";
 import { UserAvatar } from "../user-avatar/UserAvatar";
 import { container } from "tsyringe";
-import UserService from "../../../api-service/user-service/UserService";
-import JourneyService from "../../../api-service/journey-service/JourneyService";
 import { NotificationProps } from "../../common/interfaces/NotificationProps";
 import { NewNotification } from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
-import {Dictionary} from "tsyringe/dist/typings/types";
 
 export const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
     let [modalVisible, setModalVisible] = useState(props.visible);
-    // let [username, setUsername] = useState(" ");
-    // let [userSurname, setUserSurname] = useState(" ");
-    // let [userPosition, setUserPosition] = useState(" ");
-    // //let notificationJsonData = props.notificationJsonData;
-    // const userService = container.resolve(UserService);
-    // const journeyService = container.resolve(JourneyService);
     const notificationService = container.resolve(NotificationsService);
-    // useEffect(() => {
-    //     userService.getUser(props.participant!.id).then((user) => {
-    //         setUsername(user?.data!.name);
-    //         setUserSurname(user?.data!.surname);
-    //         setUserPosition(user?.data!.position);
-    //     });
-    // });
+
     return (
         <View>
             <TouchableOpacity
                 onPress={() => {
                     setModalVisible(!modalVisible);
-                    //notificationService.markAsRead(props.notificationId);
+                    notificationService.markAsRead(props.notificationId);
                 }}
             >
                 <NewNotification
