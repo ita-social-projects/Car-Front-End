@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-    Image,
-    Text,
-    TouchableOpacity,
-    View,
-    FlatList,
-} from "react-native";
+import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import { Stop } from "../../../../../../models/Stop";

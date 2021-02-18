@@ -26,8 +26,10 @@ const JourneyApplicant = ({ route }: any) => {
 
     return (
         <ScrollView style={JourneyApplicantStyle.mainContainer}>
-            {isLoading ? (<Indicator color="#414045" size="large" text=""/>) : 
-                (<View style={JourneyApplicantStyle.topContainer}>
+            {isLoading ? (
+                <Indicator color="#414045" size="large" text="" />
+            ) : (
+                <View style={JourneyApplicantStyle.topContainer}>
                     <AvatarLogo user={user} size={49} />
                     <View style={JourneyApplicantStyle.userInformation}>
                         <Text style={JourneyApplicantStyle.userName}>
@@ -40,8 +42,8 @@ const JourneyApplicant = ({ route }: any) => {
                             123 rides, 2 badges
                         </Text>
                     </View>
-                </View>)
-            }
+                </View>
+            )}
             <View style={JourneyApplicantStyle.buttonContainer}>
                 <TouchableOpacity
                     style={JourneyApplicantStyle.button}
