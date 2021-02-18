@@ -104,10 +104,10 @@ function EditCars(navigation: any) {
             .catch((e) => console.log(e));
     };
 
-    const saveCarHandle = async (car: CarDto) => {
+    const saveCarHandle = async (carDto: CarDto) => {
         setLoading(true);
-        console.log(car);
-        const newCar = await carService.update(car).then((res) => res.data);
+        console.log(carDto);
+        const newCar = await carService.update(carDto).then((res) => res.data);
         await carService.uploadPhoto(newCar.id, imageData);
         setLoading(false);
     };
