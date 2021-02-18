@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { View } from "react-native";
 import JourneyCard from "../../../../../../../components/journey-card/JourneyCard";
 import JourneyService from "../../../../../../../../api-service/journey-service/JourneyService";
 import { AuthContext } from "../../../../../../auth/AuthProvider";

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { View } from "react-native";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../../../../api-service/journey-service/JourneyService";
 import { Journey } from "../../../../../../../../models/Journey";
