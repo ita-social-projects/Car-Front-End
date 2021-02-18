@@ -8,4 +8,4 @@ export type Car = null | {
     plateNumber: string;
     ownerId: number;
     imageId: string;
-}
+};

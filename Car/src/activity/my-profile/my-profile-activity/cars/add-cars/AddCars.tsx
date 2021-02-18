@@ -11,16 +11,17 @@ import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
-import Brand from "../../../../../../models/Brand";
-import CarDTO from "../../../../../../models/CarDTO";
+import { Brand } from "../../../../../../models/Brand";
 import { Color } from "../../../../../../models/Color";
-import Model from "../../../../../../models/Model";
+import { Model } from "../../../../../../models/Model";
 import { AuthContext } from "../../../../auth/AuthProvider";
 import { CarDropDownPickerItem } from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
+import { Car } from "../../../../../../models/Car";
+import { CarDto } from "../../../../../../dto/CarDto";
 
 function AddCars() {
     const { user } = useContext(AuthContext);
@@ -52,7 +53,6 @@ function AddCars() {
     const [imageData, setImageData] = useState<FormData>({} as FormData);
 
     const [loading, setLoading] = useState(false);
-
     const brandService = container.resolve(BrandService);
     const modelSerivce = container.resolve(ModelService);
     const carService = container.resolve(CarService);
@@ -91,25 +91,25 @@ function AddCars() {
             .catch((e) => console.log(e));
     };
 
-    const saveCarHandle = async (car: CarDTO) => {
+    const saveCarHandle = async (car: CarDto) => {
         setLoading(true);
         console.log(car);
         const newCar = await carService.add(car).then((res) => res.data);
-        await carService.uploadPhoto(newCar.id, imageData);
+        await carService.uploadPhoto(newCar!.id, imageData);
         setLoading(false);
     };
 
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
         .length
         ? brands.map((brand) => ({
-              ...{ value: String(brand.id), label: brand.name }
+              ...{ value: String(brand!.id), label: brand!.name }
           }))
         : null;
 
     let modelItems: CarDropDownPickerItem[] | null = Object.entries(models)
         .length
         ? models.map((model) => ({
-              ...{ value: String(model.id), label: model.name }
+              ...{ value: String(model!.id), label: model!.name }
           }))
         : null;
 
@@ -202,11 +202,12 @@ function AddCars() {
                         style={AddCarsStyle.carButtonSave}
                         onPress={() => {
                             saveCarHandle({
-                                brandId: Number(selectedBrand?.value),
                                 modelId: Number(selectedModel?.value),
                                 color: Number(selectedColor?.value),
                                 plateNumber: plateNumber,
-                                userId: Number(user?.id)
+                                ownerId: Number(user?.id),
+                                imageId: photo.uri !== undefined ? String(photo.uri) : null,
+                                id: 0
                             });
                             navigation.goBack();
                         }}

@@ -4,4 +4,4 @@ export type Brand = null | {
     id: number;
     name: string;
     models: Model[];
-}
+};

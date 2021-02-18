@@ -4,4 +4,4 @@ export type Address = null | {
     street: string;
     latitude: number;
     longitude: number;
-}
+};

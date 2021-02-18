@@ -5,14 +5,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import CarService from "../../../../../api-service/car-service/CarService";
-import CarInfoDTO from "../../../../../models/CarInfoDTO";
+import { Car } from "../../../../../models/Car";
 import { AuthContext } from "../../../../activity/auth/AuthProvider";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
 import CarsStyle from "./CarsStyle";
 
 export default function Cars(props: any) {
     const { user } = useContext(AuthContext);
-    const [cars, setCars] = useState<Array<CarInfoDTO>>([]);
+    const [cars, setCars] = useState<Array<Car>>([]);
     const [loading, setLoading] = useState(true);
 
     const carService = container.resolve(CarService);
@@ -71,18 +71,18 @@ export default function Cars(props: any) {
                     <>
                         {cars.map((item) => {
                             return (
-                                <View key={item.id}>
+                                <View key={item!.id}>
                                     <TouchableNavigationCard
-                                        carId={item.id}
+                                        carId={item!.id}
                                         navigationName="EditCars"
                                         cardName="Edit a car"
                                         picture={
-                                            item.byteOfImage ? (
+                                            item!.imageId ? (
                                                 <Image
                                                     source={{
                                                         uri:
                                                             "data:image/png;base64," +
-                                                            item.byteOfImage
+                                                            item!.imageId
                                                     }}
                                                     style={[
                                                         CarsStyle.carAvatar
@@ -98,10 +98,10 @@ export default function Cars(props: any) {
                                         }
                                     >
                                         <Text style={CarsStyle.brand}>
-                                            {item.brandName}
+                                            {item!.model?.brand?.name}
                                         </Text>
                                         <Text style={CarsStyle.model}>
-                                            {item.modelName}
+                                            {item!.model?.name}
                                         </Text>
                                     </TouchableNavigationCard>
                                 </View>
