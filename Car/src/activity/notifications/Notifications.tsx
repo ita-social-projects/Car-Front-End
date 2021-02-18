@@ -1,6 +1,7 @@
 import * as signalR from "@microsoft/signalr";
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import { View, Text } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
@@ -9,7 +10,8 @@ import { Notification } from "../../../models/Notification";
 import { AuthContext } from "../auth/AuthProvider";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
-export default function Notifications(props: any) {
+
+const Notifications = (props: any) => {
     const { user, unreadNumber } = useContext(AuthContext);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const notificationsService = container.resolve(NotificationsService);
@@ -42,10 +44,14 @@ export default function Notifications(props: any) {
     }, []);
 
     return (
-        <ScrollView style={NotificationStyle.headerContainer}>
-            {notifications.map((item, key) => (
-                <NotificationComponent item={item} key={key} />
-            ))}
-        </ScrollView>
+        <FlatList 
+            style={NotificationStyle.headerContainer}
+            data={notifications}
+            renderItem={({item})=>(
+                <NotificationComponent item={item} />
+            )}
+        />
     );
 }
+
+export default Notifications;

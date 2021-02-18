@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import TouchableJourney from "../../../touchable/journey/TouchableJourney";
+import TouchableJourney from "../../touchable/journey/TouchableJourney";
 import UpcomingJourneysStyle from "./UpcomingJourneysStyle";
 
 export default function UpcomingJourneys() {

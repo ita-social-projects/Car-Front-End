@@ -7,32 +7,30 @@ import JourneyNewApplicantStyle, {
     Circle,
     item
 } from "./JourneyNewApplicantStyle";
-import { UserAvatar } from "../user-avatar/UserAvatar";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import { NotificationProps } from "../../common/interfaces/NotificationProps";
 import { NewNotification } from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
+import { User } from "../../../models/User";
 
 export const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
-    let [modalVisible, setModalVisible] = useState(props.visible);
-    let [userName, setUserName] = useState(" ");
-    let [userSurName, setUserSurName] = useState(" ");
-    let [userPosition, setUserPosition] = useState(" ");
-    let message =
-        props.participant?.message == "" ? null : props.participant?.message;
+    const [modalVisible, setModalVisible] = useState(props.visible);
+    const [user, setUser] = useState(null as User);
+
+    const message = props.participant?.message ?? "";
     const userService = container.resolve(UserService);
     const journeyService = container.resolve(JourneyService);
     const notificationService = container.resolve(NotificationsService);
+
     useEffect(() => {
-        userService.getUser(props.participant!.userId).then((user) => {
-            setUserName(user?.data!.name);
-            setUserSurName(user?.data!.surname);
-            setUserPosition(user?.data!.position);
-        });
+        userService.getUser(props.participant!.userId).then((res) => {
+            setUser(res.data);
+        }).catch((e) => console.log(e));
     });
     return (
         <View>
@@ -44,7 +42,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
             >
                 <NewNotification
                     userId={props.participant!.userId}
-                    fullName={`${userName} ${userSurName}`}
+                    fullName={`${user?.name} ${user?.surname}`}
                     notificationTitle={"asked to join to your journey"}
                     read={props.read}
                     date={new Date(props.date)}
@@ -83,17 +81,14 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 JourneyNewApplicantStyle.title
                             ]}
                         >
-                            <UserAvatar
-                                userId={props.participant!.userId}
-                                flexBox={{ width: 20 }}
-                            />
+                            <AvatarLogo user={user} size={49} />
                             <View style={item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
-                                        {userName + " " + userSurName}
+                                        {user?.name + " " + user?.surname}
                                     </Text>
                                     <Text style={JourneyNewApplicantStyle.bio}>
-                                        {userPosition}
+                                        {user?.position}
                                     </Text>
                                     <Text
                                         style={
@@ -126,8 +121,8 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 />
                             </View>
                         ) : (
-                            <View />
-                        )}
+                                <View />
+                            )}
 
                         <View
                             style={[
@@ -144,8 +139,8 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                     I’m Traveling with a baggage.
                                 </Text>
                             ) : (
-                                <View />
-                            )}
+                                    <View />
+                                )}
                             <View
                                 style={JourneyNewApplicantStyle.optionsLine}
                             />

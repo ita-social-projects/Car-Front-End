@@ -18,20 +18,33 @@ function SearchJourney() {
         journeyService
             .getJourney(1)
             .then((res1) => {
-                setJourneys([
-                    res1.data,
-                    res1.data,
-                    res1.data,
-                    res1.data,
-                    res1.data,
-                    res1.data
-                ]);
+                journeyService.getJourney(4).then((res2) => {
+                    journeyService.getJourney(5).then((res3) => {
+                        journeyService.getJourney(7).then((res4) => {
+                            journeyService.getJourney(8).then((res5) => {
+                                setJourneys([
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res1.data
+                                ]);
+                            });
+                        });
+                    });
+                });
             })
             .catch((e) => console.log(e));
     }, []);
 
     return (
-        <View style={SearchJouneyStyle.container}>
+        <ScrollView style={SearchJouneyStyle.container}>
             <View style={SearchJouneyStyle.topInputContainer}>
                 <TouchableMapBar
                     directionType="From"
@@ -49,7 +62,7 @@ function SearchJourney() {
                 />
             </View>
 
-            <ScrollView>
+            <View>
                 <TouchableCard
                     cardName="Map"
                     iconName="location"
@@ -124,8 +137,8 @@ function SearchJourney() {
                         />
                     </View>
                 </View>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     );
 }
 

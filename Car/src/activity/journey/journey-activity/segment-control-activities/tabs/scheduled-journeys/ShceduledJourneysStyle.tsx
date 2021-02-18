@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import Font from "../../../../../../../data/fonts/Font";
+import Font from "../../../../../../data/fonts/Font";
 
-const AllJourneysStyle = StyleSheet.create({
+const ShceduledJourneysStyle = StyleSheet.create({
     text: {
         flex: 1,
         fontFamily: Font.ProximaNova.Black,
@@ -16,4 +16,4 @@ const AllJourneysStyle = StyleSheet.create({
     }
 });
 
-export default AllJourneysStyle;
+export default ShceduledJourneysStyle;

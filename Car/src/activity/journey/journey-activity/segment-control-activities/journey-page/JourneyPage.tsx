@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
+import { Text, TouchableOpacity, View, FlatList } from "react-native";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import { Stop } from "../../../../../../models/Stop";
@@ -13,6 +13,7 @@ import { LinearTextGradient } from "react-native-text-gradient";
 import { Divider } from "react-native-elements";
 import Moment from "moment";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 
 const JourneyPage = ({ props }: any) => {
     const journeyService = container.resolve(JourneyService);
@@ -35,10 +36,7 @@ const JourneyPage = ({ props }: any) => {
         return (
             <View style={JourneyPageStyle.userBlock}>
                 <View style={JourneyPageStyle.userImageBlock}>
-                    <Image
-                        style={JourneyPageStyle.userImage}
-                        source={require("../../../../../../assets/images/default-user-photo.jpg")}
-                    />
+                    <AvatarLogo user={currentJourney?.organizer} size={38.5} />
                 </View>
                 <View style={JourneyPageStyle.userInfoBlock}>
                     <Text style={JourneyPageStyle.userNameText}>
@@ -70,10 +68,7 @@ const JourneyPage = ({ props }: any) => {
                     }
                 >
                     <View style={JourneyPageStyle.userImageBlock}>
-                        <Image
-                            style={JourneyPageStyle.userImage}
-                            source={require("../../../../../../assets/images/default-user-photo.jpg")}
-                        />
+                        <AvatarLogo user={item} size={38.5} />
                     </View>
                     <View style={JourneyPageStyle.userInfoBlock}>
                         <LinearTextGradient
