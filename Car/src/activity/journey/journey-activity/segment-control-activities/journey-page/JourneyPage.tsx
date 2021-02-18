@@ -13,18 +13,21 @@ import { LinearTextGradient } from "react-native-text-gradient";
 import { Divider } from "react-native-elements";
 import Moment from "moment";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyPage = ({ props }: any) => {
     const journeyService = container.resolve(JourneyService);
     const [currentJourney, setJourney] = useState({} as Journey);
     const navigation = useNavigation();
     const { journeyId } = props.route.params;
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         journeyService
             .getJourney(journeyId)
             .then((res) => setJourney(res.data))
             .catch((e) => console.log(e));
+        setLoading(false);
     }, []);
 
     const Separator = () => {
@@ -108,7 +111,7 @@ const JourneyPage = ({ props }: any) => {
                     )}
                 </View>
                 <Text>
-                    {item?.address.city} {item?.address.street} street
+                    {item?.address?.city} {item?.address?.street} street
                 </Text>
             </View>
         );
@@ -162,13 +165,21 @@ const JourneyPage = ({ props }: any) => {
     const journeyInfoContent = () => {
         return (
             <View style={JourneyPageStyle.mainContainer}>
-                <View style={JourneyPageStyle.contentView}>
-                    <Organizer />
-                    <StopsBlock />
-                    <Separator />
-                    <ApplicantsBlock />
-                    <ButtonsBlock />
-                </View>
+                {isLoading ? (
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text="Loading information..."
+                    />
+                ) : (
+                    <View style={JourneyPageStyle.contentView}>
+                        <Organizer />
+                        <StopsBlock />
+                        <Separator />
+                        <ApplicantsBlock />
+                        <ButtonsBlock />
+                    </View>
+                )}
             </View>
         );
     };

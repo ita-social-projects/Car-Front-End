@@ -16,19 +16,19 @@ class JourneyService {
 
     getPastJourneys(userId: number) {
         return this.apiService.get<Array<Journey>>(
-            this.routePrefix + "/past/" + userId
+            this.routePrefix + "past/" + userId
         );
     }
 
     getUpcomingJourneys(userId: number) {
         return this.apiService.get<Array<Journey>>(
-            this.routePrefix + "/upcoming/" + userId
+            this.routePrefix + "upcoming/" + userId
         );
     }
 
     getScheduledJourneys(userId: number) {
         return this.apiService.get<Array<Journey>>(
-            this.routePrefix + "/scheduled/" + userId
+            this.routePrefix + "scheduled/" + userId
         );
     }
 

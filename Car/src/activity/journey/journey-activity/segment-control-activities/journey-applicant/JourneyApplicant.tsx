@@ -8,35 +8,42 @@ import { User } from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import { JourneyApplicantStyle } from "./JourneyApplicantStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
+import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyApplicant = ({ route }: any) => {
     const { userId } = route.params;
     const userService = container.resolve(UserService);
     const [user, setUser] = useState({} as User);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         userService
             .getUser(userId)
             .then((res) => setUser(res.data))
             .catch((e) => console.log(e));
+        setLoading(false);
     }, []);
 
     return (
         <ScrollView style={JourneyApplicantStyle.mainContainer}>
-            <View style={JourneyApplicantStyle.topContainer}>
-                <AvatarLogo user={user} size={49} />
-                <View style={JourneyApplicantStyle.userInformation}>
-                    <Text style={JourneyApplicantStyle.userName}>
-                        {user?.name + " " + user?.surname}
-                    </Text>
-                    <Text style={JourneyApplicantStyle.userAdditionalData}>
-                        {user?.position}
-                    </Text>
-                    <Text style={JourneyApplicantStyle.userAdditionalData}>
-                        123 rides, 2 badges
-                    </Text>
+            {isLoading ? (
+                <Indicator color="#414045" size="large" text="" />
+            ) : (
+                <View style={JourneyApplicantStyle.topContainer}>
+                    <AvatarLogo user={user} size={49} />
+                    <View style={JourneyApplicantStyle.userInformation}>
+                        <Text style={JourneyApplicantStyle.userName}>
+                            {user?.name + " " + user?.surname}
+                        </Text>
+                        <Text style={JourneyApplicantStyle.userAdditionalData}>
+                            {user?.position}
+                        </Text>
+                        <Text style={JourneyApplicantStyle.userAdditionalData}>
+                            123 rides, 2 badges
+                        </Text>
+                    </View>
                 </View>
-            </View>
+            )}
             <View style={JourneyApplicantStyle.buttonContainer}>
                 <TouchableOpacity
                     style={JourneyApplicantStyle.button}
