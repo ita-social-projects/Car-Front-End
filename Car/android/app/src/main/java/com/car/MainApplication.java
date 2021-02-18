@@ -1,4 +1,4 @@
-package com.softservecarmobile;
+package com.car;
 
 import android.app.Application;
 import android.content.Context;

@@ -12,14 +12,6 @@ const AvatarLogoTitleStyle = StyleSheet.create({
         flexDirection: "row"
     },
 
-    headerUserAvatar: {
-        width: 56,
-        height: 56,
-        borderRadius: 50,
-        borderWidth: 3,
-        borderColor: "#EEEEEE"
-    },
-
     headerUserInformation: {
         marginLeft: 15,
         fontFamily: Font.ProximaNova.Bold

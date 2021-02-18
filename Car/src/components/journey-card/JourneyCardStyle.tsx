@@ -47,12 +47,6 @@ const JourneyCardStyle = StyleSheet.create({
         justifyContent: "space-between"
     },
 
-    image: {
-        borderRadius: 400,
-        width: 38.5,
-        height: 38.5
-    },
-
     driverNameText: {
         fontFamily: Font.OpenSans.Extrabold,
         fontSize: 16,
