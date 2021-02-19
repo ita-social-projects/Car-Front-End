@@ -16,6 +16,7 @@ const Notifications = (props: any) => {
     const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl(EnvironmentRoutes.notificationUrl)
         .build();
+    let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(1);
     hubConnection.start();
 
     const refreshNotification = () => {
@@ -31,10 +32,11 @@ const Notifications = (props: any) => {
 
     useEffect(() => {
         refreshNotification();
-    }, [0]);
+    }, [unreadNotificationsNumber]);
 
     useEffect(() => {
-        refreshNotification();
+        hubConnection.on("sendToReact", refreshNotification);
+        hubConnection.on("updateUnreadNotificationsNumber", setUnreadNotificationsNumber)
         props.navigation.addListener("focus", refreshNotification);
         return () => {
             props.navigation.removeListener("focus", refreshNotification);
