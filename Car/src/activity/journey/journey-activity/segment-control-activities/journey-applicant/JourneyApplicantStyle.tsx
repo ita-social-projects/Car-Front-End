@@ -44,35 +44,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         marginBottom: 8
     },
 
-    buttonContainer: {
-        alignItems: "flex-end",
-        paddingRight: 17,
-        paddingBottom: 24
-    },
-
-    button: {
-        height: 36,
-        width: 139,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        borderColor: "#000000",
-        borderWidth: 2,
-        borderStyle: "solid"
-    },
-
-    buttonText: {
-        fontFamily: Font.ProximaNova.ExtraBold,
-        fontWeight: "700",
-        fontSize: 16,
-        lineHeight: 20,
-        textTransform: "uppercase",
-        color: "black",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingHorizontal: 5
-    },
-
     separator: {
         height: 1,
         backgroundColor: "#F2F2F2"

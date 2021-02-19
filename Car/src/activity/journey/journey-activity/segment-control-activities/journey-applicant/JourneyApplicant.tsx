@@ -54,24 +54,6 @@ const JourneyApplicant = ({ route }: any) => {
                             </Text>
                         </View>
                     </View>
-
-                    <View style={JourneyApplicantStyle.buttonContainer}>
-                        <TouchableOpacity
-                            style={JourneyApplicantStyle.button}
-                            onPress={() => {
-                                navigation.navigate("Messages", {});
-                            }}
-                        >
-                            <Ionicons
-                                name={"mail"}
-                                style={JourneyApplicantStyle.buttonText}
-                                color="#414045"
-                            />
-                            <Text style={JourneyApplicantStyle.buttonText}>
-                                Message
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
                     <View style={JourneyApplicantStyle.separator} />
                     <View style={JourneyApplicantStyle.bottomContainer}>
                         <Text style={JourneyApplicantStyle.detailsText}>
