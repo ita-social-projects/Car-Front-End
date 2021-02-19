@@ -107,7 +107,7 @@ const JourneyApplicantStyle = StyleSheet.create({
     },
 
     whitespaceBlock: {
-        height: 16,
+        height: 16
     }
 });
 

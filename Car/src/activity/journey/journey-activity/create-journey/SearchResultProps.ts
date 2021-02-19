@@ -1,2 +1,1 @@
-export interface SearchResultProps {
-}
+export interface SearchResultProps {}
