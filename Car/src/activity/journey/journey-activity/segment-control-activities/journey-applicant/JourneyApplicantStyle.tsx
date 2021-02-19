@@ -133,6 +133,10 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 13,
         color: "#02A2CF"
+    },
+
+    whitespaceBlock: {
+        height: 16,
     }
 });
 

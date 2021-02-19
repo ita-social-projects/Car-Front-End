@@ -94,6 +94,7 @@ const JourneyApplicant = ({ route }: any) => {
                             </Text>
                         </View>
                     </View>
+                    <View style={JourneyApplicantStyle.whitespaceBlock} />
                 </>
             )}
         </ScrollView>
