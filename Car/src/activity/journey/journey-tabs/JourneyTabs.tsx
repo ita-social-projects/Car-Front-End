@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyNewApplicant from "../../../components/journey-new-applicant/JourneyNewApplicant";
-import Journey from "../Journey";
+import JourneyStartPage from "../Journey";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
 import SearchJourney from "../journey-activity/search-journey/SearchJourney";
 import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
@@ -47,7 +47,7 @@ const JourneyTabs = () => {
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Journey"
-                    component={Journey}
+                    component={JourneyStartPage}
                     options={{
                         headerTitle: "Journey",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,

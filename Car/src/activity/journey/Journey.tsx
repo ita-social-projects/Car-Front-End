@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import AllJourneys from "./journey-activity/segment-control-activities/tabs/all-journeys/AllJourneys";
-import PastJourneys from "./journey-activity/segment-control-activities/tabs/past-journeys/PastJourneys";
-import ScheduledJourneys from "./journey-activity/segment-control-activities/tabs/scheduled-journeys/ScheduledJourneys";
-import UpcomingJourneys from "./journey-activity/segment-control-activities/tabs/upcoming-journeys/UpcomingJourneys";
+import { container } from "tsyringe";
+import JourneyService from "../../../api-service/journey-service/JourneyService";
+import Journey from "../../../models/Journey";
+import JourneyCard from "../../components/journey-card/JourneyCard";
+import AuthContext from "../auth/AuthContext";
+//import AllJourneys from "./journey-activity/segment-control-activities/tabs/all-journeys/AllJourneys";
+//import PastJourneys from "./journey-activity/segment-control-activities/tabs/past-journeys/PastJourneys";
+//import ScheduledJourneys from "./journey-activity/segment-control-activities/tabs/scheduled-journeys/ScheduledJourneys";
+//import UpcomingJourneys from "./journey-activity/segment-control-activities/tabs/upcoming-journeys/UpcomingJourneys";
 import JourneyStyle from "./JourneyStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
-function Journey(props: any) {
+function JourneyStartPage(props: any) {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [allButtonStyle, setAllButtonStyle] = useState(
         JourneyStyle.activeButton
@@ -22,6 +27,76 @@ function Journey(props: any) {
         JourneyStyle.unactiveButton
     );
 
+    const { user } = useContext(AuthContext);
+    const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);    
+    const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>([]);
+    const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>([]);
+
+    const journeyService = container.resolve(JourneyService);
+
+    useEffect(() => {
+        journeyService
+            .getPastJourneys(Number(user?.id))
+            .then((res) => {
+                setPastJourneys(res.data);
+            })
+            .catch((e) => console.log(e));
+    }, []);
+
+    useEffect(() => {
+        journeyService
+            .getUpcomingJourneys(Number(user?.id))
+            .then((res) => {
+                setUpcomingJourneys(res.data);
+            })
+            .catch((e) => console.log(e));
+    }, []);
+
+    useEffect(() => {
+        journeyService
+            .getScheduledJourneys(Number(user?.id))
+            .then((res) => {
+                setScheduledJourneys(res.data);
+            })
+            .catch((e) => console.log(e));
+    }, []);
+
+    const PastJourneys = () => {
+        return (
+            <View>
+                {pastJourneys.map((item) => (
+                    <View key={item?.id}>
+                        <JourneyCard journey={item} />
+                    </View>
+                ))}
+            </View>
+        );
+    };
+
+    const ScheduledJourneys = () => {
+        return (
+            <View>
+                {scheduledJourneys.map((item) => (
+                    <View key={item?.id}>
+                        <JourneyCard journey={item} />
+                    </View>
+                ))}
+            </View>
+        );
+    };
+
+    const UpcomingJourneys = () => {
+        return (
+            <View>
+                {upcomingJourneys.map((item) => (
+                    <View key={item?.id}>
+                        <JourneyCard journey={item} />
+                    </View>
+                ))}
+            </View>
+        );
+    };
+    
     return (
         <ScrollView style={JourneyStyle.page}>
             <View style={JourneyStyle.touchableNavigationBlocks}>
@@ -124,8 +199,21 @@ function Journey(props: any) {
             </View>
 
             {selectedIndex === 0 && (
-                <View>
-                    <AllJourneys />
+                <View style={JourneyStyle.tabStyle}>                    
+                    {upcomingJourneys.length > 0 && (
+                        <Text style={JourneyStyle.tabTextStyle}>Upcoming</Text>
+                    )}                    
+                    { <UpcomingJourneys /> }
+
+                    {pastJourneys.length > 0 && (
+                        <Text style={JourneyStyle.tabTextStyle}>Past</Text>
+                    )}                    
+                    { <PastJourneys /> }
+
+                    {scheduledJourneys.length > 0 && (
+                        <Text style={JourneyStyle.tabTextStyle}>Scheduled</Text>
+                    )}                    
+                    { <ScheduledJourneys /> }
                 </View>
             )}
             {selectedIndex === 1 && (
@@ -147,4 +235,4 @@ function Journey(props: any) {
     );
 }
 
-export default Journey;
+export default JourneyStartPage;
