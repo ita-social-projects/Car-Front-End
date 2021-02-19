@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import { container } from "tsyringe";
-import UserService from "../../../api-service/user-service/UserService";
-import JourneyService from "../../../api-service/journey-service/JourneyService";
+import { UserAvatar } from "../user-avatar/UserAvatar";
 import NotificationProps from "../../common/interfaces/NotificationProps";
 import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
-import AvatarLogo from "../avatar-logo/AvatarLogo";
-import User from "../../../models/User";
 import Item from "../styles/flex/Item";
 import Circle from "../styles/Circle";
 
 const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
-    const [modalVisible, setModalVisible] = useState(props.visible);
-    const [user, setUser] = useState(null as User);
-
-    const message = props.participant?.message ?? "";
-    const userService = container.resolve(UserService);
-    const journeyService = container.resolve(JourneyService);
+    let [modalVisible, setModalVisible] = useState(props.visible);
     const notificationService = container.resolve(NotificationsService);
 
-    useEffect(() => {
-        userService
-            .getUser(props.participant!.userId)
-            .then((res) => {
-                setUser(res.data);
-            })
-            .catch((e) => console.log(e));
-    });
     return (
         <View>
             <TouchableOpacity
@@ -43,11 +27,10 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                 }}
             >
                 <NewNotification
-                    userId={props.participant!.userId}
-                    fullName={`${user?.name} ${user?.surname}`}
-                    notificationTitle={"asked to join to your journey"}
+                    user={props.user}
+                    notificationTitle={JSON.parse(props.notificationData).title}
                     read={props.read}
-                    date={new Date(props.date)}
+                    date={props.date}
                 />
             </TouchableOpacity>
             <Modal
@@ -83,14 +66,17 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 JourneyNewApplicantStyle.title
                             ]}
                         >
-                            <AvatarLogo user={user} size={49} />
+                            <UserAvatar
+                                user={props.user}
+                                flexBox={{ width: 20 }}
+                            />
                             <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
-                                        {user?.name + " " + user?.surname}
+                                        {props.user!.name + " " + props.user!.surname}
                                     </Text>
                                     <Text style={JourneyNewApplicantStyle.bio}>
-                                        {user?.position}
+                                        {props.user!.position}
                                     </Text>
                                     <Text
                                         style={
@@ -102,7 +88,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                             </View>
                         </View>
-                        {message != null ? (
+                        {JSON.parse(props.notificationData)?.comments != null ? (
                             <View
                                 style={[
                                     JourneyNewApplicantStyle.row,
@@ -114,7 +100,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                         JourneyNewApplicantStyle.commentsText
                                     }
                                 >
-                                    {message}
+                                    {JSON.parse(props.notificationData)?.comments}
                                 </Text>
                                 <View
                                     style={
@@ -132,7 +118,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 JourneyNewApplicantStyle.options
                             ]}
                         >
-                            {props.participant!.hasLuggage ? (
+                            {JSON.parse(props.notificationData)?.hasLuggage ? (
                                 <Text
                                     style={
                                         JourneyNewApplicantStyle.optionsHeader
@@ -151,7 +137,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             <Text
                                 style={JourneyNewApplicantStyle.optionsHeader}
                             >
-                                Jaylon’s stop in your Journey
+                                {props.user!.name}’s stop in your Journey
                             </Text>
                             <View
                                 style={[
@@ -293,7 +279,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                                 JourneyNewApplicantStyle.activeStopName
                                             ]}
                                         >
-                                            Jaylon's stop A.2 ‏
+                                            {props.user!.name}'s stop A.2 ‏
                                         </Text>
                                         <Text
                                             style={{
@@ -350,12 +336,6 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                     JourneyNewApplicantStyle.acceptButton
                                 ]}
                                 onPress={() => {
-                                    journeyService.addParticipant(({
-                                        journeyId: props.participant!.journeyId,
-                                        userId: props.participant!.userId,
-                                        hasLuggage: props.participant!
-                                            .hasLuggage
-                                    } as unknown) as FormData);
                                     setModalVisible(!modalVisible);
                                 }}
                             >

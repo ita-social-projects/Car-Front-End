@@ -7,7 +7,7 @@ type User = null | {
     email: string;
     token: string;
     hireDate: Date;
-    imageId: string;
+    avatarUrl: string;
     journeyCount: number;
 };
 
