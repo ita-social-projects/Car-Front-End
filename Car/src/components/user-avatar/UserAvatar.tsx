@@ -1,81 +1,38 @@
 import JourneyNewApplicantStyle from "../journey-new-applicant/JourneyNewApplicantStyle";
-import { ActivityIndicator, Image, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { container } from "tsyringe";
-import UserService from "../../../api-service/user-service/UserService";
-import AccentColors from "../../common/enums/AccentColors";
+import { Image, Text, View } from "react-native";
+import React from "react";
+import { AccentColors }  from "../../common/enums/AccentColors";
+import User from "../../../models/User";
+import {UserAvatarStyle} from "./UserAvatarStyle";
 import Item from "../styles/flex/Item";
 
-export const UserAvatar = (props: {
-    userId: number;
+export function UserAvatar(props: {
+    user: User;
     flexBox?: { width: number };
-}) => {
-    const userService = container.resolve(UserService);
-    let [userFullName, setUserFullName] = useState([" ", " "]);
-    const [isImage, setIsImage] = useState(false);
+}) {
 
-    let [avatar, setAvatar] = useState(
-        <ActivityIndicator size="large" color="black" />
-    );
+    let avatarColour = (userId: number) => AccentColors[Math.floor(userId % (Object.keys(AccentColors).length/2))];
 
-    useEffect(() => {
-        userService
-            .getAvatar(Number(props.userId))
-            .then((result) => {
-                const byteOfImage = JSON.stringify(result.request._response);
-                if (!result.data) {
-                    setAvatar(
-                        <Image
-                            source={{
-                                uri: "data:image/png;base64," + byteOfImage
-                            }}
-                        />
-                    );
-                    setIsImage(false);
-                } else {
-                    setAvatar(
-                        <Image
-                            source={require("../../../assets/images/default-user-photo.jpg")}
-                        />
-                    );
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-                setAvatar(
-                    <Image
-                        source={require("../../../assets/images/default-user-photo.jpg")}
-                    />
-                );
-            });
-        userService
-            .getUser(props.userId)
-            .then((user) =>
-                setUserFullName([user.data!.name, user.data!.surname])
-            );
-    }, []);
-
-    let avatarColour = (userId: number) =>
-        AccentColors[Math.floor(userId % Object.keys(AccentColors).length)];
 
     return (
-        <View style={props.flexBox == null ? {} : Item(props.flexBox.width)}>
-            {isImage ? (
-                <View>{avatar}</View>
+        <View style={props.flexBox != null ? Item(props.flexBox.width) : {}}>
+            {props.user!.avatarUrl != null ? (
+                <View>
+                    <Image source={{uri: props.user!.avatarUrl}}/>
+                </View>
             ) : (
                 <View
                     style={[
-                        JourneyNewApplicantStyle.circle,
-                        { backgroundColor: avatarColour(props.userId) }
+                        UserAvatarStyle(avatarColour(props.user!.id)).circle
                     ]}
                 >
                     <Text style={JourneyNewApplicantStyle.icon}>
-                        {userFullName[0][0] + userFullName[1][0]}
+                        {props.user!.name[0] + props.user!.surname[0]}
                     </Text>
                 </View>
             )}
         </View>
     );
-};
+}
 
 export default UserAvatar;

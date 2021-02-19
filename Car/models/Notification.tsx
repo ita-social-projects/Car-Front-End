@@ -3,12 +3,12 @@ import User from "./User";
 
 type Notification = null | {
     id: number;
-    receiver: User;
-    data: string;
+    user: User;
     isRead: boolean;
-    createdAt: Date;
-    sender: User;
-    type: NotificationType;
+    createAt: Date;
+    receiverId: number;
+    notificationType: NotificationType;
+    notificationData: string;
 };
 
 export default Notification;

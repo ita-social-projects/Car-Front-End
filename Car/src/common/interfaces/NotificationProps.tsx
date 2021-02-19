@@ -1,8 +1,9 @@
-import Participant from "../../../models/Participant";
+import User from "../../../models/User";
 
 interface NotificationProps {
     notificationId: number;
-    participant: Participant;
+    notificationData: string
+    user: User;
     visible: boolean;
     read: boolean;
     date: Date;

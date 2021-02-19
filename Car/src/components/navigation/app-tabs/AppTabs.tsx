@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
@@ -7,12 +7,22 @@ import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfil
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
+import * as signalR from "@microsoft/signalr";
+import routes from "../../../../api-service/EnvironmentRoutes";
 
 interface AppTabsProps {}
 
 const Tabs = createBottomTabNavigator<AppTabsList>();
 
 const AppTabs: React.FC<AppTabsProps> = () => {
+    let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl(routes.notificationUrl)
+        .build();
+    hubConnection.start();
+
+    useEffect(() => {
+        hubConnection.on("updateUnreadNotificationsNumber", setUnreadNotificationsNumber)});
     return (
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
@@ -65,7 +75,8 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             />
             <Tabs.Screen
                 options={{
-                    tabBarLabel: "Notifications"
+                    tabBarLabel: "Notifications",
+                    tabBarBadge: unreadNotificationsNumber > 0 ? unreadNotificationsNumber.toString() : undefined
                 }}
                 name="NotificationsTabs"
                 component={NotificationsTabs}
