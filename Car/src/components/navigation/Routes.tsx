@@ -21,19 +21,18 @@ const Routes: React.FC<RoutesProps> = () => {
 
     return (
         <NavigationContainer ref={navigationRef}>
-            {user ? (
+            {user == null ? (
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Exception" component={Exception} />
+                </Stack.Navigator>
+            ) : (
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen
                         name="AppTabs"
                         component={AppTabs}
                         options={{ headerShown: false }}
                     />
-                    <Stack.Screen name="Login" component={Login} />
-                    <Stack.Screen name="Exception" component={Exception} />
-                </Stack.Navigator>
-            ) : (
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="Login" component={Login} />
                     <Stack.Screen name="Exception" component={Exception} />
                 </Stack.Navigator>
             )}

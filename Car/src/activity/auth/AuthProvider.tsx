@@ -34,7 +34,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                             return;
                         }
                         const tempUser: User = {
-                            email: userGraph.mail! || userGraph.userPrincipalName!,
+                            email:
+                                userGraph.mail! || userGraph.userPrincipalName!,
                             name: userGraph.givenName,
                             surname: userGraph.surname,
                             location: userGraph.officeLocation,
