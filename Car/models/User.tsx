@@ -1,4 +1,4 @@
-export type User = null | {
+type User = null | {
     id: number;
     name: string;
     surname: string;
@@ -8,4 +8,7 @@ export type User = null | {
     token: string;
     hireDate: Date;
     avatarUrl: string;
+    journeyCount: number;
 };
+
+export default User;

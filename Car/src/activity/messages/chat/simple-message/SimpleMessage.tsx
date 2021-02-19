@@ -1,18 +1,18 @@
-import ChatService from "../../../../../api-service/chat-service/ChatService";
-import { AuthContext } from "../../../auth/AuthProvider";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
+    FlatList,
+    Image,
     SafeAreaView,
     Text,
-    View,
     TouchableOpacity,
-    Image,
-    FlatList
+    View
 } from "react-native";
+import { SearchBar } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
-import { SearchBar } from "react-native-elements";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import AuthContext from "../../../auth/AuthContext";
 import SimpleMessageStyle from "./SimpleMessageStyle";
 
 const SimpleMessage = (props: any) => {
@@ -31,11 +31,11 @@ const SimpleMessage = (props: any) => {
         });
     }, []);
 
-    const setSearchFilter = (text) => {
+    const setSearchFilter = (text: any) => {
         if (text) {
-            const newData = masterDataSource.filter(function (item) {
-                const itemData = item.name
-                    ? item.name.toUpperCase()
+            const newData = masterDataSource.filter((item: any) => {
+                const itemData = item?.name
+                    ? item?.name.toUpperCase()
                     : "".toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf(textData) > -1;
@@ -64,7 +64,7 @@ const SimpleMessage = (props: any) => {
         );
     };
 
-    const ItemView = ({ item }) => {
+    const ItemView = (item: any) => {
         return (
             <View style={SimpleMessageStyle.main}>
                 <View style={SimpleMessageStyle.button}>

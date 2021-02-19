@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import * as navigation from "../../components/navigation/Navigation";
-import { AuthContext } from "../auth/AuthProvider";
+import AuthContext from "../auth/AuthContext";
 import ExceptionStyle from "./ExceptionStyle";
 
-export function Exception(props: any) {
+const Exception = (props: any) => {
     const { logout } = useContext(AuthContext);
     const userMessage =
         props.route.params.errorMessage == 401
@@ -55,4 +55,6 @@ export function Exception(props: any) {
             {action()}
         </View>
     );
-}
+};
+
+export default Exception;

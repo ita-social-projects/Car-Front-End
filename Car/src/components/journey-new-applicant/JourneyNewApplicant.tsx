@@ -3,17 +3,16 @@ import { Modal, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
-import JourneyNewApplicantStyle, {
-    Circle,
-    item
-} from "./JourneyNewApplicantStyle";
-import { UserAvatar } from "../user-avatar/UserAvatar";
+import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import { container } from "tsyringe";
-import { NotificationProps } from "../../common/interfaces/NotificationProps";
-import { NewNotification } from "../new-notification/NewNotification";
+import { UserAvatar } from "../user-avatar/UserAvatar";
+import NotificationProps from "../../common/interfaces/NotificationProps";
+import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import Item from "../styles/flex/Item";
+import Circle from "../styles/Circle";
 
-export const JourneyNewApplicant: React.FC<NotificationProps> = (
+const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
     let [modalVisible, setModalVisible] = useState(props.visible);
@@ -42,12 +41,12 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                 <View style={JourneyNewApplicantStyle.body}>
                     <View style={JourneyNewApplicantStyle.container}>
                         <View style={JourneyNewApplicantStyle.row}>
-                            <View style={item(50)}>
+                            <View style={Item(50)}>
                                 <Text style={JourneyNewApplicantStyle.header}>
                                     New Applicant
                                 </Text>
                             </View>
-                            <View style={item(50)}>
+                            <View style={Item(50)}>
                                 <TouchableOpacity
                                     onPress={() => {
                                         setModalVisible(!modalVisible);
@@ -71,7 +70,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 user={props.user}
                                 flexBox={{ width: 20 }}
                             />
-                            <View style={item(80)}>
+                            <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
                                         {props.user!.name + " " + props.user!.surname}
@@ -149,7 +148,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -169,7 +168,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -191,7 +190,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -214,7 +213,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -235,7 +234,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -262,7 +261,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -301,7 +300,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                             >
                                 <View
                                     style={[
-                                        item(5),
+                                        Item(5),
                                         JourneyNewApplicantStyle.tripColumn
                                     ]}
                                 >
@@ -316,7 +315,7 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                                 <View
                                     style={[
-                                        item(95),
+                                        Item(95),
                                         JourneyNewApplicantStyle.tripPoint
                                     ]}
                                 >
@@ -337,7 +336,6 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
                                     JourneyNewApplicantStyle.acceptButton
                                 ]}
                                 onPress={() => {
-                                    //journeyService.addParticipant(() as FormData);
                                     setModalVisible(!modalVisible);
                                 }}
                             >
@@ -374,3 +372,5 @@ export const JourneyNewApplicant: React.FC<NotificationProps> = (
         </View>
     );
 };
+
+export default JourneyNewApplicant;

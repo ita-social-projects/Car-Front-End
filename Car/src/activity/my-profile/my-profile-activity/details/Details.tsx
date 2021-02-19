@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import { Button, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import { AuthContext } from "../../../auth/AuthProvider";
+import { Text, View } from "react-native";
+import AuthContext from "../../../auth/AuthContext";
 import DetailsStyle from "./DetailsStyle";
 
 const Details = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     return (
         <View style={DetailsStyle.container}>

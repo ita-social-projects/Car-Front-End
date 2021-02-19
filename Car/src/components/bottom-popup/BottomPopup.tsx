@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { View } from "react-native";
 import BottomSheet from "reanimated-bottom-sheet";
 import BottomPopupStyle from "./BottomPopupStyle";

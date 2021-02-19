@@ -1,5 +1,7 @@
 import React from "react";
 
-export interface ComponentsEnum<T> {
+interface ComponentsEnum<T> {
     [index: number]: React.FunctionComponent<T>;
 }
+
+export default ComponentsEnum;

@@ -19,7 +19,6 @@ const JourneyStyle = StyleSheet.create({
     },
 
     allJourneys: {
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         borderColor: "black",
@@ -28,7 +27,6 @@ const JourneyStyle = StyleSheet.create({
     },
 
     pastJourneys: {
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         borderColor: "black",
@@ -37,7 +35,6 @@ const JourneyStyle = StyleSheet.create({
     },
 
     upcomingJourneys: {
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         borderColor: "black",
@@ -46,7 +43,6 @@ const JourneyStyle = StyleSheet.create({
     },
 
     scheduledJourneys: {
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         borderColor: "black",
@@ -83,6 +79,10 @@ const JourneyStyle = StyleSheet.create({
 
     touchableNavigationBlocks: {
         paddingTop: 16
+    },
+
+    tabStyle: {
+        paddingTop: 24
     }
 });
 

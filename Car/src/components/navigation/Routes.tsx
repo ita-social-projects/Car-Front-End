@@ -1,18 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect } from "react";
-import { AuthParamList } from "../../activity/auth/AuthParamList";
-import { AuthContext } from "../../activity/auth/AuthProvider";
-import { Exception } from "../../activity/exception/Exception";
-import { Login } from "../../activity/login/Login";
-import { AppTabs } from "./app-tabs/AppTabs";
+import AuthParamList from "../../activity/auth/AuthParamList";
+import AuthContext from "../../activity/auth/AuthContext";
+import Exception from "../../activity/exception/Exception";
+import Login from "../../activity/login/Login";
+import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 
 interface RoutesProps {}
 
 const Stack = createStackNavigator<AuthParamList>();
 
-export const Routes: React.FC<RoutesProps> = () => {
+const Routes: React.FC<RoutesProps> = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -40,3 +40,5 @@ export const Routes: React.FC<RoutesProps> = () => {
         </NavigationContainer>
     );
 };
+
+export default Routes;

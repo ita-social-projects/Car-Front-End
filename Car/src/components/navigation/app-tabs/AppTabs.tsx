@@ -5,7 +5,7 @@ import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
-import { AppTabsList } from "./AppTabsList";
+import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 import * as signalR from "@microsoft/signalr";
 import {routes} from "../../../../Environment";
@@ -14,7 +14,7 @@ interface AppTabsProps {}
 
 const Tabs = createBottomTabNavigator<AppTabsList>();
 
-export const AppTabs: React.FC<AppTabsProps> = () => {
+const AppTabs: React.FC<AppTabsProps> = () => {
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
     const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl(routes.notificationUrl)
@@ -84,3 +84,5 @@ export const AppTabs: React.FC<AppTabsProps> = () => {
         </Tabs.Navigator>
     );
 };
+
+export default AppTabs;

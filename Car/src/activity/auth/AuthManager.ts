@@ -1,17 +1,10 @@
 import AsyncStorage from "@react-native-community/async-storage";
-import { AuthConfiguration, authorize } from "react-native-app-auth";
+import { authorize } from "react-native-app-auth";
 import AuthConfig from "./AuthConfig";
 
-const config: AuthConfiguration = {
-    clientId: AuthConfig.clientId,
-    redirectUrl: AuthConfig.redirectUrl,
-    scopes: AuthConfig.appScopes,
-    additionalParameters: { prompt: "select_account" },
-    serviceConfiguration: AuthConfig.serviceConfiguration
-};
-export class AuthManager {
+class AuthManager {
     static signInAsync = async () => {
-        const result = await authorize(config);
+        const result = await authorize(AuthConfig);
         await AsyncStorage.setItem("userToken", result.accessToken);
         await AsyncStorage.setItem("idToken", result.idToken);
         await AsyncStorage.setItem("refreshToken", result.refreshToken);
@@ -53,3 +46,5 @@ export class AuthManager {
         await AsyncStorage.setItem("user", user);
     };
 }
+
+export default AuthManager;

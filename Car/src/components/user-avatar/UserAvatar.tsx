@@ -1,11 +1,10 @@
-import JourneyNewApplicantStyle, {
-    item
-} from "../journey-new-applicant/JourneyNewApplicantStyle";
+import JourneyNewApplicantStyle from "../journey-new-applicant/JourneyNewApplicantStyle";
 import { Image, Text, View } from "react-native";
 import React from "react";
-import { AccentColors } from "../../common/enums/AccentColors";
-import {User} from "../../../models/User";
+import { AccentColors }  from "../../common/enums/AccentColors";
+import User from "../../../models/User";
 import {UserAvatarStyle} from "./UserAvatarStyle";
+import Item from "../styles/flex/Item";
 
 export function UserAvatar(props: {
     user: User;
@@ -16,7 +15,7 @@ export function UserAvatar(props: {
 
 
     return (
-        <View style={props.flexBox != null ? item(props.flexBox.width) : {}}>
+        <View style={props.flexBox != null ? Item(props.flexBox.width) : {}}>
             {props.user!.avatarUrl != null ? (
                 <View>
                     <Image source={{uri: props.user!.avatarUrl}}/>
@@ -35,3 +34,5 @@ export function UserAvatar(props: {
         </View>
     );
 }
+
+export default UserAvatar;

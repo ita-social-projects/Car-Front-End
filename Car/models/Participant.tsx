@@ -1,4 +1,4 @@
-import {User} from "./User";
+import User from "./User";
 
 export type Participant = null | {
     user: User;
@@ -6,3 +6,5 @@ export type Participant = null | {
     journeyId: number;
     message?: string;
 };
+
+export default Participant;

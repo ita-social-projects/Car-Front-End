@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import "reflect-metadata";
-import { JourneyNewApplicant } from "../../components/journey-new-applicant/JourneyNewApplicant";
-import { ComponentsEnum } from "../../common/interfaces/ComponentsEnum";
-import { NotificationProps } from "../../common/interfaces/NotificationProps";
+import ComponentsEnum from "../../common/interfaces/ComponentsEnum";
+import NotificationProps from "../../common/interfaces/NotificationProps";
+import JourneyNewApplicant from "../../components/journey-new-applicant/JourneyNewApplicant";
 
 const NotificationComponent = (props: any) => {
     const [isModalVisible] = useState(false);

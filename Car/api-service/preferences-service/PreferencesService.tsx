@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { UserPreferences } from "../../models/UserPreferences";
+import UserPreferences from "../../models/UserPreferences";
 import APIService from "../APIService";
 
 @injectable()
