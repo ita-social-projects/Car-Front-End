@@ -1,10 +1,8 @@
 import JourneyNewApplicantStyle, {
     item
 } from "../journey-new-applicant/JourneyNewApplicantStyle";
-import { ActivityIndicator, Image, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { container } from "tsyringe";
-import UserService from "../../../api-service/user-service/UserService";
+import { Image, Text, View } from "react-native";
+import React from "react";
 import { AccentColors } from "../../common/enums/AccentColors";
 import {User} from "../../../models/User";
 import {UserAvatarStyle} from "./UserAvatarStyle";
@@ -14,8 +12,8 @@ export function UserAvatar(props: {
     flexBox?: { width: number };
 }) {
 
-    let avatarColour = (userId: number) =>
-        AccentColors[Math.floor(userId % Object.keys(AccentColors).length)];
+    let avatarColour = (userId: number) => AccentColors[Math.floor(userId % (Object.keys(AccentColors).length/2))];
+
 
     return (
         <View style={props.flexBox != null ? item(props.flexBox.width) : {}}>
