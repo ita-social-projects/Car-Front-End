@@ -8,7 +8,7 @@ import NotificationsTabs from "../../../activity/notifications/notifications-tab
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 import * as signalR from "@microsoft/signalr";
-import {routes} from "../../../../Environment";
+import routes from "../../../../api-service/EnvironmentRoutes";
 
 interface AppTabsProps {}
 
