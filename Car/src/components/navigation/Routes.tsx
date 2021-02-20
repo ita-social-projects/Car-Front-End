@@ -8,6 +8,7 @@ import Login from "../../activity/login/Login";
 import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const Stack = createStackNavigator<AuthParamList>();
 
@@ -16,8 +17,22 @@ const Routes = () => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        (async () => loadStorageUser())().then(() => setLoading(false));
-    });
+        (async () => {
+            const currentLogin = new Date();
+            const lastLogin = new Date(
+                (await AsyncStorage.getItem("lastLogin")) as string
+            );
+            if (currentLogin.getTime() - lastLogin.getTime() > 2629800000) {
+                await AsyncStorage.setItem(
+                    "lastLogin",
+                    currentLogin.toUTCString()
+                );
+                await AsyncStorage.removeItem("user");
+            }
+        })().then(() =>
+            (async () => loadStorageUser())().then(() => setLoading(false))
+        );
+    }, []);
 
     return (
         <NavigationContainer ref={navigationRef}>
