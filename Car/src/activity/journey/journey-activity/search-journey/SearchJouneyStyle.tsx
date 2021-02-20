@@ -3,6 +3,7 @@ import Font from "../../../../data/fonts/Font";
 
 const SearchJouneyStyle = StyleSheet.create({
     container: {
+        zIndex: 150,
         backgroundColor: "#FAFAFA"
     },
 
@@ -22,6 +23,8 @@ const SearchJouneyStyle = StyleSheet.create({
     },
 
     topInputContainer: {
+        backgroundColor: "#FAFAFA",
+        zIndex: 2000,
         borderBottomColor: "#C1C1C5",
         borderBottomWidth: 1
     },
@@ -33,6 +36,43 @@ const SearchJouneyStyle = StyleSheet.create({
 
     button: {
         width: 150
+    },
+
+    screenContainer: {
+        width: "100%",
+        height: "100%"
+    },
+
+    mapContainer: {
+        position: "absolute",
+        width: "100%",
+        height: "100%"
+    },
+
+    saveButtonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+
+    carButtonSave: {
+        paddingHorizontal: 16,
+        paddingVertical: 14,
+        marginTop: 550,
+        marginRight: 20,
+        marginLeft: 260,
+        position: "absolute",
+        backgroundColor: "#000000",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
+    },
+
+    carButtonSaveText: {
+        color: "white",
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        fontSize: 16,
+        lineHeight: 20
     }
 });
 

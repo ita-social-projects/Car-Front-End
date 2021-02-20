@@ -23,6 +23,8 @@ import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton"
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
+import DestinationSearch from "../journey-activity/segment-control-activities/map-address/DestinationSearch";
+import Search from "../journey-activity/segment-control-activities/map-address/Search";
 
 const StackTabs = createStackNavigator();
 
@@ -261,8 +263,8 @@ const JourneyTabs = () => {
                     }}
                 />
                 <StackTabs.Screen
-                    name="Get Location From Map"
-                    component={MapGetAddress}
+                    name="Search"
+                    component={DestinationSearch}
                     options={{
                         title: "Search Journey",
                         headerTitleAlign: "center",
