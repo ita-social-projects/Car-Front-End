@@ -58,7 +58,6 @@
         "react-native": "0.63.4",
         "react-native-animated-loader": "0.0.8",
         "react-native-app-auth": "^6.0.1",
-        "react-native-background-fetch": "^4.0.1",
         "react-native-bootstrap": "0.1.0",
         "react-native-dropdown-picker": "3.7.6",
         "react-native-elements": "3.2.0",
