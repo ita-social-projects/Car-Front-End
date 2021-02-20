@@ -4004,6 +4004,11 @@
   "resolved" "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
   "version" "2.0.6"
 
+"fast-plist@^0.1.2":
+  "integrity" "sha1-pFr/NFGWAG1AbKbNzQX2kFHvNbg="
+  "resolved" "https://registry.npmjs.org/fast-plist/-/fast-plist-0.1.2.tgz"
+  "version" "0.1.2"
+
 "fastq@^1.6.0":
   "integrity" "sha512-AWuv6Ery3pM+dY7LYS8YIaCiQvUaos9OB1RyNgaOWnaX+Tik7Onvcsf8x8c+YtDeT0maYLniBip2hox5KtEXXA=="
   "resolved" "https://registry.npmjs.org/fastq/-/fastq-1.10.1.tgz"
@@ -7750,6 +7755,15 @@
     "invariant" "2.2.4"
     "react-native-base64" "0.0.2"
 
+"react-native-background-fetch@^4.0.1":
+  "integrity" "sha512-dUhAU7qfSDPdTSg7E6CZ6RhdhxCt9dZAdtoKTvOnpMNxubW+DrPca1oisCML/GatNwVWCJgvLMxuA9I1oonmrQ=="
+  "resolved" "https://registry.npmjs.org/react-native-background-fetch/-/react-native-background-fetch-4.0.1.tgz"
+  "version" "4.0.1"
+  dependencies:
+    "fast-plist" "^0.1.2"
+    "plist" "^3.0.1"
+    "xcode" "^2.0.0"
+
 "react-native-base64@0.0.2":
   "integrity" "sha512-Fu/J1a2y0X22EJDWqJR2oEa1fpP4gTFjYxk8ElJdt1Yak3HOXmFJ7EohLVHU2DaQkgmKfw8qb7u/48gpzveRbg=="
   "resolved" "https://registry.npmjs.org/react-native-base64/-/react-native-base64-0.0.2.tgz"
@@ -7969,7 +7983,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^15.0.2"
 
-"react-native@0.63.4":
+"react-native@>=0.28.0", "react-native@0.63.4":
   "integrity" "sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.63.4.tgz"
   "version" "0.63.4"

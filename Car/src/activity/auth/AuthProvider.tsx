@@ -11,9 +11,7 @@ import AuthContext from "./AuthContext";
 
 const loginService = container.resolve(LoginService);
 
-interface AuthProviderProps {}
-
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);
 
     return (

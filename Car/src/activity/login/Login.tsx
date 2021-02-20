@@ -3,9 +3,10 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import AuthManager from "../auth/AuthManager";
 import AuthContext from "../auth/AuthContext";
 import LoginStyle from "./LoginStyle";
+import BackgroundFetch from "react-native-background-fetch";
 
 const Login = (props: any) => {
-    const { login } = useContext(AuthContext);
+    const { login, logout } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -55,6 +56,10 @@ const Login = (props: any) => {
     } else {
         loader = null;
     }
+
+    BackgroundFetch.scheduleTask({ delay: 2628000000, taskId: "1" });
+    BackgroundFetch.configure({ minimumFetchInterval: 15 }, () => logout());
+    BackgroundFetch.start();
 
     return (
         <View style={LoginStyle.pageContainer}>

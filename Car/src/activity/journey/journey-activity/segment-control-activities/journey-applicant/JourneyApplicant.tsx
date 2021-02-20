@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { container } from "tsyringe";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import User from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
-import * as navigation from "../../../../../components/navigation/Navigation";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyApplicant = ({ route }: any) => {
