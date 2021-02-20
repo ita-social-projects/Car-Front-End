@@ -36,7 +36,10 @@ const Notifications = (props: any) => {
 
     useEffect(() => {
         hubConnection.on("sendToReact", refreshNotification);
-        hubConnection.on("updateUnreadNotificationsNumber", setUnreadNotificationsNumber)
+        hubConnection.on(
+            "updateUnreadNotificationsNumber",
+            setUnreadNotificationsNumber
+        );
         props.navigation.addListener("focus", refreshNotification);
         return () => {
             props.navigation.removeListener("focus", refreshNotification);

@@ -16,6 +16,9 @@ target 'Car' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+
+
+
   target 'CarTests' do
     inherit! :complete
     # Pods for testing

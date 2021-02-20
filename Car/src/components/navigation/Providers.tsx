@@ -2,9 +2,7 @@ import React from "react";
 import AuthProvider from "../../activity/auth/AuthProvider";
 import Routes from "./Routes";
 
-interface ProvidersProps {}
-
-const Providers: React.FC<ProvidersProps> = () => {
+const Providers = () => {
     return (
         <AuthProvider>
             <Routes />

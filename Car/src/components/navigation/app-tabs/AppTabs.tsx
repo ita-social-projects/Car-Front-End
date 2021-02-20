@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
@@ -22,7 +22,11 @@ const AppTabs: React.FC<AppTabsProps> = () => {
     hubConnection.start();
 
     useEffect(() => {
-        hubConnection.on("updateUnreadNotificationsNumber", setUnreadNotificationsNumber)});
+        hubConnection.on(
+            "updateUnreadNotificationsNumber",
+            setUnreadNotificationsNumber
+        );
+    });
     return (
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
@@ -76,7 +80,10 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             <Tabs.Screen
                 options={{
                     tabBarLabel: "Notifications",
-                    tabBarBadge: unreadNotificationsNumber > 0 ? unreadNotificationsNumber.toString() : undefined
+                    tabBarBadge:
+                        unreadNotificationsNumber > 0
+                            ? unreadNotificationsNumber.toString()
+                            : undefined
                 }}
                 name="NotificationsTabs"
                 component={NotificationsTabs}

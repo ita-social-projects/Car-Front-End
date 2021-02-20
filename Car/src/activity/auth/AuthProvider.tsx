@@ -11,9 +11,7 @@ import AuthContext from "./AuthContext";
 
 const loginService = container.resolve(LoginService);
 
-interface AuthProviderProps {}
-
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);
 
     return (
@@ -42,7 +40,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                             position: userGraph.jobTitle,
                             id: 0,
                             token: "",
-                            imageId: "",
+                            avatarUrl: "",
                             journeyCount: 0,
                             hireDate: new Date()
                         };
