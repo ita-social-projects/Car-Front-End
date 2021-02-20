@@ -34,6 +34,16 @@ const Routes = () => {
         );
     }, []);
 
+    const navigator = user ? (
+        <Stack.Screen
+            name="AppTabs"
+            component={AppTabs}
+            options={{ headerShown: false }}
+        />
+    ) : (
+        <Stack.Screen name="Login" component={Login} />
+    );
+
     return (
         <NavigationContainer ref={navigationRef}>
             {isLoading ? (
@@ -42,18 +52,9 @@ const Routes = () => {
                     size="large"
                     text="Loading information..."
                 />
-            ) : user ? (
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen
-                        name="AppTabs"
-                        component={AppTabs}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen name="Exception" component={Exception} />
-                </Stack.Navigator>
             ) : (
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="Login" component={Login} />
+                    {navigator}
                     <Stack.Screen name="Exception" component={Exception} />
                 </Stack.Navigator>
             )}

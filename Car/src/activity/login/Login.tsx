@@ -5,7 +5,7 @@ import AuthContext from "../auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 
 const Login = (props: any) => {
-    const { login, logout } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
