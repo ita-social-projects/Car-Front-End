@@ -1,5 +1,5 @@
 import APIService from "../APIService";
-import { Notification } from "../../models/Notification";
+import Notification from "../../models/Notification";
 import { injectable } from "tsyringe";
 
 @injectable()
@@ -31,7 +31,7 @@ class NotificationsService {
     }
 
     markAsRead(notificationId: number) {
-        return this.apiService.post(this.routePrefix + `\\${notificationId}`);
+        return this.apiService.put(this.routePrefix + `\\${notificationId}`);
     }
 }
 export default NotificationsService;

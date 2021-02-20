@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../../../data/fonts/Font";
 
-export const JourneyApplicantStyle = StyleSheet.create({
+const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: "#FFFFFF"
@@ -42,35 +42,6 @@ export const JourneyApplicantStyle = StyleSheet.create({
         opacity: 0.5,
         fontFamily: Font.ProximaNova.Regular,
         marginBottom: 8
-    },
-
-    buttonContainer: {
-        alignItems: "flex-end",
-        paddingRight: 17,
-        paddingBottom: 24
-    },
-
-    button: {
-        height: 36,
-        width: 139,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        borderColor: "#000000",
-        borderWidth: 2,
-        borderStyle: "solid"
-    },
-
-    buttonText: {
-        fontFamily: Font.ProximaNova.ExtraBold,
-        fontWeight: "700",
-        fontSize: 16,
-        lineHeight: 20,
-        textTransform: "uppercase",
-        color: "black",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingHorizontal: 5
     },
 
     separator: {
@@ -133,5 +104,11 @@ export const JourneyApplicantStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 13,
         color: "#02A2CF"
+    },
+
+    whitespaceBlock: {
+        height: 16
     }
 });
+
+export default JourneyApplicantStyle;

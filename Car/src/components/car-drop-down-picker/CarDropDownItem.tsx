@@ -1,4 +1,6 @@
-export interface CarDropDownPickerItem {
+interface CarDropDownPickerItem {
     label: string;
     value: string;
 }
+
+export default CarDropDownPickerItem;

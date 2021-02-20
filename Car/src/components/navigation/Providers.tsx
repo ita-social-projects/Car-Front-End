@@ -1,13 +1,13 @@
 import React from "react";
-import { AuthProvider } from "../../activity/auth/AuthProvider";
-import { Routes } from "./Routes";
+import AuthProvider from "../../activity/auth/AuthProvider";
+import Routes from "./Routes";
 
-interface ProvidersProps {}
-
-export const Providers: React.FC<ProvidersProps> = () => {
+const Providers = () => {
     return (
         <AuthProvider>
             <Routes />
         </AuthProvider>
     );
 };
+
+export default Providers;

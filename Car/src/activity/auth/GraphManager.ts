@@ -1,5 +1,6 @@
 import { Client } from "@microsoft/microsoft-graph-client";
-import { AuthManager } from "./AuthManager";
+import AuthManager from "./AuthManager";
+
 require("isomorphic-fetch");
 
 class GraphAuthProvider {
@@ -15,9 +16,9 @@ const clientOptions = {
 
 const graphClient = Client.initWithMiddleware(clientOptions);
 
-export class GraphManager {
+class GraphManager {
     static getUserAsync = async () => {
-        return await graphClient
+        return graphClient
             .api("/me")
             .select(
                 "id,displayName,givenName,mail,position,mailboxSettings,userPrincipalName,officeLocation,surname"
@@ -25,3 +26,5 @@ export class GraphManager {
             .get();
     };
 }
+
+export default GraphManager;

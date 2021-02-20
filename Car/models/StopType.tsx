@@ -1,5 +1,7 @@
-export enum StopType {
+enum StopType {
     Start,
     Intermediate,
     Finish
 }
+
+export default StopType;

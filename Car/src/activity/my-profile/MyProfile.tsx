@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableNavigationCard from "./my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
-function MyProfile(props: any) {
+const MyProfile = (props: any) => {
     return (
         <View style={MyProfileStyle.container}>
             <TouchableNavigationCard
@@ -78,5 +78,5 @@ function MyProfile(props: any) {
             </TouchableNavigationCard>
         </View>
     );
-}
+};
 export default MyProfile;

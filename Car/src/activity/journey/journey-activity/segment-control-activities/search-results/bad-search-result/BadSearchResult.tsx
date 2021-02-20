@@ -1,11 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import BadSearchResultStyle from "./BadSearchResultStyle";
+import * as navigation from "../../../../../../components/navigation/Navigation";
 
 const BadSearchResult = () => {
-    const navigation = useNavigation();
-
     return (
         <View style={BadSearchResultStyle.container}>
             <View style={BadSearchResultStyle.textContainer}>
@@ -23,7 +21,7 @@ const BadSearchResult = () => {
                 <TouchableOpacity
                     style={BadSearchResultStyle.button}
                     onPress={() => {
-                        navigation.navigate("Search Journey");
+                        navigation.navigate("Search Journey", {});
                     }}
                 >
                     <Text style={BadSearchResultStyle.buttonText}>

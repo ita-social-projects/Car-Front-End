@@ -1,7 +1,8 @@
-export type UserPreferences = null | {
+type UserPreferences = null | {
     id: number;
-    userId: number;
     doAllowSmoking: boolean;
     doAllowEating: boolean;
     comments: string;
 };
+
+export default UserPreferences;

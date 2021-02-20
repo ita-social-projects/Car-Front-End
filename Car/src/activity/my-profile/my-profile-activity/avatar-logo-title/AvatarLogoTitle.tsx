@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import "reflect-metadata";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
-import { AuthContext } from "../../../auth/AuthProvider";
+import AuthContext from "../../../auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 
 function AvatarLogoTitle() {

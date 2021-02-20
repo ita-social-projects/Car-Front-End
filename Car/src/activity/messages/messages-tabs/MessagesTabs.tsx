@@ -5,8 +5,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { container } from "tsyringe";
 import UserService from "../../../../api-service/user-service/UserService";
-import { User } from "../../../../models/User";
-import { AuthContext } from "../../auth/AuthProvider";
+import User from "../../../../models/User";
+import AuthContext from "../../auth/AuthContext";
 import Chat from "../chat/Chat";
 import SimpleMessage from "../chat/simple-message/SimpleMessage";
 import * as navigation from "../../../components/navigation/Navigation";
@@ -14,7 +14,7 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 
 const StackTabs = createStackNavigator();
 
-const ChatTabs = () => {
+const MessagesTabs = () => {
     const userServices = container.resolve(UserService);
     const [currentUser, setCurrentUser] = useState({} as User);
     const { user } = useContext(AuthContext);
@@ -101,4 +101,4 @@ const ChatTabs = () => {
         </View>
     );
 };
-export default ChatTabs;
+export default MessagesTabs;

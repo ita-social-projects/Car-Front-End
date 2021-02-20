@@ -1,7 +1,9 @@
 import Model from "./Model";
 
-export default interface Brand {
+type Brand = null | {
     id: number;
     name: string;
     models: Model[];
-}
+};
+
+export default Brand;

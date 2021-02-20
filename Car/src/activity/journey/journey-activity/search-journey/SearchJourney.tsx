@@ -3,7 +3,7 @@ import { Button, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { container } from "tsyringe";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import { Journey } from "../../../../../models/Journey";
+import Journey from "../../../../../models/Journey";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
 import SearchJouneyStyle from "./SearchJouneyStyle";
@@ -11,6 +11,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 
 function SearchJourney() {
     const [journeys, setJourneys] = useState<Array<Journey>>([]);
+    const [isLoading, setLoading] = useState(true);
 
     const journeyService = container.resolve(JourneyService);
 
@@ -18,20 +19,34 @@ function SearchJourney() {
         journeyService
             .getJourney(1)
             .then((res1) => {
-                setJourneys([
-                    res1.data,
-                    res1.data,
-                    res1.data,
-                    res1.data,
-                    res1.data,
-                    res1.data
-                ]);
+                journeyService.getJourney(4).then((res2) => {
+                    journeyService.getJourney(5).then((res3) => {
+                        journeyService.getJourney(7).then((res4) => {
+                            journeyService.getJourney(8).then((res5) => {
+                                setJourneys([
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res1.data
+                                ]);
+                                setLoading(false);
+                            });
+                        });
+                    });
+                });
             })
             .catch((e) => console.log(e));
     }, []);
 
     return (
-        <View style={SearchJouneyStyle.container}>
+        <ScrollView style={SearchJouneyStyle.container}>
             <View style={SearchJouneyStyle.topInputContainer}>
                 <TouchableMapBar
                     directionType="From"
@@ -49,7 +64,7 @@ function SearchJourney() {
                 />
             </View>
 
-            <ScrollView>
+            <View>
                 <TouchableCard
                     cardName="Map"
                     iconName="location"
@@ -105,6 +120,7 @@ function SearchJourney() {
                 <View style={SearchJouneyStyle.buttonsContainer}>
                     <View style={SearchJouneyStyle.button}>
                         <Button
+                            disabled={isLoading}
                             color="#000000"
                             title="OK"
                             onPress={() => {
@@ -124,8 +140,8 @@ function SearchJourney() {
                         />
                     </View>
                 </View>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     );
 }
 
