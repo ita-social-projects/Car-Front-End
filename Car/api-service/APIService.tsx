@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import { routes } from "../Environment";
-import { axiosInstance } from "./Interceptor";
+import EnvironmentRoutes from "./EnvironmentRoutes";
+import axiosInstance from "./Interceptor";
 
 @injectable()
 class APIService {
-    baseUrl: string = routes.apiUrl;
+    baseUrl: string = EnvironmentRoutes.apiUrl;
     baseHeaders = {
         headers: {
             "Context-Type": "application/json",

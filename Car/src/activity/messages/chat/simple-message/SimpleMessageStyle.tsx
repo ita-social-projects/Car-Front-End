@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
+
 const SimpleMessageStyle = StyleSheet.create({
     main: {
         display: "flex",

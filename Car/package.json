@@ -78,6 +78,7 @@
         "reanimated-bottom-sheet": "1.0.0-alpha.22",
         "redux": "4.0.5",
         "reflect-metadata": "0.1.13",
+        "string-to-color": "^2.2.2",
         "tsyringe": "4.4.0"
     },
     "devDependencies": {

@@ -1,4 +1,9 @@
-export type Chat = null | {
+import Message from "./Message";
+
+type Chat = null | {
     id: number;
-    Name: string;
+    name: string;
+    messages: Message[];
 };
+
+export default Chat;

@@ -1,4 +1,4 @@
-export enum Color {
+enum Color {
     White,
     Black,
     Grey,
@@ -11,3 +11,5 @@ export enum Color {
     Violet,
     Orange
 }
+
+export default Color;
