@@ -1,7 +1,7 @@
 import APIService from "../APIService";
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import { Stop } from "../../models/Stop";
+import Stop  from "../../models/Stop";
 
 @injectable()
 class StopService {

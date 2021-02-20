@@ -13,13 +13,13 @@ import TouchableCard from "../segment-control-activities/touchable/card/Touchabl
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
 import { container } from "tsyringe";
 import StopService from "../../../../../api-service/stop-service/StopService";
-import { AuthContext } from "../../../auth/AuthProvider";
+import AuthContext from "../../../auth/AuthContext";
 import SearchJouneyStyle from "./SearchJouneyStyle";
-import { StopType } from "../../../../../models/StopType";
-import { Stop } from "../../../../../models/Stop";
+import StopType from "../../../../../models/StopType";
+import Stop from "../../../../../models/Stop";
 import { useNavigation } from "@react-navigation/native";
 import MapGetAddress from "../segment-control-activities/map-address/MapGetAddress";
-import { Journey } from "../../../../../models/Journey";
+import Journey from "../../../../../models/Journey";
 import DestinationSearch from "../segment-control-activities/map-address/DestinationSearch";
 
 function SearchJourney() {
@@ -45,7 +45,7 @@ function SearchJourney() {
     }, []);
 
     function getFullAddress(stopDto: Stop | undefined | null) {
-        return stopDto?.address.city + ", " + stopDto?.address.street;
+        return stopDto?.address?.city + ", " + stopDto?.address?.street;
     }
 
     return (
@@ -60,7 +60,7 @@ function SearchJourney() {
                         SearchJouneyStyle.carButtonSave,
                         { zIndex: 200, position: "absolute" }
                     ]}
-                    onPress={() => {}}
+                    onPress={() => { }}
                 >
                     <Text style={SearchJouneyStyle.carButtonSaveText}>
                         Confirm
@@ -87,8 +87,8 @@ function SearchJourney() {
                         flex="10"
                     />
                 ) : (
-                    <></>
-                )}
+                        <></>
+                    )}
             </View>
 
             <ScrollView style={[SearchJouneyStyle.container]}>
@@ -141,8 +141,8 @@ function SearchJourney() {
                             color="black"
                         />
                     ) : (
-                        <></>
-                    )}
+                            <></>
+                        )}
                     {stops?.length ? (
                         stops?.map((item) => (
                             <TouchableCard
@@ -167,8 +167,8 @@ function SearchJourney() {
                             />
                         ))
                     ) : (
-                        <></>
-                    )}
+                            <></>
+                        )}
                 </View>
             </ScrollView>
         </View>
