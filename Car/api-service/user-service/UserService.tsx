@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { injectable } from "tsyringe";
 import User from "../../models/User";
 import APIService from "../APIService";
+import EnvironmentRoutes from "../EnvironmentRoutes";
 
 @injectable()
 class UserService {
@@ -16,6 +17,17 @@ class UserService {
     getAvatar(id: number) {
         return this.apiService.get<string>(
             this.routePrefix + "/" + id + "/avatar"
+        );
+    }
+
+    setAvatar(id: number, formData: FormData) {
+        return fetch(
+            EnvironmentRoutes.apiUrl + this.routePrefix + "/" + id + "/avatar",
+            {
+                method: "PUT",
+                headers: { "Content-Type": "multipart/form-data" },
+                body: formData
+            }
         );
     }
 
