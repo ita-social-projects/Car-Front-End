@@ -44,10 +44,9 @@ export default function Cars(props: any) {
             })
             .catch((e) => console.log(e));
     }
-    
+
     useEffect(() => {
-        const unsubscribe = props.navigation.addListener("focus", loadCars);
-        return unsubscribe;
+        return props.navigation.addListener("focus", loadCars);
     }, [props.navigation]);
 
     let addCarElement = (

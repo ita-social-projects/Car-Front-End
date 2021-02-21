@@ -28,14 +28,14 @@ import CarTextInput from "../../../../../components/car-text-input/CarTextInput"
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
-import { useNavigation } from "@react-navigation/native";
 
 function AddCars() {
     const { user } = useContext(AuthContext);
-    const navigation = useNavigation();
+
     let modelPickerController: any;
     let brandPickerController: any;
     let colorPickerController: any;
+
     const [brands, setBrands] = useState({} as CarBrand[]);
     const [models, setModels] = useState({} as CarModel[]);
     const [colors] = useState<Array<{ value: string; label: string }>>(
