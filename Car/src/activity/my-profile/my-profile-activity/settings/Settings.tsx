@@ -72,8 +72,8 @@ const Settings = () => {
     const image = isPhotoChanged ? (
         <Image source={{ uri: photo.uri }} style={SettingsStyle.avatar} />
     ) : (
-            avatar
-        );
+        avatar
+    );
 
     let loader: any;
 
@@ -89,10 +89,8 @@ const Settings = () => {
         loader = null;
     }
 
-    
-    const uploadButtonText = !isPhotoExsists && !isPhotoChanged
-        ? "Upload photo"
-        : "Change photo";
+    const uploadButtonText =
+        !isPhotoExsists && !isPhotoChanged ? "Upload photo" : "Change photo";
 
     return (
         <View style={SettingsStyle.container}>
@@ -103,61 +101,63 @@ const Settings = () => {
                     text="Loading information..."
                 />
             ) : (
-                    <>
-                        <View style={SettingsStyle.avatarContainer}>
-                            {image}
-                            <View style={SettingsStyle.overlay} />
-                            <View style={SettingsStyle.whitespace} />
+                <>
+                    <View style={SettingsStyle.avatarContainer}>
+                        {image}
+                        <View style={SettingsStyle.overlay} />
+                        <View style={SettingsStyle.whitespace} />
+                        <TouchableOpacity
+                            style={SettingsStyle.uploadButton}
+                            onPress={() => uploadPhotoHandle()}
+                        >
+                            <Text style={SettingsStyle.uploadButtonText}>
+                                {uploadButtonText}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={SettingsStyle.bottomContainer}>
+                        <View style={SettingsStyle.saveButtonContainer}>
+                            {loader}
                             <TouchableOpacity
-                                style={SettingsStyle.uploadButton}
-                                onPress={() => uploadPhotoHandle()}
+                                style={[
+                                    SettingsStyle.saveButton,
+                                    (!isPhotoChanged || isSaved) &&
+                                        SettingsStyle.pressedButton
+                                ]}
+                                disabled={!isPhotoChanged || isSaved}
+                                activeOpacity={1}
+                                onPress={() => {
+                                    setSaved(true);
+                                    (async () =>
+                                        await userService.setAvatar(
+                                            user!.id,
+                                            imageData
+                                        ))()
+                                        .then(() =>
+                                            Alert.alert(
+                                                "Saved",
+                                                "Please restart the App",
+                                                [
+                                                    {
+                                                        text: "Restart",
+                                                        onPress: () => {
+                                                            DevSettings.reload();
+                                                        }
+                                                    }
+                                                ]
+                                            )
+                                        )
+                                        .then((loader = null));
+                                }}
                             >
-                                <Text style={SettingsStyle.uploadButtonText}>
-                                    {uploadButtonText}
+                                <Text style={SettingsStyle.saveButtonText}>
+                                    Save
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={SettingsStyle.bottomContainer}>
-                            <View style={SettingsStyle.saveButtonContainer}>
-                                {loader}
-                                <TouchableOpacity
-                                    style={[
-                                        SettingsStyle.saveButton,
-                                        (!isPhotoChanged || isSaved) &&
-                                        SettingsStyle.pressedButton
-                                    ]}
-                                    disabled={!isPhotoChanged || isSaved}
-                                    activeOpacity={1}
-                                    onPress={() => {
-                                        setSaved(true);
-                                        (async () =>
-                                            await userService.setAvatar(
-                                                user!.id,
-                                                imageData
-                                            ))().then(() =>
-                                                Alert.alert(
-                                                    "Saved",
-                                                    "Please restart the App",
-                                                    [
-                                                        {
-                                                            text: "Restart",
-                                                            onPress: () => {
-                                                                DevSettings.reload();
-                                                            }
-                                                        }
-                                                    ]
-                                                )
-                                            ).then(loader = null);
-                                    }}
-                                >
-                                    <Text style={SettingsStyle.saveButtonText}>
-                                        Save
-                            </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </>
-                )}
+                    </View>
+                </>
+            )}
         </View>
     );
 };

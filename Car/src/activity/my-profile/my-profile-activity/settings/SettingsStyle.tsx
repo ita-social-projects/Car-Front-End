@@ -92,9 +92,9 @@ const SettingsStyle = EStyleSheet.create({
 
     saveButtonContainer: {
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
     },
-    
+
     pressedButton: {
         backgroundColor: "#888888"
     }

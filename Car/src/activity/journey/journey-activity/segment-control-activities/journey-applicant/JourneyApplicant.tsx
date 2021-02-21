@@ -47,7 +47,10 @@ const JourneyApplicant = ({ route }: any) => {
                             <Text
                                 style={JourneyApplicantStyle.userAdditionalData}
                             >
-                                123 rides, 2 badges
+                                {user?.journeyCount === 1
+                                    ? "1 ride"
+                                    : user?.journeyCount + " rides"}
+                                , 2 badges
                             </Text>
                         </View>
                     </View>
