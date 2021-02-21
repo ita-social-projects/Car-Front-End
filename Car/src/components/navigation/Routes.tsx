@@ -22,7 +22,10 @@ const Routes = () => {
             const lastLogin = new Date(
                 (await AsyncStorage.getItem("lastLogin")) as string
             );
-            if (Math.abs(currentLogin.getTime() - lastLogin.getTime()) > 2629800000) {
+            if (
+                Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
+                2629800000
+            ) {
                 await AsyncStorage.setItem(
                     "lastLogin",
                     currentLogin.toUTCString()

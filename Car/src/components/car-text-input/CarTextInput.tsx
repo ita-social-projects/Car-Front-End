@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CarTextInputStyle from "./CarTextInputStyle";
 

@@ -1,40 +1,94 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, View } from "react-native";
+import {
+    ActivityIndicator,
+    Alert,
+    Image,
+    KeyboardAvoidingView,
+    Platform,
+    Text,
+    View
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
     ImagePickerResponse,
     launchImageLibrary
 } from "react-native-image-picker/src";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
-import Brand from "../../../../../../models/Brand";
-import Color from "../../../../../../models/Color";
-import Model from "../../../../../../models/Model";
+import CarBrand from "../../../../../../models/car/CarBrand";
+import CarColor from "../../../../../../models/car/CarColor";
+import CarModel from "../../../../../../models/car/CarModel";
 import AuthContext from "../../../../auth/AuthContext";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
-import CarDto from "../../../../../../dto/CarDto";
+import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
+import { useNavigation } from "@react-navigation/native";
 
 function AddCars() {
     const { user } = useContext(AuthContext);
-
-    const [brands, setBrands] = useState({} as Brand[]);
-    const [models, setModels] = useState({} as Model[]);
+    const navigation = useNavigation();
+    let modelPickerController: any;
+    let brandPickerController: any;
+    let colorPickerController: any;
+    const [brands, setBrands] = useState({} as CarBrand[]);
+    const [models, setModels] = useState({} as CarModel[]);
     const [colors] = useState<Array<{ value: string; label: string }>>(
-        Object.values(Color)
+        Object.values(CarColor)
             .filter((value) => isNaN(Number(value)))
             .map((item, index) => ({
                 value: index.toString(),
                 label: item.toString()
             }))
     );
+
+    function showAlert(errorMessage: string) {
+        Alert.alert("Error!", errorMessage, [
+            {
+                text: "Ok"
+            }
+        ]);
+    }
+
+    function validateFields(): boolean {
+        if (
+            selectedBrand?.value === null ||
+            selectedBrand?.value === undefined
+        ) {
+            showAlert("Brand is a required field!");
+            return false;
+        }
+        if (
+            selectedModel?.value === null ||
+            selectedModel?.value === undefined
+        ) {
+            showAlert("Model is a required field!");
+            return false;
+        }
+        if (
+            selectedColor?.value === null ||
+            selectedColor?.value === undefined
+        ) {
+            showAlert("Color is a required field!");
+            return false;
+        }
+        if (
+            plateNumber === null ||
+            plateNumber === undefined ||
+            plateNumber.length < 4 ||
+            plateNumber.length > 10 ||
+            !plateNumber.match(/^[A-Za-z0-9-]+$/)
+        ) {
+            showAlert("Plate number is not valid!");
+            return false;
+        }
+        return true;
+    }
 
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
         null
@@ -52,8 +106,9 @@ function AddCars() {
     const [imageData, setImageData] = useState<FormData>({} as FormData);
 
     const [loading, setLoading] = useState(false);
+
     const brandService = container.resolve(BrandService);
-    const modelSerivce = container.resolve(ModelService);
+    const modelService = container.resolve(ModelService);
     const carService = container.resolve(CarService);
 
     useEffect(() => {
@@ -82,15 +137,17 @@ function AddCars() {
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        modelSerivce
+        modelService
             .getModelsByBrandId(Number(brand.value))
             .then((res) => {
                 setModels(res.data);
+                modelPickerController.selectItem(res.data[0]?.id.toString());
+                modelPickerController.open();
             })
             .catch((e) => console.log(e));
     };
 
-    const saveCarHandle = async (car: CarDto) => {
+    const saveCarHandle = async (car: CreateCarViewModel) => {
         setLoading(true);
         console.log(car);
         const newCar = await carService.add(car).then((res) => res.data);
@@ -101,19 +158,29 @@ function AddCars() {
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
         .length
         ? brands.map((brand) => ({
-              ...{ value: String(brand!.id), label: brand!.name }
+              ...{
+                  value: String(brand!.id),
+                  label: brand!.name
+              }
           }))
         : null;
 
     let modelItems: CarDropDownPickerItem[] | null = Object.entries(models)
         .length
         ? models.map((model) => ({
-              ...{ value: String(model!.id), label: model!.name }
+              ...{
+                  value: String(model!.id),
+                  label: model!.name
+              }
           }))
         : null;
 
     return (
-        <KeyboardAwareScrollView style={AddCarsStyle.wrapper}>
+        <KeyboardAvoidingView
+            style={AddCarsStyle.wrapper}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={40}
+        >
             <View style={AddCarsStyle.carAvatarContainer}>
                 {photo && (
                     <Image
@@ -140,9 +207,16 @@ function AddCars() {
                         items={brandItems}
                         zIndex={3000}
                         required={true}
-                        selectHandle={(item: CarDropDownPickerItem) =>
-                            selectBrandHandle(item)
+                        selectHandle={(item: CarDropDownPickerItem) => {
+                            selectBrandHandle(item);
+                        }}
+                        controller={(instance: any) =>
+                            (brandPickerController = instance)
                         }
+                        onOpen={() => {
+                            colorPickerController.close();
+                            modelPickerController.close();
+                        }}
                     />
                     <CarDropDownPicker
                         style={AddCarsStyle.dropDownPicker}
@@ -151,8 +225,16 @@ function AddCars() {
                         zIndex={2000}
                         required={true}
                         disabled={!modelItems}
+                        defaultValue={null}
                         selectHandle={(item: CarDropDownPickerItem) =>
                             setModel(item)
+                        }
+                        onOpen={() => {
+                            colorPickerController.close();
+                            brandPickerController.close();
+                        }}
+                        controller={(instance: any) =>
+                            (modelPickerController = instance)
                         }
                     />
                     <CarDropDownPicker
@@ -164,6 +246,13 @@ function AddCars() {
                         selectHandle={(item: CarDropDownPickerItem) =>
                             setColor(item)
                         }
+                        onOpen={() => {
+                            brandPickerController.close();
+                            modelPickerController.close();
+                        }}
+                        controller={(instance: any) =>
+                            (colorPickerController = instance)
+                        }
                     />
                     <CarTextInput
                         rules={{
@@ -171,7 +260,10 @@ function AddCars() {
                                 value: true,
                                 message: "Plate number is required"
                             },
-                            minLength: { value: 4, message: "Min length is 4" },
+                            minLength: {
+                                value: 4,
+                                message: "Min length is 4"
+                            },
                             maxLength: {
                                 value: 10,
                                 message: "Max length is 10"
@@ -200,18 +292,21 @@ function AddCars() {
                     <TouchableOpacity
                         style={AddCarsStyle.carButtonSave}
                         onPress={() => {
-                            saveCarHandle({
-                                modelId: Number(selectedModel?.value),
-                                color: Number(selectedColor?.value),
-                                plateNumber: plateNumber,
-                                ownerId: Number(user?.id),
-                                imageId:
-                                    photo.uri !== undefined
-                                        ? String(photo.uri)
-                                        : null,
-                                id: 0
-                            });
-                            navigation.goBack();
+                            if (validateFields()) {
+                                saveCarHandle({
+                                    modelId: Number(selectedModel?.value),
+                                    color: Number(selectedColor?.value),
+                                    plateNumber: plateNumber,
+                                    ownerId: Number(user?.id),
+                                    imageId:
+                                        photo.uri !== undefined
+                                            ? String(photo.uri)
+                                            : null,
+                                    id: 0
+                                });
+
+                                navigation.goBack();
+                            }
                         }}
                     >
                         <Text style={AddCarsStyle.carButtonSaveText}>Save</Text>
@@ -227,7 +322,7 @@ function AddCars() {
                     </TouchableOpacity>
                 </View>
             </View>
-        </KeyboardAwareScrollView>
+        </KeyboardAvoidingView>
     );
 }
 

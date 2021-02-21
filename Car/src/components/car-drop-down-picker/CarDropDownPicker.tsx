@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
@@ -31,7 +31,7 @@ function CarDropDownPicker(props: any) {
                 searchablePlaceholderTextColor="gray"
                 searchableError={() => <Text>Not Found</Text>}
                 placeholder={props.placeHolder}
-                defaultValue={""}
+                defaultValue={props.defaultValue}
                 style={[
                     CarDropDownPickerStyle.container,
                     props.disabled && CarDropDownPickerStyle.disabledStyle
@@ -55,7 +55,11 @@ function CarDropDownPicker(props: any) {
                           }
                         : () => {}
                 }
+                dropDownMaxHeight={Dimensions.get("window").height / 4}
+                autoScrollToDefaultValue={true}
                 disabled={props.disabled}
+                controller={props.controller}
+                onOpen={props.onOpen}
             />
         </View>
     );

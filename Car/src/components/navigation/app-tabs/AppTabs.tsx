@@ -57,7 +57,8 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: "black",
-                inactiveTintColor: "#AAA9AE"
+                inactiveTintColor: "#AAA9AE",
+                keyboardHidesTabBar: true
             }}
         >
             <Tabs.Screen
