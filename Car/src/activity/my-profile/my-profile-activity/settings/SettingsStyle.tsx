@@ -83,13 +83,18 @@ const SettingsStyle = EStyleSheet.create({
         textTransform: "uppercase"
     },
 
-    saveButtonContainer: {
+    bottomContainer: {
         flex: 1,
         justifyContent: "flex-end",
         alignItems: "flex-end",
         padding: 16
     },
 
+    saveButtonContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    
     pressedButton: {
         backgroundColor: "#888888"
     }
