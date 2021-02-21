@@ -2,15 +2,15 @@ import { StyleSheet } from "react-native";
 
 const AddCarsStyle = StyleSheet.create({
     wrapper: {
-        flex: 1,
-        backgroundColor: "white"
+        backgroundColor: "white",
+        flex: 1
     },
 
     carAvatarContainer: {
-        height: 200,
         backgroundColor: "#C4C4C4",
         alignItems: "flex-end",
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        flex: 3
     },
 
     carButtonUpload: {
@@ -33,7 +33,8 @@ const AddCarsStyle = StyleSheet.create({
 
     inputsContainer: {
         marginRight: 24,
-        marginLeft: 24
+        marginLeft: 24,
+        flex: 6
     },
 
     dropDownContainer: {
@@ -46,7 +47,8 @@ const AddCarsStyle = StyleSheet.create({
 
     saveButtonContainer: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        zIndex: 0
     },
 
     carButtonSave: {
@@ -67,11 +69,11 @@ const AddCarsStyle = StyleSheet.create({
     },
 
     carAvatar: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
         borderWidth: 2,
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
         position: "absolute"
     },
 

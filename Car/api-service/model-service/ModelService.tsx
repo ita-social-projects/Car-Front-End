@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import Model from "../../models/Model";
+import CarModel from "../../models/car/CarModel";
 import APIService from "../APIService";
 
 @injectable()
@@ -10,11 +10,11 @@ class ModelService {
     routePrefix: string = "models";
 
     getModels() {
-        return this.apiService.get<Model[]>(this.routePrefix);
+        return this.apiService.get<CarModel[]>(this.routePrefix);
     }
 
     getModelsByBrandId(id: number) {
-        return this.apiService.get<Model[]>(
+        return this.apiService.get<CarModel[]>(
             this.routePrefix + "/by-brand/" + id
         );
     }

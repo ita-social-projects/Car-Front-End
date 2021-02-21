@@ -1,21 +1,53 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+    ActivityIndicator,
+    Image,
+    Text,
+    View,
+    RefreshControl,
+    ScrollView
+} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import CarService from "../../../../../api-service/car-service/CarService";
-import Car from "../../../../../models/Car";
+import CarViewModel from "../../../../../models/car/CarViewModel";
 import AuthContext from "../../../../activity/auth/AuthContext";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
 import CarsStyle from "./CarsStyle";
 
 export default function Cars(props: any) {
     const { user } = useContext(AuthContext);
-    const [cars, setCars] = useState<Array<Car>>([]);
+    const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [loading, setLoading] = useState(true);
-
+    const [refreshing, setRefreshing] = React.useState(false);
     const carService = container.resolve(CarService);
+
+    const wait = (timeout: number) => {
+        return new Promise((resolve) => setTimeout(resolve, timeout));
+    };
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(1000).then(() => {
+            loadCars();
+            setRefreshing(false);
+        });
+    }, []);
+
+    function loadCars() {
+        carService
+            .getAll(Number(user?.id))
+            .then((res) => {
+                setCars(res.data);
+                setLoading(false);
+            })
+            .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        return props.navigation.addListener("focus", loadCars);
+    }, [props.navigation]);
 
     let addCarElement = (
         <View>
@@ -47,20 +79,13 @@ export default function Cars(props: any) {
         </View>
     );
 
-    useEffect(() => {
-        carService
-            .getAll(Number(user?.id))
-            .then((res) => {
-                setCars(res.data);
-                setLoading(false);
-            })
-            .catch((e) => console.log(e));
-    }, []);
-
     return (
         <ScrollView
             style={CarsStyle.container}
             contentContainerStyle={loading && CarsStyle.loading}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
         >
             <View
                 style={[CarsStyle.carContainer, loading && CarsStyle.loading]}
