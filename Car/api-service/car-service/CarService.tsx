@@ -1,17 +1,10 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-<<<<<<< HEAD
-import CarDto from "../../dto/CarDto";
-import Car from "../../models/Car";
-import APIService from "../APIService";
-import EnvironmentRoutes from "../EnvironmentRoutes";
-=======
 import CreateCarViewModel from "../../models/car/CreateCarViewModel";
-import routes from "../EnvironmentRoutes";
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
->>>>>>> origin
+import EnvironmentRoutes from "../EnvironmentRoutes";
 
 @injectable()
 class CarService {
