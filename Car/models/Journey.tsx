@@ -1,4 +1,4 @@
-import Car from "./Car";
+import CarViewModel from "./car/CarViewModel";
 import Schedule from "./Schedule";
 import Stop from "./Stop";
 import User from "./User";
@@ -14,7 +14,7 @@ type Journey = null | {
     participants: User[];
     stops: Stop[];
     organizer: User;
-    car: Car;
+    car: CarViewModel;
 };
 
 export default Journey;

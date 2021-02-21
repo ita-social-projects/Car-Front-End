@@ -1,9 +1,10 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import { CarDto } from "../../dto/CarDto";
-import { routes } from "../../Environment";
-import Car from "../../models/Car";
+import CreateCarViewModel from "../../models/car/CreateCarViewModel";
+import routes from "../EnvironmentRoutes";
+import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
+import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
 
 @injectable()
 class CarService {
@@ -19,20 +20,20 @@ class CarService {
         });
     }
 
-    add(car: CarDto) {
-        return this.apiService.post<CarDto>(this.routePrefix, car);
+    add(car: CreateCarViewModel) {
+        return this.apiService.post<CreateCarViewModel>(this.routePrefix, car);
     }
 
-    update(car: CarDto) {
-        return this.apiService.put<CarDto>(this.routePrefix, car);
+    update(car: UpdateCarViewModel) {
+        return this.apiService.put<UpdateCarViewModel>(this.routePrefix, car);
     }
 
     getById(id: number) {
-        return this.apiService.get<Car>(this.routePrefix + "/" + id);
+        return this.apiService.get<CarViewModel>(this.routePrefix + "/" + id);
     }
 
     getAll(id: number) {
-        return this.apiService.get<Array<Car>>(
+        return this.apiService.get<Array<CarViewModel>>(
             this.routePrefix + "/by-user/" + id
         );
     }
