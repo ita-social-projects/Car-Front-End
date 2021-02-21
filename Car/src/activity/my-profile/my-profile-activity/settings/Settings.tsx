@@ -24,6 +24,7 @@ const Settings = () => {
     const [isPhotoChanged, setStatus] = useState(false);
     const [isLoading, setLoading] = useState(true);
     const [isSaved, setSaved] = useState(false);
+    const [isPhotoExsists, photoExists] = useState(false);
     const [imageData, setImageData] = useState<FormData>({} as FormData);
 
     const { user } = useContext(AuthContext);
@@ -46,11 +47,13 @@ const Settings = () => {
         });
     };
 
+    let byteOfImage = "";
+
     useEffect(() => {
         userService
             .getAvatar(Number(user?.id))
             .then((result) => {
-                const byteOfImage = JSON.stringify(result.request._response);
+                byteOfImage = JSON.stringify(result.request._response);
                 if (byteOfImage !== '""') {
                     setAvatar(
                         <Image
@@ -60,6 +63,7 @@ const Settings = () => {
                             style={SettingsStyle.avatar}
                         />
                     );
+                    photoExists(true);
                 }
             })
             .then(() => setLoading(false));
@@ -85,6 +89,11 @@ const Settings = () => {
         loader = null;
     }
 
+    
+    const uploadButtonText = !isPhotoExsists && !isPhotoChanged
+        ? "Upload photo"
+        : "Change photo";
+
     return (
         <View style={SettingsStyle.container}>
             {isLoading ? (
@@ -99,15 +108,12 @@ const Settings = () => {
                             {image}
                             <View style={SettingsStyle.overlay} />
                             <View style={SettingsStyle.whitespace} />
-
                             <TouchableOpacity
                                 style={SettingsStyle.uploadButton}
                                 onPress={() => uploadPhotoHandle()}
                             >
                                 <Text style={SettingsStyle.uploadButtonText}>
-                                    {Object.entries(avatar).length
-                                        ? "Change photo"
-                                        : "Upload photo"}
+                                    {uploadButtonText}
                                 </Text>
                             </TouchableOpacity>
                         </View>
