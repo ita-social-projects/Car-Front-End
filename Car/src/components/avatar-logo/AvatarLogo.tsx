@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Platform, Text, View } from "react-native";
 import { container } from "tsyringe";
 import UserService from "../../../api-service/user-service/UserService";
 import AvatarLogoStyle from "./AvatarLogoStyle";
@@ -38,7 +38,7 @@ const AvatarLogo = (props: any) => {
                     const byteOfImage = JSON.stringify(
                         result.request._response
                     );
-                    if (byteOfImage !== '""') {
+                    if (byteOfImage !== '""' && Platform.OS !== "ios") {
                         setAvatar(
                             <Image
                                 source={{
