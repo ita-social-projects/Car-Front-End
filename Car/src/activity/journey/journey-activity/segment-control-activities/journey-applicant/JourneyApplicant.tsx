@@ -23,6 +23,9 @@ const JourneyApplicant = ({ route }: any) => {
             .catch((e) => console.log(e));
     }, []);
 
+    const journeys =
+        user?.journeyCount === 1 ? "1 ride" : user?.journeyCount + " rides";
+
     return (
         <ScrollView style={JourneyApplicantStyle.mainContainer}>
             {isLoading ? (
@@ -47,7 +50,7 @@ const JourneyApplicant = ({ route }: any) => {
                             <Text
                                 style={JourneyApplicantStyle.userAdditionalData}
                             >
-                                123 rides, 2 badges
+                                {journeys}, 2 badges
                             </Text>
                         </View>
                     </View>

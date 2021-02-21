@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
+import moment from "moment";
 
 const JourneyCard = (props: any) => {
     const journey = props.journey;
@@ -61,9 +62,9 @@ const JourneyCard = (props: any) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={JourneyCardStyle.timeText}>
-                                    {journey?.departureTime === undefined
-                                        ? "Today at 19:15"
-                                        : journey?.departureTime}
+                                    {moment(
+                                        new Date(journey?.departureTime)
+                                    ).fromNow()}
                                 </Text>
                             </View>
                         </View>

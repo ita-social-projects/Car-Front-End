@@ -19,24 +19,26 @@ function SearchJourney() {
         journeyService
             .getJourney(1)
             .then((res1) => {
-                journeyService.getJourney(4).then((res2) => {
-                    journeyService.getJourney(5).then((res3) => {
-                        journeyService.getJourney(7).then((res4) => {
-                            journeyService.getJourney(8).then((res5) => {
-                                setJourneys([
-                                    res1.data,
-                                    res2.data,
-                                    res3.data,
-                                    res4.data,
-                                    res5.data,
-                                    res1.data,
-                                    res2.data,
-                                    res3.data,
-                                    res4.data,
-                                    res5.data,
-                                    res1.data
-                                ]);
-                                setLoading(false);
+                journeyService.getJourney(5).then((res2) => {
+                    journeyService.getJourney(7).then((res3) => {
+                        journeyService.getJourney(8).then((res4) => {
+                            journeyService.getJourney(9).then((res5) => {
+                                journeyService.getJourney(11).then((res6) => {
+                                    setJourneys([
+                                        res1.data,
+                                        res2.data,
+                                        res3.data,
+                                        res4.data,
+                                        res5.data,
+                                        res6.data,
+                                        res1.data,
+                                        res2.data,
+                                        res3.data,
+                                        res4.data,
+                                        res5.data
+                                    ]);
+                                    setLoading(false);
+                                });
                             });
                         });
                     });

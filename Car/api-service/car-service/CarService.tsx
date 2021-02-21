@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
 import CreateCarViewModel from "../../models/car/CreateCarViewModel";
-import routes from "../EnvironmentRoutes";
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
+import EnvironmentRoutes from "../EnvironmentRoutes";
 
 @injectable()
 class CarService {
@@ -13,11 +13,14 @@ class CarService {
     routePrefix: string = "cars";
 
     uploadPhoto(id: number, formData: FormData) {
-        return fetch(routes.apiUrl + this.routePrefix + "/" + id + "/photo", {
-            method: "PUT",
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        });
+        return fetch(
+            EnvironmentRoutes.apiUrl + this.routePrefix + "/" + id + "/photo",
+            {
+                method: "PUT",
+                headers: { "Content-Type": "multipart/form-data" },
+                body: formData
+            }
+        );
     }
 
     add(car: CreateCarViewModel) {
