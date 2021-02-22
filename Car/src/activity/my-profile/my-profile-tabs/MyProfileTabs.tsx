@@ -46,15 +46,9 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -80,15 +74,9 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -147,15 +135,9 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
