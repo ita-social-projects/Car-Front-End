@@ -13,6 +13,13 @@ const PreferencesStyle = StyleSheet.create({
         height: 20
     },
 
+    loadingContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#FFFFFF"
+    },
+
     preferencesContainer: {
         paddingTop: 46,
         flexDirection: "row",
