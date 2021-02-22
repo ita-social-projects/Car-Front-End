@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
-    DevSettings,
     Image,
     Text,
     TouchableOpacity,
@@ -17,6 +16,7 @@ import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../auth/AuthContext";
 import SettingsStyle from "./SettingsStyle";
+import RNRestart from "react-native-restart";
 
 const Settings = () => {
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
@@ -141,7 +141,7 @@ const Settings = () => {
                                                     {
                                                         text: "Restart",
                                                         onPress: () => {
-                                                            DevSettings.reload();
+                                                            RNRestart.Restart();
                                                         }
                                                     }
                                                 ]

@@ -8,15 +8,12 @@ import AuthContext from "../../../auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 
 function AvatarLogoTitle() {
-    const { user } = useContext(AuthContext);
-    const [journeysCount, setJourneysCount] = useState(user?.journeyCount);
+    const [user, setUser] = useState(useContext(AuthContext).user);
 
     const userService = container.resolve(UserService);
 
     useEffect(() => {
-        userService
-            .getUser(Number(user?.id))
-            .then((res) => setJourneysCount(res.data?.journeyCount));
+        userService.getUser(Number(user?.id)).then((res) => setUser(res.data));
     });
 
     return (
@@ -31,9 +28,9 @@ function AvatarLogoTitle() {
                         {user?.position}
                     </Text>
                     <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
-                        {journeysCount === 1
+                        {user?.journeyCount === 1
                             ? "1 ride"
-                            : journeysCount + " rides"}
+                            : user?.journeyCount + " rides"}
                         , 2 badges
                     </Text>
                 </View>
