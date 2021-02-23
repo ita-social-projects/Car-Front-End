@@ -35,7 +35,7 @@ const Routes = () => {
         })().then(() =>
             (async () => loadStorageUser())().then(() => setLoading(false))
         );
-    }, []);
+    }, [0]);
 
     const navigator = user ? (
         <Stack.Screen

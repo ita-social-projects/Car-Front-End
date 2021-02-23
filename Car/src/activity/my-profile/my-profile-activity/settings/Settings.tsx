@@ -63,7 +63,7 @@ const Settings = () => {
                 }
             })
             .then(() => setLoading(false));
-    });
+    }, []);
 
     const image = isPhotoChanged ? (
         <Image source={{ uri: photo.uri }} style={SettingsStyle.avatar} />
