@@ -16,10 +16,10 @@ import BrandService from "../../../../../../api-service/brand-service/BrandServi
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
 import CarDto from "../../../../../../dto/CarDto";
-import Brand from "../../../../../../models/Brand";
-import Car from "../../../../../../models/Car";
-import Color from "../../../../../../models/Color";
-import Model from "../../../../../../models/Model";
+import CarBrand from "../../../../../../models/car/CarBrand";
+import CarViewModel from "../../../../../../models/car/CarViewModel";
+import CarColor from "../../../../../../models/car/CarColor";
+import CarModel from "../../../../../../models/car/CarModel";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
@@ -31,7 +31,7 @@ function EditCars(navigation: any) {
 
     const { user } = useContext(AuthContext);
 
-    const [car, setCar] = useState({} as Car);
+    const [car, setCar] = useState({} as CarViewModel);
 
     useEffect(() => {
         carService
@@ -42,10 +42,10 @@ function EditCars(navigation: any) {
             .catch((e) => console.log(e));
     }, []);
 
-    const [brands, setBrands] = useState({} as Brand[]);
-    const [models, setModels] = useState({} as Model[]);
+    const [brands, setBrands] = useState({} as CarBrand[]);
+    const [models, setModels] = useState({} as CarModel[]);
     const [colors] = useState<Array<{ value: string; label: string }>>(
-        Object.values(Color)
+        Object.values(CarColor)
             .filter((value) => isNaN(Number(value)))
             .map((item, index) => ({
                 value: index.toString(),

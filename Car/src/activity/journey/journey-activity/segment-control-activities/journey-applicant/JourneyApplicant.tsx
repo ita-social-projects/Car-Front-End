@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { container } from "tsyringe";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import User from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
-import * as navigation from "../../../../../components/navigation/Navigation";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyApplicant = ({ route }: any) => {
@@ -25,6 +22,9 @@ const JourneyApplicant = ({ route }: any) => {
             })
             .catch((e) => console.log(e));
     }, []);
+
+    const journeys =
+        user?.journeyCount === 1 ? "1 ride" : user?.journeyCount + " rides";
 
     return (
         <ScrollView style={JourneyApplicantStyle.mainContainer}>
@@ -50,27 +50,9 @@ const JourneyApplicant = ({ route }: any) => {
                             <Text
                                 style={JourneyApplicantStyle.userAdditionalData}
                             >
-                                123 rides, 2 badges
+                                {journeys}, 2 badges
                             </Text>
                         </View>
-                    </View>
-
-                    <View style={JourneyApplicantStyle.buttonContainer}>
-                        <TouchableOpacity
-                            style={JourneyApplicantStyle.button}
-                            onPress={() => {
-                                navigation.navigate("Messages", {});
-                            }}
-                        >
-                            <Ionicons
-                                name={"mail"}
-                                style={JourneyApplicantStyle.buttonText}
-                                color="#414045"
-                            />
-                            <Text style={JourneyApplicantStyle.buttonText}>
-                                Message
-                            </Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={JourneyApplicantStyle.separator} />
                     <View style={JourneyApplicantStyle.bottomContainer}>
@@ -94,6 +76,7 @@ const JourneyApplicant = ({ route }: any) => {
                             </Text>
                         </View>
                     </View>
+                    <View style={JourneyApplicantStyle.whitespaceBlock} />
                 </>
             )}
         </ScrollView>

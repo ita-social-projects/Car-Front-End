@@ -22,3 +22,33 @@ jobs:
         with:
           name: car-app-android.v1.0.${{ github.run_number }}.apk
           path: /home/runner/work/Car-Front-End/Car-Front-End/Car/android/app/build/outputs/apk/release/
+  ios_app: 
+  #this build is only for simulator!
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          cd Car
+          npm install
+      - name: Build app for using only in simulator
+        run: |
+             cd Car/ios
+             xcodebuild CODE_SIGNING_ALLOWED="NO" CODE_SIGN_IDENTITY="" -workspace Car.xcworkspace -scheme Car -sdk "iphonesimulator" -destination "generic/platform=iOS Simulator" -configuration Release archive -archivePath $PWD/build/car.xcarchive
+      #Than u will have devaccount or certificate for Ad-hoc deployment use this command instead of command which is above
+      # xcodebuild -workspace Car.xcworkspace -scheme Car -sdk "iphoneos" -destination "generic/platform=iOS" -configuration Release archive -archivePath $PWD/build/car.xcarchive
+      #After that use command for creating ipa from xcarchive (u will have to create exportOptions.plist file (read about it in the internet)):
+      # xcodebuild -exportArchive -archivePath $PWD/build/SoftServeCarMobile.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
+      #Since u can't open .xcarchive via terminal u have to change it's extension
+      - name: Simualtor app extraction from xcarchive
+        run: |
+           cd Car/ios/build/
+           mv car.xcarchive car
+      - name: Upload App
+        uses: actions/upload-artifact@v1
+        # then u will be able and create ipa file use next commands in this action instead of below commands
+        # name: car.v1.0.${{ github.run_number }}.ipa
+        # path: Car/ios/
+        with:
+          name: car-simulator-ios.v1.0.${{ github.run_number }}.app
+          path: Car/ios/build/car/Products/Applications/

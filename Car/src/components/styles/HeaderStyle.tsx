@@ -39,10 +39,6 @@ const HeaderStyle = StyleSheet.create({
         paddingRight: 12
     },
 
-    blackButtonText: {
-        color: "black"
-    },
-
     headerTitleStyle: {
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",

@@ -1,4 +1,4 @@
-enum Color {
+enum CarColor {
     White,
     Black,
     Grey,
@@ -12,4 +12,4 @@ enum Color {
     Orange
 }
 
-export default Color;
+export default CarColor;
