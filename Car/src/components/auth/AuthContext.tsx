@@ -8,9 +8,9 @@ const AuthContext = React.createContext<{
     loadStorageUser: () => void;
 }>({
     user: null,
-    login: () => {},
-    logout: () => {},
-    loadStorageUser: () => {}
+    login: () => null,
+    logout: () => null,
+    loadStorageUser: () => null
 });
 
 export default AuthContext;

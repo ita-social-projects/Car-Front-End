@@ -5,46 +5,43 @@ import AuthConfig from "./AuthConfig";
 const AuthManager = {
     signInAsync: async () => {
         const result = await authorize(AuthConfig);
-        await AsyncStorage.setItem("userToken", result.accessToken);
-        await AsyncStorage.setItem("idToken", result.idToken);
-        await AsyncStorage.setItem("refreshToken", result.refreshToken);
-        await AsyncStorage.setItem(
-            "expireTime",
-            result.accessTokenExpirationDate
-        );
+        AsyncStorage.setItem("userToken", result.accessToken);
+        AsyncStorage.setItem("idToken", result.idToken);
+        AsyncStorage.setItem("refreshToken", result.refreshToken);
+        AsyncStorage.setItem("expireTime", result.accessTokenExpirationDate);
     },
 
     signOutAsync: async () => {
-        await AsyncStorage.removeItem("userToken");
-        await AsyncStorage.removeItem("refreshToken");
-        await AsyncStorage.removeItem("expireTime");
-        await AsyncStorage.removeItem("idToken");
-        await AsyncStorage.removeItem("user");
-        await AsyncStorage.removeItem("APIToken");
+        AsyncStorage.removeItem("userToken");
+        AsyncStorage.removeItem("refreshToken");
+        AsyncStorage.removeItem("expireTime");
+        AsyncStorage.removeItem("idToken");
+        AsyncStorage.removeItem("user");
+        AsyncStorage.removeItem("APIToken");
     },
 
     getIdToken: async () => {
-        return await AsyncStorage.getItem("idToken");
+        return AsyncStorage.getItem("idToken");
     },
 
     getAccessTokenAsync: async () => {
-        return await AsyncStorage.getItem("userToken");
+        return AsyncStorage.getItem("userToken");
     },
 
     saveAPIToken: async (token: string) => {
-        await AsyncStorage.setItem("APIToken", token);
+        AsyncStorage.setItem("APIToken", token);
     },
 
     getAPIToken: async () => {
-        return await AsyncStorage.getItem("APIToken");
+        return AsyncStorage.getItem("APIToken");
     },
 
     getUser: async () => {
-        return await AsyncStorage.getItem("user");
+        return AsyncStorage.getItem("user");
     },
 
     setUser: async (user: any) => {
-        await AsyncStorage.setItem("user", user);
+        AsyncStorage.setItem("user", user);
     }
 };
 
