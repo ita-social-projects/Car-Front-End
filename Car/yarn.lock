@@ -9031,11 +9031,6 @@
     "loose-envify" "^1.4.0"
     "symbol-observable" "^1.2.0"
 
-"reflect-metadata@0.1.13":
-  "integrity" "sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg=="
-  "resolved" "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.13.tgz"
-  "version" "0.1.13"
-
 "regenerate-unicode-properties@^8.2.0":
   "integrity" "sha512-F9DjY1vKLo/tPePDycuH3dn9H1OTPIkVD9Kz4LODu+F2C75mgjAJ7x/gwy6ZcSNRAAkhNlJSOHRe8k3p+K9WhA=="
   "resolved" "https://registry.npmjs.org/regenerate-unicode-properties/-/regenerate-unicode-properties-8.2.0.tgz"
@@ -10373,13 +10368,6 @@
   "version" "3.17.1"
   dependencies:
     "tslib" "^1.8.1"
-
-"tsyringe@4.4.0":
-  "integrity" "sha512-SlMApe1lhIq546CDp7bF+IdF4RB6d+9C5T7B0AS0P/Bm+Qpizj/gEmZzvw9J/KlXPEt4qHTbi1TRvX3rCPSdTg=="
-  "resolved" "https://registry.npmjs.org/tsyringe/-/tsyringe-4.4.0.tgz"
-  "version" "4.4.0"
-  dependencies:
-    "tslib" "^1.9.3"
 
 "tunnel-agent@^0.6.0":
   "integrity" "sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0="

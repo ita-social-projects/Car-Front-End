@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
-import { container } from "tsyringe";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import User from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
@@ -9,13 +8,11 @@ import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyApplicant = ({ route }: any) => {
     const { userId } = route.params;
-    const userService = container.resolve(UserService);
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        userService
-            .getUser(userId)
+        UserService.getUser(userId)
             .then((res) => {
                 setUser(res.data);
                 setLoading(false);

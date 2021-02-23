@@ -1,7 +1,7 @@
 import * as signalR from "@microsoft/signalr";
 import React from "react";
 import { View, Button, Text, TextInput } from "react-native";
-import EnvironmentRoutes from "../../../../api-service/EnvironmentRoutes";
+import APIConfig from "../../../../api-service/APIConfig";
 import ChatState from "./ChatState";
 import ChatStyle from "./ChatStyle";
 
@@ -19,7 +19,7 @@ class Chat extends React.Component<ChatState, ChatState> {
 
     componentDidMount() {
         const hubConnection = new signalR.HubConnectionBuilder()
-            .withUrl(EnvironmentRoutes.chatUrl)
+            .withUrl(APIConfig.URL + "Chat/")
             .build();
         this.setState({ hubConnection }, () => {
             this.state.hubConnection.start().then(() => "Connection started!");

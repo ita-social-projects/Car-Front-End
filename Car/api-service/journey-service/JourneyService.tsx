@@ -1,59 +1,50 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
 import Journey from "../../models/Journey";
 import APIService from "../APIService";
-import EnvironmentRoutes from "../EnvironmentRoutes";
+import APIRoutes from "../APIRoutes";
+import APIConfig from "../APIConfig";
 
-@injectable()
-class JourneyService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getJourneyUrl();
 
-    routePrefix: string = "journeys";
+const JourneyService = {
+    getJourney: async (journeyId: number) => {
+        return await APIService.get<Journey>(route + journeyId);
+    },
 
-    getJourney(journeyId: number) {
-        return this.apiService.get<Journey>(this.routePrefix + "/" + journeyId);
-    }
+    getPastJourneys: async (userId: number) => {
+        return await APIService.get<Array<Journey>>(route + "past/" + userId);
+    },
 
-    getPastJourneys(userId: number) {
-        return this.apiService.get<Array<Journey>>(
-            this.routePrefix + "/past/" + userId
+    getUpcomingJourneys: async (userId: number) => {
+        return await APIService.get<Array<Journey>>(
+            route + "upcoming/" + userId
         );
-    }
+    },
 
-    getUpcomingJourneys(userId: number) {
-        return this.apiService.get<Array<Journey>>(
-            this.routePrefix + "/upcoming/" + userId
+    getScheduledJourneys: async (userId: number) => {
+        return await APIService.get<Array<Journey>>(
+            route + "scheduled/" + userId
         );
-    }
+    },
 
-    getScheduledJourneys(userId: number) {
-        return this.apiService.get<Array<Journey>>(
-            this.routePrefix + "/scheduled/" + userId
-        );
-    }
+    create: async (journey: Journey) => {
+        return await APIService.post<Journey>(route, journey);
+    },
 
-    create(journey: Journey) {
-        return this.apiService.post<Journey>(this.routePrefix, journey);
-    }
+    update: async (journey: Journey) => {
+        return await APIService.put<Journey>(route, journey);
+    },
 
-    update(journey: Journey) {
-        return this.apiService.put<Journey>(this.routePrefix, journey);
-    }
+    delete: async (journey: Journey) => {
+        return await APIService.delete<Journey>(route, journey);
+    },
 
-    delete(journey: Journey) {
-        return this.apiService.delete<Journey>(this.routePrefix, journey);
+    addParticipant: async (formData: FormData) => {
+        return await APIService.post<Journey>(route + "participant", {
+            method: "POST",
+            headers: { "Content-Type": "multipart/form-data" },
+            body: formData
+        });
     }
-
-    addParticipant(formData: FormData) {
-        return this.apiService.post<Journey>(
-            EnvironmentRoutes.apiUrl + this.routePrefix + "/participant",
-            {
-                method: "POST",
-                headers: { "Content-Type": "multipart/form-data" },
-                body: formData
-            }
-        );
-    }
-}
+};
 
 export default JourneyService;

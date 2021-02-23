@@ -84,9 +84,7 @@
         "react-redux": "7.2.2",
         "reanimated-bottom-sheet": "1.0.0-alpha.22",
         "redux": "4.0.5",
-        "reflect-metadata": "0.1.13",
-        "string-to-color": "^2.2.2",
-        "tsyringe": "4.4.0"
+        "string-to-color": "^2.2.2"
     },
     "devDependencies": {
         "@babel/core": "7.8.4",

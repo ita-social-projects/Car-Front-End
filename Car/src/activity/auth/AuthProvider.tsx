@@ -4,12 +4,8 @@ import AuthManager from "./AuthManager";
 import GraphManager from "./GraphManager";
 import * as navigation from "../../components/navigation/Navigation";
 import User from "../../../models/User";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import LoginService from "../../../api-service/login-service/LoginService";
 import AuthContext from "./AuthContext";
-
-const loginService = container.resolve(LoginService);
 
 const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);
@@ -45,7 +41,7 @@ const AuthProvider = ({ children }: any) => {
                             hireDate: new Date()
                         };
 
-                        const dbUser = await loginService.loginUser(tempUser);
+                        const dbUser = await LoginService.loginUser(tempUser);
 
                         if (!dbUser.data?.token) {
                             navigation.navigate("Login", {

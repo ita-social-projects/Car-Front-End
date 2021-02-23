@@ -12,6 +12,7 @@ const Exception = (props: any) => {
             : props.route.params.errorMessage == "Network error"
             ? "The site can’t be reached"
             : "Internal Server Error";
+
     const process401 = () => {
         return (
             <View>
@@ -27,6 +28,7 @@ const Exception = (props: any) => {
             </View>
         );
     };
+
     const processOtherErrors = () => {
         return (
             <View>
@@ -41,11 +43,13 @@ const Exception = (props: any) => {
             </View>
         );
     };
-    let action =
+
+    const action =
         props.route.params.errorMessage == 401 ||
         props.route.params.errorMessage == "Network error"
             ? process401
             : processOtherErrors;
+
     return (
         <View style={ExceptionStyle.container}>
             <Text style={ExceptionStyle.exceptionCode}>

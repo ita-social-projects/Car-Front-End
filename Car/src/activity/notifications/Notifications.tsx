@@ -1,8 +1,7 @@
 import * as signalR from "@microsoft/signalr";
 import React, { useContext, useState, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import { container } from "tsyringe";
-import EnvironmentRoutes from "../../../api-service/EnvironmentRoutes";
+import APIConfig from "../../../api-service/APIConfig";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Notification from "../../../models/Notification";
 import AuthContext from "../auth/AuthContext";
@@ -12,16 +11,18 @@ import NotificationStyle from "./NotificationStyle";
 const Notifications = (props: any) => {
     const { user } = useContext(AuthContext);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
-    const notificationsService = container.resolve(NotificationsService);
     const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(EnvironmentRoutes.notificationUrl)
+        .withUrl(APIConfig.URL + "Notification/")
         .build();
-    let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(1);
+
+    const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
+        1
+    );
+
     hubConnection.start();
 
     const refreshNotification = () => {
-        notificationsService
-            .getNotifications(Number(user?.id))
+        NotificationsService.getNotifications(Number(user?.id))
             .then((res) => {
                 if (res.data) {
                     setNotifications(res.data);
@@ -50,6 +51,7 @@ const Notifications = (props: any) => {
         <FlatList
             style={NotificationStyle.headerContainer}
             data={notifications}
+            keyExtractor={(item, key) => "" + key + item}
             renderItem={({ item }) => <NotificationComponent item={item} />}
         />
     );

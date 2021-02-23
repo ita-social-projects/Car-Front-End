@@ -13,8 +13,6 @@ import {
     ImagePickerResponse,
     launchImageLibrary
 } from "react-native-image-picker/src";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
@@ -107,13 +105,8 @@ function AddCars() {
 
     const [loading, setLoading] = useState(false);
 
-    const brandService = container.resolve(BrandService);
-    const modelService = container.resolve(ModelService);
-    const carService = container.resolve(CarService);
-
     useEffect(() => {
-        brandService
-            .getBrands()
+        BrandService.getBrands()
             .then((res) => {
                 setBrands(res.data);
             })
@@ -137,8 +130,7 @@ function AddCars() {
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        modelService
-            .getModelsByBrandId(Number(brand.value))
+        ModelService.getModelsByBrandId(Number(brand.value))
             .then((res) => {
                 setModels(res.data);
                 modelPickerController.selectItem(res.data[0]?.id.toString());
@@ -150,8 +142,8 @@ function AddCars() {
     const saveCarHandle = async (car: CreateCarViewModel) => {
         setLoading(true);
         console.log(car);
-        const newCar = await carService.add(car).then((res) => res.data);
-        await carService.uploadPhoto(newCar!.id, imageData);
+        const newCar = await CarService.add(car).then((res) => res.data);
+        await CarService.uploadPhoto(newCar!.id, imageData);
         setLoading(false);
     };
 
