@@ -13,7 +13,7 @@ import {
 } from "react-native-image-picker/src";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import SettingsStyle from "./SettingsStyle";
 import RNRestart from "react-native-restart";
 
@@ -89,7 +89,7 @@ const Settings = () => {
         !isPhotoExsists && !isPhotoChanged ? "Upload photo" : "Change photo";
 
     const saveChangesAsync = async () =>
-        await UserService.setAvatar(user!.id, imageData);
+        UserService.setAvatar(user!.id, imageData);
 
     return (
         <View style={SettingsStyle.container}>

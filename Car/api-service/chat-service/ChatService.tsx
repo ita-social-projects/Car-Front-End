@@ -6,7 +6,7 @@ const route = APIRoutes.getChatUrl();
 
 const ChatService = {
     getChat: async (id: number | undefined) => {
-        return await APIService.get<Chat>(route + id);
+        return APIService.get<Chat>(route + id);
     }
 };
 

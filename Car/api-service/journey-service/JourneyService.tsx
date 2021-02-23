@@ -6,39 +6,35 @@ const route = APIRoutes.getJourneyUrl();
 
 const JourneyService = {
     getJourney: async (journeyId: number) => {
-        return await APIService.get<Journey>(route + journeyId);
+        return APIService.get<Journey>(route + journeyId);
     },
 
     getPastJourneys: async (userId: number) => {
-        return await APIService.get<Array<Journey>>(route + "past/" + userId);
+        return APIService.get<Array<Journey>>(route + "past/" + userId);
     },
 
     getUpcomingJourneys: async (userId: number) => {
-        return await APIService.get<Array<Journey>>(
-            route + "upcoming/" + userId
-        );
+        return APIService.get<Array<Journey>>(route + "upcoming/" + userId);
     },
 
     getScheduledJourneys: async (userId: number) => {
-        return await APIService.get<Array<Journey>>(
-            route + "scheduled/" + userId
-        );
+        return APIService.get<Array<Journey>>(route + "scheduled/" + userId);
     },
 
     create: async (journey: Journey) => {
-        return await APIService.post<Journey>(route, journey);
+        return APIService.post<Journey>(route, journey);
     },
 
     update: async (journey: Journey) => {
-        return await APIService.put<Journey>(route, journey);
+        return APIService.put<Journey>(route, journey);
     },
 
     delete: async (journey: Journey) => {
-        return await APIService.delete<Journey>(route, journey);
+        return APIService.delete<Journey>(route, journey);
     },
 
     addParticipant: async (formData: FormData) => {
-        return await APIService.post<Journey>(route + "participant", {
+        return APIService.post<Journey>(route + "participant", {
             method: "POST",
             headers: { "Content-Type": "multipart/form-data" },
             body: formData

@@ -1,14 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect, useState } from "react";
-import AuthParamList from "../../activity/auth/AuthParamList";
-import AuthContext from "../../activity/auth/AuthContext";
-import Exception from "../../activity/exception/Exception";
+import AuthParamList from "../auth/AuthParamList";
+import AuthContext from "../auth/AuthContext";
 import Login from "../../activity/login/Login";
 import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
+import Exception from "../exception/Exception";
 
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;

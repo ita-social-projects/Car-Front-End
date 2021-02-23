@@ -32,7 +32,7 @@ const AuthManager = {
     },
 
     saveAPIToken: async (token: string) => {
-        await await AsyncStorage.setItem("APIToken", token);
+        await AsyncStorage.setItem("APIToken", token);
     },
 
     getAPIToken: async () => {
@@ -44,7 +44,7 @@ const AuthManager = {
     },
 
     setUser: async (user: any) => {
-        await await AsyncStorage.setItem("user", user);
+        await AsyncStorage.setItem("user", user);
     }
 };
 

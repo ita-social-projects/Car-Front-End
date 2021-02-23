@@ -3,7 +3,7 @@ import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
-import AuthContext from "../../../../activity/auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";

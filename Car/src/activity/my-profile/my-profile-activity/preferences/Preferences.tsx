@@ -4,7 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
 import UserPreferences from "../../../../../models/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOptionComponent from "./ChooseOptionComponent";
 import PreferencesStyle from "./PreferencesStyle";
 

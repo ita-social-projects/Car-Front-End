@@ -6,11 +6,11 @@ const route = APIRoutes.getModelUrl();
 
 const ModelService = {
     getModels: async () => {
-        return await APIService.get<CarModel[]>(route);
+        return APIService.get<CarModel[]>(route);
     },
 
     getModelsByBrandId: async (id: number) => {
-        return await APIService.get<CarModel[]>(route + "by-brand/" + id);
+        return APIService.get<CarModel[]>(route + "by-brand/" + id);
     }
 };
 

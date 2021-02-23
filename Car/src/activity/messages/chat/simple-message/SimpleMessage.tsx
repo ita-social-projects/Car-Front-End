@@ -10,7 +10,7 @@ import {
 import { SearchBar } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import SimpleMessageStyle from "./SimpleMessageStyle";
 
 const SimpleMessage = (props: any) => {

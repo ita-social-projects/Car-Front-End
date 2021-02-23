@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 
 function AvatarLogoTitle() {

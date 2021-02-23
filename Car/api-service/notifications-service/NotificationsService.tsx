@@ -6,25 +6,25 @@ const route = APIRoutes.getNotificationsUrl();
 
 const NotificationsService = {
     getNotification: async (id: number) => {
-        return await APIService.get<Notification>(route + id);
+        return APIService.get<Notification>(route + id);
     },
 
     getNotifications: async (userId: number) => {
-        return await APIService.get<Array<Notification>>(
+        return APIService.get<Array<Notification>>(
             route + "/notifications/" + userId
         );
     },
 
     getUnreadNotificationsNumber: async (userId: number) => {
-        return await APIService.get(route + "unreadNumber/" + userId);
+        return APIService.get(route + "unreadNumber/" + userId);
     },
 
     updateNotification: async (notification: Notification) => {
-        return await APIService.put<Notification>(route, notification);
+        return APIService.put<Notification>(route, notification);
     },
 
     markAsRead: async (notificationId: number) => {
-        return await APIService.put(route + notificationId);
+        return APIService.put(route + notificationId);
     }
 };
 

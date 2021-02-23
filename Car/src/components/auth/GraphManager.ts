@@ -18,7 +18,7 @@ const graphClient = Client.initWithMiddleware(clientOptions);
 
 const GraphManager = {
     getUserAsync: async () => {
-        return await graphClient
+        return graphClient
             .api("/me")
             .select(
                 "id,displayName,givenName,mail,position,mailboxSettings,userPrincipalName,officeLocation,surname"

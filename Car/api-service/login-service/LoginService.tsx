@@ -6,7 +6,7 @@ const route = APIRoutes.getLogindUrl();
 
 const LoginService = {
     loginUser: async (user: User) => {
-        return await APIService.post<User>(route, user);
+        return APIService.post<User>(route, user);
     }
 };
 

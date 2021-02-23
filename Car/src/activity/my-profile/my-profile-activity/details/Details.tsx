@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import DetailsStyle from "./DetailsStyle";
 
 const Details = () => {

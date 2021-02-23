@@ -6,11 +6,11 @@ const route = APIRoutes.getPreferencesUrl();
 
 const PreferencesService = {
     getUserPreferences: async (id: number) => {
-        return await APIService.get<UserPreferences>(route + id);
+        return APIService.get<UserPreferences>(route + id);
     },
 
     updateUserPreferences: async (preferences: UserPreferences) => {
-        return await APIService.put<UserPreferences>(route, preferences);
+        return APIService.put<UserPreferences>(route, preferences);
     }
 };
 

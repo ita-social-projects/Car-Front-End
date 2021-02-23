@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import AuthManager from "./AuthManager";
 import GraphManager from "./GraphManager";
-import * as navigation from "../../components/navigation/Navigation";
+import * as navigation from "../navigation/Navigation";
 import User from "../../../models/User";
 import LoginService from "../../../api-service/login-service/LoginService";
 import AuthContext from "./AuthContext";

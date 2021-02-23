@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import AuthManager from "../src/activity/auth/AuthManager";
+import AuthManager from "../src/components/auth/AuthManager";
 import * as navigation from "../src/components/navigation/Navigation";
 
 const Interceptor = axios.create({ timeout: 20000 });

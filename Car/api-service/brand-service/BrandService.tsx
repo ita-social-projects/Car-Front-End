@@ -6,7 +6,7 @@ const route = APIRoutes.getBrandUrl();
 
 const BrandService = {
     getBrands: async () => {
-        return await APIService.get<CarBrand[]>(route);
+        return APIService.get<CarBrand[]>(route);
     }
 };
 

@@ -21,7 +21,7 @@ import CarModel from "../../../../../../models/car/CarModel";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
-import AuthContext from "../../../../auth/AuthContext";
+import AuthContext from "../../../../../components/auth/AuthContext";
 import EditCarsStyle from "./EditCarsStyle";
 import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
 

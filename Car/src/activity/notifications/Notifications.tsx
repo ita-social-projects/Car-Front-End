@@ -4,7 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import APIConfig from "../../../api-service/APIConfig";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Notification from "../../../models/Notification";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../../components/auth/AuthContext";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
 
