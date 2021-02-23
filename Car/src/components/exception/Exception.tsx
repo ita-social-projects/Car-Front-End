@@ -6,12 +6,16 @@ import ExceptionStyle from "./ExceptionStyle";
 
 const Exception = (props: any) => {
     const { logout } = useContext(AuthContext);
+
+    const NetworkError =
+        props.route.params.errorMessage == "Network error"
+            ? "The site can’t be reached"
+            : "Internal Server Error";
+
     const userMessage =
         props.route.params.errorMessage == 401
             ? "You are unauthorized. You have to log in to the app."
-            : props.route.params.errorMessage == "Network error"
-            ? "The site can’t be reached"
-            : "Internal Server Error";
+            : NetworkError;
 
     const process401 = () => {
         return (
