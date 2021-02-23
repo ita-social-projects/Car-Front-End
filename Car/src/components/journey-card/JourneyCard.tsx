@@ -5,9 +5,10 @@ import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
+import Journey from "../../../models/Journey";
 
 const JourneyCard = (props: any) => {
-    const journey = props.journey;
+    const journey: Journey = props.journey;
 
     return (
         <View>
@@ -63,7 +64,7 @@ const JourneyCard = (props: any) => {
                                 </Text>
                                 <Text style={JourneyCardStyle.timeText}>
                                     {moment(
-                                        new Date(journey?.departureTime)
+                                        new Date(journey!?.departureTime)
                                     ).fromNow()}
                                 </Text>
                             </View>
@@ -73,21 +74,22 @@ const JourneyCard = (props: any) => {
                         <View style={JourneyCardStyle.firstStopBlock}>
                             <View style={JourneyCardStyle.stopCircleIcon} />
                             <Text style={JourneyCardStyle.stopsText}>
-                                {journey?.stops ===
+                                {journey!?.stops[0]!?.address!?.street ===
                                 undefined
                                     ? "Location A"
-                                    : journey?.stops[0]?.address?.street}
+                                    : journey!?.stops[0]!?.address!?.street}
                             </Text>
                         </View>
                         <View style={JourneyCardStyle.stopStickIcon} />
                         <View style={JourneyCardStyle.lastStopBlock}>
                             <View style={JourneyCardStyle.stopCircleIcon} />
                             <Text style={JourneyCardStyle.stopsText}>
-                                {journey?.stops ===
-                                undefined
+                                {journey!?.stops[journey!?.stops!?.length - 1]
+                                    ?.address?.street === undefined
                                     ? "Location B"
-                                    : journey?.stops[journey?.stops.length - 1]
-                                          ?.address?.street}
+                                    : journey?.stops[
+                                          journey!?.stops!?.length - 1
+                                      ]?.address!?.street}
                             </Text>
                         </View>
                     </View>

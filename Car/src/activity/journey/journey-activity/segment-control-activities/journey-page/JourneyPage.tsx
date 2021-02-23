@@ -50,7 +50,7 @@ const JourneyPage = ({ props }: any) => {
                             {currentJourney?.organizer?.position}
                         </Text>
                         <Text style={JourneyPageStyle.dateText}>
-                            {Moment(currentJourney?.departureTime).calendar()}
+                            {Moment(currentJourney?.departureTime).fromNow()}
                         </Text>
                     </View>
                 </View>

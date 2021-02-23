@@ -8,7 +8,7 @@ import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 
-export default function Cars(props: any) {
+const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
@@ -134,4 +134,6 @@ export default function Cars(props: any) {
             </View>
         </ScrollView>
     );
-}
+};
+
+export default Cars;

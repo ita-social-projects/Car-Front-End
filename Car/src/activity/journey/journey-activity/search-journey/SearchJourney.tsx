@@ -15,13 +15,13 @@ function SearchJourney() {
     console.log(journeys);
 
     useEffect(() => {
-        JourneyService.getJourney(1)
+        JourneyService.getJourney(2)
             .then((res1) => {
-                JourneyService.getJourney(5).then((res2) => {
-                    JourneyService.getJourney(7).then((res3) => {
-                        JourneyService.getJourney(8).then((res4) => {
-                            JourneyService.getJourney(9).then((res5) => {
-                                JourneyService.getJourney(11).then((res6) => {
+                JourneyService.getJourney(2).then((res2) => {
+                    JourneyService.getJourney(2).then((res3) => {
+                        JourneyService.getJourney(2).then((res4) => {
+                            JourneyService.getJourney(2).then((res5) => {
+                                JourneyService.getJourney(2).then((res6) => {
                                     setJourneys([
                                         res1.data,
                                         res2.data,
@@ -33,7 +33,7 @@ function SearchJourney() {
                                         res2.data,
                                         res3.data,
                                         res4.data,
-                                        res5.data,
+                                        res5.data
                                     ]);
                                     setLoading(false);
                                 });

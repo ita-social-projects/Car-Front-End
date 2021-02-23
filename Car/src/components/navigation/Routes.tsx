@@ -11,6 +11,7 @@ import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
 
 const Stack = createStackNavigator<AuthParamList>();
+const MILISECONDS_IN_MONTH = 2629800000;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
@@ -24,7 +25,7 @@ const Routes = () => {
             );
             if (
                 Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
-                2629800000
+                MILISECONDS_IN_MONTH
             ) {
                 await AsyncStorage.setItem(
                     "lastLogin",
