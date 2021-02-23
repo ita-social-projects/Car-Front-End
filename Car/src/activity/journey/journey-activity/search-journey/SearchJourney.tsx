@@ -12,6 +12,8 @@ function SearchJourney() {
     const [journeys, setJourneys] = useState<Array<Journey>>([]);
     const [isLoading, setLoading] = useState(true);
 
+    console.log(journeys);
+
     useEffect(() => {
         JourneyService.getJourney(1)
             .then((res1) => {
@@ -31,7 +33,7 @@ function SearchJourney() {
                                         res2.data,
                                         res3.data,
                                         res4.data,
-                                        res5.data
+                                        res5.data,
                                     ]);
                                     setLoading(false);
                                 });

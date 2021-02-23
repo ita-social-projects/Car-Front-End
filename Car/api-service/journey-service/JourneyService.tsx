@@ -1,7 +1,6 @@
 import Journey from "../../models/Journey";
 import APIService from "../APIService";
 import APIRoutes from "../APIRoutes";
-import APIConfig from "../APIConfig";
 
 const route = APIRoutes.getJourneyUrl();
 
