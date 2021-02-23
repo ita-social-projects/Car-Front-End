@@ -12,8 +12,6 @@ function SearchJourney() {
     const [journeys, setJourneys] = useState<Array<Journey>>([]);
     const [isLoading, setLoading] = useState(true);
 
-    console.log(journeys);
-
     useEffect(() => {
         JourneyService.getJourney(2)
             .then((res1) => {
