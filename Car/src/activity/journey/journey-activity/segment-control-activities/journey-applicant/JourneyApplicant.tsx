@@ -24,7 +24,7 @@ const JourneyApplicant = ({ route }: any) => {
         user?.journeyCount === 1 ? "1 ride" : user?.journeyCount + " rides";
 
     return (
-        <ScrollView style={JourneyApplicantStyle.mainContainer}>
+        <View style={JourneyApplicantStyle.mainContainer}>
             {isLoading ? (
                 <Indicator
                     color="#414045"
@@ -32,7 +32,7 @@ const JourneyApplicant = ({ route }: any) => {
                     text="Loading information..."
                 />
             ) : (
-                <>
+                <ScrollView>
                     <View style={JourneyApplicantStyle.topContainer}>
                         <AvatarLogo user={user} size={49} />
                         <View style={JourneyApplicantStyle.userInformation}>
@@ -74,9 +74,9 @@ const JourneyApplicant = ({ route }: any) => {
                         </View>
                     </View>
                     <View style={JourneyApplicantStyle.whitespaceBlock} />
-                </>
+                </ScrollView>
             )}
-        </ScrollView>
+        </View>
     );
 };
 
