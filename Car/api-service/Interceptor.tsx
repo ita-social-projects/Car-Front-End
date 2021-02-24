@@ -1,5 +1,5 @@
 import axios from "axios";
-import AlertWindow from "../src/components/alert-window/AlertWindow";
+import ErrorAlert from "../src/components/error-alert/ErrorAlert";
 import AuthManager from "../src/components/auth/AuthManager";
 
 const Interceptor = axios.create({ timeout: 20000 });
@@ -25,7 +25,7 @@ Interceptor.interceptors.request.use(
     },
 
     (error: any) => {
-        AlertWindow(error.message);
+        ErrorAlert(error.message);
 
         return Promise.reject(error);
     }
@@ -43,7 +43,7 @@ Interceptor.interceptors.response.use(
             errorCode = error.response.status;
         }
         
-        AlertWindow(errorCode);
+        ErrorAlert(errorCode);
 
         return Promise.reject(error);
     }

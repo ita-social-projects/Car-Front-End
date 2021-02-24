@@ -2,7 +2,7 @@ import { Alert } from "react-native";
 
 let IsAlertShowing = false;
 
-const AlertWindow = (message: string, func?: any) => {
+const ErrorAlert = (message: string, func?: any) => {
     if (!IsAlertShowing) {
         IsAlertShowing = true;
 
@@ -17,4 +17,4 @@ const AlertWindow = (message: string, func?: any) => {
         }]);
     }
 }
-export default AlertWindow;
+export default ErrorAlert;
