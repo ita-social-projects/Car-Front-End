@@ -3,7 +3,7 @@ import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/Journey";
 import AuthContext from "../../components/auth/AuthContext";
-import JourneyCardList from "../../components/journey-card/JourneyCardsList";
+import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStyle from "./JourneyStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
