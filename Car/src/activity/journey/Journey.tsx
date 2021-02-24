@@ -3,7 +3,8 @@ import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/Journey";
 import AuthContext from "../../components/auth/AuthContext";
-import JourneyCard from "../../components/journey-card/JourneyCard";
+//import JourneyCard from "../../components/journey-card/JourneyCard";
+import JourneyCardList from "../../components/journey-card/JourneyCardsList";
 import JourneyStyle from "./JourneyStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
@@ -32,17 +33,17 @@ function JourneyStartPage(props: any) {
     );
 
     useEffect(() => {
-        JourneyService.getPastJourneys(Number(user?.id))
+        JourneyService.getUpcomingJourneys(Number(user?.id))
             .then((res) => {
-                setPastJourneys(res.data);
+                setUpcomingJourneys(res.data);
             })
             .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     useEffect(() => {
-        JourneyService.getUpcomingJourneys(Number(user?.id))
+        JourneyService.getPastJourneys(Number(user?.id))
             .then((res) => {
-                setUpcomingJourneys(res.data);
+                setPastJourneys(res.data);
             })
             .catch((e) => Alert.alert("Error", e.message));
     }, []);
@@ -55,41 +56,41 @@ function JourneyStartPage(props: any) {
             .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
-    const PastJourneys = () => {
-        return (
-            <View>
-                {pastJourneys.map((item) => (
-                    <View key={item?.id}>
-                        <JourneyCard journey={item} />
-                    </View>
-                ))}
-            </View>
-        );
-    };
+    // const PastJourneys = () => {
+    //     return (
+    //         <View>
+    //             {pastJourneys.map((item) => (
+    //                 <View key={item?.id}>
+    //                     <JourneyCard journey={item} />
+    //                 </View>
+    //             ))}
+    //         </View>
+    //     );
+    // };
 
-    const ScheduledJourneys = () => {
-        return (
-            <View>
-                {scheduledJourneys.map((item) => (
-                    <View key={item?.id}>
-                        <JourneyCard journey={item} />
-                    </View>
-                ))}
-            </View>
-        );
-    };
+    // const ScheduledJourneys = () => {
+    //     return (
+    //         <View>
+    //             {scheduledJourneys.map((item) => (
+    //                 <View key={item?.id}>
+    //                     <JourneyCard journey={item} />
+    //                 </View>
+    //             ))}
+    //         </View>
+    //     );
+    // };
 
-    const UpcomingJourneys = () => {
-        return (
-            <View>
-                {upcomingJourneys.map((item) => (
-                    <View key={item?.id}>
-                        <JourneyCard journey={item} />
-                    </View>
-                ))}
-            </View>
-        );
-    };
+    // const UpcomingJourneys = () => {
+    //     return (
+    //         <View>
+    //             {upcomingJourneys.map((item) => (
+    //                 <View key={item?.id}>
+    //                     <JourneyCard journey={item} />
+    //                 </View>
+    //             ))}
+    //         </View>
+    //     );
+    // };
 
     return (
         <ScrollView style={JourneyStyle.page}>
@@ -197,32 +198,32 @@ function JourneyStartPage(props: any) {
                     {upcomingJourneys.length > 0 && (
                         <Text style={JourneyStyle.tabTextStyle}>Upcoming</Text>
                     )}
-                    {<UpcomingJourneys />}
+                    {<JourneyCardList journey={upcomingJourneys} />}
 
                     {pastJourneys.length > 0 && (
                         <Text style={JourneyStyle.tabTextStyle}>Past</Text>
                     )}
-                    {<PastJourneys />}
+                    {<JourneyCardList journey={pastJourneys} />}
 
                     {scheduledJourneys.length > 0 && (
                         <Text style={JourneyStyle.tabTextStyle}>Scheduled</Text>
                     )}
-                    {<ScheduledJourneys />}
+                    {<JourneyCardList journey={scheduledJourneys} />}
                 </View>
             )}
             {selectedIndex === 1 && (
                 <View style={JourneyStyle.tabStyle}>
-                    <PastJourneys />
+                    {<JourneyCardList journey={pastJourneys} />}
                 </View>
             )}
             {selectedIndex === 2 && (
                 <View style={JourneyStyle.tabStyle}>
-                    <UpcomingJourneys />
+                    {<JourneyCardList journey={upcomingJourneys} />}
                 </View>
             )}
             {selectedIndex === 3 && (
                 <View style={JourneyStyle.tabStyle}>
-                    <ScheduledJourneys />
+                    {<JourneyCardList journey={scheduledJourneys} />}
                 </View>
             )}
         </ScrollView>
