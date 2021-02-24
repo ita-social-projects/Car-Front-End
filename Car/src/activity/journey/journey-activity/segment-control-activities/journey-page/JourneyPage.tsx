@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, FlatList } from "react-native";
-import { container } from "tsyringe";
+import { Text, TouchableOpacity, View, FlatList, Alert } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../../models/Stop";
 import StopType from "../../../../../../models/StopType";
@@ -17,20 +16,18 @@ import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyPage = ({ props }: any) => {
-    const journeyService = container.resolve(JourneyService);
     const [currentJourney, setJourney] = useState({} as Journey);
     const navigation = useNavigation();
     const { journeyId } = props.route.params;
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        journeyService
-            .getJourney(journeyId)
+        JourneyService.getJourney(journeyId)
             .then((res) => {
                 setJourney(res.data);
                 setLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const Separator = () => {

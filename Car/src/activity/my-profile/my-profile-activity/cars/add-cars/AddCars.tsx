@@ -13,15 +13,13 @@ import {
     ImagePickerResponse,
     launchImageLibrary
 } from "react-native-image-picker/src";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
 import CarBrand from "../../../../../../models/car/CarBrand";
 import CarColor from "../../../../../../models/car/CarColor";
 import CarModel from "../../../../../../models/car/CarModel";
-import AuthContext from "../../../../auth/AuthContext";
+import AuthContext from "../../../../../components/auth/AuthContext";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
@@ -107,17 +105,12 @@ function AddCars() {
 
     const [loading, setLoading] = useState(false);
 
-    const brandService = container.resolve(BrandService);
-    const modelService = container.resolve(ModelService);
-    const carService = container.resolve(CarService);
-
     useEffect(() => {
-        brandService
-            .getBrands()
+        BrandService.getBrands()
             .then((res) => {
                 setBrands(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -137,21 +130,20 @@ function AddCars() {
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        modelService
-            .getModelsByBrandId(Number(brand.value))
+        ModelService.getModelsByBrandId(Number(brand.value))
             .then((res) => {
                 setModels(res.data);
                 modelPickerController.selectItem(res.data[0]?.id.toString());
                 modelPickerController.open();
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert(JSON.stringify(e)));
     };
 
     const saveCarHandle = async (car: CreateCarViewModel) => {
         setLoading(true);
         console.log(car);
-        const newCar = await carService.add(car).then((res) => res.data);
-        await carService.uploadPhoto(newCar!.id, imageData);
+        const newCar = await CarService.add(car).then((res) => res.data);
+        await CarService.uploadPhoto(newCar!.id, imageData);
         setLoading(false);
     };
 

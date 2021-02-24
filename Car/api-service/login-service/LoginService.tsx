@@ -1,15 +1,13 @@
-import { injectable } from "tsyringe";
 import User from "../../models/User";
+import APIRoutes from "../APIRoutes";
 import APIService from "../APIService";
 
-@injectable()
-class LoginService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getLogindUrl();
 
-    routePrefix: string = "login";
-
-    async loginUser(user: User) {
-        return await this.apiService.post<User>(this.routePrefix, user);
+const LoginService = {
+    loginUser: async (user: User) => {
+        return APIService.post<User>(route, user);
     }
-}
+};
+
 export default LoginService;

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+    Alert,
     FlatList,
     Image,
     SafeAreaView,
@@ -9,26 +10,25 @@ import {
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import SimpleMessageStyle from "./SimpleMessageStyle";
 
 const SimpleMessage = (props: any) => {
-    const chatService = container.resolve(ChatService);
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        chatService.getChat(user?.id).then((res) => {
-            const chats = res.data;
-            console.log(chats);
-            setFilteredDataSource(chats);
-            setMasterDataSource(chats);
-        });
+        ChatService.getChat(user?.id)
+            .then((res) => {
+                const chats = res.data;
+                console.log(chats);
+                setFilteredDataSource(chats);
+                setMasterDataSource(chats);
+            })
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const setSearchFilter = (text: any) => {

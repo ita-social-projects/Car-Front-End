@@ -1,17 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import AuthManager from "../src/activity/auth/AuthManager";
-import * as navigation from "../src/components/navigation/Navigation";
+import { Alert } from "react-native";
+import AuthManager from "../src/components/auth/AuthManager";
 
 const Interceptor = axios.create({ timeout: 20000 });
 
 Interceptor.interceptors.request.use(
-    async function (req: {
-        headers: {
-            Accept: string;
-            "Content-Type": string;
-            Authorization?: string;
-        };
-    }) {
+    async (req: any) => {
         const token = await AuthManager.getAPIToken();
         if (token) {
             req.headers = {
@@ -41,7 +35,7 @@ Interceptor.interceptors.response.use(
         if (error.response) {
             errorCode = error.response.status;
         }
-        navigation.navigate("Exception", { errorMessage: errorCode });
+        Alert.alert("Error", errorCode);
         return Promise.reject(error);
     }
 );

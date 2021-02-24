@@ -1,24 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View } from "react-native";
-import { container } from "tsyringe";
+import { Alert, View } from "react-native";
 import JourneyService from "../../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../../models/Journey";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
-import AuthContext from "../../../../../auth/AuthContext";
+import AuthContext from "../../../../../../components/auth/AuthContext";
 
 const ScheduledJourneys = () => {
     const { user } = useContext(AuthContext);
     const [scheduledJourneys, setJourneys] = useState<Array<Journey>>([]);
 
-    const journeyService = container.resolve(JourneyService);
-
     useEffect(() => {
-        journeyService
-            .getScheduledJourneys(Number(user?.id))
+        JourneyService.getScheduledJourneys(Number(user?.id))
             .then((res) => {
                 setJourneys(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     return (

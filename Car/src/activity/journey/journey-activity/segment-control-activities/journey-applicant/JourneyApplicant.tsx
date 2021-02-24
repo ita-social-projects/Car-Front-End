@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
-import { container } from "tsyringe";
+import { Alert, ScrollView, Text, View } from "react-native";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import User from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
@@ -9,25 +8,23 @@ import Indicator from "../../../../../components/activity-indicator/Indicator";
 
 const JourneyApplicant = ({ route }: any) => {
     const { userId } = route.params;
-    const userService = container.resolve(UserService);
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        userService
-            .getUser(userId)
+        UserService.getUser(userId)
             .then((res) => {
                 setUser(res.data);
                 setLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const journeys =
         user?.journeyCount === 1 ? "1 ride" : user?.journeyCount + " rides";
 
     return (
-        <ScrollView style={JourneyApplicantStyle.mainContainer}>
+        <View style={JourneyApplicantStyle.mainContainer}>
             {isLoading ? (
                 <Indicator
                     color="#414045"
@@ -35,7 +32,7 @@ const JourneyApplicant = ({ route }: any) => {
                     text="Loading information..."
                 />
             ) : (
-                <>
+                <ScrollView>
                     <View style={JourneyApplicantStyle.topContainer}>
                         <AvatarLogo user={user} size={49} />
                         <View style={JourneyApplicantStyle.userInformation}>
@@ -77,9 +74,9 @@ const JourneyApplicant = ({ route }: any) => {
                         </View>
                     </View>
                     <View style={JourneyApplicantStyle.whitespaceBlock} />
-                </>
+                </ScrollView>
             )}
-        </ScrollView>
+        </View>
     );
 };
 

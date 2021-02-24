@@ -21,7 +21,7 @@ const BadSearchResult = () => {
                 <TouchableOpacity
                     style={BadSearchResultStyle.button}
                     onPress={() => {
-                        navigation.navigate("Search Journey", {});
+                        navigation.navigate("Search Journey");
                     }}
                 >
                     <Text style={BadSearchResultStyle.buttonText}>

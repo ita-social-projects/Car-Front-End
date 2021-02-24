@@ -1,50 +1,35 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
 import CreateCarViewModel from "../../models/car/CreateCarViewModel";
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
-import EnvironmentRoutes from "../EnvironmentRoutes";
+import APIRoutes from "../APIRoutes";
 
-@injectable()
-class CarService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getCarUrl();
 
-    routePrefix: string = "cars";
+const CarService = {
+    uploadPhoto: async (id: number, formData: FormData) => {
+        return APIService.put(route + id + "/photo", formData);
+    },
 
-    uploadPhoto(id: number, formData: FormData) {
-        return fetch(
-            EnvironmentRoutes.apiUrl + this.routePrefix + "/" + id + "/photo",
-            {
-                method: "PUT",
-                headers: { "Content-Type": "multipart/form-data" },
-                body: formData
-            }
-        );
+    add: async (car: CreateCarViewModel) => {
+        return APIService.post<CreateCarViewModel>(route, car);
+    },
+
+    update: async (car: UpdateCarViewModel) => {
+        return APIService.put<UpdateCarViewModel>(route, car);
+    },
+
+    getById: async (id: number) => {
+        return APIService.get<CarViewModel>(route + id);
+    },
+
+    getAll: async (id: number) => {
+        return APIService.get<Array<CarViewModel>>(route + "by-user/" + id);
+    },
+
+    getAvatar: async (id: number) => {
+        return APIService.get<string>(route + id + "/photo");
     }
+};
 
-    add(car: CreateCarViewModel) {
-        return this.apiService.post<CreateCarViewModel>(this.routePrefix, car);
-    }
-
-    update(car: UpdateCarViewModel) {
-        return this.apiService.put<UpdateCarViewModel>(this.routePrefix, car);
-    }
-
-    getById(id: number) {
-        return this.apiService.get<CarViewModel>(this.routePrefix + "/" + id);
-    }
-
-    getAll(id: number) {
-        return this.apiService.get<Array<CarViewModel>>(
-            this.routePrefix + "/by-user/" + id
-        );
-    }
-
-    getAvatar(id: number) {
-        return this.apiService.get<string>(
-            this.routePrefix + "/" + id + "/photo"
-        );
-    }
-}
 export default CarService;
