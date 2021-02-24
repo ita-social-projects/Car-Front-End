@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Alert, Text, TextInput, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
 import UserPreferences from "../../../../../models/UserPreferences";
@@ -43,7 +43,8 @@ export default function Preferences(props: any) {
                     setUserPreferences(res.data);
                 }
             })
-            .then(() => setLoading(false));
+            .then(() => setLoading(false))
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     useEffect(() => {

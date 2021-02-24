@@ -110,7 +110,7 @@ function AddCars() {
             .then((res) => {
                 setBrands(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -136,7 +136,7 @@ function AddCars() {
                 modelPickerController.selectItem(res.data[0]?.id.toString());
                 modelPickerController.open();
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert(JSON.stringify(e)));
     };
 
     const saveCarHandle = async (car: CreateCarViewModel) => {

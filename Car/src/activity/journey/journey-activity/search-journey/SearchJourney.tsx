@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Alert, Button, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
@@ -40,7 +40,7 @@ function SearchJourney() {
                     });
                 });
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     return (
@@ -133,7 +133,7 @@ function SearchJourney() {
                             color="#000000"
                             title="BAD"
                             onPress={() => {
-                                navigation.navigate("Bad Search Result", {});
+                                navigation.navigate("Bad Search Result");
                             }}
                         />
                     </View>

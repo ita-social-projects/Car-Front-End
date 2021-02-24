@@ -204,7 +204,7 @@ const JourneyTabs = () => {
                             <TouchableOpacity
                                 style={HeaderStyle.requestButton}
                                 onPress={() => {
-                                    navigation.navigate("Search Journey", {});
+                                    navigation.navigate("Search Journey");
                                 }}
                             >
                                 <Text style={HeaderStyle.buttonText}>
@@ -245,7 +245,7 @@ const JourneyTabs = () => {
                             <TouchableOpacity
                                 style={HeaderStyle.requestButton}
                                 onPress={() => {
-                                    navigation.navigate("Search Journey", {});
+                                    navigation.navigate("Search Journey");
                                 }}
                             >
                                 <Text style={HeaderStyle.buttonText}>

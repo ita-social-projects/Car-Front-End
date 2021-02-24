@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import JourneyService from "../../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../../models/Journey";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
@@ -14,7 +14,7 @@ const UpcomingJourneys = () => {
             .then((res) => {
                 setJourneys(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     return (

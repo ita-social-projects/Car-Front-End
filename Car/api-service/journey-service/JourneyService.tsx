@@ -34,11 +34,7 @@ const JourneyService = {
     },
 
     addParticipant: async (formData: FormData) => {
-        return APIService.post<Journey>(route + "participant", {
-            method: "POST",
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        });
+        return APIService.post<Journey>(route + "participant", formData);
     }
 };
 

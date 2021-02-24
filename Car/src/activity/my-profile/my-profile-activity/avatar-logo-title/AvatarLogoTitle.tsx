@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import AuthContext from "../../../../components/auth/AuthContext";
@@ -9,7 +9,9 @@ function AvatarLogoTitle() {
     const [user, setUser] = useState(useContext(AuthContext).user);
 
     useEffect(() => {
-        UserService.getUser(Number(user?.id)).then((res) => setUser(res.data));
+        UserService.getUser(Number(user?.id))
+            .then((res) => setUser(res.data))
+            .catch((e) => Alert.alert("Error", e.message));
     });
 
     return (

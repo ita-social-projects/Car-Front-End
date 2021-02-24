@@ -14,7 +14,7 @@ import AvatarLogo from "../avatar-logo/AvatarLogo";
 const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
-    let [modalVisible, setModalVisible] = useState(props.visible);
+    const [modalVisible, setModalVisible] = useState(props.visible);
 
     return (
         <View>
