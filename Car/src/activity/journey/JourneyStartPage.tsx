@@ -43,7 +43,7 @@ function JourneyStartPage(props: any) {
         JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
             setScheduledJourneys(res2.data)
         );
-    }, [0]);    
+    }, [0]);
 
     return (
         <ScrollView style={JourneyStartPageStyle.page}>
@@ -83,43 +83,78 @@ function JourneyStartPage(props: any) {
                     onPress={() => {
                         setSelectedIndex(0);
                         setAllButtonStyle(JourneyStartPageStyle.activeButton);
-                        setPastButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setUpcomingButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setScheduledButtonStyle(JourneyStartPageStyle.unactiveButton);
+                        setPastButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
+                        setUpcomingButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
+                        setScheduledButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
                     }}
                 >
-                    <Text style={[JourneyStartPageStyle.buttonText, allButtonStyle]}>
+                    <Text
+                        style={[
+                            JourneyStartPageStyle.buttonText,
+                            allButtonStyle
+                        ]}
+                    >
                         All
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={1}
-                    style={[JourneyStartPageStyle.pastJourneys, pastButtonStyle]}
+                    style={[
+                        JourneyStartPageStyle.pastJourneys,
+                        pastButtonStyle
+                    ]}
                     onPress={() => {
                         setSelectedIndex(1);
                         setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
                         setPastButtonStyle(JourneyStartPageStyle.activeButton);
-                        setUpcomingButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setScheduledButtonStyle(JourneyStartPageStyle.unactiveButton);
+                        setUpcomingButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
+                        setScheduledButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
                     }}
                 >
-                    <Text style={[JourneyStartPageStyle.buttonText, pastButtonStyle]}>
+                    <Text
+                        style={[
+                            JourneyStartPageStyle.buttonText,
+                            pastButtonStyle
+                        ]}
+                    >
                         Past
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={1}
-                    style={[JourneyStartPageStyle.upcomingJourneys, upcomingButtonStyle]}
+                    style={[
+                        JourneyStartPageStyle.upcomingJourneys,
+                        upcomingButtonStyle
+                    ]}
                     onPress={() => {
                         setSelectedIndex(2);
                         setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setPastButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setUpcomingButtonStyle(JourneyStartPageStyle.activeButton);
-                        setScheduledButtonStyle(JourneyStartPageStyle.unactiveButton);
+                        setPastButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
+                        setUpcomingButtonStyle(
+                            JourneyStartPageStyle.activeButton
+                        );
+                        setScheduledButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
                     }}
                 >
                     <Text
-                        style={[JourneyStartPageStyle.buttonText, upcomingButtonStyle]}
+                        style={[
+                            JourneyStartPageStyle.buttonText,
+                            upcomingButtonStyle
+                        ]}
                     >
                         Upcoming
                     </Text>
@@ -133,13 +168,22 @@ function JourneyStartPage(props: any) {
                     onPress={() => {
                         setSelectedIndex(3);
                         setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setPastButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setUpcomingButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setScheduledButtonStyle(JourneyStartPageStyle.activeButton);
+                        setPastButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
+                        setUpcomingButtonStyle(
+                            JourneyStartPageStyle.unactiveButton
+                        );
+                        setScheduledButtonStyle(
+                            JourneyStartPageStyle.activeButton
+                        );
                     }}
                 >
                     <Text
-                        style={[JourneyStartPageStyle.buttonText, scheduledButtonStyle]}
+                        style={[
+                            JourneyStartPageStyle.buttonText,
+                            scheduledButtonStyle
+                        ]}
                     >
                         Scheduled
                     </Text>
@@ -149,17 +193,23 @@ function JourneyStartPage(props: any) {
             {selectedIndex === 0 && (
                 <View style={JourneyStartPageStyle.tabStyle}>
                     {upcomingJourneys.length > 0 && (
-                        <Text style={JourneyStartPageStyle.tabTextStyle}>Upcoming</Text>
+                        <Text style={JourneyStartPageStyle.tabTextStyle}>
+                            Upcoming
+                        </Text>
                     )}
                     {<JourneyCardList journey={upcomingJourneys} />}
 
                     {pastJourneys.length > 0 && (
-                        <Text style={JourneyStartPageStyle.tabTextStyle}>Past</Text>
+                        <Text style={JourneyStartPageStyle.tabTextStyle}>
+                            Past
+                        </Text>
                     )}
                     {<JourneyCardList journey={pastJourneys} />}
 
                     {scheduledJourneys.length > 0 && (
-                        <Text style={JourneyStartPageStyle.tabTextStyle}>Scheduled</Text>
+                        <Text style={JourneyStartPageStyle.tabTextStyle}>
+                            Scheduled
+                        </Text>
                     )}
                     {<JourneyCardList journey={scheduledJourneys} />}
                 </View>

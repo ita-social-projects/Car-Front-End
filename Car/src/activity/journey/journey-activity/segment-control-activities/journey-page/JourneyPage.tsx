@@ -22,11 +22,10 @@ const JourneyPage = ({ props }: any) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        JourneyService.getJourney(journeyId)
-            .then((res) => {
-                setJourney(res.data);
-                setLoading(false);
-            });
+        JourneyService.getJourney(journeyId).then((res) => {
+            setJourney(res.data);
+            setLoading(false);
+        });
     }, []);
 
     const Separator = () => {
