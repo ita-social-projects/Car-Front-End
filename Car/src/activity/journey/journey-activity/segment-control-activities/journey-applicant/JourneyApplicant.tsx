@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import User from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
@@ -12,13 +12,10 @@ const JourneyApplicant = ({ route }: any) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        UserService.getUser(userId)
-            .then((res) => {
-                setUser(res.data);
-                setLoading(false);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
-    }, []);
+        UserService.getUser(userId).then((res) =>
+            (async () => setUser(res.data))().then(() => setLoading(false))
+        );
+    }, [0]);
 
     const journeys =
         user?.journeyCount === 1 ? "1 ride" : user?.journeyCount + " rides";

@@ -11,7 +11,7 @@ import JourneyApplicant from "../journey-activity/segment-control-activities/jou
 import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/segment-control-activities/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/segment-control-activities/search-results/ok-search-result/OkSearchResult";
-import JourneyStyle from "../JourneyStyle";
+import JourneyStyle from "../JourneyStartPageStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
 import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
-const JourneyStyle = StyleSheet.create({
+const JourneyStartPageStyle = StyleSheet.create({
     page: {
         backgroundColor: "white",
         paddingHorizontal: 15
@@ -95,4 +95,4 @@ const JourneyStyle = StyleSheet.create({
     }
 });
 
-export default JourneyStyle;
+export default JourneyStartPageStyle;

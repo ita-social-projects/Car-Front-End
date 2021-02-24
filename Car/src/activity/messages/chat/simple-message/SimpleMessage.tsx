@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-    Alert,
     FlatList,
     Image,
     SafeAreaView,
@@ -21,14 +20,12 @@ const SimpleMessage = (props: any) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        ChatService.getChat(user?.id)
-            .then((res) => {
-                const chats = res.data;
-                console.log(chats);
-                setFilteredDataSource(chats);
-                setMasterDataSource(chats);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        ChatService.getChat(user?.id).then((res) => {
+            const chats = res.data;
+            console.log(chats);
+            setFilteredDataSource(chats);
+            setMasterDataSource(chats);
+        });
     }, []);
 
     const setSearchFilter = (text: any) => {

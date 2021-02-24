@@ -106,11 +106,9 @@ function AddCars() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        BrandService.getBrands()
-            .then((res) => {
-                setBrands(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        BrandService.getBrands().then((res) => {
+            setBrands(res.data);
+        });
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -130,13 +128,11 @@ function AddCars() {
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        ModelService.getModelsByBrandId(Number(brand.value))
-            .then((res) => {
-                setModels(res.data);
-                modelPickerController.selectItem(res.data[0]?.id.toString());
-                modelPickerController.open();
-            })
-            .catch((e) => Alert.alert(JSON.stringify(e)));
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+            setModels(res.data);
+            modelPickerController.selectItem(res.data[0]?.id.toString());
+            modelPickerController.open();
+        });
     };
 
     const saveCarHandle = async (car: CreateCarViewModel) => {

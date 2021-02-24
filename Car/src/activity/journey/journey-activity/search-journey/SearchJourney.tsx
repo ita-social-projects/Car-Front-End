@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
@@ -13,34 +13,32 @@ function SearchJourney() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        JourneyService.getJourney(2)
-            .then((res1) => {
-                JourneyService.getJourney(2).then((res2) => {
-                    JourneyService.getJourney(2).then((res3) => {
-                        JourneyService.getJourney(2).then((res4) => {
-                            JourneyService.getJourney(2).then((res5) => {
-                                JourneyService.getJourney(2).then((res6) => {
-                                    setJourneys([
-                                        res1.data,
-                                        res2.data,
-                                        res3.data,
-                                        res4.data,
-                                        res5.data,
-                                        res6.data,
-                                        res1.data,
-                                        res2.data,
-                                        res3.data,
-                                        res4.data,
-                                        res5.data
-                                    ]);
-                                    setLoading(false);
-                                });
+        JourneyService.getJourney(2).then((res1) => {
+            JourneyService.getJourney(3).then((res2) => {
+                JourneyService.getJourney(4).then((res3) => {
+                    JourneyService.getJourney(2).then((res4) => {
+                        JourneyService.getJourney(3).then((res5) => {
+                            JourneyService.getJourney(4).then((res6) => {
+                                setJourneys([
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res6.data,
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data
+                                ]);
+                                setLoading(false);
                             });
                         });
                     });
                 });
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+            });
+        });
     }, []);
 
     return (
