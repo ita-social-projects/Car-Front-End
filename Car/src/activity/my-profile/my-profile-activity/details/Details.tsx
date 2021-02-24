@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
@@ -12,7 +12,8 @@ const Details = () => {
     useEffect(() => {
         UserService.getUser(Number(user?.id))
             .then((res) => setUser(res.data))
-            .then(() => setLoading(false));
+            .then(() => setLoading(false))
+            .catch((e) => Alert.alert("Error", e.message));
     });
 
     return (

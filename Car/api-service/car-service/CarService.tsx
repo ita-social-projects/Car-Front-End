@@ -8,11 +8,7 @@ const route = APIRoutes.getCarUrl();
 
 const CarService = {
     uploadPhoto: async (id: number, formData: FormData) => {
-        return fetch(route + id + "/photo", {
-            method: "PUT",
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        });
+        return APIService.put(route + id + "/photo", formData);
     },
 
     add: async (car: CreateCarViewModel) => {

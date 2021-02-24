@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Platform, Text, View } from "react-native";
+import { Alert, Image, Platform, Text, View } from "react-native";
 import UserService from "../../../api-service/user-service/UserService";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 import stc from "string-to-color";
@@ -45,9 +45,7 @@ const AvatarLogo = (props: any) => {
                         );
                     }
                 })
-                .catch((e) => {
-                    console.log(e);
-                });
+                .catch((e) => Alert.alert("Error", e.message));
         }, []);
 
     return <View>{avatar}</View>;

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
     ActivityIndicator,
+    Alert,
     Image,
     Text,
     TouchableOpacity,
@@ -37,7 +38,7 @@ function EditCars(navigation: any) {
             .then((res) => {
                 setCar(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
@@ -70,7 +71,7 @@ function EditCars(navigation: any) {
             .then((res) => {
                 setBrands(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -93,7 +94,7 @@ function EditCars(navigation: any) {
             .then((res) => {
                 setModels(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     };
 
     const saveCarHandle = async (carDto: CreateCarViewModel) => {

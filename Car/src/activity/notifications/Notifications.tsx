@@ -1,5 +1,6 @@
 import * as signalR from "@microsoft/signalr";
 import React, { useContext, useState, useEffect } from "react";
+import { Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import APIConfig from "../../../api-service/APIConfig";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
@@ -28,7 +29,7 @@ const Notifications = (props: any) => {
                     setNotifications(res.data);
                 }
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     };
 
     useEffect(() => {

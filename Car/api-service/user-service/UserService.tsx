@@ -14,11 +14,7 @@ const UserService = {
     },
 
     setAvatar: async (id: number, formData: FormData) => {
-        return fetch(route + id + "/avatar", {
-            method: "PUT",
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        });
+        return APIService.put(route + id + "/avatar", formData);
     }
 };
 

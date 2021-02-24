@@ -8,7 +8,7 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
-import Exception from "../exception/Exception";
+import { Alert } from "react-native";
 
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;
@@ -34,7 +34,9 @@ const Routes = () => {
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
-            (async () => loadStorageUser())().then(() => setLoading(false))
+            (async () => loadStorageUser())()
+                .then(() => setLoading(false))
+                .catch((e) => Alert.alert("Error", e.message))
         );
     }, [0]);
 
@@ -59,7 +61,6 @@ const Routes = () => {
             ) : (
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     {navigator}
-                    <Stack.Screen name="Exception" component={Exception} />
                 </Stack.Navigator>
             )}
         </NavigationContainer>

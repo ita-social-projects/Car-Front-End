@@ -61,7 +61,7 @@ const AuthProvider = ({ children }: any) => {
 
                         setUser(dbUser.data);
 
-                        navigation.navigate("AppTabs", {});
+                        navigation.navigate("AppTabs");
                     }
                 },
 

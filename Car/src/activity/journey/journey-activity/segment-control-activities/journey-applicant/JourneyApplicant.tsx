@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Alert, ScrollView, Text, View } from "react-native";
 import UserService from "../../../../../../api-service/user-service/UserService";
 import User from "../../../../../../models/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
@@ -17,7 +17,7 @@ const JourneyApplicant = ({ route }: any) => {
                 setUser(res.data);
                 setLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const journeys =

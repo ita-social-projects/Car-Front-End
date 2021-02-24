@@ -62,7 +62,8 @@ const Settings = () => {
                     photoExists(true);
                 }
             })
-            .then(() => setLoading(false));
+            .then(() => setLoading(false))
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const image = isPhotoChanged ? (
@@ -89,7 +90,9 @@ const Settings = () => {
         !isPhotoExsists && !isPhotoChanged ? "Upload photo" : "Change photo";
 
     const saveChangesAsync = async () =>
-        UserService.setAvatar(user!.id, imageData);
+        UserService.setAvatar(user!.id, imageData).catch((e) =>
+            Alert.alert(JSON.stringify(e))
+        );
 
     return (
         <View style={SettingsStyle.container}>
