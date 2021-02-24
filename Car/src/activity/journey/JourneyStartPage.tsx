@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/Journey";
 import AuthContext from "../../components/auth/AuthContext";
@@ -32,28 +32,18 @@ function JourneyStartPage(props: any) {
     );
 
     useEffect(() => {
-        JourneyService.getUpcomingJourneys(Number(user?.id))
-            .then((res) => {
-                setUpcomingJourneys(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
-    }, []);
+        JourneyService.getUpcomingJourneys(Number(user?.id)).then((res) =>
+            setUpcomingJourneys(res.data)
+        );
 
-    useEffect(() => {
-        JourneyService.getPastJourneys(Number(user?.id))
-            .then((res) => {
-                setPastJourneys(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
-    }, []);
+        JourneyService.getPastJourneys(Number(user?.id)).then((res1) =>
+            setPastJourneys(res1.data)
+        );
 
-    useEffect(() => {
-        JourneyService.getScheduledJourneys(Number(user?.id))
-            .then((res) => {
-                setScheduledJourneys(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
-    }, []);
+        JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
+            setScheduledJourneys(res2.data)
+        );
+    }, [0]);    
 
     return (
         <ScrollView style={JourneyStyle.page}>
