@@ -12,9 +12,13 @@ import AllJourneysStyle from "./AllJourneysStyle";
 
 const AllJourneys = () => {
     const { user } = useContext(AuthContext);
-    const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);    
-    const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>([]);
-    const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>([]);
+    const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
+    const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>(
+        []
+    );
+    const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>(
+        []
+    );
 
     const journeyService = container.resolve(JourneyService);
 
@@ -84,13 +88,13 @@ const AllJourneys = () => {
     return (
         <View style={AllJourneysStyle.container}>
             <Text style={AllJourneysStyle.text}>Upcoming</Text>
-            { <UpcomingJourneys /> }
+            {<UpcomingJourneys />}
 
             <Text style={AllJourneysStyle.text}>Past</Text>
             <PastJourneys />
 
             <Text style={AllJourneysStyle.text}>Scheduled</Text>
-            { <ScheduledJourneys /> }
+            {<ScheduledJourneys />}
         </View>
     );
 };

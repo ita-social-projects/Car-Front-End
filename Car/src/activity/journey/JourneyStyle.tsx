@@ -91,7 +91,7 @@ const JourneyStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 14,
         textTransform: "uppercase",
-        paddingBottom: 16        
+        paddingBottom: 16
     }
 });
 

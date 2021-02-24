@@ -1,14 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { container } from "tsyringe";
+import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/Journey";
+import AuthContext from "../../components/auth/AuthContext";
 import JourneyCard from "../../components/journey-card/JourneyCard";
-import AuthContext from "../auth/AuthContext";
-//import AllJourneys from "./journey-activity/segment-control-activities/tabs/all-journeys/AllJourneys";
-//import PastJourneys from "./journey-activity/segment-control-activities/tabs/past-journeys/PastJourneys";
-//import ScheduledJourneys from "./journey-activity/segment-control-activities/tabs/scheduled-journeys/ScheduledJourneys";
-//import UpcomingJourneys from "./journey-activity/segment-control-activities/tabs/upcoming-journeys/UpcomingJourneys";
 import JourneyStyle from "./JourneyStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
@@ -28,37 +23,36 @@ function JourneyStartPage(props: any) {
     );
 
     const { user } = useContext(AuthContext);
-    const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);    
-    const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>([]);
-    const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>([]);
-
-    const journeyService = container.resolve(JourneyService);
+    const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
+    const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>(
+        []
+    );
+    const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>(
+        []
+    );
 
     useEffect(() => {
-        journeyService
-            .getPastJourneys(Number(user?.id))
+        JourneyService.getPastJourneys(Number(user?.id))
             .then((res) => {
                 setPastJourneys(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     useEffect(() => {
-        journeyService
-            .getUpcomingJourneys(Number(user?.id))
+        JourneyService.getUpcomingJourneys(Number(user?.id))
             .then((res) => {
                 setUpcomingJourneys(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     useEffect(() => {
-        journeyService
-            .getScheduledJourneys(Number(user?.id))
+        JourneyService.getScheduledJourneys(Number(user?.id))
             .then((res) => {
                 setScheduledJourneys(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => Alert.alert("Error", e.message));
     }, []);
 
     const PastJourneys = () => {
@@ -96,7 +90,7 @@ function JourneyStartPage(props: any) {
             </View>
         );
     };
-    
+
     return (
         <ScrollView style={JourneyStyle.page}>
             <View style={JourneyStyle.touchableNavigationBlocks}>
@@ -199,21 +193,21 @@ function JourneyStartPage(props: any) {
             </View>
 
             {selectedIndex === 0 && (
-                <View style={JourneyStyle.tabStyle}>                    
+                <View style={JourneyStyle.tabStyle}>
                     {upcomingJourneys.length > 0 && (
                         <Text style={JourneyStyle.tabTextStyle}>Upcoming</Text>
-                    )}                    
-                    { <UpcomingJourneys /> }
+                    )}
+                    {<UpcomingJourneys />}
 
                     {pastJourneys.length > 0 && (
                         <Text style={JourneyStyle.tabTextStyle}>Past</Text>
-                    )}                    
-                    { <PastJourneys /> }
+                    )}
+                    {<PastJourneys />}
 
                     {scheduledJourneys.length > 0 && (
                         <Text style={JourneyStyle.tabTextStyle}>Scheduled</Text>
-                    )}                    
-                    { <ScheduledJourneys /> }
+                    )}
+                    {<ScheduledJourneys />}
                 </View>
             )}
             {selectedIndex === 1 && (
