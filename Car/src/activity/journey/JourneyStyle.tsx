@@ -83,6 +83,15 @@ const JourneyStyle = StyleSheet.create({
 
     tabStyle: {
         paddingTop: 24
+    },
+
+    tabTextStyle: {
+        flex: 1,
+        fontFamily: Font.ProximaNova.Black,
+        fontWeight: "700",
+        fontSize: 14,
+        textTransform: "uppercase",
+        paddingBottom: 16
     }
 });
 

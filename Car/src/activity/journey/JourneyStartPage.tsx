@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import AllJourneys from "./journey-activity/segment-control-activities/tabs/all-journeys/AllJourneys";
-import PastJourneys from "./journey-activity/segment-control-activities/tabs/past-journeys/PastJourneys";
-import ScheduledJourneys from "./journey-activity/segment-control-activities/tabs/scheduled-journeys/ScheduledJourneys";
-import UpcomingJourneys from "./journey-activity/segment-control-activities/tabs/upcoming-journeys/UpcomingJourneys";
+import React, { useContext, useEffect, useState } from "react";
+import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import JourneyService from "../../../api-service/journey-service/JourneyService";
+import Journey from "../../../models/Journey";
+import AuthContext from "../../components/auth/AuthContext";
+import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStyle from "./JourneyStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
-function Journey(props: any) {
+function JourneyStartPage(props: any) {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [allButtonStyle, setAllButtonStyle] = useState(
         JourneyStyle.activeButton
@@ -21,6 +21,39 @@ function Journey(props: any) {
     const [scheduledButtonStyle, setScheduledButtonStyle] = useState(
         JourneyStyle.unactiveButton
     );
+
+    const { user } = useContext(AuthContext);
+    const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
+    const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>(
+        []
+    );
+    const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>(
+        []
+    );
+
+    useEffect(() => {
+        JourneyService.getUpcomingJourneys(Number(user?.id))
+            .then((res) => {
+                setUpcomingJourneys(res.data);
+            })
+            .catch((e) => Alert.alert("Error", e.message));
+    }, []);
+
+    useEffect(() => {
+        JourneyService.getPastJourneys(Number(user?.id))
+            .then((res) => {
+                setPastJourneys(res.data);
+            })
+            .catch((e) => Alert.alert("Error", e.message));
+    }, []);
+
+    useEffect(() => {
+        JourneyService.getScheduledJourneys(Number(user?.id))
+            .then((res) => {
+                setScheduledJourneys(res.data);
+            })
+            .catch((e) => Alert.alert("Error", e.message));
+    }, []);
 
     return (
         <ScrollView style={JourneyStyle.page}>
@@ -124,27 +157,40 @@ function Journey(props: any) {
             </View>
 
             {selectedIndex === 0 && (
-                <View>
-                    <AllJourneys />
+                <View style={JourneyStyle.tabStyle}>
+                    {upcomingJourneys.length > 0 && (
+                        <Text style={JourneyStyle.tabTextStyle}>Upcoming</Text>
+                    )}
+                    {<JourneyCardList journey={upcomingJourneys} />}
+
+                    {pastJourneys.length > 0 && (
+                        <Text style={JourneyStyle.tabTextStyle}>Past</Text>
+                    )}
+                    {<JourneyCardList journey={pastJourneys} />}
+
+                    {scheduledJourneys.length > 0 && (
+                        <Text style={JourneyStyle.tabTextStyle}>Scheduled</Text>
+                    )}
+                    {<JourneyCardList journey={scheduledJourneys} />}
                 </View>
             )}
             {selectedIndex === 1 && (
                 <View style={JourneyStyle.tabStyle}>
-                    <PastJourneys />
+                    {<JourneyCardList journey={pastJourneys} />}
                 </View>
             )}
             {selectedIndex === 2 && (
                 <View style={JourneyStyle.tabStyle}>
-                    <UpcomingJourneys />
+                    {<JourneyCardList journey={upcomingJourneys} />}
                 </View>
             )}
             {selectedIndex === 3 && (
                 <View style={JourneyStyle.tabStyle}>
-                    <ScheduledJourneys />
+                    {<JourneyCardList journey={scheduledJourneys} />}
                 </View>
             )}
         </ScrollView>
     );
 }
 
-export default Journey;
+export default JourneyStartPage;
