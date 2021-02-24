@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/Journey";
 import AuthContext from "../../components/auth/AuthContext";
