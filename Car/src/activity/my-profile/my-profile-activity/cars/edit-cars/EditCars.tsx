@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
     ActivityIndicator,
-    Alert,
     Image,
     Text,
     TouchableOpacity,
@@ -34,11 +33,9 @@ function EditCars(navigation: any) {
     const [car, setCar] = useState({} as CarViewModel);
 
     useEffect(() => {
-        CarService.getById(carId)
-            .then((res) => {
-                setCar(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        CarService.getById(carId).then((res) => {
+            setCar(res.data);
+        });
     }, []);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
@@ -67,11 +64,9 @@ function EditCars(navigation: any) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        BrandService.getBrands()
-            .then((res) => {
-                setBrands(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        BrandService.getBrands().then((res) => {
+            setBrands(res.data);
+        });
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -90,11 +85,9 @@ function EditCars(navigation: any) {
     };
 
     const selectBrandHandle = (brand: any) => {
-        ModelService.getModelsByBrandId(Number(brand.value))
-            .then((res) => {
-                setModels(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+            setModels(res.data);
+        });
     };
 
     const saveCarHandle = async (carDto: CreateCarViewModel) => {

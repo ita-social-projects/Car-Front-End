@@ -1,12 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-    Image,
-    Text,
-    View,
-    RefreshControl,
-    ScrollView,
-    Alert
-} from "react-native";
+import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
@@ -34,12 +27,10 @@ const Cars = (props: any) => {
     }, []);
 
     function loadCars() {
-        CarService.getAll(Number(user?.id))
-            .then((res) => {
-                setCars(res.data);
-                setLoading(false);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        CarService.getAll(Number(user?.id)).then((res) => {
+            setCars(res.data);
+            setLoading(false);
+        });
     }
 
     useEffect(() => {

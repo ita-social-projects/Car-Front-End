@@ -1,8 +1,17 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { Alert } from "react-native";
 import AuthManager from "../src/components/auth/AuthManager";
+import RNRestart from "react-native-restart";
 
 const Interceptor = axios.create({ timeout: 20000 });
+const AlertWindow = (message: string) => (Alert.alert("Error", message, [
+    {
+        text: "Restart",
+        onPress: () => {
+            RNRestart.Restart();
+        }
+    }
+]));
 
 Interceptor.interceptors.request.use(
     async (req: any) => {
@@ -27,7 +36,7 @@ Interceptor.interceptors.request.use(
 );
 
 Interceptor.interceptors.response.use(
-    (response: AxiosResponse<JSON>) => {
+    (response) => {
         return response;
     },
     function (error: { response: { status: number } }) {
@@ -35,7 +44,7 @@ Interceptor.interceptors.response.use(
         if (error.response) {
             errorCode = error.response.status;
         }
-        Alert.alert("Error", errorCode);
+        AlertWindow(errorCode);
         return Promise.reject(error);
     }
 );

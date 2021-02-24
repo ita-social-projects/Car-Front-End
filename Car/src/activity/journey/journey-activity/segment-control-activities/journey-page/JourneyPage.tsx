@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, FlatList, Alert } from "react-native";
+import { Text, TouchableOpacity, View, FlatList } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../../models/Stop";
 import StopType from "../../../../../../models/StopType";
@@ -26,8 +26,7 @@ const JourneyPage = ({ props }: any) => {
             .then((res) => {
                 setJourney(res.data);
                 setLoading(false);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+            });
     }, []);
 
     const Separator = () => {

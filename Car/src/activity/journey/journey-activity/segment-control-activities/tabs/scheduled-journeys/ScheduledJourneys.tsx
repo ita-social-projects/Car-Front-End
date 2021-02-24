@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
 import JourneyService from "../../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../../models/Journey";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
@@ -10,11 +10,9 @@ const ScheduledJourneys = () => {
     const [scheduledJourneys, setJourneys] = useState<Array<Journey>>([]);
 
     useEffect(() => {
-        JourneyService.getScheduledJourneys(Number(user?.id))
-            .then((res) => {
-                setJourneys(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        JourneyService.getScheduledJourneys(Number(user?.id)).then((res) => {
+            setJourneys(res.data);
+        });
     }, []);
 
     return (
