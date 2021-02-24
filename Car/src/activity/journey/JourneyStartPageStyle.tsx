@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
-const JourneyStyle = StyleSheet.create({
+const JourneyStartPageStyle = StyleSheet.create({
     page: {
         backgroundColor: "white",
         paddingHorizontal: 15
@@ -83,7 +83,16 @@ const JourneyStyle = StyleSheet.create({
 
     tabStyle: {
         paddingTop: 24
+    },
+
+    tabTextStyle: {
+        flex: 1,
+        fontFamily: Font.ProximaNova.Black,
+        fontWeight: "700",
+        fontSize: 14,
+        textTransform: "uppercase",
+        paddingBottom: 16
     }
 });
 
-export default JourneyStyle;
+export default JourneyStartPageStyle;
