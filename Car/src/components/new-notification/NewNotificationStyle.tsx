@@ -2,7 +2,12 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 
 const NewNotificationStyle = EStyleSheet.create({
-    content: {},
+    content: {
+        paddingLeft: 11.75,
+        marginRight: 20
+    },
+
+    avatar: {},
 
     notificationContainer: {
         marginTop: "0.95rem",

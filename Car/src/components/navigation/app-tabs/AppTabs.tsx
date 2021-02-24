@@ -8,7 +8,7 @@ import NotificationsTabs from "../../../activity/notifications/notifications-tab
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 import * as signalR from "@microsoft/signalr";
-import routes from "../../../../api-service/EnvironmentRoutes";
+import APIConfig from "../../../../api-service/APIConfig";
 
 interface AppTabsProps {}
 
@@ -17,7 +17,7 @@ const Tabs = createBottomTabNavigator<AppTabsList>();
 const AppTabs: React.FC<AppTabsProps> = () => {
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
     const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(routes.notificationUrl)
+        .withUrl(APIConfig.URL + "Notification")
         .build();
     hubConnection.start();
 

@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
 import UserPreferences from "../../../../../models/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOptionComponent from "./ChooseOptionComponent";
 import PreferencesStyle from "./PreferencesStyle";
 
@@ -22,8 +20,6 @@ export default function Preferences(props: any) {
         {} as UserPreferences
     );
 
-    const preferencesService = container.resolve(PreferencesService);
-
     const updatePreferences = () => {
         let preferences: UserPreferences = null;
         if (userPreferences) {
@@ -34,12 +30,11 @@ export default function Preferences(props: any) {
                 comments: comments
             };
         }
-        preferencesService.updateUserPreferences(preferences);
+        PreferencesService.updateUserPreferences(preferences);
     };
 
     useEffect(() => {
-        preferencesService
-            .getUserPreferences(Number(user?.id))
+        PreferencesService.getUserPreferences(Number(user?.id))
             .then((res) => {
                 if (res.data) {
                     setSmokingAllowed(res.data.doAllowSmoking);

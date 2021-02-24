@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
-import AuthContext from "../../../../activity/auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 
-export default function Cars(props: any) {
+const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = React.useState(false);
-    const carService = container.resolve(CarService);
 
     const wait = (timeout: number) => {
         return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -30,8 +27,7 @@ export default function Cars(props: any) {
     }, []);
 
     function loadCars() {
-        carService
-            .getAll(Number(user?.id))
+        CarService.getAll(Number(user?.id))
             .then((res) => {
                 setCars(res.data);
                 setLoading(false);
@@ -138,4 +134,6 @@ export default function Cars(props: any) {
             </View>
         </ScrollView>
     );
-}
+};
+
+export default Cars;

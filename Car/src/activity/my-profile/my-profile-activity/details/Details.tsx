@@ -1,20 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { container } from "tsyringe";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import DetailsStyle from "./DetailsStyle";
 
 const Details = () => {
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [isLoading, setLoading] = useState(true);
 
-    const userService = container.resolve(UserService);
-
     useEffect(() => {
-        userService
-            .getUser(Number(user?.id))
+        UserService.getUser(Number(user?.id))
             .then((res) => setUser(res.data))
             .then(() => setLoading(false));
     });

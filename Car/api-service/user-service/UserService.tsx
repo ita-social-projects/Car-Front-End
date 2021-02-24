@@ -1,47 +1,25 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
 import User from "../../models/User";
 import APIService from "../APIService";
-import EnvironmentRoutes from "../EnvironmentRoutes";
+import APIRoutes from "../APIRoutes";
 
-@injectable()
-class UserService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getUserUrl();
 
-    routePrefix: string = "users";
+const UserService = {
+    getUser: async (id: number) => {
+        return APIService.get<User>(route + id);
+    },
 
-    getUser(id: number) {
-        return this.apiService.get<User>(this.routePrefix + "/" + id);
+    getAvatar: async (id: number) => {
+        return APIService.get<string>(route + id + "/avatar");
+    },
+
+    setAvatar: async (id: number, formData: FormData) => {
+        return fetch(route + id + "/avatar", {
+            method: "PUT",
+            headers: { "Content-Type": "multipart/form-data" },
+            body: formData
+        });
     }
-
-    getAvatar(id: number) {
-        return this.apiService.get<string>(
-            this.routePrefix + "/" + id + "/avatar"
-        );
-    }
-
-    setAvatar(id: number, formData: FormData) {
-        return fetch(
-            EnvironmentRoutes.apiUrl + this.routePrefix + "/" + id + "/avatar",
-            {
-                method: "PUT",
-                headers: { "Content-Type": "multipart/form-data" },
-                body: formData
-            }
-        );
-    }
-
-    create(user: User) {
-        return this.apiService.post<User>(this.routePrefix, user);
-    }
-
-    update(user: User) {
-        return this.apiService.put<User>(this.routePrefix, user);
-    }
-
-    delete(user: User) {
-        return this.apiService.delete<User>(this.routePrefix, user);
-    }
-}
+};
 
 export default UserService;
