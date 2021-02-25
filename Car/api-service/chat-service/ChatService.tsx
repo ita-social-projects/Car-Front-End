@@ -7,6 +7,14 @@ const route = APIRoutes.getChatUrl();
 const ChatService = {
     getChat: async (id: number | undefined) => {
         return APIService.get<Chat>(route + id);
+    },
+
+    getCeratinChat: async (id: number | undefined) => {
+        return APIService.get<Chat>(route + "chat/" + id);
+    },
+
+    getCertainChat: async (id: number | undefined) => {
+        return APIService.get<Chat>(route + "chat" + id);
     }
 };
 
