@@ -42,7 +42,7 @@ Interceptor.interceptors.response.use(
         if (error.response) {
             errorCode = error.response.status;
         }
-        
+
         ErrorAlert(errorCode);
 
         return Promise.reject(error);
