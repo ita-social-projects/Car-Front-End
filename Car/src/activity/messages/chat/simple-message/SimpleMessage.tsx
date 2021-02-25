@@ -1,23 +1,27 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    FlatList,
-    Image,
-    SafeAreaView,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
-import { SearchBar } from "react-native-elements";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import AuthContext from "../../../../components/auth/AuthContext";
+import React, { useEffect, useState, useContext } from "react";
+import {
+    SafeAreaView,
+    Text,
+    View,
+    TouchableOpacity,
+    FlatList
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import "reflect-metadata";
+import { SearchBar } from "react-native-elements";
 import SimpleMessageStyle from "./SimpleMessageStyle";
+import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
+import APIConfig from "../../../../../api-service/APIConfig";
+import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 
 const SimpleMessage = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
+    const [hubConnection, setHubConnection] = useState<HubConnection>();
 
     useEffect(() => {
         ChatService.getChat(user?.id).then((res) => {
@@ -26,14 +30,24 @@ const SimpleMessage = (props: any) => {
             setFilteredDataSource(chats);
             setMasterDataSource(chats);
         });
+        const hubConnectionFunc = new HubConnectionBuilder()
+            .withUrl(APIConfig.URL + "Chat/")
+            .build();
+        hubConnectionFunc?.start().then(() => "Connection started!");
+        setHubConnection(hubConnectionFunc);
     }, []);
 
     const setSearchFilter = (text: any) => {
         if (text) {
-            const newData = masterDataSource.filter((item: any) => {
-                const itemData = item?.name
-                    ? item?.name.toUpperCase()
-                    : "".toUpperCase();
+            const newData = masterDataSource.filter(function (item) {
+                const itemData =
+                    item.journey.organizer.name +
+                    " " +
+                    item.journey.organizer.surname
+                        ? item.journey.organizer.name.toUpperCase() +
+                          " " +
+                          item.journey.organizer.surname.toUpperCase()
+                        : "".toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf(textData) > -1;
             });
@@ -61,37 +75,43 @@ const SimpleMessage = (props: any) => {
         );
     };
 
-    const ItemView = (item: any) => {
+    const ItemView = ({ item }: any) => {
         return (
-            <View style={SimpleMessageStyle.main}>
-                <View style={SimpleMessageStyle.button}>
-                    <View style={{ flexDirection: "row" }}>
-                        <Image
-                            style={SimpleMessageStyle.image}
-                            source={{
-                                uri:
-                                    "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-                            }}
-                        />
-                        <View>
+            <TouchableOpacity
+                onPress={() =>
+                    props.navigation.navigate("Chat", {
+                        hubConnection: hubConnection,
+                        chatId: item.id
+                    })
+                }
+            >
+                <View style={SimpleMessageStyle.main}>
+                    <View style={SimpleMessageStyle.wrapper}>
+                        <View style={SimpleMessageStyle.avatarWrapper}>
+                            <AvatarLogo
+                                user={item.journey.organizer}
+                                size={50}
+                            />
+                        </View>
+                        <View style={SimpleMessageStyle.dataWrapper}>
                             <Text style={SimpleMessageStyle.fonts}>
-                                {item.name}
+                                {item.journey.organizer.name}{" "}
+                                {item.journey.organizer.surname}
                             </Text>
                             <Text style={SimpleMessageStyle.textStyle}>
-                                {item.name}{" "}
+                                {item.journey.departureTime
+                                    .replace("T", " ")
+                                    .slice(0, 16)}
                             </Text>
                         </View>
-                    </View>
-                    <TouchableOpacity
-                        style={{ paddingTop: 12 }}
-                        onPress={() => props.navigation.navigate("Chat")}
-                    >
-                        <View>
-                            <Ionicons name={"chatbubbles"} size={20} />
+                        <View style={SimpleMessageStyle.iconWrapper}>
+                            <View>
+                                <Ionicons name={"chatbubbles"} size={20} />
+                            </View>
                         </View>
-                    </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     };
 
