@@ -88,7 +88,10 @@ const SimpleMessage = (props: any) => {
                 <View style={SimpleMessageStyle.main}>
                     <View style={SimpleMessageStyle.wrapper}>
                         <View style={SimpleMessageStyle.avatarWrapper}>
-                            <AvatarLogo user={item.journey.organizer} size={50} />
+                            <AvatarLogo
+                                user={item.journey.organizer}
+                                size={50}
+                            />
                         </View>
                         <View style={SimpleMessageStyle.dataWrapper}>
                             <Text style={SimpleMessageStyle.fonts}>
