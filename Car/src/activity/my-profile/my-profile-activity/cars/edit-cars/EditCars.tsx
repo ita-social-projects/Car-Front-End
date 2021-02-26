@@ -21,14 +21,10 @@ import CarModel from "../../../../../../models/car/CarModel";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
-import AuthContext from "../../../../../components/auth/AuthContext";
 import EditCarsStyle from "./EditCarsStyle";
-import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
 
-function EditCars(navigation: any) {
+const EditCars = (navigation: any) => {
     const { carId } = navigation.route.params;
-
-    const { user } = useContext(AuthContext);
 
     const [car, setCar] = useState({} as CarViewModel);
 
@@ -57,11 +53,8 @@ function EditCars(navigation: any) {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
     const [imageData, setImageData] = useState<FormData>({} as FormData);
-
-    const [loading, setLoading] = useState(false);
+    const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
     useEffect(() => {
         BrandService.getBrands().then((res) => {
@@ -103,6 +96,11 @@ function EditCars(navigation: any) {
               ...{ value: String(model!.id), label: model!.name }
           }))
         : null;
+
+    console.log(selectedModel);
+    console.log(selectedColor);
+    console.log(plateNumber);
+    console.log(imageData);
 
     return (
         <KeyboardAwareScrollView style={EditCarsStyle.wrapper}>
@@ -204,20 +202,11 @@ function EditCars(navigation: any) {
                         <Text style={EditCarsStyle.carButtonSaveText}>
                             Save
                         </Text>
-                        {loading ? (
-                            <ActivityIndicator
-                                style={EditCarsStyle.spinner}
-                                size={20}
-                                color="white"
-                            />
-                        ) : (
-                            <></>
-                        )}
                     </TouchableOpacity>
                 </View>
             </View>
         </KeyboardAwareScrollView>
     );
-}
+};
 
 export default EditCars;

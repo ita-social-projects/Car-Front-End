@@ -27,14 +27,14 @@ const Chat = (props: any) => {
             const messagesFromChat = res.data?.messages;
             const tempChat: any = [];
             messagesFromChat?.forEach((element: any) => {
-                UserService.getUser(element?.senderId).then((res) => {
+                UserService.getUser(element?.senderId).then((r) => {
                     const messageToAdd = {
                         _id: element?.id,
                         text: element?.text,
                         createdAt: element?.createdAt,
                         user: {
                             _id: element?.senderId?.toString(),
-                            name: res?.data?.name + " " + res?.data?.surname
+                            name: r?.data?.name + " " + r?.data?.surname
                         }
                     };
                     tempChat.push(messageToAdd);
@@ -43,18 +43,17 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        HubConnection.on("RecieveMessage", (message: any) => {
-            console.log(message);
-            UserService.getUser(message?.senderId).then((res) =>
+        HubConnection.on("RecieveMessage", (receivedMessage: any) => {
+            UserService.getUser(receivedMessage?.senderId).then((res) =>
                 setMessages((previousMessages) =>
                     GiftedChat.append(
                         previousMessages as any,
                         {
-                            _id: message.id,
-                            text: message.text,
-                            createdAt: message.createdAt,
+                            _id: receivedMessage.id,
+                            text: receivedMessage.text,
+                            createdAt: receivedMessage.createdAt,
                             user: {
-                                _id: message.senderId?.toString(),
+                                _id: receivedMessage.senderId?.toString(),
                                 name: res?.data?.name + " " + res?.data?.surname
                             }
                         } as any

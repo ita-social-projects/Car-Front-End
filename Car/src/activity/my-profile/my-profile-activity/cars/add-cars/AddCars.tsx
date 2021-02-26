@@ -26,7 +26,7 @@ import CarTextInput from "../../../../../components/car-text-input/CarTextInput"
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
 
-function AddCars() {
+const AddCars = () => {
     const { user } = useContext(AuthContext);
 
     let modelPickerController: any;
@@ -304,6 +304,6 @@ function AddCars() {
             </View>
         </KeyboardAvoidingView>
     );
-}
+};
 
 export default AddCars;

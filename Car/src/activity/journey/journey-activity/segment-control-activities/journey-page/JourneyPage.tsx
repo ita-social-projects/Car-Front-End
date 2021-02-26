@@ -14,8 +14,6 @@ import Moment from "moment";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
-import { HubConnectionBuilder } from "@microsoft/signalr";
-import APIConfig from "../../../../../../api-service/APIConfig";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);

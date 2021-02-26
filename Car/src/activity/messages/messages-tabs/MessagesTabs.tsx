@@ -1,11 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UserService from "../../../../api-service/user-service/UserService";
-import User from "../../../../models/User";
-import AuthContext from "../../../components/auth/AuthContext";
 import Chat from "../chat/Chat";
 import Messages from "../Messages";
 import * as navigation from "../../../components/navigation/Navigation";

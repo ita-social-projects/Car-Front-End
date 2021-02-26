@@ -8,8 +8,6 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
-import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
-import APIConfig from "../../../api-service/APIConfig";
 
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;

@@ -44,25 +44,15 @@ const Settings = () => {
         });
     };
 
-    let byteOfImage = "";
-
     useEffect(() => {
-        UserService.getAvatar(Number(user?.id))
-            .then((result) => {
-                byteOfImage = JSON.stringify(result.request._response);
-                if (byteOfImage !== '""') {
-                    setAvatar(
-                        <Image
-                            source={{
-                                uri: "data:image/png;base64," + byteOfImage
-                            }}
-                            style={SettingsStyle.avatar}
-                        />
-                    );
-                    photoExists(true);
-                }
-            })
-            .then(() => setLoading(false));
+        setAvatar(
+            <Image
+                source={{ uri: user?.avatarUrl }}
+                style={SettingsStyle.avatar}
+            />
+        );
+        photoExists(true);
+        setLoading(false);
     }, []);
 
     const image = isPhotoChanged ? (
@@ -90,6 +80,16 @@ const Settings = () => {
 
     const saveChangesAsync = async () =>
         UserService.setAvatar(user!.id, imageData);
+
+    const askToRestartApp = () =>
+        Alert.alert("Saved", "Please restart the App", [
+            {
+                text: "Restart",
+                onPress: () => {
+                    RNRestart.Restart();
+                }
+            }
+        ]);
 
     return (
         <View style={SettingsStyle.container}>
@@ -128,20 +128,7 @@ const Settings = () => {
                                 onPress={() => {
                                     setSaved(true);
                                     saveChangesAsync()
-                                        .then(() =>
-                                            Alert.alert(
-                                                "Saved",
-                                                "Please restart the App",
-                                                [
-                                                    {
-                                                        text: "Restart",
-                                                        onPress: () => {
-                                                            RNRestart.Restart();
-                                                        }
-                                                    }
-                                                ]
-                                            )
-                                        )
+                                        .then(() => askToRestartApp())
                                         .then((loader = null));
                                 }}
                             >

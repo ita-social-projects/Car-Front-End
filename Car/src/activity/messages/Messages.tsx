@@ -1,4 +1,3 @@
-import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import moment from "moment";
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text, SafeAreaView } from "react-native";
@@ -6,14 +5,13 @@ import { SearchBar } from "react-native-elements";
 import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import APIConfig from "../../../api-service/APIConfig";
 import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
 import * as navigation from "../../components/navigation/Navigation";
 
-const SimpleMessage = (props: any) => {
+const Messages = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
     const [masterDataSource, setMasterDataSource] = useState<any>([]);
     const [search, setSearch] = useState("");
@@ -131,4 +129,4 @@ const SimpleMessage = (props: any) => {
     );
 };
 
-export default SimpleMessage;
+export default Messages;
