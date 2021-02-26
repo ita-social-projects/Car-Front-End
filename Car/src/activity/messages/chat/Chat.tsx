@@ -8,11 +8,11 @@ import {
     InputToolbar
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
+import HubConnection from "../../../../api-service/HubConnection";
 import UserService from "../../../../api-service/user-service/UserService";
 import AuthContext from "../../../components/auth/AuthContext";
 import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../components/navigation/Navigation";
-import { hubConnection } from "../../../components/navigation/Routes";
 import ChatStyle from "./ChatStyle";
 
 const Chat = (props: any) => {
@@ -43,7 +43,7 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        hubConnection.on("RecieveMessage", (message: any) => {
+        HubConnection.on("RecieveMessage", (message: any) => {
             console.log(message);
             UserService.getUser(message?.senderId).then((res) =>
                 setMessages((previousMessages) =>
@@ -62,12 +62,13 @@ const Chat = (props: any) => {
                 )
             );
         });
-        hubConnection
-            ?.invoke("EnterToGroup", props.route.params.chatId.toString())
-            .catch((err: any) => console.log(err));
+        HubConnection?.invoke(
+            "EnterToGroup",
+            props.route.params.chatId.toString()
+        ).catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
-            hubConnection?.invoke(
+            HubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()
             );
@@ -75,13 +76,11 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        hubConnection
-            ?.invoke("SendMessageToGroup", {
-                Text: message,
-                SenderId: user?.id,
-                ChatId: props.route.params.chatId
-            })
-            .catch((err: any) => console.log(err));
+        HubConnection?.invoke("SendMessageToGroup", {
+            Text: message,
+            SenderId: user?.id,
+            ChatId: props.route.params.chatId
+        }).catch((err: any) => console.log(err));
         setMessage("");
     };
 
