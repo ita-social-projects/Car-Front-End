@@ -1,15 +1,16 @@
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
+import moment from "moment";
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
+import { LinearTextGradient } from "react-native-text-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import APIConfig from "../../../api-service/APIConfig";
 import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
-import SimpleMessageStyle from "./MessagesStyle";
-
+import MessagesStyle from "./MessagesStyle";
 
 const SimpleMessage = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
@@ -62,8 +63,8 @@ const SimpleMessage = (props: any) => {
                 onClear={() => setSearchFilter("")}
                 placeholder={"Search in Messages"}
                 value={search}
-                containerStyle={SimpleMessageStyle.containerStyle}
-                inputContainerStyle={SimpleMessageStyle.inputContainerStyle}
+                containerStyle={MessagesStyle.containerStyle}
+                inputContainerStyle={MessagesStyle.inputContainerStyle}
             />
         ) : (
             <View />
@@ -80,26 +81,31 @@ const SimpleMessage = (props: any) => {
                     })
                 }
             >
-                <View style={SimpleMessageStyle.main}>
-                    <View style={SimpleMessageStyle.wrapper}>
-                        <View style={SimpleMessageStyle.avatarWrapper}>
+                <View style={MessagesStyle.main}>
+                    <View style={MessagesStyle.wrapper}>
+                        <View style={MessagesStyle.avatarWrapper}>
                             <AvatarLogo
                                 user={item.journey.organizer}
                                 size={50}
                             />
                         </View>
-                        <View style={SimpleMessageStyle.dataWrapper}>
-                            <Text style={SimpleMessageStyle.fonts}>
+                        <View style={MessagesStyle.dataWrapper}>
+                        <LinearTextGradient
+                            locations={[0, 1]}
+                            colors={["#00A3CF", "#5552A0"]}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 0 }}
+                        >
+                            <Text style={MessagesStyle.fonts}>
                                 {item.journey.organizer.name}{" "}
-                                {item.journey.organizer.surname}
+                                {item.journey.organizer.surname}'s journey
                             </Text>
-                            <Text style={SimpleMessageStyle.textStyle}>
-                                {item.journey.departureTime
-                                    .replace("T", " ")
-                                    .slice(0, 16)}
+                            </LinearTextGradient>
+                            <Text style={MessagesStyle.textStyle}>
+                                {moment(new Date(item.journey.departureTime)).calendar()}
                             </Text>
                         </View>
-                        <View style={SimpleMessageStyle.iconWrapper}>
+                        <View style={MessagesStyle.iconWrapper}>
                             <View>
                                 <Ionicons name={"chatbubbles"} size={20} />
                             </View>
@@ -112,7 +118,7 @@ const SimpleMessage = (props: any) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={SimpleMessageStyle.container}>
+            <View style={MessagesStyle.container}>
                 {renderHeader()}
                 <FlatList
                     data={filteredDataSource}

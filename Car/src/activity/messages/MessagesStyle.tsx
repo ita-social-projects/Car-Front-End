@@ -7,6 +7,7 @@ const SimpleMessageStyle = StyleSheet.create({
         width: "100%",
         justifyContent: "center"
     },
+
     wrapper: {
         flex: 1,
         width: "100%",
@@ -15,20 +16,23 @@ const SimpleMessageStyle = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row"
     },
+
     avatarWrapper: {
         paddingLeft: 5,
-        width: 40,
+        width: 50,
         height: "100%",
         justifyContent: "center"
     },
+
     dataWrapper: {
         flex: 1,
-        marginHorizontal: 10,
+        paddingLeft: 10.75,
         width: 39,
         height: 39,
         justifyContent: "center",
         marginTop: 15
     },
+
     iconWrapper: {
         width: 39,
         height: 39,
@@ -36,10 +40,13 @@ const SimpleMessageStyle = StyleSheet.create({
         justifyContent: "center",
         marginTop: 15
     },
+
     fonts: {
         fontFamily: Font.OpenSans.Bold,
-        fontSize: 13
+        fontSize: 13,
+        color: "#00A3CF"
     },
+
     image: {
         width: 56,
         height: 56,
@@ -47,15 +54,18 @@ const SimpleMessageStyle = StyleSheet.create({
         marginRight: 7,
         bottom: 5
     },
+
     lottie: {
         width: 100,
         height: 100
     },
+
     container: {
         flex: 1,
         backgroundColor: "white",
         padding: 15
     },
+
     containerStyle: {
         height: 44,
         backgroundColor: "white",
@@ -64,6 +74,7 @@ const SimpleMessageStyle = StyleSheet.create({
         marginTop: 5,
         marginBottom: 20
     },
+
     inputContainerStyle: {
         backgroundColor: "white",
         borderColor: "black",
@@ -72,9 +83,11 @@ const SimpleMessageStyle = StyleSheet.create({
         borderBottomColor: "black",
         paddingLeft: 5
     },
+
     textStyle: {
         fontSize: 11,
         paddingTop: 10,
+        lineHeight: 16,
         fontFamily: Font.OpenSans.SemiBold
     }
 });

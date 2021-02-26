@@ -9,6 +9,7 @@ import {
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
 import AuthContext from "../../../components/auth/AuthContext";
+import * as navigation from "../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
 
 const Chat = (props: any) => {
@@ -93,15 +94,19 @@ const Chat = (props: any) => {
                 }}
                 textStyle={{
                     left: {
-                        color: "#000000"
+                        color: "#000000",
+                        paddingHorizontal: 4,
+
                     },
                     right: {
-                        color: "#FFFFFF"
+                        color: "#FFFFFF",
+                        paddingHorizontal: 4,
                     }
                 }}
             />
         );
     };
+
     const renderSend = (props: any) => {
         return (
             <Send {...props}>
@@ -118,6 +123,11 @@ const Chat = (props: any) => {
 
     const renderInputToolbar = (props: any) => {
         return (
+            
+            <View style={{
+                marginHorizontal: 16,
+                marginVertical: 46
+                }}>
             <InputToolbar
                 {...props}
                 primaryStyle={{
@@ -127,12 +137,16 @@ const Chat = (props: any) => {
                     height: 44
                 }}
             />
+            </View>
         );
     };
 
     return (
         <View style={ChatStyle.chatWrapper}>
             <GiftedChat
+                renderAvatar={() => console.log(user)}
+                onPressAvatar={(user) => navigation.navigate("Applicant Page", { userId: Number(user._id) })}
+                messagesContainerStyle={{paddingHorizontal: 8}}
                 placeholder="Aa"
                 renderTime={() => <View></View>}
                 maxInputLength={500}
