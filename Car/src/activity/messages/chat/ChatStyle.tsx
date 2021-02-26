@@ -20,7 +20,7 @@ const ChatStyle = StyleSheet.create({
         backgroundColor: "black",
         alignItems: "center",
         justifyContent: "center"
-    },
+    }
 });
 
 export default ChatStyle;

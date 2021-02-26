@@ -14,21 +14,12 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 const StackTabs = createStackNavigator();
 
 const MessagesTabs = () => {
-    const [currentUser, setCurrentUser] = useState({} as User);
-    const { user } = useContext(AuthContext);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const setIsOpen = () => {
         setIsOpenFilter(!isOpenFilter);
     };
-
-    useEffect(() => {
-        UserService.getUser(
-            Number(user?.id)
-        ).then((res: { data: React.SetStateAction<User> }) =>
-            setCurrentUser(res.data)
-        );
-    }, []);
+    
 
     return (
         <View style={HeaderStyle.container}>

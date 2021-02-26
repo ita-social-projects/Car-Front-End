@@ -8,9 +8,13 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
+import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
+import APIConfig from "../../../api-service/APIConfig";
 
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;
+
+export let hubConnection = null as unknown as HubConnection;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
@@ -34,7 +38,14 @@ const Routes = () => {
             }
         })().then(() =>
             (async () => loadStorageUser())().then(() => setLoading(false))
-        );
+        ).then(() => {
+            if (user){
+            const hubConnectionFunc = new HubConnectionBuilder()
+            .withUrl(APIConfig.URL + "Chat/")
+            .build();
+        hubConnectionFunc?.start().then(() => "Connection started!");
+        hubConnection = hubConnectionFunc;
+    }});
     }, [0]);
 
     const navigator = user ? (

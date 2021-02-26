@@ -2,9 +2,9 @@ import axios from "axios";
 import ErrorAlert from "../src/components/error-alert/ErrorAlert";
 import AuthManager from "../src/components/auth/AuthManager";
 
-const Interceptor = axios.create({ timeout: 20000 });
+const Axios = axios.create({ timeout: 20000 });
 
-Interceptor.interceptors.request.use(
+Axios.interceptors.request.use(
     async (req: any) => {
         const token = await AuthManager.getAPIToken();
 
@@ -24,19 +24,19 @@ Interceptor.interceptors.request.use(
         return req;
     },
 
-    (error: any) => {
+    async (error: any) => {
         ErrorAlert(error.message);
 
         return Promise.reject(error);
     }
 );
 
-Interceptor.interceptors.response.use(
-    (response) => {
+Axios.interceptors.response.use(
+    async (response) => {
         return response;
     },
 
-    function (error: { response: { status: number } }) {
+    async (error: { response: { status: number } }) => {
         let errorCode: any = "Network error";
 
         if (error.response) {
@@ -49,4 +49,4 @@ Interceptor.interceptors.response.use(
     }
 );
 
-export default Interceptor;
+export default Axios;

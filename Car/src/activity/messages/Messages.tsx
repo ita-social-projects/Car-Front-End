@@ -11,13 +11,13 @@ import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
+import * as navigation from "../../components/navigation/Navigation"
 
 const SimpleMessage = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
     const [masterDataSource, setMasterDataSource] = useState<any>([]);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
-    const [hubConnection, setHubConnection] = useState<HubConnection>();
 
     useEffect(() => {
         ChatService.getChat(user?.id).then((res) => {
@@ -26,11 +26,6 @@ const SimpleMessage = (props: any) => {
             setFilteredDataSource(chats);
             setMasterDataSource(chats);
         });
-        const hubConnectionFunc = new HubConnectionBuilder()
-            .withUrl(APIConfig.URL + "Chat/")
-            .build();
-        hubConnectionFunc?.start().then(() => "Connection started!");
-        setHubConnection(hubConnectionFunc);
     }, []);
 
     const setSearchFilter = (text: any) => {
@@ -74,11 +69,11 @@ const SimpleMessage = (props: any) => {
     const ItemView = ({ item }: any) => {
         return (
             <TouchableOpacity
-                onPress={() =>
-                    props.navigation.navigate("Chat", {
-                        hubConnection: hubConnection,
-                        chatId: item.id
-                    })
+                onPress={() =>{
+                        navigation.navigate("Chat", {
+                        chatId: item.id,
+                        header: item.journey.organizer.name + " " + item.journey.organizer.surname + "'s journey"
+                    });}
                 }
             >
                 <View style={MessagesStyle.main}>
@@ -90,19 +85,21 @@ const SimpleMessage = (props: any) => {
                             />
                         </View>
                         <View style={MessagesStyle.dataWrapper}>
-                        <LinearTextGradient
-                            locations={[0, 1]}
-                            colors={["#00A3CF", "#5552A0"]}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
-                        >
-                            <Text style={MessagesStyle.fonts}>
-                                {item.journey.organizer.name}{" "}
-                                {item.journey.organizer.surname}'s journey
-                            </Text>
+                            <LinearTextGradient
+                                locations={[0, 1]}
+                                colors={["#00A3CF", "#5552A0"]}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                            >
+                                <Text style={MessagesStyle.fonts}>
+                                    {item.journey.organizer.name}{" "}
+                                    {item.journey.organizer.surname}'s journey
+                                </Text>
                             </LinearTextGradient>
                             <Text style={MessagesStyle.textStyle}>
-                                {moment(new Date(item.journey.departureTime)).calendar()}
+                                {moment(
+                                    new Date(item.journey.departureTime)
+                                ).calendar()}
                             </Text>
                         </View>
                         <View style={MessagesStyle.iconWrapper}>
