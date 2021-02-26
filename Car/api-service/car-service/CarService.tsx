@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import CreateCarViewModel from "../../models/car/CreateCarViewModel";
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
 import EnvironmentRoutes from "../EnvironmentRoutes";
+import axios from "axios";
 
 @injectable()
 class CarService {
@@ -23,8 +23,8 @@ class CarService {
         );
     }
 
-    add(car: CreateCarViewModel) {
-        return this.apiService.post<CreateCarViewModel>(this.routePrefix, car);
+    add(car: FormData) {
+        return axios.post(EnvironmentRoutes.apiUrl + this.routePrefix, car);
     }
 
     update(car: UpdateCarViewModel) {

@@ -15,7 +15,6 @@ import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
-import CarDto from "../../../../../../dto/CarDto";
 import CarBrand from "../../../../../../models/car/CarBrand";
 import CarViewModel from "../../../../../../models/car/CarViewModel";
 import CarColor from "../../../../../../models/car/CarColor";
@@ -104,14 +103,6 @@ function EditCars(navigation: any) {
             .catch((e) => console.log(e));
     };
 
-    const saveCarHandle = async (carDto: CarDto) => {
-        setLoading(true);
-        console.log(carDto);
-        const newCar = await carService.update(carDto).then((res) => res.data);
-        await carService.uploadPhoto(newCar.id, imageData);
-        setLoading(false);
-    };
-
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
         .length
         ? brands.map((brand) => ({
@@ -129,10 +120,10 @@ function EditCars(navigation: any) {
     return (
         <KeyboardAwareScrollView style={EditCarsStyle.wrapper}>
             <View style={EditCarsStyle.carAvatarContainer}>
-                {photo && (
+                {car!.imageId && (
                     <Image
-                        source={{ uri: photo.uri }}
-                        style={EditCarsStyle.carAvatar}
+                        source={{ uri: car?.imageId }}
+                        style={{ width: "100%", height: "100%" }}
                     />
                 )}
                 <TouchableOpacity
@@ -144,6 +135,10 @@ function EditCars(navigation: any) {
                             ? "Change photo"
                             : "Upload photo"}
                     </Text>
+                    <Image
+                        source={{ uri: car?.imageId }}
+                        style={{ width: "100%", height: "100%" }}
+                    />
                 </TouchableOpacity>
             </View>
             <View style={EditCarsStyle.inputsContainer}>
@@ -214,17 +209,6 @@ function EditCars(navigation: any) {
                     <TouchableOpacity
                         style={EditCarsStyle.carButtonSave}
                         onPress={() => {
-                            saveCarHandle({
-                                modelId: Number(selectedModel?.value),
-                                color: Number(selectedColor?.value),
-                                plateNumber: plateNumber,
-                                ownerId: Number(user?.id),
-                                imageId:
-                                    photo.uri !== undefined
-                                        ? String(photo.uri)
-                                        : null,
-                                id: 0
-                            });
                             navigation.goBack();
                         }}
                     >

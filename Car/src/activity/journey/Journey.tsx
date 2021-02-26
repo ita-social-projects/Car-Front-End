@@ -123,26 +123,10 @@ function Journey(props: any) {
                 </TouchableOpacity>
             </View>
 
-            {selectedIndex === 0 && (
-                <View>
-                    <AllJourneys />
-                </View>
-            )}
-            {selectedIndex === 1 && (
-                <View style={JourneyStyle.tabStyle}>
-                    <PastJourneys />
-                </View>
-            )}
-            {selectedIndex === 2 && (
-                <View style={JourneyStyle.tabStyle}>
-                    <UpcomingJourneys />
-                </View>
-            )}
-            {selectedIndex === 3 && (
-                <View style={JourneyStyle.tabStyle}>
-                    <ScheduledJourneys />
-                </View>
-            )}
+            {selectedIndex === 0 && <View></View>}
+            {selectedIndex === 1 && <View style={JourneyStyle.tabStyle}></View>}
+            {selectedIndex === 2 && <View style={JourneyStyle.tabStyle}></View>}
+            {selectedIndex === 3 && <View style={JourneyStyle.tabStyle}></View>}
         </ScrollView>
     );
 }

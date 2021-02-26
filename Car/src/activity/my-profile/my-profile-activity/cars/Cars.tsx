@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import {
     ActivityIndicator,
     Image,
@@ -20,14 +20,14 @@ export default function Cars(props: any) {
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [loading, setLoading] = useState(true);
-    const [refreshing, setRefreshing] = React.useState(false);
+    const [refreshing, setRefreshing] = useState(false);
     const carService = container.resolve(CarService);
 
     const wait = (timeout: number) => {
         return new Promise((resolve) => setTimeout(resolve, timeout));
     };
 
-    const onRefresh = React.useCallback(() => {
+    const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(1000).then(() => {
             loadCars();
@@ -87,6 +87,7 @@ export default function Cars(props: any) {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
         >
+            
             <View
                 style={[CarsStyle.carContainer, loading && CarsStyle.loading]}
             >
@@ -105,13 +106,9 @@ export default function Cars(props: any) {
                                             item!.imageId ? (
                                                 <Image
                                                     source={{
-                                                        uri:
-                                                            "data:image/png;base64," +
-                                                            item!.imageId
+                                                        uri: item?.imageId
                                                     }}
-                                                    style={[
-                                                        CarsStyle.carAvatar
-                                                    ]}
+                                                    style={CarsStyle.carAvatar}
                                                 />
                                             ) : (
                                                 <Ionicons
