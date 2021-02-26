@@ -25,7 +25,6 @@ import CarDropDownPicker from "../../../../../components/car-drop-down-picker/Ca
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
-import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
 
 function AddCars() {
     const { user } = useContext(AuthContext);
@@ -80,7 +79,7 @@ function AddCars() {
             plateNumber === undefined ||
             plateNumber.length < 4 ||
             plateNumber.length > 10 ||
-            !plateNumber.match(/^[A-Za-z0-9-]+$/)
+            !plateNumber.match(/^[A-Za-zА-Яа-я0-9-]+$/)
         ) {
             showAlert("Plate number is not valid!");
             return false;
@@ -101,7 +100,6 @@ function AddCars() {
     const [plateNumber, setPlateNumber] = useState<string>("");
 
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
-    const [imageData, setImageData] = useState<FormData>({} as FormData);
 
     const [loading, setLoading] = useState(false);
 
@@ -115,15 +113,28 @@ function AddCars() {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
                 setPhoto(response);
-                const selectedImageData = new FormData();
-                selectedImageData.append("image", {
-                    name: response.fileName,
-                    type: response.type,
-                    uri: response?.uri
-                });
-                setImageData(selectedImageData);
             }
         });
+    };
+
+    const saveCarHandle = async () => {
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("ownerId", user?.id);
+        formData.append("modelId", Number(selectedModel?.value));
+        formData.append("color", Number(selectedColor?.value));
+        formData.append("plateNumber", plateNumber);
+        if (photo !== null && photo !== undefined) {
+            formData.append("image", {
+                name: photo.fileName,
+                type: photo.type,
+                uri: photo?.uri
+            });
+        }
+        await CarService.add(formData)
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
+        setLoading(false);
     };
 
     const selectBrandHandle = (brand: any) => {
@@ -133,14 +144,6 @@ function AddCars() {
             modelPickerController.selectItem(res.data[0]?.id.toString());
             modelPickerController.open();
         });
-    };
-
-    const saveCarHandle = async (car: CreateCarViewModel) => {
-        setLoading(true);
-        console.log(car);
-        const newCar = await CarService.add(car).then((res) => res.data);
-        await CarService.uploadPhoto(newCar!.id, imageData);
-        setLoading(false);
     };
 
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
@@ -281,18 +284,7 @@ function AddCars() {
                         style={AddCarsStyle.carButtonSave}
                         onPress={() => {
                             if (validateFields()) {
-                                saveCarHandle({
-                                    modelId: Number(selectedModel?.value),
-                                    color: Number(selectedColor?.value),
-                                    plateNumber: plateNumber,
-                                    ownerId: Number(user?.id),
-                                    imageId:
-                                        photo.uri !== undefined
-                                            ? String(photo.uri)
-                                            : null,
-                                    id: 0
-                                });
-
+                                saveCarHandle();
                                 navigation.goBack();
                             }
                         }}
