@@ -1,27 +1,18 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import {
-    ActivityIndicator,
-    Image,
-    Text,
-    View,
-    RefreshControl,
-    ScrollView
-} from "react-native";
+import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
-import AuthContext from "../../../../activity/auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
+import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 
-export default function Cars(props: any) {
+const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
-    const carService = container.resolve(CarService);
 
     const wait = (timeout: number) => {
         return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -36,13 +27,10 @@ export default function Cars(props: any) {
     }, []);
 
     function loadCars() {
-        carService
-            .getAll(Number(user?.id))
-            .then((res) => {
-                setCars(res.data);
-                setLoading(false);
-            })
-            .catch((e) => console.log(e));
+        CarService.getAll(Number(user?.id)).then((res) => {
+            setCars(res.data);
+            setLoading(false);
+        });
     }
 
     useEffect(() => {
@@ -82,17 +70,20 @@ export default function Cars(props: any) {
     return (
         <ScrollView
             style={CarsStyle.container}
-            contentContainerStyle={loading && CarsStyle.loading}
+            contentContainerStyle={isLoading && CarsStyle.loading}
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
         >
-            
             <View
-                style={[CarsStyle.carContainer, loading && CarsStyle.loading]}
+                style={[CarsStyle.carContainer, isLoading && CarsStyle.loading]}
             >
-                {loading ? (
-                    <ActivityIndicator size={40} color="black" />
+                {isLoading ? (
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text="Loading information..."
+                    />
                 ) : cars.length ? (
                     <>
                         {cars.map((item) => {
@@ -137,4 +128,6 @@ export default function Cars(props: any) {
             </View>
         </ScrollView>
     );
-}
+};
+
+export default Cars;

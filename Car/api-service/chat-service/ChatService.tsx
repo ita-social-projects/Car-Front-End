@@ -1,17 +1,21 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
 import Chat from "../../models/Chat";
+import APIRoutes from "../APIRoutes";
 import APIService from "../APIService";
 
-@injectable()
-class ChatService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getChatUrl();
 
-    routePrefix: string = "user-chats/";
+const ChatService = {
+    getChat: async (id: number | undefined) => {
+        return APIService.get<Chat>(route + id);
+    },
 
-    getChat(id: number | undefined) {
-        return this.apiService.get<Chat>(this.routePrefix + id);
+    getCeratinChat: async (id: number | undefined) => {
+        return APIService.get<Chat>(route + "chat/" + id);
+    },
+
+    getCertainChat: async (id: number | undefined) => {
+        return APIService.get<Chat>(route + "chat" + id);
     }
-}
+};
 
 export default ChatService;

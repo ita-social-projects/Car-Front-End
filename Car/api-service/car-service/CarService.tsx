@@ -1,50 +1,32 @@
 import "reflect-metadata";
-import { injectable } from "tsyringe";
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
-import EnvironmentRoutes from "../EnvironmentRoutes";
 import axios from "axios";
+import APIRoutes from "../APIRoutes";
 
-@injectable()
-class CarService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getCarUrl();
 
-    routePrefix: string = "cars";
-
-    uploadPhoto(id: number, formData: FormData) {
-        return fetch(
-            EnvironmentRoutes.apiUrl + this.routePrefix + "/" + id + "/photo",
-            {
-                method: "PUT",
-                headers: { "Content-Type": "multipart/form-data" },
-                body: formData
-            }
-        );
-    }
-
+const CarService = {
     add(car: FormData) {
-        return axios.post(EnvironmentRoutes.apiUrl + this.routePrefix, car);
-    }
+        return axios.post(route, car);
+    },
 
-    update(car: UpdateCarViewModel) {
-        return this.apiService.put<UpdateCarViewModel>(this.routePrefix, car);
-    }
+    update: async (car: UpdateCarViewModel) => {
+        return APIService.put<UpdateCarViewModel>(route, car);
+    },
 
-    getById(id: number) {
-        return this.apiService.get<CarViewModel>(this.routePrefix + "/" + id);
-    }
+    getById: async (id: number) => {
+        return APIService.get<CarViewModel>(route + id);
+    },
 
-    getAll(id: number) {
-        return this.apiService.get<Array<CarViewModel>>(
-            this.routePrefix + "/by-user/" + id
-        );
-    }
+    getAll: async (id: number) => {
+        return APIService.get<Array<CarViewModel>>(route + "by-user/" + id);
+    },
 
-    getAvatar(id: number) {
-        return this.apiService.get<string>(
-            this.routePrefix + "/" + id + "/photo"
-        );
+    getAvatar: async (id: number) => {
+        return APIService.get<string>(route + id + "/photo");
     }
-}
+};
+
 export default CarService;

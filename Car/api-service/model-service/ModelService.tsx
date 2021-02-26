@@ -1,23 +1,17 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
 import CarModel from "../../models/car/CarModel";
+import APIRoutes from "../APIRoutes";
 import APIService from "../APIService";
 
-@injectable()
-class ModelService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getModelUrl();
 
-    routePrefix: string = "models";
+const ModelService = {
+    getModels: async () => {
+        return APIService.get<CarModel[]>(route);
+    },
 
-    getModels() {
-        return this.apiService.get<CarModel[]>(this.routePrefix);
+    getModelsByBrandId: async (id: number) => {
+        return APIService.get<CarModel[]>(route + "by-brand/" + id);
     }
-
-    getModelsByBrandId(id: number) {
-        return this.apiService.get<CarModel[]>(
-            this.routePrefix + "/by-brand/" + id
-        );
-    }
-}
+};
 
 export default ModelService;

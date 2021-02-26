@@ -1,22 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import UserService from "../../../../../api-service/user-service/UserService";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 
 function AvatarLogoTitle() {
-    const { user } = useContext(AuthContext);
-    const [journeysCount, setJourneysCount] = useState(user?.journeyCount);
-
-    const userService = container.resolve(UserService);
+    const [user, setUser] = useState(useContext(AuthContext).user);
 
     useEffect(() => {
-        userService
-            .getUser(Number(user?.id))
-            .then((res) => setJourneysCount(res.data?.journeyCount));
+        UserService.getUser(Number(user?.id)).then((res) => setUser(res.data));
     });
 
     return (
@@ -30,9 +23,9 @@ function AvatarLogoTitle() {
                         {user?.position}
                     </Text>
                     <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
-                        {journeysCount === 1
+                        {user?.journeyCount === 1
                             ? "1 ride"
-                            : journeysCount + " rides"}
+                            : user?.journeyCount + " rides"}
                         , 2 badges
                     </Text>
                 </View>

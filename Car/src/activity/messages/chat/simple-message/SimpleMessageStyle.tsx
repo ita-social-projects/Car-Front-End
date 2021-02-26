@@ -3,28 +3,43 @@ import Font from "../../../../data/fonts/Font";
 
 const SimpleMessageStyle = StyleSheet.create({
     main: {
-        display: "flex",
-        flexDirection: "column",
-        borderBottomWidth: 1,
-        borderBottomColor: "#C1C1C5",
         height: 68,
-        alignContent: "center",
-        width: 344,
-        alignSelf: "center",
-        backgroundColor: "#FFFFFF"
+        width: "100%",
+        justifyContent: "center"
     },
-
-    button: {
-        flexDirection: "row",
+    wrapper: {
+        flex: 1,
+        width: "100%",
+        height: 50,
+        borderBottomWidth: 1,
         justifyContent: "space-between",
-        padding: 10
+        flexDirection: "row"
     },
-
+    avatarWrapper: {
+        paddingLeft: 5,
+        width: 40,
+        height: "100%",
+        justifyContent: "center"
+    },
+    dataWrapper: {
+        flex: 1,
+        marginHorizontal: 10,
+        width: 39,
+        height: 39,
+        justifyContent: "center",
+        marginTop: 15
+    },
+    iconWrapper: {
+        width: 39,
+        height: 39,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 15
+    },
     fonts: {
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13
     },
-
     image: {
         width: 56,
         height: 56,
@@ -32,34 +47,31 @@ const SimpleMessageStyle = StyleSheet.create({
         marginRight: 7,
         bottom: 5
     },
-
     lottie: {
         width: 100,
         height: 100
     },
-
     container: {
-        backgroundColor: "white"
+        flex: 1,
+        backgroundColor: "white",
+        padding: 15
     },
-
     containerStyle: {
         height: 44,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "white",
         borderBottomColor: "transparent",
         borderTopColor: "transparent",
         marginTop: 5,
         marginBottom: 20
     },
-
     inputContainerStyle: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "white",
         borderColor: "black",
         borderWidth: 2,
         borderBottomWidth: 2,
         borderBottomColor: "black",
         paddingLeft: 5
     },
-
     textStyle: {
         fontSize: 11,
         paddingTop: 10,

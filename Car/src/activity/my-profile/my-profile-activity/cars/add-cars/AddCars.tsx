@@ -13,15 +13,13 @@ import {
     ImagePickerResponse,
     launchImageLibrary
 } from "react-native-image-picker/src";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
 import CarBrand from "../../../../../../models/car/CarBrand";
 import CarColor from "../../../../../../models/car/CarColor";
 import CarModel from "../../../../../../models/car/CarModel";
-import AuthContext from "../../../../auth/AuthContext";
+import AuthContext from "../../../../../components/auth/AuthContext";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
@@ -105,17 +103,10 @@ function AddCars() {
 
     const [loading, setLoading] = useState(false);
 
-    const brandService = container.resolve(BrandService);
-    const modelService = container.resolve(ModelService);
-    const carService = container.resolve(CarService);
-
     useEffect(() => {
-        brandService
-            .getBrands()
-            .then((res) => {
-                setBrands(res.data);
-            })
-            .catch((e) => console.log(e));
+        BrandService.getBrands().then((res) => {
+            setBrands(res.data);
+        });
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -140,8 +131,7 @@ function AddCars() {
                 uri: photo?.uri
             });
         }
-        await carService
-            .add(formData)
+        await CarService.add(formData)
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
         setLoading(false);
@@ -149,14 +139,11 @@ function AddCars() {
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        modelService
-            .getModelsByBrandId(Number(brand.value))
-            .then((res) => {
-                setModels(res.data);
-                modelPickerController.selectItem(res.data[0]?.id.toString());
-                modelPickerController.open();
-            })
-            .catch((e) => console.log(e));
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+            setModels(res.data);
+            modelPickerController.selectItem(res.data[0]?.id.toString());
+            modelPickerController.open();
+        });
     };
 
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
@@ -297,7 +284,7 @@ function AddCars() {
                         style={AddCarsStyle.carButtonSave}
                         onPress={() => {
                             if (validateFields()) {
-                                saveCarHandle()
+                                saveCarHandle();
                                 navigation.goBack();
                             }
                         }}

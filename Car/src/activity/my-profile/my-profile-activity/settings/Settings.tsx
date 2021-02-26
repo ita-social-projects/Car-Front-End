@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
-    DevSettings,
     Image,
     Text,
     TouchableOpacity,
@@ -12,11 +11,11 @@ import {
     ImagePickerResponse,
     launchImageLibrary
 } from "react-native-image-picker/src";
-import { container } from "tsyringe";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import SettingsStyle from "./SettingsStyle";
+import RNRestart from "react-native-restart";
 
 const Settings = () => {
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
@@ -28,8 +27,6 @@ const Settings = () => {
     const [imageData, setImageData] = useState<FormData>({} as FormData);
 
     const { user } = useContext(AuthContext);
-
-    const userService = container.resolve(UserService);
 
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
@@ -50,8 +47,7 @@ const Settings = () => {
     let byteOfImage = "";
 
     useEffect(() => {
-        userService
-            .getAvatar(Number(user?.id))
+        UserService.getAvatar(Number(user?.id))
             .then((result) => {
                 byteOfImage = JSON.stringify(result.request._response);
                 if (byteOfImage !== '""') {
@@ -67,7 +63,7 @@ const Settings = () => {
                 }
             })
             .then(() => setLoading(false));
-    });
+    }, []);
 
     const image = isPhotoChanged ? (
         <Image source={{ uri: photo.uri }} style={SettingsStyle.avatar} />
@@ -91,6 +87,9 @@ const Settings = () => {
 
     const uploadButtonText =
         !isPhotoExsists && !isPhotoChanged ? "Upload photo" : "Change photo";
+
+    const saveChangesAsync = async () =>
+        UserService.setAvatar(user!.id, imageData);
 
     return (
         <View style={SettingsStyle.container}>
@@ -128,11 +127,7 @@ const Settings = () => {
                                 activeOpacity={1}
                                 onPress={() => {
                                     setSaved(true);
-                                    (async () =>
-                                        await userService.setAvatar(
-                                            user!.id,
-                                            imageData
-                                        ))()
+                                    saveChangesAsync()
                                         .then(() =>
                                             Alert.alert(
                                                 "Saved",
@@ -141,7 +136,7 @@ const Settings = () => {
                                                     {
                                                         text: "Restart",
                                                         onPress: () => {
-                                                            DevSettings.reload();
+                                                            RNRestart.Restart();
                                                         }
                                                     }
                                                 ]

@@ -11,7 +11,6 @@ import {
     launchImageLibrary
 } from "react-native-image-picker/src";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
@@ -22,8 +21,9 @@ import CarModel from "../../../../../../models/car/CarModel";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
-import AuthContext from "../../../../auth/AuthContext";
+import AuthContext from "../../../../../components/auth/AuthContext";
 import EditCarsStyle from "./EditCarsStyle";
+import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
 
 function EditCars(navigation: any) {
     const { carId } = navigation.route.params;
@@ -33,12 +33,9 @@ function EditCars(navigation: any) {
     const [car, setCar] = useState({} as CarViewModel);
 
     useEffect(() => {
-        carService
-            .getById(carId)
-            .then((res) => {
-                setCar(res.data);
-            })
-            .catch((e) => console.log(e));
+        CarService.getById(carId).then((res) => {
+            setCar(res.data);
+        });
     }, []);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
@@ -66,17 +63,10 @@ function EditCars(navigation: any) {
 
     const [loading, setLoading] = useState(false);
 
-    const brandService = container.resolve(BrandService);
-    const modelSerivce = container.resolve(ModelService);
-    const carService = container.resolve(CarService);
-
     useEffect(() => {
-        brandService
-            .getBrands()
-            .then((res) => {
-                setBrands(res.data);
-            })
-            .catch((e) => console.log(e));
+        BrandService.getBrands().then((res) => {
+            setBrands(res.data);
+        });
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -95,12 +85,9 @@ function EditCars(navigation: any) {
     };
 
     const selectBrandHandle = (brand: any) => {
-        modelSerivce
-            .getModelsByBrandId(Number(brand.value))
-            .then((res) => {
-                setModels(res.data);
-            })
-            .catch((e) => console.log(e));
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+            setModels(res.data);
+        });
     };
 
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
@@ -135,10 +122,12 @@ function EditCars(navigation: any) {
                             ? "Change photo"
                             : "Upload photo"}
                     </Text>
-                    <Image
-                        source={{ uri: car?.imageId }}
-                        style={{ width: "100%", height: "100%" }}
-                    />
+                    {car?.imageId && (
+                        <Image
+                            source={{ uri: car?.imageId }}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                    )}
                 </TouchableOpacity>
             </View>
             <View style={EditCarsStyle.inputsContainer}>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { container } from "tsyringe";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
@@ -13,38 +12,33 @@ function SearchJourney() {
     const [journeys, setJourneys] = useState<Array<Journey>>([]);
     const [isLoading, setLoading] = useState(true);
 
-    const journeyService = container.resolve(JourneyService);
-
     useEffect(() => {
-        journeyService
-            .getJourney(1)
-            .then((res1) => {
-                journeyService.getJourney(5).then((res2) => {
-                    journeyService.getJourney(7).then((res3) => {
-                        journeyService.getJourney(8).then((res4) => {
-                            journeyService.getJourney(9).then((res5) => {
-                                journeyService.getJourney(11).then((res6) => {
-                                    setJourneys([
-                                        res1.data,
-                                        res2.data,
-                                        res3.data,
-                                        res4.data,
-                                        res5.data,
-                                        res6.data,
-                                        res1.data,
-                                        res2.data,
-                                        res3.data,
-                                        res4.data,
-                                        res5.data
-                                    ]);
-                                    setLoading(false);
-                                });
+        JourneyService.getJourney(2).then((res1) => {
+            JourneyService.getJourney(3).then((res2) => {
+                JourneyService.getJourney(4).then((res3) => {
+                    JourneyService.getJourney(2).then((res4) => {
+                        JourneyService.getJourney(3).then((res5) => {
+                            JourneyService.getJourney(4).then((res6) => {
+                                setJourneys([
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res6.data,
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data
+                                ]);
+                                setLoading(false);
                             });
                         });
                     });
                 });
-            })
-            .catch((e) => console.log(e));
+            });
+        });
     }, []);
 
     return (
@@ -137,7 +131,7 @@ function SearchJourney() {
                             color="#000000"
                             title="BAD"
                             onPress={() => {
-                                navigation.navigate("Bad Search Result", {});
+                                navigation.navigate("Bad Search Result");
                             }}
                         />
                     </View>

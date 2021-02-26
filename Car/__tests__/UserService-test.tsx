@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../api-service/APIService";
 import UserService from "../api-service/user-service/UserService";
-import { User } from "../models/User";
+import User from "../models/User";
 
 describe("UserService", () => {
     let userData = {
@@ -17,11 +17,8 @@ describe("UserService", () => {
         token: ""
     };
 
-    let apiService: APIService = new APIService();
-    let userService = new UserService(apiService);
-
     test("should get user", () => {
-        jest.spyOn(apiService, "get").mockImplementation(
+        jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {
                     resolve({
@@ -38,43 +35,19 @@ describe("UserService", () => {
 
         let response: User;
 
-        userService.getUser(userData.id).then((res) => {
+        UserService.getUser(userData.id).then((res) => {
             response = res.data;
             expect(res.status).toEqual(200);
             expect(response).toEqual(userData);
         });
     });
 
-    test("should add user", () => {
-        jest.spyOn(apiService, "post").mockImplementation(
-            () =>
-                new Promise<AxiosResponse<User>>(function (resolve) {
-                    resolve({
-                        data: userData,
-                        statusText: "Ok",
-                        status: 200,
-                        config: {},
-                        headers: {
-                            "Context-Type": "application/json"
-                        }
-                    });
-                })
-        );
-
-        let response: User;
-
-        userService.create(userData).then((res) => {
-            response = res.data;
-            expect(res.status).toEqual(200);
-            expect(response).toEqual(userData);
-        });
-    });
     test("should update user", () => {
         let newName = "Mark";
 
         let newUser = { ...userData, name: newName };
 
-        jest.spyOn(apiService, "put").mockImplementation(
+        jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {
                     resolve({
@@ -91,7 +64,7 @@ describe("UserService", () => {
 
         let response: User;
 
-        userService.getUser(userData.id).then((res) => {
+        UserService.getUser(userData.id).then((res) => {
             response = res.data;
             expect(res.status).toEqual(200);
             expect(response).toEqual(userData);

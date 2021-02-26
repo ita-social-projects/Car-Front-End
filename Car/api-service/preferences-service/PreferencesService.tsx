@@ -1,24 +1,17 @@
-import { injectable } from "tsyringe";
 import UserPreferences from "../../models/UserPreferences";
+import APIRoutes from "../APIRoutes";
 import APIService from "../APIService";
 
-@injectable()
-class PreferencesService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getPreferencesUrl();
 
-    routePrefix: string = "user-preferences";
+const PreferencesService = {
+    getUserPreferences: async (id: number) => {
+        return APIService.get<UserPreferences>(route + id);
+    },
 
-    getUserPreferences(id: number) {
-        return this.apiService.get<UserPreferences>(
-            this.routePrefix + "/" + id
-        );
+    updateUserPreferences: async (preferences: UserPreferences) => {
+        return APIService.put<UserPreferences>(route, preferences);
     }
+};
 
-    updateUserPreferences(preferences: UserPreferences) {
-        return this.apiService.put<UserPreferences>(
-            this.routePrefix,
-            preferences
-        );
-    }
-}
 export default PreferencesService;

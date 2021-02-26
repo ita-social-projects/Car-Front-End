@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import "reflect-metadata";
 import ComponentsEnum from "../../common/interfaces/ComponentsEnum";
 import NotificationProps from "../../common/interfaces/NotificationProps";
 import JourneyNewApplicant from "../../components/journey-new-applicant/JourneyNewApplicant";

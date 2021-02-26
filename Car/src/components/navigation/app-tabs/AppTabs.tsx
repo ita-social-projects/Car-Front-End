@@ -8,7 +8,8 @@ import NotificationsTabs from "../../../activity/notifications/notifications-tab
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 import * as signalR from "@microsoft/signalr";
-import routes from "../../../../api-service/EnvironmentRoutes";
+import APIConfig from "../../../../api-service/APIConfig";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 interface AppTabsProps {}
 
@@ -17,7 +18,7 @@ const Tabs = createBottomTabNavigator<AppTabsList>();
 const AppTabs: React.FC<AppTabsProps> = () => {
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
     const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(routes.notificationUrl)
+        .withUrl(APIConfig.URL + "Notification")
         .build();
     hubConnection.start();
 
@@ -27,6 +28,14 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             setUnreadNotificationsNumber
         );
     });
+
+    const getTabBarVisibility = (route: any) => {
+        const routeName = getFocusedRouteNameFromRoute(route)!;
+        const hideOnScreens = ["Chat"];
+        if (hideOnScreens.indexOf(routeName) > -1) return false;
+        return true;
+    };
+
     return (
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
@@ -64,7 +73,10 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             <Tabs.Screen
                 name="MessagesTabs"
                 component={MessagesTabs}
-                options={{ tabBarLabel: "Messages" }}
+                options={({ route }) => ({
+                    tabBarVisible: getTabBarVisibility(route),
+                    tabBarLabel: "Messages"
+                })}
             />
             <Tabs.Screen
                 options={{ tabBarLabel: "My Profile" }}

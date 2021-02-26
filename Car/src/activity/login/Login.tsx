@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
-import AuthManager from "../auth/AuthManager";
-import AuthContext from "../auth/AuthContext";
+import AuthManager from "../../components/auth/AuthManager";
+import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 
 const Login = (props: any) => {

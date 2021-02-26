@@ -4,26 +4,24 @@ import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
-import { container } from "tsyringe";
-import { UserAvatar } from "../user-avatar/UserAvatar";
 import NotificationProps from "../../common/interfaces/NotificationProps";
 import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Item from "../styles/flex/Item";
 import Circle from "../styles/Circle";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
 
 const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
 ) => {
-    let [modalVisible, setModalVisible] = useState(props.visible);
-    const notificationService = container.resolve(NotificationsService);
+    const [modalVisible, setModalVisible] = useState(props.visible);
 
     return (
         <View>
             <TouchableOpacity
                 onPress={() => {
                     setModalVisible(!modalVisible);
-                    notificationService.markAsRead(props.notificationId);
+                    NotificationsService.markAsRead(props.notificationId);
                 }}
             >
                 <NewNotification
@@ -66,10 +64,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 JourneyNewApplicantStyle.title
                             ]}
                         >
-                            <UserAvatar
-                                user={props.user}
-                                flexBox={{ width: 20 }}
-                            />
+                            <AvatarLogo user={props.user} size={49} />
                             <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>

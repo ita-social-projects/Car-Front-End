@@ -1,9 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect, useState } from "react";
-import AuthParamList from "../../activity/auth/AuthParamList";
-import AuthContext from "../../activity/auth/AuthContext";
-import Exception from "../../activity/exception/Exception";
+import AuthParamList from "../auth/AuthParamList";
+import AuthContext from "../auth/AuthContext";
 import Login from "../../activity/login/Login";
 import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
@@ -11,6 +10,7 @@ import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
 
 const Stack = createStackNavigator<AuthParamList>();
+const MILISECONDS_IN_MONTH = 2629800000;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
@@ -24,7 +24,7 @@ const Routes = () => {
             );
             if (
                 Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
-                2629800000
+                MILISECONDS_IN_MONTH
             ) {
                 await AsyncStorage.setItem(
                     "lastLogin",
@@ -35,7 +35,7 @@ const Routes = () => {
         })().then(() =>
             (async () => loadStorageUser())().then(() => setLoading(false))
         );
-    }, []);
+    }, [0]);
 
     const navigator = user ? (
         <Stack.Screen
@@ -58,7 +58,6 @@ const Routes = () => {
             ) : (
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     {navigator}
-                    <Stack.Screen name="Exception" component={Exception} />
                 </Stack.Navigator>
             )}
         </NavigationContainer>

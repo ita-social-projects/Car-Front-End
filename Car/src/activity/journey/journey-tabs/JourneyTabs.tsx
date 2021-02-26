@@ -4,14 +4,14 @@ import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyNewApplicant from "../../../components/journey-new-applicant/JourneyNewApplicant";
-import Journey from "../Journey";
+import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
 import SearchJourney from "../journey-activity/search-journey/SearchJourney";
 import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
 import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/segment-control-activities/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/segment-control-activities/search-results/ok-search-result/OkSearchResult";
-import JourneyStyle from "../JourneyStyle";
+import JourneyStyle from "../JourneyStartPageStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
 import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
@@ -47,7 +47,7 @@ const JourneyTabs = () => {
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Journey"
-                    component={Journey}
+                    component={JourneyStartPage}
                     options={{
                         headerTitle: "Journey",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
@@ -204,7 +204,7 @@ const JourneyTabs = () => {
                             <TouchableOpacity
                                 style={HeaderStyle.requestButton}
                                 onPress={() => {
-                                    navigation.navigate("Search Journey", {});
+                                    navigation.navigate("Search Journey");
                                 }}
                             >
                                 <Text style={HeaderStyle.buttonText}>
@@ -245,7 +245,7 @@ const JourneyTabs = () => {
                             <TouchableOpacity
                                 style={HeaderStyle.requestButton}
                                 onPress={() => {
-                                    navigation.navigate("Search Journey", {});
+                                    navigation.navigate("Search Journey");
                                 }}
                             >
                                 <Text style={HeaderStyle.buttonText}>
@@ -273,15 +273,9 @@ const JourneyTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
