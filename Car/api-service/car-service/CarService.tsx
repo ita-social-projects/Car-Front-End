@@ -1,18 +1,15 @@
-import CreateCarViewModel from "../../models/car/CreateCarViewModel";
+import "reflect-metadata";
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
+import axios from "axios";
 import APIRoutes from "../APIRoutes";
 
 const route = APIRoutes.getCarUrl();
 
 const CarService = {
-    uploadPhoto: async (id: number, formData: FormData) => {
-        return APIService.put(route + id + "/photo", formData);
-    },
-
-    add: async (car: CreateCarViewModel) => {
-        return APIService.post<CreateCarViewModel>(route, car);
+    add(car: FormData) {
+        return axios.post(route, car);
     },
 
     update: async (car: UpdateCarViewModel) => {

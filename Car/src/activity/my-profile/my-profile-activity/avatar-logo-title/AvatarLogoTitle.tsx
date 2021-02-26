@@ -15,7 +15,6 @@ function AvatarLogoTitle() {
     return (
         <View style={AvatarLogoTitleStyle.container}>
             <View style={AvatarLogoTitleStyle.headerContainer}>
-                <AvatarLogo user={user} size={56} />
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
                     <Text style={AvatarLogoTitleStyle.headerUserName}>
                         {user?.name + " " + user?.surname}
