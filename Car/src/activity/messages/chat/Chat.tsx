@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     GiftedChat,
     Bubble,
     Send,
-    InputToolbar
+    InputToolbar,
+    IMessage
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
 import AuthContext from "../../../components/auth/AuthContext";
 import ChatStyle from "./ChatStyle";
+
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
@@ -17,15 +19,15 @@ const Chat = (props: any) => {
 
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
-            const messagesFromChat = res.data.messages;
+            const messagesFromChat = res.data?.messages;
             const tempChat: any = [];
-            messagesFromChat.forEach((element) => {
+            messagesFromChat?.forEach((element: any) => {
                 const messageToAdd = {
-                    _id: element.id,
-                    text: element.text,
-                    createdAt: element.createdAt,
+                    _id: element?.id,
+                    text: element?.text,
+                    createdAt: element?.createdAt,
                     user: {
-                        _id: element.senderId.toString()!,
+                        _id: element?.senderId?.toString(),
                         name: "React Native",
                         avatar: "https://placeimg.com/140/140/any"
                     }
@@ -40,15 +42,18 @@ const Chat = (props: any) => {
             (message: any) => {
                 console.log(message);
                 setMessages((previousMessages) =>
-                    GiftedChat.append(previousMessages, {
-                        _id: message.id,
-                        text: message.text,
-                        createdAt: message.createdAt,
-                        user: {
-                            _id: message.senderId?.toString(),
-                            avatar: "https://placeimg.com/140/140/any"
-                        }
-                    })
+                    GiftedChat.append(
+                        previousMessages as any,
+                        {
+                            _id: message.id,
+                            text: message.text,
+                            createdAt: message.createdAt,
+                            user: {
+                                _id: message.senderId?.toString(),
+                                avatar: "https://placeimg.com/140/140/any"
+                            }
+                        } as any
+                    )
                 );
             }
         );
@@ -132,7 +137,7 @@ const Chat = (props: any) => {
                 placeholder="Aa"
                 renderTime={() => <View></View>}
                 maxInputLength={500}
-                messages={messages}
+                messages={messages as any[]}
                 onInputTextChanged={setMessage}
                 text={message}
                 onSend={onSend}

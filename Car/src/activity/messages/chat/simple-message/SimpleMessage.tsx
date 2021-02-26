@@ -17,8 +17,8 @@ import APIConfig from "../../../../../api-service/APIConfig";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 
 const SimpleMessage = (props: any) => {
-    const [filteredDataSource, setFilteredDataSource] = useState([]);
-    const [masterDataSource, setMasterDataSource] = useState([]);
+    const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
+    const [masterDataSource, setMasterDataSource] = useState<any>([]);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
     const [hubConnection, setHubConnection] = useState<HubConnection>();
@@ -39,7 +39,7 @@ const SimpleMessage = (props: any) => {
 
     const setSearchFilter = (text: any) => {
         if (text) {
-            const newData = masterDataSource.filter(function (item) {
+            const newData = masterDataSource.filter((item: any) => {
                 const itemData =
                     item.journey.organizer.name +
                     " " +
@@ -121,7 +121,7 @@ const SimpleMessage = (props: any) => {
                 {renderHeader()}
                 <FlatList
                     data={filteredDataSource}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(item, index) => index.toString() + item}
                     renderItem={ItemView}
                 />
             </View>
