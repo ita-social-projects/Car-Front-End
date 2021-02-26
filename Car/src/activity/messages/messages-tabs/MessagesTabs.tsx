@@ -19,7 +19,6 @@ const MessagesTabs = () => {
     const setIsOpen = () => {
         setIsOpenFilter(!isOpenFilter);
     };
-    
 
     return (
         <View style={HeaderStyle.container}>

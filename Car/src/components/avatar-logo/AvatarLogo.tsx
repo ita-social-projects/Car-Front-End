@@ -17,9 +17,7 @@ const AvatarLogo = (props: any) => {
                 style={[
                     avatarStyle,
                     {
-                        backgroundColor: stc(
-                            user?.name + " " + user?.surname
-                        )
+                        backgroundColor: stc(user?.name + " " + user?.surname)
                     }
                 ]}
             >
@@ -27,7 +25,10 @@ const AvatarLogo = (props: any) => {
                     {user?.name[0] + user?.surname[0]}
                 </Text>
             </View>
-            <Image source={{uri: user.imageId}} style={[avatarStyle, {position: "absolute"}]} />
+            <Image
+                source={{ uri: user.imageId }}
+                style={[avatarStyle, { position: "absolute" }]}
+            />
         </>
     );
 };

@@ -14,7 +14,7 @@ import APIConfig from "../../../api-service/APIConfig";
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;
 
-export let hubConnection = null as unknown as HubConnection;
+export let hubConnection = (null as unknown) as HubConnection;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
@@ -36,16 +36,21 @@ const Routes = () => {
                 );
                 await AsyncStorage.removeItem("user");
             }
-        })().then(() =>
-            (async () => loadStorageUser())().then(() => setLoading(false))
-        ).then(() => {
-            if (user){
-            const hubConnectionFunc = new HubConnectionBuilder()
-            .withUrl(APIConfig.URL + "Chat/")
-            .build();
-        hubConnectionFunc?.start().then(() => "Connection started!");
-        hubConnection = hubConnectionFunc;
-    }});
+        })()
+            .then(() =>
+                (async () => loadStorageUser())().then(() => setLoading(false))
+            )
+            .then(() => {
+                if (user) {
+                    const hubConnectionFunc = new HubConnectionBuilder()
+                        .withUrl(APIConfig.URL + "Chat/")
+                        .build();
+                    hubConnectionFunc
+                        ?.start()
+                        .then(() => "Connection started!");
+                    hubConnection = hubConnectionFunc;
+                }
+            });
     }, [0]);
 
     const navigator = user ? (

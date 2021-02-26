@@ -20,7 +20,7 @@ const Chat = (props: any) => {
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
 
-    props.navigation.setOptions({headerTitle: props.route.params.header});
+    props.navigation.setOptions({ headerTitle: props.route.params.header });
 
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
@@ -43,31 +43,25 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        hubConnection.on(
-            "RecieveMessage",
-            (message: any) => {
-                console.log(message);
-                UserService.getUser(message?.senderId).then((res) =>
-                    setMessages((previousMessages) =>
-                        GiftedChat.append(
-                            previousMessages as any,
-                            {
-                                _id: message.id,
-                                text: message.text,
-                                createdAt: message.createdAt,
-                                user: {
-                                    _id: message.senderId?.toString(),
-                                    name:
-                                        res?.data?.name +
-                                        " " +
-                                        res?.data?.surname
-                                }
-                            } as any
-                        )
+        hubConnection.on("RecieveMessage", (message: any) => {
+            console.log(message);
+            UserService.getUser(message?.senderId).then((res) =>
+                setMessages((previousMessages) =>
+                    GiftedChat.append(
+                        previousMessages as any,
+                        {
+                            _id: message.id,
+                            text: message.text,
+                            createdAt: message.createdAt,
+                            user: {
+                                _id: message.senderId?.toString(),
+                                name: res?.data?.name + " " + res?.data?.surname
+                            }
+                        } as any
                     )
-                );
-            }
-        );
+                )
+            );
+        });
         hubConnection
             ?.invoke("EnterToGroup", props.route.params.chatId.toString())
             .catch((err: any) => console.log(err));
@@ -107,12 +101,12 @@ const Chat = (props: any) => {
                     left: {
                         color: "#000000",
                         paddingHorizontal: 8,
-                        paddingVertical: 2,
+                        paddingVertical: 2
                     },
                     right: {
                         color: "#FFFFFF",
                         paddingHorizontal: 8,
-                        paddingVertical: 2,
+                        paddingVertical: 2
                     }
                 }}
             />

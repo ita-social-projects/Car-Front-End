@@ -11,7 +11,7 @@ import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
-import * as navigation from "../../components/navigation/Navigation"
+import * as navigation from "../../components/navigation/Navigation";
 
 const SimpleMessage = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
@@ -69,12 +69,16 @@ const SimpleMessage = (props: any) => {
     const ItemView = ({ item }: any) => {
         return (
             <TouchableOpacity
-                onPress={() =>{
-                        navigation.navigate("Chat", {
+                onPress={() => {
+                    navigation.navigate("Chat", {
                         chatId: item.id,
-                        header: item.journey.organizer.name + " " + item.journey.organizer.surname + "'s journey"
-                    });}
-                }
+                        header:
+                            item.journey.organizer.name +
+                            " " +
+                            item.journey.organizer.surname +
+                            "'s journey"
+                    });
+                }}
             >
                 <View style={MessagesStyle.main}>
                     <View style={MessagesStyle.wrapper}>

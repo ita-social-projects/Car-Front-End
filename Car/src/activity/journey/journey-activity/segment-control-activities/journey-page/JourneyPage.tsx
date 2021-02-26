@@ -17,7 +17,7 @@ import Indicator from "../../../../../components/activity-indicator/Indicator";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import APIConfig from "../../../../../../api-service/APIConfig";
 
-const JourneyPage = ({props}: any) => {
+const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);
     const navigation = useNavigation();
     const { journeyId } = props.route.params;
@@ -142,11 +142,18 @@ const JourneyPage = ({props}: any) => {
     const ButtonsBlock = () => {
         return (
             <View style={JourneyPageStyle.buttonsBlock}>
-                <TouchableOpacity style={JourneyPageStyle.messageAllButton}
-                onPress={() => navigation.navigate("Chat", {
-                    chatId: currentJourney?.id,
-                    header: currentJourney?.organizer?.name + " " + currentJourney?.organizer?.surname + "'s journey"
-                })}
+                <TouchableOpacity
+                    style={JourneyPageStyle.messageAllButton}
+                    onPress={() =>
+                        navigation.navigate("Chat", {
+                            chatId: currentJourney?.id,
+                            header:
+                                currentJourney?.organizer?.name +
+                                " " +
+                                currentJourney?.organizer?.surname +
+                                "'s journey"
+                        })
+                    }
                 >
                     <Text style={JourneyPageStyle.messageAllButtonText}>
                         MESSAGE ALL
