@@ -7,7 +7,7 @@ import UserService from "../../../../api-service/user-service/UserService";
 import User from "../../../../models/User";
 import AuthContext from "../../../components/auth/AuthContext";
 import Chat from "../chat/Chat";
-import SimpleMessage from "../chat/simple-message/SimpleMessage";
+import Messages from "../Messages";
 import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 
@@ -50,7 +50,7 @@ const MessagesTabs = () => {
                         headerLeft: () => <View />
                     }}
                     children={(props) => (
-                        <SimpleMessage
+                        <Messages
                             {...props}
                             component={Chat}
                             isOpenFilter={isOpenFilter}

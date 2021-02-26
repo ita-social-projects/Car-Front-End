@@ -5,8 +5,7 @@ import {
     GiftedChat,
     Bubble,
     Send,
-    InputToolbar,
-    IMessage
+    InputToolbar
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
 import AuthContext from "../../../components/auth/AuthContext";

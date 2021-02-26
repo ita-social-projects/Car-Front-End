@@ -1,20 +1,15 @@
-import ChatService from "../../../../../api-service/chat-service/ChatService";
-import AuthContext from "../../../../components/auth/AuthContext";
-import React, { useEffect, useState, useContext } from "react";
-import {
-    SafeAreaView,
-    Text,
-    View,
-    TouchableOpacity,
-    FlatList
-} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import "reflect-metadata";
-import { SearchBar } from "react-native-elements";
-import SimpleMessageStyle from "./SimpleMessageStyle";
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
-import APIConfig from "../../../../../api-service/APIConfig";
-import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
+import React, { useState, useContext, useEffect } from "react";
+import { View, Text, SafeAreaView } from "react-native";
+import { SearchBar } from "react-native-elements";
+import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import APIConfig from "../../../api-service/APIConfig";
+import ChatService from "../../../api-service/chat-service/ChatService";
+import AuthContext from "../../components/auth/AuthContext";
+import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
+import SimpleMessageStyle from "./MessagesStyle";
+
 
 const SimpleMessage = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
