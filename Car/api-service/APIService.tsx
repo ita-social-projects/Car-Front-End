@@ -1,4 +1,4 @@
-import Interceptor from "./Interceptor";
+import Axios from "./Axios";
 
 const baseHeaders = {
     headers: {
@@ -9,22 +9,19 @@ const baseHeaders = {
 
 const APIService = {
     get<T>(url: string, params?: any) {
-        return Interceptor.get<T>(url, Object.assign({}, baseHeaders, params));
+        return Axios.get<T>(url, Object.assign({}, baseHeaders, params));
     },
 
     post<T>(url: string, params?: any) {
-        return Interceptor.post<T>(url, Object.assign({}, baseHeaders, params));
+        return Axios.post<T>(url, Object.assign({}, baseHeaders, params));
     },
 
     put<T>(url: string, params?: any) {
-        return Interceptor.put<T>(url, Object.assign({}, baseHeaders, params));
+        return Axios.put<T>(url, Object.assign({}, baseHeaders, params));
     },
 
     delete<T>(url: string, params?: any) {
-        return Interceptor.delete<T>(
-            url,
-            Object.assign({}, baseHeaders, params)
-        );
+        return Axios.delete<T>(url, Object.assign({}, baseHeaders, params));
     }
 };
 

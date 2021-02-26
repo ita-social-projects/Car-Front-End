@@ -140,7 +140,19 @@ const JourneyPage = ({ props }: any) => {
     const ButtonsBlock = () => {
         return (
             <View style={JourneyPageStyle.buttonsBlock}>
-                <TouchableOpacity style={JourneyPageStyle.messageAllButton}>
+                <TouchableOpacity
+                    style={JourneyPageStyle.messageAllButton}
+                    onPress={() =>
+                        navigation.navigate("Chat", {
+                            chatId: currentJourney?.id,
+                            header:
+                                currentJourney?.organizer?.name +
+                                " " +
+                                currentJourney?.organizer?.surname +
+                                "'s journey"
+                        })
+                    }
+                >
                     <Text style={JourneyPageStyle.messageAllButtonText}>
                         MESSAGE ALL
                     </Text>

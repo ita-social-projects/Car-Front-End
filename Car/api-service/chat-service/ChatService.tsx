@@ -5,17 +5,13 @@ import APIService from "../APIService";
 const route = APIRoutes.getChatUrl();
 
 const ChatService = {
-    getChat: async (id: number | undefined) => {
-        return APIService.get<Chat>(route + id);
-    },
+    getChat: async (id: number | undefined) => APIService.get<Chat>(route + id),
 
-    getCeratinChat: async (id: number | undefined) => {
-        return APIService.get<Chat>(route + "chat/" + id);
-    },
+    getCeratinChat: async (id: number | undefined) =>
+        APIService.get<Chat>(route + "chat/" + id),
 
-    getCertainChat: async (id: number | undefined) => {
-        return APIService.get<Chat>(route + "chat" + id);
-    }
+    getCertainChat: async (id: number | undefined) =>
+        APIService.get<Chat>(route + "chat" + id)
 };
 
 export default ChatService;

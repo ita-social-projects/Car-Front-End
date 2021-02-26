@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     GiftedChat,
@@ -8,56 +8,66 @@ import {
     InputToolbar
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
+import HubConnection from "../../../../api-service/HubConnection";
+import UserService from "../../../../api-service/user-service/UserService";
 import AuthContext from "../../../components/auth/AuthContext";
+import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
+import * as navigation from "../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
+
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
 
+    props.navigation.setOptions({ headerTitle: props.route.params.header });
+
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
-            const messagesFromChat = res.data.messages;
+            const messagesFromChat = res.data?.messages;
             const tempChat: any = [];
-            messagesFromChat.forEach((element) => {
-                const messageToAdd = {
-                    _id: element.id,
-                    text: element.text,
-                    createdAt: element.createdAt,
-                    user: {
-                        _id: element.senderId.toString()!,
-                        name: "React Native",
-                        avatar: "https://placeimg.com/140/140/any"
-                    }
-                };
-                tempChat.push(messageToAdd);
+            messagesFromChat?.forEach((element: any) => {
+                UserService.getUser(element?.senderId).then((r) => {
+                    const messageToAdd = {
+                        _id: element?.id,
+                        text: element?.text,
+                        createdAt: element?.createdAt,
+                        user: {
+                            _id: element?.senderId?.toString(),
+                            name: r?.data?.name + " " + r?.data?.surname
+                        }
+                    };
+                    tempChat.push(messageToAdd);
+                });
             });
             setMessages(tempChat);
         });
 
-        props.route.params.hubConnection.on(
-            "RecieveMessage",
-            (message: any) => {
-                console.log(message);
+        HubConnection.on("RecieveMessage", (receivedMessage: any) => {
+            UserService.getUser(receivedMessage?.senderId).then((res) =>
                 setMessages((previousMessages) =>
-                    GiftedChat.append(previousMessages, {
-                        _id: message.id,
-                        text: message.text,
-                        createdAt: message.createdAt,
-                        user: {
-                            _id: message.senderId?.toString(),
-                            avatar: "https://placeimg.com/140/140/any"
-                        }
-                    })
-                );
-            }
-        );
-        props.route.params.hubConnection
-            ?.invoke("EnterToGroup", props.route.params.chatId.toString())
-            .catch((err: any) => console.log(err));
+                    GiftedChat.append(
+                        previousMessages as any,
+                        {
+                            _id: receivedMessage.id,
+                            text: receivedMessage.text,
+                            createdAt: receivedMessage.createdAt,
+                            user: {
+                                _id: receivedMessage.senderId?.toString(),
+                                name: res?.data?.name + " " + res?.data?.surname
+                            }
+                        } as any
+                    )
+                )
+            );
+        });
+        HubConnection?.invoke(
+            "EnterToGroup",
+            props.route.params.chatId.toString()
+        ).catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
-            props.route.params.hubConnection?.invoke(
+            HubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()
             );
@@ -65,13 +75,11 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        props.route.params.hubConnection
-            ?.invoke("SendMessageToGroup", {
-                Text: message,
-                SenderId: user?.id,
-                ChatId: props.route.params.chatId
-            })
-            .catch((err: any) => console.log(err));
+        HubConnection?.invoke("SendMessageToGroup", {
+            Text: message,
+            SenderId: user?.id,
+            ChatId: props.route.params.chatId
+        }).catch((err: any) => console.log(err));
         setMessage("");
     };
 
@@ -89,15 +97,20 @@ const Chat = (props: any) => {
                 }}
                 textStyle={{
                     left: {
-                        color: "#000000"
+                        color: "#000000",
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
                     },
                     right: {
-                        color: "#FFFFFF"
+                        color: "#FFFFFF",
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
                     }
                 }}
             />
         );
     };
+
     const renderSend = (props: any) => {
         return (
             <Send {...props}>
@@ -114,25 +127,55 @@ const Chat = (props: any) => {
 
     const renderInputToolbar = (props: any) => {
         return (
-            <InputToolbar
-                {...props}
-                primaryStyle={{
-                    borderWidth: 2,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: 44
+            <View
+                style={{
+                    marginHorizontal: 16,
+                    marginVertical: 46
                 }}
-            />
+            >
+                <InputToolbar
+                    {...props}
+                    primaryStyle={{
+                        borderWidth: 2,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: 44
+                    }}
+                />
+            </View>
         );
     };
 
     return (
         <View style={ChatStyle.chatWrapper}>
             <GiftedChat
+                renderAvatar={(data) => (
+                    <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate("Applicant Page", {
+                                userId: Number(data.currentMessage.user._id)
+                            })
+                        }
+                    >
+                        <AvatarLogo
+                            size={36}
+                            user={{
+                                id: data.currentMessage.user._id,
+                                name: data.currentMessage.user.name.split(
+                                    " "
+                                )[0],
+                                surname: data.currentMessage.user.name.split(
+                                    " "
+                                )[1]
+                            }}
+                        />
+                    </TouchableOpacity>
+                )}
+                messagesContainerStyle={{ paddingHorizontal: 8 }}
                 placeholder="Aa"
                 renderTime={() => <View></View>}
                 maxInputLength={500}
-                messages={messages}
+                messages={messages as any[]}
                 onInputTextChanged={setMessage}
                 text={message}
                 onSend={onSend}

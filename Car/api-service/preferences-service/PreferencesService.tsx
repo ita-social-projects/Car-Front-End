@@ -5,13 +5,11 @@ import APIService from "../APIService";
 const route = APIRoutes.getPreferencesUrl();
 
 const PreferencesService = {
-    getUserPreferences: async (id: number) => {
-        return APIService.get<UserPreferences>(route + id);
-    },
+    getUserPreferences: async (id: number) =>
+        APIService.get<UserPreferences>(route + id),
 
-    updateUserPreferences: async (preferences: UserPreferences) => {
-        return APIService.put<UserPreferences>(route, preferences);
-    }
+    updateUserPreferences: async (preferences: UserPreferences) =>
+        APIService.put<UserPreferences>(route, preferences)
 };
 
 export default PreferencesService;
