@@ -1,11 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Image,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
     ImagePickerResponse,
     launchImageLibrary
