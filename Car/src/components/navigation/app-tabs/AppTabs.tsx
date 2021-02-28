@@ -7,10 +7,10 @@ import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfil
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
-import APIConfig from "../../../../api-service/APIConfig";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
-import AuthContext, {SignalRHubConnection} from "../../auth/AuthContext";
+import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
+import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 
 interface AppTabsProps {}
 
@@ -21,11 +21,9 @@ const AppTabs: React.FC<AppTabsProps> = () => {
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
     NotificationsService.getUnreadNotificationsNumber(user!.id)
         .then(result => setUnreadNotificationsNumber(result.data as number));
-    const hubConnection = SignalRHubConnection;
-    hubConnection.start();
 
     useEffect(() => {
-        hubConnection.on(
+        SignalRHubConnection.on(
             "updateUnreadNotificationsNumber",
             setUnreadNotificationsNumber
         );
@@ -34,8 +32,8 @@ const AppTabs: React.FC<AppTabsProps> = () => {
     const getTabBarVisibility = (route: any) => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
-        if (hideOnScreens.indexOf(routeName) > -1) return false;
-        return true;
+        return hideOnScreens.indexOf(routeName) <= -1;
+
     };
 
     return (
@@ -101,7 +99,7 @@ const AppTabs: React.FC<AppTabsProps> = () => {
                             : undefined
                 }}
                 name="NotificationsTabs"
-                component={NotificationsTabs}
+                component = {NotificationsTabs}
             />
         </Tabs.Navigator>
     );

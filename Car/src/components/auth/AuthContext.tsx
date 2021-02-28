@@ -1,7 +1,5 @@
 import React from "react";
 import User from "../../../models/User";
-import * as signalR from "@microsoft/signalr";
-import APIConfig from "../../../api-service/APIConfig";
 
 const returnType: any = {};
 
@@ -11,9 +9,5 @@ const AuthContext = React.createContext({
     logout: () => returnType,
     loadStorageUser: () => returnType,
 });
-export const SignalRHubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(APIConfig.URL + "signalr/")
-    .build()
-
 
 export default AuthContext;
