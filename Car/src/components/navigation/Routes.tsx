@@ -16,7 +16,6 @@ const MILISECONDS_IN_MONTH = 2629800000;
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-
     useEffect(() => {
         (async () => {
             const currentLogin = new Date();
@@ -36,13 +35,14 @@ const Routes = () => {
         })().then(() =>
             (async () => loadStorageUser())().then(() => setLoading(false))
         );
-    }, [0]);
+    }, []);
+
 
     const navigator = user ? (
         <Stack.Screen
             name="AppTabs"
-            component={AppTabs}
             options={{ headerShown: false }}
+            component = {AppTabs}
         />
     ) : (
         <Stack.Screen name="Login" component={Login} />

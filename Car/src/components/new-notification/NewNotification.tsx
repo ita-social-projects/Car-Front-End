@@ -5,7 +5,7 @@ import ContainerStyle from "../styles/flex/Container";
 import RowStyle from "../styles/flex/Row";
 import NewNotificationStyle from "./NewNotificationStyle";
 import Item from "../styles/flex/Item";
-import AvatarLogo from "../avatar-logo/AvatarLogo";
+import UserAvatar from "../user-avatar/UserAvatar";
 
 const NewNotification: React.FC<NewNotificationProps> = (
     props: NewNotificationProps
@@ -19,10 +19,11 @@ const NewNotification: React.FC<NewNotificationProps> = (
                 ]}
             >
                 <View style={[RowStyle.row, NewNotificationStyle.center]}>
-                    <AvatarLogo user={props.user} size={49} />
+                    <UserAvatar user={props.user}
+                                flexBox={{ width: 20 }}/>
                     <View style={[Item(65), NewNotificationStyle.content]}>
                         <Text style={NewNotificationStyle.name}>
-                            {props.user!.name + " " + props.user!.surname}
+                            {props.user!.name+" "+props.user!.surname}
                         </Text>
                         <Text style={NewNotificationStyle.title}>
                             {props.notificationTitle}

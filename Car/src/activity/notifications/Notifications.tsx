@@ -1,25 +1,23 @@
-import * as signalR from "@microsoft/signalr";
 import React, { useContext, useState, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import APIConfig from "../../../api-service/APIConfig";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Notification from "../../../models/Notification";
 import AuthContext from "../../components/auth/AuthContext";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
+import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 
 const Notifications = (props: any) => {
     const { user } = useContext(AuthContext);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
-    const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(APIConfig.URL + "Notification/")
-        .build();
-
+    console.log("-",3000);
+    console.log(SignalRHubConnection);
+    console.log("!",3000);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
-        1
+        NotificationsService.getUnreadNotificationsNumber(user!.id)
     );
 
-    hubConnection.start();
+
 
     const refreshNotification = () => {
         NotificationsService.getNotifications(Number(user?.id)).then((res) => {
@@ -34,8 +32,8 @@ const Notifications = (props: any) => {
     }, [unreadNotificationsNumber]);
 
     useEffect(() => {
-        hubConnection.on("sendToReact", refreshNotification);
-        hubConnection.on(
+        SignalRHubConnection.on("sendToReact", refreshNotification);
+        SignalRHubConnection.on(
             "updateUnreadNotificationsNumber",
             setUnreadNotificationsNumber
         );
