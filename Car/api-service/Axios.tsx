@@ -25,7 +25,7 @@ Axios.interceptors.request.use(
     },
 
     async (error: any) => {
-        ErrorAlert(error.message);
+        ErrorAlert();
 
         return Promise.reject(error);
     }
@@ -43,7 +43,7 @@ Axios.interceptors.response.use(
             errorCode = error.response.status;
         }
 
-        ErrorAlert(errorCode);
+        ErrorAlert();
 
         return Promise.reject(error);
     }

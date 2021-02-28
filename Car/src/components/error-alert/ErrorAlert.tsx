@@ -1,7 +1,6 @@
-import { Popup, Toast } from "popup-ui";
+import { Popup } from "popup-ui";
 import React from "react";
 import { Image } from "react-native";
-import Axios from "../../../api-service/Axios";
 import ErrorAlertStyle from "./ErrorAlertStyle";
 
 let IsAlertShowing = false;
