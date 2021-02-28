@@ -5,17 +5,14 @@ import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
-import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 import * as signalR from "@microsoft/signalr";
 import APIConfig from "../../../../api-service/APIConfig";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
-interface AppTabsProps {}
+const Tabs = createBottomTabNavigator();
 
-const Tabs = createBottomTabNavigator<AppTabsList>();
-
-const AppTabs: React.FC<AppTabsProps> = () => {
+const AppTabs = () => {
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
     const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl(APIConfig.URL + "Notification")
@@ -42,7 +39,7 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             sceneContainerStyle={AppTabsStyle.navigator}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
-                    let iconName;
+                    let iconName: string;
                     switch (route.name) {
                         case "MessagesTabs":
                             iconName = "chatbubbles";
@@ -59,7 +56,7 @@ const AppTabs: React.FC<AppTabsProps> = () => {
                     }
 
                     return (
-                        <Ionicons name={iconName} size={size} color={color} />
+                        <Ionicons name={iconName!} size={size} color={color} />
                     );
                 }
             })}
