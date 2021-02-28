@@ -7,6 +7,8 @@ import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfil
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
+import APIConfig from "../../../../api-service/APIConfig";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import AuthContext, {SignalRHubConnection} from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 
@@ -16,8 +18,6 @@ const Tabs = createBottomTabNavigator<AppTabsList>();
 
 const AppTabs: React.FC<AppTabsProps> = () => {
     const { user } = useContext(AuthContext);
-    console.log(user!.id);
-
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
     NotificationsService.getUnreadNotificationsNumber(user!.id)
         .then(result => setUnreadNotificationsNumber(result.data as number));
@@ -30,6 +30,14 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             setUnreadNotificationsNumber
         );
     });
+
+    const getTabBarVisibility = (route: any) => {
+        const routeName = getFocusedRouteNameFromRoute(route)!;
+        const hideOnScreens = ["Chat"];
+        if (hideOnScreens.indexOf(routeName) > -1) return false;
+        return true;
+    };
+
     return (
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
@@ -67,7 +75,10 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             <Tabs.Screen
                 name="MessagesTabs"
                 component={MessagesTabs}
-                options={{ tabBarLabel: "Messages" }}
+                options={({ route }) => ({
+                    tabBarVisible: getTabBarVisibility(route),
+                    tabBarLabel: "Messages"
+                })}
             />
             <Tabs.Screen
                 options={{ tabBarLabel: "My Profile" }}

@@ -1,12 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
     ImagePickerResponse,
     launchImageLibrary
@@ -22,23 +15,17 @@ import CarModel from "../../../../../../models/car/CarModel";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
-import AuthContext from "../../../../../components/auth/AuthContext";
 import EditCarsStyle from "./EditCarsStyle";
-import CreateCarViewModel from "../../../../../../models/car/CreateCarViewModel";
 
-function EditCars(navigation: any) {
+const EditCars = (navigation: any) => {
     const { carId } = navigation.route.params;
-
-    const { user } = useContext(AuthContext);
 
     const [car, setCar] = useState({} as CarViewModel);
 
     useEffect(() => {
-        CarService.getById(carId)
-            .then((res) => {
-                setCar(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        CarService.getById(carId).then((res) => {
+            setCar(res.data);
+        });
     }, []);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
@@ -60,18 +47,13 @@ function EditCars(navigation: any) {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
     const [imageData, setImageData] = useState<FormData>({} as FormData);
-
-    const [loading, setLoading] = useState(false);
+    const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
     useEffect(() => {
-        BrandService.getBrands()
-            .then((res) => {
-                setBrands(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        BrandService.getBrands().then((res) => {
+            setBrands(res.data);
+        });
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -90,19 +72,9 @@ function EditCars(navigation: any) {
     };
 
     const selectBrandHandle = (brand: any) => {
-        ModelService.getModelsByBrandId(Number(brand.value))
-            .then((res) => {
-                setModels(res.data);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
-    };
-
-    const saveCarHandle = async (carDto: CreateCarViewModel) => {
-        setLoading(true);
-        console.log(carDto);
-        const newCar = await CarService.update(carDto).then((res) => res.data);
-        await CarService.uploadPhoto(newCar!.id, imageData);
-        setLoading(false);
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+            setModels(res.data);
+        });
     };
 
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
@@ -119,13 +91,18 @@ function EditCars(navigation: any) {
           }))
         : null;
 
+    console.log(selectedModel);
+    console.log(selectedColor);
+    console.log(plateNumber);
+    console.log(imageData);
+
     return (
         <KeyboardAwareScrollView style={EditCarsStyle.wrapper}>
             <View style={EditCarsStyle.carAvatarContainer}>
-                {photo && (
+                {car!.imageId && (
                     <Image
-                        source={{ uri: photo.uri }}
-                        style={EditCarsStyle.carAvatar}
+                        source={{ uri: car?.imageId }}
+                        style={{ width: "100%", height: "100%" }}
                     />
                 )}
                 <TouchableOpacity
@@ -137,6 +114,12 @@ function EditCars(navigation: any) {
                             ? "Change photo"
                             : "Upload photo"}
                     </Text>
+                    {car?.imageId && (
+                        <Image
+                            source={{ uri: car?.imageId }}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                    )}
                 </TouchableOpacity>
             </View>
             <View style={EditCarsStyle.inputsContainer}>
@@ -207,37 +190,17 @@ function EditCars(navigation: any) {
                     <TouchableOpacity
                         style={EditCarsStyle.carButtonSave}
                         onPress={() => {
-                            saveCarHandle({
-                                modelId: Number(selectedModel?.value),
-                                color: Number(selectedColor?.value),
-                                plateNumber: plateNumber,
-                                ownerId: Number(user?.id),
-                                imageId:
-                                    photo.uri !== undefined
-                                        ? String(photo.uri)
-                                        : null,
-                                id: 0
-                            });
                             navigation.goBack();
                         }}
                     >
                         <Text style={EditCarsStyle.carButtonSaveText}>
                             Save
                         </Text>
-                        {loading ? (
-                            <ActivityIndicator
-                                style={EditCarsStyle.spinner}
-                                size={20}
-                                color="white"
-                            />
-                        ) : (
-                            <></>
-                        )}
                     </TouchableOpacity>
                 </View>
             </View>
         </KeyboardAwareScrollView>
     );
-}
+};
 
 export default EditCars;

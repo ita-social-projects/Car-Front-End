@@ -1,12 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    Image,
-    Text,
-    View,
-    RefreshControl,
-    ScrollView,
-    Alert
-} from "react-native";
+import React, { useContext, useEffect, useState, useCallback } from "react";
+import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
@@ -19,13 +12,13 @@ const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
-    const [refreshing, setRefreshing] = React.useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     const wait = (timeout: number) => {
         return new Promise((resolve) => setTimeout(resolve, timeout));
     };
 
-    const onRefresh = React.useCallback(() => {
+    const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(1000).then(() => {
             loadCars();
@@ -34,12 +27,10 @@ const Cars = (props: any) => {
     }, []);
 
     function loadCars() {
-        CarService.getAll(Number(user?.id))
-            .then((res) => {
-                setCars(res.data);
-                setLoading(false);
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        CarService.getAll(Number(user?.id)).then((res) => {
+            setCars(res.data);
+            setLoading(false);
+        });
     }
 
     useEffect(() => {
@@ -106,13 +97,9 @@ const Cars = (props: any) => {
                                             item!.imageId ? (
                                                 <Image
                                                     source={{
-                                                        uri:
-                                                            "data:image/png;base64," +
-                                                            item!.imageId
+                                                        uri: item?.imageId
                                                     }}
-                                                    style={[
-                                                        CarsStyle.carAvatar
-                                                    ]}
+                                                    style={CarsStyle.carAvatar}
                                                 />
                                             ) : (
                                                 <Ionicons

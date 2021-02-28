@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Notification from "../../../models/Notification";
@@ -19,13 +18,11 @@ const Notifications = (props: any) => {
     hubConnection.start();
 
     const refreshNotification = () => {
-        NotificationsService.getNotifications(Number(user?.id))
-            .then((res) => {
-                if (res.data) {
-                    setNotifications(res.data);
-                }
-            })
-            .catch((e) => Alert.alert("Error", e.message));
+        NotificationsService.getNotifications(Number(user?.id)).then((res) => {
+            if (res.data) {
+                setNotifications(res.data);
+            }
+        });
     };
 
     useEffect(() => {

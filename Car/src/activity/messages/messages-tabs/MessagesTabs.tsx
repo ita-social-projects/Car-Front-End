@@ -1,34 +1,21 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState, useContext, useEffect } from "react";
-import { View, Text, Alert } from "react-native";
+import React, { useState } from "react";
+import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UserService from "../../../../api-service/user-service/UserService";
-import User from "../../../../models/User";
-import AuthContext from "../../../components/auth/AuthContext";
 import Chat from "../chat/Chat";
-import SimpleMessage from "../chat/simple-message/SimpleMessage";
+import Messages from "../Messages";
 import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 
 const StackTabs = createStackNavigator();
 
 const MessagesTabs = () => {
-    const [currentUser, setCurrentUser] = useState({} as User);
-    const { user } = useContext(AuthContext);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const setIsOpen = () => {
         setIsOpenFilter(!isOpenFilter);
     };
-
-    useEffect(() => {
-        UserService.getUser(Number(user?.id))
-            .then((res: { data: React.SetStateAction<User> }) =>
-                setCurrentUser(res.data)
-            )
-            .catch((e) => Alert.alert("Error", e.message));
-    }, []);
 
     return (
         <View style={HeaderStyle.container}>
@@ -50,7 +37,7 @@ const MessagesTabs = () => {
                         headerLeft: () => <View />
                     }}
                     children={(props) => (
-                        <SimpleMessage
+                        <Messages
                             {...props}
                             component={Chat}
                             isOpenFilter={isOpenFilter}

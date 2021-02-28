@@ -1,28 +1,50 @@
 import { StyleSheet } from "react-native";
-import Font from "../../../../data/fonts/Font";
+import Font from "../../data/fonts/Font";
 
 const SimpleMessageStyle = StyleSheet.create({
     main: {
-        display: "flex",
-        flexDirection: "column",
-        borderBottomWidth: 1,
-        borderBottomColor: "#C1C1C5",
         height: 68,
-        alignContent: "center",
-        width: 344,
-        alignSelf: "center",
-        backgroundColor: "#FFFFFF"
+        width: "100%",
+        justifyContent: "center"
     },
 
-    button: {
-        flexDirection: "row",
+    wrapper: {
+        flex: 1,
+        width: "100%",
+        height: 50,
+        borderBottomWidth: 1,
         justifyContent: "space-between",
-        padding: 10
+        flexDirection: "row"
+    },
+
+    avatarWrapper: {
+        paddingLeft: 5,
+        width: 50,
+        height: "100%",
+        justifyContent: "center"
+    },
+
+    dataWrapper: {
+        flex: 1,
+        paddingLeft: 10.75,
+        width: 39,
+        height: 39,
+        justifyContent: "center",
+        marginTop: 15
+    },
+
+    iconWrapper: {
+        width: 39,
+        height: 39,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 15
     },
 
     fonts: {
         fontFamily: Font.OpenSans.Bold,
-        fontSize: 13
+        fontSize: 13,
+        color: "#00A3CF"
     },
 
     image: {
@@ -39,12 +61,14 @@ const SimpleMessageStyle = StyleSheet.create({
     },
 
     container: {
-        backgroundColor: "white"
+        flex: 1,
+        backgroundColor: "white",
+        padding: 15
     },
 
     containerStyle: {
         height: 44,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "white",
         borderBottomColor: "transparent",
         borderTopColor: "transparent",
         marginTop: 5,
@@ -52,7 +76,7 @@ const SimpleMessageStyle = StyleSheet.create({
     },
 
     inputContainerStyle: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "white",
         borderColor: "black",
         borderWidth: 2,
         borderBottomWidth: 2,
@@ -63,6 +87,7 @@ const SimpleMessageStyle = StyleSheet.create({
     textStyle: {
         fontSize: 11,
         paddingTop: 10,
+        lineHeight: 16,
         fontFamily: Font.OpenSans.SemiBold
     }
 });

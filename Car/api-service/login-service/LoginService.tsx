@@ -5,9 +5,7 @@ import APIService from "../APIService";
 const route = APIRoutes.getLogindUrl();
 
 const LoginService = {
-    loginUser: async (user: User) => {
-        return APIService.post<User>(route, user);
-    }
+    loginUser: async (user: User) => APIService.post<User>(route, user)
 };
 
 export default LoginService;

@@ -1,81 +1,196 @@
-import * as signalR from "@microsoft/signalr";
-import React from "react";
-import { View, Button, Text, TextInput } from "react-native";
-import APIConfig from "../../../../api-service/APIConfig";
-import ChatState from "./ChatState";
+import React, { useState, useEffect, useContext } from "react";
+import { TouchableOpacity, View } from "react-native";
+import { Icon } from "react-native-elements";
+import {
+    GiftedChat,
+    Bubble,
+    Send,
+    InputToolbar
+} from "react-native-gifted-chat";
+import ChatService from "../../../../api-service/chat-service/ChatService";
+import HubConnection from "../../../../api-service/HubConnection";
+import UserService from "../../../../api-service/user-service/UserService";
+import AuthContext from "../../../components/auth/AuthContext";
+import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
+import * as navigation from "../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
 
-class Chat extends React.Component<ChatState, ChatState> {
-    constructor(props: ChatState) {
-        super(props);
+const Chat = (props: any) => {
+    const [messages, setMessages] = useState<object[]>([]);
+    const [message, setMessage] = useState("");
+    const { user } = useContext(AuthContext);
 
-        this.state = {
-            message: "",
-            messages: [],
-            hubConnection: null,
-            receivedUserId: ""
-        };
-    }
+    props.navigation.setOptions({ headerTitle: props.route.params.header });
 
-    componentDidMount() {
-        const hubConnection = new signalR.HubConnectionBuilder()
-            .withUrl(APIConfig.URL + "Chat/")
-            .build();
-        this.setState({ hubConnection }, () => {
-            this.state.hubConnection.start().then(() => "Connection started!");
-
-            hubConnection.on("RecieveMessage", (receivedMessage) => {
-                this.setState({
-                    messages: [...this.state.messages, receivedMessage]
+    useEffect(() => {
+        ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+            const messagesFromChat = res.data?.messages;
+            const tempChat: any = [];
+            messagesFromChat?.forEach((element: any) => {
+                UserService.getUser(element?.senderId).then((r) => {
+                    const messageToAdd = {
+                        _id: element?.id,
+                        text: element?.text,
+                        createdAt: element?.createdAt,
+                        user: {
+                            _id: element?.senderId?.toString(),
+                            name: r?.data?.name + " " + r?.data?.surname
+                        }
+                    };
+                    tempChat.push(messageToAdd);
                 });
             });
+            setMessages(tempChat);
         });
-    }
 
-    onSubmit = () => {
-        this.state.hubConnection
-            .invoke("SendMessage", this.state.message)
-            .catch((err) => console.log(err));
-        this.setState({ message: "" });
+        HubConnection.on("RecieveMessage", (receivedMessage: any) => {
+            UserService.getUser(receivedMessage?.senderId).then((res) =>
+                setMessages((previousMessages) =>
+                    GiftedChat.append(
+                        previousMessages as any,
+                        {
+                            _id: receivedMessage.id,
+                            text: receivedMessage.text,
+                            createdAt: receivedMessage.createdAt,
+                            user: {
+                                _id: receivedMessage.senderId?.toString(),
+                                name: res?.data?.name + " " + res?.data?.surname
+                            }
+                        } as any
+                    )
+                )
+            );
+        });
+        HubConnection?.invoke(
+            "EnterToGroup",
+            props.route.params.chatId.toString()
+        ).catch((err: any) => console.log(err));
+        setMessage("");
+        return function cleanup() {
+            HubConnection?.invoke(
+                "LeaveTheGroup",
+                props.route.params.chatId.toString()
+            );
+        };
+    }, []);
+
+    const onSend = () => {
+        HubConnection?.invoke("SendMessageToGroup", {
+            Text: message,
+            SenderId: user?.id,
+            ChatId: props.route.params.chatId
+        }).catch((err: any) => console.log(err));
+        setMessage("");
     };
 
-    render() {
+    const renderBubble = (props: any) => {
         return (
-            <View style={ChatStyle.page}>
-                <View style={ChatStyle.container}>
-                    <View style={ChatStyle.chatMessage}>
-                        <View>
-                            {this.state.messages.map(
-                                (message: string, index: number) => {
-                                    return (
-                                        <Text
-                                            style={ChatStyle.message}
-                                            key={index}
-                                        >
-                                            {message}
-                                        </Text>
-                                    );
-                                }
-                            )}
-                        </View>
-                    </View>
-                    <View style={ChatStyle.buttonContainer}>
-                        <TextInput
-                            style={ChatStyle.input}
-                            value={this.state.message}
-                            placeholder="Aa"
-                            onChangeText={(message) => {
-                                this.setState({ message: message });
-                            }}
-                        />
-                        <View>
-                            <Button onPress={this.onSubmit} title="Send" />
-                        </View>
-                    </View>
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    left: {
+                        backgroundColor: "#F1F1F4"
+                    },
+                    right: {
+                        backgroundColor: "#EB7A89"
+                    }
+                }}
+                textStyle={{
+                    left: {
+                        color: "#000000",
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
+                    },
+                    right: {
+                        color: "#FFFFFF",
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
+                    }
+                }}
+            />
+        );
+    };
+
+    const renderSend = (props: any) => {
+        return (
+            <Send {...props}>
+                <View style={ChatStyle.button}>
+                    <Icon
+                        name="paper-plane"
+                        type="font-awesome"
+                        color="white"
+                    />
                 </View>
+            </Send>
+        );
+    };
+
+    const renderInputToolbar = (props: any) => {
+        return (
+            <View
+                style={{
+                    marginHorizontal: 16,
+                    marginVertical: 46
+                }}
+            >
+                <InputToolbar
+                    {...props}
+                    primaryStyle={{
+                        borderWidth: 2,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: 44
+                    }}
+                />
             </View>
         );
-    }
-}
+    };
+
+    return (
+        <View style={ChatStyle.chatWrapper}>
+            <GiftedChat
+                renderAvatar={(data) => (
+                    <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate("Applicant Page", {
+                                userId: Number(data.currentMessage.user._id)
+                            })
+                        }
+                    >
+                        <AvatarLogo
+                            size={36}
+                            user={{
+                                id: data.currentMessage.user._id,
+                                name: data.currentMessage.user.name.split(
+                                    " "
+                                )[0],
+                                surname: data.currentMessage.user.name.split(
+                                    " "
+                                )[1]
+                            }}
+                        />
+                    </TouchableOpacity>
+                )}
+                messagesContainerStyle={{ paddingHorizontal: 8 }}
+                placeholder="Aa"
+                renderTime={() => <View></View>}
+                maxInputLength={500}
+                messages={messages as any[]}
+                onInputTextChanged={setMessage}
+                text={message}
+                onSend={onSend}
+                scrollToBottom
+                alwaysShowSend
+                user={{
+                    _id: user?.id.toString()!,
+                    name: user?.name!
+                }}
+                renderBubble={renderBubble}
+                renderSend={renderSend}
+                renderInputToolbar={renderInputToolbar}
+            />
+        </View>
+    );
+};
 
 export default Chat;

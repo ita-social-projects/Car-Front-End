@@ -8,7 +8,6 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
-import { Alert } from "react-native";
 
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;
@@ -34,9 +33,7 @@ const Routes = () => {
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
-            (async () => loadStorageUser())()
-                .then(() => setLoading(false))
-                .catch((e) => Alert.alert("Error", e.message))
+            (async () => loadStorageUser())().then(() => setLoading(false))
         );
     }, [0]);
 

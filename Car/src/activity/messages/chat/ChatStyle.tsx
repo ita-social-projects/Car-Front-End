@@ -1,46 +1,25 @@
 import { StyleSheet } from "react-native";
+import Font from "../../../data/fonts/Font";
 
 const ChatStyle = StyleSheet.create({
-    page: {
+    messageField: {
         flex: 1,
-        backgroundColor: "#FFFFFF"
-    },
-
-    container: {
         width: "100%",
+        height: "100%"
+    },
+
+    chatWrapper: {
         flex: 1,
-        justifyContent: "flex-end",
+        backgroundColor: "white",
+        paddingBottom: 24
+    },
+
+    button: {
+        width: 41,
+        height: "100%",
+        backgroundColor: "black",
         alignItems: "center",
-        marginBottom: 20
-    },
-
-    message: {
-        borderWidth: 1,
-        borderColor: "#20232a",
-        borderRadius: 8,
-        textAlign: "center",
-        padding: 8
-    },
-
-    input: {
-        padding: 10,
-        width: "80%",
-        borderWidth: 4,
-        borderColor: "#20232A",
-        borderRadius: 4
-    },
-
-    buttonContainer: {
-        display: "flex",
-        alignItems: "center",
-        margin: 5,
-        flexDirection: "row",
-        height: 40,
-        justifyContent: "space-between"
-    },
-
-    chatMessage: {
-        backgroundColor: "powderblue"
+        justifyContent: "center"
     }
 });
 
