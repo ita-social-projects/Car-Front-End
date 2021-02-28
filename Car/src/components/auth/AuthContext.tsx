@@ -12,8 +12,7 @@ const AuthContext = React.createContext({
     loadStorageUser: () => returnType,
 });
 export const SignalRHubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(APIConfig.URL + "Notification/")
-    //.withUrl(APIConfig.URL + "Chat/")
+    .withUrl(APIConfig.URL + "signalr/")
     .build()
 
 

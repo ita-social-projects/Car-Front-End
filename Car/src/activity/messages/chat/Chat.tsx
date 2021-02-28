@@ -8,9 +8,9 @@ import {
     InputToolbar
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
-import HubConnection from "../../../../api-service/HubConnection";
+//import HubConnection from "../../../../api-service/HubConnection";
 import UserService from "../../../../api-service/user-service/UserService";
-import AuthContext from "../../../components/auth/AuthContext";
+import AuthContext, {SignalRHubConnection} from "../../../components/auth/AuthContext";
 import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
@@ -19,7 +19,7 @@ const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
-
+    const hubConnection = SignalRHubConnection;
     props.navigation.setOptions({ headerTitle: props.route.params.header });
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        HubConnection.on("RecieveMessage", (receivedMessage: any) => {
+        hubConnection.on("RecieveMessage", (receivedMessage: any) => {
             UserService.getUser(receivedMessage?.senderId).then((res) =>
                 setMessages((previousMessages) =>
                     GiftedChat.append(
@@ -61,13 +61,13 @@ const Chat = (props: any) => {
                 )
             );
         });
-        HubConnection?.invoke(
+        hubConnection?.invoke(
             "EnterToGroup",
             props.route.params.chatId.toString()
         ).catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
-            HubConnection?.invoke(
+            hubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()
             );
@@ -75,7 +75,7 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        HubConnection?.invoke("SendMessageToGroup", {
+        hubConnection?.invoke("SendMessageToGroup", {
             Text: message,
             SenderId: user?.id,
             ChatId: props.route.params.chatId
@@ -173,7 +173,7 @@ const Chat = (props: any) => {
                 )}
                 messagesContainerStyle={{ paddingHorizontal: 8 }}
                 placeholder="Aa"
-                renderTime={() => <View></View>}
+                renderTime={() => <View/>}
                 maxInputLength={500}
                 messages={messages as any[]}
                 onInputTextChanged={setMessage}
