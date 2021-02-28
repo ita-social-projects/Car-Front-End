@@ -37,12 +37,6 @@ Axios.interceptors.response.use(
     },
 
     async (error: { response: { status: number } }) => {
-        let errorCode: any = "Network error";
-
-        if (error.response) {
-            errorCode = error.response.status;
-        }
-
         ErrorAlert();
 
         return Promise.reject(error);

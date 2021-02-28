@@ -22,7 +22,7 @@ const AvatarLogo = (props: any) => {
                 ]}
             >
                 <Text style={AvatarLogoStyle.userAvatarText}>
-                    {user!.name[0] + user!.surname[0]}
+                    {user?.name[0] + user?.surname[0]}
                 </Text>
             </View>
             <Image
