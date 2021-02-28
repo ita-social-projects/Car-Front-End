@@ -1,4 +1,3 @@
-import axiosRetry from "axios-retry";
 import { Popup, Toast } from "popup-ui";
 import React from "react";
 import { Image } from "react-native";
@@ -25,14 +24,11 @@ const ErrorAlert = (message?: string, func?: any) => {
                 />
             ),
             callback: () => {
-                axiosRetry(Axios, {
-                    retries: 200,
-                    retryDelay: axiosRetry.exponentialDelay
-                });
                 IsAlertShowing = false;
                 Popup.hide();
             }
         });
     }
 };
+
 export default ErrorAlert;

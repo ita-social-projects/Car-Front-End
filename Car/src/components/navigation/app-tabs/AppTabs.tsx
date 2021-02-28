@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
@@ -16,8 +16,9 @@ const Tabs = createBottomTabNavigator();
 const AppTabs = () => {
     const { user } = useContext(AuthContext);
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
-    NotificationsService.getUnreadNotificationsNumber(user!.id)
-        .then(result => setUnreadNotificationsNumber(result.data as number));
+    NotificationsService.getUnreadNotificationsNumber(user!.id).then((result) =>
+        setUnreadNotificationsNumber(result.data as number)
+    );
 
     useEffect(() => {
         SignalRHubConnection.on(
@@ -30,7 +31,6 @@ const AppTabs = () => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
         return hideOnScreens.indexOf(routeName) <= -1;
-
     };
 
     return (
@@ -96,7 +96,7 @@ const AppTabs = () => {
                             : undefined
                 }}
                 name="NotificationsTabs"
-                component = {NotificationsTabs}
+                component={NotificationsTabs}
             />
         </Tabs.Navigator>
     );

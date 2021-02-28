@@ -60,10 +60,9 @@ const Chat = (props: any) => {
                 )
             );
         });
-        SignalRHubConnection!.invoke(
-            "EnterToGroup",
-            props.route.params.chatId.toString()
-        ).catch((err: any) => console.log(err));
+        SignalRHubConnection!
+            .invoke("EnterToGroup", props.route.params.chatId.toString())
+            .catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
             SignalRHubConnection?.invoke(
@@ -74,11 +73,13 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        SignalRHubConnection!.invoke("SendMessageToGroup", {
-            Text: message,
-            SenderId: user?.id,
-            ChatId: props.route.params.chatId
-        }).catch((err: any) => console.log(err));
+        SignalRHubConnection!
+            .invoke("SendMessageToGroup", {
+                Text: message,
+                SenderId: user?.id,
+                ChatId: props.route.params.chatId
+            })
+            .catch((err: any) => console.log(err));
         setMessage("");
     };
 
@@ -172,7 +173,7 @@ const Chat = (props: any) => {
                 )}
                 messagesContainerStyle={{ paddingHorizontal: 8 }}
                 placeholder="Aa"
-                renderTime={() => <View/>}
+                renderTime={() => <View />}
                 maxInputLength={500}
                 messages={messages as any[]}
                 onInputTextChanged={setMessage}
