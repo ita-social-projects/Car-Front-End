@@ -8,18 +8,17 @@ import {
     InputToolbar
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
-import HubConnection from "../../../../api-service/HubConnection";
 import UserService from "../../../../api-service/user-service/UserService";
 import AuthContext from "../../../components/auth/AuthContext";
 import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
+import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
-
     props.navigation.setOptions({ headerTitle: props.route.params.header });
 
     useEffect(() => {
@@ -43,7 +42,7 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        HubConnection.on("RecieveMessage", (receivedMessage: any) => {
+        SignalRHubConnection.on("RecieveMessage", (receivedMessage: any) => {
             UserService.getUser(receivedMessage?.senderId).then((res) =>
                 setMessages((previousMessages) =>
                     GiftedChat.append(
@@ -61,13 +60,13 @@ const Chat = (props: any) => {
                 )
             );
         });
-        HubConnection?.invoke(
+        SignalRHubConnection!.invoke(
             "EnterToGroup",
             props.route.params.chatId.toString()
         ).catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
-            HubConnection?.invoke(
+            SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()
             );
@@ -75,7 +74,7 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        HubConnection?.invoke("SendMessageToGroup", {
+        SignalRHubConnection!.invoke("SendMessageToGroup", {
             Text: message,
             SenderId: user?.id,
             ChatId: props.route.params.chatId
@@ -173,7 +172,7 @@ const Chat = (props: any) => {
                 )}
                 messagesContainerStyle={{ paddingHorizontal: 8 }}
                 placeholder="Aa"
-                renderTime={() => <View></View>}
+                renderTime={() => <View/>}
                 maxInputLength={500}
                 messages={messages as any[]}
                 onInputTextChanged={setMessage}
