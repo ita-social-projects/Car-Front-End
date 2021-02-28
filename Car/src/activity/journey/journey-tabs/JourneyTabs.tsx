@@ -11,7 +11,6 @@ import JourneyApplicant from "../journey-activity/segment-control-activities/jou
 import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/segment-control-activities/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/segment-control-activities/search-results/ok-search-result/OkSearchResult";
-import MapGetAddress from "../journey-activity/segment-control-activities/map-address/MapGetAddress";
 import JourneyStyle from "../JourneyStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
@@ -19,8 +18,7 @@ import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton"
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
-import DestinationSearch from "../journey-activity/segment-control-activities/map-address/DestinationSearch";
-import Search from "../journey-activity/segment-control-activities/map-address/Search";
+import SearchJourneyMap from "../journey-activity/segment-control-activities/map-address/SearchJourneyMap";
 
 const StackTabs = createStackNavigator();
 
@@ -260,7 +258,7 @@ const JourneyTabs = () => {
                 />
                 <StackTabs.Screen
                     name="Search"
-                    component={DestinationSearch}
+                    component={SearchJourneyMap}
                     options={{
                         title: "Search Journey",
                         headerTitleAlign: "center",

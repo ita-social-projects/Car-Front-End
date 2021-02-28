@@ -19,7 +19,7 @@ const SearchJouneyStyle = StyleSheet.create({
     },
 
     spinner: {
-        marginTop: 60
+        marginTop: 250
     },
 
     topInputContainer: {
@@ -47,6 +47,10 @@ const SearchJouneyStyle = StyleSheet.create({
         position: "absolute",
         width: "100%",
         height: "100%"
+    },
+
+    insideContainer: {
+        zIndex: 150
     },
 
     saveButtonContainer: {

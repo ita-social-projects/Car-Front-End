@@ -49,7 +49,7 @@ const MyProfile = (props: any) => {
 
             <TouchableNavigationCard
                 navigation={props.navigation}
-                navigationName="AddressBook"
+                navigationName="AddressBookTabs"
                 cardName="Address book"
                 picture={
                     <Ionicons

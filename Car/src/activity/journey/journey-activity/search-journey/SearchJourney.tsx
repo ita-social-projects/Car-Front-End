@@ -1,38 +1,41 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Button,
-    FlatList,
-    Modal,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
 import { container } from "tsyringe";
 import StopService from "../../../../../api-service/stop-service/StopService";
+import LocationService from "../../../../../api-service/location-service/LocationService";
 import AuthContext from "../../../auth/AuthContext";
 import SearchJouneyStyle from "./SearchJouneyStyle";
 import StopType from "../../../../../models/StopType";
 import Stop from "../../../../../models/Stop";
-import { useNavigation } from "@react-navigation/native";
-import MapGetAddress from "../segment-control-activities/map-address/MapGetAddress";
-import Journey from "../../../../../models/Journey";
-import DestinationSearch from "../segment-control-activities/map-address/DestinationSearch";
+import Location from "../../../../../models/Location";
+import SearchJourneyMap from "../segment-control-activities/map-address/SearchJourneyMap";
 
 function SearchJourney() {
-    const navigation = useNavigation();
     const { user } = useContext(AuthContext);
     const stopService = container.resolve(StopService);
+    const locationService = container.resolve(LocationService);
 
     const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
     const [fromDirection, setFromDirection] = useState("Your location");
     const [toDirection, setToDirection] = useState("");
     const [isOpen, setOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [latitude, setLatitude] = useState<Number | undefined>(1);
+    const [longitude, setLongitude] = useState<Number | undefined>(1);
     const [isMapOpen, setMapOpen] = useState(100);
+    const [locations, setLocations] = useState<Array<Location>>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        locationService
+            .getAll(Number(user?.id))
+            .then((res) => {
+                setLocations(res.data);
+            })
+            .catch((e) => console.log(e));
+    }, []);
 
     useEffect(() => {
         stopService
@@ -45,7 +48,7 @@ function SearchJourney() {
     }, []);
 
     function getFullAddress(stopDto: Stop | undefined | null) {
-        return stopDto?.address?.city + ", " + stopDto?.address?.street;
+        return stopDto?.address?.street + ", " + stopDto?.address?.city;
     }
 
     return (
@@ -53,14 +56,15 @@ function SearchJourney() {
             <View
                 style={[SearchJouneyStyle.mapContainer, { zIndex: isMapOpen }]}
             >
-                <MapGetAddress></MapGetAddress>
-
+                <SearchJourneyMap
+                    latitude={latitude}
+                    longitude={longitude}
+                ></SearchJourneyMap>
                 <TouchableOpacity
                     style={[
                         SearchJouneyStyle.carButtonSave,
                         { zIndex: 200, position: "absolute" }
                     ]}
-                    onPress={() => { }}
                 >
                     <Text style={SearchJouneyStyle.carButtonSaveText}>
                         Confirm
@@ -68,7 +72,6 @@ function SearchJourney() {
                 </TouchableOpacity>
             </View>
             <View style={SearchJouneyStyle.topInputContainer}>
-                {/* <DestinationSearch/>  */}
                 <TouchableMapBar
                     directionType="From"
                     iconName="location"
@@ -87,53 +90,70 @@ function SearchJourney() {
                         flex="10"
                     />
                 ) : (
-                        <></>
-                    )}
+                    <></>
+                )}
             </View>
 
             <ScrollView style={[SearchJouneyStyle.container]}>
-                <View style={{ zIndex: 150 }}>
-                    <TouchableCard
-                        cardName="Map"
-                        iconName="location"
-                        angle="0"
-                        address="Choose starting point on the Map"
-                        addressFontColor="black"
-                        iconColor="#414045"
-                        size={25}
-                        onPress={() => {
-                            setMapOpen(200);
-                        }}
-                    />
-                    <TouchableCard
-                        cardName="Home"
-                        iconName="home-outline"
-                        angle="0"
-                        address="Trifon Kunev 26, Sofia"
-                        addressFontColor="#909095"
-                        onPress={() => {
-                            setFromDirection("Home");
-                            setOpen(true);
-                        }}
-                        iconColor="#414045"
-                        size={25}
-                    />
-                    <TouchableCard
-                        cardName="Work"
-                        iconName="briefcase-outline"
-                        angle="0"
-                        address="SoftServe, Bld. 'Bulgaria' 49"
-                        addressFontColor="#909095"
-                        iconColor="#414045"
-                        onPress={() => {
-                            navigation.navigate("Search");
-                        }}
-                        size={25}
-                    />
+                <View style={SearchJouneyStyle.insideContainer}>
+                    {loading ? (
+                        <></>
+                    ) : locations.length ? (
+                        <>
+                            <TouchableCard
+                                cardName="Map"
+                                iconName="location"
+                                angle="0"
+                                address="Choose starting point on the Map"
+                                addressFontColor="black"
+                                iconColor="#414045"
+                                size={25}
+                                onPress={() => {
+                                    setMapOpen(200);
+                                }}
+                            />
+                            {locations.map((item) => {
+                                return (
+                                    <View key={item!.id}>
+                                        <TouchableCard
+                                            cardName={item?.name}
+                                            iconName={
+                                                item?.type?.name
+                                                    ? item?.type?.name
+                                                    : "location"
+                                            }
+                                            angle="0"
+                                            address={
+                                                item!.address?.street +
+                                                ", " +
+                                                item!.address?.city
+                                            }
+                                            addressFontColor="#909095"
+                                            onPress={() => {
+                                                setFromDirection(
+                                                    item!.address?.street +
+                                                        ", " +
+                                                        item!.address?.city
+                                                );
+                                                setOpen(true);
+                                                setLongitude(
+                                                    item!.address?.longitude
+                                                );
+                                                setLatitude(
+                                                    item!.address?.latitude
+                                                );
+                                            }}
+                                            iconColor="#414045"
+                                            size={25}
+                                        />
+                                    </View>
+                                );
+                            })}
+                        </>
+                    ) : (
+                        {}
+                    )}
 
-                    <Text style={SearchJouneyStyle.recentJourneyText}>
-                        Recent Journeys
-                    </Text>
                     {loading ? (
                         <ActivityIndicator
                             style={SearchJouneyStyle.spinner}
@@ -141,8 +161,10 @@ function SearchJourney() {
                             color="black"
                         />
                     ) : (
-                            <></>
-                        )}
+                        <Text style={SearchJouneyStyle.recentJourneyText}>
+                            Recent Journeys
+                        </Text>
+                    )}
                     {stops?.length ? (
                         stops?.map((item) => (
                             <TouchableCard
@@ -167,8 +189,8 @@ function SearchJourney() {
                             />
                         ))
                     ) : (
-                            <></>
-                        )}
+                        <></>
+                    )}
                 </View>
             </ScrollView>
         </View>

@@ -10,7 +10,6 @@ function Input(props: any) {
             <View style={CarTextInputStyle.container}>
                 <Text style={CarTextInputStyle.requiredPointer}>*</Text>
                 <TextInput
-                    {...props}
                     style={[
                         CarTextInputStyle.textInputStyle,
                         props.error && { borderColor: "red" }

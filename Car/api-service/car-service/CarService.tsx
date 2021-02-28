@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { injectable } from "tsyringe";
-import { CarDto } from "../../dto/CarDto";
-import { routes } from "../../Environment";
+import CarDto from "../../dto/CarDto";
+import routes from "../EnvironmentRoutes";
 import Car from "../../models/Car";
 import APIService from "../APIService";
 

@@ -12,6 +12,7 @@ import Settings from "../my-profile-activity/settings/Settings";
 import MyProfile from "../MyProfile";
 import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
+import AddressBookTabs from "../my-profile-activity/address-book/address-book-tabs/AddressBookTabs";
 
 const StackTabs = createStackNavigator();
 
@@ -102,32 +103,9 @@ const MyProfileTabs = () => {
                     options={{ headerShown: false }}
                 />
                 <StackTabs.Screen
-                    name="AddressBook"
-                    component={AddressBook}
-                    options={{
-                        headerTitle: "Address Book",
-                        headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }}
+                    name="AddressBookTabs"
+                    component={AddressBookTabs}
+                    options={{ headerShown: false }}
                 />
                 <StackTabs.Screen
                     name="Settings"
