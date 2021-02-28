@@ -8,7 +8,6 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
-import { Root } from "popup-ui";
 
 const Stack = createStackNavigator<AuthParamList>();
 const MILISECONDS_IN_MONTH = 2629800000;
@@ -16,6 +15,8 @@ const MILISECONDS_IN_MONTH = 2629800000;
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
+
+    const { Root } = require("popup-ui");
 
     useEffect(() => {
         (async () => {
