@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
@@ -7,18 +7,21 @@ import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfil
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
-import * as signalR from "@microsoft/signalr";
-import APIConfig from "../../../../api-service/APIConfig";
+import AuthContext, {SignalRHubConnection} from "../../auth/AuthContext";
+import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 
 interface AppTabsProps {}
 
 const Tabs = createBottomTabNavigator<AppTabsList>();
 
 const AppTabs: React.FC<AppTabsProps> = () => {
+    const { user } = useContext(AuthContext);
+    console.log(user!.id);
+
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
-    const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(APIConfig.URL + "Notification")
-        .build();
+    NotificationsService.getUnreadNotificationsNumber(user!.id)
+        .then(result => setUnreadNotificationsNumber(result.data as number));
+    const hubConnection = SignalRHubConnection;
     hubConnection.start();
 
     useEffect(() => {
