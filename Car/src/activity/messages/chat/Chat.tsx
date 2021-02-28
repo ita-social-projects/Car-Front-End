@@ -8,18 +8,17 @@ import {
     InputToolbar
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
-//import HubConnection from "../../../../api-service/HubConnection";
 import UserService from "../../../../api-service/user-service/UserService";
-import AuthContext, {SignalRHubConnection} from "../../../components/auth/AuthContext";
+import AuthContext from "../../../components/auth/AuthContext";
 import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
+import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
-    const hubConnection = SignalRHubConnection;
     props.navigation.setOptions({ headerTitle: props.route.params.header });
 
     useEffect(() => {
@@ -43,7 +42,7 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        hubConnection.on("RecieveMessage", (receivedMessage: any) => {
+        SignalRHubConnection.on("RecieveMessage", (receivedMessage: any) => {
             UserService.getUser(receivedMessage?.senderId).then((res) =>
                 setMessages((previousMessages) =>
                     GiftedChat.append(
@@ -61,13 +60,13 @@ const Chat = (props: any) => {
                 )
             );
         });
-        hubConnection?.invoke(
+        SignalRHubConnection!.invoke(
             "EnterToGroup",
             props.route.params.chatId.toString()
         ).catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
-            hubConnection?.invoke(
+            SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()
             );
@@ -75,7 +74,7 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        hubConnection?.invoke("SendMessageToGroup", {
+        SignalRHubConnection!.invoke("SendMessageToGroup", {
             Text: message,
             SenderId: user?.id,
             ChatId: props.route.params.chatId
