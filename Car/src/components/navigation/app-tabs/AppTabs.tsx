@@ -1,26 +1,24 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
-import AppTabsList from "./AppTabsList";
 import AppTabsStyle from "./AppTabsStyle";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 
-interface AppTabsProps {}
+const Tabs = createBottomTabNavigator();
 
-const Tabs = createBottomTabNavigator<AppTabsList>();
-
-const AppTabs: React.FC<AppTabsProps> = () => {
+const AppTabs = () => {
     const { user } = useContext(AuthContext);
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
-    NotificationsService.getUnreadNotificationsNumber(user!.id)
-        .then(result => setUnreadNotificationsNumber(result.data as number));
+    NotificationsService.getUnreadNotificationsNumber(user!.id).then((result) =>
+        setUnreadNotificationsNumber(result.data as number)
+    );
 
     useEffect(() => {
         SignalRHubConnection.on(
@@ -33,7 +31,6 @@ const AppTabs: React.FC<AppTabsProps> = () => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
         return hideOnScreens.indexOf(routeName) <= -1;
-
     };
 
     return (
@@ -42,7 +39,7 @@ const AppTabs: React.FC<AppTabsProps> = () => {
             sceneContainerStyle={AppTabsStyle.navigator}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
-                    let iconName;
+                    let iconName: string;
                     switch (route.name) {
                         case "MessagesTabs":
                             iconName = "chatbubbles";
@@ -59,7 +56,7 @@ const AppTabs: React.FC<AppTabsProps> = () => {
                     }
 
                     return (
-                        <Ionicons name={iconName} size={size} color={color} />
+                        <Ionicons name={iconName!} size={size} color={color} />
                     );
                 }
             })}
@@ -99,7 +96,7 @@ const AppTabs: React.FC<AppTabsProps> = () => {
                             : undefined
                 }}
                 name="NotificationsTabs"
-                component = {NotificationsTabs}
+                component={NotificationsTabs}
             />
         </Tabs.Navigator>
     );

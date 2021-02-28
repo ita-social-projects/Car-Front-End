@@ -7,7 +7,7 @@ const AuthContext = React.createContext({
     user: null as User,
     login: () => returnType,
     logout: () => returnType,
-    loadStorageUser: () => returnType,
+    loadStorageUser: () => returnType
 });
 
 export default AuthContext;

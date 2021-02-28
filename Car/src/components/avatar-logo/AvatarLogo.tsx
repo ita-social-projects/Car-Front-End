@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 import stc from "string-to-color";
 
@@ -21,9 +21,9 @@ const AvatarLogo = (props: any) => {
                     }
                 ]}
             >
-                {/*<Text style={AvatarLogoStyle.userAvatarText}>*/}
-                {/*    {user!.name[0] + user!.surname[0]}*/}
-                {/*</Text>*/}
+                <Text style={AvatarLogoStyle.userAvatarText}>
+                    {user?.name[0] + user?.surname[0]}
+                </Text>
             </View>
             <Image
                 source={{ uri: user!.avatarUrl }}

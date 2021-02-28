@@ -71,7 +71,9 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                             <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
-                                        {props.user!.name + " " + props.user!.surname}
+                                        {props.user!.name +
+                                            " " +
+                                            props.user!.surname}
                                     </Text>
                                     <Text style={JourneyNewApplicantStyle.bio}>
                                         {props.user!.position}
@@ -86,7 +88,8 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 </View>
                             </View>
                         </View>
-                        {JSON.parse(props.notificationData)?.comments != null ? (
+                        {JSON.parse(props.notificationData)?.comments !=
+                        null ? (
                             <View
                                 style={[
                                     JourneyNewApplicantStyle.row,
@@ -98,7 +101,10 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                         JourneyNewApplicantStyle.commentsText
                                     }
                                 >
-                                    {JSON.parse(props.notificationData)?.comments}
+                                    {
+                                        JSON.parse(props.notificationData)
+                                            ?.comments
+                                    }
                                 </Text>
                                 <View
                                     style={
@@ -282,7 +288,7 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                         <Text
                                             style={{
                                                 fontFamily:
-                                                Font.OpenSans.Regular
+                                                    Font.OpenSans.Regular
                                             }}
                                         >
                                             (view on the map)

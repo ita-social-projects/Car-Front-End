@@ -1,23 +1,34 @@
-import { Alert } from "react-native";
+import React from "react";
+import { Image } from "react-native";
+import ErrorAlertStyle from "./ErrorAlertStyle";
 
 let IsAlertShowing = false;
 
-const ErrorAlert = (message: string, func?: any) => {
+const ErrorAlert = (message?: string, func?: any) => {
     if (!IsAlertShowing) {
         IsAlertShowing = true;
 
-        Alert.alert("Error", message, [
-            {
-                text: "OK",
-                onPress: () => {
-                    if (func !== undefined) {
-                        func();
-                    }
+        const { Popup } = require("popup-ui");
 
-                    IsAlertShowing = false;
-                }
+        Popup.show({
+            type: "Warning",
+            title: "The Internet?",
+            button: true,
+            textBody: "That thing is still around?",
+            buttonText: "Retry",
+            icon: (
+                <Image
+                    source={require("../../../assets/images/surprised-car.png")}
+                    style={ErrorAlertStyle.icon}
+                    resizeMode="contain"
+                />
+            ),
+            callback: () => {
+                IsAlertShowing = false;
+                Popup.hide();
             }
-        ]);
+        });
     }
 };
+
 export default ErrorAlert;

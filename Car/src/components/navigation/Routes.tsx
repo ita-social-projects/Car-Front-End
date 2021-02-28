@@ -15,6 +15,9 @@ const MILISECONDS_IN_MONTH = 2629800000;
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
+
+    const { Root } = require("popup-ui");
+
     useEffect(() => {
         (async () => {
             const currentLogin = new Date();
@@ -36,31 +39,32 @@ const Routes = () => {
         );
     }, []);
 
-
     const navigator = user ? (
         <Stack.Screen
             name="AppTabs"
             options={{ headerShown: false }}
-            component = {AppTabs}
+            component={AppTabs}
         />
     ) : (
         <Stack.Screen name="Login" component={Login} />
     );
 
     return (
-        <NavigationContainer ref={navigationRef}>
-            {isLoading ? (
-                <Indicator
-                    color="#414045"
-                    size="large"
-                    text="Loading information..."
-                />
-            ) : (
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    {navigator}
-                </Stack.Navigator>
-            )}
-        </NavigationContainer>
+        <Root>
+            <NavigationContainer ref={navigationRef}>
+                {isLoading ? (
+                    <Indicator
+                        color="#414045"
+                        size="large"
+                        text="Loading information..."
+                    />
+                ) : (
+                    <Stack.Navigator screenOptions={{ headerShown: false }}>
+                        {navigator}
+                    </Stack.Navigator>
+                )}
+            </NavigationContainer>
+        </Root>
     );
 };
 

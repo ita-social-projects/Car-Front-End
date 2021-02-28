@@ -10,14 +10,12 @@ import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 const Notifications = (props: any) => {
     const { user } = useContext(AuthContext);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
-    console.log("-",3000);
+    console.log("-", 3000);
     console.log(SignalRHubConnection);
-    console.log("!",3000);
+    console.log("!", 3000);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
         NotificationsService.getUnreadNotificationsNumber(user!.id)
     );
-
-
 
     const refreshNotification = () => {
         NotificationsService.getNotifications(Number(user?.id)).then((res) => {

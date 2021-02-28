@@ -19,11 +19,10 @@ const NewNotification: React.FC<NewNotificationProps> = (
                 ]}
             >
                 <View style={[RowStyle.row, NewNotificationStyle.center]}>
-                    <UserAvatar user={props.user}
-                                flexBox={{ width: 20 }}/>
+                    <UserAvatar user={props.user} flexBox={{ width: 20 }} />
                     <View style={[Item(65), NewNotificationStyle.content]}>
                         <Text style={NewNotificationStyle.name}>
-                            {props.user!.name+" "+props.user!.surname}
+                            {props.user!.name + " " + props.user!.surname}
                         </Text>
                         <Text style={NewNotificationStyle.title}>
                             {props.notificationTitle}
