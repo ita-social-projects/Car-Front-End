@@ -51,8 +51,8 @@ function CarDropDownPicker(props: any) {
                 onChangeItem={
                     props.selectHandle
                         ? (item) => {
-                              props.selectHandle(item);
-                          }
+                            props.selectHandle(item);
+                        }
                         : () => {}
                 }
                 dropDownMaxHeight={Dimensions.get("window").height / 4}

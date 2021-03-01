@@ -6,6 +6,8 @@ import AvatarLogoStyle from "./AvatarLogoStyle";
 const AvatarLogo = (props: any) => {
     const user = props?.user;
 
+    console.log("aaaaaa");
+
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
         { height: props?.size, width: props?.size }

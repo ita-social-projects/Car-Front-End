@@ -41,18 +41,18 @@ const AppTabs = () => {
                 tabBarIcon: ({ color, size }) => {
                     let iconName: string;
                     switch (route.name) {
-                        case "MessagesTabs":
-                            iconName = "chatbubbles";
-                            break;
-                        case "MyProfileTabs":
-                            iconName = "person";
-                            break;
-                        case "JourneyTabs":
-                            iconName = "car";
-                            break;
-                        case "NotificationsTabs":
-                            iconName = "notifications";
-                            break;
+                    case "MessagesTabs":
+                        iconName = "chatbubbles";
+                        break;
+                    case "MyProfileTabs":
+                        iconName = "person";
+                        break;
+                    case "JourneyTabs":
+                        iconName = "car";
+                        break;
+                    case "NotificationsTabs":
+                        iconName = "notifications";
+                        break;
                     }
 
                     return (

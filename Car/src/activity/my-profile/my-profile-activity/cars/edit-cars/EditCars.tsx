@@ -80,15 +80,15 @@ const EditCars = (navigation: any) => {
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
         .length
         ? brands.map((brand) => ({
-              ...{ value: String(brand!.id), label: brand!.name }
-          }))
+            ...{ value: String(brand!.id), label: brand!.name }
+        }))
         : null;
 
     let modelItems: CarDropDownPickerItem[] | null = Object.entries(models)
         .length
         ? models.map((model) => ({
-              ...{ value: String(model!.id), label: model!.name }
-          }))
+            ...{ value: String(model!.id), label: model!.name }
+        }))
         : null;
 
     console.log(selectedModel);

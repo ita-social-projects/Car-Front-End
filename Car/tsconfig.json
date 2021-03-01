@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
@@ -12,7 +11,7 @@
         "noEmit": true,
         "strict": true,
         "target": "esnext",
-        "skipLibCheck": true,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules/**/*",

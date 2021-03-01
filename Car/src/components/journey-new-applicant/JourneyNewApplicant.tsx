@@ -90,31 +90,31 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                         </View>
                         {JSON.parse(props.notificationData)?.comments !=
                         null ? (
-                            <View
-                                style={[
-                                    JourneyNewApplicantStyle.row,
-                                    JourneyNewApplicantStyle.commentsBox
-                                ]}
-                            >
-                                <Text
-                                    style={
-                                        JourneyNewApplicantStyle.commentsText
-                                    }
+                                <View
+                                    style={[
+                                        JourneyNewApplicantStyle.row,
+                                        JourneyNewApplicantStyle.commentsBox
+                                    ]}
                                 >
-                                    {
+                                    <Text
+                                        style={
+                                            JourneyNewApplicantStyle.commentsText
+                                        }
+                                    >
+                                        {
                                         JSON.parse(props.notificationData)
                                             ?.comments
-                                    }
-                                </Text>
-                                <View
-                                    style={
-                                        JourneyNewApplicantStyle.commentsBoxAfter
-                                    }
-                                />
-                            </View>
-                        ) : (
-                            <View />
-                        )}
+                                        }
+                                    </Text>
+                                    <View
+                                        style={
+                                            JourneyNewApplicantStyle.commentsBoxAfter
+                                        }
+                                    />
+                                </View>
+                            ) : (
+                                <View />
+                            )}
 
                         <View
                             style={[
