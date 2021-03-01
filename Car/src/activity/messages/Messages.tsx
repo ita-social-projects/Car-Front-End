@@ -1,8 +1,8 @@
 import moment from "moment";
-import React, { useState, useContext, useEffect } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { SafeAreaView, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
-import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ChatService from "../../../api-service/chat-service/ChatService";
@@ -20,6 +20,7 @@ const Messages = (props: any) => {
     useEffect(() => {
         ChatService.getChat(user?.id).then((res) => {
             const chats = res.data;
+
             console.log(chats);
             setFilteredDataSource(chats);
             setMasterDataSource(chats);
@@ -38,8 +39,10 @@ const Messages = (props: any) => {
                           item.journey.organizer.surname.toUpperCase()
                         : "".toUpperCase();
                 const textData = text.toUpperCase();
+                
                 return itemData.indexOf(textData) > -1;
             });
+
             setFilteredDataSource(newData);
             setSearch(text);
         } else {

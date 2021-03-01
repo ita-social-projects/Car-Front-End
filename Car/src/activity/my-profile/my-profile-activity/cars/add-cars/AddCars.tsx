@@ -58,6 +58,7 @@ const AddCars = () => {
             selectedBrand?.value === undefined
         ) {
             showAlert("Brand is a required field!");
+            
             return false;
         }
         if (
@@ -65,6 +66,7 @@ const AddCars = () => {
             selectedModel?.value === undefined
         ) {
             showAlert("Model is a required field!");
+            
             return false;
         }
         if (
@@ -72,6 +74,7 @@ const AddCars = () => {
             selectedColor?.value === undefined
         ) {
             showAlert("Color is a required field!");
+            
             return false;
         }
         if (
@@ -82,8 +85,10 @@ const AddCars = () => {
             !plateNumber.match(/^[A-Za-zА-Яа-я0-9-]+$/)
         ) {
             showAlert("Plate number is not valid!");
+            
             return false;
         }
+        
         return true;
     }
 
@@ -120,6 +125,7 @@ const AddCars = () => {
     const saveCarHandle = async () => {
         setLoading(true);
         const formData = new FormData();
+
         formData.append("ownerId", user?.id);
         formData.append("modelId", Number(selectedModel?.value));
         formData.append("color", Number(selectedColor?.value));

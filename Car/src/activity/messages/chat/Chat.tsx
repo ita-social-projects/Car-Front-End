@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
-    GiftedChat,
     Bubble,
-    Send,
-    InputToolbar
+    GiftedChat,
+    InputToolbar,
+    Send
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
 import UserService from "../../../../api-service/user-service/UserService";
@@ -19,12 +19,14 @@ const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
+
     props.navigation.setOptions({ headerTitle: props.route.params.header });
 
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
             const messagesFromChat = res.data?.messages;
             const tempChat: any = [];
+
             messagesFromChat?.forEach((element: any) => {
                 UserService.getUser(element?.senderId).then((r) => {
                     const messageToAdd = {
@@ -36,6 +38,7 @@ const Chat = (props: any) => {
                             name: r?.data?.name + " " + r?.data?.surname
                         }
                     };
+
                     tempChat.push(messageToAdd);
                 });
             });
@@ -65,6 +68,7 @@ const Chat = (props: any) => {
             props.route.params.chatId.toString()
         ).catch((err: any) => console.log(err));
         setMessage("");
+        
         return function cleanup() {
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",

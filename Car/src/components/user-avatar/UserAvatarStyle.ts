@@ -13,4 +13,5 @@ const UserAvatarStyle = (backgroundColor: string) =>
             marginTop: 5
         }
     });
+
 export default UserAvatarStyle;

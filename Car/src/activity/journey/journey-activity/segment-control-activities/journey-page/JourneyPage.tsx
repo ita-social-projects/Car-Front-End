@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, FlatList } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../../models/Stop";
 import StopType from "../../../../../../models/StopType";

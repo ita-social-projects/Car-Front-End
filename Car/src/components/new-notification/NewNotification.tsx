@@ -66,10 +66,12 @@ const NewNotification: React.FC<NewNotificationProps> = (
         const days = Math.floor(diff / 1000 / 60 / 60 / 24);
         const months = Math.floor(diff / 1000 / 60 / 60 / 24 / 30);
         const years = Math.floor(diff / 1000 / 60 / 60 / 24 / 30 / 12);
+
         if (minutes < 60) {
             if (minutes == 0) {
                 return "now";
             }
+            
             return minutes + " min";
         }
         if (hours < 24) {
@@ -81,11 +83,13 @@ const NewNotification: React.FC<NewNotificationProps> = (
         if (months < 12) {
             return months + " m";
         }
+        
         return years + " y";
 
         function daysRemainingInMonth(date: Date) {
             const year = date.getFullYear();
             const month = date.getMonth();
+            
             return new Date(year, month, 0).getDate();
         }
     }

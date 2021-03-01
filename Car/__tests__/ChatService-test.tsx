@@ -37,6 +37,7 @@ describe("ChatService", () => {
         );
 
         let response: Chat;
+
         ChatService.getChat(userData.id).then((res) => {
             response = res.data;
             expect(res.status).toEqual(200);

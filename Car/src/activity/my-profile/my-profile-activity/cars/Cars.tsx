@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";

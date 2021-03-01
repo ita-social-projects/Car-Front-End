@@ -61,6 +61,7 @@ const EditCars = (navigation: any) => {
             if (!response.didCancel) {
                 setPhoto(response);
                 const selectedImageData = new FormData();
+
                 selectedImageData.append("image", {
                     name: response.fileName,
                     type: response.type,

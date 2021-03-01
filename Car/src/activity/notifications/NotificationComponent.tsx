@@ -9,6 +9,7 @@ const NotificationComponent = (props: any) => {
     let componentsEnum: ComponentsEnum<NotificationProps> = {
         1: JourneyNewApplicant
     };
+    
     return (
         <View>
             {React.createElement(componentsEnum[props.item.type], {

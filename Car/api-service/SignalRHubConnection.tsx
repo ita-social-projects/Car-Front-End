@@ -7,6 +7,7 @@ let SignalRHubConnection: HubConnection;
     const SignalRubConnectionFunc = new HubConnectionBuilder()
         .withUrl(APIConfig.URL + "signalr/")
         .build();
+
     SignalRubConnectionFunc!.start();
     SignalRHubConnection = SignalRubConnectionFunc;
 })();

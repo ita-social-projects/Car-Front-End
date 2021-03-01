@@ -43,6 +43,7 @@ describe("UserService", () => {
     test("It should update preferences", () => {
         let newComments = "Hello world!";
         let newPreferences = { ...preferencesData, comments: newComments };
+
         jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<UserPreferences>>(function (resolve) {
@@ -58,6 +59,7 @@ describe("UserService", () => {
                 })
         );
         let response: UserPreferences;
+
         PreferencesService.updateUserPreferences(preferencesData).then(
             (res) => {
                 response = res.data;

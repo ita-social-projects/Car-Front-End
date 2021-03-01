@@ -34,6 +34,7 @@ const Settings = () => {
                 setPhoto(response);
                 setStatus(true);
                 const selectedImageData = new FormData();
+
                 selectedImageData.append("image", {
                     name: response.fileName,
                     type: response.type,

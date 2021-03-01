@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Notification from "../../../models/Notification";
@@ -10,6 +10,7 @@ import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 const Notifications = (props: any) => {
     const { user } = useContext(AuthContext);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
+
     console.log("-", 3000);
     console.log(SignalRHubConnection);
     console.log("!", 3000);
@@ -36,6 +37,7 @@ const Notifications = (props: any) => {
             setUnreadNotificationsNumber
         );
         props.navigation.addListener("focus", refreshNotification);
+        
         return () => {
             props.navigation.removeListener("focus", refreshNotification);
         };

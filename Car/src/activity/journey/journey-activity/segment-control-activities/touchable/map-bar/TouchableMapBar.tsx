@@ -7,6 +7,7 @@ import TouchableMapBarStyle from "./TouchableMapBarStyle";
 function TouchableMapBar(props: any) {
     let marginBottom = parseInt(props.marB);
     let marginTop = parseInt(props.marT);
+    
     return (
         <View>
             <TouchableOpacity

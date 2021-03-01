@@ -24,12 +24,11 @@
         ]
     },
     "scripts": {
-        "android": "tsc --noEmit && eslint --ext .js,.jsx,.tx,.tsx && react-native run-android",
+        "android": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ &&  react-native run-android",
         "ios": "react-native run-ios",
-        "start": "tsc --noEmit && eslint --ext .js,.jsx,.tx,.tsx && react-native start",
+        "start": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && react-native start",
         "test": "jest --coverage",
-        "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./",
-        "prettier:write": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json}"
+        "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./"
     },
     "husky": {
         "hooks": {

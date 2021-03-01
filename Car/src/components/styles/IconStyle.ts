@@ -12,4 +12,5 @@ const IconStyle = EStyleSheet.create({
         color: "#ffffff"
     }
 });
+
 export default IconStyle;

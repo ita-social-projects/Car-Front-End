@@ -12,6 +12,7 @@ const Login = (props: any) => {
     const refresher = async (props: any) => {
         const apiToken = await AuthManager.getAPIToken();
         const accessToken = await AuthManager.getAccessTokenAsync();
+
         if (apiToken) {
             clearInterval(props);
             loadingProcess(false);
@@ -32,6 +33,7 @@ const Login = (props: any) => {
 
     useEffect(() => {
         props.navigation.addListener("focus", startRefresher);
+        
         return () => {
             props.navigation.removeListener("focus", startRefresher);
         };
