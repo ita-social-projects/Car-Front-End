@@ -15,7 +15,7 @@ const AvatarLogo = (props: any) => {
             <View
                 style={[
                     avatarStyle,
-                    { backgroundColor: stc(user!.name + " " + user!.surname) }
+                    { backgroundColor: stc(user.name + " " + user.surname) }
                 ]}
             >
                 <Text style={AvatarLogoStyle.userAvatarText}>

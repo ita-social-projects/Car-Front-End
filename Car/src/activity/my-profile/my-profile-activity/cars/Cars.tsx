@@ -14,22 +14,16 @@ const Cars = (props: any) => {
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 
-    const wait = (timeout: number) => {
-        return new Promise((resolve) => setTimeout(resolve, timeout));
-    };
-
     const onRefresh = useCallback(() => {
         setRefreshing(true);
-        wait(1000).then(() => {
-            loadCars();
-            setRefreshing(false);
-        });
+        loadCars();
     }, []);
 
-    function loadCars() {
+    const loadCars = () => {
         CarService.getAll(Number(user?.id)).then((res) => {
             setCars(res.data);
             setLoading(false);
+            setRefreshing(false);
         });
     }
 
