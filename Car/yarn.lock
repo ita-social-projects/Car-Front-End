@@ -1512,6 +1512,11 @@
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   "version" "0.0.29"
 
+"@types/minimatch@^3.0.3":
+  "integrity" "sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA=="
+  "resolved" "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.3.tgz"
+  "version" "3.0.3"
+
 "@types/node@*":
   "integrity" "sha512-JsoLXFppG62tWTklIoO4knA+oDTYsmqWxHRvd4lpmfQRNhX6osheUOWETP2jMoV/2bEHuMra8Pp3Dmo/stBFcw=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-14.14.9.tgz"
@@ -1962,6 +1967,11 @@
   "resolved" "https://registry.npmjs.org/arr-union/-/arr-union-3.1.0.tgz"
   "version" "3.1.0"
 
+"array-differ@^3.0.0":
+  "integrity" "sha512-THtfYS6KtME/yIAhKjZ2ul7XI96lQGHRputJQHO80LAWQnuGP4iCIN8vdMRboGbIEYBwU33q8Tch1os2+X0kMg=="
+  "resolved" "https://registry.npmjs.org/array-differ/-/array-differ-3.0.0.tgz"
+  "version" "3.0.0"
+
 "array-equal@^1.0.0":
   "integrity" "sha1-jCpe8kcv2ep0KwTHenUJO6J1fJM="
   "resolved" "https://registry.npmjs.org/array-equal/-/array-equal-1.0.0.tgz"
@@ -2031,6 +2041,11 @@
     "define-properties" "^1.1.3"
     "es-abstract" "^1.18.0-next.1"
     "function-bind" "^1.1.1"
+
+"arrify@^2.0.1":
+  "integrity" "sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug=="
+  "resolved" "https://registry.npmjs.org/arrify/-/arrify-2.0.1.tgz"
+  "version" "2.0.1"
 
 "asap@^2.0.0":
   "version" "2.0.6"
@@ -3661,7 +3676,7 @@
   dependencies:
     "eslint-plugin-react-native-globals" "^0.1.1"
 
-"eslint-plugin-react@^7.19.0", "eslint-plugin-react@^7.21.5":
+"eslint-plugin-react@^7.21.5", "eslint-plugin-react@^7.22.0":
   "integrity" "sha512-p30tuX3VS+NWv9nQot9xIGAHBXR0+xJVaZriEsHoJrASGCJZDJ8JLNM0YqKqI0AKm6Uxaa1VUHoNEibxRCMQHA=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-react/-/eslint-plugin-react-7.22.0.tgz"
   "version" "7.22.0"
@@ -3924,6 +3939,21 @@
     "npm-run-path" "^4.0.0"
     "onetime" "^5.1.0"
     "p-finally" "^2.0.0"
+    "signal-exit" "^3.0.2"
+    "strip-final-newline" "^2.0.0"
+
+"execa@^4.0.0":
+  "integrity" "sha512-j5W0//W7f8UxAn8hXVnwG8tLwdiUy4FJLcSupCg6maBYZDpyBvTApK7KyuI4bKj8KOh1r2YH+6ucuYtJv1bTZA=="
+  "resolved" "https://registry.npmjs.org/execa/-/execa-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "cross-spawn" "^7.0.0"
+    "get-stream" "^5.0.0"
+    "human-signals" "^1.1.1"
+    "is-stream" "^2.0.0"
+    "merge-stream" "^2.0.0"
+    "npm-run-path" "^4.0.0"
+    "onetime" "^5.1.0"
     "signal-exit" "^3.0.2"
     "strip-final-newline" "^2.0.0"
 
@@ -6905,6 +6935,11 @@
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
   "version" "2.29.1"
 
+"mri@^1.1.5":
+  "integrity" "sha512-oi1b3MfbyGa7FJMP9GmLTttni5JoICpYBRlq+x5V16fZbLsnL9N3wFqqIm/nIG43FjUFkFh9Epzp/kzUGUnJxQ=="
+  "resolved" "https://registry.npmjs.org/mri/-/mri-1.1.6.tgz"
+  "version" "1.1.6"
+
 "ms@^2.0.0", "ms@^2.1.2":
   "version" "2.1.3"
 
@@ -6922,6 +6957,17 @@
   "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
   "version" "2.1.2"
+
+"multimatch@^4.0.0":
+  "integrity" "sha512-lDmx79y1z6i7RNx0ZGCPq1bzJ6ZoDDKbvh7jxr9SJcWLkShMzXrHbYVpTdnhNM5MXpDUxCQ4DgqVttVXlBgiBQ=="
+  "resolved" "https://registry.npmjs.org/multimatch/-/multimatch-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "@types/minimatch" "^3.0.3"
+    "array-differ" "^3.0.0"
+    "array-union" "^2.1.0"
+    "arrify" "^2.0.1"
+    "minimatch" "^3.0.4"
 
 "mute-stream@~0.0.4", "mute-stream@0.0.7":
   "integrity" "sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s="
@@ -7779,7 +7825,7 @@
   dependencies:
     "fast-diff" "^1.1.2"
 
-"prettier@^2.0.2", "prettier@^2.2.1":
+"prettier@^2.0.2", "prettier@^2.2.1", "prettier@>=2.0.0":
   "integrity" "sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q=="
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.2.1.tgz"
   "version" "2.2.1"
@@ -7833,6 +7879,18 @@
     "ansi-regex" "^5.0.0"
     "ansi-styles" "^4.0.0"
     "react-is" "^17.0.1"
+
+"pretty-quick@^3.1.0":
+  "integrity" "sha512-DtxIxksaUWCgPFN7E1ZZk4+Aav3CCuRdhrDSFZENb404sYMtuo9Zka823F+Mgeyt8Zt3bUiCjFzzWYE9LYqkmQ=="
+  "resolved" "https://registry.npmjs.org/pretty-quick/-/pretty-quick-3.1.0.tgz"
+  "version" "3.1.0"
+  dependencies:
+    "chalk" "^3.0.0"
+    "execa" "^4.0.0"
+    "find-up" "^4.1.0"
+    "ignore" "^5.1.4"
+    "mri" "^1.1.5"
+    "multimatch" "^4.0.0"
 
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
