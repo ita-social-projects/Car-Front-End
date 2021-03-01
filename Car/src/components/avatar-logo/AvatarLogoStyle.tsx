@@ -16,6 +16,10 @@ const AvatarLogoTitle = StyleSheet.create({
         textTransform: "uppercase",
         color: "#FFFFFF",
         paddingTop: 3
+    },
+
+    image: { 
+        position: "absolute", 
     }
 });
 

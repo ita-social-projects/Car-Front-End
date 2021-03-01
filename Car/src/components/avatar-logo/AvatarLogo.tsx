@@ -27,7 +27,7 @@ const AvatarLogo = (props: any) => {
             </View>
             <Image
                 source={{ uri: user!.avatarUrl }}
-                style={[avatarStyle, { position: "absolute" }]}
+                style={[avatarStyle, AvatarLogoStyle.image]}
             />
         </>
     );
