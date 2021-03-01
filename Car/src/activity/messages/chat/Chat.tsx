@@ -60,9 +60,10 @@ const Chat = (props: any) => {
                 )
             );
         });
-        SignalRHubConnection
-            .invoke("EnterToGroup", props.route.params.chatId.toString())
-            .catch((err: any) => console.log(err));
+        SignalRHubConnection.invoke(
+            "EnterToGroup",
+            props.route.params.chatId.toString()
+        ).catch((err: any) => console.log(err));
         setMessage("");
         return function cleanup() {
             SignalRHubConnection?.invoke(

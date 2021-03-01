@@ -18,8 +18,8 @@ const AvatarLogoTitle = StyleSheet.create({
         paddingTop: 3
     },
 
-    image: { 
-        position: "absolute", 
+    image: {
+        position: "absolute"
     }
 });
 

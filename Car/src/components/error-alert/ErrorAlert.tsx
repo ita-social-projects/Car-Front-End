@@ -24,7 +24,7 @@ const ErrorAlert = (message?: string, func?: any) => {
                 />
             ),
             callback: () => {
-                if (func != null){
+                if (func != null) {
                     func();
                 }
                 IsAlertShowing = false;
