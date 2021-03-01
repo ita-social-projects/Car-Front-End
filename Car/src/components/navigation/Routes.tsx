@@ -24,6 +24,7 @@ const Routes = () => {
             const lastLogin = new Date(
                 (await AsyncStorage.getItem("lastLogin")) as string
             );
+
             if (
                 Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
                 MILISECONDS_IN_MONTH

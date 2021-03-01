@@ -1,11 +1,10 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
-import AvatarLogoStyle from "./AvatarLogoStyle";
 import stc from "string-to-color";
+import AvatarLogoStyle from "./AvatarLogoStyle";
 
 const AvatarLogo = (props: any) => {
     const user = props?.user;
-
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
         { height: props?.size, width: props?.size }
@@ -16,9 +15,7 @@ const AvatarLogo = (props: any) => {
             <View
                 style={[
                     avatarStyle,
-                    {
-                        backgroundColor: stc(user!.name + " " + user!.surname)
-                    }
+                    { backgroundColor: stc(user.name + " " + user.surname) }
                 ]}
             >
                 <Text style={AvatarLogoStyle.userAvatarText}>
@@ -27,7 +24,7 @@ const AvatarLogo = (props: any) => {
             </View>
             <Image
                 source={{ uri: user!.avatarUrl }}
-                style={[avatarStyle, { position: "absolute" }]}
+                style={[avatarStyle, AvatarLogoStyle.image]}
             />
         </>
     );

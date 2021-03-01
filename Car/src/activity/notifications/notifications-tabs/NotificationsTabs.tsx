@@ -8,9 +8,11 @@ const StackTabs = createStackNavigator();
 
 const NotificationsTabs = (props: any) => {
     const hubConnection = props.SignalRHubConnection;
+
     console.log("-", 2000);
     console.log(hubConnection);
     console.log("!", 2000);
+    
     return (
         <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
@@ -33,4 +35,5 @@ const NotificationsTabs = (props: any) => {
         </View>
     );
 };
+
 export default NotificationsTabs;

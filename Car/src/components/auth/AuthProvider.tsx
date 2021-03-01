@@ -21,10 +21,12 @@ const AuthProvider = ({ children }: any) => {
 
                     if (accessToken) {
                         const userGraph = await GraphManager.getUserAsync();
+
                         if (!userGraph) {
                             navigation.navigate("Login", {
                                 resetIndicator: true
                             });
+                            
                             return;
                         }
                         const tempUser: User = {
@@ -47,6 +49,7 @@ const AuthProvider = ({ children }: any) => {
                             navigation.navigate("Login", {
                                 resetIndicator: true
                             });
+                            
                             return;
                         }
 
@@ -72,6 +75,7 @@ const AuthProvider = ({ children }: any) => {
 
                 loadStorageUser: async () => {
                     const storeUser = await AsyncStorage.getItem("user");
+
                     if (storeUser) {
                         setUser(JSON.parse(storeUser));
                     } else {

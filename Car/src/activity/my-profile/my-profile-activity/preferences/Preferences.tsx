@@ -22,6 +22,7 @@ export default function Preferences(props: any) {
 
     const updatePreferences = () => {
         let preferences: UserPreferences = null;
+
         if (userPreferences) {
             preferences = {
                 id: userPreferences.id,
@@ -48,6 +49,7 @@ export default function Preferences(props: any) {
 
     useEffect(() => {
         props.navigation.addListener("blur", updatePreferences);
+        
         return () => {
             props.navigation.removeListener("blur", updatePreferences);
         };

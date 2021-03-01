@@ -5,7 +5,7 @@ import ContainerStyle from "../styles/flex/Container";
 import RowStyle from "../styles/flex/Row";
 import NewNotificationStyle from "./NewNotificationStyle";
 import Item from "../styles/flex/Item";
-import UserAvatar from "../user-avatar/UserAvatar";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
 
 const NewNotification: React.FC<NewNotificationProps> = (
     props: NewNotificationProps
@@ -19,7 +19,9 @@ const NewNotification: React.FC<NewNotificationProps> = (
                 ]}
             >
                 <View style={[RowStyle.row, NewNotificationStyle.center]}>
-                    <UserAvatar user={props.user} flexBox={{ width: 20 }} />
+                    <View style={NewNotificationStyle.avatar}>
+                        <AvatarLogo user={props.user} size={38.5} />
+                    </View>
                     <View style={[Item(65), NewNotificationStyle.content]}>
                         <Text style={NewNotificationStyle.name}>
                             {props.user!.name + " " + props.user!.surname}
@@ -66,10 +68,12 @@ const NewNotification: React.FC<NewNotificationProps> = (
         const days = Math.floor(diff / 1000 / 60 / 60 / 24);
         const months = Math.floor(diff / 1000 / 60 / 60 / 24 / 30);
         const years = Math.floor(diff / 1000 / 60 / 60 / 24 / 30 / 12);
+
         if (minutes < 60) {
             if (minutes == 0) {
                 return "now";
             }
+            
             return minutes + " min";
         }
         if (hours < 24) {
@@ -81,11 +85,13 @@ const NewNotification: React.FC<NewNotificationProps> = (
         if (months < 12) {
             return months + " m";
         }
+        
         return years + " y";
 
         function daysRemainingInMonth(date: Date) {
             const year = date.getFullYear();
             const month = date.getMonth();
+            
             return new Date(year, month, 0).getDate();
         }
     }

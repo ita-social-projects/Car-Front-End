@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import { Image, Text, View, RefreshControl, ScrollView } from "react-native";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
@@ -14,22 +14,16 @@ const Cars = (props: any) => {
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 
-    const wait = (timeout: number) => {
-        return new Promise((resolve) => setTimeout(resolve, timeout));
-    };
-
     const onRefresh = useCallback(() => {
         setRefreshing(true);
-        wait(1000).then(() => {
-            loadCars();
-            setRefreshing(false);
-        });
+        loadCars();
     }, []);
 
-    function loadCars() {
+    const loadCars = () => {
         CarService.getAll(Number(user?.id)).then((res) => {
             setCars(res.data);
             setLoading(false);
+            setRefreshing(false);
         });
     }
 

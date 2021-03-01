@@ -5,6 +5,7 @@ import AuthConfig from "./AuthConfig";
 const AuthManager = {
     signInAsync: async () => {
         const result = await authorize(AuthConfig);
+
         AsyncStorage.setItem("userToken", result.accessToken);
         AsyncStorage.setItem("idToken", result.idToken);
         AsyncStorage.setItem("refreshToken", result.refreshToken);

@@ -24,6 +24,9 @@ const ErrorAlert = (message?: string, func?: any) => {
                 />
             ),
             callback: () => {
+                if (func != null) {
+                    func();
+                }
                 IsAlertShowing = false;
                 Popup.hide();
             }

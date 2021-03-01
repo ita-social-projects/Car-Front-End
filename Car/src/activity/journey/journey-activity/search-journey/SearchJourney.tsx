@@ -13,12 +13,12 @@ function SearchJourney() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        JourneyService.getJourney(2).then((res1) => {
-            JourneyService.getJourney(3).then((res2) => {
-                JourneyService.getJourney(4).then((res3) => {
+        JourneyService.getJourney(1).then((res1) => {
+            JourneyService.getJourney(2).then((res2) => {
+                JourneyService.getJourney(1).then((res3) => {
                     JourneyService.getJourney(2).then((res4) => {
-                        JourneyService.getJourney(3).then((res5) => {
-                            JourneyService.getJourney(4).then((res6) => {
+                        JourneyService.getJourney(1).then((res5) => {
+                            JourneyService.getJourney(2).then((res6) => {
                                 setJourneys([
                                     res1.data,
                                     res2.data,

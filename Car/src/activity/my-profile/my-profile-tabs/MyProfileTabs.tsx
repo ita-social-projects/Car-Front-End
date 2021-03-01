@@ -148,4 +148,5 @@ const MyProfileTabs = () => {
         </View>
     );
 };
+
 export default MyProfileTabs;

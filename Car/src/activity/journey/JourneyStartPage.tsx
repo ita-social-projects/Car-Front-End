@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/Journey";
 import AuthContext from "../../components/auth/AuthContext";
@@ -31,22 +31,37 @@ function JourneyStartPage(props: any) {
         []
     );
 
-    useEffect(() => {
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        loadJourneys();
+    }, []);
+
+    const loadJourneys = () => {
         JourneyService.getUpcomingJourneys(Number(user?.id)).then((res) =>
             setUpcomingJourneys(res.data)
-        );
+        ).then(() => setRefreshing(false));
 
         JourneyService.getPastJourneys(Number(user?.id)).then((res1) =>
             setPastJourneys(res1.data)
-        );
+        ).then(() => setRefreshing(false));
 
         JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
             setScheduledJourneys(res2.data)
-        );
-    }, [0]);
+        ).then(() => setRefreshing(false));
+    }
+
+    useEffect(() => {
+        return props.navigation.addListener("focus", loadJourneys);
+    }, [props.navigation]);
 
     return (
-        <ScrollView style={JourneyStartPageStyle.page}>
+        <ScrollView 
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }    
+            style={JourneyStartPageStyle.page}>
             <View style={JourneyStartPageStyle.touchableNavigationBlocks}>
                 <TouchableNavigationBlock
                     navigation={props.navigation}

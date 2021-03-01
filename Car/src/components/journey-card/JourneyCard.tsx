@@ -88,7 +88,7 @@ const JourneyCard = (props: any) => {
                                     ?.address?.street === undefined
                                     ? "Location B"
                                     : journey?.stops[journey?.stops?.length - 1]
-                                          ?.address?.street}
+                                        ?.address?.street}
                             </Text>
                         </View>
                     </View>

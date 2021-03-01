@@ -24,12 +24,17 @@
         ]
     },
     "scripts": {
-        "android": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && react-native run-android",
-        "ios": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && react-native run-ios",
-        "start": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && react-native start",
+        "android": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ &&  react-native run-android",
+        "ios": "react-native run-ios",
+        "start": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && react-native start",
         "test": "jest --coverage",
-        "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
-        "prettier:write": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json}"
+        "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && npm run lint && npm test",
+            "pre-push": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && npm run lint && npm test"
+        }
     },
     "dependencies": {
         "@babel/plugin-proposal-decorators": "7.12.1",
@@ -40,11 +45,11 @@
         "@react-navigation/bottom-tabs": "5.11.2",
         "@react-navigation/native": "5.8.10",
         "@react-navigation/stack": "5.12.8",
+        "@typescript-eslint/parser": "^4.15.2",
         "axios": "0.21.1",
         "fbjs": "^3.0.0",
         "isomorphic-fetch": "3.0.0",
         "moment": "^2.29.1",
-        "npm": "^7.5.4",
         "popup-ui": "^1.2.2",
         "react": "16.13.1",
         "react-hook-form": "6.14.2",
@@ -65,31 +70,27 @@
         "react-native-text-gradient": "0.1.7",
         "react-native-vector-icons": "7.1.0",
         "reanimated-bottom-sheet": "1.0.0-alpha.22",
-        "reflect-metadata": "^0.1.13",
         "rxjs": "^5.5.12",
-        "string-to-color": "^2.2.2"
+        "string-to-color": "^2.2.2",
+        "typescript": "4.2.2"
     },
     "devDependencies": {
         "@babel/core": "7.8.4",
         "@babel/runtime": "7.8.4",
-        "@react-native-community/eslint-config": "1.1.0",
         "@types/jest": "^26.0.20",
-        "@types/react": "17.0.0",
-        "@types/react-native": "0.63.37",
+        "@types/react": "^17.0.0",
+        "@types/react-native": "^0.63.37",
         "@types/react-native-vector-icons": "6.4.6",
-        "@typescript-eslint/eslint-plugin": "^2.34.0",
-        "eslint": "^7.19.0",
-        "eslint-config-airbnb-typescript": "^12.3.1",
-        "eslint-config-prettier": "^6.15.0",
-        "eslint-plugin-import": "^2.22.1",
-        "eslint-plugin-jsx-a11y": "^6.4.1",
-        "eslint-plugin-react": "^7.19.0",
+        "cross-env": "^7.0.3",
+        "eslint": "^6.8.0",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^3.0.0",
+        "eslint-plugin-unused-imports": "^1.1.0",
+        "husky": "^5.1.2",
         "jest": "^25.1.0",
-        "prettier": "^2.2.1",
         "react-native-cli": "^2.0.1",
         "react-native-linear-gradient": "^2.5.6",
-        "react-test-renderer": "16.13.1",
-        "typescript": "4.1.2"
+        "react-test-renderer": "16.13.1"
     },
     "jest": {
         "preset": "react-native"

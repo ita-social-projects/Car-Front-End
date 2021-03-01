@@ -16,6 +16,7 @@ const Tabs = createBottomTabNavigator();
 const AppTabs = () => {
     const { user } = useContext(AuthContext);
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
+
     NotificationsService.getUnreadNotificationsNumber(user!.id).then((result) =>
         setUnreadNotificationsNumber(result.data as number)
     );
@@ -30,6 +31,7 @@ const AppTabs = () => {
     const getTabBarVisibility = (route: any) => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
+        
         return hideOnScreens.indexOf(routeName) <= -1;
     };
 
@@ -40,6 +42,7 @@ const AppTabs = () => {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
                     let iconName: string;
+
                     switch (route.name) {
                         case "MessagesTabs":
                             iconName = "chatbubbles";

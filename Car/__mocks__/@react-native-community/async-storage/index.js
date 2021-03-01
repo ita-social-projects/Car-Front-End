@@ -1,6 +1,7 @@
 //maybe need to delete this file
 
 let cache = {};
+
 export default {
     setItem: (key, value) => {
         return new Promise((resolve, reject) => {

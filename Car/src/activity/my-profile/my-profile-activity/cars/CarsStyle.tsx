@@ -43,4 +43,5 @@ const CarsStyle = StyleSheet.create({
         borderColor: "#EEEEEE"
     }
 });
+
 export default CarsStyle;

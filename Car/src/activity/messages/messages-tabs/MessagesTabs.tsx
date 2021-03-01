@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Chat from "../chat/Chat";
@@ -85,4 +85,5 @@ const MessagesTabs = () => {
         </View>
     );
 };
+
 export default MessagesTabs;

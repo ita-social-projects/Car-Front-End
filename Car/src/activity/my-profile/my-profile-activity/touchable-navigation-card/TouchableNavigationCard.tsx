@@ -35,4 +35,5 @@ const TouchableNavigationCard = (props: any) => {
         </View>
     );
 };
+
 export default TouchableNavigationCard;

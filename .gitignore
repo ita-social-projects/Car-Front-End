@@ -14,5 +14,5 @@ buck-out/
 *.keystore
 !debug.keystore
 
-/SoftServeCarMobile/coverage/
+coverage/
 node_modules/

@@ -33,6 +33,7 @@ describe("UserService", () => {
                 })
         );
         let response: User;
+
         LoginService.loginUser(userData).then((res) => {
             response = res.data;
             expect(res.status).toEqual(200);
