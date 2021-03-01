@@ -33,7 +33,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && npm run lint && npm test",
+            "pre-commit": "npm run lint && npm test",
             "pre-push": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && npm run lint && npm test"
         }
     },
