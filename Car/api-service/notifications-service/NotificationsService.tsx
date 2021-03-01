@@ -1,5 +1,5 @@
 import APIService from "../APIService";
-import Notification from "../../models/Notification";
+import Notification from "../../models/notification/Notification";
 import APIRoutes from "../APIRoutes";
 
 const route = APIRoutes.getNotificationsUrl();

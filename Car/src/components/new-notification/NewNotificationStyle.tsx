@@ -27,7 +27,9 @@ const NewNotificationStyle = EStyleSheet.create({
         fontSize: "0.825rem"
     },
 
-    time: {},
+    time: {
+        marginLeft: 20,
+    },
 
     dateRead: {
         fontFamily: Font.OpenSans.Regular,
@@ -37,6 +39,10 @@ const NewNotificationStyle = EStyleSheet.create({
         top: "0.15rem",
         right: "-0.35rem",
         textAlign: "right"
+    },
+
+    avatar: {
+        paddingRight: 10.75,
     },
 
     dateUnread: {

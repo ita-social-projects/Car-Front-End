@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 enum NotificationType {
     PassengerApply = 1,
     ApplicationApproval = 2,

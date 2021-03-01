@@ -1,1 +1,4 @@
 tsconfig.json
+node_modules
+__mocks__
+__tests__

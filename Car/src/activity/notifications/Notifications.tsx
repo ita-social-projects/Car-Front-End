@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
-import Notification from "../../../models/Notification";
+import Notification from "../../../models/notification/Notification";
 import AuthContext from "../../components/auth/AuthContext";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";

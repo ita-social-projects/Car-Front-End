@@ -9,7 +9,7 @@ import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Item from "../styles/flex/Item";
 import Circle from "../styles/Circle";
-import UserAvatar from "../user-avatar/UserAvatar";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
 
 const JourneyNewApplicant: React.FC<NotificationProps> = (
     props: NotificationProps
@@ -64,9 +64,9 @@ const JourneyNewApplicant: React.FC<NotificationProps> = (
                                 JourneyNewApplicantStyle.title
                             ]}
                         >
-                            <UserAvatar
+                            <AvatarLogo
                                 user={props.user}
-                                flexBox={{ width: 20 }}
+                                size={49}
                             />
                             <View style={Item(80)}>
                                 <View style={JourneyNewApplicantStyle.profile}>
