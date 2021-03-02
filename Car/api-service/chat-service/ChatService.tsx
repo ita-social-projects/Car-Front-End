@@ -9,9 +9,6 @@ const ChatService = {
 
     getCeratinChat: async (id: number | undefined) =>
         APIService.get<Chat>(route + "chat/" + id),
-
-    getCertainChat: async (id: number | undefined) =>
-        APIService.get<Chat>(route + "chat" + id)
 };
 
 export default ChatService;
