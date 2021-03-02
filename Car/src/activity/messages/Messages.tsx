@@ -20,8 +20,7 @@ const Messages = (props: any) => {
     useEffect(() => {
         ChatService.getChat(user?.id).then((res) => {
             const chats = res.data;
-
-            console.log(chats);
+            
             setFilteredDataSource(chats);
             setMasterDataSource(chats);
         });
