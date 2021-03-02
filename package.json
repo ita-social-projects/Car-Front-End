@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "lint": "cd Car && tsc --noEmit && npx eslint --fix --ext .js,.jsx,.ts,.tsx ./",
+        "postinstall": "husky install"
+    },
+
+    "husky": {
+        "hooks": {
+            "pre-commit": "cd Car && npm run lint && npm test",
+            "pre-push": "cd Car && npm run lint && npm test"
+        }
+    }
+}
