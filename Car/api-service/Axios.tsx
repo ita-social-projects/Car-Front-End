@@ -27,6 +27,8 @@ Axios.interceptors.request.use(
     async (error: any) => {
         ErrorAlert();
 
+        console.log(error.message)
+
         return Promise.reject(error);
     }
 );
@@ -38,6 +40,8 @@ Axios.interceptors.response.use(
 
     async (error: { response: { status: number } }) => {
         ErrorAlert();
+
+        console.log(error.response.status);
 
         return Promise.reject(error);
     }

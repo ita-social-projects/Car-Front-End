@@ -28,12 +28,13 @@
         "ios": "react-native run-ios",
         "start": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && react-native start",
         "test": "jest --coverage",
-        "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./"
+        "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./",
+        "postinstall": "cd .. && husky install || husky install"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && npm run lint && npm test",
-            "pre-push": "npx prettier --write **/*.{js,ts,tsx,json} && npx prettier --write *.{js,tsx,json} && npm run lint && npm test"
+            "pre-commit": "npm run lint && npm test",
+            "pre-push": "npm run lint && npm test"
         }
     },
     "dependencies": {

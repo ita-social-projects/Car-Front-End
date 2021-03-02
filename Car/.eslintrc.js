@@ -8,7 +8,7 @@ module.exports = {
         "unused-imports",
     ],
     rules: {
-        indent: [
+        "indent": [
             "error",
             4,
             {
@@ -47,5 +47,11 @@ module.exports = {
         "react/no-children-prop": "off",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": "error",
-    }
+    },
+    "overrides": [{
+        "files": ["*Style.tsx"],
+        "rules": {
+            "no-magic-numbers": "off",
+        }
+    }]
 };
