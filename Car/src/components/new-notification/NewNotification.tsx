@@ -1,5 +1,4 @@
 import React from "react";
-import NewNotificationProps from "../../common/interfaces/NewNotificationProps";
 import { Text, View } from "react-native";
 import ContainerStyle from "../styles/flex/Container";
 import RowStyle from "../styles/flex/Row";
@@ -7,9 +6,7 @@ import NewNotificationStyle from "./NewNotificationStyle";
 import Item from "../styles/flex/Item";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 
-const NewNotification: React.FC<NewNotificationProps> = (
-    props: NewNotificationProps
-) => {
+const NewNotification = (props: any) => {
     return (
         <View style={props.read ? null : NewNotificationStyle.unread}>
             <View

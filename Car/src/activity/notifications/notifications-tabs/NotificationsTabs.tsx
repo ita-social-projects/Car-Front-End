@@ -6,24 +6,13 @@ import Notifications from "../Notifications";
 
 const StackTabs = createStackNavigator();
 
-const NotificationsTabs = (props: any) => {
-    const hubConnection = props.SignalRHubConnection;
-
-    console.log("-", 2000);
-    console.log(hubConnection);
-    console.log("!", 2000);
-    
+const NotificationsTabs = () => {    
     return (
         <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Notifications"
-                    component={(navprops2) => (
-                        <Notifications
-                            {...navprops2}
-                            SignalRHubConnection={props.SignalRHubConnection}
-                        />
-                    )}
+                    component={Notifications}
                     options={{
                         headerTitle: "Notifications",
                         headerTitleAlign: "center",

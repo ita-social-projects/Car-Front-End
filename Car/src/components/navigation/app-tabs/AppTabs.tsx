@@ -35,6 +35,10 @@ const AppTabs = () => {
         return hideOnScreens.indexOf(routeName) <= -1;
     };
 
+    const tabBarBadge = unreadNotificationsNumber > 0
+        ? unreadNotificationsNumber.toString()
+        : undefined
+
     return (
         <Tabs.Navigator
             initialRouteName="JourneyTabs"
@@ -93,10 +97,7 @@ const AppTabs = () => {
             <Tabs.Screen
                 options={{
                     tabBarLabel: "Notifications",
-                    tabBarBadge:
-                        unreadNotificationsNumber > 0
-                            ? unreadNotificationsNumber.toString()
-                            : undefined
+                    tabBarBadge: tabBarBadge,
                 }}
                 name="NotificationsTabs"
                 component={NotificationsTabs}
