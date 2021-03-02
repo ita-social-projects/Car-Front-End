@@ -27,4 +27,4 @@ class Notifications (reactContext: ReactApplicationContext) : ReactContextBaseJa
         private val DURATION_SHORT_KEY = "SHORT"
         private val DURATION_LONG_KEY = "LONG"
     }
-}﻿
+}
