@@ -29,7 +29,7 @@
         "start": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && react-native start",
         "test": "jest --coverage",
         "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./",
-        "postinstall": "cd .. && husky install || husky install"
+        "postinstall": "is-ci || cd .. && husky install || husky install"
     },
     "husky": {
         "hooks": {
@@ -88,6 +88,7 @@
         "eslint-plugin-react-hooks": "^3.0.0",
         "eslint-plugin-unused-imports": "^1.1.0",
         "husky": "^5.1.2",
+        "is-ci": "^2.0.0",
         "jest": "^25.1.0",
         "react-native-cli": "^2.0.1",
         "react-native-linear-gradient": "^2.5.6",
