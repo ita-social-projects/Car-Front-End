@@ -47,6 +47,7 @@ module.exports = {
         "react/no-children-prop": "off",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": "error",
+        "quotes": ["error", "double"]
     },
     "overrides": [{
         "files": ["*Style.tsx"],
