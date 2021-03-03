@@ -1,27 +1,18 @@
 import APIService from "../APIService";
 import Location from "../../models/Location";
+import APIRoutes from "../APIRoutes";
 
-const routePrefix = "locations";
+const route = APIRoutes.getLocationUrl();
 
 const LocationService = {
 
-    add(location: Location) {
-        return APIService.post<Location>(routePrefix, location);
-    },
+    add: (location: Location) => APIService.post<Location>(route, location),
 
-    update(location: Location) {
-        return APIService.put<Location>(routePrefix, location);
-    },
+    update: async (location: Location) => APIService.put<Location>(route, location),
 
-    getById(id: number) {
-        return APIService.get<Location>(routePrefix + "/" + id);
-    },
+    getById: async (id: number) => APIService.get<Location>(route + id),
 
-    getAll(id: number) {
-        return APIService.get<Array<Location>>(
-            routePrefix + "/by-user/" + id
-        );
-    },
-}
+    getAll: async (id: number) => APIService.get<Array<Location>>(route + "by-user/" + id),
+};
 
 export default LocationService;

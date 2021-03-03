@@ -5,9 +5,7 @@ import APIService from "../APIService";
 const route = APIRoutes.getBrandUrl();
 
 const BrandService = {
-    getBrands: async () => {
-        return APIService.get<CarBrand[]>(route);
-    }
+    getBrands: async () => APIService.get<CarBrand[]>(route),
 };
 
 export default BrandService;

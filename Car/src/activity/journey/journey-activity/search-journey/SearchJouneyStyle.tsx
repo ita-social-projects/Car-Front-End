@@ -1,10 +1,14 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
 const SearchJouneyStyle = StyleSheet.create({
     container: {
         zIndex: 150,
         backgroundColor: "#FAFAFA"
+    },
+
+    loadingContainer: {
+        flex: 1,
     },
 
     recentJourneyText: {
@@ -58,12 +62,11 @@ const SearchJouneyStyle = StyleSheet.create({
         justifyContent: "space-between"
     },
 
-    carButtonSave: {
+    confirmButton: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        marginTop: 550,
-        marginRight: 20,
-        marginLeft: 260,
+        top: Dimensions.get("screen").height - 236,
+        left: Dimensions.get("screen").width -121,
         position: "absolute",
         backgroundColor: "#000000",
         flexDirection: "row",
@@ -71,7 +74,7 @@ const SearchJouneyStyle = StyleSheet.create({
         justifyContent: "space-around"
     },
 
-    carButtonSaveText: {
+    confirmButtonSaveText: {
         color: "white",
         textTransform: "uppercase",
         fontWeight: "bold",

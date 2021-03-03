@@ -18,6 +18,13 @@ module.exports = {
                 "ArrayExpression": 1,
             }
         ],
+        "max-len": [
+            "error",
+            {
+                "ignorePattern": "^\\s*import",
+                "code": 120,
+            }
+        ],
         "no-loop-func": "error",
         "array-bracket-spacing": ["error", "never"],
         "space-in-parens": ["error", "never"],
@@ -47,7 +54,8 @@ module.exports = {
         "react/no-children-prop": "off",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": "error",
-        "quotes": ["error", "double"]
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
     },
     "overrides": [{
         "files": ["*Style.tsx"],

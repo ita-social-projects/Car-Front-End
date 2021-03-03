@@ -25,7 +25,7 @@ const Cars = (props: any) => {
             setLoading(false);
             setRefreshing(false);
         });
-    }
+    };
 
     useEffect(() => {
         return props.navigation.addListener("focus", loadCars);

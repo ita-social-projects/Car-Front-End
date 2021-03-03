@@ -50,7 +50,7 @@ function JourneyStartPage(props: any) {
         JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
             setScheduledJourneys(res2.data)
         ).then(() => setRefreshing(false));
-    }
+    };
 
     useEffect(() => {
         return props.navigation.addListener("focus", loadJourneys);

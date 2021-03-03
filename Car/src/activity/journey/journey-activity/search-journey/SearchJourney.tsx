@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
@@ -11,6 +11,7 @@ import Stop from "../../../../../models/Stop";
 import Location from "../../../../../models/Location";
 import SearchJourneyMap from "../segment-control-activities/map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
+import Indicator from "../../../../components/activity-indicator/Indicator";
 
 function SearchJourney() {
     const { user } = useContext(AuthContext);
@@ -31,9 +32,7 @@ function SearchJourney() {
                 setLocations(res.data);
             })
             .catch((e: any) => console.log(e));
-    }, []);
 
-    useEffect(() => {
         StopService
             .getRecentJourneyStops(Number(user?.id))
             .then((res: any) => {
@@ -43,9 +42,8 @@ function SearchJourney() {
             .catch((e: any) => console.log(e));
     }, []);
 
-    function getFullAddress(stopDto: Stop | undefined | null) {
-        return stopDto?.address?.street + ", " + stopDto?.address?.city;
-    }
+    const getFullAddress = (stopDto: Stop | undefined | null) => 
+        stopDto?.address?.street + ", " + stopDto?.address?.city;
 
     return (
         <View style={SearchJouneyStyle.screenContainer}>
@@ -57,12 +55,11 @@ function SearchJourney() {
                     longitude={longitude}
                 ></SearchJourneyMap>
                 <TouchableOpacity
-                    style={[
-                        SearchJouneyStyle.carButtonSave,
-                        { zIndex: 200, position: "absolute" }
-                    ]}
+                    style={
+                        SearchJouneyStyle.confirmButton
+                    }
                 >
-                    <Text style={SearchJouneyStyle.carButtonSaveText}>
+                    <Text style={SearchJouneyStyle.confirmButtonSaveText}>
                         Confirm
                     </Text>
                 </TouchableOpacity>
@@ -94,7 +91,7 @@ function SearchJourney() {
                 <View style={SearchJouneyStyle.insideContainer}>
                     {loading ? (
                         <></>
-                    ) : locations.length ? (
+                    ) : locations.length != 1 ? (
                         <>
                             <TouchableCard
                                 cardName="Map"
@@ -108,54 +105,54 @@ function SearchJourney() {
                                     setMapOpen(200);
                                 }}
                             />
-                            {locations.map((item: any) => {
-                                return (
-                                    <View key={item!.id}>
-                                        <TouchableCard
-                                            cardName={item?.name}
-                                            iconName={
+                            {locations.map((item: any) => (
+                                <View key={item!.id}>
+                                    <TouchableCard
+                                        cardName={item?.name}
+                                        iconName={
                                                 item?.type?.name
                                                     ? item?.type?.name
                                                     : "location"
-                                            }
-                                            angle="0"
-                                            address={
+                                        }
+                                        angle="0"
+                                        address={
                                                 item!.address?.street +
                                                 ", " +
                                                 item!.address?.city
-                                            }
-                                            addressFontColor="#909095"
-                                            onPress={() => {
-                                                setFromDirection(
+                                        }
+                                        addressFontColor="#909095"
+                                        onPress={() => {
+                                            setFromDirection(
                                                     item!.address?.street +
                                                         ", " +
                                                         item!.address?.city
-                                                );
-                                                setOpen(true);
-                                                setLongitude(
+                                            );
+                                            setOpen(true);
+                                            setLongitude(
                                                     item!.address?.longitude
-                                                );
-                                                setLatitude(
+                                            );
+                                            setLatitude(
                                                     item!.address?.latitude
-                                                );
-                                            }}
-                                            iconColor="#414045"
-                                            size={25}
-                                        />
-                                    </View>
-                                );
-                            })}
+                                            );
+                                        }}
+                                        iconColor="#414045"
+                                        size={25}
+                                    />
+                                </View>
+                            ))}
                         </>
                     ) : (
                         {}
                     )}
 
                     {loading ? (
-                        <ActivityIndicator
-                            style={SearchJouneyStyle.spinner}
-                            size={30}
-                            color="black"
-                        />
+                        <View style={SearchJouneyStyle.loadingContainer}>
+                            <Indicator
+                                color="#414045"
+                                size="large"
+                                text="Loading information..."
+                            />
+                        </View>
                     ) : (
                         <Text style={SearchJouneyStyle.recentJourneyText}>
                             Recent Journeys

@@ -37,7 +37,7 @@ const AppTabs = () => {
 
     const tabBarBadge = unreadNotificationsNumber > 0
         ? unreadNotificationsNumber.toString()
-        : undefined
+        : undefined;
 
     return (
         <Tabs.Navigator
