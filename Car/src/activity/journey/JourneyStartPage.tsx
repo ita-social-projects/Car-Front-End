@@ -7,7 +7,7 @@ import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
-function JourneyStartPage (props: any) {
+const JourneyStartPage = (props: any) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [allButtonStyle, setAllButtonStyle] = useState(
         JourneyStartPageStyle.activeButton
@@ -246,6 +246,6 @@ function JourneyStartPage (props: any) {
             )}
         </ScrollView>
     );
-}
+};
 
 export default JourneyStartPage;

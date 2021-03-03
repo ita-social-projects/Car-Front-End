@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
@@ -12,6 +12,9 @@ import Location from "../../../../../models/Location";
 import SearchJourneyMap from "../segment-control-activities/map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Indicator from "../../../../components/activity-indicator/Indicator";
+import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import Journey from "../../../../../models/Journey";
+import * as navigation from "../../../../components/navigation/Navigation";
 
 function SearchJourney () {
     const { user } = useContext(AuthContext);
@@ -24,6 +27,37 @@ function SearchJourney () {
     const [isMapOpen, setMapOpen] = useState(100);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
+    const [journeys, setJourneys] = useState<Array<Journey>>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        JourneyService.getJourney(1).then((res1) => {
+            JourneyService.getJourney(2).then((res2) => {
+                JourneyService.getJourney(3).then((res3) => {
+                    JourneyService.getJourney(5).then((res4) => {
+                        JourneyService.getJourney(7).then((res5) => {
+                            JourneyService.getJourney(2).then((res6) => {
+                                setJourneys([
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data,
+                                    res6.data,
+                                    res1.data,
+                                    res2.data,
+                                    res3.data,
+                                    res4.data,
+                                    res5.data
+                                ]);
+                                setIsLoading(false);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    }, []);
 
     useEffect(() => {
         LocationService
@@ -184,6 +218,29 @@ function SearchJourney () {
                     ) : (
                         <></>
                     )}
+                </View>
+                <View style={SearchJouneyStyle.buttonsContainer}>
+                    <View style={SearchJouneyStyle.button}>
+                        <Button
+                            disabled={isLoading}
+                            color="#000000"
+                            title="OK"
+                            onPress={() => {
+                                navigation.navigate("OK Search Result", {
+                                    journeys: journeys
+                                });
+                            }}
+                        />
+                    </View>
+                    <View style={SearchJouneyStyle.button}>
+                        <Button
+                            color="#000000"
+                            title="BAD"
+                            onPress={() => {
+                                navigation.navigate("Bad Search Result");
+                            }}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </View>
