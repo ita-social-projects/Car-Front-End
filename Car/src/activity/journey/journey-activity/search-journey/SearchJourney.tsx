@@ -13,7 +13,7 @@ import SearchJourneyMap from "../segment-control-activities/map-address/SearchJo
 import AuthContext from "../../../../components/auth/AuthContext";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 
-function SearchJourney() {
+function SearchJourney () {
     const { user } = useContext(AuthContext);
 
     const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
@@ -42,7 +42,7 @@ function SearchJourney() {
             .catch((e: any) => console.log(e));
     }, []);
 
-    const getFullAddress = (stopDto: Stop | undefined | null) => 
+    const getFullAddress = (stopDto: Stop | undefined | null) =>
         stopDto?.address?.street + ", " + stopDto?.address?.city;
 
     return (

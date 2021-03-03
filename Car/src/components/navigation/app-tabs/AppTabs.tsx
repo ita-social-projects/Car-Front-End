@@ -31,7 +31,7 @@ const AppTabs = () => {
     const getTabBarVisibility = (route: any) => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
-        
+
         return hideOnScreens.indexOf(routeName) <= -1;
     };
 

@@ -33,13 +33,13 @@ const Login = (props: any) => {
 
     useEffect(() => {
         props.navigation.addListener("focus", startRefresher);
-        
+
         return () => {
             props.navigation.removeListener("focus", startRefresher);
         };
     }, []);
 
-    function loadingProcess(value: boolean) {
+    function loadingProcess (value: boolean) {
         setButtonDisabled(value);
         setLoading(value);
     }

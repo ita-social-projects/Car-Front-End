@@ -8,7 +8,7 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOptionComponent from "./ChooseOptionComponent";
 import PreferencesStyle from "./PreferencesStyle";
 
-export default function Preferences(props: any) {
+export default function Preferences (props: any) {
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");
@@ -49,7 +49,7 @@ export default function Preferences(props: any) {
 
     useEffect(() => {
         props.navigation.addListener("blur", updatePreferences);
-        
+
         return () => {
             props.navigation.removeListener("blur", updatePreferences);
         };

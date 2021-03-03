@@ -10,7 +10,7 @@ import * as navigation from "../../../../../components/navigation/Navigation";
 
 const StackTabs = createStackNavigator();
 
-export default function CarTabs() {
+export default function CarTabs () {
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
             <StackTabs.Navigator>

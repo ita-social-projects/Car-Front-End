@@ -20,7 +20,7 @@ const Messages = (props: any) => {
     useEffect(() => {
         ChatService.getChat(user?.id).then((res) => {
             const chats = res.data;
-            
+
             setFilteredDataSource(chats);
             setMasterDataSource(chats);
         });
@@ -38,7 +38,7 @@ const Messages = (props: any) => {
                           item.journey.organizer.surname.toUpperCase()
                         : "".toUpperCase();
                 const textData = text.toUpperCase();
-                
+
                 return itemData.indexOf(textData) > -1;
             });
 

@@ -7,7 +7,7 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 
-export default function AddressBook(props: any) {
+export default function AddressBook (props: any) {
     const { user } = useContext(AuthContext);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);

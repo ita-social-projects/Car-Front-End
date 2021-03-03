@@ -29,12 +29,14 @@ module.exports = {
         "array-bracket-spacing": ["error", "never"],
         "space-in-parens": ["error", "never"],
         "object-curly-spacing": ["error", "always"],
+        "space-before-function-paren": "error",
         "no-duplicate-imports": "error",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "newline-after-var": ["error", "always"],
         "newline-before-return": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
+        "no-multi-spaces": "error",
         "no-invalid-this": "error",
         "no-await-in-loop": "error",
         "no-extra-boolean-cast": "error",
@@ -47,6 +49,8 @@ module.exports = {
         "no-useless-catch": "error",
         "no-useless-concat": "error",
         "no-useless-return": "error",
+        "no-useless-rename": "error",
+        "no-trailing-spaces": "error",
         "react/prefer-stateless-function": "error",
         "react/display-name": "off",
         "react/prop-types": "off",
@@ -61,6 +65,6 @@ module.exports = {
         "files": ["*Style.tsx"],
         "rules": {
             "no-magic-numbers": "off",
-        }
-    }]
+        },
+    }, ]
 };

@@ -18,11 +18,11 @@ const SetPlace = (props: any) => {
         longitudeDelta: 0.01
     };
 
-    function removeRegionAndPostalCode(json: any) {
+    function removeRegionAndPostalCode (json: any) {
         return json.split(", ").slice(0, -3).join(", ");
     }
 
-    function getActualAddress() {
+    function getActualAddress () {
         return fetch(
             `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`
         )

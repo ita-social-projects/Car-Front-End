@@ -9,7 +9,7 @@ import SetPlace from "../add-locations/SetPlace";
 
 const StackTabs = createStackNavigator();
 
-export default function AddressBookTabs() {
+export default function AddressBookTabs () {
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
             <StackTabs.Navigator>

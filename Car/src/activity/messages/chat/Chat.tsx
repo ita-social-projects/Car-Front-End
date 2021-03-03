@@ -34,7 +34,7 @@ const Chat = (props: any) => {
                     createdAt: element?.createdAt,
                     user: {
                         _id: element?.senderId?.toString(),
-                        name: element?.sender?.name + " " +  element?.sender?.surname
+                        name: element?.sender?.name + " " + element?.sender?.surname
                     }
                 };
 
@@ -67,7 +67,7 @@ const Chat = (props: any) => {
         ).catch((err: any) => console.log(err));
         setMessage("");
 
-        return function cleanup() {
+        return function cleanup () {
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()

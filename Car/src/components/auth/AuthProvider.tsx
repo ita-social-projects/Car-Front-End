@@ -26,7 +26,7 @@ const AuthProvider = ({ children }: any) => {
                             navigation.navigate("Login", {
                                 resetIndicator: true
                             });
-                            
+
                             return;
                         }
                         const tempUser: User = {
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }: any) => {
                             navigation.navigate("Login", {
                                 resetIndicator: true
                             });
-                            
+
                             return;
                         }
 

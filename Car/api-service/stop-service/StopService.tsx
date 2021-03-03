@@ -6,7 +6,7 @@ const route = APIRoutes.getJourneyUrl();
 
 const StopService = {
 
-    getRecentJourneyStops(id: number) {
+    getRecentJourneyStops (id: number) {
         return APIService.get<Array<Array<Stop>>>(route + "recent/" + id);
     }
 };
