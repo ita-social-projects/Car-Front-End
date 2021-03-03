@@ -3,24 +3,20 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
 import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
-import { container } from "tsyringe";
 import StopService from "../../../../../api-service/stop-service/StopService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
-import AuthContext from "../../../auth/AuthContext";
 import SearchJouneyStyle from "./SearchJouneyStyle";
 import StopType from "../../../../../models/StopType";
 import Stop from "../../../../../models/Stop";
 import Location from "../../../../../models/Location";
 import SearchJourneyMap from "../segment-control-activities/map-address/SearchJourneyMap";
+import AuthContext from "../../../../components/auth/AuthContext";
 
 function SearchJourney() {
     const { user } = useContext(AuthContext);
-    const stopService = container.resolve(StopService);
-    const locationService = container.resolve(LocationService);
 
     const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
     const [fromDirection, setFromDirection] = useState("Your location");
-    const [toDirection, setToDirection] = useState("");
     const [isOpen, setOpen] = useState(false);
     const [latitude, setLatitude] = useState<Number | undefined>(1);
     const [longitude, setLongitude] = useState<Number | undefined>(1);
@@ -29,22 +25,22 @@ function SearchJourney() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        locationService
+        LocationService
             .getAll(Number(user?.id))
-            .then((res) => {
+            .then((res: any) => {
                 setLocations(res.data);
             })
-            .catch((e) => console.log(e));
+            .catch((e: any) => console.log(e));
     }, []);
 
     useEffect(() => {
-        stopService
+        StopService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res) => {
+            .then((res: any) => {
                 setStop(res.data);
                 setLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e: any) => console.log(e));
     }, []);
 
     function getFullAddress(stopDto: Stop | undefined | null) {
@@ -84,7 +80,7 @@ function SearchJourney() {
                     <TouchableMapBar
                         directionType="To"
                         iconName="map"
-                        defaultInputValue={toDirection}
+                        defaultInputValue={""}
                         marginBottom="12"
                         marginTop="3"
                         flex="10"
@@ -112,7 +108,7 @@ function SearchJourney() {
                                     setMapOpen(200);
                                 }}
                             />
-                            {locations.map((item) => {
+                            {locations.map((item: any) => {
                                 return (
                                     <View key={item!.id}>
                                         <TouchableCard
@@ -166,12 +162,12 @@ function SearchJourney() {
                         </Text>
                     )}
                     {stops?.length ? (
-                        stops?.map((item) => (
+                        stops?.map((item: any) => (
                             <TouchableCard
-                                key={item.map((i) => i?.id)}
+                                key={item.map((i: any) => i?.id)}
                                 cardName={getFullAddress(
                                     item.find(
-                                        (address) =>
+                                        (address: any) =>
                                             address?.type === StopType.Start
                                     )
                                 )}
@@ -179,7 +175,7 @@ function SearchJourney() {
                                 angle="0"
                                 address={getFullAddress(
                                     item.find(
-                                        (address) =>
+                                        (address: any) =>
                                             address?.type === StopType.Finish
                                     )
                                 )}

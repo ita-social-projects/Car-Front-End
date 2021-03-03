@@ -1,46 +1,24 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
-import CarDto from "../../dto/CarDto";
-import routes from "../EnvironmentRoutes";
-import Car from "../../models/Car";
+import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
+import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
+import axios from "axios";
+import APIRoutes from "../APIRoutes";
 
-@injectable()
-class CarService {
-    constructor(private apiService: APIService) {}
+const route = APIRoutes.getCarUrl();
 
-    routePrefix: string = "cars";
+const CarService = {
+    add: async (car: FormData) => axios.post(route, car),
 
-    uploadPhoto(id: number, formData: FormData) {
-        return fetch(routes.apiUrl + this.routePrefix + "/" + id + "/photo", {
-            method: "PUT",
-            headers: { "Content-Type": "multipart/form-data" },
-            body: formData
-        });
-    }
+    update: async (car: UpdateCarViewModel) =>
+        APIService.put<UpdateCarViewModel>(route, car),
 
-    add(car: CarDto) {
-        return this.apiService.post<CarDto>(this.routePrefix, car);
-    }
+    getById: async (id: number) => APIService.get<CarViewModel>(route + id),
 
-    update(car: CarDto) {
-        return this.apiService.put<CarDto>(this.routePrefix, car);
-    }
+    getAll: async (id: number) =>
+        APIService.get<Array<CarViewModel>>(route + "by-user/" + id),
 
-    getById(id: number) {
-        return this.apiService.get<Car>(this.routePrefix + "/" + id);
-    }
+    getAvatar: async (id: number) =>
+        APIService.get<string>(route + id + "/photo")
+};
 
-    getAll(id: number) {
-        return this.apiService.get<Array<Car>>(
-            this.routePrefix + "/by-user/" + id
-        );
-    }
-
-    getAvatar(id: number) {
-        return this.apiService.get<string>(
-            this.routePrefix + "/" + id + "/photo"
-        );
-    }
-}
 export default CarService;

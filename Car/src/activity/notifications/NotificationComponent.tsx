@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import "reflect-metadata";
-import ComponentsEnum from "../../common/interfaces/ComponentsEnum";
-import NotificationProps from "../../common/interfaces/NotificationProps";
 import JourneyNewApplicant from "../../components/journey-new-applicant/JourneyNewApplicant";
 
 const NotificationComponent = (props: any) => {
     const [isModalVisible] = useState(false);
-    let componentsEnum: ComponentsEnum<NotificationProps> = {
+    const componentsEnum: any = {
         1: JourneyNewApplicant
     };
+    
     return (
         <View>
             {React.createElement(componentsEnum[props.item.type], {

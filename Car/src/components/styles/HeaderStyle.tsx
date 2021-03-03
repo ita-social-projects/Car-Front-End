@@ -39,14 +39,10 @@ const HeaderStyle = StyleSheet.create({
         paddingRight: 12
     },
 
-    blackButtonText: {
-        color: "black"
-    },
-
     headerTitleStyle: {
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",
-        fontSize: 20
+        fontSize: 18
     },
 
     messages: {

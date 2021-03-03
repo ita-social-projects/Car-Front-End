@@ -1,51 +1,37 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Image,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
     ImagePickerResponse,
     launchImageLibrary
 } from "react-native-image-picker/src";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { container } from "tsyringe";
 import BrandService from "../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../api-service/model-service/ModelService";
-import CarDto from "../../../../../../dto/CarDto";
-import Brand from "../../../../../../models/Brand";
-import Car from "../../../../../../models/Car";
-import Color from "../../../../../../models/Color";
-import Model from "../../../../../../models/Model";
+import CarBrand from "../../../../../../models/car/CarBrand";
+import CarViewModel from "../../../../../../models/car/CarViewModel";
+import CarColor from "../../../../../../models/car/CarColor";
+import CarModel from "../../../../../../models/car/CarModel";
 import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
 import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
-import AuthContext from "../../../../auth/AuthContext";
 import EditCarsStyle from "./EditCarsStyle";
 
-function EditCars(navigation: any) {
+const EditCars = (navigation: any) => {
     const { carId } = navigation.route.params;
 
-    const { user } = useContext(AuthContext);
-
-    const [car, setCar] = useState({} as Car);
+    const [car, setCar] = useState({} as CarViewModel);
 
     useEffect(() => {
-        carService
-            .getById(carId)
-            .then((res) => {
-                setCar(res.data);
-            })
-            .catch((e) => console.log(e));
+        CarService.getById(carId).then((res) => {
+            setCar(res.data);
+        });
     }, []);
 
-    const [brands, setBrands] = useState({} as Brand[]);
-    const [models, setModels] = useState({} as Model[]);
+    const [brands, setBrands] = useState({} as CarBrand[]);
+    const [models, setModels] = useState({} as CarModel[]);
     const [colors] = useState<Array<{ value: string; label: string }>>(
-        Object.values(Color)
+        Object.values(CarColor)
             .filter((value) => isNaN(Number(value)))
             .map((item, index) => ({
                 value: index.toString(),
@@ -61,23 +47,13 @@ function EditCars(navigation: any) {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
     const [imageData, setImageData] = useState<FormData>({} as FormData);
-
-    const [loading, setLoading] = useState(false);
-
-    const brandService = container.resolve(BrandService);
-    const modelSerivce = container.resolve(ModelService);
-    const carService = container.resolve(CarService);
+    const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
     useEffect(() => {
-        brandService
-            .getBrands()
-            .then((res) => {
-                setBrands(res.data);
-            })
-            .catch((e) => console.log(e));
+        BrandService.getBrands().then((res) => {
+            setBrands(res.data);
+        });
     }, []);
 
     const uploadPhotoHandle = () => {
@@ -85,6 +61,7 @@ function EditCars(navigation: any) {
             if (!response.didCancel) {
                 setPhoto(response);
                 const selectedImageData = new FormData();
+
                 selectedImageData.append("image", {
                     name: response.fileName,
                     type: response.type,
@@ -96,43 +73,37 @@ function EditCars(navigation: any) {
     };
 
     const selectBrandHandle = (brand: any) => {
-        modelSerivce
-            .getModelsByBrandId(Number(brand.value))
-            .then((res) => {
-                setModels(res.data);
-            })
-            .catch((e) => console.log(e));
-    };
-
-    const saveCarHandle = async (carDto: CarDto) => {
-        setLoading(true);
-        console.log(carDto);
-        const newCar = await carService.update(carDto).then((res) => res.data);
-        await carService.uploadPhoto(newCar.id, imageData);
-        setLoading(false);
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+            setModels(res.data);
+        });
     };
 
     let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
         .length
         ? brands.map((brand) => ({
-              ...{ value: String(brand!.id), label: brand!.name }
-          }))
+            ...{ value: String(brand!.id), label: brand!.name }
+        }))
         : null;
 
     let modelItems: CarDropDownPickerItem[] | null = Object.entries(models)
         .length
         ? models.map((model) => ({
-              ...{ value: String(model!.id), label: model!.name }
-          }))
+            ...{ value: String(model!.id), label: model!.name }
+        }))
         : null;
+
+    console.log(selectedModel);
+    console.log(selectedColor);
+    console.log(plateNumber);
+    console.log(imageData);
 
     return (
         <KeyboardAwareScrollView style={EditCarsStyle.wrapper}>
             <View style={EditCarsStyle.carAvatarContainer}>
-                {photo && (
+                {car!.imageId && (
                     <Image
-                        source={{ uri: photo.uri }}
-                        style={EditCarsStyle.carAvatar}
+                        source={{ uri: car?.imageId }}
+                        style={{ width: "100%", height: "100%" }}
                     />
                 )}
                 <TouchableOpacity
@@ -144,6 +115,12 @@ function EditCars(navigation: any) {
                             ? "Change photo"
                             : "Upload photo"}
                     </Text>
+                    {car?.imageId && (
+                        <Image
+                            source={{ uri: car?.imageId }}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                    )}
                 </TouchableOpacity>
             </View>
             <View style={EditCarsStyle.inputsContainer}>
@@ -214,37 +191,17 @@ function EditCars(navigation: any) {
                     <TouchableOpacity
                         style={EditCarsStyle.carButtonSave}
                         onPress={() => {
-                            saveCarHandle({
-                                modelId: Number(selectedModel?.value),
-                                color: Number(selectedColor?.value),
-                                plateNumber: plateNumber,
-                                ownerId: Number(user?.id),
-                                imageId:
-                                    photo.uri !== undefined
-                                        ? String(photo.uri)
-                                        : null,
-                                id: 0
-                            });
                             navigation.goBack();
                         }}
                     >
                         <Text style={EditCarsStyle.carButtonSaveText}>
                             Save
                         </Text>
-                        {loading ? (
-                            <ActivityIndicator
-                                style={EditCarsStyle.spinner}
-                                size={20}
-                                color="white"
-                            />
-                        ) : (
-                            <></>
-                        )}
                     </TouchableOpacity>
                 </View>
             </View>
         </KeyboardAwareScrollView>
     );
-}
+};
 
 export default EditCars;

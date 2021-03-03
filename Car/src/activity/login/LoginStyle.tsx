@@ -6,7 +6,8 @@ const LoginStyle = StyleSheet.create({
         flex: 1,
         paddingTop: Platform.OS === "ios" ? 74 : 37,
         paddingHorizontal: 16,
-        paddingBottom: 22
+        paddingBottom: 22,
+        backgroundColor: "#FFFFFF",
     },
 
     greetingTextContainer: {

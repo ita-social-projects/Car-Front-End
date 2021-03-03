@@ -1,16 +1,12 @@
 import APIService from "../APIService";
-import "reflect-metadata";
-import { injectable } from "tsyringe";
 import Stop from "../../models/Stop";
 
-@injectable()
-class StopService {
-    constructor(private apiService: APIService) {}
+const routePrefix = "journeys/recent/";
 
-    routePrefix: string = "journeys/recent/";
+const StopService = {
 
     getRecentJourneyStops(id: number) {
-        return this.apiService.get<Array<Array<Stop>>>(this.routePrefix + id);
+        return APIService.get<Array<Array<Stop>>>(routePrefix + id);
     }
 }
 

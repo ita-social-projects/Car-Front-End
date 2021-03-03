@@ -4,9 +4,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
+import moment from "moment";
+import Journey from "../../../models/Journey";
 
 const JourneyCard = (props: any) => {
-    const journey = props.journey;
+    const journey: Journey = props.journey;
 
     return (
         <View>
@@ -61,9 +63,9 @@ const JourneyCard = (props: any) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={JourneyCardStyle.timeText}>
-                                    {journey?.departureTime === undefined
-                                        ? "Today at 19:15"
-                                        : journey?.departureTime}
+                                    {moment(new Date(journey!?.departureTime))
+                                        .utc()
+                                        .fromNow()}
                                 </Text>
                             </View>
                         </View>
@@ -82,11 +84,11 @@ const JourneyCard = (props: any) => {
                         <View style={JourneyCardStyle.lastStopBlock}>
                             <View style={JourneyCardStyle.stopCircleIcon} />
                             <Text style={JourneyCardStyle.stopsText}>
-                                {journey?.stops[journey?.stops.length - 1]
+                                {journey?.stops[journey?.stops?.length - 1]
                                     ?.address?.street === undefined
                                     ? "Location B"
-                                    : journey?.stops[journey?.stops.length - 1]
-                                          ?.address?.street}
+                                    : journey?.stops[journey?.stops?.length - 1]
+                                        ?.address?.street}
                             </Text>
                         </View>
                     </View>

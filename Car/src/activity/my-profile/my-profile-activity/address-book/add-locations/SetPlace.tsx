@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import { Input } from "react-native-elements";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import env from "../../../../../../Environment";
-import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
-import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
+import APIConfig from "../../../../../../api-service/APIConfig";
 import TouchableMapBar from "../../../../journey/journey-activity/segment-control-activities/touchable/map-bar/TouchableMapBar";
 import SetPlaceStyle from "./SetPlaceStyle";
 
@@ -27,7 +24,7 @@ const SetPlace = (props: any) => {
 
     function getActualAddress() {
         return fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${env.apiKey}`
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`
         )
             .then((res) => res.json())
             .then((json) => {
@@ -35,6 +32,7 @@ const SetPlace = (props: any) => {
                 var resultedAddress = removeRegionAndPostalCode(
                     json.results[indexOfResultedArray].formatted_address
                 );
+
                 setAddress(resultedAddress);
             });
     }
@@ -72,8 +70,8 @@ const SetPlace = (props: any) => {
                             onChangeItem={
                                 props.selectHandle
                                     ? (item) => {
-                                          props.selectHandle(item);
-                                      }
+                                        props.selectHandle(item);
+                                    }
                                     : () => {}
                             }
                             disabled={props.disabled}
@@ -88,7 +86,7 @@ const SetPlace = (props: any) => {
                     <Marker
                         draggable={true}
                         pinColor={"#000080"}
-                        onDragEnd={(e) => {
+                        onDragEnd={(e: any) => {
                             setLatitude(e.nativeEvent.coordinate.latitude);
                             setLongitude(e.nativeEvent.coordinate.longitude);
                             getActualAddress();

@@ -1,10 +1,9 @@
-import React, { Component, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, Text, View, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { container } from "tsyringe";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import Location from "../../../../../models/Location";
-import AuthContext from "../../../auth/AuthContext";
+import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 
@@ -12,8 +11,6 @@ export default function AddressBook(props: any) {
     const { user } = useContext(AuthContext);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
-
-    const locationService = container.resolve(LocationService);
 
     let addLocationElement = (
         <View>
@@ -47,13 +44,13 @@ export default function AddressBook(props: any) {
     );
 
     useEffect(() => {
-        locationService
+        LocationService
             .getAll(Number(user?.id))
-            .then((res) => {
+            .then((res: any) => {
                 setLocations(res.data);
                 setLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e: any) => console.log(e));
     }, []);
 
     return (
@@ -71,7 +68,7 @@ export default function AddressBook(props: any) {
                     <ActivityIndicator size={40} color="black" />
                 ) : locations.length ? (
                     <>
-                        {locations.map((item) => {
+                        {locations.map((item: any) => {
                             return (
                                 <View key={item!.id}>
                                     <TouchableNavigationCard

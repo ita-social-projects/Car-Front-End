@@ -1,37 +1,24 @@
 import APIService from "../APIService";
-import Notification from "../../models/Notification";
-import { injectable } from "tsyringe";
+import Notification from "../../models/notification/Notification";
+import APIRoutes from "../APIRoutes";
 
-@injectable()
-class NotificationsService {
-    constructor(private apiService: APIService) {}
-    routePrefix: string = "Notification";
+const route = APIRoutes.getNotificationsUrl();
 
-    getNotification(id: number) {
-        return this.apiService.get<Notification>(this.routePrefix + "/" + id);
-    }
+const NotificationsService = {
+    getNotification: async (id: number) =>
+        APIService.get<Notification>(route + id),
 
-    getNotifications(userId: number) {
-        return this.apiService.get<Array<Notification>>(
-            this.routePrefix + "/notifications/" + userId
-        );
-    }
+    getNotifications: async (userId: number) =>
+        APIService.get<Array<Notification>>(route + "notifications/" + userId),
 
-    getUnreadNotificationsNumber(userId: number) {
-        return this.apiService.get(
-            this.routePrefix + "/unreadNumber/" + userId
-        );
-    }
+    getUnreadNotificationsNumber: async (userId: number) =>
+        APIService.get(route + "unreadNumber/" + userId),
 
-    updateNotification(notification: Notification) {
-        return this.apiService.put<Notification>(
-            this.routePrefix,
-            notification
-        );
-    }
+    updateNotification: async (notification: Notification) =>
+        APIService.put<Notification>(route, notification),
 
-    markAsRead(notificationId: number) {
-        return this.apiService.put(this.routePrefix + `\\${notificationId}`);
-    }
-}
+    markAsRead: async (notificationId: number) =>
+        APIService.put(route + notificationId)
+};
+
 export default NotificationsService;

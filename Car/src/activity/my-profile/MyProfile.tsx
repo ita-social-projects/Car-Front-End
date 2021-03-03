@@ -79,4 +79,5 @@ const MyProfile = (props: any) => {
         </View>
     );
 };
+
 export default MyProfile;

@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../api-service/APIService";
 import PreferencesService from "../api-service/preferences-service/PreferencesService";
-import { UserPreferences } from "../models/UserPreferences";
+import UserPreferences from "../models/UserPreferences";
 
 describe("UserService", () => {
     let preferencesData = {
@@ -13,11 +13,8 @@ describe("UserService", () => {
         comments: "what a lovely day"
     };
 
-    let apiService: APIService = new APIService();
-    let preferencesService = new PreferencesService(apiService);
-
     test("should get preferences", () => {
-        jest.spyOn(apiService, "get").mockImplementation(
+        jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<UserPreferences>>(function (resolve) {
                     resolve({
@@ -34,19 +31,20 @@ describe("UserService", () => {
 
         let response: UserPreferences;
 
-        preferencesService
-            .getUserPreferences(preferencesData.userId)
-            .then((res) => {
+        PreferencesService.getUserPreferences(preferencesData.userId).then(
+            (res) => {
                 response = res.data;
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(preferencesData);
-            });
+            }
+        );
     });
 
     test("It should update preferences", () => {
         let newComments = "Hello world!";
         let newPreferences = { ...preferencesData, comments: newComments };
-        jest.spyOn(apiService, "put").mockImplementation(
+
+        jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<UserPreferences>>(function (resolve) {
                     resolve({
@@ -61,12 +59,13 @@ describe("UserService", () => {
                 })
         );
         let response: UserPreferences;
-        preferencesService
-            .updateUserPreferences(preferencesData)
-            .then((res) => {
+
+        PreferencesService.updateUserPreferences(preferencesData).then(
+            (res) => {
                 response = res.data;
                 expect(res.status).toEqual(200);
                 expect(response).toEqual(preferencesData);
-            });
+            }
+        );
     });
 });

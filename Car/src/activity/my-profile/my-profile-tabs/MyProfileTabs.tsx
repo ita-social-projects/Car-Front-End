@@ -2,8 +2,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import "reflect-metadata";
-import AddressBook from "../my-profile-activity/address-book/AddressBook";
 import AvatarLogoTitle from "../my-profile-activity/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
@@ -47,15 +45,9 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -81,15 +73,9 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -125,15 +111,9 @@ const MyProfileTabs = () => {
                                     name={"chevron-back-outline"}
                                     size={35}
                                     color={"#02A2CF"}
-                                    style={HeaderStyle.blackButtonText}
                                 />
                                 <View style={HeaderStyle.backButtonTextView}>
-                                    <Text
-                                        style={[
-                                            HeaderStyle.buttonText,
-                                            HeaderStyle.blackButtonText
-                                        ]}
-                                    >
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -145,4 +125,5 @@ const MyProfileTabs = () => {
         </View>
     );
 };
+
 export default MyProfileTabs;

@@ -1,21 +1,35 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import "reflect-metadata";
-import { container } from "tsyringe";
 import CarService from "../../../../../api-service/car-service/CarService";
-import Car from "../../../../../models/Car";
-import AuthContext from "../../../../activity/auth/AuthContext";
+import CarViewModel from "../../../../../models/car/CarViewModel";
+import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../../../../activity/my-profile/my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
+import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 
-export default function Cars(props: any) {
+const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
-    const [cars, setCars] = useState<Array<Car>>([]);
-    const [loading, setLoading] = useState(true);
+    const [cars, setCars] = useState<Array<CarViewModel>>([]);
+    const [isLoading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
 
-    const carService = container.resolve(CarService);
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        loadCars();
+    }, []);
+
+    const loadCars = () => {
+        CarService.getAll(Number(user?.id)).then((res) => {
+            setCars(res.data);
+            setLoading(false);
+            setRefreshing(false);
+        });
+    }
+
+    useEffect(() => {
+        return props.navigation.addListener("focus", loadCars);
+    }, [props.navigation]);
 
     let addCarElement = (
         <View>
@@ -47,26 +61,23 @@ export default function Cars(props: any) {
         </View>
     );
 
-    useEffect(() => {
-        carService
-            .getAll(Number(user?.id))
-            .then((res) => {
-                setCars(res.data);
-                setLoading(false);
-            })
-            .catch((e) => console.log(e));
-    }, []);
-
     return (
         <ScrollView
             style={CarsStyle.container}
-            contentContainerStyle={loading && CarsStyle.loading}
+            contentContainerStyle={isLoading && CarsStyle.loading}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
         >
             <View
-                style={[CarsStyle.carContainer, loading && CarsStyle.loading]}
+                style={[CarsStyle.carContainer, isLoading && CarsStyle.loading]}
             >
-                {loading ? (
-                    <ActivityIndicator size={40} color="black" />
+                {isLoading ? (
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text="Loading information..."
+                    />
                 ) : cars.length ? (
                     <>
                         {cars.map((item) => {
@@ -80,13 +91,9 @@ export default function Cars(props: any) {
                                             item!.imageId ? (
                                                 <Image
                                                     source={{
-                                                        uri:
-                                                            "data:image/png;base64," +
-                                                            item!.imageId
+                                                        uri: item?.imageId
                                                     }}
-                                                    style={[
-                                                        CarsStyle.carAvatar
-                                                    ]}
+                                                    style={CarsStyle.carAvatar}
                                                 />
                                             ) : (
                                                 <Ionicons
@@ -115,4 +122,6 @@ export default function Cars(props: any) {
             </View>
         </ScrollView>
     );
-}
+};
+
+export default Cars;

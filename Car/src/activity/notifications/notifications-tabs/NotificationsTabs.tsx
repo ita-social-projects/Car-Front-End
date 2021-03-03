@@ -6,7 +6,7 @@ import Notifications from "../Notifications";
 
 const StackTabs = createStackNavigator();
 
-const NotificationsTabs = () => {
+const NotificationsTabs = () => {    
     return (
         <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
@@ -24,4 +24,5 @@ const NotificationsTabs = () => {
         </View>
     );
 };
+
 export default NotificationsTabs;

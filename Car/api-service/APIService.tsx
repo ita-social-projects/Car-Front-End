@@ -1,46 +1,28 @@
-import "reflect-metadata";
-import { injectable } from "tsyringe";
-import EnvironmentRoutes from "./EnvironmentRoutes";
-import axiosInstance from "./Interceptor";
+import Axios from "./Axios";
 
-@injectable()
-class APIService {
-    baseUrl: string = EnvironmentRoutes.apiUrl;
-    baseHeaders = {
-        headers: {
-            "Context-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
-        },
-        responseType: "json"
-    };
-
-    get<T>(url: string, params?: any) {
-        return axiosInstance.get<T>(
-            this.baseUrl + url,
-            Object.assign({}, this.baseHeaders, params)
-        );
+const baseHeaders = {
+    headers: {
+        "Context-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
     }
+};
+
+const APIService = {
+    get<T>(url: string, params?: any) {
+        return Axios.get<T>(url, Object.assign({}, baseHeaders, params));
+    },
 
     post<T>(url: string, params?: any) {
-        return axiosInstance.post<T>(
-            this.baseUrl + url,
-            Object.assign({}, this.baseHeaders, params)
-        );
-    }
+        return Axios.post<T>(url, Object.assign({}, baseHeaders, params));
+    },
 
     put<T>(url: string, params?: any) {
-        return axiosInstance.put<T>(
-            this.baseUrl + url,
-            Object.assign({}, this.baseHeaders, params)
-        );
-    }
+        return Axios.put<T>(url, Object.assign({}, baseHeaders, params));
+    },
 
     delete<T>(url: string, params?: any) {
-        return axiosInstance.delete<T>(
-            this.baseUrl + url,
-            Object.assign({}, this.baseHeaders, params)
-        );
+        return Axios.delete<T>(url, Object.assign({}, baseHeaders, params));
     }
-}
+};
 
 export default APIService;

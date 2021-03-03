@@ -81,4 +81,5 @@ const TouchableNavigationBlock = (props: PropsType) => {
         </View>
     );
 };
+
 export default TouchableNavigationBlock;

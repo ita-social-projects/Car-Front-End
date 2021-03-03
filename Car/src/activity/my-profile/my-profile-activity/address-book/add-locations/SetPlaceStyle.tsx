@@ -46,4 +46,5 @@ const SetPlaceStyle = StyleSheet.create({
         color: "red"
     }
 });
+
 export default SetPlaceStyle;

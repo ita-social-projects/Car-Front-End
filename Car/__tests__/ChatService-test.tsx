@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import APIService from "../api-service/APIService";
 import ChatService from "../api-service/chat-service/ChatService";
-import { Chat } from "../models/Chat";
+import Chat from "../models/Chat";
 
 describe("ChatService", () => {
     let chatsData = {
@@ -20,11 +20,8 @@ describe("ChatService", () => {
         token: ""
     };
 
-    let apiService: APIService = new APIService();
-    let chatService: ChatService = new ChatService(apiService);
-
     test("it should return chats", () => {
-        jest.spyOn(apiService, "get").mockImplementation(
+        jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Chat>>(function (resolve) {
                     resolve({
@@ -40,7 +37,8 @@ describe("ChatService", () => {
         );
 
         let response: Chat;
-        chatService.getChat(userData.id).then((res) => {
+
+        ChatService.getChat(userData.id).then((res) => {
             response = res.data;
             expect(res.status).toEqual(200);
             expect(response).toEqual(userData);
