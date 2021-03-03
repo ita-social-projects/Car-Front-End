@@ -8,14 +8,14 @@ const TouchableCard = (props: any) => {
         <View style={{ backgroundColor: "white" }}>
             <TouchableOpacity
                 style={TouchableCardStyle.cardContainer}
-                onPress={() => {}}
+                onPress={props.onPress}
             >
                 <View style={TouchableCardStyle.cardInformationContainer}>
                     <Ionicons
-                        style={TouchableCardStyle.cardIcon}
+                        style={[TouchableCardStyle.cardIcon]}
                         name={props?.iconName}
-                        size={22}
-                        color={"#414045"}
+                        size={props?.size}
+                        color={props?.iconColor}
                     />
                     <View style={TouchableCardStyle.cardTextContainer}>
                         <Text style={TouchableCardStyle.cardName}>

@@ -44,7 +44,7 @@ const AddCars = () => {
             }))
     );
 
-    function showAlert(errorMessage: string) {
+    function showAlert (errorMessage: string) {
         Alert.alert("Error!", errorMessage, [
             {
                 text: "Ok"
@@ -52,13 +52,13 @@ const AddCars = () => {
         ]);
     }
 
-    function validateFields(): boolean {
+    function validateFields (): boolean {
         if (
             selectedBrand?.value === null ||
             selectedBrand?.value === undefined
         ) {
             showAlert("Brand is a required field!");
-            
+
             return false;
         }
         if (
@@ -66,7 +66,7 @@ const AddCars = () => {
             selectedModel?.value === undefined
         ) {
             showAlert("Model is a required field!");
-            
+
             return false;
         }
         if (
@@ -74,7 +74,7 @@ const AddCars = () => {
             selectedColor?.value === undefined
         ) {
             showAlert("Color is a required field!");
-            
+
             return false;
         }
         if (
@@ -85,10 +85,10 @@ const AddCars = () => {
             !plateNumber.match(/^[A-Za-zА-Яа-я0-9-]+$/)
         ) {
             showAlert("Plate number is not valid!");
-            
+
             return false;
         }
-        
+
         return true;
     }
 

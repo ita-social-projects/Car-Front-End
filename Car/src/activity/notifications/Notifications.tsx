@@ -34,7 +34,7 @@ const Notifications = (props: any) => {
             setUnreadNotificationsNumber
         );
         props.navigation.addListener("focus", refreshNotification);
-        
+
         return () => {
             props.navigation.removeListener("focus", refreshNotification);
         };

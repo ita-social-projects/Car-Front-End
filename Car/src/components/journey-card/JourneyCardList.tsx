@@ -5,7 +5,7 @@ import JourneyCard from "./JourneyCard";
 
 const JourneyCardList = (props: any) => {
     const journey: Journey[] = props.journey;
-    
+
     return (
         <View>
             {journey.map((item) => (

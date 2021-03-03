@@ -18,7 +18,7 @@ const JourneyApplicant = ({ route }: any) => {
     }, [0]);
 
     const journeys =
-        user?.journeyCount === 1 ? "1 ride" : user?.journeyCount + " rides";
+        user?.journeyCount == 1 ? "1 ride" : user?.journeyCount + " rides";
 
     return (
         <View style={JourneyApplicantStyle.mainContainer}>

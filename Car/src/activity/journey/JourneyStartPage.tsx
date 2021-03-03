@@ -7,7 +7,7 @@ import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
 import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
 
-function JourneyStartPage(props: any) {
+const JourneyStartPage = (props: any) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [allButtonStyle, setAllButtonStyle] = useState(
         JourneyStartPageStyle.activeButton
@@ -50,17 +50,17 @@ function JourneyStartPage(props: any) {
         JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
             setScheduledJourneys(res2.data)
         ).then(() => setRefreshing(false));
-    }
+    };
 
     useEffect(() => {
         return props.navigation.addListener("focus", loadJourneys);
     }, [props.navigation]);
 
     return (
-        <ScrollView 
+        <ScrollView
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }    
+            }
             style={JourneyStartPageStyle.page}>
             <View style={JourneyStartPageStyle.touchableNavigationBlocks}>
                 <TouchableNavigationBlock
@@ -246,6 +246,6 @@ function JourneyStartPage(props: any) {
             )}
         </ScrollView>
     );
-}
+};
 
 export default JourneyStartPage;

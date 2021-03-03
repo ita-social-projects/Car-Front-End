@@ -1,39 +1,39 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import Font from "../../../../../../data/fonts/Font";
 
 const TouchableMapBarStyle = StyleSheet.create({
     container: {
         flexDirection: "row",
-        borderWidth: 2,
-        padding: 10,
+        borderWidth: 2.3,
+        padding: 8,
         marginRight: 20,
         marginLeft: 20,
+
         backgroundColor: "white",
-        fontFamily: Platform.OS === "ios" ? "Open Sans" : "OpenSans-Regular.ttf"
+        fontFamily: Font.OpenSans.Regular
     },
 
     insideText: {
-        flex: 1,
         color: "#909095",
         marginLeft: 5,
-        fontSize: 16
+        fontSize: 17,
+        fontFamily: Font.OpenSans.Regular
     },
 
     directionText: {
-        flex: 5,
         color: "black",
-        marginLeft: 5,
-        fontSize: 16
+        fontSize: 18
     },
 
     textInputStyle: {
         paddingVertical: 8,
-        fontSize: 16,
+        fontSize: 17,
         lineHeight: 24,
         zIndex: 0
     },
 
     barIcon: {
-        flex: 1,
+        marginRight: 5,
         borderColor: "#EEEEEE"
     }
 });

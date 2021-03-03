@@ -1,41 +1,27 @@
 import APIConfig from "./APIConfig";
 
 const APIRoutes = {
-    getBrandUrl: () => {
-        return APIConfig.URL + "api/brands/";
-    },
+    getBrandUrl: () => APIConfig.URL + "api/brands/",
 
-    getCarUrl: () => {
-        return APIConfig.URL + "api/cars/";
-    },
+    getCarUrl: () => APIConfig.URL + "api/cars/",
 
-    getChatUrl: () => {
-        return APIConfig.URL + "api/user-chats/";
-    },
+    getChatUrl: () => APIConfig.URL + "api/user-chats/",
 
-    getJourneyUrl: () => {
-        return APIConfig.URL + "api/journeys/";
-    },
+    getJourneyUrl: () => APIConfig.URL + "api/journeys/",
 
-    getLogindUrl: () => {
-        return APIConfig.URL + "api/login/";
-    },
+    getLogindUrl: () => APIConfig.URL + "api/login/",
 
-    getModelUrl: () => {
-        return APIConfig.URL + "api/models/";
-    },
+    getModelUrl: () => APIConfig.URL + "api/models/",
 
-    getNotificationsUrl: () => {
-        return APIConfig.URL + "api/Notification/";
-    },
+    getNotificationsUrl: () => APIConfig.URL + "api/Notification/",
 
-    getPreferencesUrl: () => {
-        return APIConfig.URL + "api/user-preferences/";
-    },
+    getPreferencesUrl: () => APIConfig.URL + "api/user-preferences/",
 
-    getUserUrl: () => {
-        return APIConfig.URL + "api/users/";
-    }
+    getUserUrl: () => APIConfig.URL + "api/users/",
+
+    getLocationUrl : () => APIConfig.URL + "api/locations/",
+
+    getLocationTypeUrl : () => APIConfig.URL + "api/location-types/"
 };
 
 export default APIRoutes;

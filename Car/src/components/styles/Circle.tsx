@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-function Circle(props: {
+function Circle (props: {
     color: string;
     radius: string;
     children?: React.ReactNode;
