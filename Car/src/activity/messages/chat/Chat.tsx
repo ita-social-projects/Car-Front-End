@@ -24,23 +24,21 @@ const Chat = (props: any) => {
 
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
-            const messagesFromChat = res.data?.messages;
-            const tempChat: any = [];
+            let tempChat: any = [];
 
-            messagesFromChat?.forEach((element: any) => {
-                UserService.getUser(element?.senderId).then((r) => {
-                    const messageToAdd = {
-                        _id: element?.id,
-                        text: element?.text,
-                        createdAt: element?.createdAt,
-                        user: {
-                            _id: element?.senderId?.toString(),
-                            name: r?.data?.name + " " + r?.data?.surname
-                        }
-                    };
+            console.log(res.data?.messages);
+            res.data?.messages?.forEach((element: any) => {
+                const messageToAdd = {
+                    _id: element?.id,
+                    text: element?.text,
+                    createdAt: element?.createdAt,
+                    user: {
+                        _id: element?.senderId?.toString(),
+                        name: element?.sender?.name + " " +  element?.sender?.surname
+                    }
+                };
 
-                    tempChat.push(messageToAdd);
-                });
+                tempChat.push(messageToAdd);
             });
             setMessages(tempChat);
         });
@@ -68,7 +66,7 @@ const Chat = (props: any) => {
             props.route.params.chatId.toString()
         ).catch((err: any) => console.log(err));
         setMessage("");
-        
+
         return function cleanup() {
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
