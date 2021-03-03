@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd Car && tsc --noEmit && npx eslint --fix --ext .js,.jsx,.ts,.tsx ./ && npx jest --coverage
+cd Car && npx tsc --noEmit && npx eslint --fix --ext .js,.jsx,.ts,.tsx ./ && npx jest --coverage
