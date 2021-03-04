@@ -8,7 +8,6 @@ import {
     Send
 } from "react-native-gifted-chat";
 import ChatService from "../../../../api-service/chat-service/ChatService";
-import UserService from "../../../../api-service/user-service/UserService";
 import AuthContext from "../../../components/auth/AuthContext";
 import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../components/navigation/Navigation";
@@ -34,7 +33,7 @@ const Chat = (props: any) => {
                     createdAt: element?.createdAt,
                     user: {
                         _id: element?.senderId?.toString(),
-                        name: element?.sender?.name + " " +  element?.sender?.surname
+                        name: element?.sender?.name + " " + element?.sender?.surname
                     }
                 };
 
@@ -44,22 +43,20 @@ const Chat = (props: any) => {
         });
 
         SignalRHubConnection.on("RecieveMessage", (receivedMessage: any) => {
-            UserService.getUser(receivedMessage?.senderId).then((res) =>
-                setMessages((previousMessages) =>
-                    GiftedChat.append(
-                        previousMessages as any,
-                        {
-                            _id: receivedMessage.id,
-                            text: receivedMessage.text,
-                            createdAt: receivedMessage.createdAt,
-                            user: {
-                                _id: receivedMessage.senderId?.toString(),
-                                name: res?.data?.name + " " + res?.data?.surname
-                            }
-                        } as any
-                    )
+            setMessages((previousMessages) =>
+                GiftedChat.append(
+                    previousMessages as any,
+                    {
+                        _id: receivedMessage.id,
+                        text: receivedMessage.text,
+                        createdAt: receivedMessage.createdAt,
+                        user: {
+                            _id: receivedMessage.senderId?.toString(),
+                            name: receivedMessage?.sender?.name + " " + receivedMessage?.sender?.surname
+                        }
+                    } as any
                 )
-            );
+            )
         });
         SignalRHubConnection.invoke(
             "EnterToGroup",
@@ -116,12 +113,12 @@ const Chat = (props: any) => {
 
     const renderSend = (props: any) => {
         return (
-            <Send {...props}>
+            <Send {...props} style={{ flex: 1, width: "100%" }}>
                 <View style={ChatStyle.button}>
                     <Icon
                         name="paper-plane"
                         type="font-awesome"
-                        color="white"
+                        color="black"
                     />
                 </View>
             </Send>
@@ -130,52 +127,54 @@ const Chat = (props: any) => {
 
     const renderInputToolbar = (props: any) => {
         return (
-            <View
-                style={{
-                    marginHorizontal: 16,
-                    marginVertical: 46
+            <InputToolbar
+                {...props}
+                required
+                autogrow
+                multiline
+                flex={1}
+                primaryStyle={{
+                    borderWidth: 2,
+                    marginHorizontal: 10,
+                    justifyContent: "center",
+                    height: "100%",
+                    overflow: "scroll"
                 }}
+            />
+        );
+    }
+
+    const renderUserAvatar = (data: any) => {
+        return (
+            <TouchableOpacity
+                onPress={() =>
+                    navigation.navigate("Applicant Page", {
+                        userId: Number(data.currentMessage.user._id)
+                    })
+                }
             >
-                <InputToolbar
-                    {...props}
-                    primaryStyle={{
-                        borderWidth: 2,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: 44
+                <AvatarLogo
+                    size={36}
+                    user={{
+                        id: data.currentMessage.user._id,
+                        name: data.currentMessage.user.name.split(
+                            " "
+                        )[0],
+                        surname: data.currentMessage.user.name.split(
+                            " "
+                        )[1]
                     }}
                 />
-            </View>
-        );
-    };
+            </TouchableOpacity>
+        )
+    }
 
     return (
         <View style={ChatStyle.chatWrapper}>
             <GiftedChat
-                renderAvatar={(data) => (
-                    <TouchableOpacity
-                        onPress={() =>
-                            navigation.navigate("Applicant Page", {
-                                userId: Number(data.currentMessage.user._id)
-                            })
-                        }
-                    >
-                        <AvatarLogo
-                            size={36}
-                            user={{
-                                id: data.currentMessage.user._id,
-                                name: data.currentMessage.user.name.split(
-                                    " "
-                                )[0],
-                                surname: data.currentMessage.user.name.split(
-                                    " "
-                                )[1]
-                            }}
-                        />
-                    </TouchableOpacity>
-                )}
-                messagesContainerStyle={{ paddingHorizontal: 8 }}
+                renderAvatar={(data) => renderUserAvatar(data)}
                 placeholder="Aa"
+                messagesContainerStyle={{ paddingBottom: 10 }}
                 renderTime={() => <View />}
                 maxInputLength={500}
                 messages={messages as any[]}
@@ -190,10 +189,13 @@ const Chat = (props: any) => {
                 }}
                 renderBubble={renderBubble}
                 renderSend={renderSend}
+                minInputToolbarHeight={44}
+                minComposerHeight={44}
+                maxComposerHeight={120}
                 renderInputToolbar={renderInputToolbar}
             />
         </View>
-    );
+    )
 };
 
 export default Chat;
