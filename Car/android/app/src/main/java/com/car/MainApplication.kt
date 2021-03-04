@@ -1,12 +1,15 @@
 package com.car;
 
-import android.app.Application;
+import android.app.*
 import android.content.Context
+import android.content.Intent
 import com.facebook.react.*
-import com.facebook.soloader.SoLoader;
+import com.facebook.soloader.SoLoader
+import com.reactnativecommunity.asyncstorage.AsyncStorageModule
 import java.lang.reflect.InvocationTargetException
 
 class MainApplication : Application(), ReactApplication {
+
     private val mReactNativeHost: ReactNativeHost = object : ReactNativeHost(this) {
         override fun getUseDeveloperSupport(): Boolean {
             return BuildConfig.DEBUG
@@ -29,6 +32,9 @@ class MainApplication : Application(), ReactApplication {
         super.onCreate()
         SoLoader.init(this,  /* native exopackage */false)
         initializeFlipper(this, reactNativeHost.reactInstanceManager)
+
+        val intent = Intent(this, NotificationService::class.java)
+        startService(intent)
     }
 
     companion object {
