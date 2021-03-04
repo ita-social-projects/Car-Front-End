@@ -1,4 +1,4 @@
-package com.car;
+package com.car
 
 import android.app.*
 import android.content.Context
@@ -7,15 +7,16 @@ import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import android.os.IBinder
 import android.widget.RemoteViews
+import com.car.Entities.Message
 import com.car.Entities.User
-import com.car.NotificationModule.NotificationPackage
-import com.facebook.react.*
-import com.facebook.soloader.SoLoader
+import com.facebook.react.bridge.ReactMethod
 import com.microsoft.signalr.HubConnection
-import java.lang.reflect.InvocationTargetException
+import com.microsoft.signalr.HubConnectionBuilder
 
-class MainApplication : Application(), ReactApplication {
+
+class NotificationService : Service() {
 
     lateinit var hubConnection: HubConnection
     lateinit var notificationManager : NotificationManager
@@ -25,68 +26,22 @@ class MainApplication : Application(), ReactApplication {
     private val description = "Test notification"
     private var user: User? = null
 
-    private val mReactNativeHost: ReactNativeHost = object : ReactNativeHost(this) {
-        override fun getUseDeveloperSupport(): Boolean {
-            return BuildConfig.DEBUG
-        }
+    var notificationCount = 0
 
-        override fun getPackages(): List<ReactPackage> {
-            var packages = PackageList(this).packages
-            packages.add(NotificationPackage())
-            return packages
-        }
-
-        override fun getJSMainModuleName(): String {
-            return "index"
-        }
+    override fun onBind(intent: Intent): IBinder? {
+        return null
     }
 
-    override fun getReactNativeHost(): ReactNativeHost {
-        return mReactNativeHost
-    }
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        hubConnection = HubConnectionBuilder.create("https://car-project.azurewebsites.net/signalr/").build()
+        hubConnection.start()
+        hubConnection.on("RecieveMessage", { message ->
+            sendNotification(message.id, "${message.sender.name} ${message.sender.surname}", message.text)
+        }, Message::class.java)
 
-    override fun onCreate() {
-        super.onCreate()
-        SoLoader.init(this,  /* native exopackage */false)
-        initializeFlipper(this, reactNativeHost.reactInstanceManager)
 
-        val intent = Intent(this, NotificationService::class.java)
-        startService(intent)
 
-        sendNotification(1, "Roman Danylevych's journey", "Implementation of notifications is in progress!")
-    }
-
-    companion object {
-        /**
-         * Loads Flipper in React Native templates. Call this in the onCreate method with something like
-         * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-         *
-         * @param context
-         * @param reactInstanceManager
-         */
-        private fun initializeFlipper(
-                context: Context, reactInstanceManager: ReactInstanceManager) {
-            if (BuildConfig.DEBUG) {
-                try {
-                    /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
-                    val aClass = Class.forName("com.softservecarmobile.ReactNativeFlipper")
-                    aClass
-                            .getMethod("initializeFlipper", Context::class.java, ReactInstanceManager::class.java)
-                            .invoke(null, context, reactInstanceManager)
-                } catch (e: ClassNotFoundException) {
-                    e.printStackTrace()
-                } catch (e: NoSuchMethodException) {
-                    e.printStackTrace()
-                } catch (e: IllegalAccessException) {
-                    e.printStackTrace()
-                } catch (e: InvocationTargetException) {
-                    e.printStackTrace()
-                }
-            }
-        }
+        return super.onStartCommand(intent, flags, startId)
     }
 
     fun sendNotification(id: Int, title: String, text: String) {
