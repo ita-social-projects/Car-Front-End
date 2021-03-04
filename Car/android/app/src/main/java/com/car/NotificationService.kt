@@ -11,8 +11,10 @@ import android.os.IBinder
 import android.widget.RemoteViews
 import com.car.Entities.Message
 import com.car.Entities.User
+import com.facebook.react.bridge.ReactMethod
 import com.microsoft.signalr.HubConnection
 import com.microsoft.signalr.HubConnectionBuilder
+
 
 class NotificationService : Service() {
 
@@ -33,15 +35,16 @@ class NotificationService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         hubConnection = HubConnectionBuilder.create("https://car-project.azurewebsites.net/signalr/").build()
         hubConnection.start()
-        hubConnection.on("RecieveMessage", {message ->
-            sendNotification(message.id, "${message.sender.name} ${message.sender.surname}", message.text) }, Message::class.java)
+        hubConnection.on("RecieveMessage", { message ->
+            sendNotification(message.id, "${message.sender.name} ${message.sender.surname}", message.text)
+        }, Message::class.java)
 
 
 
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun sendNotification(id: Int, title: String ,text: String) {
+    fun sendNotification(id: Int, title: String, text: String) {
         val intent = Intent(this, LauncherActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
