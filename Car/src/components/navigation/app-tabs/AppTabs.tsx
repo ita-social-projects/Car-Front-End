@@ -31,13 +31,13 @@ const AppTabs = () => {
     const getTabBarVisibility = (route: any) => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
-        
+
         return hideOnScreens.indexOf(routeName) <= -1;
     };
 
     const tabBarBadge = unreadNotificationsNumber > 0
         ? unreadNotificationsNumber.toString()
-        : undefined
+        : undefined;
 
     return (
         <Tabs.Navigator

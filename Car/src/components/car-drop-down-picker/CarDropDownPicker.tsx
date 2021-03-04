@@ -4,7 +4,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
 
-function CarDropDownPicker(props: any) {
+function CarDropDownPicker (props: any) {
     return (
         <View style={props.required && { justifyContent: "center" }}>
             {props.required && (

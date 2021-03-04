@@ -6,7 +6,7 @@ require("isomorphic-fetch");
 const GraphAuthProvider = {
     getAccessToken: async () => {
         const token = await AuthManager.getAccessTokenAsync();
-        
+
         return token || "";
     }
 };

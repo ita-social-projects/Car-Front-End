@@ -5,7 +5,7 @@ import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import AuthContext from "../../../../components/auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 
-function AvatarLogoTitle() {
+function AvatarLogoTitle () {
     const [user, setUser] = useState(useContext(AuthContext).user);
 
     useEffect(() => {

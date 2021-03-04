@@ -4,10 +4,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableMapBarStyle from "./TouchableMapBarStyle";
 
-function TouchableMapBar(props: any) {
-    let marginBottom = parseInt(props.marB);
-    let marginTop = parseInt(props.marT);
-    
+function TouchableMapBar (props: any) {
+    let marginBottom = parseInt(props.marginBottom);
+    let marginTop = parseInt(props.marginTop);
+    let flex = parseInt(props.flex);
+
     return (
         <View>
             <TouchableOpacity
@@ -19,7 +20,9 @@ function TouchableMapBar(props: any) {
                 <Text style={TouchableMapBarStyle.insideText}>
                     {props.directionType + ":"}{" "}
                 </Text>
-                <Text style={TouchableMapBarStyle.directionText}>
+                <Text
+                    style={[TouchableMapBarStyle.directionText, { flex: flex }]}
+                >
                     {props.defaultInputValue}{" "}
                 </Text>
                 <View>
@@ -29,8 +32,8 @@ function TouchableMapBar(props: any) {
                             { transform: [{ rotate: 0 + "deg" }] }
                         ]}
                         name={props?.iconName}
-                        size={20}
-                        color={"black"}
+                        size={22}
+                        color={"#414045"}
                     />
                 </View>
             </TouchableOpacity>

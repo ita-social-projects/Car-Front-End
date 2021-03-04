@@ -65,6 +65,7 @@ const Chat = (props: any) => {
         setMessage("");
 
         return function cleanup() {
+
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()

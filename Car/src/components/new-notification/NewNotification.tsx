@@ -49,7 +49,7 @@ const NewNotification = (props: any) => {
             />
         </View>
     );
-    function getTimeDifference(minuendTime: Date, subtrahendTime: Date) {
+    function getTimeDifference (minuendTime: Date, subtrahendTime: Date) {
         const diff = Math.abs(
             Date.UTC(
                 minuendTime.getUTCFullYear(),
@@ -70,7 +70,7 @@ const NewNotification = (props: any) => {
             if (minutes == 0) {
                 return "now";
             }
-            
+
             return minutes + " min";
         }
         if (hours < 24) {
@@ -82,13 +82,13 @@ const NewNotification = (props: any) => {
         if (months < 12) {
             return months + " m";
         }
-        
+
         return years + " y";
 
-        function daysRemainingInMonth(date: Date) {
+        function daysRemainingInMonth (date: Date) {
             const year = date.getFullYear();
             const month = date.getMonth();
-            
+
             return new Date(year, month, 0).getDate();
         }
     }

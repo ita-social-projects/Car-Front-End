@@ -12,7 +12,7 @@ import AvatarLogo from "../avatar-logo/AvatarLogo";
 
 const JourneyNewApplicant = (props: any) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
-    
+
     return (
         <View>
             <TouchableOpacity

@@ -4,13 +4,12 @@ import { Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CarTextInputStyle from "./CarTextInputStyle";
 
-function Input(props: any) {
+function Input (props: any) {
     return (
         <>
             <View style={CarTextInputStyle.container}>
                 <Text style={CarTextInputStyle.requiredPointer}>*</Text>
                 <TextInput
-                    {...props}
                     style={[
                         CarTextInputStyle.textInputStyle,
                         props.error && { borderColor: "red" }
@@ -26,7 +25,7 @@ function Input(props: any) {
     );
 }
 
-function CarTextInput(props: any) {
+function CarTextInput (props: any) {
     const { handleSubmit, control, errors } = useForm();
 
     return (
