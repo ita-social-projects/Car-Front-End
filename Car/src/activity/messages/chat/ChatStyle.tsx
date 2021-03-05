@@ -10,15 +10,16 @@ const ChatStyle = StyleSheet.create({
     chatWrapper: {
         flex: 1,
         backgroundColor: "white",
-        paddingBottom: 24
+        paddingBottom: 18
     },
 
     button: {
         width: 41,
         height: "100%",
-        backgroundColor: "black",
         alignItems: "center",
-        justifyContent: "center"
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        paddingBottom: 10
     }
 });
 
