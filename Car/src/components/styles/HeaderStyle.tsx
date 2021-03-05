@@ -35,6 +35,10 @@ const HeaderStyle = StyleSheet.create({
         fontWeight: "700"
     },
 
+    orangeButtonText: {
+        color: "#EC6400"
+    },
+
     moreOptionsIcon: {
         paddingRight: 12
     },

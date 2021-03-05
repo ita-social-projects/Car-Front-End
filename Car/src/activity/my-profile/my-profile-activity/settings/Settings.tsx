@@ -1,146 +1,43 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
-import {
-    ImagePickerResponse,
-    launchImageLibrary
-} from "react-native-image-picker/src";
-import UserService from "../../../../../api-service/user-service/UserService";
-import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../../components/auth/AuthContext";
+import React from "react";
+import { Text, View } from "react-native";
 import SettingsStyle from "./SettingsStyle";
-import RNRestart from "react-native-restart";
+import TouchableNavigationCard from "../touchable-navigation-card/TouchableNavigationCard";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Settings = () => {
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
-    const [avatar, setAvatar] = useState(<View />);
-    const [isPhotoChanged, setStatus] = useState(false);
-    const [isLoading, setLoading] = useState(true);
-    const [isSaved, setSaved] = useState(false);
-    const [isPhotoExsists, photoExists] = useState(false);
-    const [imageData, setImageData] = useState<FormData>({} as FormData);
-
-    const { user } = useContext(AuthContext);
-
-    const uploadPhotoHandle = () => {
-        launchImageLibrary({ mediaType: "photo" }, (response) => {
-            if (!response.didCancel) {
-                setPhoto(response);
-                setStatus(true);
-                const selectedImageData = new FormData();
-
-                selectedImageData.append("image", {
-                    name: response.fileName,
-                    type: response.type,
-                    uri: response?.uri
-                });
-                setImageData(selectedImageData);
-            }
-        });
-    };
-
-    useEffect(() => {
-        setAvatar(
-            <Image
-                source={{ uri: user?.avatarUrl }}
-                style={SettingsStyle.avatar}
-            />
-        );
-        photoExists(true);
-        setLoading(false);
-    }, []);
-
-    const image = isPhotoChanged ? (
-        <Image source={{ uri: photo.uri }} style={SettingsStyle.avatar} />
-    ) : (
-        avatar
-    );
-
-    let loader: any;
-
-    if (isSaved) {
-        loader = (
-            <ActivityIndicator
-                style={SettingsStyle.loadingIcon}
-                size="large"
-                color="black"
-            />
-        );
-    } else {
-        loader = null;
-    }
-
-    const uploadButtonText =
-        !isPhotoExsists && !isPhotoChanged ? "Upload photo" : "Change photo";
-
-    const saveChangesAsync = async () =>
-        UserService.setAvatar(user!.id, imageData);
-
-    const askToRestartApp = () =>
-        Alert.alert("Saved", "Please restart the App", [
-            {
-                text: "Restart",
-                onPress: () => {
-                    RNRestart.Restart();
-                }
-            }
-        ]);
-
+const Settings = (props: any) => {
     return (
         <View style={SettingsStyle.container}>
-            {isLoading ? (
-                <Indicator
-                    color="#414045"
-                    size="large"
-                    text="Loading information..."
-                />
-            ) : (
-                <>
-                    <View style={SettingsStyle.avatarContainer}>
-                        {image}
-                        <View style={SettingsStyle.overlay} />
-                        <View style={SettingsStyle.whitespace} />
-                        <TouchableOpacity
-                            style={SettingsStyle.uploadButton}
-                            onPress={() => uploadPhotoHandle()}
-                        >
-                            <Text style={SettingsStyle.uploadButtonText}>
-                                {uploadButtonText}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={SettingsStyle.bottomContainer}>
-                        <View style={SettingsStyle.saveButtonContainer}>
-                            {loader}
-                            <TouchableOpacity
-                                style={[
-                                    SettingsStyle.saveButton,
-                                    (!isPhotoChanged || isSaved) &&
-                                        SettingsStyle.pressedButton
-                                ]}
-                                disabled={!isPhotoChanged || isSaved}
-                                activeOpacity={1}
-                                onPress={() => {
-                                    setSaved(true);
-                                    saveChangesAsync()
-                                        .then(() => askToRestartApp())
-                                        .then((loader = null));
-                                }}
-                            >
-                                <Text style={SettingsStyle.saveButtonText}>
-                                    Save
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </>
-            )}
+            <TouchableOpacity style={SettingsStyle.profileInfo} ></TouchableOpacity>
+            <TouchableNavigationCard
+                navigation={props.navigation}
+                navigationName="AppSettings"
+                cardName="App Settings"
+                angle="0"
+            >
+                <Text style={SettingsStyle.cardText}>
+                    App Settings
+                </Text>
+            </TouchableNavigationCard>
+            <TouchableNavigationCard
+                navigation={props.navigation}
+                navigationName="NotificationSettings"
+                cardName="Notifications Settings"
+                angle="0"
+            >
+                <Text style={SettingsStyle.cardText}>
+                    Notifications Settings
+                </Text>
+            </TouchableNavigationCard>
+            <TouchableNavigationCard
+                navigation={props.navigation}
+                navigationName="ChatSettings"
+                cardName="Chats Settings"
+                angle="0"
+            >
+                <Text style={SettingsStyle.cardText}>
+                    Chats Settings
+                </Text>
+            </TouchableNavigationCard>
         </View>
     );
 };

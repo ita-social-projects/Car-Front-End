@@ -64,7 +64,7 @@ const MyProfile = (props: any) => {
 
             <TouchableNavigationCard
                 navigation={props.navigation}
-                navigationName="Settings"
+                navigationName="SettingsTabs"
                 cardName="Settings"
                 picture={
                     <Ionicons

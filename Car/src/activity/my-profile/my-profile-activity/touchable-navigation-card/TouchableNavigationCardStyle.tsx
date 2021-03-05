@@ -32,7 +32,7 @@ const TouchableNavigationCardStyle = StyleSheet.create({
 
     cardName: {
         fontWeight: "bold"
-    }
+    },
 });
 
 export default TouchableNavigationCardStyle;
