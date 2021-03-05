@@ -8,10 +8,17 @@ import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
 
 class NotificationPackage : ReactPackage {
+
+    /**
+     * Creates List of Native Modules
+     */
     override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> {
         return mutableListOf(NotificationModule())
     }
 
+    /**
+     * Creates Native Module View Managers
+     */
     override fun createViewManagers(reactContext: ReactApplicationContext): MutableList<ViewManager<View, ReactShadowNode<*>>> {
         return mutableListOf()
     }

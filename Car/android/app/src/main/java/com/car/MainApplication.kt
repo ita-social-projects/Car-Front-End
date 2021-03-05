@@ -17,13 +17,11 @@ import java.lang.reflect.InvocationTargetException
 
 class MainApplication : Application(), ReactApplication {
 
-    lateinit var hubConnection: HubConnection
     lateinit var notificationManager : NotificationManager
     lateinit var notificationChannel: NotificationChannel
     lateinit var builder : Notification.Builder
     private val channelId = "com.car"
     private val description = "Test notification"
-    private var user: User? = null
 
     private val mReactNativeHost: ReactNativeHost = object : ReactNativeHost(this) {
         override fun getUseDeveloperSupport(): Boolean {
@@ -68,10 +66,10 @@ class MainApplication : Application(), ReactApplication {
                 context: Context, reactInstanceManager: ReactInstanceManager) {
             if (BuildConfig.DEBUG) {
                 try {
-                    /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
+                    /**
+                     * We use reflection here to pick up the class that initializes Flipper,
+                     * since Flipper library is not available in release mode
+                     */
                     val aClass = Class.forName("com.softservecarmobile.ReactNativeFlipper")
                     aClass
                             .getMethod("initializeFlipper", Context::class.java, ReactInstanceManager::class.java)
