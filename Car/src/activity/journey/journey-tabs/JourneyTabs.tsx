@@ -19,6 +19,7 @@ import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import SearchJourneyMap from "../journey-activity/segment-control-activities/map-address/SearchJourneyMap";
+import Chat from "../../messages/chat/Chat";
 
 const StackTabs = createStackNavigator();
 
@@ -320,6 +321,44 @@ const JourneyTabs = () => {
                         )
                     }}
                     component={JourneyApplicant}
+                />
+
+                <StackTabs.Screen
+                    name="Chat"
+                    component={Chat}
+                    options={{
+                        headerTitle: "Chat",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                style={HeaderStyle.backButtonOpacity}
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Ionicons
+                                    name={"chevron-back-outline"}
+                                    size={35}
+                                    color={"#02A2CF"}
+                                />
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        ),
+                        headerRight: () => (
+                            <TouchableOpacity onPress={() => {}}>
+                                <Ionicons
+                                    name={"ellipsis-horizontal"}
+                                    size={30}
+                                    style={HeaderStyle.moreOptionsIcon}
+                                />
+                            </TouchableOpacity>
+                        )
+                    }}
                 />
 
                 <StackTabs.Screen

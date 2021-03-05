@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AddCars from "../add-cars/AddCars";
 import Cars from "../Cars";
 import EditCars from "../edit-cars/EditCars";
-import CarTabsStyle from "./CarTabsStyle";
+import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
 
 const StackTabs = createStackNavigator();
@@ -20,10 +20,10 @@ export default function CarTabs () {
                     options={{
                         headerTitle: "Your Cars",
                         headerTitleAlign: "center",
-                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={CarTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -33,8 +33,8 @@ export default function CarTabs () {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View style={CarTabsStyle.backButtonTextView}>
-                                    <Text style={CarTabsStyle.buttonText}>
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -48,10 +48,10 @@ export default function CarTabs () {
                     options={{
                         headerTitle: "Add a Car",
                         headerTitleAlign: "center",
-                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={CarTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -61,8 +61,8 @@ export default function CarTabs () {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View style={CarTabsStyle.backButtonTextView}>
-                                    <Text style={CarTabsStyle.buttonText}>
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -73,7 +73,7 @@ export default function CarTabs () {
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
-                                    style={CarTabsStyle.moreOptionsIcon}
+                                    style={HeaderStyle.moreOptionsIcon}
                                 />
                             </TouchableOpacity>
                         )
@@ -85,10 +85,10 @@ export default function CarTabs () {
                     options={{
                         headerTitle: "Your Car",
                         headerTitleAlign: "center",
-                        headerTitleStyle: CarTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={CarTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -98,8 +98,8 @@ export default function CarTabs () {
                                     size={35}
                                     color={"#02A2CF"}
                                 />
-                                <View style={CarTabsStyle.backButtonTextView}>
-                                    <Text style={CarTabsStyle.buttonText}>
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
                                         Back
                                     </Text>
                                 </View>
@@ -110,7 +110,7 @@ export default function CarTabs () {
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
-                                    style={CarTabsStyle.moreOptionsIcon}
+                                    style={HeaderStyle.moreOptionsIcon}
                                 />
                             </TouchableOpacity>
                         )

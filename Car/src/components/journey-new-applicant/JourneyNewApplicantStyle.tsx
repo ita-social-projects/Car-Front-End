@@ -1,8 +1,10 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
+import { Platform } from "react-native";
 
 const JourneyNewApplicantStyle = EStyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
         borderColor: "rgba(151, 151, 151, 0.233556)",
@@ -11,12 +13,12 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         borderTopRightRadius: 16,
         borderBottomRightRadius: 16,
         borderBottomLeftRadius: 16,
-        height: "95%",
         margin: 10,
+        marginTop: Platform.OS === "ios" ? 52 : 0,
+        marginBottom: 32,
         paddingTop: 23,
         paddingBottom: 23,
-        paddingLeft: 25,
-        paddingRight: 25,
+        paddingHorizontal: 25,
         shadowColor: "#414045",
         shadowOffset: { width: 0, height: 16 },
         shadowOpacity: 0.2,
