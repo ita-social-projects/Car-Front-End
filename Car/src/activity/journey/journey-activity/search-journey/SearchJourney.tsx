@@ -6,15 +6,15 @@ import TouchableMapBar from "../segment-control-activities/touchable/map-bar/Tou
 import StopService from "../../../../../api-service/stop-service/StopService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import SearchJouneyStyle from "./SearchJouneyStyle";
-import StopType from "../../../../../models/StopType";
-import Stop from "../../../../../models/Stop";
-import Location from "../../../../../models/Location";
+import Stop from "../../../../../models/stop/Stop";
+import Location from "../../../../../models/location/Location";
 import SearchJourneyMap from "../segment-control-activities/map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
 import * as navigation from "../../../../components/navigation/Navigation";
+import StopType from "../../../../../models/stop/StopType";
 
 function SearchJourney () {
     const { user } = useContext(AuthContext);

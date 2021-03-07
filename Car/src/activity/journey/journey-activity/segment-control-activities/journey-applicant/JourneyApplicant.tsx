@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import UserService from "../../../../../../api-service/user-service/UserService";
-import User from "../../../../../../models/User";
+import User from "../../../../../../models/user/User";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
@@ -73,6 +73,7 @@ const JourneyApplicant = (props: any) => {
                     <View style={JourneyApplicantStyle.whitespaceBlock} />
                 </ScrollView>
             )}
+
         </View>
     );
 };

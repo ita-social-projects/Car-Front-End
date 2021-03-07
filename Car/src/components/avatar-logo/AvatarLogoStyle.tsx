@@ -17,10 +17,6 @@ const AvatarLogoTitle = StyleSheet.create({
         color: "#FFFFFF",
         paddingTop: 3
     },
-
-    image: {
-        position: "absolute"
-    }
 });
 
 export default AvatarLogoTitle;

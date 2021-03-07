@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AvatarLogoTitle from "../my-profile-activity/avatar-logo-title/AvatarLogoTitle";
+import AvatarLogoTitle from "../../../components/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
 import Preferences from "../my-profile-activity/preferences/Preferences";

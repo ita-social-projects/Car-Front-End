@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
-import UserPreferences from "../../../../../models/UserPreferences";
+import UserPreferences from "../../../../../models/user/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOptionComponent from "./ChooseOptionComponent";

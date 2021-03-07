@@ -19,13 +19,12 @@ const Chat = (props: any) => {
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
 
-    props.navigation.setOptions({ headerTitle: props.route.params.header });
-
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+            props.navigation.setOptions({ headerTitle: props.route.params.header });
+
             let tempChat: any = [];
 
-            console.log(res.data?.messages);
             res.data?.messages?.forEach((element: any) => {
                 const messageToAdd = {
                     _id: element?.id,

@@ -1,4 +1,4 @@
-import User from "../../models/User";
+import User from "../../models/user/User";
 import APIRoutes from "../APIRoutes";
 import APIService from "../APIService";
 

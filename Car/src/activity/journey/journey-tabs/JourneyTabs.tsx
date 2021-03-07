@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useRef, useState } from "react";
-import { Text, View } from "react-native";
+import { Animated, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyNewApplicant from "../../../components/journey-new-applicant/JourneyNewApplicant";
@@ -26,22 +26,72 @@ const StackTabs = createStackNavigator();
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
 
+    const layoutOpacity = useState(new Animated.Value(0))[0];
+    const journeyOpacity = useState(new Animated.Value(1))[0];
+
+    const fadeIn = () => {
+        Animated.timing(layoutOpacity, {
+            toValue: 0.5,
+            duration: 500,
+            useNativeDriver: true
+        }).start();
+
+        Animated.timing(journeyOpacity, {
+            toValue: 0.5,
+            duration: 500,
+            useNativeDriver: true
+        }).start();
+    };
+
+    const fadeOut = () => {
+        Animated.timing(layoutOpacity, {
+            toValue: 0,
+            duration: 500,
+            useNativeDriver: true
+        }).start();
+
+        Animated.timing(journeyOpacity, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true
+        }).start();
+    };
+
+    const closeHandle = () => {
+        setOpen(false);
+        fadeOut();
+    };
+
+    const pressHandle = () => {
+        setOpen(!isOpen);
+
+        if (isOpen) {
+            fadeOut();
+        } else {
+            fadeIn();
+        }
+
+        moreOptionsRef?.current?.snapTo(
+            isOpen ? 0 : 1
+        );
+
+    };
+
     const moreOptionsHeader = () => (
         <View style={JourneyPageStyle.headerTitleStyle}>
             <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
         </View>
     );
 
-    const moreOptionsContent = () => {
-        return (
-            <View style={JourneyPageStyle.panel}>
-                <MenuButton text="Add Stop" onPress={() => {}} />
-                <MenuButton text="Edit the Journey" onPress={() => {}} />
-                <MenuButton text="Invite Softservian" onPress={() => {}} />
-                <MenuButton text="Cancel the Journey" onPress={() => {}} />
-            </View>
-        );
-    };
+    const moreOptionsContent = () => (
+        <View style={JourneyPageStyle.panel}>
+            <MenuButton text="Add Stop" onPress={() => {}} />
+            <MenuButton text="Edit the Journey" onPress={() => {}} />
+            <MenuButton text="Invite Softservian" onPress={() => {}} />
+            <MenuButton text="Cancel the Journey" onPress={() => {}} />
+        </View>
+    );
+
     const moreOptionsRef = useRef<BottomSheet>(null);
 
     return (
@@ -142,14 +192,7 @@ const JourneyTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity
-                                onPress={() => {
-                                    setOpen(!isOpen);
-                                    moreOptionsRef?.current?.snapTo(
-                                        isOpen ? 0 : 1
-                                    );
-                                }}
-                            >
+                            <TouchableOpacity onPress={pressHandle} >
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
@@ -162,15 +205,18 @@ const JourneyTabs = () => {
                     {(props: any) => {
                         return (
                             <>
-                                <JourneyPage props={props} />
+                                <Animated.View style={[HeaderStyle.layout, { opacity: layoutOpacity }]} />
+                                <Animated.View style={[HeaderStyle.popUp, { opacity: journeyOpacity }]}>
+                                    <JourneyPage props={props} />
+                                </Animated.View>
                                 <BottomPopup
                                     refForChild={moreOptionsRef}
-                                    snapPoints={[0, 300]}
+                                    snapPoints={[0, 280]}
                                     renderContent={moreOptionsContent}
                                     initialSnap={0}
                                     renderHeader={moreOptionsHeader}
                                     enabledInnerScrolling={false}
-                                    onCloseEnd={() => setOpen(false)}
+                                    onCloseEnd={closeHandle}
                                 />
                             </>
                         );

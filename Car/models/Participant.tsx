@@ -1,4 +1,4 @@
-import User from "./User";
+import User from "./user/User";
 
 export type Participant = null | {
     user: User;

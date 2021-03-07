@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
 const HeaderStyle = StyleSheet.create({
@@ -12,6 +12,21 @@ const HeaderStyle = StyleSheet.create({
         paddingRight: 17,
         justifyContent: "center",
         alignItems: "center"
+    },
+
+    layout: {
+        height: Dimensions.get("screen").height,
+        width: Dimensions.get("screen").width,
+        position: "absolute",
+        backgroundColor: "#000000",
+        zIndex: 50,
+    },
+
+    popUp: {
+        backgroundColor: "#FFFFFF",
+        height: Dimensions.get("screen").height,
+        width: Dimensions.get("screen").width,
+        position: "absolute",
     },
 
     myProfileHeaderStyle: {

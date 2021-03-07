@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import UserService from "../../../../../api-service/user-service/UserService";
-import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
-import AuthContext from "../../../../components/auth/AuthContext";
+import UserService from "../../../api-service/user-service/UserService";
+import AvatarLogo from "../avatar-logo/AvatarLogo";
+import AuthContext from "../auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 
-function AvatarLogoTitle () {
+const AvatarLogoTitle = () => {
     const [user, setUser] = useState(useContext(AuthContext).user);
 
     useEffect(() => {
         UserService.getUser(Number(user?.id)).then((res) => setUser(res.data));
-    });
+    }, []);
 
     return (
         <View style={AvatarLogoTitleStyle.container}>
@@ -33,6 +33,6 @@ function AvatarLogoTitle () {
             </View>
         </View>
     );
-}
+};
 
 export default AvatarLogoTitle;
