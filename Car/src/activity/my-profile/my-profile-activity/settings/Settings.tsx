@@ -28,7 +28,7 @@ const Settings = (props: any) => {
         }).start();
     };
 
-    const sleep = (milliseconds: Number) => {
+    const sleep = (milliseconds: number) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds));
     };
 
