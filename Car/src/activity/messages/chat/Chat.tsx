@@ -19,13 +19,11 @@ const Chat = (props: any) => {
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
 
-    props.navigation.setOptions({ headerTitle: props.route.params.header });
-
     useEffect(() => {
+        props.navigation.setOptions({ headerTitle: props.route.params.header });
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
             let tempChat: any = [];
 
-            console.log(res.data?.messages);
             res.data?.messages?.forEach((element: any) => {
                 const messageToAdd = {
                     _id: element?.id,
@@ -42,7 +40,7 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        SignalRHubConnection.on("RecieveMessage", (receivedMessage: any) => {
+        SignalRHubConnection!.on("RecieveMessage", (receivedMessage: any) => {
             setMessages((previousMessages) =>
                 GiftedChat.append(
                     previousMessages as any,
@@ -56,7 +54,7 @@ const Chat = (props: any) => {
                         }
                     } as any
                 )
-            )
+            );
         });
         SignalRHubConnection.invoke(
             "EnterToGroup",
@@ -64,7 +62,7 @@ const Chat = (props: any) => {
         ).catch((err: any) => console.log(err));
         setMessage("");
 
-        return function cleanup() {
+        return () => {
 
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
@@ -74,14 +72,18 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        SignalRHubConnection!
-            .invoke("SendMessageToGroup", {
-                Text: message,
-                SenderId: user?.id,
-                ChatId: props.route.params.chatId
-            })
-            .catch((err: any) => console.log(err));
-        setMessage("");
+        const messageToSend = message.trim();
+
+        if (messageToSend != "") {
+            SignalRHubConnection!
+                .invoke("SendMessageToGroup", {
+                    Text: messageToSend,
+                    SenderId: user?.id,
+                    ChatId: props.route.params.chatId
+                })
+                .catch((err: any) => console.log(err));
+            setMessage("");
+        }
     };
 
     const renderBubble = (props: any) => {
@@ -143,7 +145,7 @@ const Chat = (props: any) => {
                 }}
             />
         );
-    }
+    };
 
     const renderUserAvatar = (data: any) => {
         return (
@@ -167,8 +169,8 @@ const Chat = (props: any) => {
                     }}
                 />
             </TouchableOpacity>
-        )
-    }
+        );
+    };
 
     return (
         <View style={ChatStyle.chatWrapper}>
@@ -196,7 +198,7 @@ const Chat = (props: any) => {
                 renderInputToolbar={renderInputToolbar}
             />
         </View>
-    )
+    );
 };
 
 export default Chat;
