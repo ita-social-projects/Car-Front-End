@@ -24,9 +24,6 @@ class NotificationService : Service() {
     lateinit var builder : Notification.Builder
     private val channelId = "com.car"
     private val description = "Test notification"
-    private var user: User? = null
-
-    var notificationCount = 0
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -39,11 +36,12 @@ class NotificationService : Service() {
             sendNotification(message.id, "${message.sender.name} ${message.sender.surname}", message.text)
         }, Message::class.java)
 
-
-
         return super.onStartCommand(intent, flags, startId)
     }
 
+    /**
+     * Sends Push Notification
+     */
     fun sendNotification(id: Int, title: String, text: String) {
         val intent = Intent(this, LauncherActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)

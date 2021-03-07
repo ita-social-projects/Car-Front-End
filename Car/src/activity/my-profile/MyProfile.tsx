@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import TouchableNavigationCard from "./my-profile-activity/touchable-navigation-card/TouchableNavigationCard";
+import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: any) => {
@@ -64,7 +64,7 @@ const MyProfile = (props: any) => {
 
             <TouchableNavigationCard
                 navigation={props.navigation}
-                navigationName="Settings"
+                navigationName="SettingsTabs"
                 cardName="Settings"
                 picture={
                     <Ionicons

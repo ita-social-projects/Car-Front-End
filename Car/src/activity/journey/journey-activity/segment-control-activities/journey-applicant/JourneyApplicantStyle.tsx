@@ -4,13 +4,13 @@ import Font from "../../../../../data/fonts/Font";
 const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#FFFFFF",
+        paddingLeft: 20,
+        paddingTop: 36,
     },
 
     topContainer: {
         height: 116,
-        paddingLeft: 20,
-        paddingTop: 36,
         flexDirection: "row"
     },
 
@@ -52,7 +52,7 @@ const JourneyApplicantStyle = StyleSheet.create({
     bottomContainer: {
         backgroundColor: "#FFFFFF",
         paddingRight: 24,
-        paddingLeft: 24,
+        paddingLeft: 4,
         paddingTop: 13
     },
 

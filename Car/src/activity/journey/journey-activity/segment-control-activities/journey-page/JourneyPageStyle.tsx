@@ -46,7 +46,6 @@ const JourneyPageStyle = StyleSheet.create({
 
     mainContainer: {
         backgroundColor: "white",
-        height: Dimensions.get("window").height * 0.8
     },
 
     contentView: {
@@ -123,7 +122,8 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     applicantsBlock: {
-        marginTop: 15
+        marginTop: 15,
+        height: 300,
     },
 
     applicantsHeader: {
@@ -158,20 +158,23 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     bottomPopup: {
-        backgroundColor: "white"
+        backgroundColor: "white",
     },
 
     buttonsBlock: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 10,
     },
 
     messageAllButton: {
         backgroundColor: "white",
         borderColor: "black",
         borderWidth: 3,
-        width: "40%"
+        justifyContent: "center",
+        alignItems: "center",
+        width: Dimensions.get("screen").width * 0.4
     },
 
     messageAllButtonText: {
@@ -185,7 +188,10 @@ const JourneyPageStyle = StyleSheet.create({
 
     startJourneyButton: {
         backgroundColor: "black",
-        width: "55%"
+        width: Dimensions.get("screen").width * 0.465,
+        justifyContent: "center",
+        alignItems: "center",
+        height: 51,
     },
 
     startJourneyButtonText: {

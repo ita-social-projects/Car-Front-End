@@ -22,6 +22,8 @@ const Chat = (props: any) => {
     useEffect(() => {
         props.navigation.setOptions({ headerTitle: props.route.params.header });
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+            props.navigation.setOptions({ headerTitle: props.route.params.header });
+
             let tempChat: any = [];
 
             res.data?.messages?.forEach((element: any) => {
@@ -62,7 +64,11 @@ const Chat = (props: any) => {
         ).catch((err: any) => console.log(err));
         setMessage("");
 
+<<<<<<< HEAD
         return () => {
+=======
+        return function cleanup () {
+>>>>>>> develop
 
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",

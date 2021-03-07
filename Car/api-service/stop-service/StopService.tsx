@@ -1,5 +1,5 @@
 import APIService from "../APIService";
-import Stop from "../../models/Stop";
+import Stop from "../../models/stop/Stop";
 import APIRoutes from "../APIRoutes";
 
 const route = APIRoutes.getJourneyUrl();

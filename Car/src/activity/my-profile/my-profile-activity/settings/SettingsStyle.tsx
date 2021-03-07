@@ -1,102 +1,82 @@
-import { Dimensions } from "react-native";
-import EStyleSheet from "react-native-extended-stylesheet";
+import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
-const SettingsStyle = EStyleSheet.create({
+const SettingsStyle = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#FFFFFF",
+        paddingTop: 166,
+    },
+
+    profileInfo: {
+        marginHorizontal: 14,
+        marginVertical: 20,
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: "#F0F0F0",
+        height: 126,
+        width: Dimensions.get("screen").width - 28,
+        top: 0,
+        left: 0,
+        paddingTop: 10,
+        zIndex: 100,
+        backgroundColor: "#FFFFFF",
+        position: "absolute",
+    },
+
+    moreOptions: {
         backgroundColor: "#FFFFFF"
     },
 
-    avatarContainer: {
-        height: Dimensions.get("window").width,
-        backgroundColor: "#FFFFFF",
-        alignItems: "flex-end",
-        justifyContent: "flex-end"
-    },
-
-    uploadButton: {
-        paddingHorizontal: 16,
-        paddingVertical: 14,
-        backgroundColor: "#FFFFFF",
-        alignItems: "center",
-        borderWidth: 2,
-        borderColor: "#000000",
-        marginRight: 24,
-        marginBottom: 19
-    },
-
-    uploadButtonText: {
+    moreOptionsHeader: {
         textTransform: "uppercase",
-        fontWeight: "bold",
-        fontSize: 16,
-        lineHeight: 20
+        fontFamily: Font.ProximaNova.ExtraBold,
+        paddingLeft: 24,
+        paddingBottom: 33,
+        fontSize: 14,
+        lineHeight: 16,
     },
 
-    avatar: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        position: "absolute",
-        overlayColor: "#000000"
+    changeAvatarText: {
+        fontFamily: Font.OpenSans.Bold,
+        fontWeight: "700",
+        fontSize: 13,
+        lineHeight: 16,
     },
 
-    overlay: {
-        top: -Dimensions.get("window").width / 2,
-        right: 0,
-        bottom: 0,
-        left: -Dimensions.get("window").width / 2,
-        borderWidth: Dimensions.get("window").width / 2,
-        height: Dimensions.get("window").width * 2,
-        width: Dimensions.get("window").width * 2,
-        borderColor: "rgba(255,255,255,0.5)",
-        borderRadius: 1000,
-        position: "absolute"
+    deleteAvatarText: {
+        fontFamily: Font.OpenSans.Bold,
+        fontWeight: "700",
+        fontSize: 13,
+        lineHeight: 16,
+        color: "#EC6400"
     },
 
-    whitespace: {
-        top: Dimensions.get("window").width,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        height: Dimensions.get("window").width / 2,
+    moreOptionsButton: {
+        height: 44,
         width: Dimensions.get("window").width,
-        backgroundColor: "#FFFFFF",
-        position: "absolute"
-    },
-
-    saveButton: {
-        width: 81,
-        height: 48,
-        backgroundColor: "#000000",
-        fontFamily: Font.ProximaNova.Bold,
-        fontSize: 16,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-
-    saveButtonText: {
-        fontFamily: Font.ProximaNova.Bold,
-        fontSize: 16,
-        color: "#FFFFFF",
-        textTransform: "uppercase"
-    },
-
-    bottomContainer: {
-        flex: 1,
-        justifyContent: "flex-end",
-        alignItems: "flex-end",
-        padding: 16
-    },
-
-    saveButtonContainer: {
+        alignItems: "flex-start",
         justifyContent: "center",
-        alignItems: "center"
+        paddingLeft: 24,
     },
 
-    pressedButton: {
-        backgroundColor: "#888888"
+    sepataror: {
+        height: 1,
+        backgroundColor: "#C1C1C5",
+        marginHorizontal: 10,
+    },
+
+    cardText: {
+        fontWeight: "bold",
+        color: "#000000"
+    },
+
+    layout: {
+        height: Dimensions.get("screen").height,
+        width: Dimensions.get("screen").width,
+        position: "absolute",
+        backgroundColor: "#000000",
+        zIndex: 50,
     }
 });
 

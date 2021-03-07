@@ -1,5 +1,5 @@
 import NotificationType from "./NotificationType";
-import User from "../User";
+import User from "../user/User";
 
 type Notification = null | {
     id: number;
