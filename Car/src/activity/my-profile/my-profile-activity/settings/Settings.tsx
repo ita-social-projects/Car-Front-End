@@ -16,13 +16,21 @@ const Settings = (props: any) => {
 
     const [isOpen, setOpen] = useState(false);
 
+    const [isVisible, setVisibility] = useState(false);
+
     const opacity = useState(new Animated.Value(0))[0];
 
-    const fadeIn = () => Animated.timing(opacity, {
-        toValue: 0.5,
-        duration: 500,
-        useNativeDriver: true
-    }).start();
+    const fadeIn = () => {
+        Animated.timing(opacity, {
+            toValue: 0.5,
+            duration: 500,
+            useNativeDriver: true
+        }).start();
+    };
+
+    const sleep = (milliseconds: number) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
+    };
 
     const fadeOut = () => Animated.timing(opacity, {
         toValue: 0,
@@ -40,7 +48,9 @@ const Settings = (props: any) => {
 
         if (isOpen) {
             fadeOut();
+            (async () => sleep(700))().then(() => setVisibility(false));
         } else {
+            setVisibility(true);
             fadeIn();
         }
 
@@ -168,7 +178,7 @@ const Settings = (props: any) => {
                 enabledInnerScrolling={false}
                 onCloseEnd={closeHandle}
             />
-            <Animated.View style={[SettingsStyle.layout, { opacity }]} />
+            <Animated.View style={isVisible && [SettingsStyle.layout, { opacity }]} />
         </>
     );
 };

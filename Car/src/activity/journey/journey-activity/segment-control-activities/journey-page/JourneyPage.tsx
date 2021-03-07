@@ -130,7 +130,11 @@ const JourneyPage = ({ props }: any) => {
                     {currentJourney?.countOfSeats}
                 </Text>
                 <ScrollView onStartShouldSetResponder={() => true}>
-                    {currentJourney?.participants.map((item) => Applicant(item))}
+                    {currentJourney?.participants.map((item, index) => (
+                        <View key={index}>
+                            {Applicant(item)}
+                        </View>
+                    ))}
                 </ScrollView>
             </View>
         );
