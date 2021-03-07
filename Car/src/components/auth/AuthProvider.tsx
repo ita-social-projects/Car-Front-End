@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import AuthManager from "./AuthManager";
 import GraphManager from "./GraphManager";
 import * as navigation from "../navigation/Navigation";
-import User from "../../../models/User";
+import User from "../../../models/user/User";
 import LoginService from "../../../api-service/login-service/LoginService";
 import AuthContext from "./AuthContext";
 

@@ -1,147 +1,175 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
-import {
-    ImagePickerResponse,
-    launchImageLibrary
-} from "react-native-image-picker/src";
-import UserService from "../../../../../api-service/user-service/UserService";
-import Indicator from "../../../../components/activity-indicator/Indicator";
-import AuthContext from "../../../../components/auth/AuthContext";
+import React, { useContext, useRef, useState } from "react";
+import { Animated, Text, TouchableOpacity, View } from "react-native";
 import SettingsStyle from "./SettingsStyle";
-import RNRestart from "react-native-restart";
+import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
+import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
+import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
+import { launchImageLibrary } from "react-native-image-picker/src";
+import UserService from "../../../../../api-service/user-service/UserService";
+import AuthContext from "../../../../components/auth/AuthContext";
+import AsyncStorage from "@react-native-community/async-storage";
+import { BottomSheet } from "react-native-elements";
 
-const Settings = () => {
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
-    const [avatar, setAvatar] = useState(<View />);
-    const [isPhotoChanged, setStatus] = useState(false);
-    const [isLoading, setLoading] = useState(true);
-    const [isSaved, setSaved] = useState(false);
-    const [isPhotoExsists, photoExists] = useState(false);
-    const [imageData, setImageData] = useState<FormData>({} as FormData);
+const Settings = (props: any) => {
 
     const { user } = useContext(AuthContext);
+
+    const [isOpen, setOpen] = useState(false);
+
+    const opacity = useState(new Animated.Value(0))[0];
+
+    const fadeIn = () => Animated.timing(opacity, {
+        toValue: 0.5,
+        duration: 500,
+        useNativeDriver: true
+    }).start();
+
+    const fadeOut = () => Animated.timing(opacity, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true
+    }).start();
+
+    const closeHandle = () => {
+        setOpen(false);
+        fadeOut();
+    };
+
+    const pressHandle = () => {
+        setOpen(!isOpen);
+
+        if (isOpen) {
+            fadeOut();
+        } else {
+            fadeIn();
+        }
+
+        moreOptionsRef?.current?.snapTo(
+            isOpen ? 0 : 1
+        );
+    };
 
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
-                setPhoto(response);
-                setStatus(true);
-                const selectedImageData = new FormData();
+                const updatedUser = new FormData();
 
-                selectedImageData.append("image", {
-                    name: response.fileName,
-                    type: response.type,
-                    uri: response?.uri
-                });
-                setImageData(selectedImageData);
+                updatedUser.append("id", user?.id);
+                updatedUser.append("name", user?.name);
+                updatedUser.append("surname", user?.surname);
+                updatedUser.append("position", user?.position);
+                updatedUser.append("location", user?.location);
+                updatedUser.append("image", response);
+
+                UserService.updateUser(updatedUser).then(() =>
+                    UserService.getUser(user!.id).then((res) =>
+                        AsyncStorage.setItem("user", JSON.stringify(res.data))));
             }
         });
     };
 
-    useEffect(() => {
-        setAvatar(
-            <Image
-                source={{ uri: user?.avatarUrl }}
-                style={SettingsStyle.avatar}
-            />
-        );
-        photoExists(true);
-        setLoading(false);
-    }, []);
+    const deletePhotoHandle = () => {
+        const updatedUser = new FormData();
 
-    const image = isPhotoChanged ? (
-        <Image source={{ uri: photo.uri }} style={SettingsStyle.avatar} />
-    ) : (
-        avatar
+        updatedUser.append("id", user?.id);
+        updatedUser.append("name", user?.name);
+        updatedUser.append("surname", user?.surname);
+        updatedUser.append("position", user?.position);
+        updatedUser.append("location", user?.location);
+
+        UserService.updateUser(updatedUser).then(() =>
+            UserService.getUser(user!.id).then((res) =>
+                AsyncStorage.setItem("user", JSON.stringify(res.data))));
+    };
+
+    const moreOptionsContent = () => (
+        <View style={SettingsStyle.moreOptions}>
+            <TouchableOpacity
+                style={SettingsStyle.moreOptionsButton}
+                onPress={() => {
+                    uploadPhotoHandle();
+                    pressHandle();
+                }}>
+                <Text style={SettingsStyle.changeAvatarText}>
+                    Change Avatar
+                </Text>
+            </TouchableOpacity>
+            <View style={SettingsStyle.sepataror} />
+            <TouchableOpacity
+                style={SettingsStyle.moreOptionsButton}
+                onPress={() => {
+                    deletePhotoHandle();
+                    pressHandle();
+                }}>
+                <Text style={SettingsStyle.deleteAvatarText}>
+                    Delete Avatar
+                </Text>
+            </TouchableOpacity>
+        </View>
     );
 
-    let loader: any;
+    const moreOptionsHeader = () => (
+        <View style={SettingsStyle.moreOptions}>
+            <Text style={SettingsStyle.moreOptionsHeader}>
+            Edit Profile
+            </Text>
+        </View>
 
-    if (isSaved) {
-        loader = (
-            <ActivityIndicator
-                style={SettingsStyle.loadingIcon}
-                size="large"
-                color="black"
-            />
-        );
-    } else {
-        loader = null;
-    }
+    );
 
-    const uploadButtonText =
-        !isPhotoExsists && !isPhotoChanged ? "Upload photo" : "Change photo";
-
-    const saveChangesAsync = async () =>
-        UserService.setAvatar(user!.id, imageData);
-
-    const askToRestartApp = () =>
-        Alert.alert("Saved", "Please restart the App", [
-            {
-                text: "Restart",
-                onPress: () => {
-                    RNRestart.Restart();
-                }
-            }
-        ]);
+    const moreOptionsRef = useRef<BottomSheet>(null) as any;
 
     return (
-        <View style={SettingsStyle.container}>
-            {isLoading ? (
-                <Indicator
-                    color="#414045"
-                    size="large"
-                    text="Loading information..."
-                />
-            ) : (
-                <>
-                    <View style={SettingsStyle.avatarContainer}>
-                        {image}
-                        <View style={SettingsStyle.overlay} />
-                        <View style={SettingsStyle.whitespace} />
-                        <TouchableOpacity
-                            style={SettingsStyle.uploadButton}
-                            onPress={() => uploadPhotoHandle()}
-                        >
-                            <Text style={SettingsStyle.uploadButtonText}>
-                                {uploadButtonText}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={SettingsStyle.bottomContainer}>
-                        <View style={SettingsStyle.saveButtonContainer}>
-                            {loader}
-                            <TouchableOpacity
-                                style={[
-                                    SettingsStyle.saveButton,
-                                    (!isPhotoChanged || isSaved) &&
-                                        SettingsStyle.pressedButton
-                                ]}
-                                disabled={!isPhotoChanged || isSaved}
-                                activeOpacity={1}
-                                onPress={() => {
-                                    setSaved(true);
-                                    saveChangesAsync()
-                                        .then(() => askToRestartApp())
-                                        .then((loader = null));
-                                }}
-                            >
-                                <Text style={SettingsStyle.saveButtonText}>
-                                    Save
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </>
-            )}
-        </View>
+        <>
+            <TouchableOpacity
+                activeOpacity={1}
+                style={SettingsStyle.profileInfo}
+                onLongPress={pressHandle}>
+                <AvatarLogoTitle />
+            </TouchableOpacity>
+            <View style={SettingsStyle.container}>
+                <TouchableNavigationCard
+                    navigation={props.navigation}
+                    navigationName="AppSettings"
+                    cardName="App Settings"
+                    angle="0"
+                >
+                    <Text style={SettingsStyle.cardText}>
+                    App Settings
+                    </Text>
+                </TouchableNavigationCard>
+                <TouchableNavigationCard
+                    navigation={props.navigation}
+                    navigationName="NotificationSettings"
+                    cardName="Notifications Settings"
+                    angle="0"
+                >
+                    <Text style={SettingsStyle.cardText}>
+                    Notifications Settings
+                    </Text>
+                </TouchableNavigationCard>
+                <TouchableNavigationCard
+                    navigation={props.navigation}
+                    navigationName="ChatSettings"
+                    cardName="Chats Settings"
+                    angle="0"
+                >
+                    <Text style={SettingsStyle.cardText}>
+                    Chats Settings
+                    </Text>
+                </TouchableNavigationCard>
+            </View>
+            <BottomPopup
+                snapPoints={[0, 188]}
+                refForChild={moreOptionsRef}
+                renderContent={moreOptionsContent}
+                initialSnap={0}
+                renderHeader={moreOptionsHeader}
+                enabledInnerScrolling={false}
+                onCloseEnd={closeHandle}
+            />
+            <Animated.View style={[SettingsStyle.layout, { opacity }]} />
+        </>
     );
 };
 

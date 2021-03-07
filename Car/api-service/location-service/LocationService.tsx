@@ -1,5 +1,5 @@
 import APIService from "../APIService";
-import Location from "../../models/Location";
+import Location from "../../models/location/Location";
 import APIRoutes from "../APIRoutes";
 
 const route = APIRoutes.getLocationUrl();

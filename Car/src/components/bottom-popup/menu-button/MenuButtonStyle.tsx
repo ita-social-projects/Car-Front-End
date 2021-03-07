@@ -7,6 +7,7 @@ const MenuButtonStyle = StyleSheet.create({
     },
 
     panelButton: {
+        paddingLeft: 12,
         height: 44,
         justifyContent: "center",
         flexDirection: "column"

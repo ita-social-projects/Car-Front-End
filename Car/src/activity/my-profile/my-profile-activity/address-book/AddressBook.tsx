@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, Text, View, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LocationService from "../../../../../api-service/location-service/LocationService";
-import Location from "../../../../../models/Location";
+import Location from "../../../../../models/location/Location";
 import AuthContext from "../../../../components/auth/AuthContext";
-import TouchableNavigationCard from "../touchable-navigation-card/TouchableNavigationCard";
+import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 
 export default function AddressBook (props: any) {

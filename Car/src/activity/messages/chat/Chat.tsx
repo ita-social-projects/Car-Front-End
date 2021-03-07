@@ -19,13 +19,12 @@ const Chat = (props: any) => {
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
 
-    props.navigation.setOptions({ headerTitle: props.route.params.header });
-
     useEffect(() => {
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+            props.navigation.setOptions({ headerTitle: props.route.params.header });
+
             let tempChat: any = [];
 
-            console.log(res.data?.messages);
             res.data?.messages?.forEach((element: any) => {
                 const messageToAdd = {
                     _id: element?.id,
@@ -56,7 +55,7 @@ const Chat = (props: any) => {
                         }
                     } as any
                 )
-            )
+            );
         });
         SignalRHubConnection.invoke(
             "EnterToGroup",
@@ -64,7 +63,7 @@ const Chat = (props: any) => {
         ).catch((err: any) => console.log(err));
         setMessage("");
 
-        return function cleanup() {
+        return function cleanup () {
 
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
@@ -143,7 +142,7 @@ const Chat = (props: any) => {
                 }}
             />
         );
-    }
+    };
 
     const renderUserAvatar = (data: any) => {
         return (
@@ -167,8 +166,8 @@ const Chat = (props: any) => {
                     }}
                 />
             </TouchableOpacity>
-        )
-    }
+        );
+    };
 
     return (
         <View style={ChatStyle.chatWrapper}>
@@ -196,7 +195,7 @@ const Chat = (props: any) => {
                 renderInputToolbar={renderInputToolbar}
             />
         </View>
-    )
+    );
 };
 
 export default Chat;

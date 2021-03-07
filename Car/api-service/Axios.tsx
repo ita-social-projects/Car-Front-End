@@ -27,8 +27,6 @@ Axios.interceptors.request.use(
     async (error: any) => {
         ErrorAlert();
 
-        console.log(error.message);
-
         return Promise.reject(error);
     }
 );

@@ -1,6 +1,6 @@
-import Address from "./Address";
+import Address from "../Address";
 import StopType from "./StopType";
-import User from "./User";
+import User from "../user/User";
 
 type Stop = null | {
     id: number;

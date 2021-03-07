@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
-import Stop from "../../../../../../models/Stop";
-import StopType from "../../../../../../models/StopType";
-import User from "../../../../../../models/User";
+import Stop from "../../../../../../models/stop/Stop";
+import User from "../../../../../../models/user/User";
 import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
 import JourneyPageStyle from "./JourneyPageStyle";
 import Journey from "../../../../../../models/Journey";
@@ -14,6 +13,8 @@ import Moment from "moment";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
+import StopType from "../../../../../../models/stop/StopType";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);
@@ -128,11 +129,9 @@ const JourneyPage = ({ props }: any) => {
                     SOFTSERVIANS {currentJourney?.participants?.length}/
                     {currentJourney?.countOfSeats}
                 </Text>
-                <FlatList
-                    data={currentJourney?.participants}
-                    renderItem={({ item }) => Applicant(item)}
-                    keyExtractor={(item) => item!.id.toString()}
-                />
+                <ScrollView onStartShouldSetResponder={() => true}>
+                    {currentJourney?.participants.map((item) => Applicant(item))}
+                </ScrollView>
             </View>
         );
     };
@@ -166,7 +165,7 @@ const JourneyPage = ({ props }: any) => {
         );
     };
 
-    const journeyInfoContent = () => {
+    const journeyContent = () => {
         return (
             <View style={JourneyPageStyle.mainContainer}>
                 {isLoading ? (
@@ -193,16 +192,10 @@ const JourneyPage = ({ props }: any) => {
             <BottomPopup
                 style={JourneyPageStyle.bottomPopup}
                 snapPoints={[
-                    "80%",
-                    "45%",
+                    "88%",
                     "40%",
-                    "35%",
-                    "30%",
-                    "25%",
-                    "20%",
-                    "15%"
                 ]}
-                renderContent={journeyInfoContent}
+                renderContent={journeyContent}
                 initialSnap={0}
                 renderHeader={() => {}}
                 enabledInnerScrolling={false}

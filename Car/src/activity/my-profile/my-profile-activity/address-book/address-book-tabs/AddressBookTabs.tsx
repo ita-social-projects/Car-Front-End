@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AddressBookTabsStyle from "./AddressBookTabsStyle";
+import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import AddressBook from "../AddressBook";
 import SetPlace from "../add-locations/SetPlace";
@@ -19,10 +19,10 @@ export default function AddressBookTabs () {
                     options={{
                         headerTitle: "Address Book",
                         headerTitleAlign: "center",
-                        headerTitleStyle: AddressBookTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={AddressBookTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -34,11 +34,11 @@ export default function AddressBookTabs () {
                                 />
                                 <View
                                     style={
-                                        AddressBookTabsStyle.backButtonTextView
+                                        HeaderStyle.backButtonTextView
                                     }
                                 >
                                     <Text
-                                        style={AddressBookTabsStyle.buttonText}
+                                        style={HeaderStyle.buttonText}
                                     >
                                         Back
                                     </Text>
@@ -53,10 +53,10 @@ export default function AddressBookTabs () {
                     options={{
                         headerTitle: "Add Address",
                         headerTitleAlign: "center",
-                        headerTitleStyle: AddressBookTabsStyle.headerTitleStyle,
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: () => (
                             <TouchableOpacity
-                                style={AddressBookTabsStyle.backButtonOpacity}
+                                style={HeaderStyle.backButtonOpacity}
                                 onPress={() => {
                                     navigation.goBack();
                                 }}
@@ -68,11 +68,11 @@ export default function AddressBookTabs () {
                                 />
                                 <View
                                     style={
-                                        AddressBookTabsStyle.backButtonTextView
+                                        HeaderStyle.backButtonTextView
                                     }
                                 >
                                     <Text
-                                        style={AddressBookTabsStyle.buttonText}
+                                        style={HeaderStyle.buttonText}
                                     >
                                         Back
                                     </Text>
@@ -84,7 +84,7 @@ export default function AddressBookTabs () {
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
-                                    style={AddressBookTabsStyle.moreOptionsIcon}
+                                    style={HeaderStyle.moreOptionsIcon}
                                 />
                             </TouchableOpacity>
                         )

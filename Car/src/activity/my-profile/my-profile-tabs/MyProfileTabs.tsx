@@ -2,19 +2,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AvatarLogoTitle from "../my-profile-activity/avatar-logo-title/AvatarLogoTitle";
+import AvatarLogoTitle from "../../../components/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
 import Preferences from "../my-profile-activity/preferences/Preferences";
-import Settings from "../my-profile-activity/settings/Settings";
 import MyProfile from "../MyProfile";
 import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import AddressBookTabs from "../my-profile-activity/address-book/address-book-tabs/AddressBookTabs";
+import SettingsTabs from "../my-profile-activity/settings/settings-tabs/SettingsTabs";
 
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = () => {
+
     return (
         <View style={HeaderStyle.container}>
             <StackTabs.Navigator>
@@ -94,32 +95,9 @@ const MyProfileTabs = () => {
                     options={{ headerShown: false }}
                 />
                 <StackTabs.Screen
-                    name="Settings"
-                    component={Settings}
-                    options={{
-                        headerTitle: "Settings",
-                        headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }}
+                    name="SettingsTabs"
+                    component={SettingsTabs}
+                    options={{ headerShown: false }}
                 />
             </StackTabs.Navigator>
         </View>
