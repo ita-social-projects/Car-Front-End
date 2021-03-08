@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Platform, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../../models/stop/Stop";
 import User from "../../../../../../models/user/User";
@@ -14,6 +14,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 import StopType from "../../../../../../models/stop/StopType";
+import { ScrollView } from "react-native-gesture-handler";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);
