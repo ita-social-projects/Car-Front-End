@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Platform, Text, View } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../../models/stop/Stop";
 import User from "../../../../../../models/user/User";
@@ -159,6 +159,16 @@ const JourneyPage = ({ props }: any) => {
                                 "'s journey"
                         })
                     }
+                    onLongPress={() =>
+                        navigation.navigate("Chat", {
+                            chatId: currentJourney?.id,
+                            header:
+                                currentJourney?.organizer?.name +
+                                " " +
+                                currentJourney?.organizer?.surname +
+                                "'s journey"
+                        })
+                    }
                 >
                     <Text style={JourneyPageStyle.messageAllButtonText}>
                         MESSAGE ALL
@@ -199,7 +209,10 @@ const JourneyPage = ({ props }: any) => {
         <>
             <BottomPopup
                 style={JourneyPageStyle.bottomPopup}
-                snapPoints={[
+                snapPoints={Platform.OS === "ios" ? [
+                    "78%",
+                    "35%",
+                ] : [
                     "88%",
                     "40%",
                 ]}
