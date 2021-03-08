@@ -20,6 +20,7 @@ const Chat = (props: any) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
+        props.navigation.setOptions({ headerTitle: props.route.params.header });
         ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
             props.navigation.setOptions({ headerTitle: props.route.params.header });
 
@@ -41,7 +42,7 @@ const Chat = (props: any) => {
             setMessages(tempChat);
         });
 
-        SignalRHubConnection.on("RecieveMessage", (receivedMessage: any) => {
+        SignalRHubConnection!.on("RecieveMessage", (receivedMessage: any) => {
             setMessages((previousMessages) =>
                 GiftedChat.append(
                     previousMessages as any,
@@ -63,8 +64,7 @@ const Chat = (props: any) => {
         ).catch((err: any) => console.log(err));
         setMessage("");
 
-        return function cleanup () {
-
+        return () => {
             SignalRHubConnection?.invoke(
                 "LeaveTheGroup",
                 props.route.params.chatId.toString()
@@ -73,14 +73,18 @@ const Chat = (props: any) => {
     }, []);
 
     const onSend = () => {
-        SignalRHubConnection!
-            .invoke("SendMessageToGroup", {
-                Text: message,
-                SenderId: user?.id,
-                ChatId: props.route.params.chatId
-            })
-            .catch((err: any) => console.log(err));
-        setMessage("");
+        const messageToSend = message.trim();
+
+        if (messageToSend != "") {
+            SignalRHubConnection!
+                .invoke("SendMessageToGroup", {
+                    Text: messageToSend,
+                    SenderId: user?.id,
+                    ChatId: props.route.params.chatId
+                })
+                .catch((err: any) => console.log(err));
+            setMessage("");
+        }
     };
 
     const renderBubble = (props: any) => {
