@@ -2,9 +2,17 @@ import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
 const SettingsStyle = StyleSheet.create({
-    container: {
+    mainContainer: {
         flex: 1,
         backgroundColor: "#FFFFFF",
+    },
+
+    container: {
+        height: Dimensions.get("window").height -105,
+        width: Dimensions.get("window").width,
+    },
+
+    bottomContainer: {
         paddingTop: 166,
     },
 
