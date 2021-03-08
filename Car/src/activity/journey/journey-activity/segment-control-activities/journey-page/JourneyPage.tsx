@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Platform, Text, View } from "react-native";
+import { FlatList, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../../models/stop/Stop";
 import User from "../../../../../../models/user/User";
@@ -14,7 +14,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 import StopType from "../../../../../../models/stop/StopType";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);
@@ -67,10 +66,6 @@ const JourneyPage = ({ props }: any) => {
                             userId: item?.id
                         })
                     }
-                    onLongPress={() =>
-                        navigation.navigate("Applicant Page", {
-                            userId: item?.id
-                        })}
                 >
                     <View style={JourneyPageStyle.userImageBlock}>
                         <AvatarLogo user={item} size={38.5} />
@@ -150,16 +145,6 @@ const JourneyPage = ({ props }: any) => {
                 <TouchableOpacity
                     style={JourneyPageStyle.messageAllButton}
                     onPress={() =>
-                        navigation.navigate("Chat", {
-                            chatId: currentJourney?.id,
-                            header:
-                                currentJourney?.organizer?.name +
-                                " " +
-                                currentJourney?.organizer?.surname +
-                                "'s journey"
-                        })
-                    }
-                    onLongPress={() =>
                         navigation.navigate("Chat", {
                             chatId: currentJourney?.id,
                             header:
