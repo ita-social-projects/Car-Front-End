@@ -7,6 +7,7 @@ import Chat from "../chat/Chat";
 import Messages from "../Messages";
 import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
+import JourneyApplicant from "../../journey/journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
 
 const StackTabs = createStackNavigator();
 
@@ -80,6 +81,35 @@ const MessagesTabs = () => {
                             </TouchableOpacity>
                         )
                     }}
+                />
+
+                <StackTabs.Screen
+                    name="Applicant Page"
+                    options={{
+                        title: "SoftServian",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                style={HeaderStyle.backButtonOpacity}
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Ionicons
+                                    name={"chevron-back-outline"}
+                                    size={35}
+                                    color={"#02A2CF"}
+                                />
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
+                    component={JourneyApplicant}
                 />
             </StackTabs.Navigator>
         </View>
