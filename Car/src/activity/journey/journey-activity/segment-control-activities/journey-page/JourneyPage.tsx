@@ -67,6 +67,10 @@ const JourneyPage = ({ props }: any) => {
                             userId: item?.id
                         })
                     }
+                    onLongPress={() =>
+                        navigation.navigate("Applicant Page", {
+                            userId: item?.id
+                        })}
                 >
                     <View style={JourneyPageStyle.userImageBlock}>
                         <AvatarLogo user={item} size={38.5} />

@@ -38,9 +38,8 @@ const Settings = (props: any) => {
         }).start();
     };
 
-    const sleep = (milliseconds: number) => {
-        return new Promise(resolve => setTimeout(resolve, milliseconds));
-    };
+    const sleep = (milliseconds: number) =>
+        new Promise(resolve => setTimeout(resolve, milliseconds));
 
     const fadeOut = () => Animated.timing(opacity, {
         toValue: 0,
@@ -51,6 +50,7 @@ const Settings = (props: any) => {
     const closeHandle = () => {
         setOpen(false);
         fadeOut();
+        (async () => sleep(700))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {

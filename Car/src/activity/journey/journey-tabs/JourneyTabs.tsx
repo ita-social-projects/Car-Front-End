@@ -25,11 +25,17 @@ const StackTabs = createStackNavigator();
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
+    const [isVisible, setVisibility] = useState(false);
 
     const layoutOpacity = useState(new Animated.Value(0))[0];
     const journeyOpacity = useState(new Animated.Value(1))[0];
 
+    const sleep = (milliseconds: number) =>
+        new Promise(resolve => setTimeout(resolve, milliseconds));
+
     const fadeIn = () => {
+        setVisibility(true);
+
         Animated.timing(layoutOpacity, {
             toValue: 0.5,
             duration: 500,
@@ -60,6 +66,7 @@ const JourneyTabs = () => {
     const closeHandle = () => {
         setOpen(false);
         fadeOut();
+        (async () => sleep(700))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {
@@ -205,7 +212,7 @@ const JourneyTabs = () => {
                     {(props: any) => {
                         return (
                             <>
-                                <Animated.View style={[HeaderStyle.layout, { opacity: layoutOpacity }]} />
+                                <Animated.View style={isVisible && [HeaderStyle.layout, { opacity: layoutOpacity }]} />
                                 <Animated.View style={[HeaderStyle.popUp, { opacity: journeyOpacity }]}>
                                     <JourneyPage props={props} />
                                 </Animated.View>

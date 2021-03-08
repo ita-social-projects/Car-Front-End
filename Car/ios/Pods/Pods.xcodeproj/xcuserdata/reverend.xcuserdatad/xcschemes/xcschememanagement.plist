@@ -274,6 +274,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>react-native-maps.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>react-native-restart.xcscheme</key>
 		<dict>
 			<key>isShown</key>

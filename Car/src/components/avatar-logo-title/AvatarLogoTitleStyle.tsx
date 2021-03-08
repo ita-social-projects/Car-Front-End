@@ -13,8 +13,9 @@ const AvatarLogoTitleStyle = StyleSheet.create({
     },
 
     headerUserInformation: {
-        marginLeft: 15,
-        fontFamily: Font.ProximaNova.Bold
+        marginLeft: 71,
+        fontFamily: Font.ProximaNova.Bold,
+        position: "absolute"
     },
 
     headerUserName: {
