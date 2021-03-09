@@ -1,14 +1,30 @@
 import { StyleSheet } from "react-native";
 import Font from "../../../../../../data/fonts/Font";
 
-const TouchableMapBarStyle = StyleSheet.create({
+const SetPlaceStyle = StyleSheet.create({
+    globalContainer: {
+        width: "100%",
+        height: "100%"
+    },
+
+    mapContainer: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        zIndex: 100
+    },
+
+    map: {
+        flex: 1
+    },
+
     container: {
+        zIndex: 200,
         flexDirection: "row",
         borderWidth: 2.3,
-        padding: 8,
-        marginRight: 20,
+        marginRight: 100,
         marginLeft: 20,
-
+        paddingLeft: 100,
         backgroundColor: "white",
         fontFamily: Font.OpenSans.Regular
     },
@@ -20,22 +36,15 @@ const TouchableMapBarStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular
     },
 
-    directionText: {
-        color: "black",
-        fontSize: 18
-    },
-
     textInputStyle: {
-        paddingVertical: 8,
-        fontSize: 17,
+        fontSize: 16,
         lineHeight: 24,
         zIndex: 0
     },
 
-    barIcon: {
-        marginRight: 5,
-        borderColor: "#EEEEEE"
+    errorText: {
+        color: "red"
     }
 });
 
-export default TouchableMapBarStyle;
+export default SetPlaceStyle;

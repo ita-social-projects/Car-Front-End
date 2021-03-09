@@ -5,16 +5,16 @@ import {
     launchImageLibrary
 } from "react-native-image-picker/src";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import BrandService from "../../../../../../api-service/brand-service/BrandService";
-import CarService from "../../../../../../api-service/car-service/CarService";
-import ModelService from "../../../../../../api-service/model-service/ModelService";
-import CarBrand from "../../../../../../models/car/CarBrand";
-import CarViewModel from "../../../../../../models/car/CarViewModel";
-import CarColor from "../../../../../../models/car/CarColor";
-import CarModel from "../../../../../../models/car/CarModel";
-import CarDropDownPickerItem from "../../../../../components/car-drop-down-picker/CarDropDownItem";
-import CarDropDownPicker from "../../../../../components/car-drop-down-picker/CarDropDownPicker";
-import CarTextInput from "../../../../../components/car-text-input/CarTextInput";
+import BrandService from "../../../../../../../api-service/brand-service/BrandService";
+import CarService from "../../../../../../../api-service/car-service/CarService";
+import ModelService from "../../../../../../../api-service/model-service/ModelService";
+import CarBrand from "../../../../../../../models/car/CarBrand";
+import CarViewModel from "../../../../../../../models/car/CarViewModel";
+import CarColor from "../../../../../../../models/car/CarColor";
+import CarModel from "../../../../../../../models/car/CarModel";
+import CarDropDownPickerItem from "../../../../../../components/car-drop-down-picker/CarDropDownItem";
+import CarDropDownPicker from "../../../../../../components/car-drop-down-picker/CarDropDownPicker";
+import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import EditCarsStyle from "./EditCarsStyle";
 
 const EditCars = (navigation: any) => {

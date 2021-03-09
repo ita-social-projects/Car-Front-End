@@ -5,7 +5,7 @@ import Journey from "../../../models/Journey";
 import AuthContext from "../../components/auth/AuthContext";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
-import TouchableNavigationBlock from "./touchable-navigation-block/TouchableNavigationBlock";
+import TouchableNavigationBlock from "../../components/touchable-navigation-block/TouchableNavigationBlock";
 
 const JourneyStartPage = (props: any) => {
     const [selectedIndex, setSelectedIndex] = useState(0);

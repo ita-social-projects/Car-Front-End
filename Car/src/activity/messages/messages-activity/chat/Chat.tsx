@@ -7,12 +7,12 @@ import {
     InputToolbar,
     Send
 } from "react-native-gifted-chat";
-import ChatService from "../../../../api-service/chat-service/ChatService";
-import AuthContext from "../../../components/auth/AuthContext";
-import AvatarLogo from "../../../components/avatar-logo/AvatarLogo";
-import * as navigation from "../../../components/navigation/Navigation";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import AuthContext from "../../../../components/auth/AuthContext";
+import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
+import * as navigation from "../../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
-import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
+import SignalRHubConnection from "../../../../../api-service/SignalRHubConnection";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);

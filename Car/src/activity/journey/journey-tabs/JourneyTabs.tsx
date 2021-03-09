@@ -7,19 +7,19 @@ import JourneyNewApplicant from "../../../components/journey-new-applicant/Journ
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
 import SearchJourney from "../journey-activity/search-journey/SearchJourney";
-import JourneyApplicant from "../journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
-import JourneyPage from "../journey-activity/segment-control-activities/journey-page/JourneyPage";
+import JourneyApplicant from "../journey-activity/journey-applicant/JourneyApplicant";
+import JourneyPage from "../journey-activity/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/search-journey/search-results/ok-search-result/OkSearchResult";
 import JourneyStyle from "../JourneyStartPageStyle";
 import * as navigation from "../../../components/navigation/Navigation";
-import JourneyPageStyle from "../journey-activity/segment-control-activities/journey-page/JourneyPageStyle";
+import JourneyPageStyle from "../journey-activity/journey-page/JourneyPageStyle";
 import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
-import SearchJourneyMap from "../journey-activity/segment-control-activities/map-address/SearchJourneyMap";
-import Chat from "../../messages/chat/Chat";
+import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
+import Chat from "../../messages/messages-activity/chat/Chat";
 
 const StackTabs = createStackNavigator();
 

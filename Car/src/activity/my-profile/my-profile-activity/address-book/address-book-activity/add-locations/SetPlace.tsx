@@ -3,8 +3,8 @@ import { Text, TextInput, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import APIConfig from "../../../../../../api-service/APIConfig";
-import TouchableMapBar from "../../../../journey/journey-activity/segment-control-activities/touchable/map-bar/TouchableMapBar";
+import APIConfig from "../../../../../../../api-service/APIConfig";
+import TouchableMapBar from "../../../../../../components/touchable-map-bar/TouchableMapBar";
 import SetPlaceStyle from "./SetPlaceStyle";
 
 const SetPlace = (props: any) => {
@@ -91,7 +91,7 @@ const SetPlace = (props: any) => {
                             setLongitude(e.nativeEvent.coordinate.longitude);
                             getActualAddress();
                         }}
-                        image={require("../../../../../../assets/images/custom-marker.png")}
+                        image={require("../../../../../../../assets/images/custom-marker.png")}
                         coordinate={{
                             latitude: latitude,
                             longitude: longitude

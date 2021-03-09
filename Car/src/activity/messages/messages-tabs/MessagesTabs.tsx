@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Chat from "../chat/Chat";
+import Chat from "../messages-activity/chat/Chat";
 import Messages from "../Messages";
 import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
-import JourneyApplicant from "../../journey/journey-activity/segment-control-activities/journey-applicant/JourneyApplicant";
+import JourneyApplicant from "../../journey/journey-activity/journey-applicant/JourneyApplicant";
 
 const StackTabs = createStackNavigator();
 

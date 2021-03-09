@@ -4,7 +4,7 @@ import SettingsStyle from "./SettingsStyle";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
-import { launchImageLibrary } from "react-native-image-picker/src";
+import { ImagePickerResponse, launchImageLibrary } from "react-native-image-picker/src";
 import UserService from "../../../../../api-service/user-service/UserService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -72,23 +72,13 @@ const Settings = (props: any) => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
-                const updatedUser = new FormData();
-
-                updatedUser.append("id", user?.id);
-                updatedUser.append("name", user?.name);
-                updatedUser.append("surname", user?.surname);
-                updatedUser.append("position", user?.position);
-                updatedUser.append("location", user?.location);
-                updatedUser.append("image", response);
-
-                UserService.updateUser(updatedUser).then(() =>
-                    UserService.getUser(user!.id).then((res) =>
-                        AsyncStorage.setItem("user", JSON.stringify(res.data))));
+                saveUser(response);
             }
         });
     };
 
-    const deletePhotoHandle = () => {
+    const saveUser = async (photo: ImagePickerResponse) => {
+
         const updatedUser = new FormData();
 
         updatedUser.append("id", user?.id);
@@ -97,9 +87,20 @@ const Settings = (props: any) => {
         updatedUser.append("position", user?.position);
         updatedUser.append("location", user?.location);
 
-        UserService.updateUser(updatedUser).then(() =>
+        if (photo !== null && photo !== undefined) {
+            updatedUser.append("image", {
+                name: photo.fileName,
+                type: photo.type,
+                uri: photo?.uri
+            });
+        }
+
+        await UserService.updateUser(updatedUser).then((res) => {
+            console.log(res.status + " " + res.data);
+
             UserService.getUser(user!.id).then((res) =>
-                AsyncStorage.setItem("user", JSON.stringify(res.data))));
+                AsyncStorage.setItem("user", JSON.stringify(res.data)));
+        });
     };
 
     const moreOptionsContent = () => (
@@ -118,7 +119,7 @@ const Settings = (props: any) => {
             <TouchableOpacity
                 style={SettingsStyle.moreOptionsButton}
                 onPress={() => {
-                    deletePhotoHandle();
+                    saveUser(null as unknown as ImagePickerResponse);
                     pressHandle();
                 }}>
                 <Text style={SettingsStyle.deleteAvatarText}>
@@ -131,7 +132,7 @@ const Settings = (props: any) => {
     const moreOptionsHeader = () => (
         <View style={SettingsStyle.moreOptions}>
             <Text style={SettingsStyle.moreOptionsHeader}>
-            Edit Profile
+                Edit Profile
             </Text>
         </View>
 
@@ -159,7 +160,7 @@ const Settings = (props: any) => {
                             angle="0"
                         >
                             <Text style={SettingsStyle.cardText}>
-                    App Settings
+                                App Settings
                             </Text>
                         </TouchableNavigationCard>
                         <TouchableNavigationCard
@@ -169,7 +170,7 @@ const Settings = (props: any) => {
                             angle="0"
                         >
                             <Text style={SettingsStyle.cardText}>
-                    Notifications Settings
+                                Notifications Settings
                             </Text>
                         </TouchableNavigationCard>
                         <TouchableNavigationCard
@@ -179,7 +180,7 @@ const Settings = (props: any) => {
                             angle="0"
                         >
                             <Text style={SettingsStyle.cardText}>
-                    Chats Settings
+                                Chats Settings
                             </Text>
                         </TouchableNavigationCard>
                     </View>

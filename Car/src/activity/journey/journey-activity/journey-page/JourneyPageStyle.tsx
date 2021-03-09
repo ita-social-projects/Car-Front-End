@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
-import Font from "../../../../../data/fonts/Font";
+import Font from "../../../../data/fonts/Font";
 
 const JourneyPageStyle = StyleSheet.create({
     container: {
