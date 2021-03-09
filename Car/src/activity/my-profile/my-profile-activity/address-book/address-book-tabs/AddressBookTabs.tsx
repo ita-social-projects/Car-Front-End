@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import AddressBook from "../AddressBook";
-import SetPlace from "../add-locations/SetPlace";
+import SetPlace from "../address-book-activity/add-locations/SetPlace";
 
 const StackTabs = createStackNavigator();
 

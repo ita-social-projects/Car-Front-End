@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import TouchableCard from "../segment-control-activities/touchable/card/TouchableCard";
-import TouchableMapBar from "../segment-control-activities/touchable/map-bar/TouchableMapBar";
+import TouchableCard from "../../../../components/touchable-card/TouchableCard";
+import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
 import StopService from "../../../../../api-service/stop-service/StopService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import SearchJouneyStyle from "./SearchJouneyStyle";
 import Stop from "../../../../../models/stop/Stop";
 import Location from "../../../../../models/location/Location";
-import SearchJourneyMap from "../segment-control-activities/map-address/SearchJourneyMap";
+import SearchJourneyMap from "../map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";

@@ -21,6 +21,10 @@ Axios.interceptors.request.use(
             };
         }
 
+        if (req.method === "put") {
+            console.log(req.data._parts);
+        }
+
         return req;
     },
 

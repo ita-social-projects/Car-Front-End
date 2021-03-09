@@ -2,9 +2,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AddCars from "../add-cars/AddCars";
+import AddCars from "../car-activity/add-cars/AddCars";
 import Cars from "../Cars";
-import EditCars from "../edit-cars/EditCars";
+import EditCars from "../car-activity/edit-cars/EditCars";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import * as navigation from "../../../../../components/navigation/Navigation";
 
