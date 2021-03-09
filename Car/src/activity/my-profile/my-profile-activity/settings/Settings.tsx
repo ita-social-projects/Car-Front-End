@@ -12,7 +12,7 @@ import { BottomSheet } from "react-native-elements";
 
 const Settings = (props: any) => {
 
-    const [user, setUser] = useState(useContext(AuthContext).user);
+    const [user, setUser] = useState<any>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
     const [isRefreshing, setRefreshing] = useState(false);
@@ -105,27 +105,42 @@ const Settings = (props: any) => {
 
     const moreOptionsContent = () => (
         <View style={SettingsStyle.moreOptions}>
-            <TouchableOpacity
-                style={SettingsStyle.moreOptionsButton}
-                onPress={() => {
-                    pressHandle();
-                    (async () => sleep(700))().then(() => uploadPhotoHandle());
-                }}>
-                <Text style={SettingsStyle.changeAvatarText}>
-                    Change Avatar
-                </Text>
-            </TouchableOpacity>
-            <View style={SettingsStyle.sepataror} />
-            <TouchableOpacity
-                style={SettingsStyle.moreOptionsButton}
-                onPress={() => {
-                    saveUser(null as unknown as ImagePickerResponse);
-                    pressHandle();
-                }}>
-                <Text style={SettingsStyle.deleteAvatarText}>
-                    Delete Avatar
-                </Text>
-            </TouchableOpacity>
+            {user?.imageId == null ? (
+                <TouchableOpacity
+                    style={SettingsStyle.moreOptionsButton}
+                    onPress={() => {
+                        pressHandle();
+                        (async () => sleep(700))().then(() => uploadPhotoHandle());
+                    }}>
+                    <Text style={SettingsStyle.changeAvatarText}>
+                        Upload Avatar
+                    </Text>
+                </TouchableOpacity>
+            ) : (
+                <>
+                    <TouchableOpacity
+                        style={SettingsStyle.moreOptionsButton}
+                        onPress={() => {
+                            pressHandle();
+                            (async () => sleep(700))().then(() => uploadPhotoHandle());
+                        }}>
+                        <Text style={SettingsStyle.changeAvatarText}>
+                            Change Avatar
+                        </Text>
+                    </TouchableOpacity>
+                    <View style={SettingsStyle.sepataror} />
+                    <TouchableOpacity
+                        style={SettingsStyle.moreOptionsButton}
+                        onPress={() => {
+                            saveUser(null as unknown as ImagePickerResponse);
+                            pressHandle();
+                        }}>
+                        <Text style={SettingsStyle.deleteAvatarText}>
+                            Delete Avatar
+                        </Text>
+                    </TouchableOpacity>
+                </>
+            )}
         </View>
     );
 
@@ -186,7 +201,7 @@ const Settings = (props: any) => {
                     </View>
                     <Animated.View style={isVisible && [SettingsStyle.layout, { opacity }]} />
                     <BottomPopup
-                        snapPoints={[0, 188]}
+                        snapPoints={[0, user?.imageId != null ? 188 : 143]}
                         refForChild={moreOptionsRef}
                         renderContent={moreOptionsContent}
                         initialSnap={0}
