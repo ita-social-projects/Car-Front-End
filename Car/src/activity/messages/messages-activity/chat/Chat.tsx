@@ -36,13 +36,11 @@ const Chat = (props: any) => {
     useEffect(() => {
         if (connection) {
             connection.start().then(() => {
-                console.log("Connected!");
                 connection.invoke(
                     "EnterToGroup",
                     props.route.params.chatId.toString()
                 ).catch((err: any) => console.log(err));
             });
-            console.log("invoked!");
 
             ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
 
@@ -73,7 +71,6 @@ const Chat = (props: any) => {
             });
 
             connection!.on("RecieveMessage", (receivedMessage: any) => {
-                console.log("Connection: ", connection.connectionId);
                 setMessages((previousMessages) =>
                     GiftedChat.append(
                         previousMessages as any,
@@ -101,7 +98,6 @@ const Chat = (props: any) => {
     }, [connection]);
 
     const onSend = () => {
-        console.log("Current state: ", connection?.state);
         if (connection) {
             const messageToSend = message.trim();
 
