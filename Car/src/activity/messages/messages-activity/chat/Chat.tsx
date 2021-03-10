@@ -12,79 +12,113 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
-import SignalRHubConnection from "../../../../../api-service/SignalRHubConnection";
+import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
+import APIConfig from "../../../../../api-service/APIConfig";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
+    const [connection, setConnection] = useState<HubConnection>();
 
     useEffect(() => {
+        (() => {
+            const newConnection = new HubConnectionBuilder()
+                .withUrl(APIConfig.URL + "signalr/")
+                .withAutomaticReconnect()
+                .build();
+
+            setConnection(newConnection);
+        })();
         props.navigation.setOptions({ headerTitle: props.route.params.header });
-        ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
-            props.navigation.setOptions({ headerTitle: props.route.params.header });
-
-            let tempChat: any = [];
-
-            res.data?.messages?.forEach((element: any) => {
-                const messageToAdd = {
-                    _id: element?.id,
-                    text: element?.text,
-                    createdAt: element?.createdAt,
-                    user: {
-                        _id: element?.senderId?.toString(),
-                        name: element?.sender?.name + " " + element?.sender?.surname
-                    }
-                };
-
-                tempChat.push(messageToAdd);
-            });
-            setMessages(tempChat);
-        });
-
-        SignalRHubConnection!.on("RecieveMessage", (receivedMessage: any) => {
-            setMessages((previousMessages) =>
-                GiftedChat.append(
-                    previousMessages as any,
-                    {
-                        _id: receivedMessage.id,
-                        text: receivedMessage.text,
-                        createdAt: receivedMessage.createdAt,
-                        user: {
-                            _id: receivedMessage.senderId?.toString(),
-                            name: receivedMessage?.sender?.name + " " + receivedMessage?.sender?.surname
-                        }
-                    } as any
-                )
-            );
-        });
-        SignalRHubConnection.invoke(
-            "EnterToGroup",
-            props.route.params.chatId.toString()
-        ).catch((err: any) => console.log(err));
-        setMessage("");
-
-        return () => {
-            SignalRHubConnection?.invoke(
-                "LeaveTheGroup",
-                props.route.params.chatId.toString()
-            );
-        };
     }, []);
 
-    const onSend = () => {
-        const messageToSend = message.trim();
+    useEffect(() => {
+        if (connection) {
+            connection.start().then(() => {
+                console.log("Connected!");
+                connection.invoke(
+                    "EnterToGroup",
+                    props.route.params.chatId.toString()
+                ).catch((err: any) => console.log(err));
+            });
+            console.log("invoked!");
 
-        if (messageToSend != "") {
-            SignalRHubConnection!
-                .invoke("SendMessageToGroup", {
-                    Text: messageToSend,
-                    SenderId: user?.id,
-                    ChatId: props.route.params.chatId
-                })
-                .catch((err: any) => console.log(err));
+            ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+
+                let tempChat: any = [];
+
+                res.data?.messages?.forEach((element: any) => {
+                    const messageToAdd = {
+                        _id: element?.id,
+                        text: element?.text,
+                        createdAt: element?.createdAt,
+                        user: {
+                            _id: element?.senderId?.toString(),
+                            name: element?.sender?.name + " " + element?.sender?.surname
+                        }
+                    };
+
+                    tempChat.push(messageToAdd);
+                });
+                setMessages(tempChat);
+            });
+            console.log("Use Effect has refreshed");
+
+            connection.onreconnected(() => {
+                connection.invoke(
+                    "EnterToGroup",
+                    props.route.params.chatId.toString()
+                ).catch((err: any) => console.log(err));
+            });
+
+            connection!.on("RecieveMessage", (receivedMessage: any) => {
+                console.log("Connection: ", connection.connectionId);
+                setMessages((previousMessages) =>
+                    GiftedChat.append(
+                        previousMessages as any,
+                        {
+                            _id: receivedMessage.id,
+                            text: receivedMessage.text,
+                            createdAt: receivedMessage.createdAt,
+                            user: {
+                                _id: receivedMessage.senderId?.toString(),
+                                name: receivedMessage?.sender?.name + " " + receivedMessage?.sender?.surname
+                            }
+                        } as any
+                    )
+                );
+            });
             setMessage("");
+
+            return () => {
+                connection?.invoke(
+                    "LeaveTheGroup",
+                    props.route.params.chatId.toString()
+                );
+            };
         }
+    }, [connection]);
+
+    const onSend = () => {
+        console.log("Current state: ", connection?.state);
+        if (connection) {
+            const messageToSend = message.trim();
+
+            if (messageToSend != "") {
+                connection!
+                    .invoke("SendMessageToGroup", {
+                        Text: messageToSend,
+                        SenderId: user?.id,
+                        ChatId: props.route.params.chatId
+                    })
+                    .catch((err: any) => console.log(err));
+                setMessage("");
+            }
+        } else {
+            console.log("No connection yet");
+        }
+
     };
 
     const renderBubble = (props: any) => {
