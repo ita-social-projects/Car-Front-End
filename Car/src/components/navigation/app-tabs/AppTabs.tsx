@@ -79,7 +79,7 @@ const AppTabs = () => {
                 component={MessagesTabs}
                 options={({ route }) => ({
                     tabBarVisible: getTabBarVisibility(route),
-                    tabBarLabel: "Messages"
+                    tabBarLabel: "Chats"
                 })}
             />
             <Tabs.Screen
