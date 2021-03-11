@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     Bubble,
@@ -14,12 +14,14 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
     const [connection, setConnection] = useState<HubConnection>();
+    const [loading, setSpinner] = useState(true);
 
     useEffect(() => {
         (() => {
@@ -60,6 +62,8 @@ const Chat = (props: any) => {
                     tempChat.push(messageToAdd);
                 });
                 setMessages(tempChat);
+            }).then(() => {
+                setSpinner(false);
             });
             console.log("Use Effect has refreshed");
 
@@ -210,7 +214,6 @@ const Chat = (props: any) => {
                 placeholder="Aa"
                 messagesContainerStyle={{ paddingBottom: 10 }}
                 renderTime={() => <View />}
-                maxInputLength={500}
                 messages={messages as any[]}
                 onInputTextChanged={setMessage}
                 text={message}
@@ -227,9 +230,23 @@ const Chat = (props: any) => {
                 minComposerHeight={44}
                 maxComposerHeight={120}
                 renderInputToolbar={renderInputToolbar}
+                maxInputLength={500}
             />
+            {
+                <Spinner
+                    visible={loading}
+                    textContent={"Loading..."}
+                    textStyle={styles.spinnerTextStyle}
+                />
+            }
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    spinnerTextStyle: {
+        color: "#FFF"
+    },
+});
 
 export default Chat;
