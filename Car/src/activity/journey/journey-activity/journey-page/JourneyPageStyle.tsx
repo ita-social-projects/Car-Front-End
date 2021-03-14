@@ -108,6 +108,7 @@ const JourneyPageStyle = StyleSheet.create({
         fontWeight: "700",
         fontFamily: Font.OpenSans.ExtraBold
     },
+
     separator: {
         backgroundColor: "#C1C1C5",
         height: 1,
@@ -174,16 +175,15 @@ const JourneyPageStyle = StyleSheet.create({
         borderWidth: 3,
         justifyContent: "center",
         alignItems: "center",
+        height: 51,
         width: Dimensions.get("screen").width * 0.4
     },
 
     messageAllButtonText: {
         color: "black",
         fontWeight: "700",
-        textAlign: "center",
-        height: 45,
         fontSize: 18,
-        textAlignVertical: "center"
+        textTransform: "uppercase",
     },
 
     startJourneyButton: {
@@ -197,10 +197,7 @@ const JourneyPageStyle = StyleSheet.create({
     startJourneyButtonText: {
         color: "white",
         fontWeight: "700",
-        textAlign: "center",
-        height: 45,
         fontSize: 18,
-        textAlignVertical: "center"
     }
 });
 

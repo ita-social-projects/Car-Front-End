@@ -5,7 +5,7 @@ import PreferencesService from "../../../../../api-service/preferences-service/P
 import UserPreferences from "../../../../../models/user/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
-import ChooseOptionComponent from "./ChooseOptionComponent";
+import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import PreferencesStyle from "./PreferencesStyle";
 
 export default function Preferences (props: any) {
@@ -67,18 +67,22 @@ export default function Preferences (props: any) {
                 </View>
             ) : (
                 <ScrollView style={PreferencesStyle.container}>
-                    <ChooseOptionComponent
-                        text={"Do you allow smoking in your car?"}
-                        value={isSmokingAllowed}
-                        onValueChanged={(value: any) =>
-                            setSmokingAllowed(value)
-                        }
-                    />
-                    <ChooseOptionComponent
-                        text={"Do you allow eating in your car?"}
-                        value={isEatingAllowed}
-                        onValueChanged={(value: any) => setEatingAllowed(value)}
-                    />
+                    <View style={PreferencesStyle.chooseOptionContainer}>
+                        <ChooseOption
+                            text={"Do you allow smoking in your car?"}
+                            value={isSmokingAllowed}
+                            onValueChanged={(value: any) =>
+                                setSmokingAllowed(value)
+                            }
+                        />
+                    </View>
+                    <View>
+                        <ChooseOption
+                            text={"Do you allow eating in your car?"}
+                            value={isEatingAllowed}
+                            onValueChanged={(value: any) => setEatingAllowed(value)}
+                        />
+                    </View>
                     <View style={PreferencesStyle.commentsContainer}>
                         <Text style={PreferencesStyle.commentsText}>
                             Comments

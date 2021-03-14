@@ -14,7 +14,7 @@ const JourneyCard = (props: any) => {
         <View>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate("Journey Page", {
+                    navigation.navigate("Journey Request Page", {
                         journeyId: journey?.id
                     });
                 }}

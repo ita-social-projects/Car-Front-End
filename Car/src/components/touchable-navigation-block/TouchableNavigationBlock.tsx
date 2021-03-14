@@ -1,8 +1,6 @@
-import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import {
     Image,
-    ImageSourcePropType,
     Text,
     TouchableOpacity,
     View
@@ -10,24 +8,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle";
 
-type ManageJourneys = {
-    CreateJourney: any;
-    SearchJourney: any;
-};
-
-interface PropsType {
-    navigation: StackNavigationProp<ManageJourneys>;
-    navigationName: any;
-    from: string;
-    to: string;
-    reverse: boolean;
-    width: number;
-    height: number;
-    blockName: string;
-    blockImage: ImageSourcePropType;
-}
-
-const TouchableNavigationBlock = (props: PropsType) => {
+const TouchableNavigationBlock = (props: any) => {
     return (
         <View>
             <TouchableOpacity
