@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Platform, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../models/stop/Stop";
 import User from "../../../../../models/user/User";
@@ -15,41 +15,86 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import StopType from "../../../../../models/stop/StopType";
 import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../components/navigation/Navigation";
+import CarService from "../../../../../api-service/car-service/CarService";
+import CarViewModel from "../../../../../models/car/CarViewModel";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
     const [isLoading, setLoading] = useState(true);
+    const [car, setCar] = useState<CarViewModel>(null);
 
     useEffect(() => {
         !isDriver && props.navigation.setOptions({ headerRight: () => (<View />) });
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
+            CarService.getById(res.data?.car?.id!).then((carRes) => setCar(carRes.data));
             setLoading(false);
         });
-    }, []);
+    }, [1]);
+
+    console.log(currentJourney?.car);
 
     const Separator = () => <Divider style={JourneyPageStyle.separator} />;
 
     const Organizer = () => (
-        <View style={JourneyPageStyle.userBlock}>
-            <View style={JourneyPageStyle.userImageBlock}>
-                <AvatarLogo user={currentJourney?.organizer} size={38.5} />
-            </View>
-            <View style={JourneyPageStyle.userInfoBlock}>
-                <Text style={JourneyPageStyle.userNameText}>
-                    {currentJourney?.organizer?.name}{" "}
-                    {currentJourney?.organizer?.surname}'s journey
-                </Text>
-                <View style={JourneyPageStyle.userSecondaryInfoBlock}>
-                    <Text style={JourneyPageStyle.userRoleText}>
-                        {currentJourney?.organizer?.position}
-                    </Text>
-                    <Text style={JourneyPageStyle.dateText}>
-                        {Moment(currentJourney?.departureTime).calendar()}
-                    </Text>
+        <>
+            <TouchableOpacity
+                style={JourneyPageStyle.userBlock}
+                onPress={() =>
+                    navigation.navigate("Applicant Page", {
+                        userId: currentJourney?.organizer?.id
+                    })
+                }
+            >
+                <View style={JourneyPageStyle.userImageBlock}>
+                    <AvatarLogo user={currentJourney?.organizer} size={38.5} />
                 </View>
+                <View style={JourneyPageStyle.userInfoBlock}>
+                    <Text style={JourneyPageStyle.userNameText}>
+                        {currentJourney?.organizer?.name}{" "}
+                        {currentJourney?.organizer?.surname}'s journey
+                    </Text>
+                    <View style={JourneyPageStyle.userSecondaryInfoBlock}>
+                        <Text style={JourneyPageStyle.userRoleText}>
+                            {currentJourney?.organizer?.position}
+                        </Text>
+                        <Text style={JourneyPageStyle.dateText}>
+                            {Moment(currentJourney?.departureTime).calendar()}
+                        </Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
+            <View style={JourneyPageStyle.driverBlockWhiteSpace} />
+        </>
+    );
+
+    const Car = () => (
+        <View style={JourneyPageStyle.carContainer}>
+            <View style={JourneyPageStyle.carAvatarContainer}>
+                {car?.imageId ? (
+                    <Image
+                        source={{
+                            uri: car?.imageId
+                        }}
+                        style={JourneyPageStyle.carAvatar}
+                    />
+                ) : (
+                    <Ionicons
+                        name={"car"}
+                        size={20}
+                        color="#414045"
+                    />
+                )}
+            </View>
+            <View style={JourneyPageStyle.carInfoContainer}>
+                <Text style={JourneyPageStyle.carName}>
+                    {car?.model?.brand?.name} {car?.model?.name}
+                </Text>
+                <Text style={JourneyPageStyle.carPlateNumber}>
+                    {car?.plateNumber}
+                </Text>
             </View>
         </View>
     );
@@ -57,7 +102,7 @@ const JourneyPage = ({ props }: any) => {
     const Applicant = (item: User) => (
         <>
             <TouchableOpacity
-                style={JourneyPageStyle.userBlock}
+                style={JourneyPageStyle.applicant}
                 onPress={() =>
                     navigation.navigate("Applicant Page", {
                         userId: item?.id
@@ -114,19 +159,17 @@ const JourneyPage = ({ props }: any) => {
     );
 
     const ApplicantsBlock = () => (
-        <View style={JourneyPageStyle.applicantsBlock}>
+        <>
             <Text style={JourneyPageStyle.applicantsHeader}>
                     SOFTSERVIANS {currentJourney?.participants?.length}/
                 {currentJourney?.countOfSeats}
             </Text>
-            <ScrollView onStartShouldSetResponder={() => true}>
-                {currentJourney?.participants.map((item, index) => (
-                    <View key={index}>
-                        {Applicant(item)}
-                    </View>
-                ))}
-            </ScrollView>
-        </View>
+            {currentJourney?.participants.map((item, index) => (
+                <View key={index}>
+                    {Applicant(item)}
+                </View>
+            ))}
+        </>
     );
 
     const ButtonsBlock = () => (
@@ -159,17 +202,26 @@ const JourneyPage = ({ props }: any) => {
     const journeyContent = () => (
         <View style={JourneyPageStyle.mainContainer}>
             {isLoading ? (
-                <Indicator
-                    size="large"
-                    color="#414045"
-                    text="Loading information..."
-                />
+                <View style={JourneyPageStyle.loadingContainer}>
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text="Loading information..."
+                    />
+                </View>
             ) : (
                 <View style={JourneyPageStyle.contentView}>
                     <Organizer />
-                    <StopsBlock />
                     <Separator />
-                    <ApplicantsBlock />
+
+                    <ScrollView onStartShouldSetResponder={() => true} style={{ height: 336 }}>
+
+                        <Car />
+                        <ApplicantsBlock />
+                        <StopsBlock />
+
+                    </ScrollView>
+                    <Separator />
                     <ButtonsBlock />
                 </View>
             )}
@@ -177,22 +229,22 @@ const JourneyPage = ({ props }: any) => {
     );
 
     return (
-        <>
+        <View style={JourneyPageStyle.pageContainer}>
+            <Text style={JourneyPageStyle.pageText}>
+                    Map implementation is in progress
+            </Text>
             <BottomPopup
                 style={JourneyPageStyle.bottomPopup}
-                snapPoints={Platform.OS === "ios" ? [
-                    "78%",
-                    "35%",
-                ] : [
-                    "88%",
-                    "40%",
+                snapPoints={[
+                    699,
+                    290,
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}
                 renderHeader={() => {}}
                 enabledInnerScrolling={false}
             />
-        </>
+        </View>
     );
 };
 

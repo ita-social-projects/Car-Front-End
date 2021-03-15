@@ -108,11 +108,13 @@ const JourneyRequestPage = (props: any) => {
     const journeyContent = () => (
         <View style={JourneyRequestPageStyle.mainContainer}>
             {isLoading ? (
-                <Indicator
-                    size="large"
-                    color="#414045"
-                    text="Loading information..."
-                />
+                <View style={JourneyRequestPageStyle.loadingContainer}>
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text="Loading information..."
+                    />
+                </View>
             ) : (
                 <View style={JourneyRequestPageStyle.contentView}>
                     <Organizer />
@@ -125,7 +127,11 @@ const JourneyRequestPage = (props: any) => {
     );
 
     return (
-        <>
+        <View style={JourneyRequestPageStyle.pageContainer}>
+            <Text style={JourneyRequestPageStyle.pageText}>
+                    Map implementation is in progress
+            </Text>
+
             <BottomPopup
                 style={JourneyRequestPageStyle.bottomPopup}
                 snapPoints={[
@@ -137,7 +143,7 @@ const JourneyRequestPage = (props: any) => {
                 renderHeader={() => {}}
                 enabledInnerScrolling={false}
             />
-        </>
+        </View>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     Bubble,
@@ -236,17 +236,12 @@ const Chat = (props: any) => {
                 <Spinner
                     visible={loading}
                     textContent={"Loading..."}
-                    textStyle={styles.spinnerTextStyle}
+                    color={"#414045"}
+                    textStyle={ChatStyle.spinnerTextStyle}
                 />
             }
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    spinnerTextStyle: {
-        color: "#FFF"
-    },
-});
 
 export default Chat;

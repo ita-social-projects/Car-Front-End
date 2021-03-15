@@ -14,7 +14,7 @@ import OkSearchResult from "../journey-activity/search-journey/search-results/ok
 import JourneyStyle from "../JourneyStartPageStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/journey-page/JourneyPageStyle";
-import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
+import MenuButton from "../../../components/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";

@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import { Switch } from "react-native-gesture-handler";
 import ChooseOptionStyle from "./ChooseOptionStyle";
 
 const ChooseOption = (props: any) => {

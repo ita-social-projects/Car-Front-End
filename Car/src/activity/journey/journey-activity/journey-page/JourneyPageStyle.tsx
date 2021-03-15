@@ -2,14 +2,69 @@ import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
 const JourneyPageStyle = StyleSheet.create({
-    container: {
-        flex: 1
+    pageContainer: {
+        flex: 1,
+        backgroundColor: "#88FF88",
+        alignItems: "center"
     },
 
-    item: {
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16
+    pageText: {
+        fontFamily: Font.ProximaNova.ExtraBold,
+        color: "#000000",
+    },
+
+    loadingContainer: {
+        height: 500,
+        backgroundColor: "#FFFFFF",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+
+    carContainer: {
+        paddingTop: 22,
+        paddingBottom: 30,
+        paddingLeft: 12,
+        flexDirection: "row"
+    },
+
+    carInfoContainer: {
+        paddingLeft: 10,
+    },
+
+    carName: {
+        color: "#000000",
+        fontFamily: Font.OpenSans.Bold,
+        fontSize: 13,
+        lineHeight: 16,
+        paddingBottom: 4,
+        paddingTop: 1.25,
+    },
+
+    carPlateNumber: {
+        color: "#414045",
+        fontFamily: Font.OpenSans.Regular,
+        fontSize: 11,
+        lineHeight: 16,
+    },
+
+    carAvatar: {
+        width: 38.5,
+        height: 38.5,
+        borderRadius: 38.5,
+    },
+
+    carAvatarContainer: {
+        width: 36,
+        height: 36,
+        alignItems: "center",
+        justifyContent: "center"
+
+    },
+
+    applicant: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        paddingVertical: 14.75
     },
 
     title: {
@@ -55,7 +110,11 @@ const JourneyPageStyle = StyleSheet.create({
 
     userBlock: {
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+    },
+
+    driverBlockWhiteSpace: {
+        height: 27,
     },
 
     userImageBlock: {
@@ -113,18 +172,11 @@ const JourneyPageStyle = StyleSheet.create({
         backgroundColor: "#C1C1C5",
         height: 1,
         width: "100%",
-        marginBottom: 7,
-        marginTop: 7
     },
 
     ellipsisButton: {
         alignItems: "flex-end",
         justifyContent: "center"
-    },
-
-    applicantsBlock: {
-        marginTop: 15,
-        height: 300,
     },
 
     applicantsHeader: {
@@ -133,7 +185,6 @@ const JourneyPageStyle = StyleSheet.create({
         fontSize: 16,
         justifyContent: "flex-start",
         marginBottom: 10,
-        marginTop: 10
     },
 
     stopsBlock: {
@@ -165,8 +216,8 @@ const JourneyPageStyle = StyleSheet.create({
     buttonsBlock: {
         flexDirection: "row",
         justifyContent: "flex-end",
-        marginTop: 20,
-        marginBottom: 10,
+        marginTop: 16,
+        marginBottom: 16,
     },
 
     messageAllButton: {

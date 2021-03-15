@@ -3,6 +3,24 @@ import Font from "../../../../data/fonts/Font";
 
 const JourneyRequestPageStyle = StyleSheet.create({
 
+    pageContainer: {
+        flex: 1,
+        backgroundColor: "#88FF88",
+        alignItems: "center"
+    },
+
+    pageText: {
+        fontFamily: Font.ProximaNova.ExtraBold,
+        color: "#000000",
+    },
+
+    loadingContainer: {
+        height: 300,
+        backgroundColor: "#FFFFFF",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+
     contentView: {
         width: "90%",
         alignSelf: "center"
