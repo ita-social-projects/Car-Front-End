@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCardStyle from "./JourneyCardStyle";
@@ -6,18 +6,36 @@ import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import Journey from "../../../models/Journey";
+import AuthContext from "../auth/AuthContext";
 
 const JourneyCard = (props: any) => {
     const journey: Journey = props.journey;
+    const { user } = useContext(AuthContext);
+    const [isDriver, setDriver] = useState(false);
+    const [isPassanger, setPassanger] = useState(false);
+
+    useEffect (() => {
+        journey?.participants.forEach((u) => u?.id == user?.id ? setPassanger(true) : () => {});
+        setDriver(journey?.organizer?.id == user?.id);
+    }, []);
+
+    const navigateJourney = () => {
+        if (!isPassanger && !isDriver) {
+            navigation.navigate("Journey Request Page", {
+                journeyId: journey?.id
+            });
+        } else {
+            navigation.navigate("Journey Page", {
+                journeyId: journey?.id,
+                isDriver
+            });
+        }
+    };
 
     return (
         <View>
             <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("Journey Request Page", {
-                        journeyId: journey?.id
-                    });
-                }}
+                onPress={navigateJourney}
             >
                 <View style={JourneyCardStyle.component}>
                     <View style={JourneyCardStyle.driverInfoBlock}>

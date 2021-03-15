@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
@@ -9,11 +9,13 @@ import Moment from "moment";
 import { Divider } from "react-native-elements";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
-import * as navigation from "../../../../components/navigation/Navigation";
+import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
+import AuthContext from "../../../../components/auth/AuthContext";
 
 const JourneyRequestPage = (props: any) => {
 
     const [currentJourney, setJourney] = useState({} as Journey);
+    const { user } = useContext(AuthContext);
     const { journeyId } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [isBaggaage, setBaggage] = useState(false);
@@ -24,7 +26,16 @@ const JourneyRequestPage = (props: any) => {
             setJourney(res.data);
             setLoading(false);
         });
-    }, []);
+    }, [1]);
+
+    const sendRequest = () => NotificationsService.addNotification(
+        {
+            senderId: user?.id,
+            receiverId: currentJourney?.organizer?.id!,
+            type: 1,
+            jsonData: "${\"title:\" \"New Applicant\", \"comments\": \"{comments}\", \"hasLuggage\": \"{isBaggage}\"}",
+        }
+    ).then((res) => console.log(res));
 
     const Separator = () => <Divider style={JourneyRequestPageStyle.separator} />;
 
@@ -84,9 +95,7 @@ const JourneyRequestPage = (props: any) => {
             <TouchableOpacity
                 style={JourneyRequestPageStyle.confirmButton}
                 onPress={() =>
-                    navigation.navigate("Journey Page", {
-                        journeyId: currentJourney?.id
-                    })
+                    sendRequest()
                 }
             >
                 <Text style={JourneyRequestPageStyle.confirmButtonText}>
@@ -120,8 +129,8 @@ const JourneyRequestPage = (props: any) => {
             <BottomPopup
                 style={JourneyRequestPageStyle.bottomPopup}
                 snapPoints={[
+                    400,
                     120,
-                    400
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}

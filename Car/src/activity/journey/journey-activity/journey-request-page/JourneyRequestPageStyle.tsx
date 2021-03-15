@@ -9,11 +9,12 @@ const JourneyRequestPageStyle = StyleSheet.create({
     },
 
     bottomPopup: {
-        backgroundColor: "white",
+        backgroundColor: "white"
     },
 
     mainContainer: {
         backgroundColor: "white",
+        height: 400,
     },
 
     dateText: {
