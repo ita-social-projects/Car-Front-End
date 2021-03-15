@@ -9,7 +9,6 @@ let SignalRHubConnection: HubConnection;
         .withAutomaticReconnect()
         .build();
 
-    SignalRubConnectionFunc.serverTimeoutInMilliseconds = 900000;
     SignalRubConnectionFunc!.start();
     SignalRHubConnection = SignalRubConnectionFunc;
 })();

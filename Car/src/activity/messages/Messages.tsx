@@ -31,11 +31,11 @@ const Messages = (props: any) => {
             const newData = masterDataSource.filter((item: any) => {
                 const itemData =
                     item.journey.organizer.name +
-                    " " +
-                    item.journey.organizer.surname
+                        " " +
+                        item.journey.organizer.surname
                         ? item.journey.organizer.name.toUpperCase() +
-                          " " +
-                          item.journey.organizer.surname.toUpperCase()
+                        " " +
+                        item.journey.organizer.surname.toUpperCase()
                         : "".toUpperCase();
                 const textData = text.toUpperCase();
 

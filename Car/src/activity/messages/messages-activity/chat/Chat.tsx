@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     Bubble,
@@ -12,79 +12,113 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import * as navigation from "../../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
-import SignalRHubConnection from "../../../../../api-service/SignalRHubConnection";
+import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
+import APIConfig from "../../../../../api-service/APIConfig";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
+    const [connection, setConnection] = useState<HubConnection>();
+    const [loading, setSpinner] = useState(true);
 
     useEffect(() => {
+        (() => {
+            const newConnection = new HubConnectionBuilder()
+                .withUrl(APIConfig.URL + "signalr/")
+                .withAutomaticReconnect()
+                .build();
+
+            setConnection(newConnection);
+        })();
         props.navigation.setOptions({ headerTitle: props.route.params.header });
-        ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
-            props.navigation.setOptions({ headerTitle: props.route.params.header });
-
-            let tempChat: any = [];
-
-            res.data?.messages?.forEach((element: any) => {
-                const messageToAdd = {
-                    _id: element?.id,
-                    text: element?.text,
-                    createdAt: element?.createdAt,
-                    user: {
-                        _id: element?.senderId?.toString(),
-                        name: element?.sender?.name + " " + element?.sender?.surname
-                    }
-                };
-
-                tempChat.push(messageToAdd);
-            });
-            setMessages(tempChat);
-        });
-
-        SignalRHubConnection!.on("RecieveMessage", (receivedMessage: any) => {
-            setMessages((previousMessages) =>
-                GiftedChat.append(
-                    previousMessages as any,
-                    {
-                        _id: receivedMessage.id,
-                        text: receivedMessage.text,
-                        createdAt: receivedMessage.createdAt,
-                        user: {
-                            _id: receivedMessage.senderId?.toString(),
-                            name: receivedMessage?.sender?.name + " " + receivedMessage?.sender?.surname
-                        }
-                    } as any
-                )
-            );
-        });
-        SignalRHubConnection.invoke(
-            "EnterToGroup",
-            props.route.params.chatId.toString()
-        ).catch((err: any) => console.log(err));
-        setMessage("");
-
-        return () => {
-            SignalRHubConnection?.invoke(
-                "LeaveTheGroup",
-                props.route.params.chatId.toString()
-            );
-        };
     }, []);
 
-    const onSend = () => {
-        const messageToSend = message.trim();
+    useEffect(() => {
+        if (connection) {
+            connection.start().then(() => {
+                connection.invoke(
+                    "EnterToGroup",
+                    props.route.params.chatId.toString()
+                ).catch((err: any) => console.log(err));
+            });
 
-        if (messageToSend != "") {
-            SignalRHubConnection!
-                .invoke("SendMessageToGroup", {
-                    Text: messageToSend,
-                    SenderId: user?.id,
-                    ChatId: props.route.params.chatId
-                })
-                .catch((err: any) => console.log(err));
+            ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+
+                let tempChat: any = [];
+
+                res.data?.messages?.forEach((element: any) => {
+                    const messageToAdd = {
+                        _id: element?.id,
+                        text: element?.text,
+                        createdAt: element?.createdAt,
+                        user: {
+                            _id: element?.senderId?.toString(),
+                            name: element?.sender?.name + " " + element?.sender?.surname
+                        }
+                    };
+
+                    tempChat.push(messageToAdd);
+                });
+                setMessages(tempChat);
+            }).then(() => {
+                setSpinner(false);
+            });
+            console.log("Use Effect has refreshed");
+
+            connection.onreconnected(() => {
+                connection.invoke(
+                    "EnterToGroup",
+                    props.route.params.chatId.toString()
+                ).catch((err: any) => console.log(err));
+            });
+
+            connection!.on("RecieveMessage", (receivedMessage: any) => {
+                setMessages((previousMessages) =>
+                    GiftedChat.append(
+                        previousMessages as any,
+                        {
+                            _id: receivedMessage.id,
+                            text: receivedMessage.text,
+                            createdAt: receivedMessage.createdAt,
+                            user: {
+                                _id: receivedMessage.senderId?.toString(),
+                                name: receivedMessage?.sender?.name + " " + receivedMessage?.sender?.surname
+                            }
+                        } as any
+                    )
+                );
+            });
             setMessage("");
+
+            return () => {
+                connection?.invoke(
+                    "LeaveTheGroup",
+                    props.route.params.chatId.toString()
+                );
+            };
         }
+    }, [connection]);
+
+    const onSend = () => {
+        if (connection) {
+            const messageToSend = message.trim();
+
+            if (messageToSend != "") {
+                connection!
+                    .invoke("SendMessageToGroup", {
+                        Text: messageToSend,
+                        SenderId: user?.id,
+                        ChatId: props.route.params.chatId
+                    })
+                    .catch((err: any) => console.log(err));
+                setMessage("");
+            }
+        } else {
+            console.log("No connection yet");
+        }
+
     };
 
     const renderBubble = (props: any) => {
@@ -180,7 +214,6 @@ const Chat = (props: any) => {
                 placeholder="Aa"
                 messagesContainerStyle={{ paddingBottom: 10 }}
                 renderTime={() => <View />}
-                maxInputLength={500}
                 messages={messages as any[]}
                 onInputTextChanged={setMessage}
                 text={message}
@@ -197,9 +230,23 @@ const Chat = (props: any) => {
                 minComposerHeight={44}
                 maxComposerHeight={120}
                 renderInputToolbar={renderInputToolbar}
+                maxInputLength={500}
             />
+            {
+                <Spinner
+                    visible={loading}
+                    textContent={"Loading..."}
+                    textStyle={styles.spinnerTextStyle}
+                />
+            }
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    spinnerTextStyle: {
+        color: "#FFF"
+    },
+});
 
 export default Chat;
