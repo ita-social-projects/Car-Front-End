@@ -19,6 +19,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState({} as Journey);
     const { journeyId } = props.route.params;
+    const { isDriver } = props.route.params;
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -146,11 +147,11 @@ const JourneyPage = ({ props }: any) => {
                         MESSAGE ALL
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={JourneyPageStyle.startJourneyButton}>
+            {isDriver && (<TouchableOpacity style={JourneyPageStyle.startJourneyButton}>
                 <Text style={JourneyPageStyle.startJourneyButtonText}>
                         START THE JOURNEY
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity>)}
         </View>
     );
 

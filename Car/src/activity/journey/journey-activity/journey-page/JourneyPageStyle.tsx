@@ -164,7 +164,7 @@ const JourneyPageStyle = StyleSheet.create({
 
     buttonsBlock: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "flex-end",
         marginTop: 20,
         marginBottom: 10,
     },
@@ -192,6 +192,7 @@ const JourneyPageStyle = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 51,
+        marginLeft: Dimensions.get("screen").width * 0.045,
     },
 
     startJourneyButtonText: {
