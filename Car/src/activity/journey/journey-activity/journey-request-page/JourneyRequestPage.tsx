@@ -140,7 +140,7 @@ const JourneyRequestPage = (props: any) => {
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}
-                renderHeader={() => {}}
+                renderHeader={() => <></>}
                 enabledInnerScrolling={false}
             />
         </View>

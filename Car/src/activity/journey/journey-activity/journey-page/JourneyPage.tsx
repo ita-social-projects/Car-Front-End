@@ -19,14 +19,14 @@ import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 
 const JourneyPage = ({ props }: any) => {
-    const [currentJourney, setJourney] = useState({} as Journey);
+    const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
 
     useEffect(() => {
-        !isDriver && props.navigation.setOptions({ headerRight: () => (<View />) });
+        !isDriver && props.navigation.setOptions({ headerRight: () => <View /> });
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             CarService.getById(res.data?.car?.id!).then((carRes) => setCar(carRes.data));
@@ -241,7 +241,7 @@ const JourneyPage = ({ props }: any) => {
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}
-                renderHeader={() => {}}
+                renderHeader={() => <></>}
                 enabledInnerScrolling={false}
             />
         </View>

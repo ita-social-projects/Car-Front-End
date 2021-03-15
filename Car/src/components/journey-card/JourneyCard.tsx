@@ -15,7 +15,7 @@ const JourneyCard = (props: any) => {
     const [isPassanger, setPassanger] = useState(false);
 
     useEffect (() => {
-        journey?.participants.forEach((u) => u?.id == user?.id ? setPassanger(true) : () => {});
+        journey?.participants.forEach((u) => u?.id == user?.id ? setPassanger(true) : () => <></>);
         setDriver(journey?.organizer?.id == user?.id);
     }, []);
 

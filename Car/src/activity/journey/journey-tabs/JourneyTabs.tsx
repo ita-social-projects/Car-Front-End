@@ -31,6 +31,8 @@ const JourneyTabs = () => {
     const layoutOpacity = useState(new Animated.Value(0))[0];
     const journeyOpacity = useState(new Animated.Value(1))[0];
 
+    const noAction = () => <></>;
+
     const sleep = (milliseconds: number) =>
         new Promise(resolve => setTimeout(resolve, milliseconds));
 
@@ -93,10 +95,10 @@ const JourneyTabs = () => {
 
     const moreOptionsContent = () => (
         <View style={JourneyPageStyle.panel}>
-            <MenuButton text="Add Stop" onPress={() => {}} />
-            <MenuButton text="Edit the Journey" onPress={() => {}} />
-            <MenuButton text="Invite Softservian" onPress={() => {}} />
-            <MenuButton text="Cancel the Journey" onPress={() => {}} />
+            <MenuButton text="Add Stop" onPress={noAction} />
+            <MenuButton text="Edit the Journey" onPress={noAction} />
+            <MenuButton text="Invite Softservian" onPress={noAction} />
+            <MenuButton text="Cancel the Journey" onPress={noAction} />
         </View>
     );
 
