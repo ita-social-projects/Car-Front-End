@@ -14,12 +14,13 @@ import OkSearchResult from "../journey-activity/search-journey/search-results/ok
 import JourneyStyle from "../JourneyStartPageStyle";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/journey-page/JourneyPageStyle";
-import MenuButton from "../../../components/bottom-popup/menu-button/MenuButton";
+import MenuButton from "../../../components/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
 import Chat from "../../messages/messages-activity/chat/Chat";
+import JourneyRequestPage from "../journey-activity/journey-request-page/JourneyRequestPage";
 
 const StackTabs = createStackNavigator();
 
@@ -29,6 +30,8 @@ const JourneyTabs = () => {
 
     const layoutOpacity = useState(new Animated.Value(0))[0];
     const journeyOpacity = useState(new Animated.Value(1))[0];
+
+    const noAction = () => <></>;
 
     const sleep = (milliseconds: number) =>
         new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -92,10 +95,10 @@ const JourneyTabs = () => {
 
     const moreOptionsContent = () => (
         <View style={JourneyPageStyle.panel}>
-            <MenuButton text="Add Stop" onPress={() => {}} />
-            <MenuButton text="Edit the Journey" onPress={() => {}} />
-            <MenuButton text="Invite Softservian" onPress={() => {}} />
-            <MenuButton text="Cancel the Journey" onPress={() => {}} />
+            <MenuButton text="Add Stop" onPress={noAction} />
+            <MenuButton text="Edit the Journey" onPress={noAction} />
+            <MenuButton text="Invite Softservian" onPress={noAction} />
+            <MenuButton text="Cancel the Journey" onPress={noAction} />
         </View>
     );
 
@@ -210,13 +213,14 @@ const JourneyTabs = () => {
                     }}
                 >
                     {(props: any) => {
+
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout, { opacity: layoutOpacity }]} />
                                 <Animated.View style={[HeaderStyle.popUp, { opacity: journeyOpacity }]}>
                                     <JourneyPage props={props} />
                                 </Animated.View>
-                                <BottomPopup
+                                {props.route.params.isDriver && <BottomPopup
                                     refForChild={moreOptionsRef}
                                     snapPoints={[0, 280]}
                                     renderContent={moreOptionsContent}
@@ -224,11 +228,39 @@ const JourneyTabs = () => {
                                     renderHeader={moreOptionsHeader}
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
-                                />
+                                />}
                             </>
                         );
                     }}
                 </StackTabs.Screen>
+                <StackTabs.Screen
+                    name="Journey Request Page"
+                    component={JourneyRequestPage}
+                    options={{
+                        title: "Confirm Journey",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                style={HeaderStyle.backButtonOpacity}
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                            >
+                                <Ionicons
+                                    name={"chevron-back-outline"}
+                                    size={35}
+                                    color={"#02A2CF"}
+                                />
+                                <View style={HeaderStyle.backButtonTextView}>
+                                    <Text style={HeaderStyle.buttonText}>
+                                        Back
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
+                />
                 <StackTabs.Screen
                     name="OK Search Result"
                     component={OkSearchResult}

@@ -20,7 +20,11 @@ const ChatStyle = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingBottom: 10
-    }
+    },
+
+    spinnerTextStyle: {
+        color: "#414045"
+    },
 });
 
 export default ChatStyle;

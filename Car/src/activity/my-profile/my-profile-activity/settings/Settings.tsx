@@ -201,7 +201,7 @@ const Settings = (props: any) => {
                     </View>
                     <Animated.View style={isVisible && [SettingsStyle.layout, { opacity }]} />
                     <BottomPopup
-                        snapPoints={[0, user?.imageId != null ? 188 : 143]}
+                        snapPoints={[0, user?.imageId != null ? 216 : 171]}
                         refForChild={moreOptionsRef}
                         renderContent={moreOptionsContent}
                         initialSnap={0}
