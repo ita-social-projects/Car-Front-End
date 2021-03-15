@@ -211,13 +211,14 @@ const JourneyTabs = () => {
                     }}
                 >
                     {(props: any) => {
+
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout, { opacity: layoutOpacity }]} />
                                 <Animated.View style={[HeaderStyle.popUp, { opacity: journeyOpacity }]}>
                                     <JourneyPage props={props} />
                                 </Animated.View>
-                                <BottomPopup
+                                {props.route.params.isDriver && <BottomPopup
                                     refForChild={moreOptionsRef}
                                     snapPoints={[0, 280]}
                                     renderContent={moreOptionsContent}
@@ -225,7 +226,7 @@ const JourneyTabs = () => {
                                     renderHeader={moreOptionsHeader}
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
-                                />
+                                />}
                             </>
                         );
                     }}

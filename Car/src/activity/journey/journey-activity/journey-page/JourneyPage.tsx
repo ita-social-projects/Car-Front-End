@@ -23,6 +23,7 @@ const JourneyPage = ({ props }: any) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
+        !isDriver && props.navigation.setOptions({ headerRight: () => (<View />) });
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             setLoading(false);
