@@ -10,6 +10,11 @@ function Input (props: any) {
             <View style={CarTextInputStyle.container}>
                 <Text style={CarTextInputStyle.requiredPointer}>*</Text>
                 <TextInput
+                    onChangeText={(text: any) =>{
+                        props.onChangeText(text);
+                        console.log(text);
+                    }}
+                    placeholder={props.placeholder}
                     style={[
                         CarTextInputStyle.textInputStyle,
                         props.error && { borderColor: "red" }
@@ -26,25 +31,18 @@ function Input (props: any) {
 }
 
 function CarTextInput (props: any) {
-    const { handleSubmit, control, errors } = useForm();
+    const { control } = useForm();
 
     return (
         <Controller
             control={control}
             rules={props.rules}
-            defaultValue=""
             name="name"
-            render={({ onChange, value }) => (
+            defaultValue=""
+            render={() => (
                 <Input
-                    onChangeText={(text: string) => {
-                        onChange(text);
-                        props.onChangeText(text, Boolean(errors?.name));
-                    }}
-                    onBlur={handleSubmit(() => {})}
-                    value={value}
+                    onChangeText={props.onChangeText}
                     placeholder={props.placeHolder}
-                    error={errors?.name}
-                    errorText={errors?.name?.message}
                 />
             )}
         />

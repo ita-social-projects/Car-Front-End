@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
     ActivityIndicator,
-    Alert,
     Image,
-    KeyboardAvoidingView,
-    Platform,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -25,6 +23,7 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
+import { ScrollView } from "react-native-gesture-handler";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
@@ -82,7 +81,7 @@ const AddCars = () => {
             plateNumber === undefined ||
             plateNumber.length < 4 ||
             plateNumber.length > 10 ||
-            !plateNumber.match(/^[A-Za-zА-Яа-я0-9-]+$/)
+            !plateNumber.match(/^[A-Za-z0-9-]+$/)
         ) {
             showAlert("Plate number is not valid!");
 
@@ -122,14 +121,16 @@ const AddCars = () => {
         });
     };
 
+    let ssHanychyna = "";
     const saveCarHandle = async () => {
         setLoading(true);
         const formData = new FormData();
 
+        ssHanychyna = "GGGG";
         formData.append("ownerId", user?.id);
         formData.append("modelId", Number(selectedModel?.value));
         formData.append("color", Number(selectedColor?.value));
-        formData.append("plateNumber", plateNumber);
+        formData.append("plateNumber", ssHanychyna);
         if (photo !== null && photo !== undefined) {
             formData.append("image", {
                 name: photo.fileName,
@@ -173,10 +174,8 @@ const AddCars = () => {
         : null;
 
     return (
-        <KeyboardAvoidingView
+        <View
             style={AddCarsStyle.wrapper}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={40}
         >
             <View style={AddCarsStyle.carAvatarContainer}>
                 {photo && (
@@ -196,7 +195,7 @@ const AddCars = () => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={AddCarsStyle.inputsContainer}>
+            <ScrollView style={AddCarsStyle.inputsContainer}>
                 <View style={AddCarsStyle.dropDownContainer}>
                     <CarDropDownPicker
                         style={AddCarsStyle.dropDownPicker}
@@ -252,29 +251,7 @@ const AddCars = () => {
                         }
                     />
                     <CarTextInput
-                        rules={{
-                            required: {
-                                value: true,
-                                message: "Plate number is required"
-                            },
-                            minLength: {
-                                value: 4,
-                                message: "Min length is 4"
-                            },
-                            maxLength: {
-                                value: 10,
-                                message: "Max length is 10"
-                            },
-                            pattern: {
-                                value: /^[A-Za-z0-9-]+$/,
-                                message:
-                                    "This field must contain 4-10 characters, including numbers, " +
-                                    "letters, hyphens"
-                            }
-                        }}
-                        onChangeText={(text: string) => {
-                            setPlateNumber(text);
-                        }}
+                        onChangeText={setPlateNumber}
                         placeHolder="Plate number"
                     />
                 </View>
@@ -306,8 +283,8 @@ const AddCars = () => {
                         )}
                     </TouchableOpacity>
                 </View>
-            </View>
-        </KeyboardAvoidingView>
+            </ScrollView>
+        </View>
     );
 };
 
