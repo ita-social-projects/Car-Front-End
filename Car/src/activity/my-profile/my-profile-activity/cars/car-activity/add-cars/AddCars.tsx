@@ -121,16 +121,14 @@ const AddCars = () => {
         });
     };
 
-    let ssHanychyna = "";
     const saveCarHandle = async () => {
         setLoading(true);
         const formData = new FormData();
 
-        ssHanychyna = "GGGG";
         formData.append("ownerId", user?.id);
         formData.append("modelId", Number(selectedModel?.value));
         formData.append("color", Number(selectedColor?.value));
-        formData.append("plateNumber", ssHanychyna);
+        formData.append("plateNumber", plateNumber);
         if (photo !== null && photo !== undefined) {
             formData.append("image", {
                 name: photo.fileName,

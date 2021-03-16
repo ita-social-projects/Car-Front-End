@@ -12,7 +12,6 @@ function Input (props: any) {
                 <TextInput
                     onChangeText={(text: any) =>{
                         props.onChangeText(text);
-                        console.log(text);
                     }}
                     placeholder={props.placeholder}
                     style={[
