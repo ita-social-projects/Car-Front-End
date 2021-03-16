@@ -70,7 +70,7 @@ const SettingsStyle = StyleSheet.create({
 
     sepataror: {
         height: 1,
-        backgroundColor: "#C1C1C5",
+        backgroundColor: Platform.OS === "ios" ? "#888888" : "#C1C1C5",
         marginHorizontal: 10,
     },
 
@@ -84,7 +84,7 @@ const SettingsStyle = StyleSheet.create({
         width: Dimensions.get("screen").width,
         position: "absolute",
         backgroundColor: "#000000",
-        zIndex: 50,
+        zIndex: Platform.OS === "ios" ? -1 : 50,
     }
 });
 

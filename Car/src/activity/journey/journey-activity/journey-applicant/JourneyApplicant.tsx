@@ -30,9 +30,11 @@ const JourneyApplicant = (props: any) => {
                 />
             ) : (
                 <ScrollView>
+                    <View style={JourneyApplicantStyle.avatarContainer}>
+                        <AvatarLogo user={user} size={105} />
+                    </View>
                     <View style={JourneyApplicantStyle.topContainer}>
-                        <AvatarLogo user={user} size={49} />
-                        <View style={JourneyApplicantStyle.userInformation}>
+                        <View >
                             <Text style={JourneyApplicantStyle.userName}>
                                 {user?.name + " " + user?.surname}
                             </Text>

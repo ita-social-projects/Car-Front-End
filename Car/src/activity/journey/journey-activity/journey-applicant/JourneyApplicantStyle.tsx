@@ -5,13 +5,19 @@ const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: "#FFFFFF",
-        paddingLeft: 20,
-        paddingTop: 36,
+        paddingHorizontal: 23,
+        paddingTop: 22.5,
     },
 
     topContainer: {
         height: 116,
         flexDirection: "row"
+    },
+
+    avatarContainer: {
+        paddingBottom: 23.5,
+        alignItems: "center",
+        justifyContent: "center",
     },
 
     userAvatar: {
@@ -20,12 +26,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         borderRadius: 50,
         borderWidth: 3,
         borderColor: "#EEEEEE"
-    },
-
-    userInformation: {
-        marginLeft: 15,
-        fontFamily: Font.ProximaNova.Bold,
-        fontWeight: "bold"
     },
 
     userName: {
@@ -51,8 +51,6 @@ const JourneyApplicantStyle = StyleSheet.create({
 
     bottomContainer: {
         backgroundColor: "#FFFFFF",
-        paddingRight: 24,
-        paddingLeft: 4,
         paddingTop: 13
     },
 

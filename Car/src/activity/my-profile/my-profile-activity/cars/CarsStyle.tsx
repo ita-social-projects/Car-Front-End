@@ -39,8 +39,6 @@ const CarsStyle = StyleSheet.create({
         width: 38.5,
         height: 38.5,
         borderRadius: 38.5,
-        borderWidth: 3,
-        borderColor: "#EEEEEE"
     }
 });
 

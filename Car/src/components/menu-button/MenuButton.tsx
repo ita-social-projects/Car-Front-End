@@ -38,7 +38,7 @@ const MenuButton = (props: any) => {
                     <View style={MenuButtonStyle.container}>
                         <Text
                             style={[
-                                MenuButtonStyle.panelButton,
+                                MenuButtonStyle.panelButtonTitle,
                                 { color: colorText }
                             ]}
                         >
