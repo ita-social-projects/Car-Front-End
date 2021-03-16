@@ -9,6 +9,7 @@ import UserService from "../../../../../api-service/user-service/UserService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BottomSheet } from "react-native-elements";
+import RNRestart from "react-native-restart";
 
 const Settings = (props: any) => {
 
@@ -16,6 +17,8 @@ const Settings = (props: any) => {
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
     const [isRefreshing, setRefreshing] = useState(false);
+
+    const { Popup } = require("popup-ui");
 
     const opacity = useState(new Animated.Value(0))[0];
 
@@ -100,6 +103,18 @@ const Settings = (props: any) => {
 
             UserService.getUser(user!.id).then((res) =>
                 AsyncStorage.setItem("user", JSON.stringify(res.data)));
+        });
+
+        Popup.show({
+            type: "Success",
+            title: "Upload complete!",
+            button: true,
+            textBody: "Your photo has been successfully updated",
+            buttonText: "Back to App",
+            callback: () => {
+                Popup.hide();
+                RNRestart.Restart();
+            }
         });
     };
 
@@ -200,18 +215,17 @@ const Settings = (props: any) => {
                         </TouchableNavigationCard>
                     </View>
                     <Animated.View style={isVisible && [SettingsStyle.layout, { opacity }]} />
-                    <BottomPopup
-                        snapPoints={[0, user?.imageId != null ? 216 : 171]}
-                        refForChild={moreOptionsRef}
-                        renderContent={moreOptionsContent}
-                        initialSnap={0}
-                        renderHeader={moreOptionsHeader}
-                        enabledInnerScrolling={false}
-                        onCloseEnd={closeHandle}
-                    />
                 </View>
             </ScrollView>
-
+            <BottomPopup
+                snapPoints={[0, user?.imageId != null ? 188 : 143]}
+                refForChild={moreOptionsRef}
+                renderContent={moreOptionsContent}
+                initialSnap={0}
+                renderHeader={moreOptionsHeader}
+                enabledInnerScrolling={false}
+                onCloseEnd={closeHandle}
+            />
         </>
     );
 };

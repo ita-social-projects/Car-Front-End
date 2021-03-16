@@ -250,7 +250,11 @@ const JourneyPageStyle = StyleSheet.create({
         color: "white",
         fontWeight: "700",
         fontSize: 18,
-    }
+    },
+
+    scrollBlock: {
+        height: 336
+    },
 });
 
 export default JourneyPageStyle;
