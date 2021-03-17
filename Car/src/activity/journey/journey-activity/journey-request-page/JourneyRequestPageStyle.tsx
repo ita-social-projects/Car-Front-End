@@ -144,6 +144,10 @@ const JourneyRequestPageStyle = StyleSheet.create({
         width: Dimensions.get("screen").width * 0.4
     },
 
+    pressedButton: {
+        opacity: 0.2,
+    },
+
     buttonBlock: {
         flexDirection: "row",
         justifyContent: "flex-end",

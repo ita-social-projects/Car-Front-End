@@ -18,6 +18,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -26,10 +27,19 @@ const JourneyPage = ({ props }: any) => {
     const { isPassenger } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
+    const [isRequested, setRequested] = useState(false);
 
     useEffect(() => {
         !isDriver && props.navigation.setOptions({ headerRight: () => <View /> });
         !isDriver && !isPassenger && props.navigation.setOptions({ headerTitle: "Request to Driver" });
+
+        (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
+            if (isReq == "1") {
+                setRequested(true);
+                (async () => (isDriver || isPassenger) && AsyncStorage.removeItem("journeyId" + journeyId))();
+            }
+        });
+
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             CarService.getById(res.data?.car?.id!).then((carRes) => setCar(carRes.data));
@@ -199,13 +209,14 @@ const JourneyPage = ({ props }: any) => {
             )}
             {!isDriver && !isPassenger && (
                 <TouchableOpacity
-                    style={JourneyPageStyle.requestButton}
+                    style={[JourneyPageStyle.requestButton, isRequested && JourneyPageStyle.pressedButton]}
                     onPress={() => navigation.navigate("Journey Request Page", {
                         journeyId: currentJourney?.id
                     })}
+                    disabled={isRequested}
                 >
                     <Text style={JourneyPageStyle.requestButtonText}>
-                        Request to driver
+                        {isRequested ? "Requested" : "Request to driver"}
                     </Text>
                 </TouchableOpacity>
             )}

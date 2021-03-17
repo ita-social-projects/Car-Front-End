@@ -11,6 +11,8 @@ import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
 import AuthContext from "../../../../components/auth/AuthContext";
+import * as navigation from "../../../../components/navigation/Navigation";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const JourneyRequestPage = (props: any) => {
 
@@ -18,6 +20,9 @@ const JourneyRequestPage = (props: any) => {
     const { user } = useContext(AuthContext);
     const { journeyId } = props.route.params;
     const [isLoading, setLoading] = useState(true);
+    const [isRequested, setRequested] = useState(true);
+
+    const { Popup } = require("popup-ui");
 
     let isLuggage = false;
     let comments = "";
@@ -25,7 +30,10 @@ const JourneyRequestPage = (props: any) => {
     useEffect(() => {
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
-            setLoading(false);
+            (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
+                setRequested(isReq == "1");
+                setLoading(false);
+            });
         });
     }, []);
 
@@ -42,7 +50,31 @@ const JourneyRequestPage = (props: any) => {
                 isLuggage +
                 "\"}",
             }
-        );
+        ).then((res) => {
+            if (res.status == 200) {
+                setRequested(true);
+                (async () => {
+                    await AsyncStorage.setItem(
+                        "journeyId" + currentJourney?.id,
+                        "1"
+                    );
+                })().then(() => showCongratulations());
+            }
+        });
+    };
+
+    const showCongratulations = () => {
+        Popup.show({
+            type: "Success",
+            title: "Complete!",
+            button: true,
+            textBody: "Your request has been sent to the driver",
+            buttonText: "Ok",
+            callback: () => {
+                Popup.hide();
+                navigation.goBack();
+            }
+        });
     };
 
     const Separator = () => <Divider style={JourneyRequestPageStyle.separator} />;
@@ -113,13 +145,14 @@ const JourneyRequestPage = (props: any) => {
     const ConfirmButton = () => (
         <View style={JourneyRequestPageStyle.buttonBlock}>
             <TouchableOpacity
-                style={JourneyRequestPageStyle.confirmButton}
+                style={[JourneyRequestPageStyle.confirmButton, isRequested && JourneyRequestPageStyle.pressedButton]}
                 onPress={() =>
                     sendRequest()
                 }
+                disabled={isRequested}
             >
                 <Text style={JourneyRequestPageStyle.confirmButtonText}>
-                        Confirm
+                    {isRequested ? "Requested" : "Confirm"}
                 </Text>
             </TouchableOpacity>
         </View>
