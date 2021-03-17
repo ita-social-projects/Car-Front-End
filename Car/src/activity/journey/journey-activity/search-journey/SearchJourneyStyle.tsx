@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
-const SearchJouneyStyle = StyleSheet.create({
+const SearchJourneyStyle = StyleSheet.create({
     container: {
         zIndex: 150,
         backgroundColor: "#FAFAFA"
@@ -83,4 +83,4 @@ const SearchJouneyStyle = StyleSheet.create({
     }
 });
 
-export default SearchJouneyStyle;
+export default SearchJourneyStyle;
