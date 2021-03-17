@@ -14,14 +14,14 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import ChatStyle from "./ChatStyle";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
-import Spinner from "react-native-loading-spinner-overlay";
+import Indicator from "../../../../components/activity-indicator/Indicator";
 
 const Chat = (props: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
     const [connection, setConnection] = useState<HubConnection>();
-    const [loading, setSpinner] = useState(true);
+    const [isLoading, setSpinner] = useState(true);
 
     useEffect(() => {
         (() => {
@@ -209,37 +209,37 @@ const Chat = (props: any) => {
 
     return (
         <View style={ChatStyle.chatWrapper}>
-            <GiftedChat
-                renderAvatar={(data) => renderUserAvatar(data)}
-                placeholder="Aa"
-                messagesContainerStyle={{ paddingBottom: 10 }}
-                renderTime={() => <View />}
-                messages={messages as any[]}
-                onInputTextChanged={setMessage}
-                text={message}
-                onSend={onSend}
-                scrollToBottom
-                alwaysShowSend
-                user={{
-                    _id: user?.id.toString()!,
-                    name: user?.name!
-                }}
-                renderBubble={renderBubble}
-                renderSend={renderSend}
-                minInputToolbarHeight={44}
-                minComposerHeight={44}
-                maxComposerHeight={120}
-                renderInputToolbar={renderInputToolbar}
-                maxInputLength={500}
-            />
-            {
-                <Spinner
-                    visible={loading}
-                    textContent={"Loading..."}
-                    color={"#414045"}
-                    textStyle={ChatStyle.spinnerTextStyle}
+            {isLoading ? (
+                <Indicator
+                    size="large"
+                    color="#414045"
+                    text="Loading information..."
                 />
-            }
+            ) : (
+                <GiftedChat
+                    renderAvatar={(data) => renderUserAvatar(data)}
+                    placeholder="Aa"
+                    messagesContainerStyle={{ paddingBottom: 10 }}
+                    renderTime={() => <View />}
+                    messages={messages as any[]}
+                    onInputTextChanged={setMessage}
+                    text={message}
+                    onSend={onSend}
+                    scrollToBottom
+                    alwaysShowSend
+                    user={{
+                        _id: user?.id.toString()!,
+                        name: user?.name!
+                    }}
+                    renderBubble={renderBubble}
+                    renderSend={renderSend}
+                    minInputToolbarHeight={44}
+                    minComposerHeight={44}
+                    maxComposerHeight={120}
+                    renderInputToolbar={renderInputToolbar}
+                    maxInputLength={500}
+                />
+            )}
         </View>
     );
 };

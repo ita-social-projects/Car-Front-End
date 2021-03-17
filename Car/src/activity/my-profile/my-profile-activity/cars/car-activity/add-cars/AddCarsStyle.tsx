@@ -10,7 +10,7 @@ const AddCarsStyle = StyleSheet.create({
         backgroundColor: "#C4C4C4",
         alignItems: "flex-end",
         justifyContent: "flex-end",
-        flex: 3
+        height: "40%"
     },
 
     carButtonUpload: {
@@ -32,13 +32,13 @@ const AddCarsStyle = StyleSheet.create({
     },
 
     inputsContainer: {
-        marginRight: 24,
-        marginLeft: 24,
-        flex: 6
+        height: "600%",
     },
 
     dropDownContainer: {
-        marginVertical: 24
+        marginVertical: 24,
+        marginRight: 24,
+        marginLeft: 24,
     },
 
     dropDownPicker: {
@@ -48,7 +48,10 @@ const AddCarsStyle = StyleSheet.create({
     saveButtonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        zIndex: 0
+        zIndex: 0,
+        marginBottom: 15,
+        marginRight: 24,
+        marginLeft: 24,
     },
 
     carButtonSave: {
