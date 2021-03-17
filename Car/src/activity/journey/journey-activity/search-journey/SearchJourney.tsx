@@ -22,8 +22,8 @@ function SearchJourney () {
     const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
     const [fromDirection, setFromDirection] = useState("Your location");
     const [isOpen, setOpen] = useState(false);
-    const [latitude, setLatitude] = useState<Number | undefined>(1);
-    const [longitude, setLongitude] = useState<Number | undefined>(1);
+    const [latitude, setLatitude] = useState<number | undefined>(1);
+    const [longitude, setLongitude] = useState<number | undefined>(1);
     const [isMapOpen, setMapOpen] = useState(100);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
@@ -87,7 +87,7 @@ function SearchJourney () {
                 <SearchJourneyMap
                     latitude={latitude}
                     longitude={longitude}
-                ></SearchJourneyMap>
+                />
                 <TouchableOpacity
                     style={
                         SearchJourneyStyle.confirmButton
@@ -140,7 +140,7 @@ function SearchJourney () {
                                 }}
                             />
                             {locations.map((item: any) => (
-                                <View key={item!.id}>
+                                <View key={item.id}>
                                     <TouchableCard
                                         cardName={item?.name}
                                         iconName={
@@ -150,23 +150,23 @@ function SearchJourney () {
                                         }
                                         angle="0"
                                         address={
-                                                item!.address?.street +
+                                                item.address?.street +
                                                 ", " +
-                                                item!.address?.city
+                                                item.address?.city
                                         }
                                         addressFontColor="#909095"
                                         onPress={() => {
                                             setFromDirection(
-                                                    item!.address?.street +
+                                                    item.address?.street +
                                                         ", " +
-                                                        item!.address?.city
+                                                        item.address?.city
                                             );
                                             setOpen(true);
                                             setLongitude(
-                                                    item!.address?.longitude
+                                                    item.address?.longitude
                                             );
                                             setLatitude(
-                                                    item!.address?.latitude
+                                                    item.address?.latitude
                                             );
                                         }}
                                         iconColor="#414045"
