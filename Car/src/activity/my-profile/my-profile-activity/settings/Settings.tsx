@@ -85,10 +85,6 @@ const Settings = (props: any) => {
         const updatedUser = new FormData();
 
         updatedUser.append("id", user?.id);
-        updatedUser.append("name", user?.name);
-        updatedUser.append("surname", user?.surname);
-        updatedUser.append("position", user?.position);
-        updatedUser.append("location", user?.location);
 
         if (photo !== null && photo !== undefined) {
             updatedUser.append("image", {
