@@ -268,6 +268,10 @@ const JourneyPageStyle = StyleSheet.create({
         textTransform: "uppercase"
     },
 
+    pressedButton: {
+        opacity: 0.2
+    },
+
     scrollBlock: {
         height: 336
     },

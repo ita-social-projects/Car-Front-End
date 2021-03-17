@@ -85,10 +85,6 @@ const Settings = (props: any) => {
         const updatedUser = new FormData();
 
         updatedUser.append("id", user?.id);
-        updatedUser.append("name", user?.name);
-        updatedUser.append("surname", user?.surname);
-        updatedUser.append("position", user?.position);
-        updatedUser.append("location", user?.location);
 
         if (photo !== null && photo !== undefined) {
             updatedUser.append("image", {
@@ -105,17 +101,31 @@ const Settings = (props: any) => {
                 AsyncStorage.setItem("user", JSON.stringify(res.data)));
         });
 
-        Popup.show({
-            type: "Success",
-            title: "Upload complete!",
-            button: true,
-            textBody: "Your photo has been successfully updated",
-            buttonText: "Back to App",
-            callback: () => {
-                Popup.hide();
-                RNRestart.Restart();
-            }
-        });
+        if (photo === null || photo === undefined) {
+            Popup.show({
+                type: "Success",
+                title: "Delete complete!",
+                button: true,
+                textBody: "Your photo has been successfully deleted",
+                buttonText: "Back to App",
+                callback: () => {
+                    Popup.hide();
+                    RNRestart.Restart();
+                }
+            });
+        } else {
+            Popup.show({
+                type: "Success",
+                title: "Upload complete!",
+                button: true,
+                textBody: "Your photo has been successfully updated",
+                buttonText: "Back to App",
+                callback: () => {
+                    Popup.hide();
+                    RNRestart.Restart();
+                }
+            });
+        }
     };
 
     const moreOptionsContent = () => (

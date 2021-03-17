@@ -21,7 +21,7 @@ const NotificationsService = {
         APIService.put(route + notificationId),
 
     addNotification: async (notification: any) =>
-        APIService.post(route + notification),
+        APIService.post(route, notification),
 };
 
 export default NotificationsService;
