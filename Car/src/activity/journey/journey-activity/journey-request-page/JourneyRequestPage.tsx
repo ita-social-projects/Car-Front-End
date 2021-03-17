@@ -42,7 +42,7 @@ const JourneyRequestPage = (props: any) => {
                 isLuggage +
                 "\"}",
             }
-        ).then((res) => console.log(res));
+        );
     };
 
     const Separator = () => <Divider style={JourneyRequestPageStyle.separator} />;
@@ -87,9 +87,9 @@ const JourneyRequestPage = (props: any) => {
                         numberOfLines={10}
                         value={text}
                         placeholder={"Any comments?"}
-                        onChangeText={(text) => {
-                            comments = text;
-                            setText(text);
+                        onChangeText={(fromInput) => {
+                            comments = fromInput;
+                            setText(fromInput);
                         }}
                     />
                     <Text style={JourneyRequestPageStyle.hintText}>
