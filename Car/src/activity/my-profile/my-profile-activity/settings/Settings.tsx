@@ -23,7 +23,7 @@ const Settings = (props: any) => {
     const opacity = useState(new Animated.Value(0))[0];
 
     const loadUser = () =>
-        UserService.getUser(user!.id).then((res) => setUser(res.data));
+        UserService.getUser(user.id).then((res) => setUser(res.data));
 
     useEffect(() => {
         loadUser();
@@ -94,10 +94,10 @@ const Settings = (props: any) => {
             });
         }
 
-        await UserService.updateUser(updatedUser).then((res) => {
-            console.log(res.status + " " + res.data);
+        await UserService.updateUser(updatedUser).then((response) => {
+            console.log(response.status + " " + response.data);
 
-            UserService.getUser(user!.id).then((res) =>
+            UserService.getUser(user.id).then((res) =>
                 AsyncStorage.setItem("user", JSON.stringify(res.data)));
         });
 

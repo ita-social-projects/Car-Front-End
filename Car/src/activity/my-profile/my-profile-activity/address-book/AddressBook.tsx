@@ -70,9 +70,9 @@ export default function AddressBook (props: any) {
                     <>
                         {locations.map((item: any) => {
                             return (
-                                <View key={item!.id}>
+                                <View key={item.id}>
                                     <TouchableNavigationCard
-                                        carId={item!.id}
+                                        carId={item.id}
                                         navigationName="EditAddress"
                                         cardName="Edit a Address"
                                         picture={
@@ -88,12 +88,12 @@ export default function AddressBook (props: any) {
                                         }
                                     >
                                         <Text style={AddressBookStyle.name}>
-                                            {item!.name}
+                                            {item.name}
                                         </Text>
                                         <Text style={AddressBookStyle.address}>
-                                            {item!.address?.street +
+                                            {item.address?.street +
                                                 ", " +
-                                                item!.address?.city}
+                                                item.address?.city}
                                         </Text>
                                     </TouchableNavigationCard>
                                 </View>
