@@ -18,24 +18,32 @@ const JourneyRequestPage = (props: any) => {
     const { user } = useContext(AuthContext);
     const { journeyId } = props.route.params;
     const [isLoading, setLoading] = useState(true);
-    const [isBaggaage, setBaggage] = useState(false);
-    const [comments, setComments] = useState("");
+
+    let isLuggage = false;
+    let comments = "";
 
     useEffect(() => {
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             setLoading(false);
         });
-    }, [1]);
+    }, []);
 
-    const sendRequest = () => NotificationsService.addNotification(
-        {
-            senderId: user?.id,
-            receiverId: currentJourney?.organizer?.id!,
-            type: 1,
-            jsonData: "${\"title:\" \"New Applicant\", \"comments\": \"{comments}\", \"hasLuggage\": \"{isBaggage}\"}",
-        }
-    ).then((res) => console.log(res));
+    const sendRequest = () => {
+        NotificationsService.addNotification(
+            {
+                senderId: user?.id,
+                receiverId: currentJourney?.organizer?.id!,
+                type: 1,
+                jsonData:
+                "{\"title:\" \"New Applicant\", \"comments\": \"" +
+                comments +
+                "\", \"hasLuggage\": \"" +
+                isLuggage +
+                "\"}",
+            }
+        );
+    };
 
     const Separator = () => <Divider style={JourneyRequestPageStyle.separator} />;
 
@@ -61,34 +69,46 @@ const JourneyRequestPage = (props: any) => {
         </View>
     );
 
-    const AdditionalInfo = () => (
-        <>
-            <View style={JourneyRequestPageStyle.commentsContainer}>
-                <Text style={JourneyRequestPageStyle.commentsText}>
+    const AdditionalInfo = () => {
+
+        const [text, setText] = useState("");
+        const [isBaggaage, setBaggage] = useState(false);
+
+        return (
+            <>
+                <View style={JourneyRequestPageStyle.commentsContainer}>
+                    <Text style={JourneyRequestPageStyle.commentsText}>
                             Comments
-                </Text>
-                <TextInput
-                    style={JourneyRequestPageStyle.TextInput}
-                    multiline={true}
-                    maxLength={100}
-                    numberOfLines={10}
-                    value={comments}
-                    placeholder={"Any comments?"}
-                    onChangeText={(text) => setComments(text)}
-                />
-                <Text style={JourneyRequestPageStyle.hintText}>
+                    </Text>
+                    <TextInput
+                        style={JourneyRequestPageStyle.TextInput}
+                        multiline={true}
+                        maxLength={100}
+                        numberOfLines={10}
+                        value={text}
+                        placeholder={"Any comments?"}
+                        onChangeText={(fromInput) => {
+                            comments = fromInput;
+                            setText(fromInput);
+                        }}
+                    />
+                    <Text style={JourneyRequestPageStyle.hintText}>
                             Up to 100 symbols
-                </Text>
-            </View>
-            <View style={JourneyRequestPageStyle.chooseOptionContainer}>
-                <ChooseOption
-                    text={"Do you have a baggage with you to transport?"}
-                    value={isBaggaage}
-                    onValueChanged={(value: any) => setBaggage(value)}
-                />
-            </View>
-        </>
-    );
+                    </Text>
+                </View>
+                <View style={JourneyRequestPageStyle.chooseOptionContainer}>
+                    <ChooseOption
+                        text={"Do you have a baggage with you to transport?"}
+                        value={isBaggaage}
+                        onValueChanged={(value: boolean) => {
+                            isLuggage = value;
+                            setBaggage(value);
+                        }}
+                    />
+                </View>
+            </>
+        );
+    };
 
     const ConfirmButton = () => (
         <View style={JourneyRequestPageStyle.buttonBlock}>

@@ -250,7 +250,27 @@ const JourneyPageStyle = StyleSheet.create({
         color: "white",
         fontWeight: "700",
         fontSize: 18,
-    }
+        textTransform: "uppercase"
+    },
+
+    requestButton: {
+        backgroundColor: "black",
+        width: Dimensions.get("screen").width * 0.515,
+        justifyContent: "center",
+        alignItems: "center",
+        height: 51,
+    },
+
+    requestButtonText: {
+        color: "white",
+        fontWeight: "700",
+        fontSize: 18,
+        textTransform: "uppercase"
+    },
+
+    scrollBlock: {
+        height: 336
+    },
 });
 
 export default JourneyPageStyle;

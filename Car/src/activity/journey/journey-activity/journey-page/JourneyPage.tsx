@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../models/stop/Stop";
 import User from "../../../../../models/user/User";
@@ -17,24 +17,25 @@ import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../components/navigation/Navigation";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
+    const { isPassenger } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
 
     useEffect(() => {
         !isDriver && props.navigation.setOptions({ headerRight: () => <View /> });
+        !isDriver && !isPassenger && props.navigation.setOptions({ headerTitle: "Request to Driver" });
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             CarService.getById(res.data?.car?.id!).then((carRes) => setCar(carRes.data));
             setLoading(false);
         });
     }, [1]);
-
-    console.log(currentJourney?.car);
 
     const Separator = () => <Divider style={JourneyPageStyle.separator} />;
 
@@ -150,11 +151,7 @@ const JourneyPage = ({ props }: any) => {
 
     const StopsBlock = () => (
         <View style={JourneyPageStyle.stopsBlock}>
-            <FlatList
-                data={currentJourney?.stops}
-                renderItem={({ item }) => StopListItem(item)}
-                keyExtractor={(item) => item!.id.toString()}
-            />
+            {currentJourney?.stops.map((item) => StopListItem(item))}
         </View>
     );
 
@@ -174,28 +171,44 @@ const JourneyPage = ({ props }: any) => {
 
     const ButtonsBlock = () => (
         <View style={JourneyPageStyle.buttonsBlock}>
-            <TouchableOpacity
-                style={JourneyPageStyle.messageAllButton}
-                onPress={() =>
-                    navigation.navigate("Chat", {
-                        chatId: currentJourney?.id,
-                        header:
+            {(isDriver || isPassenger) && (
+                <TouchableOpacity
+                    style={JourneyPageStyle.messageAllButton}
+                    onPress={() =>
+                        navigation.navigate("Chat", {
+                            chatId: currentJourney?.id,
+                            header:
                                 currentJourney?.organizer?.name +
                                 " " +
                                 currentJourney?.organizer?.surname +
                                 "'s journey"
-                    })
-                }
-            >
-                <Text style={JourneyPageStyle.messageAllButtonText}>
-                        MESSAGE ALL
-                </Text>
-            </TouchableOpacity>
-            {isDriver && (<TouchableOpacity style={JourneyPageStyle.startJourneyButton}>
-                <Text style={JourneyPageStyle.startJourneyButtonText}>
-                        START THE JOURNEY
-                </Text>
-            </TouchableOpacity>)}
+                        })
+                    }
+                >
+                    <Text style={JourneyPageStyle.messageAllButtonText}>
+                        Message All
+                    </Text>
+                </TouchableOpacity>
+            )}
+            {isDriver && (
+                <TouchableOpacity style={JourneyPageStyle.startJourneyButton}>
+                    <Text style={JourneyPageStyle.startJourneyButtonText}>
+                        Start The Journey
+                    </Text>
+                </TouchableOpacity>
+            )}
+            {!isDriver && !isPassenger && (
+                <TouchableOpacity
+                    style={JourneyPageStyle.requestButton}
+                    onPress={() => navigation.navigate("Journey Request Page", {
+                        journeyId: currentJourney?.id
+                    })}
+                >
+                    <Text style={JourneyPageStyle.requestButtonText}>
+                        Request to driver
+                    </Text>
+                </TouchableOpacity>
+            )}
         </View>
     );
 
@@ -214,7 +227,12 @@ const JourneyPage = ({ props }: any) => {
                     <Organizer />
                     <Separator />
 
-                    <ScrollView onStartShouldSetResponder={() => true} style={{ height: 336 }}>
+                    <ScrollView
+                        onStartShouldSetResponder={() => true}
+                        style={JourneyPageStyle.scrollBlock}
+                        showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false}
+                    >
 
                         <Car />
                         <ApplicantsBlock />
@@ -236,8 +254,8 @@ const JourneyPage = ({ props }: any) => {
             <BottomPopup
                 style={JourneyPageStyle.bottomPopup}
                 snapPoints={[
-                    699,
-                    290,
+                    671 + getStatusBarHeight(),
+                    262 + getStatusBarHeight(),
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}

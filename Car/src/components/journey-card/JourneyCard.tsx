@@ -12,25 +12,19 @@ const JourneyCard = (props: any) => {
     const journey: Journey = props.journey;
     const { user } = useContext(AuthContext);
     const [isDriver, setDriver] = useState(false);
-    const [isPassanger, setPassanger] = useState(false);
+    const [isPassenger, setPassenger] = useState(false);
 
     useEffect (() => {
-        journey?.participants.forEach((u) => u?.id == user?.id ? setPassanger(true) : () => <></>);
+        journey?.participants.forEach((u) => u?.id == user?.id ? setPassenger(true) : () => <></>);
         setDriver(journey?.organizer?.id == user?.id);
     }, []);
 
-    const navigateJourney = () => {
-        if (!isPassanger && !isDriver) {
-            navigation.navigate("Journey Request Page", {
-                journeyId: journey?.id
-            });
-        } else {
-            navigation.navigate("Journey Page", {
-                journeyId: journey?.id,
-                isDriver
-            });
-        }
-    };
+    const navigateJourney = () =>
+        navigation.navigate("Journey Page", {
+            journeyId: journey?.id,
+            isDriver,
+            isPassenger
+        });
 
     return (
         <View>
