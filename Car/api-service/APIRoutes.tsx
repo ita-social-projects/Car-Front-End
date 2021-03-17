@@ -9,7 +9,7 @@ const APIRoutes = {
 
     getJourneyUrl: () => APIConfig.URL + "api/journeys/",
 
-    getLogindUrl: () => APIConfig.URL + "api/login/",
+    getLoginUrl: () => APIConfig.URL + "api/login/",
 
     getModelUrl: () => APIConfig.URL + "api/models/",
 
