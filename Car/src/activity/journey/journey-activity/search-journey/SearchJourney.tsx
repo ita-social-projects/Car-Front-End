@@ -5,7 +5,7 @@ import TouchableCard from "../../../../components/touchable-card/TouchableCard";
 import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
 import StopService from "../../../../../api-service/stop-service/StopService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
-import SearchJouneyStyle from "./SearchJouneyStyle";
+import SearchJourneyStyle from "./SearchJourneyStyle";
 import Stop from "../../../../../models/stop/Stop";
 import Location from "../../../../../models/location/Location";
 import SearchJourneyMap from "../map-address/SearchJourneyMap";
@@ -22,8 +22,8 @@ function SearchJourney () {
     const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
     const [fromDirection, setFromDirection] = useState("Your location");
     const [isOpen, setOpen] = useState(false);
-    const [latitude, setLatitude] = useState<Number | undefined>(1);
-    const [longitude, setLongitude] = useState<Number | undefined>(1);
+    const [latitude, setLatitude] = useState<number | undefined>(1);
+    const [longitude, setLongitude] = useState<number | undefined>(1);
     const [isMapOpen, setMapOpen] = useState(100);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
@@ -80,25 +80,25 @@ function SearchJourney () {
         stopDto?.address?.street + ", " + stopDto?.address?.city;
 
     return (
-        <View style={SearchJouneyStyle.screenContainer}>
+        <View style={SearchJourneyStyle.screenContainer}>
             <View
-                style={[SearchJouneyStyle.mapContainer, { zIndex: isMapOpen }]}
+                style={[SearchJourneyStyle.mapContainer, { zIndex: isMapOpen }]}
             >
                 <SearchJourneyMap
                     latitude={latitude}
                     longitude={longitude}
-                ></SearchJourneyMap>
+                />
                 <TouchableOpacity
                     style={
-                        SearchJouneyStyle.confirmButton
+                        SearchJourneyStyle.confirmButton
                     }
                 >
-                    <Text style={SearchJouneyStyle.confirmButtonSaveText}>
+                    <Text style={SearchJourneyStyle.confirmButtonSaveText}>
                         Confirm
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={SearchJouneyStyle.topInputContainer}>
+            <View style={SearchJourneyStyle.topInputContainer}>
                 <TouchableMapBar
                     directionType="From"
                     iconName="location"
@@ -121,8 +121,8 @@ function SearchJourney () {
                 )}
             </View>
 
-            <ScrollView style={[SearchJouneyStyle.container]}>
-                <View style={SearchJouneyStyle.insideContainer}>
+            <ScrollView style={[SearchJourneyStyle.container]}>
+                <View style={SearchJourneyStyle.insideContainer}>
                     {loading ? (
                         <></>
                     ) : locations.length != 1 ? (
@@ -140,7 +140,7 @@ function SearchJourney () {
                                 }}
                             />
                             {locations.map((item: any) => (
-                                <View key={item!.id}>
+                                <View key={item.id}>
                                     <TouchableCard
                                         cardName={item?.name}
                                         iconName={
@@ -150,23 +150,23 @@ function SearchJourney () {
                                         }
                                         angle="0"
                                         address={
-                                                item!.address?.street +
+                                                item.address?.street +
                                                 ", " +
-                                                item!.address?.city
+                                                item.address?.city
                                         }
                                         addressFontColor="#909095"
                                         onPress={() => {
                                             setFromDirection(
-                                                    item!.address?.street +
+                                                    item.address?.street +
                                                         ", " +
-                                                        item!.address?.city
+                                                        item.address?.city
                                             );
                                             setOpen(true);
                                             setLongitude(
-                                                    item!.address?.longitude
+                                                    item.address?.longitude
                                             );
                                             setLatitude(
-                                                    item!.address?.latitude
+                                                    item.address?.latitude
                                             );
                                         }}
                                         iconColor="#414045"
@@ -180,7 +180,7 @@ function SearchJourney () {
                     )}
 
                     {loading ? (
-                        <View style={SearchJouneyStyle.loadingContainer}>
+                        <View style={SearchJourneyStyle.loadingContainer}>
                             <Indicator
                                 color="#414045"
                                 size="large"
@@ -188,7 +188,7 @@ function SearchJourney () {
                             />
                         </View>
                     ) : (
-                        <Text style={SearchJouneyStyle.recentJourneyText}>
+                        <Text style={SearchJourneyStyle.recentJourneyText}>
                             Recent Journeys
                         </Text>
                     )}
@@ -219,8 +219,8 @@ function SearchJourney () {
                         <></>
                     )}
                 </View>
-                <View style={SearchJouneyStyle.buttonsContainer}>
-                    <View style={SearchJouneyStyle.button}>
+                <View style={SearchJourneyStyle.buttonsContainer}>
+                    <View style={SearchJourneyStyle.button}>
                         <Button
                             disabled={isLoading}
                             color="#000000"
@@ -232,7 +232,7 @@ function SearchJourney () {
                             }}
                         />
                     </View>
-                    <View style={SearchJouneyStyle.button}>
+                    <View style={SearchJourneyStyle.button}>
                         <Button
                             color="#000000"
                             title="BAD"

@@ -59,7 +59,7 @@ const SettingsTabs = () => {
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
@@ -78,7 +78,7 @@ const SettingsTabs = () => {
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}

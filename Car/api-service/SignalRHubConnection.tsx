@@ -9,7 +9,7 @@ let SignalRHubConnection: HubConnection;
         .withAutomaticReconnect()
         .build();
 
-    SignalRubConnectionFunc!.start();
+    SignalRubConnectionFunc.start();
     SignalRHubConnection = SignalRubConnectionFunc;
 })();
 

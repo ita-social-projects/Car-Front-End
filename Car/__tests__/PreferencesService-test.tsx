@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../api-service/APIService";
 import PreferencesService from "../api-service/preferences-service/PreferencesService";
-import UserPreferences from "../models/UserPreferences";
+import UserPreferences from "../models/user/UserPreferences";
 
 describe("UserService", () => {
     let preferencesData = {
