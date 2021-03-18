@@ -1,13 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Chat from "../messages-activity/chat/Chat";
 import Messages from "../Messages";
-import * as navigation from "../../../components/navigation/Navigation";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import JourneyApplicant from "../../journey/journey-activity/journey-applicant/JourneyApplicant";
+import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 
 const StackTabs = createStackNavigator();
 
@@ -52,25 +52,7 @@ const MessagesTabs = () => {
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
+                        headerLeft: HeaderBackButton,
                         headerRight: () => (
                             <TouchableOpacity onPress={() => {}}>
                                 <Ionicons
@@ -89,25 +71,7 @@ const MessagesTabs = () => {
                         title: "SoftServian",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
                     component={JourneyApplicant}
                 />

@@ -44,7 +44,7 @@ const JourneyRequestPage = (props: any) => {
                 receiverId: currentJourney?.organizer?.id!,
                 type: 1,
                 jsonData:
-                "{\"title:\" \"New Applicant\", \"comments\": \"" +
+                "{\"title\": \"New Applicant\", \"comments\": \"" +
                 comments +
                 "\", \"hasLuggage\": \"" +
                 isLuggage +

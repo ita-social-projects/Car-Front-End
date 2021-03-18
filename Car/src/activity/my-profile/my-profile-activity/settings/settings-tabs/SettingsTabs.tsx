@@ -3,13 +3,13 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
-import * as navigation from "../../../../../components/navigation/Navigation";
 import AppSettings from "../settings-activity/app-settings/AppSettings";
 import NotificationSettings from "../settings-activity/notification-settings/NotificationSettings";
 import ChatSettings from "../settings-activity/chat-settings/ChatSettings";
 import Settings from "../Settings";
 import RNRestart from "react-native-restart";
 import AsyncStorage from "@react-native-community/async-storage";
+import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 
 const StackTabs = createStackNavigator();
 
@@ -24,25 +24,7 @@ const SettingsTabs = () => {
                         headerTitle: "Settings",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
+                        headerLeft: HeaderBackButton,
                         headerRight: () => (
                             <TouchableOpacity
                                 style={HeaderStyle.requestButton}
@@ -65,31 +47,7 @@ const SettingsTabs = () => {
                         headerTitle: "App Settings",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
-                                    <Text
-                                        style={HeaderStyle.buttonText}
-                                    >
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
                 />
                 <StackTabs.Screen
@@ -99,31 +57,7 @@ const SettingsTabs = () => {
                         headerTitle: "Notifications Settings",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
-                                    <Text
-                                        style={HeaderStyle.buttonText}
-                                    >
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
+                        headerLeft: HeaderBackButton,
                         headerRight: () => (
                             <TouchableOpacity onPress={() => {}}>
                                 <Ionicons
@@ -142,31 +76,7 @@ const SettingsTabs = () => {
                         headerTitle: "Chats Settings",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
-                                    <Text
-                                        style={HeaderStyle.buttonText}
-                                    >
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
+                        headerLeft: HeaderBackButton,
                         headerRight: () => (
                             <TouchableOpacity onPress={() => {}}>
                                 <Ionicons

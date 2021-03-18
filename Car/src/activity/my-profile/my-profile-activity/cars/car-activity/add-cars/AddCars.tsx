@@ -81,7 +81,7 @@ const AddCars = () => {
             plateNumber === undefined ||
             plateNumber.length < 4 ||
             plateNumber.length > 10 ||
-            !plateNumber.match(/^[A-Za-zА-Яа-я0-9-]+$/)
+            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
         ) {
             showAlert("Plate number is not valid!");
 
