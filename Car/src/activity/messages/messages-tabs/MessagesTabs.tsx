@@ -8,6 +8,7 @@ import Messages from "../Messages";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import JourneyApplicant from "../../journey/journey-activity/journey-applicant/JourneyApplicant";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
+import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 
 const StackTabs = createStackNavigator();
 
@@ -53,15 +54,7 @@ const MessagesTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderEllipsis
                     }}
                 />
 

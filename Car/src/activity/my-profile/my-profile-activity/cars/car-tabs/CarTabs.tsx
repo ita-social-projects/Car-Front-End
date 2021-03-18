@@ -1,12 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { View } from "react-native";
 import AddCars from "../car-activity/add-cars/AddCars";
 import Cars from "../Cars";
 import EditCars from "../car-activity/edit-cars/EditCars";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
+import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
 
 const StackTabs = createStackNavigator();
 
@@ -32,15 +32,7 @@ const CarTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderEllipsis
                     }}
                 />
                 <StackTabs.Screen
@@ -51,15 +43,7 @@ const CarTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderEllipsis
                     }}
                 />
             </StackTabs.Navigator>

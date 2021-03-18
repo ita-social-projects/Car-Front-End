@@ -1,8 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyNewApplicant from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
@@ -12,7 +10,6 @@ import JourneyPage from "../journey-activity/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/search-journey/search-results/ok-search-result/OkSearchResult";
 import JourneyStyle from "../JourneyStartPageStyle";
-import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/journey-page/JourneyPageStyle";
 import MenuButton from "../../../components/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
@@ -22,6 +19,8 @@ import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
 import Chat from "../../messages/messages-activity/chat/Chat";
 import JourneyRequestPage from "../journey-activity/journey-request-page/JourneyRequestPage";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
+import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
+import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 
 const StackTabs = createStackNavigator();
 
@@ -148,15 +147,7 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity onPress={pressHandle} >
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
                 >
                     {(props: any) => {
@@ -198,18 +189,7 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    navigation.navigate("Search Journey");
-                                }}
-                            >
-                                <Text style={HeaderStyle.buttonText}>
-                                    Request
-                                </Text>
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderRequestButton
                     }}
                 />
 
@@ -221,18 +201,6 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    navigation.navigate("Search Journey");
-                                }}
-                            >
-                                <Text style={HeaderStyle.buttonText}>
-                                    Request
-                                </Text>
-                            </TouchableOpacity>
-                        )
                     }}
                 />
                 <StackTabs.Screen
@@ -243,14 +211,7 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    navigation.navigate("Search Journey", {});
-                                }}
-                            ></TouchableOpacity>
-                        )
+                        headerRight: HeaderRequestButton
                     }}
                 />
 
@@ -273,15 +234,7 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderEllipsis
                     }}
                 />
 

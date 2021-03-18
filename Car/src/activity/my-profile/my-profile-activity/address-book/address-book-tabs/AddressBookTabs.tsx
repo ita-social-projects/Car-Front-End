@@ -1,11 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { View } from "react-native";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
-import * as navigation from "../../../../../components/navigation/Navigation";
 import AddressBook from "../AddressBook";
 import SetPlace from "../address-book-activity/add-locations/SetPlace";
+import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
+import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 
 const StackTabs = createStackNavigator();
 
@@ -20,31 +20,7 @@ export default function AddressBookTabs () {
                         headerTitle: "Address Book",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
-                                    <Text
-                                        style={HeaderStyle.buttonText}
-                                    >
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
                 />
                 <StackTabs.Screen
@@ -54,40 +30,8 @@ export default function AddressBookTabs () {
                         headerTitle: "Add Address",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View
-                                    style={
-                                        HeaderStyle.backButtonTextView
-                                    }
-                                >
-                                    <Text
-                                        style={HeaderStyle.buttonText}
-                                    >
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderEllipsis
                     }}
                 />
             </StackTabs.Navigator>

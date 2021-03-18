@@ -1,15 +1,14 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { View } from "react-native";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import AppSettings from "../settings-activity/app-settings/AppSettings";
 import NotificationSettings from "../settings-activity/notification-settings/NotificationSettings";
 import ChatSettings from "../settings-activity/chat-settings/ChatSettings";
 import Settings from "../Settings";
-import RNRestart from "react-native-restart";
-import AsyncStorage from "@react-native-community/async-storage";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
+import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
+import HeaderLogoutButton from "../../../../../components/header-logout-button/HeaderLogoutButton";
 
 const StackTabs = createStackNavigator();
 
@@ -25,19 +24,7 @@ const SettingsTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    (async () => { await AsyncStorage.removeItem("user"); })().then(() =>
-                                        RNRestart.Restart());
-                                }}
-                            >
-                                <Text style={[HeaderStyle.buttonText, HeaderStyle.orangeButtonText]}>
-                                    Logout
-                                </Text>
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderLogoutButton
                     }}
                 />
                 <StackTabs.Screen
@@ -58,15 +45,7 @@ const SettingsTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderEllipsis
                     }}
                 />
                 <StackTabs.Screen
@@ -77,15 +56,7 @@ const SettingsTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
                         headerLeft: HeaderBackButton,
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerRight: HeaderEllipsis
                     }}
                 />
             </StackTabs.Navigator>
