@@ -80,7 +80,7 @@ export default function AddressBookTabs () {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}

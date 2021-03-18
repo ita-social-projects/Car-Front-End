@@ -4,7 +4,7 @@ import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 
-const Login = (props: any) => {
+const Login = (properties: any) => {
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -32,10 +32,10 @@ const Login = (props: any) => {
     };
 
     useEffect(() => {
-        props.navigation.addListener("focus", startRefresher);
+        properties.navigation.addListener("focus", startRefresher);
 
         return () => {
-            props.navigation.removeListener("focus", startRefresher);
+            properties.navigation.removeListener("focus", startRefresher);
         };
     }, []);
 

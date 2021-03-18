@@ -69,7 +69,7 @@ export default function CarTabs () {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
@@ -106,7 +106,7 @@ export default function CarTabs () {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}

@@ -16,7 +16,7 @@ import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 
-const Chat = (props: any) => {
+const Chat = (properties: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const { user } = useContext(AuthContext);
@@ -32,7 +32,7 @@ const Chat = (props: any) => {
 
             setConnection(newConnection);
         })();
-        props.navigation.setOptions({ headerTitle: props.route.params.header });
+        properties.navigation.setOptions({ headerTitle: properties.route.params.header });
     }, []);
 
     useEffect(() => {
@@ -40,11 +40,11 @@ const Chat = (props: any) => {
             connection.start().then(() => {
                 connection.invoke(
                     "EnterToGroup",
-                    props.route.params.chatId.toString()
+                    properties.route.params.chatId.toString()
                 ).catch((err: any) => console.log(err));
             });
 
-            ChatService.getCeratinChat(props?.route?.params?.chatId).then((res) => {
+            ChatService.getCeratinChat(properties?.route?.params?.chatId).then((res) => {
 
                 let tempChat: any = [];
 
@@ -70,11 +70,11 @@ const Chat = (props: any) => {
             connection.onreconnected(() => {
                 connection.invoke(
                     "EnterToGroup",
-                    props.route.params.chatId.toString()
+                    properties.route.params.chatId.toString()
                 ).catch((err: any) => console.log(err));
             });
 
-            connection!.on("RecieveMessage", (receivedMessage: any) => {
+            connection.on("RecieveMessage", (receivedMessage: any) => {
                 setMessages((previousMessages) =>
                     GiftedChat.append(
                         previousMessages as any,
@@ -95,7 +95,7 @@ const Chat = (props: any) => {
             return () => {
                 connection?.invoke(
                     "LeaveTheGroup",
-                    props.route.params.chatId.toString()
+                    properties.route.params.chatId.toString()
                 );
             };
         }
@@ -106,11 +106,11 @@ const Chat = (props: any) => {
             const messageToSend = message.trim();
 
             if (messageToSend != "") {
-                connection!
+                connection
                     .invoke("SendMessageToGroup", {
                         Text: messageToSend,
                         SenderId: user?.id,
-                        ChatId: props.route.params.chatId
+                        ChatId: properties.route.params.chatId
                     })
                     .catch((err: any) => console.log(err));
                 setMessage("");

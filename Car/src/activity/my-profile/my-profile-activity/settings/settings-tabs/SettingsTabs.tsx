@@ -125,7 +125,7 @@ const SettingsTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
@@ -168,7 +168,7 @@ const SettingsTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}

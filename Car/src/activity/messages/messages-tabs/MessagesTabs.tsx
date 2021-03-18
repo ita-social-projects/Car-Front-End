@@ -72,7 +72,7 @@ const MessagesTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
