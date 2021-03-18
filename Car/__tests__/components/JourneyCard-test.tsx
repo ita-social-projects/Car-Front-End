@@ -1,25 +1,14 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import shallowRender from "react-test-renderer/shallow";
 import JourneyCard from "../../src/components/journey-card/JourneyCard";
 
+const renderer = shallowRender.createRenderer();
+
 test("renders correctly", () =>
-  expect(renderer.create(<JourneyCard />).toJSON()).toMatchInlineSnapshot(`
+  expect(renderer.render(<JourneyCard />)).toMatchInlineSnapshot(`
     <View>
-      <View
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "opacity": 1,
-          }
-        }
+      <ForwardRef
+        onPress={[Function]}
       >
         <View
           style={
@@ -50,42 +39,9 @@ test("renders correctly", () =>
                 }
               }
             >
-              <View
-                style={
-                  Array [
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "borderRadius": 1000,
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "height": 38.5,
-                        "width": 38.5,
-                      },
-                    ],
-                    Object {
-                      "backgroundColor": "#000000",
-                    },
-                  ]
-                }
-              >
-                <Text
-                  style={
-                    Object {
-                      "color": "#FFFFFF",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 16,
-                      "fontWeight": "700",
-                      "lineHeight": 16,
-                      "paddingTop": 3,
-                      "textTransform": "uppercase",
-                    }
-                  }
-                >
-                  
-                </Text>
-              </View>
+              <AvatarLogo
+                size={38.5}
+              />
             </View>
             <View
               style={
@@ -130,43 +86,16 @@ test("renders correctly", () =>
                     }
                   }
                 >
-                  <View
-                    accessible={true}
-                    focusable={true}
-                    onClick={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
-                    style={
-                      Object {
-                        "opacity": 1,
-                      }
-                    }
+                  <ForwardRef
+                    onPress={[Function]}
                   >
-                    <Text
+                    <Icon
                       allowFontScaling={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "black",
-                            "fontSize": 20,
-                          },
-                          undefined,
-                          Object {
-                            "fontFamily": "Ionicons",
-                            "fontStyle": "normal",
-                            "fontWeight": "normal",
-                          },
-                          Object {},
-                        ]
-                      }
-                    >
-                      
-                    </Text>
-                  </View>
+                      color="black"
+                      name="ellipsis-horizontal"
+                      size={20}
+                    />
+                  </ForwardRef>
                 </View>
               </View>
               <View
@@ -289,6 +218,6 @@ test("renders correctly", () =>
             </View>
           </View>
         </View>
-      </View>
+      </ForwardRef>
     </View>
   `));

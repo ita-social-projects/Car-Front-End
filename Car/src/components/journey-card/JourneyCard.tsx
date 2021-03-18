@@ -5,18 +5,18 @@ import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
-import Journey from "../../../models/Journey";
 import AuthContext from "../auth/AuthContext";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/Constants";
 
 const JourneyCard = (props: any) => {
-    const journey: Journey = props.journey;
+    const journey = props.journey;
     const { user } = useContext(AuthContext);
     const [isDriver, setDriver] = useState(false);
     const [isPassenger, setPassenger] = useState(false);
 
     useEffect (() => {
-        journey?.participants.forEach((participant) => participant?.id == user?.id ? setPassenger(true) : () => <></>);
+        journey?.participants.forEach((participant: any) =>
+            participant?.id == user?.id ? setPassenger(true) : () => <></>);
         setDriver(journey?.organizer?.id == user?.id);
     }, []);
 
