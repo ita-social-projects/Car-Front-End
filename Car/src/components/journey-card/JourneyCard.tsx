@@ -76,7 +76,7 @@ const JourneyCard = (props: any) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={JourneyCardStyle.timeText}>
-                                    {moment(new Date(journey!?.departureTime))
+                                    {moment(new Date(journey?.departureTime))
                                         .utc()
                                         .fromNow()}
                                 </Text>
