@@ -28,11 +28,11 @@ const AvatarLogo = (props: any) => {
                 <View
                     style={[
                         avatarStyle,
-                        { backgroundColor: stc(user.name + " " + user.surname) }
+                        { backgroundColor: user == undefined ? "#000000" : stc(user.name + " " + user.surname) }
                     ]}
                 >
                     <Text style={AvatarLogoStyle.userAvatarText}>
-                        {user?.name[FIRST_ELEMENT_INDEX] + user?.surname[FIRST_ELEMENT_INDEX]}
+                        {user == undefined ? "" : user?.name[FIRST_ELEMENT_INDEX] + user?.surname[FIRST_ELEMENT_INDEX]}
                     </Text>
                 </View>
             )}
