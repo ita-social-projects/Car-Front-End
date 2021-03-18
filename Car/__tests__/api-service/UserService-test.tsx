@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
 import "react-native";
-import APIService from "../api-service/APIService";
-import UserService from "../api-service/user-service/UserService";
-import User from "../models/user/User";
+import APIService from "../../api-service/APIService";
+import UserService from "../../api-service/user-service/UserService";
+import User from "../../models/user/User";
 
 describe("UserService", () => {
     let userData = {

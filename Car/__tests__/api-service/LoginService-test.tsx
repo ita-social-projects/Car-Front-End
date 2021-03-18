@@ -1,15 +1,12 @@
 import { AxiosResponse } from "axios";
-import APIService from "../api-service/APIService";
-import ChatService from "../api-service/chat-service/ChatService";
-import Chat from "../models/Chat";
+import "react-native";
+import APIService from "../../api-service/APIService";
+import LoginService from "../../api-service/login-service/LoginService";
+import User from "../../models/user/User";
 
-describe("ChatService", () => {
-    let chatsData = {
-        id: 1,
-        Name: "Maksym"
-    };
+describe("UserService", () => {
     let userData = {
-        id: 1,
+        id: 13,
         name: "Peter",
         surname: "Pen",
         position: "Student",
@@ -20,12 +17,12 @@ describe("ChatService", () => {
         token: ""
     };
 
-    test("it should return chats", () => {
-        jest.spyOn(APIService, "get").mockImplementation(
+    test("It should login user", () => {
+        jest.spyOn(APIService, "post").mockImplementation(
             () =>
-                new Promise<AxiosResponse<Chat>>(function (resolve) {
+                new Promise<AxiosResponse<User>>(function (resolve) {
                     resolve({
-                        data: chatsData,
+                        data: userData,
                         statusText: "Ok",
                         status: 200,
                         config: {},
@@ -35,10 +32,9 @@ describe("ChatService", () => {
                     });
                 })
         );
+        let response: User;
 
-        let response: Chat;
-
-        ChatService.getChat(userData.id).then((res) => {
+        LoginService.loginUser(userData).then((res) => {
             response = res.data;
             expect(res.status).toEqual(200);
             expect(response).toEqual(userData);
