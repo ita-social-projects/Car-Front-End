@@ -21,6 +21,18 @@ import JourneyRequestPage from "../journey-activity/journey-request-page/Journey
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
+import {
+    ANIMATION_DURATION,
+    FIRST_ELEMENT_INDEX,
+    HALF_OPACITY,
+    JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
+    MAX_OPACITY,
+    MAX_POPUP_POSITION,
+    MIN_POPUP_HEIGHT,
+    MIN_POPUP_POSITION,
+    SLEEP_DURATION,
+    ZERO_OPACITY
+} from "../../../constants/Constants";
 
 const StackTabs = createStackNavigator();
 
@@ -28,8 +40,8 @@ const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
 
-    const layoutOpacity = useState(new Animated.Value(0))[0];
-    const journeyOpacity = useState(new Animated.Value(1))[0];
+    const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
+    const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
 
     const noAction = () => <></>;
 
@@ -40,28 +52,28 @@ const JourneyTabs = () => {
         setVisibility(true);
 
         Animated.timing(layoutOpacity, {
-            toValue: 0.5,
-            duration: 500,
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
 
         Animated.timing(journeyOpacity, {
-            toValue: 0.5,
-            duration: 500,
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
     };
 
     const fadeOut = () => {
         Animated.timing(layoutOpacity, {
-            toValue: 0,
-            duration: 500,
+            toValue: MAX_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
 
         Animated.timing(journeyOpacity, {
-            toValue: 1,
-            duration: 500,
+            toValue: MAX_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
     };
@@ -69,7 +81,7 @@ const JourneyTabs = () => {
     const closeHandle = () => {
         setOpen(false);
         fadeOut();
-        (async () => sleep(700))().then(() => setVisibility(false));
+        (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {
@@ -82,7 +94,7 @@ const JourneyTabs = () => {
         }
 
         moreOptionsRef?.current?.snapTo(
-            isOpen ? 0 : 1
+            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
         );
 
     };
@@ -160,7 +172,7 @@ const JourneyTabs = () => {
                                 </Animated.View>
                                 {props.route.params.isDriver && <BottomPopup
                                     refForChild={moreOptionsRef}
-                                    snapPoints={[0, 280]}
+                                    snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                     renderContent={moreOptionsContent}
                                     initialSnap={0}
                                     renderHeader={moreOptionsHeader}

@@ -26,6 +26,14 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         elevation: 10
     },
 
+    headerContainer: {
+        width: "50%"
+    },
+
+    profileContainer: {
+        width: "80%"
+    },
+
     body: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         height: "100%"
@@ -261,11 +269,13 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "column",
+        width: "5%"
     },
 
     tripPoint: {
-        paddingLeft: "0.6rem"
+        paddingLeft: "0.6rem",
+        width: "95%"
     },
 
     buttons: {

@@ -15,6 +15,7 @@ import ChatStyle from "./ChatStyle";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/Constants";
 
 const Chat = (properties: any) => {
     const [messages, setMessages] = useState<object[]>([]);
@@ -195,12 +196,8 @@ const Chat = (properties: any) => {
                     size={36}
                     user={{
                         id: data.currentMessage.user._id,
-                        name: data.currentMessage.user.name.split(
-                            " "
-                        )[0],
-                        surname: data.currentMessage.user.name.split(
-                            " "
-                        )[1]
+                        name: data.currentMessage.user.name.split(" ")[FIRST_ELEMENT_INDEX],
+                        surname: data.currentMessage.user.name.split(" ")[SECOND_ELEMENT_INDEX]
                     }}
                 />
             </TouchableOpacity>

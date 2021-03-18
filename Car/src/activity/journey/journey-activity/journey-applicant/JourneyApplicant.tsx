@@ -5,6 +5,7 @@ import User from "../../../../../models/user/User";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
 import Indicator from "../../../../components/activity-indicator/Indicator";
+import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/Constants";
 
 const JourneyApplicant = (props: any) => {
     const { userId } = props.route.params;
@@ -15,10 +16,10 @@ const JourneyApplicant = (props: any) => {
         UserService.getUser(userId).then((res) =>
             (async () => setUser(res.data))().then(() => setLoading(false))
         );
-    }, [0]);
+    }, []);
 
     const journeys =
-        user?.journeyCount == 1 ? "1 ride" : user?.journeyCount + " rides";
+        user?.journeyCount == SINGLE_ELEMENT_COLLECTION_LENGTH ? "1 ride" : user?.journeyCount + " rides";
 
     return (
         <View style={JourneyApplicantStyle.mainContainer}>

@@ -10,6 +10,17 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BottomSheet } from "react-native-elements";
 import RNRestart from "react-native-restart";
+import {
+    ANIMATION_DURATION,
+    FIRST_ELEMENT_INDEX,
+    HALF_OPACITY,
+    MAX_POPUP_POSITION,
+    MIN_POPUP_HEIGHT,
+    MIN_POPUP_POSITION,
+    POPUP_HEIGHT_WITHOUT_USER_IMAGE,
+    POPUP_HEIGHT_WITH_USER_IMAGE,
+    SLEEP_DURATION, ZERO_OPACITY
+} from "../../../../constants/Constants";
 
 const Settings = (props: any) => {
 
@@ -20,14 +31,14 @@ const Settings = (props: any) => {
 
     const { Popup } = require("popup-ui");
 
-    const opacity = useState(new Animated.Value(0))[0];
+    const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
     const loadUser = () =>
         UserService.getUser(user.id).then((res) => setUser(res.data));
 
     useEffect(() => {
         loadUser();
-    }, [0]);
+    }, []);
 
     const onRefresh = () => {
         loadUser().then(() => setRefreshing(false));
@@ -35,8 +46,8 @@ const Settings = (props: any) => {
 
     const fadeIn = () => {
         Animated.timing(opacity, {
-            toValue: 0.5,
-            duration: 500,
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
     };
@@ -45,15 +56,15 @@ const Settings = (props: any) => {
         new Promise(resolve => setTimeout(resolve, milliseconds));
 
     const fadeOut = () => Animated.timing(opacity, {
-        toValue: 0,
-        duration: 500,
+        toValue: ZERO_OPACITY,
+        duration: ANIMATION_DURATION,
         useNativeDriver: true
     }).start();
 
     const closeHandle = () => {
         setOpen(false);
         fadeOut();
-        (async () => sleep(700))().then(() => setVisibility(false));
+        (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {
@@ -61,14 +72,14 @@ const Settings = (props: any) => {
 
         if (isOpen) {
             fadeOut();
-            (async () => sleep(700))().then(() => setVisibility(false));
+            (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
         } else {
             setVisibility(true);
             fadeIn();
         }
 
         moreOptionsRef?.current?.snapTo(
-            isOpen ? 0 : 1
+            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
         );
     };
 
@@ -135,7 +146,7 @@ const Settings = (props: any) => {
                     style={SettingsStyle.moreOptionsButton}
                     onPress={() => {
                         pressHandle();
-                        (async () => sleep(700))().then(() => uploadPhotoHandle());
+                        (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                     }}>
                     <Text style={SettingsStyle.changeAvatarText}>
                         Upload Avatar
@@ -147,7 +158,7 @@ const Settings = (props: any) => {
                         style={SettingsStyle.moreOptionsButton}
                         onPress={() => {
                             pressHandle();
-                            (async () => sleep(700))().then(() => uploadPhotoHandle());
+                            (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                         }}>
                         <Text style={SettingsStyle.changeAvatarText}>
                             Change Avatar
@@ -228,7 +239,9 @@ const Settings = (props: any) => {
                 </View>
             </ScrollView>
             <BottomPopup
-                snapPoints={[0, user?.imageId != null ? 188 : 143]}
+                snapPoints={[
+                    MIN_POPUP_HEIGHT,
+                    user?.imageId != null ? POPUP_HEIGHT_WITH_USER_IMAGE : POPUP_HEIGHT_WITHOUT_USER_IMAGE]}
                 refForChild={moreOptionsRef}
                 renderContent={moreOptionsContent}
                 initialSnap={0}

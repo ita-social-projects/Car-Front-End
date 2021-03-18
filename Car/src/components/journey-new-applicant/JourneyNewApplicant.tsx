@@ -6,9 +6,9 @@ import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
-import Item from "../styles/flex/Item";
 import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
+import { GRADIENT_END, GRADIENT_START } from "../../constants/Constants";
 
 const JourneyNewApplicant = (props: any) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
@@ -36,20 +36,18 @@ const JourneyNewApplicant = (props: any) => {
                 <View style={JourneyNewApplicantStyle.body}>
                     <View style={JourneyNewApplicantStyle.container}>
                         <View style={JourneyNewApplicantStyle.row}>
-                            <View style={Item(50)}>
+                            <View style={JourneyNewApplicantStyle.headerContainer}>
                                 <Text style={JourneyNewApplicantStyle.header}>
                                     New Applicant
                                 </Text>
                             </View>
-                            <View style={Item(50)}>
+                            <View style={JourneyNewApplicantStyle.headerContainer}>
                                 <TouchableOpacity
                                     onPress={() => {
                                         setModalVisible(!modalVisible);
                                     }}
                                 >
-                                    <Text
-                                        style={JourneyNewApplicantStyle.snooze}
-                                    >
+                                    <Text style={JourneyNewApplicantStyle.snooze} >
                                         Snooze
                                     </Text>
                                 </TouchableOpacity>
@@ -65,7 +63,7 @@ const JourneyNewApplicant = (props: any) => {
                                 user={props.user}
                                 size={49}
                             />
-                            <View style={Item(80)}>
+                            <View style={JourneyNewApplicantStyle.profileContainer}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={JourneyNewApplicantStyle.name}>
                                         {props.user!.name +
@@ -75,43 +73,27 @@ const JourneyNewApplicant = (props: any) => {
                                     <Text style={JourneyNewApplicantStyle.bio}>
                                         {props.user!.position}
                                     </Text>
-                                    <Text
-                                        style={
-                                            JourneyNewApplicantStyle.achievements
-                                        }
-                                    >
+                                    <Text style={JourneyNewApplicantStyle.achievements} >
                                         123 rides, 2 badges
                                     </Text>
                                 </View>
                             </View>
                         </View>
-                        {JSON.parse(props.notificationData)?.comments !=
-                        null ? (
-                                <View
-                                    style={[
-                                        JourneyNewApplicantStyle.row,
-                                        JourneyNewApplicantStyle.commentsBox
-                                    ]}
-                                >
-                                    <Text
-                                        style={
-                                            JourneyNewApplicantStyle.commentsText
-                                        }
-                                    >
-                                        {
-                                        JSON.parse(props.notificationData)
-                                            ?.comments
-                                        }
-                                    </Text>
-                                    <View
-                                        style={
-                                            JourneyNewApplicantStyle.commentsBoxAfter
-                                        }
-                                    />
-                                </View>
-                            ) : (
-                                <View />
-                            )}
+                        {JSON.parse(props.notificationData)?.comments != null ? (
+                            <View
+                                style={[
+                                    JourneyNewApplicantStyle.row,
+                                    JourneyNewApplicantStyle.commentsBox
+                                ]}
+                            >
+                                <Text style={JourneyNewApplicantStyle.commentsText} >
+                                    {JSON.parse(props.notificationData) ?.comments}
+                                </Text>
+                                <View style={JourneyNewApplicantStyle.commentsBoxAfter} />
+                            </View>
+                        ) : (
+                            <View />
+                        )}
 
                         <View
                             style={[
@@ -120,24 +102,16 @@ const JourneyNewApplicant = (props: any) => {
                             ]}
                         >
                             {JSON.parse(props.notificationData)?.hasLuggage ? (
-                                <Text
-                                    style={
-                                        JourneyNewApplicantStyle.optionsHeader
-                                    }
-                                >
+                                <Text style={JourneyNewApplicantStyle.optionsHeader} >
                                     I’m Traveling with a baggage.
                                 </Text>
                             ) : (
                                 <View />
                             )}
-                            <View
-                                style={JourneyNewApplicantStyle.optionsLine}
-                            />
+                            <View style={JourneyNewApplicantStyle.optionsLine} />
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
-                            <Text
-                                style={JourneyNewApplicantStyle.optionsHeader}
-                            >
+                            <Text style={JourneyNewApplicantStyle.optionsHeader} >
                                 {props.user!.name}’s stop in your Journey
                             </Text>
                             <View
@@ -147,12 +121,7 @@ const JourneyNewApplicant = (props: any) => {
                                     JourneyNewApplicantStyle.stopsRows
                                 ]}
                             >
-                                <View
-                                    style={[
-                                        Item(5),
-                                        JourneyNewApplicantStyle.tripColumn
-                                    ]}
-                                >
+                                <View style={JourneyNewApplicantStyle.tripColumn} >
                                     <Circle
                                         color="#FFFFFF"
                                         radius="1.3rem"
@@ -161,23 +130,10 @@ const JourneyNewApplicant = (props: any) => {
                                     >
                                         <Circle color="#C1C1C5" radius="1rem" />
                                     </Circle>
-                                    <View
-                                        style={[
-                                            JourneyNewApplicantStyle.stopLine
-                                        ]}
-                                    />
+                                    <View style={JourneyNewApplicantStyle.stopLine}/>
                                 </View>
-                                <View
-                                    style={[
-                                        Item(95),
-                                        JourneyNewApplicantStyle.tripPoint
-                                    ]}
-                                >
-                                    <Text
-                                        style={
-                                            JourneyNewApplicantStyle.stopName
-                                        }
-                                    >
+                                <View style={JourneyNewApplicantStyle.tripPoint} >
+                                    <Text style={JourneyNewApplicantStyle.stopName} >
                                         Location A
                                     </Text>
                                 </View>
@@ -189,12 +145,7 @@ const JourneyNewApplicant = (props: any) => {
                                     JourneyNewApplicantStyle.row
                                 ]}
                             >
-                                <View
-                                    style={[
-                                        Item(5),
-                                        JourneyNewApplicantStyle.tripColumn
-                                    ]}
-                                >
+                                <View style={JourneyNewApplicantStyle.tripColumn} >
                                     <Circle
                                         color="#FFFFFF"
                                         radius="0.75rem"
@@ -206,23 +157,10 @@ const JourneyNewApplicant = (props: any) => {
                                             radius="0.35rem"
                                         />
                                     </Circle>
-                                    <View
-                                        style={
-                                            JourneyNewApplicantStyle.stopLine
-                                        }
-                                    />
+                                    <View style={JourneyNewApplicantStyle.stopLine} />
                                 </View>
-                                <View
-                                    style={[
-                                        Item(95),
-                                        JourneyNewApplicantStyle.tripPoint
-                                    ]}
-                                >
-                                    <Text
-                                        style={
-                                            JourneyNewApplicantStyle.stopName
-                                        }
-                                    >
+                                <View style={JourneyNewApplicantStyle.tripPoint} >
+                                    <Text style={JourneyNewApplicantStyle.stopName} >
                                         Stop A.1
                                     </Text>
                                 </View>
@@ -233,12 +171,7 @@ const JourneyNewApplicant = (props: any) => {
                                     JourneyNewApplicantStyle.row
                                 ]}
                             >
-                                <View
-                                    style={[
-                                        Item(5),
-                                        JourneyNewApplicantStyle.tripColumn
-                                    ]}
-                                >
+                                <View style={JourneyNewApplicantStyle.tripColumn} >
                                     <Circle
                                         color="#FFFFFF"
                                         radius="1.1rem"
@@ -254,32 +187,17 @@ const JourneyNewApplicant = (props: any) => {
                                             end={{ x: 1, y: 1 }}
                                         />
                                     </Circle>
-                                    <View
-                                        style={
-                                            JourneyNewApplicantStyle.stopLine
-                                        }
-                                    />
+                                    <View style={JourneyNewApplicantStyle.stopLine} />
                                 </View>
-                                <View
-                                    style={[
-                                        Item(95),
-                                        JourneyNewApplicantStyle.tripPoint
-                                    ]}
-                                >
+                                <View style={JourneyNewApplicantStyle.tripPoint} >
                                     <LinearTextGradient
-                                        style={[
-                                            JourneyNewApplicantStyle.stopName
-                                        ]}
-                                        locations={[0, 1]}
+                                        style={JourneyNewApplicantStyle.stopName}
+                                        locations={[GRADIENT_START, GRADIENT_END]}
                                         colors={["#00A3CF", "#5552A0"]}
                                         start={{ x: 0, y: 0 }}
                                         end={{ x: 1, y: 0 }}
                                     >
-                                        <Text
-                                            style={[
-                                                JourneyNewApplicantStyle.activeStopName
-                                            ]}
-                                        >
+                                        <Text style={JourneyNewApplicantStyle.activeStopName} >
                                             {props.user!.name}'s stop A.2 ‏
                                         </Text>
                                         <Text
@@ -299,12 +217,7 @@ const JourneyNewApplicant = (props: any) => {
                                     JourneyNewApplicantStyle.row
                                 ]}
                             >
-                                <View
-                                    style={[
-                                        Item(5),
-                                        JourneyNewApplicantStyle.tripColumn
-                                    ]}
-                                >
+                                <View style={JourneyNewApplicantStyle.tripColumn} >
                                     <Circle
                                         color="#FFFFFF"
                                         radius="1.3rem"
@@ -314,17 +227,8 @@ const JourneyNewApplicant = (props: any) => {
                                         <Circle color="#C1C1C5" radius="1rem" />
                                     </Circle>
                                 </View>
-                                <View
-                                    style={[
-                                        Item(95),
-                                        JourneyNewApplicantStyle.tripPoint
-                                    ]}
-                                >
-                                    <Text
-                                        style={
-                                            JourneyNewApplicantStyle.stopName
-                                        }
-                                    >
+                                <View style={JourneyNewApplicantStyle.tripPoint} >
+                                    <Text style={JourneyNewApplicantStyle.stopName} >
                                         Location B (Your stop)
                                     </Text>
                                 </View>
@@ -340,11 +244,7 @@ const JourneyNewApplicant = (props: any) => {
                                     setModalVisible(!modalVisible);
                                 }}
                             >
-                                <Text
-                                    style={
-                                        JourneyNewApplicantStyle.acceptButtonText
-                                    }
-                                >
+                                <Text style={JourneyNewApplicantStyle.acceptButtonText} >
                                     Accept
                                 </Text>
                             </TouchableOpacity>
@@ -358,11 +258,7 @@ const JourneyNewApplicant = (props: any) => {
                                     setModalVisible(!modalVisible);
                                 }}
                             >
-                                <Text
-                                    style={
-                                        JourneyNewApplicantStyle.declineButtonText
-                                    }
-                                >
+                                <Text style={JourneyNewApplicantStyle.declineButtonText} >
                                     Decline
                                 </Text>
                             </TouchableOpacity>

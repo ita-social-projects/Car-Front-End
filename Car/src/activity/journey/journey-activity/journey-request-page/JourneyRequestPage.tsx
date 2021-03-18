@@ -13,6 +13,11 @@ import NotificationsService from "../../../../../api-service/notifications-servi
 import AuthContext from "../../../../components/auth/AuthContext";
 import * as navigation from "../../../../components/navigation/Navigation";
 import AsyncStorage from "@react-native-community/async-storage";
+import {
+    HTTP_STATUS_OK,
+    MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
+    MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT
+} from "../../../../constants/Constants";
 
 const JourneyRequestPage = (props: any) => {
 
@@ -51,7 +56,7 @@ const JourneyRequestPage = (props: any) => {
                 "\"}",
             }
         ).then((res) => {
-            if (res.status == 200) {
+            if (res.status == HTTP_STATUS_OK) {
                 setRequested(true);
                 (async () => {
                     await AsyncStorage.setItem(
@@ -188,8 +193,8 @@ const JourneyRequestPage = (props: any) => {
             <BottomPopup
                 style={JourneyRequestPageStyle.bottomPopup}
                 snapPoints={[
-                    400,
-                    120,
+                    MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
+                    MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}

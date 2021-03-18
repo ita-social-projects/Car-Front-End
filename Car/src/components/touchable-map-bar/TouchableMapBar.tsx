@@ -29,7 +29,7 @@ function TouchableMapBar (props: any) {
                     <Ionicons
                         style={[
                             TouchableMapBarStyle.barIcon,
-                            { transform: [{ rotate: 0 + "deg" }] }
+                            { transform: [{ rotate: "0deg" }] }
                         ]}
                         name={props?.iconName}
                         size={22}

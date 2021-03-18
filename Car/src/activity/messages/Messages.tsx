@@ -10,6 +10,7 @@ import AuthContext from "../../components/auth/AuthContext";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
 import * as navigation from "../../components/navigation/Navigation";
+import { GRADIENT_END, GRADIENT_START, NOT_EXISTING_ELEMENT_INDEX } from "../../constants/Constants";
 
 const Messages = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
@@ -39,7 +40,7 @@ const Messages = (props: any) => {
                         : "".toUpperCase();
                 const textData = text.toUpperCase();
 
-                return itemData.indexOf(textData) > -1;
+                return itemData.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
             });
 
             setFilteredDataSource(newData);
@@ -90,7 +91,7 @@ const Messages = (props: any) => {
                         </View>
                         <View style={MessagesStyle.dataWrapper}>
                             <LinearTextGradient
-                                locations={[0, 1]}
+                                locations={[GRADIENT_START, GRADIENT_END]}
                                 colors={["#00A3CF", "#5552A0"]}
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 0 }}

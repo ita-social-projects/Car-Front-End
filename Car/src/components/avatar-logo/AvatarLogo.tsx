@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import stc from "string-to-color";
 import UserService from "../../../api-service/user-service/UserService";
+import { FIRST_ELEMENT_INDEX } from "../../constants/Constants";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 
 const AvatarLogo = (props: any) => {
@@ -31,7 +32,7 @@ const AvatarLogo = (props: any) => {
                     ]}
                 >
                     <Text style={AvatarLogoStyle.userAvatarText}>
-                        {user?.name[0] + user?.surname[0]}
+                        {user?.name[FIRST_ELEMENT_INDEX] + user?.surname[FIRST_ELEMENT_INDEX]}
                     </Text>
                 </View>
             )}

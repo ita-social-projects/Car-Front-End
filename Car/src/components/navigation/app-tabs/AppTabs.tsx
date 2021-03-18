@@ -10,12 +10,13 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
+import { EMPTY_COLLECTION_LENGTH, NOT_EXISTING_ELEMENT_INDEX } from "../../../constants/Constants";
 
 const Tabs = createBottomTabNavigator();
 
 const AppTabs = () => {
     const { user } = useContext(AuthContext);
-    let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(0);
+    let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
     NotificationsService.getUnreadNotificationsNumber(user!.id).then((result) =>
         setUnreadNotificationsNumber(result.data as number)
@@ -32,10 +33,10 @@ const AppTabs = () => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
 
-        return hideOnScreens.indexOf(routeName) <= -1;
+        return hideOnScreens.indexOf(routeName) <= NOT_EXISTING_ELEMENT_INDEX;
     };
 
-    const tabBarBadge = unreadNotificationsNumber > 0
+    const tabBarBadge = unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH
         ? unreadNotificationsNumber.toString()
         : undefined;
 

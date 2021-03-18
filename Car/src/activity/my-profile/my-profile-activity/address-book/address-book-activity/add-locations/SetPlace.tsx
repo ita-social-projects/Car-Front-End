@@ -5,11 +5,17 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import APIConfig from "../../../../../../../api-service/APIConfig";
 import TouchableMapBar from "../../../../../../components/touchable-map-bar/TouchableMapBar";
+import {
+    FIRST_ELEMENT_INDEX,
+    THIRD_FROM_END_ELEMENT_INDEX,
+    INITIAL_LATITUDE,
+    INITIAL_LONGITUDE
+} from "../../../../../../constants/Constants";
 import SetPlaceStyle from "./SetPlaceStyle";
 
 const SetPlace = (props: any) => {
-    const [latitude, setLatitude] = useState(49.843844);
-    const [longitude, setLongitude] = useState(24.025581);
+    const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
+    const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
     const [address, setAddress] = useState("");
     const initialRegion = {
         latitude: 49.843844,
@@ -18,11 +24,11 @@ const SetPlace = (props: any) => {
         longitudeDelta: 0.01
     };
 
-    function removeRegionAndPostalCode (json: any) {
-        return json.split(", ").slice(0, -3).join(", ");
-    }
+    const removeRegionAndPostalCode = (json: string) => {
+        return json.split(", ").slice(FIRST_ELEMENT_INDEX, THIRD_FROM_END_ELEMENT_INDEX).join(", ");
+    };
 
-    function getActualAddress () {
+    const getActualAddress = () => {
         return fetch(
             `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`
         )
@@ -35,7 +41,7 @@ const SetPlace = (props: any) => {
 
                 setAddress(resultedAddress);
             });
-    }
+    };
 
     return (
         <View style={SetPlaceStyle.globalContainer}>

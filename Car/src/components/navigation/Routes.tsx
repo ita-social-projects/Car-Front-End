@@ -8,9 +8,9 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
+import { MILISECONDS_IN_MONTH } from "../../constants/Constants";
 
 const Stack = createStackNavigator<AuthParamList>();
-const MILISECONDS_IN_MONTH = 2629800000;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
@@ -25,10 +25,7 @@ const Routes = () => {
                 (await AsyncStorage.getItem("lastLogin")) as string
             );
 
-            if (
-                Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
-                MILISECONDS_IN_MONTH
-            ) {
+            if (Math.abs(currentLogin.getTime() - lastLogin.getTime()) > MILISECONDS_IN_MONTH) {
                 await AsyncStorage.setItem(
                     "lastLogin",
                     currentLogin.toUTCString()
@@ -43,11 +40,16 @@ const Routes = () => {
     const navigator = user ? (
         <Stack.Screen
             name="AppTabs"
-            options={{ headerShown: false }}
             component={AppTabs}
+            options={{
+                headerShown: false
+            }}
         />
     ) : (
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+            name="Login"
+            component={Login}
+        />
     );
 
     return (
