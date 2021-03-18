@@ -5,7 +5,8 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert
+    Alert,
+    ScrollView
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -23,7 +24,6 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import { ScrollView } from "react-native-gesture-handler";
 import {
     FIRST_ELEMENT_INDEX,
     MAX_PLATE_NUMBER_LENGTH,

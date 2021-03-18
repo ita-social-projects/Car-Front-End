@@ -1,6 +1,5 @@
 import React from "react";
-import { View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, View } from "react-native";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
 import OkSearchResultStyle from "./OkSearchResultStyle";
 

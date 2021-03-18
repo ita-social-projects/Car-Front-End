@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Text, TouchableOpacity, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import TouchableCard from "../../../../components/touchable-card/TouchableCard";
 import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
 import StopService from "../../../../../api-service/stop-service/StopService";

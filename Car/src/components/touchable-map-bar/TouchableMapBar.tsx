@@ -1,10 +1,9 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableMapBarStyle from "./TouchableMapBarStyle";
 
-function TouchableMapBar (props: any) {
+const TouchableMapBar = (props: any) => {
     let marginBottom = parseInt(props.marginBottom);
     let marginTop = parseInt(props.marginTop);
     let flex = parseInt(props.flex);
@@ -39,6 +38,6 @@ function TouchableMapBar (props: any) {
             </TouchableOpacity>
         </View>
     );
-}
+};
 
 export default TouchableMapBar;
