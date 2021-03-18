@@ -10,6 +10,9 @@ const AvatarLogo = (props: any) => {
         { height: props?.size, width: props?.size }
     ];
 
+    const userAvatarText = props.user == undefined ?
+        "" : props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX];
+
     return (
         <>
             {props.user?.imageId != null ? (
@@ -26,8 +29,7 @@ const AvatarLogo = (props: any) => {
                     ]}
                 >
                     <Text style={AvatarLogoStyle.userAvatarText}>
-                        {props.user == undefined ?
-                            "" : props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX]}
+                        {userAvatarText}
                     </Text>
                 </View>
             )}
