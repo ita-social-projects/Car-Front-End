@@ -61,7 +61,8 @@ const HeaderStyle = StyleSheet.create({
     headerTitleStyle: {
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",
-        fontSize: 18
+        fontSize: 18,
+        marginLeft: 20
     },
 
     messages: {

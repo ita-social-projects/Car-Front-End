@@ -22,6 +22,7 @@ const Chat = (properties: any) => {
     const { user } = useContext(AuthContext);
     const [connection, setConnection] = useState<HubConnection>();
     const [isLoading, setSpinner] = useState(true);
+    const [isSendDisabled, setDisabled] = useState(true);
 
     useEffect(() => {
         (() => {
@@ -151,12 +152,12 @@ const Chat = (properties: any) => {
 
     const renderSend = (props: any) => {
         return (
-            <Send {...props} style={{ flex: 1, width: "100%" }}>
+            <Send disabled={isSendDisabled} {...props} style={{ flex: 1, width: "100%" }}>
                 <View style={ChatStyle.button}>
                     <Icon
                         name="paper-plane"
                         type="font-awesome"
-                        color="black"
+                        color={isSendDisabled ? "grey" : "black"}
                     />
                 </View>
             </Send>
@@ -222,7 +223,16 @@ const Chat = (properties: any) => {
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     renderTime={() => <View />}
                     messages={messages as any[]}
-                    onInputTextChanged={setMessage}
+                    onInputTextChanged={(value) => {
+                        if(value.trim())
+                        {
+                            setMessage(value);
+                            setDisabled(false);
+                        }else{
+                            setMessage(value);
+                            setDisabled(true);
+                        }
+                    }}
                     text={message}
                     onSend={onSend}
                     scrollToBottom

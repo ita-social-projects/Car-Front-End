@@ -53,6 +53,7 @@ const Messages = (props: any) => {
     const renderHeader = () => {
         return props.isOpenFilter ? (
             <SearchBar
+                maxLength={25}
                 searchIcon={{ color: "black", size: 28 }}
                 onChangeText={(text) => setSearchFilter(text)}
                 onClear={() => setSearchFilter("")}
