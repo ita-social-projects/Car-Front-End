@@ -435,7 +435,7 @@ const JourneyTabs = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity>
                                 <Ionicons
                                     name={"ellipsis-horizontal"}
                                     size={30}
