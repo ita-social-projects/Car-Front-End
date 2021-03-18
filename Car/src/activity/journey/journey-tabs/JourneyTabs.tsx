@@ -66,7 +66,7 @@ const JourneyTabs = () => {
 
     const fadeOut = () => {
         Animated.timing(layoutOpacity, {
-            toValue: MAX_OPACITY,
+            toValue: ZERO_OPACITY,
             duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
