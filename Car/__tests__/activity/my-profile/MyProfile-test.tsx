@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MyProfile from "../../src/activity/my-profile/MyProfile";
+import MyProfile from "../../../src/activity/my-profile/MyProfile";
 
 test("renders correctly", () =>
   expect(renderer.create(<MyProfile />).toJSON()).toMatchInlineSnapshot(`
