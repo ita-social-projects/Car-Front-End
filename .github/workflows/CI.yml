@@ -63,9 +63,9 @@ jobs:
             -Dsonar.projectKey=ita-social-projects_Car-Front-End
             -Dsonar.javascript.lcov.reportPaths=Car/coverage/lcov.info 
             -Dsonar.sources=./Car
-            -Dsonar.exclusions=**/coverage/**,**/__tests__/**,**/ios/**,**/android/**,,**/*config.js,**/*Style.tsx
+            -Dsonar.exclusions=**/coverage/**,**/__tests__/**,**/ios/**,**/android/**,,**/*config.js,**/*Style.tsx,**/*-test.tsx
             -Dsonar.verbose=false
-            -Dsonar.coverage.exclusions=**/__tests__/**,**/coverage/**,**/*config.js,**/styles/**,**/ChatStyles/**,**/ios/**,**/android/**,**/*Style.tsx
+            -Dsonar.coverage.exclusions=**/__tests__/**,**/coverage/**,**/*config.js,**/styles/**,**/ChatStyles/**,**/ios/**,**/android/**,**/*Style.tsx,**/*-test.tsx
             -Dsonar.c.file.suffixes=-
             -Dsonar.cpp.file.suffixes=-
             -Dsonar.objc.file.suffixes=-
