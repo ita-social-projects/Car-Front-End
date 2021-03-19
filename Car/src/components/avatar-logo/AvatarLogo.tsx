@@ -2,20 +2,35 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import stc from "string-to-color";
 import ImageService from "../../../api-service/image-service/ImageService";
-import { FIRST_ELEMENT_INDEX } from "../../constants/Constants";
+import {
+    AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
+    AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+    FIRST_ELEMENT_INDEX
+} from "../../constants/Constants";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 
 const AvatarLogo = (props: any) => {
-    const avatarStyle = [
-        AvatarLogoStyle.userAvatar,
-        { height: props?.size, width: props?.size }
-    ];
 
     const userAvatarText = props.user ?
         props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
 
     const backgroundColor = props.user ?
         stc(props.user.name + " " + props.user.surname): "#000000";
+
+    const avatarStyle = [
+        AvatarLogoStyle.userAvatar,
+        {
+            height: props?.size,
+            width: props?.size,
+            backgroundColor: backgroundColor
+        }
+    ];
+
+    const avatarTextStyle = [AvatarLogoStyle.userAvatarText, {
+        fontSize: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+        lineHeight: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+        paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO
+    }];
 
     const userAvatar = props.user?.imageId ? (
         <Image
@@ -24,12 +39,9 @@ const AvatarLogo = (props: any) => {
         />
     ) : (
         <View
-            style={[
-                avatarStyle,
-                { backgroundColor }
-            ]}
+            style={avatarStyle}
         >
-            <Text style={AvatarLogoStyle.userAvatarText}>
+            <Text style={avatarTextStyle}>
                 {userAvatarText}
             </Text>
         </View>

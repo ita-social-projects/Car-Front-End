@@ -94,34 +94,34 @@ test("renders correctly", () =>
                   <View
                     style={
                       Array [
-                        Array [
-                          Object {
-                            "alignItems": "center",
-                            "borderRadius": 1000,
-                            "justifyContent": "center",
-                          },
-                          Object {
-                            "height": 38.5,
-                            "width": 38.5,
-                          },
-                        ],
+                        Object {
+                          "alignItems": "center",
+                          "borderRadius": 1000,
+                          "justifyContent": "center",
+                        },
                         Object {
                           "backgroundColor": "#d1d8a6",
+                          "height": 38.5,
+                          "width": 38.5,
                         },
                       ]
                     }
                   >
                     <Text
                       style={
-                        Object {
-                          "color": "#FFFFFF",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 16,
-                          "fontWeight": "700",
-                          "lineHeight": 16,
-                          "paddingTop": 3,
-                          "textTransform": "uppercase",
-                        }
+                        Array [
+                          Object {
+                            "color": "#FFFFFF",
+                            "fontFamily": "Open Sans",
+                            "fontWeight": "700",
+                            "textTransform": "uppercase",
+                          },
+                          Object {
+                            "fontSize": 15.4,
+                            "lineHeight": 15.4,
+                            "paddingTop": 15.4,
+                          },
+                        ]
                       }
                     >
                       AB

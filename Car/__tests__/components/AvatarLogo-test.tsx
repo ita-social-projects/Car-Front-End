@@ -11,34 +11,34 @@ test("renders correctly", () =>
     <View
       style={
         Array [
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 1000,
-              "justifyContent": "center",
-            },
-            Object {
-              "height": undefined,
-              "width": undefined,
-            },
-          ],
+          Object {
+            "alignItems": "center",
+            "borderRadius": 1000,
+            "justifyContent": "center",
+          },
           Object {
             "backgroundColor": "#c3b2b6",
+            "height": undefined,
+            "width": undefined,
           },
         ]
       }
     >
       <Text
         style={
-          Object {
-            "color": "#FFFFFF",
-            "fontFamily": "Open Sans",
-            "fontSize": 16,
-            "fontWeight": "700",
-            "lineHeight": 16,
-            "paddingTop": 3,
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "Open Sans",
+              "fontWeight": "700",
+              "textTransform": "uppercase",
+            },
+            Object {
+              "fontSize": NaN,
+              "lineHeight": NaN,
+              "paddingTop": NaN,
+            },
+          ]
         }
       >
         AA
@@ -68,6 +68,7 @@ test("renders correctly", () =>
             "justifyContent": "center",
           },
           Object {
+            "backgroundColor": "#c3b2b6",
             "height": undefined,
             "width": undefined,
           },
@@ -81,34 +82,34 @@ test("renders correctly", () =>
     <View
       style={
         Array [
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 1000,
-              "justifyContent": "center",
-            },
-            Object {
-              "height": undefined,
-              "width": undefined,
-            },
-          ],
+          Object {
+            "alignItems": "center",
+            "borderRadius": 1000,
+            "justifyContent": "center",
+          },
           Object {
             "backgroundColor": "#000000",
+            "height": undefined,
+            "width": undefined,
           },
         ]
       }
     >
       <Text
         style={
-          Object {
-            "color": "#FFFFFF",
-            "fontFamily": "Open Sans",
-            "fontSize": 16,
-            "fontWeight": "700",
-            "lineHeight": 16,
-            "paddingTop": 3,
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "Open Sans",
+              "fontWeight": "700",
+              "textTransform": "uppercase",
+            },
+            Object {
+              "fontSize": NaN,
+              "lineHeight": NaN,
+              "paddingTop": NaN,
+            },
+          ]
         }
       >
         
