@@ -2,7 +2,9 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 
 const NewNotificationStyle = EStyleSheet.create({
-    content: {},
+    content: {
+        width: "65%"
+    },
 
     notificationContainer: {
         marginTop: "0.95rem",
@@ -29,6 +31,7 @@ const NewNotificationStyle = EStyleSheet.create({
 
     time: {
         marginLeft: 20,
+        width: "15%"
     },
 
     dateRead: {

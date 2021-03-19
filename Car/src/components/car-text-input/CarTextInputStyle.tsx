@@ -18,11 +18,16 @@ const CarTextInputStyle = StyleSheet.create({
         paddingVertical: 8,
         fontSize: 16,
         lineHeight: 24,
+        textTransform: "uppercase",
         zIndex: 0
     },
 
     errorText: {
         color: "red"
+    },
+
+    errorBorder: {
+        borderColor: "red"
     }
 });
 

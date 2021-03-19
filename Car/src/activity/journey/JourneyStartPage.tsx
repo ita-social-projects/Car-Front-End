@@ -6,9 +6,16 @@ import AuthContext from "../../components/auth/AuthContext";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
 import TouchableNavigationBlock from "../../components/touchable-navigation-block/TouchableNavigationBlock";
+import {
+    FIRST_ELEMENT_INDEX,
+    SECOND_ELEMENT_INDEX,
+    THIRD_ELEMENT_INDEX,
+    FOURTH_ELEMENT_INDEX,
+    EMPTY_COLLECTION_LENGTH
+} from "../../constants/Constants";
 
 const JourneyStartPage = (props: any) => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(FIRST_ELEMENT_INDEX);
     const [allButtonStyle, setAllButtonStyle] = useState(
         JourneyStartPageStyle.activeButton
     );
@@ -96,7 +103,7 @@ const JourneyStartPage = (props: any) => {
                     activeOpacity={1}
                     style={[JourneyStartPageStyle.allJourneys, allButtonStyle]}
                     onPress={() => {
-                        setSelectedIndex(0);
+                        setSelectedIndex(FIRST_ELEMENT_INDEX);
                         setAllButtonStyle(JourneyStartPageStyle.activeButton);
                         setPastButtonStyle(
                             JourneyStartPageStyle.unactiveButton
@@ -125,7 +132,7 @@ const JourneyStartPage = (props: any) => {
                         pastButtonStyle
                     ]}
                     onPress={() => {
-                        setSelectedIndex(1);
+                        setSelectedIndex(SECOND_ELEMENT_INDEX);
                         setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
                         setPastButtonStyle(JourneyStartPageStyle.activeButton);
                         setUpcomingButtonStyle(
@@ -152,7 +159,7 @@ const JourneyStartPage = (props: any) => {
                         upcomingButtonStyle
                     ]}
                     onPress={() => {
-                        setSelectedIndex(2);
+                        setSelectedIndex(THIRD_ELEMENT_INDEX);
                         setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
                         setPastButtonStyle(
                             JourneyStartPageStyle.unactiveButton
@@ -181,7 +188,7 @@ const JourneyStartPage = (props: any) => {
                         scheduledButtonStyle
                     ]}
                     onPress={() => {
-                        setSelectedIndex(3);
+                        setSelectedIndex(FOURTH_ELEMENT_INDEX);
                         setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
                         setPastButtonStyle(
                             JourneyStartPageStyle.unactiveButton
@@ -205,23 +212,23 @@ const JourneyStartPage = (props: any) => {
                 </TouchableOpacity>
             </View>
 
-            {selectedIndex === 0 && (
+            {selectedIndex === FIRST_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
-                    {upcomingJourneys.length > 0 && (
+                    {upcomingJourneys.length > EMPTY_COLLECTION_LENGTH && (
                         <Text style={JourneyStartPageStyle.tabTextStyle}>
                             Upcoming
                         </Text>
                     )}
                     {<JourneyCardList journey={upcomingJourneys} />}
 
-                    {pastJourneys.length > 0 && (
+                    {pastJourneys.length > EMPTY_COLLECTION_LENGTH && (
                         <Text style={JourneyStartPageStyle.tabTextStyle}>
                             Past
                         </Text>
                     )}
                     {<JourneyCardList journey={pastJourneys} />}
 
-                    {scheduledJourneys.length > 0 && (
+                    {scheduledJourneys.length > EMPTY_COLLECTION_LENGTH && (
                         <Text style={JourneyStartPageStyle.tabTextStyle}>
                             Scheduled
                         </Text>
@@ -229,17 +236,17 @@ const JourneyStartPage = (props: any) => {
                     {<JourneyCardList journey={scheduledJourneys} />}
                 </View>
             )}
-            {selectedIndex === 1 && (
+            {selectedIndex === SECOND_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
                     {<JourneyCardList journey={pastJourneys} />}
                 </View>
             )}
-            {selectedIndex === 2 && (
+            {selectedIndex === THIRD_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
                     {<JourneyCardList journey={upcomingJourneys} />}
                 </View>
             )}
-            {selectedIndex === 3 && (
+            {selectedIndex === FOURTH_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
                     {<JourneyCardList journey={scheduledJourneys} />}
                 </View>

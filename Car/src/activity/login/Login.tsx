@@ -3,6 +3,7 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
+import { REFRESHER_TIMEOUT } from "../../constants/Constants";
 
 const Login = (properties: any) => {
     const { login } = useContext(AuthContext);
@@ -28,7 +29,7 @@ const Login = (properties: any) => {
     const startRefresher = () => {
         var intervalId = setInterval(() => {
             refresher(intervalId);
-        }, 500);
+        }, REFRESHER_TIMEOUT);
     };
 
     useEffect(() => {

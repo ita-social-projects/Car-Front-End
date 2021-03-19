@@ -8,12 +8,6 @@ const HeaderStyle = StyleSheet.create({
         backgroundColor: "#FFFFFF"
     },
 
-    requestButton: {
-        paddingRight: 17,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-
     layout: {
         height: Dimensions.get("screen").height,
         width: Dimensions.get("screen").width,
@@ -31,31 +25,6 @@ const HeaderStyle = StyleSheet.create({
 
     myProfileHeaderStyle: {
         height: Platform.OS === "ios" ? 144 : 120
-    },
-
-    backButtonOpacity: {
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
-
-    backButtonTextView: {
-        flexDirection: "column",
-        justifyContent: "center"
-    },
-
-    buttonText: {
-        color: "#02A2CF",
-        fontFamily: Font.OpenSans.ExtraBold,
-        fontSize: 20,
-        fontWeight: "700"
-    },
-
-    orangeButtonText: {
-        color: "#EC6400"
-    },
-
-    moreOptionsIcon: {
-        paddingRight: 12
     },
 
     headerTitleStyle: {

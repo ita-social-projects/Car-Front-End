@@ -4,6 +4,7 @@ import UserService from "../../../api-service/user-service/UserService";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import AuthContext from "../auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
+import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/Constants";
 
 const AvatarLogoTitle = () => {
     const [user, setUser] = useState(useContext(AuthContext).user);
@@ -24,7 +25,7 @@ const AvatarLogoTitle = () => {
                         {user?.position}
                     </Text>
                     <Text style={AvatarLogoTitleStyle.headerUserAdditionalData}>
-                        {user?.journeyCount === 1
+                        {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
                             ? "1 ride"
                             : user?.journeyCount + " rides"}
                         , 2 badges

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Image, Text, View } from "react-native";
 import stc from "string-to-color";
-import UserService from "../../../api-service/user-service/UserService";
+import { FIRST_ELEMENT_INDEX } from "../../constants/Constants";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 
 const AvatarLogo = (props: any) => {
@@ -10,28 +10,26 @@ const AvatarLogo = (props: any) => {
         { height: props?.size, width: props?.size }
     ];
 
-    const [user, setUser] = useState(props.user);
-
-    useEffect(() => {
-        UserService.getUser(user.id).then((res) => setUser(res.data));
-    }, []);
+    const userAvatarText = props.user == undefined ?
+        "" : props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX];
 
     return (
         <>
-            {user?.imageId != null ? (
+            {props.user?.imageId != null ? (
                 <Image
-                    source={{ uri: user?.imageId }}
+                    source={{ uri: props.user?.imageId }}
                     style={avatarStyle}
                 />
             ) : (
                 <View
                     style={[
                         avatarStyle,
-                        { backgroundColor: stc(user.name + " " + user.surname) }
+                        { backgroundColor: props.user == undefined ?
+                            "#000000" : stc(props.user.name + " " + props.user.surname) }
                     ]}
                 >
                     <Text style={AvatarLogoStyle.userAvatarText}>
-                        {user?.name[0] + user?.surname[0]}
+                        {userAvatarText}
                     </Text>
                 </View>
             )}

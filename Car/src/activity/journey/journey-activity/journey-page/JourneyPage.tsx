@@ -17,8 +17,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../components/navigation/Navigation";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
-import { getStatusBarHeight } from "react-native-status-bar-height";
 import AsyncStorage from "@react-native-community/async-storage";
+import { GRADIENT_END, GRADIENT_START, MAX_JOURNEY_PAGE_POPUP_HEIGHT, MIN_JOURNEY_PAGE_POPUP_HEIGHT } from "../../../../constants/Constants";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -45,7 +45,7 @@ const JourneyPage = ({ props }: any) => {
             CarService.getById(res.data?.car?.id!).then((carRes) => setCar(carRes.data));
             setLoading(false);
         });
-    }, [1]);
+    }, []);
 
     const Separator = () => <Divider style={JourneyPageStyle.separator} />;
 
@@ -125,7 +125,7 @@ const JourneyPage = ({ props }: any) => {
                 </View>
                 <View style={JourneyPageStyle.userInfoBlock}>
                     <LinearTextGradient
-                        locations={[0, 1]}
+                        locations={[GRADIENT_START, GRADIENT_END]}
                         colors={["#00A3CF", "#5552A0"]}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 0 }}
@@ -265,8 +265,8 @@ const JourneyPage = ({ props }: any) => {
             <BottomPopup
                 style={JourneyPageStyle.bottomPopup}
                 snapPoints={[
-                    671 + getStatusBarHeight(),
-                    262 + getStatusBarHeight(),
+                    MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+                    MIN_JOURNEY_PAGE_POPUP_HEIGHT,
                 ]}
                 renderContent={journeyContent}
                 initialSnap={0}

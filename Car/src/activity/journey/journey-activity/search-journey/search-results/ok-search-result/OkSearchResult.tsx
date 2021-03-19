@@ -1,11 +1,10 @@
 import React from "react";
-import { View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, View } from "react-native";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
 import OkSearchResultStyle from "./OkSearchResultStyle";
 
-const OkSearchResult = ({ route }: any) => {
-    const journeys = route.params.journeys;
+const OkSearchResult = (props: any) => {
+    const journeys = props.route.params.journeys;
 
     return (
         <View style={OkSearchResultStyle.container}>

@@ -2,13 +2,13 @@ import React from "react";
 import { Image } from "react-native";
 import ErrorAlertStyle from "./ErrorAlertStyle";
 
+const { Popup } = require("popup-ui");
+
 let IsAlertShowing = false;
 
 const ErrorAlert = (message?: string, func?: any) => {
     if (!IsAlertShowing) {
         IsAlertShowing = true;
-
-        const { Popup } = require("popup-ui");
 
         Popup.show({
             type: "Warning",

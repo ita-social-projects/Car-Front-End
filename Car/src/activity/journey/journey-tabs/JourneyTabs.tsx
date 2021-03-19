@@ -1,8 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyNewApplicant from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
@@ -12,7 +10,6 @@ import JourneyPage from "../journey-activity/journey-page/JourneyPage";
 import BadSearchResult from "../journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 import OkSearchResult from "../journey-activity/search-journey/search-results/ok-search-result/OkSearchResult";
 import JourneyStyle from "../JourneyStartPageStyle";
-import * as navigation from "../../../components/navigation/Navigation";
 import JourneyPageStyle from "../journey-activity/journey-page/JourneyPageStyle";
 import MenuButton from "../../../components/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
@@ -21,15 +18,30 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
 import Chat from "../../messages/messages-activity/chat/Chat";
 import JourneyRequestPage from "../journey-activity/journey-request-page/JourneyRequestPage";
-
-const StackTabs = createStackNavigator();
+import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
+import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
+import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
+import {
+    ANIMATION_DURATION,
+    FIRST_ELEMENT_INDEX,
+    HALF_OPACITY,
+    JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
+    MAX_OPACITY,
+    MAX_POPUP_POSITION,
+    MIN_POPUP_HEIGHT,
+    MIN_POPUP_POSITION,
+    SLEEP_DURATION,
+    ZERO_OPACITY
+} from "../../../constants/Constants";
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
 
-    const layoutOpacity = useState(new Animated.Value(0))[0];
-    const journeyOpacity = useState(new Animated.Value(1))[0];
+    const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
+    const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
+
+    const StackTabs = createStackNavigator();
 
     const noAction = () => <></>;
 
@@ -40,28 +52,28 @@ const JourneyTabs = () => {
         setVisibility(true);
 
         Animated.timing(layoutOpacity, {
-            toValue: 0.5,
-            duration: 500,
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
 
         Animated.timing(journeyOpacity, {
-            toValue: 0.5,
-            duration: 500,
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
     };
 
     const fadeOut = () => {
         Animated.timing(layoutOpacity, {
-            toValue: 0,
-            duration: 500,
+            toValue: ZERO_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
 
         Animated.timing(journeyOpacity, {
-            toValue: 1,
-            duration: 500,
+            toValue: MAX_OPACITY,
+            duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
     };
@@ -69,7 +81,7 @@ const JourneyTabs = () => {
     const closeHandle = () => {
         setOpen(false);
         fadeOut();
-        (async () => sleep(700))().then(() => setVisibility(false));
+        (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {
@@ -82,7 +94,7 @@ const JourneyTabs = () => {
         }
 
         moreOptionsRef?.current?.snapTo(
-            isOpen ? 0 : 1
+            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
         );
 
     };
@@ -125,25 +137,7 @@ const JourneyTabs = () => {
                         headerTitle: "Create a Journey",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
                 />
 
@@ -154,25 +148,7 @@ const JourneyTabs = () => {
                         headerTitle: "Search for a Journey",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
                 />
 
@@ -182,34 +158,8 @@ const JourneyTabs = () => {
                         title: "Journey",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity onPress={pressHandle} >
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton,
+                        headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
                 >
                     {(props: any) => {
@@ -222,7 +172,7 @@ const JourneyTabs = () => {
                                 </Animated.View>
                                 {props.route.params.isDriver && <BottomPopup
                                     refForChild={moreOptionsRef}
-                                    snapPoints={[0, 280]}
+                                    snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                     renderContent={moreOptionsContent}
                                     initialSnap={0}
                                     renderHeader={moreOptionsHeader}
@@ -240,25 +190,7 @@ const JourneyTabs = () => {
                         title: "Confirm Journey",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
                 />
                 <StackTabs.Screen
@@ -268,37 +200,8 @@ const JourneyTabs = () => {
                         title: "Search result",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    navigation.navigate("Search Journey");
-                                }}
-                            >
-                                <Text style={HeaderStyle.buttonText}>
-                                    Request
-                                </Text>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderRequestButton
                     }}
                 />
 
@@ -309,37 +212,7 @@ const JourneyTabs = () => {
                         title: "Search result",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    navigation.navigate("Search Journey");
-                                }}
-                            >
-                                <Text style={HeaderStyle.buttonText}>
-                                    Request
-                                </Text>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton,
                     }}
                 />
                 <StackTabs.Screen
@@ -349,63 +222,20 @@ const JourneyTabs = () => {
                         title: "Search Journey",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.requestButton}
-                                onPress={() => {
-                                    navigation.navigate("Search Journey", {});
-                                }}
-                            ></TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderRequestButton
                     }}
                 />
 
                 <StackTabs.Screen
                     name="Applicant Page"
+                    component={JourneyApplicant}
                     options={{
                         title: "SoftServian",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton
                     }}
-                    component={JourneyApplicant}
                 />
 
                 <StackTabs.Screen
@@ -415,34 +245,8 @@ const JourneyTabs = () => {
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
                         headerTitleStyle: HeaderStyle.headerTitleStyle,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={HeaderStyle.backButtonOpacity}
-                                onPress={() => {
-                                    navigation.goBack();
-                                }}
-                            >
-                                <Ionicons
-                                    name={"chevron-back-outline"}
-                                    size={35}
-                                    color={"#02A2CF"}
-                                />
-                                <View style={HeaderStyle.backButtonTextView}>
-                                    <Text style={HeaderStyle.buttonText}>
-                                        Back
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity>
-                                <Ionicons
-                                    name={"ellipsis-horizontal"}
-                                    size={30}
-                                    style={HeaderStyle.moreOptionsIcon}
-                                />
-                            </TouchableOpacity>
-                        )
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderEllipsis
                     }}
                 />
 

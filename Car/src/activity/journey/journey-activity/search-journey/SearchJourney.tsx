@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Text, TouchableOpacity, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import TouchableCard from "../../../../components/touchable-card/TouchableCard";
 import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
 import StopService from "../../../../../api-service/stop-service/StopService";
@@ -15,27 +14,40 @@ import JourneyService from "../../../../../api-service/journey-service/JourneySe
 import Journey from "../../../../../models/Journey";
 import * as navigation from "../../../../components/navigation/Navigation";
 import StopType from "../../../../../models/stop/StopType";
+import {
+    HIDDEN_MAP_Z_INDEX,
+    SHOWN_MAP_Z_INDEX,
+    INITIAL_LATITUDE,
+    INITIAL_LONGITUDE,
+    SINGLE_ELEMENT_COLLECTION_LENGTH
+} from "../../../../constants/Constants";
 
-function SearchJourney () {
+const SearchJourney = () => {
     const { user } = useContext(AuthContext);
 
     const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
     const [fromDirection, setFromDirection] = useState("Your location");
     const [isOpen, setOpen] = useState(false);
-    const [latitude, setLatitude] = useState<number | undefined>(1);
-    const [longitude, setLongitude] = useState<number | undefined>(1);
-    const [isMapOpen, setMapOpen] = useState(100);
+    const [latitude, setLatitude] = useState<number | undefined>(INITIAL_LATITUDE);
+    const [longitude, setLongitude] = useState<number | undefined>(INITIAL_LONGITUDE);
+    const [isMapOpen, setMapOpen] = useState(HIDDEN_MAP_Z_INDEX);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
     const [journeys, setJourneys] = useState<Array<Journey>>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        // eslint-disable-next-line no-magic-numbers
         JourneyService.getJourney(1).then((res1) => {
+            // eslint-disable-next-line no-magic-numbers
             JourneyService.getJourney(2).then((res2) => {
+                // eslint-disable-next-line no-magic-numbers
                 JourneyService.getJourney(3).then((res3) => {
+                    // eslint-disable-next-line no-magic-numbers
                     JourneyService.getJourney(5).then((res4) => {
+                        // eslint-disable-next-line no-magic-numbers
                         JourneyService.getJourney(7).then((res5) => {
+                            // eslint-disable-next-line no-magic-numbers
                             JourneyService.getJourney(2).then((res6) => {
                                 setJourneys([
                                     res1.data,
@@ -125,7 +137,7 @@ function SearchJourney () {
                 <View style={SearchJourneyStyle.insideContainer}>
                     {loading ? (
                         <></>
-                    ) : locations.length != 1 ? (
+                    ) : locations.length != SINGLE_ELEMENT_COLLECTION_LENGTH ? (
                         <>
                             <TouchableCard
                                 cardName="Map"
@@ -136,7 +148,7 @@ function SearchJourney () {
                                 iconColor="#414045"
                                 size={25}
                                 onPress={() => {
-                                    setMapOpen(200);
+                                    setMapOpen(SHOWN_MAP_Z_INDEX);
                                 }}
                             />
                             {locations.map((item: any) => (
@@ -245,6 +257,6 @@ function SearchJourney () {
             </ScrollView>
         </View>
     );
-}
+};
 
 export default SearchJourney;

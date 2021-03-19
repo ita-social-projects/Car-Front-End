@@ -5,7 +5,8 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert
+    Alert,
+    ScrollView
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -23,7 +24,11 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+    FIRST_ELEMENT_INDEX,
+    MAX_PLATE_NUMBER_LENGTH,
+    MIN_PLATE_NUMBER_LENGTH
+} from "../../../../../../constants/Constants";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
@@ -79,9 +84,9 @@ const AddCars = () => {
         if (
             plateNumber === null ||
             plateNumber === undefined ||
-            plateNumber.length < 4 ||
-            plateNumber.length > 10 ||
-            !plateNumber.match(/^[A-Za-zА-Яа-я0-9-]+$/)
+            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
+            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
+            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
         ) {
             showAlert("Plate number is not valid!");
 
@@ -146,7 +151,7 @@ const AddCars = () => {
         setBrand(brand);
         ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
             setModels(res.data);
-            modelPickerController.selectItem(res.data[0]?.id.toString());
+            modelPickerController.selectItem(res.data[FIRST_ELEMENT_INDEX]?.id.toString());
             modelPickerController.open();
         });
     };

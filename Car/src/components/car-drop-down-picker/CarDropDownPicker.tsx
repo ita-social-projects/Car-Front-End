@@ -1,67 +1,67 @@
 import React from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { DROP_DOWN_MAX_HEIGHT } from "../../constants/Constants";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
 
-function CarDropDownPicker (props: any) {
-    return (
-        <View style={props.required && { justifyContent: "center" }}>
-            {props.required && (
-                <Text
-                    style={[
-                        CarDropDownPickerStyle.requiredPointer,
-                        { zIndex: props.zIndex + 10 }
-                    ]}
-                >
-                    *
-                </Text>
-            )}
-            <DropDownPicker
-                zIndex={props.zIndex}
-                customArrowDown={() => (
-                    <Ionicons name="caret-down-outline" size={14} />
-                )}
-                customArrowUp={() => (
-                    <Ionicons name="caret-up-outline" size={14} />
-                )}
-                items={props.items ?? []}
-                searchable={true}
-                searchablePlaceholder="Manual input"
-                searchablePlaceholderTextColor="gray"
-                searchableError={() => <Text>Not Found</Text>}
-                placeholder={props.placeHolder}
-                defaultValue={props.defaultValue}
+const CarDropDownPicker = (props: any) => (
+    <View style={props.required && { justifyContent: "center" }}>
+        {props.required && (
+            <Text
                 style={[
-                    CarDropDownPickerStyle.container,
-                    props.disabled && CarDropDownPickerStyle.disabledStyle
+                    CarDropDownPickerStyle.requiredPointer,
+                    { zIndex: props.zIndex }
                 ]}
-                dropDownStyle={CarDropDownPickerStyle.dropDownStyle}
-                containerStyle={[{ height: 48 }, props.style]}
-                placeholderStyle={[
-                    CarDropDownPickerStyle.placeholderStyle,
-                    props.required && { paddingLeft: 12 },
-                    CarDropDownPickerStyle.initialPlaceHolder
-                ]}
-                selectedLabelStyle={[
-                    CarDropDownPickerStyle.placeholderStyle,
-                    props.required && { paddingLeft: 12 }
-                ]}
-                itemStyle={CarDropDownPickerStyle.itemStyle}
-                onChangeItem={
-                    props.selectHandle
-                        ? (item) => {
-                            props.selectHandle(item);
-                        }
-                        : () => {}
-                }
-                dropDownMaxHeight={Dimensions.get("window").height / 4}
-                autoScrollToDefaultValue={true}
-                disabled={props.disabled}
-                controller={props.controller}
-                onOpen={props.onOpen}
-            />
-        </View>
-    );
-}
+            >
+                    *
+            </Text>
+        )}
+        <DropDownPicker
+            zIndex={props.zIndex}
+            customArrowDown={() => (
+                <Ionicons name="caret-down-outline" size={14} />
+            )}
+            customArrowUp={() => (
+                <Ionicons name="caret-up-outline" size={14} />
+            )}
+            items={props.items ?? []}
+            searchable={true}
+            searchablePlaceholder="Manual input"
+            searchablePlaceholderTextColor="gray"
+            searchableError={() => <Text>Not Found</Text>}
+            placeholder={props.placeHolder}
+            defaultValue={props.defaultValue}
+            style={[
+                CarDropDownPickerStyle.container,
+                props.disabled && CarDropDownPickerStyle.disabledStyle
+            ]}
+            dropDownStyle={CarDropDownPickerStyle.dropDownStyle}
+            containerStyle={[{ height: 48 }, props.style]}
+            placeholderStyle={[
+                CarDropDownPickerStyle.placeholderStyle,
+                props.required && { paddingLeft: 12 },
+                CarDropDownPickerStyle.initialPlaceHolder
+            ]}
+            selectedLabelStyle={[
+                CarDropDownPickerStyle.placeholderStyle,
+                props.required && { paddingLeft: 12 }
+            ]}
+            itemStyle={CarDropDownPickerStyle.itemStyle}
+            onChangeItem={
+                props.selectHandle
+                    ? (item) => {
+                        props.selectHandle(item);
+                    }
+                    : () => <></>
+            }
+            dropDownMaxHeight={DROP_DOWN_MAX_HEIGHT}
+            autoScrollToDefaultValue={true}
+            disabled={props.disabled}
+            controller={props.controller}
+            onOpen={props.onOpen}
+        />
+    </View>
+);
+
 export default CarDropDownPicker;

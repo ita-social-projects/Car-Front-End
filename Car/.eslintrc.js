@@ -32,7 +32,7 @@ module.exports = {
         "space-before-function-paren": "error",
         "no-duplicate-imports": "error",
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/exhaustive-deps": "off",
         "newline-after-var": ["error", "always"],
         "newline-before-return": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
@@ -41,7 +41,7 @@ module.exports = {
         "no-await-in-loop": "error",
         "no-extra-boolean-cast": "error",
         "no-unreachable": "error",
-        "no-magic-numbers": "warn",
+        "no-magic-numbers": "error",
         "no-redeclare": "error",
         "no-return-await": "error",
         "no-return-assign": "error",
@@ -62,7 +62,7 @@ module.exports = {
         "semi": ["error", "always"],
     },
     "overrides": [{
-        "files": ["*Style.tsx"],
+        "files": ["*Style.tsx", "Constants.tsx"],
         "rules": {
             "no-magic-numbers": "off",
         },
