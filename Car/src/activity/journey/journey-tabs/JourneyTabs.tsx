@@ -34,14 +34,14 @@ import {
     ZERO_OPACITY
 } from "../../../constants/Constants";
 
-const StackTabs = createStackNavigator();
-
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
+
+    const StackTabs = createStackNavigator();
 
     const noAction = () => <></>;
 
