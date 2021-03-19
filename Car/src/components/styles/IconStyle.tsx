@@ -1,5 +1,6 @@
 import Font from "../../data/fonts/Font";
 import EStyleSheet from "react-native-extended-stylesheet";
+
 const IconStyle = EStyleSheet.create({
     icon: {
         fontFamily: Font.OpenSans.Bold,

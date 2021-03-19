@@ -229,7 +229,7 @@ const JourneyPage = ({ props }: any) => {
         </View>
     );
 
-    const journeyContent = () => (
+    const JourneyContent = () => (
         <View style={JourneyPageStyle.mainContainer}>
             {isLoading ? (
                 <View style={JourneyPageStyle.loadingContainer}>
@@ -252,8 +252,8 @@ const JourneyPage = ({ props }: any) => {
                     >
 
                         <Car />
-                        <ApplicantsBlock />
                         <StopsBlock />
+                        <ApplicantsBlock />
 
                     </ScrollView>
                     <Separator />
@@ -274,7 +274,7 @@ const JourneyPage = ({ props }: any) => {
                     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
                 ]}
-                renderContent={journeyContent}
+                renderContent={() => <JourneyContent />}
                 initialSnap={0}
                 renderHeader={() => <></>}
                 enabledInnerScrolling={false}

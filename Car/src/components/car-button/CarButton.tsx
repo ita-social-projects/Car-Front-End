@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import CarButtonStyle from "./CarButtonStyle";
 
-function CarButton () {
+const CarButton = () => {
     return (
         <TouchableOpacity
             style={[CarButtonStyle.button, CarButtonStyle.whiteButton]}
@@ -10,5 +10,6 @@ function CarButton () {
             <Text style={[CarButtonStyle.title]}>props.title</Text>
         </TouchableOpacity>
     );
-}
+};
+
 export default CarButton;

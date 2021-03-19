@@ -22,8 +22,7 @@ const JourneyPageStyle = StyleSheet.create({
 
     carContainer: {
         paddingTop: 22,
-        paddingBottom: 30,
-        paddingLeft: 12,
+        paddingLeft: 16,
         flexDirection: "row"
     },
 
@@ -111,6 +110,7 @@ const JourneyPageStyle = StyleSheet.create({
     userBlock: {
         flexDirection: "row",
         justifyContent: "space-around",
+        paddingLeft: 2,
     },
 
     driverBlockWhiteSpace: {
@@ -191,7 +191,8 @@ const JourneyPageStyle = StyleSheet.create({
         width: "100%",
         justifyContent: "space-around",
         marginTop: 20,
-        marginLeft: 10
+        marginLeft: 14,
+        paddingBottom: 30,
     },
 
     stopListItem: {

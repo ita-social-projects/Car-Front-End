@@ -2,13 +2,13 @@ import React from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-function Circle (props: {
+const Circle = (props: {
     color: string;
     radius: string;
     children?: React.ReactNode;
     base?: boolean;
     marginTop?: string;
-}) {
+}) => {
     let innerStyle = EStyleSheet.create({
         circle: {
             backgroundColor: props.color,
@@ -33,6 +33,6 @@ function Circle (props: {
             {props.children}
         </View>
     );
-}
+};
 
 export default Circle;
