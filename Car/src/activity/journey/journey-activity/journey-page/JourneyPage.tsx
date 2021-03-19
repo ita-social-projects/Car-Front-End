@@ -18,7 +18,13 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
-import { GRADIENT_END, GRADIENT_START, MAX_JOURNEY_PAGE_POPUP_HEIGHT, MIN_JOURNEY_PAGE_POPUP_HEIGHT } from "../../../../constants/Constants";
+import {
+    GRADIENT_END,
+    GRADIENT_START,
+    MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+    MIN_JOURNEY_PAGE_POPUP_HEIGHT
+} from "../../../../constants/Constants";
+import ImageService from "../../../../../api-service/image-service/ImageService";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -87,7 +93,7 @@ const JourneyPage = ({ props }: any) => {
                 {car?.imageId ? (
                     <Image
                         source={{
-                            uri: car?.imageId
+                            uri: ImageService.getImageById(car?.imageId)
                         }}
                         style={JourneyPageStyle.carAvatar}
                     />

@@ -7,6 +7,7 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
+import ImageService from "../../../../../api-service/image-service/ImageService";
 
 const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
@@ -91,7 +92,7 @@ const Cars = (props: any) => {
                                             item!.imageId ? (
                                                 <Image
                                                     source={{
-                                                        uri: item?.imageId
+                                                        uri: ImageService.getImageById(item?.imageId!)
                                                     }}
                                                     style={CarsStyle.carAvatar}
                                                 />

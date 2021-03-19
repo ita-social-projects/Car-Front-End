@@ -30,18 +30,16 @@ const NewNotificationStyle = EStyleSheet.create({
     },
 
     time: {
-        marginLeft: 20,
-        width: "15%"
+        paddingTop: 22,
+        flex: 1,
+        justifyContent: "flex-end",
+        alignItems: "flex-end"
     },
 
     dateRead: {
         fontFamily: Font.OpenSans.Regular,
         color: "#909095",
-        fontSize: "0.825rem",
-        position: "absolute",
-        top: "0.15rem",
-        right: "-0.35rem",
-        textAlign: "right"
+        fontSize: "0.825rem"
     },
 
     avatar: {
@@ -51,11 +49,7 @@ const NewNotificationStyle = EStyleSheet.create({
     dateUnread: {
         fontFamily: Font.OpenSans.Bold,
         color: "#02a2cf",
-        fontSize: "0.825rem",
-        position: "absolute",
-        top: "0.15rem",
-        right: "-0.35rem",
-        textAlign: "right"
+        fontSize: "0.825rem"
     },
 
     optionsLineRead: {

@@ -16,11 +16,12 @@ import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/Constants";
+import UserService from "../../../../../api-service/user-service/UserService";
 
 const Chat = (properties: any) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
-    const { user } = useContext(AuthContext);
+    const [user, setUser] = useState(useContext(AuthContext).user);
     const [connection, setConnection] = useState<HubConnection>();
     const [isLoading, setSpinner] = useState(true);
     const [isSendDisabled, setDisabled] = useState(true);
@@ -34,7 +35,11 @@ const Chat = (properties: any) => {
 
             setConnection(newConnection);
         })();
+
         properties.navigation.setOptions({ headerTitle: properties.route.params.header });
+
+        UserService.getUser(user!.id).then((res) => setUser(res.data));
+
     }, []);
 
     useEffect(() => {
@@ -56,8 +61,8 @@ const Chat = (properties: any) => {
                         text: element?.text,
                         createdAt: element?.createdAt,
                         user: {
-                            _id: element?.senderId?.toString(),
-                            name: element?.sender?.name + " " + element?.sender?.surname
+                            _id: element?.senderId + "|" + element?.sender?.imageId,
+                            name: element?.sender?.name + "|" + element?.sender?.surname
                         }
                     };
 
@@ -85,8 +90,8 @@ const Chat = (properties: any) => {
                             text: receivedMessage.text,
                             createdAt: receivedMessage.createdAt,
                             user: {
-                                _id: receivedMessage.senderId?.toString(),
-                                name: receivedMessage?.sender?.name + " " + receivedMessage?.sender?.surname
+                                _id: receivedMessage.senderId + "|" + receivedMessage?.sender?.senderId,
+                                name: receivedMessage?.sender?.name + "|" + receivedMessage?.sender?.surname
                             }
                         } as any
                     )
@@ -123,87 +128,79 @@ const Chat = (properties: any) => {
 
     };
 
-    const renderBubble = (props: any) => {
-        return (
-            <Bubble
-                {...props}
-                wrapperStyle={{
-                    left: {
-                        backgroundColor: "#F1F1F4"
-                    },
-                    right: {
-                        backgroundColor: "#EB7A89"
-                    }
-                }}
-                textStyle={{
-                    left: {
-                        color: "#000000",
-                        paddingHorizontal: 8,
-                        paddingVertical: 2
-                    },
-                    right: {
-                        color: "#FFFFFF",
-                        paddingHorizontal: 8,
-                        paddingVertical: 2
-                    }
-                }}
-            />
-        );
-    };
-
-    const renderSend = (props: any) => {
-        return (
-            <Send disabled={isSendDisabled} {...props} style={{ flex: 1, width: "100%" }}>
-                <View style={ChatStyle.button}>
-                    <Icon
-                        name="paper-plane"
-                        type="font-awesome"
-                        color={isSendDisabled ? "grey" : "black"}
-                    />
-                </View>
-            </Send>
-        );
-    };
-
-    const renderInputToolbar = (props: any) => {
-        return (
-            <InputToolbar
-                {...props}
-                required
-                autogrow
-                multiline
-                flex={1}
-                primaryStyle={{
-                    borderWidth: 2,
-                    marginHorizontal: 10,
-                    justifyContent: "center",
-                    height: "100%",
-                    overflow: "scroll"
-                }}
-            />
-        );
-    };
-
-    const renderUserAvatar = (data: any) => {
-        return (
-            <TouchableOpacity
-                onPress={() =>
-                    navigation.navigate("Applicant Page", {
-                        userId: Number(data.currentMessage.user._id)
-                    })
+    const renderBubble = (props: any) => (
+        <Bubble
+            {...props}
+            wrapperStyle={{
+                left: {
+                    backgroundColor: "#F1F1F4"
+                },
+                right: {
+                    backgroundColor: "#EB7A89"
                 }
-            >
-                <AvatarLogo
-                    size={36}
-                    user={{
-                        id: data.currentMessage.user._id,
-                        name: data.currentMessage.user.name.split(" ")[FIRST_ELEMENT_INDEX],
-                        surname: data.currentMessage.user.name.split(" ")[SECOND_ELEMENT_INDEX]
-                    }}
+            }}
+            textStyle={{
+                left: {
+                    color: "#000000",
+                    paddingHorizontal: 8,
+                    paddingVertical: 2
+                },
+                right: {
+                    color: "#FFFFFF",
+                    paddingHorizontal: 8,
+                    paddingVertical: 2
+                }
+            }}
+        />
+    );
+
+    const renderSend = (props: any) => (
+        <Send disabled={isSendDisabled} {...props} style={{ flex: 1, width: "100%" }}>
+            <View style={ChatStyle.button}>
+                <Icon
+                    name="paper-plane"
+                    type="font-awesome"
+                    color={isSendDisabled ? "grey" : "black"}
                 />
-            </TouchableOpacity>
-        );
-    };
+            </View>
+        </Send>
+    );
+
+    const renderInputToolbar = (props: any) => (
+        <InputToolbar
+            {...props}
+            required
+            autogrow
+            multiline
+            flex={1}
+            primaryStyle={{
+                borderWidth: 2,
+                marginHorizontal: 10,
+                justifyContent: "center",
+                height: "100%",
+                overflow: "scroll"
+            }}
+        />
+    );
+
+    const renderUserAvatar = (data: any) => (
+        <TouchableOpacity
+            onPress={() =>
+                navigation.navigate("Applicant Page", {
+                    userId: Number(data.currentMessage.user._id.split("|")[FIRST_ELEMENT_INDEX])
+                })
+            }
+        >
+            <AvatarLogo
+                size={36}
+                user={{
+                    imageId: data.currentMessage.user._id.split("|")[SECOND_ELEMENT_INDEX],
+                    name: data.currentMessage.user.name.split("|")[FIRST_ELEMENT_INDEX],
+                    surname: data.currentMessage.user.name.split("|")[SECOND_ELEMENT_INDEX]
+                }}
+            />
+        </TouchableOpacity>
+    );
 
     return (
         <View style={ChatStyle.chatWrapper}>
@@ -235,8 +232,8 @@ const Chat = (properties: any) => {
                     scrollToBottom
                     alwaysShowSend
                     user={{
-                        _id: user?.id.toString()!,
-                        name: user?.name!
+                        _id: user?.id + "|" + user?.imageId,
+                        name: user?.name + "|" + user?.surname
                     }}
                     renderBubble={renderBubble}
                     renderSend={renderSend}

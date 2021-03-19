@@ -26,7 +26,7 @@ const NewNotification = (props: any) => (
                         {props.notificationTitle}
                     </Text>
                 </View>
-                <View style={ NewNotificationStyle.time}>
+                <View style={NewNotificationStyle.time}>
                     <Text
                         style={
                             props.read

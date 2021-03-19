@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import stc from "string-to-color";
+import ImageService from "../../../api-service/image-service/ImageService";
 import { FIRST_ELEMENT_INDEX } from "../../constants/Constants";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 
@@ -15,9 +16,9 @@ const AvatarLogo = (props: any) => {
 
     return (
         <>
-            {props.user?.imageId != null ? (
+            {props.user?.imageId != null && props.user?.imageId != "null" ? (
                 <Image
-                    source={{ uri: props.user?.imageId }}
+                    source={{ uri: ImageService.getImageById(props.user?.imageId) }}
                     style={avatarStyle}
                 />
             ) : (
