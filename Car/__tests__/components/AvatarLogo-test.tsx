@@ -45,6 +45,52 @@ test("renders correctly", () =>
   `));
 
 test("renders correctly", () =>
+  expect(
+    renderer
+      .create(
+        <AvatarLogo user={{ name: "A", surname: "A", imageId: "null" }} />
+      )
+      .toJSON()
+  ).toMatchInlineSnapshot(`
+    <View
+      style={
+        Array [
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 1000,
+              "justifyContent": "center",
+            },
+            Object {
+              "height": undefined,
+              "width": undefined,
+            },
+          ],
+          Object {
+            "backgroundColor": "#8d6765",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "Open Sans",
+            "fontSize": 16,
+            "fontWeight": "700",
+            "lineHeight": 16,
+            "paddingTop": 3,
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        AA
+      </Text>
+    </View>
+  `));
+
+test("renders correctly", () =>
   expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
