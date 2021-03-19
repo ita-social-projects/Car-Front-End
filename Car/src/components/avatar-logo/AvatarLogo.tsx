@@ -32,22 +32,21 @@ const AvatarLogo = (props: any) => {
         paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO
     }];
 
-    const userAvatar = props.user?.imageId ? (
-        <Image
-            source={{ uri: ImageService.getImageById(props.user?.imageId) }}
-            style={avatarStyle}
-        />
-    ) : (
-        <View
-            style={avatarStyle}
-        >
-            <Text style={avatarTextStyle}>
-                {userAvatarText}
-            </Text>
-        </View>
-    );
-
-    return (userAvatar);
+    return (
+        props.user?.imageId ? (
+            <Image
+                source={{ uri: ImageService.getImageById(props.user?.imageId) }}
+                style={avatarStyle}
+            />
+        ) : (
+            <View
+                style={avatarStyle}
+            >
+                <Text style={avatarTextStyle}>
+                    {userAvatarText}
+                </Text>
+            </View>
+        ));
 };
 
 export default AvatarLogo;

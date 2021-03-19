@@ -38,4 +38,4 @@ export const HIDDEN_MAP_Z_INDEX = 100;
 export const SHOWN_MAP_Z_INDEX = 200;
 export const HTTP_STATUS_OK = 200;
 export const AVATAR_LOGO_SIZE_TO_TEXT_RATIO = 2.5;
-export const AVATAR_LOGO_SIZE_TO_PADDING_RATIO = 2.5;
+export const AVATAR_LOGO_SIZE_TO_PADDING_RATIO = 14;

@@ -119,7 +119,7 @@ test("renders correctly", () =>
                           Object {
                             "fontSize": 15.4,
                             "lineHeight": 15.4,
-                            "paddingTop": 15.4,
+                            "paddingTop": 2.75,
                           },
                         ]
                       }
