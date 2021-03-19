@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import CarButton from "../../src/components/car-button/CarButton";
 
 test("renders correctly", () =>
-  expect(renderer.create(<CarButton />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<CarButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
       focusable={false}

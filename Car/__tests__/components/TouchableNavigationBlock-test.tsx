@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import TouchableNavigationBlock from "../../src/components/touchable-navigation-block/TouchableNavigationBlock";
 
 test("renders correctly", () =>
-  expect(renderer.create(<TouchableNavigationBlock />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<TouchableNavigationBlock />).toJSON())
+        .toMatchInlineSnapshot(`
     <View>
       <View
         accessible={true}

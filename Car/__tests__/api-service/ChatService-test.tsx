@@ -6,7 +6,43 @@ import Chat from "../../models/Chat";
 describe("ChatService", () => {
     let chatsData = {
         id: 1,
-        Name: "Maksym"
+        name: "Maksym",
+        messages: [{
+            id: 2,
+            text: "string",
+            sender: {
+                id: 1,
+                name: "string",
+                surname: "string",
+                position: "string",
+                location: "string",
+                email: "string",
+                token: "string",
+                hireDate: new Date(),
+                imageId: "string",
+                journeyCount: 1,
+            },
+            createdAt: new Date(),
+        },
+        {
+            id: 3,
+            text: "string",
+            sender: {
+                id: 5,
+                name: "string",
+                surname: "string",
+                position: "string",
+                location: "string",
+                email: "string",
+                token: "string",
+                hireDate: new Date(),
+                imageId: "string",
+                journeyCount: 3,
+            },
+            createdAt: new Date(),
+        },
+
+        ]
     };
     let userData = {
         id: 1,

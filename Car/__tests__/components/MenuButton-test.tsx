@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import MenuButton from "../../src/components/menu-button/MenuButton";
 
 test("renders correctly", () =>
-  expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
       focusable={false}

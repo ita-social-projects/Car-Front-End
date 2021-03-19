@@ -3,9 +3,11 @@ import renderer from "react-test-renderer";
 import AvatarLogo from "../../src/components/avatar-logo/AvatarLogo";
 
 test("renders correctly", () =>
-  expect(
-    renderer.create(<AvatarLogo user={{ name: "A", surname: "A" }} />).toJSON()
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer
+            .create(<AvatarLogo user={{ name: "Abc", surname: "Abc" }} />)
+            .toJSON()
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -21,7 +23,7 @@ test("renders correctly", () =>
             },
           ],
           Object {
-            "backgroundColor": "#8d6765",
+            "backgroundColor": "#c3b2b6",
           },
         ]
       }
@@ -45,53 +47,37 @@ test("renders correctly", () =>
   `));
 
 test("renders correctly", () =>
-  expect(
-    renderer
-      .create(
-        <AvatarLogo user={{ name: "A", surname: "A", imageId: "null" }} />
-      )
-      .toJSON()
-  ).toMatchInlineSnapshot(`
-    <View
+    expect(
+        renderer
+            .create(
+                <AvatarLogo user={{ name: "Abc", surname: "Abc", imageId: "AbCdE" }} />
+            )
+            .toJSON()
+    ).toMatchInlineSnapshot(`
+    <Image
+      source={
+        Object {
+          "uri": "https://drive.google.com/uc?id=AbCdE&export=view",
+        }
+      }
       style={
         Array [
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 1000,
-              "justifyContent": "center",
-            },
-            Object {
-              "height": undefined,
-              "width": undefined,
-            },
-          ],
           Object {
-            "backgroundColor": "#8d6765",
+            "alignItems": "center",
+            "borderRadius": 1000,
+            "justifyContent": "center",
+          },
+          Object {
+            "height": undefined,
+            "width": undefined,
           },
         ]
       }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#FFFFFF",
-            "fontFamily": "Open Sans",
-            "fontSize": 16,
-            "fontWeight": "700",
-            "lineHeight": 16,
-            "paddingTop": 3,
-            "textTransform": "uppercase",
-          }
-        }
-      >
-        AA
-      </Text>
-    </View>
+    />
   `));
 
 test("renders correctly", () =>
-  expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [

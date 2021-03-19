@@ -187,14 +187,14 @@ const Chat = (properties: any) => {
         <TouchableOpacity
             onPress={() =>
                 navigation.navigate("Applicant Page", {
-                    userId: Number(data.currentMessage.user._id.split("|")[FIRST_ELEMENT_INDEX])
+                    userId: data.currentMessage.user._id.split("|")[FIRST_ELEMENT_INDEX] as number
                 })
             }
         >
             <AvatarLogo
                 size={36}
                 user={{
-                    imageId: data.currentMessage.user._id.split("|")[SECOND_ELEMENT_INDEX],
+                    imageId: data.currentMessage.user._id.replace("null", "").split("|")[SECOND_ELEMENT_INDEX],
                     name: data.currentMessage.user.name.split("|")[FIRST_ELEMENT_INDEX],
                     surname: data.currentMessage.user.name.split("|")[SECOND_ELEMENT_INDEX]
                 }}

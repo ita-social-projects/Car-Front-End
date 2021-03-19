@@ -5,7 +5,7 @@ import CarTextInput from "../../src/components/car-text-input/CarTextInput";
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<CarTextInput />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<CarTextInput />)).toMatchInlineSnapshot(`
     <Controller
       control={
         Object {

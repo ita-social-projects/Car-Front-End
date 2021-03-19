@@ -5,7 +5,7 @@ import AddCars from "../../../src/activity/my-profile/my-profile-activity/cars/c
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<AddCars />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<AddCars />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {

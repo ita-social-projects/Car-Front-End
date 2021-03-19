@@ -5,9 +5,9 @@ import JourneyRequestPage from "../../../src/activity/journey/journey-activity/j
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", () =>
-  expect(
-    renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Object {

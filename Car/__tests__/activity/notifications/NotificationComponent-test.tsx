@@ -5,8 +5,8 @@ import NotificationComponent from "../../../src/activity/notifications/Notificat
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<NotificationComponent item={{ type: 1 }} />))
-    .toMatchInlineSnapshot(`
+    expect(renderer.render(<NotificationComponent item={{ type: 1 }} />))
+        .toMatchInlineSnapshot(`
     <View>
       <JourneyNewApplicant
         date={Date { NaN }}

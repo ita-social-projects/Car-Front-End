@@ -5,8 +5,8 @@ import SearchJourneyMap from "../../../src/activity/journey/journey-activity/map
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<SearchJourneyMap latitude={0} longitude={0} />))
-    .toMatchInlineSnapshot(`
+    expect(renderer.render(<SearchJourneyMap latitude={0} longitude={0} />))
+        .toMatchInlineSnapshot(`
     <MapView
       customMapStyle={
         Array [

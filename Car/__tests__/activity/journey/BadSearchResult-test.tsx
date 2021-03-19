@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import BadSearchResult from "../../../src/activity/journey/journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 
 test("renders correctly", () =>
-  expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Object {

@@ -10,11 +10,12 @@ describe("UserService", () => {
         name: "Peter",
         surname: "Pen",
         position: "Student",
-        byteOfImage: "./dd124lam-112_0!1dxxkd",
+        imageId: "./dd124lam-112_0!1dxxkd",
         location: "Lviv",
         hireDate: new Date("2020-10-11"),
         email: "peter@gmail.com",
-        token: ""
+        token: "",
+        journeyCount: 8
     };
 
     test("It should login user", () => {

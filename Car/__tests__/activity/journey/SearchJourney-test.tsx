@@ -5,7 +5,7 @@ import SearchJourney from "../../../src/activity/journey/journey-activity/search
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<SearchJourney />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<SearchJourney />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {

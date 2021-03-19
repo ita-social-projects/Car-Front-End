@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import ChatSettings from "../../../src/activity/my-profile/my-profile-activity/settings/settings-activity/chat-settings/ChatSettings";
 
 test("renders correctly", () =>
-  expect(renderer.create(<ChatSettings />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<ChatSettings />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Object {

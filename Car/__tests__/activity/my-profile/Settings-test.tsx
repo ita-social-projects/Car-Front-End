@@ -5,7 +5,7 @@ import Settings from "../../../src/activity/my-profile/my-profile-activity/setti
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
         refreshControl={

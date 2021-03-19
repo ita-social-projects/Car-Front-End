@@ -5,7 +5,7 @@ import Preferences from "../../../src/activity/my-profile/my-profile-activity/pr
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", () =>
-  expect(renderer.render(<Preferences />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Preferences />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <View
         style={

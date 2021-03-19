@@ -5,9 +5,9 @@ import JourneyApplicant from "../../../src/activity/journey/journey-activity/jou
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", () =>
-  expect(
-    renderer.render(<JourneyApplicant route={{ params: { userId: 1 } }} />)
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(<JourneyApplicant route={{ params: { userId: 1 } }} />)
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Object {

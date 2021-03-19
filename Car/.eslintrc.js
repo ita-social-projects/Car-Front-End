@@ -62,7 +62,7 @@ module.exports = {
         "semi": ["error", "always"],
     },
     "overrides": [{
-        "files": ["*Style.tsx", "Constants.tsx"],
+        "files": ["*Style.tsx", "Constants.tsx", "*-test.tsx"],
         "rules": {
             "no-magic-numbers": "off",
         },
