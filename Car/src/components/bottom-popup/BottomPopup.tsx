@@ -11,7 +11,7 @@ const BottomPopup = (props: any) => {
                     <View style={BottomPopupStyle.panelHandle} />
                 </View>
             </View>
-            {props?.renderHeader()}
+            {props?.renderHeader}
         </>
     );
 
@@ -19,7 +19,7 @@ const BottomPopup = (props: any) => {
         <BottomSheet
             ref={props.refForChild}
             snapPoints={props.snapPoints}
-            renderContent={props.renderContent}
+            renderContent={() => props.renderContent}
             renderHeader={renderHeader}
             initialSnap={props.initialSnap}
             enabledInnerScrolling={props.enabledInnerScrolling}

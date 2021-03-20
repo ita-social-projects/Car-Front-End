@@ -122,8 +122,65 @@ test("renders correctly", () =>
             "current": null,
           }
         }
-        renderContent={[Function]}
-        renderHeader={[Function]}
+        renderContent={
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFFFFF",
+              }
+            }
+          >
+            <ForwardRef
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "height": 44,
+                  "justifyContent": "center",
+                  "paddingLeft": 24,
+                  "width": 750,
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "fontFamily": "Open Sans",
+                    "fontSize": 13,
+                    "fontWeight": "700",
+                    "lineHeight": 16,
+                  }
+                }
+              >
+                Upload Avatar
+              </Text>
+            </ForwardRef>
+          </View>
+        }
+        renderHeader={
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFFFFF",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Proxima Nova",
+                  "fontSize": 14,
+                  "lineHeight": 16,
+                  "paddingBottom": 33,
+                  "paddingLeft": 24,
+                  "textTransform": "uppercase",
+                }
+              }
+            >
+              Edit Profile
+            </Text>
+          </View>
+        }
         snapPoints={
           Array [
             0,

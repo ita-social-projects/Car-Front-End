@@ -139,56 +139,6 @@ const Settings = (props: any) => {
         }
     };
 
-    const moreOptionsContent = () => (
-        <View style={SettingsStyle.moreOptions}>
-            {user?.imageId == null ? (
-                <TouchableOpacity
-                    style={SettingsStyle.moreOptionsButton}
-                    onPress={() => {
-                        pressHandle();
-                        (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
-                    }}>
-                    <Text style={SettingsStyle.changeAvatarText}>
-                        Upload Avatar
-                    </Text>
-                </TouchableOpacity>
-            ) : (
-                <>
-                    <TouchableOpacity
-                        style={SettingsStyle.moreOptionsButton}
-                        onPress={() => {
-                            pressHandle();
-                            (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
-                        }}>
-                        <Text style={SettingsStyle.changeAvatarText}>
-                            Change Avatar
-                        </Text>
-                    </TouchableOpacity>
-                    <View style={SettingsStyle.sepataror} />
-                    <TouchableOpacity
-                        style={SettingsStyle.moreOptionsButton}
-                        onPress={() => {
-                            saveUser(null as unknown as ImagePickerResponse);
-                            pressHandle();
-                        }}>
-                        <Text style={SettingsStyle.deleteAvatarText}>
-                            Delete Avatar
-                        </Text>
-                    </TouchableOpacity>
-                </>
-            )}
-        </View>
-    );
-
-    const moreOptionsHeader = () => (
-        <View style={SettingsStyle.moreOptions}>
-            <Text style={SettingsStyle.moreOptionsHeader}>
-                Edit Profile
-            </Text>
-        </View>
-
-    );
-
     const moreOptionsRef = useRef<BottomSheet>(null) as any;
 
     return (
@@ -243,9 +193,59 @@ const Settings = (props: any) => {
                     MIN_POPUP_HEIGHT,
                     user?.imageId != null ? POPUP_HEIGHT_WITH_USER_IMAGE : POPUP_HEIGHT_WITHOUT_USER_IMAGE]}
                 refForChild={moreOptionsRef}
-                renderContent={moreOptionsContent}
+                renderContent={
+
+                    <View style={SettingsStyle.moreOptions}>
+                        {user?.imageId == null ? (
+
+                            <TouchableOpacity
+                                style={SettingsStyle.moreOptionsButton}
+                                onPress={() => {
+                                    pressHandle();
+                                    (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
+                                }}>
+                                <Text style={SettingsStyle.changeAvatarText}>
+                                Upload Avatar
+                                </Text>
+                            </TouchableOpacity>
+
+                        ) : (
+
+                            <>
+                                <TouchableOpacity
+                                    style={SettingsStyle.moreOptionsButton}
+                                    onPress={() => {
+                                        pressHandle();
+                                        (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
+                                    }}>
+                                    <Text style={SettingsStyle.changeAvatarText}>
+                                        Change Avatar
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <View style={SettingsStyle.sepataror} />
+
+                                <TouchableOpacity
+                                    style={SettingsStyle.moreOptionsButton}
+                                    onPress={() => {
+                                        saveUser(null as unknown as ImagePickerResponse);
+                                        pressHandle();
+                                    }}>
+                                    <Text style={SettingsStyle.deleteAvatarText}>
+                                        Delete Avatar
+                                    </Text>
+                                </TouchableOpacity>
+                            </>
+                        )}
+                    </View>
+                }
                 initialSnap={0}
-                renderHeader={moreOptionsHeader}
+                renderHeader={
+                    <View style={SettingsStyle.moreOptions}>
+                        <Text style={SettingsStyle.moreOptionsHeader}>
+                            Edit Profile
+                        </Text>
+                    </View>}
                 enabledInnerScrolling={false}
                 onCloseEnd={closeHandle}
             />

@@ -43,8 +43,6 @@ const JourneyTabs = () => {
 
     const StackTabs = createStackNavigator();
 
-    const noAction = () => <></>;
-
     const sleep = (milliseconds: number) =>
         new Promise(resolve => setTimeout(resolve, milliseconds));
 
@@ -99,21 +97,6 @@ const JourneyTabs = () => {
 
     };
 
-    const moreOptionsHeader = () => (
-        <View style={JourneyPageStyle.headerTitleStyle}>
-            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
-        </View>
-    );
-
-    const moreOptionsContent = () => (
-        <View style={JourneyPageStyle.panel}>
-            <MenuButton text="Add Stop" onPress={noAction} />
-            <MenuButton text="Edit the Journey" onPress={noAction} />
-            <MenuButton text="Invite Softservian" onPress={noAction} />
-            <MenuButton text="Cancel the Journey" onPress={noAction} />
-        </View>
-    );
-
     const moreOptionsRef = useRef<BottomSheet>(null);
 
     return (
@@ -167,15 +150,30 @@ const JourneyTabs = () => {
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout, { opacity: layoutOpacity }]} />
+
                                 <Animated.View style={[HeaderStyle.popUp, { opacity: journeyOpacity }]}>
                                     <JourneyPage props={props} />
                                 </Animated.View>
+
                                 {props.route.params.isDriver && <BottomPopup
                                     refForChild={moreOptionsRef}
                                     snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
-                                    renderContent={moreOptionsContent}
+                                    renderContent={
+
+                                        <View style={JourneyPageStyle.panel}>
+                                            <MenuButton text="Add Stop" />
+                                            <MenuButton text="Edit the Journey" />
+                                            <MenuButton text="Invite Softservian" />
+                                            <MenuButton text="Cancel the Journey" />
+                                        </View>
+                                    }
                                     initialSnap={0}
-                                    renderHeader={moreOptionsHeader}
+                                    renderHeader={
+
+                                        <View style={JourneyPageStyle.headerTitleStyle}>
+                                            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
+                                        </View>
+                                    }
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
                                 />}
