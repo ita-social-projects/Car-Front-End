@@ -276,7 +276,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     pressedButton: {
-        opacity: 0.2
+        backgroundColor: "#00000033"
     },
 
     scrollBlock: {

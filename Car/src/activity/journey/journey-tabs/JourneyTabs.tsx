@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
-import JourneyNewApplicant from "../../../components/journey-new-applicant/JourneyNewApplicant";
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
 import SearchJourney from "../journey-activity/search-journey/SearchJourney";
@@ -246,11 +245,6 @@ const JourneyTabs = () => {
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
-                />
-
-                <StackTabs.Screen
-                    name="New Applicant Page"
-                    component={JourneyNewApplicant}
                 />
             </StackTabs.Navigator>
         </View>

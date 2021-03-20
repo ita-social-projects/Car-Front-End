@@ -33,13 +33,44 @@ test("renders correctly", () =>
       </Text>
       <BottomPopup
         enabledInnerScrolling={false}
-        initialSnap={0}
-        renderContent={[Function]}
-        renderHeader={[Function]}
+        initialSnap={1}
+        refForChild={
+          Object {
+            "current": null,
+          }
+        }
+        renderContent={
+          <View
+            style={
+              Object {
+                "backgroundColor": "white",
+                "height": 400,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#FFFFFF",
+                  "height": 300,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Indicator
+                color="#414045"
+                size="large"
+                text="Loading information..."
+              />
+            </View>
+          </View>
+        }
+        renderHeader={<React.Fragment />}
         snapPoints={
           Array [
-            400,
-            120,
+            385,
+            0,
           ]
         }
         style={

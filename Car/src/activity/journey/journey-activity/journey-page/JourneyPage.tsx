@@ -24,7 +24,8 @@ import {
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
-    MAX_POPUP_POSITION
+    MAX_POPUP_POSITION,
+    MIN_POPUP_POSITION
 } from "../../../../constants/Constants";
 
 const JourneyPage = ({ props }: any) => {
@@ -74,7 +75,7 @@ const JourneyPage = ({ props }: any) => {
                     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                     isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
                 ]}
-                initialSnap={1}
+                initialSnap={MIN_POPUP_POSITION}
                 enabledInnerScrolling={true}
                 renderContent={
                     <View style={JourneyPageStyle.contentView}>
@@ -183,6 +184,7 @@ const JourneyPage = ({ props }: any) => {
                                         </View>
                                     </View>
                                 </TouchableOpacity>
+
                                 <Divider style={JourneyPageStyle.separator} />
                             </View>
                         ))}

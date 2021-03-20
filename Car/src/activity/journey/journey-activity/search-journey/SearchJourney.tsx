@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import TouchableCard from "../../../../components/touchable-card/TouchableCard";
 import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
-import StopService from "../../../../../api-service/stop-service/StopService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import SearchJourneyStyle from "./SearchJourneyStyle";
 import Stop from "../../../../../models/stop/Stop";
@@ -79,7 +78,7 @@ const SearchJourney = () => {
             })
             .catch((e: any) => console.log(e));
 
-        StopService
+        JourneyService
             .getRecentJourneyStops(Number(user?.id))
             .then((res: any) => {
                 setStop(res.data);

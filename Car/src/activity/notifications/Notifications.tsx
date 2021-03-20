@@ -9,6 +9,7 @@ import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 
 const Notifications = (props: any) => {
     const { user } = useContext(AuthContext);
+
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
