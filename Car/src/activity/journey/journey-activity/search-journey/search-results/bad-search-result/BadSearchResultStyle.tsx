@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import DM from "../../../../../../components/styles/DM";
 import Font from "../../../../../../data/fonts/Font";
 
 const BadSearchResultStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: DM("#FFFFFF")
     },
 
     textContainer: {
@@ -17,7 +18,7 @@ const BadSearchResultStyle = StyleSheet.create({
         fontFamily: Font.ProximaNova.Extrabold,
         fontSize: 16,
         fontWeight: "700",
-        color: "#000000",
+        color: DM("#000000"),
         textTransform: "uppercase",
         textAlign: "center"
     },
@@ -37,7 +38,7 @@ const BadSearchResultStyle = StyleSheet.create({
         fontFamily: Font.ProximaNova.Extrabold,
         fontSize: 16,
         fontWeight: "700",
-        color: "#FFFFFF",
+        color: DM("#FFFFFF"),
         textTransform: "uppercase"
     },
 
@@ -51,7 +52,7 @@ const BadSearchResultStyle = StyleSheet.create({
     button: {
         height: 48,
         width: 248,
-        backgroundColor: "#000000",
+        backgroundColor: DM("#000000"),
         justifyContent: "center",
         alignItems: "center"
     }

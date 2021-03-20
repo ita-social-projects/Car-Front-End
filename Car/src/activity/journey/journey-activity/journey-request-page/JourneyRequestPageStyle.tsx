@@ -1,24 +1,18 @@
 import { Dimensions, StyleSheet } from "react-native";
+import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const JourneyRequestPageStyle = StyleSheet.create({
 
     pageContainer: {
         flex: 1,
-        backgroundColor: "#88FF88",
+        backgroundColor: DM("#88FF88"),
         alignItems: "center"
     },
 
     pageText: {
         fontFamily: Font.ProximaNova.ExtraBold,
-        color: "#000000",
-    },
-
-    loadingContainer: {
-        height: 300,
-        backgroundColor: "#FFFFFF",
-        justifyContent: "center",
-        alignItems: "center"
+        color: DM("#000000"),
     },
 
     contentView: {
@@ -27,23 +21,23 @@ const JourneyRequestPageStyle = StyleSheet.create({
     },
 
     bottomPopup: {
-        backgroundColor: "white"
+        backgroundColor: DM("white")
     },
 
     mainContainer: {
-        backgroundColor: "white",
+        backgroundColor: DM("white"),
         height: 400,
     },
 
     dateText: {
         fontSize: 13,
-        color: "#02A2CF",
+        color: DM("#02A2CF"),
         fontWeight: "700",
         fontFamily: Font.OpenSans.ExtraBold
     },
 
     separator: {
-        backgroundColor: "#C1C1C5",
+        backgroundColor: DM("#C1C1C5"),
         height: 1,
         width: "100%",
         marginBottom: 7,
@@ -57,7 +51,7 @@ const JourneyRequestPageStyle = StyleSheet.create({
 
     userRoleText: {
         fontSize: 13,
-        color: "#909095",
+        color: DM("#909095"),
         fontWeight: "100",
         fontFamily: Font.OpenSans.Regular
     },
@@ -89,17 +83,18 @@ const JourneyRequestPageStyle = StyleSheet.create({
     userNameText: {
         fontSize: 15,
         fontWeight: "700",
+        color: DM("black"),
         fontFamily: Font.OpenSans.Regular
     },
 
     TextInput: {
         height: 80,
         borderWidth: 2,
-        borderColor: "black",
+        borderColor: DM("black"),
         fontFamily: Font.OpenSans.Regular,
         fontSize: 16,
         lineHeight: 24,
-        color: "#000000",
+        color: DM("#000000"),
         padding: 16,
         textAlignVertical: "top"
     },
@@ -109,7 +104,7 @@ const JourneyRequestPageStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 13,
         lineHeight: 18,
-        color: "#000000"
+        color: DM("#000000")
     },
 
     commentsContainer: {
@@ -119,7 +114,7 @@ const JourneyRequestPageStyle = StyleSheet.create({
     commentsText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
-        color: "#414045",
+        color: DM("#414045"),
         paddingBottom: 4
     },
 
@@ -128,15 +123,15 @@ const JourneyRequestPageStyle = StyleSheet.create({
     },
 
     confirmButtonText: {
-        color: "black",
+        color: DM("black"),
         fontWeight: "700",
         fontSize: 18,
         textTransform: "uppercase",
     },
 
     confirmButton: {
-        backgroundColor: "white",
-        borderColor: "black",
+        backgroundColor: DM("white"),
+        borderColor: DM("black"),
         borderWidth: 3,
         justifyContent: "center",
         alignItems: "center",

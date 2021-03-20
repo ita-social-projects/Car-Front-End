@@ -1,11 +1,16 @@
 import { StyleSheet } from "react-native";
+import DM from "../../../../components/styles/DM";
 
 const CreateJourneyStyle = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#FFFFFF"
+        backgroundColor: DM("#FFFFFF")
+    },
+
+    text: {
+        color: DM("black"),
     }
 });
 

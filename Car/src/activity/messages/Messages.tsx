@@ -11,6 +11,7 @@ import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
 import * as navigation from "../../components/navigation/Navigation";
 import { GRADIENT_END, GRADIENT_START, NOT_EXISTING_ELEMENT_INDEX } from "../../constants/Constants";
+import DM from "../../components/styles/DM";
 
 const Messages = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
@@ -112,7 +113,11 @@ const Messages = (props: any) => {
                                     </View>
                                     <View style={MessagesStyle.iconWrapper}>
                                         <View>
-                                            <Ionicons name={"chatbubbles"} size={20} />
+                                            <Ionicons
+                                                name={"chatbubbles"}
+                                                size={20}
+                                                color={DM("black")}
+                                            />
                                         </View>
                                     </View>
                                 </View>

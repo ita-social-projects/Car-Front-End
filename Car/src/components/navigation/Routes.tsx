@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect, useState } from "react";
 import AuthParamList from "../auth/AuthParamList";
@@ -9,13 +9,15 @@ import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
 import { MILISECONDS_IN_MONTH } from "../../constants/Constants";
+import { StatusBar } from "react-native";
+import DM from "../styles/DM";
 
 const Stack = createStackNavigator<AuthParamList>();
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-
+    const [isDarkMode, setDarkMode] = useState(false);
     const { Root } = require("popup-ui");
 
     useEffect(() => {
@@ -33,8 +35,15 @@ const Routes = () => {
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
-            (async () => loadStorageUser())().then(() => setLoading(false))
-        );
+            (async () => loadStorageUser())().then(() =>
+
+                setLoading(false)
+
+            ));
+        AsyncStorage.getItem("isDarkMode").then((res) => {
+            setDarkMode(res === "true");
+        });
+
     }, []);
 
     const navigator = user ? (
@@ -54,7 +63,13 @@ const Routes = () => {
 
     return (
         <Root>
-            <NavigationContainer ref={navigationRef}>
+            <StatusBar
+                animated={true}
+                backgroundColor={DM("#FFFFFF")}
+                barStyle={DM("dark-content") as any}/>
+            <NavigationContainer
+                theme={isDarkMode ? DarkTheme : undefined}
+                ref={navigationRef}>
                 {isLoading ? (
                     <Indicator
                         color="#414045"

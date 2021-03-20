@@ -14,7 +14,13 @@ test("renders correctly", () =>
         }
       }
     >
-      <Text>
+      <Text
+        style={
+          Object {
+            "color": "black",
+          }
+        }
+      >
         Create Journey
       </Text>
     </View>

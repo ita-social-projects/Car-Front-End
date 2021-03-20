@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import DM from "../../../../../../components/styles/DM";
 
 const OkSearchResultStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: DM("#FFFFFF")
     },
 
     list: {

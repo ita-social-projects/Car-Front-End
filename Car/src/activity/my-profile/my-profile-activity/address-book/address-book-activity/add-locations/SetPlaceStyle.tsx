@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import DM from "../../../../../../components/styles/DM";
 import Font from "../../../../../../data/fonts/Font";
 
 const SetPlaceStyle = StyleSheet.create({
@@ -22,15 +23,16 @@ const SetPlaceStyle = StyleSheet.create({
         zIndex: 200,
         flexDirection: "row",
         borderWidth: 2.3,
+        borderColor: DM("black"),
         marginRight: 100,
         marginLeft: 20,
         paddingLeft: 100,
-        backgroundColor: "white",
+        backgroundColor: DM("white"),
         fontFamily: Font.OpenSans.Regular
     },
 
     insideText: {
-        color: "#909095",
+        color: DM("#909095"),
         marginLeft: 5,
         fontSize: 17,
         fontFamily: Font.OpenSans.Regular
@@ -38,12 +40,13 @@ const SetPlaceStyle = StyleSheet.create({
 
     textInputStyle: {
         fontSize: 16,
+        color: DM("black"),
         lineHeight: 24,
         zIndex: 0
     },
 
     errorText: {
-        color: "red"
+        color: DM("red")
     }
 });
 

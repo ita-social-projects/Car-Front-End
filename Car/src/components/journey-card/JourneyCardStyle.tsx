@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
+import DM from "../styles/DM";
 
 const JourneyCardStyle = StyleSheet.create({
     component: {
@@ -7,7 +8,7 @@ const JourneyCardStyle = StyleSheet.create({
         borderRadius: 8,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "black",
+        borderColor: DM("black"),
         marginBottom: 16
     },
 
@@ -52,6 +53,7 @@ const JourneyCardStyle = StyleSheet.create({
         fontSize: 16,
         fontWeight: "700",
         lineHeight: 16,
+        color: DM("black"),
         alignItems: "center"
     },
 
@@ -59,7 +61,7 @@ const JourneyCardStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
         lineHeight: 16,
-        color: "#909095",
+        color: DM("#909095"),
         alignItems: "center"
     },
 
@@ -68,7 +70,7 @@ const JourneyCardStyle = StyleSheet.create({
         fontSize: 11,
         lineHeight: 16,
         fontWeight: "700",
-        color: "#02A2CF"
+        color: DM("#02A2CF")
     },
 
     stopsBlock: {
@@ -86,15 +88,15 @@ const JourneyCardStyle = StyleSheet.create({
     stopCircleIcon: {
         width: 16,
         borderWidth: 2,
-        backgroundColor: "#AAA9AE",
-        borderColor: "#FFFFFF",
+        backgroundColor: DM("#AAA9AE"),
+        borderColor: DM("#FFFFFF"),
         borderRadius: 400
     },
 
     stopStickIcon: {
         width: 2,
         height: 12,
-        backgroundColor: "#AAA9AE",
+        backgroundColor: DM("#AAA9AE"),
         left: 7
     },
 
@@ -102,7 +104,7 @@ const JourneyCardStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
         lineHeight: 16,
-        color: "#414045",
+        color: DM("#414045"),
         paddingLeft: 6
     }
 });

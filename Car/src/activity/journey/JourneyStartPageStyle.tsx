@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import DM from "../../components/styles/DM";
 import Font from "../../data/fonts/Font";
 
 const JourneyStartPageStyle = StyleSheet.create({
     page: {
-        backgroundColor: "white",
+        backgroundColor: DM("white"),
         paddingHorizontal: 15
     },
 
@@ -21,7 +22,7 @@ const JourneyStartPageStyle = StyleSheet.create({
     allJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
+        borderColor: DM("black"),
         borderWidth: 2,
         width: 54
     },
@@ -29,7 +30,7 @@ const JourneyStartPageStyle = StyleSheet.create({
     pastJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
+        borderColor: DM("black"),
         borderWidth: 2,
         width: 62
     },
@@ -37,7 +38,7 @@ const JourneyStartPageStyle = StyleSheet.create({
     upcomingJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
+        borderColor: DM("black"),
         borderWidth: 2,
         width: 98
     },
@@ -45,7 +46,7 @@ const JourneyStartPageStyle = StyleSheet.create({
     scheduledJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
+        borderColor: DM("black"),
         borderWidth: 2,
         width: 103
     },
@@ -53,17 +54,18 @@ const JourneyStartPageStyle = StyleSheet.create({
     buttonText: {
         textTransform: "uppercase",
         fontFamily: Font.ProximaNova.ExtraBold,
+        color: DM("black"),
         fontWeight: "700"
     },
 
     unactiveButton: {
-        backgroundColor: "#FFFFFF",
-        color: "#000000"
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000")
     },
 
     activeButton: {
-        backgroundColor: "#000000",
-        color: "#FFFFFF"
+        backgroundColor: DM("#000000"),
+        color: DM("#FFFFFF")
     },
 
     manageJourneysContainer: {
@@ -72,6 +74,7 @@ const JourneyStartPageStyle = StyleSheet.create({
 
     manageJourneysText: {
         fontFamily: Font.ProximaNova.Black,
+        color: DM("black"),
         fontWeight: "700",
         fontSize: 20,
         textTransform: "uppercase"
@@ -89,6 +92,7 @@ const JourneyStartPageStyle = StyleSheet.create({
         flex: 1,
         fontFamily: Font.ProximaNova.Black,
         fontWeight: "700",
+        color: DM("black"),
         fontSize: 14,
         textTransform: "uppercase",
         paddingBottom: 16

@@ -1,11 +1,12 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import DM from "../styles/DM";
 import TouchableCardStyle from "./TouchableCardStyle";
 
 const TouchableCard = (props: any) => {
     return (
-        <View style={{ backgroundColor: "white" }}>
+        <View style={{ backgroundColor: DM("white") }}>
             <TouchableOpacity
                 style={TouchableCardStyle.cardContainer}
                 onPress={props.onPress}

@@ -52,6 +52,7 @@ test("renders correctly", () =>
           <Text
             style={
               Object {
+                "color": "black",
                 "fontSize": 16,
                 "fontWeight": "bold",
                 "lineHeight": 20,

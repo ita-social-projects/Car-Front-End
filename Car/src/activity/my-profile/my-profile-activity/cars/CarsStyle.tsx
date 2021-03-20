@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import DM from "../../../../components/styles/DM";
 
 const CarsStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: DM("white")
     },
 
     loading: {
@@ -18,21 +19,21 @@ const CarsStyle = StyleSheet.create({
 
     brand: {
         fontWeight: "bold",
-        color: "black"
+        color: DM("black")
     },
 
     model: {
         fontWeight: "bold",
         fontSize: 11,
         lineHeight: 16,
-        color: "#414045"
+        color: DM("#414045")
     },
 
     message: {
         paddingHorizontal: 24,
         paddingVertical: 16,
         fontSize: 15,
-        color: "#414045"
+        color: DM("#414045")
     },
 
     carAvatar: {

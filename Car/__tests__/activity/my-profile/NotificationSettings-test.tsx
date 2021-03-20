@@ -15,7 +15,13 @@ test("renders correctly", () =>
         }
       }
     >
-      <Text>
+      <Text
+        style={
+          Object {
+            "color": "black",
+          }
+        }
+      >
         App Settings
       </Text>
     </View>

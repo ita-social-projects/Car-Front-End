@@ -7,6 +7,7 @@ import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import AuthContext from "../auth/AuthContext";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/Constants";
+import DM from "../styles/DM";
 
 const JourneyCard = (props: any) => {
     const journey = props.journey;
@@ -63,7 +64,7 @@ const JourneyCard = (props: any) => {
                                     >
                                         <Ionicons
                                             name={"ellipsis-horizontal"}
-                                            color={"black"}
+                                            color={DM("black")}
                                             size={20}
                                         />
                                     </TouchableOpacity>

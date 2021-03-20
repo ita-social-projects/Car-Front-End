@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const PreferencesStyle = StyleSheet.create({
@@ -6,7 +7,7 @@ const PreferencesStyle = StyleSheet.create({
         flex: 1,
         paddingTop: 5,
         paddingHorizontal: 18,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: DM("white"),
     },
 
     whitespaceBlock: {
@@ -17,7 +18,7 @@ const PreferencesStyle = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#FFFFFF"
+        backgroundColor:  DM("white"),
     },
 
     commentsContainer: {
@@ -27,7 +28,7 @@ const PreferencesStyle = StyleSheet.create({
     commentsText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
-        color: "#414045",
+        color: DM("#414045"),
         paddingBottom: 4
     },
 
@@ -38,11 +39,11 @@ const PreferencesStyle = StyleSheet.create({
     TextInput: {
         height: 80,
         borderWidth: 2,
-        borderColor: "black",
+        borderColor: DM("black"),
         fontFamily: Font.OpenSans.Regular,
         fontSize: 16,
         lineHeight: 24,
-        color: "#000000",
+        color: DM("black"),
         padding: 16,
         textAlignVertical: "top"
     },
@@ -52,7 +53,7 @@ const PreferencesStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 13,
         lineHeight: 18,
-        color: "#000000"
+        color: DM("black"),
     }
 });
 

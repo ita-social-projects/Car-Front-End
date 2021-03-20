@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
+import DM from "../styles/DM";
 
 const TouchableCardStyle = StyleSheet.create({
     cardContainer: {
@@ -32,6 +33,7 @@ const TouchableCardStyle = StyleSheet.create({
         fontWeight: "bold",
         fontFamily: Font.OpenSans.Regular,
         fontStyle: "normal",
+        color: DM("black"),
         fontSize: 14,
         lineHeight: 16,
         marginBottom: 2,

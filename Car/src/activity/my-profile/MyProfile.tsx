@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import DM from "../../components/styles/DM";
 import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
@@ -15,7 +16,7 @@ const MyProfile = (props: any) => {
                     <Ionicons
                         name={"person-circle-outline"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
@@ -31,7 +32,7 @@ const MyProfile = (props: any) => {
                         name={"options-outline"}
                         size={20}
                         style={MyProfileStyle.optionIcon}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
@@ -42,7 +43,13 @@ const MyProfile = (props: any) => {
                 navigation={props.navigation}
                 navigationName="CarTabs"
                 cardName="Your cars"
-                picture={<Ionicons name={"car"} size={20} color="#414045" />}
+                picture={
+                    <Ionicons
+                        name={"car"}
+                        size={20}
+                        color={DM("#414045")}
+                    />
+                }
             >
                 <Text style={MyProfileStyle.text}>Your cars</Text>
             </TouchableNavigationCard>
@@ -55,7 +62,7 @@ const MyProfile = (props: any) => {
                     <Ionicons
                         name={"bookmark-outline"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
@@ -70,7 +77,7 @@ const MyProfile = (props: any) => {
                     <Ionicons
                         name={"settings-outline"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >

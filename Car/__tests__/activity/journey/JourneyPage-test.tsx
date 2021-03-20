@@ -155,7 +155,13 @@ test("renders correctly", () =>
                       }
                     />
                   </View>
-                  <Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "black",
+                      }
+                    }
+                  >
                     Location A
                   </Text>
                 </View>
@@ -181,7 +187,13 @@ test("renders correctly", () =>
                       size={18}
                     />
                   </View>
-                  <Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "black",
+                      }
+                    }
+                  >
                     Location B
                   </Text>
                 </View>
@@ -190,6 +202,7 @@ test("renders correctly", () =>
             <Text
               style={
                 Object {
+                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontSize": 16,
                   "fontWeight": "bold",
@@ -257,6 +270,7 @@ test("renders correctly", () =>
                 <Text
                   style={
                     Object {
+                      "color": "black",
                       "fontFamily": "Open Sans",
                       "fontSize": 15,
                       "fontWeight": "700",

@@ -37,6 +37,7 @@ test("renders correctly", () =>
             style={
               Object {
                 "backgroundColor": "white",
+                "borderColor": "black",
                 "borderWidth": 2.3,
                 "flexDirection": "row",
                 "fontFamily": "Open Sans",
@@ -65,7 +66,7 @@ test("renders correctly", () =>
             <DropDownPicker
               activeItemStyle={Object {}}
               activeLabelStyle={Object {}}
-              arrowColor="#000"
+              arrowColor="black"
               arrowSize={15}
               arrowStyle={Object {}}
               autoScrollToDefaultValue={false}

@@ -17,6 +17,7 @@ import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/Constants";
 import UserService from "../../../../../api-service/user-service/UserService";
+import DM from "../../../../components/styles/DM";
 
 const Chat = (properties: any) => {
     const [messages, setMessages] = useState<object[]>([]);
@@ -133,10 +134,10 @@ const Chat = (properties: any) => {
             {...props}
             wrapperStyle={{
                 left: {
-                    backgroundColor: "#F1F1F4"
+                    backgroundColor: DM("#F1F1F4")
                 },
                 right: {
-                    backgroundColor: "#EB7A89"
+                    backgroundColor: DM("#EB7A89")
                 }
             }}
             textStyle={{
@@ -160,7 +161,7 @@ const Chat = (properties: any) => {
                 <Icon
                     name="paper-plane"
                     type="font-awesome"
-                    color={isSendDisabled ? "grey" : "black"}
+                    color={isSendDisabled ? DM("grey") : DM("black")}
                 />
             </View>
         </Send>
@@ -175,10 +176,11 @@ const Chat = (properties: any) => {
             flex={1}
             primaryStyle={{
                 borderWidth: 2,
-                marginHorizontal: 10,
+                borderColor: DM("black"),
                 justifyContent: "center",
                 height: "100%",
-                overflow: "scroll"
+                overflow: "scroll",
+                backgroundColor: DM("white"),
             }}
         />
     );
@@ -207,7 +209,7 @@ const Chat = (properties: any) => {
             {isLoading ? (
                 <Indicator
                     size="large"
-                    color="#414045"
+                    color={DM("#414045")}
                     text="Loading information..."
                 />
             ) : (

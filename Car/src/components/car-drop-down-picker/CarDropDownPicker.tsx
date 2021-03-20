@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { DROP_DOWN_MAX_HEIGHT } from "../../constants/Constants";
+import DM from "../styles/DM";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
 
 const CarDropDownPicker = (props: any) => (
@@ -28,7 +29,7 @@ const CarDropDownPicker = (props: any) => (
             items={props.items ?? []}
             searchable={true}
             searchablePlaceholder="Manual input"
-            searchablePlaceholderTextColor="gray"
+            searchablePlaceholderTextColor={DM("gray")}
             searchableError={() => <Text>Not Found</Text>}
             placeholder={props.placeHolder}
             defaultValue={props.defaultValue}

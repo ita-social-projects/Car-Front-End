@@ -2,6 +2,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+import DM from "../styles/DM";
 import CarTextInputStyle from "./CarTextInputStyle";
 
 const CarTextInput = (props: any) => {
@@ -25,7 +26,7 @@ const CarTextInput = (props: any) => {
                             placeholder={props.placeHolder}
                             style={[
                                 CarTextInputStyle.textInputStyle,
-                                props.error && { borderColor: "red" }
+                                props.error && { borderColor: DM("red") }
                             ]}
                         />
                     </View>

@@ -1,4 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
+import DM from "../../components/styles/DM";
 import Font from "../../data/fonts/Font";
 
 const LoginStyle = StyleSheet.create({
@@ -7,7 +8,7 @@ const LoginStyle = StyleSheet.create({
         paddingTop: Platform.OS === "ios" ? 74 : 37,
         paddingHorizontal: 16,
         paddingBottom: 22,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
     },
 
     greetingTextContainer: {
@@ -16,6 +17,7 @@ const LoginStyle = StyleSheet.create({
 
     greetingText: {
         fontFamily: Font.ProximaNova.Bold,
+        color: DM("black"),
         fontSize: 14,
         lineHeight: 16,
         textTransform: "uppercase",
@@ -29,6 +31,7 @@ const LoginStyle = StyleSheet.create({
 
     applicationNameText: {
         fontFamily: Font.ProximaNova.Bold,
+        color: DM("black"),
         fontSize: 20,
         textTransform: "uppercase",
         letterSpacing: 0.2
@@ -49,8 +52,7 @@ const LoginStyle = StyleSheet.create({
     button: {
         width: 81,
         height: 48,
-        backgroundColor: "#000000",
-        fontFamily: Font.ProximaNova.Bold,
+        backgroundColor: DM("#000000"),
         fontSize: 16,
         alignItems: "center",
         justifyContent: "center"
@@ -59,12 +61,12 @@ const LoginStyle = StyleSheet.create({
     buttonText: {
         fontFamily: Font.ProximaNova.Bold,
         fontSize: 16,
-        color: "#FFFFFF",
+        color: DM("#FFFFFF"),
         textTransform: "uppercase"
     },
 
     pressedButton: {
-        backgroundColor: "#888888"
+        backgroundColor: DM("#888888")
     },
 
     loadingIcon: {

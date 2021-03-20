@@ -1,13 +1,14 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 import { Platform } from "react-native";
+import DM from "../styles/DM";
 
 const JourneyNewApplicantStyle = EStyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
         borderWidth: 1,
-        borderColor: "rgba(151, 151, 151, 0.233556)",
+        borderColor: DM("rgba(151, 151, 151, 0.233556)"),
         borderStyle: "solid",
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
@@ -19,7 +20,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         paddingTop: 23,
         paddingBottom: 23,
         paddingHorizontal: 25,
-        shadowColor: "#414045",
+        shadowColor: DM("#414045"),
         shadowOffset: { width: 0, height: 16 },
         shadowOpacity: 0.2,
         shadowRadius: 6.27,
@@ -35,12 +36,12 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     body: {
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backgroundColor: DM("rgba(0, 0, 0, 0.5)"),
         height: "100%"
     },
 
     circle: {
-        backgroundColor: "#A5C500",
+        backgroundColor: DM("#A5C500"),
         borderRadius: 90,
         height: 57,
         width: 57,
@@ -51,7 +52,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     circleGrad: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
         borderRadius: 90,
         height: "0.8rem",
         width: "0.8rem",
@@ -80,7 +81,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         alignItems: "center",
         letterSpacing: 0.2,
         textTransform: "uppercase",
-        color: "#000000"
+        color: DM("#000000")
     },
 
     snooze: {
@@ -92,7 +93,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         textAlign: "right",
         letterSpacing: 0.875,
         textTransform: "capitalize",
-        color: "#02A2CF"
+        color: DM("#02A2CF")
     },
 
     ellipse: {
@@ -108,7 +109,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         alignItems: "center",
         textAlign: "center",
         textTransform: "uppercase",
-        color: "#ffffff"
+        color: DM("#FFFFFF")
     },
 
     profile: {
@@ -120,14 +121,14 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         lineHeight: 21,
-        color: "#000000"
+        color: DM("#000000")
     },
 
     bio: {
         fontFamily: Font.ProximaNova.Regular,
         fontSize: "0.85rem",
         lineHeight: 14,
-        color: "#000000",
+        color: DM("#000000"),
         opacity: 0.5,
         marginTop: "0.7rem"
     },
@@ -136,7 +137,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.ProximaNova.Regular,
         fontSize: 15,
         lineHeight: 14,
-        color: "#000000",
+        color: DM("#000000"),
         opacity: 0.5,
         marginTop: "0.7rem"
     },
@@ -147,14 +148,14 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         letterSpacing: 3,
         marginTop: -10,
         paddingTop: 0,
-        color: "#000000"
+        color: DM("#000000")
     },
 
     commentsBox: {
         borderWidth: 1,
-        borderColor: "rgba(151, 151, 151, 0.3)",
+        borderColor: DM("rgba(151, 151, 151, 0.3)"),
         borderStyle: "solid",
-        backgroundColor: "#ffffff",
+        backgroundColor: DM("#FFFFFF"),
         marginTop: "1.5rem"
     },
 
@@ -164,15 +165,15 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         height: "1rem",
         borderWidth: 1,
         borderStyle: "solid",
-        borderTopColor: "rgba(0,0,0,0)",
-        borderLeftColor: "rgba(0,0,0,0)",
-        borderRightColor: "rgba(151, 151, 151, 0.3)",
-        borderBottomColor: "rgba(151, 151, 151, 0.3)",
+        borderTopColor: DM("rgba(0,0,0,0)"),
+        borderLeftColor: DM("rgba(0,0,0,0)"),
+        borderRightColor: DM("rgba(151, 151, 151, 0.3)"),
+        borderBottomColor: DM("rgba(151, 151, 151, 0.3)"),
         top: "-0.5rem",
         left: "50%",
         marginLeft: "-1rem",
         transform: [{ rotateZ: "-135deg" }],
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
         opacity: 1
     },
 
@@ -206,12 +207,12 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         minHeight: 7,
         minWidth: "99%",
         borderWidth: 1,
-        borderTopColor: "rgba(0,0,0,0)",
-        borderLeftColor: "rgba(0,0,0,0)",
-        borderRightColor: "rgba(0,0,0,0)",
-        borderBottomColor: "#C1C1C5",
+        borderTopColor: DM("rgba(0,0,0,0)"),
+        borderLeftColor: DM("rgba(0,0,0,0)"),
+        borderRightColor: DM("rgba(0,0,0,0)"),
+        borderBottomColor: DM("#C1C1C5"),
         borderStyle: "solid",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
         marginLeft: "auto",
         marginRight: "auto"
     },
@@ -237,7 +238,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: "1rem",
         lineHeight: "1.1rem",
-        color: "#909095"
+        color: DM("#909095")
     },
 
     activeStopName: {
@@ -247,7 +248,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontSize: "1rem",
         lineHeight: "1.1rem",
-        color: "#909095",
+        color: DM("#909095"),
         paddingTop: "0.3rem" // Circle's Border Compensation
     },
 
@@ -258,7 +259,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         top: "1.3rem",
         marginRight: "0.1435rem",
         borderLeftWidth: "0.1435rem",
-        borderColor: "#C1C1C5"
+        borderColor: DM("#C1C1C5")
     },
 
     stopsRows: {
@@ -291,18 +292,18 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     acceptButton: {
-        backgroundColor: "black"
+        backgroundColor: DM("black")
     },
 
     acceptButtonText: {
-        color: "white",
+        color: DM("white"),
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         letterSpacing: "0.05rem"
     },
 
     declineButtonText: {
-        color: "#EC6400",
+        color: DM("#EC6400"),
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         letterSpacing: "0.05rem"

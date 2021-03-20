@@ -29,7 +29,6 @@ test("renders correctly", () =>
         <View
           style={
             Object {
-              "fontFamily": "Proxima Nova",
               "marginLeft": 71,
               "position": "absolute",
             }
@@ -38,6 +37,7 @@ test("renders correctly", () =>
           <Text
             style={
               Object {
+                "color": "black",
                 "fontSize": 18,
                 "fontWeight": "bold",
                 "lineHeight": 21,
@@ -50,6 +50,7 @@ test("renders correctly", () =>
           <Text
             style={
               Object {
+                "color": "black",
                 "fontSize": 14,
                 "lineHeight": 14,
                 "marginBottom": 8,
@@ -60,6 +61,7 @@ test("renders correctly", () =>
           <Text
             style={
               Object {
+                "color": "black",
                 "fontSize": 14,
                 "lineHeight": 14,
                 "marginBottom": 8,

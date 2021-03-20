@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import DM from "../styles/DM";
 
 const CarButtonStyle = StyleSheet.create({
     button: {
@@ -8,17 +9,17 @@ const CarButtonStyle = StyleSheet.create({
     },
 
     whiteButton: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
         borderWidth: 2,
-        borderColor: "#000000"
+        borderColor: DM("#000000")
     },
 
     blackButton: {
-        backgroundColor: "#000000"
+        backgroundColor: DM("#000000")
     },
 
     disabled: {
-        opacity: 0.4
+        opacity: 0.2
     },
 
     title: {
@@ -29,11 +30,11 @@ const CarButtonStyle = StyleSheet.create({
     },
 
     whiteTitle: {
-        color: "white"
+        color: DM("white")
     },
 
     blackTitle: {
-        color: "black"
+        color: DM("black")
     }
 });
 

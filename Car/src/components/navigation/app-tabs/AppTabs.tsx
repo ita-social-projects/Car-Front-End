@@ -11,6 +11,7 @@ import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 import { EMPTY_COLLECTION_LENGTH, NOT_EXISTING_ELEMENT_INDEX } from "../../../constants/Constants";
+import DM from "../../styles/DM";
 
 const Tabs = createBottomTabNavigator();
 
@@ -70,8 +71,8 @@ const AppTabs = () => {
             })}
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
-                activeTintColor: "black",
-                inactiveTintColor: "#AAA9AE",
+                activeTintColor: DM("black"),
+                inactiveTintColor: DM("#AAA9AE"),
                 keyboardHidesTabBar: true
             }}
         >

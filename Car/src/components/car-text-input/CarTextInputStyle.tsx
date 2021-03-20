@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import DM from "../styles/DM";
 
 const CarTextInputStyle = StyleSheet.create({
     container: {
@@ -10,7 +11,7 @@ const CarTextInputStyle = StyleSheet.create({
     requiredPointer: {
         position: "absolute",
         zIndex: 10,
-        color: "red",
+        color: DM("red"),
         marginLeft: 16
     },
 
@@ -23,11 +24,11 @@ const CarTextInputStyle = StyleSheet.create({
     },
 
     errorText: {
-        color: "red"
+        color: DM("red")
     },
 
     errorBorder: {
-        borderColor: "red"
+        borderColor: DM("red")
     }
 });
 

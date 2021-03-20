@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import DM from "../../components/styles/DM";
 
 const MyProfileStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: DM("white")
     },
 
     optionIcon: {
@@ -11,6 +12,7 @@ const MyProfileStyle = StyleSheet.create({
     },
 
     text: {
+        color: DM("black"),
         fontWeight: "bold"
     }
 });

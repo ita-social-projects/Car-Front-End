@@ -157,6 +157,15 @@ const JourneyTabs = () => {
                                 {props.route.params.isDriver && <BottomPopup
                                     refForChild={moreOptionsRef}
                                     snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                    enabledInnerScrolling={false}
+                                    onCloseEnd={closeHandle}
+                                    initialSnap={0}
+                                    renderHeader={
+
+                                        <View style={JourneyPageStyle.headerTitleStyle}>
+                                            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
+                                        </View>
+                                    }
                                     renderContent={
 
                                         <View style={JourneyPageStyle.panel}>
@@ -166,15 +175,6 @@ const JourneyTabs = () => {
                                             <MenuButton text="Cancel the Journey" />
                                         </View>
                                     }
-                                    initialSnap={0}
-                                    renderHeader={
-
-                                        <View style={JourneyPageStyle.headerTitleStyle}>
-                                            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
-                                        </View>
-                                    }
-                                    enabledInnerScrolling={false}
-                                    onCloseEnd={closeHandle}
                                 />}
                             </>
                         );

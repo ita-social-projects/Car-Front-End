@@ -82,6 +82,7 @@ test("renders correctly", () =>
             <Text
               style={
                 Object {
+                  "color": "black",
                   "flex": 2,
                   "fontFamily": "Open Sans",
                   "fontSize": 14,

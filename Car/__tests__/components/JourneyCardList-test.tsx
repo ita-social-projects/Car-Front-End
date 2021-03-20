@@ -150,6 +150,7 @@ test("renders correctly", () =>
                         style={
                           Object {
                             "alignItems": "center",
+                            "color": "black",
                             "fontFamily": undefined,
                             "fontSize": 16,
                             "fontWeight": "700",

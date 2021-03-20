@@ -63,6 +63,7 @@ test("renders correctly", () =>
                 <Text
                   style={
                     Object {
+                      "color": "black",
                       "fontWeight": "bold",
                     }
                   }
@@ -153,6 +154,7 @@ test("renders correctly", () =>
                 <Text
                   style={
                     Object {
+                      "color": "black",
                       "fontWeight": "bold",
                     }
                   }
@@ -237,6 +239,7 @@ test("renders correctly", () =>
                 <Text
                   style={
                     Object {
+                      "color": "black",
                       "fontWeight": "bold",
                     }
                   }
@@ -321,6 +324,7 @@ test("renders correctly", () =>
                 <Text
                   style={
                     Object {
+                      "color": "black",
                       "fontWeight": "bold",
                     }
                   }
@@ -405,6 +409,7 @@ test("renders correctly", () =>
                 <Text
                   style={
                     Object {
+                      "color": "black",
                       "fontWeight": "bold",
                     }
                   }

@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 import { Text, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import DM from "../styles/DM";
 import MenuButtonStyle from "./MenuButtonStyle";
 
 const MenuButton = (props: any) => {
-    const [colorButton, setColorButton] = useState("white");
-    const [colorText, setColorText] = useState("black");
-    const [colorIcon, setColorIcon] = useState("black");
-    const [colorSeparator, setColorSeparator] = useState("#C1C1C5");
+    const [colorButton, setColorButton] = useState(DM("white"));
+    const [colorText, setColorText] = useState(DM("black"));
+    const [colorIcon, setColorIcon] = useState(DM("black"));
+    const [colorSeparator, setColorSeparator] = useState(DM("#C1C1C5"));
 
     const changeColorToBlack = () => {
-        setColorText("white");
-        setColorButton("black");
-        setColorIcon("white");
-        setColorSeparator("black");
+        setColorText(DM("white"));
+        setColorButton(DM("black"));
+        setColorIcon(DM("white"));
+        setColorSeparator(DM("black"));
     };
 
     const changeColorToWhite = () => {
-        setColorText("black");
-        setColorButton("white");
-        setColorIcon("black");
-        setColorSeparator("#C1C1C5");
+        setColorText(DM("black"));
+        setColorButton(DM("white"));
+        setColorIcon(DM("black"));
+        setColorSeparator(DM("#C1C1C5"));
     };
 
     return (

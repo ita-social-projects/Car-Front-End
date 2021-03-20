@@ -120,7 +120,7 @@ const JourneyPage = ({ props }: any) => {
                                             <View style={JourneyPageStyle.stopCustomLineIcon} />
                                         )}
                                     </View>
-                                    <Text>
+                                    <Text style={JourneyPageStyle.stopListItemText}>
                                         {item?.address?.city} {item?.address?.street} street
                                     </Text>
                                 </View>
@@ -131,7 +131,7 @@ const JourneyPage = ({ props }: any) => {
                                             <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                                             <View style={JourneyPageStyle.stopCustomLineIcon} />
                                         </View>
-                                        <Text>
+                                        <Text style={JourneyPageStyle.stopListItemText}>
                                                 Location A
                                         </Text>
                                     </View>
@@ -139,7 +139,7 @@ const JourneyPage = ({ props }: any) => {
                                         <View style={JourneyPageStyle.stopListItemRow}>
                                             <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                                         </View>
-                                        <Text>
+                                        <Text style={JourneyPageStyle.stopListItemText}>
                                                 Location B
                                         </Text>
                                     </View>

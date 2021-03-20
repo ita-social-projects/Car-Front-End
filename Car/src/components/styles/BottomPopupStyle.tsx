@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import DM from "./DM";
 
 const BottomPopupStyle = StyleSheet.create({
     headerContainer: {
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: DM("white"),
         borderTopRightRadius: 16,
         borderTopLeftRadius: 16
     },
@@ -12,7 +13,7 @@ const BottomPopupStyle = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: 74,
-        backgroundColor: "black",
+        backgroundColor: DM("black"),
         height: 4,
         marginTop: 15,
         borderRadius: 2

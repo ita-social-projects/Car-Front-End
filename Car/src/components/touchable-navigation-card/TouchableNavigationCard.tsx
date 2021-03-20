@@ -3,6 +3,7 @@ import { TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableNavigationCardStyle from "./TouchableNavigationCardStyle";
 import * as navigation from "../navigation/Navigation";
+import DM from "../styles/DM";
 
 const TouchableNavigationCard = (props: any) => {
     return (
@@ -32,7 +33,7 @@ const TouchableNavigationCard = (props: any) => {
                     <Ionicons
                         name={"chevron-forward-outline"}
                         size={20}
-                        color={"#414045"}
+                        color={DM("#414045")}
                     />
                 </View>
             </TouchableOpacity>

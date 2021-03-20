@@ -148,6 +148,7 @@ test("renders correctly", () =>
               <Text
                 style={
                   Object {
+                    "color": "black",
                     "fontFamily": "Open Sans",
                     "fontSize": 13,
                     "fontWeight": "700",
@@ -171,6 +172,7 @@ test("renders correctly", () =>
             <Text
               style={
                 Object {
+                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontSize": 14,
                   "lineHeight": 16,

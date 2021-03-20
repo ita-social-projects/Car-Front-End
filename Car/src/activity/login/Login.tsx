@@ -4,6 +4,7 @@ import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 import { REFRESHER_TIMEOUT } from "../../constants/Constants";
+import DM from "../../components/styles/DM";
 
 const Login = (properties: any) => {
     const { login } = useContext(AuthContext);
@@ -52,7 +53,7 @@ const Login = (properties: any) => {
             <ActivityIndicator
                 style={LoginStyle.loadingIcon}
                 size="large"
-                color="black"
+                color={DM("black")}
             />
         );
     } else {

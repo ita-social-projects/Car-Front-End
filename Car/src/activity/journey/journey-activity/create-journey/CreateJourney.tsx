@@ -5,7 +5,9 @@ import CreateJourneyStyle from "./CreateJourneyStyle";
 const CreateJourney = () => {
     return (
         <View style={CreateJourneyStyle.container}>
-            <Text>Create Journey</Text>
+            <Text style={CreateJourneyStyle.text}>
+                Create Journey
+            </Text>
         </View>
     );
 };

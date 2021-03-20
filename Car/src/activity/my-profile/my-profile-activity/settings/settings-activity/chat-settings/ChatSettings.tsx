@@ -5,7 +5,7 @@ import ChatSettingsStyle from "./ChatSettingsStyle";
 const ChatSettings = () => {
     return (
         <View style={ChatSettingsStyle.containert}>
-            <Text>
+            <Text style={ChatSettingsStyle.text}>
                 App Settings
             </Text>
         </View>

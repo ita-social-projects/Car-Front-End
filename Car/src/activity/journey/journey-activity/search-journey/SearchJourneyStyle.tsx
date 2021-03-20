@@ -1,10 +1,11 @@
 import { Dimensions, StyleSheet } from "react-native";
+import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const SearchJourneyStyle = StyleSheet.create({
     container: {
         zIndex: 150,
-        backgroundColor: "#FAFAFA"
+        backgroundColor: DM("#FAFAFA")
     },
 
     loadingContainer: {
@@ -19,6 +20,7 @@ const SearchJourneyStyle = StyleSheet.create({
         marginRight: 10,
         fontWeight: "bold",
         fontSize: 14,
+        color: DM("black"),
         fontFamily: Font.OpenSans.Bold
     },
 
@@ -27,9 +29,9 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     topInputContainer: {
-        backgroundColor: "#FAFAFA",
+        backgroundColor: DM("#FAFAFA"),
         zIndex: 2000,
-        borderBottomColor: "#C1C1C5",
+        borderBottomColor: DM("#C1C1C5"),
         borderBottomWidth: 1
     },
 

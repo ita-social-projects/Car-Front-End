@@ -1,5 +1,6 @@
 import Font from "../../data/fonts/Font";
 import EStyleSheet from "react-native-extended-stylesheet";
+import DM from "./DM";
 
 const IconStyle = EStyleSheet.create({
     icon: {
@@ -10,7 +11,7 @@ const IconStyle = EStyleSheet.create({
         alignItems: "center",
         textAlign: "center",
         textTransform: "uppercase",
-        color: "#ffffff"
+        color: DM("#FFFFFF")
     }
 });
 

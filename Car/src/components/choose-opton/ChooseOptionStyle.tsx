@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
+import DM from "../styles/DM";
 
 const ChooseOptionStyle = StyleSheet.create({
     preferencesContainer: {
@@ -27,6 +28,7 @@ const ChooseOptionStyle = StyleSheet.create({
     preferenceNameText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
+        color: DM("black"),
         lineHeight: 16,
         fontSize: 13
     },
@@ -34,6 +36,7 @@ const ChooseOptionStyle = StyleSheet.create({
     preferenceValueText: {
         fontFamily: Font.OpenSans.Regular,
         lineHeight: 24,
+        color: DM("black"),
         fontSize: 16
     },
 });

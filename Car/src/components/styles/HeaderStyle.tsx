@@ -1,23 +1,24 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
+import DM from "./DM";
 
 const HeaderStyle = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: "stretch",
-        backgroundColor: "#FFFFFF"
+        backgroundColor: DM("#FFFFFF")
     },
 
     layout: {
         height: Dimensions.get("screen").height,
         width: Dimensions.get("screen").width,
         position: "absolute",
-        backgroundColor: "#000000",
+        backgroundColor: DM("#000000"),
         zIndex: 50,
     },
 
     popUp: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: DM("#FFFFFF"),
         height: Dimensions.get("screen").height,
         width: Dimensions.get("screen").width,
         position: "absolute",
@@ -30,6 +31,7 @@ const HeaderStyle = StyleSheet.create({
     headerTitleStyle: {
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",
+        color: DM("black"),
         fontSize: 18,
         marginLeft: 20
     },

@@ -13,7 +13,7 @@ test("renders correctly", () =>
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#FFFFFF",
+            "backgroundColor": "white",
             "flex": 1,
             "justifyContent": "center",
           }

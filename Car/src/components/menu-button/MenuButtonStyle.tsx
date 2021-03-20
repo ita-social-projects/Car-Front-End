@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import DM from "../styles/DM";
 
 const MenuButtonStyle = StyleSheet.create({
     wrapper: {
@@ -17,7 +18,7 @@ const MenuButtonStyle = StyleSheet.create({
         fontSize: 13,
         lineHeight: 42,
         fontWeight: "bold",
-        color: "black",
+        color: DM("black"),
         alignItems: "center",
         paddingLeft: 24
     },

@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { WHITE } from "../../../../../../constants/Colors";
+import DM from "../../../../../../components/styles/DM";
 
 const AppSettingsStyle = StyleSheet.create({
     containert: {
         flex: 1,
-        backgroundColor: WHITE,
+        backgroundColor: DM("white"),
         paddingTop: 50,
         paddingHorizontal: 16,
     },

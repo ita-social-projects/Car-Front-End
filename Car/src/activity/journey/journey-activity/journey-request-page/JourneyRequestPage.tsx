@@ -21,6 +21,7 @@ import {
     MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
     MIN_POPUP_POSITION
 } from "../../../../constants/Constants";
+import DM from "../../../../components/styles/DM";
 
 const JourneyRequestPage = (props: any) => {
 
@@ -93,6 +94,7 @@ const JourneyRequestPage = (props: any) => {
                 numberOfLines={10}
                 value={text}
                 placeholder={"Any comments?"}
+                placeholderTextColor={DM("#888888")}
                 onChangeText={(fromInput) => {
                     comments = fromInput;
                     setText(fromInput);

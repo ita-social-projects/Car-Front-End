@@ -4,6 +4,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import APIConfig from "../../../../../../../api-service/APIConfig";
+import DM from "../../../../../../components/styles/DM";
 import TouchableMapBar from "../../../../../../components/touchable-map-bar/TouchableMapBar";
 import {
     FIRST_ELEMENT_INDEX,
@@ -61,17 +62,26 @@ const SetPlace = (props: any) => {
                         <Text style={SetPlaceStyle.insideText}></Text>
                         <DropDownPicker
                             customArrowDown={() => (
-                                <Ionicons name="caret-down-outline" size={14} />
+                                <Ionicons
+                                    name="caret-down-outline"
+                                    size={14}
+                                    color={DM("black")}
+                                />
                             )}
                             customArrowUp={() => (
-                                <Ionicons name="caret-up-outline" size={14} />
+                                <Ionicons
+                                    name="caret-up-outline"
+                                    size={14}
+                                    color={DM("black")}
+                                />
                             )}
                             items={props.items ?? []}
                             searchable={true}
                             searchablePlaceholder="Manual input"
-                            searchablePlaceholderTextColor="gray"
+                            searchablePlaceholderTextColor={DM("gray")}
                             searchableError={() => <Text>Not Found</Text>}
                             placeholder={props.placeHolder}
+                            arrowColor={DM("black")}
                             defaultValue={""}
                             onChangeItem={
                                 props.selectHandle
@@ -91,7 +101,7 @@ const SetPlace = (props: any) => {
                 >
                     <Marker
                         draggable={true}
-                        pinColor={"#000080"}
+                        pinColor={DM("#000080")}
                         onDragEnd={(e: any) => {
                             setLatitude(e.nativeEvent.coordinate.latitude);
                             setLongitude(e.nativeEvent.coordinate.longitude);

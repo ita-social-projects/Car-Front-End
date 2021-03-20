@@ -9,7 +9,7 @@ test("renders correctly", () =>
     <View
       style={
         Object {
-          "backgroundColor": "#FFFFFF",
+          "backgroundColor": "white",
           "flex": 1,
           "paddingHorizontal": 16,
           "paddingTop": 50,
@@ -34,6 +34,7 @@ test("renders correctly", () =>
           <Text
             style={
               Object {
+                "color": "black",
                 "fontFamily": "Open Sans",
                 "fontSize": 13,
                 "fontWeight": "700",
@@ -81,6 +82,7 @@ test("renders correctly", () =>
           <Text
             style={
               Object {
+                "color": "black",
                 "fontFamily": "Open Sans",
                 "fontSize": 16,
                 "lineHeight": 24,

@@ -25,7 +25,7 @@ test("renders correctly", () =>
         style={
           Array [
             Object {
-              "color": undefined,
+              "color": "black",
               "fontSize": 30,
             },
             Object {

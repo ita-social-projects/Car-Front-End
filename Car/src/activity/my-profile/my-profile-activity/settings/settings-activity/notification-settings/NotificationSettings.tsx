@@ -5,7 +5,7 @@ import NotificationSettingsStyle from "./NotificationSettingsStyle";
 const NotificationSettings = () => {
     return (
         <View style={NotificationSettingsStyle.containert}>
-            <Text>
+            <Text style={NotificationSettingsStyle.text}>
                 App Settings
             </Text>
         </View>

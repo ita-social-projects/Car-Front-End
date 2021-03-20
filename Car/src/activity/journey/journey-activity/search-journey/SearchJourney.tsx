@@ -20,6 +20,7 @@ import {
     INITIAL_LONGITUDE,
     SINGLE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../constants/Constants";
+import DM from "../../../../components/styles/DM";
 
 const SearchJourney = () => {
     const { user } = useContext(AuthContext);
@@ -143,8 +144,8 @@ const SearchJourney = () => {
                                 iconName="location"
                                 angle="0"
                                 address="Choose starting point on the Map"
-                                addressFontColor="black"
-                                iconColor="#414045"
+                                addressFontColor={DM("black")}
+                                iconColor={DM("#414045")}
                                 size={25}
                                 onPress={() => {
                                     setMapOpen(SHOWN_MAP_Z_INDEX);
@@ -165,7 +166,7 @@ const SearchJourney = () => {
                                                 ", " +
                                                 item.address?.city
                                         }
-                                        addressFontColor="#909095"
+                                        addressFontColor={DM("#909095")}
                                         onPress={() => {
                                             setFromDirection(
                                                     item.address?.street +
@@ -180,7 +181,7 @@ const SearchJourney = () => {
                                                     item.address?.latitude
                                             );
                                         }}
-                                        iconColor="#414045"
+                                        iconColor={DM("#414045")}
                                         size={25}
                                     />
                                 </View>
@@ -193,7 +194,7 @@ const SearchJourney = () => {
                     {loading ? (
                         <View style={SearchJourneyStyle.loadingContainer}>
                             <Indicator
-                                color="#414045"
+                                color={DM("#414045")}
                                 size="large"
                                 text="Loading information..."
                             />
@@ -221,8 +222,8 @@ const SearchJourney = () => {
                                             address?.type === StopType.Finish
                                     )
                                 )}
-                                addressFontColor="#909095"
-                                iconColor="#909095"
+                                addressFontColor={DM("#909095")}
+                                iconColor={DM("#909095")}
                                 size={30}
                             />
                         ))

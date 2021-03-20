@@ -66,6 +66,7 @@ test("renders correctly", () =>
         <Text
           style={
             Object {
+              "color": "black",
               "fontFamily": "Proxima Nova",
               "fontSize": 20,
               "fontWeight": "700",
@@ -108,6 +109,7 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
+                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
@@ -145,6 +147,7 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
+                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
@@ -182,6 +185,7 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
+                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
@@ -219,6 +223,7 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
+                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",

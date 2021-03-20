@@ -27,6 +27,7 @@ test("renders correctly", () =>
         <Text
           style={
             Object {
+              "color": "black",
               "fontFamily": "Proxima Nova",
               "fontSize": 14,
               "letterSpacing": 0.2,
@@ -49,6 +50,7 @@ test("renders correctly", () =>
         <Text
           style={
             Object {
+              "color": "black",
               "fontFamily": "Proxima Nova",
               "fontSize": 20,
               "letterSpacing": 0.2,
@@ -86,7 +88,6 @@ test("renders correctly", () =>
                 Object {
                   "alignItems": "center",
                   "backgroundColor": "#000000",
-                  "fontFamily": "Proxima Nova",
                   "fontSize": 16,
                   "height": 48,
                   "justifyContent": "center",
