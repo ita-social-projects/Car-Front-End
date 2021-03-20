@@ -19,6 +19,7 @@ import ImageService from "../../../../../api-service/image-service/ImageService"
 import {
     GRADIENT_END,
     GRADIENT_START,
+    INITIAL_TIME,
     JOURNEY_CONTENT_HEIGHT,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT
@@ -190,7 +191,7 @@ const JourneyPage = ({ props }: any) => {
                                             {currentJourney?.organizer?.position}
                                         </Text>
                                         <Text style={JourneyPageStyle.dateText}>
-                                            {Moment(currentJourney?.departureTime).calendar()}
+                                            {Moment(currentJourney?.departureTime ?? INITIAL_TIME).calendar()}
                                         </Text>
                                     </View>
                                 </View>

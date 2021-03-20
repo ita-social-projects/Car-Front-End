@@ -147,7 +147,7 @@ test("renders correctly", () =>
                         }
                       }
                     >
-                      Today at 1:36 PM
+                      01/01/1970
                     </Text>
                   </View>
                 </View>
