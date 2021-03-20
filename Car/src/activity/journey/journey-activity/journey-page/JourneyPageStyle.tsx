@@ -98,13 +98,11 @@ const JourneyPageStyle = StyleSheet.create({
         alignItems: "center"
     },
 
-    mainContainer: {
-        backgroundColor: "white",
-    },
-
     contentView: {
-        width: "90%",
-        alignSelf: "center"
+        width: "100%",
+        paddingHorizontal: "5%",
+        alignSelf: "center",
+        backgroundColor: "white",
     },
 
     userBlock: {
@@ -229,6 +227,14 @@ const JourneyPageStyle = StyleSheet.create({
         alignItems: "center",
         height: 51,
         width: Dimensions.get("screen").width * 0.4
+    },
+
+    buttons: {
+        position: "absolute",
+        width: Dimensions.get("window").width,
+        backgroundColor: "#FFFFFF",
+        top: 411,
+        paddingHorizontal: "5%"
     },
 
     messageAllButtonText: {

@@ -49,11 +49,7 @@ const JourneyRequestPage = (props: any) => {
                 receiverId: currentJourney?.organizer?.id!,
                 type: 1,
                 jsonData:
-                "{\"title\": \"New Applicant\", \"comments\": \"" +
-                comments +
-                "\", \"hasLuggage\": \"" +
-                isLuggage +
-                "\"}",
+                `{"title": "New Applicant", "comments": "${comments}", "hasLuggage": "${isLuggage}"}`,
             }
         ).then((res) => {
             if (res.status == HTTP_STATUS_OK) {

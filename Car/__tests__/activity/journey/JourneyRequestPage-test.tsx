@@ -4,6 +4,10 @@ import JourneyRequestPage from "../../../src/activity/journey/journey-activity/j
 
 const renderer = shallowRenderer.createRenderer();
 
+jest.mock("react-native-gesture-handler");
+jest.mock("react-native-gesture-handler", () => require("react-native"));
+jest.mock("reanimated-bottom-sheet", () => {});
+
 test("renders correctly", () =>
     expect(
         renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)

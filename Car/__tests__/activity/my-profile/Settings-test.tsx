@@ -4,6 +4,9 @@ import Settings from "../../../src/activity/my-profile/my-profile-activity/setti
 
 const renderer = shallowRender.createRenderer();
 
+jest.mock("react-native-gesture-handler", () => require("react-native"));
+jest.mock("reanimated-bottom-sheet", () => {});
+
 test("renders correctly", () =>
     expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
     <React.Fragment>

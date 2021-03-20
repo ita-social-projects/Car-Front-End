@@ -4,6 +4,8 @@ import AddCars from "../../../src/activity/my-profile/my-profile-activity/cars/c
 
 const renderer = shallowRender.createRenderer();
 
+jest.mock("react-native-gesture-handler", () => require("react-native"));
+
 test("renders correctly", () =>
     expect(renderer.render(<AddCars />)).toMatchInlineSnapshot(`
     <View
