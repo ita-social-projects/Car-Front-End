@@ -76,8 +76,10 @@ const JourneyPage = ({ props }: any) => {
                             </View>
 
                         ) : (
-
                             <View style={JourneyPageStyle.contentView}>
+
+                                {/* Car block */}
+
                                 <View style={JourneyPageStyle.carContainer}>
                                     <View style={JourneyPageStyle.carAvatarContainer}>
                                         {car?.imageId ? (
@@ -105,8 +107,10 @@ const JourneyPage = ({ props }: any) => {
                                     </View>
                                 </View>
 
+                                {/* Stops block */}
+
                                 <View style={JourneyPageStyle.stopsBlock}>
-                                    {currentJourney?.stops.map((item) =>
+                                    {currentJourney?.stops.length ? currentJourney?.stops.map((item) =>
                                         <View key={item?.id} style={JourneyPageStyle.stopListItem}>
                                             <View style={JourneyPageStyle.stopListItemRow}>
                                                 <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
@@ -118,8 +122,30 @@ const JourneyPage = ({ props }: any) => {
                                                 {item?.address?.city} {item?.address?.street} street
                                             </Text>
                                         </View>
+                                    ) : (
+                                        <>
+                                            <View style={JourneyPageStyle.stopListItem}>
+                                                <View style={JourneyPageStyle.stopListItemRow}>
+                                                    <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+                                                    <View style={JourneyPageStyle.stopCustomLineIcon} />
+                                                </View>
+                                                <Text>
+                                                Location A
+                                                </Text>
+                                            </View>
+                                            <View style={JourneyPageStyle.stopListItem}>
+                                                <View style={JourneyPageStyle.stopListItemRow}>
+                                                    <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+                                                </View>
+                                                <Text>
+                                                Location B
+                                                </Text>
+                                            </View>
+                                        </>
                                     )}
                                 </View>
+
+                                {/* Participants block */}
 
                                 <Text style={JourneyPageStyle.applicantsHeader}>
                                         SOFTSERVIANS {currentJourney?.participants?.length}/
@@ -170,6 +196,8 @@ const JourneyPage = ({ props }: any) => {
                     <View style={JourneyPageStyle.mainContainer}>
                         <View style={JourneyPageStyle.contentView}>
 
+                            {/* Driver block */}
+
                             <TouchableOpacity
                                 style={JourneyPageStyle.userBlock}
                                 onPress={() =>
@@ -199,6 +227,9 @@ const JourneyPage = ({ props }: any) => {
                             <View style={JourneyPageStyle.driverBlockWhiteSpace} />
 
                             <Divider style={JourneyPageStyle.separator} />
+
+                            {/* Buttons block */}
+
                             <View style={{
                                 position: "absolute",
                                 width: Dimensions.get("window").width,
