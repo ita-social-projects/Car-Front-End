@@ -62,7 +62,7 @@ export default function Preferences (props: any) {
                 <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  DM("white") }]}>
                     <Indicator
                         size="large"
-                        color="#414045"
+                        color={DM("#414045")}
                         text="Loading information..."
                     />
                 </View>

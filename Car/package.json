@@ -20,8 +20,8 @@
     "scripts": {
         "android": "react-native run-android",
         "ios": "react-native run-ios",
-        "start": "&& react-native start",
-        "test": "jest -u --coverage",
+        "start": "react-native start",
+        "test": "jest -u --coverage --runInBand --detectOpenHandles",
         "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && jest --coverage",
         "postinstall": "cd .. && husky install || husky install || 0"
     },

@@ -15,7 +15,7 @@ import ChatStyle from "./ChatStyle";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/Constants";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../constants/Constants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
 
@@ -62,8 +62,10 @@ const Chat = (properties: any) => {
                         text: element?.text,
                         createdAt: element?.createdAt,
                         user: {
-                            _id: element?.senderId + "|" + element?.sender?.imageId,
-                            name: element?.sender?.name + "|" + element?.sender?.surname
+                            _id: element?.senderId,
+                            name: element?.sender?.name + "|"
+                            + element?.sender?.surname + "|"
+                            + element?.sender?.imageId
                         }
                     };
 
@@ -91,8 +93,10 @@ const Chat = (properties: any) => {
                             text: receivedMessage.text,
                             createdAt: receivedMessage.createdAt,
                             user: {
-                                _id: receivedMessage.senderId + "|" + receivedMessage?.sender?.senderId,
-                                name: receivedMessage?.sender?.name + "|" + receivedMessage?.sender?.surname
+                                _id: receivedMessage.senderId,
+                                name: receivedMessage?.sender?.name + "|"
+                                + receivedMessage?.sender?.surname + "|"
+                                + receivedMessage?.sender?.imageId
                             }
                         } as any
                     )
@@ -177,6 +181,7 @@ const Chat = (properties: any) => {
             primaryStyle={{
                 borderWidth: 2,
                 borderColor: DM("black"),
+                color: DM("black"),
                 justifyContent: "center",
                 height: "100%",
                 overflow: "scroll",
@@ -189,14 +194,14 @@ const Chat = (properties: any) => {
         <TouchableOpacity
             onPress={() =>
                 navigation.navigate("Applicant Page", {
-                    userId: data.currentMessage.user._id.split("|")[FIRST_ELEMENT_INDEX] as number
+                    userId: data.currentMessage.user._id as number
                 })
             }
         >
             <AvatarLogo
                 size={36}
                 user={{
-                    imageId: data.currentMessage.user._id.replace("null", "").split("|")[SECOND_ELEMENT_INDEX],
+                    imageId: data.currentMessage.user.name.replace("null", "").split("|")[THIRD_ELEMENT_INDEX],
                     name: data.currentMessage.user.name.split("|")[FIRST_ELEMENT_INDEX],
                     surname: data.currentMessage.user.name.split("|")[SECOND_ELEMENT_INDEX]
                 }}
@@ -234,7 +239,7 @@ const Chat = (properties: any) => {
                     scrollToBottom
                     alwaysShowSend
                     user={{
-                        _id: user?.id + "|" + user?.imageId,
+                        _id: user?.id!,
                         name: user?.name + "|" + user?.surname
                     }}
                     renderBubble={renderBubble}

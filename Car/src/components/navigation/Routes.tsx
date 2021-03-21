@@ -37,13 +37,10 @@ const Routes = () => {
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
-            (async () => loadStorageUser())().then(() =>
+            (async () => loadStorageUser())().then(() => setLoading(false)));
 
-                setLoading(false)
-
-            ));
         AsyncStorage.getItem("isDarkMode").then((res) => {
-            changeNavigationBarColor(DM("#FFFFFF"), false, true);
+            changeNavigationBarColor(res === "true" ? "#141414" : "#FFFFFF", false, true);
             isDarkMode = res === "true";
         });
 
@@ -75,7 +72,7 @@ const Routes = () => {
                 ref={navigationRef}>
                 {isLoading ? (
                     <Indicator
-                        color="#414045"
+                        color={DM("#414045")}
                         size="large"
                         text="Loading information..."
                     />

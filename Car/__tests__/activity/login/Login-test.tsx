@@ -113,11 +113,16 @@ test("renders correctly", () =>
           >
             <Text
               style={
-                Object {
-                  "fontFamily": "Proxima Nova",
-                  "fontSize": 16,
-                  "textTransform": "uppercase",
-                }
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova",
+                    "fontSize": 16,
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "color": "white",
+                  },
+                ]
               }
             >
               Login

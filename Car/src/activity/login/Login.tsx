@@ -89,7 +89,7 @@ const Login = (properties: any) => {
                             setButtonDisabled(true);
                         }}
                     >
-                        <Text style={LoginStyle.buttonText}>Login</Text>
+                        <Text style={[LoginStyle.buttonText, { color: DM("white") }]}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>
