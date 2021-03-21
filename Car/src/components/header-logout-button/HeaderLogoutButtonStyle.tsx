@@ -9,7 +9,6 @@ const HeaderLogoutButtonStyle = StyleSheet.create({
     },
 
     buttonText: {
-        color: "#EC6400",
         fontFamily: Font.OpenSans.ExtraBold,
         fontSize: 20,
         fontWeight: "700"

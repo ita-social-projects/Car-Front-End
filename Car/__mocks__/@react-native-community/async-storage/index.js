@@ -1,29 +1,30 @@
-//maybe need to delete this file
-
 let cache = {};
 
 export default {
     setItem: (key, value) => {
         return new Promise((resolve, reject) => {
-            return typeof key !== "string" || typeof value !== "string"
-                ? reject(new Error("key and value must be string"))
-                : resolve((cache[key] = value));
+            return typeof key !== "string" || typeof value !== "string" ?
+                reject(new Error("key and value must be string")) :
+                resolve((cache[key] = value));
         });
     },
+
     getItem: (key, value) => {
         return new Promise((resolve) => {
-            return cache.hasOwnProperty(key)
-                ? resolve(cache[key])
-                : resolve(null);
+            return cache.hasOwnProperty(key) ?
+                resolve(cache[key]) :
+                resolve(null);
         });
     },
+
     removeItem: (key) => {
         return new Promise((resolve, reject) => {
-            return cache.hasOwnProperty(key)
-                ? resolve(delete cache[key])
-                : reject("No such key!");
+            return cache.hasOwnProperty(key) ?
+                resolve(delete cache[key]) :
+                reject("No such key!");
         });
     },
+
     clear: (key) => {
         return new Promise((resolve, reject) => resolve((cache = {})));
     },

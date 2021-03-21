@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { DROP_DOWN_MAX_HEIGHT } from "../../constants/Constants";
+import DM from "../styles/DM";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
 
 const CarDropDownPicker = (props: any) => (
@@ -11,7 +12,8 @@ const CarDropDownPicker = (props: any) => (
             <Text
                 style={[
                     CarDropDownPickerStyle.requiredPointer,
-                    { zIndex: props.zIndex }
+                    { zIndex: props.zIndex },
+                    { color: DM("red") }
                 ]}
             >
                     *
@@ -20,34 +22,45 @@ const CarDropDownPicker = (props: any) => (
         <DropDownPicker
             zIndex={props.zIndex}
             customArrowDown={() => (
-                <Ionicons name="caret-down-outline" size={14} />
+                <Ionicons name="caret-down-outline" size={14} color={DM("black")} />
             )}
             customArrowUp={() => (
-                <Ionicons name="caret-up-outline" size={14} />
+                <Ionicons name="caret-up-outline" size={14} color={DM("black")} />
             )}
             items={props.items ?? []}
             searchable={true}
             searchablePlaceholder="Manual input"
-            searchablePlaceholderTextColor="gray"
-            searchableError={() => <Text>Not Found</Text>}
+            searchablePlaceholderTextColor={DM("gray")}
+            searchableError={() => <Text style={{ color: DM("black") }}>Not Found</Text>}
+            searchTextInputProps={{ style: { color: DM("black") } }}
+            searchableStyle={{ color: DM("black") }}
             placeholder={props.placeHolder}
             defaultValue={props.defaultValue}
             style={[
                 CarDropDownPickerStyle.container,
-                props.disabled && CarDropDownPickerStyle.disabledStyle
+                {
+                    borderColor: DM("black"),
+                    backgroundColor: DM("white")
+                },
+                props.disabled && { borderColor: DM("gray") }
             ]}
-            dropDownStyle={CarDropDownPickerStyle.dropDownStyle}
+            dropDownStyle={[CarDropDownPickerStyle.dropDownStyle,
+                {
+                    borderColor: DM("black"),
+                    backgroundColor: DM("white"),
+                }]}
             containerStyle={[{ height: 48 }, props.style]}
             placeholderStyle={[
                 CarDropDownPickerStyle.placeholderStyle,
                 props.required && { paddingLeft: 12 },
-                CarDropDownPickerStyle.initialPlaceHolder
+                { color: DM("#909095") }
             ]}
             selectedLabelStyle={[
                 CarDropDownPickerStyle.placeholderStyle,
+                { color: DM("black") },
                 props.required && { paddingLeft: 12 }
             ]}
-            itemStyle={CarDropDownPickerStyle.itemStyle}
+            itemStyle={[CarDropDownPickerStyle.itemStyle, { backgroundColor: DM("#F0F0F0") }]}
             onChangeItem={
                 props.selectHandle
                     ? (item) => {

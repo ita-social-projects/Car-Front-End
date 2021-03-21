@@ -13,7 +13,6 @@ const HeaderBackButtonStyle = StyleSheet.create({
     },
 
     backButtonText: {
-        color: "#02A2CF",
         fontFamily: Font.OpenSans.ExtraBold,
         fontSize: 20,
         fontWeight: "700"

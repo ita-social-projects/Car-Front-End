@@ -4,17 +4,21 @@ import Login from "../../../src/activity/login/Login";
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
-  expect(renderer.render(<Login />)).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.render(<Login />)).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-          "paddingBottom": 22,
-          "paddingHorizontal": 16,
-          "paddingTop": 74,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingBottom": 22,
+            "paddingHorizontal": 16,
+            "paddingTop": 74,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <View
@@ -26,13 +30,18 @@ test("renders correctly", () =>
       >
         <Text
           style={
-            Object {
-              "fontFamily": "Proxima Nova",
-              "fontSize": 14,
-              "letterSpacing": 0.2,
-              "lineHeight": 16,
-              "textTransform": "uppercase",
-            }
+            Array [
+              Object {
+                "fontFamily": "Proxima Nova",
+                "fontSize": 14,
+                "letterSpacing": 0.2,
+                "lineHeight": 16,
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "black",
+              },
+            ]
           }
         >
           Welcome to
@@ -48,12 +57,17 @@ test("renders correctly", () =>
       >
         <Text
           style={
-            Object {
-              "fontFamily": "Proxima Nova",
-              "fontSize": 20,
-              "letterSpacing": 0.2,
-              "textTransform": "uppercase",
-            }
+            Array [
+              Object {
+                "fontFamily": "Proxima Nova",
+                "fontSize": 20,
+                "letterSpacing": 0.2,
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "black",
+              },
+            ]
           }
         >
           Softserve Journeys
@@ -85,25 +99,30 @@ test("renders correctly", () =>
               Array [
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#000000",
-                  "fontFamily": "Proxima Nova",
                   "fontSize": 16,
                   "height": 48,
                   "justifyContent": "center",
                   "width": 81,
                 },
                 false,
+                Object {
+                  "backgroundColor": "#000000",
+                },
               ]
             }
           >
             <Text
               style={
-                Object {
-                  "color": "#FFFFFF",
-                  "fontFamily": "Proxima Nova",
-                  "fontSize": 16,
-                  "textTransform": "uppercase",
-                }
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova",
+                    "fontSize": 16,
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "color": "white",
+                  },
+                ]
               }
             >
               Login

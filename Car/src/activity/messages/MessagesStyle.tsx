@@ -44,7 +44,6 @@ const SimpleMessageStyle = StyleSheet.create({
     fonts: {
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
-        color: "#00A3CF"
     },
 
     image: {
@@ -62,13 +61,11 @@ const SimpleMessageStyle = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: "white",
         padding: 15
     },
 
     containerStyle: {
         height: 44,
-        backgroundColor: "white",
         borderBottomColor: "transparent",
         borderTopColor: "transparent",
         marginTop: 5,
@@ -76,11 +73,8 @@ const SimpleMessageStyle = StyleSheet.create({
     },
 
     inputContainerStyle: {
-        backgroundColor: "white",
-        borderColor: "black",
         borderWidth: 2,
         borderBottomWidth: 2,
-        borderBottomColor: "black",
         paddingLeft: 5
     },
 

@@ -3,16 +3,20 @@ import OkSearchResult from "../../../src/activity/journey/journey-activity/searc
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
-  expect(
-    renderer.render(OkSearchResult({ route: { params: { journeys: [] } } }))
-  ).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(
+        renderer.render(OkSearchResult({ route: { params: { journeys: [] } } }))
+    ).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <FlatList

@@ -29,6 +29,7 @@ import {
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH
 } from "../../../../../../constants/Constants";
+import DM from "../../../../../../components/styles/DM";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
@@ -178,9 +179,9 @@ const AddCars = () => {
 
     return (
         <View
-            style={AddCarsStyle.wrapper}
+            style={[AddCarsStyle.wrapper, { backgroundColor: DM("white") }]}
         >
-            <View style={AddCarsStyle.carAvatarContainer}>
+            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("#C4C4C4") }]}>
                 {photo && (
                     <Image
                         source={{ uri: photo.uri }}
@@ -188,10 +189,14 @@ const AddCars = () => {
                     />
                 )}
                 <TouchableOpacity
-                    style={AddCarsStyle.carButtonUpload}
+                    style={[AddCarsStyle.carButtonUpload,
+                        {
+                            backgroundColor: DM("#FFFFFF"),
+                            borderColor: DM("#000000")
+                        }]}
                     onPress={() => uploadPhotoHandle()}
                 >
-                    <Text style={AddCarsStyle.carButtonUploadText}>
+                    <Text style={[AddCarsStyle.carButtonUploadText, { color: DM("black") }]}>
                         {Object.entries(photo).length
                             ? "Change photo"
                             : "Upload photo"}
@@ -259,22 +264,24 @@ const AddCars = () => {
                     />
                 </View>
                 <View style={AddCarsStyle.saveButtonContainer}>
-                    <Text style={{ color: "red" }}>
+                    <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: "#414045" }}>
+                        <Text style={{ color: DM("#414045") }}>
                             {" "}
                             - mandatory information
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        style={AddCarsStyle.carButtonSave}
+                        style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
                             if (validateFields()) {
                                 saveCarHandle().then(() => navigation.goBack());
                             }
                         }}
                     >
-                        <Text style={AddCarsStyle.carButtonSaveText}>Save</Text>
+                        <Text style={[AddCarsStyle.carButtonSaveText, { color: DM("white") }]}>
+                            Save
+                        </Text>
                         {loading ? (
                             <ActivityIndicator
                                 style={AddCarsStyle.spinner}

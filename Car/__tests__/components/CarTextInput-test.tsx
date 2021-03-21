@@ -4,8 +4,11 @@ import CarTextInput from "../../src/components/car-text-input/CarTextInput";
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
-  expect(renderer.render(<CarTextInput />)).toMatchInlineSnapshot(`
+jest.mock("react-native-gesture-handler", () => require("react-native"));
+jest.useFakeTimers();
+
+test("renders correctly", async () =>
+    expect(renderer.render(<CarTextInput />)).toMatchInlineSnapshot(`
     <Controller
       control={
         Object {

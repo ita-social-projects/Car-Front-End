@@ -4,8 +4,8 @@ import SetPlace from "../../../src/activity/my-profile/my-profile-activity/addre
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
-  expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -35,16 +35,21 @@ test("renders correctly", () =>
         <React.Fragment>
           <View
             style={
-              Object {
-                "backgroundColor": "white",
-                "borderWidth": 2.3,
-                "flexDirection": "row",
-                "fontFamily": "Open Sans",
-                "marginLeft": 20,
-                "marginRight": 100,
-                "paddingLeft": 100,
-                "zIndex": 200,
-              }
+              Array [
+                Object {
+                  "borderWidth": 2.3,
+                  "flexDirection": "row",
+                  "fontFamily": "Open Sans",
+                  "marginLeft": 20,
+                  "marginRight": 100,
+                  "paddingLeft": 100,
+                  "zIndex": 200,
+                },
+                Object {
+                  "backgroundColor": "white",
+                  "borderColor": "black",
+                },
+              ]
             }
           >
             <Component
@@ -54,18 +59,22 @@ test("renders correctly", () =>
             />
             <Text
               style={
-                Object {
-                  "color": "#909095",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 17,
-                  "marginLeft": 5,
-                }
+                Array [
+                  Object {
+                    "fontFamily": "Open Sans",
+                    "fontSize": 17,
+                    "marginLeft": 5,
+                  },
+                  Object {
+                    "color": "#909095",
+                  },
+                ]
               }
             />
             <DropDownPicker
               activeItemStyle={Object {}}
               activeLabelStyle={Object {}}
-              arrowColor="#000"
+              arrowColor="black"
               arrowSize={15}
               arrowStyle={Object {}}
               autoScrollToDefaultValue={false}

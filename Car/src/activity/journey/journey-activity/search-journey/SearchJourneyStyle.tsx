@@ -4,7 +4,6 @@ import Font from "../../../../data/fonts/Font";
 const SearchJourneyStyle = StyleSheet.create({
     container: {
         zIndex: 150,
-        backgroundColor: "#FAFAFA"
     },
 
     loadingContainer: {
@@ -27,9 +26,7 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     topInputContainer: {
-        backgroundColor: "#FAFAFA",
         zIndex: 2000,
-        borderBottomColor: "#C1C1C5",
         borderBottomWidth: 1
     },
 
@@ -75,7 +72,6 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     confirmButtonSaveText: {
-        color: "white",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

@@ -5,19 +5,16 @@ const HeaderStyle = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: "stretch",
-        backgroundColor: "#FFFFFF"
     },
 
     layout: {
         height: Dimensions.get("screen").height,
         width: Dimensions.get("screen").width,
         position: "absolute",
-        backgroundColor: "#000000",
         zIndex: 50,
     },
 
     popUp: {
-        backgroundColor: "#FFFFFF",
         height: Dimensions.get("screen").height,
         width: Dimensions.get("screen").width,
         position: "absolute",

@@ -4,7 +4,6 @@ import Font from "../../../../data/fonts/Font";
 const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: "#FFFFFF",
         paddingHorizontal: 23,
         paddingTop: 22.5,
     },
@@ -18,14 +17,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         paddingBottom: 23.5,
         alignItems: "center",
         justifyContent: "center",
-    },
-
-    userAvatar: {
-        width: 56,
-        height: 56,
-        borderRadius: 50,
-        borderWidth: 3,
-        borderColor: "#EEEEEE"
     },
 
     userName: {
@@ -45,12 +36,10 @@ const JourneyApplicantStyle = StyleSheet.create({
     },
 
     separator: {
-        height: 1,
-        backgroundColor: "#F2F2F2"
+        height: 1
     },
 
     bottomContainer: {
-        backgroundColor: "#FFFFFF",
         paddingTop: 13
     },
 
@@ -66,8 +55,7 @@ const JourneyApplicantStyle = StyleSheet.create({
     detailsText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
-        fontSize: 18,
-        color: "black"
+        fontSize: 18
     },
 
     positionText: {
@@ -75,7 +63,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
         fontSize: 13,
-        color: "black",
         paddingTop: 16
     },
 
@@ -84,7 +71,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
         fontSize: 13,
-        color: "black"
     },
 
     positionData: {
@@ -92,7 +78,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
         lineHeight: 18,
-        color: "#414045",
         paddingTop: 16
     },
 
@@ -100,8 +85,7 @@ const JourneyApplicantStyle = StyleSheet.create({
         flex: 194,
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
-        fontSize: 13,
-        color: "#02A2CF"
+        fontSize: 13
     },
 
     whitespaceBlock: {

@@ -4,26 +4,16 @@ import Font from "../../../../data/fonts/Font";
 const JourneyPageStyle = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: "#88FF88",
         alignItems: "center"
     },
 
     pageText: {
         fontFamily: Font.ProximaNova.ExtraBold,
-        color: "#000000",
-    },
-
-    loadingContainer: {
-        height: 500,
-        backgroundColor: "#FFFFFF",
-        justifyContent: "center",
-        alignItems: "center"
     },
 
     carContainer: {
         paddingTop: 22,
-        paddingBottom: 30,
-        paddingLeft: 12,
+        paddingLeft: 16,
         flexDirection: "row"
     },
 
@@ -31,8 +21,15 @@ const JourneyPageStyle = StyleSheet.create({
         paddingLeft: 10,
     },
 
+    lining: {
+        position: "absolute",
+        top: -10,
+        height: 100,
+        width: Dimensions.get("screen").width,
+        zIndex: -1
+    },
+
     carName: {
-        color: "#000000",
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
         lineHeight: 16,
@@ -41,7 +38,6 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     carPlateNumber: {
-        color: "#414045",
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
         lineHeight: 16,
@@ -71,23 +67,13 @@ const JourneyPageStyle = StyleSheet.create({
         fontSize: 32
     },
 
-    panelContainer: {
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
-    },
-
     panel: {
         height: 200,
-        backgroundColor: "white"
     },
 
     headerTitleStyle: {
         paddingLeft: 24,
-        paddingBottom: 20,
-        backgroundColor: "white"
+        paddingBottom: 20
     },
 
     headerTextStyle: {
@@ -99,18 +85,16 @@ const JourneyPageStyle = StyleSheet.create({
         alignItems: "center"
     },
 
-    mainContainer: {
-        backgroundColor: "white",
-    },
-
     contentView: {
-        width: "90%",
-        alignSelf: "center"
+        width: "100%",
+        paddingHorizontal: "5%",
+        alignSelf: "center",
     },
 
     userBlock: {
         flexDirection: "row",
         justifyContent: "space-around",
+        paddingLeft: 2,
     },
 
     driverBlockWhiteSpace: {
@@ -145,8 +129,7 @@ const JourneyPageStyle = StyleSheet.create({
     applicantNameText: {
         fontSize: 15,
         fontWeight: "700",
-        fontFamily: Font.OpenSans.ExtraBold,
-        color: "#00A3CF"
+        fontFamily: Font.OpenSans.ExtraBold
     },
 
     userSecondaryInfoBlock: {
@@ -156,20 +139,17 @@ const JourneyPageStyle = StyleSheet.create({
 
     userRoleText: {
         fontSize: 13,
-        color: "#909095",
         fontWeight: "100",
         fontFamily: Font.OpenSans.Regular
     },
 
     dateText: {
         fontSize: 13,
-        color: "#02A2CF",
         fontWeight: "700",
         fontFamily: Font.OpenSans.ExtraBold
     },
 
     separator: {
-        backgroundColor: "#C1C1C5",
         height: 1,
         width: "100%",
     },
@@ -191,7 +171,8 @@ const JourneyPageStyle = StyleSheet.create({
         width: "100%",
         justifyContent: "space-around",
         marginTop: 20,
-        marginLeft: 10
+        marginLeft: 14,
+        paddingBottom: 30,
     },
 
     stopListItem: {
@@ -204,13 +185,8 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     stopCustomLineIcon: {
-        backgroundColor: "#AAA9AE",
         height: 12,
         width: 2
-    },
-
-    bottomPopup: {
-        backgroundColor: "white",
     },
 
     buttonsBlock: {
@@ -221,8 +197,6 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     messageAllButton: {
-        backgroundColor: "white",
-        borderColor: "black",
         borderWidth: 3,
         justifyContent: "center",
         alignItems: "center",
@@ -230,31 +204,20 @@ const JourneyPageStyle = StyleSheet.create({
         width: Dimensions.get("screen").width * 0.4
     },
 
+    buttons: {
+        position: "absolute",
+        width: Dimensions.get("window").width,
+        top: 411,
+        paddingHorizontal: "5%"
+    },
+
     messageAllButtonText: {
-        color: "black",
         fontWeight: "700",
         fontSize: 18,
         textTransform: "uppercase",
     },
 
-    startJourneyButton: {
-        backgroundColor: "black",
-        width: Dimensions.get("screen").width * 0.465,
-        justifyContent: "center",
-        alignItems: "center",
-        height: 51,
-        marginLeft: Dimensions.get("screen").width * 0.045,
-    },
-
-    startJourneyButtonText: {
-        color: "white",
-        fontWeight: "700",
-        fontSize: 18,
-        textTransform: "uppercase"
-    },
-
     requestButton: {
-        backgroundColor: "black",
         width: Dimensions.get("screen").width * 0.515,
         justifyContent: "center",
         alignItems: "center",
@@ -262,18 +225,9 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     requestButtonText: {
-        color: "white",
         fontWeight: "700",
         fontSize: 18,
         textTransform: "uppercase"
-    },
-
-    pressedButton: {
-        opacity: 0.2
-    },
-
-    scrollBlock: {
-        height: 336
     },
 });
 

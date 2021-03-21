@@ -2,9 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import HeaderLogoutButton from "../../src/components/header-logout-button/HeaderLogoutButton";
 
-test("renders correctly", () =>
-  expect(renderer.create(<HeaderLogoutButton />).toJSON())
-    .toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.create(<HeaderLogoutButton />).toJSON())
+        .toMatchInlineSnapshot(`
     <View
       accessible={true}
       focusable={true}
@@ -26,12 +26,16 @@ test("renders correctly", () =>
     >
       <Text
         style={
-          Object {
-            "color": "#EC6400",
-            "fontFamily": "Open Sans",
-            "fontSize": 20,
-            "fontWeight": "700",
-          }
+          Array [
+            Object {
+              "fontFamily": "Open Sans",
+              "fontSize": 20,
+              "fontWeight": "700",
+            },
+            Object {
+              "color": "#EC6400",
+            },
+          ]
         }
       >
         Logout

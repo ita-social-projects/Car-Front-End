@@ -2,16 +2,20 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Details from "../../../src/activity/my-profile/my-profile-activity/details/Details";
 
-test("renders correctly", () =>
-  expect(renderer.create(<Details />).toJSON()).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.create(<Details />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-          "paddingHorizontal": 24,
-          "paddingTop": 32,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 24,
+            "paddingTop": 32,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <View
@@ -32,12 +36,16 @@ test("renders correctly", () =>
         />
         <Text
           style={
-            Object {
-              "color": "#414045",
-              "fontFamily": "Proxima Nova",
-              "fontSize": 14,
-              "fontWeight": "700",
-            }
+            Array [
+              Object {
+                "fontFamily": "Proxima Nova",
+                "fontSize": 14,
+                "fontWeight": "700",
+              },
+              Object {
+                "color": "#414045",
+              },
+            ]
           }
         >
           Loading information...

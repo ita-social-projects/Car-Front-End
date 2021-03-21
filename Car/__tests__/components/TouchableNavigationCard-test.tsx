@@ -2,9 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import TouchableNavigationCard from "../../src/components/touchable-navigation-card/TouchableNavigationCard";
 
-test("renders correctly", () =>
-  expect(renderer.create(<TouchableNavigationCard />).toJSON())
-    .toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.create(<TouchableNavigationCard />).toJSON())
+        .toMatchInlineSnapshot(`
     <View>
       <View
         accessible={true}
@@ -18,6 +18,7 @@ test("renders correctly", () =>
         onStartShouldSetResponder={[Function]}
         style={
           Object {
+            "borderBottomColor": "rgba(0,0,0,0.5)",
             "opacity": 1,
           }
         }

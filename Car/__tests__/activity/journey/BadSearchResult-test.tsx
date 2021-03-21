@@ -2,14 +2,18 @@ import React from "react";
 import renderer from "react-test-renderer";
 import BadSearchResult from "../../../src/activity/journey/journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 
-test("renders correctly", () =>
-  expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <View
@@ -23,14 +27,18 @@ test("renders correctly", () =>
       >
         <Text
           style={
-            Object {
-              "color": "#000000",
-              "fontFamily": undefined,
-              "fontSize": 16,
-              "fontWeight": "700",
-              "textAlign": "center",
-              "textTransform": "uppercase",
-            }
+            Array [
+              Object {
+                "fontFamily": undefined,
+                "fontSize": 16,
+                "fontWeight": "700",
+                "textAlign": "center",
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "#000000",
+              },
+            ]
           }
         >
           Couldn't find results from your search criteria
@@ -92,13 +100,17 @@ test("renders correctly", () =>
         >
           <Text
             style={
-              Object {
-                "color": "#FFFFFF",
-                "fontFamily": undefined,
-                "fontSize": 16,
-                "fontWeight": "700",
-                "textTransform": "uppercase",
-              }
+              Array [
+                Object {
+                  "fontFamily": undefined,
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "#FFFFFF",
+                },
+              ]
             }
           >
             Create Journey Request

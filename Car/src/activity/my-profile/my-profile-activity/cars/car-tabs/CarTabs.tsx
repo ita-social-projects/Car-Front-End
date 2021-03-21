@@ -7,6 +7,7 @@ import EditCars from "../car-activity/edit-cars/EditCars";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
+import DM from "../../../../../components/styles/DM";
 
 const StackTabs = createStackNavigator();
 
@@ -20,7 +21,7 @@ const CarTabs = () => {
                     options={{
                         headerTitle: "Your Cars",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -30,7 +31,7 @@ const CarTabs = () => {
                     options={{
                         headerTitle: "Add a Car",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -41,7 +42,7 @@ const CarTabs = () => {
                     options={{
                         headerTitle: "Your Car",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}

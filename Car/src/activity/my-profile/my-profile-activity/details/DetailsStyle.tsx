@@ -6,7 +6,6 @@ const DetailsStyle = StyleSheet.create({
         flex: 1,
         paddingTop: 32,
         paddingHorizontal: 24,
-        backgroundColor: "#FFFFFF"
     },
 
     detailsContainer: {
@@ -23,14 +22,12 @@ const DetailsStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
-        color: "#000000"
     },
 
     detailValueGrayText: {
         fontFamily: Font.OpenSans.Regular,
         fontSize: 13,
         lineHeight: 18,
-        color: "#414045"
     },
 
     detailValueBlueText: {
@@ -38,7 +35,6 @@ const DetailsStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
-        color: "#02A2CF"
     }
 });
 

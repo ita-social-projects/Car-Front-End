@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import Font from "../../data/fonts/Font";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
     container: {
@@ -14,7 +13,6 @@ const AvatarLogoTitleStyle = StyleSheet.create({
 
     headerUserInformation: {
         marginLeft: 71,
-        fontFamily: Font.ProximaNova.Bold,
         position: "absolute"
     },
 

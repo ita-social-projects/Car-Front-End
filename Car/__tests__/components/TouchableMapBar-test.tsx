@@ -4,14 +4,13 @@ import TouchableMapBar from "../../src/components/touchable-map-bar/TouchableMap
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
-  expect(renderer.render(<TouchableMapBar />)).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.render(<TouchableMapBar />)).toMatchInlineSnapshot(`
     <View>
       <ForwardRef
         style={
           Array [
             Object {
-              "backgroundColor": "white",
               "borderWidth": 2.3,
               "flexDirection": "row",
               "fontFamily": "Open Sans",
@@ -20,6 +19,8 @@ test("renders correctly", () =>
               "padding": 8,
             },
             Object {
+              "backgroundColor": "white",
+              "borderColor": "black",
               "marginBottom": NaN,
               "marginTop": NaN,
             },
@@ -28,12 +29,16 @@ test("renders correctly", () =>
       >
         <Text
           style={
-            Object {
-              "color": "#909095",
-              "fontFamily": "Open Sans",
-              "fontSize": 17,
-              "marginLeft": 5,
-            }
+            Array [
+              Object {
+                "fontFamily": "Open Sans",
+                "fontSize": 17,
+                "marginLeft": 5,
+              },
+              Object {
+                "color": "#909095",
+              },
+            ]
           }
         >
           undefined:
@@ -43,10 +48,10 @@ test("renders correctly", () =>
           style={
             Array [
               Object {
-                "color": "black",
                 "fontSize": 18,
               },
               Object {
+                "color": "black",
                 "flex": NaN,
               },
             ]
@@ -62,10 +67,10 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
-                  "borderColor": "#EEEEEE",
                   "marginRight": 5,
                 },
                 Object {
+                  "borderColor": "#EEEEEE",
                   "transform": Array [
                     Object {
                       "rotate": "0deg",

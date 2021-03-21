@@ -10,7 +10,6 @@ const CarTextInputStyle = StyleSheet.create({
     requiredPointer: {
         position: "absolute",
         zIndex: 10,
-        color: "red",
         marginLeft: 16
     },
 
@@ -21,14 +20,6 @@ const CarTextInputStyle = StyleSheet.create({
         textTransform: "uppercase",
         zIndex: 0
     },
-
-    errorText: {
-        color: "red"
-    },
-
-    errorBorder: {
-        borderColor: "red"
-    }
 });
 
 export default CarTextInputStyle;

@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const OkSearchResultStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF"
     },
 
     list: {

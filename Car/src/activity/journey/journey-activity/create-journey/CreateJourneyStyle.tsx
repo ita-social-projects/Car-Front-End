@@ -5,8 +5,8 @@ const CreateJourneyStyle = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#FFFFFF"
-    }
+    },
+
 });
 
 export default CreateJourneyStyle;

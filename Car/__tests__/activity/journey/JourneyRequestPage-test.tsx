@@ -4,38 +4,306 @@ import JourneyRequestPage from "../../../src/activity/journey/journey-activity/j
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
-  expect(
-    renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)
-  ).toMatchInlineSnapshot(`
+jest.mock("react-native-gesture-handler");
+jest.mock("react-native-gesture-handler", () => require("react-native"));
+jest.mock("reanimated-bottom-sheet", () => {});
+
+test("renders correctly", async () =>
+    expect(
+        renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)
+    ).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#88FF88",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#88FF88",
+          },
+        ]
       }
     >
       <Text
         style={
-          Object {
-            "color": "#000000",
-            "fontFamily": "Proxima Nova",
-          }
+          Array [
+            Object {
+              "fontFamily": "Proxima Nova",
+            },
+            Object {
+              "color": "#222222",
+            },
+          ]
         }
       >
         Map implementation is in progress
       </Text>
       <BottomPopup
         enabledInnerScrolling={false}
-        initialSnap={0}
-        renderContent={[Function]}
-        renderHeader={[Function]}
+        initialSnap={1}
+        refForChild={
+          Object {
+            "current": null,
+          }
+        }
+        renderContent={
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 400,
+                },
+                Object {
+                  "backgroundColor": "white",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignSelf": "center",
+                  "width": "90%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-around",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "justifyContent": "space-around",
+                      "margin": 7,
+                      "marginLeft": 13,
+                    }
+                  }
+                >
+                  <AvatarLogo
+                    size={38.5}
+                  />
+                </View>
+                <View
+                  style={
+                    Object {
+                      "flex": 5,
+                      "flexDirection": "column",
+                      "justifyContent": "space-around",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Array [
+                        Object {
+                          "fontFamily": "Open Sans",
+                          "fontSize": 15,
+                          "fontWeight": "700",
+                        },
+                        Object {
+                          "color": "black",
+                        },
+                      ]
+                    }
+                  >
+                     
+                    's journey
+                  </Text>
+                  <View
+                    style={
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "fontFamily": "Open Sans",
+                            "fontSize": 13,
+                            "fontWeight": "100",
+                          },
+                          Object {
+                            "color": "#909095",
+                          },
+                        ]
+                      }
+                    />
+                    <Text
+                      style={
+                        Array [
+                          Object {
+                            "fontFamily": "Open Sans",
+                            "fontSize": 13,
+                            "fontWeight": "700",
+                          },
+                          Object {
+                            "color": "#02A2CF",
+                          },
+                        ]
+                      }
+                    >
+                      01/01/1970
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Object {
+                    "height": 27,
+                  }
+                }
+              />
+              <Themed.Divider
+                style={
+                  Array [
+                    Object {
+                      "height": 1,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                      "width": "100%",
+                    },
+                    Object {
+                      "backgroundColor": "#C1C1C5",
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "paddingTop": 8,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontWeight": "700",
+                        "paddingBottom": 4,
+                      },
+                      Object {
+                        "color": "#414045",
+                      },
+                    ]
+                  }
+                >
+                  Comments
+                </Text>
+                <Comments />
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontSize": 13,
+                        "lineHeight": 18,
+                        "paddingTop": 4,
+                      },
+                      Object {
+                        "color": "#000000",
+                      },
+                    ]
+                  }
+                >
+                  Up to 100 symbols
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "paddingTop": 17,
+                  }
+                }
+              >
+                <Luggage />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-end",
+                    "marginBottom": 10,
+                    "marginTop": 20,
+                  }
+                }
+              >
+                <ForwardRef
+                  disabled={true}
+                  onPress={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "borderWidth": 3,
+                        "height": 51,
+                        "justifyContent": "center",
+                        "width": 300,
+                      },
+                      Object {
+                        "backgroundColor": "white",
+                        "borderColor": "black",
+                      },
+                      Object {
+                        "opacity": 0.2,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    style={
+                      Array [
+                        Object {
+                          "fontSize": 18,
+                          "fontWeight": "700",
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "color": "black",
+                        },
+                      ]
+                    }
+                  >
+                    Requested
+                  </Text>
+                </ForwardRef>
+              </View>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 100,
+                    "position": "absolute",
+                    "top": -10,
+                    "width": 750,
+                    "zIndex": -1,
+                  },
+                  Object {
+                    "backgroundColor": "white",
+                  },
+                ]
+              }
+            />
+          </View>
+        }
+        renderHeader={<React.Fragment />}
         snapPoints={
           Array [
-            400,
-            120,
+            412,
+            0,
           ]
         }
         style={

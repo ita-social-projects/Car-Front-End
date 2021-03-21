@@ -1,23 +1,24 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../../api-service/APIService";
 import UserService from "../../api-service/user-service/UserService";
 import User from "../../models/user/User";
 
-describe("UserService", () => {
-    let userData = {
+describe("User Service test", () => {
+    const userData: User = {
         id: 3,
         name: "Tom",
         surname: "Kick",
         position: "Developer",
-        byteOfImage: "./dd124lam-112_0!1dxxkd",
+        imageId: "./dd124lam-112_0!1dxxkd",
         location: "Lviv",
         hireDate: new Date("2020-04-09"),
         email: "tom@gmail.com",
-        token: ""
+        token: "",
+        journeyCount: 8,
     };
 
-    test("should get user", () => {
+    test("should get user", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {
@@ -32,42 +33,31 @@ describe("UserService", () => {
                     });
                 })
         );
-
-        let response: User;
-
         UserService.getUser(userData.id).then((res) => {
-            response = res.data;
-            expect(res.status).toEqual(200);
-            expect(response).toEqual(userData);
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(userData));
         });
     });
 
-    test("should update user", () => {
-        let newName = "Mark";
+    test("should update user", async () => {
 
-        let newUser = { ...userData, name: newName };
-
-        jest.spyOn(APIService, "put").mockImplementation(
+        jest.spyOn(axios, "put").mockImplementation(
             () =>
-                new Promise<AxiosResponse<User>>(function (resolve) {
+                new Promise<AxiosResponse>(function (resolve) {
                     resolve({
-                        data: newUser,
+                        data: {} as any,
                         statusText: "Ok",
                         status: 200,
                         config: {},
                         headers: {
-                            "Context-Type": "application/json"
+                            "Context-Type": "miltipart/Form-data"
                         }
                     });
                 })
         );
 
-        let response: User;
-
-        UserService.getUser(userData.id).then((res) => {
-            response = res.data;
-            expect(res.status).toEqual(200);
-            expect(response).toEqual(userData);
+        UserService.updateUser({} as any).then((res) => {
+            expect(res.status).toBe(200);
         });
     });
 });

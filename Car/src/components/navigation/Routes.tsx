@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect, useState } from "react";
 import AuthParamList from "../auth/AuthParamList";
@@ -9,13 +9,17 @@ import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
 import { MILISECONDS_IN_MONTH } from "../../constants/Constants";
+import { StatusBar } from "react-native";
+import DM from "../styles/DM";
+import changeNavigationBarColor from "react-native-navigation-bar-color";
 
 const Stack = createStackNavigator<AuthParamList>();
+
+export let isDarkMode: boolean;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-
     const { Root } = require("popup-ui");
 
     useEffect(() => {
@@ -33,8 +37,13 @@ const Routes = () => {
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
-            (async () => loadStorageUser())().then(() => setLoading(false))
-        );
+            (async () => loadStorageUser())().then(() => setLoading(false)));
+
+        AsyncStorage.getItem("isDarkMode").then((res) => {
+            changeNavigationBarColor(res === "true" ? "#121212" : "#FFFFFF", false, true);
+            isDarkMode = res === "true";
+        });
+
     }, []);
 
     const navigator = user ? (
@@ -54,10 +63,16 @@ const Routes = () => {
 
     return (
         <Root>
-            <NavigationContainer ref={navigationRef}>
+            <StatusBar
+                animated={true}
+                backgroundColor={DM("#121212")}
+                barStyle={DM("dark-content") as any}/>
+            <NavigationContainer
+                theme={isDarkMode ? DarkTheme : undefined}
+                ref={navigationRef}>
                 {isLoading ? (
                     <Indicator
-                        color="#414045"
+                        color={DM("#414045")}
                         size="large"
                         text="Loading information..."
                     />

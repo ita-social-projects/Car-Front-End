@@ -5,21 +5,18 @@ import { Platform } from "react-native";
 const JourneyNewApplicantStyle = EStyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF",
         borderWidth: 1,
-        borderColor: "rgba(151, 151, 151, 0.233556)",
         borderStyle: "solid",
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
         borderBottomRightRadius: 16,
         borderBottomLeftRadius: 16,
         margin: 10,
-        marginTop: Platform.OS === "ios" ? 52 : 0,
+        marginTop: Platform.OS === "ios" ? 52 : 32,
         marginBottom: 32,
         paddingTop: 23,
         paddingBottom: 23,
         paddingHorizontal: 25,
-        shadowColor: "#414045",
         shadowOffset: { width: 0, height: 16 },
         shadowOpacity: 0.2,
         shadowRadius: 6.27,
@@ -35,23 +32,10 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     },
 
     body: {
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
         height: "100%"
     },
 
-    circle: {
-        backgroundColor: "#A5C500",
-        borderRadius: 90,
-        height: 57,
-        width: 57,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 5
-    },
-
     circleGrad: {
-        backgroundColor: "#FFFFFF",
         borderRadius: 90,
         height: "0.8rem",
         width: "0.8rem",
@@ -80,7 +64,6 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         alignItems: "center",
         letterSpacing: 0.2,
         textTransform: "uppercase",
-        color: "#000000"
     },
 
     snooze: {
@@ -92,23 +75,11 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         textAlign: "right",
         letterSpacing: 0.875,
         textTransform: "capitalize",
-        color: "#02A2CF"
     },
 
     ellipse: {
         width: 100,
         height: 100
-    },
-
-    icon: {
-        fontFamily: Font.OpenSans.Bold,
-        fontSize: "0.9375rem",
-        lineHeight: 16,
-        display: "flex",
-        alignItems: "center",
-        textAlign: "center",
-        textTransform: "uppercase",
-        color: "#ffffff"
     },
 
     profile: {
@@ -120,14 +91,12 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         lineHeight: 21,
-        color: "#000000"
     },
 
     bio: {
         fontFamily: Font.ProximaNova.Regular,
         fontSize: "0.85rem",
         lineHeight: 14,
-        color: "#000000",
         opacity: 0.5,
         marginTop: "0.7rem"
     },
@@ -136,25 +105,13 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.ProximaNova.Regular,
         fontSize: 15,
         lineHeight: 14,
-        color: "#000000",
         opacity: 0.5,
         marginTop: "0.7rem"
     },
 
-    more: {
-        fontFamily: Font.OpenSans.ExtraBold,
-        fontSize: 20,
-        letterSpacing: 3,
-        marginTop: -10,
-        paddingTop: 0,
-        color: "#000000"
-    },
-
     commentsBox: {
         borderWidth: 1,
-        borderColor: "rgba(151, 151, 151, 0.3)",
         borderStyle: "solid",
-        backgroundColor: "#ffffff",
         marginTop: "1.5rem"
     },
 
@@ -164,15 +121,10 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         height: "1rem",
         borderWidth: 1,
         borderStyle: "solid",
-        borderTopColor: "rgba(0,0,0,0)",
-        borderLeftColor: "rgba(0,0,0,0)",
-        borderRightColor: "rgba(151, 151, 151, 0.3)",
-        borderBottomColor: "rgba(151, 151, 151, 0.3)",
         top: "-0.5rem",
         left: "50%",
         marginLeft: "-1rem",
         transform: [{ rotateZ: "-135deg" }],
-        backgroundColor: "#FFFFFF",
         opacity: 1
     },
 
@@ -206,12 +158,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         minHeight: 7,
         minWidth: "99%",
         borderWidth: 1,
-        borderTopColor: "rgba(0,0,0,0)",
-        borderLeftColor: "rgba(0,0,0,0)",
-        borderRightColor: "rgba(0,0,0,0)",
-        borderBottomColor: "#C1C1C5",
         borderStyle: "solid",
-        backgroundColor: "#FFFFFF",
         marginLeft: "auto",
         marginRight: "auto"
     },
@@ -237,7 +184,6 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: "1rem",
         lineHeight: "1.1rem",
-        color: "#909095"
     },
 
     activeStopName: {
@@ -247,7 +193,6 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontSize: "1rem",
         lineHeight: "1.1rem",
-        color: "#909095",
         paddingTop: "0.3rem" // Circle's Border Compensation
     },
 
@@ -258,7 +203,6 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         top: "1.3rem",
         marginRight: "0.1435rem",
         borderLeftWidth: "0.1435rem",
-        borderColor: "#C1C1C5"
     },
 
     stopsRows: {
@@ -290,19 +234,13 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         alignItems: "center"
     },
 
-    acceptButton: {
-        backgroundColor: "black"
-    },
-
     acceptButtonText: {
-        color: "white",
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         letterSpacing: "0.05rem"
     },
 
     declineButtonText: {
-        color: "#EC6400",
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         letterSpacing: "0.05rem"

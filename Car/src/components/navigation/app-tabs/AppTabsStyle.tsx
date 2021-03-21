@@ -7,7 +7,7 @@ const AppTabsStyle = StyleSheet.create({
         fontSize: 10,
         fontWeight: "800",
         fontFamily: Font.OpenSans.Bold,
-        lineHeight: 16
+        lineHeight: 16,
     },
 
     navigator: {

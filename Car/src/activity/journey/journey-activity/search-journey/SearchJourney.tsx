@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import TouchableCard from "../../../../components/touchable-card/TouchableCard";
 import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
-import StopService from "../../../../../api-service/stop-service/StopService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import SearchJourneyStyle from "./SearchJourneyStyle";
 import Stop from "../../../../../models/stop/Stop";
@@ -21,6 +20,7 @@ import {
     INITIAL_LONGITUDE,
     SINGLE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../constants/Constants";
+import DM from "../../../../components/styles/DM";
 
 const SearchJourney = () => {
     const { user } = useContext(AuthContext);
@@ -79,7 +79,7 @@ const SearchJourney = () => {
             })
             .catch((e: any) => console.log(e));
 
-        StopService
+        JourneyService
             .getRecentJourneyStops(Number(user?.id))
             .then((res: any) => {
                 setStop(res.data);
@@ -100,17 +100,17 @@ const SearchJourney = () => {
                     latitude={latitude}
                     longitude={longitude}
                 />
-                <TouchableOpacity
-                    style={
-                        SearchJourneyStyle.confirmButton
-                    }
-                >
-                    <Text style={SearchJourneyStyle.confirmButtonSaveText}>
+                <TouchableOpacity style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]} >
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                         Confirm
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={SearchJourneyStyle.topInputContainer}>
+            <View style={[SearchJourneyStyle.topInputContainer,
+                {
+                    backgroundColor: DM("#FAFAFA"),
+                    borderBottomColor: DM("#C1C1C5")
+                }]}>
                 <TouchableMapBar
                     directionType="From"
                     iconName="location"
@@ -133,7 +133,7 @@ const SearchJourney = () => {
                 )}
             </View>
 
-            <ScrollView style={[SearchJourneyStyle.container]}>
+            <ScrollView style={[SearchJourneyStyle.container, { backgroundColor: DM("#FAFAFA") }]}>
                 <View style={SearchJourneyStyle.insideContainer}>
                     {loading ? (
                         <></>
@@ -144,8 +144,8 @@ const SearchJourney = () => {
                                 iconName="location"
                                 angle="0"
                                 address="Choose starting point on the Map"
-                                addressFontColor="black"
-                                iconColor="#414045"
+                                addressFontColor={DM("black")}
+                                iconColor={DM("#414045")}
                                 size={25}
                                 onPress={() => {
                                     setMapOpen(SHOWN_MAP_Z_INDEX);
@@ -166,7 +166,7 @@ const SearchJourney = () => {
                                                 ", " +
                                                 item.address?.city
                                         }
-                                        addressFontColor="#909095"
+                                        addressFontColor={DM("#909095")}
                                         onPress={() => {
                                             setFromDirection(
                                                     item.address?.street +
@@ -181,7 +181,7 @@ const SearchJourney = () => {
                                                     item.address?.latitude
                                             );
                                         }}
-                                        iconColor="#414045"
+                                        iconColor={DM("#414045")}
                                         size={25}
                                     />
                                 </View>
@@ -194,13 +194,13 @@ const SearchJourney = () => {
                     {loading ? (
                         <View style={SearchJourneyStyle.loadingContainer}>
                             <Indicator
-                                color="#414045"
+                                color={DM("#414045")}
                                 size="large"
                                 text="Loading information..."
                             />
                         </View>
                     ) : (
-                        <Text style={SearchJourneyStyle.recentJourneyText}>
+                        <Text style={[SearchJourneyStyle.recentJourneyText, { color: DM("black") }]}>
                             Recent Journeys
                         </Text>
                     )}
@@ -222,8 +222,8 @@ const SearchJourney = () => {
                                             address?.type === StopType.Finish
                                     )
                                 )}
-                                addressFontColor="#909095"
-                                iconColor="#909095"
+                                addressFontColor={DM("#909095")}
+                                iconColor={DM("#909095")}
                                 size={30}
                             />
                         ))
@@ -235,7 +235,7 @@ const SearchJourney = () => {
                     <View style={SearchJourneyStyle.button}>
                         <Button
                             disabled={isLoading}
-                            color="#000000"
+                            color="green"
                             title="OK"
                             onPress={() => {
                                 navigation.navigate("OK Search Result", {
@@ -246,7 +246,7 @@ const SearchJourney = () => {
                     </View>
                     <View style={SearchJourneyStyle.button}>
                         <Button
-                            color="#000000"
+                            color="red"
                             title="BAD"
                             onPress={() => {
                                 navigation.navigate("Bad Search Result");

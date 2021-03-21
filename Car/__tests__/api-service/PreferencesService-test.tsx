@@ -4,16 +4,15 @@ import APIService from "../../api-service/APIService";
 import PreferencesService from "../../api-service/preferences-service/PreferencesService";
 import UserPreferences from "../../models/user/UserPreferences";
 
-describe("UserService", () => {
+describe("Preferences Service test", () => {
     let preferencesData = {
-        id: 3,
-        userId: 14,
+        id: 1,
         doAllowEating: false,
         doAllowSmoking: false,
         comments: "what a lovely day"
     };
 
-    test("should get preferences", () => {
+    test("should get preferences", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<UserPreferences>>(function (resolve) {
@@ -31,16 +30,16 @@ describe("UserService", () => {
 
         let response: UserPreferences;
 
-        PreferencesService.getUserPreferences(preferencesData.userId).then(
+        PreferencesService.getUserPreferences(preferencesData.id).then(
             (res) => {
                 response = res.data;
-                expect(res.status).toEqual(200);
-                expect(response).toEqual(preferencesData);
+                expect(res.status).toBe(200);
+                expect(JSON.stringify(response)).toBe(JSON.stringify(preferencesData));
             }
         );
     });
 
-    test("It should update preferences", () => {
+    test("should update preferences", async () => {
         let newComments = "Hello world!";
         let newPreferences = { ...preferencesData, comments: newComments };
 
@@ -63,8 +62,8 @@ describe("UserService", () => {
         PreferencesService.updateUserPreferences(preferencesData).then(
             (res) => {
                 response = res.data;
-                expect(res.status).toEqual(200);
-                expect(response).toEqual(preferencesData);
+                expect(res.status).toBe(200);
+                expect(JSON.stringify(response)).toBe(JSON.stringify(preferencesData));
             }
         );
     });

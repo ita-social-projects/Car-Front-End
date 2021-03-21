@@ -10,13 +10,14 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 import AddressBookTabs from "../my-profile-activity/address-book/address-book-tabs/AddressBookTabs";
 import SettingsTabs from "../my-profile-activity/settings/settings-tabs/SettingsTabs";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
+import DM from "../../../components/styles/DM";
 
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = () => {
 
     return (
-        <View style={HeaderStyle.container}>
+        <View style={[HeaderStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="MyProfile"
@@ -33,7 +34,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Preferences",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -43,7 +44,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Details",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />

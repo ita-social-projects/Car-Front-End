@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const NotificationSettingsStyle = StyleSheet.create({
-    containert: {
+    container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#FFFFFF",
     },
 });
 

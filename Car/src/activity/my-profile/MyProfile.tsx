@@ -1,12 +1,13 @@
 import React from "react";
 import { Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import DM from "../../components/styles/DM";
 import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: any) => {
     return (
-        <View style={MyProfileStyle.container}>
+        <View style={[MyProfileStyle.container, { backgroundColor: DM("white") }]}>
             <TouchableNavigationCard
                 navigation={props.navigation}
                 navigationName="Details"
@@ -15,11 +16,11 @@ const MyProfile = (props: any) => {
                     <Ionicons
                         name={"person-circle-outline"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Details</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Details</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -31,20 +32,26 @@ const MyProfile = (props: any) => {
                         name={"options-outline"}
                         size={20}
                         style={MyProfileStyle.optionIcon}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Preferences</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Preferences</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
                 navigation={props.navigation}
                 navigationName="CarTabs"
                 cardName="Your cars"
-                picture={<Ionicons name={"car"} size={20} color="#414045" />}
+                picture={
+                    <Ionicons
+                        name={"car"}
+                        size={20}
+                        color={DM("#414045")}
+                    />
+                }
             >
-                <Text style={MyProfileStyle.text}>Your cars</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Your cars</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -55,11 +62,11 @@ const MyProfile = (props: any) => {
                     <Ionicons
                         name={"bookmark-outline"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Address book</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Address book</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -70,11 +77,11 @@ const MyProfile = (props: any) => {
                     <Ionicons
                         name={"settings-outline"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Settings</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Settings</Text>
             </TouchableNavigationCard>
         </View>
     );

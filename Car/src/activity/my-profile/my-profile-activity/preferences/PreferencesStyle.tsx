@@ -5,8 +5,7 @@ const PreferencesStyle = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 5,
-        paddingHorizontal: 18,
-        backgroundColor: "#FFFFFF"
+        paddingHorizontal: 18
     },
 
     whitespaceBlock: {
@@ -16,8 +15,7 @@ const PreferencesStyle = StyleSheet.create({
     loadingContainer: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#FFFFFF"
+        alignItems: "center"
     },
 
     commentsContainer: {
@@ -27,7 +25,6 @@ const PreferencesStyle = StyleSheet.create({
     commentsText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
-        color: "#414045",
         paddingBottom: 4
     },
 
@@ -35,14 +32,12 @@ const PreferencesStyle = StyleSheet.create({
         paddingTop: 46,
     },
 
-    TextInput: {
+    textInput: {
         height: 80,
         borderWidth: 2,
-        borderColor: "black",
         fontFamily: Font.OpenSans.Regular,
         fontSize: 16,
         lineHeight: 24,
-        color: "#000000",
         padding: 16,
         textAlignVertical: "top"
     },
@@ -52,7 +47,6 @@ const PreferencesStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 13,
         lineHeight: 18,
-        color: "#000000"
     }
 });
 

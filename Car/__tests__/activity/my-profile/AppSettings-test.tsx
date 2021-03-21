@@ -2,20 +2,108 @@ import React from "react";
 import renderer from "react-test-renderer";
 import AppSettings from "../../../src/activity/my-profile/my-profile-activity/settings/settings-activity/app-settings/AppSettings";
 
-test("renders correctly", () =>
-  expect(renderer.create(<AppSettings />).toJSON()).toMatchInlineSnapshot(`
+jest.mock("react-native-gesture-handler", () => require("react-native"));
+
+test("renders correctly", async () =>
+    expect(renderer.create(<AppSettings />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-          "justifyContent": "center",
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 16,
+            "paddingTop": 50,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
-      <Text>
-        App Settings
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "700",
+                  "lineHeight": 16,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
+            }
+          >
+            Enable Dark Mode
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "paddingRight": 20,
+            }
+          }
+        >
+          <RCTSwitch
+            accessibilityRole="switch"
+            onChange={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "height": 31,
+                  "width": 51,
+                },
+                Object {
+                  "height": 28,
+                  "width": 36,
+                },
+              ]
+            }
+            value={false}
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "width": 26,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 16,
+                  "lineHeight": 24,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
+            }
+          >
+            No
+          </Text>
+        </View>
+      </View>
     </View>
   `));

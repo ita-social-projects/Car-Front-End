@@ -1,40 +1,54 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import stc from "string-to-color";
-import { FIRST_ELEMENT_INDEX } from "../../constants/Constants";
+import ImageService from "../../../api-service/image-service/ImageService";
+import {
+    AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
+    AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+    FIRST_ELEMENT_INDEX
+} from "../../constants/Constants";
+import DM from "../styles/DM";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 
 const AvatarLogo = (props: any) => {
+
+    const userAvatarText = props.user ?
+        props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
+
+    const backgroundColor = props.user ?
+        stc(props.user.name + " " + props.user.surname): DM("#000000");
+
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
-        { height: props?.size, width: props?.size }
+        {
+            height: props?.size,
+            width: props?.size,
+            backgroundColor: backgroundColor
+        }
     ];
 
-    const userAvatarText = props.user == undefined ?
-        "" : props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX];
+    const avatarTextStyle = [AvatarLogoStyle.userAvatarText, {
+        fontSize: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+        lineHeight: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+        paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
+        color: "#FFFFFF"
+    }];
 
     return (
-        <>
-            {props.user?.imageId != null ? (
-                <Image
-                    source={{ uri: props.user?.imageId }}
-                    style={avatarStyle}
-                />
-            ) : (
-                <View
-                    style={[
-                        avatarStyle,
-                        { backgroundColor: props.user == undefined ?
-                            "#000000" : stc(props.user.name + " " + props.user.surname) }
-                    ]}
-                >
-                    <Text style={AvatarLogoStyle.userAvatarText}>
-                        {userAvatarText}
-                    </Text>
-                </View>
-            )}
-        </>
-    );
+        props.user?.imageId ? (
+            <Image
+                source={{ uri: ImageService.getImageById(props.user?.imageId) }}
+                style={avatarStyle}
+            />
+        ) : (
+            <View
+                style={avatarStyle}
+            >
+                <Text style={avatarTextStyle}>
+                    {userAvatarText}
+                </Text>
+            </View>
+        ));
 };
 
 export default AvatarLogo;

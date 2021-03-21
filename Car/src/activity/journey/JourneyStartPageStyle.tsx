@@ -3,7 +3,6 @@ import Font from "../../data/fonts/Font";
 
 const JourneyStartPageStyle = StyleSheet.create({
     page: {
-        backgroundColor: "white",
         paddingHorizontal: 15
     },
 
@@ -21,7 +20,6 @@ const JourneyStartPageStyle = StyleSheet.create({
     allJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
         borderWidth: 2,
         width: 54
     },
@@ -29,7 +27,6 @@ const JourneyStartPageStyle = StyleSheet.create({
     pastJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
         borderWidth: 2,
         width: 62
     },
@@ -37,7 +34,6 @@ const JourneyStartPageStyle = StyleSheet.create({
     upcomingJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
         borderWidth: 2,
         width: 98
     },
@@ -45,7 +41,6 @@ const JourneyStartPageStyle = StyleSheet.create({
     scheduledJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderColor: "black",
         borderWidth: 2,
         width: 103
     },
@@ -54,16 +49,6 @@ const JourneyStartPageStyle = StyleSheet.create({
         textTransform: "uppercase",
         fontFamily: Font.ProximaNova.ExtraBold,
         fontWeight: "700"
-    },
-
-    unactiveButton: {
-        backgroundColor: "#FFFFFF",
-        color: "#000000"
-    },
-
-    activeButton: {
-        backgroundColor: "#000000",
-        color: "#FFFFFF"
     },
 
     manageJourneysContainer: {

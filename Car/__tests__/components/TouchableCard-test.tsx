@@ -2,8 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import TouchableCard from "../../src/components/touchable-card/TouchableCard";
 
-test("renders correctly", () =>
-  expect(renderer.create(<TouchableCard />).toJSON()).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.create(<TouchableCard />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -81,23 +81,27 @@ test("renders correctly", () =>
           >
             <Text
               style={
-                Object {
-                  "flex": 2,
-                  "fontFamily": "Open Sans",
-                  "fontSize": 14,
-                  "fontStyle": "normal",
-                  "fontWeight": "bold",
-                  "lineHeight": 16,
-                  "marginBottom": 2,
-                  "marginTop": 1,
-                }
+                Array [
+                  Object {
+                    "flex": 2,
+                    "fontFamily": "Open Sans",
+                    "fontSize": 14,
+                    "fontStyle": "normal",
+                    "fontWeight": "bold",
+                    "lineHeight": 16,
+                    "marginBottom": 2,
+                    "marginTop": 1,
+                  },
+                  Object {
+                    "color": "black",
+                  },
+                ]
               }
             />
             <Text
               style={
                 Array [
                   Object {
-                    "color": "#909095",
                     "flex": 4,
                     "fontFamily": "Open Sans",
                     "fontSize": 12,

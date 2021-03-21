@@ -4,6 +4,7 @@ import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 import { REFRESHER_TIMEOUT } from "../../constants/Constants";
+import DM from "../../components/styles/DM";
 
 const Login = (properties: any) => {
     const { login } = useContext(AuthContext);
@@ -52,7 +53,7 @@ const Login = (properties: any) => {
             <ActivityIndicator
                 style={LoginStyle.loadingIcon}
                 size="large"
-                color="black"
+                color={DM("black")}
             />
         );
     } else {
@@ -60,13 +61,13 @@ const Login = (properties: any) => {
     }
 
     return (
-        <View style={LoginStyle.pageContainer}>
+        <View style={[LoginStyle.pageContainer, { backgroundColor: DM("#FFFFFF") }]}>
             <View style={LoginStyle.greetingTextContainer}>
-                <Text style={LoginStyle.greetingText}>Welcome to</Text>
+                <Text style={[LoginStyle.greetingText, { color: DM("black") }]}>Welcome to</Text>
             </View>
 
             <View style={LoginStyle.applicationNameTextContainer}>
-                <Text style={LoginStyle.applicationNameText}>
+                <Text style={[LoginStyle.applicationNameText, { color: DM("black") }]}>
                     Softserve Journeys
                 </Text>
             </View>
@@ -77,7 +78,8 @@ const Login = (properties: any) => {
                     <TouchableOpacity
                         style={[
                             LoginStyle.button,
-                            buttonDisabled && LoginStyle.pressedButton
+                            buttonDisabled && { backgroundColor: DM("#888888") },
+                            { backgroundColor: DM("#000000") }
                         ]}
                         disabled={buttonDisabled}
                         activeOpacity={1}
@@ -87,7 +89,7 @@ const Login = (properties: any) => {
                             setButtonDisabled(true);
                         }}
                     >
-                        <Text style={LoginStyle.buttonText}>Login</Text>
+                        <Text style={[LoginStyle.buttonText, { color: DM("white") }]}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>

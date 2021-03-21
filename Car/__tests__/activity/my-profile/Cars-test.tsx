@@ -4,8 +4,8 @@ import Cars from "../../../src/activity/my-profile/my-profile-activity/cars/Cars
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
-  expect(renderer.render(<Cars />)).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.render(<Cars />)).toMatchInlineSnapshot(`
     <ScrollView
       contentContainerStyle={
         Object {
@@ -19,10 +19,14 @@ test("renders correctly", () =>
         />
       }
       style={
-        Object {
-          "backgroundColor": "white",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <View

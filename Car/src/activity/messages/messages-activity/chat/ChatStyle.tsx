@@ -9,7 +9,6 @@ const ChatStyle = StyleSheet.create({
 
     chatWrapper: {
         flex: 1,
-        backgroundColor: "white",
         paddingBottom: 18
     },
 
@@ -20,10 +19,6 @@ const ChatStyle = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingBottom: 10
-    },
-
-    spinnerTextStyle: {
-        color: "#414045"
     },
 });
 

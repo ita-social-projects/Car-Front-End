@@ -6,9 +6,11 @@ import AuthContext from "../../components/auth/AuthContext";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
 import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
+import DM from "../../components/styles/DM";
 
 const Notifications = (props: any) => {
     const { user } = useContext(AuthContext);
+
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
@@ -42,7 +44,7 @@ const Notifications = (props: any) => {
 
     return (
         <FlatList
-            style={NotificationStyle.headerContainer}
+            style={[NotificationStyle.headerContainer, { backgroundColor: DM("#FFFFFF") }]}
             data={notifications}
             keyExtractor={(item, key) => "" + key + item}
             renderItem={({ item }) => <NotificationComponent item={item} />}

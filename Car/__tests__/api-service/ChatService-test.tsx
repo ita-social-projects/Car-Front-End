@@ -3,27 +3,52 @@ import APIService from "../../api-service/APIService";
 import ChatService from "../../api-service/chat-service/ChatService";
 import Chat from "../../models/Chat";
 
-describe("ChatService", () => {
-    let chatsData = {
+describe("Chat Service test", () => {
+    let chatsData = [{
         id: 1,
-        Name: "Maksym"
-    };
-    let userData = {
-        id: 1,
-        name: "Peter",
-        surname: "Pen",
-        position: "Student",
-        byteOfImage: "./dd124lam-112_0!1dxxkd",
-        location: "Lviv",
-        hireDate: new Date("2020-10-11"),
-        email: "peter@gmail.com",
-        token: ""
-    };
+        name: "Maksym",
+        messages: [{
+            id: 2,
+            text: "string",
+            sender: {
+                id: 1,
+                name: "string",
+                surname: "string",
+                position: "string",
+                location: "string",
+                email: "string",
+                token: "string",
+                hireDate: new Date(),
+                imageId: "string",
+                journeyCount: 1,
+            },
+            createdAt: new Date(),
+        },
+        {
+            id: 3,
+            text: "string",
+            sender: {
+                id: 5,
+                name: "string",
+                surname: "string",
+                position: "string",
+                location: "string",
+                email: "string",
+                token: "string",
+                hireDate: new Date(),
+                imageId: "string",
+                journeyCount: 3,
+            },
+            createdAt: new Date(),
+        },
 
-    test("it should return chats", () => {
+        ]
+    }];
+
+    test("should return chats", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
-                new Promise<AxiosResponse<Chat>>(function (resolve) {
+                new Promise<AxiosResponse<Chat[]>>(function (resolve) {
                     resolve({
                         data: chatsData,
                         statusText: "Ok",
@@ -36,12 +61,31 @@ describe("ChatService", () => {
                 })
         );
 
-        let response: Chat;
+        ChatService.getChat(1).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toEqual(JSON.stringify(chatsData));
+        });
+    });
 
-        ChatService.getChat(userData.id).then((res) => {
-            response = res.data;
-            expect(res.status).toEqual(200);
-            expect(response).toEqual(userData);
+    test("should return chat", async () => {
+        jest.spyOn(APIService, "get").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<Chat>>(function (resolve) {
+                    resolve({
+                        data: chatsData[0],
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+
+        ChatService.getCeratinChat(1).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
         });
     });
 });

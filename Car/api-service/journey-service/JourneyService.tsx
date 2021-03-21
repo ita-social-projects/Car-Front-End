@@ -1,6 +1,7 @@
 import Journey from "../../models/Journey";
 import APIService from "../APIService";
 import APIRoutes from "../APIRoutes";
+import Stop from "../../models/stop/Stop";
 
 const route = APIRoutes.getJourneyUrl();
 
@@ -17,16 +18,8 @@ const JourneyService = {
     getScheduledJourneys: async (userId: number) =>
         APIService.get<Array<Journey>>(route + "scheduled/" + userId),
 
-    create: async (journey: Journey) =>
-        APIService.post<Journey>(route, journey),
-
-    update: async (journey: Journey) => APIService.put<Journey>(route, journey),
-
-    delete: async (journey: Journey) =>
-        APIService.delete<Journey>(route, journey),
-
-    addParticipant: async (formData: FormData) =>
-        APIService.post<Journey>(route + "participant", formData)
+    getRecentJourneyStops: async (id: number) =>
+        APIService.get<Array<Array<Stop>>>(route + "recent/" + id),
 };
 
 export default JourneyService;

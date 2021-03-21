@@ -4,18 +4,22 @@ import JourneyApplicant from "../../../src/activity/journey/journey-activity/jou
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
-  expect(
-    renderer.render(<JourneyApplicant route={{ params: { userId: 1 } }} />)
-  ).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(
+        renderer.render(<JourneyApplicant route={{ params: { userId: 1 } }} />)
+    ).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-          "paddingHorizontal": 23,
-          "paddingTop": 22.5,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 23,
+            "paddingTop": 22.5,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <Indicator

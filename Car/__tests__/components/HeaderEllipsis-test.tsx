@@ -2,8 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import HeaderEllipsis from "../../src/components/header-ellipsis/HeaderEllipsis";
 
-test("renders correctly", () =>
-  expect(renderer.create(<HeaderEllipsis />).toJSON()).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.create(<HeaderEllipsis />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
       focusable={false}
@@ -25,7 +25,7 @@ test("renders correctly", () =>
         style={
           Array [
             Object {
-              "color": undefined,
+              "color": "black",
               "fontSize": 30,
             },
             Object {

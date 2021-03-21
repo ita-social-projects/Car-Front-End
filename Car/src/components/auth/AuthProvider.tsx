@@ -38,7 +38,7 @@ const AuthProvider = ({ children }: any) => {
                             position: userGraph.jobTitle,
                             id: 0,
                             token: "",
-                            avatarUrl: "",
+                            imageId: "",
                             journeyCount: 0,
                             hireDate: new Date()
                         };

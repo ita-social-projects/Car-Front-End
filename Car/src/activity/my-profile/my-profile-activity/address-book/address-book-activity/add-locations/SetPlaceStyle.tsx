@@ -25,26 +25,14 @@ const SetPlaceStyle = StyleSheet.create({
         marginRight: 100,
         marginLeft: 20,
         paddingLeft: 100,
-        backgroundColor: "white",
         fontFamily: Font.OpenSans.Regular
     },
 
     insideText: {
-        color: "#909095",
         marginLeft: 5,
         fontSize: 17,
         fontFamily: Font.OpenSans.Regular
     },
-
-    textInputStyle: {
-        fontSize: 16,
-        lineHeight: 24,
-        zIndex: 0
-    },
-
-    errorText: {
-        color: "red"
-    }
 });
 
 export default SetPlaceStyle;

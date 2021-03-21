@@ -7,8 +7,6 @@ const TouchableCardStyle = StyleSheet.create({
         paddingLeft: 27,
         paddingTop: 18,
         paddingRight: 10,
-        borderBottomColor: "#C1C1C5",
-        borderTopColor: "#C1C1C5",
         marginLeft: 8,
         marginRight: 8,
         borderBottomWidth: 1,
@@ -45,7 +43,6 @@ const TouchableCardStyle = StyleSheet.create({
     cardAddress: {
         flex: 4,
         fontSize: 12,
-        color: "#909095",
         fontFamily: Font.OpenSans.Regular
     }
 });

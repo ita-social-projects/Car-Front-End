@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const CarsStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white"
     },
 
     loading: {
@@ -18,21 +17,18 @@ const CarsStyle = StyleSheet.create({
 
     brand: {
         fontWeight: "bold",
-        color: "black"
     },
 
     model: {
         fontWeight: "bold",
         fontSize: 11,
         lineHeight: 16,
-        color: "#414045"
     },
 
     message: {
         paddingHorizontal: 24,
         paddingVertical: 16,
         fontSize: 15,
-        color: "#414045"
     },
 
     carAvatar: {

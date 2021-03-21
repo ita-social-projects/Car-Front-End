@@ -4,8 +4,8 @@ import SearchJourney from "../../../src/activity/journey/journey-activity/search
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
-  expect(renderer.render(<SearchJourney />)).toMatchInlineSnapshot(`
+test("renders correctly", async () =>
+    expect(renderer.render(<SearchJourney />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -34,28 +34,37 @@ test("renders correctly", () =>
         />
         <ForwardRef
           style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#000000",
-              "flexDirection": "row",
-              "justifyContent": "space-around",
-              "left": 629,
-              "paddingHorizontal": 16,
-              "paddingVertical": 14,
-              "position": "absolute",
-              "top": 1098,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#000000",
+                "flexDirection": "row",
+                "justifyContent": "space-around",
+                "left": 629,
+                "paddingHorizontal": 16,
+                "paddingVertical": 14,
+                "position": "absolute",
+                "top": 1098,
+              },
+              Object {
+                "backgroundColor": "black",
+              },
+            ]
           }
         >
           <Text
             style={
-              Object {
-                "color": "white",
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "lineHeight": 20,
-                "textTransform": "uppercase",
-              }
+              Array [
+                Object {
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "lineHeight": 20,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "white",
+                },
+              ]
             }
           >
             Confirm
@@ -64,12 +73,16 @@ test("renders correctly", () =>
       </View>
       <View
         style={
-          Object {
-            "backgroundColor": "#FAFAFA",
-            "borderBottomColor": "#C1C1C5",
-            "borderBottomWidth": 1,
-            "zIndex": 2000,
-          }
+          Array [
+            Object {
+              "borderBottomWidth": 1,
+              "zIndex": 2000,
+            },
+            Object {
+              "backgroundColor": "#FAFAFA",
+              "borderBottomColor": "#C1C1C5",
+            },
+          ]
         }
       >
         <TouchableMapBar
@@ -86,8 +99,10 @@ test("renders correctly", () =>
         style={
           Array [
             Object {
-              "backgroundColor": "#FAFAFA",
               "zIndex": 150,
+            },
+            Object {
+              "backgroundColor": "#FAFAFA",
             },
           ]
         }
@@ -131,7 +146,7 @@ test("renders correctly", () =>
             }
           >
             <Button
-              color="#000000"
+              color="green"
               disabled={true}
               onPress={[Function]}
               title="OK"
@@ -145,7 +160,7 @@ test("renders correctly", () =>
             }
           >
             <Button
-              color="#000000"
+              color="red"
               onPress={[Function]}
               title="BAD"
             />

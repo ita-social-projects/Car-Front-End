@@ -10,12 +10,8 @@ const AvatarLogoTitle = StyleSheet.create({
 
     userAvatarText: {
         fontFamily: Font.OpenSans.Bold,
-        fontSize: 16,
-        lineHeight: 16,
         fontWeight: "700",
         textTransform: "uppercase",
-        color: "#FFFFFF",
-        paddingTop: 3
     },
 });
 

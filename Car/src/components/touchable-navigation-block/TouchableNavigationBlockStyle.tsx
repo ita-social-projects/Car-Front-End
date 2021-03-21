@@ -4,7 +4,6 @@ import Font from "../../data/fonts/Font";
 const TouchableNavigationBlockStyle = StyleSheet.create({
     blockContainer: {
         borderRadius: 8,
-        borderColor: "#FFFFFF",
         borderWidth: 2,
         borderStyle: "solid",
         height: 160,

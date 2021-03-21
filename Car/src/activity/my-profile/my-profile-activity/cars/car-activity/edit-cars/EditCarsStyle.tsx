@@ -3,12 +3,10 @@ import { StyleSheet } from "react-native";
 const EditCarsStyle = StyleSheet.create({
     wrapper: {
         flex: 1,
-        backgroundColor: "white"
     },
 
     carAvatarContainer: {
-        height: 200,
-        backgroundColor: "#C4C4C4",
+        height: "40%",
         alignItems: "flex-end",
         justifyContent: "flex-end"
     },
@@ -16,10 +14,8 @@ const EditCarsStyle = StyleSheet.create({
     carButtonUpload: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        backgroundColor: "#FFFFFF",
         alignItems: "center",
         borderWidth: 2,
-        borderColor: "#000000",
         marginRight: 24,
         marginBottom: 19
     },
@@ -32,6 +28,7 @@ const EditCarsStyle = StyleSheet.create({
     },
 
     inputsContainer: {
+        height: "600%",
         marginRight: 24,
         marginLeft: 24
     },
@@ -52,14 +49,12 @@ const EditCarsStyle = StyleSheet.create({
     carButtonSave: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        backgroundColor: "#000000",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-around"
     },
 
     carButtonSaveText: {
-        color: "white",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

@@ -7,7 +7,6 @@ const JourneyCardStyle = StyleSheet.create({
         borderRadius: 8,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "black",
         marginBottom: 16
     },
 
@@ -59,7 +58,6 @@ const JourneyCardStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
         lineHeight: 16,
-        color: "#909095",
         alignItems: "center"
     },
 
@@ -68,7 +66,6 @@ const JourneyCardStyle = StyleSheet.create({
         fontSize: 11,
         lineHeight: 16,
         fontWeight: "700",
-        color: "#02A2CF"
     },
 
     stopsBlock: {
@@ -86,15 +83,12 @@ const JourneyCardStyle = StyleSheet.create({
     stopCircleIcon: {
         width: 16,
         borderWidth: 2,
-        backgroundColor: "#AAA9AE",
-        borderColor: "#FFFFFF",
         borderRadius: 400
     },
 
     stopStickIcon: {
         width: 2,
         height: 12,
-        backgroundColor: "#AAA9AE",
         left: 7
     },
 
@@ -102,7 +96,6 @@ const JourneyCardStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
         lineHeight: 16,
-        color: "#414045",
         paddingLeft: 6
     }
 });

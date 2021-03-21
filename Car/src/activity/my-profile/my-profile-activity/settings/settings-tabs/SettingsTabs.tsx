@@ -9,6 +9,7 @@ import Settings from "../Settings";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderLogoutButton from "../../../../../components/header-logout-button/HeaderLogoutButton";
+import DM from "../../../../../components/styles/DM";
 
 const StackTabs = createStackNavigator();
 
@@ -22,7 +23,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderLogoutButton
                     }}
@@ -33,7 +34,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "App Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -43,7 +44,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Notifications Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -54,7 +55,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Chats Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}

@@ -3,6 +3,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import HeaderLogoutButtonStyle from "./HeaderLogoutButtonStyle";
 import RNRestart from "react-native-restart";
+import DM from "../styles/DM";
 
 const HeaderLogoutButton = () => (
     <TouchableOpacity
@@ -12,7 +13,7 @@ const HeaderLogoutButton = () => (
                 RNRestart.Restart());
         }}
     >
-        <Text style={HeaderLogoutButtonStyle.buttonText}>
+        <Text style={[HeaderLogoutButtonStyle.buttonText, { color: DM("#EC6400") }]}>
             Logout
         </Text>
     </TouchableOpacity>

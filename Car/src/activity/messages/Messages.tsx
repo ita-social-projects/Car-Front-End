@@ -11,6 +11,7 @@ import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
 import * as navigation from "../../components/navigation/Navigation";
 import { GRADIENT_END, GRADIENT_START, NOT_EXISTING_ELEMENT_INDEX } from "../../constants/Constants";
+import DM from "../../components/styles/DM";
 
 const Messages = (props: any) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
@@ -51,82 +52,83 @@ const Messages = (props: any) => {
         }
     };
 
-    const renderHeader = () => {
-        return props.isOpenFilter ? (
-            <SearchBar
-                maxLength={25}
-                searchIcon={{ color: "black", size: 28 }}
-                onChangeText={(text) => setSearchFilter(text)}
-                onClear={() => setSearchFilter("")}
-                placeholder={"Search in Messages"}
-                value={search}
-                containerStyle={MessagesStyle.containerStyle}
-                inputContainerStyle={MessagesStyle.inputContainerStyle}
-            />
-        ) : (
-            <View />
-        );
-    };
-
-    const ItemView = ({ item }: any) => {
-        return (
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("Chat", {
-                        chatId: item.id,
-                        header:
-                            item.journey.organizer.name +
-                            " " +
-                            item.journey.organizer.surname +
-                            "'s journey"
-                    });
-                }}
-            >
-                <View style={MessagesStyle.main}>
-                    <View style={MessagesStyle.wrapper}>
-                        <View style={MessagesStyle.avatarWrapper}>
-                            <AvatarLogo
-                                user={item.journey.organizer}
-                                size={50}
-                            />
-                        </View>
-                        <View style={MessagesStyle.dataWrapper}>
-                            <LinearTextGradient
-                                locations={[GRADIENT_START, GRADIENT_END]}
-                                colors={["#00A3CF", "#5552A0"]}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                            >
-                                <Text style={MessagesStyle.fonts}>
-                                    {item.journey.organizer.name}{" "}
-                                    {item.journey.organizer.surname}'s journey
-                                </Text>
-                            </LinearTextGradient>
-                            <Text style={MessagesStyle.textStyle}>
-                                {moment(
-                                    new Date(item.journey.departureTime)
-                                ).calendar()}
-                            </Text>
-                        </View>
-                        <View style={MessagesStyle.iconWrapper}>
-                            <View>
-                                <Ionicons name={"chatbubbles"} size={20} />
-                            </View>
-                        </View>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        );
-    };
-
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={MessagesStyle.container}>
-                {renderHeader()}
+            <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
+                {props.isOpenFilter ? (
+                    <SearchBar
+                        maxLength={25}
+                        searchIcon={{ color: DM("black"), size: 28 }}
+                        onChangeText={(text) => setSearchFilter(text)}
+                        onClear={() => setSearchFilter("")}
+                        placeholder={"Search in Messages"}
+                        value={search}
+                        containerStyle={[MessagesStyle.containerStyle, { backgroundColor: DM("white") }]}
+                        inputContainerStyle={[MessagesStyle.inputContainerStyle,
+                            {
+                                backgroundColor: DM("white"),
+                                borderColor: DM("black"),
+                                borderBottomColor: DM("black")
+                            }]}
+                    />
+                ) : (
+                    <View />
+                )}
                 <FlatList
                     data={filteredDataSource}
                     keyExtractor={(item, index) => index.toString() + item}
-                    renderItem={ItemView}
+                    renderItem={({ item }: any) => (
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate("Chat", {
+                                    chatId: item.id,
+                                    header:
+                                            item.journey.organizer.name +
+                                            " " +
+                                            item.journey.organizer.surname +
+                                            "'s journey"
+                                });
+                            }}
+                        >
+                            <View style={MessagesStyle.main}>
+                                <View style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}>
+                                    <View style={MessagesStyle.avatarWrapper}>
+                                        <AvatarLogo
+                                            user={item.journey.organizer}
+                                            size={50}
+                                        />
+                                    </View>
+                                    <View style={MessagesStyle.dataWrapper}>
+                                        <LinearTextGradient
+                                            locations={[GRADIENT_START, GRADIENT_END]}
+                                            colors={["#00A3CF", "#5552A0"]}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 0 }}
+                                        >
+                                            <Text style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}>
+                                                {item.journey.organizer.name}{" "}
+                                                {item.journey.organizer.surname}'s journey
+                                            </Text>
+                                        </LinearTextGradient>
+                                        <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
+                                            {moment(
+                                                new Date(item.journey.departureTime)
+                                            ).calendar()}
+                                        </Text>
+                                    </View>
+                                    <View style={MessagesStyle.iconWrapper}>
+                                        <View>
+                                            <Ionicons
+                                                name={"chatbubbles"}
+                                                size={20}
+                                                color={DM("black")}
+                                            />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    )}
                 />
             </View>
         </SafeAreaView>
