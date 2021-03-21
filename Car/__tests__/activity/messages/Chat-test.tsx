@@ -24,5 +24,39 @@ test("renders correctly", () =>
         size="large"
         text="Loading information..."
       />
+      <BottomPopup
+        enabledInnerScrolling={false}
+        initialSnap={1}
+        refForChild={
+          Object {
+            "current": null,
+          }
+        }
+        renderContent={
+          <View
+            style={
+              Object {
+                "backgroundColor": "white",
+              }
+            }
+          >
+            <MenuButton
+              onPress={[Function]}
+              text="Copy text"
+            />
+            <MenuButton
+              onPress={[Function]}
+              text="Cancel"
+            />
+          </View>
+        }
+        renderHeader={<View />}
+        snapPoints={
+          Array [
+            118,
+            0,
+          ]
+        }
+      />
     </View>
   `));

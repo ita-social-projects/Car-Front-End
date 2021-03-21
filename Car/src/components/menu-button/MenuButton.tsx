@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import { Text, TouchableHighlight, View } from "react-native";
+import { Text, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DM from "../styles/DM";
 import MenuButtonStyle from "./MenuButtonStyle";
 
 const MenuButton = (props: any) => {
-    const [colorButton, setColorButton] = useState(DM("white"));
-    const [colorText, setColorText] = useState(DM("black"));
-    const [colorIcon, setColorIcon] = useState(DM("black"));
+
+    const black = DM("#000000");
+    const white = DM("#FFFFFF");
+
+    const [colorButton, setColorButton] = useState(white);
+    const [colorText, setColorText] = useState(black);
+    const [colorIcon, setColorIcon] = useState(black);
     const [colorSeparator, setColorSeparator] = useState(DM("#C1C1C5"));
 
     const changeColorToBlack = () => {
-        setColorText(DM("white"));
-        setColorButton(DM("black"));
-        setColorIcon(DM("white"));
-        setColorSeparator(DM("black"));
+        setColorText(white);
+        setColorButton(black);
+        setColorIcon(white);
+        setColorSeparator(black);
     };
 
     const changeColorToWhite = () => {
-        setColorText(DM("black"));
-        setColorButton(DM("white"));
-        setColorIcon(DM("black"));
+        setColorText(black);
+        setColorButton(white);
+        setColorIcon(black);
         setColorSeparator(DM("#C1C1C5"));
     };
 
     return (
-        <TouchableHighlight
+        <TouchableWithoutFeedback
             style={[
                 MenuButtonStyle.panelButton,
                 { backgroundColor: colorButton }
@@ -47,15 +52,18 @@ const MenuButton = (props: any) => {
                             {props.text}
                         </Text>
                     </View>
-                    <View style={MenuButtonStyle.container}>
-                        <Icon
-                            color={colorIcon}
-                            name="chevron-right"
-                            size={30}
-                            style={MenuButtonStyle.Icon}
-                        />
-                    </View>
+                    {props.isIcon ? (
+                        <View style={MenuButtonStyle.container}>
+                            <Icon
+                                color={colorIcon}
+                                name="chevron-right"
+                                size={30}
+                                style={MenuButtonStyle.Icon}
+                            />
+                        </View>
+                    ) : (<View />)}
                 </View>
+
                 <View
                     style={[
                         MenuButtonStyle.separator,
@@ -63,7 +71,7 @@ const MenuButton = (props: any) => {
                     ]}
                 />
             </View>
-        </TouchableHighlight>
+        </TouchableWithoutFeedback>
     );
 };
 

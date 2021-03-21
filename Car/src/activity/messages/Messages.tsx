@@ -58,7 +58,7 @@ const Messages = (props: any) => {
                 {props.isOpenFilter ? (
                     <SearchBar
                         maxLength={25}
-                        searchIcon={{ color: "black", size: 28 }}
+                        searchIcon={{ color: DM("black"), size: 28 }}
                         onChangeText={(text) => setSearchFilter(text)}
                         onClear={() => setSearchFilter("")}
                         placeholder={"Search in Messages"}

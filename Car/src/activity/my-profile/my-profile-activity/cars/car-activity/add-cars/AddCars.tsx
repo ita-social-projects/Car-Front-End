@@ -264,9 +264,9 @@ const AddCars = () => {
                     />
                 </View>
                 <View style={AddCarsStyle.saveButtonContainer}>
-                    <Text style={{ color: "red" }}>
+                    <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: "#414045" }}>
+                        <Text style={{ color: DM("#414045") }}>
                             {" "}
                             - mandatory information
                         </Text>

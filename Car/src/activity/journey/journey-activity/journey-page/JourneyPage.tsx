@@ -281,6 +281,8 @@ const JourneyPage = ({ props }: any) => {
                                 )}
                             </View>
                         </View>
+
+                        <View style={[JourneyPageStyle.lining, { backgroundColor: DM("white") }]} />
                     </View>
                 }
             />

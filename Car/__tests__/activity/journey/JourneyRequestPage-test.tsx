@@ -157,6 +157,13 @@ test("renders correctly", () =>
                   </View>
                 </View>
               </View>
+              <View
+                style={
+                  Object {
+                    "height": 27,
+                  }
+                }
+              />
               <Themed.Divider
                 style={
                   Array [
@@ -274,12 +281,28 @@ test("renders correctly", () =>
                 </ForwardRef>
               </View>
             </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 100,
+                    "position": "absolute",
+                    "top": -10,
+                    "width": 750,
+                    "zIndex": -1,
+                  },
+                  Object {
+                    "backgroundColor": "white",
+                  },
+                ]
+              }
+            />
           </View>
         }
         renderHeader={<React.Fragment />}
         snapPoints={
           Array [
-            385,
+            412,
             0,
           ]
         }

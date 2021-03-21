@@ -452,6 +452,22 @@ test("renders correctly", () =>
                 </ForwardRef>
               </View>
             </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 100,
+                    "position": "absolute",
+                    "top": -10,
+                    "width": 750,
+                    "zIndex": -1,
+                  },
+                  Object {
+                    "backgroundColor": "white",
+                  },
+                ]
+              }
+            />
           </View>
         }
         snapPoints={

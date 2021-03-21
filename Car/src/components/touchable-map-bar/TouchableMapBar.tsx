@@ -18,6 +18,7 @@ const TouchableMapBar = (props: any) => {
                         marginBottom: marginBottom,
                         marginTop: marginTop,
                         backgroundColor: DM("white"),
+                        borderColor: DM("black")
                     }
                 ]}
             >

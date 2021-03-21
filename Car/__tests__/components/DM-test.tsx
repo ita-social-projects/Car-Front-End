@@ -10,15 +10,24 @@ test("should not transform color", () => expect(DM("dark-content")).toBe("dark-c
 test("should not transform color", () => expect(DM("#FAFAFA")).toBe("#FAFAFA"));
 test("should not transform color", () => expect(DM("#F0F0F0")).toBe("#F0F0F0"));
 test("should not transform color", () => expect(DM("#414045")).toBe("#414045"));
+test("should not transform color", () => expect(DM("#F1F1F4")).toBe("#F1F1F4"));
+test("should not transform color", () => expect(DM("#00000033")).toBe("#00000033"));
+test("should not transform color", () => expect(DM("#909095")).toBe("#909095"));
 
 test("should not transform color", () => expect(DM("ABC", true)).toBe("ABC"));
+test("should transform color", () => expect(DM("#121212", false)).toBe("#FFFFFF"));
+
+test("should transform color", () => expect(DM("#121212", false)).toBe("#FFFFFF"));
 
 test("should transform color", () => expect(DM("black", true)).toBe("#EBEBEB"));
-test("should transform color", () => expect(DM("white", true)).toBe("#141414"));
-test("should transform color", () => expect(DM("#FFFFFF", true)).toBe("#141414"));
+test("should transform color", () => expect(DM("white", true)).toBe("#1C1C1C"));
+test("should transform color", () => expect(DM("#FFFFFF", true)).toBe("#1C1C1C"));
 test("should transform color", () => expect(DM("#000000", true)).toBe("#EBEBEB"));
 test("should transform color", () => expect(DM("light-content", true)).toBe("dark-content"));
 test("should transform color", () => expect(DM("dark-content", true)).toBe("light-content"));
 test("should transform color", () => expect(DM("#FAFAFA", true)).toBe("#191919"));
 test("should transform color", () => expect(DM("#F0F0F0", true)).toBe("#232323"));
 test("should transform color", () => expect(DM("#414045", true)).toBe("#BEBFBA"));
+test("should transform color", () => expect(DM("#F1F1F4", true)).toBe("#7678BE"));
+test("should transform color", () => expect(DM("#00000033", true)).toBe("#EBEBEB33"));
+test("should transform color", () => expect(DM("#909095", true)).toBe("#6F6F6A"));

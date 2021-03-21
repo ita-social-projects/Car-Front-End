@@ -34,7 +34,7 @@ const MessagesTabs = () => {
                                 style={{ right: 10 }}
                                 onPress={() => setIsOpen()}
                             >
-                                <Ionicons name={"search"} size={30} />
+                                <Ionicons name={"search"} size={30} color={DM("black")} />
                             </TouchableOpacity>
                         ),
                         headerLeft: () => <View />

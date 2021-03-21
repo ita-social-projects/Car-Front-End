@@ -65,7 +65,7 @@ const Routes = () => {
         <Root>
             <StatusBar
                 animated={true}
-                backgroundColor={DM("#FFFFFF")}
+                backgroundColor={DM("#121212")}
                 barStyle={DM("dark-content") as any}/>
             <NavigationContainer
                 theme={isDarkMode ? DarkTheme : undefined}

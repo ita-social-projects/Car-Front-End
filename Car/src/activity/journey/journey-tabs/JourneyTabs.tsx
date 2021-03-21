@@ -178,10 +178,10 @@ const JourneyTabs = () => {
                                     renderContent={
 
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
-                                            <MenuButton text="Add Stop" />
-                                            <MenuButton text="Edit the Journey" />
-                                            <MenuButton text="Invite Softservian" />
-                                            <MenuButton text="Cancel the Journey" />
+                                            <MenuButton text="Add Stop" isIcon={true} />
+                                            <MenuButton text="Edit the Journey" isIcon={true} />
+                                            <MenuButton text="Invite Softservian" isIcon={true} />
+                                            <MenuButton text="Cancel the Journey" isIcon={true} />
                                         </View>
                                     }
                                 />}

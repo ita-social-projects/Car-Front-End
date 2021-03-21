@@ -100,12 +100,8 @@ const SearchJourney = () => {
                     latitude={latitude}
                     longitude={longitude}
                 />
-                <TouchableOpacity
-                    style={
-                        SearchJourneyStyle.confirmButton
-                    }
-                >
-                    <Text style={SearchJourneyStyle.confirmButtonSaveText}>
+                <TouchableOpacity style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]} >
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                         Confirm
                     </Text>
                 </TouchableOpacity>
@@ -239,7 +235,7 @@ const SearchJourney = () => {
                     <View style={SearchJourneyStyle.button}>
                         <Button
                             disabled={isLoading}
-                            color="#000000"
+                            color="green"
                             title="OK"
                             onPress={() => {
                                 navigation.navigate("OK Search Result", {
@@ -250,7 +246,7 @@ const SearchJourney = () => {
                     </View>
                     <View style={SearchJourneyStyle.button}>
                         <Button
-                            color="#000000"
+                            color="red"
                             title="BAD"
                             onPress={() => {
                                 navigation.navigate("Bad Search Result");

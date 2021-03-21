@@ -31,7 +31,7 @@ const AvatarLogo = (props: any) => {
         fontSize: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
         lineHeight: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
         paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
-        color: DM("#FFFFFF")
+        color: "#FFFFFF"
     }];
 
     return (

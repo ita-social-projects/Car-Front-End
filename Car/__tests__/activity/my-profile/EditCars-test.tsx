@@ -9,13 +9,7 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 test("renders correctly", () =>
     expect(renderer.render(<EditCars route={{ params: { carId: 1 } }} />))
         .toMatchInlineSnapshot(`
-    <KeyboardAwareScrollView
-      enableAutomaticScroll={true}
-      enableOnAndroid={false}
-      enableResetScrollToCoords={true}
-      extraHeight={75}
-      extraScrollHeight={0}
-      keyboardOpeningTime={250}
+    <View
       style={
         Array [
           Object {
@@ -26,14 +20,13 @@ test("renders correctly", () =>
           },
         ]
       }
-      viewIsInsideTabBar={false}
     >
       <View
         style={
           Array [
             Object {
               "alignItems": "flex-end",
-              "height": 200,
+              "height": "40%",
               "justifyContent": "flex-end",
             },
             Object {
@@ -42,6 +35,23 @@ test("renders correctly", () =>
           ]
         }
       >
+        <Image
+          source={
+            Object {
+              "uri": undefined,
+            }
+          }
+          style={
+            Object {
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
         <ForwardRef
           onPress={[Function]}
           style={
@@ -80,9 +90,10 @@ test("renders correctly", () =>
           </Text>
         </ForwardRef>
       </View>
-      <View
+      <ScrollView
         style={
           Object {
+            "height": "600%",
             "marginLeft": 24,
             "marginRight": 24,
           }
@@ -96,7 +107,9 @@ test("renders correctly", () =>
           }
         >
           <CarDropDownPicker
+            controller={[Function]}
             items={null}
+            onOpen={[Function]}
             placeHolder="Brand"
             required={true}
             selectHandle={[Function]}
@@ -108,8 +121,11 @@ test("renders correctly", () =>
             zIndex={3000}
           />
           <CarDropDownPicker
+            controller={[Function]}
+            defaultValue={null}
             disabled={true}
             items={null}
+            onOpen={[Function]}
             placeHolder="Model"
             required={true}
             selectHandle={[Function]}
@@ -121,6 +137,7 @@ test("renders correctly", () =>
             zIndex={2000}
           />
           <CarDropDownPicker
+            controller={[Function]}
             items={
               Array [
                 Object {
@@ -169,6 +186,7 @@ test("renders correctly", () =>
                 },
               ]
             }
+            onOpen={[Function]}
             placeHolder="Color"
             required={true}
             selectHandle={[Function]}
@@ -182,26 +200,6 @@ test("renders correctly", () =>
           <CarTextInput
             onChangeText={[Function]}
             placeHolder="Plate number"
-            rules={
-              Object {
-                "maxLength": Object {
-                  "message": "Max length is 10",
-                  "value": 10,
-                },
-                "minLength": Object {
-                  "message": "Min length is 4",
-                  "value": 4,
-                },
-                "pattern": Object {
-                  "message": "This field must contain 4-10 characters, including numbers, letters, hyphens",
-                  "value": /\\^\\[A-Za-z0-9-\\]\\+\\$/,
-                },
-                "required": Object {
-                  "message": "Plate number is required",
-                  "value": true,
-                },
-              }
-            }
           />
         </View>
         <View
@@ -265,8 +263,9 @@ test("renders correctly", () =>
             >
               Save
             </Text>
+            <React.Fragment />
           </ForwardRef>
         </View>
-      </View>
-    </KeyboardAwareScrollView>
+      </ScrollView>
+    </View>
   `));

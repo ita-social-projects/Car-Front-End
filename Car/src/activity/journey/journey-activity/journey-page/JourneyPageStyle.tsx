@@ -21,6 +21,14 @@ const JourneyPageStyle = StyleSheet.create({
         paddingLeft: 10,
     },
 
+    lining: {
+        position: "absolute",
+        top: -10,
+        height: 100,
+        width: Dimensions.get("screen").width,
+        zIndex: -1
+    },
+
     carName: {
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,

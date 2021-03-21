@@ -6,7 +6,7 @@ const EditCarsStyle = StyleSheet.create({
     },
 
     carAvatarContainer: {
-        height: 200,
+        height: "40%",
         alignItems: "flex-end",
         justifyContent: "flex-end"
     },
@@ -28,6 +28,7 @@ const EditCarsStyle = StyleSheet.create({
     },
 
     inputsContainer: {
+        height: "600%",
         marginRight: 24,
         marginLeft: 24
     },

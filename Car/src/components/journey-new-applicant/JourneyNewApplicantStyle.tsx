@@ -12,7 +12,7 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         borderBottomRightRadius: 16,
         borderBottomLeftRadius: 16,
         margin: 10,
-        marginTop: Platform.OS === "ios" ? 52 : 0,
+        marginTop: Platform.OS === "ios" ? 52 : 32,
         marginBottom: 32,
         paddingTop: 23,
         paddingBottom: 23,

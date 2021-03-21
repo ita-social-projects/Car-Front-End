@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Clipboard, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     Bubble,
@@ -15,9 +15,19 @@ import ChatStyle from "./ChatStyle";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../constants/Constants";
+import {
+    CHAT_POPUP_HEIGHT,
+    FIRST_ELEMENT_INDEX,
+    MAX_POPUP_POSITION,
+    MIN_POPUP_HEIGHT,
+    MIN_POPUP_POSITION,
+    SECOND_ELEMENT_INDEX,
+    THIRD_ELEMENT_INDEX
+} from "../../../../constants/Constants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
+import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
+import MenuButton from "../../../../components/menu-button/MenuButton";
 
 const Chat = (properties: any) => {
     const [messages, setMessages] = useState<object[]>([]);
@@ -146,7 +156,7 @@ const Chat = (properties: any) => {
             }}
             textStyle={{
                 left: {
-                    color: "#000000",
+                    color: DM("#000000"),
                     paddingHorizontal: 8,
                     paddingVertical: 2
                 },
@@ -209,6 +219,20 @@ const Chat = (properties: any) => {
         </TouchableOpacity>
     );
 
+    const moreOptionsRef = useRef<any>(null);
+
+    let selectedMessage: any;
+    let isOpen: boolean = false;
+
+    const showPopup = (context: any, message: any) =>{
+        isOpen = !isOpen;
+        selectedMessage = message;
+
+        moreOptionsRef?.current?.snapTo(
+            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
+        );
+    };
+
     return (
         <View style={[ChatStyle.chatWrapper, { backgroundColor: DM("white") }]}>
             {isLoading ? (
@@ -249,8 +273,26 @@ const Chat = (properties: any) => {
                     maxComposerHeight={120}
                     renderInputToolbar={renderInputToolbar}
                     maxInputLength={500}
+                    onLongPress={showPopup}
                 />
             )}
+            <BottomPopup
+                refForChild={moreOptionsRef}
+                snapPoints={[CHAT_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
+                enabledInnerScrolling={false}
+                initialSnap={1}
+                renderHeader={<View />}
+                renderContent={
+
+                    <View style={{ backgroundColor: DM("white") }}>
+                        <MenuButton text="Copy text" onPress={() => {
+                            moreOptionsRef.current.snapTo(MIN_POPUP_POSITION);
+                            Clipboard.setString(selectedMessage.text);
+                        }} />
+                        <MenuButton text="Cancel" onPress={() => moreOptionsRef.current.snapTo(MIN_POPUP_POSITION)}/>
+                    </View>
+                }
+            />
         </View>
     );
 };

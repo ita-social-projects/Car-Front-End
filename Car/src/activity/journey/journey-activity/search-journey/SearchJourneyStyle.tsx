@@ -72,7 +72,6 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     confirmButtonSaveText: {
-        color: "white",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

@@ -20,6 +20,7 @@ test("renders correctly", () =>
             },
             Object {
               "backgroundColor": "white",
+              "borderColor": "black",
               "marginBottom": NaN,
               "marginTop": NaN,
             },

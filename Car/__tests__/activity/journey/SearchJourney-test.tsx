@@ -34,28 +34,37 @@ test("renders correctly", () =>
         />
         <ForwardRef
           style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#000000",
-              "flexDirection": "row",
-              "justifyContent": "space-around",
-              "left": 629,
-              "paddingHorizontal": 16,
-              "paddingVertical": 14,
-              "position": "absolute",
-              "top": 1098,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#000000",
+                "flexDirection": "row",
+                "justifyContent": "space-around",
+                "left": 629,
+                "paddingHorizontal": 16,
+                "paddingVertical": 14,
+                "position": "absolute",
+                "top": 1098,
+              },
+              Object {
+                "backgroundColor": "black",
+              },
+            ]
           }
         >
           <Text
             style={
-              Object {
-                "color": "white",
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "lineHeight": 20,
-                "textTransform": "uppercase",
-              }
+              Array [
+                Object {
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "lineHeight": 20,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "white",
+                },
+              ]
             }
           >
             Confirm
@@ -137,7 +146,7 @@ test("renders correctly", () =>
             }
           >
             <Button
-              color="#000000"
+              color="green"
               disabled={true}
               onPress={[Function]}
               title="OK"
@@ -151,7 +160,7 @@ test("renders correctly", () =>
             }
           >
             <Button
-              color="#000000"
+              color="red"
               onPress={[Function]}
               title="BAD"
             />

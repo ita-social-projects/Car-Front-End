@@ -168,6 +168,8 @@ const JourneyRequestPage = (props: any) => {
                                 </View>
                             </View>
 
+                            <View style={JourneyRequestPageStyle.driverBlockWhiteSpace} />
+
                             <Divider style={[JourneyRequestPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
 
                             {/* Additional Info */}
@@ -207,6 +209,8 @@ const JourneyRequestPage = (props: any) => {
                                 </TouchableOpacity>
                             </View>
                         </View>
+
+                        <View style={[JourneyRequestPageStyle.lining, { backgroundColor: DM("white") }]} />
                     </View>
                 }
             />

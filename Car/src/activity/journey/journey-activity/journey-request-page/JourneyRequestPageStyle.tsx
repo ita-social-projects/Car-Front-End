@@ -17,6 +17,18 @@ const JourneyRequestPageStyle = StyleSheet.create({
         alignSelf: "center"
     },
 
+    lining: {
+        position: "absolute",
+        top: -10,
+        height: 100,
+        width: Dimensions.get("screen").width,
+        zIndex: -1
+    },
+
+    driverBlockWhiteSpace: {
+        height: 27,
+    },
+
     mainContainer: {
         height: 400,
     },
