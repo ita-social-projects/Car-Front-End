@@ -15,7 +15,7 @@ describe("Location Service test", () => {
         user: null,
     }];
 
-    test("should return notification", () => {
+    test("should return notification", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Notification>>(function (resolve) {
@@ -36,7 +36,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should return notifications", () => {
+    test("should return notifications", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Notification[]>>(function (resolve) {
@@ -57,7 +57,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should return unread notifications count", () => {
+    test("should return unread notifications count", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<number>>(function (resolve) {
@@ -78,7 +78,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should add notification", () => {
+    test("should add notification", async () => {
         jest.spyOn(APIService, "post").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Notification>>(function (resolve) {
@@ -99,7 +99,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should update notification", () => {
+    test("should update notification", async () => {
         jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Notification>>(function (resolve) {
@@ -120,7 +120,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should mark notification as read", () => {
+    test("should mark notification as read", async () => {
         jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Notification>>(function (resolve) {

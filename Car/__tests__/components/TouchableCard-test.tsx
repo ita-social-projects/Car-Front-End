@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import TouchableCard from "../../src/components/touchable-card/TouchableCard";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<TouchableCard />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={

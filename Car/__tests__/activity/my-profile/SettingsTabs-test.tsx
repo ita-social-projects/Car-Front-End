@@ -4,7 +4,7 @@ import SettingsTabs from "../../../src/activity/my-profile/my-profile-activity/s
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<SettingsTabs />)).toMatchInlineSnapshot(`
     <View
       style={

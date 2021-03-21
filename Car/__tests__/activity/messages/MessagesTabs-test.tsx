@@ -4,7 +4,7 @@ import MessagesTabs from "../../../src/activity/messages/messages-tabs/MessagesT
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<MessagesTabs />)).toMatchInlineSnapshot(`
     <View
       style={

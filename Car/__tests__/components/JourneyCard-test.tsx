@@ -4,7 +4,7 @@ import JourneyCard from "../../src/components/journey-card/JourneyCard";
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<JourneyCard />)).toMatchInlineSnapshot(`
     <View>
       <ForwardRef

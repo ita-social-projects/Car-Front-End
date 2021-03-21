@@ -4,7 +4,7 @@ import MyProfileTabs from "../../../src/activity/my-profile/my-profile-tabs/MyPr
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<MyProfileTabs />)).toMatchInlineSnapshot(`
     <View
       style={

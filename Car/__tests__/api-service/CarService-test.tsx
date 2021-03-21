@@ -32,7 +32,7 @@ describe("Location Service test", () => {
         plateNumber: "DEF"
     };
 
-    test("should return cars", () => {
+    test("should return cars", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<CarViewModel[]>>(function (resolve) {
@@ -53,7 +53,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should return car", () => {
+    test("should return car", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<CarViewModel>>(function (resolve) {
@@ -74,7 +74,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should return car image", () => {
+    test("should return car image", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<string>>(function (resolve) {
@@ -95,7 +95,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should update car", () => {
+    test("should update car", async () => {
         jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<UpdateCarViewModel>>(function (resolve) {
@@ -116,7 +116,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should add car", () => {
+    test("should add car", async () => {
         jest.spyOn(axios, "post").mockImplementation(
             () =>
                 new Promise<AxiosResponse<UpdateCarViewModel>>(function (resolve) {

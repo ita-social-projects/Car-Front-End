@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import HeaderEllipsis from "../../src/components/header-ellipsis/HeaderEllipsis";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<HeaderEllipsis />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}

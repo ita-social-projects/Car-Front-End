@@ -7,7 +7,7 @@ const renderer = shallowRender.createRenderer();
 jest.mock("reanimated-bottom-sheet", () => {});
 jest.useFakeTimers();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<BottomPopup />)).toMatchInlineSnapshot(`
     <UNDEFINED
       renderContent={[Function]}

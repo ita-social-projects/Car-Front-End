@@ -7,7 +7,7 @@ const renderer = shallowRender.createRenderer();
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.useFakeTimers();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<CarTextInput />)).toMatchInlineSnapshot(`
     <Controller
       control={

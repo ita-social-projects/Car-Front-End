@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import BadSearchResult from "../../../src/activity/journey/journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={

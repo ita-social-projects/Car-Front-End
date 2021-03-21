@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import MenuButton from "../../src/components/menu-button/MenuButton";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
     <RNGestureHandlerButton
       collapsable={false}

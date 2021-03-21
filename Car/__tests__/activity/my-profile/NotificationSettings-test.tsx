@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import NotificationSettings from "../../../src/activity/my-profile/my-profile-activity/settings/settings-activity/notification-settings/NotificationSettings";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<NotificationSettings />).toJSON())
         .toMatchInlineSnapshot(`
     <View

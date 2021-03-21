@@ -18,7 +18,7 @@ describe("User Service test", () => {
         journeyCount: 8,
     };
 
-    test("should get user", () => {
+    test("should get user", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {
@@ -39,7 +39,7 @@ describe("User Service test", () => {
         });
     });
 
-    test("should update user", () => {
+    test("should update user", async () => {
 
         jest.spyOn(axios, "put").mockImplementation(
             () =>

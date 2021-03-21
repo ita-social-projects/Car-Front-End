@@ -19,7 +19,7 @@ describe("Journey Service test", () => {
         stops: []
     }];
 
-    test("should return journey", () => {
+    test("should return journey", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Journey>>(function (resolve) {
@@ -40,7 +40,7 @@ describe("Journey Service test", () => {
         });
     });
 
-    test("should return past journeys", () => {
+    test("should return past journeys", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Journey[]>>(function (resolve) {
@@ -61,7 +61,7 @@ describe("Journey Service test", () => {
         });
     });
 
-    test("should return upcoming journeys", () => {
+    test("should return upcoming journeys", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Journey[]>>(function (resolve) {
@@ -82,7 +82,7 @@ describe("Journey Service test", () => {
         });
     });
 
-    test("should return scheduled journeys", () => {
+    test("should return scheduled journeys", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Journey[]>>(function (resolve) {

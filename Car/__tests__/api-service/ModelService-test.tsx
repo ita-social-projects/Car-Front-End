@@ -11,7 +11,7 @@ describe("Model Service test", () => {
         name: "ABC"
     }];
 
-    test("should return models", () => {
+    test("should return models", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<CarModel[]>>(function (resolve) {

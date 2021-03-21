@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Details from "../../../src/activity/my-profile/my-profile-activity/details/Details";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<Details />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={

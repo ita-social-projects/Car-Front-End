@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import CarDropDownPicker from "../../src/components/car-drop-down-picker/CarDropDownPicker";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<CarDropDownPicker />).toJSON())
         .toMatchInlineSnapshot(`
     <View>

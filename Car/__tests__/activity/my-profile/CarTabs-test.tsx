@@ -4,7 +4,7 @@ import CarTabs from "../../../src/activity/my-profile/my-profile-activity/cars/c
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<CarTabs />)).toMatchInlineSnapshot(`
     <View
       style={

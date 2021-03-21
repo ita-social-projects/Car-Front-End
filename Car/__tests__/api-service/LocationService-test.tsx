@@ -16,7 +16,7 @@ describe("Location Service test", () => {
         userId: 1
     }];
 
-    test("should return locations", () => {
+    test("should return locations", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Location[]>>(function (resolve) {
@@ -37,7 +37,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should return location", () => {
+    test("should return location", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Location>>(function (resolve) {
@@ -58,7 +58,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should add location", () => {
+    test("should add location", async () => {
         jest.spyOn(APIService, "post").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Location>>(function (resolve) {
@@ -79,7 +79,7 @@ describe("Location Service test", () => {
         });
     });
 
-    test("should update location", () => {
+    test("should update location", async () => {
         jest.spyOn(APIService, "put").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Location>>(function (resolve) {

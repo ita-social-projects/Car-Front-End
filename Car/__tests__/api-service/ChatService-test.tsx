@@ -45,7 +45,7 @@ describe("Chat Service test", () => {
         ]
     }];
 
-    test("should return chats", () => {
+    test("should return chats", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Chat[]>>(function (resolve) {
@@ -67,7 +67,7 @@ describe("Chat Service test", () => {
         });
     });
 
-    test("should return chat", () => {
+    test("should return chat", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<Chat>>(function (resolve) {

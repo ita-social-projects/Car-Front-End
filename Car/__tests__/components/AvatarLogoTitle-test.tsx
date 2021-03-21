@@ -4,7 +4,7 @@ import AvatarLogoTitle from "../../src/components/avatar-logo-title/AvatarLogoTi
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<AvatarLogoTitle />)).toMatchInlineSnapshot(`
     <View
       style={

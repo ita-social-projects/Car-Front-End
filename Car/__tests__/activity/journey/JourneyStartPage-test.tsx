@@ -4,7 +4,7 @@ import JourneyStartPage from "../../../src/activity/journey/JourneyStartPage";
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<JourneyStartPage />)).toMatchInlineSnapshot(`
     <ScrollView
       refreshControl={

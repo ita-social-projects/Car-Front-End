@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import TouchableNavigationCard from "../../src/components/touchable-navigation-card/TouchableNavigationCard";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<TouchableNavigationCard />).toJSON())
         .toMatchInlineSnapshot(`
     <View>

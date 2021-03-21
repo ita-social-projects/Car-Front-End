@@ -4,7 +4,7 @@ import JourneyNewApplicant from "../../src/components/journey-new-applicant/Jour
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(
         renderer.render(
             <JourneyNewApplicant

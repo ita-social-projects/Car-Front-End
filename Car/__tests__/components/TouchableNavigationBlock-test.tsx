@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import TouchableNavigationBlock from "../../src/components/touchable-navigation-block/TouchableNavigationBlock";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<TouchableNavigationBlock />).toJSON())
         .toMatchInlineSnapshot(`
     <View>

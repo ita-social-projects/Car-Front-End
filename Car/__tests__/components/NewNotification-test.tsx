@@ -4,7 +4,7 @@ import shallowRender from "react-test-renderer/shallow";
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(
         renderer.render(
             <NewNotification

@@ -18,7 +18,7 @@ describe("Login Service test", () => {
         journeyCount: 8
     };
 
-    test("should login user", () => {
+    test("should login user", async () => {
         jest.spyOn(APIService, "post").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import HeaderBackButton from "../../src/components/header-back-button/HeaderBackButton";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<HeaderBackButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}

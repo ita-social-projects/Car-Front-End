@@ -4,7 +4,7 @@ import JourneyTabs from "../../../src/activity/journey/journey-tabs/JourneyTabs"
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<JourneyTabs />)).toMatchInlineSnapshot(`
     <View
       style={

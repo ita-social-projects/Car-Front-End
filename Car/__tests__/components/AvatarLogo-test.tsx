@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import AvatarLogo from "../../src/components/avatar-logo/AvatarLogo";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(
         renderer
             .create(<AvatarLogo user={{ name: "Abc", surname: "Abc" }} />)
@@ -46,7 +46,7 @@ test("renders correctly", () =>
     </View>
   `));
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(
         renderer
             .create(
@@ -77,7 +77,7 @@ test("renders correctly", () =>
     />
   `));
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={

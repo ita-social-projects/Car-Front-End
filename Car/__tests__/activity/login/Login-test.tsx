@@ -4,7 +4,7 @@ import Login from "../../../src/activity/login/Login";
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<Login />)).toMatchInlineSnapshot(`
     <View
       style={

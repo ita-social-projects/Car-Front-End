@@ -4,7 +4,7 @@ import TouchableMapBar from "../../src/components/touchable-map-bar/TouchableMap
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<TouchableMapBar />)).toMatchInlineSnapshot(`
     <View>
       <ForwardRef

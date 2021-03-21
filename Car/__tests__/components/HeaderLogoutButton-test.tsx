@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import HeaderLogoutButton from "../../src/components/header-logout-button/HeaderLogoutButton";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<HeaderLogoutButton />).toJSON())
         .toMatchInlineSnapshot(`
     <View

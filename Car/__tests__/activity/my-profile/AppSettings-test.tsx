@@ -4,7 +4,7 @@ import AppSettings from "../../../src/activity/my-profile/my-profile-activity/se
 
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.create(<AppSettings />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={

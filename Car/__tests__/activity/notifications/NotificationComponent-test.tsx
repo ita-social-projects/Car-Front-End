@@ -4,7 +4,7 @@ import NotificationComponent from "../../../src/activity/notifications/Notificat
 
 const renderer = shallowRenderer.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<NotificationComponent item={{ type: 1 }} />))
         .toMatchInlineSnapshot(`
     <View>

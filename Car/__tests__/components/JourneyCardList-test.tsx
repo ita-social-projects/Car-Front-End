@@ -2,12 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import JourneyCardList from "../../src/components/journey-card/JourneyCardList";
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(
         renderer.create(<JourneyCardList journey={[]} />).toJSON()
     ).toMatchInlineSnapshot("<View />"));
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(
         renderer
             .create(

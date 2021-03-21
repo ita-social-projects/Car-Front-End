@@ -4,7 +4,7 @@ import AddressBook from "../../../src/activity/my-profile/my-profile-activity/ad
 
 const renderer = shallowRender.createRenderer();
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<AddressBook />)).toMatchInlineSnapshot(`
     <ScrollView
       contentContainerStyle={

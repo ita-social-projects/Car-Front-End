@@ -6,7 +6,7 @@ const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<Messages />)).toMatchInlineSnapshot(`
     <ForwardRef(SafeAreaView)
       style={

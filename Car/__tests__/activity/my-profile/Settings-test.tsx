@@ -7,7 +7,7 @@ const renderer = shallowRender.createRenderer();
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
-test("renders correctly", () =>
+test("renders correctly", async () =>
     expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
