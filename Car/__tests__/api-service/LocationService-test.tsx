@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../../api-service/APIService";
-import LocationService from "../../api-service/Location-service/LocationService";
+import LocationService from "../../api-service/location-service/LocationService";
 import Location from "../../models/location/Location";
 
 describe("Location Service test", () => {
