@@ -4,7 +4,7 @@ import APIService from "../../api-service/APIService";
 import LoginService from "../../api-service/login-service/LoginService";
 import User from "../../models/user/User";
 
-describe("UserService", () => {
+describe("Login Service test", () => {
     let userData = {
         id: 13,
         name: "Peter",
@@ -18,7 +18,7 @@ describe("UserService", () => {
         journeyCount: 8
     };
 
-    test("It should login user", () => {
+    test("should login user", () => {
         jest.spyOn(APIService, "post").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {
@@ -33,12 +33,9 @@ describe("UserService", () => {
                     });
                 })
         );
-        let response: User;
-
         LoginService.loginUser(userData).then((res) => {
-            response = res.data;
-            expect(res.status).toEqual(200);
-            expect(response).toEqual(userData);
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(userData));
         });
     });
 });

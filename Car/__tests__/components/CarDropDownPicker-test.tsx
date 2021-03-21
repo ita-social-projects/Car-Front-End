@@ -38,7 +38,7 @@ test("renders correctly", () =>
               "backgroundColor": "white",
               "borderBottomLeftRadius": 0,
               "borderBottomRightRadius": 0,
-              "borderColor": "#dfdfdf",
+              "borderColor": "black",
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "borderWidth": 2,

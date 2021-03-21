@@ -23,12 +23,12 @@ export default function AddressBook (props: any) {
                     <Ionicons
                         name={"add-circle-outline"}
                         size={20}
-                        color={"#414045"}
+                        color={DM("#414045")}
                     />
                 }
                 angle="0"
             >
-                <Text style={{ fontWeight: "bold", color: "#02A2CF" }}>
+                <Text style={{ fontWeight: "bold", color: DM("#02A2CF") }}>
                     Add new Address
                 </Text>
             </TouchableNavigationCard>
@@ -66,7 +66,7 @@ export default function AddressBook (props: any) {
                 ]}
             >
                 {loading ? (
-                    <ActivityIndicator size={40} color="black" />
+                    <ActivityIndicator size={40} color={DM("black")} />
                 ) : locations.length ? (
                     <>
                         {locations.map((item: any) => {
@@ -84,7 +84,7 @@ export default function AddressBook (props: any) {
                                                         : "location"
                                                 }
                                                 size={25}
-                                                color="#414045"
+                                                color={DM("#414045")}
                                             />
                                         }
                                     >

@@ -19,7 +19,7 @@ const TouchableCard = (props: any) => {
                         style={[TouchableCardStyle.cardIcon]}
                         name={props?.iconName}
                         size={props?.size}
-                        color={props?.iconColor}
+                        color={DM(props?.iconColor)}
                     />
                     <View style={TouchableCardStyle.cardTextContainer}>
                         <Text style={[TouchableCardStyle.cardName,

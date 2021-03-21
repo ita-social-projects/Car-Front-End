@@ -19,9 +19,11 @@ const APIRoutes = {
 
     getUserUrl: () => APIConfig.URL + "api/users/",
 
-    getLocationUrl : () => APIConfig.URL + "api/locations/",
+    getLocationUrl: () => APIConfig.URL + "api/locations/",
 
-    getLocationTypeUrl : () => APIConfig.URL + "api/location-types/"
+    getLocationTypeUrl: () => APIConfig.URL + "api/location-types/",
+
+    getSignalRUrl: () => APIConfig.URL + "signalr/"
 };
 
 export default APIRoutes;

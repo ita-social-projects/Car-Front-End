@@ -40,7 +40,7 @@ const Routes = () => {
             (async () => loadStorageUser())().then(() => setLoading(false)));
 
         AsyncStorage.getItem("isDarkMode").then((res) => {
-            changeNavigationBarColor(res === "true" ? "#141414" : "#FFFFFF", false, true);
+            changeNavigationBarColor(res === "true" ? "#121212" : "#FFFFFF", false, true);
             isDarkMode = res === "true";
         });
 

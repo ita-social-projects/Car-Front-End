@@ -1,12 +1,12 @@
 import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import APIConfig from "./APIConfig";
+import APIRoutes from "./APIRoutes";
 
 let SignalRHubConnection: HubConnection;
 
 (() => {
     const SignalRubConnectionFunc = new HubConnectionBuilder()
         .configureLogging(LogLevel.None)
-        .withUrl(APIConfig.URL + "signalr/")
+        .withUrl(APIRoutes.getSignalRUrl())
         .withAutomaticReconnect()
         .build();
 

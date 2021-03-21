@@ -38,8 +38,11 @@ const CarDropDownPicker = (props: any) => (
             defaultValue={props.defaultValue}
             style={[
                 CarDropDownPickerStyle.container,
-                props.disabled && { borderColor: DM("gray") },
-                { backgroundColor: DM("white") }
+                {
+                    borderColor: DM("black"),
+                    backgroundColor: DM("white")
+                },
+                props.disabled && { borderColor: DM("gray") }
             ]}
             dropDownStyle={[CarDropDownPickerStyle.dropDownStyle,
                 {

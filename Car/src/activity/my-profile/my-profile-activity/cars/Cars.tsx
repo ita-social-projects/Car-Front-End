@@ -43,7 +43,7 @@ const Cars = (props: any) => {
                     <Ionicons
                         name={"add-circle-outline"}
                         size={20}
-                        color={"#414045"}
+                        color={DM("#414045")}
                     />
                 }
                 angle="0"
@@ -101,7 +101,7 @@ const Cars = (props: any) => {
                                                 <Ionicons
                                                     name={"car"}
                                                     size={20}
-                                                    color="#414045"
+                                                    color={DM("#414045")}
                                                 />
                                             )
                                         }

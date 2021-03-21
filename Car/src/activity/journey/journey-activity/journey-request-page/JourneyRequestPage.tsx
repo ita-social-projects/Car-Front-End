@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -22,6 +22,7 @@ import {
     MIN_POPUP_POSITION
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const JourneyRequestPage = (props: any) => {
 
