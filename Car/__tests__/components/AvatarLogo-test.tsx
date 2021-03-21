@@ -2,8 +2,6 @@ import React from "react";
 import renderer from "react-test-renderer";
 import AvatarLogo from "../../src/components/avatar-logo/AvatarLogo";
 
-jest.useFakeTimers();
-
 test("renders correctly", () =>
     expect(
         renderer

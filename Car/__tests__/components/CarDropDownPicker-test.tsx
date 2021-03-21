@@ -35,10 +35,10 @@ test("renders correctly", () =>
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#fff",
+              "backgroundColor": "white",
               "borderBottomLeftRadius": 0,
               "borderBottomRightRadius": 0,
-              "borderColor": "black",
+              "borderColor": "#dfdfdf",
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "borderWidth": 2,
@@ -111,7 +111,7 @@ test("renders correctly", () =>
                 style={
                   Array [
                     Object {
-                      "color": undefined,
+                      "color": "black",
                       "fontSize": 14,
                     },
                     undefined,
@@ -159,6 +159,7 @@ test("renders correctly", () =>
                   "paddingHorizontal": 4,
                 },
                 Object {
+                  "backgroundColor": "white",
                   "borderColor": "black",
                 },
               ],
@@ -191,17 +192,9 @@ test("renders correctly", () =>
               placeholderTextColor="gray"
               rejectResponderTermination={true}
               style={
-                Array [
-                  Object {
-                    "borderBottomWidth": 1,
-                    "borderColor": "#dfdfdf",
-                    "flex": 1,
-                    "marginBottom": 10,
-                    "paddingHorizontal": 0,
-                    "paddingVertical": 8,
-                  },
-                  Object {},
-                ]
+                Object {
+                  "color": "black",
+                }
               }
               underlineColorAndroid="transparent"
             />
@@ -224,7 +217,13 @@ test("renders correctly", () =>
                   }
                 }
               >
-                <Text>
+                <Text
+                  style={
+                    Object {
+                      "color": "black",
+                    }
+                  }
+                >
                   Not Found
                 </Text>
               </View>

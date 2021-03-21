@@ -16,8 +16,8 @@ const CarTextInput = (props: any) => {
             defaultValue=""
             render={() => (
                 <>
-                    <View style={CarTextInputStyle.container}>
-                        <Text style={[CarTextInputStyle.requiredPointer, { borderColor: DM("red") }]}>
+                    <View style={[CarTextInputStyle.container, { borderColor: DM("black") }]}>
+                        <Text style={[CarTextInputStyle.requiredPointer, { color: DM("red") }]}>
                             *
                         </Text>
                         <TextInput
@@ -26,14 +26,16 @@ const CarTextInput = (props: any) => {
                                 props.onChangeText(text.toUpperCase());
                             }}
                             placeholder={props.placeHolder}
+                            placeholderTextColor={DM("gray")}
                             style={[
                                 CarTextInputStyle.textInputStyle,
+                                { color: DM("black") },
                                 props.error && { borderColor: DM("red") }
                             ]}
                         />
                     </View>
                     {props.errorText && (
-                        <Text style={{ borderColor: DM("red") }}>
+                        <Text style={{ color: DM("red") }}>
                             {props.errorText}
                         </Text>
                     )}

@@ -22,24 +22,30 @@ const CarDropDownPicker = (props: any) => (
         <DropDownPicker
             zIndex={props.zIndex}
             customArrowDown={() => (
-                <Ionicons name="caret-down-outline" size={14} />
+                <Ionicons name="caret-down-outline" size={14} color={DM("black")} />
             )}
             customArrowUp={() => (
-                <Ionicons name="caret-up-outline" size={14} />
+                <Ionicons name="caret-up-outline" size={14} color={DM("black")} />
             )}
             items={props.items ?? []}
             searchable={true}
             searchablePlaceholder="Manual input"
             searchablePlaceholderTextColor={DM("gray")}
-            searchableError={() => <Text>Not Found</Text>}
+            searchableError={() => <Text style={{ color: DM("black") }}>Not Found</Text>}
+            searchTextInputProps={{ style: { color: DM("black") } }}
+            searchableStyle={{ color: DM("black") }}
             placeholder={props.placeHolder}
             defaultValue={props.defaultValue}
             style={[
                 CarDropDownPickerStyle.container,
-                props.disabled && CarDropDownPickerStyle.disabledStyle,
-                { borderColor: DM("black") }
+                props.disabled && { borderColor: DM("gray") },
+                { backgroundColor: DM("white") }
             ]}
-            dropDownStyle={[CarDropDownPickerStyle.dropDownStyle, { borderColor: DM("black") }]}
+            dropDownStyle={[CarDropDownPickerStyle.dropDownStyle,
+                {
+                    borderColor: DM("black"),
+                    backgroundColor: DM("white"),
+                }]}
             containerStyle={[{ height: 48 }, props.style]}
             placeholderStyle={[
                 CarDropDownPickerStyle.placeholderStyle,

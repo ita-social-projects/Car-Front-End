@@ -8,6 +8,7 @@ const DM = (color: string) => {
         if (color === "light-content") return ("dark-content");
         if (color === "dark-content") return ("light-content");
         if (color === "#FAFAFA") return ("#191919");
+        if (color === "#F0F0F0") return ("#232323");
     }
 
     return (color);

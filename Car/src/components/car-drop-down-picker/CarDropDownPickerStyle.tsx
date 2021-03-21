@@ -27,10 +27,6 @@ const CarDropDownPickerStyle = StyleSheet.create({
         paddingLeft: 8
     },
 
-    disabledStyle: {
-        borderColor: "gray"
-    },
-
     requiredPointer: {
         position: "absolute",
         left: 18,
