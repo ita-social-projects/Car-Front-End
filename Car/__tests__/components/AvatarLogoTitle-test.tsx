@@ -36,37 +36,49 @@ test("renders correctly", () =>
         >
           <Text
             style={
-              Object {
-                "color": "black",
-                "fontSize": 18,
-                "fontWeight": "bold",
-                "lineHeight": 21,
-                "marginBottom": 8,
-              }
+              Array [
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "lineHeight": 21,
+                  "marginBottom": 8,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
             }
           >
             undefined undefined
           </Text>
           <Text
             style={
-              Object {
-                "color": "black",
-                "fontSize": 14,
-                "lineHeight": 14,
-                "marginBottom": 8,
-                "opacity": 0.5,
-              }
+              Array [
+                Object {
+                  "fontSize": 14,
+                  "lineHeight": 14,
+                  "marginBottom": 8,
+                  "opacity": 0.5,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
             }
           />
           <Text
             style={
-              Object {
-                "color": "black",
-                "fontSize": 14,
-                "lineHeight": 14,
-                "marginBottom": 8,
-                "opacity": 0.5,
-              }
+              Array [
+                Object {
+                  "fontSize": 14,
+                  "lineHeight": 14,
+                  "marginBottom": 8,
+                  "opacity": 0.5,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
             }
           >
             undefined rides

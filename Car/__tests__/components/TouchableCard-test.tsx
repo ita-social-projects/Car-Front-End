@@ -81,24 +81,27 @@ test("renders correctly", () =>
           >
             <Text
               style={
-                Object {
-                  "color": "black",
-                  "flex": 2,
-                  "fontFamily": "Open Sans",
-                  "fontSize": 14,
-                  "fontStyle": "normal",
-                  "fontWeight": "bold",
-                  "lineHeight": 16,
-                  "marginBottom": 2,
-                  "marginTop": 1,
-                }
+                Array [
+                  Object {
+                    "flex": 2,
+                    "fontFamily": "Open Sans",
+                    "fontSize": 14,
+                    "fontStyle": "normal",
+                    "fontWeight": "bold",
+                    "lineHeight": 16,
+                    "marginBottom": 2,
+                    "marginTop": 1,
+                  },
+                  Object {
+                    "color": "black",
+                  },
+                ]
               }
             />
             <Text
               style={
                 Array [
                   Object {
-                    "color": "#909095",
                     "flex": 4,
                     "fontFamily": "Open Sans",
                     "fontSize": 12,

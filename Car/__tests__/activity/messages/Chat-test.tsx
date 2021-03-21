@@ -8,11 +8,15 @@ test("renders correctly", () =>
     expect(renderer.render(<Chat />)).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "white",
-          "flex": 1,
-          "paddingBottom": 18,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingBottom": 18,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <Indicator

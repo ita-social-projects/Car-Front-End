@@ -7,6 +7,7 @@ import {
     AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
     FIRST_ELEMENT_INDEX
 } from "../../constants/Constants";
+import DM from "../styles/DM";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 
 const AvatarLogo = (props: any) => {
@@ -15,7 +16,7 @@ const AvatarLogo = (props: any) => {
         props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
 
     const backgroundColor = props.user ?
-        stc(props.user.name + " " + props.user.surname): "#000000";
+        stc(props.user.name + " " + props.user.surname): DM("#000000");
 
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
@@ -29,7 +30,8 @@ const AvatarLogo = (props: any) => {
     const avatarTextStyle = [AvatarLogoStyle.userAvatarText, {
         fontSize: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
         lineHeight: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
-        paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO
+        paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
+        color: DM("#FFFFFF")
     }];
 
     return (

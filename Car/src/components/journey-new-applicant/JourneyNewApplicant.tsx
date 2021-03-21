@@ -9,6 +9,7 @@ import NotificationsService from "../../../api-service/notifications-service/Not
 import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/Constants";
+import DM from "../styles/DM";
 
 const JourneyNewApplicant = (props: any) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
@@ -33,11 +34,18 @@ const JourneyNewApplicant = (props: any) => {
                 animationType="fade"
                 transparent={true}
             >
-                <View style={JourneyNewApplicantStyle.body}>
-                    <View style={JourneyNewApplicantStyle.container}>
+                <View style={[JourneyNewApplicantStyle.body, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
+                    <View style={[JourneyNewApplicantStyle.container,
+                        {
+                            shadowColor: DM("#414045"),
+                            backgroundColor: DM("#FFFFFF"),
+                            borderColor: DM("rgba(151, 151, 151, 0.233556)"),
+                        }]}>
                         <View style={JourneyNewApplicantStyle.row}>
                             <View style={JourneyNewApplicantStyle.headerContainer}>
-                                <Text style={JourneyNewApplicantStyle.header}>
+                                <Text style={[JourneyNewApplicantStyle.header,
+                                    { color: DM("#000000") }]}
+                                >
                                     New Applicant
                                 </Text>
                             </View>
@@ -47,7 +55,8 @@ const JourneyNewApplicant = (props: any) => {
                                         setModalVisible(!modalVisible);
                                     }}
                                 >
-                                    <Text style={JourneyNewApplicantStyle.snooze} >
+                                    <Text style={[JourneyNewApplicantStyle.snooze,
+                                        { color: DM("#02A2CF") }]} >
                                         Snooze
                                     </Text>
                                 </TouchableOpacity>
@@ -65,15 +74,15 @@ const JourneyNewApplicant = (props: any) => {
                             />
                             <View style={JourneyNewApplicantStyle.profileContainer}>
                                 <View style={JourneyNewApplicantStyle.profile}>
-                                    <Text style={JourneyNewApplicantStyle.name}>
+                                    <Text style={[JourneyNewApplicantStyle.name, { color: DM("#000000") }]}>
                                         {props.user!.name +
                                             " " +
                                             props.user!.surname}
                                     </Text>
-                                    <Text style={JourneyNewApplicantStyle.bio}>
+                                    <Text style={[JourneyNewApplicantStyle.bio, { color: DM("#000000") }]}>
                                         {props.user!.position}
                                     </Text>
-                                    <Text style={JourneyNewApplicantStyle.achievements} >
+                                    <Text style={[JourneyNewApplicantStyle.achievements, { color: DM("#000000") }]} >
                                         123 rides, 2 badges
                                     </Text>
                                 </View>
@@ -83,13 +92,24 @@ const JourneyNewApplicant = (props: any) => {
                             <View
                                 style={[
                                     JourneyNewApplicantStyle.row,
-                                    JourneyNewApplicantStyle.commentsBox
+                                    JourneyNewApplicantStyle.commentsBox,
+                                    {
+                                        borderColor: DM("rgba(151, 151, 151, 0.3)"),
+                                        backgroundColor: DM("#FFFFFF")
+                                    }
                                 ]}
                             >
                                 <Text style={JourneyNewApplicantStyle.commentsText} >
                                     {JSON.parse(props.notificationData) ?.comments}
                                 </Text>
-                                <View style={JourneyNewApplicantStyle.commentsBoxAfter} />
+                                <View style={[JourneyNewApplicantStyle.commentsBoxAfter,
+                                    {
+                                        borderTopColor: DM("rgba(0,0,0,0)"),
+                                        borderLeftColor: DM("rgba(0,0,0,0)"),
+                                        borderRightColor: DM("rgba(151, 151, 151, 0.3)"),
+                                        borderBottomColor: DM("rgba(151, 151, 151, 0.3)"),
+                                        backgroundColor: DM("#FFFFFF")
+                                    }]} />
                             </View>
                         ) : (
                             <View />
@@ -108,10 +128,17 @@ const JourneyNewApplicant = (props: any) => {
                             ) : (
                                 <View />
                             )}
-                            <View style={JourneyNewApplicantStyle.optionsLine} />
+                            <View style={[JourneyNewApplicantStyle.optionsLine,
+                                {
+                                    borderTopColor: DM("rgba(0,0,0,0)"),
+                                    borderLeftColor: DM("rgba(0,0,0,0)"),
+                                    borderRightColor: DM("rgba(0,0,0,0)"),
+                                    borderBottomColor: DM("#C1C1C5"),
+                                    backgroundColor: DM("#FFFFFF")
+                                }]} />
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
-                            <Text style={JourneyNewApplicantStyle.optionsHeader} >
+                            <Text style={[JourneyNewApplicantStyle.optionsHeader, { color: DM("#000000") }]} >
                                 {props.user!.name}’s stop in your Journey
                             </Text>
                             <View
@@ -130,10 +157,10 @@ const JourneyNewApplicant = (props: any) => {
                                     >
                                         <Circle color="#C1C1C5" radius="1rem" />
                                     </Circle>
-                                    <View style={JourneyNewApplicantStyle.stopLine}/>
+                                    <View style={[JourneyNewApplicantStyle.stopLine, { borderColor: DM("#C1C1C5") }]} />
                                 </View>
                                 <View style={JourneyNewApplicantStyle.tripPoint} >
-                                    <Text style={JourneyNewApplicantStyle.stopName} >
+                                    <Text style={[JourneyNewApplicantStyle.stopName, { color: DM("#909095") }]} >
                                         Location A
                                     </Text>
                                 </View>
@@ -157,10 +184,10 @@ const JourneyNewApplicant = (props: any) => {
                                             radius="0.35rem"
                                         />
                                     </Circle>
-                                    <View style={JourneyNewApplicantStyle.stopLine} />
+                                    <View style={[JourneyNewApplicantStyle.stopLine, { borderColor: DM("#C1C1C5") }]} />
                                 </View>
                                 <View style={JourneyNewApplicantStyle.tripPoint} >
-                                    <Text style={JourneyNewApplicantStyle.stopName} >
+                                    <Text style={[JourneyNewApplicantStyle.stopName, { color: DM("#909095") }]} >
                                         Stop A.1
                                     </Text>
                                 </View>
@@ -179,25 +206,27 @@ const JourneyNewApplicant = (props: any) => {
                                         marginTop={"0.3rem"}
                                     >
                                         <LinearGradient
-                                            style={
-                                                JourneyNewApplicantStyle.circleGrad
+                                            style={ [JourneyNewApplicantStyle.circleGrad,
+                                                { backgroundColor: DM("#FFFFFF") }]
                                             }
                                             colors={["#00A3CF", "#5552A0"]}
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                         />
                                     </Circle>
-                                    <View style={JourneyNewApplicantStyle.stopLine} />
+                                    <View style={[JourneyNewApplicantStyle.stopLine, { borderColor: DM("#C1C1C5") }]} />
                                 </View>
                                 <View style={JourneyNewApplicantStyle.tripPoint} >
                                     <LinearTextGradient
-                                        style={JourneyNewApplicantStyle.stopName}
+                                        style={[JourneyNewApplicantStyle.stopName, { color: DM("#909095") }]}
                                         locations={[GRADIENT_START, GRADIENT_END]}
                                         colors={["#00A3CF", "#5552A0"]}
                                         start={{ x: 0, y: 0 }}
                                         end={{ x: 1, y: 0 }}
                                     >
-                                        <Text style={JourneyNewApplicantStyle.activeStopName} >
+                                        <Text style={[JourneyNewApplicantStyle.activeStopName,
+                                            { color: DM("#909095") }]
+                                        } >
                                             {props.user!.name}'s stop A.2 ‏
                                         </Text>
                                         <Text
@@ -228,7 +257,7 @@ const JourneyNewApplicant = (props: any) => {
                                     </Circle>
                                 </View>
                                 <View style={JourneyNewApplicantStyle.tripPoint} >
-                                    <Text style={JourneyNewApplicantStyle.stopName} >
+                                    <Text style={[JourneyNewApplicantStyle.stopName, { color: DM("#909095") }]} >
                                         Location B (Your stop)
                                     </Text>
                                 </View>
@@ -238,13 +267,14 @@ const JourneyNewApplicant = (props: any) => {
                             <TouchableOpacity
                                 style={[
                                     JourneyNewApplicantStyle.button,
-                                    JourneyNewApplicantStyle.acceptButton
+                                    JourneyNewApplicantStyle.acceptButton,
+                                    { backgroundColor: DM("black") }
                                 ]}
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
                                 }}
                             >
-                                <Text style={JourneyNewApplicantStyle.acceptButtonText} >
+                                <Text style={[JourneyNewApplicantStyle.acceptButtonText, { color: DM("white") }]} >
                                     Accept
                                 </Text>
                             </TouchableOpacity>
@@ -258,7 +288,7 @@ const JourneyNewApplicant = (props: any) => {
                                     setModalVisible(!modalVisible);
                                 }}
                             >
-                                <Text style={JourneyNewApplicantStyle.declineButtonText} >
+                                <Text style={[JourneyNewApplicantStyle.declineButtonText, { color: DM("#EC6400") }]} >
                                     Decline
                                 </Text>
                             </TouchableOpacity>

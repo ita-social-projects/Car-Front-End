@@ -56,7 +56,6 @@ test("renders correctly", () =>
                 Object {},
                 Array [
                   Object {
-                    "color": "black",
                     "fontSize": 16,
                     "lineHeight": 24,
                     "paddingVertical": 10,
@@ -153,12 +152,16 @@ test("renders correctly", () =>
                 "position": "absolute",
                 "width": "100%",
               },
-              Object {
-                "borderColor": "black",
-                "borderTopWidth": 0,
-                "borderWidth": 2,
-                "paddingHorizontal": 4,
-              },
+              Array [
+                Object {
+                  "borderTopWidth": 0,
+                  "borderWidth": 2,
+                  "paddingHorizontal": 4,
+                },
+                Object {
+                  "borderColor": "black",
+                },
+              ],
               Object {
                 "borderWidth": 0,
                 "display": "none",

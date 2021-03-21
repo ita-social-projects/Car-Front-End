@@ -5,6 +5,7 @@ import BottomPopup from "../../src/components/bottom-popup/BottomPopup";
 const renderer = shallowRender.createRenderer();
 
 jest.mock("reanimated-bottom-sheet", () => {});
+jest.useFakeTimers();
 
 test("renders correctly", () =>
     expect(renderer.render(<BottomPopup />)).toMatchInlineSnapshot(`

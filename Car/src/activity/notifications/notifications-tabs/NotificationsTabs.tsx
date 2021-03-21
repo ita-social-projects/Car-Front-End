@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { View } from "react-native";
+import DM from "../../../components/styles/DM";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import Notifications from "../Notifications";
 
@@ -16,7 +17,7 @@ const NotificationsTabs = () => {
                     options={{
                         headerTitle: "Notifications",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: () => <View />
                     }}
                 />

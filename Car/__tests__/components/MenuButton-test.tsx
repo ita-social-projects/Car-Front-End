@@ -49,11 +49,13 @@ test("renders correctly", () =>
                 Array [
                   Object {
                     "alignItems": "center",
-                    "color": "black",
                     "fontSize": 13,
                     "fontWeight": "bold",
                     "lineHeight": 42,
                     "paddingLeft": 24,
+                  },
+                  Object {
+                    "color": "black",
                   },
                   Object {
                     "color": "black",

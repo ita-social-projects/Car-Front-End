@@ -1,15 +1,12 @@
 import { StyleSheet } from "react-native";
-import DM from "../../../../../../components/styles/DM";
 
 const EditCarsStyle = StyleSheet.create({
     wrapper: {
         flex: 1,
-        backgroundColor: DM("white")
     },
 
     carAvatarContainer: {
         height: 200,
-        backgroundColor: DM("#C4C4C4"),
         alignItems: "flex-end",
         justifyContent: "flex-end"
     },
@@ -17,10 +14,8 @@ const EditCarsStyle = StyleSheet.create({
     carButtonUpload: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        backgroundColor: DM("#FFFFFF"),
         alignItems: "center",
         borderWidth: 2,
-        borderColor: DM("#000000"),
         marginRight: 24,
         marginBottom: 19
     },
@@ -28,7 +23,6 @@ const EditCarsStyle = StyleSheet.create({
     carButtonUploadText: {
         textTransform: "uppercase",
         fontWeight: "bold",
-        color: DM("black"),
         fontSize: 16,
         lineHeight: 20
     },
@@ -54,14 +48,12 @@ const EditCarsStyle = StyleSheet.create({
     carButtonSave: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        backgroundColor: DM("#000000"),
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-around"
     },
 
     carButtonSaveText: {
-        color: DM("white"),
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

@@ -64,12 +64,16 @@ test("renders correctly", () =>
       </View>
       <View
         style={
-          Object {
-            "backgroundColor": "#FAFAFA",
-            "borderBottomColor": "#C1C1C5",
-            "borderBottomWidth": 1,
-            "zIndex": 2000,
-          }
+          Array [
+            Object {
+              "borderBottomWidth": 1,
+              "zIndex": 2000,
+            },
+            Object {
+              "backgroundColor": "#FAFAFA",
+              "borderBottomColor": "#C1C1C5",
+            },
+          ]
         }
       >
         <TouchableMapBar
@@ -86,8 +90,10 @@ test("renders correctly", () =>
         style={
           Array [
             Object {
-              "backgroundColor": "#FAFAFA",
               "zIndex": 150,
+            },
+            Object {
+              "backgroundColor": "#FAFAFA",
             },
           ]
         }

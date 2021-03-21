@@ -1,11 +1,9 @@
 import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
-import DM from "../styles/DM";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
     blockContainer: {
         borderRadius: 8,
-        borderColor: DM("#FFFFFF"),
         borderWidth: 2,
         borderStyle: "solid",
         height: 160,

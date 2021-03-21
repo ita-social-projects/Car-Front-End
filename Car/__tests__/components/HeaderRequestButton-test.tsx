@@ -26,12 +26,16 @@ test("renders correctly", () =>
     >
       <Text
         style={
-          Object {
-            "color": "#02A2CF",
-            "fontFamily": "Open Sans",
-            "fontSize": 20,
-            "fontWeight": "700",
-          }
+          Array [
+            Object {
+              "fontFamily": "Open Sans",
+              "fontSize": 20,
+              "fontWeight": "700",
+            },
+            Object {
+              "color": "#02A2CF",
+            },
+          ]
         }
       >
         Request

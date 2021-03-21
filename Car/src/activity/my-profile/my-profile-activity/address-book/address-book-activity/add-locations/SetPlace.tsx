@@ -57,9 +57,13 @@ const SetPlace = (props: any) => {
                 />
 
                 <>
-                    <View style={SetPlaceStyle.container}>
+                    <View style={[SetPlaceStyle.container,
+                        {
+                            borderColor: DM("black"),
+                            backgroundColor: DM("white")
+                        }]}>
                         <TextInput />
-                        <Text style={SetPlaceStyle.insideText}></Text>
+                        <Text style={[SetPlaceStyle.insideText, { color: DM("#909095") }]}></Text>
                         <DropDownPicker
                             customArrowDown={() => (
                                 <Ionicons

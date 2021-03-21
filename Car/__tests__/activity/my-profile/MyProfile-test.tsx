@@ -6,10 +6,14 @@ test("renders correctly", () =>
     expect(renderer.create(<MyProfile />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "white",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <View>
@@ -25,6 +29,7 @@ test("renders correctly", () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
+              "borderBottomColor": "rgba(0,0,0,0.5)",
               "opacity": 1,
             }
           }
@@ -62,10 +67,14 @@ test("renders correctly", () =>
               <View>
                 <Text
                   style={
-                    Object {
-                      "color": "black",
-                      "fontWeight": "bold",
-                    }
+                    Array [
+                      Object {
+                        "fontWeight": "bold",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
                   }
                 >
                   Details
@@ -110,6 +119,7 @@ test("renders correctly", () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
+              "borderBottomColor": "rgba(0,0,0,0.5)",
               "opacity": 1,
             }
           }
@@ -153,10 +163,14 @@ test("renders correctly", () =>
               <View>
                 <Text
                   style={
-                    Object {
-                      "color": "black",
-                      "fontWeight": "bold",
-                    }
+                    Array [
+                      Object {
+                        "fontWeight": "bold",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
                   }
                 >
                   Preferences
@@ -201,6 +215,7 @@ test("renders correctly", () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
+              "borderBottomColor": "rgba(0,0,0,0.5)",
               "opacity": 1,
             }
           }
@@ -238,10 +253,14 @@ test("renders correctly", () =>
               <View>
                 <Text
                   style={
-                    Object {
-                      "color": "black",
-                      "fontWeight": "bold",
-                    }
+                    Array [
+                      Object {
+                        "fontWeight": "bold",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
                   }
                 >
                   Your cars
@@ -286,6 +305,7 @@ test("renders correctly", () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
+              "borderBottomColor": "rgba(0,0,0,0.5)",
               "opacity": 1,
             }
           }
@@ -323,10 +343,14 @@ test("renders correctly", () =>
               <View>
                 <Text
                   style={
-                    Object {
-                      "color": "black",
-                      "fontWeight": "bold",
-                    }
+                    Array [
+                      Object {
+                        "fontWeight": "bold",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
                   }
                 >
                   Address book
@@ -371,6 +395,7 @@ test("renders correctly", () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
+              "borderBottomColor": "rgba(0,0,0,0.5)",
               "opacity": 1,
             }
           }
@@ -408,10 +433,14 @@ test("renders correctly", () =>
               <View>
                 <Text
                   style={
-                    Object {
-                      "color": "black",
-                      "fontWeight": "bold",
-                    }
+                    Array [
+                      Object {
+                        "fontWeight": "bold",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
                   }
                 >
                   Settings

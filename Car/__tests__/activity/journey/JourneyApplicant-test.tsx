@@ -10,12 +10,16 @@ test("renders correctly", () =>
     ).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-          "paddingHorizontal": 23,
-          "paddingTop": 22.5,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 23,
+            "paddingTop": 22.5,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <Indicator

@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import DM from "../../../../components/styles/DM";
 
 const ChatStyle = StyleSheet.create({
     messageField: {
@@ -10,7 +9,6 @@ const ChatStyle = StyleSheet.create({
 
     chatWrapper: {
         flex: 1,
-        backgroundColor: DM("white"),
         paddingBottom: 18
     },
 
@@ -21,10 +19,6 @@ const ChatStyle = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingBottom: 10
-    },
-
-    spinnerTextStyle: {
-        color: DM("#414045")
     },
 });
 

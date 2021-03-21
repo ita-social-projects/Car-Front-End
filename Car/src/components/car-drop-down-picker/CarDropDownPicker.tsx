@@ -12,7 +12,8 @@ const CarDropDownPicker = (props: any) => (
             <Text
                 style={[
                     CarDropDownPickerStyle.requiredPointer,
-                    { zIndex: props.zIndex }
+                    { zIndex: props.zIndex },
+                    { color: DM("red") }
                 ]}
             >
                     *
@@ -35,20 +36,22 @@ const CarDropDownPicker = (props: any) => (
             defaultValue={props.defaultValue}
             style={[
                 CarDropDownPickerStyle.container,
-                props.disabled && CarDropDownPickerStyle.disabledStyle
+                props.disabled && CarDropDownPickerStyle.disabledStyle,
+                { borderColor: DM("black") }
             ]}
-            dropDownStyle={CarDropDownPickerStyle.dropDownStyle}
+            dropDownStyle={[CarDropDownPickerStyle.dropDownStyle, { borderColor: DM("black") }]}
             containerStyle={[{ height: 48 }, props.style]}
             placeholderStyle={[
                 CarDropDownPickerStyle.placeholderStyle,
                 props.required && { paddingLeft: 12 },
-                CarDropDownPickerStyle.initialPlaceHolder
+                { color: DM("#909095") }
             ]}
             selectedLabelStyle={[
                 CarDropDownPickerStyle.placeholderStyle,
+                { color: DM("black") },
                 props.required && { paddingLeft: 12 }
             ]}
-            itemStyle={CarDropDownPickerStyle.itemStyle}
+            itemStyle={[CarDropDownPickerStyle.itemStyle, { backgroundColor: DM("#F0F0F0") }]}
             onChangeItem={
                 props.selectHandle
                     ? (item) => {

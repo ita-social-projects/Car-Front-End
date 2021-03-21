@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Animated, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Animated, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SettingsStyle from "./SettingsStyle";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
@@ -21,6 +21,7 @@ import {
     POPUP_HEIGHT_WITH_USER_IMAGE,
     SLEEP_DURATION, ZERO_OPACITY
 } from "../../../../constants/Constants";
+import DM from "../../../../components/styles/DM";
 
 const Settings = (props: any) => {
 
@@ -144,13 +145,17 @@ const Settings = (props: any) => {
     return (
         <>
             <ScrollView
-                style={SettingsStyle.mainContainer}
+                style={[SettingsStyle.mainContainer, { backgroundColor: DM("#FFFFFF") }]}
                 refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh}/>}>
                 <View style={SettingsStyle.container}>
                     <View style={SettingsStyle.bottomContainer}>
                         <TouchableOpacity
                             activeOpacity={1}
-                            style={SettingsStyle.profileInfo}
+                            style={[SettingsStyle.profileInfo,
+                                {
+                                    borderColor: DM("#F0F0F0"),
+                                    backgroundColor: DM("#FFFFFF")
+                                }]}
                             onLongPress={pressHandle}>
                             <AvatarLogoTitle />
                         </TouchableOpacity>
@@ -160,7 +165,7 @@ const Settings = (props: any) => {
                             cardName="App Settings"
                             angle="0"
                         >
-                            <Text style={SettingsStyle.cardText}>
+                            <Text style={[SettingsStyle.cardText, { color: DM("#000000") }]}>
                                 App Settings
                             </Text>
                         </TouchableNavigationCard>
@@ -170,7 +175,7 @@ const Settings = (props: any) => {
                             cardName="Notifications Settings"
                             angle="0"
                         >
-                            <Text style={SettingsStyle.cardText}>
+                            <Text style={[SettingsStyle.cardText, { color: DM("#000000") }]}>
                                 Notifications Settings
                             </Text>
                         </TouchableNavigationCard>
@@ -180,12 +185,13 @@ const Settings = (props: any) => {
                             cardName="Chats Settings"
                             angle="0"
                         >
-                            <Text style={SettingsStyle.cardText}>
+                            <Text style={[SettingsStyle.cardText, { color: DM("#000000") }]}>
                                 Chats Settings
                             </Text>
                         </TouchableNavigationCard>
                     </View>
-                    <Animated.View style={isVisible && [SettingsStyle.layout, { opacity }]} />
+                    <Animated.View
+                        style={isVisible && [SettingsStyle.layout, { opacity, backgroundColor: DM("#000000") }]} />
                 </View>
             </ScrollView>
             <BottomPopup
@@ -195,7 +201,7 @@ const Settings = (props: any) => {
                 refForChild={moreOptionsRef}
                 renderContent={
 
-                    <View style={SettingsStyle.moreOptions}>
+                    <View style={{ backgroundColor: DM("#FFFFFF") }}>
                         {user?.imageId == null ? (
 
                             <TouchableOpacity
@@ -204,7 +210,7 @@ const Settings = (props: any) => {
                                     pressHandle();
                                     (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                 }}>
-                                <Text style={SettingsStyle.changeAvatarText}>
+                                <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
                                 Upload Avatar
                                 </Text>
                             </TouchableOpacity>
@@ -218,12 +224,14 @@ const Settings = (props: any) => {
                                         pressHandle();
                                         (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                     }}>
-                                    <Text style={SettingsStyle.changeAvatarText}>
+                                    <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
                                         Change Avatar
                                     </Text>
                                 </TouchableOpacity>
 
-                                <View style={SettingsStyle.sepataror} />
+                                <View style={[SettingsStyle.sepataror,
+                                    { backgroundColor: DM(Platform.OS === "ios" ? "#888888" : "#C1C1C5") }
+                                ]} />
 
                                 <TouchableOpacity
                                     style={SettingsStyle.moreOptionsButton}
@@ -231,7 +239,7 @@ const Settings = (props: any) => {
                                         saveUser(null as unknown as ImagePickerResponse);
                                         pressHandle();
                                     }}>
-                                    <Text style={SettingsStyle.deleteAvatarText}>
+                                    <Text style={[SettingsStyle.deleteAvatarText, { color: DM("#EC6400") }]}>
                                         Delete Avatar
                                     </Text>
                                 </TouchableOpacity>
@@ -241,8 +249,8 @@ const Settings = (props: any) => {
                 }
                 initialSnap={0}
                 renderHeader={
-                    <View style={SettingsStyle.moreOptions}>
-                        <Text style={SettingsStyle.moreOptionsHeader}>
+                    <View style={{ backgroundColor: DM("#FFFFFF") }}>
+                        <Text style={[SettingsStyle.moreOptionsHeader, { color: DM("black") }]}>
                             Edit Profile
                         </Text>
                     </View>}

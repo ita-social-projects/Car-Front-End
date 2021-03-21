@@ -27,6 +27,7 @@ import {
     MAX_POPUP_POSITION,
     MIN_POPUP_POSITION
 } from "../../../../constants/Constants";
+import DM from "../../../../components/styles/DM";
 
 const JourneyPage = ({ props }: any) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -62,15 +63,15 @@ const JourneyPage = ({ props }: any) => {
 
     return (
         <>
-            <View style={JourneyPageStyle.pageContainer}>
-                <Text style={JourneyPageStyle.pageText}>
+            <View style={[JourneyPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
+                <Text style={[JourneyPageStyle.pageText, { color: DM("#222222") }]}>
                     Map implementation is in progress
                 </Text>
 
             </View>
             <BottomPopup
                 refForChild={moreOptionsRef}
-                style={JourneyPageStyle.bottomPopup}
+                style={{ backgroundColor: DM("white") }}
                 snapPoints={[
                     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                     isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -78,7 +79,7 @@ const JourneyPage = ({ props }: any) => {
                 initialSnap={MIN_POPUP_POSITION}
                 enabledInnerScrolling={true}
                 renderContent={
-                    <View style={JourneyPageStyle.contentView}>
+                    <View style={[JourneyPageStyle.contentView, { backgroundColor: DM("white") }]}>
 
                         {/* Car block */}
 
@@ -100,10 +101,10 @@ const JourneyPage = ({ props }: any) => {
                                 )}
                             </View>
                             <View style={JourneyPageStyle.carInfoContainer}>
-                                <Text style={JourneyPageStyle.carName}>
+                                <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
                                     {car?.model?.brand?.name} {car?.model?.name}
                                 </Text>
-                                <Text style={JourneyPageStyle.carPlateNumber}>
+                                <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
                                     {car?.plateNumber}
                                 </Text>
                             </View>
@@ -117,10 +118,12 @@ const JourneyPage = ({ props }: any) => {
                                     <View style={JourneyPageStyle.stopListItemRow}>
                                         <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                                         {item?.type !== StopType.Finish && (
-                                            <View style={JourneyPageStyle.stopCustomLineIcon} />
+                                            <View style={[JourneyPageStyle.stopCustomLineIcon,
+                                                { backgroundColor: DM("#AAA9AE") }
+                                            ]} />
                                         )}
                                     </View>
-                                    <Text style={JourneyPageStyle.stopListItemText}>
+                                    <Text style={{ color: DM("black") }}>
                                         {item?.address?.city} {item?.address?.street} street
                                     </Text>
                                 </View>
@@ -129,9 +132,11 @@ const JourneyPage = ({ props }: any) => {
                                     <View style={JourneyPageStyle.stopListItem}>
                                         <View style={JourneyPageStyle.stopListItemRow}>
                                             <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
-                                            <View style={JourneyPageStyle.stopCustomLineIcon} />
+                                            <View style={[JourneyPageStyle.stopCustomLineIcon,
+                                                { backgroundColor: DM("#AAA9AE") }]}
+                                            />
                                         </View>
-                                        <Text style={JourneyPageStyle.stopListItemText}>
+                                        <Text style={{ color: DM("black") }}>
                                                 Location A
                                         </Text>
                                     </View>
@@ -139,7 +144,7 @@ const JourneyPage = ({ props }: any) => {
                                         <View style={JourneyPageStyle.stopListItemRow}>
                                             <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                                         </View>
-                                        <Text style={JourneyPageStyle.stopListItemText}>
+                                        <Text style={{ color: DM("black") }}>
                                                 Location B
                                         </Text>
                                     </View>
@@ -149,7 +154,7 @@ const JourneyPage = ({ props }: any) => {
 
                         {/* Participants block */}
 
-                        <Text style={JourneyPageStyle.applicantsHeader}>
+                        <Text style={[JourneyPageStyle.applicantsHeader, { color: DM("black") }]}>
                                         SOFTSERVIANS {currentJourney?.participants?.length}/
                             {currentJourney?.countOfSeats}
                         </Text>
@@ -173,19 +178,21 @@ const JourneyPage = ({ props }: any) => {
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 0 }}
                                         >
-                                            <Text style={JourneyPageStyle.applicantNameText}>
+                                            <Text style={[JourneyPageStyle.applicantNameText,
+                                                { color: DM("#00A3CF") }
+                                            ]}>
                                                 {item?.name} {item?.surname}
                                             </Text>
                                         </LinearTextGradient>
                                         <View style={JourneyPageStyle.userSecondaryInfoBlock}>
-                                            <Text style={JourneyPageStyle.userRoleText}>
+                                            <Text style={[JourneyPageStyle.userRoleText, { color: DM("#909095") }]}>
                                                 {item?.position}
                                             </Text>
                                         </View>
                                     </View>
                                 </TouchableOpacity>
 
-                                <Divider style={JourneyPageStyle.separator} />
+                                <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
                             </View>
                         ))}
 
@@ -195,7 +202,7 @@ const JourneyPage = ({ props }: any) => {
                 }
                 renderHeader={
 
-                    <View style={JourneyPageStyle.contentView}>
+                    <View style={[JourneyPageStyle.contentView, { backgroundColor: DM("white") }]}>
 
                         {/* Driver block */}
 
@@ -211,15 +218,15 @@ const JourneyPage = ({ props }: any) => {
                                 <AvatarLogo user={currentJourney?.organizer} size={38.5} />
                             </View>
                             <View style={JourneyPageStyle.userInfoBlock}>
-                                <Text style={JourneyPageStyle.userNameText}>
+                                <Text style={[JourneyPageStyle.userNameText, { color: DM("black") }]}>
                                     {currentJourney?.organizer?.name}{" "}
                                     {currentJourney?.organizer?.surname}'s journey
                                 </Text>
                                 <View style={JourneyPageStyle.userSecondaryInfoBlock}>
-                                    <Text style={JourneyPageStyle.userRoleText}>
+                                    <Text style={[JourneyPageStyle.userRoleText, { color: DM("#909095") }]}>
                                         {currentJourney?.organizer?.position}
                                     </Text>
-                                    <Text style={JourneyPageStyle.dateText}>
+                                    <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
                                         {Moment(currentJourney?.departureTime ?? INITIAL_TIME).calendar()}
                                     </Text>
                                 </View>
@@ -227,16 +234,19 @@ const JourneyPage = ({ props }: any) => {
                         </TouchableOpacity>
                         <View style={JourneyPageStyle.driverBlockWhiteSpace} />
 
-                        <Divider style={JourneyPageStyle.separator} />
+                        <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
 
                         {/* Buttons block */}
 
-                        <View style={JourneyPageStyle.buttons}>
-                            <Divider style={JourneyPageStyle.separator} />
+                        <View style={[JourneyPageStyle.buttons, { backgroundColor: DM("#FFFFFF") }]}>
+                            <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
                             <View style={JourneyPageStyle.buttonsBlock}>
                                 {(isDriver || isPassenger) && (
                                     <TouchableOpacity
-                                        style={JourneyPageStyle.messageAllButton}
+                                        style={[JourneyPageStyle.messageAllButton, {
+                                            backgroundColor: DM("white"),
+                                            borderColor: DM("black") }
+                                        ]}
                                         onPress={() =>
                                             navigation.navigate("Chat", {
                                                 chatId: currentJourney?.id,
@@ -248,8 +258,8 @@ const JourneyPage = ({ props }: any) => {
                                             })
                                         }
                                     >
-                                        <Text style={JourneyPageStyle.messageAllButtonText}>
-                                                Message All
+                                        <Text style={[JourneyPageStyle.messageAllButtonText, { color: DM("black") }]}>
+                                            Message All
                                         </Text>
                                     </TouchableOpacity>
                                 )}
@@ -257,13 +267,14 @@ const JourneyPage = ({ props }: any) => {
                                     <TouchableOpacity
                                         style={[
                                             JourneyPageStyle.requestButton,
-                                            isRequested && JourneyPageStyle.pressedButton]}
+                                            { backgroundColor: DM("black") },
+                                            isRequested && { backgroundColor: DM("#00000033") }]}
                                         onPress={() => navigation.navigate("Journey Request Page", {
                                             journeyId: currentJourney?.id
                                         })}
                                         disabled={isRequested}
                                     >
-                                        <Text style={JourneyPageStyle.requestButtonText}>
+                                        <Text style={[JourneyPageStyle.requestButtonText, { color: DM("white") }]}>
                                             {isRequested ? "Requested" : "Request to driver"}
                                         </Text>
                                     </TouchableOpacity>

@@ -18,6 +18,7 @@ test("renders correctly", () =>
         onStartShouldSetResponder={[Function]}
         style={
           Object {
+            "borderBottomColor": "rgba(0,0,0,0.5)",
             "opacity": 1,
           }
         }

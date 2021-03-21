@@ -1,17 +1,14 @@
 import { Dimensions, StyleSheet } from "react-native";
-import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const JourneyPageStyle = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: DM("#88FF88"),
         alignItems: "center"
     },
 
     pageText: {
         fontFamily: Font.ProximaNova.ExtraBold,
-        color: DM("#000000"),
     },
 
     carContainer: {
@@ -25,7 +22,6 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     carName: {
-        color: DM("#000000"),
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
         lineHeight: 16,
@@ -34,7 +30,6 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     carPlateNumber: {
-        color: DM("#414045"),
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
         lineHeight: 16,
@@ -64,23 +59,13 @@ const JourneyPageStyle = StyleSheet.create({
         fontSize: 32
     },
 
-    panelContainer: {
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
-    },
-
     panel: {
         height: 200,
-        backgroundColor: DM("white")
     },
 
     headerTitleStyle: {
         paddingLeft: 24,
-        paddingBottom: 20,
-        backgroundColor: DM("white")
+        paddingBottom: 20
     },
 
     headerTextStyle: {
@@ -89,7 +74,6 @@ const JourneyPageStyle = StyleSheet.create({
         fontWeight: "bold",
         textTransform: "uppercase",
         letterSpacing: 0.2,
-        color: DM("black"),
         alignItems: "center"
     },
 
@@ -97,7 +81,6 @@ const JourneyPageStyle = StyleSheet.create({
         width: "100%",
         paddingHorizontal: "5%",
         alignSelf: "center",
-        backgroundColor: DM("white"),
     },
 
     userBlock: {
@@ -132,15 +115,13 @@ const JourneyPageStyle = StyleSheet.create({
     userNameText: {
         fontSize: 15,
         fontWeight: "700",
-        color: DM("black"),
         fontFamily: Font.OpenSans.Regular
     },
 
     applicantNameText: {
         fontSize: 15,
         fontWeight: "700",
-        fontFamily: Font.OpenSans.ExtraBold,
-        color: DM("#00A3CF")
+        fontFamily: Font.OpenSans.ExtraBold
     },
 
     userSecondaryInfoBlock: {
@@ -150,20 +131,17 @@ const JourneyPageStyle = StyleSheet.create({
 
     userRoleText: {
         fontSize: 13,
-        color: DM("#909095"),
         fontWeight: "100",
         fontFamily: Font.OpenSans.Regular
     },
 
     dateText: {
         fontSize: 13,
-        color: DM("#02A2CF"),
         fontWeight: "700",
         fontFamily: Font.OpenSans.ExtraBold
     },
 
     separator: {
-        backgroundColor: DM("#C1C1C5"),
         height: 1,
         width: "100%",
     },
@@ -176,7 +154,6 @@ const JourneyPageStyle = StyleSheet.create({
     applicantsHeader: {
         fontFamily: Font.ProximaNova.Bold,
         fontWeight: "bold",
-        color: DM("black"),
         fontSize: 16,
         justifyContent: "flex-start",
         marginBottom: 10,
@@ -194,23 +171,14 @@ const JourneyPageStyle = StyleSheet.create({
         flexDirection: "row"
     },
 
-    stopListItemText: {
-        color: DM("black"),
-    },
-
     stopListItemRow: {
         flexDirection: "column",
         alignItems: "center"
     },
 
     stopCustomLineIcon: {
-        backgroundColor: DM("#AAA9AE"),
         height: 12,
         width: 2
-    },
-
-    bottomPopup: {
-        backgroundColor: DM("white"),
     },
 
     buttonsBlock: {
@@ -221,8 +189,6 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     messageAllButton: {
-        backgroundColor: DM("white"),
-        borderColor: DM("black"),
         borderWidth: 3,
         justifyContent: "center",
         alignItems: "center",
@@ -233,36 +199,17 @@ const JourneyPageStyle = StyleSheet.create({
     buttons: {
         position: "absolute",
         width: Dimensions.get("window").width,
-        backgroundColor: DM("#FFFFFF"),
         top: 411,
         paddingHorizontal: "5%"
     },
 
     messageAllButtonText: {
-        color: DM("black"),
         fontWeight: "700",
         fontSize: 18,
         textTransform: "uppercase",
     },
 
-    startJourneyButton: {
-        backgroundColor: DM("black"),
-        width: Dimensions.get("screen").width * 0.465,
-        justifyContent: "center",
-        alignItems: "center",
-        height: 51,
-        marginLeft: Dimensions.get("screen").width * 0.045,
-    },
-
-    startJourneyButtonText: {
-        color: DM("white"),
-        fontWeight: "700",
-        fontSize: 18,
-        textTransform: "uppercase"
-    },
-
     requestButton: {
-        backgroundColor: DM("black"),
         width: Dimensions.get("screen").width * 0.515,
         justifyContent: "center",
         alignItems: "center",
@@ -270,14 +217,9 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     requestButtonText: {
-        color: DM("white"),
         fontWeight: "700",
         fontSize: 18,
         textTransform: "uppercase"
-    },
-
-    pressedButton: {
-        backgroundColor: DM("#00000033")
     },
 });
 

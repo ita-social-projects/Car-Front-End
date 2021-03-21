@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import DM from "../styles/DM";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
     container: {
@@ -21,7 +20,6 @@ const AvatarLogoTitleStyle = StyleSheet.create({
         lineHeight: 21,
         fontSize: 18,
         marginBottom: 8,
-        color: DM("black"),
         fontWeight: "bold"
     },
 
@@ -29,7 +27,6 @@ const AvatarLogoTitleStyle = StyleSheet.create({
         lineHeight: 14,
         fontSize: 14,
         opacity: 0.5,
-        color: DM("black"),
         marginBottom: 8
     }
 });

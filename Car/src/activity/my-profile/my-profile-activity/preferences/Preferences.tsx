@@ -6,6 +6,7 @@ import UserPreferences from "../../../../../models/user/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
+import DM from "../../../../components/styles/DM";
 import PreferencesStyle from "./PreferencesStyle";
 
 export default function Preferences (props: any) {
@@ -58,7 +59,7 @@ export default function Preferences (props: any) {
     return (
         <>
             {isLoading ? (
-                <View style={PreferencesStyle.loadingContainer}>
+                <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  DM("white") }]}>
                     <Indicator
                         size="large"
                         color="#414045"
@@ -66,7 +67,7 @@ export default function Preferences (props: any) {
                     />
                 </View>
             ) : (
-                <ScrollView style={PreferencesStyle.container}>
+                <ScrollView style={[PreferencesStyle.container, { backgroundColor: DM("white") }]}>
                     <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
                             text={"Do you allow smoking in your car?"}
@@ -84,18 +85,22 @@ export default function Preferences (props: any) {
                         />
                     </View>
                     <View style={PreferencesStyle.commentsContainer}>
-                        <Text style={PreferencesStyle.commentsText}>
+                        <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
                             Comments
                         </Text>
                         <TextInput
-                            style={PreferencesStyle.TextInput}
+                            style={[PreferencesStyle.textInput,
+                                {
+                                    borderColor: DM("black"),
+                                    color: DM("black")
+                                }]}
                             multiline={true}
                             maxLength={100}
                             numberOfLines={10}
                             value={comments}
                             onChangeText={(text) => setComments(text)}
                         />
-                        <Text style={PreferencesStyle.hintText}>
+                        <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
                             Up to 100 symbols
                         </Text>
                         <View style={PreferencesStyle.whitespaceBlock} />

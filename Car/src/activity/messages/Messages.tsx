@@ -54,7 +54,7 @@ const Messages = (props: any) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={MessagesStyle.container}>
+            <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
                 {props.isOpenFilter ? (
                     <SearchBar
                         maxLength={25}
@@ -63,8 +63,13 @@ const Messages = (props: any) => {
                         onClear={() => setSearchFilter("")}
                         placeholder={"Search in Messages"}
                         value={search}
-                        containerStyle={MessagesStyle.containerStyle}
-                        inputContainerStyle={MessagesStyle.inputContainerStyle}
+                        containerStyle={[MessagesStyle.containerStyle, { backgroundColor: DM("white") }]}
+                        inputContainerStyle={[MessagesStyle.inputContainerStyle,
+                            {
+                                backgroundColor: DM("white"),
+                                borderColor: DM("black"),
+                                borderBottomColor: DM("black")
+                            }]}
                     />
                 ) : (
                     <View />
@@ -86,7 +91,7 @@ const Messages = (props: any) => {
                             }}
                         >
                             <View style={MessagesStyle.main}>
-                                <View style={MessagesStyle.wrapper}>
+                                <View style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}>
                                     <View style={MessagesStyle.avatarWrapper}>
                                         <AvatarLogo
                                             user={item.journey.organizer}
@@ -100,12 +105,12 @@ const Messages = (props: any) => {
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 0 }}
                                         >
-                                            <Text style={MessagesStyle.fonts}>
+                                            <Text style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}>
                                                 {item.journey.organizer.name}{" "}
                                                 {item.journey.organizer.surname}'s journey
                                             </Text>
                                         </LinearTextGradient>
-                                        <Text style={MessagesStyle.textStyle}>
+                                        <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                                             {moment(
                                                 new Date(item.journey.departureTime)
                                             ).calendar()}

@@ -14,10 +14,14 @@ test("renders correctly", () =>
         />
       }
       style={
-        Object {
-          "backgroundColor": "white",
-          "paddingHorizontal": 15,
-        }
+        Array [
+          Object {
+            "paddingHorizontal": 15,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <View
@@ -65,13 +69,17 @@ test("renders correctly", () =>
       >
         <Text
           style={
-            Object {
-              "color": "black",
-              "fontFamily": "Proxima Nova",
-              "fontSize": 20,
-              "fontWeight": "700",
-              "textTransform": "uppercase",
-            }
+            Array [
+              Object {
+                "fontFamily": "Proxima Nova",
+                "fontSize": 20,
+                "fontWeight": "700",
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "black",
+              },
+            ]
           }
         >
           Manage journeys
@@ -93,7 +101,6 @@ test("renders correctly", () =>
             Array [
               Object {
                 "alignItems": "center",
-                "borderColor": "black",
                 "borderWidth": 2,
                 "justifyContent": "center",
                 "width": 54,
@@ -102,6 +109,9 @@ test("renders correctly", () =>
                 "backgroundColor": "#000000",
                 "color": "#FFFFFF",
               },
+              Object {
+                "borderColor": "black",
+              },
             ]
           }
         >
@@ -109,7 +119,6 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
-                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
@@ -131,7 +140,6 @@ test("renders correctly", () =>
             Array [
               Object {
                 "alignItems": "center",
-                "borderColor": "black",
                 "borderWidth": 2,
                 "justifyContent": "center",
                 "width": 62,
@@ -140,6 +148,9 @@ test("renders correctly", () =>
                 "backgroundColor": "#FFFFFF",
                 "color": "#000000",
               },
+              Object {
+                "borderColor": "black",
+              },
             ]
           }
         >
@@ -147,7 +158,6 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
-                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
@@ -169,7 +179,6 @@ test("renders correctly", () =>
             Array [
               Object {
                 "alignItems": "center",
-                "borderColor": "black",
                 "borderWidth": 2,
                 "justifyContent": "center",
                 "width": 98,
@@ -178,6 +187,9 @@ test("renders correctly", () =>
                 "backgroundColor": "#FFFFFF",
                 "color": "#000000",
               },
+              Object {
+                "borderColor": "black",
+              },
             ]
           }
         >
@@ -185,7 +197,6 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
-                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
@@ -207,7 +218,6 @@ test("renders correctly", () =>
             Array [
               Object {
                 "alignItems": "center",
-                "borderColor": "black",
                 "borderWidth": 2,
                 "justifyContent": "center",
                 "width": 103,
@@ -216,6 +226,9 @@ test("renders correctly", () =>
                 "backgroundColor": "#FFFFFF",
                 "color": "#000000",
               },
+              Object {
+                "borderColor": "black",
+              },
             ]
           }
         >
@@ -223,7 +236,6 @@ test("renders correctly", () =>
             style={
               Array [
                 Object {
-                  "color": "black",
                   "fontFamily": "Proxima Nova",
                   "fontWeight": "700",
                   "textTransform": "uppercase",

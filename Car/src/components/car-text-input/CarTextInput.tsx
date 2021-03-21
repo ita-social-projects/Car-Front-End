@@ -17,7 +17,9 @@ const CarTextInput = (props: any) => {
             render={() => (
                 <>
                     <View style={CarTextInputStyle.container}>
-                        <Text style={CarTextInputStyle.requiredPointer}>*</Text>
+                        <Text style={[CarTextInputStyle.requiredPointer, { borderColor: DM("red") }]}>
+                            *
+                        </Text>
                         <TextInput
                             autoCapitalize={"characters"}
                             onChangeText={(text: string) =>{
@@ -31,7 +33,7 @@ const CarTextInput = (props: any) => {
                         />
                     </View>
                     {props.errorText && (
-                        <Text style={CarTextInputStyle.errorText}>
+                        <Text style={{ borderColor: DM("red") }}>
                             {props.errorText}
                         </Text>
                     )}

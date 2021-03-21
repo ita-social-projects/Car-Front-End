@@ -14,19 +14,27 @@ test("renders correctly", () =>
     ).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#88FF88",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#88FF88",
+          },
+        ]
       }
     >
       <Text
         style={
-          Object {
-            "color": "#000000",
-            "fontFamily": "Proxima Nova",
-          }
+          Array [
+            Object {
+              "fontFamily": "Proxima Nova",
+            },
+            Object {
+              "color": "#222222",
+            },
+          ]
         }
       >
         Map implementation is in progress
@@ -42,10 +50,14 @@ test("renders correctly", () =>
         renderContent={
           <View
             style={
-              Object {
-                "backgroundColor": "white",
-                "height": 400,
-              }
+              Array [
+                Object {
+                  "height": 400,
+                },
+                Object {
+                  "backgroundColor": "white",
+                },
+              ]
             }
           >
             <View
@@ -89,12 +101,16 @@ test("renders correctly", () =>
                 >
                   <Text
                     style={
-                      Object {
-                        "color": "black",
-                        "fontFamily": "Open Sans",
-                        "fontSize": 15,
-                        "fontWeight": "700",
-                      }
+                      Array [
+                        Object {
+                          "fontFamily": "Open Sans",
+                          "fontSize": 15,
+                          "fontWeight": "700",
+                        },
+                        Object {
+                          "color": "black",
+                        },
+                      ]
                     }
                   >
                      
@@ -110,22 +126,30 @@ test("renders correctly", () =>
                   >
                     <Text
                       style={
-                        Object {
-                          "color": "#909095",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "100",
-                        }
+                        Array [
+                          Object {
+                            "fontFamily": "Open Sans",
+                            "fontSize": 13,
+                            "fontWeight": "100",
+                          },
+                          Object {
+                            "color": "#909095",
+                          },
+                        ]
                       }
                     />
                     <Text
                       style={
-                        Object {
-                          "color": "#02A2CF",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "700",
-                        }
+                        Array [
+                          Object {
+                            "fontFamily": "Open Sans",
+                            "fontSize": 13,
+                            "fontWeight": "700",
+                          },
+                          Object {
+                            "color": "#02A2CF",
+                          },
+                        ]
                       }
                     >
                       01/01/1970
@@ -135,13 +159,17 @@ test("renders correctly", () =>
               </View>
               <Themed.Divider
                 style={
-                  Object {
-                    "backgroundColor": "#C1C1C5",
-                    "height": 1,
-                    "marginBottom": 7,
-                    "marginTop": 7,
-                    "width": "100%",
-                  }
+                  Array [
+                    Object {
+                      "height": 1,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                      "width": "100%",
+                    },
+                    Object {
+                      "backgroundColor": "#C1C1C5",
+                    },
+                  ]
                 }
               />
               <View
@@ -153,12 +181,16 @@ test("renders correctly", () =>
               >
                 <Text
                   style={
-                    Object {
-                      "color": "#414045",
-                      "fontFamily": "Open Sans",
-                      "fontWeight": "700",
-                      "paddingBottom": 4,
-                    }
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontWeight": "700",
+                        "paddingBottom": 4,
+                      },
+                      Object {
+                        "color": "#414045",
+                      },
+                    ]
                   }
                 >
                   Comments
@@ -166,13 +198,17 @@ test("renders correctly", () =>
                 <Comments />
                 <Text
                   style={
-                    Object {
-                      "color": "#000000",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "lineHeight": 18,
-                      "paddingTop": 4,
-                    }
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontSize": 13,
+                        "lineHeight": 18,
+                        "paddingTop": 4,
+                      },
+                      Object {
+                        "color": "#000000",
+                      },
+                    ]
                   }
                 >
                   Up to 100 symbols
@@ -204,12 +240,14 @@ test("renders correctly", () =>
                     Array [
                       Object {
                         "alignItems": "center",
-                        "backgroundColor": "white",
-                        "borderColor": "black",
                         "borderWidth": 3,
                         "height": 51,
                         "justifyContent": "center",
                         "width": 300,
+                      },
+                      Object {
+                        "backgroundColor": "white",
+                        "borderColor": "black",
                       },
                       Object {
                         "opacity": 0.2,
@@ -219,12 +257,16 @@ test("renders correctly", () =>
                 >
                   <Text
                     style={
-                      Object {
-                        "color": "black",
-                        "fontSize": 18,
-                        "fontWeight": "700",
-                        "textTransform": "uppercase",
-                      }
+                      Array [
+                        Object {
+                          "fontSize": 18,
+                          "fontWeight": "700",
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "color": "black",
+                        },
+                      ]
                     }
                   >
                     Requested

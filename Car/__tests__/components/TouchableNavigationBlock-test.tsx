@@ -43,14 +43,18 @@ test("renders correctly", () =>
             }
           }
           style={
-            Object {
-              "borderColor": "#FFFFFF",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "height": 160,
-              "marginVertical": 5,
-            }
+            Array [
+              Object {
+                "borderRadius": 8,
+                "borderStyle": "solid",
+                "borderWidth": 2,
+                "height": 160,
+                "marginVertical": 5,
+              },
+              Object {
+                "borderColor": "#FFFFFF",
+              },
+            ]
           }
         >
           <View

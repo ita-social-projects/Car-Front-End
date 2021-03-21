@@ -11,12 +11,16 @@ test("renders correctly", () =>
     <React.Fragment>
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "white",
-            "flex": 1,
-            "justifyContent": "center",
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            Object {
+              "backgroundColor": "white",
+            },
+          ]
         }
       >
         <Indicator

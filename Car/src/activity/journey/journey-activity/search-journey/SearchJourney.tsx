@@ -110,7 +110,11 @@ const SearchJourney = () => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <View style={SearchJourneyStyle.topInputContainer}>
+            <View style={[SearchJourneyStyle.topInputContainer,
+                {
+                    backgroundColor: DM("#FAFAFA"),
+                    borderBottomColor: DM("#C1C1C5")
+                }]}>
                 <TouchableMapBar
                     directionType="From"
                     iconName="location"
@@ -133,7 +137,7 @@ const SearchJourney = () => {
                 )}
             </View>
 
-            <ScrollView style={[SearchJourneyStyle.container]}>
+            <ScrollView style={[SearchJourneyStyle.container, { backgroundColor: DM("#FAFAFA") }]}>
                 <View style={SearchJourneyStyle.insideContainer}>
                     {loading ? (
                         <></>
@@ -200,7 +204,7 @@ const SearchJourney = () => {
                             />
                         </View>
                     ) : (
-                        <Text style={SearchJourneyStyle.recentJourneyText}>
+                        <Text style={[SearchJourneyStyle.recentJourneyText, { color: DM("black") }]}>
                             Recent Journeys
                         </Text>
                     )}

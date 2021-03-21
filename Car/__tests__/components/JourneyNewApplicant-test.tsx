@@ -34,11 +34,40 @@ test("renders correctly", () =>
         transparent={true}
         visible={true}
       >
-        <View>
-          <View>
+        <View
+          style={
+            Array [
+              undefined,
+              Object {
+                "backgroundColor": "rgba(0, 0, 0, 0.5)",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                undefined,
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "rgba(151, 151, 151, 0.233556)",
+                  "shadowColor": "#414045",
+                },
+              ]
+            }
+          >
             <View>
               <View>
-                <Text>
+                <Text
+                  style={
+                    Array [
+                      undefined,
+                      Object {
+                        "color": "#000000",
+                      },
+                    ]
+                  }
+                >
                   New Applicant
                 </Text>
               </View>
@@ -46,7 +75,16 @@ test("renders correctly", () =>
                 <ForwardRef
                   onPress={[Function]}
                 >
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#02A2CF",
+                        },
+                      ]
+                    }
+                  >
                     Snooze
                   </Text>
                 </ForwardRef>
@@ -72,13 +110,40 @@ test("renders correctly", () =>
               />
               <View>
                 <View>
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#000000",
+                        },
+                      ]
+                    }
+                  >
                     Abc Abc
                   </Text>
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#000000",
+                        },
+                      ]
+                    }
+                  >
                     Abc
                   </Text>
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#000000",
+                        },
+                      ]
+                    }
+                  >
                     123 rides, 2 badges
                   </Text>
                 </View>
@@ -89,13 +154,30 @@ test("renders correctly", () =>
                 Array [
                   undefined,
                   undefined,
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "rgba(151, 151, 151, 0.3)",
+                  },
                 ]
               }
             >
               <Text>
                 Abc
               </Text>
-              <View />
+              <View
+                style={
+                  Array [
+                    undefined,
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomColor": "rgba(151, 151, 151, 0.3)",
+                      "borderLeftColor": "rgba(0,0,0,0)",
+                      "borderRightColor": "rgba(151, 151, 151, 0.3)",
+                      "borderTopColor": "rgba(0,0,0,0)",
+                    },
+                  ]
+                }
+              />
             </View>
             <View
               style={
@@ -108,7 +190,20 @@ test("renders correctly", () =>
               <Text>
                 I’m Traveling with a baggage.
               </Text>
-              <View />
+              <View
+                style={
+                  Array [
+                    undefined,
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomColor": "#C1C1C5",
+                      "borderLeftColor": "rgba(0,0,0,0)",
+                      "borderRightColor": "rgba(0,0,0,0)",
+                      "borderTopColor": "rgba(0,0,0,0)",
+                    },
+                  ]
+                }
+              />
             </View>
             <View
               style={
@@ -117,7 +212,16 @@ test("renders correctly", () =>
                 ]
               }
             >
-              <Text>
+              <Text
+                style={
+                  Array [
+                    undefined,
+                    Object {
+                      "color": "#000000",
+                    },
+                  ]
+                }
+              >
                 Abc
                 ’s stop in your Journey
               </Text>
@@ -142,10 +246,28 @@ test("renders correctly", () =>
                       radius="1rem"
                     />
                   </Circle>
-                  <View />
+                  <View
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "borderColor": "#C1C1C5",
+                        },
+                      ]
+                    }
+                  />
                 </View>
                 <View>
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#909095",
+                        },
+                      ]
+                    }
+                  >
                     Location A
                   </Text>
                 </View>
@@ -170,10 +292,28 @@ test("renders correctly", () =>
                       radius="0.35rem"
                     />
                   </Circle>
-                  <View />
+                  <View
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "borderColor": "#C1C1C5",
+                        },
+                      ]
+                    }
+                  />
                 </View>
                 <View>
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#909095",
+                        },
+                      ]
+                    }
+                  >
                     Stop A.1
                   </Text>
                 </View>
@@ -212,9 +352,26 @@ test("renders correctly", () =>
                           "y": 0,
                         }
                       }
+                      style={
+                        Array [
+                          undefined,
+                          Object {
+                            "backgroundColor": "#FFFFFF",
+                          },
+                        ]
+                      }
                     />
                   </Circle>
-                  <View />
+                  <View
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "borderColor": "#C1C1C5",
+                        },
+                      ]
+                    }
+                  />
                 </View>
                 <View>
                   <RNVirtualLinearTextGradient
@@ -242,8 +399,25 @@ test("renders correctly", () =>
                         "y": 0,
                       }
                     }
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#909095",
+                        },
+                      ]
+                    }
                   >
-                    <Text>
+                    <Text
+                      style={
+                        Array [
+                          undefined,
+                          Object {
+                            "color": "#909095",
+                          },
+                        ]
+                      }
+                    >
                       Abc
                       's stop A.2 ‏
                     </Text>
@@ -281,7 +455,16 @@ test("renders correctly", () =>
                   </Circle>
                 </View>
                 <View>
-                  <Text>
+                  <Text
+                    style={
+                      Array [
+                        undefined,
+                        Object {
+                          "color": "#909095",
+                        },
+                      ]
+                    }
+                  >
                     Location B (Your stop)
                   </Text>
                 </View>
@@ -294,10 +477,22 @@ test("renders correctly", () =>
                   Array [
                     undefined,
                     undefined,
+                    Object {
+                      "backgroundColor": "black",
+                    },
                   ]
                 }
               >
-                <Text>
+                <Text
+                  style={
+                    Array [
+                      undefined,
+                      Object {
+                        "color": "white",
+                      },
+                    ]
+                  }
+                >
                   Accept
                 </Text>
               </ForwardRef>
@@ -310,7 +505,16 @@ test("renders correctly", () =>
                   ]
                 }
               >
-                <Text>
+                <Text
+                  style={
+                    Array [
+                      undefined,
+                      Object {
+                        "color": "#EC6400",
+                      },
+                    ]
+                  }
+                >
                   Decline
                 </Text>
               </ForwardRef>

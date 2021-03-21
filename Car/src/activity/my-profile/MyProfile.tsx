@@ -7,7 +7,7 @@ import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: any) => {
     return (
-        <View style={MyProfileStyle.container}>
+        <View style={[MyProfileStyle.container, { backgroundColor: DM("white") }]}>
             <TouchableNavigationCard
                 navigation={props.navigation}
                 navigationName="Details"
@@ -20,7 +20,7 @@ const MyProfile = (props: any) => {
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Details</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Details</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -36,7 +36,7 @@ const MyProfile = (props: any) => {
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Preferences</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Preferences</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -51,7 +51,7 @@ const MyProfile = (props: any) => {
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Your cars</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Your cars</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -66,7 +66,7 @@ const MyProfile = (props: any) => {
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Address book</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Address book</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -81,7 +81,7 @@ const MyProfile = (props: any) => {
                     />
                 }
             >
-                <Text style={MyProfileStyle.text}>Settings</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Settings</Text>
             </TouchableNavigationCard>
         </View>
     );

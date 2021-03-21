@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import Location from "../../../../../models/location/Location";
 import AuthContext from "../../../../components/auth/AuthContext";
+import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 
@@ -34,7 +35,7 @@ export default function AddressBook (props: any) {
             {locations?.length ? (
                 <></>
             ) : (
-                <Text style={AddressBookStyle.message}>
+                <Text style={[AddressBookStyle.message, { color: DM("#414045") }]}>
                     Currently you don’t have any address in the list. You have
                     to add a address if you want to create or search Journeys
                     with personal one.
@@ -55,7 +56,7 @@ export default function AddressBook (props: any) {
 
     return (
         <ScrollView
-            style={AddressBookStyle.container}
+            style={[AddressBookStyle.container, { backgroundColor: DM("white") }]}
             contentContainerStyle={loading && AddressBookStyle.loading}
         >
             <View
@@ -87,10 +88,10 @@ export default function AddressBook (props: any) {
                                             />
                                         }
                                     >
-                                        <Text style={AddressBookStyle.name}>
+                                        <Text style={[AddressBookStyle.name, { color: DM("black") }]}>
                                             {item.name}
                                         </Text>
-                                        <Text style={AddressBookStyle.address}>
+                                        <Text style={[AddressBookStyle.address, { color: DM("#414045") }]}>
                                             {item.address?.street +
                                                 ", " +
                                                 item.address?.city}

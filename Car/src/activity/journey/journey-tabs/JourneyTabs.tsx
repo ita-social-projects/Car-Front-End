@@ -32,6 +32,7 @@ import {
     SLEEP_DURATION,
     ZERO_OPACITY
 } from "../../../constants/Constants";
+import DM from "../../../components/styles/DM";
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
@@ -106,7 +107,7 @@ const JourneyTabs = () => {
                     component={JourneyStartPage}
                     options={{
                         headerTitle: "Journey",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: () => <View />
                     }}
@@ -118,7 +119,7 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Create a Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -129,7 +130,7 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Search for a Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -139,7 +140,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
@@ -148,9 +149,13 @@ const JourneyTabs = () => {
 
                         return (
                             <>
-                                <Animated.View style={isVisible && [HeaderStyle.layout, { opacity: layoutOpacity }]} />
+                                <Animated.View style={isVisible && [HeaderStyle.layout,
+                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                ]} />
 
-                                <Animated.View style={[HeaderStyle.popUp, { opacity: journeyOpacity }]}>
+                                <Animated.View style={[HeaderStyle.popUp,
+                                    { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
+                                ]}>
                                     <JourneyPage props={props} />
                                 </Animated.View>
 
@@ -162,13 +167,17 @@ const JourneyTabs = () => {
                                     initialSnap={0}
                                     renderHeader={
 
-                                        <View style={JourneyPageStyle.headerTitleStyle}>
-                                            <Text style={JourneyPageStyle.headerTextStyle}>More options</Text>
+                                        <View style={[JourneyPageStyle.headerTitleStyle,
+                                            { backgroundColor: DM("white") }
+                                        ]}>
+                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                                                More options
+                                            </Text>
                                         </View>
                                     }
                                     renderContent={
 
-                                        <View style={JourneyPageStyle.panel}>
+                                        <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                             <MenuButton text="Add Stop" />
                                             <MenuButton text="Edit the Journey" />
                                             <MenuButton text="Invite Softservian" />
@@ -186,7 +195,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Confirm Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -196,7 +205,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search result",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
@@ -208,7 +217,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search result",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                     }}
                 />
@@ -218,7 +227,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search Journey",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
@@ -230,7 +239,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "SoftServian",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -241,7 +250,7 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}

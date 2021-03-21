@@ -9,10 +9,14 @@ test("renders correctly", () =>
     ).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
       }
     >
       <FlatList

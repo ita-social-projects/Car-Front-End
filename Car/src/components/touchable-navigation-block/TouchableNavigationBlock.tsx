@@ -6,6 +6,7 @@ import {
     View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import DM from "../styles/DM";
 import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle";
 
 const TouchableNavigationBlock = (props: any) => {
@@ -15,7 +16,7 @@ const TouchableNavigationBlock = (props: any) => {
                 onPress={() => props.navigation.navigate(props.navigationName)}
             >
                 <LinearGradient
-                    style={TouchableNavigationBlockStyle.blockContainer}
+                    style={[TouchableNavigationBlockStyle.blockContainer, { borderColor: DM("#FFFFFF"), }]}
                     colors={[props.from, props.to]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}

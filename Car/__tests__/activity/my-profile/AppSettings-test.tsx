@@ -8,12 +8,16 @@ test("renders correctly", () =>
     expect(renderer.create(<AppSettings />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "white",
-          "flex": 1,
-          "paddingHorizontal": 16,
-          "paddingTop": 50,
-        }
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 16,
+            "paddingTop": 50,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <View
@@ -33,13 +37,17 @@ test("renders correctly", () =>
         >
           <Text
             style={
-              Object {
-                "color": "black",
-                "fontFamily": "Open Sans",
-                "fontSize": 13,
-                "fontWeight": "700",
-                "lineHeight": 16,
-              }
+              Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "700",
+                  "lineHeight": 16,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
             }
           >
             Enable Dark Mode
@@ -81,12 +89,16 @@ test("renders correctly", () =>
         >
           <Text
             style={
-              Object {
-                "color": "black",
-                "fontFamily": "Open Sans",
-                "fontSize": 16,
-                "lineHeight": 24,
-              }
+              Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 16,
+                  "lineHeight": 24,
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
             }
           >
             No

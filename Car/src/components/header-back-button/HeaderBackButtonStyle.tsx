@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
-import DM from "../styles/DM";
 
 const HeaderBackButtonStyle = StyleSheet.create({
     backButton: {
@@ -14,7 +13,6 @@ const HeaderBackButtonStyle = StyleSheet.create({
     },
 
     backButtonText: {
-        color: DM("#02A2CF"),
         fontFamily: Font.OpenSans.ExtraBold,
         fontSize: 20,
         fontWeight: "700"

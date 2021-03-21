@@ -64,14 +64,18 @@ test("renders correctly", () =>
           >
             <View
               style={
-                Object {
-                  "borderColor": "black",
-                  "borderRadius": 8,
-                  "borderStyle": "solid",
-                  "borderWidth": 1,
-                  "height": 128,
-                  "marginBottom": 16,
-                }
+                Array [
+                  Object {
+                    "borderRadius": 8,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "height": 128,
+                    "marginBottom": 16,
+                  },
+                  Object {
+                    "borderColor": "black",
+                  },
+                ]
               }
             >
               <View
@@ -111,12 +115,12 @@ test("renders correctly", () =>
                       style={
                         Array [
                           Object {
-                            "color": "#FFFFFF",
                             "fontFamily": "Open Sans",
                             "fontWeight": "700",
                             "textTransform": "uppercase",
                           },
                           Object {
+                            "color": "#FFFFFF",
                             "fontSize": 15.4,
                             "lineHeight": 15.4,
                             "paddingTop": 2.75,
@@ -148,14 +152,18 @@ test("renders correctly", () =>
                     <View>
                       <Text
                         style={
-                          Object {
-                            "alignItems": "center",
-                            "color": "black",
-                            "fontFamily": undefined,
-                            "fontSize": 16,
-                            "fontWeight": "700",
-                            "lineHeight": 16,
-                          }
+                          Array [
+                            Object {
+                              "alignItems": "center",
+                              "fontFamily": undefined,
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "lineHeight": 16,
+                            },
+                            Object {
+                              "color": "black",
+                            },
+                          ]
                         }
                       >
                         ABC BCD
@@ -223,26 +231,34 @@ test("renders correctly", () =>
                   >
                     <Text
                       style={
-                        Object {
-                          "alignItems": "center",
-                          "color": "#909095",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 11,
-                          "lineHeight": 16,
-                        }
+                        Array [
+                          Object {
+                            "alignItems": "center",
+                            "fontFamily": "Open Sans",
+                            "fontSize": 11,
+                            "lineHeight": 16,
+                          },
+                          Object {
+                            "color": "#909095",
+                          },
+                        ]
                       }
                     >
                       CDE
                     </Text>
                     <Text
                       style={
-                        Object {
-                          "color": "#02A2CF",
-                          "fontFamily": undefined,
-                          "fontSize": 11,
-                          "fontWeight": "700",
-                          "lineHeight": 16,
-                        }
+                        Array [
+                          Object {
+                            "fontFamily": undefined,
+                            "fontSize": 11,
+                            "fontWeight": "700",
+                            "lineHeight": 16,
+                          },
+                          Object {
+                            "color": "#02A2CF",
+                          },
+                        ]
                       }
                     >
                       Invalid date
@@ -266,24 +282,32 @@ test("renders correctly", () =>
                 >
                   <View
                     style={
-                      Object {
-                        "backgroundColor": "#AAA9AE",
-                        "borderColor": "#FFFFFF",
-                        "borderRadius": 400,
-                        "borderWidth": 2,
-                        "width": 16,
-                      }
+                      Array [
+                        Object {
+                          "borderRadius": 400,
+                          "borderWidth": 2,
+                          "width": 16,
+                        },
+                        Object {
+                          "backgroundColor": "#AAA9AE",
+                          "borderColor": "#FFFFFF",
+                        },
+                      ]
                     }
                   />
                   <Text
                     style={
-                      Object {
-                        "color": "#414045",
-                        "fontFamily": "Open Sans",
-                        "fontSize": 11,
-                        "lineHeight": 16,
-                        "paddingLeft": 6,
-                      }
+                      Array [
+                        Object {
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "lineHeight": 16,
+                          "paddingLeft": 6,
+                        },
+                        Object {
+                          "color": "#414045",
+                        },
+                      ]
                     }
                   >
                     Location A
@@ -291,12 +315,16 @@ test("renders correctly", () =>
                 </View>
                 <View
                   style={
-                    Object {
-                      "backgroundColor": "#AAA9AE",
-                      "height": 12,
-                      "left": 7,
-                      "width": 2,
-                    }
+                    Array [
+                      Object {
+                        "height": 12,
+                        "left": 7,
+                        "width": 2,
+                      },
+                      Object {
+                        "backgroundColor": "#AAA9AE",
+                      },
+                    ]
                   }
                 />
                 <View
@@ -308,24 +336,32 @@ test("renders correctly", () =>
                 >
                   <View
                     style={
-                      Object {
-                        "backgroundColor": "#AAA9AE",
-                        "borderColor": "#FFFFFF",
-                        "borderRadius": 400,
-                        "borderWidth": 2,
-                        "width": 16,
-                      }
+                      Array [
+                        Object {
+                          "borderRadius": 400,
+                          "borderWidth": 2,
+                          "width": 16,
+                        },
+                        Object {
+                          "backgroundColor": "#AAA9AE",
+                          "borderColor": "#FFFFFF",
+                        },
+                      ]
                     }
                   />
                   <Text
                     style={
-                      Object {
-                        "color": "#414045",
-                        "fontFamily": "Open Sans",
-                        "fontSize": 11,
-                        "lineHeight": 16,
-                        "paddingLeft": 6,
-                      }
+                      Array [
+                        Object {
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "lineHeight": 16,
+                          "paddingLeft": 6,
+                        },
+                        Object {
+                          "color": "#414045",
+                        },
+                      ]
                     }
                   >
                     Location B

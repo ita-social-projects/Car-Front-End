@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import DM from "../styles/DM";
 import TouchableMapBarStyle from "./TouchableMapBarStyle";
 
 const TouchableMapBar = (props: any) => {
@@ -13,14 +14,21 @@ const TouchableMapBar = (props: any) => {
             <TouchableOpacity
                 style={[
                     TouchableMapBarStyle.container,
-                    { marginBottom: marginBottom, marginTop: marginTop }
+                    {
+                        marginBottom: marginBottom,
+                        marginTop: marginTop,
+                        backgroundColor: DM("white"),
+                    }
                 ]}
             >
-                <Text style={TouchableMapBarStyle.insideText}>
+                <Text style={[TouchableMapBarStyle.insideText,
+                    { color: DM("#909095"), }
+                ]}>
                     {props.directionType + ":"}{" "}
                 </Text>
                 <Text
-                    style={[TouchableMapBarStyle.directionText, { flex: flex }]}
+                    style={[TouchableMapBarStyle.directionText,
+                        { flex: flex, color: DM("black"), }]}
                 >
                     {props.defaultInputValue}{" "}
                 </Text>
@@ -28,7 +36,7 @@ const TouchableMapBar = (props: any) => {
                     <Ionicons
                         style={[
                             TouchableMapBarStyle.barIcon,
-                            { transform: [{ rotate: "0deg" }] }
+                            { transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE") }
                         ]}
                         name={props?.iconName}
                         size={22}

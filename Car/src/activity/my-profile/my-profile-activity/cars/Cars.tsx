@@ -8,6 +8,7 @@ import TouchableNavigationCard from "../../../../components/touchable-navigation
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 import ImageService from "../../../../../api-service/image-service/ImageService";
+import DM from "../../../../components/styles/DM";
 
 const Cars = (props: any) => {
     const { user } = useContext(AuthContext);
@@ -54,7 +55,7 @@ const Cars = (props: any) => {
             {cars?.length ? (
                 <></>
             ) : (
-                <Text style={CarsStyle.message}>
+                <Text style={[CarsStyle.message, { color: DM("#414045") }]}>
                     Currently you don’t have any car in the list. You have to
                     add a car if you want to create Journeys with personal one.
                 </Text>
@@ -64,7 +65,7 @@ const Cars = (props: any) => {
 
     return (
         <ScrollView
-            style={CarsStyle.container}
+            style={[CarsStyle.container, { backgroundColor: DM("white") }]}
             contentContainerStyle={isLoading && CarsStyle.loading}
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -105,10 +106,10 @@ const Cars = (props: any) => {
                                             )
                                         }
                                     >
-                                        <Text style={CarsStyle.brand}>
+                                        <Text style={[CarsStyle.brand, { color: DM("black") }]}>
                                             {item!.model?.brand?.name}
                                         </Text>
-                                        <Text style={CarsStyle.model}>
+                                        <Text style={[CarsStyle.model, { color: DM("#414045") }]}>
                                             {item!.model?.name}
                                         </Text>
                                     </TouchableNavigationCard>

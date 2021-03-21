@@ -10,20 +10,28 @@ test("renders correctly", () =>
     expect(renderer.render(<AddCars />)).toMatchInlineSnapshot(`
     <View
       style={
-        Object {
-          "backgroundColor": "white",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <View
         style={
-          Object {
-            "alignItems": "flex-end",
-            "backgroundColor": "#C4C4C4",
-            "height": "40%",
-            "justifyContent": "flex-end",
-          }
+          Array [
+            Object {
+              "alignItems": "flex-end",
+              "height": "40%",
+              "justifyContent": "flex-end",
+            },
+            Object {
+              "backgroundColor": "#C4C4C4",
+            },
+          ]
         }
       >
         <Image
@@ -46,27 +54,35 @@ test("renders correctly", () =>
         <ForwardRef
           onPress={[Function]}
           style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#FFFFFF",
-              "borderColor": "#000000",
-              "borderWidth": 2,
-              "marginBottom": 19,
-              "marginRight": 24,
-              "paddingHorizontal": 16,
-              "paddingVertical": 14,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "borderWidth": 2,
+                "marginBottom": 19,
+                "marginRight": 24,
+                "paddingHorizontal": 16,
+                "paddingVertical": 14,
+              },
+              Object {
+                "backgroundColor": "#FFFFFF",
+                "borderColor": "#000000",
+              },
+            ]
           }
         >
           <Text
             style={
-              Object {
-                "color": "black",
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "lineHeight": 20,
-                "textTransform": "uppercase",
-              }
+              Array [
+                Object {
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "lineHeight": 20,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "black",
+                },
+              ]
             }
           >
             Upload photo
@@ -219,25 +235,33 @@ test("renders correctly", () =>
           <ForwardRef
             onPress={[Function]}
             style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#000000",
-                "flexDirection": "row",
-                "justifyContent": "space-around",
-                "paddingHorizontal": 16,
-                "paddingVertical": 14,
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-around",
+                  "paddingHorizontal": 16,
+                  "paddingVertical": 14,
+                },
+                Object {
+                  "backgroundColor": "#000000",
+                },
+              ]
             }
           >
             <Text
               style={
-                Object {
-                  "color": "white",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                  "lineHeight": 20,
-                  "textTransform": "uppercase",
-                }
+                Array [
+                  Object {
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "lineHeight": 20,
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "color": "white",
+                  },
+                ]
               }
             >
               Save

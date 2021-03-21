@@ -205,7 +205,7 @@ const Chat = (properties: any) => {
     );
 
     return (
-        <View style={ChatStyle.chatWrapper}>
+        <View style={[ChatStyle.chatWrapper, { backgroundColor: DM("white") }]}>
             {isLoading ? (
                 <Indicator
                     size="large"

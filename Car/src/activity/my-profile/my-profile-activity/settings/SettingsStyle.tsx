@@ -1,11 +1,9 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
-import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const SettingsStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: DM("#FFFFFF"),
     },
 
     container: {
@@ -22,25 +20,18 @@ const SettingsStyle = StyleSheet.create({
         marginVertical: 20,
         borderRadius: 16,
         borderWidth: 1,
-        borderColor: DM("#F0F0F0"),
         height: 126,
         width: Dimensions.get("screen").width - 28,
         top: 0,
         left: 0,
         paddingTop: 10,
         zIndex: 100,
-        backgroundColor: DM("#FFFFFF"),
         position: "absolute",
-    },
-
-    moreOptions: {
-        backgroundColor: DM("#FFFFFF")
     },
 
     moreOptionsHeader: {
         textTransform: "uppercase",
         fontFamily: Font.ProximaNova.ExtraBold,
-        color: DM("black"),
         paddingLeft: 24,
         paddingBottom: 33,
         fontSize: 14,
@@ -49,7 +40,6 @@ const SettingsStyle = StyleSheet.create({
 
     changeAvatarText: {
         fontFamily: Font.OpenSans.Bold,
-        color: DM("black"),
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
@@ -60,7 +50,6 @@ const SettingsStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
-        color: DM("#EC6400")
     },
 
     moreOptionsButton: {
@@ -73,20 +62,17 @@ const SettingsStyle = StyleSheet.create({
 
     sepataror: {
         height: 1,
-        backgroundColor: DM(Platform.OS === "ios" ? "#888888" : "#C1C1C5"),
         marginHorizontal: 10,
     },
 
     cardText: {
         fontWeight: "bold",
-        color: DM("#000000")
     },
 
     layout: {
         height: Dimensions.get("screen").height,
         width: Dimensions.get("screen").width,
         position: "absolute",
-        backgroundColor: DM("#000000"),
         zIndex: Platform.OS === "ios" ? -1 : 50,
     }
 });

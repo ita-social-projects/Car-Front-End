@@ -40,6 +40,7 @@ const MenuButton = (props: any) => {
                         <Text
                             style={[
                                 MenuButtonStyle.panelButtonTitle,
+                                { color: DM("black") },
                                 { color: colorText }
                             ]}
                         >

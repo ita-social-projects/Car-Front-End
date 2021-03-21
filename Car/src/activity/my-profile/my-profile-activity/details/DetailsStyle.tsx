@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const DetailsStyle = StyleSheet.create({
@@ -7,7 +6,6 @@ const DetailsStyle = StyleSheet.create({
         flex: 1,
         paddingTop: 32,
         paddingHorizontal: 24,
-        backgroundColor: DM("#FFFFFF")
     },
 
     detailsContainer: {
@@ -24,14 +22,12 @@ const DetailsStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
-        color: DM("#000000")
     },
 
     detailValueGrayText: {
         fontFamily: Font.OpenSans.Regular,
         fontSize: 13,
         lineHeight: 18,
-        color: DM("#414045")
     },
 
     detailValueBlueText: {
@@ -39,7 +35,6 @@ const DetailsStyle = StyleSheet.create({
         fontWeight: "700",
         fontSize: 13,
         lineHeight: 16,
-        color: DM("#02A2CF")
     }
 });
 

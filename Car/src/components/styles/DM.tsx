@@ -1,6 +1,8 @@
+import { isDarkMode } from "../navigation/Routes";
+
 const DM = (color: string) => {
 
-    if(!true) {
+    if(isDarkMode) {
         if (color === "black" || color === "#000000") return ("#EBEBEB");
         if (color === "white" || color === "#FFFFFF") return ("#141414");
         if (color === "light-content") return ("dark-content");

@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Platform, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableNavigationCardStyle from "./TouchableNavigationCardStyle";
 import * as navigation from "../navigation/Navigation";
@@ -9,7 +9,9 @@ const TouchableNavigationCard = (props: any) => {
     return (
         <View>
             <TouchableOpacity
-                style={TouchableNavigationCardStyle.cardContainer}
+                style={[
+                    TouchableNavigationCardStyle.cardContainer,
+                    { borderBottomColor: DM(Platform.OS === "ios" ? "rgba(0,0,0,0.5)" : "#C1C1C5"), }]}
                 onPress={() =>
                     navigation.navigate(props?.navigationName, {
                         carId: props.carId

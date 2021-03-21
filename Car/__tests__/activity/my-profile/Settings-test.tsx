@@ -18,10 +18,14 @@ test("renders correctly", () =>
           />
         }
         style={
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "flex": 1,
-          }
+          Array [
+            Object {
+              "flex": 1,
+            },
+            Object {
+              "backgroundColor": "#FFFFFF",
+            },
+          ]
         }
       >
         <View
@@ -43,21 +47,25 @@ test("renders correctly", () =>
               activeOpacity={1}
               onLongPress={[Function]}
               style={
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderColor": "#F0F0F0",
-                  "borderRadius": 16,
-                  "borderWidth": 1,
-                  "height": 126,
-                  "left": 0,
-                  "marginHorizontal": 14,
-                  "marginVertical": 20,
-                  "paddingTop": 10,
-                  "position": "absolute",
-                  "top": 0,
-                  "width": 722,
-                  "zIndex": 100,
-                }
+                Array [
+                  Object {
+                    "borderRadius": 16,
+                    "borderWidth": 1,
+                    "height": 126,
+                    "left": 0,
+                    "marginHorizontal": 14,
+                    "marginVertical": 20,
+                    "paddingTop": 10,
+                    "position": "absolute",
+                    "top": 0,
+                    "width": 722,
+                    "zIndex": 100,
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#F0F0F0",
+                  },
+                ]
               }
             >
               <AvatarLogoTitle />
@@ -69,10 +77,14 @@ test("renders correctly", () =>
             >
               <Text
                 style={
-                  Object {
-                    "color": "#000000",
-                    "fontWeight": "bold",
-                  }
+                  Array [
+                    Object {
+                      "fontWeight": "bold",
+                    },
+                    Object {
+                      "color": "#000000",
+                    },
+                  ]
                 }
               >
                 App Settings
@@ -85,10 +97,14 @@ test("renders correctly", () =>
             >
               <Text
                 style={
-                  Object {
-                    "color": "#000000",
-                    "fontWeight": "bold",
-                  }
+                  Array [
+                    Object {
+                      "fontWeight": "bold",
+                    },
+                    Object {
+                      "color": "#000000",
+                    },
+                  ]
                 }
               >
                 Notifications Settings
@@ -101,10 +117,14 @@ test("renders correctly", () =>
             >
               <Text
                 style={
-                  Object {
-                    "color": "#000000",
-                    "fontWeight": "bold",
-                  }
+                  Array [
+                    Object {
+                      "fontWeight": "bold",
+                    },
+                    Object {
+                      "color": "#000000",
+                    },
+                  ]
                 }
               >
                 Chats Settings
@@ -147,13 +167,17 @@ test("renders correctly", () =>
             >
               <Text
                 style={
-                  Object {
-                    "color": "black",
-                    "fontFamily": "Open Sans",
-                    "fontSize": 13,
-                    "fontWeight": "700",
-                    "lineHeight": 16,
-                  }
+                  Array [
+                    Object {
+                      "fontFamily": "Open Sans",
+                      "fontSize": 13,
+                      "fontWeight": "700",
+                      "lineHeight": 16,
+                    },
+                    Object {
+                      "color": "black",
+                    },
+                  ]
                 }
               >
                 Upload Avatar
@@ -171,15 +195,19 @@ test("renders correctly", () =>
           >
             <Text
               style={
-                Object {
-                  "color": "black",
-                  "fontFamily": "Proxima Nova",
-                  "fontSize": 14,
-                  "lineHeight": 16,
-                  "paddingBottom": 33,
-                  "paddingLeft": 24,
-                  "textTransform": "uppercase",
-                }
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova",
+                    "fontSize": 14,
+                    "lineHeight": 16,
+                    "paddingBottom": 33,
+                    "paddingLeft": 24,
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "color": "black",
+                  },
+                ]
               }
             >
               Edit Profile

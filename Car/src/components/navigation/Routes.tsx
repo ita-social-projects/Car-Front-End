@@ -14,10 +14,11 @@ import DM from "../styles/DM";
 
 const Stack = createStackNavigator<AuthParamList>();
 
+export let isDarkMode: boolean;
+
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-    const [isDarkMode, setDarkMode] = useState(false);
     const { Root } = require("popup-ui");
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const Routes = () => {
 
             ));
         AsyncStorage.getItem("isDarkMode").then((res) => {
-            setDarkMode(res === "true");
+            isDarkMode = res === "true";
         });
 
     }, []);

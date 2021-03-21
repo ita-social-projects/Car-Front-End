@@ -6,6 +6,7 @@ import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/Constants";
+import DM from "../../../../components/styles/DM";
 
 const JourneyApplicant = (props: any) => {
     const { userId } = props.route.params;
@@ -22,7 +23,7 @@ const JourneyApplicant = (props: any) => {
         user?.journeyCount == SINGLE_ELEMENT_COLLECTION_LENGTH ? "1 ride" : user?.journeyCount + " rides";
 
     return (
-        <View style={JourneyApplicantStyle.mainContainer}>
+        <View style={[JourneyApplicantStyle.mainContainer, { backgroundColor: DM("#FFFFFF") }]}>
             {isLoading ? (
                 <Indicator
                     color="#414045"
@@ -36,39 +37,39 @@ const JourneyApplicant = (props: any) => {
                     </View>
                     <View style={JourneyApplicantStyle.topContainer}>
                         <View >
-                            <Text style={JourneyApplicantStyle.userName}>
+                            <Text style={[JourneyApplicantStyle.userName, { color: DM("black") }]}>
                                 {user?.name + " " + user?.surname}
                             </Text>
                             <Text
-                                style={JourneyApplicantStyle.userAdditionalData}
+                                style={[JourneyApplicantStyle.userAdditionalData, { color: DM("black") }]}
                             >
                                 {user?.position}
                             </Text>
                             <Text
-                                style={JourneyApplicantStyle.userAdditionalData}
+                                style={[JourneyApplicantStyle.userAdditionalData, { color: DM("black") }]}
                             >
                                 {journeys}, 2 badges
                             </Text>
                         </View>
                     </View>
-                    <View style={JourneyApplicantStyle.separator} />
-                    <View style={JourneyApplicantStyle.bottomContainer}>
-                        <Text style={JourneyApplicantStyle.detailsText}>
+                    <View style={[JourneyApplicantStyle.separator, { backgroundColor: DM("#F2F2F2") }]} />
+                    <View style={[JourneyApplicantStyle.bottomContainer, { backgroundColor: DM("#FFFFFF") }]}>
+                        <Text style={[JourneyApplicantStyle.detailsText, { color: DM("black") }]}>
                             Details
                         </Text>
                         <View style={JourneyApplicantStyle.positionContainer}>
-                            <Text style={JourneyApplicantStyle.positionText}>
+                            <Text style={[JourneyApplicantStyle.positionText, { color: DM("black") }]}>
                                 Position:
                             </Text>
-                            <Text style={JourneyApplicantStyle.positionData}>
+                            <Text style={[JourneyApplicantStyle.positionData, { color: DM("#414045") }]}>
                                 {user?.position}
                             </Text>
                         </View>
                         <View style={JourneyApplicantStyle.locationContainer}>
-                            <Text style={JourneyApplicantStyle.locationText}>
+                            <Text style={[JourneyApplicantStyle.locationText, { color: DM("black") }]}>
                                 Location:
                             </Text>
-                            <Text style={JourneyApplicantStyle.locationData}>
+                            <Text style={[JourneyApplicantStyle.locationData, { color: DM("#02A2CF") }]}>
                                 {user?.location}
                             </Text>
                         </View>

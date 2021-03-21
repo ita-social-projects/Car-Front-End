@@ -1,6 +1,4 @@
-import { Platform } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
-import DM from "../styles/DM";
 
 const TouchableNavigationCardStyle = EStyleSheet.create({
     cardContainer: {
@@ -8,7 +6,6 @@ const TouchableNavigationCardStyle = EStyleSheet.create({
         paddingLeft: 10,
         paddingTop: 26,
         paddingRight: 10,
-        borderBottomColor: DM(Platform.OS === "ios" ? "rgba(0,0,0,0.5)" : "#C1C1C5"),
         marginLeft: 8,
         marginRight: 8,
         borderBottomWidth: 1,

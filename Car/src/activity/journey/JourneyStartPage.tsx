@@ -13,21 +13,25 @@ import {
     FOURTH_ELEMENT_INDEX,
     EMPTY_COLLECTION_LENGTH
 } from "../../constants/Constants";
+import DM from "../../components/styles/DM";
 
 const JourneyStartPage = (props: any) => {
+
+    const activeButtonStyle = {
+        backgroundColor: DM("#000000"),
+        color: DM("#FFFFFF")
+    };
+
+    const unactiveButtonStyle = {
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000")
+    };
+
     const [selectedIndex, setSelectedIndex] = useState(FIRST_ELEMENT_INDEX);
-    const [allButtonStyle, setAllButtonStyle] = useState(
-        JourneyStartPageStyle.activeButton
-    );
-    const [pastButtonStyle, setPastButtonStyle] = useState(
-        JourneyStartPageStyle.unactiveButton
-    );
-    const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(
-        JourneyStartPageStyle.unactiveButton
-    );
-    const [scheduledButtonStyle, setScheduledButtonStyle] = useState(
-        JourneyStartPageStyle.unactiveButton
-    );
+    const [allButtonStyle, setAllButtonStyle] = useState(activeButtonStyle);
+    const [pastButtonStyle, setPastButtonStyle] = useState(unactiveButtonStyle);
+    const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(unactiveButtonStyle);
+    const [scheduledButtonStyle, setScheduledButtonStyle] = useState(unactiveButtonStyle);
 
     const { user } = useContext(AuthContext);
     const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
@@ -68,7 +72,7 @@ const JourneyStartPage = (props: any) => {
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
-            style={JourneyStartPageStyle.page}>
+            style={[JourneyStartPageStyle.page, { backgroundColor: DM("white") }]}>
             <View style={JourneyStartPageStyle.touchableNavigationBlocks}>
                 <TouchableNavigationBlock
                     navigation={props.navigation}
@@ -94,26 +98,20 @@ const JourneyStartPage = (props: any) => {
                 />
             </View>
             <View style={JourneyStartPageStyle.manageJourneysContainer}>
-                <Text style={JourneyStartPageStyle.manageJourneysText}>
+                <Text style={[JourneyStartPageStyle.manageJourneysText, { color: DM("black") }]}>
                     Manage journeys
                 </Text>
             </View>
             <View style={JourneyStartPageStyle.segmentControlContainer}>
                 <TouchableOpacity
                     activeOpacity={1}
-                    style={[JourneyStartPageStyle.allJourneys, allButtonStyle]}
+                    style={[JourneyStartPageStyle.allJourneys, allButtonStyle, { borderColor: DM("black") }]}
                     onPress={() => {
                         setSelectedIndex(FIRST_ELEMENT_INDEX);
-                        setAllButtonStyle(JourneyStartPageStyle.activeButton);
-                        setPastButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
-                        setUpcomingButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
-                        setScheduledButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
+                        setAllButtonStyle(activeButtonStyle);
+                        setPastButtonStyle(unactiveButtonStyle);
+                        setUpcomingButtonStyle(unactiveButtonStyle);
+                        setScheduledButtonStyle(unactiveButtonStyle);
                     }}
                 >
                     <Text
@@ -129,18 +127,15 @@ const JourneyStartPage = (props: any) => {
                     activeOpacity={1}
                     style={[
                         JourneyStartPageStyle.pastJourneys,
-                        pastButtonStyle
+                        pastButtonStyle,
+                        { borderColor: DM("black") }
                     ]}
                     onPress={() => {
                         setSelectedIndex(SECOND_ELEMENT_INDEX);
-                        setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setPastButtonStyle(JourneyStartPageStyle.activeButton);
-                        setUpcomingButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
-                        setScheduledButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
+                        setAllButtonStyle(unactiveButtonStyle);
+                        setPastButtonStyle(activeButtonStyle);
+                        setUpcomingButtonStyle(unactiveButtonStyle);
+                        setScheduledButtonStyle(unactiveButtonStyle);
                     }}
                 >
                     <Text
@@ -156,20 +151,15 @@ const JourneyStartPage = (props: any) => {
                     activeOpacity={1}
                     style={[
                         JourneyStartPageStyle.upcomingJourneys,
-                        upcomingButtonStyle
+                        upcomingButtonStyle,
+                        { borderColor: DM("black") }
                     ]}
                     onPress={() => {
                         setSelectedIndex(THIRD_ELEMENT_INDEX);
-                        setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setPastButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
-                        setUpcomingButtonStyle(
-                            JourneyStartPageStyle.activeButton
-                        );
-                        setScheduledButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
+                        setAllButtonStyle(unactiveButtonStyle);
+                        setPastButtonStyle(unactiveButtonStyle);
+                        setUpcomingButtonStyle(activeButtonStyle);
+                        setScheduledButtonStyle(unactiveButtonStyle);
                     }}
                 >
                     <Text
@@ -185,20 +175,15 @@ const JourneyStartPage = (props: any) => {
                     activeOpacity={1}
                     style={[
                         JourneyStartPageStyle.scheduledJourneys,
-                        scheduledButtonStyle
+                        scheduledButtonStyle,
+                        { borderColor: DM("black") }
                     ]}
                     onPress={() => {
                         setSelectedIndex(FOURTH_ELEMENT_INDEX);
-                        setAllButtonStyle(JourneyStartPageStyle.unactiveButton);
-                        setPastButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
-                        setUpcomingButtonStyle(
-                            JourneyStartPageStyle.unactiveButton
-                        );
-                        setScheduledButtonStyle(
-                            JourneyStartPageStyle.activeButton
-                        );
+                        setAllButtonStyle(unactiveButtonStyle);
+                        setPastButtonStyle(unactiveButtonStyle);
+                        setUpcomingButtonStyle(unactiveButtonStyle);
+                        setScheduledButtonStyle(activeButtonStyle);
                     }}
                 >
                     <Text
@@ -215,21 +200,21 @@ const JourneyStartPage = (props: any) => {
             {selectedIndex === FIRST_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
                     {upcomingJourneys.length > EMPTY_COLLECTION_LENGTH && (
-                        <Text style={JourneyStartPageStyle.tabTextStyle}>
+                        <Text style={[JourneyStartPageStyle.tabTextStyle, { color: DM("black") }]}>
                             Upcoming
                         </Text>
                     )}
                     {<JourneyCardList journey={upcomingJourneys} />}
 
                     {pastJourneys.length > EMPTY_COLLECTION_LENGTH && (
-                        <Text style={JourneyStartPageStyle.tabTextStyle}>
+                        <Text style={[JourneyStartPageStyle.tabTextStyle, { color: DM("black") }]}>
                             Past
                         </Text>
                     )}
                     {<JourneyCardList journey={pastJourneys} />}
 
                     {scheduledJourneys.length > EMPTY_COLLECTION_LENGTH && (
-                        <Text style={JourneyStartPageStyle.tabTextStyle}>
+                        <Text style={[JourneyStartPageStyle.tabTextStyle, { color: DM("black") }]}>
                             Scheduled
                         </Text>
                     )}

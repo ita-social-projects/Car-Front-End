@@ -13,10 +13,14 @@ test("renders correctly", () =>
         }
       }
       style={
-        Object {
-          "backgroundColor": "white",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "white",
+          },
+        ]
       }
     >
       <View

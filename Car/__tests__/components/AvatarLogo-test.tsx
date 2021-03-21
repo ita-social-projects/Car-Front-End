@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import AvatarLogo from "../../src/components/avatar-logo/AvatarLogo";
 
+jest.useFakeTimers();
+
 test("renders correctly", () =>
     expect(
         renderer
@@ -28,12 +30,12 @@ test("renders correctly", () =>
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
               "fontFamily": "Open Sans",
               "fontWeight": "700",
               "textTransform": "uppercase",
             },
             Object {
+              "color": "#FFFFFF",
               "fontSize": NaN,
               "lineHeight": NaN,
               "paddingTop": NaN,
@@ -99,12 +101,12 @@ test("renders correctly", () =>
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
               "fontFamily": "Open Sans",
               "fontWeight": "700",
               "textTransform": "uppercase",
             },
             Object {
+              "color": "#FFFFFF",
               "fontSize": NaN,
               "lineHeight": NaN,
               "paddingTop": NaN,

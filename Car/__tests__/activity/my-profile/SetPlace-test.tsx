@@ -35,17 +35,21 @@ test("renders correctly", () =>
         <React.Fragment>
           <View
             style={
-              Object {
-                "backgroundColor": "white",
-                "borderColor": "black",
-                "borderWidth": 2.3,
-                "flexDirection": "row",
-                "fontFamily": "Open Sans",
-                "marginLeft": 20,
-                "marginRight": 100,
-                "paddingLeft": 100,
-                "zIndex": 200,
-              }
+              Array [
+                Object {
+                  "borderWidth": 2.3,
+                  "flexDirection": "row",
+                  "fontFamily": "Open Sans",
+                  "marginLeft": 20,
+                  "marginRight": 100,
+                  "paddingLeft": 100,
+                  "zIndex": 200,
+                },
+                Object {
+                  "backgroundColor": "white",
+                  "borderColor": "black",
+                },
+              ]
             }
           >
             <Component
@@ -55,12 +59,16 @@ test("renders correctly", () =>
             />
             <Text
               style={
-                Object {
-                  "color": "#909095",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 17,
-                  "marginLeft": 5,
-                }
+                Array [
+                  Object {
+                    "fontFamily": "Open Sans",
+                    "fontSize": 17,
+                    "marginLeft": 5,
+                  },
+                  Object {
+                    "color": "#909095",
+                  },
+                ]
               }
             />
             <DropDownPicker

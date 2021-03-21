@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
-import DM from "../../../../components/styles/DM";
 import Font from "../../../../data/fonts/Font";
 
 const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: DM("#FFFFFF"),
         paddingHorizontal: 23,
         paddingTop: 22.5,
     },
@@ -24,7 +22,6 @@ const JourneyApplicantStyle = StyleSheet.create({
     userName: {
         lineHeight: 21,
         fontFamily: Font.ProximaNova.Bold,
-        color: DM("black"),
         fontSize: 18,
         marginBottom: 8,
         fontWeight: "bold"
@@ -34,18 +31,15 @@ const JourneyApplicantStyle = StyleSheet.create({
         lineHeight: 14,
         fontSize: 14,
         opacity: 0.5,
-        color: DM("black"),
         fontFamily: Font.ProximaNova.Regular,
         marginBottom: 8
     },
 
     separator: {
-        height: 1,
-        backgroundColor: DM("#F2F2F2")
+        height: 1
     },
 
     bottomContainer: {
-        backgroundColor: DM("#FFFFFF"),
         paddingTop: 13
     },
 
@@ -61,8 +55,7 @@ const JourneyApplicantStyle = StyleSheet.create({
     detailsText: {
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
-        fontSize: 18,
-        color: DM("black")
+        fontSize: 18
     },
 
     positionText: {
@@ -70,7 +63,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
         fontSize: 13,
-        color: DM("black"),
         paddingTop: 16
     },
 
@@ -79,7 +71,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
         fontSize: 13,
-        color: DM("black")
     },
 
     positionData: {
@@ -87,7 +78,6 @@ const JourneyApplicantStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
         lineHeight: 18,
-        color: DM("#414045"),
         paddingTop: 16
     },
 
@@ -95,8 +85,7 @@ const JourneyApplicantStyle = StyleSheet.create({
         flex: 194,
         fontFamily: Font.OpenSans.Bold,
         fontWeight: "bold",
-        fontSize: 13,
-        color: DM("#02A2CF")
+        fontSize: 13
     },
 
     whitespaceBlock: {

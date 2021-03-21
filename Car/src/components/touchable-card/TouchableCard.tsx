@@ -8,7 +8,10 @@ const TouchableCard = (props: any) => {
     return (
         <View style={{ backgroundColor: DM("white") }}>
             <TouchableOpacity
-                style={TouchableCardStyle.cardContainer}
+                style={[TouchableCardStyle.cardContainer,
+                    { borderBottomColor: DM("#C1C1C5"),
+                        borderTopColor: DM("#C1C1C5"), }
+                ]}
                 onPress={props.onPress}
             >
                 <View style={TouchableCardStyle.cardInformationContainer}>
@@ -19,7 +22,8 @@ const TouchableCard = (props: any) => {
                         color={props?.iconColor}
                     />
                     <View style={TouchableCardStyle.cardTextContainer}>
-                        <Text style={TouchableCardStyle.cardName}>
+                        <Text style={[TouchableCardStyle.cardName,
+                            { color: DM("black") }]}>
                             {props.cardName}
                         </Text>
                         <Text

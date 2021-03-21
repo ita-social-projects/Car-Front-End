@@ -9,6 +9,7 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 import JourneyApplicant from "../../journey/journey-activity/journey-applicant/JourneyApplicant";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
+import DM from "../../../components/styles/DM";
 
 const StackTabs = createStackNavigator();
 
@@ -27,7 +28,7 @@ const MessagesTabs = () => {
                     options={{
                         headerTitle: "Messages",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerRight: () => (
                             <TouchableOpacity
                                 style={{ right: 10 }}
@@ -52,7 +53,7 @@ const MessagesTabs = () => {
                     options={{
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -63,7 +64,7 @@ const MessagesTabs = () => {
                     options={{
                         title: "SoftServian",
                         headerTitleAlign: "center",
-                        headerTitleStyle: HeaderStyle.headerTitleStyle,
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
                     component={JourneyApplicant}

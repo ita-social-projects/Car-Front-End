@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import DM from "../../components/styles/DM";
 import Font from "../../data/fonts/Font";
 
 const SimpleMessageStyle = StyleSheet.create({
@@ -14,7 +13,6 @@ const SimpleMessageStyle = StyleSheet.create({
         width: "100%",
         height: 50,
         borderBottomWidth: 1,
-        borderColor: DM("black"),
         justifyContent: "space-between",
         flexDirection: "row"
     },
@@ -46,7 +44,6 @@ const SimpleMessageStyle = StyleSheet.create({
     fonts: {
         fontFamily: Font.OpenSans.Bold,
         fontSize: 13,
-        color: DM("#00A3CF")
     },
 
     image: {
@@ -64,13 +61,11 @@ const SimpleMessageStyle = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: DM("white"),
         padding: 15
     },
 
     containerStyle: {
         height: 44,
-        backgroundColor: DM("white"),
         borderBottomColor: "transparent",
         borderTopColor: "transparent",
         marginTop: 5,
@@ -78,11 +73,8 @@ const SimpleMessageStyle = StyleSheet.create({
     },
 
     inputContainerStyle: {
-        backgroundColor: DM("white"),
-        borderColor: DM("black"),
         borderWidth: 2,
         borderBottomWidth: 2,
-        borderBottomColor: DM("black"),
         paddingLeft: 5
     },
 
@@ -90,7 +82,6 @@ const SimpleMessageStyle = StyleSheet.create({
         fontSize: 11,
         paddingTop: 10,
         lineHeight: 16,
-        color: DM("black"),
         fontFamily: Font.OpenSans.SemiBold
     }
 });

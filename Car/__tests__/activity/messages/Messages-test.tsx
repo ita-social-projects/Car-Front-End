@@ -17,11 +17,15 @@ test("renders correctly", () =>
     >
       <View
         style={
-          Object {
-            "backgroundColor": "white",
-            "flex": 1,
-            "padding": 15,
-          }
+          Array [
+            Object {
+              "flex": 1,
+              "padding": 15,
+            },
+            Object {
+              "backgroundColor": "white",
+            },
+          ]
         }
       >
         <View />

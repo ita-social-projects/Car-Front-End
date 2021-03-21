@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
+import DM from "../../../../components/styles/DM";
 import DetailsStyle from "./DetailsStyle";
 
 const Details = () => {
@@ -16,7 +17,7 @@ const Details = () => {
     });
 
     return (
-        <View style={DetailsStyle.container}>
+        <View style={[DetailsStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
             {isLoading ? (
                 <Indicator
                     size="large"
@@ -27,36 +28,36 @@ const Details = () => {
                 <>
                     <View style={DetailsStyle.detailsContainer}>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={DetailsStyle.detailNameText}>
+                            <Text style={[DetailsStyle.detailNameText, { color: DM("#000000") }]}>
                                 Position
                             </Text>
                         </View>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={DetailsStyle.detailValueGrayText}>
+                            <Text style={[DetailsStyle.detailValueGrayText, { color: DM("#414045") }]}>
                                 {user?.position}
                             </Text>
                         </View>
                     </View>
                     <View style={DetailsStyle.detailsContainer}>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={DetailsStyle.detailNameText}>
+                            <Text style={[DetailsStyle.detailNameText, { color: DM("#000000") }]}>
                                 Location
                             </Text>
                         </View>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={DetailsStyle.detailValueBlueText}>
+                            <Text style={[DetailsStyle.detailValueBlueText, { color: DM("#02A2CF") }]}>
                                 {user?.location}
                             </Text>
                         </View>
                     </View>
                     <View style={DetailsStyle.detailsContainer}>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={DetailsStyle.detailNameText}>
+                            <Text style={[DetailsStyle.detailNameText, { color: DM("#000000") }]}>
                                 Workspace
                             </Text>
                         </View>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={DetailsStyle.detailValueBlueText}>
+                            <Text style={[DetailsStyle.detailValueBlueText, { color: DM("#02A2CF") }]}>
                                 {user?.location}
                             </Text>
                         </View>

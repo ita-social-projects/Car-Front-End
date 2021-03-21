@@ -16,6 +16,7 @@ import CarDropDownPickerItem from "../../../../../../components/car-drop-down-pi
 import CarDropDownPicker from "../../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import EditCarsStyle from "./EditCarsStyle";
+import DM from "../../../../../../components/styles/DM";
 
 const EditCars = (navigation: any) => {
     const { carId } = navigation.route.params;
@@ -98,8 +99,8 @@ const EditCars = (navigation: any) => {
     console.log(imageData);
 
     return (
-        <KeyboardAwareScrollView style={EditCarsStyle.wrapper}>
-            <View style={EditCarsStyle.carAvatarContainer}>
+        <KeyboardAwareScrollView style={[EditCarsStyle.wrapper, { backgroundColor: DM("white") }]}>
+            <View style={[EditCarsStyle.carAvatarContainer, { backgroundColor: DM("#C4C4C4") }]}>
                 {car!.imageId && (
                     <Image
                         source={{ uri: car?.imageId }}
@@ -107,10 +108,14 @@ const EditCars = (navigation: any) => {
                     />
                 )}
                 <TouchableOpacity
-                    style={EditCarsStyle.carButtonUpload}
+                    style={[EditCarsStyle.carButtonUpload,
+                        {
+                            backgroundColor: DM("#FFFFFF"),
+                            borderColor: DM("#000000"),
+                        }]}
                     onPress={() => uploadPhotoHandle()}
                 >
-                    <Text style={EditCarsStyle.carButtonUploadText}>
+                    <Text style={[EditCarsStyle.carButtonUploadText, { color: DM("black") }]}>
                         {Object.entries(photo).length
                             ? "Change photo"
                             : "Upload photo"}
@@ -189,12 +194,12 @@ const EditCars = (navigation: any) => {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        style={EditCarsStyle.carButtonSave}
+                        style={[EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
                             navigation.goBack();
                         }}
                     >
-                        <Text style={EditCarsStyle.carButtonSaveText}>
+                        <Text style={[EditCarsStyle.carButtonSaveText, { color: DM("white") }]}>
                             Save
                         </Text>
                     </TouchableOpacity>

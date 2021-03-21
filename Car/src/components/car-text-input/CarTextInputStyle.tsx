@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import DM from "../styles/DM";
 
 const CarTextInputStyle = StyleSheet.create({
     container: {
@@ -11,7 +10,6 @@ const CarTextInputStyle = StyleSheet.create({
     requiredPointer: {
         position: "absolute",
         zIndex: 10,
-        color: DM("red"),
         marginLeft: 16
     },
 
@@ -22,14 +20,6 @@ const CarTextInputStyle = StyleSheet.create({
         textTransform: "uppercase",
         zIndex: 0
     },
-
-    errorText: {
-        color: DM("red")
-    },
-
-    errorBorder: {
-        borderColor: DM("red")
-    }
 });
 
 export default CarTextInputStyle;

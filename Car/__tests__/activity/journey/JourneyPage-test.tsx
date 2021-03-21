@@ -16,19 +16,27 @@ test("renders correctly", () =>
     <React.Fragment>
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#88FF88",
-            "flex": 1,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            Object {
+              "backgroundColor": "#88FF88",
+            },
+          ]
         }
       >
         <Text
           style={
-            Object {
-              "color": "#000000",
-              "fontFamily": "Proxima Nova",
-            }
+            Array [
+              Object {
+                "fontFamily": "Proxima Nova",
+              },
+              Object {
+                "color": "#222222",
+              },
+            ]
           }
         >
           Map implementation is in progress
@@ -45,12 +53,16 @@ test("renders correctly", () =>
         renderContent={
           <View
             style={
-              Object {
-                "alignSelf": "center",
-                "backgroundColor": "white",
-                "paddingHorizontal": "5%",
-                "width": "100%",
-              }
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "paddingHorizontal": "5%",
+                  "width": "100%",
+                },
+                Object {
+                  "backgroundColor": "white",
+                },
+              ]
             }
           >
             <View
@@ -88,26 +100,34 @@ test("renders correctly", () =>
               >
                 <Text
                   style={
-                    Object {
-                      "color": "#000000",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "lineHeight": 16,
-                      "paddingBottom": 4,
-                      "paddingTop": 1.25,
-                    }
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontSize": 13,
+                        "lineHeight": 16,
+                        "paddingBottom": 4,
+                        "paddingTop": 1.25,
+                      },
+                      Object {
+                        "color": "#000000",
+                      },
+                    ]
                   }
                 >
                    
                 </Text>
                 <Text
                   style={
-                    Object {
-                      "color": "#414045",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 11,
-                      "lineHeight": 16,
-                    }
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontSize": 11,
+                        "lineHeight": 16,
+                      },
+                      Object {
+                        "color": "#414045",
+                      },
+                    ]
                   }
                 />
               </View>
@@ -147,11 +167,15 @@ test("renders correctly", () =>
                     />
                     <View
                       style={
-                        Object {
-                          "backgroundColor": "#AAA9AE",
-                          "height": 12,
-                          "width": 2,
-                        }
+                        Array [
+                          Object {
+                            "height": 12,
+                            "width": 2,
+                          },
+                          Object {
+                            "backgroundColor": "#AAA9AE",
+                          },
+                        ]
                       }
                     />
                   </View>
@@ -201,14 +225,18 @@ test("renders correctly", () =>
             </View>
             <Text
               style={
-                Object {
-                  "color": "black",
-                  "fontFamily": "Proxima Nova",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                  "justifyContent": "flex-start",
-                  "marginBottom": 10,
-                }
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova",
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "justifyContent": "flex-start",
+                    "marginBottom": 10,
+                  },
+                  Object {
+                    "color": "black",
+                  },
+                ]
               }
             >
               SOFTSERVIANS 
@@ -226,12 +254,16 @@ test("renders correctly", () =>
         renderHeader={
           <View
             style={
-              Object {
-                "alignSelf": "center",
-                "backgroundColor": "white",
-                "paddingHorizontal": "5%",
-                "width": "100%",
-              }
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "paddingHorizontal": "5%",
+                  "width": "100%",
+                },
+                Object {
+                  "backgroundColor": "white",
+                },
+              ]
             }
           >
             <ForwardRef
@@ -269,12 +301,16 @@ test("renders correctly", () =>
               >
                 <Text
                   style={
-                    Object {
-                      "color": "black",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 15,
-                      "fontWeight": "700",
-                    }
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans",
+                        "fontSize": 15,
+                        "fontWeight": "700",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
                   }
                 >
                    
@@ -290,22 +326,30 @@ test("renders correctly", () =>
                 >
                   <Text
                     style={
-                      Object {
-                        "color": "#909095",
-                        "fontFamily": "Open Sans",
-                        "fontSize": 13,
-                        "fontWeight": "100",
-                      }
+                      Array [
+                        Object {
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "100",
+                        },
+                        Object {
+                          "color": "#909095",
+                        },
+                      ]
                     }
                   />
                   <Text
                     style={
-                      Object {
-                        "color": "#02A2CF",
-                        "fontFamily": "Open Sans",
-                        "fontSize": 13,
-                        "fontWeight": "700",
-                      }
+                      Array [
+                        Object {
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "700",
+                        },
+                        Object {
+                          "color": "#02A2CF",
+                        },
+                      ]
                     }
                   >
                     01/01/1970
@@ -322,31 +366,43 @@ test("renders correctly", () =>
             />
             <Themed.Divider
               style={
-                Object {
-                  "backgroundColor": "#C1C1C5",
-                  "height": 1,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 1,
+                    "width": "100%",
+                  },
+                  Object {
+                    "backgroundColor": "#C1C1C5",
+                  },
+                ]
               }
             />
             <View
               style={
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "paddingHorizontal": "5%",
-                  "position": "absolute",
-                  "top": 411,
-                  "width": 750,
-                }
+                Array [
+                  Object {
+                    "paddingHorizontal": "5%",
+                    "position": "absolute",
+                    "top": 411,
+                    "width": 750,
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                  },
+                ]
               }
             >
               <Themed.Divider
                 style={
-                  Object {
-                    "backgroundColor": "#C1C1C5",
-                    "height": 1,
-                    "width": "100%",
-                  }
+                  Array [
+                    Object {
+                      "height": 1,
+                      "width": "100%",
+                    },
+                    Object {
+                      "backgroundColor": "#C1C1C5",
+                    },
+                  ]
                 }
               />
               <View
@@ -366,10 +422,12 @@ test("renders correctly", () =>
                     Array [
                       Object {
                         "alignItems": "center",
-                        "backgroundColor": "black",
                         "height": 51,
                         "justifyContent": "center",
                         "width": 386.25,
+                      },
+                      Object {
+                        "backgroundColor": "black",
                       },
                       false,
                     ]
@@ -377,12 +435,16 @@ test("renders correctly", () =>
                 >
                   <Text
                     style={
-                      Object {
-                        "color": "white",
-                        "fontSize": 18,
-                        "fontWeight": "700",
-                        "textTransform": "uppercase",
-                      }
+                      Array [
+                        Object {
+                          "fontSize": 18,
+                          "fontWeight": "700",
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "color": "white",
+                        },
+                      ]
                     }
                   >
                     Request to driver
