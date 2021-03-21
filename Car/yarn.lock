@@ -4585,6 +4585,13 @@
     "slash" "^3.0.0"
     "stack-utils" "^1.0.1"
 
+"jest-mock-axios@^4.3.0":
+  "integrity" "sha512-9391Cui3dHLP41/W41SXdoWsdBN/tsAewLOdzChPMp85u7cCeGnwygt+w1muGVyw2ZiEBZBsPmdhAM7SBx5vDA=="
+  "resolved" "https://registry.npmjs.org/jest-mock-axios/-/jest-mock-axios-4.3.0.tgz"
+  "version" "4.3.0"
+  dependencies:
+    "synchronous-promise" "^2.0.15"
+
 "jest-mock@^24.9.0":
   "integrity" "sha512-3BEYN5WbSq9wd+SyLDES7AHnjH9A/ROBwmz7l2y+ol+NtSFO8DYiEBzoO1CeFc9a8DYy10EO4dDFVv/wN3zl1w=="
   "resolved" "https://registry.npmjs.org/jest-mock/-/jest-mock-24.9.0.tgz"
@@ -7715,6 +7722,11 @@
   "integrity" "sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw=="
   "resolved" "https://registry.npmjs.org/symbol-tree/-/symbol-tree-3.2.4.tgz"
   "version" "3.2.4"
+
+"synchronous-promise@^2.0.15":
+  "integrity" "sha512-k8uzYIkIVwmT+TcglpdN50pS2y1BDcUnBPK9iJeGu0Pl1lOI8pD6wtzgw91Pjpe+RxtTncw32tLxs/R0yNL2Mg=="
+  "resolved" "https://registry.npmjs.org/synchronous-promise/-/synchronous-promise-2.0.15.tgz"
+  "version" "2.0.15"
 
 "table@^5.2.3":
   "integrity" "sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug=="
