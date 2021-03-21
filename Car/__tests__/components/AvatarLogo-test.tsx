@@ -1,12 +1,13 @@
 import React from "react";
-import shallowRender from "react-test-renderer/shallow";
+import renderer from "react-test-renderer";
 import AvatarLogo from "../../src/components/avatar-logo/AvatarLogo";
 
-const renderer = shallowRender.createRenderer();
-
 test("renders correctly", () =>
-    expect(renderer.render(<AvatarLogo user={{ name: "Abc", surname: "Abc" }} />))
-        .toMatchInlineSnapshot(`
+    expect(
+        renderer
+            .create(<AvatarLogo user={{ name: "Abc", surname: "Abc" }} />)
+            .toJSON()
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -47,9 +48,11 @@ test("renders correctly", () =>
 
 test("renders correctly", () =>
     expect(
-        renderer.render(
-            <AvatarLogo user={{ name: "Abc", surname: "Abc", imageId: "AbCdE" }} />
-        )
+        renderer
+            .create(
+                <AvatarLogo user={{ name: "Abc", surname: "Abc", imageId: "AbCdE" }} />
+            )
+            .toJSON()
     ).toMatchInlineSnapshot(`
     <Image
       source={
@@ -75,7 +78,7 @@ test("renders correctly", () =>
   `));
 
 test("renders correctly", () =>
-    expect(renderer.render(<AvatarLogo />)).toMatchInlineSnapshot(`
+    expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [
