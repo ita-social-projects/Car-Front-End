@@ -19,7 +19,7 @@ const AppTabs = () => {
     const { user } = useContext(AuthContext);
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
-    NotificationsService.getUnreadNotificationsNumber(user!.id).then((result) =>
+    NotificationsService.getUnreadNotificationsNumber(user?.id).then((result) =>
         setUnreadNotificationsNumber(result.data as number)
     );
 

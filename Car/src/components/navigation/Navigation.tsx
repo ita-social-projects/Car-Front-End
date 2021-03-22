@@ -2,10 +2,8 @@ import React from "react";
 
 export const navigationRef = React.createRef<any>();
 
-export function navigate (name: string, params?: any) {
+export const navigate = (name: string, params?: any) =>
     navigationRef.current?.navigate(name, params);
-}
 
-export function goBack () {
+export const goBack = () =>
     navigationRef.current?.goBack();
-}
