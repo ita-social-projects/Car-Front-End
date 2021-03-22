@@ -67,6 +67,10 @@ export class SignalRHubConnection {
 	onclose(cb: (err?: Error) => void): void {
 		this.backend.registerOnclose(cb);
 	}
+
+	on() {
+		return this;
+	}
 }
 
 export enum LogLevel {
