@@ -48,7 +48,7 @@ const SearchJourney = () => {
                         // eslint-disable-next-line no-magic-numbers
                         JourneyService.getJourney(7).then((res5) => {
                             // eslint-disable-next-line no-magic-numbers
-                            JourneyService.getJourney(2).then((res6) => {
+                            JourneyService.getJourney(8).then((res6) => {
                                 setJourneys([
                                     res1.data,
                                     res2.data,
