@@ -150,12 +150,12 @@ const JourneyNewApplicant = (props: any) => {
                             >
                                 <View style={JourneyNewApplicantStyle.tripColumn} >
                                     <Circle
-                                        color="#FFFFFF"
+                                        color={DM("#FFFFFF")}
                                         radius="1.3rem"
                                         base={true}
                                         marginTop={"0.3rem"}
                                     >
-                                        <Circle color="#C1C1C5" radius="1rem" />
+                                        <Circle color={DM("#C1C1C5")} radius="1rem" />
                                     </Circle>
                                     <View style={[JourneyNewApplicantStyle.stopLine, { borderColor: DM("#C1C1C5") }]} />
                                 </View>

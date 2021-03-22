@@ -55,8 +55,8 @@ export class SignalRHubConnection {
 
 	backend = new SignalRHubBackend(this);
 
-	start(): Promise<void> {
-		return Promise.resolve();
+	start() {
+		return this;
 	}
 
 	stop(): Promise<void> {

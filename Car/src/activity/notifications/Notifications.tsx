@@ -14,7 +14,7 @@ const Notifications = (props: any) => {
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
 
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
-        NotificationsService.getUnreadNotificationsNumber(user!.id)
+        NotificationsService.getUnreadNotificationsNumber(user?.id)
     );
 
     const refreshNotification = () => {

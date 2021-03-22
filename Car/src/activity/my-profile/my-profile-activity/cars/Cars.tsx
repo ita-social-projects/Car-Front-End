@@ -48,7 +48,7 @@ const Cars = (props: any) => {
                 }
                 angle="0"
             >
-                <Text style={{ fontWeight: "bold", color: "#02A2CF" }}>
+                <Text style={{ fontWeight: "bold", color: DM("#02A2CF") }}>
                     Add a car
                 </Text>
             </TouchableNavigationCard>
