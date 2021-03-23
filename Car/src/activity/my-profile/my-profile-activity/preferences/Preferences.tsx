@@ -72,7 +72,7 @@ export default function Preferences (props: any) {
                         <ChooseOption
                             text={"Do you allow smoking in your car?"}
                             value={isSmokingAllowed}
-                            onValueChanged={(value: any) =>
+                            onValueChanged={(value: boolean) =>
                                 setSmokingAllowed(value)
                             }
                         />
@@ -81,7 +81,7 @@ export default function Preferences (props: any) {
                         <ChooseOption
                             text={"Do you allow eating in your car?"}
                             value={isEatingAllowed}
-                            onValueChanged={(value: any) => setEatingAllowed(value)}
+                            onValueChanged={(value: boolean) => setEatingAllowed(value)}
                         />
                     </View>
                     <View style={PreferencesStyle.commentsContainer}>
