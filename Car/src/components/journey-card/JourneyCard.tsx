@@ -8,8 +8,9 @@ import moment from "moment";
 import AuthContext from "../auth/AuthContext";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/Constants";
 import DM from "../styles/DM";
+import Journey from "../../../models/Journey";
 
-const JourneyCard = (props: any) => {
+const JourneyCard = (props: {journey?: Journey}) => {
     const journey = props.journey;
     const { user } = useContext(AuthContext);
     const [isDriver, setDriver] = useState(false);
@@ -73,7 +74,7 @@ const JourneyCard = (props: any) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
-                                    {moment(new Date(journey?.departureTime))
+                                    {moment(new Date(journey?.departureTime ?? ""))
                                         .utc()
                                         .fromNow()}
                                 </Text>

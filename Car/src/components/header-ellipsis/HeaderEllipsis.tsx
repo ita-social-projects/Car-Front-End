@@ -5,9 +5,7 @@ import DM from "../styles/DM";
 import HeaderEllipsisStyle from "./HeaderEllipsisStyle";
 
 const HeaderEllipsis = (props: any) => (
-    <TouchableOpacity
-        onPress={props.onPress}
-    >
+    <TouchableOpacity onPress={props.onPress}>
         <Ionicons
             name={"ellipsis-horizontal"}
             size={30}
