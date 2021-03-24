@@ -5,7 +5,7 @@ import Chat from "../../../src/activity/messages/messages-activity/chat/Chat";
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-  expect(renderer.render(<Chat />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Chat />)).toMatchInlineSnapshot(`
     <View
       style={
         Array [
