@@ -245,7 +245,7 @@ const Chat = (properties: any) => {
 
     const loadEarlierMessages = () => {
         setLoadingEarlier(true);
-        let oldestMessageId = Math.min(...messages.map((user: any) => user._id));
+        let oldestMessageId = Math.min(...messages.map((u: any) => u._id));
 
         loadMessages(oldestMessageId)
             .then((res) => {
