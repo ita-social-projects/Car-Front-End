@@ -163,6 +163,7 @@ const JourneyTabs = () => {
                                     refForChild={moreOptionsRef}
                                     snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                     enabledInnerScrolling={false}
+                                    enabledGestureInteraction={true}
                                     onCloseEnd={closeHandle}
                                     initialSnap={0}
                                     renderHeader={

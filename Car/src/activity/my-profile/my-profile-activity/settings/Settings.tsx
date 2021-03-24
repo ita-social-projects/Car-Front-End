@@ -199,6 +199,7 @@ const Settings = (props: any) => {
                     MIN_POPUP_HEIGHT,
                     user?.imageId != null ? POPUP_HEIGHT_WITH_USER_IMAGE : POPUP_HEIGHT_WITHOUT_USER_IMAGE]}
                 refForChild={moreOptionsRef}
+                enabledGestureInteraction={true}
                 renderContent={
 
                     <View style={{ backgroundColor: DM("#FFFFFF") }}>

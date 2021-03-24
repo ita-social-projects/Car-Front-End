@@ -9,6 +9,7 @@ const BottomPopup = (props: any) => (
         ref={props.refForChild}
         snapPoints={props.snapPoints}
         renderContent={() => props.renderContent}
+        enabledGestureInteraction={props.enabledGestureInteraction}
         renderHeader={() => (
             <>
                 <View style={[BottomPopupStyle.header,

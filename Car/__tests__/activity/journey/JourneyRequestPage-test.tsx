@@ -40,6 +40,7 @@ test("renders correctly", async () =>
         Map implementation is in progress
       </Text>
       <BottomPopup
+        enabledGestureInteraction={true}
         enabledInnerScrolling={false}
         initialSnap={1}
         refForChild={

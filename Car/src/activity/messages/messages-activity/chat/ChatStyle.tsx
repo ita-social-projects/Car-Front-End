@@ -9,7 +9,8 @@ const ChatStyle = StyleSheet.create({
 
     chatWrapper: {
         flex: 1,
-        paddingBottom: 18
+        paddingBottom: 5,
+        paddingHorizontal: 5
     },
 
     button: {

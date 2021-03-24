@@ -8,7 +8,7 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
+  expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
         refreshControl={
@@ -137,6 +137,7 @@ test("renders correctly", async () =>
         </View>
       </ScrollView>
       <BottomPopup
+        enabledGestureInteraction={true}
         enabledInnerScrolling={false}
         initialSnap={0}
         onCloseEnd={[Function]}

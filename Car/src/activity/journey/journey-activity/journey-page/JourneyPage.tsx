@@ -71,6 +71,7 @@ const JourneyPage = ({ props }: any) => {
             </View>
             <BottomPopup
                 refForChild={moreOptionsRef}
+                enabledGestureInteraction={true}
                 style={{ backgroundColor: DM("white") }}
                 snapPoints={[
                     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
