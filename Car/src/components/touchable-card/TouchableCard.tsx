@@ -3,8 +3,9 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import DM from "../styles/DM";
 import TouchableCardStyle from "./TouchableCardStyle";
+import TouchableCardProps from "./TouchableCardProps";
 
-const TouchableCard = (props: any) => {
+const TouchableCard = (props: TouchableCardProps) => {
     return (
         <View style={{ backgroundColor: DM("white") }}>
             <TouchableOpacity

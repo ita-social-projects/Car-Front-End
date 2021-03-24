@@ -21,7 +21,7 @@ const DM = (color: string, forceDark?: boolean) => {
         if (color === "#121212") return ("#FFFFFF");
     }
 
-    return (color);
+    return color;
 };
 
 export default DM;
