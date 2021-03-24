@@ -10,6 +10,7 @@ test("renders correctly", async () =>
             <JourneyNewApplicant
                 user={{ name: "Abc", surname: "Abc", position: "Abc" }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
+                notificationId={0}
             />
         )
     ).toMatchInlineSnapshot(`

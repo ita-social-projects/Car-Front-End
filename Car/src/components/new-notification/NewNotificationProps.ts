@@ -1,11 +1,8 @@
+import UserModel from "../types/UserModel";
+
 interface NewNotificationProps {
     read?: boolean,
-    user?: {
-        name: string,
-        surname: string,
-        position: string,
-        imageId?: string
-    },
+    user?: UserModel | null,
     notificationTitle?: string,
     date?: Date
 }

@@ -10,8 +10,9 @@ import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/Constants";
 import DM from "../styles/DM";
+import JourneyNewApplicantProps from "./JourneyNewApplicantProps";
 
-const JourneyNewApplicant = (props: any) => {
+const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
 
     return (
