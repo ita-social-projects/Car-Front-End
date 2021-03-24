@@ -6,7 +6,7 @@ import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs"
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsStyle from "./AppTabsStyle";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { getFocusedRouteNameFromRoute, RouteProp } from "@react-navigation/native";
 import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
@@ -30,7 +30,7 @@ const AppTabs = () => {
         );
     });
 
-    const getTabBarVisibility = (route: any) => {
+    const getTabBarVisibility = (route: RouteProp<Record<string, object | undefined>, "MessagesTabs">) => {
         const routeName = getFocusedRouteNameFromRoute(route)!;
         const hideOnScreens = ["Chat"];
 
