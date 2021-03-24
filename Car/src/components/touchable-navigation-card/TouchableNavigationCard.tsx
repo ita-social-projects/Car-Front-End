@@ -4,8 +4,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableNavigationCardStyle from "./TouchableNavigationCardStyle";
 import * as navigation from "../navigation/Navigation";
 import DM from "../styles/DM";
+import TouchableNavigationCardProps from "./TouchableNavigationCardProps";
 
-const TouchableNavigationCard = (props: any) => {
+const TouchableNavigationCard = (props: TouchableNavigationCardProps) => {
     return (
         <View>
             <TouchableOpacity
