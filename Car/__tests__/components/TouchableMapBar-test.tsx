@@ -5,7 +5,8 @@ import TouchableMapBar from "../../src/components/touchable-map-bar/TouchableMap
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<TouchableMapBar />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<TouchableMapBar iconName={"location"} />))
+        .toMatchInlineSnapshot(`
     <View>
       <ForwardRef
         style={
@@ -63,6 +64,7 @@ test("renders correctly", async () =>
           <Icon
             allowFontScaling={false}
             color="#414045"
+            name="location"
             size={22}
             style={
               Array [
