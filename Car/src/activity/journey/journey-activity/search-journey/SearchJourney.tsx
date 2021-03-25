@@ -97,8 +97,8 @@ const SearchJourney = () => {
                 style={[SearchJourneyStyle.mapContainer, { zIndex: isMapOpen }]}
             >
                 <SearchJourneyMap
-                    latitude={latitude}
-                    longitude={longitude}
+                    latitude={latitude ?? INITIAL_LATITUDE}
+                    longitude={longitude ?? INITIAL_LONGITUDE}
                 />
                 <TouchableOpacity style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]} >
                     <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>

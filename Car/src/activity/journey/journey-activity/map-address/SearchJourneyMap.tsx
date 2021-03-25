@@ -1,8 +1,9 @@
 import React from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "./SearchJourneyMapStyle";
+import SearchJourneyMapProps from "./SearchJourneyMapProps";
 
-const SearchJourneyMap = (props: any) => {
+const SearchJourneyMap = (props: SearchJourneyMapProps) => {
     return (
         <MapView
             style={{ flex: 1 }}
@@ -18,8 +19,8 @@ const SearchJourneyMap = (props: any) => {
             <Marker
                 image={require("../../../../../assets/images/custom-marker.png")}
                 coordinate={{
-                    latitude: props?.latitude,
-                    longitude: props?.longitude
+                    latitude: props.latitude,
+                    longitude: props.longitude
                 }}
             />
         </MapView>
