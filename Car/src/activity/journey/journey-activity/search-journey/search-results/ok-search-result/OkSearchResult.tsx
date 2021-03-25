@@ -3,8 +3,9 @@ import { FlatList, View } from "react-native";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
 import DM from "../../../../../../components/styles/DM";
 import OkSearchResultStyle from "./OkSearchResultStyle";
+import Journey from "../../../../../../../models/Journey";
 
-const OkSearchResult = (props: any) => {
+const OkSearchResult = (props: {route: {params: {journeys: Journey[]}}}) => {
     const journeys = props.route.params.journeys;
 
     return (
