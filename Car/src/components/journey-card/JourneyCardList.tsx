@@ -3,7 +3,7 @@ import { View } from "react-native";
 import Journey from "../../../models/Journey";
 import JourneyCard from "./JourneyCard";
 
-const JourneyCardList = (props: any) => {
+const JourneyCardList = (props: { journey: any[] }) => {
     const journey: Journey[] = props.journey;
 
     return (
