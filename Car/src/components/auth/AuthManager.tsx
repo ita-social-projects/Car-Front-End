@@ -41,7 +41,7 @@ const AuthManager = {
         return AsyncStorage.getItem("user");
     },
 
-    setUser: async (user: any) => {
+    setUser: async (user: string) => {
         AsyncStorage.setItem("user", user);
     }
 };

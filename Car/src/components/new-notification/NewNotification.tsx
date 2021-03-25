@@ -6,8 +6,9 @@ import NewNotificationStyle from "./NewNotificationStyle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import DM from "../styles/DM";
+import NewNotificationProps from "./NewNotificationProps";
 
-const NewNotification = (props: any) => (
+const NewNotification = (props: NewNotificationProps) => (
     <View style={props.read ? null : { backgroundColor: DM("rgba(0,161,206,0.1)") }}>
         <View
             style={[

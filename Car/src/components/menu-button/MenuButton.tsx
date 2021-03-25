@@ -4,8 +4,9 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DM from "../styles/DM";
 import MenuButtonStyle from "./MenuButtonStyle";
+import MenuButtonProps from "./MenuButtonProps";
 
-const MenuButton = (props: any) => {
+const MenuButton = (props: MenuButtonProps) => {
 
     const black = DM("#000000");
     const white = DM("#FFFFFF");

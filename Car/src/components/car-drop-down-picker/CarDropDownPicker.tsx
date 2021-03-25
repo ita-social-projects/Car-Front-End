@@ -5,8 +5,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { DROP_DOWN_MAX_HEIGHT } from "../../constants/Constants";
 import DM from "../styles/DM";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
+import CarDropDownPickerProps from "./CarDropDownPickerProps";
 
-const CarDropDownPicker = (props: any) => (
+const CarDropDownPicker = (props: CarDropDownPickerProps) => (
     <View style={props.required && { justifyContent: "center" }}>
         {props.required && (
             <Text
@@ -64,7 +65,7 @@ const CarDropDownPicker = (props: any) => (
             onChangeItem={
                 props.selectHandle
                     ? (item) => {
-                        props.selectHandle(item);
+                        props.selectHandle?.call(props, item);
                     }
                     : () => <></>
             }

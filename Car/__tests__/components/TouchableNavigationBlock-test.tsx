@@ -3,8 +3,14 @@ import renderer from "react-test-renderer";
 import TouchableNavigationBlock from "../../src/components/touchable-navigation-block/TouchableNavigationBlock";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<TouchableNavigationBlock />).toJSON())
-        .toMatchInlineSnapshot(`
+    expect(renderer.create(
+        <TouchableNavigationBlock
+            to={""} from={""}
+            blockImage={require("")}
+        />
+    )
+        .toJSON()
+    ).toMatchInlineSnapshot(`
     <View>
       <View
         accessible={true}
@@ -67,6 +73,7 @@ test("renders correctly", async () =>
             }
           >
             <Image
+              source={Object {}}
               style={
                 Object {
                   "height": undefined,

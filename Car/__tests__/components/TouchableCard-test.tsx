@@ -3,7 +3,8 @@ import renderer from "react-test-renderer";
 import TouchableCard from "../../src/components/touchable-card/TouchableCard";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<TouchableCard />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<TouchableCard iconColor={"black"} iconName={"location"} />)
+        .toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -53,7 +54,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "color": undefined,
+                  "color": "black",
                   "fontSize": 12,
                 },
                 Array [
@@ -70,7 +71,7 @@ test("renders correctly", async () =>
               ]
             }
           >
-            
+            
           </Text>
           <View
             style={
