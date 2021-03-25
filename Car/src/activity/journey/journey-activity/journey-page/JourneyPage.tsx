@@ -28,8 +28,9 @@ import {
     MIN_POPUP_POSITION
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
+import JourneyPageProps from "./JourneyPageProps";
 
-const JourneyPage = ({ props }: any) => {
+const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
@@ -39,8 +40,8 @@ const JourneyPage = ({ props }: any) => {
     const [isRequested, setRequested] = useState(false);
 
     useEffect(() => {
-        !isDriver && props.navigation.setOptions({ headerRight: () => <View /> });
-        !isDriver && !isPassenger && props.navigation.setOptions({ headerTitle: "Request to Driver" });
+        !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
+        !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
         (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
             if (isReq == "1") {
