@@ -10,8 +10,9 @@ import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/Constants";
 import DM from "../styles/DM";
+import JourneyNewApplicantProps from "./JourneyNewApplicantProps";
 
-const JourneyNewApplicant = (props: any) => {
+const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
 
     return (
@@ -75,12 +76,12 @@ const JourneyNewApplicant = (props: any) => {
                             <View style={JourneyNewApplicantStyle.profileContainer}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={[JourneyNewApplicantStyle.name, { color: DM("#000000") }]}>
-                                        {props.user!.name +
+                                        {props.user.name +
                                             " " +
-                                            props.user!.surname}
+                                            props.user.surname}
                                     </Text>
                                     <Text style={[JourneyNewApplicantStyle.bio, { color: DM("#000000") }]}>
-                                        {props.user!.position}
+                                        {props.user.position}
                                     </Text>
                                     <Text style={[JourneyNewApplicantStyle.achievements, { color: DM("#000000") }]} >
                                         123 rides, 2 badges
@@ -139,7 +140,7 @@ const JourneyNewApplicant = (props: any) => {
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
                             <Text style={[JourneyNewApplicantStyle.optionsHeader, { color: DM("#000000") }]} >
-                                {props.user!.name}’s stop in your Journey
+                                {props.user.name}’s stop in your Journey
                             </Text>
                             <View
                                 style={[
@@ -227,7 +228,7 @@ const JourneyNewApplicant = (props: any) => {
                                         <Text style={[JourneyNewApplicantStyle.activeStopName,
                                             { color: DM("#909095") }]
                                         } >
-                                            {props.user!.name}'s stop A.2 ‏
+                                            {props.user.name}'s stop A.2 ‏
                                         </Text>
                                         <Text
                                             style={{

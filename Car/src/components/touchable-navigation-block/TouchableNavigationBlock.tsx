@@ -8,8 +8,9 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import DM from "../styles/DM";
 import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle";
+import TouchableNavigationBlockProps from "./TouchableNavigationBlockProps";
 
-const TouchableNavigationBlock = (props: any) => {
+const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
     return (
         <View>
             <TouchableOpacity

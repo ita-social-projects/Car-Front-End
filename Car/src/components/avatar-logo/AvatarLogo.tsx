@@ -9,8 +9,9 @@ import {
 } from "../../constants/Constants";
 import DM from "../styles/DM";
 import AvatarLogoStyle from "./AvatarLogoStyle";
+import AvatarLogoProps from "./AvatarLogoProps";
 
-const AvatarLogo = (props: any) => {
+const AvatarLogo = (props: AvatarLogoProps) => {
 
     const userAvatarText = props.user ?
         props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
@@ -27,10 +28,11 @@ const AvatarLogo = (props: any) => {
         }
     ];
 
+    const size = props.size ?? NaN;
     const avatarTextStyle = [AvatarLogoStyle.userAvatarText, {
-        fontSize: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
-        lineHeight: props?.size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
-        paddingTop: props?.size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
+        fontSize: size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+        lineHeight: size / AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
+        paddingTop: size / AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
         color: "#FFFFFF"
     }];
 

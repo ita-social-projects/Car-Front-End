@@ -6,7 +6,7 @@ const { Popup } = require("popup-ui");
 
 let IsAlertShowing = false;
 
-const ErrorAlert = (message?: string, func?: any) => {
+const ErrorAlert = (message?: string, func?: () => void) => {
     if (!IsAlertShowing) {
         IsAlertShowing = true;
 

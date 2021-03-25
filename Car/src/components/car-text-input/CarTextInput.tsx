@@ -4,8 +4,9 @@ import { Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import DM from "../styles/DM";
 import CarTextInputStyle from "./CarTextInputStyle";
+import CarTextInputProps from "./CarTextInputProps";
 
-const CarTextInput = (props: any) => {
+const CarTextInput = (props: CarTextInputProps) => {
     const { control } = useForm();
 
     return (
@@ -23,7 +24,7 @@ const CarTextInput = (props: any) => {
                         <TextInput
                             autoCapitalize={"characters"}
                             onChangeText={(text: string) =>{
-                                props.onChangeText(text.toUpperCase());
+                                props.onChangeText?.call(props, text.toUpperCase());
                             }}
                             placeholder={props.placeHolder}
                             placeholderTextColor={DM("gray")}

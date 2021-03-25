@@ -3,8 +3,9 @@ import { Text, View } from "react-native";
 import { Switch } from "react-native-gesture-handler";
 import DM from "../styles/DM";
 import ChooseOptionStyle from "./ChooseOptionStyle";
+import ChooseOptionProps from "./ChooseOptionProps";
 
-const ChooseOption = (props: any) => {
+const ChooseOption = (props: ChooseOptionProps) => {
     return (
         <View style={ChooseOptionStyle.preferencesContainer}>
             <View style={ChooseOptionStyle.preferenceNameContainer}>
