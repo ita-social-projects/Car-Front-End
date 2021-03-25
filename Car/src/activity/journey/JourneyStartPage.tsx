@@ -23,16 +23,16 @@ const JourneyStartPage = (props: JourneyStartPageProps) => {
         color: DM("#FFFFFF")
     };
 
-    const unactiveButtonStyle = {
+    const inactiveButtonStyle = {
         backgroundColor: DM("#FFFFFF"),
         color: DM("#000000")
     };
 
     const [selectedIndex, setSelectedIndex] = useState(FIRST_ELEMENT_INDEX);
     const [allButtonStyle, setAllButtonStyle] = useState(activeButtonStyle);
-    const [pastButtonStyle, setPastButtonStyle] = useState(unactiveButtonStyle);
-    const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(unactiveButtonStyle);
-    const [scheduledButtonStyle, setScheduledButtonStyle] = useState(unactiveButtonStyle);
+    const [pastButtonStyle, setPastButtonStyle] = useState(inactiveButtonStyle);
+    const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(inactiveButtonStyle);
+    const [scheduledButtonStyle, setScheduledButtonStyle] = useState(inactiveButtonStyle);
 
     const { user } = useContext(AuthContext);
     const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
@@ -110,9 +110,9 @@ const JourneyStartPage = (props: JourneyStartPageProps) => {
                     onPress={() => {
                         setSelectedIndex(FIRST_ELEMENT_INDEX);
                         setAllButtonStyle(activeButtonStyle);
-                        setPastButtonStyle(unactiveButtonStyle);
-                        setUpcomingButtonStyle(unactiveButtonStyle);
-                        setScheduledButtonStyle(unactiveButtonStyle);
+                        setPastButtonStyle(inactiveButtonStyle);
+                        setUpcomingButtonStyle(inactiveButtonStyle);
+                        setScheduledButtonStyle(inactiveButtonStyle);
                     }}
                 >
                     <Text
@@ -133,10 +133,10 @@ const JourneyStartPage = (props: JourneyStartPageProps) => {
                     ]}
                     onPress={() => {
                         setSelectedIndex(SECOND_ELEMENT_INDEX);
-                        setAllButtonStyle(unactiveButtonStyle);
+                        setAllButtonStyle(inactiveButtonStyle);
                         setPastButtonStyle(activeButtonStyle);
-                        setUpcomingButtonStyle(unactiveButtonStyle);
-                        setScheduledButtonStyle(unactiveButtonStyle);
+                        setUpcomingButtonStyle(inactiveButtonStyle);
+                        setScheduledButtonStyle(inactiveButtonStyle);
                     }}
                 >
                     <Text
@@ -157,10 +157,10 @@ const JourneyStartPage = (props: JourneyStartPageProps) => {
                     ]}
                     onPress={() => {
                         setSelectedIndex(THIRD_ELEMENT_INDEX);
-                        setAllButtonStyle(unactiveButtonStyle);
-                        setPastButtonStyle(unactiveButtonStyle);
+                        setAllButtonStyle(inactiveButtonStyle);
+                        setPastButtonStyle(inactiveButtonStyle);
                         setUpcomingButtonStyle(activeButtonStyle);
-                        setScheduledButtonStyle(unactiveButtonStyle);
+                        setScheduledButtonStyle(inactiveButtonStyle);
                     }}
                 >
                     <Text
@@ -181,9 +181,9 @@ const JourneyStartPage = (props: JourneyStartPageProps) => {
                     ]}
                     onPress={() => {
                         setSelectedIndex(FOURTH_ELEMENT_INDEX);
-                        setAllButtonStyle(unactiveButtonStyle);
-                        setPastButtonStyle(unactiveButtonStyle);
-                        setUpcomingButtonStyle(unactiveButtonStyle);
+                        setAllButtonStyle(inactiveButtonStyle);
+                        setPastButtonStyle(inactiveButtonStyle);
+                        setUpcomingButtonStyle(inactiveButtonStyle);
                         setScheduledButtonStyle(activeButtonStyle);
                     }}
                 >
