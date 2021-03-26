@@ -5,8 +5,9 @@ import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 import { REFRESHER_TIMEOUT } from "../../constants/Constants";
 import DM from "../../components/styles/DM";
+import LoginProps from "./LoginProps";
 
-const Login = (properties: any) => {
+const Login = (properties: LoginProps) => {
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
