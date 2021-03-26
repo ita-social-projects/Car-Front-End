@@ -17,7 +17,9 @@ import APIConfig from "../../../../../api-service/APIConfig";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import {
     CHAT_POPUP_HEIGHT,
+    COUNT_OF_MESSAGES_TO_LOAD,
     FIRST_ELEMENT_INDEX,
+    FIRST_LOADING_MESSAGES,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
     MIN_POPUP_POSITION,
@@ -36,6 +38,8 @@ const Chat = (properties: any) => {
     const [connection, setConnection] = useState<HubConnection>();
     const [isLoading, setSpinner] = useState(true);
     const [isSendDisabled, setDisabled] = useState(true);
+    const [isLoadingEarlier, setLoadingEarlier] = useState(false);
+    const [isLoadMessage, setLoadMessage] = useState(true);
 
     useEffect(() => {
         (() => {
@@ -61,31 +65,11 @@ const Chat = (properties: any) => {
                     properties.route.params.chatId.toString()
                 ).catch((err: any) => console.log(err));
             });
-
-            ChatService.getCeratinChat(properties?.route?.params?.chatId).then((res) => {
-
-                let tempChat: any = [];
-
-                res.data?.messages?.forEach((element: any) => {
-                    const messageToAdd = {
-                        _id: element?.id,
-                        text: element?.text,
-                        createdAt: element?.createdAt,
-                        user: {
-                            _id: element?.senderId,
-                            name: element?.sender?.name + "|"
-                            + element?.sender?.surname + "|"
-                            + element?.sender?.imageId
-                        }
-                    };
-
-                    tempChat.push(messageToAdd);
+            loadMessages(FIRST_LOADING_MESSAGES)
+                .then((res) => {
+                    setMessages(res);
+                    setSpinner(false);
                 });
-                setMessages(tempChat);
-            }).then(() => {
-                setSpinner(false);
-            });
-            console.log("Use Effect has refreshed");
 
             connection.onreconnected(() => {
                 connection.invoke(
@@ -105,8 +89,8 @@ const Chat = (properties: any) => {
                             user: {
                                 _id: receivedMessage.senderId,
                                 name: receivedMessage?.sender?.name + "|"
-                                + receivedMessage?.sender?.surname + "|"
-                                + receivedMessage?.sender?.imageId
+                                    + receivedMessage?.sender?.surname + "|"
+                                    + receivedMessage?.sender?.imageId
                             }
                         } as any
                     )
@@ -140,7 +124,6 @@ const Chat = (properties: any) => {
         } else {
             console.log("No connection yet");
         }
-
     };
 
     const renderBubble = (props: any) => (
@@ -224,13 +207,56 @@ const Chat = (properties: any) => {
     let selectedMessage: any;
     let isOpen: boolean = false;
 
-    const showPopup = (context: any, message: any) =>{
+    const showPopup = (context: any, message: any) => {
         isOpen = !isOpen;
         selectedMessage = message;
 
         moreOptionsRef?.current?.snapTo(
             isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
         );
+    };
+
+    const loadMessages = (messageId: number): Promise<any> => {
+        let tempChat: any = [];
+
+        return ChatService.getCeratinChat(
+            properties?.route?.params?.chatId, messageId)
+            .then((res: any) => {
+                res.data?.forEach((data: any) => {
+                    const messageToAdd = {
+                        _id: data?.id,
+                        text: data?.text,
+                        createdAt: data?.createdAt,
+                        user: {
+                            _id: data?.senderId,
+                            name: data?.name + "|"
+                                + data?.surname + "|"
+                                + data?.imageId
+                        }
+                    };
+
+                    tempChat.push(messageToAdd);
+                });
+                if (tempChat.length < COUNT_OF_MESSAGES_TO_LOAD) {
+                    setLoadMessage(false);
+                }
+            }).then(() => tempChat);
+    };
+
+    const loadEarlierMessages = () => {
+        setLoadingEarlier(true);
+        let oldestMessageId = Math.min(...messages.map((u: any) => u._id));
+
+        loadMessages(oldestMessageId)
+            .then((res) => {
+                setMessages((previousMessages) =>
+                    GiftedChat.append(
+                        res,
+                        previousMessages as any
+                    )
+                );
+                setLoadingEarlier(false);
+            });
     };
 
     return (
@@ -249,11 +275,10 @@ const Chat = (properties: any) => {
                     renderTime={() => <View />}
                     messages={messages as any[]}
                     onInputTextChanged={(value) => {
-                        if(value.trim())
-                        {
+                        if (value.trim()) {
                             setMessage(value);
                             setDisabled(false);
-                        }else{
+                        } else {
                             setMessage(value);
                             setDisabled(true);
                         }
@@ -274,6 +299,9 @@ const Chat = (properties: any) => {
                     renderInputToolbar={renderInputToolbar}
                     maxInputLength={500}
                     onLongPress={showPopup}
+                    loadEarlier={isLoadMessage}
+                    onLoadEarlier={loadEarlierMessages}
+                    isLoadingEarlier={isLoadingEarlier}
                 />
             )}
             <BottomPopup
@@ -282,14 +310,14 @@ const Chat = (properties: any) => {
                 enabledInnerScrolling={false}
                 initialSnap={1}
                 renderHeader={<View />}
+                enabledGestureInteraction={false}
                 renderContent={
-
                     <View style={{ backgroundColor: DM("white") }}>
                         <MenuButton text="Copy text" onPress={() => {
                             moreOptionsRef.current.snapTo(MIN_POPUP_POSITION);
                             Clipboard.setString(selectedMessage.text);
                         }} />
-                        <MenuButton text="Cancel" onPress={() => moreOptionsRef.current.snapTo(MIN_POPUP_POSITION)}/>
+                        <MenuButton text="Cancel" onPress={() => moreOptionsRef.current.snapTo(MIN_POPUP_POSITION)} />
                     </View>
                 }
             />

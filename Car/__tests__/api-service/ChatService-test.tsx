@@ -83,7 +83,7 @@ describe("Chat Service test", () => {
                 })
         );
 
-        ChatService.getCeratinChat(1).then((res) => {
+        ChatService.getCeratinChat(1, 0).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
         });

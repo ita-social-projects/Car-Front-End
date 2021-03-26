@@ -134,6 +134,7 @@ const JourneyRequestPage = (props: any) => {
 
             <BottomPopup
                 refForChild={moreOptionsRef}
+                enabledGestureInteraction={true}
                 style={{ backgroundColor: DM("white") }}
                 snapPoints={[
                     MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,

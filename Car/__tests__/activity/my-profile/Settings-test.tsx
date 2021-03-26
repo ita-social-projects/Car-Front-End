@@ -137,6 +137,7 @@ test("renders correctly", async () =>
         </View>
       </ScrollView>
       <BottomPopup
+        enabledGestureInteraction={true}
         enabledInnerScrolling={false}
         initialSnap={0}
         onCloseEnd={[Function]}

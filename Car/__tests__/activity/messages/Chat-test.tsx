@@ -11,7 +11,8 @@ test("renders correctly", async () =>
         Array [
           Object {
             "flex": 1,
-            "paddingBottom": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 5,
           },
           Object {
             "backgroundColor": "white",
@@ -25,6 +26,7 @@ test("renders correctly", async () =>
         text="Loading information..."
       />
       <BottomPopup
+        enabledGestureInteraction={false}
         enabledInnerScrolling={false}
         initialSnap={1}
         refForChild={
@@ -53,7 +55,7 @@ test("renders correctly", async () =>
         renderHeader={<View />}
         snapPoints={
           Array [
-            118,
+            135,
             0,
           ]
         }

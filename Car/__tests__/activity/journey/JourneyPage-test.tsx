@@ -43,6 +43,7 @@ test("renders correctly", async () =>
         </Text>
       </View>
       <BottomPopup
+        enabledGestureInteraction={true}
         enabledInnerScrolling={true}
         initialSnap={1}
         refForChild={
