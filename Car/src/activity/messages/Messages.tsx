@@ -12,8 +12,9 @@ import MessagesStyle from "./MessagesStyle";
 import * as navigation from "../../components/navigation/Navigation";
 import { GRADIENT_END, GRADIENT_START, NOT_EXISTING_ELEMENT_INDEX } from "../../constants/Constants";
 import DM from "../../components/styles/DM";
+import MessagesProps from "./MessagesProps";
 
-const Messages = (props: any) => {
+const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
     const [masterDataSource, setMasterDataSource] = useState<any>([]);
     const [search, setSearch] = useState("");
