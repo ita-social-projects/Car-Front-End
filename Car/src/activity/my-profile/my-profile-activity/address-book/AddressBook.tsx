@@ -8,7 +8,7 @@ import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 
-export default function AddressBook (props: any) {
+export default function AddressBook (props: {navigation: any}) {
     const { user } = useContext(AuthContext);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);

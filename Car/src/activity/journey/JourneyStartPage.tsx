@@ -14,9 +14,9 @@ import {
     EMPTY_COLLECTION_LENGTH
 } from "../../constants/Constants";
 import DM from "../../components/styles/DM";
-import JourneyStartPageProps from "./JourneyStartPageProps";
+import NavigationAddListener from "../../types/NavigationAddListener";
 
-const JourneyStartPage = (props: JourneyStartPageProps) => {
+const JourneyStartPage = (props: NavigationAddListener) => {
 
     const activeButtonStyle = {
         backgroundColor: DM("#000000"),

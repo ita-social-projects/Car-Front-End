@@ -9,8 +9,9 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 import ImageService from "../../../../../api-service/image-service/ImageService";
 import DM from "../../../../components/styles/DM";
+import NavigationAddListener from "../../../../types/NavigationAddListener";
 
-const Cars = (props: any) => {
+const Cars = (props: NavigationAddListener) => {
     const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
@@ -68,7 +69,7 @@ const Cars = (props: any) => {
             style={[CarsStyle.container, { backgroundColor: DM("white") }]}
             contentContainerStyle={isLoading && CarsStyle.loading}
             refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
             }
         >
             <View
