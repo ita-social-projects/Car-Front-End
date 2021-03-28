@@ -5,7 +5,7 @@ import DM from "../../components/styles/DM";
 import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
-const MyProfile = (props: any) => {
+const MyProfile = (props: {navigation: any}) => {
     return (
         <View style={[MyProfileStyle.container, { backgroundColor: DM("white") }]}>
             <TouchableNavigationCard

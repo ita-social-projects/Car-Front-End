@@ -1,4 +1,4 @@
-interface LoginProps {
+interface NavigationAddAndRemoveListener {
     navigation: {
         // eslint-disable-next-line unused-imports/no-unused-vars
         addListener: (event: string, callback: () => void) => () => void
@@ -7,4 +7,4 @@ interface LoginProps {
     }
 }
 
-export default LoginProps;
+export default NavigationAddAndRemoveListener;
