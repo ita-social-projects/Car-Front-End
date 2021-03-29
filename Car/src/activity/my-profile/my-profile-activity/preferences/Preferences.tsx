@@ -8,8 +8,9 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import DM from "../../../../components/styles/DM";
 import PreferencesStyle from "./PreferencesStyle";
+import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
 
-export default function Preferences (props: any) {
+export default function Preferences (props: NavigationAddAndRemoveListener) {
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");

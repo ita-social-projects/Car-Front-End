@@ -24,7 +24,7 @@ import {
 import DM from "../../../../components/styles/DM";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const JourneyRequestPage = (props: any) => {
+const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => {
 
     const [currentJourney, setJourney] = useState({} as Journey);
     const { user } = useContext(AuthContext);

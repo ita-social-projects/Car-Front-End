@@ -7,8 +7,9 @@ import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
 import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 import DM from "../../components/styles/DM";
+import NavigationAddAndRemoveListener from "../../types/NavigationAddAndRemoveListener";
 
-const Notifications = (props: any) => {
+const Notifications = (props: NavigationAddAndRemoveListener) => {
     const { user } = useContext(AuthContext);
 
     const [notifications, setNotifications] = useState<Array<Notification>>([]);

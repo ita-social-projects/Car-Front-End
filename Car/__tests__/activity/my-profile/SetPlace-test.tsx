@@ -5,7 +5,9 @@ import SetPlace from "../../../src/activity/my-profile/my-profile-activity/addre
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
+    expect(renderer.render(
+        <SetPlace disabled={false} items={[]} placeHolder={"Select an item"} />))
+        .toMatchInlineSnapshot(`
     <View
       style={
         Object {

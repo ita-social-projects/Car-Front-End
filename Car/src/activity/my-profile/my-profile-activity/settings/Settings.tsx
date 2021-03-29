@@ -23,7 +23,7 @@ import {
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 
-const Settings = (props: any) => {
+const Settings = (props: {navigation: any}) => {
 
     const [user, setUser] = useState<any>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
