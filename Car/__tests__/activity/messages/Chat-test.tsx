@@ -26,7 +26,6 @@ test("renders correctly", async () =>
         text="Loading information..."
       />
       <BottomPopup
-        enabledGestureInteraction={false}
         enabledInnerScrolling={false}
         initialSnap={1}
         refForChild={

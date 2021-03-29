@@ -310,7 +310,6 @@ const Chat = (properties: any) => {
                 enabledInnerScrolling={false}
                 initialSnap={1}
                 renderHeader={<View />}
-                enabledGestureInteraction={false}
                 renderContent={
                     <View style={{ backgroundColor: DM("white") }}>
                         <MenuButton text="Copy text" onPress={() => {
