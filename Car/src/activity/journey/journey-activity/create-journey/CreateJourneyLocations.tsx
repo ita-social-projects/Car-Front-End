@@ -6,21 +6,25 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import Geolocation from "@react-native-community/geolocation";
 import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
+import {
+    FIRST_ELEMENT_INDEX,
+    INITIAL_LATITUDE,
+    INITIAL_LONGITUDE,
+    SECOND_ELEMENT_INDEX
+} from "../../../../constants/Constants";
 
 const CreateJourneyLocations = () => {
-    const DEFAULT_LATITUDE = 49.843844;
-    const DEFAULT_LONGITUDE = 24.025581;
-    const ZERO = 0;
     const MINUS_THREE = -3;
-    const [latitude, setLatitude] = useState(DEFAULT_LATITUDE);
-    const [longitude, setLongitude] = useState(DEFAULT_LONGITUDE);
+    const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
+    const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
     const [fromDirection, setFromDirection] = useState("Your Location");
-    const [selectedLocation, setSelectedLocation] = useState({ lat: 49.843844, lng: 24.025581 });
+    const [selectedLocation, setSelectedLocation] =
+        useState({ lat: INITIAL_LATITUDE, lng: INITIAL_LONGITUDE });
     const [isOpen] = useState(false);
 
     let mapRegion = {
-        latitude: 49.843844,
-        longitude: 24.025581,
+        latitude: INITIAL_LATITUDE,
+        longitude: INITIAL_LONGITUDE,
         latitudeDelta: 0.09,
         longitudeDelta: 0.09
     };
@@ -67,19 +71,16 @@ const CreateJourneyLocations = () => {
     }, [selectedLocation]);
 
     const removeRegionAndPostalCode = (json: any) => {
-        return json.split(", ").slice(ZERO, MINUS_THREE).join(", ");
+        return json.split(", ").slice(FIRST_ELEMENT_INDEX, MINUS_THREE).join(", ");
     };
 
     const getFromDirection = () => {
         return fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`
-        )
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`)
             .then((res) => res.json())
             .then((json) => {
-                var indexOfResultedArray = 1;
-                var resultedAddress = removeRegionAndPostalCode(
-                    json.results[indexOfResultedArray].formatted_address
-                );
+                const resultedAddress =
+                    removeRegionAndPostalCode(json.results[SECOND_ELEMENT_INDEX].formatted_address);
 
                 setFromDirection(resultedAddress);
             });
@@ -131,7 +132,7 @@ const CreateJourneyLocations = () => {
                     onDragEnd={(e: any) => {
                         setLatitude(e.nativeEvent.coordinate.latitude);
                         setLongitude(e.nativeEvent.coordinate.longitude);
-                        setSelectedLocationHandler;
+                        setSelectedLocationHandler(e);
                         getFromDirection();
                     }}
                     image={require("../../../../../assets/images/custom-marker.png")}

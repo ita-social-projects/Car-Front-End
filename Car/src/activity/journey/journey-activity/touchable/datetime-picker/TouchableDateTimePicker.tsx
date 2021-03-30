@@ -10,15 +10,7 @@ function TouchableDateTimePicker (props: any) {
     const MINUS_TWO = -2;
     const ONE = 1;
     const ZERO = 0;
-    const days = [
-        "sun",
-        "mon",
-        "tue",
-        "wed",
-        "thu",
-        "fri",
-        "sat"
-    ];
+    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     const onCancelPress = () => {
         setDate(new Date());
         setShow(false);

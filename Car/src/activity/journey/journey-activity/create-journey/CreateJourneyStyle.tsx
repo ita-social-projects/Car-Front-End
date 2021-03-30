@@ -57,7 +57,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         lineHeight: 18,
     },
 
-    unactiveButton: {
+    inactiveButton: {
         backgroundColor: "#FFFFFF",
         color: "#000000"
     },

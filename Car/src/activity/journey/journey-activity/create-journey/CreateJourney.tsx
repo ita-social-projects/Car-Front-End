@@ -13,28 +13,24 @@ function CreateJourney () {
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [state, setState] = useState();
 
-    function changeJourneyTypeDropDownVisibility (){
+    function changeJourneyTypeDropDownVisibility () {
         setIsVisibleJourneyTypeDropDown(true);
         setIsVisibleCarDropDown(false);
     }
 
-    function changeCarDropDownVisibility (){
+    function changeCarDropDownVisibility () {
         setIsVisibleJourneyTypeDropDown(false);
         setIsVisibleCarDropDown(true);
     }
 
-    function closeAllDropDowns (){
+    function closeAllDropDowns () {
         setIsVisibleJourneyTypeDropDown(false);
         setIsVisibleCarDropDown(false);
     }
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(
-        CreateJourneyStyle.activeButton
-    );
+    const [freeButtonStyle, setFreeButtonStyle] = useState(CreateJourneyStyle.activeButton);
 
-    const [paidButtonStyle, setPaidButtonStyle] = useState(
-        CreateJourneyStyle.unactiveButton
-    );
+    const [paidButtonStyle, setPaidButtonStyle] = useState(CreateJourneyStyle.inactiveButton);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -50,8 +46,7 @@ function CreateJourney () {
                 placeholder="Journey type:"
                 isVisible={isVisibleJourneyTypeDropDown}
                 onOpen={() => changeJourneyTypeDropDownVisibility()}
-                onChangeItem={(item: { value: React.SetStateAction<undefined>; }) =>
-                {
+                onChangeItem={(item: { value: React.SetStateAction<undefined>; }) => {
                     setState(item.value);
                     closeAllDropDowns();
                 }}
@@ -83,7 +78,7 @@ function CreateJourney () {
                     onPress={() => {
                         FreeButtonChoiceAlert();
                         setFreeButtonStyle(CreateJourneyStyle.activeButton);
-                        setPaidButtonStyle(CreateJourneyStyle.unactiveButton);
+                        setPaidButtonStyle(CreateJourneyStyle.inactiveButton);
                     }}>
                     <Text style={[CreateJourneyStyle.feeButtonText, freeButtonStyle]}>Free</Text>
                 </TouchableOpacity>
@@ -91,7 +86,7 @@ function CreateJourney () {
                     style={[CreateJourneyStyle.feeButtonPaid, paidButtonStyle]}
                     onPress={() => {
                         PaidButtonChoiceAlert();
-                        setFreeButtonStyle(CreateJourneyStyle.unactiveButton);
+                        setFreeButtonStyle(CreateJourneyStyle.inactiveButton);
                         setPaidButtonStyle(CreateJourneyStyle.activeButton);
                     }}>
                     <Text style={[CreateJourneyStyle.feeButtonText, paidButtonStyle]}>Paid</Text>
@@ -113,6 +108,6 @@ function CreateJourney () {
             </TouchableOpacity>
         </ScrollView>
     );
-};
+}
 
 export default CreateJourney;
