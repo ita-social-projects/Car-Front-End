@@ -88,7 +88,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginRight:20
     },
 
-    TextInputStyle:{
+    textInputStyle:{
         height: 100,
         borderWidth: 2,
         borderColor: "black",

@@ -1,15 +1,57 @@
-import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import FreeButtonChoiceAlert from "../alerts/FreeButtonChoiceAlert";
-import PaidButtonChoiceAlert from "../alerts/PaidButtonChoiceAlert";
-import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDropDownPicker";
-import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
-import TouchableDateTimePicker from "../touchable/datetime-picker/TouchableDateTimePicker";
-import { CreateJourneyStyle } from "./CreateJourneyStyle";
+import React, { useRef, useState } from "react";
+import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
+import { View, Text, TouchableOpacity } from "react-native";
+import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
+import DM from "../../../../components/styles/DM";
+import AddressInput from "./AddressInput/AddressInput";
 
 function CreateJourney () {
-    const [isVisibleJourneyTypeDropDown, setIsVisibleJourneyTypeDropDown] = useState(false);
+    const [isFromConfirmed, setIsFromConfirmed] = useState(false);
+    const [isToConfirmed, setIsToConfirmed] = useState(false);
+    const refForFrom = useRef<GooglePlacesAutocompleteRef>();
+    const refForTo = useRef<GooglePlacesAutocompleteRef>();
+
+    const confirmPressHandler = () => {
+        if (isFromConfirmed && isToConfirmed) return;
+
+        const ref = !isFromConfirmed ? refForFrom : refForTo;
+        const setConfirmed = !isFromConfirmed ? setIsFromConfirmed : setIsToConfirmed;
+        const input = ref.current?.getAddressText();
+
+        ref.current?.setAddressText(
+            `${!isFromConfirmed ? "From" : "To"}: ${input}`);
+        setConfirmed(true);
+    };
+
+    return (
+        <View style={{ flex: 1 }}>
+            <AddressInput
+                placeholder={"From"}
+                isConfirmed={isFromConfirmed}
+                ref={refForFrom as any}
+            />
+
+            {isFromConfirmed ? (
+                <AddressInput
+                    placeholder={"To"}
+                    isConfirmed={isToConfirmed}
+                    ref={refForTo as any}
+                />
+            ) : (<></>)}
+
+            {isFromConfirmed && isToConfirmed ? (<></>) :
+                (<TouchableOpacity
+                    style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]}
+                    onPress={confirmPressHandler}
+                >
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                        Confirm
+                    </Text>
+                </TouchableOpacity>)}
+        </View>
+    );
+
+    /*const [isVisibleJourneyTypeDropDown, setIsVisibleJourneyTypeDropDown] = useState(false);
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [state, setState] = useState();
 
@@ -34,9 +76,7 @@ function CreateJourney () {
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
-            <TouchableDateTimePicker
-                iconName="time"
-            />
+            <TouchableDateTimePicker iconName="time" />
             <JourneyCreationDropDownPicker
                 items={[
                     { label: "Own Car", value: "own car" },
@@ -70,9 +110,7 @@ function CreateJourney () {
             />
             <SeatsInputSpinner/>
             <View style={CreateJourneyStyle.feeContainer}>
-                <Text style={CreateJourneyStyle.text}>
-                    Fee
-                </Text>
+                <Text style={CreateJourneyStyle.text}>Fee</Text>
                 <TouchableOpacity
                     style={[CreateJourneyStyle.feeButtonFree, freeButtonStyle]}
                     onPress={() => {
@@ -95,7 +133,7 @@ function CreateJourney () {
             <View style={CreateJourneyStyle.commentsView}>
                 <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
                 <TextInput
-                    style={CreateJourneyStyle.TextInputStyle}
+                    style={CreateJourneyStyle.textInputStyle}
                     multiline={true}
                     maxLength={100}
                     numberOfLines={10}
@@ -107,7 +145,7 @@ function CreateJourney () {
                 <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
             </TouchableOpacity>
         </ScrollView>
-    );
+    );*/
 }
 
 export default CreateJourney;
