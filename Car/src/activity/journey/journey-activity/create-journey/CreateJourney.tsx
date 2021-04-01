@@ -6,6 +6,9 @@ import DM from "../../../../components/styles/DM";
 import AddressInput from "./AddressInput/AddressInput";
 
 function CreateJourney () {
+    const FLEX_ZERO = 0;
+    const FLEX_ONE = 1;
+
     const [isFromConfirmed, setIsFromConfirmed] = useState(false);
     const [isToConfirmed, setIsToConfirmed] = useState(false);
     const refForFrom = useRef<GooglePlacesAutocompleteRef>();
@@ -29,6 +32,7 @@ function CreateJourney () {
                 placeholder={"From"}
                 isConfirmed={isFromConfirmed}
                 ref={refForFrom as any}
+                flex={isFromConfirmed ? FLEX_ZERO : FLEX_ONE}
             />
 
             {isFromConfirmed ? (
@@ -36,6 +40,7 @@ function CreateJourney () {
                     placeholder={"To"}
                     isConfirmed={isToConfirmed}
                     ref={refForTo as any}
+                    flex={1}
                 />
             ) : (<></>)}
 

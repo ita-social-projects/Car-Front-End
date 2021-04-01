@@ -1,6 +1,7 @@
 interface AddressInputProps {
     placeholder: string,
-    isConfirmed: boolean
+    isConfirmed: boolean,
+    flex: number
 }
 
 export default AddressInputProps;

@@ -15,9 +15,10 @@ const AddressInput = React.forwardRef<GooglePlacesAutocompleteRef, AddressInputP
                 language: "ua"
             }}
             placeholder={props.placeholder}
-            styles={AddressInputStyles}
+            styles={{ ...AddressInputStyles, ...{ container: {
+                flex: props.flex,
+            } } }}
             enablePoweredByContainer={false}
-            minLength={2}
             textInputProps={{
                 editable: !props.isConfirmed
             }}

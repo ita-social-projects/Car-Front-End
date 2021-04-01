@@ -2,15 +2,17 @@ import { StyleSheet } from "react-native";
 
 const AddressInputStyles = StyleSheet.create({
     textInputContainer: {
-        margin: 20
+        marginHorizontal: 20,
+        marginTop: 10
     },
     textInput: {
-        height: 38,
         color: "black",
-        fontSize: 16,
+        fontSize: 18,
         borderColor: "black",
         borderWidth: 2,
-        borderRadius: 0
+        borderRadius: 0,
+        paddingHorizontal: 15,
+        paddingVertical: 10
     },
     predefinedPlacesDescription: {
         color: "#1faadb",

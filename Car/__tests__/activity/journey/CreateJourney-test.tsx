@@ -14,6 +14,7 @@ test("renders correctly", async () =>
       }
     >
       <ForwardRef
+        flex={1}
         isConfirmed={false}
         placeholder="From"
       />
