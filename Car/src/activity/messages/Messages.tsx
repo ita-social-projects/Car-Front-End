@@ -111,9 +111,9 @@ const Messages = (props: any) => {
                                             </Text>
                                         </LinearTextGradient>
                                         <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
-                                            {moment(
+                                        Starts at: {moment(
                                                 new Date(item.journey.departureTime)
-                                            ).calendar()}
+                                            ).format("DD.MM HH:mm")}
                                         </Text>
                                     </View>
                                     <View style={MessagesStyle.iconWrapper}>

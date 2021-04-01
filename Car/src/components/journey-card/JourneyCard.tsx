@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
@@ -61,11 +60,6 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                             );
                                         }}
                                     >
-                                        <Ionicons
-                                            name={"ellipsis-horizontal"}
-                                            color={DM("black")}
-                                            size={20}
-                                        />
                                     </TouchableOpacity>
                                 </View>
                             </View>

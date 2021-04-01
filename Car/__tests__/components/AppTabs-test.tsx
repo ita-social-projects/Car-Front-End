@@ -46,11 +46,7 @@ test("renders correctly", async () =>
       <Screen
         component={[Function]}
         name="JourneyTabs"
-        options={
-          Object {
-            "tabBarLabel": "Journey",
-          }
-        }
+        options={[Function]}
       />
       <Screen
         component={[Function]}

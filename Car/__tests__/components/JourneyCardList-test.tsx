@@ -195,28 +195,7 @@ test("renders correctly", async () =>
                             "opacity": 1,
                           }
                         }
-                      >
-                        <Text
-                          allowFontScaling={false}
-                          style={
-                            Array [
-                              Object {
-                                "color": "black",
-                                "fontSize": 20,
-                              },
-                              undefined,
-                              Object {
-                                "fontFamily": "Ionicons",
-                                "fontStyle": "normal",
-                                "fontWeight": "normal",
-                              },
-                              Object {},
-                            ]
-                          }
-                        >
-                          
-                        </Text>
-                      </View>
+                      />
                     </View>
                   </View>
                   <View
