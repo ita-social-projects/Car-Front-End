@@ -4,6 +4,7 @@ interface AddressInputProps {
     placeholder: string,
     top: number,
     paddingLeft: number,
+    address: string
     // eslint-disable-next-line unused-imports/no-unused-vars
     onChangeText: (text: string) => void,
     // eslint-disable-next-line unused-imports/no-unused-vars

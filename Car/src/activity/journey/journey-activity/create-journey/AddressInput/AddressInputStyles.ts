@@ -6,6 +6,9 @@ const AddressInputStyles = StyleSheet.create({
         left: 10,
         right: 10
     },
+    textInputContainer: {
+        zIndex: 1
+    },
     placeholder: {
         position: "absolute",
         left: 15,

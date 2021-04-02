@@ -3,16 +3,58 @@ import { View, Text, TouchableOpacity } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import AddressInput from "./AddressInput/AddressInput";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { mapStyle } from "../map-address/SearchJourneyMapStyle";
+import {
+    FIRST_ELEMENT_INDEX,
+    INITIAL_LATITUDE,
+    INITIAL_LONGITUDE,
+    SECOND_ELEMENT_INDEX
+} from "../../../../constants/Constants";
+import APIConfig from "../../../../../api-service/APIConfig";
 
 function CreateJourney () {
+    const MINUS_THREE = -3;
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [isFromConfirmed, setIsFromConfirmed] = useState(false);
     const [isToConfirmed, setIsToConfirmed] = useState(false);
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    const [selectedLocation, setSelectedLocation] =
+        useState({ lat: INITIAL_LATITUDE, lng: INITIAL_LONGITUDE });
+
+    let mapRegion = {
+        latitude: INITIAL_LATITUDE,
+        longitude: INITIAL_LONGITUDE,
+        latitudeDelta: 0.09,
+        longitudeDelta: 0.09
+    };
+
+    let markerCoordinates = {
+        latitude: selectedLocation.lat,
+        longitude: selectedLocation.lng
+    };
 
     const confirmPressHandler = () => {
         console.log("from - " + from);
         console.log("to - " + to);
+    };
+
+    const removeRegionAndPostalCode = (json: string) => {
+        return json.split(", ").slice(FIRST_ELEMENT_INDEX, MINUS_THREE).join(", ");
+    };
+
+    const getFromDirection = (latitude: number, longitude: number) => {
+        return fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`)
+            .then((res) => res.json())
+            .then((json) => {
+                let resultedAddress = json.results[SECOND_ELEMENT_INDEX].formatted_address;
+
+                resultedAddress = removeRegionAndPostalCode(resultedAddress);
+                console.log(resultedAddress);
+                setFrom(resultedAddress);
+            });
     };
 
     const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
@@ -23,23 +65,53 @@ function CreateJourney () {
                 placeholder={"From"}
                 top={10}
                 paddingLeft={68}
+                address={from}
                 onPress={(data) => {
                     setIsFromConfirmed(true);
                     setFrom(data.description);
                 }}
-                onChangeText={() => setIsFromConfirmed(false)}
+                onChangeText={(text) => {
+                    setIsFromConfirmed(false);
+                    setFrom(text);
+                }}
             />
 
             <AddressInput
                 placeholder={"To"}
                 top={65}
                 paddingLeft={45}
+                address={to}
                 onPress={(data) => {
                     setIsToConfirmed(true);
                     setTo(data.description);
                 }}
-                onChangeText={() => setIsToConfirmed(false)}
+                onChangeText={(text) => {
+                    setIsToConfirmed(false);
+                    setTo(text);
+                }}
             />
+
+            <MapView
+                style={{ flex: 1 }}
+                provider={PROVIDER_GOOGLE}
+                showsUserLocation={true}
+                initialRegion={mapRegion}
+                customMapStyle={mapStyle}
+            >
+                {
+                    <Marker
+                        draggable={true}
+                        onDragEnd={(e) => {
+                            console.log("On drag end");
+                            console.log(e.nativeEvent.coordinate.latitude);
+                            console.log(e.nativeEvent.coordinate.longitude);
+                            getFromDirection(e.nativeEvent.coordinate.latitude, e.nativeEvent.coordinate.longitude);
+                        }}
+                        image={require("../../../../../assets/images/custom-marker.png")}
+                        coordinate={markerCoordinates}
+                    />
+                }
+            </MapView>
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,

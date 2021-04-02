@@ -37,7 +37,8 @@ const AddressInput = (props: AddressInputProps) => {
             isRowScrollable={false}
             textInputProps={{
                 // editable: !props.isConfirmed
-                onChangeText: props.onChangeText
+                onChangeText: props.onChangeText,
+                value: props.address
             }}
             placeholder={""}
         />);

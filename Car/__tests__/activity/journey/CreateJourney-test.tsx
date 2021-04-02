@@ -14,6 +14,7 @@ test("renders correctly", async () =>
       }
     >
       <AddressInput
+        address=""
         onChangeText={[Function]}
         onPress={[Function]}
         paddingLeft={68}
@@ -21,12 +22,68 @@ test("renders correctly", async () =>
         top={10}
       />
       <AddressInput
+        address=""
         onChangeText={[Function]}
         onPress={[Function]}
         paddingLeft={45}
         placeholder="To"
         top={65}
       />
+      <MapView
+        customMapStyle={
+          Array [
+            Object {
+              "featureType": "poi.business",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+            Object {
+              "elementType": "labels.text",
+              "featureType": "poi.park",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ]
+        }
+        initialRegion={
+          Object {
+            "latitude": 49.843844,
+            "latitudeDelta": 0.09,
+            "longitude": 24.025581,
+            "longitudeDelta": 0.09,
+          }
+        }
+        provider="google"
+        showsUserLocation={true}
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <MapMarker
+          coordinate={
+            Object {
+              "latitude": 49.843844,
+              "longitude": 24.025581,
+            }
+          }
+          draggable={true}
+          image={
+            Object {
+              "testUri": "../../../assets/images/custom-marker.png",
+            }
+          }
+          onDragEnd={[Function]}
+          stopPropagation={false}
+        />
+      </MapView>
       <ForwardRef
         disabled={true}
         onPress={[Function]}
