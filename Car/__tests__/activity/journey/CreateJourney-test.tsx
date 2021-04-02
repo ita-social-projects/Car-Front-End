@@ -13,13 +13,22 @@ test("renders correctly", async () =>
         }
       }
     >
-      <ForwardRef
-        flex={1}
-        isConfirmed={false}
+      <AddressInput
+        onChangeText={[Function]}
+        onPress={[Function]}
+        paddingLeft={68}
         placeholder="From"
+        top={10}
       />
-      <React.Fragment />
+      <AddressInput
+        onChangeText={[Function]}
+        onPress={[Function]}
+        paddingLeft={45}
+        placeholder="To"
+        top={65}
+      />
       <ForwardRef
+        disabled={true}
         onPress={[Function]}
         style={
           Array [
@@ -35,7 +44,7 @@ test("renders correctly", async () =>
               "top": 1098,
             },
             Object {
-              "backgroundColor": "black",
+              "backgroundColor": "gray",
             },
           ]
         }

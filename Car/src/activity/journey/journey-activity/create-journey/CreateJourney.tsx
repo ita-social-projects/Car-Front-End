@@ -1,58 +1,56 @@
-import React, { useRef, useState } from "react";
-import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import AddressInput from "./AddressInput/AddressInput";
 
 function CreateJourney () {
-    const FLEX_ZERO = 0;
-    const FLEX_ONE = 1;
-
+    const [from, setFrom] = useState("");
+    const [to, setTo] = useState("");
     const [isFromConfirmed, setIsFromConfirmed] = useState(false);
     const [isToConfirmed, setIsToConfirmed] = useState(false);
-    const refForFrom = useRef<GooglePlacesAutocompleteRef>();
-    const refForTo = useRef<GooglePlacesAutocompleteRef>();
 
     const confirmPressHandler = () => {
-        if (isFromConfirmed && isToConfirmed) return;
-
-        const ref = !isFromConfirmed ? refForFrom : refForTo;
-        const setConfirmed = !isFromConfirmed ? setIsFromConfirmed : setIsToConfirmed;
-        const input = ref.current?.getAddressText();
-
-        ref.current?.setAddressText(
-            `${!isFromConfirmed ? "From" : "To"}: ${input}`);
-        setConfirmed(true);
+        console.log("from - " + from);
+        console.log("to - " + to);
     };
+
+    const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
 
     return (
         <View style={{ flex: 1 }}>
             <AddressInput
                 placeholder={"From"}
-                isConfirmed={isFromConfirmed}
-                ref={refForFrom as any}
-                flex={isFromConfirmed ? FLEX_ZERO : FLEX_ONE}
+                top={10}
+                paddingLeft={68}
+                onPress={(data) => {
+                    setIsFromConfirmed(true);
+                    setFrom(data.description);
+                }}
+                onChangeText={() => setIsFromConfirmed(false)}
             />
 
-            {isFromConfirmed ? (
-                <AddressInput
-                    placeholder={"To"}
-                    isConfirmed={isToConfirmed}
-                    ref={refForTo as any}
-                    flex={1}
-                />
-            ) : (<></>)}
+            <AddressInput
+                placeholder={"To"}
+                top={65}
+                paddingLeft={45}
+                onPress={(data) => {
+                    setIsToConfirmed(true);
+                    setTo(data.description);
+                }}
+                onChangeText={() => setIsToConfirmed(false)}
+            />
 
-            {isFromConfirmed && isToConfirmed ? (<></>) :
-                (<TouchableOpacity
-                    style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]}
-                    onPress={confirmPressHandler}
-                >
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
-                        Confirm
-                    </Text>
-                </TouchableOpacity>)}
+            <TouchableOpacity
+                style={[SearchJourneyStyle.confirmButton,
+                    { backgroundColor: DM(DM(fromAndToIsConfirmed ? "black" : "gray")) }]}
+                onPress={confirmPressHandler}
+                disabled={!fromAndToIsConfirmed}
+            >
+                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                    Confirm
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 
