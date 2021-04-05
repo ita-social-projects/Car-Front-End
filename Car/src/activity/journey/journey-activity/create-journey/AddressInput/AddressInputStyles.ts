@@ -29,12 +29,17 @@ const AddressInputStyles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 0,
         paddingLeft: 58,
-        paddingRight: 15,
+        paddingRight: 45,
         paddingVertical: 10
     },
     predefinedPlacesDescription: {
         color: "#1faadb",
     },
+    marker: {
+        position: "absolute",
+        top: 8,
+        right: 20
+    }
 });
 
 export default AddressInputStyles;

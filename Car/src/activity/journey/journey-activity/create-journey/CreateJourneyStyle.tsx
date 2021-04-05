@@ -121,4 +121,9 @@ export const CreateJourneyStyle = StyleSheet.create({
         fontSize: 16,
         lineHeight: 20,
     },
+
+    movableMarker: {
+        position: "absolute",
+        zIndex: 1
+    }
 });

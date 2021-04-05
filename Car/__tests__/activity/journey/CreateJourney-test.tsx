@@ -15,7 +15,9 @@ test("renders correctly", async () =>
     >
       <AddressInput
         address=""
+        isMarkerFocus={true}
         onChangeText={[Function]}
+        onMarkerPress={[Function]}
         onPress={[Function]}
         paddingLeft={68}
         placeholder="From"
@@ -23,7 +25,9 @@ test("renders correctly", async () =>
       />
       <AddressInput
         address=""
+        isMarkerFocus={false}
         onChangeText={[Function]}
+        onMarkerPress={[Function]}
         onPress={[Function]}
         paddingLeft={45}
         placeholder="To"
@@ -67,22 +71,31 @@ test("renders correctly", async () =>
           }
         }
       >
-        <MapMarker
-          coordinate={
-            Object {
-              "latitude": 49.843844,
-              "longitude": 24.025581,
+        <React.Fragment>
+          <MapMarker
+            coordinate={
+              Object {
+                "latitude": 49.843844,
+                "longitude": 24.025581,
+              }
             }
-          }
-          draggable={true}
-          image={
-            Object {
-              "testUri": "../../../assets/images/custom-marker.png",
+            draggable={true}
+            image={
+              Object {
+                "testUri": "../../../assets/images/custom-marker.png",
+              }
             }
-          }
-          onDragEnd={[Function]}
-          stopPropagation={false}
-        />
+            onDragEnd={[Function]}
+            stopPropagation={false}
+            style={
+              Object {
+                "position": "absolute",
+                "zIndex": 1,
+              }
+            }
+          />
+          <React.Fragment />
+        </React.Fragment>
       </MapView>
       <ForwardRef
         disabled={true}

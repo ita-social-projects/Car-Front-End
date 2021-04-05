@@ -4,11 +4,13 @@ interface AddressInputProps {
     placeholder: string,
     top: number,
     paddingLeft: number,
-    address: string
+    address: string,
+    isMarkerFocus: boolean,
     // eslint-disable-next-line unused-imports/no-unused-vars
     onChangeText: (text: string) => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
-    onPress: (data: GooglePlaceData, detail: (GooglePlaceDetail | null)) => void
+    onPress: (data: GooglePlaceData, detail: (GooglePlaceDetail | null)) => void,
+    onMarkerPress: () => void
 }
 
 export default AddressInputProps;

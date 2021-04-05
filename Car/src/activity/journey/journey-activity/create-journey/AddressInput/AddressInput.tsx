@@ -3,7 +3,8 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import APIConfig from "../../../../../../api-service/APIConfig";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputStyles from "./AddressInputStyles";
-import { Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const AddressInput = (props: AddressInputProps) => {
     return (
@@ -13,13 +14,23 @@ const AddressInput = (props: AddressInputProps) => {
                 key: APIConfig.apiKey,
                 language: "ua"
             }}
-            renderLeftButton={() => {
-                return (
-                    <Text style={AddressInputStyles.placeholder}>
-                        {props.placeholder + ":"}
-                    </Text>
-                );
-            }}
+            renderLeftButton={() => (
+                <Text style={AddressInputStyles.placeholder}>
+                    {props.placeholder + ":"}
+                </Text>
+            )}
+            renderRightButton={() => (
+                <TouchableOpacity
+                    style={AddressInputStyles.marker}
+                    onPress={props.onMarkerPress}
+                >
+                    <FontAwesome
+                        name={"map-marker"}
+                        size={30}
+                        color={props.isMarkerFocus ? "#5355fc" : "grey"}
+                    />
+                </TouchableOpacity>
+            )}
             styles={{
                 ...AddressInputStyles,
                 ...{
