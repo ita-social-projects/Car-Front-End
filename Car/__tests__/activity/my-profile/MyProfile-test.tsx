@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import MyProfile from "../../../src/activity/my-profile/MyProfile";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<MyProfile />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<MyProfile navigation={undefined}/>).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [

@@ -4,8 +4,14 @@ import JourneyStartPage from "../../../src/activity/journey/JourneyStartPage";
 
 const renderer = shallowRenderer.createRenderer();
 
+const navigation = {
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    addListener: (event: string, callback: () => void) => () => void {},
+};
+
 test("renders correctly", async () =>
-    expect(renderer.render(<JourneyStartPage />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<JourneyStartPage navigation={navigation} />))
+        .toMatchInlineSnapshot(`
     <ScrollView
       refreshControl={
         <RefreshControlMock
@@ -40,6 +46,11 @@ test("renders correctly", async () =>
           blockName="Search for a Journey"
           from="#A5C500"
           height={140}
+          navigation={
+            Object {
+              "addListener": [Function],
+            }
+          }
           navigationName="Search Journey"
           reverse={false}
           to="#00A977"
@@ -54,6 +65,11 @@ test("renders correctly", async () =>
           blockName="Create a Journey"
           from="#00A3CF"
           height={140}
+          navigation={
+            Object {
+              "addListener": [Function],
+            }
+          }
           navigationName="Create Journey"
           reverse={true}
           to="#5552A0"

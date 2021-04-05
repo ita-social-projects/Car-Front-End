@@ -8,7 +8,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 
-const JourneyApplicant = (props: any) => {
+const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
     const { userId } = props.route.params;
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);

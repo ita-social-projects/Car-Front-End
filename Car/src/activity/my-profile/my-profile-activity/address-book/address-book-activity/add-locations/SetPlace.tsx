@@ -13,8 +13,9 @@ import {
     INITIAL_LONGITUDE, SECOND_ELEMENT_INDEX
 } from "../../../../../../constants/Constants";
 import SetPlaceStyle from "./SetPlaceStyle";
+import SetPlaceProps from "./SetPlaceProps";
 
-const SetPlace = (props: any) => {
+const SetPlace = (props: SetPlaceProps) => {
     const [latitude, setLatitude] = useState(INITIAL_LATITUDE);
     const [longitude, setLongitude] = useState(INITIAL_LONGITUDE);
     const [address, setAddress] = useState("");
@@ -88,7 +89,7 @@ const SetPlace = (props: any) => {
                             onChangeItem={
                                 props.selectHandle
                                     ? (item) => {
-                                        props.selectHandle(item);
+                                        props.selectHandle?.call(props, item);
                                     }
                                     : () => {}
                             }

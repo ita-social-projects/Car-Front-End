@@ -5,7 +5,7 @@ import Cars from "../../../src/activity/my-profile/my-profile-activity/cars/Cars
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Cars />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Cars navigation={undefined as any}/>)).toMatchInlineSnapshot(`
     <ScrollView
       contentContainerStyle={
         Object {

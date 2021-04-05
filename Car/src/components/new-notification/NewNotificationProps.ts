@@ -1,4 +1,4 @@
-import UserModel from "../types/UserModel";
+import UserModel from "../../types/UserModel";
 
 interface NewNotificationProps {
     read?: boolean,

@@ -30,8 +30,9 @@ import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import MenuButton from "../../../../components/menu-button/MenuButton";
+import ChatProps from "./ChatProps";
 
-const Chat = (properties: any) => {
+const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<object[]>([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(useContext(AuthContext).user);

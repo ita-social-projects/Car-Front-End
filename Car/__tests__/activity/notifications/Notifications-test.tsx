@@ -5,7 +5,8 @@ import Notifications from "../../../src/activity/notifications/Notifications";
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Notifications />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Notifications navigation={undefined as any}/>))
+        .toMatchInlineSnapshot(`
     <ForwardRef
       data={Array []}
       keyExtractor={[Function]}

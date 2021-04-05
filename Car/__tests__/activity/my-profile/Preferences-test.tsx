@@ -7,7 +7,7 @@ const renderer = shallowRender.createRenderer();
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Preferences />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Preferences navigation={undefined as any}/>)).toMatchInlineSnapshot(`
     <React.Fragment>
       <View
         style={
