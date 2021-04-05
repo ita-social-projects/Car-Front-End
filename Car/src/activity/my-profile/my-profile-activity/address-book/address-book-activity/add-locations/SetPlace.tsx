@@ -10,7 +10,7 @@ import {
     FIRST_ELEMENT_INDEX,
     THIRD_FROM_END_ELEMENT_INDEX,
     INITIAL_LATITUDE,
-    INITIAL_LONGITUDE
+    INITIAL_LONGITUDE, SECOND_ELEMENT_INDEX
 } from "../../../../../../constants/Constants";
 import SetPlaceStyle from "./SetPlaceStyle";
 
@@ -29,16 +29,14 @@ const SetPlace = (props: any) => {
         return json.split(", ").slice(FIRST_ELEMENT_INDEX, THIRD_FROM_END_ELEMENT_INDEX).join(", ");
     };
 
-    const getActualAddress = () => {
+    const getActualAddress = (latitude: number, longitude: number) => {
         return fetch(
             `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`
         )
             .then((res) => res.json())
             .then((json) => {
-                var indexOfResultedArray = 1;
-                var resultedAddress = removeRegionAndPostalCode(
-                    json.results[indexOfResultedArray].formatted_address
-                );
+                const resultedAddress =
+                    removeRegionAndPostalCode(json.results[SECOND_ELEMENT_INDEX].formatted_address);
 
                 setAddress(resultedAddress);
             });
@@ -109,7 +107,7 @@ const SetPlace = (props: any) => {
                         onDragEnd={(e: any) => {
                             setLatitude(e.nativeEvent.coordinate.latitude);
                             setLongitude(e.nativeEvent.coordinate.longitude);
-                            getActualAddress();
+                            getActualAddress(e.nativeEvent.coordinate.latitude, e.nativeEvent.coordinate.longitude);
                         }}
                         image={require("../../../../../../../assets/images/custom-marker.png")}
                         coordinate={{
