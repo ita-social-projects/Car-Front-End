@@ -3,18 +3,20 @@ import { View, Text, TouchableOpacity, Platform, PermissionsAndroid } from "reac
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import AddressInput from "./AddressInput/AddressInput";
-import MapView, { Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
+import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
     FIRST_ELEMENT_INDEX,
     INITIAL_LATITUDE,
     INITIAL_LONGITUDE,
-    SECOND_ELEMENT_INDEX, THIRD_FROM_END_ELEMENT_INDEX
+    SECOND_ELEMENT_INDEX,
+    SECOND_FROM_END_ELEMENT_INDEX,
+    THIRD_ELEMENT_INDEX,
+    THIRD_FROM_END_ELEMENT_INDEX
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
-import Coordinates from "../../../../types/Coordinates";
 import MarkerFocus from "./MarkerFocus";
 import Geolocation from "@react-native-community/geolocation";
 
@@ -24,20 +26,7 @@ const CreateRequestToGeocodingApi = (address: string) => {
         "&key=" + APIConfig.apiKey;
 };
 
-const GetCoordinatesByDescription = (description: string,
-    setAddress: Dispatch<SetStateAction<Coordinates>>) => {
-
-    fetch(CreateRequestToGeocodingApi(description))
-        .then(result => result.json())
-        .then(json => {
-            const location = json.results[FIRST_ELEMENT_INDEX].geometry.location;
-            const coordinate = { latitude: location.lat, longitude: location.lng };
-
-            setAddress(coordinate);
-        });
-};
-
-function CreateJourney () {
+const CreateJourney = () => {
     const [fromText, setFromText] = useState("");
     const [toText, setToText] = useState("");
 
@@ -47,9 +36,9 @@ function CreateJourney () {
     const [isToConfirmed, setIsToConfirmed] = useState(false);
 
     const [fromCoordinates, setFromCoordinates] =
-        useState<Coordinates>({ latitude: 0, longitude: 0 });
+        useState<LatLng>({ latitude: 0, longitude: 0 });
     const [toCoordinates, setToCoordinates] =
-        useState<Coordinates>({ latitude: 0, longitude: 0 });
+        useState<LatLng>({ latitude: 0, longitude: 0 });
 
     let mapRegion: Region = {
         latitude: INITIAL_LATITUDE,
@@ -57,12 +46,7 @@ function CreateJourney () {
         latitudeDelta: 0.09,
         longitudeDelta: 0.09
     };
-    const [userRegion, setUserRegion] = useState<Region>(mapRegion);
-
-    // useEffect(() => {
-    //     console.log(fromCoordinates);
-    //     console.log(toCoordinates);
-    // }, [fromCoordinates, toCoordinates]);
+    const [region, setRegion] = useState<Region>(mapRegion);
 
     const androidPermission = async () => {
         try {
@@ -89,7 +73,7 @@ function CreateJourney () {
             (position) => {
                 console.log("Location");
                 console.log(position.coords);
-                setUserRegion((prevState) => {
+                setRegion((prevState) => {
                     return {
                         ...prevState,
                         latitude: position.coords.latitude,
@@ -105,16 +89,11 @@ function CreateJourney () {
         );
     }, []);
 
-    let markerCoordinates = {
-        latitude: INITIAL_LATITUDE,
-        longitude: INITIAL_LONGITUDE
-    };
-
     const confirmPressHandler = () => {
         console.log("Confirm was pressed");
     };
 
-    const setAddress = (address: string, coordinates: Coordinates) => {
+    const setAddress = (address: string, coordinates: LatLng) => {
         if (markerFocus === MarkerFocus.From) {
             setFromText(address);
             setIsFromConfirmed(true);
@@ -127,7 +106,12 @@ function CreateJourney () {
     };
 
     const removeRegionAndPostalCode = (json: string) => {
-        return json.split(", ").slice(FIRST_ELEMENT_INDEX, THIRD_FROM_END_ELEMENT_INDEX).join(", ");
+        const addressArray = json.split(", ");
+        const endIndex = addressArray.length > THIRD_ELEMENT_INDEX ?
+            THIRD_FROM_END_ELEMENT_INDEX :
+            SECOND_FROM_END_ELEMENT_INDEX;
+
+        return addressArray.slice(FIRST_ELEMENT_INDEX, endIndex).join(", ");
     };
 
     const getFromDirection = (latitude: number, longitude: number) => {
@@ -142,18 +126,44 @@ function CreateJourney () {
             });
     };
 
-    const onMarkerPressHandler = (markerFocus: MarkerFocus) => {
-        setMarkerFocus(markerFocus);
+    const onMarkerPressHandler = (markerFocus: MarkerFocus) => setMarkerFocus(markerFocus);
+
+    const GetCoordinatesByDescription = (description: string,
+        setAddress: Dispatch<SetStateAction<LatLng>>) => {
+
+        fetch(CreateRequestToGeocodingApi(description))
+            .then(result => result.json())
+            .then(json => {
+                const location = json.results[FIRST_ELEMENT_INDEX].geometry.location;
+                const coordinate = { latitude: location.lat, longitude: location.lng };
+
+                setAddress(coordinate);
+                setRegion((prevState) => {
+                    return {
+                        ...prevState,
+                        latitude: coordinate.longitude,
+                        longitude: coordinate.latitude
+                    };
+                });
+            });
     };
 
     const addressInputOnPressHandler = (data: any,
-        setCoordinates: Dispatch<SetStateAction<Coordinates>>,
+        setCoordinates: Dispatch<SetStateAction<LatLng>>,
         setIsConfirmed: Dispatch<SetStateAction<boolean>>,
         setText: Dispatch<SetStateAction<string>>) => {
+
         if (data.geometry) {
             const point = data.geometry.location;
 
             setCoordinates({ latitude: point.lat, longitude: point.lng });
+            setRegion((prevState) => {
+                return {
+                    ...prevState,
+                    latitude: point.lat,
+                    longitude: point.lng
+                };
+            });
         } else {
             GetCoordinatesByDescription(data.description, setCoordinates);
         }
@@ -166,6 +176,20 @@ function CreateJourney () {
         setText: Dispatch<SetStateAction<string>>) => {
         setIsConfirmed(false);
         setText(text);
+    };
+
+    const markerOnDragEndHandler = (event: MapEvent) => {
+        const { latitude, longitude } = event.nativeEvent.coordinate;
+
+        getFromDirection(latitude, longitude);
+
+        setRegion((prevState) => {
+            return {
+                ...prevState,
+                latitude: latitude,
+                longitude: longitude
+            };
+        });
     };
 
     const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
@@ -206,8 +230,8 @@ function CreateJourney () {
                 style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                initialRegion={userRegion}
-                region={userRegion}
+                initialRegion={region}
+                region={region}
                 customMapStyle={mapStyle}
             >
                 {
@@ -215,11 +239,9 @@ function CreateJourney () {
                         <Marker
                             style={CreateJourneyStyle.movableMarker}
                             draggable={true}
-                            onDragEnd={(e) => {
-                                getFromDirection(e.nativeEvent.coordinate.latitude, e.nativeEvent.coordinate.longitude);
-                            }}
+                            onDragEnd={markerOnDragEndHandler}
                             image={require("../../../../../assets/images/custom-marker.png")}
-                            coordinate={markerCoordinates}
+                            coordinate={region}
                         />
                         {
                             fromAndToIsConfirmed ? (
@@ -355,6 +377,6 @@ function CreateJourney () {
             </TouchableOpacity>
         </ScrollView>
     );*/
-}
+};
 
 export default CreateJourney;
