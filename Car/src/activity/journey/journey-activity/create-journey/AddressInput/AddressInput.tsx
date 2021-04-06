@@ -1,14 +1,27 @@
 import React from "react";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GooglePlacesAutocomplete, Place } from "react-native-google-places-autocomplete";
 import APIConfig from "../../../../../../api-service/APIConfig";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputStyles from "./AddressInputStyles";
 import { Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import AddressInputRow from "./AddressInputRow/AddressInputRow";
+
+const predefinedPlaces: Place[] = [
+    {
+        description: "Home",
+        geometry: { location: { lat: 49.877316, lng: 23.930052 } }
+    },
+    {
+        description: "Work",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    }
+];
 
 const AddressInput = (props: AddressInputProps) => {
     return (
         <GooglePlacesAutocomplete
+            predefinedPlaces={predefinedPlaces}
             onPress={props.onPress}
             query={{
                 key: APIConfig.apiKey,
@@ -47,11 +60,11 @@ const AddressInput = (props: AddressInputProps) => {
             enablePoweredByContainer={false}
             isRowScrollable={false}
             textInputProps={{
-                // editable: !props.isConfirmed
                 onChangeText: props.onChangeText,
                 value: props.address
             }}
             placeholder={""}
+            renderRow={(data) => <AddressInputRow data={data} />}
         />);
 };
 
