@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Platform, PermissionsAndroid } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import AddressInput from "./AddressInput/AddressInput";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
     FIRST_ELEMENT_INDEX,
@@ -14,19 +14,9 @@ import {
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
-
-// eslint-disable-next-line unused-imports/no-unused-vars
-enum MarkerFocus {
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    From,
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    To
-}
-
-interface Coordinates {
-    latitude: number,
-    longitude: number
-}
+import Coordinates from "../../../../types/Coordinates";
+import MarkerFocus from "./MarkerFocus";
+import Geolocation from "@react-native-community/geolocation";
 
 const CreateRequestToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -34,7 +24,8 @@ const CreateRequestToGeocodingApi = (address: string) => {
         "&key=" + APIConfig.apiKey;
 };
 
-const GetCoordinatesByDescription = (description: string, setAddress: Dispatch<SetStateAction<Coordinates>>) => {
+const GetCoordinatesByDescription = (description: string,
+    setAddress: Dispatch<SetStateAction<Coordinates>>) => {
 
     fetch(CreateRequestToGeocodingApi(description))
         .then(result => result.json())
@@ -42,31 +33,77 @@ const GetCoordinatesByDescription = (description: string, setAddress: Dispatch<S
             const location = json.results[FIRST_ELEMENT_INDEX].geometry.location;
             const coordinate = { latitude: location.lat, longitude: location.lng };
 
-            // console.log(coordinate);
             setAddress(coordinate);
         });
 };
 
 function CreateJourney () {
-    const [from, setFrom] = useState("");
-    const [to, setTo] = useState("");
+    const [fromText, setFromText] = useState("");
+    const [toText, setToText] = useState("");
+
     const [markerFocus, setMarkerFocus] = useState(MarkerFocus.From);
+
     const [isFromConfirmed, setIsFromConfirmed] = useState(false);
     const [isToConfirmed, setIsToConfirmed] = useState(false);
-    const [fromCoordinates, setFromCoordinates] = useState<Coordinates>({ latitude: 0, longitude: 0 });
-    const [toCoordinates, setToCoordinates] = useState<Coordinates>({ latitude: 0, longitude: 0 });
 
-    useEffect(() => {
-        console.log(fromCoordinates);
-        console.log(toCoordinates);
-    }, [fromCoordinates, toCoordinates]);
+    const [fromCoordinates, setFromCoordinates] =
+        useState<Coordinates>({ latitude: 0, longitude: 0 });
+    const [toCoordinates, setToCoordinates] =
+        useState<Coordinates>({ latitude: 0, longitude: 0 });
 
-    let mapRegion = {
+    let mapRegion: Region = {
         latitude: INITIAL_LATITUDE,
         longitude: INITIAL_LONGITUDE,
         latitudeDelta: 0.09,
         longitudeDelta: 0.09
     };
+    const [userRegion, setUserRegion] = useState<Region>(mapRegion);
+
+    // useEffect(() => {
+    //     console.log(fromCoordinates);
+    //     console.log(toCoordinates);
+    // }, [fromCoordinates, toCoordinates]);
+
+    const androidPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid
+                .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("You can use the location");
+            } else {
+                console.log("Location permission denied");
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    };
+
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            androidPermission();
+        } else {
+            Geolocation.requestAuthorization();
+        }
+        Geolocation.getCurrentPosition(
+            (position) => {
+                console.log("Location");
+                console.log(position.coords);
+                setUserRegion((prevState) => {
+                    return {
+                        ...prevState,
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+                });
+                console.log(position);
+            },
+            (error) => {
+                console.log(error);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+    }, []);
 
     let markerCoordinates = {
         latitude: INITIAL_LATITUDE,
@@ -79,11 +116,11 @@ function CreateJourney () {
 
     const setAddress = (address: string, coordinates: Coordinates) => {
         if (markerFocus === MarkerFocus.From) {
-            setFrom(address);
+            setFromText(address);
             setIsFromConfirmed(true);
             setFromCoordinates(coordinates);
         } else if (markerFocus === MarkerFocus.To) {
-            setTo(address);
+            setToText(address);
             setIsToConfirmed(true);
             setToCoordinates(coordinates);
         }
@@ -109,6 +146,28 @@ function CreateJourney () {
         setMarkerFocus(markerFocus);
     };
 
+    const addressInputOnPressHandler = (data: any,
+        setCoordinates: Dispatch<SetStateAction<Coordinates>>,
+        setIsConfirmed: Dispatch<SetStateAction<boolean>>,
+        setText: Dispatch<SetStateAction<string>>) => {
+        if (data.geometry) {
+            const point = data.geometry.location;
+
+            setCoordinates({ latitude: point.lat, longitude: point.lng });
+        } else {
+            GetCoordinatesByDescription(data.description, setCoordinates);
+        }
+        setIsConfirmed(true);
+        setText(data.description);
+    };
+
+    const addressInputOnChangeTextHandler = (text: string,
+        setIsConfirmed: Dispatch<SetStateAction<boolean>>,
+        setText: Dispatch<SetStateAction<string>>) => {
+        setIsConfirmed(false);
+        setText(text);
+    };
+
     const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
 
     return (
@@ -117,16 +176,13 @@ function CreateJourney () {
                 placeholder={"From"}
                 top={10}
                 paddingLeft={68}
-                address={from}
-                onPress={(data) => {
-                    setIsFromConfirmed(true);
-                    setFrom(data.description);
-                    GetCoordinatesByDescription(data.description, setFromCoordinates);
-                }}
-                onChangeText={(text) => {
-                    setIsFromConfirmed(false);
-                    setFrom(text);
-                }}
+                address={fromText}
+                onPress={(data) =>
+                    addressInputOnPressHandler(data, setFromCoordinates, setIsFromConfirmed, setFromText)
+                }
+                onChangeText={(text) =>
+                    addressInputOnChangeTextHandler(text, setIsFromConfirmed, setFromText)
+                }
                 onMarkerPress={() => onMarkerPressHandler(MarkerFocus.From)}
                 isMarkerFocus={markerFocus === MarkerFocus.From}
             />
@@ -135,16 +191,13 @@ function CreateJourney () {
                 placeholder={"To"}
                 top={65}
                 paddingLeft={45}
-                address={to}
-                onPress={(data) => {
-                    setIsToConfirmed(true);
-                    setTo(data.description);
-                    GetCoordinatesByDescription(data.description, setToCoordinates);
-                }}
-                onChangeText={(text) => {
-                    setIsToConfirmed(false);
-                    setTo(text);
-                }}
+                address={toText}
+                onPress={(data) =>
+                    addressInputOnPressHandler(data, setToCoordinates, setIsToConfirmed, setToText)
+                }
+                onChangeText={(text) =>
+                    addressInputOnChangeTextHandler(text, setIsToConfirmed, setToText)
+                }
                 onMarkerPress={() => onMarkerPressHandler(MarkerFocus.To)}
                 isMarkerFocus={markerFocus === MarkerFocus.To}
             />
@@ -153,7 +206,8 @@ function CreateJourney () {
                 style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                initialRegion={mapRegion}
+                initialRegion={userRegion}
+                region={userRegion}
                 customMapStyle={mapStyle}
             >
                 {

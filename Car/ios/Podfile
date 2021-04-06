@@ -22,6 +22,8 @@ target 'Car' do
   pod 'react-native-restart', :path => '../node_modules/react-native-restart'
 
 
+  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+
   target 'CarTests' do
     inherit! :complete
     # Pods for testing

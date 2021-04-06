@@ -64,6 +64,14 @@ test("renders correctly", async () =>
           }
         }
         provider="google"
+        region={
+          Object {
+            "latitude": 49.843844,
+            "latitudeDelta": 0.09,
+            "longitude": 24.025581,
+            "longitudeDelta": 0.09,
+          }
+        }
         showsUserLocation={true}
         style={
           Object {
