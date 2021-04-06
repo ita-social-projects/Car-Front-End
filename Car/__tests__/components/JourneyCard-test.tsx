@@ -97,14 +97,7 @@ test("renders correctly", async () =>
                 >
                   <ForwardRef
                     onPress={[Function]}
-                  >
-                    <Icon
-                      allowFontScaling={false}
-                      color="black"
-                      name="ellipsis-horizontal"
-                      size={20}
-                    />
-                  </ForwardRef>
+                  />
                 </View>
               </View>
               <View

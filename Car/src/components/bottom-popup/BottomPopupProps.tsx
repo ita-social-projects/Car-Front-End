@@ -7,6 +7,7 @@ interface BottomPopupProps {
     renderHeader?: ReactNode,
     initialSnap?: number,
     enabledInnerScrolling?: boolean,
+    enabledGestureInteraction?: boolean,
     onCloseEnd?: () => void,
     style?: object
 }

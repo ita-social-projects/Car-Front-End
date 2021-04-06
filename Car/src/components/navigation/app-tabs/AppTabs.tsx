@@ -6,11 +6,10 @@ import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs"
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsStyle from "./AppTabsStyle";
-import { getFocusedRouteNameFromRoute, RouteProp } from "@react-navigation/native";
 import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
-import { EMPTY_COLLECTION_LENGTH, NOT_EXISTING_ELEMENT_INDEX } from "../../../constants/Constants";
+import { EMPTY_COLLECTION_LENGTH } from "../../../constants/Constants";
 import DM from "../../styles/DM";
 
 const Tabs = createBottomTabNavigator();
@@ -29,13 +28,6 @@ const AppTabs = () => {
             setUnreadNotificationsNumber
         );
     });
-
-    const getTabBarVisibility = (route: RouteProp<Record<string, object | undefined>, "MessagesTabs">) => {
-        const routeName = getFocusedRouteNameFromRoute(route)!;
-        const hideOnScreens = ["Chat"];
-
-        return hideOnScreens.indexOf(routeName) <= NOT_EXISTING_ELEMENT_INDEX;
-    };
 
     const tabBarBadge = unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH
         ? unreadNotificationsNumber.toString()
@@ -79,8 +71,7 @@ const AppTabs = () => {
             <Tabs.Screen
                 name="MessagesTabs"
                 component={MessagesTabs}
-                options={({ route }) => ({
-                    tabBarVisible: getTabBarVisibility(route),
+                options={() => ({
                     tabBarLabel: "Chats"
                 })}
             />
@@ -90,9 +81,9 @@ const AppTabs = () => {
                 component={MyProfileTabs}
             />
             <Tabs.Screen
-                options={{
+                options={() => ({
                     tabBarLabel: "Journey"
-                }}
+                })}
                 name="JourneyTabs"
                 component={JourneyTabs}
             />

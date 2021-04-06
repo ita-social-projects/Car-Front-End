@@ -26,7 +26,7 @@ const MessagesTabs = () => {
                 <StackTabs.Screen
                     name="Messages"
                     options={{
-                        headerTitle: "Messages",
+                        headerTitle: "Chats",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerRight: () => (

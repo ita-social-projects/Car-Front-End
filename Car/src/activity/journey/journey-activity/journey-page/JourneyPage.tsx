@@ -72,13 +72,13 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
             </View>
             <BottomPopup
                 refForChild={moreOptionsRef}
-                enabledGestureInteraction={true}
                 style={{ backgroundColor: DM("white") }}
                 snapPoints={[
                     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                     isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
                 ]}
                 initialSnap={MIN_POPUP_POSITION}
+                enabledGestureInteraction={true}
                 enabledInnerScrolling={true}
                 renderContent={
                     <View style={[JourneyPageStyle.contentView, { backgroundColor: DM("white") }]}>

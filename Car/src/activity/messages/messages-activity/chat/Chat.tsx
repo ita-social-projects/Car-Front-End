@@ -5,7 +5,7 @@ import {
     Bubble,
     GiftedChat,
     InputToolbar,
-    Send
+    Send,
 } from "react-native-gifted-chat";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import AuthContext from "../../../../components/auth/AuthContext";
@@ -86,7 +86,7 @@ const Chat = (properties: ChatProps) => {
                         {
                             _id: receivedMessage.id,
                             text: receivedMessage.text,
-                            createdAt: receivedMessage.createdAt,
+                            createdAt: new Date(receivedMessage.createdAt),
                             user: {
                                 _id: receivedMessage.senderId,
                                 name: receivedMessage?.sender?.name + "|"
@@ -227,7 +227,7 @@ const Chat = (properties: ChatProps) => {
                     const messageToAdd = {
                         _id: data?.id,
                         text: data?.text,
-                        createdAt: data?.createdAt,
+                        createdAt: new Date(data.createdAt),
                         user: {
                             _id: data?.senderId,
                             name: data?.name + "|"
@@ -273,7 +273,8 @@ const Chat = (properties: ChatProps) => {
                     renderAvatar={(data) => renderUserAvatar(data)}
                     placeholder="Aa"
                     messagesContainerStyle={{ paddingBottom: 10 }}
-                    renderTime={() => <View />}
+                    timeFormat="HH:mm"
+                    dateFormat="MM.DD.YYYY"
                     messages={messages as any[]}
                     onInputTextChanged={(value) => {
                         if (value.trim()) {
@@ -309,9 +310,9 @@ const Chat = (properties: ChatProps) => {
                 refForChild={moreOptionsRef}
                 snapPoints={[CHAT_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
                 enabledInnerScrolling={false}
+                enabledGestureInteraction={false}
                 initialSnap={1}
                 renderHeader={<View />}
-                enabledGestureInteraction={false}
                 renderContent={
                     <View style={{ backgroundColor: DM("white") }}>
                         <MenuButton text="Copy text" onPress={() => {
