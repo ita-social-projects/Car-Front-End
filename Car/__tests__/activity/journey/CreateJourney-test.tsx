@@ -34,6 +34,18 @@ test("renders correctly", async () =>
         top={65}
       />
       <MapView
+        camera={
+          Object {
+            "altitude": 200,
+            "center": Object {
+              "latitude": 49.843844,
+              "longitude": 24.025581,
+            },
+            "heading": 20,
+            "pitch": 2,
+            "zoom": 16,
+          }
+        }
         customMapStyle={
           Array [
             Object {
@@ -55,23 +67,19 @@ test("renders correctly", async () =>
             },
           ]
         }
-        initialRegion={
+        initialCamera={
           Object {
-            "latitude": 49.843844,
-            "latitudeDelta": 0.09,
-            "longitude": 24.025581,
-            "longitudeDelta": 0.09,
+            "altitude": 200,
+            "center": Object {
+              "latitude": 49.843844,
+              "longitude": 24.025581,
+            },
+            "heading": 20,
+            "pitch": 2,
+            "zoom": 16,
           }
         }
         provider="google"
-        region={
-          Object {
-            "latitude": 49.843844,
-            "latitudeDelta": 0.09,
-            "longitude": 24.025581,
-            "longitudeDelta": 0.09,
-          }
-        }
         showsUserLocation={true}
         style={
           Object {
@@ -84,9 +92,7 @@ test("renders correctly", async () =>
             coordinate={
               Object {
                 "latitude": 49.843844,
-                "latitudeDelta": 0.09,
                 "longitude": 24.025581,
-                "longitudeDelta": 0.09,
               }
             }
             draggable={true}

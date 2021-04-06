@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Platform, PermissionsAndroid } from "react-native";
+import { PermissionsAndroid, Platform, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import AddressInput from "./AddressInput/AddressInput";
-import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
+import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
     FIRST_ELEMENT_INDEX,
@@ -40,23 +40,23 @@ const CreateJourney = () => {
     const [toCoordinates, setToCoordinates] =
         useState<LatLng>({ latitude: 0, longitude: 0 });
 
-    let mapRegion: Region = {
+    const initialCoordinate: LatLng = {
         latitude: INITIAL_LATITUDE,
-        longitude: INITIAL_LONGITUDE,
-        latitudeDelta: 0.09,
-        longitudeDelta: 0.09
+        longitude: INITIAL_LONGITUDE
     };
-    const [region, setRegion] = useState<Region>(mapRegion);
+    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
+    const [mapRef, setMarRef] = useState<MapView | null>(null);
+    const [mapWasFocusedToUserLocation, setMapWasFocusedToUserLocation] = useState(false);
 
-    const setRegionHelper = (latitude: number, longitude: number) => {
-        setRegion((prevState) => {
-            return {
-                ...prevState,
-                latitude: latitude,
-                longitude: longitude
-            };
-        });
+    const animateCameraAndMoveMarker = (latitude: number, longitude: number) => {
+        const newMarkerCoordinates: LatLng = { longitude: longitude, latitude: latitude };
 
+        setMarkerCoordinates(newMarkerCoordinates);
+
+        console.log("animateCameraAndMoveMarker() -- mapRef is null: " + (mapRef === null));
+        mapRef?.animateCamera({
+            center: newMarkerCoordinates
+        }, { duration: 2000 });
     };
 
     const androidPermission = async () => {
@@ -82,7 +82,7 @@ const CreateJourney = () => {
         }
         Geolocation.getCurrentPosition(
             (position) => {
-                setRegionHelper(position.coords.latitude, position.coords.longitude);
+                animateCameraAndMoveMarker(position.coords.latitude, position.coords.longitude);
             },
             (error) => {
                 console.log(error);
@@ -116,7 +116,7 @@ const CreateJourney = () => {
         return addressArray.slice(FIRST_ELEMENT_INDEX, endIndex).join(", ");
     };
 
-    const getFromDirection = (latitude: number, longitude: number) => {
+    const setAddressByCoordinates = (latitude: number, longitude: number) => {
         fetch(
             `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`)
             .then((res) => res.json())
@@ -130,7 +130,7 @@ const CreateJourney = () => {
 
     const onMarkerPressHandler = (markerFocus: MarkerFocus) => setMarkerFocus(markerFocus);
 
-    const GetCoordinatesByDescription = (description: string,
+    const SetCoordinatesByDescription = (description: string,
         setAddress: Dispatch<SetStateAction<LatLng>>) => {
 
         fetch(CreateRequestToGeocodingApi(description))
@@ -140,25 +140,27 @@ const CreateJourney = () => {
                 const coordinate = { latitude: location.lat, longitude: location.lng };
 
                 setAddress(coordinate);
-                setRegionHelper(coordinate.latitude, coordinate.longitude);
+                animateCameraAndMoveMarker(coordinate.latitude, coordinate.longitude);
             });
     };
 
     const addressInputOnPressHandler = (data: any,
         setCoordinates: Dispatch<SetStateAction<LatLng>>,
         setIsConfirmed: Dispatch<SetStateAction<boolean>>,
-        setText: Dispatch<SetStateAction<string>>) => {
+        setText: Dispatch<SetStateAction<string>>,
+        markerFocus: MarkerFocus) => {
 
         if (data.geometry) {
             const point = data.geometry.location;
 
             setCoordinates({ latitude: point.lat, longitude: point.lng });
-            setRegionHelper(point.lat, point.lng);
+            animateCameraAndMoveMarker(point.lat, point.lng);
         } else {
-            GetCoordinatesByDescription(data.description, setCoordinates);
+            SetCoordinatesByDescription(data.description, setCoordinates);
         }
         setIsConfirmed(true);
         setText(data.description);
+        setMarkerFocus(markerFocus);
     };
 
     const addressInputOnChangeTextHandler = (text: string,
@@ -171,12 +173,20 @@ const CreateJourney = () => {
     const markerOnDragEndHandler = (event: MapEvent) => {
         const { latitude, longitude } = event.nativeEvent.coordinate;
 
-        getFromDirection(latitude, longitude);
+        setAddressByCoordinates(latitude, longitude);
 
-        setRegionHelper(latitude, longitude);
+        animateCameraAndMoveMarker(latitude, longitude);
     };
 
     const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
+
+    const initialCamera = {
+        center: initialCoordinate,
+        pitch: 2,
+        heading: 20,
+        altitude: 200,
+        zoom: 16
+    };
 
     return (
         <View style={{ flex: 1 }}>
@@ -186,7 +196,8 @@ const CreateJourney = () => {
                 paddingLeft={68}
                 address={fromText}
                 onPress={(data) =>
-                    addressInputOnPressHandler(data, setFromCoordinates, setIsFromConfirmed, setFromText)
+                    addressInputOnPressHandler(data, setFromCoordinates,
+                        setIsFromConfirmed, setFromText, MarkerFocus.From)
                 }
                 onChangeText={(text) =>
                     addressInputOnChangeTextHandler(text, setIsFromConfirmed, setFromText)
@@ -201,7 +212,8 @@ const CreateJourney = () => {
                 paddingLeft={45}
                 address={toText}
                 onPress={(data) =>
-                    addressInputOnPressHandler(data, setToCoordinates, setIsToConfirmed, setToText)
+                    addressInputOnPressHandler(data, setToCoordinates,
+                        setIsToConfirmed, setToText, MarkerFocus.To)
                 }
                 onChangeText={(text) =>
                     addressInputOnChangeTextHandler(text, setIsToConfirmed, setToText)
@@ -211,11 +223,24 @@ const CreateJourney = () => {
             />
 
             <MapView
+                ref={ref => {
+                    setMarRef(ref);
+                    if (!mapWasFocusedToUserLocation) {
+                        ref?.getCamera().then(camera => {
+                            if (camera.center !== markerCoordinates) {
+                                ref?.animateCamera(
+                                    { center: markerCoordinates },
+                                    { duration: 2000 });
+                                setMapWasFocusedToUserLocation(true);
+                            }
+                        });
+                    }
+                }}
                 style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                initialRegion={region}
-                region={region}
+                initialCamera={initialCamera}
+                camera={ mapRef === null ? { ...initialCamera, center: markerCoordinates } : undefined }
                 customMapStyle={mapStyle}
             >
                 {
@@ -225,7 +250,7 @@ const CreateJourney = () => {
                             draggable={true}
                             onDragEnd={markerOnDragEndHandler}
                             image={require("../../../../../assets/images/custom-marker.png")}
-                            coordinate={region}
+                            coordinate={markerCoordinates}
                         />
                         {
                             fromAndToIsConfirmed ? (
