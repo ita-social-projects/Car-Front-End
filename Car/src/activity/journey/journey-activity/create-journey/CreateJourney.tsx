@@ -48,6 +48,17 @@ const CreateJourney = () => {
     };
     const [region, setRegion] = useState<Region>(mapRegion);
 
+    const setRegionHelper = (latitude: number, longitude: number) => {
+        setRegion((prevState) => {
+            return {
+                ...prevState,
+                latitude: latitude,
+                longitude: longitude
+            };
+        });
+
+    };
+
     const androidPermission = async () => {
         try {
             const granted = await PermissionsAndroid
@@ -71,16 +82,7 @@ const CreateJourney = () => {
         }
         Geolocation.getCurrentPosition(
             (position) => {
-                console.log("Location");
-                console.log(position.coords);
-                setRegion((prevState) => {
-                    return {
-                        ...prevState,
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    };
-                });
-                console.log(position);
+                setRegionHelper(position.coords.latitude, position.coords.longitude);
             },
             (error) => {
                 console.log(error);
@@ -138,13 +140,7 @@ const CreateJourney = () => {
                 const coordinate = { latitude: location.lat, longitude: location.lng };
 
                 setAddress(coordinate);
-                setRegion((prevState) => {
-                    return {
-                        ...prevState,
-                        latitude: coordinate.longitude,
-                        longitude: coordinate.latitude
-                    };
-                });
+                setRegionHelper(coordinate.latitude, coordinate.longitude);
             });
     };
 
@@ -157,13 +153,7 @@ const CreateJourney = () => {
             const point = data.geometry.location;
 
             setCoordinates({ latitude: point.lat, longitude: point.lng });
-            setRegion((prevState) => {
-                return {
-                    ...prevState,
-                    latitude: point.lat,
-                    longitude: point.lng
-                };
-            });
+            setRegionHelper(point.lat, point.lng);
         } else {
             GetCoordinatesByDescription(data.description, setCoordinates);
         }
@@ -183,13 +173,7 @@ const CreateJourney = () => {
 
         getFromDirection(latitude, longitude);
 
-        setRegion((prevState) => {
-            return {
-                ...prevState,
-                latitude: latitude,
-                longitude: longitude
-            };
-        });
+        setRegionHelper(latitude, longitude);
     };
 
     const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
