@@ -21,6 +21,7 @@ test("renders correctly", async () =>
         onPress={[Function]}
         paddingLeft={68}
         placeholder="From"
+        savedLocations={Array []}
         top={10}
       />
       <AddressInput
@@ -31,6 +32,7 @@ test("renders correctly", async () =>
         onPress={[Function]}
         paddingLeft={45}
         placeholder="To"
+        savedLocations={Array []}
         top={65}
       />
       <MapView

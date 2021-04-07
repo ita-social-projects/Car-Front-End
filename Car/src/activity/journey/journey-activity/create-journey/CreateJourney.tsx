@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import React, { Dispatch, SetStateAction,
+    useContext, useEffect, useRef, useState } from "react";
 import { PermissionsAndroid, Platform, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
@@ -18,6 +19,9 @@ import MapViewDirections from "react-native-maps-directions";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
 import MarkerFocus from "./MarkerFocus";
 import Geolocation from "@react-native-community/geolocation";
+import LocationService from "../../../../../api-service/location-service/LocationService";
+import AuthContext from "../../../../components/auth/AuthContext";
+import Location from "../../../../../models/location/Location";
 
 const CreateRequestToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -26,6 +30,9 @@ const CreateRequestToGeocodingApi = (address: string) => {
 };
 
 const CreateJourney = () => {
+    const { user } = useContext(AuthContext);
+    const [locations, setLocations] = useState<Array<Location>>([]);
+
     const [fromText, setFromText] = useState("");
     const [toText, setToText] = useState("");
 
@@ -53,6 +60,15 @@ const CreateJourney = () => {
         altitude: 200,
         zoom: 16
     };
+
+    useEffect(() => {
+        LocationService
+            .getAll(Number(user?.id))
+            .then((res: any) => {
+                setLocations(res.data);
+            })
+            .catch((e: any) => console.log(e));
+    }, []);
 
     const animateCameraAndMoveMarker = (latitude: number, longitude: number) => {
         const newMarkerCoordinates: LatLng = { longitude: longitude, latitude: latitude };
@@ -201,6 +217,7 @@ const CreateJourney = () => {
                 }
                 onMarkerPress={() => onMarkerPressHandler(MarkerFocus.From)}
                 isMarkerFocus={markerFocus === MarkerFocus.From}
+                savedLocations={locations}
             />
 
             <AddressInput
@@ -217,6 +234,7 @@ const CreateJourney = () => {
                 }
                 onMarkerPress={() => onMarkerPressHandler(MarkerFocus.To)}
                 isMarkerFocus={markerFocus === MarkerFocus.To}
+                savedLocations={locations}
             />
 
             <MapView
