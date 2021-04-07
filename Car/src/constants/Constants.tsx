@@ -14,6 +14,7 @@ export const THIRD_FROM_END_ELEMENT_INDEX = -3;
 export const LAST_INDEX_CORRECTION = 1;
 export const EMPTY_COLLECTION_LENGTH = 0;
 export const SINGLE_ELEMENT_COLLECTION_LENGTH = 1;
+export const THREE_ELEMENT_COLLECTION_LENGTH = 3;
 export const ZERO_OPACITY = 0;
 export const HALF_OPACITY = 0.5;
 export const MAX_OPACITY = 1;

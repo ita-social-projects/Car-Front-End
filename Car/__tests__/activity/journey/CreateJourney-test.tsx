@@ -34,18 +34,6 @@ test("renders correctly", async () =>
         top={65}
       />
       <MapView
-        camera={
-          Object {
-            "altitude": 200,
-            "center": Object {
-              "latitude": 49.843844,
-              "longitude": 24.025581,
-            },
-            "heading": 20,
-            "pitch": 2,
-            "zoom": 16,
-          }
-        }
         customMapStyle={
           Array [
             Object {

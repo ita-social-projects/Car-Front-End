@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { PermissionsAndroid, Platform, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
@@ -11,8 +11,7 @@ import {
     INITIAL_LONGITUDE,
     SECOND_ELEMENT_INDEX,
     SECOND_FROM_END_ELEMENT_INDEX,
-    THIRD_ELEMENT_INDEX,
-    THIRD_FROM_END_ELEMENT_INDEX
+    THIRD_FROM_END_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
@@ -45,16 +44,22 @@ const CreateJourney = () => {
         longitude: INITIAL_LONGITUDE
     };
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
-    const [mapRef, setMarRef] = useState<MapView | null>(null);
-    const [mapWasFocusedToUserLocation, setMapWasFocusedToUserLocation] = useState(false);
+    const mapRef = useRef<MapView | null>(null);
+
+    const initialCamera = {
+        center: initialCoordinate,
+        pitch: 2,
+        heading: 20,
+        altitude: 200,
+        zoom: 16
+    };
 
     const animateCameraAndMoveMarker = (latitude: number, longitude: number) => {
         const newMarkerCoordinates: LatLng = { longitude: longitude, latitude: latitude };
 
         setMarkerCoordinates(newMarkerCoordinates);
 
-        console.log("animateCameraAndMoveMarker() -- mapRef is null: " + (mapRef === null));
-        mapRef?.animateCamera({
+        mapRef.current?.animateCamera({
             center: newMarkerCoordinates
         }, { duration: 2000 });
     };
@@ -109,7 +114,7 @@ const CreateJourney = () => {
 
     const removeRegionAndPostalCode = (json: string) => {
         const addressArray = json.split(", ");
-        const endIndex = addressArray.length > THIRD_ELEMENT_INDEX ?
+        const endIndex = addressArray.length > THREE_ELEMENT_COLLECTION_LENGTH ?
             THIRD_FROM_END_ELEMENT_INDEX :
             SECOND_FROM_END_ELEMENT_INDEX;
 
@@ -180,14 +185,6 @@ const CreateJourney = () => {
 
     const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
 
-    const initialCamera = {
-        center: initialCoordinate,
-        pitch: 2,
-        heading: 20,
-        altitude: 200,
-        zoom: 16
-    };
-
     return (
         <View style={{ flex: 1 }}>
             <AddressInput
@@ -223,24 +220,12 @@ const CreateJourney = () => {
             />
 
             <MapView
-                ref={ref => {
-                    setMarRef(ref);
-                    if (!mapWasFocusedToUserLocation) {
-                        ref?.getCamera().then(camera => {
-                            if (camera.center !== markerCoordinates) {
-                                ref?.animateCamera(
-                                    { center: markerCoordinates },
-                                    { duration: 2000 });
-                                setMapWasFocusedToUserLocation(true);
-                            }
-                        });
-                    }
-                }}
+                ref={ref => { mapRef.current = ref; }}
                 style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}
-                camera={ mapRef === null ? { ...initialCamera, center: markerCoordinates } : undefined }
+                // camera={ mapRef === null ? { ...initialCamera, center: markerCoordinates } : undefined }
                 customMapStyle={mapStyle}
             >
                 {
