@@ -15,6 +15,26 @@ const predefinedPlaces: Place[] = [
     {
         description: "Work",
         geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    },
+    {
+        description: "Work 1",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    },
+    {
+        description: "Work 2",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    },
+    {
+        description: "Work 3",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    },
+    {
+        description: "Work 4",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    },
+    {
+        description: "Work 5",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
     }
 ];
 
@@ -65,7 +85,8 @@ const AddressInput = (props: AddressInputProps) => {
             }}
             placeholder={""}
             renderRow={(data) => <AddressInputRow data={data} />}
-        />);
+        />
+    );
 };
 
 export default AddressInput;
