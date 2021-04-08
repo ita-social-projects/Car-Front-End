@@ -3,6 +3,7 @@
     package="com.car">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MainApplication"
@@ -18,7 +19,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="API-HERE" /> <!-- You will also only need to add this uses-library tag -->
+            android:value="AIzaSyA4BK5svjc6bumMDsjlaiGtjpIZBAFU8Fg" /> <!-- You will also only need to add this uses-library tag -->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

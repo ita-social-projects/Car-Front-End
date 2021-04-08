@@ -63,7 +63,7 @@ const SearchJourneyStyle = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 14,
         top: Dimensions.get("screen").height - 236,
-        left: Dimensions.get("screen").width -121,
+        left: Dimensions.get("screen").width - 121,
         position: "absolute",
         backgroundColor: "#000000",
         flexDirection: "row",
