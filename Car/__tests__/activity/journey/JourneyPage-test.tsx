@@ -7,14 +7,12 @@ const renderer = shallowRenderer.createRenderer();
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
-const props = { route: { params: { journeyId: 1, isDriver: false, isPassenger: false } } };
+const props = {
+    route: { params: { journeyId: 1, isDriver: false, isPassenger: false } },
+};
 
 test("renders correctly", async () =>
-    expect(
-        renderer.render(
-            <JourneyPage props={props} />
-        )
-    ).toMatchInlineSnapshot(`
+    expect(renderer.render(<JourneyPage props={props} />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <View
         style={
@@ -45,6 +43,7 @@ test("renders correctly", async () =>
         </Text>
       </View>
       <BottomPopup
+        enabledGestureInteraction={true}
         enabledInnerScrolling={true}
         initialSnap={1}
         refForChild={
