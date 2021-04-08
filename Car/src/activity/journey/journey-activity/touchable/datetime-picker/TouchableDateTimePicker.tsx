@@ -21,9 +21,9 @@ function TouchableDateTimePicker (props: any) {
     };
 
     function formatDate (dateUTC: any) {
-        let date = dateUTC.getDate();
+        let dayOfTheMonth = dateUTC.getDate();
 
-        date = ("0" + date).slice(MINUS_TWO);
+        dayOfTheMonth = ("0" + dayOfTheMonth).slice(MINUS_TWO);
         let month = dateUTC.getMonth();
 
         let Month = parseInt(month) + ONE;
@@ -40,7 +40,7 @@ function TouchableDateTimePicker (props: any) {
 
         minutes = ("0" + minutes).slice(MINUS_TWO);
 
-        return date + "/" + month + "; " + dayName + "; " + hours + ":" + minutes;
+        return dayOfTheMonth + "/" + month + "; " + dayName + "; " + hours + ":" + minutes;
     }
 
     return (

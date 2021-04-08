@@ -30,9 +30,9 @@ const SetPlace = (props: SetPlaceProps) => {
         return json.split(", ").slice(FIRST_ELEMENT_INDEX, THIRD_FROM_END_ELEMENT_INDEX).join(", ");
     };
 
-    const getActualAddress = (latitude: number, longitude: number) => {
+    const getActualAddress = (lat: number, lng: number) => {
         return fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${APIConfig.apiKey}`
         )
             .then((res) => res.json())
             .then((json) => {

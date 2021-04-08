@@ -149,10 +149,10 @@ const CreateJourney = () => {
             });
     };
 
-    const onMarkerPressHandler = (markerFocus: MarkerFocus) => setMarkerFocus(markerFocus);
+    const onMarkerPressHandler = (focus: MarkerFocus) => setMarkerFocus(focus);
 
     const SetCoordinatesByDescription = (description: string,
-        setAddress: Dispatch<SetStateAction<LatLng>>) => {
+        setCoordinates: Dispatch<SetStateAction<LatLng>>) => {
 
         fetch(CreateRequestToGeocodingApi(description))
             .then(result => result.json())
@@ -160,7 +160,7 @@ const CreateJourney = () => {
                 const location = json.results[FIRST_ELEMENT_INDEX].geometry.location;
                 const coordinate = { latitude: location.lat, longitude: location.lng };
 
-                setAddress(coordinate);
+                setCoordinates(coordinate);
                 animateCameraAndMoveMarker(coordinate.latitude, coordinate.longitude);
             });
     };
@@ -169,7 +169,7 @@ const CreateJourney = () => {
         setCoordinates: Dispatch<SetStateAction<LatLng>>,
         setIsConfirmed: Dispatch<SetStateAction<boolean>>,
         setText: Dispatch<SetStateAction<string>>,
-        markerFocus: MarkerFocus) => {
+        focus: MarkerFocus) => {
 
         if (data.geometry) {
             const point = data.geometry.location;
@@ -181,7 +181,7 @@ const CreateJourney = () => {
         }
         setIsConfirmed(true);
         setText(data.description);
-        setMarkerFocus(markerFocus);
+        setMarkerFocus(focus);
     };
 
     const addressInputOnChangeTextHandler = (text: string,
