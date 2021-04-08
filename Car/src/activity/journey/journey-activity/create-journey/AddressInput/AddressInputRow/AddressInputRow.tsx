@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
 });
 
 interface AddressInputRowProps {
-    data: GooglePlaceData
+    data: GooglePlaceData,
+    isTitle?: boolean
 }
 
 const AddressInputRow = (props: AddressInputRowProps) => {

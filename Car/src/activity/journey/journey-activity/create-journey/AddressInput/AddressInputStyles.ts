@@ -40,6 +40,14 @@ const AddressInputStyles = StyleSheet.create({
         position: "absolute",
         top: 8,
         right: 20
+    },
+    recentRidesTitleContainer: {
+        width: "100%",
+        alignItems: "center"
+    },
+    recentRidesTitle: {
+        fontSize: 18,
+        fontWeight: "700"
     }
 });
 
