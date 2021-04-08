@@ -88,7 +88,7 @@ test("renders correctly", async () =>
             draggable={true}
             image={
               Object {
-                "testUri": "../../../assets/images/custom-marker.png",
+                "testUri": "../../../assets/images/small-custom-marker.png",
               }
             }
             onDragEnd={[Function]}
