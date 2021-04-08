@@ -21,7 +21,7 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerRight": [Function],
-              "headerTitle": "Messages",
+              "headerTitle": "Chats",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {

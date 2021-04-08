@@ -50,6 +50,21 @@ Platform for sharing rides between company employees
 
 ### How to run locally
 
+To run app locally you should proceed these instructions 
+https://reactnative.dev/docs/environment-setup
+with such options:
+	1. Selected guide: React Native CLI Quikcstart
+	2. Development OS: Windows
+	3. Target OS: Android
+You can switch beetwen options depending on your OS.
+
+Possible issue:
+	1. VT-x can be turn off (Solution - https://www.youtube.com/watch?v=MOuTxfzCvMY)
+	2. "npx react-native run-android" can be replaced by "npm run android"
+	3. If you get an error "emulator didn`t start within 30 seconds" try to run firstly emulator via AVD manager
+(Android Studio) and then your app.  
+	4. Before running app first time, install all dependencies by "npm i"
+
 ### How to run with Docker
 
 ---
