@@ -251,7 +251,7 @@ const CreateJourney = () => {
                             style={CreateJourneyStyle.movableMarker}
                             draggable={true}
                             onDragEnd={markerOnDragEndHandler}
-                            image={require("../../../../../assets/images/custom-marker.png")}
+                            image={require("../../../../../assets/images/small-custom-marker.png")}
                             coordinate={markerCoordinates}
                         />
                         {
@@ -260,7 +260,7 @@ const CreateJourney = () => {
                                     <Marker
                                         title={"From"}
                                         coordinate={fromCoordinates}
-                                        image={require("../../../../../assets/images/circle-marker.png")}
+                                        image={require("../../../../../assets/images/small-circle-marker.png")}
                                     />
                                     <Marker
                                         title={"To"}
