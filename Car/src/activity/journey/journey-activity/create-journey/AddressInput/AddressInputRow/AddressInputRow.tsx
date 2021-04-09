@@ -11,12 +11,7 @@ const styles = StyleSheet.create({
         paddingRight: 100
     },
     iconContainer: {
-        width: 50
-    },
-    iconInnerContainer: {
-        backgroundColor: "#a2a2a2",
-        padding: 5,
-        borderRadius: 50,
+        // padding: 5,
         marginRight: 15
     }
 });
@@ -30,13 +25,11 @@ const AddressInputRow = (props: AddressInputRowProps) => {
     return (
         <View style={styles.row}>
             <View style={styles.iconContainer}>
-                <View style={styles.iconInnerContainer}>
-                    <Ionicons
-                        name={(props.data as any)?.iconName ?? "location"}
-                        size={25}
-                        color={DM("#414045")}
-                    />
-                </View>
+                <Ionicons
+                    name={(props.data as any)?.iconName ?? "location"}
+                    size={25}
+                    color={DM("#414045")}
+                />
             </View>
             <Text>{props.data.description || (props.data as any).vicinity}</Text>
         </View>

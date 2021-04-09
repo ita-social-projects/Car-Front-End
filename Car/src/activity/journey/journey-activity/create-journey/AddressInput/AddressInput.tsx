@@ -3,13 +3,13 @@ import { GooglePlacesAutocomplete, Place } from "react-native-google-places-auto
 import APIConfig from "../../../../../../api-service/APIConfig";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputStyles from "./AddressInputStyles";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import Location from "../../../../../../models/location/Location";
-import { FIRST_ELEMENT_INDEX, INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Constants";
+import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Constants";
 
-const predefinedPlaces = [
+let recentRides = [
     {
         description: "Address 1",
         geometry: { location: { lat: 49.877316, lng: 23.930052 } }
@@ -25,13 +25,16 @@ const predefinedPlaces = [
     {
         description: "Address 4",
         geometry: { location: { lat: 49.834976, lng: 24.008147 } }
+    },
+    {
+        description: "Address 5",
+        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
     }
 ];
 
-predefinedPlaces.unshift({
-    ...predefinedPlaces[FIRST_ELEMENT_INDEX],
-    isTitle: true
-} as Place);
+recentRides = recentRides.map(ride => {
+    return { ...ride, iconName: "ios-time-outline" };
+});
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = (locations: Location[]) => {
@@ -52,7 +55,7 @@ const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = (locations
 const AddressInput = (props: AddressInputProps) => {
     return (
         <GooglePlacesAutocomplete
-            predefinedPlaces={mapSavedLocationsToPlaces(props.savedLocations).concat(predefinedPlaces)}
+            predefinedPlaces={mapSavedLocationsToPlaces(props.savedLocations).concat(recentRides)}
             onPress={props.onPress}
             query={{
                 key: APIConfig.apiKey,
@@ -95,19 +98,7 @@ const AddressInput = (props: AddressInputProps) => {
                 value: props.address
             }}
             placeholder={""}
-            renderRow={(data) => {
-                if ((data as any)?.isTitle) {
-                    return (
-                        <View style={AddressInputStyles.recentRidesTitleContainer}>
-                            <Text style={AddressInputStyles.recentRidesTitle}>
-                                Recent rides
-                            </Text>
-                        </View>
-                    );
-                }
-
-                return (<AddressInputRow data={data}/>);
-            }}
+            renderRow={(data) => (<AddressInputRow data={data}/>)}
         />
     );
 };

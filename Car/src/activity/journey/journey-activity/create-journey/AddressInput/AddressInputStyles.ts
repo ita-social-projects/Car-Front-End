@@ -21,7 +21,7 @@ const AddressInputStyles = StyleSheet.create({
         position: "absolute",
         top: 50,
         zIndex: 2,
-        height: 250
+        height: 270
     },
     textInput: {
         color: "black",
