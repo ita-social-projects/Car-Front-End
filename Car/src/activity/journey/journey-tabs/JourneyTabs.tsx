@@ -21,7 +21,7 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 import {
-    ANIMATION_DURATION,
+    ANIMATION_DURATION, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
     FIRST_ELEMENT_INDEX,
     HALF_OPACITY,
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
@@ -40,6 +40,8 @@ const JourneyTabs = () => {
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
+
+    const moreOptionsRef = useRef<BottomSheet>(null);
 
     const StackTabs = createStackNavigator();
 
@@ -97,8 +99,6 @@ const JourneyTabs = () => {
 
     };
 
-    const moreOptionsRef = useRef<BottomSheet>(null);
-
     return (
         <View style={JourneyStyle.tabsStyle}>
             <StackTabs.Navigator>
@@ -115,14 +115,56 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Create Journey"
-                    component={CreateJourney}
+                    // component={CreateJourney}
                     options={{
                         headerTitle: "Create a Journey",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
-                        headerLeft: HeaderBackButton
+                        headerLeft: HeaderBackButton,
+                        headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
-                />
+                >
+                    {() => {
+
+                        return (
+                            <>
+                                <Animated.View style={isVisible && [HeaderStyle.layout,
+                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                ]} />
+
+                                <Animated.View style={[HeaderStyle.popUp,
+                                    { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
+                                ]}>
+                                    <CreateJourney />
+                                </Animated.View>
+
+                                <BottomPopup
+                                    refForChild={moreOptionsRef}
+                                    snapPoints={[MIN_POPUP_HEIGHT, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                    enabledInnerScrolling={false}
+                                    onCloseEnd={closeHandle}
+                                    initialSnap={0}
+                                    renderHeader={
+                                        <View style={[JourneyPageStyle.headerTitleStyle,
+                                            { backgroundColor: DM("white") }
+                                        ]}>
+                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                                                More options
+                                            </Text>
+                                        </View>
+                                    }
+                                    renderContent={
+                                        <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
+                                            <MenuButton text="Add Stop" isIcon={true} />
+                                            <MenuButton text="Schedule This Journey" isIcon={true} />
+                                            <MenuButton text="Change Preferences" isIcon={true} />
+                                        </View>
+                                    }
+                                />
+                            </>
+                        );
+                    }}
+                </StackTabs.Screen>
 
                 <StackTabs.Screen
                     name="Search Journey"
@@ -176,7 +218,6 @@ const JourneyTabs = () => {
                                         </View>
                                     }
                                     renderContent={
-
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                             <MenuButton text="Add Stop" isIcon={true} />
                                             <MenuButton text="Edit the Journey" isIcon={true} />
