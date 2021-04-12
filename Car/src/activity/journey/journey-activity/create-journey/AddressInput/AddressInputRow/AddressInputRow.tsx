@@ -11,27 +11,22 @@ const styles = StyleSheet.create({
         paddingRight: 100
     },
     iconContainer: {
-        // padding: 5,
+        marginVertical: -5,
         marginRight: 15
     }
 });
 
-interface AddressInputRowProps {
-    data: GooglePlaceData,
-    isTitle?: boolean
-}
-
-const AddressInputRow = (props: AddressInputRowProps) => {
+const AddressInputRow = ({ data }: {data: GooglePlaceData}) => {
     return (
         <View style={styles.row}>
             <View style={styles.iconContainer}>
                 <Ionicons
-                    name={(props.data as any)?.iconName ?? "location"}
+                    name={(data as any)?.iconName ?? "location"}
                     size={25}
                     color={DM("#414045")}
                 />
             </View>
-            <Text>{props.data.description || (props.data as any).vicinity}</Text>
+            <Text>{data.description || (data as any).vicinity}</Text>
         </View>
     );
 };
