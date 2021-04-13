@@ -49,3 +49,4 @@ export const AVATAR_LOGO_SIZE_TO_PADDING_RATIO = 14;
 export const INITIAL_TIME = 0;
 export const FIRST_LOADING_MESSAGES = 0;
 export const COUNT_OF_MESSAGES_TO_LOAD = 0;
+export const NUMBER_OF_STOPS_LIMIT = 7;

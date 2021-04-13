@@ -155,7 +155,14 @@ const JourneyTabs = () => {
                                     }
                                     renderContent={
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
-                                            <MenuButton text="Add Stop" isIcon={true} />
+                                            <MenuButton
+                                                text="Add Stop"
+                                                isIcon={true}
+                                                onPress={() => {
+                                                    CreateJourney.addStopPressHandler();
+                                                    pressHandle();
+                                                }}
+                                            />
                                             <MenuButton text="Schedule This Journey" isIcon={true} />
                                             <MenuButton text="Change Preferences" isIcon={true} />
                                         </View>

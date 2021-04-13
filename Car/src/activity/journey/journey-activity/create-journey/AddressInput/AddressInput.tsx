@@ -81,13 +81,13 @@ const AddressInput = (props: AddressInputProps) => {
             styles={{
                 ...AddressInputStyles,
                 ...{
-                    container: {
-                        ...AddressInputStyles.container,
-                        ...{ top: props.top }
-                    },
+                    // container: {
+                    //     ...AddressInputStyles.container,
+                    //     top: props.top
+                    // },
                     textInput: {
                         ...AddressInputStyles.textInput,
-                        ...{ paddingLeft: props.paddingLeft }
+                        paddingLeft: props.paddingLeft
                     }
                 }
             }}

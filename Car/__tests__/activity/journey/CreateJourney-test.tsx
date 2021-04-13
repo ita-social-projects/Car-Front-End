@@ -13,27 +13,47 @@ test("renders correctly", async () =>
         }
       }
     >
-      <AddressInput
-        address=""
-        isMarkerFocus={true}
-        onChangeText={[Function]}
-        onMarkerPress={[Function]}
-        onPress={[Function]}
-        paddingLeft={68}
-        placeholder="From"
-        savedLocations={Array []}
-        top={10}
-      />
-      <AddressInput
-        address=""
-        isMarkerFocus={false}
-        onChangeText={[Function]}
-        onMarkerPress={[Function]}
-        onPress={[Function]}
-        paddingLeft={45}
-        placeholder="To"
-        savedLocations={Array []}
-        top={65}
+      <FlatList
+        data={
+          Array [
+            Object {
+              "coordinates": Object {
+                "latitude": 0,
+                "longitude": 0,
+              },
+              "isConfirmed": false,
+              "text": "",
+            },
+            Object {
+              "coordinates": Object {
+                "latitude": 0,
+                "longitude": 0,
+              },
+              "isConfirmed": false,
+              "text": "",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "flex": 1,
+            "marginTop": 15,
+            "paddingHorizontal": 10,
+            "width": "100%",
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
       />
       <MapView
         customMapStyle={
@@ -73,7 +93,7 @@ test("renders correctly", async () =>
         showsUserLocation={true}
         style={
           Object {
-            "flex": 1,
+            "flex": 3,
           }
         }
       >
@@ -100,29 +120,23 @@ test("renders correctly", async () =>
               }
             }
           />
-          <React.Fragment />
         </React.Fragment>
       </MapView>
       <ForwardRef
-        disabled={true}
+        disabled={false}
         onPress={[Function]}
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#000000",
-              "flexDirection": "row",
-              "justifyContent": "space-around",
-              "left": 629,
-              "paddingHorizontal": 16,
-              "paddingVertical": 14,
-              "position": "absolute",
-              "top": 1098,
-            },
-            Object {
-              "backgroundColor": "gray",
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#000000",
+            "flexDirection": "row",
+            "justifyContent": "space-around",
+            "left": 629,
+            "paddingHorizontal": 16,
+            "paddingVertical": 14,
+            "position": "absolute",
+            "top": 1098,
+          }
         }
       >
         <Text
@@ -140,7 +154,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Confirm
+          Add stop
         </Text>
       </ForwardRef>
     </View>

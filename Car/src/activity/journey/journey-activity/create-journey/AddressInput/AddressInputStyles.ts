@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 
 const AddressInputStyles = StyleSheet.create({
     container: {
-        position: "absolute",
-        left: 10,
-        right: 10
+        // position: "absolute"
+        // borderWidth: 2
     },
     textInputContainer: {
-        zIndex: 1
+        // position: "absolute",
+        // zIndex: 1
     },
     placeholder: {
         position: "absolute",
@@ -18,9 +18,9 @@ const AddressInputStyles = StyleSheet.create({
         color: "grey"
     },
     listView: {
-        position: "absolute",
-        top: 50,
-        zIndex: 2,
+        position: "relative",
+        // top: 100,
+        zIndex: 100,
         height: 270
     },
     textInput: {
@@ -40,14 +40,6 @@ const AddressInputStyles = StyleSheet.create({
         position: "absolute",
         top: 8,
         right: 20
-    },
-    recentRidesTitleContainer: {
-        width: "100%",
-        alignItems: "center"
-    },
-    recentRidesTitle: {
-        fontSize: 18,
-        fontWeight: "700"
     }
 });
 
