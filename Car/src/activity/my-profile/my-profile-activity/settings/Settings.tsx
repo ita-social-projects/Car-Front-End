@@ -211,7 +211,7 @@ const Settings = (props: {navigation: any}) => {
                                     (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                 }}>
                                 <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
-                                Upload Avatar
+                                    Add photo
                                 </Text>
                             </TouchableOpacity>
 
@@ -225,7 +225,7 @@ const Settings = (props: {navigation: any}) => {
                                         (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                     }}>
                                     <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
-                                        Change Avatar
+                                        Change photo
                                     </Text>
                                 </TouchableOpacity>
 
@@ -240,7 +240,7 @@ const Settings = (props: {navigation: any}) => {
                                         pressHandle();
                                     }}>
                                     <Text style={[SettingsStyle.deleteAvatarText, { color: DM("#EC6400") }]}>
-                                        Delete Avatar
+                                        Delete photo
                                     </Text>
                                 </TouchableOpacity>
                             </>

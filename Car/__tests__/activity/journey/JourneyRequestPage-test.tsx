@@ -114,7 +114,7 @@ test("renders correctly", async () =>
                     }
                   >
                      
-                    's journey
+                    's ride
                   </Text>
                   <View
                     style={

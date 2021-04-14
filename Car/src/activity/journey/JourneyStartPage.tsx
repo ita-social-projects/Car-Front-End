@@ -79,7 +79,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     navigation={props.navigation}
                     navigationName="Search Journey"
                     blockImage={require("../../../assets/images/journey/bermuda-searching.png")}
-                    blockName="Search for a Journey"
+                    blockName="Search for Ride"
                     from="#A5C500"
                     to="#00A977"
                     reverse={false}
@@ -90,7 +90,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     navigation={props.navigation}
                     navigationName="Create Journey"
                     blockImage={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
-                    blockName="Create a Journey"
+                    blockName="Add a ride"
                     from="#00A3CF"
                     to="#5552A0"
                     reverse={true}
@@ -100,7 +100,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
             </View>
             <View style={JourneyStartPageStyle.manageJourneysContainer}>
                 <Text style={[JourneyStartPageStyle.manageJourneysText, { color: DM("black") }]}>
-                    Manage journeys
+                    MANAGE RIDES
                 </Text>
             </View>
             <View style={JourneyStartPageStyle.segmentControlContainer}>
@@ -193,7 +193,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             scheduledButtonStyle
                         ]}
                     >
-                        Scheduled
+                        Regular
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -216,7 +216,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
 
                     {scheduledJourneys.length > EMPTY_COLLECTION_LENGTH && (
                         <Text style={[JourneyStartPageStyle.tabTextStyle, { color: DM("black") }]}>
-                            Scheduled
+                            Regular
                         </Text>
                     )}
                     {<JourneyCardList journey={scheduledJourneys} />}

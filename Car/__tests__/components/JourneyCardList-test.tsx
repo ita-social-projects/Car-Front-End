@@ -167,7 +167,7 @@ test("renders correctly", async () =>
                         }
                       >
                         ABC BCD
-                        's journey
+                        's ride
                       </Text>
                     </View>
                     <View

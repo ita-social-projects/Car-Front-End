@@ -87,7 +87,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     </View>
                     <View style={PreferencesStyle.commentsContainer}>
                         <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
-                            Comments
+                            Other preferences
                         </Text>
                         <TextInput
                             style={[PreferencesStyle.textInput,

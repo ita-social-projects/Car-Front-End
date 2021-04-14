@@ -57,8 +57,7 @@ const Cars = (props: NavigationAddListener) => {
                 <></>
             ) : (
                 <Text style={[CarsStyle.message, { color: DM("#414045") }]}>
-                    Currently you don’t have any car in the list. You have to
-                    add a car if you want to create Journeys with personal one.
+                    For now, you have no cars on the list. Add one or two to create trips of your own.
                 </Text>
             )}
         </View>
@@ -89,7 +88,7 @@ const Cars = (props: NavigationAddListener) => {
                                     <TouchableNavigationCard
                                         carId={item!.id}
                                         navigationName="EditCars"
-                                        cardName="Edit a car"
+                                        cardName="Edit Car Info"
                                         picture={
                                             item!.imageId ? (
                                                 <Image
