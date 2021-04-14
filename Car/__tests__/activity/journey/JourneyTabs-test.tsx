@@ -63,6 +63,28 @@ test("renders correctly", async () =>
         </Screen>
         <Screen
           component={[Function]}
+          name="Address Input"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "Input Address",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "black",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
           name="Search Journey"
           options={
             Object {

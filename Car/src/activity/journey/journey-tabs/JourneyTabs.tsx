@@ -33,6 +33,7 @@ import {
     ZERO_OPACITY
 } from "../../../constants/Constants";
 import DM from "../../../components/styles/DM";
+import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
@@ -115,7 +116,6 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Create Journey"
-                    // component={CreateJourney}
                     options={{
                         headerTitle: "Create a Journey",
                         headerTitleAlign: "center",
@@ -172,6 +172,17 @@ const JourneyTabs = () => {
                         );
                     }}
                 </StackTabs.Screen>
+
+                <StackTabs.Screen
+                    name="Address Input"
+                    component={AddressInputPage}
+                    options={{
+                        headerTitle: "Input Address",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleAlign: "center",
+                        headerLeft: HeaderBackButton
+                    }}
+                />
 
                 <StackTabs.Screen
                     name="Search Journey"

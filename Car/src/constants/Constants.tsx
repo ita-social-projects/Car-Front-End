@@ -1,5 +1,7 @@
 import { Dimensions } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { LatLng } from "react-native-maps";
+import WayPoint from "../activity/journey/journey-activity/create-journey/WayPoint";
 
 export const DROP_DOWN_MAX_HEIGHT = Dimensions.get("window").height / 4;
 export const GRADIENT_START = 0;
@@ -50,3 +52,25 @@ export const INITIAL_TIME = 0;
 export const FIRST_LOADING_MESSAGES = 0;
 export const COUNT_OF_MESSAGES_TO_LOAD = 0;
 export const NUMBER_OF_STOPS_LIMIT = 7;
+export const LEFT_PADDING_FOR_FROM_PLACEHOLDER = 67;
+export const LEFT_PADDING_FOR_TO_PLACEHOLDER = 45;
+export const LEFT_PADDING_FOR_VIA_PLACEHOLDER = 50;
+
+export const initialCoordinate: LatLng = {
+    latitude: INITIAL_LATITUDE,
+    longitude: INITIAL_LONGITUDE
+};
+
+export const initialCamera = {
+    center: initialCoordinate,
+    pitch: 2,
+    heading: 20,
+    altitude: 200,
+    zoom: 16
+};
+
+export const initialWayPoint: WayPoint = {
+    text: "",
+    isConfirmed: false,
+    coordinates: { latitude: 0, longitude: 0 }
+};

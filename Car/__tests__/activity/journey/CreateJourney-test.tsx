@@ -77,32 +77,7 @@ test("renders correctly", async () =>
             "flex": 1,
           }
         }
-      >
-        <React.Fragment>
-          <MapMarker
-            coordinate={
-              Object {
-                "latitude": 49.843844,
-                "longitude": 24.025581,
-              }
-            }
-            draggable={true}
-            image={
-              Object {
-                "testUri": "../../../assets/images/small-custom-marker.png",
-              }
-            }
-            onDragEnd={[Function]}
-            stopPropagation={false}
-            style={
-              Object {
-                "position": "absolute",
-                "zIndex": 1,
-              }
-            }
-          />
-        </React.Fragment>
-      </MapView>
+      />
       <ForwardRef
         disabled={false}
         onPress={[Function]}
