@@ -263,7 +263,7 @@ test("renders correctly", async () =>
                     ]
                   }
                 >
-                  Your cars
+                  My Cars
                 </Text>
               </View>
             </View>

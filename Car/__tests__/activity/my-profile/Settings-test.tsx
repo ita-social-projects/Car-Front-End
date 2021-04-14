@@ -180,7 +180,7 @@ test("renders correctly", async () =>
                   ]
                 }
               >
-                Upload Avatar
+                Add photo
               </Text>
             </ForwardRef>
           </View>

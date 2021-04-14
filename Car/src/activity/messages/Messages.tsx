@@ -87,7 +87,7 @@ const Messages = (props: MessagesProps) => {
                                             item.journey.organizer.name +
                                             " " +
                                             item.journey.organizer.surname +
-                                            "'s journey"
+                                            "'s ride"
                                 });
                             }}
                         >
@@ -108,7 +108,7 @@ const Messages = (props: MessagesProps) => {
                                         >
                                             <Text style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}>
                                                 {item.journey.organizer.name}{" "}
-                                                {item.journey.organizer.surname}'s journey
+                                                {item.journey.organizer.surname}'s ride
                                             </Text>
                                         </LinearTextGradient>
                                         <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>

@@ -268,7 +268,7 @@ const AddCars = () => {
                         *
                         <Text style={{ color: DM("#414045") }}>
                             {" "}
-                            - mandatory information
+                            - required field
                         </Text>
                     </Text>
                     <TouchableOpacity

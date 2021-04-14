@@ -21,7 +21,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Journey",
+              "headerTitle": "Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -43,7 +43,7 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerRight": [Function],
-              "headerTitle": "Create a Journey",
+              "headerTitle": "Add a ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -89,7 +89,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Search for a Journey",
+              "headerTitle": "Search for Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -123,7 +123,7 @@ test("renders correctly", async () =>
                   "color": "black",
                 },
               ],
-              "title": "Journey",
+              "title": "Ride",
             }
           }
         >
@@ -147,7 +147,7 @@ test("renders correctly", async () =>
                   "color": "black",
                 },
               ],
-              "title": "Confirm Journey",
+              "title": "Confirm Ride",
             }
           }
         />
@@ -170,7 +170,7 @@ test("renders correctly", async () =>
                   "color": "black",
                 },
               ],
-              "title": "Search result",
+              "title": "Search Results",
             }
           }
         />
@@ -192,7 +192,7 @@ test("renders correctly", async () =>
                   "color": "black",
                 },
               ],
-              "title": "Search result",
+              "title": "Search Results",
             }
           }
         />
@@ -215,7 +215,7 @@ test("renders correctly", async () =>
                   "color": "black",
                 },
               ],
-              "title": "Search Journey",
+              "title": "Search Ride",
             }
           }
         />

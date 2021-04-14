@@ -201,7 +201,7 @@ const SearchJourney = () => {
                         </View>
                     ) : (
                         <Text style={[SearchJourneyStyle.recentJourneyText, { color: DM("black") }]}>
-                            Recent Journeys
+                            Recent Rides
                         </Text>
                     )}
                     {stops?.length ? (

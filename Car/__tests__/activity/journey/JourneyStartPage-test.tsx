@@ -43,7 +43,7 @@ test("renders correctly", async () =>
               "testUri": "../../../assets/images/journey/bermuda-searching.png",
             }
           }
-          blockName="Search for a Journey"
+          blockName="Search for Ride"
           from="#A5C500"
           height={140}
           navigation={
@@ -62,7 +62,7 @@ test("renders correctly", async () =>
               "testUri": "../../../assets/images/journey/bermuda-delivery-car-service.png",
             }
           }
-          blockName="Create a Journey"
+          blockName="Add a ride"
           from="#00A3CF"
           height={140}
           navigation={
@@ -98,7 +98,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Manage journeys
+          MANAGE RIDES
         </Text>
       </View>
       <View
@@ -263,7 +263,7 @@ test("renders correctly", async () =>
               ]
             }
           >
-            Scheduled
+            Regular
           </Text>
         </ForwardRef>
       </View>

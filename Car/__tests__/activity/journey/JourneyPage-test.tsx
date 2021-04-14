@@ -240,7 +240,7 @@ test("renders correctly", async () =>
                 ]
               }
             >
-              SOFTSERVIANS 
+              SoftServians 
               /
             </Text>
             <View
@@ -315,7 +315,7 @@ test("renders correctly", async () =>
                   }
                 >
                    
-                  's journey
+                  's ride
                 </Text>
                 <View
                   style={
@@ -448,7 +448,7 @@ test("renders correctly", async () =>
                       ]
                     }
                   >
-                    Request to driver
+                    Send request
                   </Text>
                 </ForwardRef>
               </View>

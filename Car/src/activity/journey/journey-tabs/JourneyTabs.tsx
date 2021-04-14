@@ -107,7 +107,7 @@ const JourneyTabs = () => {
                     name="Journey"
                     component={JourneyStartPage}
                     options={{
-                        headerTitle: "Journey",
+                        headerTitle: "Ride",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: () => <View />
@@ -117,7 +117,7 @@ const JourneyTabs = () => {
                 <StackTabs.Screen
                     name="Create Journey"
                     options={{
-                        headerTitle: "Create a Journey",
+                        headerTitle: "Add a ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
@@ -188,7 +188,7 @@ const JourneyTabs = () => {
                     name="Search Journey"
                     component={SearchJourney}
                     options={{
-                        headerTitle: "Search for a Journey",
+                        headerTitle: "Search for Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
@@ -198,7 +198,7 @@ const JourneyTabs = () => {
                 <StackTabs.Screen
                     name="Journey Page"
                     options={{
-                        title: "Journey",
+                        title: "Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
@@ -231,16 +231,16 @@ const JourneyTabs = () => {
                                             { backgroundColor: DM("white") }
                                         ]}>
                                             <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
-                                                More options
+                                                MORE OPTIONS
                                             </Text>
                                         </View>
                                     }
                                     renderContent={
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
-                                            <MenuButton text="Add Stop" isIcon={true} />
-                                            <MenuButton text="Edit the Journey" isIcon={true} />
-                                            <MenuButton text="Invite Softservian" isIcon={true} />
-                                            <MenuButton text="Cancel the Journey" isIcon={true} />
+                                            <MenuButton text="Add stop" isIcon={true} />
+                                            <MenuButton text="Edit route" isIcon={true} />
+                                            <MenuButton text="Invite SoftServian" isIcon={true} />
+                                            <MenuButton text="Cancel ride" isIcon={true} />
                                         </View>
                                     }
                                 />}
@@ -252,7 +252,7 @@ const JourneyTabs = () => {
                     name="Journey Request Page"
                     component={JourneyRequestPage}
                     options={{
-                        title: "Confirm Journey",
+                        title: "Confirm Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
@@ -262,7 +262,7 @@ const JourneyTabs = () => {
                     name="OK Search Result"
                     component={OkSearchResult}
                     options={{
-                        title: "Search result",
+                        title: "Search Results",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
@@ -274,7 +274,7 @@ const JourneyTabs = () => {
                     name="Bad Search Result"
                     component={BadSearchResult}
                     options={{
-                        title: "Search result",
+                        title: "Search Results",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
@@ -284,7 +284,7 @@ const JourneyTabs = () => {
                     name="Search"
                     component={SearchJourneyMap}
                     options={{
-                        title: "Search Journey",
+                        title: "Search Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,

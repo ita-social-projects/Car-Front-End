@@ -114,7 +114,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
 
         return (
             <ChooseOption
-                text={"Do you have a baggage with you to transport?"}
+                text={"Have you got any luggage with you?"}
                 value={isBaggaage}
                 onValueChanged={(value: boolean) => {
                     isLuggage = value;
@@ -156,7 +156,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                                 <View style={JourneyRequestPageStyle.userInfoBlock}>
                                     <Text style={[JourneyRequestPageStyle.userNameText, { color: DM("black") }]}>
                                         {currentJourney?.organizer?.name}{" "}
-                                        {currentJourney?.organizer?.surname}'s journey
+                                        {currentJourney?.organizer?.surname}'s ride
                                     </Text>
                                     <View style={JourneyRequestPageStyle.userSecondaryInfoBlock}>
                                         <Text style={[JourneyRequestPageStyle.userRoleText, { color: DM("#909095") }]}>
@@ -177,7 +177,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
 
                             <View style={JourneyRequestPageStyle.commentsContainer}>
                                 <Text style={[JourneyRequestPageStyle.commentsText, { color: DM("#414045") }]}>
-                                        Comments
+                                    Comments
                                 </Text>
                                 <Comments />
                                 <Text style={[JourneyRequestPageStyle.hintText, { color: DM("#000000") }]}>

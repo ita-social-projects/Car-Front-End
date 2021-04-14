@@ -41,7 +41,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Couldn't find results from your search criteria
+          NO RESULTS MATCHING YOUR SEARCH FILTERS
         </Text>
       </View>
       <View
@@ -113,7 +113,7 @@ test("renders correctly", async () =>
               ]
             }
           >
-            Create Journey Request
+            CREATE RIDE REQUEST
           </Text>
         </View>
       </View>

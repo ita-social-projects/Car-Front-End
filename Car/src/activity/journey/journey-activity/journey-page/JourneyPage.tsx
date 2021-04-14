@@ -157,7 +157,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                         {/* Participants block */}
 
                         <Text style={[JourneyPageStyle.applicantsHeader, { color: DM("black") }]}>
-                                        SOFTSERVIANS {currentJourney?.participants?.length}/
+                            SoftServians {currentJourney?.participants?.length}/
                             {currentJourney?.countOfSeats}
                         </Text>
                         {currentJourney?.participants.map((item, index) => (
@@ -222,7 +222,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                             <View style={JourneyPageStyle.userInfoBlock}>
                                 <Text style={[JourneyPageStyle.userNameText, { color: DM("black") }]}>
                                     {currentJourney?.organizer?.name}{" "}
-                                    {currentJourney?.organizer?.surname}'s journey
+                                    {currentJourney?.organizer?.surname}'s ride
                                 </Text>
                                 <View style={JourneyPageStyle.userSecondaryInfoBlock}>
                                     <Text style={[JourneyPageStyle.userRoleText, { color: DM("#909095") }]}>
@@ -256,12 +256,12 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                                         currentJourney?.organizer?.name +
                                                         " " +
                                                         currentJourney?.organizer?.surname +
-                                                        "'s journey"
+                                                        "'s ride"
                                             })
                                         }
                                     >
                                         <Text style={[JourneyPageStyle.messageAllButtonText, { color: DM("black") }]}>
-                                            Message All
+                                            Message to all
                                         </Text>
                                     </TouchableOpacity>
                                 )}
@@ -277,7 +277,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                         disabled={isRequested}
                                     >
                                         <Text style={[JourneyPageStyle.requestButtonText, { color: DM("white") }]}>
-                                            {isRequested ? "Requested" : "Request to driver"}
+                                            {isRequested ? "Requested" : "Send request"}
                                         </Text>
                                     </TouchableOpacity>
                                 )}

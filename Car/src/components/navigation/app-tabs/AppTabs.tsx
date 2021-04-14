@@ -82,7 +82,7 @@ const AppTabs = () => {
             />
             <Tabs.Screen
                 options={() => ({
-                    tabBarLabel: "Journey"
+                    tabBarLabel: "Ride"
                 })}
                 name="JourneyTabs"
                 component={JourneyTabs}
