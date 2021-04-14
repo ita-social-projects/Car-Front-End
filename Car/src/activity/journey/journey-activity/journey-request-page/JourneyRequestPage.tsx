@@ -30,7 +30,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
     const { user } = useContext(AuthContext);
     const { journeyId } = props.route.params;
     const [isLoading, setLoading] = useState(true);
-    const [isRequested, setRequested] = useState(true);
+    const [isRequested, setRequested] = useState(false);
 
     const { Popup } = require("popup-ui");
 
