@@ -13,48 +13,29 @@ test("renders correctly", async () =>
         }
       }
     >
-      <FlatList
-        data={
-          Array [
-            Object {
-              "coordinates": Object {
-                "latitude": 0,
-                "longitude": 0,
-              },
-              "isConfirmed": false,
-              "text": "",
-            },
-            Object {
-              "coordinates": Object {
-                "latitude": 0,
-                "longitude": 0,
-              },
-              "isConfirmed": false,
-              "text": "",
-            },
-          ]
-        }
-        disableVirtualization={false}
-        horizontal={false}
-        initialNumToRender={10}
-        keyExtractor={[Function]}
-        maxToRenderPerBatch={10}
-        numColumns={1}
-        onEndReachedThreshold={2}
-        removeClippedSubviews={false}
-        renderItem={[Function]}
-        scrollEventThrottle={50}
+      <ScrollView
         style={
           Object {
-            "flex": 1,
+            "height": 200,
             "marginTop": 15,
             "paddingHorizontal": 10,
+            "position": "absolute",
             "width": "100%",
+            "zIndex": 1,
           }
         }
-        updateCellsBatchingPeriod={50}
-        windowSize={21}
-      />
+      >
+        <AddressInputButton
+          directionType="From"
+          onPress={[Function]}
+          text=""
+        />
+        <AddressInputButton
+          directionType="To"
+          onPress={[Function]}
+          text=""
+        />
+      </ScrollView>
       <MapView
         customMapStyle={
           Array [
@@ -93,7 +74,7 @@ test("renders correctly", async () =>
         showsUserLocation={true}
         style={
           Object {
-            "flex": 3,
+            "flex": 1,
           }
         }
       >

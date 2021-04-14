@@ -1,17 +1,14 @@
 import React, { Dispatch, SetStateAction,
     useContext, useEffect, useRef, useState } from "react";
 import {
-    FlatList,
-    ListRenderItemInfo,
     PermissionsAndroid,
-    Platform,
+    Platform, ScrollView,
     Text,
     TouchableOpacity,
     View
 } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
-import AddressInput from "./AddressInput/AddressInput";
 import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
@@ -31,6 +28,7 @@ import Geolocation from "@react-native-community/geolocation";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Location from "../../../../../models/location/Location";
+import AddressInputButton from "./AddressInputButton/AddressInputButton";
 
 const CreateRequestToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -55,8 +53,22 @@ interface CreateJourneyComponent {
     (): JSX.Element
 }
 
+const initialCoordinate: LatLng = {
+    latitude: INITIAL_LATITUDE,
+    longitude: INITIAL_LONGITUDE
+};
+
+const initialCamera = {
+    center: initialCoordinate,
+    pitch: 2,
+    heading: 20,
+    altitude: 200,
+    zoom: 16
+};
+
 const CreateJourney: CreateJourneyComponent = () => {
     const { user } = useContext(AuthContext);
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
 
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
@@ -82,21 +94,8 @@ const CreateJourney: CreateJourneyComponent = () => {
     const [stops, setStops] = useState<WayPoint[]>([]);
 
     const [markerFocus, setMarkerFocus] = useState(MarkerFocus.From);
-
-    const initialCoordinate: LatLng = {
-        latitude: INITIAL_LATITUDE,
-        longitude: INITIAL_LONGITUDE
-    };
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const mapRef = useRef<MapView | null>(null);
-
-    const initialCamera = {
-        center: initialCoordinate,
-        pitch: 2,
-        heading: 20,
-        altitude: 200,
-        zoom: 16
-    };
 
     useEffect(() => {
         LocationService
@@ -148,6 +147,7 @@ const CreateJourney: CreateJourneyComponent = () => {
     }, []);
 
     const addStopPressHandler = () => {
+        console.log("addStopPressHandler");
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, {
@@ -187,6 +187,7 @@ const CreateJourney: CreateJourneyComponent = () => {
             });
     };
 
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const onMarkerPressHandler = (focus: MarkerFocus) => setMarkerFocus(focus);
 
     const SetCoordinatesByDescription = (description: string,
@@ -203,6 +204,7 @@ const CreateJourney: CreateJourneyComponent = () => {
             });
     };
 
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const addressInputOnPressHandler = (data: any,
         setWayPoint: Dispatch<SetStateAction<WayPoint>>,
         focus: MarkerFocus) => {
@@ -220,6 +222,7 @@ const CreateJourney: CreateJourneyComponent = () => {
         setMarkerFocus(focus);
     };
 
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const addressInputOnChangeTextHandler = (text: string, setWayPoint: Dispatch<SetStateAction<WayPoint>>) => {
         setWayPointsTextAndIsConfirmed(setWayPoint, text, false);
     };
@@ -234,75 +237,44 @@ const CreateJourney: CreateJourneyComponent = () => {
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
-    const renderListItem = ({ item, index }: ListRenderItemInfo<WayPoint>) => {
-        if (index === FIRST_ELEMENT_INDEX) {
-            return (
-                <AddressInput
-                    placeholder={"From"}
-                    top={10}
-                    paddingLeft={68}
-                    address={item.text}
-                    onPress={(data) => addressInputOnPressHandler(data, setFrom, MarkerFocus.From)}
-                    onChangeText={(text) => addressInputOnChangeTextHandler(text, setFrom)}
-                    onMarkerPress={() => onMarkerPressHandler(MarkerFocus.From)}
-                    isMarkerFocus={markerFocus === MarkerFocus.From}
-                    savedLocations={savedLocations}
-                />
-            );
-        }
-
-        if (index === SECOND_ELEMENT_INDEX) {
-            return (
-                <AddressInput
-                    placeholder={"To"}
-                    top={65}
-                    paddingLeft={45}
-                    address={item.text}
-                    onPress={(data) => addressInputOnPressHandler(data, setTo, MarkerFocus.To)}
-                    onChangeText={(text) => addressInputOnChangeTextHandler(text, setTo)}
-                    onMarkerPress={() => onMarkerPressHandler(MarkerFocus.To)}
-                    isMarkerFocus={markerFocus === MarkerFocus.To}
-                    savedLocations={savedLocations}
-                />
-            );
-        }
-
-        return (
-            <AddressInput
-                placeholder={"Via"}
-                top={10}
-                paddingLeft={50}
-                address={item.text}
-                onPress={(data) => addressInputOnPressHandler(data, setFrom, MarkerFocus.From)}
-                onChangeText={(text) => addressInputOnChangeTextHandler(text, setFrom)}
-                onMarkerPress={() => onMarkerPressHandler(MarkerFocus.From)}
-                isMarkerFocus={false}
-                savedLocations={savedLocations}
-            />
-        );
-    };
-
     return (
         <View style={{ flex: 1 }}>
 
-            <FlatList
+            <ScrollView
                 style={{
-                    flex: 1,
-                    // position: "absolute",
-                    // zIndex: 1,
+                    position: "absolute",
+                    zIndex: 1,
                     width: "100%",
                     paddingHorizontal: 10,
-                    // height: 0,
+                    height: 200,
                     marginTop: 15
                 }}
-                data={[from, to].concat(stops)}
-                keyExtractor={(_, index) => (index.toString())}
-                renderItem={renderListItem}
-            />
+            >
+                <AddressInputButton
+                    directionType={"From"}
+                    text={from.text}
+                    onPress={() => console.log("From press")}
+                />
+
+                <AddressInputButton
+                    directionType={"To"}
+                    text={to.text}
+                    onPress={() => console.log("To press")}
+                />
+
+                {stops.map((stop, index) => (
+                    <AddressInputButton
+                        directionType={"Via"}
+                        text={stop.text}
+                        onPress={() => console.log("Via press")}
+                        key={index}
+                    />
+                ))}
+            </ScrollView>
 
             <MapView
                 ref={ref => (mapRef.current = ref)}
-                style={{ flex: 3 }}
+                style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}

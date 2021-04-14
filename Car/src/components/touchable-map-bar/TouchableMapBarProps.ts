@@ -4,6 +4,8 @@ interface TouchableMapBarProps {
     flex?: string
     directionType?: string,
     defaultInputValue?: string,
+    marginHorizontal?: number,
+    onPress?: () => void,
     iconName: string
 }
 

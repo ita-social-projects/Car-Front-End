@@ -15,14 +15,13 @@ test("renders correctly", async () =>
               "borderWidth": 2.3,
               "flexDirection": "row",
               "fontFamily": "Open Sans",
-              "marginLeft": 20,
-              "marginRight": 20,
               "padding": 8,
             },
             Object {
               "backgroundColor": "white",
               "borderColor": "black",
               "marginBottom": NaN,
+              "marginHorizontal": 20,
               "marginTop": NaN,
             },
           ]

@@ -5,6 +5,8 @@ import DM from "../styles/DM";
 import TouchableMapBarStyle from "./TouchableMapBarStyle";
 import TouchableMapBarProps from "./TouchableMapBarProps";
 
+const DEFAULT_MARGIN_HORIZONTAL = 20;
+
 const TouchableMapBar = (props: TouchableMapBarProps) => {
     let marginBottom = parseInt(props.marginBottom ?? "");
     let marginTop = parseInt(props.marginTop ?? "");
@@ -13,11 +15,13 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
     return (
         <View>
             <TouchableOpacity
+                onPress={props.onPress}
                 style={[
                     TouchableMapBarStyle.container,
                     {
                         marginBottom: marginBottom,
                         marginTop: marginTop,
+                        marginHorizontal: props.marginHorizontal ?? DEFAULT_MARGIN_HORIZONTAL,
                         backgroundColor: DM("white"),
                         borderColor: DM("black")
                     }
