@@ -32,8 +32,7 @@ const CarTabs = () => {
                         headerTitle: "Add a Car",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
-                        headerLeft: HeaderBackButton,
-                        headerRight: HeaderEllipsis
+                        headerLeft: HeaderBackButton
                     }}
                 />
                 <StackTabs.Screen

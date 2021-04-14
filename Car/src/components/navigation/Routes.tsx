@@ -29,7 +29,10 @@ const Routes = () => {
                 (await AsyncStorage.getItem("lastLogin")) as string
             );
 
-            if (Math.abs(currentLogin.getTime() - lastLogin.getTime()) > MILLISECONDS_IN_MONTH) {
+            if (
+                Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
+                MILLISECONDS_IN_MONTH
+            ) {
                 await AsyncStorage.setItem(
                     "lastLogin",
                     currentLogin.toUTCString()
@@ -37,13 +40,17 @@ const Routes = () => {
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
-            (async () => loadStorageUser())().then(() => setLoading(false)));
+            (async () => loadStorageUser())().then(() => setLoading(false))
+        );
 
         AsyncStorage.getItem("isDarkMode").then((res) => {
-            changeNavigationBarColor(res === "true" ? "#121212" : "#FFFFFF", false, true);
+            changeNavigationBarColor(
+                res === "true" ? "#121212" : "#FFFFFF",
+                res === "true" ? false : true,
+                true
+            );
             isDarkMode = res === "true";
         });
-
     }, []);
 
     const navigator = user ? (
@@ -51,14 +58,11 @@ const Routes = () => {
             name="AppTabs"
             component={AppTabs}
             options={{
-                headerShown: false
+                headerShown: false,
             }}
         />
     ) : (
-        <Stack.Screen
-            name="Login"
-            component={Login}
-        />
+        <Stack.Screen name="Login" component={Login} />
     );
 
     return (
@@ -66,10 +70,12 @@ const Routes = () => {
             <StatusBar
                 animated={true}
                 backgroundColor={DM("#121212")}
-                barStyle={DM("dark-content") as any}/>
+                barStyle={DM("dark-content") as any}
+            />
             <NavigationContainer
                 theme={isDarkMode ? DarkTheme : undefined}
-                ref={navigationRef}>
+                ref={navigationRef}
+            >
                 {isLoading ? (
                     <Indicator
                         color={DM("#414045")}
