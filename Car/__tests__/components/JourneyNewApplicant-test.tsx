@@ -189,7 +189,7 @@ test("renders correctly", async () =>
               }
             >
               <Text>
-                I’m Traveling with a baggage.
+                I'm traveling with luggage.
               </Text>
               <View
                 style={
@@ -224,7 +224,7 @@ test("renders correctly", async () =>
                 }
               >
                 Abc
-                ’s stop in your Journey
+                ’s stop in your ride
               </Text>
               <View
                 style={

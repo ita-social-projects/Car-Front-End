@@ -45,7 +45,7 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                         {journey?.organizer?.name +
                                             " " +
                                             journey?.organizer?.surname}
-                                        's journey
+                                        's ride
                                     </Text>
                                 </View>
                                 <View style={JourneyCardStyle.moreOptionsBlock}>

@@ -51,7 +51,7 @@ class MainApplication : Application(), ReactApplication {
         val intent = Intent(this, NotificationService::class.java)
         startService(intent)
 
-        //sendNotification(1, "Roman Danylevych's journey", "Implementation of notifications is in progress!")
+        //sendNotification(1, "Roman Danylevych's ride", "Implementation of notifications is in progress!")
     }
 
     companion object {

@@ -29,7 +29,7 @@ export default function AddressBook (props: {navigation: any}) {
                 angle="0"
             >
                 <Text style={{ fontWeight: "bold", color: DM("#02A2CF") }}>
-                    Add new Address
+                    Add New Address
                 </Text>
             </TouchableNavigationCard>
             {locations?.length ? (
