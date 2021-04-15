@@ -51,7 +51,7 @@ const MyProfile = (props: {navigation: any}) => {
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Your cars</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>My Cars</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard

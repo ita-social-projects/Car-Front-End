@@ -226,7 +226,7 @@ test("renders correctly", async () =>
               }
             >
                
-              - mandatory information
+              - required field
             </Text>
           </Text>
           <ForwardRef

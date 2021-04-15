@@ -124,7 +124,7 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                         >
                             {JSON.parse(props.notificationData)?.hasLuggage ? (
                                 <Text style={JourneyNewApplicantStyle.optionsHeader} >
-                                    I’m Traveling with a baggage.
+                                    I'm traveling with luggage.
                                 </Text>
                             ) : (
                                 <View />
@@ -140,7 +140,7 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
                             <Text style={[JourneyNewApplicantStyle.optionsHeader, { color: DM("#000000") }]} >
-                                {props.user.name}’s stop in your Journey
+                                {props.user.name}’s stop in your ride
                             </Text>
                             <View
                                 style={[

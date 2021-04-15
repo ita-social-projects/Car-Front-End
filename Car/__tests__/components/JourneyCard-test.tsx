@@ -82,7 +82,7 @@ test("renders correctly", async () =>
                     }
                   >
                     undefined undefined
-                    's journey
+                    's ride
                   </Text>
                 </View>
                 <View

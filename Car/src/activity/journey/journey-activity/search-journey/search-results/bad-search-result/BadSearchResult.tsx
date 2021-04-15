@@ -9,7 +9,7 @@ const BadSearchResult = () => {
         <View style={[BadSearchResultStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
             <View style={BadSearchResultStyle.textContainer}>
                 <Text style={[BadSearchResultStyle.text, { color: DM("#000000") }]}>
-                    Couldn't find results from your search criteria
+                    NO RESULTS MATCHING YOUR SEARCH FILTERS
                 </Text>
             </View>
             <View style={BadSearchResultStyle.imageContainer}>
@@ -26,7 +26,7 @@ const BadSearchResult = () => {
                     }}
                 >
                     <Text style={[BadSearchResultStyle.buttonText, { color: DM("#FFFFFF") }]}>
-                        Create Journey Request
+                        CREATE RIDE REQUEST
                     </Text>
                 </TouchableOpacity>
             </View>

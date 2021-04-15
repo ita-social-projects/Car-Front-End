@@ -19,7 +19,7 @@ const CarTabs = () => {
                     name="Cars"
                     component={Cars}
                     options={{
-                        headerTitle: "Your Cars",
+                        headerTitle: "My Cars",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
