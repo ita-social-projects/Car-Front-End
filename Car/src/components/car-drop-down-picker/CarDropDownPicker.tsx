@@ -45,7 +45,7 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => (
                 },
                 props.disabled && { borderColor: DM("gray") }
             ]}
-            //labelStyle={{ color: DM("black") }}
+            labelStyle={{ color: DM("black") }}
             dropDownStyle={[CarDropDownPickerStyle.dropDownStyle,
                 {
                     borderColor: DM("black"),

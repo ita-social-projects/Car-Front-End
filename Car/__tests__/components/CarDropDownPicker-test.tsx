@@ -53,7 +53,9 @@ test("renders correctly", async () =>
           <Text
             style={
               Array [
-                Object {},
+                Object {
+                  "color": "black",
+                },
                 Array [
                   Object {
                     "fontSize": 16,
@@ -310,7 +312,9 @@ test("renders correctly", async () =>
           <Text
             style={
               Array [
-                Object {},
+                Object {
+                  "color": "black",
+                },
                 Array [
                   Object {
                     "fontSize": 16,
