@@ -241,7 +241,7 @@ test("renders correctly", async () =>
                 }
               >
                 <ForwardRef
-                  disabled={true}
+                  disabled={false}
                   onPress={[Function]}
                   style={
                     Array [
@@ -256,9 +256,7 @@ test("renders correctly", async () =>
                         "backgroundColor": "white",
                         "borderColor": "black",
                       },
-                      Object {
-                        "opacity": 0.2,
-                      },
+                      false,
                     ]
                   }
                 >
@@ -276,7 +274,7 @@ test("renders correctly", async () =>
                       ]
                     }
                   >
-                    Requested
+                    Confirm
                   </Text>
                 </ForwardRef>
               </View>
