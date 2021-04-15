@@ -87,7 +87,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
             center: coordinates
-        }, { duration: 2000 });
+        }, { duration: 1000 });
     };
 
     const androidPermission = async () => {
@@ -138,13 +138,19 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const isAddStopDisabled = stops.length >= NUMBER_OF_STOPS_LIMIT;
 
-    const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number, wayPointId: string) => {
-        navigation.navigate("Address Input", {
-            placeholder: placeholder,
-            paddingLeft: paddingLeft,
-            savedLocations: savedLocations,
-            previousScreen: "Create Journey",
-            wayPointId: wayPointId
+    const onAddressInputButtonPressHandler = (
+        placeholder: string, paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
+
+        mapRef.current?.getCamera().then(camera => {
+            navigation.navigate("Address Input", {
+                placeholder: placeholder,
+                paddingLeft: paddingLeft,
+                savedLocations: savedLocations,
+                previousScreen: "Create Journey",
+                wayPointId: wayPointId,
+                wayPoint: wayPoint,
+                camera: { ...camera, altitude: 200 }
+            });
         });
     };
 
@@ -161,14 +167,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     directionType={"From"}
                     text={from.text}
                     onPress={() => onAddressInputButtonPressHandler(
-                        "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From")}
+                        "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
                 />
 
                 <AddressInputButton
                     directionType={"To"}
                     text={to.text}
                     onPress={() => onAddressInputButtonPressHandler(
-                        "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To")}
+                        "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
                 />
 
                 {stops.map((stop, index) => (
@@ -176,7 +182,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         directionType={"Via"}
                         text={stop.text}
                         onPress={() => onAddressInputButtonPressHandler(
-                            "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString())}
+                            "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
                         key={index}
                     />
                 ))}
@@ -210,6 +216,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         <Marker
                             title={"Stop"}
                             coordinate={stop.coordinates}
+                            image={require("../../../../../assets/images/stop-marker-transparent.png")}
                             key={index}
                         />
                     ))
@@ -217,6 +224,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {fromAndToIsConfirmed && (
                     <MapViewDirections
+                        optimizeWaypoints={true}
                         origin={from.coordinates}
                         destination={to.coordinates}
                         waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}

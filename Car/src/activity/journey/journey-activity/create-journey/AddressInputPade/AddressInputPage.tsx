@@ -1,13 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AddressInput from "../AddressInput/AddressInput";
 import { mapStyle } from "../../map-address/SearchJourneyMapStyle";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
-import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Camera, LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
-    FIRST_ELEMENT_INDEX,
-    initialCamera,
-    initialCoordinate, initialWayPoint, SECOND_ELEMENT_INDEX, SECOND_FROM_END_ELEMENT_INDEX,
+    FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, SECOND_FROM_END_ELEMENT_INDEX,
     THIRD_FROM_END_ELEMENT_INDEX,
     THREE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../../constants/Constants";
@@ -15,6 +13,8 @@ import APIConfig from "../../../../../../api-service/APIConfig";
 import WayPoint from "../WayPoint";
 import SearchJourneyStyle from "../../search-journey/SearchJourneyStyle";
 import DM from "../../../../../components/styles/DM";
+import Location from "../../../../../../models/location/Location";
+import * as navigation from "../../../../../components/navigation/Navigation";
 
 const AddressInputPageStyle = StyleSheet.create({
     inputContainer: {
@@ -32,14 +32,30 @@ const CreateRequestToGeocodingApi = (address: string) => {
         "&key=" + APIConfig.apiKey;
 };
 
-const AddressInputPage = (props: any) => {
-    // console.log(JSON.stringify(props.navigation, null, 8));
-    // console.log("AddressInputPage");
-    // console.log(props);
+interface AddressInputPageProps {
+    route: {
+        params: {
+            camera: Camera,
+            placeholder: string,
+            paddingLeft: number,
+            savedLocations: Location[],
+            previousScreen: "Create Journey",
+            wayPointId: string,
+            wayPoint: WayPoint
+        }
+    }
+}
 
-    const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
+const AddressInputPage = (props: AddressInputPageProps) => {
 
-    // console.log("wayPoint.isConfirmed - " + wayPoint.isConfirmed);
+    const params = props.route.params;
+
+    const centerCoordinates = params.wayPoint.isConfirmed ?
+        params.wayPoint.coordinates : params.camera.center;
+
+    const [wayPoint, setWayPoint] = useState<WayPoint>(params.wayPoint);
+
+    useEffect(() => setWayPoint(params.wayPoint), [params.wayPoint]);
 
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
@@ -57,7 +73,7 @@ const AddressInputPage = (props: any) => {
     };
 
     const mapRef = useRef<MapView | null>(null);
-    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
+    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(centerCoordinates);
 
     const animateCameraAndMoveMarker = (latitude: number, longitude: number) => {
         const newMarkerCoordinates: LatLng = { longitude: longitude, latitude: latitude };
@@ -133,8 +149,6 @@ const AddressInputPage = (props: any) => {
         animateCameraAndMoveMarker(latitude, longitude);
     };
 
-    const params = props.route.params;
-
     return (
         <View>
             <View style={AddressInputPageStyle.inputContainer}>
@@ -153,7 +167,7 @@ const AddressInputPage = (props: any) => {
                 style={{ height: "100%" }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                initialCamera={initialCamera}
+                initialCamera={{ ...params.camera, center: centerCoordinates }}
                 customMapStyle={mapStyle}
             >
                 <Marker
@@ -168,7 +182,7 @@ const AddressInputPage = (props: any) => {
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
                     { backgroundColor:  !wayPoint.isConfirmed ? "darkgrey" : "black" }]}
-                onPress={() => props.navigation.navigate(
+                onPress={() => navigation.navigate(
                     params.previousScreen, { wayPoint: wayPoint, wayPointId: params.wayPointId })}
                 disabled={!wayPoint.isConfirmed}
             >
