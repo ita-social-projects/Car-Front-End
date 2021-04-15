@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useRef, useState } from "react";
 import AddressInput from "../AddressInput/AddressInput";
 import { mapStyle } from "../../map-address/SearchJourneyMapStyle";
@@ -13,6 +13,8 @@ import {
 } from "../../../../../constants/Constants";
 import APIConfig from "../../../../../../api-service/APIConfig";
 import WayPoint from "../WayPoint";
+import SearchJourneyStyle from "../../search-journey/SearchJourneyStyle";
+import DM from "../../../../../components/styles/DM";
 
 const AddressInputPageStyle = StyleSheet.create({
     inputContainer: {
@@ -31,7 +33,13 @@ const CreateRequestToGeocodingApi = (address: string) => {
 };
 
 const AddressInputPage = (props: any) => {
+    // console.log(JSON.stringify(props.navigation, null, 8));
+    // console.log("AddressInputPage");
+    // console.log(props);
+
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
+
+    // console.log("wayPoint.isConfirmed - " + wayPoint.isConfirmed);
 
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
@@ -156,6 +164,18 @@ const AddressInputPage = (props: any) => {
                     coordinate={markerCoordinates}
                 />
             </MapView>
+
+            <TouchableOpacity
+                style={[SearchJourneyStyle.confirmButton,
+                    { backgroundColor:  !wayPoint.isConfirmed ? "darkgrey" : "black" }]}
+                onPress={() => props.navigation.navigate(
+                    params.previousScreen, { wayPoint: wayPoint, wayPointId: params.wayPointId })}
+                disabled={!wayPoint.isConfirmed}
+            >
+                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                    Confirm
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };

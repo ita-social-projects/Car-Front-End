@@ -124,7 +124,7 @@ const JourneyTabs = () => {
                         headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
                 >
-                    {() => {
+                    {(props: any) => {
 
                         return (
                             <>
@@ -135,7 +135,7 @@ const JourneyTabs = () => {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
                                 ]}>
-                                    <CreateJourney />
+                                    <CreateJourney props={props} />
                                 </Animated.View>
 
                                 <BottomPopup

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
     initialCamera,
@@ -16,6 +16,7 @@ import {
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
+    DELETE_COUNT_FOR_REPLACE,
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
@@ -27,22 +28,51 @@ import Location from "../../../../../models/location/Location";
 import AddressInputButton from "./AddressInputButton/AddressInputButton";
 import * as navigation from "../../../../components/navigation/Navigation";
 import WayPoint from "./WayPoint";
+import { CreateJourneyStyle } from "./CreateJourneyStyle";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
-    (): JSX.Element
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    ({ props }: {props: CreateJourneyProps}): JSX.Element
 }
 
-const CreateJourney: CreateJourneyComponent = () => {
+interface CreateJourneyProps {
+    route: {
+        params: {
+            wayPoint: WayPoint,
+            wayPointId: string
+        }
+    }
+}
+
+const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
+    const params = props?.route?.params;
+
     const { user } = useContext(AuthContext);
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
 
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
 
     const [stops, setStops] = useState<WayPoint[]>([]);
+
+    useEffect(() => {
+        if (params) {
+            animateCamera(params.wayPoint.coordinates);
+
+            if (params.wayPointId === "From") {
+                setFrom(params.wayPoint);
+            } else if (params.wayPointId === "To") {
+                setTo(params.wayPoint);
+            } else {
+                let updatedStops = new Array(...stops);
+
+                updatedStops.splice(Number(params.wayPointId), DELETE_COUNT_FOR_REPLACE, params.wayPoint);
+
+                setStops(updatedStops);
+            }
+        }
+    }, [params]);
 
     const mapRef = useRef<MapView | null>(null);
     const scrollViewRef = useRef<ScrollView | null>();
@@ -54,9 +84,9 @@ const CreateJourney: CreateJourneyComponent = () => {
             .catch((e: any) => console.log(e));
     }, []);
 
-    const animateCamera = (latitude: number, longitude: number) => {
+    const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
-            center: { longitude: longitude, latitude: latitude }
+            center: coordinates
         }, { duration: 2000 });
     };
 
@@ -83,7 +113,7 @@ const CreateJourney: CreateJourneyComponent = () => {
         }
         Geolocation.getCurrentPosition(
             (position) => {
-                animateCamera(position.coords.latitude, position.coords.longitude);
+                animateCamera(position.coords);
             },
             (error) => {
                 console.log(error);
@@ -93,7 +123,6 @@ const CreateJourney: CreateJourneyComponent = () => {
     }, []);
 
     const addStopPressHandler = () => {
-        console.log(stops.length);
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, {
@@ -109,11 +138,13 @@ const CreateJourney: CreateJourneyComponent = () => {
 
     const isAddStopDisabled = stops.length >= NUMBER_OF_STOPS_LIMIT;
 
-    const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number) => {
+    const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number, wayPointId: string) => {
         navigation.navigate("Address Input", {
             placeholder: placeholder,
             paddingLeft: paddingLeft,
-            savedLocations: savedLocations
+            savedLocations: savedLocations,
+            previousScreen: "Create Journey",
+            wayPointId: wayPointId
         });
     };
 
@@ -123,27 +154,21 @@ const CreateJourney: CreateJourneyComponent = () => {
             <ScrollView
                 ref={ref => (scrollViewRef.current = ref)}
                 onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
-                style={{
-                    position: "absolute",
-                    zIndex: 1,
-                    width: "100%",
-                    paddingHorizontal: 10,
-                    height: 200,
-                    marginTop: 15
-                }}
+                style={CreateJourneyStyle.scrollView}
             >
+
                 <AddressInputButton
                     directionType={"From"}
                     text={from.text}
                     onPress={() => onAddressInputButtonPressHandler(
-                        "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER)}
+                        "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From")}
                 />
 
                 <AddressInputButton
                     directionType={"To"}
                     text={to.text}
                     onPress={() => onAddressInputButtonPressHandler(
-                        "To", LEFT_PADDING_FOR_TO_PLACEHOLDER)}
+                        "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To")}
                 />
 
                 {stops.map((stop, index) => (
@@ -151,7 +176,7 @@ const CreateJourney: CreateJourneyComponent = () => {
                         directionType={"Via"}
                         text={stop.text}
                         onPress={() => onAddressInputButtonPressHandler(
-                            "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER)}
+                            "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString())}
                         key={index}
                     />
                 ))}
@@ -165,28 +190,41 @@ const CreateJourney: CreateJourneyComponent = () => {
                 initialCamera={initialCamera}
                 customMapStyle={mapStyle}
             >
-                {
-                    fromAndToIsConfirmed && (
-                        <>
-                            <Marker
-                                title={"From"}
-                                coordinate={from.coordinates}
-                                image={require("../../../../../assets/images/small-circle-marker.png")}
-                            />
-                            <Marker
-                                title={"To"}
-                                coordinate={to.coordinates}
-                            />
-                            <MapViewDirections
-                                origin={from.coordinates}
-                                destination={to.coordinates}
-                                apikey={APIConfig.apiKey}
-                                strokeWidth={5}
-                                strokeColor="#027ebd"
-                            />
-                        </>
-                    )
+                {from.isConfirmed && (
+                    <Marker
+                        title={"From"}
+                        coordinate={from.coordinates}
+                        image={require("../../../../../assets/images/small-circle-marker.png")}
+                    />)
                 }
+
+                {to.isConfirmed && (
+                    <Marker
+                        title={"To"}
+                        coordinate={to.coordinates}
+                    />)
+                }
+
+                {stops.filter(stop => stop.isConfirmed)
+                    .map((stop, index) => (
+                        <Marker
+                            title={"Stop"}
+                            coordinate={stop.coordinates}
+                            key={index}
+                        />
+                    ))
+                }
+
+                {fromAndToIsConfirmed && (
+                    <MapViewDirections
+                        origin={from.coordinates}
+                        destination={to.coordinates}
+                        waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}
+                        apikey={APIConfig.apiKey}
+                        strokeWidth={5}
+                        strokeColor="#027ebd"
+                    />
+                )}
             </MapView>
 
             <TouchableOpacity

@@ -125,5 +125,14 @@ export const CreateJourneyStyle = StyleSheet.create({
     movableMarker: {
         position: "absolute",
         zIndex: 1
+    },
+
+    scrollView: {
+        position: "absolute",
+        zIndex: 1,
+        width: "100%",
+        paddingHorizontal: 10,
+        height: 200,
+        marginTop: 15
     }
 });
