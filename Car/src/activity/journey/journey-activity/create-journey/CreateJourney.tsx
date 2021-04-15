@@ -45,6 +45,7 @@ const CreateJourney: CreateJourneyComponent = () => {
     const [stops, setStops] = useState<WayPoint[]>([]);
 
     const mapRef = useRef<MapView | null>(null);
+    const scrollViewRef = useRef<ScrollView | null>();
 
     useEffect(() => {
         LocationService
@@ -92,7 +93,7 @@ const CreateJourney: CreateJourneyComponent = () => {
     }, []);
 
     const addStopPressHandler = () => {
-        console.log("addStopPressHandler");
+        console.log(stops.length);
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, {
@@ -106,6 +107,8 @@ const CreateJourney: CreateJourneyComponent = () => {
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
+    const isAddStopDisabled = stops.length >= NUMBER_OF_STOPS_LIMIT;
+
     const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number) => {
         navigation.navigate("Address Input", {
             placeholder: placeholder,
@@ -118,6 +121,8 @@ const CreateJourney: CreateJourneyComponent = () => {
         <View style={{ flex: 1 }}>
 
             <ScrollView
+                ref={ref => (scrollViewRef.current = ref)}
+                onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
                 style={{
                     position: "absolute",
                     zIndex: 1,
@@ -185,9 +190,10 @@ const CreateJourney: CreateJourneyComponent = () => {
             </MapView>
 
             <TouchableOpacity
-                style={SearchJourneyStyle.confirmButton}
+                style={[SearchJourneyStyle.confirmButton,
+                    { backgroundColor:  isAddStopDisabled ? "darkgrey" : "black" }]}
                 onPress={addStopPressHandler}
-                disabled={stops.length > NUMBER_OF_STOPS_LIMIT}
+                disabled={isAddStopDisabled}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                     Add stop

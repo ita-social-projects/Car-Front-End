@@ -14,6 +14,7 @@ test("renders correctly", async () =>
       }
     >
       <ScrollView
+        onContentSizeChange={[Function]}
         style={
           Object {
             "height": 200,
@@ -82,17 +83,22 @@ test("renders correctly", async () =>
         disabled={false}
         onPress={[Function]}
         style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#000000",
-            "flexDirection": "row",
-            "justifyContent": "space-around",
-            "left": 629,
-            "paddingHorizontal": 16,
-            "paddingVertical": 14,
-            "position": "absolute",
-            "top": 1098,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#000000",
+              "flexDirection": "row",
+              "justifyContent": "space-around",
+              "left": 629,
+              "paddingHorizontal": 16,
+              "paddingVertical": 14,
+              "position": "absolute",
+              "top": 1098,
+            },
+            Object {
+              "backgroundColor": "black",
+            },
+          ]
         }
       >
         <Text
