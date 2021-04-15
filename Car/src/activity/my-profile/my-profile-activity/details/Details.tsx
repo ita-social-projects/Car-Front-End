@@ -50,18 +50,6 @@ const Details = () => {
                             </Text>
                         </View>
                     </View>
-                    <View style={DetailsStyle.detailsContainer}>
-                        <View style={DetailsStyle.detailContainer}>
-                            <Text style={[DetailsStyle.detailNameText, { color: DM("#000000") }]}>
-                                Workspace
-                            </Text>
-                        </View>
-                        <View style={DetailsStyle.detailContainer}>
-                            <Text style={[DetailsStyle.detailValueBlueText, { color: DM("#02A2CF") }]}>
-                                {user?.location}
-                            </Text>
-                        </View>
-                    </View>
                 </>
             )}
         </View>
