@@ -64,8 +64,7 @@ const AppTabs = () => {
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: DM("black"),
-                inactiveTintColor: DM("#AAA9AE"),
-                keyboardHidesTabBar: true
+                inactiveTintColor: DM("#AAA9AE")
             }}
         >
             <Tabs.Screen

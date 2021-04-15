@@ -18,7 +18,6 @@ test("renders correctly", async () =>
         Object {
           "activeTintColor": "black",
           "inactiveTintColor": "#AAA9AE",
-          "keyboardHidesTabBar": true,
           "labelStyle": Object {
             "fontFamily": "Open Sans",
             "fontSize": 10,
