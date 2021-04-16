@@ -58,6 +58,8 @@ const AddressInputPage = (props: AddressInputPageProps) => {
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(centerCoordinates);
 
     const animateCameraAndMoveMarker = (coordinates: LatLng) => {
+        // console.log("animateCameraAndMoveMarker - ", coordinates);
+
         setMarkerCoordinates(coordinates);
 
         mapRef.current?.animateCamera({
@@ -95,7 +97,11 @@ const AddressInputPage = (props: AddressInputPageProps) => {
         fetch(CreateRequestWithAddressToGeocodingApi(description))
             .then(result => result.json())
             .then(json => {
-                const coordinates = json.results[FIRST_ELEMENT_INDEX].geometry.location;
+                const latLng = json.results[FIRST_ELEMENT_INDEX].geometry.location;
+
+                console.log(latLng);
+
+                const coordinates: LatLng = { latitude: latLng.lat, longitude: latLng.lng };
 
                 setWayPointsCoordinates(coordinates);
                 animateCameraAndMoveMarker(coordinates);
