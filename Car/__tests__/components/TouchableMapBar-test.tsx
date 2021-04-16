@@ -59,7 +59,7 @@ test("renders correctly", async () =>
         >
            
         </Text>
-        <View>
+        <ForwardRef>
           <Icon
             allowFontScaling={false}
             color="#414045"
@@ -81,7 +81,7 @@ test("renders correctly", async () =>
               ]
             }
           />
-        </View>
+        </ForwardRef>
       </ForwardRef>
     </View>
   `));

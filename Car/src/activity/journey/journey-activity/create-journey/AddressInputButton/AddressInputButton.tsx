@@ -4,7 +4,9 @@ import React from "react";
 interface AddressInputButtonProps {
     directionType: string,
     text: string,
-    onPress: () => void
+    iconName: string,
+    onPress: () => void,
+    onIconPress?: () => void
 }
 
 const AddressInputButton = (props: AddressInputButtonProps) => {
@@ -12,12 +14,13 @@ const AddressInputButton = (props: AddressInputButtonProps) => {
         <TouchableMapBar
             onPress={props.onPress}
             directionType={props.directionType}
-            iconName="location"
+            iconName={props.iconName}
             defaultInputValue={props.text}
             marginBottom="5"
             marginTop="0"
             flex="6"
             marginHorizontal={0}
+            onIconPress={props.onIconPress}
         />
     );
 };

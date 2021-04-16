@@ -6,6 +6,7 @@ interface TouchableMapBarProps {
     defaultInputValue?: string,
     marginHorizontal?: number,
     onPress?: () => void,
+    onIconPress?: () => void,
     iconName: string
 }
 

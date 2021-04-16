@@ -29,11 +29,13 @@ test("renders correctly", async () =>
       >
         <AddressInputButton
           directionType="From"
+          iconName="location"
           onPress={[Function]}
           text=""
         />
         <AddressInputButton
           directionType="To"
+          iconName="location"
           onPress={[Function]}
           text=""
         />

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
+    Alert,
     PermissionsAndroid,
     Platform, ScrollView,
     Text,
@@ -16,7 +17,7 @@ import {
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    DELETE_COUNT_FOR_REPLACE,
+    DELETE_COUNT,
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
@@ -67,8 +68,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             } else {
                 let updatedStops = new Array(...stops);
 
-                updatedStops.splice(Number(params.wayPointId), DELETE_COUNT_FOR_REPLACE, params.wayPoint);
-
+                updatedStops.splice(Number(params.wayPointId), DELETE_COUNT, params.wayPoint);
                 setStops(updatedStops);
             }
         }
@@ -154,6 +154,24 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         });
     };
 
+    useEffect(() => console.log(stops), [stops]);
+
+    const removeStopByIndex = (stopIndex: number) => {
+        let updatedStops = new Array(...stops);
+
+        updatedStops.splice(stopIndex, DELETE_COUNT);
+        setStops(updatedStops);
+    };
+
+    const onCloseIconPressHandler = (stopIndex: number) => {
+        Alert.alert(
+            "Delete stop",
+            "Are you sure you want to delete the stop?",
+            [{ text: "Cancel", style: "cancel" },
+                { text: "Yes", onPress: () => removeStopByIndex(stopIndex) }]
+        );
+    };
+
     return (
         <View style={{ flex: 1 }}>
 
@@ -164,6 +182,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             >
 
                 <AddressInputButton
+                    iconName={"location"}
                     directionType={"From"}
                     text={from.text}
                     onPress={() => onAddressInputButtonPressHandler(
@@ -171,6 +190,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 />
 
                 <AddressInputButton
+                    iconName={"location"}
                     directionType={"To"}
                     text={to.text}
                     onPress={() => onAddressInputButtonPressHandler(
@@ -179,10 +199,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {stops.map((stop, index) => (
                     <AddressInputButton
+                        iconName={"close"}
                         directionType={"Via"}
                         text={stop.text}
                         onPress={() => onAddressInputButtonPressHandler(
                             "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
+                        onIconPress={() => onCloseIconPressHandler(index)}
                         key={index}
                     />
                 ))}

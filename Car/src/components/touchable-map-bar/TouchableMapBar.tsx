@@ -38,7 +38,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                 >
                     {props.defaultInputValue}{" "}
                 </Text>
-                <View>
+                <TouchableOpacity onPress={props.onIconPress}>
                     <Ionicons
                         style={[
                             TouchableMapBarStyle.barIcon,
@@ -48,7 +48,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                         size={22}
                         color={"#414045"}
                     />
-                </View>
+                </TouchableOpacity>
             </TouchableOpacity>
         </View>
     );

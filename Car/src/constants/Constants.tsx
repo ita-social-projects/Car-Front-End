@@ -55,7 +55,7 @@ export const NUMBER_OF_STOPS_LIMIT = 7;
 export const LEFT_PADDING_FOR_FROM_PLACEHOLDER = 67;
 export const LEFT_PADDING_FOR_TO_PLACEHOLDER = 45;
 export const LEFT_PADDING_FOR_VIA_PLACEHOLDER = 50;
-export const DELETE_COUNT_FOR_REPLACE = 1;
+export const DELETE_COUNT = 1;
 
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,
