@@ -21,7 +21,8 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 import {
-    ANIMATION_DURATION, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
+    ANIMATION_DURATION,
+    CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
     FIRST_ELEMENT_INDEX,
     HALF_OPACITY,
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
@@ -149,21 +150,19 @@ const JourneyTabs = () => {
                                             { backgroundColor: DM("white") }
                                         ]}>
                                             <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
-                                                More options
+                                                MORE OPTIONS
                                             </Text>
                                         </View>
                                     }
                                     renderContent={
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                             <MenuButton
-                                                text="Add Stop"
-                                                isIcon={true}
+                                                text="Add Stop" isIcon={true}
                                                 onPress={() => {
                                                     CreateJourney.addStopPressHandler();
                                                     pressHandle();
                                                 }}
                                             />
-                                            <MenuButton text="Schedule This Journey" isIcon={true} />
                                             <MenuButton text="Change Preferences" isIcon={true} />
                                         </View>
                                     }

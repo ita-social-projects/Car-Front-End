@@ -195,6 +195,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 showsUserLocation={true}
                 initialCamera={initialCamera}
                 customMapStyle={mapStyle}
+                showsCompass={false}
             >
                 {from.isConfirmed && (
                     <Marker
