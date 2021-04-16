@@ -38,8 +38,54 @@ test("renders correctly", async () =>
           }
         />
         <Screen
-          component={[Function]}
           name="Create Journey"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerRight": [Function],
+              "headerTitle": "Add a ride",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "black",
+                },
+              ],
+            }
+          }
+        >
+          [Function]
+        </Screen>
+        <Screen
+          component={[Function]}
+          name="Address Input"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "Input Address",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "black",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
+          name="New Journey Details"
           options={
             Object {
               "headerLeft": [Function],

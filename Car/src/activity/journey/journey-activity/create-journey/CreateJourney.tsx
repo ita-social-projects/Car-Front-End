@@ -1,83 +1,78 @@
-import React, { Dispatch, SetStateAction,
-    useContext, useEffect, useRef, useState } from "react";
-import { PermissionsAndroid, Platform, Text, TouchableOpacity, View } from "react-native";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Alert, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
-import AddressInput from "./AddressInput/AddressInput";
-import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
-    FIRST_ELEMENT_INDEX,
-    INITIAL_LATITUDE,
-    INITIAL_LONGITUDE,
-    SECOND_ELEMENT_INDEX,
-    SECOND_FROM_END_ELEMENT_INDEX,
-    THIRD_FROM_END_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH
+    DELETE_COUNT,
+    initialCamera,
+    initialWayPoint,
+    LEFT_PADDING_FOR_FROM_PLACEHOLDER,
+    LEFT_PADDING_FOR_TO_PLACEHOLDER,
+    LEFT_PADDING_FOR_VIA_PLACEHOLDER,
+    NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
-import { CreateJourneyStyle } from "./CreateJourneyStyle";
-import MarkerFocus from "./MarkerFocus";
 import Geolocation from "@react-native-community/geolocation";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Location from "../../../../../models/location/Location";
+import AddressInputButton from "./AddressInputButton/AddressInputButton";
+import * as navigation from "../../../../components/navigation/Navigation";
+import WayPoint from "../../../../types/WayPoint";
+import { CreateJourneyStyle } from "./CreateJourneyStyle";
+import CreateJourneyProps from "./CreateJourneyProps";
 
-const CreateRequestToGeocodingApi = (address: string) => {
-    return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-        address.replace(" ", "+") +
-        "&key=" + APIConfig.apiKey;
-};
+interface CreateJourneyComponent {
+    addStopPressHandler: () => void,
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    ({ props }: {props: CreateJourneyProps}): JSX.Element
+}
 
-const CreateJourney = () => {
+const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
+    const params = props?.route?.params;
+
     const { user } = useContext(AuthContext);
-    const [locations, setLocations] = useState<Array<Location>>([]);
+    const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
 
-    const [fromText, setFromText] = useState("");
-    const [toText, setToText] = useState("");
+    const [from, setFrom] = useState<WayPoint>(initialWayPoint);
+    const [to, setTo] = useState<WayPoint>(initialWayPoint);
 
-    const [markerFocus, setMarkerFocus] = useState(MarkerFocus.From);
+    const [stops, setStops] = useState<WayPoint[]>([]);
 
-    const [isFromConfirmed, setIsFromConfirmed] = useState(false);
-    const [isToConfirmed, setIsToConfirmed] = useState(false);
+    useEffect(() => {
+        if (params) {
+            animateCamera(params.wayPoint.coordinates);
 
-    const [fromCoordinates, setFromCoordinates] =
-        useState<LatLng>({ latitude: 0, longitude: 0 });
-    const [toCoordinates, setToCoordinates] =
-        useState<LatLng>({ latitude: 0, longitude: 0 });
+            if (params.wayPointId === "From") {
+                setFrom(params.wayPoint);
+            } else if (params.wayPointId === "To") {
+                setTo(params.wayPoint);
+            } else {
+                let updatedStops = new Array(...stops);
 
-    const initialCoordinate: LatLng = {
-        latitude: INITIAL_LATITUDE,
-        longitude: INITIAL_LONGITUDE
-    };
-    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
+                updatedStops.splice(Number(params.wayPointId), DELETE_COUNT, params.wayPoint);
+                setStops(updatedStops);
+            }
+        }
+    }, [params]);
+
     const mapRef = useRef<MapView | null>(null);
-
-    const initialCamera = {
-        center: initialCoordinate,
-        pitch: 2,
-        heading: 20,
-        altitude: 200,
-        zoom: 16
-    };
+    const scrollViewRef = useRef<ScrollView | null>();
 
     useEffect(() => {
         LocationService
             .getAll(Number(user?.id))
-            .then((res: any) => {
-                setLocations(res.data);
-            })
+            .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
     }, []);
 
-    const animateCameraAndMoveMarker = (latitude: number, longitude: number) => {
-        const newMarkerCoordinates: LatLng = { longitude: longitude, latitude: latitude };
-
-        setMarkerCoordinates(newMarkerCoordinates);
-
+    const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
-            center: newMarkerCoordinates
-        }, { duration: 2000 });
+            center: coordinates
+        }, { duration: 1000 });
     };
 
     const androidPermission = async () => {
@@ -103,7 +98,7 @@ const CreateJourney = () => {
         }
         Geolocation.getCurrentPosition(
             (position) => {
-                animateCameraAndMoveMarker(position.coords.latitude, position.coords.longitude);
+                animateCamera(position.coords);
             },
             (error) => {
                 console.log(error);
@@ -112,178 +107,150 @@ const CreateJourney = () => {
         );
     }, []);
 
-    const confirmPressHandler = () => {
-        console.log("Confirm was pressed");
+    CreateJourney.addStopPressHandler = () => {
+        if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
+
+        setStops(prevState => [...prevState, {
+            text: "",
+            isConfirmed: false,
+            coordinates: { longitude: 0, latitude: 0 }
+        }]);
     };
 
-    const setAddress = (address: string, coordinates: LatLng) => {
-        if (markerFocus === MarkerFocus.From) {
-            setFromText(address);
-            setIsFromConfirmed(true);
-            setFromCoordinates(coordinates);
-        } else if (markerFocus === MarkerFocus.To) {
-            setToText(address);
-            setIsToConfirmed(true);
-            setToCoordinates(coordinates);
-        }
-    };
+    const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
-    const removeRegionAndPostalCode = (json: string) => {
-        const addressArray = json.split(", ");
-        const endIndex = addressArray.length > THREE_ELEMENT_COLLECTION_LENGTH ?
-            THIRD_FROM_END_ELEMENT_INDEX :
-            SECOND_FROM_END_ELEMENT_INDEX;
+    const onAddressInputButtonPressHandler = (
+        placeholder: string, paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
 
-        return addressArray.slice(FIRST_ELEMENT_INDEX, endIndex).join(", ");
-    };
-
-    const setAddressByCoordinates = (latitude: number, longitude: number) => {
-        fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`)
-            .then((res) => res.json())
-            .then((json) => {
-                let resultedAddress = json.results[SECOND_ELEMENT_INDEX].formatted_address;
-
-                resultedAddress = removeRegionAndPostalCode(resultedAddress);
-                setAddress(resultedAddress, { latitude: latitude, longitude: longitude });
+        mapRef.current?.getCamera().then(camera => {
+            navigation.navigate("Address Input", {
+                placeholder: placeholder,
+                paddingLeft: paddingLeft,
+                savedLocations: savedLocations,
+                previousScreen: "Create Journey",
+                wayPointId: wayPointId,
+                wayPoint: wayPoint,
+                camera: { ...camera, altitude: 200 }
             });
+        });
     };
 
-    const onMarkerPressHandler = (focus: MarkerFocus) => setMarkerFocus(focus);
+    useEffect(() => console.log(stops), [stops]);
 
-    const SetCoordinatesByDescription = (description: string,
-        setCoordinates: Dispatch<SetStateAction<LatLng>>) => {
+    const removeStopByIndex = (stopIndex: number) => {
+        let updatedStops = new Array(...stops);
 
-        fetch(CreateRequestToGeocodingApi(description))
-            .then(result => result.json())
-            .then(json => {
-                const location = json.results[FIRST_ELEMENT_INDEX].geometry.location;
-                const coordinate = { latitude: location.lat, longitude: location.lng };
-
-                setCoordinates(coordinate);
-                animateCameraAndMoveMarker(coordinate.latitude, coordinate.longitude);
-            });
+        updatedStops.splice(stopIndex, DELETE_COUNT);
+        setStops(updatedStops);
     };
 
-    const addressInputOnPressHandler = (data: any,
-        setCoordinates: Dispatch<SetStateAction<LatLng>>,
-        setIsConfirmed: Dispatch<SetStateAction<boolean>>,
-        setText: Dispatch<SetStateAction<string>>,
-        focus: MarkerFocus) => {
-
-        if (data.geometry) {
-            const point = data.geometry.location;
-
-            setCoordinates({ latitude: point.lat, longitude: point.lng });
-            animateCameraAndMoveMarker(point.lat, point.lng);
-        } else {
-            SetCoordinatesByDescription(data.description, setCoordinates);
-        }
-        setIsConfirmed(true);
-        setText(data.description);
-        setMarkerFocus(focus);
+    const onCloseIconPressHandler = (stopIndex: number) => {
+        Alert.alert(
+            "Delete stop",
+            "Are you sure you want to delete the stop?",
+            [{ text: "Cancel", style: "cancel" },
+                { text: "Yes", onPress: () => removeStopByIndex(stopIndex) }]
+        );
     };
 
-    const addressInputOnChangeTextHandler = (text: string,
-        setIsConfirmed: Dispatch<SetStateAction<boolean>>,
-        setText: Dispatch<SetStateAction<string>>) => {
-        setIsConfirmed(false);
-        setText(text);
+    const confirmOnPressHandler = () => {
+        navigation.navigate("New Journey Details", {
+            from: from,
+            to: to,
+            stops: stops.filter(stop => stop.isConfirmed)
+        });
     };
-
-    const markerOnDragEndHandler = (event: MapEvent) => {
-        const { latitude, longitude } = event.nativeEvent.coordinate;
-
-        setAddressByCoordinates(latitude, longitude);
-
-        animateCameraAndMoveMarker(latitude, longitude);
-    };
-
-    const fromAndToIsConfirmed = isFromConfirmed && isToConfirmed;
 
     return (
         <View style={{ flex: 1 }}>
-            <AddressInput
-                placeholder={"From"}
-                top={10}
-                paddingLeft={68}
-                address={fromText}
-                onPress={(data) =>
-                    addressInputOnPressHandler(data, setFromCoordinates,
-                        setIsFromConfirmed, setFromText, MarkerFocus.From)
-                }
-                onChangeText={(text) =>
-                    addressInputOnChangeTextHandler(text, setIsFromConfirmed, setFromText)
-                }
-                onMarkerPress={() => onMarkerPressHandler(MarkerFocus.From)}
-                isMarkerFocus={markerFocus === MarkerFocus.From}
-                savedLocations={locations}
-            />
 
-            <AddressInput
-                placeholder={"To"}
-                top={65}
-                paddingLeft={45}
-                address={toText}
-                onPress={(data) =>
-                    addressInputOnPressHandler(data, setToCoordinates,
-                        setIsToConfirmed, setToText, MarkerFocus.To)
-                }
-                onChangeText={(text) =>
-                    addressInputOnChangeTextHandler(text, setIsToConfirmed, setToText)
-                }
-                onMarkerPress={() => onMarkerPressHandler(MarkerFocus.To)}
-                isMarkerFocus={markerFocus === MarkerFocus.To}
-                savedLocations={locations}
-            />
+            <ScrollView
+                ref={ref => (scrollViewRef.current = ref)}
+                onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
+                style={CreateJourneyStyle.scrollView}
+            >
+
+                <AddressInputButton
+                    iconName={"location"}
+                    directionType={"From"}
+                    text={from.text}
+                    onPress={() => onAddressInputButtonPressHandler(
+                        "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
+                />
+
+                <AddressInputButton
+                    iconName={"location"}
+                    directionType={"To"}
+                    text={to.text}
+                    onPress={() => onAddressInputButtonPressHandler(
+                        "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
+                />
+
+                {stops.map((stop, index) => (
+                    <AddressInputButton
+                        iconName={"close"}
+                        directionType={"Via"}
+                        text={stop.text}
+                        onPress={() => onAddressInputButtonPressHandler(
+                            "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
+                        onIconPress={() => onCloseIconPressHandler(index)}
+                        key={index}
+                    />
+                ))}
+            </ScrollView>
 
             <MapView
-                ref={ref => { mapRef.current = ref; }}
+                ref={ref => (mapRef.current = ref)}
                 style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}
                 customMapStyle={mapStyle}
+                showsCompass={false}
             >
-                {
-                    <>
-                        <Marker
-                            style={CreateJourneyStyle.movableMarker}
-                            draggable={true}
-                            onDragEnd={markerOnDragEndHandler}
-                            image={require("../../../../../assets/images/small-custom-marker.png")}
-                            coordinate={markerCoordinates}
-                        />
-                        {
-                            fromAndToIsConfirmed ? (
-                                <>
-                                    <Marker
-                                        title={"From"}
-                                        coordinate={fromCoordinates}
-                                        image={require("../../../../../assets/images/small-circle-marker.png")}
-                                    />
-                                    <Marker
-                                        title={"To"}
-                                        coordinate={toCoordinates}
-                                    />
-                                    <MapViewDirections
-                                        origin={fromCoordinates}
-                                        destination={toCoordinates}
-                                        apikey={APIConfig.apiKey}
-                                        strokeWidth={5}
-                                        strokeColor="#027ebd"
-                                    />
-                                </>
-                            ) : (<></>)
-                        }
-                    </>
+                {from.isConfirmed && (
+                    <Marker
+                        title={"From"}
+                        coordinate={from.coordinates}
+                        image={require("../../../../../assets/images/small-circle-marker.png")}
+                    />)
                 }
+
+                {to.isConfirmed && (
+                    <Marker
+                        title={"To"}
+                        coordinate={to.coordinates}
+                    />)
+                }
+
+                {stops.filter(stop => stop.isConfirmed)
+                    .map((stop, index) => (
+                        <Marker
+                            title={"Stop"}
+                            coordinate={stop.coordinates}
+                            image={require("../../../../../assets/images/stop-marker-transparent.png")}
+                            key={index}
+                        />
+                    ))
+                }
+
+                {fromAndToIsConfirmed && (
+                    <MapViewDirections
+                        optimizeWaypoints={true}
+                        origin={from.coordinates}
+                        destination={to.coordinates}
+                        waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}
+                        apikey={APIConfig.apiKey}
+                        strokeWidth={5}
+                        strokeColor="#027ebd"
+                    />
+                )}
             </MapView>
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor: DM(DM(fromAndToIsConfirmed ? "black" : "gray")) }]}
-                onPress={confirmPressHandler}
+                    { backgroundColor:  fromAndToIsConfirmed ? "black" : "darkgrey" }]}
+                onPress={confirmOnPressHandler}
                 disabled={!fromAndToIsConfirmed}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
@@ -293,5 +260,7 @@ const CreateJourney = () => {
         </View>
     );
 };
+
+CreateJourney.addStopPressHandler = () => console.log("Outer Add stop handler");
 
 export default CreateJourney;
