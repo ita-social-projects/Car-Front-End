@@ -273,7 +273,7 @@ const AddCars = () => {
                     </Text>
                     <TouchableOpacity
                         disabled={
-                            !(selectedBrand?.value === null || selectedBrand?.value === undefined)
+                            selectedBrand?.value === null || selectedBrand?.value === undefined
                         }
                         style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
