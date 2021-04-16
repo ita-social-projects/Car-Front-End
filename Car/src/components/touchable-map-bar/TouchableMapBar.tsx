@@ -15,6 +15,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
     return (
         <View>
             <TouchableOpacity
+                disabled={props.disabled}
                 onPress={props.onPress}
                 style={[
                     TouchableMapBarStyle.container,

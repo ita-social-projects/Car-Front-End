@@ -1,4 +1,5 @@
 interface TouchableMapBarProps {
+    iconName: string
     marginBottom?: string,
     marginTop?: string,
     flex?: string
@@ -7,7 +8,7 @@ interface TouchableMapBarProps {
     marginHorizontal?: number,
     onPress?: () => void,
     onIconPress?: () => void,
-    iconName: string
+    disabled?: boolean
 }
 
 export default TouchableMapBarProps;

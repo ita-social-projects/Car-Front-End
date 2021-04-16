@@ -18,6 +18,7 @@ export const EMPTY_COLLECTION_LENGTH = 0;
 export const SINGLE_ELEMENT_COLLECTION_LENGTH = 1;
 export const THREE_ELEMENT_COLLECTION_LENGTH = 3;
 export const ZERO_OPACITY = 0;
+export const ZERO_MARGIN = 0;
 export const HALF_OPACITY = 0.5;
 export const MAX_OPACITY = 1;
 export const ANIMATION_DURATION = 500;

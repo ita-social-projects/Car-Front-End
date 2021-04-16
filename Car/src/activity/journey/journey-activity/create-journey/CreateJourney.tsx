@@ -1,23 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-    Alert,
-    PermissionsAndroid,
-    Platform, ScrollView,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { Alert, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
+    DELETE_COUNT,
     initialCamera,
     initialWayPoint,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    DELETE_COUNT,
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
@@ -122,7 +115,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         );
     }, []);
 
-    const addStopPressHandler = () => {
+    CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, {
@@ -132,11 +125,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         }]);
     };
 
-    CreateJourney.addStopPressHandler = addStopPressHandler;
-
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
-
-    const isAddStopDisabled = stops.length >= NUMBER_OF_STOPS_LIMIT;
 
     const onAddressInputButtonPressHandler = (
         placeholder: string, paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
@@ -170,6 +159,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             [{ text: "Cancel", style: "cancel" },
                 { text: "Yes", onPress: () => removeStopByIndex(stopIndex) }]
         );
+    };
+
+    const confirmOnPressHandler = () => {
+        navigation.navigate("New Journey Details", {
+            from: from,
+            to: to,
+            stops: stops.filter(stop => stop.isConfirmed)
+        });
     };
 
     return (
@@ -260,12 +257,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  isAddStopDisabled ? "darkgrey" : "black" }]}
-                onPress={addStopPressHandler}
-                disabled={isAddStopDisabled}
+                    { backgroundColor:  fromAndToIsConfirmed ? "black" : "darkgrey" }]}
+                onPress={confirmOnPressHandler}
+                disabled={!fromAndToIsConfirmed}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
-                    Add stop
+                    Confirm
                 </Text>
             </TouchableOpacity>
         </View>

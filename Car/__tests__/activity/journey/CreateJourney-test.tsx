@@ -84,7 +84,7 @@ test("renders correctly", async () =>
         }
       />
       <ForwardRef
-        disabled={false}
+        disabled={true}
         onPress={[Function]}
         style={
           Array [
@@ -100,7 +100,7 @@ test("renders correctly", async () =>
               "top": 1098,
             },
             Object {
-              "backgroundColor": "black",
+              "backgroundColor": "darkgrey",
             },
           ]
         }
@@ -120,7 +120,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Add stop
+          Confirm
         </Text>
       </ForwardRef>
     </View>

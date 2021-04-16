@@ -1,12 +1,15 @@
 import TouchableMapBar from "../../../../../components/touchable-map-bar/TouchableMapBar";
 import React from "react";
+import { ZERO_MARGIN } from "../../../../../constants/Constants";
 
 interface AddressInputButtonProps {
     directionType: string,
     text: string,
     iconName: string,
-    onPress: () => void,
-    onIconPress?: () => void
+    onPress?: () => void,
+    onIconPress?: () => void,
+    disabled?: boolean,
+    marginHorizontal?: number
 }
 
 const AddressInputButton = (props: AddressInputButtonProps) => {
@@ -19,8 +22,9 @@ const AddressInputButton = (props: AddressInputButtonProps) => {
             marginBottom="5"
             marginTop="0"
             flex="6"
-            marginHorizontal={0}
+            marginHorizontal={props.marginHorizontal ?? ZERO_MARGIN}
             onIconPress={props.onIconPress}
+            disabled={props.disabled}
         />
     );
 };

@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
         backgroundColor:"#F2F2F2",
+        paddingTop: 10
     },
 
     recentJourneyText:{

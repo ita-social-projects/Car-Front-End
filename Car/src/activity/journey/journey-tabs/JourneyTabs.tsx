@@ -35,6 +35,7 @@ import {
 } from "../../../constants/Constants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
+import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
@@ -177,6 +178,17 @@ const JourneyTabs = () => {
                     component={AddressInputPage}
                     options={{
                         headerTitle: "Input Address",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleAlign: "center",
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="New Journey Details"
+                    component={NewJourneyDetailsPage}
+                    options={{
+                        headerTitle: "Add a ride",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton

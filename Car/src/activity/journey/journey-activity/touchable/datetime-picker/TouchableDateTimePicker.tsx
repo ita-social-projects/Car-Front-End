@@ -4,7 +4,7 @@ import DatePicker from "react-native-date-picker";
 import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-function TouchableDateTimePicker (props: any) {
+function TouchableDateTimePicker (props: { iconName: string}) {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const MINUS_TWO = -2;
