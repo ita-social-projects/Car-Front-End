@@ -6,18 +6,8 @@ import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreation
 import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
 import FreeButtonChoiceAlert from "../../alerts/FreeButtonChoiceAlert";
 import PaidButtonChoiceAlert from "../../alerts/PaidButtonChoiceAlert";
-import WayPoint from "../WayPoint";
 import AddressInputButton from "../AddressInputButton/AddressInputButton";
-
-interface NewJourneyDetailsPageProps {
-    route: {
-        params: {
-            from: WayPoint,
-            to: WayPoint,
-            stops: WayPoint[]
-        }
-    }
-}
+import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const params = props.route.params;

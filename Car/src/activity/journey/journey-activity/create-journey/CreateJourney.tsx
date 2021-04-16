@@ -21,22 +21,14 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import Location from "../../../../../models/location/Location";
 import AddressInputButton from "./AddressInputButton/AddressInputButton";
 import * as navigation from "../../../../components/navigation/Navigation";
-import WayPoint from "./WayPoint";
+import WayPoint from "../../../../types/WayPoint";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
+import CreateJourneyProps from "./CreateJourneyProps";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: CreateJourneyProps}): JSX.Element
-}
-
-interface CreateJourneyProps {
-    route: {
-        params: {
-            wayPoint: WayPoint,
-            wayPointId: string
-        }
-    }
 }
 
 const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {

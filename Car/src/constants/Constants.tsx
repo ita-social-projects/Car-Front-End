@@ -1,7 +1,7 @@
 import { Dimensions } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { LatLng } from "react-native-maps";
-import WayPoint from "../activity/journey/journey-activity/create-journey/WayPoint";
+import WayPoint from "../types/WayPoint";
 
 export const DROP_DOWN_MAX_HEIGHT = Dimensions.get("window").height / 4;
 export const GRADIENT_START = 0;

@@ -1,50 +1,32 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import AddressInput from "../AddressInput/AddressInput";
 import { mapStyle } from "../../map-address/SearchJourneyMapStyle";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
-import MapView, { Camera, LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
     FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, SECOND_FROM_END_ELEMENT_INDEX,
     THIRD_FROM_END_ELEMENT_INDEX,
     THREE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../../constants/Constants";
 import APIConfig from "../../../../../../api-service/APIConfig";
-import WayPoint from "../WayPoint";
+import WayPoint from "../../../../../types/WayPoint";
 import SearchJourneyStyle from "../../search-journey/SearchJourneyStyle";
 import DM from "../../../../../components/styles/DM";
-import Location from "../../../../../../models/location/Location";
 import * as navigation from "../../../../../components/navigation/Navigation";
+import AddressInputPageStyle from "./AddressInputPageStyle";
+import AddressInputPageProps from "./AddressInputPageProps";
 
-const AddressInputPageStyle = StyleSheet.create({
-    inputContainer: {
-        position: "absolute",
-        top: 10,
-        left: 10,
-        right: 10,
-        zIndex: 1
-    }
-});
-
-const CreateRequestToGeocodingApi = (address: string) => {
+const CreateRequestWithAddressToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
         address.replace(" ", "+") +
         "&key=" + APIConfig.apiKey;
 };
 
-interface AddressInputPageProps {
-    route: {
-        params: {
-            camera: Camera,
-            placeholder: string,
-            paddingLeft: number,
-            savedLocations: Location[],
-            previousScreen: "Create Journey",
-            wayPointId: string,
-            wayPoint: WayPoint
-        }
-    }
-}
+const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
+    return "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        `${coordinates.latitude},${coordinates.longitude}&key=${APIConfig.apiKey}`;
+};
 
 const AddressInputPage = (props: AddressInputPageProps) => {
 
@@ -75,13 +57,11 @@ const AddressInputPage = (props: AddressInputPageProps) => {
     const mapRef = useRef<MapView | null>(null);
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(centerCoordinates);
 
-    const animateCameraAndMoveMarker = (latitude: number, longitude: number) => {
-        const newMarkerCoordinates: LatLng = { longitude: longitude, latitude: latitude };
-
-        setMarkerCoordinates(newMarkerCoordinates);
+    const animateCameraAndMoveMarker = (coordinates: LatLng) => {
+        setMarkerCoordinates(coordinates);
 
         mapRef.current?.animateCamera({
-            center: newMarkerCoordinates
+            center: coordinates
         }, { duration: 2000 });
     };
 
@@ -99,28 +79,26 @@ const AddressInputPage = (props: AddressInputPageProps) => {
         return addressArray.slice(FIRST_ELEMENT_INDEX, endIndex).join(", ");
     };
 
-    const setAddressByCoordinates = (latitude: number, longitude: number) => {
-        fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${APIConfig.apiKey}`)
+    const setAddressByCoordinates = (coordinates: LatLng) => {
+        fetch(CreateRequestWithCoordinatesToGeocodingApi(coordinates))
             .then((res) => res.json())
             .then((json) => {
                 let resultedAddress = json.results[SECOND_ELEMENT_INDEX].formatted_address;
 
                 resultedAddress = removeRegionAndPostalCode(resultedAddress);
-                setAddress(resultedAddress, { latitude: latitude, longitude: longitude });
+                setAddress(resultedAddress, coordinates);
             });
     };
 
     const setCoordinatesByDescription = (description: string) => {
 
-        fetch(CreateRequestToGeocodingApi(description))
+        fetch(CreateRequestWithAddressToGeocodingApi(description))
             .then(result => result.json())
             .then(json => {
-                const location = json.results[FIRST_ELEMENT_INDEX].geometry.location;
-                const coordinates = { latitude: location.lat, longitude: location.lng };
+                const coordinates = json.results[FIRST_ELEMENT_INDEX].geometry.location;
 
                 setWayPointsCoordinates(coordinates);
-                animateCameraAndMoveMarker(coordinates.latitude, coordinates.longitude);
+                animateCameraAndMoveMarker(coordinates);
             });
     };
 
@@ -129,7 +107,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
             const point = data.geometry.location;
 
             setWayPointsCoordinates({ latitude: point.lat, longitude: point.lng });
-            animateCameraAndMoveMarker(point.lat, point.lng);
+            animateCameraAndMoveMarker({ latitude: point.lat, longitude: point.lng });
         } else {
             setCoordinatesByDescription(data.description);
         }
@@ -142,11 +120,9 @@ const AddressInputPage = (props: AddressInputPageProps) => {
     };
 
     const markerOnDragEndHandler = (event: MapEvent) => {
-        const { latitude, longitude } = event.nativeEvent.coordinate;
+        setAddressByCoordinates(event.nativeEvent.coordinate);
 
-        setAddressByCoordinates(latitude, longitude);
-
-        animateCameraAndMoveMarker(latitude, longitude);
+        animateCameraAndMoveMarker(event.nativeEvent.coordinate);
     };
 
     return (
