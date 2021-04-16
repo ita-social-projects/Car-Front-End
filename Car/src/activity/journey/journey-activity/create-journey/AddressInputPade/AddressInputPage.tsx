@@ -58,8 +58,6 @@ const AddressInputPage = (props: AddressInputPageProps) => {
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(centerCoordinates);
 
     const animateCameraAndMoveMarker = (coordinates: LatLng) => {
-        // console.log("animateCameraAndMoveMarker - ", coordinates);
-
         setMarkerCoordinates(coordinates);
 
         mapRef.current?.animateCamera({

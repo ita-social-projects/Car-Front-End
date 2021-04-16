@@ -1,14 +1,6 @@
 import { StyleSheet } from "react-native";
 
 const AddressInputStyles = StyleSheet.create({
-    container: {
-        // position: "absolute"
-        // borderWidth: 2
-    },
-    textInputContainer: {
-        // position: "absolute",
-        // zIndex: 1
-    },
     placeholder: {
         position: "absolute",
         left: 15,
@@ -19,7 +11,6 @@ const AddressInputStyles = StyleSheet.create({
     },
     listView: {
         position: "relative",
-        // top: 100,
         zIndex: 100,
         height: 270
     },
