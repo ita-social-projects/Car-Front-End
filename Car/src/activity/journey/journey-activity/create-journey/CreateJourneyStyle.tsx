@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
         backgroundColor:"#F2F2F2",
+        paddingTop: 10
     },
 
     recentJourneyText:{
@@ -125,5 +126,14 @@ export const CreateJourneyStyle = StyleSheet.create({
     movableMarker: {
         position: "absolute",
         zIndex: 1
+    },
+
+    scrollView: {
+        position: "absolute",
+        zIndex: 1,
+        width: "100%",
+        paddingHorizontal: 10,
+        height: 200,
+        marginTop: 15
     }
 });

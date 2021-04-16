@@ -5,7 +5,8 @@ import CreateJourney from "../../../src/activity/journey/journey-activity/create
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<CreateJourney />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<CreateJourney props={undefined as any} />))
+        .toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -13,28 +14,32 @@ test("renders correctly", async () =>
         }
       }
     >
-      <AddressInput
-        address=""
-        isMarkerFocus={true}
-        onChangeText={[Function]}
-        onMarkerPress={[Function]}
-        onPress={[Function]}
-        paddingLeft={68}
-        placeholder="From"
-        savedLocations={Array []}
-        top={10}
-      />
-      <AddressInput
-        address=""
-        isMarkerFocus={false}
-        onChangeText={[Function]}
-        onMarkerPress={[Function]}
-        onPress={[Function]}
-        paddingLeft={45}
-        placeholder="To"
-        savedLocations={Array []}
-        top={65}
-      />
+      <ScrollView
+        onContentSizeChange={[Function]}
+        style={
+          Object {
+            "height": 200,
+            "marginTop": 15,
+            "paddingHorizontal": 10,
+            "position": "absolute",
+            "width": "100%",
+            "zIndex": 1,
+          }
+        }
+      >
+        <AddressInputButton
+          directionType="From"
+          iconName="location"
+          onPress={[Function]}
+          text=""
+        />
+        <AddressInputButton
+          directionType="To"
+          iconName="location"
+          onPress={[Function]}
+          text=""
+        />
+      </ScrollView>
       <MapView
         customMapStyle={
           Array [
@@ -70,39 +75,14 @@ test("renders correctly", async () =>
           }
         }
         provider="google"
+        showsCompass={false}
         showsUserLocation={true}
         style={
           Object {
             "flex": 1,
           }
         }
-      >
-        <React.Fragment>
-          <MapMarker
-            coordinate={
-              Object {
-                "latitude": 49.843844,
-                "longitude": 24.025581,
-              }
-            }
-            draggable={true}
-            image={
-              Object {
-                "testUri": "../../../assets/images/small-custom-marker.png",
-              }
-            }
-            onDragEnd={[Function]}
-            stopPropagation={false}
-            style={
-              Object {
-                "position": "absolute",
-                "zIndex": 1,
-              }
-            }
-          />
-          <React.Fragment />
-        </React.Fragment>
-      </MapView>
+      />
       <ForwardRef
         disabled={true}
         onPress={[Function]}
@@ -120,7 +100,7 @@ test("renders correctly", async () =>
               "top": 1098,
             },
             Object {
-              "backgroundColor": "gray",
+              "backgroundColor": "darkgrey",
             },
           ]
         }

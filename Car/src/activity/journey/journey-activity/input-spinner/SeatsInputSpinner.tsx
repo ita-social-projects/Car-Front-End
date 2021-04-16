@@ -30,9 +30,7 @@ function SeatsInputSpinner (){
                     rounded={false}
                     showBorder={true}
                     value={3}
-                    onChange={(num: any) => {
-                        console.log(num);
-                    }} />
+                />
             </View>
         </View>
     );

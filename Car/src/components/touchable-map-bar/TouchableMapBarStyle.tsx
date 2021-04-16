@@ -6,8 +6,6 @@ const TouchableMapBarStyle = StyleSheet.create({
         flexDirection: "row",
         borderWidth: 2.3,
         padding: 8,
-        marginRight: 20,
-        marginLeft: 20,
         fontFamily: Font.OpenSans.Regular
     },
 
