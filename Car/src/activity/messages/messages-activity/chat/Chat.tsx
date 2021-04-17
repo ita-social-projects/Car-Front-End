@@ -274,7 +274,7 @@ const Chat = (properties: ChatProps) => {
                     placeholder="Aa"
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     timeFormat="HH:mm"
-                    dateFormat="MM.DD.YYYY"
+                    dateFormat="DD.MM"
                     messages={messages as any[]}
                     onInputTextChanged={(value) => {
                         if (value.trim()) {

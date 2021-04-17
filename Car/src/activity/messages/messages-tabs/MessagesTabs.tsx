@@ -8,7 +8,6 @@ import Messages from "../Messages";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import JourneyApplicant from "../../journey/journey-activity/journey-applicant/JourneyApplicant";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
-import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import DM from "../../../components/styles/DM";
 
 const StackTabs = createStackNavigator();
@@ -54,8 +53,7 @@ const MessagesTabs = () => {
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
-                        headerLeft: HeaderBackButton,
-                        headerRight: HeaderEllipsis
+                        headerLeft: HeaderBackButton
                     }}
                 />
 
