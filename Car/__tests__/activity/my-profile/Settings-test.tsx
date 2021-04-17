@@ -45,7 +45,7 @@ test("renders correctly", async () =>
           >
             <ForwardRef
               activeOpacity={1}
-              onLongPress={[Function]}
+              onPress={[Function]}
               style={
                 Array [
                   Object {
