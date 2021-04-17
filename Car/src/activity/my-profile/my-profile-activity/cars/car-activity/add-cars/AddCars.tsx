@@ -56,38 +56,57 @@ const AddCars = () => {
             }
         ]);
     }
-
-    function validateFields (): boolean {
-        if (
+    function isBrandEmpty () : boolean {
+        return (
             selectedBrand?.value === null ||
             selectedBrand?.value === undefined
+        );
+    }
+    function isModelEmpty () : boolean {
+        return (
+            selectedModel?.value === null ||
+            selectedModel?.value === undefined
+        );
+    }
+    function isColorEmpty () : boolean {
+        return (
+            selectedColor?.value === null ||
+            selectedColor?.value === undefined
+        );
+    }
+    function isPlateNumberNotValid () : boolean {
+        return (
+            plateNumber === null ||
+            plateNumber === undefined ||
+            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
+            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
+            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+        );
+    }
+    function validateFields (): boolean {
+        if (
+            isBrandEmpty()
         ) {
             showAlert("Brand is a required field!");
 
             return false;
         }
         if (
-            selectedModel?.value === null ||
-            selectedModel?.value === undefined
+            isModelEmpty()
         ) {
             showAlert("Model is a required field!");
 
             return false;
         }
         if (
-            selectedColor?.value === null ||
-            selectedColor?.value === undefined
+            isColorEmpty()
         ) {
             showAlert("Color is a required field!");
 
             return false;
         }
         if (
-            plateNumber === null ||
-            plateNumber === undefined ||
-            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+            isPlateNumberNotValid()
         ) {
             showAlert("Plate number is not valid!");
 
@@ -272,9 +291,7 @@ const AddCars = () => {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        disabled={
-                            selectedBrand?.value === null || selectedBrand?.value === undefined
-                        }
+                        disabled={isBrandEmpty() || isModelEmpty() || isColorEmpty() || isPlateNumberNotValid()}
                         style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
                             if (validateFields()) {
