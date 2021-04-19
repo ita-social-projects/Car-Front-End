@@ -29,7 +29,6 @@ const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
 };
 
 const AddressInputPage = (props: AddressInputPageProps) => {
-
     const params = props.route.params;
 
     const centerCoordinates = params.wayPoint.isConfirmed ?
@@ -139,6 +138,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
                     savedLocations={params.savedLocations}
+                    recentAddresses={params.recentAddresses}
                 />
             </View>
 

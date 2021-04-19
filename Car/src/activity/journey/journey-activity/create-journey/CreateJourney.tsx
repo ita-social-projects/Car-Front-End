@@ -11,7 +11,7 @@ import {
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    NUMBER_OF_STOPS_LIMIT
+    NUMBER_OF_STOPS_LIMIT, SECOND_ELEMENT_INDEX
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
@@ -24,6 +24,9 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import WayPoint from "../../../../types/WayPoint";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
 import CreateJourneyProps from "./CreateJourneyProps";
+import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import Stop from "../../../../../models/stop/Stop";
+import Address from "../../../../../models/Address";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -36,6 +39,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const { user } = useContext(AuthContext);
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
+    const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
 
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
@@ -67,6 +71,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             .getAll(Number(user?.id))
             .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
+
+        console.log("user id - " + user?.id);
+
+        JourneyService
+            .getRecentJourneyStops(Number(user?.id))
+            .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
+                .map((stop: Stop) => stop?.address)))
+            .catch((e) => console.log(e));
     }, []);
 
     const animateCamera = (coordinates: LatLng) => {
@@ -119,14 +131,15 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
-    const onAddressInputButtonPressHandler = (
-        placeholder: string, paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
+    const onAddressInputButtonPressHandler = (placeholder: string,
+        paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
 
         mapRef.current?.getCamera().then(camera => {
             navigation.navigate("Address Input", {
                 placeholder: placeholder,
                 paddingLeft: paddingLeft,
                 savedLocations: savedLocations,
+                recentAddresses: recentAddresses,
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
