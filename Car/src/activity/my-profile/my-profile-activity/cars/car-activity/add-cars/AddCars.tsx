@@ -56,35 +56,30 @@ const AddCars = () => {
             }
         ]);
     }
-
     function validateFields (): boolean {
         if (
-            selectedBrand?.value === null ||
-            selectedBrand?.value === undefined
+            !selectedBrand?.value
         ) {
             showAlert("Brand is a required field!");
 
             return false;
         }
         if (
-            selectedModel?.value === null ||
-            selectedModel?.value === undefined
+            !selectedModel?.value
         ) {
             showAlert("Model is a required field!");
 
             return false;
         }
         if (
-            selectedColor?.value === null ||
-            selectedColor?.value === undefined
+            !selectedColor?.value
         ) {
             showAlert("Color is a required field!");
 
             return false;
         }
         if (
-            plateNumber === null ||
-            plateNumber === undefined ||
+            !plateNumber ||
             plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
             plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
             !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
@@ -272,6 +267,15 @@ const AddCars = () => {
                         </Text>
                     </Text>
                     <TouchableOpacity
+                        disabled={
+                            !selectedBrand?.value ||
+                            !selectedModel?.value ||
+                            !selectedColor?.value ||
+                            !plateNumber ||
+                            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
+                            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
+                            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+                        }
                         style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
                             if (validateFields()) {

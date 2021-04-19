@@ -233,6 +233,7 @@ test("renders correctly", async () =>
             </Text>
           </Text>
           <ForwardRef
+            disabled={true}
             onPress={[Function]}
             style={
               Array [
