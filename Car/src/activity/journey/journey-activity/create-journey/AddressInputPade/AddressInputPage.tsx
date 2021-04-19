@@ -123,7 +123,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
         setWayPointsTextAndIsConfirmed(text, false);
     };
 
-    const markerOnDragEndHandler = (event: MapEvent) => {
+    const mapEventHandler = (event: MapEvent) => {
         setAddressByCoordinates(event.nativeEvent.coordinate);
 
         animateCameraAndMoveMarker(event.nativeEvent.coordinate);
@@ -149,11 +149,12 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                 showsUserLocation={true}
                 initialCamera={{ ...params.camera, center: centerCoordinates }}
                 customMapStyle={mapStyle}
+                onLongPress={mapEventHandler}
             >
                 <Marker
                     style={CreateJourneyStyle.movableMarker}
                     draggable={true}
-                    onDragEnd={markerOnDragEndHandler}
+                    onDragEnd={mapEventHandler}
                     image={require("../../../../../../assets/images/small-custom-marker.png")}
                     coordinate={markerCoordinates}
                 />
