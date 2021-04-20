@@ -14,32 +14,23 @@ function JourneyCreationDropDownPicker (props: any) {
             </Text>
             <DropDownPicker
                 items={props?.items}
-                customArrowDown={() => (
-                    <Ionicons name="caret-down-outline" size={18} />
-                )}
-                customArrowUp={() => (
-                    <Ionicons name="caret-up-outline" size={18} />
-                )}
+                customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} />)}
+                customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} />)}
                 arrowStyle={JourneyCreationDropDownPickerStyle.arrow}
                 searchable={props.searchable}
                 searchablePlaceholder={"Manual input"}
                 searchableStyle={JourneyCreationDropDownPickerStyle.searchable}
-                renderSeperator={() => (
-                    <Divider style={JourneyCreationDropDownPickerStyle.divider} />
-                )}
+                renderSeperator={() => (<Divider style={JourneyCreationDropDownPickerStyle.divider} />)}
                 zIndex={props.zIndex}
-                placeholder=""
+                placeholder={""}
                 style={JourneyCreationDropDownPickerStyle.style}
                 dropDownStyle={JourneyCreationDropDownPickerStyle.dropDownStyle}
                 selectedLabelStyle={[JourneyCreationDropDownPickerStyle.selectedLabelStyle,
                     { paddingLeft: props.paddingLeft }]}
-                itemStyle={{
-                    justifyContent: "flex-start"
-                }}
+                itemStyle={{ justifyContent: "flex-start" }}
                 onChangeItem={props.onChangeItem}
                 isVisible={props.isVisible}
                 onOpen={props.onOpen}
-
             />
         </View>
     );

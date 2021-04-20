@@ -2,32 +2,32 @@ import { StyleSheet } from "react-native";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
-        backgroundColor:"#F2F2F2",
+        backgroundColor: "#F2F2F2",
         paddingTop: 10
     },
 
-    recentJourneyText:{
+    recentJourneyText: {
         paddingBottom: 5,
         paddingLeft: 10,
         paddingTop: 8,
         paddingRight: 10,
-        marginRight:10,
+        marginRight: 10,
         fontWeight: "bold",
-        fontSize:12
+        fontSize: 12
     },
 
-    topInputContainer:{
+    topInputContainer: {
         borderBottomColor: "#C1C1C5",
-        borderBottomWidth:1,
+        borderBottomWidth: 1,
     },
 
     barIcon: {
-        flex:1,
+        flex: 1,
         borderColor: "#EEEEEE",
     },
 
     dropDownPicker: {
-        marginTop:20
+        marginTop: 20
     },
 
     feeButtonFree: {
@@ -36,8 +36,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         backgroundColor: "#000000",
         flexDirection: "row",
         justifyContent: "flex-end",
-        borderWidth: 2,
-        borderRightWidth: 0
+        borderWidth: 2
     },
 
     feeButtonPaid: {
@@ -68,28 +67,28 @@ export const CreateJourneyStyle = StyleSheet.create({
         color: "#FFFFFF"
     },
 
-    feeContainer:{
-        flexDirection:"row",
-        marginLeft:21,
-        marginRight:0,
-        marginTop:16,
-        marginBottom:20,
-        fontSize:13,
-        lineHeight:16
+    feeContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginLeft: 21,
+        marginRight: 0,
+        marginTop: 16,
+        fontSize: 13,
+        lineHeight: 16
     },
 
-    text:{
-        flex:1,
-        fontWeight:"bold",
+    text: {
+        flex: 1,
+        fontWeight: "bold",
     },
 
     commentsView: {
-        marginTop:0,
-        marginLeft:20,
-        marginRight:20
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20
     },
 
-    textInputStyle:{
+    textInputStyle: {
         height: 100,
         borderWidth: 2,
         borderColor: "black",

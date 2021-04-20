@@ -8,33 +8,20 @@ import FreeButtonChoiceAlert from "../../alerts/FreeButtonChoiceAlert";
 import PaidButtonChoiceAlert from "../../alerts/PaidButtonChoiceAlert";
 import AddressInputButton from "../AddressInputButton/AddressInputButton";
 import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
+import TwoChoice from "../TwoChoice/TwoChoice";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
     const params = props.route.params;
 
-    const [isVisibleJourneyTypeDropDown, setIsVisibleJourneyTypeDropDown] = useState(false);
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [state, setState] = useState();
 
-    function changeJourneyTypeDropDownVisibility () {
-        setIsVisibleJourneyTypeDropDown(true);
-        setIsVisibleCarDropDown(false);
-    }
-
-    function changeCarDropDownVisibility () {
-        setIsVisibleJourneyTypeDropDown(false);
-        setIsVisibleCarDropDown(true);
-    }
-
-    function closeAllDropDowns () {
-        setIsVisibleJourneyTypeDropDown(false);
-        setIsVisibleCarDropDown(false);
-    }
-
     const [freeButtonStyle, setFreeButtonStyle] = useState(CreateJourneyStyle.activeButton);
-
     const [paidButtonStyle, setPaidButtonStyle] = useState(CreateJourneyStyle.inactiveButton);
+
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(CreateJourneyStyle.activeButton);
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(CreateJourneyStyle.inactiveButton);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -67,62 +54,62 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
             <TouchableDateTimePicker iconName="time" />
 
-            <JourneyCreationDropDownPicker
-                items={[
-                    { label: "Own Car", value: "own car" },
-                    { label: "Taxi", value: "taxi" },
-                ]}
-                paddingLeft={100}
-                placeholder="Journey type:"
-                isVisible={isVisibleJourneyTypeDropDown}
-                onOpen={() => changeJourneyTypeDropDownVisibility()}
-                onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
-                    setState(item.value);
-                    closeAllDropDowns();
+            <TwoChoice
+                leftButtonStyle={freeButtonStyle}
+                rightButtonStyle={paidButtonStyle}
+                onLeftButtonPress={() => {
+                    FreeButtonChoiceAlert();
+                    setFreeButtonStyle(CreateJourneyStyle.activeButton);
+                    setPaidButtonStyle(CreateJourneyStyle.inactiveButton);
                 }}
-            />
-
-            <JourneyCreationDropDownPicker
-                items={[
-                    { label: "Volkswagen Jetta", value: "volkswagen jetta" },
-                    { label: "Ford Fiesta", value: "ford fiesta" },
-                    { label: "Toyota Camry", value: "toyota camry" },
-                ]}
-                paddingLeft={105}
-                searchable={true}
-                placeholder="Choose a Car:"
-                isVisible={isVisibleCarDropDown}
-                onOpen={() => changeCarDropDownVisibility()}
-                onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
-                    setState(item.value);
-                    closeAllDropDowns();
+                onRightButtonPress={() => {
+                    PaidButtonChoiceAlert();
+                    setFreeButtonStyle(CreateJourneyStyle.inactiveButton);
+                    setPaidButtonStyle(CreateJourneyStyle.activeButton);
                 }}
-                onClose={state}
+                title={"Fee"}
+                leftButtonText={"Free"}
+                rightButtonText={"Paid"}
             />
 
             <SeatsInputSpinner/>
 
-            <View style={CreateJourneyStyle.feeContainer}>
-                <Text style={CreateJourneyStyle.text}>Fee</Text>
-                <TouchableOpacity
-                    style={[CreateJourneyStyle.feeButtonFree, freeButtonStyle]}
-                    onPress={() => {
-                        FreeButtonChoiceAlert();
-                        setFreeButtonStyle(CreateJourneyStyle.activeButton);
-                        setPaidButtonStyle(CreateJourneyStyle.inactiveButton);
-                    }}>
-                    <Text style={[CreateJourneyStyle.feeButtonText, freeButtonStyle]}>Free</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[CreateJourneyStyle.feeButtonPaid, paidButtonStyle]}
-                    onPress={() => {
-                        PaidButtonChoiceAlert();
-                        setFreeButtonStyle(CreateJourneyStyle.inactiveButton);
-                        setPaidButtonStyle(CreateJourneyStyle.activeButton);
-                    }}>
-                    <Text style={[CreateJourneyStyle.feeButtonText, paidButtonStyle]}>Paid</Text>
-                </TouchableOpacity>
-            </View>
+            <TwoChoice
+                leftButtonStyle={ownCarButtonStyle}
+                rightButtonStyle={taxiButtonStyle}
+                onLeftButtonPress={() => {
+                    setOwnCarButtonStyle(CreateJourneyStyle.activeButton);
+                    setTaxiButtonStyle(CreateJourneyStyle.inactiveButton);
+                }}
+                onRightButtonPress={() => {
+                    setOwnCarButtonStyle(CreateJourneyStyle.inactiveButton);
+                    setTaxiButtonStyle(CreateJourneyStyle.activeButton);
+                }}
+                title={"Ride Type"}
+                leftButtonText={"Own car"}
+                rightButtonText={"Taxi"}
+            />
+
+            {ownCarButtonStyle === CreateJourneyStyle.activeButton && (
+                <JourneyCreationDropDownPicker
+                    items={[
+                        { label: "Volkswagen Jetta", value: "volkswagen jetta" },
+                        { label: "Ford Fiesta", value: "ford fiesta" },
+                        { label: "Toyota Camry", value: "toyota camry" },
+                        { label: "Test 1", value: "toyota camry" },
+                        { label: "Test 2", value: "toyota camry" },
+                    ]}
+                    paddingLeft={105}
+                    searchable={true}
+                    placeholder="Choose a Car:"
+                    isVisible={isVisibleCarDropDown}
+                    onOpen={() => setIsVisibleCarDropDown(true)}
+                    onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
+                        setState(item.value);
+                        setIsVisibleCarDropDown(false);
+                    }}
+                    onClose={state}
+                />)}
 
             <View style={CreateJourneyStyle.commentsView}>
                 <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
