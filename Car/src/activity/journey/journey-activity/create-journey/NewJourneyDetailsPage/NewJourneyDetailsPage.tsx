@@ -10,6 +10,7 @@ import AddressInputButton from "../AddressInputButton/AddressInputButton";
 import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
+
     const params = props.route.params;
 
     const [isVisibleJourneyTypeDropDown, setIsVisibleJourneyTypeDropDown] = useState(false);
@@ -37,6 +38,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
+
             <AddressInputButton
                 iconName={"location"}
                 directionType={"From"}
@@ -64,6 +66,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             ))}
 
             <TouchableDateTimePicker iconName="time" />
+
             <JourneyCreationDropDownPicker
                 items={[
                     { label: "Own Car", value: "own car" },
@@ -78,6 +81,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     closeAllDropDowns();
                 }}
             />
+
             <JourneyCreationDropDownPicker
                 items={[
                     { label: "Volkswagen Jetta", value: "volkswagen jetta" },
@@ -95,7 +99,9 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 }}
                 onClose={state}
             />
+
             <SeatsInputSpinner/>
+
             <View style={CreateJourneyStyle.feeContainer}>
                 <Text style={CreateJourneyStyle.text}>Fee</Text>
                 <TouchableOpacity
@@ -117,6 +123,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     <Text style={[CreateJourneyStyle.feeButtonText, paidButtonStyle]}>Paid</Text>
                 </TouchableOpacity>
             </View>
+
             <View style={CreateJourneyStyle.commentsView}>
                 <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
                 <TextInput
@@ -127,8 +134,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 />
                 <Text>Up to 100 symbols</Text>
             </View>
-            <TouchableOpacity
-                style={[CreateJourneyStyle.publishButton]}>
+
+            <TouchableOpacity style={CreateJourneyStyle.publishButton}>
                 <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
             </TouchableOpacity>
         </ScrollView>

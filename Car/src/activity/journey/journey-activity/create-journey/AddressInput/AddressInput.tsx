@@ -33,7 +33,8 @@ const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses 
                 lat: address?.latitude ?? INITIAL_LATITUDE,
                 lng: address?.longitude ?? INITIAL_LONGITUDE
             }
-        }
+        },
+        iconName: "ios-time-outline"
     }));
 };
 
@@ -45,7 +46,9 @@ const AddressInput = (props: AddressInputProps) => {
             onPress={props.onPress}
             query={{
                 key: APIConfig.apiKey,
-                language: "ua"
+                language: "ua",
+                location: `${props.userLocation.latitude},${props.userLocation.longitude}`,
+                radius: 30000
             }}
             renderLeftButton={() => (
                 <Text style={AddressInputStyles.placeholder}>
@@ -78,6 +81,7 @@ const AddressInput = (props: AddressInputProps) => {
             }}
             placeholder={""}
             renderRow={(data) => (<AddressInputRow data={data}/>)}
+            minLength={2}
         />
     );
 };

@@ -6,7 +6,7 @@ import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
     DELETE_COUNT,
-    initialCamera,
+    initialCamera, initialCoordinate,
     initialWayPoint,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
@@ -35,9 +35,12 @@ interface CreateJourneyComponent {
 }
 
 const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
+
     const params = props?.route?.params;
 
     const { user } = useContext(AuthContext);
+    const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
+
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
 
@@ -58,6 +61,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 let updatedStops = new Array(...stops);
 
                 updatedStops.splice(Number(params.wayPointId), DELETE_COUNT, params.wayPoint);
+                updatedStops.push(initialWayPoint);
                 setStops(updatedStops);
             }
         }
@@ -71,8 +75,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             .getAll(Number(user?.id))
             .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
-
-        console.log("user id - " + user?.id);
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
@@ -110,6 +112,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         }
         Geolocation.getCurrentPosition(
             (position) => {
+                setUserCoordinates(position.coords);
                 animateCamera(position.coords);
             },
             (error) => {
@@ -143,7 +146,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
-                camera: { ...camera, altitude: 200 }
+                camera: { ...camera, altitude: 200 },
+                userCoordinates: userCoordinates
             });
         });
     };

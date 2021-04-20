@@ -139,6 +139,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                     onPress={addressInputOnPressHandler}
                     savedLocations={params.savedLocations}
                     recentAddresses={params.recentAddresses}
+                    userLocation={params.userCoordinates}
                 />
             </View>
 

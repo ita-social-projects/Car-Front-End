@@ -1,4 +1,4 @@
-import { Camera } from "react-native-maps";
+import { Camera, LatLng } from "react-native-maps";
 import Location from "../../../../../../models/location/Location";
 import WayPoint from "../../../../../types/WayPoint";
 import Address from "../../../../../../models/Address";
@@ -13,7 +13,8 @@ interface AddressInputPageProps {
             recentAddresses: Address[],
             previousScreen: "Create Journey",
             wayPointId: string,
-            wayPoint: WayPoint
+            wayPoint: WayPoint,
+            userCoordinates: LatLng
         }
     }
 }
