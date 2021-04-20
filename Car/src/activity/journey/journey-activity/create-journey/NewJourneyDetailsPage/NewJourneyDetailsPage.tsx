@@ -8,7 +8,8 @@ import FreeButtonChoiceAlert from "../../alerts/FreeButtonChoiceAlert";
 import PaidButtonChoiceAlert from "../../alerts/PaidButtonChoiceAlert";
 import AddressInputButton from "../AddressInputButton/AddressInputButton";
 import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
-import TwoChoice from "../TwoChoice/TwoChoice";
+import SwitchSelector from "../SwitchSelector/SwitchSelector";
+import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -17,11 +18,11 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [state, setState] = useState();
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(CreateJourneyStyle.activeButton);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(CreateJourneyStyle.inactiveButton);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.activeButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
-    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(CreateJourneyStyle.activeButton);
-    const [taxiButtonStyle, setTaxiButtonStyle] = useState(CreateJourneyStyle.inactiveButton);
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -54,18 +55,18 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
             <TouchableDateTimePicker iconName="time" />
 
-            <TwoChoice
+            <SwitchSelector
                 leftButtonStyle={freeButtonStyle}
                 rightButtonStyle={paidButtonStyle}
                 onLeftButtonPress={() => {
                     FreeButtonChoiceAlert();
-                    setFreeButtonStyle(CreateJourneyStyle.activeButton);
-                    setPaidButtonStyle(CreateJourneyStyle.inactiveButton);
+                    setFreeButtonStyle(SwitchSelectorStyle.activeButton);
+                    setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
                 }}
                 onRightButtonPress={() => {
                     PaidButtonChoiceAlert();
-                    setFreeButtonStyle(CreateJourneyStyle.inactiveButton);
-                    setPaidButtonStyle(CreateJourneyStyle.activeButton);
+                    setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
+                    setPaidButtonStyle(SwitchSelectorStyle.activeButton);
                 }}
                 title={"Fee"}
                 leftButtonText={"Free"}
@@ -74,23 +75,23 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
             <SeatsInputSpinner/>
 
-            <TwoChoice
+            <SwitchSelector
                 leftButtonStyle={ownCarButtonStyle}
                 rightButtonStyle={taxiButtonStyle}
                 onLeftButtonPress={() => {
-                    setOwnCarButtonStyle(CreateJourneyStyle.activeButton);
-                    setTaxiButtonStyle(CreateJourneyStyle.inactiveButton);
+                    setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
+                    setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
                 }}
                 onRightButtonPress={() => {
-                    setOwnCarButtonStyle(CreateJourneyStyle.inactiveButton);
-                    setTaxiButtonStyle(CreateJourneyStyle.activeButton);
+                    setOwnCarButtonStyle(SwitchSelectorStyle.inactiveButton);
+                    setTaxiButtonStyle(SwitchSelectorStyle.activeButton);
                 }}
                 title={"Ride Type"}
                 leftButtonText={"Own car"}
                 rightButtonText={"Taxi"}
             />
 
-            {ownCarButtonStyle === CreateJourneyStyle.activeButton && (
+            {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
                 <JourneyCreationDropDownPicker
                     items={[
                         { label: "Volkswagen Jetta", value: "volkswagen jetta" },
