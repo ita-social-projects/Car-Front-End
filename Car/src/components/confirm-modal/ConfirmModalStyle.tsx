@@ -19,27 +19,19 @@ const ConfirmModalStyle = StyleSheet.create({
             paddingVertical: 30,
             justifyContent: 'space-between'
         },
+        boldText: {
+            fontSize: 16,
+            fontWeight: "700",
+            fontFamily: Font.OpenSans.Extrabold
+        },
+        white: {
+            color: 'white'
+        },
         confirmButton: {
             width: '90%',
             alignItems: 'center',
             backgroundColor: '#d80056',
             paddingVertical: 10,
-        },
-        confirmButtonText: {
-            fontSize: 16,
-            fontWeight: "700",
-            fontFamily: Font.OpenSans.Extrabold,
-            color: 'white'
-        },
-        cancelButtonText: {
-            fontSize: 16,
-            fontWeight: "700",
-            fontFamily: Font.OpenSans.Extrabold
-        }, 
-        titleText: {
-            fontSize: 16,
-            fontWeight: "700",
-            fontFamily: Font.OpenSans.Extrabold
         },
         subtitleText: {
             color: '#AFAEAE'
