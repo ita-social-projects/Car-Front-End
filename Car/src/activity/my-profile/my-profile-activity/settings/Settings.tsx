@@ -22,10 +22,11 @@ import {
     SLEEP_DURATION, ZERO_OPACITY
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
+import User from "../../../../../models/user/User";
 
 const Settings = (props: {navigation: any}) => {
 
-    const [user, setUser] = useState<any>(useContext(AuthContext).user);
+    const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
     const [isRefreshing, setRefreshing] = useState(false);
@@ -35,7 +36,7 @@ const Settings = (props: {navigation: any}) => {
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
     const loadUser = () =>
-        UserService.getUser(user.id).then((res) => setUser(res.data));
+        UserService.getUser(user!.id).then((res) => setUser(res.data));
 
     useEffect(() => {
         loadUser();
@@ -109,7 +110,7 @@ const Settings = (props: {navigation: any}) => {
         await UserService.updateUser(updatedUser).then((response) => {
             console.log(response.status + " " + response.data);
 
-            UserService.getUser(user.id).then((res) =>
+            UserService.getUser(user!.id).then((res) =>
                 AsyncStorage.setItem("user", JSON.stringify(res.data)));
         });
 
@@ -156,7 +157,7 @@ const Settings = (props: {navigation: any}) => {
                                     borderColor: DM("#F0F0F0"),
                                     backgroundColor: DM("#FFFFFF")
                                 }]}
-                            onLongPress={pressHandle}>
+                            onPress={pressHandle}>
                             <AvatarLogoTitle />
                         </TouchableOpacity>
                         <TouchableNavigationCard
@@ -202,7 +203,7 @@ const Settings = (props: {navigation: any}) => {
                 renderContent={
 
                     <View style={{ backgroundColor: DM("#FFFFFF") }}>
-                        {user?.imageId == null ? (
+                        {user?.imageId == null || user?.imageId == "" ? (
 
                             <TouchableOpacity
                                 style={SettingsStyle.moreOptionsButton}
