@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View, Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -25,10 +25,12 @@ import {
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
     MAX_POPUP_POSITION,
-    MIN_POPUP_POSITION
+    MIN_POPUP_POSITION,
+    ZERO_MARGIN
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -61,6 +63,9 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     }, []);
 
     const moreOptionsRef = useRef<any>(null);
+
+    const navbarHeight = Dimensions.get("screen").height - (Dimensions.get("window").height + getStatusBarHeight());
+    const buttonTop = 360;
 
     return (
         <>
@@ -240,7 +245,11 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
 
                         {/* Buttons block */}
 
-                        <View style={[JourneyPageStyle.buttons, { backgroundColor: DM("#FFFFFF") }]}>
+                        <View style={[
+                            JourneyPageStyle.buttons,
+                            { backgroundColor: DM("#FFFFFF") },
+                            navbarHeight > ZERO_MARGIN && { top: buttonTop + navbarHeight }
+                        ]}>
                             <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
                             <View style={JourneyPageStyle.buttonsBlock}>
                                 {(isDriver || isPassenger) && (

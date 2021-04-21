@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import InputSpinner from "react-native-input-spinner";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Entypo from "react-native-vector-icons/Entypo";
 import { SeatsInputSpinnerStyle } from "./SeatsInputSpinnerStyle";
 
 function SeatsInputSpinner (){
@@ -16,15 +16,15 @@ function SeatsInputSpinner (){
                     min={1}
                     step={1}
                     style={SeatsInputSpinnerStyle.spinnerContainer}
+                    inputStyle={SeatsInputSpinnerStyle.input}
                     colorPress={"#65656A"}
-                    color={"#D7D7DC"}
+                    colorLeft={"white"}
+                    colorRight={"black"}
+                    background={"white"}
+                    textColor={"black"}
                     height={44}
-                    buttonLeftImage={
-                        <Ionicons name="caret-down-outline" size={18} />
-                    }
-                    buttonRightImage={
-                        <Ionicons name="caret-up-outline" size={18} />
-                    }
+                    buttonLeftImage={<Entypo name="minus" size={24} color={"black"} />}
+                    buttonRightImage={<Entypo name="plus" size={24} color={"white"} />}
                     fontSize={16}
                     editable={false}
                     rounded={false}

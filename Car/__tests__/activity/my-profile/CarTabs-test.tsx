@@ -60,7 +60,6 @@ test("renders correctly", async () =>
           }
         />
         <Screen
-          component={[Function]}
           name="EditCars"
           options={
             Object {
@@ -81,7 +80,9 @@ test("renders correctly", async () =>
               ],
             }
           }
-        />
+        >
+          [Function]
+        </Screen>
       </StackNavigator>
     </View>
   `));

@@ -5,8 +5,7 @@ import SetPlace from "../../../src/activity/my-profile/my-profile-activity/addre
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<SetPlace />))
-        .toMatchInlineSnapshot(`
+    expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -31,7 +30,14 @@ test("renders correctly", async () =>
           onPress={[Function]}
           paddingLeft={150}
           placeholder="Address:"
+          recentAddresses={Array []}
           savedLocations={Array []}
+          userLocation={
+            Object {
+              "latitude": 49.843844,
+              "longitude": 24.025581,
+            }
+          }
         />
       </View>
       <MapView

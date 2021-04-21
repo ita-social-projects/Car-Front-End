@@ -53,7 +53,7 @@ test("renders correctly", async () =>
         }
         image={
           Object {
-            "testUri": "../../../assets/images/custom-marker.png",
+            "testUri": "../../../assets/images/maps-markers/with_shade.png",
           }
         }
         stopPropagation={false}

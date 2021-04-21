@@ -62,6 +62,8 @@ const SetPlace = () => {
     // eslint-disable-next-line unused-imports/no-unused-vars
     const [location, setLocation] = useState<WayPoint>(initialWayPoint);
 
+    const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
+
     /*    useEffect(() => {
         if (params) {
             animateCamera(params.wayPoint.coordinates);
@@ -180,6 +182,7 @@ const SetPlace = () => {
         }
         Geolocation.getCurrentPosition(
             (position) => {
+                setUserCoordinates(position.coords);
                 animateCamera(position.coords);
             },
             (error) => {
@@ -207,6 +210,8 @@ const SetPlace = () => {
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
                     savedLocations={[]}
+                    userLocation={userCoordinates}
+                    recentAddresses={[]}
                 />
             </View>
 

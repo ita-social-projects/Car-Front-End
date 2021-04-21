@@ -8,35 +8,25 @@ import FreeButtonChoiceAlert from "../../alerts/FreeButtonChoiceAlert";
 import PaidButtonChoiceAlert from "../../alerts/PaidButtonChoiceAlert";
 import AddressInputButton from "../AddressInputButton/AddressInputButton";
 import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
+import SwitchSelector from "../SwitchSelector/SwitchSelector";
+import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
+
     const params = props.route.params;
 
-    const [isVisibleJourneyTypeDropDown, setIsVisibleJourneyTypeDropDown] = useState(false);
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [state, setState] = useState();
 
-    function changeJourneyTypeDropDownVisibility () {
-        setIsVisibleJourneyTypeDropDown(true);
-        setIsVisibleCarDropDown(false);
-    }
+    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.activeButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
-    function changeCarDropDownVisibility () {
-        setIsVisibleJourneyTypeDropDown(false);
-        setIsVisibleCarDropDown(true);
-    }
-
-    function closeAllDropDowns () {
-        setIsVisibleJourneyTypeDropDown(false);
-        setIsVisibleCarDropDown(false);
-    }
-
-    const [freeButtonStyle, setFreeButtonStyle] = useState(CreateJourneyStyle.activeButton);
-
-    const [paidButtonStyle, setPaidButtonStyle] = useState(CreateJourneyStyle.inactiveButton);
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
+
             <AddressInputButton
                 iconName={"location"}
                 directionType={"From"}
@@ -64,59 +54,64 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             ))}
 
             <TouchableDateTimePicker iconName="time" />
-            <JourneyCreationDropDownPicker
-                items={[
-                    { label: "Own Car", value: "own car" },
-                    { label: "Taxi", value: "taxi" },
-                ]}
-                paddingLeft={100}
-                placeholder="Journey type:"
-                isVisible={isVisibleJourneyTypeDropDown}
-                onOpen={() => changeJourneyTypeDropDownVisibility()}
-                onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
-                    setState(item.value);
-                    closeAllDropDowns();
+
+            <SwitchSelector
+                leftButtonStyle={freeButtonStyle}
+                rightButtonStyle={paidButtonStyle}
+                onLeftButtonPress={() => {
+                    FreeButtonChoiceAlert();
+                    setFreeButtonStyle(SwitchSelectorStyle.activeButton);
+                    setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
                 }}
-            />
-            <JourneyCreationDropDownPicker
-                items={[
-                    { label: "Volkswagen Jetta", value: "volkswagen jetta" },
-                    { label: "Ford Fiesta", value: "ford fiesta" },
-                    { label: "Toyota Camry", value: "toyota camry" },
-                ]}
-                paddingLeft={105}
-                searchable={true}
-                placeholder="Choose a Car:"
-                isVisible={isVisibleCarDropDown}
-                onOpen={() => changeCarDropDownVisibility()}
-                onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
-                    setState(item.value);
-                    closeAllDropDowns();
+                onRightButtonPress={() => {
+                    PaidButtonChoiceAlert();
+                    setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
+                    setPaidButtonStyle(SwitchSelectorStyle.activeButton);
                 }}
-                onClose={state}
+                title={"Fee"}
+                leftButtonText={"Free"}
+                rightButtonText={"Paid"}
             />
+
             <SeatsInputSpinner/>
-            <View style={CreateJourneyStyle.feeContainer}>
-                <Text style={CreateJourneyStyle.text}>Fee</Text>
-                <TouchableOpacity
-                    style={[CreateJourneyStyle.feeButtonFree, freeButtonStyle]}
-                    onPress={() => {
-                        FreeButtonChoiceAlert();
-                        setFreeButtonStyle(CreateJourneyStyle.activeButton);
-                        setPaidButtonStyle(CreateJourneyStyle.inactiveButton);
-                    }}>
-                    <Text style={[CreateJourneyStyle.feeButtonText, freeButtonStyle]}>Free</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[CreateJourneyStyle.feeButtonPaid, paidButtonStyle]}
-                    onPress={() => {
-                        PaidButtonChoiceAlert();
-                        setFreeButtonStyle(CreateJourneyStyle.inactiveButton);
-                        setPaidButtonStyle(CreateJourneyStyle.activeButton);
-                    }}>
-                    <Text style={[CreateJourneyStyle.feeButtonText, paidButtonStyle]}>Paid</Text>
-                </TouchableOpacity>
-            </View>
+
+            <SwitchSelector
+                leftButtonStyle={ownCarButtonStyle}
+                rightButtonStyle={taxiButtonStyle}
+                onLeftButtonPress={() => {
+                    setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
+                    setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
+                }}
+                onRightButtonPress={() => {
+                    setOwnCarButtonStyle(SwitchSelectorStyle.inactiveButton);
+                    setTaxiButtonStyle(SwitchSelectorStyle.activeButton);
+                }}
+                title={"Ride Type"}
+                leftButtonText={"Own car"}
+                rightButtonText={"Taxi"}
+            />
+
+            {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
+                <JourneyCreationDropDownPicker
+                    items={[
+                        { label: "Volkswagen Jetta", value: "volkswagen jetta" },
+                        { label: "Ford Fiesta", value: "ford fiesta" },
+                        { label: "Toyota Camry", value: "toyota camry" },
+                        { label: "Test 1", value: "toyota camry" },
+                        { label: "Test 2", value: "toyota camry" },
+                    ]}
+                    paddingLeft={105}
+                    searchable={true}
+                    placeholder="Choose a Car:"
+                    isVisible={isVisibleCarDropDown}
+                    onOpen={() => setIsVisibleCarDropDown(true)}
+                    onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
+                        setState(item.value);
+                        setIsVisibleCarDropDown(false);
+                    }}
+                    onClose={state}
+                />)}
+
             <View style={CreateJourneyStyle.commentsView}>
                 <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
                 <TextInput
@@ -124,11 +119,13 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     multiline={true}
                     maxLength={100}
                     numberOfLines={10}
+                    placeholder={"Write your comment"}
+                    placeholderTextColor={"#686262"}
                 />
-                <Text>Up to 100 symbols</Text>
+                <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
             </View>
-            <TouchableOpacity
-                style={[CreateJourneyStyle.publishButton]}>
+
+            <TouchableOpacity style={CreateJourneyStyle.publishButton}>
                 <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
             </TouchableOpacity>
         </ScrollView>
