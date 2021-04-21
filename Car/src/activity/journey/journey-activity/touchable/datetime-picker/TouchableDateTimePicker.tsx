@@ -69,7 +69,8 @@ function TouchableDateTimePicker (props: { iconName: string}) {
                     animationType="fade"
                     visible={show}
                     supportedOrientations={["portrait"]}
-                    onRequestClose={() => setShow(!show)}>
+                    onRequestClose={() => setShow(!show)}
+                >
                     <View style={TouchableDateTimePickerStyle.centeredView}>
                         <View style={TouchableDateTimePickerStyle.modalView}>
                             <View style={TouchableDateTimePickerStyle.btnContainer}>
@@ -92,7 +93,7 @@ function TouchableDateTimePicker (props: { iconName: string}) {
                                 <DatePicker
                                     date={date}
                                     onDateChange={setDate}
-
+                                    minimumDate={new Date()}
                                 />
                             </View>
                         </View>

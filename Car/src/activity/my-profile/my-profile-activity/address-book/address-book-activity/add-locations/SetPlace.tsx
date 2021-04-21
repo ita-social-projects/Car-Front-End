@@ -110,7 +110,7 @@ const SetPlace = (props: SetPlaceProps) => {
                             setLongitude(e.nativeEvent.coordinate.longitude);
                             getActualAddress(e.nativeEvent.coordinate.latitude, e.nativeEvent.coordinate.longitude);
                         }}
-                        image={require("../../../../../../../assets/images/custom-marker.png")}
+                        image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
                         coordinate={{
                             latitude: latitude,
                             longitude: longitude
