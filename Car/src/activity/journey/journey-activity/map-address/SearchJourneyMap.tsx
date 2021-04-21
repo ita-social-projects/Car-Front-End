@@ -17,7 +17,7 @@ const SearchJourneyMap = (props: SearchJourneyMapProps) => {
             customMapStyle={mapStyle}
         >
             <Marker
-                image={require("../../../../../assets/images/custom-marker.png")}
+                image={require("../../../../../assets/images/maps-markers/with_shade.png")}
                 coordinate={{
                     latitude: props.latitude,
                     longitude: props.longitude

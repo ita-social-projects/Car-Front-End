@@ -5,9 +5,11 @@ import SetPlace from "../../../src/activity/my-profile/my-profile-activity/addre
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(
-        <SetPlace disabled={false} items={[]} placeHolder={"Select an item"} />))
-        .toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <SetPlace disabled={false} items={[]} placeHolder={"Select an item"} />
+        )
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -146,7 +148,7 @@ test("renders correctly", async () =>
             draggable={true}
             image={
               Object {
-                "testUri": "../../../assets/images/custom-marker.png",
+                "testUri": "../../../assets/images/maps-markers/with_shade.png",
               }
             }
             onDragEnd={[Function]}

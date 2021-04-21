@@ -156,7 +156,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                     style={CreateJourneyStyle.movableMarker}
                     draggable={true}
                     onDragEnd={mapEventHandler}
-                    image={require("../../../../../../assets/images/small-custom-marker.png")}
+                    image={require("../../../../../../assets/images/maps-markers/with_shade.png")}
                     coordinate={markerCoordinates}
                 />
             </MapView>

@@ -228,7 +228,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     <Marker
                         title={"From"}
                         coordinate={from.coordinates}
-                        image={require("../../../../../assets/images/small-circle-marker.png")}
+                        image={require("../../../../../assets/images/maps-markers/From.png")}
                     />)
                 }
 
@@ -236,6 +236,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     <Marker
                         title={"To"}
                         coordinate={to.coordinates}
+                        image={require("../../../../../assets/images/maps-markers/To.png")}
                     />)
                 }
 
@@ -244,7 +245,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         <Marker
                             title={"Stop"}
                             coordinate={stop.coordinates}
-                            image={require("../../../../../assets/images/stop-marker-transparent.png")}
+                            image={require("../../../../../assets/images/maps-markers/Stop.png")}
                             key={index}
                         />
                     ))
