@@ -23,6 +23,7 @@ import {
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => {
 
@@ -143,8 +144,10 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                 enabledInnerScrolling={false}
                 renderHeader={<></>}
                 renderContent={
-                    <View style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: DM("white") }]}>
-
+                    <KeyboardAwareScrollView 
+                        style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: DM("white") }]}
+                        enableOnAndroid
+                    >
                         <View style={JourneyRequestPageStyle.contentView}>
 
                             {/* Organizer block */}
@@ -212,7 +215,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                         </View>
 
                         <View style={[JourneyRequestPageStyle.lining, { backgroundColor: DM("white") }]} />
-                    </View>
+                    </KeyboardAwareScrollView>
                 }
             />
         </View>
