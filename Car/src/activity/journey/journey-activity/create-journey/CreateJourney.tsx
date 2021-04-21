@@ -61,7 +61,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 let updatedStops = new Array(...stops);
 
                 updatedStops.splice(Number(params.wayPointId), DELETE_COUNT, params.wayPoint);
-                updatedStops.push(initialWayPoint);
                 setStops(updatedStops);
             }
         }
@@ -253,7 +252,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {fromAndToIsConfirmed && (
                     <MapViewDirections
-                        optimizeWaypoints={true}
                         origin={from.coordinates}
                         destination={to.coordinates}
                         waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}

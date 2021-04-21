@@ -119,8 +119,10 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     multiline={true}
                     maxLength={100}
                     numberOfLines={10}
+                    placeholder={"Write your comment"}
+                    placeholderTextColor={"#686262"}
                 />
-                <Text>Up to 100 symbols</Text>
+                <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
             </View>
 
             <TouchableOpacity style={CreateJourneyStyle.publishButton}>
