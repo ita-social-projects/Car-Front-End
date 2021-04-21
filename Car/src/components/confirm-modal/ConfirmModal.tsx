@@ -5,7 +5,7 @@ import ConfirmModalStyle from "./ConfirmModalStyle";
 
 const ConfirmModal = (props: ConfirmModalProps) => {
     const [visible, setVisible] = useState(props.visible);
-    
+
     const disableModal = () => setVisible(false);
 
     const closeAfterConfirm = !props.dontCloseAfterConfirm ?? true;
@@ -15,7 +15,7 @@ const ConfirmModal = (props: ConfirmModalProps) => {
         if(closeAfterConfirm)
             disableModal();
     };
-    
+
     return (
         <Modal
             visible={visible}
@@ -35,19 +35,19 @@ const ConfirmModal = (props: ConfirmModalProps) => {
                             </Text>
                             <View />
                             <View />
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 style={ConfirmModalStyle.confirmButton}
                                 onPress={confirm}
                             >
                                 <Text style={(ConfirmModalStyle.boldText, ConfirmModalStyle.white)}>
-                                    {props.confirmText}    
-                                </Text>   
+                                    {props.confirmText}
+                                </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={disableModal}>
                                 <Text style={ConfirmModalStyle.boldText}>
-                                    {props.cancelText}    
-                                </Text>    
+                                    {props.cancelText}
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </TouchableWithoutFeedback>
