@@ -70,7 +70,6 @@ const CarTabs = () => {
                                     onConfirm={() => {
                                         setModalVisibility(false);
                                         (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
-                                        ;
                                     }}
                                 />
                             </>
