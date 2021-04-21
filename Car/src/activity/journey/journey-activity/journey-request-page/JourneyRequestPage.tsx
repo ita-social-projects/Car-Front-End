@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, View, Keyboard } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -143,6 +143,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                 initialSnap={MIN_POPUP_POSITION}
                 enabledInnerScrolling={false}
                 renderHeader={<></>}
+                onCloseEnd={Keyboard.dismiss}
                 renderContent={
                     <KeyboardAwareScrollView 
                         style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: DM("white") }]}
