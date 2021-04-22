@@ -39,6 +39,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
     const [availableSeats, setAvailableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
 
+    const [comment, setComment] = useState("");
+
     useEffect(() => {
         CarService.getAll(Number(user?.id)).then(result => {
             setUserCars(result.data.map(car => (
@@ -50,12 +52,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     }, []);
 
     useEffect(() => {
-        console.log("availableSeats - ", availableSeats);
-    }, [availableSeats]);
-
-    useEffect(() => {
-        console.log("departureTime - ", departureTime);
-    }, [departureTime]);
+        console.log("comment - ", comment);
+    }, [comment]);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -156,6 +154,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     numberOfLines={10}
                     placeholder={"Write your comment"}
                     placeholderTextColor={"#686262"}
+                    onChangeText={text => setComment(text)}
+                    value={comment}
                 />
                 <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
             </View>
