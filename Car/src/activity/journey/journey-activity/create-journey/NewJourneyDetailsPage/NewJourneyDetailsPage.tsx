@@ -31,6 +31,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
+    const [date, setDate] = useState(new Date());
+
     useEffect(() => {
         CarService.getAll(Number(user?.id)).then(result => {
             setUserCars(result.data.map(car => (
@@ -70,7 +72,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 />
             ))}
 
-            <TouchableDateTimePicker iconName="time" />
+            <TouchableDateTimePicker date={date} setDate={(d) => setDate(d)}/>
 
             <SwitchSelector
                 leftButtonStyle={freeButtonStyle}
