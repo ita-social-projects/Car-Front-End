@@ -11,6 +11,7 @@ interface AddressInputProps {
     onChangeText: (text: string) => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     onPress: (data: GooglePlaceData, detail: (GooglePlaceDetail | null)) => void,
+    onClearIconPress: () => void,
     savedLocations: Location[],
     recentAddresses: Address[],
     userLocation: LatLng

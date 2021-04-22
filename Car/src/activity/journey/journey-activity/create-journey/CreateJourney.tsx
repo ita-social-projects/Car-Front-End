@@ -46,8 +46,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
-
     const [stops, setStops] = useState<WayPoint[]>([]);
+    const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
 
     useEffect(() => {
         if (params) {
@@ -124,11 +124,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
-        setStops(prevState => [...prevState, {
-            text: "",
-            isConfirmed: false,
-            coordinates: { longitude: 0, latitude: 0 }
-        }]);
+        setStops(prevState => [...prevState, initialWayPoint]);
     };
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
@@ -175,6 +171,16 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             to: to,
             stops: stops.filter(stop => stop.isConfirmed)
         });
+    };
+
+    const cantBuildRouteAlert = () => {
+        setRouteIsConfirmed(false);
+
+        Alert.alert(
+            "Error",
+            "Cant build route. Please chose another way points",
+            [{ text: "Ok" }]
+        );
     };
 
     return (
@@ -259,15 +265,17 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         apikey={APIConfig.apiKey}
                         strokeWidth={5}
                         strokeColor="#027ebd"
+                        onError={cantBuildRouteAlert}
+                        onReady={() => setRouteIsConfirmed(true)}
                     />
                 )}
             </MapView>
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  fromAndToIsConfirmed ? "black" : "darkgrey" }]}
+                    { backgroundColor:  routeIsConfirmed ? "black" : "darkgrey" }]}
                 onPress={confirmOnPressHandler}
-                disabled={!fromAndToIsConfirmed}
+                disabled={!routeIsConfirmed}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                     Confirm

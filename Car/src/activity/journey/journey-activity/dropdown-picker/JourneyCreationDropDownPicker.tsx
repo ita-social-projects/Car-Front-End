@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Divider } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPickerStyle from "./JourneyCreationDropDownPickerStyle";
+import JourneyCreationDropDownPickerProps from "./JourneyCreationDropDownPickerProps";
 
-function JourneyCreationDropDownPicker (props: any) {
+const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps) => {
+    const controller = useRef<any>(null);
+
+    useEffect(() => {
+        controller.current?.selectItem(props.valueId);
+    }, [props.valueId]);
 
     return (
         <View>
@@ -14,6 +20,9 @@ function JourneyCreationDropDownPicker (props: any) {
             </Text>
             <DropDownPicker
                 items={props?.items}
+                controller={instance => {
+                    controller.current = instance;
+                }}
                 customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} />)}
                 customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} />)}
                 arrowStyle={JourneyCreationDropDownPickerStyle.arrow}
@@ -34,6 +43,6 @@ function JourneyCreationDropDownPicker (props: any) {
             />
         </View>
     );
-}
+};
 
 export default JourneyCreationDropDownPicker;
