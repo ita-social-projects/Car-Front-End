@@ -158,7 +158,9 @@ const JourneyTabs = () => {
                                     renderContent={
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                             <MenuButton
-                                                text="Add Stop" isIcon={true}
+                                                text="Add Stop"
+                                                isIcon={true}
+                                                iconName={"add-circle-outline"}
                                                 onPress={() => {
                                                     CreateJourney.addStopPressHandler();
                                                     pressHandle();
