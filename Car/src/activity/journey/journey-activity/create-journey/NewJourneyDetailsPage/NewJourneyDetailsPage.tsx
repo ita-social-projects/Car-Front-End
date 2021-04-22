@@ -79,6 +79,9 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 leftButtonStyle={ownCarButtonStyle}
                 rightButtonStyle={taxiButtonStyle}
                 onLeftButtonPress={() => {
+                    if (ownCarButtonStyle === SwitchSelectorStyle.activeButton) return;
+
+                    setIsVisibleCarDropDown(false);
                     setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
                     setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
                 }}
