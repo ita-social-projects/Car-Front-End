@@ -10,7 +10,6 @@ import {
 } from "../../../../../../constants/Constants";
 
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
-import SearchJourneyStyle from "../../../../../journey/journey-activity/search-journey/SearchJourneyStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import AuthContext from "../../../../../../components/auth/AuthContext";
@@ -21,12 +20,7 @@ import { CreateJourneyStyle } from "../../../../../journey/journey-activity/crea
 import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import AddressInputPageStyle
     from "../../../../../journey/journey-activity/create-journey/AddressInputPade/AddressInputPageStyle";
-
-/*interface SetPlaceComponent {
-    /!*addStopPressHandler: () => void,*!/
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    ({ props }: {props: SetPlaceProps}): JSX.Element
-}*/
+import SetPlaceStyle from "./SetPlaceStyle";
 
 const CreateRequestWithAddressToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -63,16 +57,6 @@ const SetPlace = () => {
     const [location, setLocation] = useState<WayPoint>(initialWayPoint);
 
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
-
-    /*    useEffect(() => {
-        if (params) {
-            animateCamera(params.wayPoint.coordinates);
-
-            if (params.wayPointId === "Address") {
-                setLocation(params.wayPoint);
-            }
-        }
-    }, [params]);*/
 
     const mapRef = useRef<MapView | null>(null);
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
@@ -147,13 +131,15 @@ const SetPlace = () => {
         setWayPointsTextAndIsConfirmed(text, false);
     };
 
-    const markerOnDragEndHandler = (event: MapEvent) => {
+    const mapEventHandler = (event: MapEvent) => {
         setAddressByCoordinates(event.nativeEvent.coordinate);
 
         animateCameraAndMoveMarker(event.nativeEvent.coordinate);
     };
 
     const animateCamera = (coordinates: LatLng) => {
+        setMarkerCoordinates(coordinates);
+
         mapRef.current?.animateCamera({
             center: coordinates
         }, { duration: 1000 });
@@ -204,8 +190,8 @@ const SetPlace = () => {
         <View style={{ flex: 1 }}>
             <View style={AddressInputPageStyle.inputContainer}>
                 <AddressInput
-                    placeholder={"Address:"}
-                    paddingLeft={150}
+                    placeholder={"Address"}
+                    paddingLeft={90}
                     address={wayPoint.text}
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
@@ -222,27 +208,27 @@ const SetPlace = () => {
                 showsUserLocation={true}
                 initialCamera={initialCamera}
                 customMapStyle={mapStyle}
+                onLongPress={mapEventHandler}
             >
-                {location.isConfirmed && (
-                    <Marker
-                        title={"Address"}
-                        style={CreateJourneyStyle.movableMarker}
-                        draggable={true}
-                        onDragEnd={markerOnDragEndHandler}
-                        coordinate={markerCoordinates}
-                        image={require("../../../../../../../assets/images/stop-marker-transparent.png")}
-                    />)
-                }
+                <Marker
+                    title={"Address"}
+                    style={CreateJourneyStyle.movableMarker}
+                    draggable={true}
+                    onDragEnd={mapEventHandler}
+                    //onDragEnd={markerOnDragEndHandler}
+                    image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
+                    coordinate={markerCoordinates}
+                />
 
             </MapView>
 
             <TouchableOpacity
-                style={[SearchJourneyStyle.confirmButton,
+                style={[SetPlaceStyle.saveButton,
                     { backgroundColor:  wayPoint.isConfirmed ? "black" : "darkgrey" }]}
                 /*onPress={confirmOnPressHandler}*/
                 disabled={!wayPoint.isConfirmed}
             >
-                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                <Text style={[SetPlaceStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
                     Save
                 </Text>
             </TouchableOpacity>
