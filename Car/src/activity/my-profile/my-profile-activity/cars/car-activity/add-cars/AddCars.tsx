@@ -5,7 +5,6 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert,
     ScrollView
 } from "react-native";
 import {
@@ -66,49 +65,6 @@ const AddCars = () => {
 
             return true;
         }
-    }
-
-    function showAlert (errorMessage: string) {
-        Alert.alert("Error!", errorMessage, [
-            {
-                text: "Ok"
-            }
-        ]);
-    }
-    function validateFields (): boolean {
-        if (
-            !selectedBrand?.value
-        ) {
-            showAlert("Brand is a required field!");
-
-            return false;
-        }
-        if (
-            !selectedModel?.value
-        ) {
-            showAlert("Model is a required field!");
-
-            return false;
-        }
-        if (
-            !selectedColor?.value
-        ) {
-            showAlert("Color is a required field!");
-
-            return false;
-        }
-        if (
-            !plateNumber ||
-            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
-        ) {
-            showAlert("Plate number is not valid!");
-
-            return false;
-        }
-
-        return true;
     }
 
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
@@ -298,16 +254,11 @@ const AddCars = () => {
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
-                            !plateNumber ||
-                            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-                            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-                            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+                            !isValidPlateNumber
                         }
                         style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
-                            if (validateFields()) {
-                                saveCarHandle().then(() => navigation.goBack());
-                            }
+                            saveCarHandle().then(() => navigation.goBack());
                         }}
                     >
                         <Text style={[AddCarsStyle.carButtonSaveText, { color: DM("white") }]}>
