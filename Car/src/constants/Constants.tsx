@@ -23,6 +23,7 @@ export const HALF_OPACITY = 0.5;
 export const MAX_OPACITY = 1;
 export const ANIMATION_DURATION = 500;
 export const SLEEP_DURATION = 700;
+export const MODAL_SLEEP_DURATION = 100;
 export const MAX_POPUP_POSITION = 0;
 export const MIN_POPUP_POSITION = 1;
 export const MIN_POPUP_HEIGHT = 0;

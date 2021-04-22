@@ -1,29 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Modal, Text, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import ConfirmModalProps from "./ConfirmModalProps";
 import ConfirmModalStyle from "./ConfirmModalStyle";
 
-const ConfirmModal = (props: ConfirmModalProps) => {
-    const [visible, setVisible] = useState(props.visible);
-
-    const disableModal = () => setVisible(false);
-
-    const closeAfterConfirm = !props.dontCloseAfterConfirm ?? true;
-
-    const confirm = () => {
-        props.onConfirm();
-        if(closeAfterConfirm)
-            disableModal();
-    };
+const ConfirmModal = ((props: ConfirmModalProps) => {
 
     return (
         <Modal
-            visible={visible}
+            visible={props.visible}
             transparent={true}
             animationType='fade'
             statusBarTranslucent={true}
         >
-            <TouchableWithoutFeedback onPress={disableModal}>
+            <TouchableWithoutFeedback onPress={props.disableModal}>
                 <View style={ConfirmModalStyle.background}>
                     <TouchableWithoutFeedback>
                         <View style={ConfirmModalStyle.window}>
@@ -37,14 +26,14 @@ const ConfirmModal = (props: ConfirmModalProps) => {
                             <View />
                             <TouchableOpacity
                                 style={ConfirmModalStyle.confirmButton}
-                                onPress={confirm}
+                                onPress={props.onConfirm}
                             >
                                 <Text style={(ConfirmModalStyle.boldText, ConfirmModalStyle.white)}>
                                     {props.confirmText}
                                 </Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={disableModal}>
+                            <TouchableOpacity onPress={props.disableModal}>
                                 <Text style={ConfirmModalStyle.boldText}>
                                     {props.cancelText}
                                 </Text>
@@ -55,6 +44,6 @@ const ConfirmModal = (props: ConfirmModalProps) => {
             </TouchableWithoutFeedback>
         </Modal>
     );
-};
+});
 
 export default ConfirmModal;

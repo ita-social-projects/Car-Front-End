@@ -201,7 +201,7 @@ const JourneyPageStyle = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 51,
-        width: Dimensions.get("screen").width * 0.4
+        width: Dimensions.get("screen").width * 0.45
     },
 
     buttons: {
@@ -218,7 +218,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     requestButton: {
-        width: Dimensions.get("screen").width * 0.515,
+        width: Dimensions.get("screen").width * 0.45,
         justifyContent: "center",
         alignItems: "center",
         height: 51,
