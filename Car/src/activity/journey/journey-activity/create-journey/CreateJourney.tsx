@@ -124,11 +124,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
-        setStops(prevState => [...prevState, {
-            text: "",
-            isConfirmed: false,
-            coordinates: { longitude: 0, latitude: 0 }
-        }]);
+        setStops(prevState => [...prevState, initialWayPoint]);
     };
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;

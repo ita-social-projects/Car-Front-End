@@ -137,6 +137,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                     address={wayPoint.text}
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
+                    onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
                     savedLocations={params.savedLocations}
                     recentAddresses={params.recentAddresses}
                     userLocation={params.userCoordinates}

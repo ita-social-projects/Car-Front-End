@@ -3,12 +3,12 @@ import { GooglePlacesAutocomplete, Place } from "react-native-google-places-auto
 import APIConfig from "../../../../../../api-service/APIConfig";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputStyles from "./AddressInputStyles";
-import { Text, View } from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { Text, TouchableOpacity } from "react-native";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import Location from "../../../../../../models/location/Location";
 import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Constants";
 import Address from "../../../../../../models/Address";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations => {
@@ -56,13 +56,16 @@ const AddressInput = (props: AddressInputProps) => {
                 </Text>
             )}
             renderRightButton={() => (
-                <View style={AddressInputStyles.marker}>
-                    <FontAwesome
-                        name={"map-marker"}
+                <TouchableOpacity
+                    style={AddressInputStyles.clearIcon}
+                    onPress={props.onClearIconPress}
+                >
+                    <Ionicons
+                        name={"close"}
                         size={30}
-                        color={"#5355fc"}
+                        color={"black"}
                     />
-                </View>
+                </TouchableOpacity>
             )}
             styles={{
                 ...AddressInputStyles,
