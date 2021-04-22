@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
 import { ScrollView, TextInput, TouchableOpacity, View, Text } from "react-native";
 import TouchableDateTimePicker from "../../touchable/datetime-picker/TouchableDateTimePicker";
@@ -10,19 +10,36 @@ import AddressInputButton from "../AddressInputButton/AddressInputButton";
 import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
 import SwitchSelector from "../SwitchSelector/SwitchSelector";
 import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
+import CarService from "../../../../../../api-service/car-service/CarService";
+import AuthContext from "../../../../../components/auth/AuthContext";
+import { EMPTY_COLLECTION_LENGTH, FIRST_ELEMENT_INDEX } from "../../../../../constants/Constants";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
     const params = props.route.params;
 
+    const { user } = useContext(AuthContext);
+
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
-    const [state, setState] = useState();
+    const [selectedCar, setSelectedCar] =
+        useState<{id: number, name: string}>({ id: NaN, name: "" });
+    const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
 
     const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+
+    useEffect(() => {
+        CarService.getAll(Number(user?.id)).then(result => {
+            setUserCars(result.data.map(car => (
+                {
+                    id: Number(car?.id),
+                    name: `${car?.model?.brand?.name} ${car?.model?.name}`
+                })));
+        });
+    }, []);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -96,23 +113,22 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
             {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
                 <JourneyCreationDropDownPicker
-                    items={[
-                        { label: "Volkswagen Jetta", value: "volkswagen jetta" },
-                        { label: "Ford Fiesta", value: "ford fiesta" },
-                        { label: "Toyota Camry", value: "toyota camry" },
-                        { label: "Test 1", value: "toyota camry" },
-                        { label: "Test 2", value: "toyota camry" },
-                    ]}
+                    items={userCars.map((car) => ({
+                        label: car.name,
+                        value: car.id
+                    }))}
                     paddingLeft={105}
                     searchable={true}
                     placeholder="Choose a Car:"
                     isVisible={isVisibleCarDropDown}
                     onOpen={() => setIsVisibleCarDropDown(true)}
-                    onChangeItem={(item: { value: React.SetStateAction<undefined> }) => {
-                        setState(item.value);
+                    onChangeItem={(item) => {
+                        setSelectedCar({ id: item.value, name: item.label });
                         setIsVisibleCarDropDown(false);
                     }}
-                    onClose={state}
+                    valueId={Number.isNaN(selectedCar.id) && userCars.length > EMPTY_COLLECTION_LENGTH ?
+                        userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
+                    }
                 />)}
 
             <View style={CreateJourneyStyle.commentsView}>
