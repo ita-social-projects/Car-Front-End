@@ -49,6 +49,25 @@ const AddCars = () => {
             }))
     );
 
+    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
+
+    function validatePlateNumber () : boolean {
+        if (
+            !plateNumber ||
+            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
+            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
+            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+        ) {
+            setValidPlateNumber(false);
+
+            return false;
+        } else {
+            setValidPlateNumber(true);
+
+            return true;
+        }
+    }
+
     function showAlert (errorMessage: string) {
         Alert.alert("Error!", errorMessage, [
             {
@@ -256,7 +275,15 @@ const AddCars = () => {
                     <CarTextInput
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
+                        onEndEditing={()=>validatePlateNumber()}
                     />
+                    {
+                        isValidPlateNumber ? null :
+                            <Text style={{ color: DM("red") }}>
+                                This field must contain 4-10 characters, including numbers, letters, hyphens
+                            </Text>
+                    }
+
                 </View>
                 <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>

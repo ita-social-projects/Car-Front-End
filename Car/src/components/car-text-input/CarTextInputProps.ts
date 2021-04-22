@@ -5,6 +5,7 @@ interface CarTextInputProps {
     placeHolder?: string,
     error?: Error,
     errorText?: string
+    onEndEditing?: () => void
 }
 
 export default CarTextInputProps;

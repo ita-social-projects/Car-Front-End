@@ -198,6 +198,7 @@ test("renders correctly", async () =>
           />
           <CarTextInput
             onChangeText={[Function]}
+            onEndEditing={[Function]}
             placeHolder="Plate number"
           />
         </View>
