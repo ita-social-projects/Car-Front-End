@@ -199,6 +199,7 @@ test("renders correctly", async () =>
           />
           <CarTextInput
             onChangeText={[Function]}
+            onEndEditing={[Function]}
             placeHolder="Plate number"
           />
         </View>
@@ -230,6 +231,7 @@ test("renders correctly", async () =>
             </Text>
           </Text>
           <ForwardRef
+            disabled={true}
             onPress={[Function]}
             style={
               Array [
