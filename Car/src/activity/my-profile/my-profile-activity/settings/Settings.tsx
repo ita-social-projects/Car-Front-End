@@ -103,7 +103,7 @@ const Settings = (props: {navigation: any}) => {
             updatedUser.append("image", {
                 name: photo.fileName,
                 type: photo.type,
-                uri: photo?.uri
+                uri: photo?.uri,
             });
         }
 
@@ -203,7 +203,7 @@ const Settings = (props: {navigation: any}) => {
                 renderContent={
 
                     <View style={{ backgroundColor: DM("#FFFFFF") }}>
-                        {user?.imageId == null || user?.imageId == "" ? (
+                        {user?.imageId == null ? (
 
                             <TouchableOpacity
                                 style={SettingsStyle.moreOptionsButton}
