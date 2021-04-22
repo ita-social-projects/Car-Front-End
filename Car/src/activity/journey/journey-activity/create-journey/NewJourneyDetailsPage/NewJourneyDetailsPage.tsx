@@ -12,7 +12,11 @@ import SwitchSelector from "../SwitchSelector/SwitchSelector";
 import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../../components/auth/AuthContext";
-import { EMPTY_COLLECTION_LENGTH, FIRST_ELEMENT_INDEX } from "../../../../../constants/Constants";
+import {
+    DEFAULT_AVAILABLE_SEATS_COUNT,
+    EMPTY_COLLECTION_LENGTH,
+    FIRST_ELEMENT_INDEX
+} from "../../../../../constants/Constants";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -31,7 +35,9 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
-    const [date, setDate] = useState(new Date());
+    const [departureTime, setDepartureTime] = useState(new Date());
+
+    const [availableSeats, setAvailableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
 
     useEffect(() => {
         CarService.getAll(Number(user?.id)).then(result => {
@@ -42,6 +48,14 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 })));
         });
     }, []);
+
+    useEffect(() => {
+        console.log("availableSeats - ", availableSeats);
+    }, [availableSeats]);
+
+    useEffect(() => {
+        console.log("departureTime - ", departureTime);
+    }, [departureTime]);
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -72,7 +86,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 />
             ))}
 
-            <TouchableDateTimePicker date={date} setDate={(d) => setDate(d)}/>
+            <TouchableDateTimePicker date={departureTime} setDate={(d) => setDepartureTime(d)}/>
 
             <SwitchSelector
                 leftButtonStyle={freeButtonStyle}
@@ -92,7 +106,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 rightButtonText={"Paid"}
             />
 
-            <SeatsInputSpinner/>
+            <SeatsInputSpinner value={availableSeats} onChange={seats => setAvailableSeats(seats)}/>
 
             <SwitchSelector
                 leftButtonStyle={ownCarButtonStyle}
