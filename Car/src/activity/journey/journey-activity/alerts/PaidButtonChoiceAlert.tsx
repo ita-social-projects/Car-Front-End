@@ -2,7 +2,7 @@ import { Alert } from "react-native";
 
 function PaidButtonChoiceAlert () {
     Alert.alert(
-        "Paid journey!",
+        "Paid ride!",
         "Participants will be informed that they'll need to partially pay for a fuel.",
         [
             {
