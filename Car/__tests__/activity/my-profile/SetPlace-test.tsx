@@ -28,8 +28,8 @@ test("renders correctly", async () =>
           address=""
           onChangeText={[Function]}
           onPress={[Function]}
-          paddingLeft={150}
-          placeholder="Address:"
+          paddingLeft={90}
+          placeholder="Address"
           recentAddresses={Array []}
           savedLocations={Array []}
           userLocation={
@@ -74,6 +74,7 @@ test("renders correctly", async () =>
             "zoom": 16,
           }
         }
+        onLongPress={[Function]}
         provider="google"
         showsUserLocation={true}
         style={
@@ -81,7 +82,31 @@ test("renders correctly", async () =>
             "height": "100%",
           }
         }
-      />
+      >
+        <MapMarker
+          coordinate={
+            Object {
+              "latitude": 49.843844,
+              "longitude": 24.025581,
+            }
+          }
+          draggable={true}
+          image={
+            Object {
+              "testUri": "../../../assets/images/maps-markers/with_shade.png",
+            }
+          }
+          onDragEnd={[Function]}
+          stopPropagation={false}
+          style={
+            Object {
+              "position": "absolute",
+              "zIndex": 1,
+            }
+          }
+          title="Address"
+        />
+      </MapView>
       <ForwardRef
         disabled={true}
         style={
@@ -91,7 +116,7 @@ test("renders correctly", async () =>
               "backgroundColor": "#000000",
               "flexDirection": "row",
               "justifyContent": "space-around",
-              "left": 629,
+              "left": 660,
               "paddingHorizontal": 16,
               "paddingVertical": 14,
               "position": "absolute",
