@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
         backgroundColor: "#F2F2F2",
-        paddingTop: 10
+        paddingTop: 25
     },
 
     recentJourneyText: {
@@ -36,7 +36,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     commentsView: {
-        marginTop: 20,
+        marginTop: 24,
         marginLeft: 20,
         marginRight: 20
     },
@@ -55,10 +55,13 @@ export const CreateJourneyStyle = StyleSheet.create({
         fontWeight: "bold"
     },
 
+    publishButtonContainer: {
+        alignItems: "flex-end",
+        marginVertical: 24
+    },
+
     publishButton: {
-        marginLeft: 260,
         marginRight: 20,
-        marginTop: 20,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
