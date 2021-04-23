@@ -23,6 +23,7 @@ export const SeatsInputSpinnerStyle = StyleSheet.create({
 
     input: {
         borderLeftWidth: 2,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        paddingHorizontal: 15
     }
 });
