@@ -27,6 +27,7 @@ test("renders correctly", async () =>
         <AddressInput
           address=""
           onChangeText={[Function]}
+          onClearIconPress={[Function]}
           onPress={[Function]}
           paddingLeft={90}
           placeholder="Address"
