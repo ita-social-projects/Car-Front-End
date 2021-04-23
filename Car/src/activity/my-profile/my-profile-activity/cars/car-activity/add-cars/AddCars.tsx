@@ -5,7 +5,6 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert,
     ScrollView
 } from "react-native";
 import {
@@ -49,47 +48,23 @@ const AddCars = () => {
             }))
     );
 
-    function showAlert (errorMessage: string) {
-        Alert.alert("Error!", errorMessage, [
-            {
-                text: "Ok"
-            }
-        ]);
-    }
-    function validateFields (): boolean {
-        if (
-            !selectedBrand?.value
-        ) {
-            showAlert("Brand is a required field!");
+    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
 
-            return false;
-        }
-        if (
-            !selectedModel?.value
-        ) {
-            showAlert("Model is a required field!");
-
-            return false;
-        }
-        if (
-            !selectedColor?.value
-        ) {
-            showAlert("Color is a required field!");
-
-            return false;
-        }
+    function validatePlateNumber () : boolean {
         if (
             !plateNumber ||
             plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
             plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
             !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
         ) {
-            showAlert("Plate number is not valid!");
+            setValidPlateNumber(false);
 
             return false;
-        }
+        } else {
+            setValidPlateNumber(true);
 
-        return true;
+            return true;
+        }
     }
 
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
@@ -256,7 +231,15 @@ const AddCars = () => {
                     <CarTextInput
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
+                        onEndEditing={()=>validatePlateNumber()}
                     />
+                    {
+                        isValidPlateNumber ? null :
+                            <Text style={{ color: DM("red") }}>
+                                This field must contain 4-10 characters, including numbers, letters, hyphens
+                            </Text>
+                    }
+
                 </View>
                 <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
@@ -271,16 +254,16 @@ const AddCars = () => {
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
-                            !plateNumber ||
-                            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-                            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-                            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+                            !isValidPlateNumber
                         }
-                        style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                        style={ !selectedBrand?.value ||
+                            !selectedModel?.value ||
+                            !selectedColor?.value ||
+                            !isValidPlateNumber ?
+                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
+                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
-                            if (validateFields()) {
-                                saveCarHandle().then(() => navigation.goBack());
-                            }
+                            saveCarHandle().then(() => navigation.goBack());
                         }}
                     >
                         <Text style={[AddCarsStyle.carButtonSaveText, { color: DM("white") }]}>
