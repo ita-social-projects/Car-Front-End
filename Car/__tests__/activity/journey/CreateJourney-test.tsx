@@ -18,7 +18,7 @@ test("renders correctly", async () =>
         onContentSizeChange={[Function]}
         style={
           Object {
-            "height": 225,
+            "height": 240,
             "marginTop": 25,
             "paddingHorizontal": 10,
             "position": "absolute",

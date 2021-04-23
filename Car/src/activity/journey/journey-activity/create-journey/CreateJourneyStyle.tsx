@@ -88,7 +88,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         zIndex: 1,
         width: "100%",
         paddingHorizontal: 10,
-        height: 225,
+        height: 240,
         marginTop: 25
     }
 });

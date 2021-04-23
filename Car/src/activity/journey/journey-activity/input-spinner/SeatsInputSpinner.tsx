@@ -18,7 +18,7 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
             </Text>
             <View>
                 <InputSpinner
-                    max={5}
+                    max={4}
                     min={1}
                     step={1}
                     style={SeatsInputSpinnerStyle.spinnerContainer}
