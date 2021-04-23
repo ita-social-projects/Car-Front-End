@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, View, Keyboard } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../models/Journey";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -23,6 +23,7 @@ import {
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => {
 
@@ -142,9 +143,12 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                 initialSnap={MIN_POPUP_POSITION}
                 enabledInnerScrolling={false}
                 renderHeader={<></>}
+                onCloseEnd={Keyboard.dismiss}
                 renderContent={
-                    <View style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: DM("white") }]}>
-
+                    <KeyboardAwareScrollView
+                        style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: DM("white") }]}
+                        enableOnAndroid
+                    >
                         <View style={JourneyRequestPageStyle.contentView}>
 
                             {/* Organizer block */}
@@ -212,7 +216,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                         </View>
 
                         <View style={[JourneyRequestPageStyle.lining, { backgroundColor: DM("white") }]} />
-                    </View>
+                    </KeyboardAwareScrollView>
                 }
             />
         </View>
