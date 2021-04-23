@@ -5,7 +5,8 @@ interface AddressInputButtonProps {
     onPress?: () => void,
     onIconPress?: () => void,
     disabled?: boolean,
-    marginHorizontal?: number
+    marginHorizontal?: number,
+    marginBottom?: number,
 }
 
 export default AddressInputButtonProps;

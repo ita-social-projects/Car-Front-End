@@ -6,7 +6,7 @@ const SwitchSelectorStyle = StyleSheet.create({
         alignItems: "center",
         marginLeft: 21,
         marginRight: 0,
-        marginTop: 16,
+        marginTop: 24,
         fontSize: 13,
         lineHeight: 16
     },

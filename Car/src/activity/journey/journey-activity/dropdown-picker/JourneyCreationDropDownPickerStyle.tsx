@@ -13,7 +13,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
     },
 
     style: {
-        marginTop: 16,
+        marginTop: 24,
         marginHorizontal: 20,
         alignItems: "center",
         borderColor: "black",
@@ -34,7 +34,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         lineHeight: 24,
         position: "absolute",
         color: "gray",
-        marginTop: 27,
+        marginTop: 35,
         marginLeft: 35,
         zIndex: 10,
 

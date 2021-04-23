@@ -31,6 +31,11 @@ const AddressInputStyles = StyleSheet.create({
         position: "absolute",
         top: 5,
         right: 10
+    },
+    marker: {
+        position: "absolute",
+        top: 8,
+        right: 15
     }
 });
 

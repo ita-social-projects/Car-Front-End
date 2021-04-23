@@ -51,10 +51,6 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
         });
     }, []);
 
-    useEffect(() => {
-        console.log("comment - ", comment);
-    }, [comment]);
-
     return (
         <ScrollView style={CreateJourneyStyle.container}>
 
@@ -64,6 +60,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 text={params.from.text}
                 disabled={true}
                 marginHorizontal={20}
+                marginBottom={24}
             />
             <AddressInputButton
                 iconName={"location"}
@@ -71,6 +68,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 text={params.to.text}
                 disabled={true}
                 marginHorizontal={20}
+                marginBottom={24}
             />
 
             {params.stops.map((stop, index) => (
@@ -80,31 +78,12 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     text={stop.text}
                     disabled={true}
                     marginHorizontal={20}
+                    marginBottom={24}
                     key={index}
                 />
             ))}
 
             <TouchableDateTimePicker date={departureTime} setDate={(d) => setDepartureTime(d)}/>
-
-            <SwitchSelector
-                leftButtonStyle={freeButtonStyle}
-                rightButtonStyle={paidButtonStyle}
-                onLeftButtonPress={() => {
-                    FreeButtonChoiceAlert();
-                    setFreeButtonStyle(SwitchSelectorStyle.activeButton);
-                    setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
-                }}
-                onRightButtonPress={() => {
-                    PaidButtonChoiceAlert();
-                    setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
-                    setPaidButtonStyle(SwitchSelectorStyle.activeButton);
-                }}
-                title={"Fee"}
-                leftButtonText={"Free"}
-                rightButtonText={"Paid"}
-            />
-
-            <SeatsInputSpinner value={availableSeats} onChange={seats => setAvailableSeats(seats)}/>
 
             <SwitchSelector
                 leftButtonStyle={ownCarButtonStyle}
@@ -145,6 +124,26 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     }
                 />)}
 
+            <SwitchSelector
+                leftButtonStyle={freeButtonStyle}
+                rightButtonStyle={paidButtonStyle}
+                onLeftButtonPress={() => {
+                    FreeButtonChoiceAlert();
+                    setFreeButtonStyle(SwitchSelectorStyle.activeButton);
+                    setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
+                }}
+                onRightButtonPress={() => {
+                    PaidButtonChoiceAlert();
+                    setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
+                    setPaidButtonStyle(SwitchSelectorStyle.activeButton);
+                }}
+                title={"Fee"}
+                leftButtonText={"Free"}
+                rightButtonText={"Paid"}
+            />
+
+            <SeatsInputSpinner value={availableSeats} onChange={seats => setAvailableSeats(seats)}/>
+
             <View style={CreateJourneyStyle.commentsView}>
                 <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
                 <TextInput
@@ -160,9 +159,11 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
             </View>
 
-            <TouchableOpacity style={CreateJourneyStyle.publishButton}>
-                <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
-            </TouchableOpacity>
+            <View style={CreateJourneyStyle.publishButtonContainer}>
+                <TouchableOpacity style={CreateJourneyStyle.publishButton}>
+                    <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };
