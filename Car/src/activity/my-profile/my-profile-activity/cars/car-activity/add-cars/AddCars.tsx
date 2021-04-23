@@ -256,7 +256,12 @@ const AddCars = () => {
                             !selectedColor?.value ||
                             !isValidPlateNumber
                         }
-                        style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                        style={ !selectedBrand?.value ||
+                            !selectedModel?.value ||
+                            !selectedColor?.value ||
+                            !isValidPlateNumber ?
+                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
+                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
                             saveCarHandle().then(() => navigation.goBack());
                         }}

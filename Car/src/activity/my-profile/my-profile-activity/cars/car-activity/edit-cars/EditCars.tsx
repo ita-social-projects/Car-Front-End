@@ -244,7 +244,12 @@ const EditCars = (navigation: any) => {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        style={[EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                        style={ !selectedBrand?.value ||
+                            !selectedModel?.value ||
+                            !selectedColor?.value ||
+                            !isValidPlateNumber ?
+                            [EditCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
+                            : [EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         disabled={
                             !selectedBrand?.value ||
                             !selectedModel?.value ||

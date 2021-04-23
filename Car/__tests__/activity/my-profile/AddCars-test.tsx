@@ -246,7 +246,7 @@ test("renders correctly", async () =>
                   "paddingVertical": 14,
                 },
                 Object {
-                  "backgroundColor": "#000000",
+                  "backgroundColor": "#808080",
                 },
               ]
             }
