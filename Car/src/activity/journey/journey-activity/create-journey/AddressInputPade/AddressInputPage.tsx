@@ -152,6 +152,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                 initialCamera={{ ...params.camera, center: centerCoordinates }}
                 customMapStyle={mapStyle}
                 onLongPress={mapEventHandler}
+                showsCompass={false}
             >
                 <Marker
                     style={CreateJourneyStyle.movableMarker}

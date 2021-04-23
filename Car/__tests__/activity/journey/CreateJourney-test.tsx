@@ -18,8 +18,8 @@ test("renders correctly", async () =>
         onContentSizeChange={[Function]}
         style={
           Object {
-            "height": 200,
-            "marginTop": 15,
+            "height": 225,
+            "marginTop": 25,
             "paddingHorizontal": 10,
             "position": "absolute",
             "width": "100%",
@@ -30,12 +30,14 @@ test("renders correctly", async () =>
         <AddressInputButton
           directionType="From"
           iconName="location"
+          marginBottom={15}
           onPress={[Function]}
           text=""
         />
         <AddressInputButton
           directionType="To"
           iconName="location"
+          marginBottom={15}
           onPress={[Function]}
           text=""
         />

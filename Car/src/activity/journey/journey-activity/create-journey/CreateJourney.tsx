@@ -198,6 +198,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     text={from.text}
                     onPress={() => onAddressInputButtonPressHandler(
                         "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
+                    marginBottom={15}
                 />
 
                 <AddressInputButton
@@ -206,6 +207,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     text={to.text}
                     onPress={() => onAddressInputButtonPressHandler(
                         "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
+                    marginBottom={15}
                 />
 
                 {stops.map((stop, index) => (
@@ -216,6 +218,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         onPress={() => onAddressInputButtonPressHandler(
                             "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
                         onIconPress={() => onCloseIconPressHandler(index)}
+                        marginBottom={15}
                         key={index}
                     />
                 ))}
@@ -272,7 +275,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             </MapView>
 
             <TouchableOpacity
-                style={[SearchJourneyStyle.confirmButton,
+                style={[CreateJourneyStyle.confirmButton,
                     { backgroundColor:  routeIsConfirmed ? "black" : "darkgrey" }]}
                 onPress={confirmOnPressHandler}
                 disabled={!routeIsConfirmed}
