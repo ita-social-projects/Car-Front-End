@@ -6,12 +6,12 @@ import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
     DELETE_COUNT,
-    initialCamera,
+    initialCamera, initialCoordinate,
     initialWayPoint,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    NUMBER_OF_STOPS_LIMIT
+    NUMBER_OF_STOPS_LIMIT, SECOND_ELEMENT_INDEX
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
@@ -24,6 +24,9 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import WayPoint from "../../../../types/WayPoint";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
 import CreateJourneyProps from "./CreateJourneyProps";
+import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import Stop from "../../../../../models/stop/Stop";
+import Address from "../../../../../models/Address";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -32,15 +35,19 @@ interface CreateJourneyComponent {
 }
 
 const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
+
     const params = props?.route?.params;
 
     const { user } = useContext(AuthContext);
+    const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
+
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
+    const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
 
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
-
     const [stops, setStops] = useState<WayPoint[]>([]);
+    const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
 
     useEffect(() => {
         if (params) {
@@ -67,6 +74,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             .getAll(Number(user?.id))
             .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
+
+        JourneyService
+            .getRecentJourneyStops(Number(user?.id))
+            .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
+                .map((stop: Stop) => stop?.address)))
+            .catch((e) => console.log(e));
     }, []);
 
     const animateCamera = (coordinates: LatLng) => {
@@ -98,6 +111,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         }
         Geolocation.getCurrentPosition(
             (position) => {
+                setUserCoordinates(position.coords);
                 animateCamera(position.coords);
             },
             (error) => {
@@ -110,27 +124,25 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
-        setStops(prevState => [...prevState, {
-            text: "",
-            isConfirmed: false,
-            coordinates: { longitude: 0, latitude: 0 }
-        }]);
+        setStops(prevState => [...prevState, initialWayPoint]);
     };
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
-    const onAddressInputButtonPressHandler = (
-        placeholder: string, paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
+    const onAddressInputButtonPressHandler = (placeholder: string,
+        paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
 
         mapRef.current?.getCamera().then(camera => {
             navigation.navigate("Address Input", {
                 placeholder: placeholder,
                 paddingLeft: paddingLeft,
                 savedLocations: savedLocations,
+                recentAddresses: recentAddresses,
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
-                camera: { ...camera, altitude: 200 }
+                camera: { ...camera, altitude: 200 },
+                userCoordinates: userCoordinates
             });
         });
     };
@@ -159,6 +171,16 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             to: to,
             stops: stops.filter(stop => stop.isConfirmed)
         });
+    };
+
+    const cantBuildRouteAlert = () => {
+        setRouteIsConfirmed(false);
+
+        Alert.alert(
+            "Error",
+            "Cant build route. Please chose another way points",
+            [{ text: "Ok" }]
+        );
     };
 
     return (
@@ -212,7 +234,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     <Marker
                         title={"From"}
                         coordinate={from.coordinates}
-                        image={require("../../../../../assets/images/small-circle-marker.png")}
+                        image={require("../../../../../assets/images/maps-markers/From.png")}
                     />)
                 }
 
@@ -220,6 +242,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     <Marker
                         title={"To"}
                         coordinate={to.coordinates}
+                        image={require("../../../../../assets/images/maps-markers/To.png")}
                     />)
                 }
 
@@ -228,7 +251,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         <Marker
                             title={"Stop"}
                             coordinate={stop.coordinates}
-                            image={require("../../../../../assets/images/stop-marker-transparent.png")}
+                            image={require("../../../../../assets/images/maps-markers/Stop.png")}
                             key={index}
                         />
                     ))
@@ -236,22 +259,23 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {fromAndToIsConfirmed && (
                     <MapViewDirections
-                        optimizeWaypoints={true}
                         origin={from.coordinates}
                         destination={to.coordinates}
                         waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}
                         apikey={APIConfig.apiKey}
                         strokeWidth={5}
                         strokeColor="#027ebd"
+                        onError={cantBuildRouteAlert}
+                        onReady={() => setRouteIsConfirmed(true)}
                     />
                 )}
             </MapView>
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  fromAndToIsConfirmed ? "black" : "darkgrey" }]}
+                    { backgroundColor:  routeIsConfirmed ? "black" : "darkgrey" }]}
                 onPress={confirmOnPressHandler}
-                disabled={!fromAndToIsConfirmed}
+                disabled={!routeIsConfirmed}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                     Confirm

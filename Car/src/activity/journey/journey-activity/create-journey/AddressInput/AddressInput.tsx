@@ -3,63 +3,52 @@ import { GooglePlacesAutocomplete, Place } from "react-native-google-places-auto
 import APIConfig from "../../../../../../api-service/APIConfig";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputStyles from "./AddressInputStyles";
-import { Text, View } from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { Text, TouchableOpacity } from "react-native";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import Location from "../../../../../../models/location/Location";
 import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Constants";
-
-let recentRides = [
-    {
-        description: "Address 1",
-        geometry: { location: { lat: 49.877316, lng: 23.930052 } }
-    },
-    {
-        description: "Address 2",
-        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
-    },
-    {
-        description: "Address 3",
-        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
-    },
-    {
-        description: "Address 4",
-        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
-    },
-    {
-        description: "Address 5",
-        geometry: { location: { lat: 49.834976, lng: 24.008147 } }
-    }
-];
-
-recentRides = recentRides.map(ride => {
-    return { ...ride, iconName: "ios-time-outline" };
-});
+import Address from "../../../../../../models/Address";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 // eslint-disable-next-line unused-imports/no-unused-vars
-const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = (locations: Location[]) => {
-    return locations.map((location) => {
-        return {
-            description: location?.name ?? "Unnamed location",
-            geometry: {
-                location: {
-                    lat: location?.address?.latitude ?? INITIAL_LATITUDE,
-                    lng: location?.address?.longitude ?? INITIAL_LONGITUDE
-                }
-            },
-            iconName: location?.type?.name
-        };
-    });
+const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations => {
+    return locations.map((location) => ({
+        description: location?.name ?? "Unnamed location",
+        geometry: {
+            location: {
+                lat: location?.address?.latitude ?? INITIAL_LATITUDE,
+                lng: location?.address?.longitude ?? INITIAL_LONGITUDE
+            }
+        },
+        iconName: location?.type?.name
+    }));
+};
+
+// eslint-disable-next-line unused-imports/no-unused-vars
+const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses => {
+    return addresses.map(address => ({
+        description: address ? `${address.city}, ${address.street}` : "Unnamed location",
+        geometry: {
+            location: {
+                lat: address?.latitude ?? INITIAL_LATITUDE,
+                lng: address?.longitude ?? INITIAL_LONGITUDE
+            }
+        },
+        iconName: "ios-time-outline"
+    }));
 };
 
 const AddressInput = (props: AddressInputProps) => {
     return (
         <GooglePlacesAutocomplete
-            predefinedPlaces={mapSavedLocationsToPlaces(props.savedLocations).concat(recentRides)}
+            predefinedPlaces={mapSavedLocationsToPlaces(props.savedLocations)
+                .concat(mapRecentAddressesToPlaces(props.recentAddresses))}
             onPress={props.onPress}
             query={{
                 key: APIConfig.apiKey,
-                language: "ua"
+                language: "ua",
+                location: `${props.userLocation.latitude},${props.userLocation.longitude}`,
+                radius: 30000
             }}
             renderLeftButton={() => (
                 <Text style={AddressInputStyles.placeholder}>
@@ -67,13 +56,16 @@ const AddressInput = (props: AddressInputProps) => {
                 </Text>
             )}
             renderRightButton={() => (
-                <View style={AddressInputStyles.marker}>
-                    <FontAwesome
-                        name={"map-marker"}
+                <TouchableOpacity
+                    style={AddressInputStyles.clearIcon}
+                    onPress={props.onClearIconPress}
+                >
+                    <Ionicons
+                        name={"close"}
                         size={30}
-                        color={"#5355fc"}
+                        color={"black"}
                     />
-                </View>
+                </TouchableOpacity>
             )}
             styles={{
                 ...AddressInputStyles,
@@ -92,6 +84,7 @@ const AddressInput = (props: AddressInputProps) => {
             }}
             placeholder={""}
             renderRow={(data) => (<AddressInputRow data={data}/>)}
+            minLength={2}
         />
     );
 };

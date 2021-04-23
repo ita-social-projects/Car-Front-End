@@ -29,7 +29,6 @@ const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
 };
 
 const AddressInputPage = (props: AddressInputPageProps) => {
-
     const params = props.route.params;
 
     const centerCoordinates = params.wayPoint.isConfirmed ?
@@ -123,7 +122,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
         setWayPointsTextAndIsConfirmed(text, false);
     };
 
-    const markerOnDragEndHandler = (event: MapEvent) => {
+    const mapEventHandler = (event: MapEvent) => {
         setAddressByCoordinates(event.nativeEvent.coordinate);
 
         animateCameraAndMoveMarker(event.nativeEvent.coordinate);
@@ -138,7 +137,10 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                     address={wayPoint.text}
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
+                    onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
                     savedLocations={params.savedLocations}
+                    recentAddresses={params.recentAddresses}
+                    userLocation={params.userCoordinates}
                 />
             </View>
 
@@ -149,12 +151,13 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                 showsUserLocation={true}
                 initialCamera={{ ...params.camera, center: centerCoordinates }}
                 customMapStyle={mapStyle}
+                onLongPress={mapEventHandler}
             >
                 <Marker
                     style={CreateJourneyStyle.movableMarker}
                     draggable={true}
-                    onDragEnd={markerOnDragEndHandler}
-                    image={require("../../../../../../assets/images/small-custom-marker.png")}
+                    onDragEnd={mapEventHandler}
+                    image={require("../../../../../../assets/images/maps-markers/with_shade.png")}
                     coordinate={markerCoordinates}
                 />
             </MapView>

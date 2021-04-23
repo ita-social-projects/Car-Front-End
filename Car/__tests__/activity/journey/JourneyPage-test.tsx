@@ -390,6 +390,7 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                   },
+                  false,
                 ]
               }
             >
@@ -425,7 +426,7 @@ test("renders correctly", async () =>
                         "alignItems": "center",
                         "height": 51,
                         "justifyContent": "center",
-                        "width": 386.25,
+                        "width": 337.5,
                       },
                       Object {
                         "backgroundColor": "black",
