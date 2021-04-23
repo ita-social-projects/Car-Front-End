@@ -165,7 +165,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  !wayPoint.isConfirmed ? "darkgrey" : "black" }]}
+                    { backgroundColor:  !wayPoint.isConfirmed ? "#afafaf" : "black" }]}
                 onPress={() => navigation.navigate(
                     params.previousScreen, { wayPoint: wayPoint, wayPointId: params.wayPointId })}
                 disabled={!wayPoint.isConfirmed}

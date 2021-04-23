@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
@@ -90,17 +90,5 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 10,
         height: 225,
         marginTop: 25
-    },
-
-    confirmButton: {
-        paddingHorizontal: 16,
-        paddingVertical: 14,
-        top: Dimensions.get("screen").height - 236,
-        left: Dimensions.get("screen").width - 121,
-        position: "absolute",
-        backgroundColor: "#000000",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around"
-    },
+    }
 });

@@ -275,8 +275,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             </MapView>
 
             <TouchableOpacity
-                style={[CreateJourneyStyle.confirmButton,
-                    { backgroundColor:  routeIsConfirmed ? "black" : "darkgrey" }]}
+                style={[SearchJourneyStyle.confirmButton,
+                    { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf" }]}
                 onPress={confirmOnPressHandler}
                 disabled={!routeIsConfirmed}
             >
