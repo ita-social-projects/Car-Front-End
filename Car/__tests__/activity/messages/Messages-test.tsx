@@ -7,7 +7,9 @@ const renderer = shallowRenderer.createRenderer();
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Messages isOpenFilter={false} component={undefined}/>)).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(<Messages isOpenFilter={false} component={undefined} />)
+    ).toMatchInlineSnapshot(`
     <ForwardRef(SafeAreaView)
       style={
         Object {
@@ -44,6 +46,47 @@ test("renders correctly", async () =>
           updateCellsBatchingPeriod={50}
           windowSize={21}
         />
+        <React.Fragment>
+          <View
+            style={
+              Object {
+                "flex": 100,
+                "marginTop": 20,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontFamily": "Milliard",
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "textAlign": "center",
+                }
+              }
+            >
+              CURRENTLY YOU DO NOT HAVE ANY
+              
+
+              CHATS
+            </Text>
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../assets/images/chat/no-chats.png",
+                }
+              }
+              style={
+                Object {
+                  "height": 225,
+                  "marginTop": 45,
+                  "resizeMode": "stretch",
+                  "width": 396,
+                }
+              }
+            />
+          </View>
+        </React.Fragment>
       </View>
     </ForwardRef(SafeAreaView)>
   `));
