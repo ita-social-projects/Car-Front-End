@@ -5,7 +5,7 @@ import SetPlace from "../../../src/activity/my-profile/my-profile-activity/addre
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
+  expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -19,7 +19,7 @@ test("renders correctly", async () =>
             "left": 10,
             "position": "absolute",
             "right": 10,
-            "top": 10,
+            "top": 25,
             "zIndex": 1,
           }
         }

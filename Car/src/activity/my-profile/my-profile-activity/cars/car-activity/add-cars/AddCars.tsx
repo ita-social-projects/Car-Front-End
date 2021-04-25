@@ -5,7 +5,8 @@ import {
     Text,
     View,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    Alert
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -26,7 +27,8 @@ import * as navigation from "../../../../../../components/navigation/Navigation"
 import {
     FIRST_ELEMENT_INDEX,
     MAX_PLATE_NUMBER_LENGTH,
-    MIN_PLATE_NUMBER_LENGTH
+    MIN_PLATE_NUMBER_LENGTH,
+    MAX_PHOTO_FILE_SIZE
 } from "../../../../../../constants/Constants";
 import DM from "../../../../../../components/styles/DM";
 
@@ -89,10 +91,23 @@ const AddCars = () => {
         });
     }, []);
 
+    const trySetPhoto = (photo: ImagePickerResponse) => {
+        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
+            setPhoto(photo);
+        } else {
+            Alert.alert("Error!", "File size should not exceed 7MB", [
+                {
+                    text: "Ok"
+                }
+            ]);
+            setPhoto({});
+        }
+    };
+
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
-            if (!response.didCancel) {
-                setPhoto(response);
+            if (!response.didCancel && response.fileSize) {
+                trySetPhoto(response);
             }
         });
     };
