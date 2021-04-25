@@ -19,7 +19,7 @@ test("renders correctly", async () =>
             "left": 10,
             "position": "absolute",
             "right": 10,
-            "top": 10,
+            "top": 25,
             "zIndex": 1,
           }
         }
