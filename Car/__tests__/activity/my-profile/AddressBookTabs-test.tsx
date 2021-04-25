@@ -39,7 +39,7 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="SetPlace"
+          name="AddLocation"
           options={
             Object {
               "headerLeft": [Function],

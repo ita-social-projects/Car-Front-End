@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-const SetPlaceStyle = StyleSheet.create({
+const AddLocationStyle = StyleSheet.create({
     container: {
         backgroundColor:"#F2F2F2",
         paddingTop: 10
@@ -27,4 +27,4 @@ const SetPlaceStyle = StyleSheet.create({
 
 });
 
-export default SetPlaceStyle;
+export default AddLocationStyle;

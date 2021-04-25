@@ -20,7 +20,7 @@ import { CreateJourneyStyle } from "../../../../../journey/journey-activity/crea
 import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import AddressInputPageStyle
     from "../../../../../journey/journey-activity/create-journey/AddressInputPade/AddressInputPageStyle";
-import SetPlaceStyle from "./SetPlaceStyle";
+import AddLocationStyle from "./AddLocationStyle";
 
 const CreateRequestWithAddressToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -33,7 +33,7 @@ const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
         `${coordinates.latitude},${coordinates.longitude}&key=${APIConfig.apiKey}`;
 };
 
-const SetPlace = () => {
+const AddLocation = () => {
 
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
 
@@ -180,7 +180,7 @@ const SetPlace = () => {
 
     // eslint-disable-next-line unused-imports/no-unused-vars
     const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number) => {
-        navigation.navigate("SetPlace", {
+        navigation.navigate("AddLocation", {
             placeholder: placeholder,
             paddingLeft: paddingLeft,
         });
@@ -224,12 +224,12 @@ const SetPlace = () => {
             </MapView>
 
             <TouchableOpacity
-                style={[SetPlaceStyle.saveButton,
+                style={[AddLocationStyle.saveButton,
                     { backgroundColor:  wayPoint.isConfirmed ? "black" : "darkgrey" }]}
                 /*onPress={confirmOnPressHandler}*/
                 disabled={!wayPoint.isConfirmed}
             >
-                <Text style={[SetPlaceStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
+                <Text style={[AddLocationStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
                     Save
                 </Text>
             </TouchableOpacity>
@@ -237,4 +237,4 @@ const SetPlace = () => {
     );
 };
 
-export default SetPlace;
+export default AddLocation;

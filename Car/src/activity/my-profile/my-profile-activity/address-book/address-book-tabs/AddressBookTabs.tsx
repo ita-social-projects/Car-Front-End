@@ -5,7 +5,7 @@ import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import AddressBook from "../AddressBook";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 import DM from "../../../../../components/styles/DM";
-import SetPlace from "../address-book-activity/add-locations/SetPlace";
+import AddLocation from "../address-book-activity/add-locations/AddLocation";
 
 const StackTabs = createStackNavigator();
 
@@ -24,8 +24,8 @@ export default function AddressBookTabs () {
                     }}
                 />
                 <StackTabs.Screen
-                    name="SetPlace"
-                    component={SetPlace}
+                    name="AddLocation"
+                    component={AddLocation}
                     options={{
                         headerTitle: "Add Address",
                         headerTitleAlign: "center",

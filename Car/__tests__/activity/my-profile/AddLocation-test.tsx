@@ -1,11 +1,11 @@
 import React from "react";
 import shallowRenderer from "react-test-renderer/shallow";
-import SetPlace from "../../../src/activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/SetPlace";
+import AddLocation from "../../../src/activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/AddLocation";
 
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-  expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<AddLocation />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
