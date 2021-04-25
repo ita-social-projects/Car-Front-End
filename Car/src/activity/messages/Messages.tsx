@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text, View, Image } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearTextGradient } from "react-native-text-gradient";
@@ -131,6 +131,31 @@ const Messages = (props: MessagesProps) => {
                         </TouchableOpacity>
                     )}
                 />
+                {
+                    filteredDataSource?.length ? (
+                        <View style={MessagesStyle.warningContainer}>
+                            <Text style={MessagesStyle.warningMessageStyle}>
+                                Each chat will be deleted 24 hours after the trip
+                                {"\n"}
+                                departure time
+                            </Text>
+                        </View>
+                    ) : (
+                        <>
+                            <View style={MessagesStyle.noMessageContainer}>
+                                <Text style={MessagesStyle.noMessageStyle}>
+                                    CURRENTLY YOU DO NOT HAVE ANY
+                                    {"\n"}
+                                    CHATS
+                                </Text>
+                                <Image
+                                    style={MessagesStyle.noChatImageStyle}
+                                    source={require("../../../assets/images/chat/no-chats.png")}
+                                />
+                            </View>
+                        </>
+                    )
+                }
             </View>
         </SafeAreaView>
     );

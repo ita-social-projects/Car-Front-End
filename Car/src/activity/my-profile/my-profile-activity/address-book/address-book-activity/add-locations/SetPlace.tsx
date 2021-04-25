@@ -190,6 +190,7 @@ const SetPlace = () => {
         <View style={{ flex: 1 }}>
             <View style={AddressInputPageStyle.inputContainer}>
                 <AddressInput
+                    onClearIconPress={() => {}}
                     placeholder={"Address"}
                     paddingLeft={90}
                     address={wayPoint.text}
