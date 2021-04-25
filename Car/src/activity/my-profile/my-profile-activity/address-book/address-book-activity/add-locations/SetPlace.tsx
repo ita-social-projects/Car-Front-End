@@ -199,7 +199,6 @@ const SetPlace = () => {
                     savedLocations={[]}
                     userLocation={userCoordinates}
                     recentAddresses={[]}
-                    onClearIconPress={() => {}}
                 />
             </View>
 
