@@ -108,6 +108,7 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
                                     date={props.date}
                                     onDateChange={props.setDate}
                                     minimumDate={addMinutesToDate(new Date(), MINUTES_OFFSET)}
+                                    locale={"en"}
                                 />
                             </View>
                         </View>
