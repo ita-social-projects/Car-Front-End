@@ -3,6 +3,7 @@ import { Text, View, Modal, TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
 import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { MINUTES_OFFSET } from "../../../../../constants/Constants";
 
 const MINUS_TWO = -2;
 const ONE = 1;
@@ -37,6 +38,12 @@ interface TouchableDateTimePickerProps {
     // eslint-disable-next-line unused-imports/no-unused-vars
     setDate: (date: Date) => void,
 }
+
+export const addMinutesToDate = (date: Date, minutes: number) => {
+    date.setMinutes(date.getMinutes() + minutes);
+
+    return date;
+};
 
 function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
     const [show, setShow] = useState(false);
@@ -100,7 +107,7 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
                                 <DatePicker
                                     date={props.date}
                                     onDateChange={props.setDate}
-                                    minimumDate={new Date()}
+                                    minimumDate={addMinutesToDate(new Date(), MINUTES_OFFSET)}
                                 />
                             </View>
                         </View>
