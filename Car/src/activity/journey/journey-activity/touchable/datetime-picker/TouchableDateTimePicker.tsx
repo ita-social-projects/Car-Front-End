@@ -41,7 +41,7 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
                     {"Departure time:"}{" "}
                 </Text>
                 <Text style={TouchableDateTimePickerStyle.dateTimeText}>
-                    {moment(props.date).utc().format("DD.MM; ddd; HH:mm")}
+                    {moment(props.date).format("DD.MM; ddd; HH:mm")}
                 </Text>
                 <View>
                     <Ionicons
