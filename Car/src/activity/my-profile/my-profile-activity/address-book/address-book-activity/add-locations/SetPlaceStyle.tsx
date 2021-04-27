@@ -1,38 +1,30 @@
-import { StyleSheet } from "react-native";
-import Font from "../../../../../../data/fonts/Font";
+import { Dimensions, StyleSheet } from "react-native";
 
 const SetPlaceStyle = StyleSheet.create({
-    globalContainer: {
-        width: "100%",
-        height: "100%"
-    },
-
-    mapContainer: {
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        zIndex: 100
-    },
-
-    map: {
-        flex: 1
-    },
-
     container: {
-        zIndex: 200,
-        flexDirection: "row",
-        borderWidth: 2.3,
-        marginRight: 100,
-        marginLeft: 20,
-        paddingLeft: 100,
-        fontFamily: Font.OpenSans.Regular
+        backgroundColor:"#F2F2F2",
+        paddingTop: 10
     },
 
-    insideText: {
-        marginLeft: 5,
-        fontSize: 17,
-        fontFamily: Font.OpenSans.Regular
+    saveButton: {
+        paddingHorizontal: 16,
+        paddingVertical: 14,
+        top: Dimensions.get("screen").height - 236,
+        left: Dimensions.get("screen").width - 90,
+        position: "absolute",
+        backgroundColor: "#000000",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
     },
+
+    saveButtonSaveText: {
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        fontSize: 16,
+        lineHeight: 20
+    }
+
 });
 
 export default SetPlaceStyle;

@@ -1,9 +1,12 @@
+import WayPoint from "../../../../../../types/WayPoint";
+
 interface SetPlaceProps {
-    disabled: boolean,
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    selectHandle?: (item: any) => void,
-    items: any[],
-    placeHolder: string
+    route: {
+        params: {
+            wayPoint: WayPoint,
+            wayPointId: string
+        }
+    }
 }
 
 export default SetPlaceProps;

@@ -42,13 +42,20 @@ test("renders correctly", async () =>
       <BottomPopup
         enabledInnerScrolling={false}
         initialSnap={1}
+        onCloseEnd={[Function]}
         refForChild={
           Object {
             "current": null,
           }
         }
         renderContent={
-          <View
+          <KeyboardAwareScrollView
+            enableAutomaticScroll={true}
+            enableOnAndroid={true}
+            enableResetScrollToCoords={true}
+            extraHeight={75}
+            extraScrollHeight={0}
+            keyboardOpeningTime={250}
             style={
               Array [
                 Object {
@@ -59,6 +66,7 @@ test("renders correctly", async () =>
                 },
               ]
             }
+            viewIsInsideTabBar={false}
           >
             <View
               style={
@@ -295,7 +303,7 @@ test("renders correctly", async () =>
                 ]
               }
             />
-          </View>
+          </KeyboardAwareScrollView>
         }
         renderHeader={<React.Fragment />}
         snapPoints={

@@ -11,6 +11,7 @@ import NotificationsService from "../../../../api-service/notifications-service/
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/Constants";
 import DM from "../../styles/DM";
+import updateLocale from "../../styles/DTFormat";
 
 const Tabs = createBottomTabNavigator();
 
@@ -27,6 +28,7 @@ const AppTabs = () => {
             "updateUnreadNotificationsNumber",
             setUnreadNotificationsNumber
         );
+        updateLocale();
     });
 
     const tabBarBadge = unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH

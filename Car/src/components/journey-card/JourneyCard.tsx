@@ -70,7 +70,7 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
                                     {moment(new Date(journey?.departureTime ?? ""))
                                         .utc()
-                                        .fromNow()}
+                                        .calendar()}
                                 </Text>
                             </View>
                         </View>

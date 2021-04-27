@@ -33,6 +33,7 @@ const CarTextInput = (props: CarTextInputProps) => {
                                 { color: DM("black") },
                                 props.error && { borderColor: DM("red") }
                             ]}
+                            onEndEditing={props.onEndEditing}
                         />
                     </View>
                     {props.errorText && (

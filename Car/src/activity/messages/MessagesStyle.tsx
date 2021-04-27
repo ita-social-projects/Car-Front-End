@@ -64,6 +64,34 @@ const SimpleMessageStyle = StyleSheet.create({
         padding: 15
     },
 
+    noMessageContainer: {
+        flex: 100,
+        marginTop: 20
+    },
+
+    warningContainer: {
+        flex: 100
+    },
+
+    warningMessageStyle: {
+        textAlign: "center",
+        color: "#414045"
+    },
+
+    noMessageStyle: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 16,
+        fontFamily: "Milliard"
+    },
+
+    noChatImageStyle: {
+        marginTop: 45,
+        width: 396,
+        height: 225,
+        resizeMode: "stretch"
+    },
+
     containerStyle: {
         height: 44,
         borderBottomColor: "transparent",

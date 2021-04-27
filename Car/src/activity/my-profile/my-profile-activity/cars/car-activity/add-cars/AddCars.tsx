@@ -5,8 +5,8 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert,
-    ScrollView
+    ScrollView,
+    Alert
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -27,7 +27,8 @@ import * as navigation from "../../../../../../components/navigation/Navigation"
 import {
     FIRST_ELEMENT_INDEX,
     MAX_PLATE_NUMBER_LENGTH,
-    MIN_PLATE_NUMBER_LENGTH
+    MIN_PLATE_NUMBER_LENGTH,
+    MAX_PHOTO_FILE_SIZE
 } from "../../../../../../constants/Constants";
 import DM from "../../../../../../components/styles/DM";
 
@@ -49,47 +50,23 @@ const AddCars = () => {
             }))
     );
 
-    function showAlert (errorMessage: string) {
-        Alert.alert("Error!", errorMessage, [
-            {
-                text: "Ok"
-            }
-        ]);
-    }
-    function validateFields (): boolean {
-        if (
-            !selectedBrand?.value
-        ) {
-            showAlert("Brand is a required field!");
+    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
 
-            return false;
-        }
-        if (
-            !selectedModel?.value
-        ) {
-            showAlert("Model is a required field!");
-
-            return false;
-        }
-        if (
-            !selectedColor?.value
-        ) {
-            showAlert("Color is a required field!");
-
-            return false;
-        }
+    function validatePlateNumber () : boolean {
         if (
             !plateNumber ||
             plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
             plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
             !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
         ) {
-            showAlert("Plate number is not valid!");
+            setValidPlateNumber(false);
 
             return false;
-        }
+        } else {
+            setValidPlateNumber(true);
 
-        return true;
+            return true;
+        }
     }
 
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
@@ -114,10 +91,23 @@ const AddCars = () => {
         });
     }, []);
 
+    const trySetPhoto = (photo: ImagePickerResponse) => {
+        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
+            setPhoto(photo);
+        } else {
+            Alert.alert("Error!", "File size should not exceed 7MB", [
+                {
+                    text: "Ok"
+                }
+            ]);
+            setPhoto({});
+        }
+    };
+
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
-            if (!response.didCancel) {
-                setPhoto(response);
+            if (!response.didCancel && response.fileSize) {
+                trySetPhoto(response);
             }
         });
     };
@@ -256,7 +246,15 @@ const AddCars = () => {
                     <CarTextInput
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
+                        onEndEditing={()=>validatePlateNumber()}
                     />
+                    {
+                        isValidPlateNumber ? null :
+                            <Text style={{ color: DM("red") }}>
+                                This field must contain 4-10 characters, including numbers, letters, hyphens
+                            </Text>
+                    }
+
                 </View>
                 <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
@@ -271,16 +269,16 @@ const AddCars = () => {
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
-                            !plateNumber ||
-                            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-                            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-                            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+                            !isValidPlateNumber
                         }
-                        style={[AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                        style={ !selectedBrand?.value ||
+                            !selectedModel?.value ||
+                            !selectedColor?.value ||
+                            !isValidPlateNumber ?
+                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("#B8B8B8") }]
+                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
                         onPress={() => {
-                            if (validateFields()) {
-                                saveCarHandle().then(() => navigation.goBack());
-                            }
+                            saveCarHandle().then(() => navigation.goBack());
                         }}
                     >
                         <Text style={[AddCarsStyle.carButtonSaveText, { color: DM("white") }]}>
