@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../../api-service/APIService";
 import JourneyService from "../../api-service/journey-service/JourneyService";
-import Journey from "../../models/Journey";
+import Journey from "../../models/journey/Journey";
 import Stop from "../../models/stop/Stop";
 
 describe("Journey Service test", () => {

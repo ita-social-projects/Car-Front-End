@@ -1,7 +1,7 @@
-import CarViewModel from "./car/CarViewModel";
-import Schedule from "./Schedule";
-import Stop from "./stop/Stop";
-import User from "./user/User";
+import CarViewModel from "../car/CarViewModel";
+import Schedule from "../Schedule";
+import Stop from "../stop/Stop";
+import User from "../user/User";
 
 type Journey = null | {
     id: number;
