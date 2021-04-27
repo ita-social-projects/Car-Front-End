@@ -47,6 +47,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
     const [stops, setStops] = useState<WayPoint[]>([]);
+    const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
     const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
 
     useEffect(() => {
@@ -147,8 +148,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         });
     };
 
-    useEffect(() => console.log(stops), [stops]);
-
     const removeStopByIndex = (stopIndex: number) => {
         let updatedStops = new Array(...stops);
 
@@ -169,18 +168,25 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         navigation.navigate("New Journey Details", {
             from: from,
             to: to,
-            stops: stops.filter(stop => stop.isConfirmed)
+            stops: stops.filter(stop => stop.isConfirmed),
+            routePoints: routePoints
         });
     };
 
     const cantBuildRouteAlert = () => {
         setRouteIsConfirmed(false);
-
         Alert.alert(
             "Error",
             "Cant build route. Please chose another way points",
             [{ text: "Ok" }]
         );
+    };
+
+    const onRouteReadyHandler = (result: {coordinates: LatLng[]}) => {
+        setRoutePoints(result.coordinates);
+        setRouteIsConfirmed(true);
+        mapRef.current?.fitToCoordinates(result.coordinates,
+            { edgePadding: { top: 260, right: 20, left: 20, bottom: 120 } });
     };
 
     return (
@@ -269,7 +275,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         strokeWidth={5}
                         strokeColor="#027ebd"
                         onError={cantBuildRouteAlert}
-                        onReady={() => setRouteIsConfirmed(true)}
+                        onReady={onRouteReadyHandler}
                     />
                 )}
             </MapView>
