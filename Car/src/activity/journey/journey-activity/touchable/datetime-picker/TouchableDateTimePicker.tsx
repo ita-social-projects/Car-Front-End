@@ -3,6 +3,7 @@ import { Text, View, Modal, TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
 import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { MINUTES_OFFSET } from "../../../../../constants/Constants";
 import moment from "moment";
 
 const ZERO = 0;
@@ -12,6 +13,12 @@ interface TouchableDateTimePickerProps {
     // eslint-disable-next-line unused-imports/no-unused-vars
     setDate: (date: Date) => void,
 }
+
+export const addMinutesToDate = (date: Date, minutes: number) => {
+    date.setMinutes(date.getMinutes() + minutes);
+
+    return date;
+};
 
 function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
     const [show, setShow] = useState(false);
@@ -34,7 +41,7 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
                     {"Departure time:"}{" "}
                 </Text>
                 <Text style={TouchableDateTimePickerStyle.dateTimeText}>
-                    {moment(props.date).utc().format("DD.MM; ddd; HH:mm")}
+                    {moment(props.date).format("DD.MM; ddd; HH:mm")}
                 </Text>
                 <View>
                     <Ionicons
@@ -75,7 +82,8 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
                                 <DatePicker
                                     date={props.date}
                                     onDateChange={props.setDate}
-                                    minimumDate={new Date()}
+                                    minimumDate={addMinutesToDate(new Date(), MINUTES_OFFSET)}
+                                    locale={"en"}
                                     is24hourSource={"device"}
                                 />
                             </View>
