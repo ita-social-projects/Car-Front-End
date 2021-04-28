@@ -241,7 +241,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             >
                 {from.isConfirmed && (
                     <Marker
-                        title={"From"}
+                        title={from.text}
                         coordinate={from.coordinates}
                         image={require("../../../../../assets/images/maps-markers/From.png")}
                     />)
@@ -249,7 +249,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {to.isConfirmed && (
                     <Marker
-                        title={"To"}
+                        title={to.text}
                         coordinate={to.coordinates}
                         image={require("../../../../../assets/images/maps-markers/To.png")}
                     />)
@@ -258,7 +258,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 {stops.filter(stop => stop.isConfirmed)
                     .map((stop, index) => (
                         <Marker
-                            title={"Stop"}
+                            title={stop.text}
                             coordinate={stop.coordinates}
                             image={require("../../../../../assets/images/maps-markers/Stop.png")}
                             key={index}
