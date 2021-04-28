@@ -40,6 +40,59 @@ test("renders correctly", async () =>
             }
           }
         />
+        <Component
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          placeholder="Name the chosen address"
+          placeholderTextColor="grey"
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "borderColor": "black",
+                "borderRadius": 0,
+                "borderWidth": 2,
+                "color": "black",
+                "fontSize": 18,
+                "paddingLeft": 15,
+                "paddingRight": 45,
+                "paddingVertical": 6,
+              },
+              Object {
+                "backgroundColor": "white",
+                "top": 10,
+              },
+            ]
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <LocationDropDownPicker
+          isVisible={false}
+          items={
+            Array [
+              Object {
+                "icon": [Function],
+                "label": "Work",
+                "value": 1,
+              },
+              Object {
+                "icon": [Function],
+                "label": "Home",
+                "value": 2,
+              },
+              Object {
+                "icon": [Function],
+                "label": "Other",
+                "value": 3,
+              },
+            ]
+          }
+          onChangeItem={[Function]}
+          onOpen={[Function]}
+          placeholder="Choose the address type and the icon"
+          valueId={0}
+        />
       </View>
       <MapView
         customMapStyle={
@@ -77,6 +130,7 @@ test("renders correctly", async () =>
         }
         onLongPress={[Function]}
         provider="google"
+        showsCompass={false}
         showsUserLocation={true}
         style={
           Object {
