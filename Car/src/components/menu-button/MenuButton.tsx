@@ -58,7 +58,7 @@ const MenuButton = (props: MenuButtonProps) => {
                     {props.isIcon ? (
                         <View style={MenuButtonStyle.container}>
                             <Icon
-                                color={colorIcon}
+                                color={props.disabled ? disabledColor : colorIcon}
                                 name={props.iconName ?? "chevron-right"}
                                 size={30}
                                 style={MenuButtonStyle.Icon}
