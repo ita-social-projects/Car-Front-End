@@ -30,6 +30,7 @@ import Address from "../../../../../models/Address";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
+    numberOfAddedStop: number,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: CreateJourneyProps}): JSX.Element
 }
@@ -71,6 +72,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const scrollViewRef = useRef<ScrollView | null>();
 
     useEffect(() => {
+        CreateJourney.numberOfAddedStop = 0;
+
         LocationService
             .getAll(Number(user?.id))
             .then((res: any) => setSavedLocations(res.data))
@@ -126,6 +129,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, initialWayPoint]);
+        CreateJourney.numberOfAddedStop = ++stops.length;
     };
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
@@ -153,6 +157,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         updatedStops.splice(stopIndex, DELETE_COUNT);
         setStops(updatedStops);
+
+        CreateJourney.numberOfAddedStop = updatedStops.length;
     };
 
     const onCloseIconPressHandler = (stopIndex: number) => {
@@ -295,5 +301,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 };
 
 CreateJourney.addStopPressHandler = () => console.log("Outer Add stop handler");
+CreateJourney.numberOfAddedStop = 0;
 
 export default CreateJourney;
