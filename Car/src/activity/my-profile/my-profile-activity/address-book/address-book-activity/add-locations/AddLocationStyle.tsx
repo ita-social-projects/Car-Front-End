@@ -1,10 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const AddLocationStyle = StyleSheet.create({
-    /* container: {
-        backgroundColor:"#F2F2F2",
-        paddingTop: 10
-    },*/
+
     inputContainer: {
         position:"absolute",
         top: 25,
@@ -15,6 +12,8 @@ const AddLocationStyle = StyleSheet.create({
 
     textInput: {
         color: "black",
+        backgroundColor: "white",
+        top: 10,
         fontSize: 18,
         borderColor: "black",
         borderWidth: 2,

@@ -47,22 +47,18 @@ test("renders correctly", async () =>
           placeholderTextColor="grey"
           rejectResponderTermination={true}
           style={
-            Array [
-              Object {
-                "borderColor": "black",
-                "borderRadius": 0,
-                "borderWidth": 2,
-                "color": "black",
-                "fontSize": 18,
-                "paddingLeft": 15,
-                "paddingRight": 45,
-                "paddingVertical": 6,
-              },
-              Object {
-                "backgroundColor": "white",
-                "top": 10,
-              },
-            ]
+            Object {
+              "backgroundColor": "white",
+              "borderColor": "black",
+              "borderRadius": 0,
+              "borderWidth": 2,
+              "color": "black",
+              "fontSize": 18,
+              "paddingLeft": 15,
+              "paddingRight": 45,
+              "paddingVertical": 6,
+              "top": 10,
+            }
           }
           underlineColorAndroid="transparent"
           value=""

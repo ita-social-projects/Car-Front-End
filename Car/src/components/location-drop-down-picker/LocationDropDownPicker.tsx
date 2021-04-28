@@ -22,24 +22,24 @@ const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
             <DropDownPicker
                 style={LocationDropDownPickerStyle.style}
                 arrowStyle={LocationDropDownPickerStyle.arrow}
-                dropDownStyle={LocationDropDownPickerStyle.dropDownStyle}
-                selectedLabelStyle={LocationDropDownPickerStyle.selectedLabelStyle}
-                itemStyle={LocationDropDownPickerStyle.itemStyle}
-                placeholderStyle={LocationDropDownPickerStyle.staticPlaceholder}
-                labelStyle={LocationDropDownPickerStyle.labelStyle}
-
-                placeholder={props.placeholder}
-                onChangeItem={props.onChangeItem}
-                isVisible={props.isVisible}
-                onOpen={props.onOpen}
-                items={props.items}
-                controller={instance => {
-                    controller.current = instance;
-                }}
                 customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} />)}
                 customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} />)}
                 renderSeperator={() => (<Divider style={LocationDropDownPickerStyle.divider} />)}
-                zIndex={props.zIndex}
+                dropDownStyle={LocationDropDownPickerStyle.dropDownStyle}
+                selectedLabelStyle={LocationDropDownPickerStyle.selectedLabelStyle}
+                itemStyle={LocationDropDownPickerStyle.itemStyle}
+                items={props.items}
+                placeholderStyle={LocationDropDownPickerStyle.staticPlaceholder}
+                placeholder={props.placeholder}
+                labelStyle={LocationDropDownPickerStyle.labelStyle}
+                onChangeItem={props.onChangeItem}
+                isVisible={props.isVisible}
+                onOpen={props.onOpen}
+
+                controller={instance => {
+                    controller.current = instance;
+                }}
+
             />
         </View>
     );

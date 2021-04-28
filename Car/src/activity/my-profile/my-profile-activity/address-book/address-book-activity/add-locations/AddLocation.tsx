@@ -210,12 +210,7 @@ const AddLocation = () => {
                 />
 
                 <TextInput
-                    style={[AddLocationStyle.textInput,
-                        {
-                            backgroundColor: "white",
-                            top: 10,
-                        }]}
-
+                    style={AddLocationStyle.textInput}
                     value={locationName}
                     placeholder={"Name the chosen address"}
                     placeholderTextColor={"grey"}
@@ -231,6 +226,7 @@ const AddLocation = () => {
                         icon: () => <Ionicons name="home-outline" size={25} color="#414045"/> },
                     { label:"Other", value: 3 ,
                         icon: () => <Ionicons name="star-outline" size={25} color="#414045"/> }]}
+
                     placeholder="Choose the address type and the icon"
                     isVisible={isVisibleLocationDropDown}
                     onOpen={() => setIsVisibleLocationDropDown(true)}
@@ -240,7 +236,6 @@ const AddLocation = () => {
                     }}
                     valueId={0}
                 />
-
             </View>
 
             <MapView
@@ -262,7 +257,6 @@ const AddLocation = () => {
                     image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
                     coordinate={markerCoordinates}
                 />
-
             </MapView>
 
             <TouchableOpacity
