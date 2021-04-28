@@ -134,6 +134,11 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
+    const filterRecentAddresses = () =>
+        recentAddresses.filter(address => savedLocations.every(location =>
+            location?.address?.longitude !== address?.longitude &&
+            location?.address?.latitude !== address?.latitude));
+
     const onAddressInputButtonPressHandler = (placeholder: string,
         paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
 
@@ -142,7 +147,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 placeholder: placeholder,
                 paddingLeft: paddingLeft,
                 savedLocations: savedLocations,
-                recentAddresses: recentAddresses,
+                recentAddresses: filterRecentAddresses(),
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
