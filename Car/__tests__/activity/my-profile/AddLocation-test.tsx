@@ -1,11 +1,11 @@
 import React from "react";
 import shallowRenderer from "react-test-renderer/shallow";
-import SetPlace from "../../../src/activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/SetPlace";
+import AddLocation from "../../../src/activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/AddLocation";
 
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<SetPlace />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<AddLocation />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -39,6 +39,55 @@ test("renders correctly", async () =>
               "longitude": 24.025581,
             }
           }
+        />
+        <Component
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          placeholder="Name the chosen address"
+          placeholderTextColor="grey"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "borderColor": "black",
+              "borderRadius": 0,
+              "borderWidth": 2,
+              "color": "black",
+              "fontSize": 18,
+              "paddingLeft": 15,
+              "paddingRight": 45,
+              "paddingVertical": 6,
+              "top": 10,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <LocationDropDownPicker
+          isVisible={false}
+          items={
+            Array [
+              Object {
+                "icon": [Function],
+                "label": "Work",
+                "value": 1,
+              },
+              Object {
+                "icon": [Function],
+                "label": "Home",
+                "value": 2,
+              },
+              Object {
+                "icon": [Function],
+                "label": "Other",
+                "value": 3,
+              },
+            ]
+          }
+          onChangeItem={[Function]}
+          onOpen={[Function]}
+          placeholder="Choose the address type and the icon"
+          valueId={0}
         />
       </View>
       <MapView
@@ -77,6 +126,7 @@ test("renders correctly", async () =>
         }
         onLongPress={[Function]}
         provider="google"
+        showsCompass={false}
         showsUserLocation={true}
         style={
           Object {

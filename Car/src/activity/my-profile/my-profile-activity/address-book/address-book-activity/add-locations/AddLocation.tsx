@@ -1,26 +1,31 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { PermissionsAndroid, Platform, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { PermissionsAndroid, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
 import DM from "../../../../../../components/styles/DM";
 import {
     initialWayPoint,
     THREE_ELEMENT_COLLECTION_LENGTH,
     THIRD_FROM_END_ELEMENT_INDEX,
-    SECOND_FROM_END_ELEMENT_INDEX, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, initialCamera, initialCoordinate
+    SECOND_FROM_END_ELEMENT_INDEX,
+    FIRST_ELEMENT_INDEX,
+    SECOND_ELEMENT_INDEX,
+    initialCamera,
+    initialCoordinate
 } from "../../../../../../constants/Constants";
 
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import AuthContext from "../../../../../../components/auth/AuthContext";
-import LocationService from "../../../../../../../api-service/location-service/LocationService";
 import Geolocation from "@react-native-community/geolocation";
 import APIConfig from "../../../../../../../api-service/APIConfig";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
-import AddressInputPageStyle
-    from "../../../../../journey/journey-activity/create-journey/AddressInputPade/AddressInputPageStyle";
-import SetPlaceStyle from "./SetPlaceStyle";
+
+import AddLocationStyle from "./AddLocationStyle";
+
+import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
+
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const CreateRequestWithAddressToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -33,9 +38,15 @@ const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
         `${coordinates.latitude},${coordinates.longitude}&key=${APIConfig.apiKey}`;
 };
 
-const SetPlace = () => {
+const AddLocation = () => {
 
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
+
+    const [isVisibleLocationDropDown, setIsVisibleLocationDropDown] = useState(false);
+
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    const [selectedLocationType, setSelectedLocationType] =
+        useState<{id: number, name: string}>({ id: NaN, name: "" });
 
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
@@ -51,21 +62,17 @@ const SetPlace = () => {
             text: text
         }));
     };
-    const { user } = useContext(AuthContext);
 
     // eslint-disable-next-line unused-imports/no-unused-vars
     const [location, setLocation] = useState<WayPoint>(initialWayPoint);
 
+    const [locationName, setLocationName] = useState("");
+
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
 
     const mapRef = useRef<MapView | null>(null);
-    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
 
-    useEffect(() => {
-        LocationService
-            .getAll(Number(user?.id))
-            .catch((e: any) => console.log(e));
-    }, []);
+    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
 
     const animateCameraAndMoveMarker = (coordinates: LatLng) => {
         setMarkerCoordinates(coordinates);
@@ -115,6 +122,7 @@ const SetPlace = () => {
                 animateCameraAndMoveMarker(coordinates);
             });
     };
+
     const addressInputOnPressHandler = (data: any) => {
         if (data.geometry) {
             const point = data.geometry.location;
@@ -180,7 +188,7 @@ const SetPlace = () => {
 
     // eslint-disable-next-line unused-imports/no-unused-vars
     const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number) => {
-        navigation.navigate("SetPlace", {
+        navigation.navigate("AddLocation", {
             placeholder: placeholder,
             paddingLeft: paddingLeft,
         });
@@ -188,17 +196,45 @@ const SetPlace = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={AddressInputPageStyle.inputContainer}>
+            <View style={AddLocationStyle.inputContainer}>
                 <AddressInput
-                    onClearIconPress={() => {}}
                     placeholder={"Address"}
                     paddingLeft={90}
                     address={wayPoint.text}
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
+                    onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
                     savedLocations={[]}
                     userLocation={userCoordinates}
                     recentAddresses={[]}
+                />
+
+                <TextInput
+                    style={AddLocationStyle.textInput}
+                    value={locationName}
+                    placeholder={"Name the chosen address"}
+                    placeholderTextColor={"grey"}
+                    onChangeText={(fromInput) => {
+                        setLocationName(fromInput);
+                    }}
+                />
+
+                <LocationDropDownPicker
+                    items={[{ label:"Work", value: 1 ,
+                        icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/> },
+                    { label:"Home", value: 2 ,
+                        icon: () => <Ionicons name="home-outline" size={25} color="#414045"/> },
+                    { label:"Other", value: 3 ,
+                        icon: () => <Ionicons name="star-outline" size={25} color="#414045"/> }]}
+
+                    placeholder="Choose the address type and the icon"
+                    isVisible={isVisibleLocationDropDown}
+                    onOpen={() => setIsVisibleLocationDropDown(true)}
+                    onChangeItem={(item) => {
+                        setSelectedLocationType({ id: item.value, name: item.label });
+                        setIsVisibleLocationDropDown(false);
+                    }}
+                    valueId={0}
                 />
             </View>
 
@@ -210,6 +246,7 @@ const SetPlace = () => {
                 initialCamera={initialCamera}
                 customMapStyle={mapStyle}
                 onLongPress={mapEventHandler}
+                showsCompass={false}
             >
                 <Marker
                     title={"Address"}
@@ -220,16 +257,15 @@ const SetPlace = () => {
                     image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
                     coordinate={markerCoordinates}
                 />
-
             </MapView>
 
             <TouchableOpacity
-                style={[SetPlaceStyle.saveButton,
+                style={[AddLocationStyle.saveButton,
                     { backgroundColor:  wayPoint.isConfirmed ? "black" : "darkgrey" }]}
                 /*onPress={confirmOnPressHandler}*/
                 disabled={!wayPoint.isConfirmed}
             >
-                <Text style={[SetPlaceStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
+                <Text style={[AddLocationStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
                     Save
                 </Text>
             </TouchableOpacity>
@@ -237,4 +273,4 @@ const SetPlace = () => {
     );
 };
 
-export default SetPlace;
+export default AddLocation;
