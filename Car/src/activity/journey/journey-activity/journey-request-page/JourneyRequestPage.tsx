@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Text, TextInput, View, Keyboard } from "react-native";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import Journey from "../../../../../models/Journey";
+import Journey from "../../../../../models/journey/Journey";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import JourneyRequestPageStyle from "./JourneyRequestPageStyle";
 import Moment from "moment";

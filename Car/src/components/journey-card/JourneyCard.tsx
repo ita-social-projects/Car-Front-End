@@ -7,7 +7,7 @@ import moment from "moment";
 import AuthContext from "../auth/AuthContext";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/Constants";
 import DM from "../styles/DM";
-import Journey from "../../../models/Journey";
+import Journey from "../../../models/journey/Journey";
 
 const JourneyCard = (props: {journey?: Journey}) => {
     const journey = props.journey;
@@ -70,7 +70,7 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
                                     {moment(new Date(journey?.departureTime ?? ""))
                                         .utc()
-                                        .fromNow()}
+                                        .calendar()}
                                 </Text>
                             </View>
                         </View>

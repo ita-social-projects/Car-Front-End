@@ -3,7 +3,7 @@ import { FlatList, View } from "react-native";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
 import DM from "../../../../../../components/styles/DM";
 import OkSearchResultStyle from "./OkSearchResultStyle";
-import Journey from "../../../../../../../models/Journey";
+import Journey from "../../../../../../../models/journey/Journey";
 
 const OkSearchResult = (props: {route: {params: {journeys: Journey[]}}}) => {
     const journeys = props.route.params.journeys;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
 import { ScrollView, TextInput, TouchableOpacity, View, Text } from "react-native";
-import TouchableDateTimePicker from "../../touchable/datetime-picker/TouchableDateTimePicker";
+import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datetime-picker/TouchableDateTimePicker";
 import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
 import FreeButtonChoiceAlert from "../../alerts/FreeButtonChoiceAlert";
@@ -15,8 +15,11 @@ import AuthContext from "../../../../../components/auth/AuthContext";
 import {
     DEFAULT_AVAILABLE_SEATS_COUNT,
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX
+    FIRST_ELEMENT_INDEX,
+    MINUTES_OFFSET
 } from "../../../../../constants/Constants";
+import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
+import APIConfig from "../../../../../../api-service/APIConfig";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -35,7 +38,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
-    const [departureTime, setDepartureTime] = useState(new Date());
+    const [departureTime, setDepartureTime] = useState(addMinutesToDate(new Date(), MINUTES_OFFSET));
 
     const [availableSeats, setAvailableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
 
@@ -47,9 +50,25 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 {
                     id: Number(car?.id),
                     name: `${car?.model?.brand?.name} ${car?.model?.name}`
-                })));
+                }
+            )));
         });
     }, []);
+
+    const publishJourneyHandler = async () => {
+        if (APIConfig.URL.endsWith(".net/")) return;
+
+        await JourneyService.add({
+            carId: selectedCar.id,
+            comments: comment,
+            countOfSeats: availableSeats,
+            departureTime: departureTime,
+            isFree: freeButtonStyle === SwitchSelectorStyle.activeButton,
+            isOnOwnCar: ownCarButtonStyle === SwitchSelectorStyle.activeButton,
+            organizerId: Number(user?.id),
+            routePoints: params.routePoints
+        });
+    };
 
     return (
         <ScrollView style={CreateJourneyStyle.container}>
@@ -160,7 +179,10 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             </View>
 
             <View style={CreateJourneyStyle.publishButtonContainer}>
-                <TouchableOpacity style={CreateJourneyStyle.publishButton}>
+                <TouchableOpacity
+                    style={CreateJourneyStyle.publishButton}
+                    onPress={publishJourneyHandler}
+                >
                     <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
                 </TouchableOpacity>
             </View>

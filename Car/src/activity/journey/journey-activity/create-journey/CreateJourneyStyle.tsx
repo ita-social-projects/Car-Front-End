@@ -52,7 +52,8 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     commentsCaption: {
         fontSize: 17,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginBottom: 8
     },
 
     publishButtonContainer: {

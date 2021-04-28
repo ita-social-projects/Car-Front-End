@@ -114,7 +114,7 @@ const Messages = (props: MessagesProps) => {
                                         <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                                         Starts at: {moment(
                                                 new Date(item.journey.departureTime)
-                                            ).format("DD.MM HH:mm")}
+                                            ).utc().format("DD.MM HH:mm")}
                                         </Text>
                                     </View>
                                     <View style={MessagesStyle.iconWrapper}>

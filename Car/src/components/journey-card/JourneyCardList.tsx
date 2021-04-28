@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Journey from "../../../models/Journey";
+import Journey from "../../../models/journey/Journey";
 import JourneyCard from "./JourneyCard";
 
 const JourneyCardList = (props: { journey: any[] }) => {

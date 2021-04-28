@@ -10,7 +10,7 @@ import SearchJourneyMap from "../map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import Journey from "../../../../../models/Journey";
+import Journey from "../../../../../models/journey/Journey";
 import * as navigation from "../../../../components/navigation/Navigation";
 import StopType from "../../../../../models/stop/StopType";
 import {
