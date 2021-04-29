@@ -8,7 +8,8 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Settings navigation={undefined}/>)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Settings navigation={undefined} />))
+        .toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
         refreshControl={
@@ -138,7 +139,7 @@ test("renders correctly", async () =>
       </ScrollView>
       <BottomPopup
         enabledInnerScrolling={false}
-        initialSnap={0}
+        initialSnap={1}
         onCloseEnd={[Function]}
         refForChild={
           Object {
@@ -216,10 +217,19 @@ test("renders correctly", async () =>
         }
         snapPoints={
           Array [
-            0,
             143,
+            0,
           ]
         }
+      />
+      <ConfirmModal
+        cancelText="No, keep it"
+        confirmText="Yes, delete it"
+        disableModal={[Function]}
+        onConfirm={[Function]}
+        subtitle="Are you sure you want to delete your profile photo?"
+        title="ARE YOU SURE?"
+        visible={false}
       />
     </React.Fragment>
   `));

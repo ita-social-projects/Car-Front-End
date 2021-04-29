@@ -61,6 +61,7 @@ export const DELETE_COUNT = 1;
 export const DEFAULT_AVAILABLE_SEATS_COUNT = 4;
 export const MINUTES_OFFSET = 10;
 export const MAX_PHOTO_FILE_SIZE = 7e+6;
+export const USER_STATE_CHANGE_EVENT_NAME = "onUserStateChange";
 
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,

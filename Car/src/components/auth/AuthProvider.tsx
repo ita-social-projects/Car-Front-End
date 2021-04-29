@@ -6,9 +6,16 @@ import * as navigation from "../navigation/Navigation";
 import User from "../../../models/user/User";
 import LoginService from "../../../api-service/login-service/LoginService";
 import AuthContext from "./AuthContext";
+import { EventRegister } from "react-native-event-listeners";
+import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/Constants";
 
 const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);
+
+    const updateUserState = (updatedUser : User) => {
+        setUser(updatedUser);
+        EventRegister.emit(USER_STATE_CHANGE_EVENT_NAME, updatedUser);
+    };
 
     return (
         <AuthContext.Provider
@@ -62,7 +69,7 @@ const AuthProvider = ({ children }: any) => {
                             JSON.stringify(dbUser.data)
                         );
 
-                        setUser(dbUser.data);
+                        updateUserState(dbUser.data);
 
                         navigation.navigate("AppTabs");
                     }
@@ -70,16 +77,16 @@ const AuthProvider = ({ children }: any) => {
 
                 logout: async () => {
                     await AuthManager.signOutAsync();
-                    setUser(null);
+                    updateUserState(null);
                 },
 
                 loadStorageUser: async () => {
                     const storeUser = await AsyncStorage.getItem("user");
 
                     if (storeUser) {
-                        setUser(JSON.parse(storeUser));
+                        updateUserState(JSON.parse(storeUser));
                     } else {
-                        setUser(null);
+                        updateUserState(null);
                     }
                 }
             }}
