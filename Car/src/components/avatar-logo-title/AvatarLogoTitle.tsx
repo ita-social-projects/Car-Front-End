@@ -1,17 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import UserService from "../../../api-service/user-service/UserService";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import AuthContext from "../auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
-import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/Constants";
+import { SINGLE_ELEMENT_COLLECTION_LENGTH, USER_STATE_CHANGE_EVENT_NAME } from "../../constants/Constants";
+import User from "../../../models/user/User";
 import DM from "../styles/DM";
+import { EventRegister } from "react-native-event-listeners";
 
 const AvatarLogoTitle = () => {
-    const [user, setUser] = useState(useContext(AuthContext).user);
+    const [user, setUser] = useState<User>(useContext(AuthContext).user);
 
     useEffect(() => {
-        UserService.getUser(Number(user?.id)).then((res) => setUser(res.data));
+        const changeEvent = EventRegister.addEventListener(
+            USER_STATE_CHANGE_EVENT_NAME,
+            u => setUser(u)
+        );
+
+        return () => {
+            EventRegister.removeEventListener(changeEvent.toString());
+        };
     }, []);
 
     return (
