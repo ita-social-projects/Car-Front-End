@@ -20,6 +20,7 @@ import {
 } from "../../../../../constants/Constants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import APIConfig from "../../../../../../api-service/APIConfig";
+import StopType from "../../../../../../models/stop/StopType";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -66,7 +67,25 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             isFree: freeButtonStyle === SwitchSelectorStyle.activeButton,
             isOnOwnCar: ownCarButtonStyle === SwitchSelectorStyle.activeButton,
             organizerId: Number(user?.id),
-            routePoints: params.routePoints
+            routePoints: params.routePoints,
+            stops: [{ ...params.from, stopType: StopType.Start },
+                ...params.stops.map(stop => ({ ...stop, stopType: StopType.Intermediate })),
+                { ...params.to, stopType: StopType.Finish }]
+                .map((value) => {
+                    return {
+                        address: {
+                            id: 0,
+                            latitude: value.coordinates.latitude,
+                            longitude: value.coordinates.longitude,
+                            city: value.text,
+                            street: ""
+                        },
+                        type: value.stopType,
+                        id: 0,
+                        journeyId: 0,
+                        user: null
+                    };
+                })
         });
     };
 
