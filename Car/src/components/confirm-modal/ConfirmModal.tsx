@@ -28,7 +28,7 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
                                 style={ConfirmModalStyle.confirmButton}
                                 onPress={props.onConfirm}
                             >
-                                <Text style={(ConfirmModalStyle.boldText, ConfirmModalStyle.white)}>
+                                <Text style={[ConfirmModalStyle.boldText, ConfirmModalStyle.white]}>
                                     {props.confirmText}
                                 </Text>
                             </TouchableOpacity>
