@@ -28,7 +28,7 @@ const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses => {
     return addresses.map(address => ({
-        description: address ? `${address.city}, ${address.street}` : "Unnamed location",
+        description: address ? address.name : "Unnamed location",
         geometry: {
             location: {
                 lat: address?.latitude ?? INITIAL_LATITUDE,

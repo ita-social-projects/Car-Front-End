@@ -77,8 +77,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             id: 0,
                             latitude: value.coordinates.latitude,
                             longitude: value.coordinates.longitude,
-                            city: value.text,
-                            street: ""
+                            name: value.text
                         },
                         type: value.stopType,
                         id: 0,

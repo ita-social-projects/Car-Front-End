@@ -89,7 +89,7 @@ const SearchJourney = () => {
     }, []);
 
     const getFullAddress = (stopDto: Stop | undefined | null) =>
-        stopDto?.address?.street + ", " + stopDto?.address?.city;
+        stopDto?.address?.name;
 
     return (
         <View style={SearchJourneyStyle.screenContainer}>

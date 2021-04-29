@@ -83,10 +83,9 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                     borderColor: DM("#FFFFFF")
                                 }]} />
                             <Text style={[JourneyCardStyle.stopsText, { color: DM("#414045") }]}>
-                                {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.street ===
-                                undefined
-                                    ? "Location A"
-                                    : journey?.stops[FIRST_ELEMENT_INDEX]?.address?.street}
+                                {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
+                                    ? journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
+                                    : "Location A"}
                             </Text>
                         </View>
                         <View style={[JourneyCardStyle.stopStickIcon, { backgroundColor: DM("#AAA9AE") }]} />
@@ -98,10 +97,10 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 }]} />
                             <Text style={[JourneyCardStyle.stopsText, { color: DM("#414045") }]}>
                                 {journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
-                                    ?.address?.street === undefined
+                                    ?.address?.name === undefined
                                     ? "Location B"
                                     : journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
-                                        ?.address?.street}
+                                        ?.address?.name}
                             </Text>
                         </View>
                     </View>

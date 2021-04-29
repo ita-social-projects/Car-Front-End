@@ -69,11 +69,11 @@ export default function AddressBook (props: {navigation: any}) {
                     <ActivityIndicator size={40} color={DM("black")} />
                 ) : locations.length ? (
                     <>
-                        {locations.map((item: any) => {
+                        {locations.map((item: Location) => {
                             return (
-                                <View key={item.id}>
+                                <View key={item?.id}>
                                     <TouchableNavigationCard
-                                        carId={item.id}
+                                        carId={item?.id}
                                         navigationName="EditAddress"
                                         cardName="Edit a Address"
                                         picture={
@@ -89,12 +89,10 @@ export default function AddressBook (props: {navigation: any}) {
                                         }
                                     >
                                         <Text style={[AddressBookStyle.name, { color: DM("black") }]}>
-                                            {item.name}
+                                            {item?.name}
                                         </Text>
                                         <Text style={[AddressBookStyle.address, { color: DM("#414045") }]}>
-                                            {item.address?.street +
-                                                ", " +
-                                                item.address?.city}
+                                            {item?.address?.name}
                                         </Text>
                                     </TouchableNavigationCard>
                                 </View>
