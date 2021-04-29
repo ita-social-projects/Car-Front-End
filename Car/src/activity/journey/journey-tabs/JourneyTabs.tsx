@@ -31,7 +31,9 @@ import {
     MIN_POPUP_HEIGHT,
     MIN_POPUP_POSITION,
     SLEEP_DURATION,
-    ZERO_OPACITY
+    ZERO_OPACITY,
+    animateOpacity,
+    sleep
 } from "../../../constants/Constants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
@@ -48,37 +50,16 @@ const JourneyTabs = () => {
 
     const StackTabs = createStackNavigator();
 
-    const sleep = (milliseconds: number) =>
-        new Promise(resolve => setTimeout(resolve, milliseconds));
-
     const fadeIn = () => {
         setVisibility(true);
 
-        Animated.timing(layoutOpacity, {
-            toValue: HALF_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
-
-        Animated.timing(journeyOpacity, {
-            toValue: HALF_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
+        animateOpacity(layoutOpacity, HALF_OPACITY, ANIMATION_DURATION);
+        animateOpacity(journeyOpacity, HALF_OPACITY, ANIMATION_DURATION);
     };
 
     const fadeOut = () => {
-        Animated.timing(layoutOpacity, {
-            toValue: ZERO_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
-
-        Animated.timing(journeyOpacity, {
-            toValue: MAX_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
+        animateOpacity(layoutOpacity, ZERO_OPACITY, ANIMATION_DURATION);
+        animateOpacity(journeyOpacity, MAX_OPACITY, ANIMATION_DURATION);
     };
 
     const closeHandle = () => {
