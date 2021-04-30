@@ -151,8 +151,8 @@ const SearchJourney = () => {
                                     setMapOpen(SHOWN_MAP_Z_INDEX);
                                 }}
                             />
-                            {locations.map((item: any) => (
-                                <View key={item.id}>
+                            {locations.map((item: Location) => (
+                                <View key={item?.id}>
                                     <TouchableCard
                                         cardName={item?.name}
                                         iconName={
@@ -161,25 +161,13 @@ const SearchJourney = () => {
                                                     : "location"
                                         }
                                         angle="0"
-                                        address={
-                                                item.address?.street +
-                                                ", " +
-                                                item.address?.city
-                                        }
+                                        address={item?.address?.name}
                                         addressFontColor={DM("#909095")}
                                         onPress={() => {
-                                            setFromDirection(
-                                                    item.address?.street +
-                                                        ", " +
-                                                        item.address?.city
-                                            );
+                                            setFromDirection(item?.address?.name ?? "");
                                             setOpen(true);
-                                            setLongitude(
-                                                    item.address?.longitude
-                                            );
-                                            setLatitude(
-                                                    item.address?.latitude
-                                            );
+                                            setLongitude(item?.address?.longitude);
+                                            setLatitude(item?.address?.latitude);
                                         }}
                                         iconColor={DM("#414045")}
                                         size={25}
