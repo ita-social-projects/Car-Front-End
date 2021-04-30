@@ -1,9 +1,30 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-const SetPlaceStyle = StyleSheet.create({
-    container: {
-        backgroundColor:"#F2F2F2",
-        paddingTop: 10
+const AddLocationStyle = StyleSheet.create({
+
+    inputContainer: {
+        position:"absolute",
+        top: 25,
+        left: 10,
+        right: 10,
+        zIndex: 1,
+    },
+
+    textInput: {
+        color: "black",
+        backgroundColor: "white",
+        top: 10,
+        fontSize: 18,
+        borderColor: "black",
+        borderWidth: 2,
+        borderRadius: 0,
+        paddingLeft: 15,
+        paddingRight: 45,
+        paddingVertical: 6,
+    },
+
+    dropDownPicker: {
+        marginBottom: 16
     },
 
     saveButton: {
@@ -27,4 +48,4 @@ const SetPlaceStyle = StyleSheet.create({
 
 });
 
-export default SetPlaceStyle;
+export default AddLocationStyle;

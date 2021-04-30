@@ -17,7 +17,7 @@ export default function AddressBook (props: {navigation: any}) {
         <View>
             <TouchableNavigationCard
                 navigation={props.navigation}
-                navigationName="SetPlace"
+                navigationName="AddLocation"
                 cardName="Add a Address"
                 picture={
                     <Ionicons
@@ -73,8 +73,9 @@ export default function AddressBook (props: {navigation: any}) {
                             return (
                                 <View key={item?.id}>
                                     <TouchableNavigationCard
+                                        navigation={props.navigation}
                                         carId={item?.id}
-                                        navigationName="EditAddress"
+                                        navigationName="EditLocation"
                                         cardName="Edit a Address"
                                         picture={
                                             <Ionicons

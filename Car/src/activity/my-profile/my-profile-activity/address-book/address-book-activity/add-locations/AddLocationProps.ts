@@ -1,6 +1,6 @@
 import WayPoint from "../../../../../../types/WayPoint";
 
-interface SetPlaceProps {
+interface AddLocationProps {
     route: {
         params: {
             wayPoint: WayPoint,
@@ -9,4 +9,4 @@ interface SetPlaceProps {
     }
 }
 
-export default SetPlaceProps;
+export default AddLocationProps;

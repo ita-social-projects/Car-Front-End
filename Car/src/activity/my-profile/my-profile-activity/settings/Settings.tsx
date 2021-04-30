@@ -9,7 +9,6 @@ import UserService from "../../../../../api-service/user-service/UserService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BottomSheet } from "react-native-elements";
-import RNRestart from "react-native-restart";
 import {
     ANIMATION_DURATION,
     FIRST_ELEMENT_INDEX,
@@ -23,6 +22,7 @@ import {
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 import User from "../../../../../models/user/User";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 
 const Settings = (props: {navigation: any}) => {
 
@@ -30,13 +30,14 @@ const Settings = (props: {navigation: any}) => {
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
     const [isRefreshing, setRefreshing] = useState(false);
-
-    const { Popup } = require("popup-ui");
+    const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
 
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
     const loadUser = () =>
         UserService.getUser(user!.id).then((res) => setUser(res.data));
+
+    const { loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
         loadUser();
@@ -81,7 +82,7 @@ const Settings = (props: {navigation: any}) => {
         }
 
         moreOptionsRef?.current?.snapTo(
-            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
+            isOpen ? MIN_POPUP_POSITION : MAX_POPUP_POSITION
         );
     };
 
@@ -94,7 +95,6 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const saveUser = async (photo: ImagePickerResponse) => {
-
         const updatedUser = new FormData();
 
         updatedUser.append("id", user?.id);
@@ -107,41 +107,105 @@ const Settings = (props: {navigation: any}) => {
             });
         }
 
-        await UserService.updateUser(updatedUser).then((response) => {
-            console.log(response.status + " " + response.data);
-
-            UserService.getUser(user!.id).then((res) =>
-                AsyncStorage.setItem("user", JSON.stringify(res.data)));
+        await UserService.updateUser(updatedUser);
+        await UserService.getUser(user!.id).then((res) => {
+            AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
 
-        if (photo === null || photo === undefined) {
-            Popup.show({
-                type: "Success",
-                title: "Delete complete!",
-                button: true,
-                textBody: "Your photo has been successfully deleted",
-                buttonText: "Back to App",
-                callback: () => {
-                    Popup.hide();
-                    RNRestart.Restart();
-                }
-            });
-        } else {
-            Popup.show({
-                type: "Success",
-                title: "Upload complete!",
-                button: true,
-                textBody: "Your photo has been successfully updated",
-                buttonText: "Back to App",
-                callback: () => {
-                    Popup.hide();
-                    RNRestart.Restart();
-                }
-            });
-        }
+        await AsyncStorage.getItem("user").then((res) => {
+            const newUser = JSON.parse(res!);
+
+            setUser(newUser);
+            loadStorageUser();
+        });
     };
 
     const moreOptionsRef = useRef<BottomSheet>(null) as any;
+
+    // Changing snapPoits to bigger values(adding photo case) causes in-library issue.
+    // Next useEffect and if statement in renderBottomPopup added to fix next issue:
+    // https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/230
+
+    useEffect(() => {
+        setBottomPopupShown(true);
+    }, [user?.imageId]);
+
+    const [isBottomPopupShown, setBottomPopupShown] = useState(true);
+
+    const renderBottomPopup = () => {
+        if (isBottomPopupShown) {
+            return (
+                <BottomPopup
+                    snapPoints={[
+                        user?.imageId != null ? POPUP_HEIGHT_WITH_USER_IMAGE
+                            : POPUP_HEIGHT_WITHOUT_USER_IMAGE,
+                        MIN_POPUP_HEIGHT
+                    ]}
+                    refForChild={moreOptionsRef}
+                    renderContent={
+
+                        <View style={{ backgroundColor: DM("#FFFFFF") }}>
+                            {user?.imageId == null ? (
+
+                                <TouchableOpacity
+                                    style={SettingsStyle.moreOptionsButton}
+                                    onPress={() => {
+                                        pressHandle();
+                                        (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
+                                        setBottomPopupShown(false);
+                                    }}>
+                                    <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
+                                    Add photo
+                                    </Text>
+                                </TouchableOpacity>
+
+                            ) : (
+
+                                <>
+                                    <TouchableOpacity
+                                        style={SettingsStyle.moreOptionsButton}
+                                        onPress={() => {
+                                            pressHandle();
+                                            (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
+                                        }}>
+                                        <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
+                                        Change photo
+                                        </Text>
+                                    </TouchableOpacity>
+
+                                    <View style={[SettingsStyle.sepataror,
+                                        { backgroundColor: DM(Platform.OS === "ios" ? "#888888" : "#C1C1C5") }
+                                    ]} />
+
+                                    <TouchableOpacity
+                                        style={SettingsStyle.moreOptionsButton}
+                                        onPress={() => {
+                                            pressHandle();
+                                            (async () => sleep(SLEEP_DURATION))()
+                                                .then(() => setDeleteModalVisible(true));
+                                        }}>
+                                        <Text style={[SettingsStyle.deleteAvatarText, { color: DM("#EC6400") }]}>
+                                        Delete photo
+                                        </Text>
+                                    </TouchableOpacity>
+                                </>
+                            )}
+                        </View>
+                    }
+                    initialSnap={MIN_POPUP_POSITION}
+                    renderHeader={
+                        <View style={{ backgroundColor: DM("#FFFFFF") }}>
+                            <Text style={[SettingsStyle.moreOptionsHeader, { color: DM("black") }]}>
+                            Edit Profile
+                            </Text>
+                        </View>}
+                    enabledInnerScrolling={false}
+                    onCloseEnd={closeHandle}
+                />);
+        } else {
+            return null;
+        }
+    };
 
     return (
         <>
@@ -195,68 +259,18 @@ const Settings = (props: {navigation: any}) => {
                         style={isVisible && [SettingsStyle.layout, { opacity, backgroundColor: DM("#000000") }]} />
                 </View>
             </ScrollView>
-            <BottomPopup
-                snapPoints={[
-                    MIN_POPUP_HEIGHT,
-                    user?.imageId != null ? POPUP_HEIGHT_WITH_USER_IMAGE : POPUP_HEIGHT_WITHOUT_USER_IMAGE]}
-                refForChild={moreOptionsRef}
-                renderContent={
-
-                    <View style={{ backgroundColor: DM("#FFFFFF") }}>
-                        {user?.imageId == null ? (
-
-                            <TouchableOpacity
-                                style={SettingsStyle.moreOptionsButton}
-                                onPress={() => {
-                                    pressHandle();
-                                    (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
-                                }}>
-                                <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
-                                    Add photo
-                                </Text>
-                            </TouchableOpacity>
-
-                        ) : (
-
-                            <>
-                                <TouchableOpacity
-                                    style={SettingsStyle.moreOptionsButton}
-                                    onPress={() => {
-                                        pressHandle();
-                                        (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
-                                    }}>
-                                    <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
-                                        Change photo
-                                    </Text>
-                                </TouchableOpacity>
-
-                                <View style={[SettingsStyle.sepataror,
-                                    { backgroundColor: DM(Platform.OS === "ios" ? "#888888" : "#C1C1C5") }
-                                ]} />
-
-                                <TouchableOpacity
-                                    style={SettingsStyle.moreOptionsButton}
-                                    onPress={() => {
-                                        saveUser(null as unknown as ImagePickerResponse);
-                                        pressHandle();
-                                    }}>
-                                    <Text style={[SettingsStyle.deleteAvatarText, { color: DM("#EC6400") }]}>
-                                        Delete photo
-                                    </Text>
-                                </TouchableOpacity>
-                            </>
-                        )}
-                    </View>
-                }
-                initialSnap={0}
-                renderHeader={
-                    <View style={{ backgroundColor: DM("#FFFFFF") }}>
-                        <Text style={[SettingsStyle.moreOptionsHeader, { color: DM("black") }]}>
-                            Edit Profile
-                        </Text>
-                    </View>}
-                enabledInnerScrolling={false}
-                onCloseEnd={closeHandle}
+            { renderBottomPopup() }
+            <ConfirmModal
+                visible={isDeleteModalVisible}
+                title="ARE YOU SURE?"
+                subtitle="Are you sure you want to delete your profile photo?"
+                confirmText="Yes, delete it"
+                cancelText="No, keep it"
+                onConfirm={() => {
+                    saveUser(null as unknown as ImagePickerResponse);
+                    setDeleteModalVisible(false);
+                }}
+                disableModal={() => setDeleteModalVisible(false)}
             />
         </>
     );

@@ -10,7 +10,7 @@ import DM from "../../../../../components/styles/DM";
 import HeaderRemoveCarButton from "../../../../../components/header-remove-car-button/HeaderRemoveCarButton";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../../components/navigation/Navigation";
-import { MODAL_SLEEP_DURATION } from "../../../../../constants/Constants";
+import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/Constants";
 
 const StackTabs = createStackNavigator();
 
@@ -19,9 +19,6 @@ const CarTabs = () => {
     const pressHandler = () => {
         setModalVisibility(true);
     };
-
-    const sleep = (milliseconds: number) =>
-        new Promise(resolve => setTimeout(resolve, milliseconds));
 
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
