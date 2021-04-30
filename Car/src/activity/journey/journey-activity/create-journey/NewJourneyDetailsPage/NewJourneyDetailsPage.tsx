@@ -21,6 +21,7 @@ import {
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import APIConfig from "../../../../../../api-service/APIConfig";
 import StopType from "../../../../../../models/stop/StopType";
+import * as navigation from "../../../../../components/navigation/Navigation";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -85,7 +86,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                         user: null
                     };
                 })
-        });
+        }).then(() => navigation.navigate("Journey"));
     };
 
     return (
