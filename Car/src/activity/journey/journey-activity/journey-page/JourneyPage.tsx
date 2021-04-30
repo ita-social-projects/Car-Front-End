@@ -131,7 +131,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                         )}
                                     </View>
                                     <Text style={{ color: DM("black") }}>
-                                        {item?.address?.city} {item?.address?.street} street
+                                        {item?.address?.name}
                                     </Text>
                                 </View>
                             ) : (

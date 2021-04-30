@@ -29,7 +29,7 @@ import {
     MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION,
+    MIN_POPUP_POSITION, NUMBER_OF_STOPS_LIMIT,
     SLEEP_DURATION,
     ZERO_OPACITY,
     animateOpacity,
@@ -139,13 +139,14 @@ const JourneyTabs = () => {
                                     renderContent={
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                             <MenuButton
-                                                text="Add Stop"
+                                                text={`Add Stop (${CreateJourney.numberOfAddedStop}/7)`}
                                                 isIcon={true}
                                                 iconName={"add-circle-outline"}
                                                 onPress={() => {
                                                     CreateJourney.addStopPressHandler();
                                                     pressHandle();
                                                 }}
+                                                disabled={CreateJourney.numberOfAddedStop === NUMBER_OF_STOPS_LIMIT}
                                             />
                                             <MenuButton text="Change Preferences" isIcon={true} />
                                         </View>

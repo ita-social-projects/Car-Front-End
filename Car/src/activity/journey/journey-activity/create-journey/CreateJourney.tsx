@@ -30,6 +30,7 @@ import Address from "../../../../../models/Address";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
+    numberOfAddedStop: number,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: CreateJourneyProps}): JSX.Element
 }
@@ -71,6 +72,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const scrollViewRef = useRef<ScrollView | null>();
 
     useEffect(() => {
+        CreateJourney.numberOfAddedStop = 0;
+
         LocationService
             .getAll(Number(user?.id))
             .then((res: any) => setSavedLocations(res.data))
@@ -126,9 +129,15 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, initialWayPoint]);
+        CreateJourney.numberOfAddedStop = ++stops.length;
     };
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
+
+    const filterRecentAddresses = () =>
+        recentAddresses.filter(address => savedLocations.every(location =>
+            location?.address?.longitude !== address?.longitude &&
+            location?.address?.latitude !== address?.latitude));
 
     const onAddressInputButtonPressHandler = (placeholder: string,
         paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
@@ -138,7 +147,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 placeholder: placeholder,
                 paddingLeft: paddingLeft,
                 savedLocations: savedLocations,
-                recentAddresses: recentAddresses,
+                recentAddresses: filterRecentAddresses(),
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
@@ -153,6 +162,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         updatedStops.splice(stopIndex, DELETE_COUNT);
         setStops(updatedStops);
+
+        CreateJourney.numberOfAddedStop = updatedStops.length;
     };
 
     const onCloseIconPressHandler = (stopIndex: number) => {
@@ -241,7 +252,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             >
                 {from.isConfirmed && (
                     <Marker
-                        title={"From"}
+                        title={from.text}
                         coordinate={from.coordinates}
                         image={require("../../../../../assets/images/maps-markers/From.png")}
                     />)
@@ -249,7 +260,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {to.isConfirmed && (
                     <Marker
-                        title={"To"}
+                        title={to.text}
                         coordinate={to.coordinates}
                         image={require("../../../../../assets/images/maps-markers/To.png")}
                     />)
@@ -258,7 +269,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 {stops.filter(stop => stop.isConfirmed)
                     .map((stop, index) => (
                         <Marker
-                            title={"Stop"}
+                            title={stop.text}
                             coordinate={stop.coordinates}
                             image={require("../../../../../assets/images/maps-markers/Stop.png")}
                             key={index}
@@ -295,5 +306,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 };
 
 CreateJourney.addStopPressHandler = () => console.log("Outer Add stop handler");
+CreateJourney.numberOfAddedStop = 0;
 
 export default CreateJourney;

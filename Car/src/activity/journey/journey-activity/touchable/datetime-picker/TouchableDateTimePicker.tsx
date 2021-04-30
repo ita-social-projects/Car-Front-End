@@ -24,7 +24,7 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
     const [show, setShow] = useState(false);
 
     const onResetPress = () => {
-        props.setDate(new Date());
+        props.setDate(addMinutesToDate(new Date(), MINUTES_OFFSET));
         setShow(false);
     };
 
