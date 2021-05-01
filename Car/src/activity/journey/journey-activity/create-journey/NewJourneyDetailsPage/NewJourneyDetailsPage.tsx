@@ -179,7 +179,11 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 rightButtonText={"Paid"}
             />
 
-            <SeatsInputSpinner value={availableSeats} onChange={seats => setAvailableSeats(seats)}/>
+            <SeatsInputSpinner
+                value={availableSeats}
+                onChange={seats => setAvailableSeats(seats)}
+                title={"Available seats:"}
+            />
 
             <View style={CreateJourneyStyle.commentsView}>
                 <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
