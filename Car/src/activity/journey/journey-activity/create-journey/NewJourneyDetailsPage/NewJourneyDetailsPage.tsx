@@ -57,6 +57,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
         });
     }, []);
 
+    useEffect(() => console.log("route points length - ", params.routePoints.length), []);
+
     const publishJourneyHandler = async () => {
         if (APIConfig.URL.endsWith(".net/")) return;
 
@@ -68,7 +70,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             isFree: freeButtonStyle === SwitchSelectorStyle.activeButton,
             isOnOwnCar: ownCarButtonStyle === SwitchSelectorStyle.activeButton,
             organizerId: Number(user?.id),
-            routePoints: params.routePoints,
+            journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: [{ ...params.from, stopType: StopType.Start },
                 ...params.stops.map(stop => ({ ...stop, stopType: StopType.Intermediate })),
                 { ...params.to, stopType: StopType.Finish }]
