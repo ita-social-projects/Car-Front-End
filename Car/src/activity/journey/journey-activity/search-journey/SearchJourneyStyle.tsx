@@ -81,7 +81,13 @@ const SearchJourneyStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 16,
         lineHeight: 20
-    }
+    },
+
+    buttonContainer: {
+        flex: 1,
+        alignItems: "flex-end",
+        flexDirection: "row-reverse",
+    },
 });
 
 export default SearchJourneyStyle;

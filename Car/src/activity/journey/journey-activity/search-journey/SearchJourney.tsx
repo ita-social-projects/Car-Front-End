@@ -17,7 +17,7 @@ import {
     EMPTY_COLLECTION_LENGTH,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
-    DEFAULT_AVAILABLE_SEATS_COUNT,
+    INITIAL_PASSENGERS_COUNT,
     initialWayPoint,
     initialCoordinate,
 } from "../../../../constants/Constants";
@@ -55,21 +55,11 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     // eslint-disable-next-line unused-imports/no-unused-vars
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
-    const [userCoordinates, setUserCoordinates] = useState<LatLng>(
-        initialCoordinate
-    );
-    const [availableSeats, setAvailableSeats] = useState(
-        DEFAULT_AVAILABLE_SEATS_COUNT
-    );
-    const [allButtonStyle, setAllButtonStyle] = useState(
-        SwitchSelectorStyle.activeButton
-    );
-    const [freeButtonStyle, setFreeButtonStyle] = useState(
-        SwitchSelectorStyle.activeButton
-    );
-    const [paidButtonStyle, setPaidButtonStyle] = useState(
-        SwitchSelectorStyle.inactiveButton
-    );
+    const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
+    const [availableSeats, setAvailableSeats] = useState(INITIAL_PASSENGERS_COUNT);
+    const [allButtonStyle, setAllButtonStyle] = useState(SwitchSelectorStyle.activeButton);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     useEffect(() => {
         LocationService.getAll(Number(user?.id))
@@ -298,6 +288,14 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         setHasLuggage(value);
                     }}
                 />
+            </View>
+            <View style={SearchJourneyStyle.buttonContainer}>
+                <TouchableOpacity
+                    style={CreateJourneyStyle.publishButton}
+                    onPress={() => {}}
+                >
+                    <Text style={CreateJourneyStyle.publishButtonText}>Search</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
