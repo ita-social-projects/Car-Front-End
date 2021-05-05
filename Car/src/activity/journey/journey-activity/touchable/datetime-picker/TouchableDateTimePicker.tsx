@@ -10,6 +10,8 @@ const ZERO = 0;
 
 interface TouchableDateTimePickerProps {
     date: Date,
+    isConfirmed: boolean,
+    setIsConfirmedToTrue: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     setDate: (date: Date) => void,
 }
@@ -30,6 +32,7 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
 
     const onDonePress = () => {
         setShow(false);
+        props.setIsConfirmedToTrue();
     };
 
     return (
@@ -40,7 +43,8 @@ function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
                 <Text style={TouchableDateTimePickerStyle.descriptionText}>
                     {"Departure time:"}{" "}
                 </Text>
-                <Text style={TouchableDateTimePickerStyle.dateTimeText}>
+                <Text style={[TouchableDateTimePickerStyle.dateTimeText,
+                    { color: props.isConfirmed ? "black" : "#909095" }]}>
                     {moment(props.date).format("DD.MM; ddd; HH:mm")}
                 </Text>
                 <View>
