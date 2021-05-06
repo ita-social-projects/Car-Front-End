@@ -59,6 +59,9 @@ export const LEFT_PADDING_FOR_TO_PLACEHOLDER = 45;
 export const LEFT_PADDING_FOR_VIA_PLACEHOLDER = 50;
 export const DELETE_COUNT = 1;
 
+export const MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER = 2;
+export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
+
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,
     longitude: INITIAL_LONGITUDE
