@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import JourneyPageStyle from "./JourneyPageStyle";
-import Journey from "../../../../../models/Journey";
+import Journey from "../../../../../models/journey/Journey";
 import { LinearTextGradient } from "react-native-text-gradient";
 import { Divider } from "react-native-elements";
 import Moment from "moment";
@@ -131,7 +131,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                         )}
                                     </View>
                                     <Text style={{ color: DM("black") }}>
-                                        {item?.address?.city} {item?.address?.street} street
+                                        {item?.address?.name}
                                     </Text>
                                 </View>
                             ) : (
@@ -259,13 +259,16 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                             borderColor: DM("black") }
                                         ]}
                                         onPress={() =>
-                                            navigation.navigate("Chat", {
-                                                chatId: currentJourney?.id,
-                                                header:
-                                                        currentJourney?.organizer?.name +
-                                                        " " +
-                                                        currentJourney?.organizer?.surname +
-                                                        "'s ride"
+                                            navigation.navigate("MessagesTabs", {
+                                                screen: "Chat",
+                                                params: {
+                                                    chatId: currentJourney?.id,
+                                                    header:
+                                                            currentJourney?.organizer?.name +
+                                                            " " +
+                                                            currentJourney?.organizer?.surname +
+                                                            "'s ride"
+                                                }
                                             })
                                         }
                                     >

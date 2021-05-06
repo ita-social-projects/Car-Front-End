@@ -6,7 +6,7 @@ export const SeatsInputSpinnerStyle = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginRight: 20,
-        marginTop: 16
+        marginTop: 24
     },
 
     spinnerContainer: {
@@ -23,6 +23,7 @@ export const SeatsInputSpinnerStyle = StyleSheet.create({
 
     input: {
         borderLeftWidth: 2,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        paddingHorizontal: 15
     }
 });

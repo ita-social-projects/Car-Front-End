@@ -10,6 +10,7 @@ const MenuButton = (props: MenuButtonProps) => {
 
     const black = DM("#000000");
     const white = DM("#FFFFFF");
+    const disabledColor = DM("#B8B8B8");
 
     const [colorButton, setColorButton] = useState(white);
     const [colorText, setColorText] = useState(black);
@@ -39,6 +40,7 @@ const MenuButton = (props: MenuButtonProps) => {
             onPressIn={changeColorToBlack.bind(this)}
             onPressOut={changeColorToWhite.bind(this)}
             onPress={props.onPress}
+            disabled={props.disabled}
         >
             <View>
                 <View style={MenuButtonStyle.wrapper}>
@@ -47,7 +49,7 @@ const MenuButton = (props: MenuButtonProps) => {
                             style={[
                                 MenuButtonStyle.panelButtonTitle,
                                 { color: DM("black") },
-                                { color: colorText }
+                                { color: props.disabled ? disabledColor : colorText }
                             ]}
                         >
                             {props.text}
@@ -56,8 +58,8 @@ const MenuButton = (props: MenuButtonProps) => {
                     {props.isIcon ? (
                         <View style={MenuButtonStyle.container}>
                             <Icon
-                                color={colorIcon}
-                                name="chevron-right"
+                                color={props.disabled ? disabledColor : colorIcon}
+                                name={props.iconName ?? "chevron-right"}
                                 size={30}
                                 style={MenuButtonStyle.Icon}
                             />

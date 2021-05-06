@@ -10,17 +10,18 @@ import SearchJourneyMap from "../map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import Journey from "../../../../../models/Journey";
+import Journey from "../../../../../models/journey/Journey";
 import * as navigation from "../../../../components/navigation/Navigation";
 import StopType from "../../../../../models/stop/StopType";
+import DM from "../../../../components/styles/DM";
 import {
+    EMPTY_COLLECTION_LENGTH,
     HIDDEN_MAP_Z_INDEX,
-    SHOWN_MAP_Z_INDEX,
     INITIAL_LATITUDE,
     INITIAL_LONGITUDE,
+    SHOWN_MAP_Z_INDEX,
     SINGLE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../constants/Constants";
-import DM from "../../../../components/styles/DM";
 
 const SearchJourney = () => {
     const { user } = useContext(AuthContext);
@@ -38,17 +39,17 @@ const SearchJourney = () => {
 
     useEffect(() => {
         // eslint-disable-next-line no-magic-numbers
-        JourneyService.getJourney(1).then((res1) => {
+        JourneyService.getJourney(9).then((res1) => {
             // eslint-disable-next-line no-magic-numbers
-            JourneyService.getJourney(2).then((res2) => {
+            JourneyService.getJourney(12).then((res2) => {
                 // eslint-disable-next-line no-magic-numbers
-                JourneyService.getJourney(3).then((res3) => {
+                JourneyService.getJourney(13).then((res3) => {
                     // eslint-disable-next-line no-magic-numbers
-                    JourneyService.getJourney(5).then((res4) => {
+                    JourneyService.getJourney(20).then((res4) => {
                         // eslint-disable-next-line no-magic-numbers
-                        JourneyService.getJourney(7).then((res5) => {
+                        JourneyService.getJourney(25).then((res5) => {
                             // eslint-disable-next-line no-magic-numbers
-                            JourneyService.getJourney(8).then((res6) => {
+                            JourneyService.getJourney(7).then((res6) => {
                                 setJourneys([
                                     res1.data,
                                     res2.data,
@@ -56,11 +57,6 @@ const SearchJourney = () => {
                                     res4.data,
                                     res5.data,
                                     res6.data,
-                                    res1.data,
-                                    res2.data,
-                                    res3.data,
-                                    res4.data,
-                                    res5.data
                                 ]);
                                 setIsLoading(false);
                             });
@@ -81,15 +77,12 @@ const SearchJourney = () => {
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res: any) => {
-                setStop(res.data);
+            .then((res) => {
+                setStop(res.data.filter(array => array.length !== EMPTY_COLLECTION_LENGTH));
                 setLoading(false);
             })
             .catch((e: any) => console.log(e));
     }, []);
-
-    const getFullAddress = (stopDto: Stop | undefined | null) =>
-        stopDto?.address?.street + ", " + stopDto?.address?.city;
 
     return (
         <View style={SearchJourneyStyle.screenContainer}>
@@ -100,7 +93,7 @@ const SearchJourney = () => {
                     latitude={latitude ?? INITIAL_LATITUDE}
                     longitude={longitude ?? INITIAL_LONGITUDE}
                 />
-                <TouchableOpacity style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]} >
+                <TouchableOpacity style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]}>
                     <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                         Confirm
                     </Text>
@@ -147,39 +140,25 @@ const SearchJourney = () => {
                                 addressFontColor={DM("black")}
                                 iconColor={DM("#414045")}
                                 size={25}
-                                onPress={() => {
-                                    setMapOpen(SHOWN_MAP_Z_INDEX);
-                                }}
+                                onPress={() => setMapOpen(SHOWN_MAP_Z_INDEX)}
                             />
-                            {locations.map((item: any) => (
-                                <View key={item.id}>
+                            {locations.map((item: Location) => (
+                                <View key={item?.id}>
                                     <TouchableCard
                                         cardName={item?.name}
                                         iconName={
-                                                item?.type?.name
-                                                    ? item?.type?.name
-                                                    : "location"
+                                            item?.type?.name
+                                                ? item?.type?.name
+                                                : "location"
                                         }
                                         angle="0"
-                                        address={
-                                                item.address?.street +
-                                                ", " +
-                                                item.address?.city
-                                        }
+                                        address={item?.address?.name}
                                         addressFontColor={DM("#909095")}
                                         onPress={() => {
-                                            setFromDirection(
-                                                    item.address?.street +
-                                                        ", " +
-                                                        item.address?.city
-                                            );
+                                            setFromDirection(item?.address?.name ?? "");
                                             setOpen(true);
-                                            setLongitude(
-                                                    item.address?.longitude
-                                            );
-                                            setLatitude(
-                                                    item.address?.latitude
-                                            );
+                                            setLongitude(item?.address?.longitude);
+                                            setLatitude(item?.address?.latitude);
                                         }}
                                         iconColor={DM("#414045")}
                                         size={25}
@@ -208,20 +187,10 @@ const SearchJourney = () => {
                         stops?.map((item: any) => (
                             <TouchableCard
                                 key={item.map((i: any) => i?.id)}
-                                cardName={getFullAddress(
-                                    item.find(
-                                        (address: any) =>
-                                            address?.type === StopType.Start
-                                    )
-                                )}
+                                cardName={item.find((address: Stop) => address?.type === StopType.Start).address.name}
                                 iconName="ios-time-outline"
                                 angle="0"
-                                address={getFullAddress(
-                                    item.find(
-                                        (address: any) =>
-                                            address?.type === StopType.Finish
-                                    )
-                                )}
+                                address={item.find((address: Stop) => address?.type === StopType.Finish).address.name}
                                 addressFontColor={DM("#909095")}
                                 iconColor={DM("#909095")}
                                 size={30}

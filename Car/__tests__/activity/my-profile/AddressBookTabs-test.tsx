@@ -39,11 +39,10 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="SetPlace"
+          name="AddLocation"
           options={
             Object {
               "headerLeft": [Function],
-              "headerRight": [Function],
               "headerTitle": "Add Address",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
@@ -60,6 +59,30 @@ test("renders correctly", async () =>
             }
           }
         />
+        <Screen
+          name="EditLocation"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerRight": [Function],
+              "headerTitle": "Edit Address",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "black",
+                },
+              ],
+            }
+          }
+        >
+          [Function]
+        </Screen>
       </StackNavigator>
     </View>
   `));

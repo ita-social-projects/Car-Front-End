@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
@@ -168,7 +168,7 @@ const Messages = (props: MessagesProps) => {
                                             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                                                 Starts at: {moment(
                                                     new Date(item!.journey!.departureTime)
-                                                ).format("DD.MM HH:mm")}
+                                                ).utc().format("DD.MM HH:mm")}
                                             </Text>
                                         }
                                     </View>
@@ -187,6 +187,31 @@ const Messages = (props: MessagesProps) => {
                         </TouchableOpacity>
                     )}
                 />
+                {
+                    filteredDataSource?.length ? (
+                        <View style={MessagesStyle.warningContainer}>
+                            <Text style={MessagesStyle.warningMessageStyle}>
+                                Each chat will be deleted 24 hours after the trip
+                                {"\n"}
+                                departure time
+                            </Text>
+                        </View>
+                    ) : (
+                        <>
+                            <View style={MessagesStyle.noMessageContainer}>
+                                <Text style={MessagesStyle.noMessageStyle}>
+                                    CURRENTLY YOU DO NOT HAVE ANY
+                                    {"\n"}
+                                    CHATS
+                                </Text>
+                                <Image
+                                    style={MessagesStyle.noChatImageStyle}
+                                    source={require("../../../assets/images/chat/no-chats.png")}
+                                />
+                            </View>
+                        </>
+                    )
+                }
             </View>
         </SafeAreaView>
     );

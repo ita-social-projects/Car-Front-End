@@ -17,6 +17,7 @@ const ConfirmModalStyle = StyleSheet.create({
         alignItems: "center",
         borderRadius: 15,
         paddingVertical: 30,
+        paddingHorizontal: 20,
         justifyContent: "space-between"
     },
     boldText: {
@@ -28,7 +29,7 @@ const ConfirmModalStyle = StyleSheet.create({
         color: "white"
     },
     confirmButton: {
-        width: "90%",
+        width: "100%",
         alignItems: "center",
         backgroundColor: "#d80056",
         paddingVertical: 10,

@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Animated, Dimensions } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { LatLng } from "react-native-maps";
 import WayPoint from "../types/WayPoint";
@@ -31,6 +31,7 @@ export const POPUP_HEIGHT_WITH_USER_IMAGE = 188;
 export const POPUP_HEIGHT_WITHOUT_USER_IMAGE = 143;
 export const JOURNEY_MORE_OPTIONS_POPUP_HEIGHT = 280;
 export const CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT = 200;
+export const EDIT_ADDRESS_MORE_OPTIONS_POPUP_HEIGHT = 150;
 export const JOURNEY_CONTENT_HEIGHT = 201 + getStatusBarHeight();
 export const MIN_JOURNEY_PAGE_POPUP_HEIGHT = 0;
 export const MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT = 262 + getStatusBarHeight();
@@ -45,6 +46,7 @@ export const INITIAL_LATITUDE = 49.843844;
 export const INITIAL_LONGITUDE = 24.025581;
 export const REFRESHER_TIMEOUT = 500;
 export const MILLISECONDS_IN_MONTH = 2629800000;
+export const MILLISECONDS_IN_MINUTES = 60000;
 export const HIDDEN_MAP_Z_INDEX = 100;
 export const SHOWN_MAP_Z_INDEX = 200;
 export const HTTP_STATUS_OK = 200;
@@ -58,6 +60,10 @@ export const LEFT_PADDING_FOR_FROM_PLACEHOLDER = 67;
 export const LEFT_PADDING_FOR_TO_PLACEHOLDER = 45;
 export const LEFT_PADDING_FOR_VIA_PLACEHOLDER = 50;
 export const DELETE_COUNT = 1;
+export const DEFAULT_AVAILABLE_SEATS_COUNT = 4;
+export const MINUTES_OFFSET = 10;
+export const MAX_PHOTO_FILE_SIZE = 7e+6;
+export const USER_STATE_CHANGE_EVENT_NAME = "onUserStateChange";
 
 export const MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER = 2;
 export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
@@ -80,3 +86,14 @@ export const initialWayPoint: WayPoint = {
     isConfirmed: false,
     coordinates: { latitude: 0, longitude: 0 }
 };
+
+export const animateOpacity = (layout: Animated.Value, opacity: number, duration: number) : void => {
+    Animated.timing(layout, {
+        toValue: opacity,
+        duration: duration,
+        useNativeDriver: true
+    }).start();
+};
+
+export const sleep = (milliseconds: number) =>
+    new Promise(resolve => setTimeout(resolve, milliseconds));

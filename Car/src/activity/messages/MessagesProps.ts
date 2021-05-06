@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Chat from "../../../models/Chat";
-import Journey from "../../../models/Journey";
+import Journey from "../../../models/journey/Journey";
 
 export interface MessagesProps {
     isOpenFilter: boolean,

@@ -3,45 +3,37 @@ import { Text, View, Modal, TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
 import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { MINUTES_OFFSET } from "../../../../../constants/Constants";
+import moment from "moment";
 
-function TouchableDateTimePicker (props: { iconName: string}) {
-    const [date, setDate] = useState(new Date());
+const ZERO = 0;
+
+interface TouchableDateTimePickerProps {
+    date: Date,
+    isConfirmed: boolean,
+    setIsConfirmedToTrue: () => void,
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    setDate: (date: Date) => void,
+}
+
+export const addMinutesToDate = (date: Date, minutes: number) => {
+    date.setMinutes(date.getMinutes() + minutes);
+
+    return date;
+};
+
+function TouchableDateTimePicker (props: TouchableDateTimePickerProps) {
     const [show, setShow] = useState(false);
-    const MINUS_TWO = -2;
-    const ONE = 1;
-    const ZERO = 0;
-    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    const onCancelPress = () => {
-        setDate(new Date());
+
+    const onResetPress = () => {
+        props.setDate(addMinutesToDate(new Date(), MINUTES_OFFSET));
         setShow(false);
     };
 
     const onDonePress = () => {
         setShow(false);
+        props.setIsConfirmedToTrue();
     };
-
-    function formatDate (dateUTC: any) {
-        let dayOfTheMonth = dateUTC.getDate();
-
-        dayOfTheMonth = ("0" + dayOfTheMonth).slice(MINUS_TWO);
-        let month = dateUTC.getMonth();
-
-        let Month = parseInt(month) + ONE;
-
-        month = ("0" + Month).slice(MINUS_TWO);
-        let dayIndex = dateUTC.getDay();
-
-        let dayName = days[dayIndex];
-
-        let hours = dateUTC.getHours();
-
-        hours = ("0" + hours).slice(MINUS_TWO);
-        let minutes = dateUTC.getMinutes();
-
-        minutes = ("0" + minutes).slice(MINUS_TWO);
-
-        return dayOfTheMonth + "/" + month + "; " + dayName + "; " + hours + ":" + minutes;
-    }
 
     return (
         <View>
@@ -51,8 +43,9 @@ function TouchableDateTimePicker (props: { iconName: string}) {
                 <Text style={TouchableDateTimePickerStyle.descriptionText}>
                     {"Departure time:"}{" "}
                 </Text>
-                <Text style={TouchableDateTimePickerStyle.dateTimeText}>
-                    {formatDate(date)}
+                <Text style={[TouchableDateTimePickerStyle.dateTimeText,
+                    { color: props.isConfirmed ? "black" : "#909095" }]}>
+                    {moment(props.date).format("DD.MM; ddd; HH:mm")}
                 </Text>
                 <View>
                     <Ionicons
@@ -60,7 +53,7 @@ function TouchableDateTimePicker (props: { iconName: string}) {
                             TouchableDateTimePickerStyle.barIcon,
                             { transform: [{ rotate: ZERO + "deg" }] }
                         ]}
-                        name={props?.iconName}
+                        name={"time"}
                         size={25}
                     />
                 </View>
@@ -75,7 +68,7 @@ function TouchableDateTimePicker (props: { iconName: string}) {
                         <View style={TouchableDateTimePickerStyle.modalView}>
                             <View style={TouchableDateTimePickerStyle.btnContainer}>
                                 <TouchableOpacity
-                                    onPress={onCancelPress}
+                                    onPress={onResetPress}
                                     style={TouchableDateTimePickerStyle.btnReset}>
                                     <Text style={TouchableDateTimePickerStyle.btnResetText}>
                                         Reset
@@ -91,9 +84,11 @@ function TouchableDateTimePicker (props: { iconName: string}) {
                             </View>
                             <View style={TouchableDateTimePickerStyle.datePicker}>
                                 <DatePicker
-                                    date={date}
-                                    onDateChange={setDate}
-                                    minimumDate={new Date()}
+                                    date={props.date}
+                                    onDateChange={props.setDate}
+                                    minimumDate={addMinutesToDate(new Date(), MINUTES_OFFSET)}
+                                    locale={"en"}
+                                    is24hourSource={"device"}
                                 />
                             </View>
                         </View>

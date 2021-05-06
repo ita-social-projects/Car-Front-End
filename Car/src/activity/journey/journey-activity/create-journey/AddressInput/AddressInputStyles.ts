@@ -27,10 +27,15 @@ const AddressInputStyles = StyleSheet.create({
     predefinedPlacesDescription: {
         color: "#1faadb",
     },
+    clearIcon: {
+        position: "absolute",
+        top: 5,
+        right: 10
+    },
     marker: {
         position: "absolute",
         top: 8,
-        right: 20
+        right: 15
     }
 });
 

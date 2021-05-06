@@ -30,6 +30,7 @@ import Address from "../../../../../models/Address";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
+    numberOfAddedStop: number,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: CreateJourneyProps}): JSX.Element
 }
@@ -46,8 +47,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
-
     const [stops, setStops] = useState<WayPoint[]>([]);
+    const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
+    const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
 
     useEffect(() => {
         if (params) {
@@ -70,6 +72,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const scrollViewRef = useRef<ScrollView | null>();
 
     useEffect(() => {
+        CreateJourney.numberOfAddedStop = 0;
+
         LocationService
             .getAll(Number(user?.id))
             .then((res: any) => setSavedLocations(res.data))
@@ -124,14 +128,16 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
-        setStops(prevState => [...prevState, {
-            text: "",
-            isConfirmed: false,
-            coordinates: { longitude: 0, latitude: 0 }
-        }]);
+        setStops(prevState => [...prevState, initialWayPoint]);
+        CreateJourney.numberOfAddedStop = ++stops.length;
     };
 
     const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
+
+    const filterRecentAddresses = () =>
+        recentAddresses.filter(address => savedLocations.every(location =>
+            location?.address?.longitude !== address?.longitude &&
+            location?.address?.latitude !== address?.latitude));
 
     const onAddressInputButtonPressHandler = (placeholder: string,
         paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
@@ -141,7 +147,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 placeholder: placeholder,
                 paddingLeft: paddingLeft,
                 savedLocations: savedLocations,
-                recentAddresses: recentAddresses,
+                recentAddresses: filterRecentAddresses(),
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
@@ -151,13 +157,13 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         });
     };
 
-    useEffect(() => console.log(stops), [stops]);
-
     const removeStopByIndex = (stopIndex: number) => {
         let updatedStops = new Array(...stops);
 
         updatedStops.splice(stopIndex, DELETE_COUNT);
         setStops(updatedStops);
+
+        CreateJourney.numberOfAddedStop = updatedStops.length;
     };
 
     const onCloseIconPressHandler = (stopIndex: number) => {
@@ -173,8 +179,25 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         navigation.navigate("New Journey Details", {
             from: from,
             to: to,
-            stops: stops.filter(stop => stop.isConfirmed)
+            stops: stops.filter(stop => stop.isConfirmed),
+            routePoints: routePoints
         });
+    };
+
+    const cantBuildRouteAlert = () => {
+        setRouteIsConfirmed(false);
+        Alert.alert(
+            "Error",
+            "Cant build route. Please chose another way points",
+            [{ text: "Ok" }]
+        );
+    };
+
+    const onRouteReadyHandler = (result: {coordinates: LatLng[]}) => {
+        setRoutePoints(result.coordinates);
+        setRouteIsConfirmed(true);
+        mapRef.current?.fitToCoordinates(result.coordinates,
+            { edgePadding: { top: 260, right: 20, left: 20, bottom: 120 } });
     };
 
     return (
@@ -192,6 +215,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     text={from.text}
                     onPress={() => onAddressInputButtonPressHandler(
                         "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
+                    marginBottom={15}
                 />
 
                 <AddressInputButton
@@ -200,6 +224,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                     text={to.text}
                     onPress={() => onAddressInputButtonPressHandler(
                         "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
+                    marginBottom={15}
                 />
 
                 {stops.map((stop, index) => (
@@ -210,6 +235,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         onPress={() => onAddressInputButtonPressHandler(
                             "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
                         onIconPress={() => onCloseIconPressHandler(index)}
+                        marginBottom={15}
                         key={index}
                     />
                 ))}
@@ -226,7 +252,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             >
                 {from.isConfirmed && (
                     <Marker
-                        title={"From"}
+                        title={from.text}
                         coordinate={from.coordinates}
                         image={require("../../../../../assets/images/maps-markers/From.png")}
                     />)
@@ -234,7 +260,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 {to.isConfirmed && (
                     <Marker
-                        title={"To"}
+                        title={to.text}
                         coordinate={to.coordinates}
                         image={require("../../../../../assets/images/maps-markers/To.png")}
                     />)
@@ -243,7 +269,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 {stops.filter(stop => stop.isConfirmed)
                     .map((stop, index) => (
                         <Marker
-                            title={"Stop"}
+                            title={stop.text}
                             coordinate={stop.coordinates}
                             image={require("../../../../../assets/images/maps-markers/Stop.png")}
                             key={index}
@@ -259,15 +285,17 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         apikey={APIConfig.apiKey}
                         strokeWidth={5}
                         strokeColor="#027ebd"
+                        onError={cantBuildRouteAlert}
+                        onReady={onRouteReadyHandler}
                     />
                 )}
             </MapView>
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  fromAndToIsConfirmed ? "black" : "darkgrey" }]}
+                    { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf" }]}
                 onPress={confirmOnPressHandler}
-                disabled={!fromAndToIsConfirmed}
+                disabled={!routeIsConfirmed}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                     Confirm
@@ -278,5 +306,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 };
 
 CreateJourney.addStopPressHandler = () => console.log("Outer Add stop handler");
+CreateJourney.numberOfAddedStop = 0;
 
 export default CreateJourney;

@@ -29,13 +29,16 @@ import {
     MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION,
+    MIN_POPUP_POSITION, NUMBER_OF_STOPS_LIMIT,
     SLEEP_DURATION,
-    ZERO_OPACITY
+    ZERO_OPACITY,
+    animateOpacity,
+    sleep
 } from "../../../constants/Constants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
 import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";
+import * as navigation from "../../../components/navigation/Navigation";
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
@@ -48,37 +51,16 @@ const JourneyTabs = () => {
 
     const StackTabs = createStackNavigator();
 
-    const sleep = (milliseconds: number) =>
-        new Promise(resolve => setTimeout(resolve, milliseconds));
-
     const fadeIn = () => {
         setVisibility(true);
 
-        Animated.timing(layoutOpacity, {
-            toValue: HALF_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
-
-        Animated.timing(journeyOpacity, {
-            toValue: HALF_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
+        animateOpacity(layoutOpacity, HALF_OPACITY, ANIMATION_DURATION);
+        animateOpacity(journeyOpacity, HALF_OPACITY, ANIMATION_DURATION);
     };
 
     const fadeOut = () => {
-        Animated.timing(layoutOpacity, {
-            toValue: ZERO_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
-
-        Animated.timing(journeyOpacity, {
-            toValue: MAX_OPACITY,
-            duration: ANIMATION_DURATION,
-            useNativeDriver: true
-        }).start();
+        animateOpacity(layoutOpacity, ZERO_OPACITY, ANIMATION_DURATION);
+        animateOpacity(journeyOpacity, MAX_OPACITY, ANIMATION_DURATION);
     };
 
     const closeHandle = () => {
@@ -158,13 +140,21 @@ const JourneyTabs = () => {
                                     renderContent={
                                         <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                             <MenuButton
-                                                text="Add Stop" isIcon={true}
+                                                text={`Add Stop (${CreateJourney.numberOfAddedStop}/7)`}
+                                                isIcon={true}
+                                                iconName={"add-circle-outline"}
                                                 onPress={() => {
                                                     CreateJourney.addStopPressHandler();
                                                     pressHandle();
                                                 }}
+                                                disabled={CreateJourney.numberOfAddedStop === NUMBER_OF_STOPS_LIMIT}
                                             />
-                                            <MenuButton text="Change Preferences" isIcon={true} />
+                                            <MenuButton
+                                                text="Change Preferences"
+                                                isIcon={true}
+                                                onPress={() => navigation.navigate("MyProfileTabs",
+                                                    { screen: "Preferences" })}
+                                            />
                                         </View>
                                     }
                                 />
