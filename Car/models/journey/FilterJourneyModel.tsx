@@ -7,6 +7,6 @@ interface FilterJourneyModel{
     departureTime: Date,
     hasLuggage: boolean,
     feeType: FeeType
-};
+}
 
 export default FilterJourneyModel;

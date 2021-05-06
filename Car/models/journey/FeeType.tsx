@@ -3,6 +3,6 @@ enum FeeType {
     All,
     Free,
     Paid
-};
+}
 
 export default FeeType;
