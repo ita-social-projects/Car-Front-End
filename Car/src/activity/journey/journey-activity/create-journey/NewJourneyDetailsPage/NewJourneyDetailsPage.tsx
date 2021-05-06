@@ -92,7 +92,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             .then(() => {
                 Alert.alert("Ride successfully published");
                 navigation.navigate("Journey");
-            }).catch(() => Alert.alert("Error"));
+            }).catch(() => Alert.alert("Ride publishing is failed"));
     };
 
     return (
