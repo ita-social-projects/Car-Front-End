@@ -39,17 +39,17 @@ const SearchJourney = () => {
 
     useEffect(() => {
         // eslint-disable-next-line no-magic-numbers
-        JourneyService.getJourney(1).then((res1) => {
+        JourneyService.getJourney(9).then((res1) => {
             // eslint-disable-next-line no-magic-numbers
-            JourneyService.getJourney(2).then((res2) => {
+            JourneyService.getJourney(12).then((res2) => {
                 // eslint-disable-next-line no-magic-numbers
-                JourneyService.getJourney(3).then((res3) => {
+                JourneyService.getJourney(13).then((res3) => {
                     // eslint-disable-next-line no-magic-numbers
-                    JourneyService.getJourney(5).then((res4) => {
+                    JourneyService.getJourney(20).then((res4) => {
                         // eslint-disable-next-line no-magic-numbers
-                        JourneyService.getJourney(7).then((res5) => {
+                        JourneyService.getJourney(25).then((res5) => {
                             // eslint-disable-next-line no-magic-numbers
-                            JourneyService.getJourney(8).then((res6) => {
+                            JourneyService.getJourney(7).then((res6) => {
                                 setJourneys([
                                     res1.data,
                                     res2.data,
@@ -57,11 +57,6 @@ const SearchJourney = () => {
                                     res4.data,
                                     res5.data,
                                     res6.data,
-                                    res1.data,
-                                    res2.data,
-                                    res3.data,
-                                    res4.data,
-                                    res5.data
                                 ]);
                                 setIsLoading(false);
                             });
