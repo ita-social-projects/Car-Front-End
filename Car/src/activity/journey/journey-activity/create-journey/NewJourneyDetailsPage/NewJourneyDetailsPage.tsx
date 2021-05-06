@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
-import { ScrollView, TextInput, TouchableOpacity, View, Text } from "react-native";
+import { ScrollView, TextInput, TouchableOpacity, View, Text, Alert } from "react-native";
 import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datetime-picker/TouchableDateTimePicker";
 import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
@@ -19,8 +19,9 @@ import {
     MINUTES_OFFSET
 } from "../../../../../constants/Constants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
-import APIConfig from "../../../../../../api-service/APIConfig";
 import StopType from "../../../../../../models/stop/StopType";
+import * as navigation from "../../../../../components/navigation/Navigation";
+import CreateJourneyModel from "../../../../../../models/journey/CreateJourneyModel";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -40,6 +41,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     const [departureTime, setDepartureTime] = useState(addMinutesToDate(new Date(), MINUTES_OFFSET));
+    const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(false);
 
     const [availableSeats, setAvailableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
 
@@ -57,9 +59,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     }, []);
 
     const publishJourneyHandler = async () => {
-        if (APIConfig.URL.endsWith(".net/")) return;
-
-        await JourneyService.add({
+        const newJourney: CreateJourneyModel = {
             carId: selectedCar.id,
             comments: comment,
             countOfSeats: availableSeats,
@@ -67,7 +67,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             isFree: freeButtonStyle === SwitchSelectorStyle.activeButton,
             isOnOwnCar: ownCarButtonStyle === SwitchSelectorStyle.activeButton,
             organizerId: Number(user?.id),
-            routePoints: params.routePoints,
+            journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: [{ ...params.from, stopType: StopType.Start },
                 ...params.stops.map(stop => ({ ...stop, stopType: StopType.Intermediate })),
                 { ...params.to, stopType: StopType.Finish }]
@@ -85,7 +85,13 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                         userId: Number(user?.Id)
                     };
                 })
-        });
+        };
+
+        await JourneyService.add(newJourney)
+            .then(() => {
+                Alert.alert("Ride successfully published");
+                navigation.navigate("Journey");
+            }).catch(() => Alert.alert("Ride publishing is failed"));
     };
 
     return (
@@ -120,7 +126,15 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 />
             ))}
 
-            <TouchableDateTimePicker date={departureTime} setDate={(d) => setDepartureTime(d)}/>
+            <TouchableDateTimePicker
+                date={departureTime}
+                setDate={(d) => {
+                    setDepartureTime(d);
+                    setDepartureTimeIsConfirmed(true);
+                }}
+                isConfirmed={departureTimeIsConfirmed}
+                setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
+            />
 
             <SwitchSelector
                 leftButtonStyle={ownCarButtonStyle}
@@ -202,8 +216,10 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
             <View style={CreateJourneyStyle.publishButtonContainer}>
                 <TouchableOpacity
-                    style={CreateJourneyStyle.publishButton}
+                    style={[CreateJourneyStyle.publishButton,
+                        { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
                     onPress={publishJourneyHandler}
+                    disabled={!departureTimeIsConfirmed}
                 >
                     <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
                 </TouchableOpacity>

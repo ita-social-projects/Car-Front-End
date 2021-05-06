@@ -38,6 +38,7 @@ import {
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
 import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";
+import * as navigation from "../../../components/navigation/Navigation";
 
 const JourneyTabs = () => {
     const [isOpen, setOpen] = useState(false);
@@ -148,7 +149,12 @@ const JourneyTabs = () => {
                                                 }}
                                                 disabled={CreateJourney.numberOfAddedStop === NUMBER_OF_STOPS_LIMIT}
                                             />
-                                            <MenuButton text="Change Preferences" isIcon={true} />
+                                            <MenuButton
+                                                text="Change Preferences"
+                                                isIcon={true}
+                                                onPress={() => navigation.navigate("MyProfileTabs",
+                                                    { screen: "Preferences" })}
+                                            />
                                         </View>
                                     }
                                 />
