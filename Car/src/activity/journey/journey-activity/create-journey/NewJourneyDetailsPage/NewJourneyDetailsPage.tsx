@@ -16,12 +16,12 @@ import {
     DEFAULT_AVAILABLE_SEATS_COUNT,
     EMPTY_COLLECTION_LENGTH,
     FIRST_ELEMENT_INDEX,
-    MILLISECONDS_IN_MINUTES,
     MINUTES_OFFSET
 } from "../../../../../constants/Constants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import StopType from "../../../../../../models/stop/StopType";
 import * as navigation from "../../../../../components/navigation/Navigation";
+import CreateJourneyModel from "../../../../../../models/journey/CreateJourneyModel";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -58,16 +58,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
         });
     }, []);
 
-    setInterval(() => {
-        const minTime = addMinutesToDate(new Date(), MINUTES_OFFSET);
-
-        if (minTime > departureTime) {
-            setDepartureTime(minTime);
-        }
-    }, MILLISECONDS_IN_MINUTES);
-
     const publishJourneyHandler = async () => {
-        await JourneyService.add({
+        const newJourney: CreateJourneyModel = {
             carId: selectedCar.id,
             comments: comment,
             countOfSeats: availableSeats,
@@ -90,13 +82,17 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                         type: value.stopType,
                         id: 0,
                         journeyId: 0,
-                        user: null
+                        user: null,
+                        userId: Number(user?.id)
                     };
                 })
-        }).then(() => {
-            Alert.alert("Ride successfully published");
-            navigation.navigate("Journey");
-        }).catch(() => Alert.alert("Error"));
+        };
+
+        await JourneyService.add(newJourney)
+            .then(() => {
+                Alert.alert("Ride successfully published");
+                navigation.navigate("Journey");
+            }).catch(() => Alert.alert("Error"));
     };
 
     return (
