@@ -67,7 +67,8 @@ const Messages = (props: MessagesProps) => {
             const data =
                 chat.journey!.organizer!.name.toUpperCase() +
                 " " +
-                chat.journey!.organizer!.surname.toUpperCase();
+                chat.journey!.organizer!.surname.toUpperCase() +
+                "'S RIDE";
             const textData = text.toUpperCase();
 
             return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
