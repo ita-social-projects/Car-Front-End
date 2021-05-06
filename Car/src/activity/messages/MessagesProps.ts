@@ -13,12 +13,11 @@ export interface FilteredChat {
     journey: Journey
 }
 
-export function chatsArrToFilteredChatsArr (chats: Chat[]): FilteredChat[]
-{
+export function chatsArrToFilteredChatsArr (chats: Chat[]): FilteredChat[] {
     let arr: FilteredChat[] = [];
 
-    chats.map(chat => {
-        chat!.messages.map(msg => {
+    chats.forEach(chat => {
+        chat?.messages.forEach(msg => {
             arr.push({
                 chatId: chat!.id,
                 text: msg!.text,

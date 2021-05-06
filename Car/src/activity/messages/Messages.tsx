@@ -36,7 +36,9 @@ const Messages = (props: MessagesProps) => {
     }, []);
 
     const getUniqueChats = (chats: FilteredChat[]) => {
-        chats.map(chat => { chat.text = ""; });
+        chats.forEach(chat => {
+            chat.text = "";
+        });
 
         return [...new Map(chats.map(chat =>
             [chat["chatId"], chat])).values()];
@@ -63,12 +65,12 @@ const Messages = (props: MessagesProps) => {
     const searchInJourneyOrganizer = (text: string, chats: FilteredChat[]) => {
         return chats.filter(chat => {
             const data =
-                chat!.journey!.organizer!.name.toUpperCase() +
+                chat.journey!.organizer!.name.toUpperCase() +
                 " " +
-                chat!.journey!.organizer!.surname.toUpperCase();
+                chat.journey!.organizer!.surname.toUpperCase();
             const textData = text.toUpperCase();
 
-            return data!.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
+            return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
         });
     };
 
@@ -77,7 +79,7 @@ const Messages = (props: MessagesProps) => {
             const data = chat.text.toUpperCase();
             const textData = text.toUpperCase();
 
-            return data!.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
+            return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
         });
     };
 
@@ -167,7 +169,7 @@ const Messages = (props: MessagesProps) => {
                                             :
                                             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                                                 Starts at: {moment(
-                                                    new Date(item!.journey!.departureTime)
+                                                    new Date(item.journey!.departureTime)
                                                 ).utc().format("DD.MM HH:mm")}
                                             </Text>
                                         }
