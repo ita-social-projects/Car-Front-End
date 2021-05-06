@@ -14,12 +14,12 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import * as navigation from "../../../../components/navigation/Navigation";
 import {
-    EMPTY_COLLECTION_LENGTH,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     INITIAL_PASSENGERS_COUNT,
     initialWayPoint,
     initialCoordinate,
+    SECOND_ELEMENT_INDEX,
 } from "../../../../constants/Constants";
 import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import WayPoint from "../../../../types/WayPoint";
@@ -32,28 +32,19 @@ import SwitchSelectorStyle from "../create-journey/SwitchSelector/SwitchSelector
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import { LatLng } from "react-native-maps";
+import FeeType from "../../../../../models/journey/FeeType";
+import StopType from "../../../../../models/stop/StopType";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
 
     const { user } = useContext(AuthContext);
 
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const [locations, setLocations] = useState<Array<Location>>([]);
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const [loading, setLoading] = useState<boolean>(true);
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [hasLuggage, setHasLuggage] = useState<boolean>(false);
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
     const [departureTime, setDepartureTime] = useState<Date>(new Date());
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
     const [availableSeats, setAvailableSeats] = useState(INITIAL_PASSENGERS_COUNT);
@@ -62,22 +53,16 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     useEffect(() => {
-        LocationService.getAll(Number(user?.id))
-            .then((res: any) => {
-                setLocations(res.data);
-            })
+        LocationService
+            .getAll(Number(user?.id))
+            .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
 
-        JourneyService.getRecentJourneyStops(Number(user?.id))
-            .then((res) => {
-                setStop(
-                    res.data.filter(
-                        (array) => array.length !== EMPTY_COLLECTION_LENGTH
-                    )
-                );
-                setLoading(false);
-            })
-            .catch((e: any) => console.log(e));
+        JourneyService
+            .getRecentJourneyStops(Number(user?.id))
+            .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
+                .map((stop: Stop) => stop?.address)))
+            .catch((e) => console.log(e));
     }, []);
 
     useEffect(() => {
@@ -141,11 +126,52 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 center: userCoordinates,
                 pitch: 2,
                 heading: 20,
-                zoom: 20,
+                zoom: 15,
                 altitude: 200,
             },
             userCoordinates: userCoordinates,
         });
+    };
+
+    const onConfirmButtonPress = async () => {
+        await JourneyService.getFilteredJourneys({
+            departureTime: departureTime,
+            hasLuggage: hasLuggage,
+            feeType:
+                allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
+                    : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
+                        : FeeType.Paid,
+            fromStop: {
+                address: {
+                    id: 0,
+                    latitude: from.coordinates.latitude,
+                    longitude: from.coordinates.longitude,
+                    name: from.text,
+                },
+                type: StopType.Start,
+                id: 0,
+                journeyId: 0,
+                userId: 0,
+            },
+            toStop: {
+                address: {
+                    id: 0,
+                    latitude: to.coordinates.latitude,
+                    longitude: to.coordinates.longitude,
+                    name: to.text,
+                },
+                type: StopType.Finish,
+                id: 0,
+                journeyId: 0,
+                userId: 0,
+            },
+        })
+            .then((res) => {
+                navigation.navigate("OK Search Result", { journeys: res.data });
+            })
+            .catch((ex) => {
+                console.log(ex);
+            });
     };
 
     const filterRecentAddresses = () =>
@@ -291,8 +317,10 @@ const SearchJourney = (props: SearchJourneyProps) => {
             </View>
             <View style={SearchJourneyStyle.buttonContainer}>
                 <TouchableOpacity
-                    style={CreateJourneyStyle.publishButton}
-                    onPress={() => {}}
+                    style={[CreateJourneyStyle.publishButton,
+                        { backgroundColor: !(to.isConfirmed && from.isConfirmed) ? "#afafaf" : "black" }]}
+                    onPress={() => {onConfirmButtonPress();}}
+                    disabled={!(to.isConfirmed && from.isConfirmed)}
                 >
                     <Text style={CreateJourneyStyle.publishButtonText}>Search</Text>
                 </TouchableOpacity>

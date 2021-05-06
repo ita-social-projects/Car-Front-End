@@ -82,7 +82,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                         type: value.stopType,
                         id: 0,
                         journeyId: 0,
-                        user: null
+                        userId: 0
                     };
                 })
         });
