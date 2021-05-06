@@ -46,6 +46,7 @@ export const INITIAL_LATITUDE = 49.843844;
 export const INITIAL_LONGITUDE = 24.025581;
 export const REFRESHER_TIMEOUT = 500;
 export const MILLISECONDS_IN_MONTH = 2629800000;
+export const MILLISECONDS_IN_MINUTES = 60000;
 export const HIDDEN_MAP_Z_INDEX = 100;
 export const SHOWN_MAP_Z_INDEX = 200;
 export const HTTP_STATUS_OK = 200;
