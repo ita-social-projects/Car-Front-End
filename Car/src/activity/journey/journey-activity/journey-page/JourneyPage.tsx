@@ -259,13 +259,16 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                             borderColor: DM("black") }
                                         ]}
                                         onPress={() =>
-                                            navigation.navigate("Chat", {
-                                                chatId: currentJourney?.id,
-                                                header:
-                                                        currentJourney?.organizer?.name +
-                                                        " " +
-                                                        currentJourney?.organizer?.surname +
-                                                        "'s ride"
+                                            navigation.navigate("MessagesTabs", {
+                                                screen: "Chat",
+                                                params: {
+                                                    chatId: currentJourney?.id,
+                                                    header:
+                                                            currentJourney?.organizer?.name +
+                                                            " " +
+                                                            currentJourney?.organizer?.surname +
+                                                            "'s ride"
+                                                }
                                             })
                                         }
                                     >

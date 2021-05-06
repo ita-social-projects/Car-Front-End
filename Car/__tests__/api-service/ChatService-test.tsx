@@ -4,9 +4,53 @@ import ChatService from "../../api-service/chat-service/ChatService";
 import Chat from "../../models/Chat";
 
 describe("Chat Service test", () => {
-    let chatsData = [{
+    let chatsData: Chat[] = [{
         id: 1,
         name: "Maksym",
+        journey: {
+            id: 1,
+            routeDistance: 1,
+            departureTime: new Date(),
+            countOfSeats: 1,
+            comments: "string",
+            isFree: false,
+            schedule: null,
+            organizer: {
+                id: 3,
+                name: "string",
+                surname: "string",
+                position: "string",
+                location: "string",
+                hireDate: new Date(),
+                email: "string",
+                imageId: "string",
+                token: "string",
+                journeyCount: 7
+            },
+            car: {
+                id: 1,
+                color: 0,
+                plateNumber: "string",
+                imageId: null,
+                ownerId: 0,
+                model: null
+            },
+            participants: [
+                {
+                    id: 1,
+                    name: "string",
+                    surname: "string",
+                    email: "string",
+                    imageId: "string",
+                    token: "string",
+                    journeyCount: 0,
+                    hireDate: new Date(),
+                    location: "string",
+                    position: "string",
+                }
+            ],
+            stops: []
+        },
         messages: [{
             id: 2,
             text: "string",
