@@ -1,56 +1,109 @@
-import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaView, Text, View, Image } from "react-native";
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
 import { SearchBar } from "react-native-elements";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { LinearTextGradient } from "react-native-text-gradient";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
-import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import MessagesStyle from "./MessagesStyle";
-import * as navigation from "../../components/navigation/Navigation";
-import { GRADIENT_END, GRADIENT_START, NOT_EXISTING_ELEMENT_INDEX } from "../../constants/Constants";
+import {
+    GRADIENT_END, GRADIENT_START,
+    MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
+    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
+    NOT_EXISTING_ELEMENT_INDEX
+} from "../../constants/Constants";
 import DM from "../../components/styles/DM";
-import MessagesProps from "./MessagesProps";
+import { chatsArrToFilteredChatsArr, FilteredChat, MessagesProps } from "./MessagesProps";
+import * as navigation from "../../components/navigation/Navigation";
+import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
+import { LinearTextGradient } from "react-native-text-gradient";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import moment from "moment";
+import { findAll } from "highlight-words-core";
 
 const Messages = (props: MessagesProps) => {
-    const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
-    const [masterDataSource, setMasterDataSource] = useState<any>([]);
+    const [filteredDataSource, setFilteredDataSource] = useState<FilteredChat[]>([]);
+    const [masterDataSource, setMasterDataSource] = useState<FilteredChat[]>([]);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
         ChatService.getChat(user?.id).then((res) => {
-            const chats = res.data;
+            let chats = chatsArrToFilteredChatsArr(res.data);
 
-            setFilteredDataSource(chats);
-            setMasterDataSource(chats);
+            setMasterDataSource(JSON.parse(JSON.stringify(chats)));
+
+            setFilteredDataSource(getUniqueChats(chats));
         });
     }, []);
 
-    const setSearchFilter = (text: any) => {
-        if (text) {
-            const newData = masterDataSource.filter((item: any) => {
-                const itemData =
-                    item.journey.organizer.name +
-                        " " +
-                        item.journey.organizer.surname
-                        ? item.journey.organizer.name.toUpperCase() +
-                        " " +
-                        item.journey.organizer.surname.toUpperCase()
-                        : "".toUpperCase();
-                const textData = text.toUpperCase();
+    const getUniqueChats = (chats: FilteredChat[]) => {
+        chats.forEach(chat => {
+            chat.text = "";
+        });
 
-                return itemData.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
-            });
+        return [...new Map(chats.map(chat =>
+            [chat["chatId"], chat])).values()];
+    };
 
-            setFilteredDataSource(newData);
-            setSearch(text);
-        } else {
-            setFilteredDataSource(masterDataSource);
+    const setSearchFilter = (text: string) => {
+        if (text.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
+            const arr = JSON.parse(JSON.stringify(masterDataSource));
+            const journeyOrganize = searchInJourneyOrganizer(text, arr);
+            const messages = searchInMessages(text, arr);
+
+            journeyOrganize.length ?
+                setFilteredDataSource(getUniqueChats(journeyOrganize))
+                :
+                setFilteredDataSource(messages);
             setSearch(text);
         }
+        else {
+            setFilteredDataSource(getUniqueChats(JSON.parse(JSON.stringify(masterDataSource))));
+            setSearch(text);
+        }
+    };
+
+    const searchInJourneyOrganizer = (text: string, chats: FilteredChat[]) => {
+        return chats.filter(chat => {
+            const data =
+                chat.journey!.organizer!.name.toUpperCase() +
+                " " +
+                chat.journey!.organizer!.surname.toUpperCase();
+            const textData = text.toUpperCase();
+
+            return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
+        });
+    };
+
+    const searchInMessages = (text: string, chats: FilteredChat[]) => {
+        return chats.filter(chat => {
+            const data = chat.text.toUpperCase();
+            const textData = text.toUpperCase();
+
+            return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
+        });
+    };
+
+    const textHighlight = (textToHighlight: string, searchWords: string[]) => {
+        const chunks = findAll({ textToHighlight, searchWords });
+
+        return (
+            <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
+                {chunks.map((chunk, index) => {
+                    const text = textToHighlight.substr(chunk.start, chunk.end - chunk.start);
+
+                    return (!chunk.highlight)
+                        ? text
+                        : (
+                            <Text
+                                key={index}
+                                style={chunk.highlight && { backgroundColor: DM("yellow") }}
+                            >
+                                {text}
+                            </Text>
+                        );
+                })}
+            </Text>
+        );
     };
 
     return (
@@ -58,7 +111,7 @@ const Messages = (props: MessagesProps) => {
             <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
                 {props.isOpenFilter ? (
                     <SearchBar
-                        maxLength={25}
+                        maxLength={MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT}
                         searchIcon={{ color: DM("black"), size: 28 }}
                         onChangeText={(text) => setSearchFilter(text)}
                         onClear={() => setSearchFilter("")}
@@ -77,17 +130,17 @@ const Messages = (props: MessagesProps) => {
                 )}
                 <FlatList
                     data={filteredDataSource}
-                    keyExtractor={(item, index) => index.toString() + item}
-                    renderItem={({ item }: any) => (
+                    keyExtractor={(msg, index) => index.toString() + msg}
+                    renderItem={({ item }) => (
                         <TouchableOpacity
                             onPress={() => {
                                 navigation.navigate("Chat", {
-                                    chatId: item.id,
+                                    chatId: item.chatId,
                                     header:
-                                            item.journey.organizer.name +
-                                            " " +
-                                            item.journey.organizer.surname +
-                                            "'s ride"
+                                        item.journey!.organizer?.name +
+                                        " " +
+                                        item.journey!.organizer?.surname +
+                                        "'s ride"
                                 });
                             }}
                         >
@@ -95,7 +148,7 @@ const Messages = (props: MessagesProps) => {
                                 <View style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}>
                                     <View style={MessagesStyle.avatarWrapper}>
                                         <AvatarLogo
-                                            user={item.journey.organizer}
+                                            user={item.journey!.organizer}
                                             size={50}
                                         />
                                     </View>
@@ -107,16 +160,21 @@ const Messages = (props: MessagesProps) => {
                                             end={{ x: 1, y: 0 }}
                                         >
                                             <Text style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}>
-                                                {item.journey.organizer.name}{" "}
-                                                {item.journey.organizer.surname}'s ride
+                                                {item.journey!.organizer?.name}{" "}
+                                                {item.journey!.organizer?.surname}'s ride
                                             </Text>
                                         </LinearTextGradient>
-                                        <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
-                                        Starts at: {moment(
-                                                new Date(item.journey.departureTime)
-                                            ).utc().format("DD.MM HH:mm")}
-                                        </Text>
+                                        {item.text ?
+                                            textHighlight(item.text, search.split(" "))
+                                            :
+                                            <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
+                                                Starts at: {moment(
+                                                    new Date(item.journey!.departureTime)
+                                                ).utc().format("DD.MM HH:mm")}
+                                            </Text>
+                                        }
                                     </View>
+
                                     <View style={MessagesStyle.iconWrapper}>
                                         <View>
                                             <Ionicons
