@@ -7,7 +7,7 @@ import JourneyPageStyle from "./JourneyPageStyle";
 import Journey from "../../../../../models/journey/Journey";
 import { LinearTextGradient } from "react-native-text-gradient";
 import { Divider } from "react-native-elements";
-import Moment from "moment";
+import moment from "moment";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import StopType from "../../../../../models/stop/StopType";
@@ -234,7 +234,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                                         {currentJourney?.organizer?.position}
                                     </Text>
                                     <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
-                                        {Moment(currentJourney?.departureTime ?? INITIAL_TIME).calendar()}
+                                        {moment(new Date(currentJourney?.departureTime ?? INITIAL_TIME)).calendar()}
                                     </Text>
                                 </View>
                             </View>

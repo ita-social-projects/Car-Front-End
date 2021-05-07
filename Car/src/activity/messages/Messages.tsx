@@ -170,7 +170,7 @@ const Messages = (props: MessagesProps) => {
                                             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                                                 Starts at: {moment(
                                                     new Date(item.journey!.departureTime)
-                                                ).utc().format("DD.MM HH:mm")}
+                                                ).format("DD.MM HH:mm")}
                                             </Text>
                                         }
                                     </View>
