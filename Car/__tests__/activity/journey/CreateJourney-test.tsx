@@ -131,5 +131,23 @@ test("renders correctly", async () =>
           </Text>
         </ForwardRef>
       </View>
+      <ConfirmModal
+        cancelText="No, keep it"
+        confirmText="Yes, delete it"
+        disableModal={[Function]}
+        onConfirm={[Function]}
+        subtitle="Are you sure you want to delete the stop?"
+        title="Stop deleting"
+        visible={false}
+      />
+      <ConfirmModal
+        confirmText="OK"
+        disableModal={[Function]}
+        hideCancelButton={true}
+        onConfirm={[Function]}
+        subtitle="Cant build route. Please chose another way points"
+        title="Error"
+        visible={false}
+      />
     </React.Fragment>
   `));

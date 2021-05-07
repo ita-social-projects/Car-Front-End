@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Alert, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
@@ -27,6 +27,7 @@ import JourneyService from "../../../../../api-service/journey-service/JourneySe
 import Stop from "../../../../../models/stop/Stop";
 import Address from "../../../../../models/Address";
 import Indicator from "../../../../components/activity-indicator/Indicator";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -50,6 +51,11 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [stops, setStops] = useState<WayPoint[]>([]);
     const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
     const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
+
+    const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
+    const [stopIndexForDeleting, setStopIndexForDeleting] = useState(NaN);
+
+    const [errorModalIsVisible, setErrorModalIsVisible] = useState(false);
 
     useEffect(() => {
         if (params) {
@@ -184,13 +190,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         CreateJourney.numberOfAddedStop = updatedStops.length;
     };
 
-    const onCloseIconPressHandler = (stopIndex: number) => {
-        Alert.alert(
-            "Delete stop",
-            "Are you sure you want to delete the stop?",
-            [{ text: "Cancel", style: "cancel" },
-                { text: "Yes", onPress: () => removeStopByIndex(stopIndex) }]
-        );
+    const onDeleteIconPressHandler = (stopIndex: number) => {
+        setStopIndexForDeleting(stopIndex);
+        setDeleteModalIsVisible(true);
     };
 
     const confirmOnPressHandler = () => {
@@ -204,11 +206,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const cantBuildRouteAlert = () => {
         setRouteIsConfirmed(false);
-        Alert.alert(
-            "Error",
-            "Cant build route. Please chose another way points",
-            [{ text: "Ok" }]
-        );
+        setErrorModalIsVisible(true);
     };
 
     const onRouteReadyHandler = (result: {coordinates: LatLng[]}) => {
@@ -263,7 +261,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                             text={stop.text}
                             onPress={() => onAddressInputButtonPressHandler(
                                 "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
-                            onIconPress={() => onCloseIconPressHandler(index)}
+                            onIconPress={() => onDeleteIconPressHandler(index)}
                             marginBottom={15}
                             key={index}
                         />
@@ -334,6 +332,28 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 </TouchableOpacity>
             </View>
 
+            <ConfirmModal
+                visible={deleteModalIsVisible}
+                title={"Stop deleting"}
+                confirmText={"Yes, delete it"}
+                cancelText={"No, keep it"}
+                onConfirm={() => {
+                    removeStopByIndex(stopIndexForDeleting);
+                    setDeleteModalIsVisible(false);
+                }}
+                disableModal={() => setDeleteModalIsVisible(false)}
+                subtitle={"Are you sure you want to delete the stop?"}
+            />
+
+            <ConfirmModal
+                visible={errorModalIsVisible}
+                title={"Error"}
+                subtitle={"Cant build route. Please chose another way points"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => setErrorModalIsVisible(false)}
+                disableModal={() => setErrorModalIsVisible(false)}
+            />
         </>
     );
 };
