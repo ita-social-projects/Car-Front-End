@@ -6,6 +6,7 @@ import { SeatsInputSpinnerStyle } from "./SeatsInputSpinnerStyle";
 
 interface SeatsInputSpinnerProps {
     value: number,
+    title: string,
     // eslint-disable-next-line unused-imports/no-unused-vars
     onChange: (value: number) => void
 }
@@ -14,7 +15,7 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
     return (
         <View style={SeatsInputSpinnerStyle.container}>
             <Text style={SeatsInputSpinnerStyle.descriptionText}>
-                Available seats:
+                {props.title}
             </Text>
             <View>
                 <InputSpinner

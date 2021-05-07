@@ -1,229 +1,332 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import TouchableCard from "../../../../components/touchable-card/TouchableCard";
-import TouchableMapBar from "../../../../components/touchable-map-bar/TouchableMapBar";
+import {
+    PermissionsAndroid,
+    Platform,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import SearchJourneyStyle from "./SearchJourneyStyle";
 import Stop from "../../../../../models/stop/Stop";
 import Location from "../../../../../models/location/Location";
-import SearchJourneyMap from "../map-address/SearchJourneyMap";
 import AuthContext from "../../../../components/auth/AuthContext";
-import Indicator from "../../../../components/activity-indicator/Indicator";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import Journey from "../../../../../models/journey/Journey";
 import * as navigation from "../../../../components/navigation/Navigation";
-import StopType from "../../../../../models/stop/StopType";
-import DM from "../../../../components/styles/DM";
 import {
-    EMPTY_COLLECTION_LENGTH,
-    HIDDEN_MAP_Z_INDEX,
-    INITIAL_LATITUDE,
-    INITIAL_LONGITUDE,
-    SHOWN_MAP_Z_INDEX,
-    SINGLE_ELEMENT_COLLECTION_LENGTH
+    LEFT_PADDING_FOR_FROM_PLACEHOLDER,
+    LEFT_PADDING_FOR_TO_PLACEHOLDER,
+    INITIAL_PASSENGERS_COUNT,
+    initialWayPoint,
+    initialCoordinate,
+    SECOND_ELEMENT_INDEX,
 } from "../../../../constants/Constants";
+import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
+import WayPoint from "../../../../types/WayPoint";
+import Address from "../../../../../models/Address";
+import Geolocation from "@react-native-community/geolocation";
+import SearchJourneyProps from "./SearchJourneyProps";
+import TouchableDateTimePicker from "../touchable/datetime-picker/TouchableDateTimePicker";
+import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
+import SwitchSelectorStyle from "../create-journey/SwitchSelector/SwitchSelectorStyle";
+import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
+import ChooseOption from "../../../../components/choose-opton/ChooseOption";
+import { LatLng } from "react-native-maps";
+import FeeType from "../../../../../models/journey/FeeType";
+import StopType from "../../../../../models/stop/StopType";
 
-const SearchJourney = () => {
+const SearchJourney = (props: SearchJourneyProps) => {
+    const params = props?.route?.params;
+
     const { user } = useContext(AuthContext);
 
-    const [stops, setStop] = useState<Array<Array<Stop>> | null>([]);
-    const [fromDirection, setFromDirection] = useState("Your location");
-    const [isOpen, setOpen] = useState(false);
-    const [latitude, setLatitude] = useState<number | undefined>(INITIAL_LATITUDE);
-    const [longitude, setLongitude] = useState<number | undefined>(INITIAL_LONGITUDE);
-    const [isMapOpen, setMapOpen] = useState(HIDDEN_MAP_Z_INDEX);
-    const [locations, setLocations] = useState<Array<Location>>([]);
-    const [loading, setLoading] = useState(true);
-    const [journeys, setJourneys] = useState<Array<Journey>>([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        // eslint-disable-next-line no-magic-numbers
-        JourneyService.getJourney(9).then((res1) => {
-            // eslint-disable-next-line no-magic-numbers
-            JourneyService.getJourney(12).then((res2) => {
-                // eslint-disable-next-line no-magic-numbers
-                JourneyService.getJourney(13).then((res3) => {
-                    // eslint-disable-next-line no-magic-numbers
-                    JourneyService.getJourney(20).then((res4) => {
-                        // eslint-disable-next-line no-magic-numbers
-                        JourneyService.getJourney(25).then((res5) => {
-                            // eslint-disable-next-line no-magic-numbers
-                            JourneyService.getJourney(7).then((res6) => {
-                                setJourneys([
-                                    res1.data,
-                                    res2.data,
-                                    res3.data,
-                                    res4.data,
-                                    res5.data,
-                                    res6.data,
-                                ]);
-                                setIsLoading(false);
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    }, []);
+    const [hasLuggage, setHasLuggage] = useState<boolean>(false);
+    const [from, setFrom] = useState<WayPoint>(initialWayPoint);
+    const [to, setTo] = useState<WayPoint>(initialWayPoint);
+    const [departureTime, setDepartureTime] = useState<Date>(new Date());
+    const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
+    const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
+    const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
+    const [availableSeats, setAvailableSeats] = useState(INITIAL_PASSENGERS_COUNT);
+    const [allButtonStyle, setAllButtonStyle] = useState(SwitchSelectorStyle.activeButton);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
 
     useEffect(() => {
         LocationService
             .getAll(Number(user?.id))
-            .then((res: any) => {
-                setLocations(res.data);
-            })
+            .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res) => {
-                setStop(res.data.filter(array => array.length !== EMPTY_COLLECTION_LENGTH));
-                setLoading(false);
-            })
-            .catch((e: any) => console.log(e));
+            .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
+                .map((stop: Stop) => stop?.address)))
+            .catch((e) => console.log(e));
     }, []);
+
+    useEffect(() => {
+        if (params) {
+            if (params.wayPointId === "From") {
+                setFrom(params.wayPoint);
+            } else if (params.wayPointId === "To") {
+                setTo(params.wayPoint);
+            }
+        }
+    }, [params]);
+
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            androidPermission();
+        } else {
+            Geolocation.requestAuthorization();
+        }
+        Geolocation.getCurrentPosition(
+            (position) => {
+                setUserCoordinates(position.coords);
+            },
+            (error) => {
+                console.log(error);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+    }, []);
+
+    const androidPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+            );
+
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("You can use the location");
+            } else {
+                console.log("Location permission denied");
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    };
+
+    const onAddressInputButtonPressHandler = (
+        placeholder: string,
+        paddingLeft: number,
+        wayPointId: string,
+        wayPoint: WayPoint
+    ) => {
+        navigation.navigate("Address Input", {
+            placeholder: placeholder,
+            paddingLeft: paddingLeft,
+            savedLocations: savedLocations,
+            recentAddresses: filterRecentAddresses(),
+            previousScreen: "Search Journey",
+            wayPointId: wayPointId,
+            wayPoint: wayPoint,
+            camera: {
+                center: userCoordinates,
+                pitch: 2,
+                heading: 20,
+                zoom: 15,
+                altitude: 200,
+            },
+            userCoordinates: userCoordinates,
+        });
+    };
+
+    const onConfirmButtonPress = async () => {
+        await JourneyService.getFilteredJourneys({
+            departureTime: departureTime,
+            hasLuggage: hasLuggage,
+            feeType:
+                allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
+                    : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
+                        : FeeType.Paid,
+            fromStop: {
+                address: {
+                    id: 0,
+                    latitude: from.coordinates.latitude,
+                    longitude: from.coordinates.longitude,
+                    name: from.text,
+                },
+                type: StopType.Start,
+                id: 0,
+                journeyId: 0,
+                userId: 0,
+            },
+            toStop: {
+                address: {
+                    id: 0,
+                    latitude: to.coordinates.latitude,
+                    longitude: to.coordinates.longitude,
+                    name: to.text,
+                },
+                type: StopType.Finish,
+                id: 0,
+                journeyId: 0,
+                userId: 0,
+            },
+        })
+            .then((res) => {
+                navigation.navigate("OK Search Result", { journeys: res.data });
+            })
+            .catch((ex) => {
+                console.log(ex);
+            });
+    };
+
+    const filterRecentAddresses = () =>
+        recentAddresses.filter((address) =>
+            savedLocations.every(
+                (location) =>
+                    location?.address?.longitude !== address?.longitude &&
+                    location?.address?.latitude !== address?.latitude
+            )
+        );
 
     return (
         <View style={SearchJourneyStyle.screenContainer}>
-            <View
-                style={[SearchJourneyStyle.mapContainer, { zIndex: isMapOpen }]}
-            >
-                <SearchJourneyMap
-                    latitude={latitude ?? INITIAL_LATITUDE}
-                    longitude={longitude ?? INITIAL_LONGITUDE}
+            <View style={SearchJourneyStyle.locationContainer}>
+                <AddressInputButton
+                    iconName={"location"}
+                    directionType={"From"}
+                    text={from.text}
+                    onPress={() =>
+                        onAddressInputButtonPressHandler(
+                            "From",
+                            LEFT_PADDING_FOR_FROM_PLACEHOLDER,
+                            "From",
+                            from
+                        )
+                    }
+                    marginBottom={15}
                 />
-                <TouchableOpacity style={[SearchJourneyStyle.confirmButton, { backgroundColor: DM(DM("black")) }]}>
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
-                        Confirm
-                    </Text>
+                <AddressInputButton
+                    iconName={"location"}
+                    directionType={"To"}
+                    text={to.text}
+                    onPress={() =>
+                        onAddressInputButtonPressHandler(
+                            "To",
+                            LEFT_PADDING_FOR_TO_PLACEHOLDER,
+                            "To",
+                            to
+                        )
+                    }
+                    marginBottom={15}
+                />
+            </View>
+
+            <TouchableDateTimePicker
+                date={departureTime}
+                setDate={(d) => setDepartureTime(d)}
+                isConfirmed={true}
+                setIsConfirmedToTrue={() => {}}
+            />
+
+            <SeatsInputSpinner
+                value={availableSeats}
+                onChange={(seats) => setAvailableSeats(seats)}
+                title={"Passengers:"}
+            />
+
+            <View style={SwitchSelectorStyle.container}>
+                <Text style={CreateJourneyStyle.text}>Fee</Text>
+                <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                        style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
+                        onPress={() => {
+                            setAllButtonStyle(SwitchSelectorStyle.activeButton);
+                            setFreeButtonStyle(
+                                SwitchSelectorStyle.inactiveButton
+                            );
+                            setPaidButtonStyle(
+                                SwitchSelectorStyle.inactiveButton
+                            );
+                        }}
+                    >
+                        <Text
+                            style={[
+                                SwitchSelectorStyle.buttonText,
+                                allButtonStyle,
+                            ]}
+                        >
+                            All
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[
+                            SwitchSelectorStyle.leftButton,
+                            freeButtonStyle,
+                        ]}
+                        onPress={() => {
+                            setAllButtonStyle(
+                                SwitchSelectorStyle.inactiveButton
+                            );
+                            setFreeButtonStyle(
+                                SwitchSelectorStyle.activeButton
+                            );
+                            setPaidButtonStyle(
+                                SwitchSelectorStyle.inactiveButton
+                            );
+                        }}
+                    >
+                        <Text
+                            style={[
+                                SwitchSelectorStyle.buttonText,
+                                freeButtonStyle,
+                            ]}
+                        >
+                            Free
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[
+                            SwitchSelectorStyle.rightButton,
+                            paidButtonStyle,
+                        ]}
+                        onPress={() => {
+                            setAllButtonStyle(
+                                SwitchSelectorStyle.inactiveButton
+                            );
+                            setFreeButtonStyle(
+                                SwitchSelectorStyle.inactiveButton
+                            );
+                            setPaidButtonStyle(
+                                SwitchSelectorStyle.activeButton
+                            );
+                        }}
+                    >
+                        <Text
+                            style={[
+                                SwitchSelectorStyle.buttonText,
+                                paidButtonStyle,
+                            ]}
+                        >
+                            Paid
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{ marginHorizontal: 20, marginTop: 20 }}>
+                <ChooseOption
+                    text={"Do you have any luggage with you?"}
+                    value={hasLuggage}
+                    onValueChanged={(value: boolean) => {
+                        setHasLuggage(value);
+                    }}
+                />
+            </View>
+            <View style={SearchJourneyStyle.buttonContainer}>
+                <TouchableOpacity
+                    style={[CreateJourneyStyle.publishButton,
+                        { backgroundColor: !(to.isConfirmed && from.isConfirmed) ? "#afafaf" : "black" }]}
+                    onPress={() => {onConfirmButtonPress();}}
+                    disabled={!(to.isConfirmed && from.isConfirmed)}
+                >
+                    <Text style={CreateJourneyStyle.publishButtonText}>Search</Text>
                 </TouchableOpacity>
             </View>
-            <View style={[SearchJourneyStyle.topInputContainer,
-                {
-                    backgroundColor: DM("#FAFAFA"),
-                    borderBottomColor: DM("#C1C1C5")
-                }]}>
-                <TouchableMapBar
-                    directionType="From"
-                    iconName="location"
-                    defaultInputValue={fromDirection}
-                    marginBottom="15"
-                    marginTop="30"
-                    flex="6"
-                />
-                {isOpen ? (
-                    <TouchableMapBar
-                        directionType="To"
-                        iconName="map"
-                        defaultInputValue={""}
-                        marginBottom="12"
-                        marginTop="3"
-                        flex="10"
-                    />
-                ) : (
-                    <></>
-                )}
-            </View>
-
-            <ScrollView style={[SearchJourneyStyle.container, { backgroundColor: DM("#FAFAFA") }]}>
-                <View style={SearchJourneyStyle.insideContainer}>
-                    {loading ? (
-                        <></>
-                    ) : locations.length != SINGLE_ELEMENT_COLLECTION_LENGTH ? (
-                        <>
-                            <TouchableCard
-                                cardName="Map"
-                                iconName="location"
-                                angle="0"
-                                address="Choose starting point on the Map"
-                                addressFontColor={DM("black")}
-                                iconColor={DM("#414045")}
-                                size={25}
-                                onPress={() => setMapOpen(SHOWN_MAP_Z_INDEX)}
-                            />
-                            {locations.map((item: Location) => (
-                                <View key={item?.id}>
-                                    <TouchableCard
-                                        cardName={item?.name}
-                                        iconName={
-                                            item?.type?.name
-                                                ? item?.type?.name
-                                                : "location"
-                                        }
-                                        angle="0"
-                                        address={item?.address?.name}
-                                        addressFontColor={DM("#909095")}
-                                        onPress={() => {
-                                            setFromDirection(item?.address?.name ?? "");
-                                            setOpen(true);
-                                            setLongitude(item?.address?.longitude);
-                                            setLatitude(item?.address?.latitude);
-                                        }}
-                                        iconColor={DM("#414045")}
-                                        size={25}
-                                    />
-                                </View>
-                            ))}
-                        </>
-                    ) : (
-                        {}
-                    )}
-
-                    {loading ? (
-                        <View style={SearchJourneyStyle.loadingContainer}>
-                            <Indicator
-                                color={DM("#414045")}
-                                size="large"
-                                text="Loading information..."
-                            />
-                        </View>
-                    ) : (
-                        <Text style={[SearchJourneyStyle.recentJourneyText, { color: DM("black") }]}>
-                            Recent Rides
-                        </Text>
-                    )}
-                    {stops?.length ? (
-                        stops?.map((item: any) => (
-                            <TouchableCard
-                                key={item.map((i: any) => i?.id)}
-                                cardName={item.find((address: Stop) => address?.type === StopType.Start).address.name}
-                                iconName="ios-time-outline"
-                                angle="0"
-                                address={item.find((address: Stop) => address?.type === StopType.Finish).address.name}
-                                addressFontColor={DM("#909095")}
-                                iconColor={DM("#909095")}
-                                size={30}
-                            />
-                        ))
-                    ) : (
-                        <></>
-                    )}
-                </View>
-                <View style={SearchJourneyStyle.buttonsContainer}>
-                    <View style={SearchJourneyStyle.button}>
-                        <Button
-                            disabled={isLoading}
-                            color="green"
-                            title="OK"
-                            onPress={() => {
-                                navigation.navigate("OK Search Result", {
-                                    journeys: journeys
-                                });
-                            }}
-                        />
-                    </View>
-                    <View style={SearchJourneyStyle.button}>
-                        <Button
-                            color="red"
-                            title="BAD"
-                            onPress={() => {
-                                navigation.navigate("Bad Search Result");
-                            }}
-                        />
-                    </View>
-                </View>
-            </ScrollView>
         </View>
     );
 };
