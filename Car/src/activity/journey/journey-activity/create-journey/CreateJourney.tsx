@@ -5,8 +5,7 @@ import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
-    DELETE_COUNT,
-    initialCamera, initialCoordinate,
+    DELETE_COUNT, initialCamera, initialCoordinate,
     initialWayPoint,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
@@ -27,6 +26,7 @@ import CreateJourneyProps from "./CreateJourneyProps";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../../models/stop/Stop";
 import Address from "../../../../../models/Address";
+import Indicator from "../../../../components/activity-indicator/Indicator";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -71,23 +71,35 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const mapRef = useRef<MapView | null>(null);
     const scrollViewRef = useRef<ScrollView | null>();
 
+    const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
+    const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
+    const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
+
     useEffect(() => {
         CreateJourney.numberOfAddedStop = 0;
 
         LocationService
             .getAll(Number(user?.id))
-            .then((res: any) => setSavedLocations(res.data))
-            .catch((e: any) => console.log(e));
+            .then((res) => {
+                setSavedLocations(res.data);
+                setSavedLocationIsLoading(false);
+            })
+            .catch((e) => console.log(e));
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
-                .map((stop: Stop) => stop?.address)))
+            .then((res: any) => {
+                setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
+                    .map((stop: Stop) => stop?.address));
+                setRecentAddressesIsLoading(false);
+            })
             .catch((e) => console.log(e));
     }, []);
 
     const animateCamera = (coordinates: LatLng) => {
+        console.log("animateCamera, mapRef.current is null - ", mapRef.current === null);
         mapRef.current?.animateCamera({
+            ...initialCamera,
             center: coordinates
         }, { duration: 1000 });
     };
@@ -99,12 +111,29 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 console.log("You can use the location");
+                findUserLocation();
             } else {
                 console.log("Location permission denied");
+                setUserLocationIsLoading(false);
             }
         } catch (err) {
             console.warn(err);
         }
+    };
+
+    const findUserLocation = () => {
+        Geolocation.getCurrentPosition(
+            (position) => {
+                setUserLocationIsLoading(false);
+                setUserCoordinates(position.coords);
+                mapRef.current?.setCamera({ ...initialCamera, center: position.coords });
+            },
+            (error) => {
+                setUserLocationIsLoading(false);
+                console.log(error);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
     };
 
     useEffect(() => {
@@ -112,17 +141,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             androidPermission();
         } else {
             Geolocation.requestAuthorization();
+            findUserLocation();
         }
-        Geolocation.getCurrentPosition(
-            (position) => {
-                setUserCoordinates(position.coords);
-                animateCamera(position.coords);
-            },
-            (error) => {
-                console.log(error);
-            },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-        );
     }, []);
 
     CreateJourney.addStopPressHandler = () => {
@@ -131,8 +151,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setStops(prevState => [...prevState, initialWayPoint]);
         CreateJourney.numberOfAddedStop = ++stops.length;
     };
-
-    const fromAndToIsConfirmed = from.isConfirmed && to.isConfirmed;
 
     const filterRecentAddresses = () =>
         recentAddresses.filter(address => savedLocations.every(location =>
@@ -200,107 +218,120 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             { edgePadding: { top: 260, right: 20, left: 20, bottom: 120 } });
     };
 
+    const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;
+
     return (
         <View style={{ flex: 1 }}>
-
-            <ScrollView
-                ref={ref => (scrollViewRef.current = ref)}
-                onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
-                style={CreateJourneyStyle.scrollView}
-            >
-
-                <AddressInputButton
-                    iconName={"location"}
-                    directionType={"From"}
-                    text={from.text}
-                    onPress={() => onAddressInputButtonPressHandler(
-                        "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
-                    marginBottom={15}
+            {infoIsLoading && (
+                <Indicator
+                    size="large"
+                    color="#414045"
+                    text="Loading information..."
                 />
+            )}
+            <View style={infoIsLoading ? { display: "none" } : { flex: 1 }}>
+                <ScrollView
+                    ref={ref => (scrollViewRef.current = ref)}
+                    onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
+                    style={CreateJourneyStyle.scrollView}
+                >
 
-                <AddressInputButton
-                    iconName={"location"}
-                    directionType={"To"}
-                    text={to.text}
-                    onPress={() => onAddressInputButtonPressHandler(
-                        "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
-                    marginBottom={15}
-                />
-
-                {stops.map((stop, index) => (
                     <AddressInputButton
-                        iconName={"close"}
-                        directionType={"Via"}
-                        text={stop.text}
+                        iconName={"location"}
+                        directionType={"From"}
+                        text={from.text}
                         onPress={() => onAddressInputButtonPressHandler(
-                            "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
-                        onIconPress={() => onCloseIconPressHandler(index)}
+                            "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
                         marginBottom={15}
-                        key={index}
                     />
-                ))}
-            </ScrollView>
 
-            <MapView
-                ref={ref => (mapRef.current = ref)}
-                style={{ flex: 1 }}
-                provider={PROVIDER_GOOGLE}
-                showsUserLocation={true}
-                initialCamera={initialCamera}
-                customMapStyle={mapStyle}
-                showsCompass={false}
-            >
-                {from.isConfirmed && (
-                    <Marker
-                        title={from.text}
-                        coordinate={from.coordinates}
-                        image={require("../../../../../assets/images/maps-markers/From.png")}
-                    />)
-                }
+                    <AddressInputButton
+                        iconName={"location"}
+                        directionType={"To"}
+                        text={to.text}
+                        onPress={() => onAddressInputButtonPressHandler(
+                            "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
+                        marginBottom={15}
+                    />
 
-                {to.isConfirmed && (
-                    <Marker
-                        title={to.text}
-                        coordinate={to.coordinates}
-                        image={require("../../../../../assets/images/maps-markers/To.png")}
-                    />)
-                }
-
-                {stops.filter(stop => stop.isConfirmed)
-                    .map((stop, index) => (
-                        <Marker
-                            title={stop.text}
-                            coordinate={stop.coordinates}
-                            image={require("../../../../../assets/images/maps-markers/Stop.png")}
+                    {stops.map((stop, index) => (
+                        <AddressInputButton
+                            iconName={"close"}
+                            directionType={"Via"}
+                            text={stop.text}
+                            onPress={() => onAddressInputButtonPressHandler(
+                                "Via", LEFT_PADDING_FOR_VIA_PLACEHOLDER, index.toString(), stops[index])}
+                            onIconPress={() => onCloseIconPressHandler(index)}
+                            marginBottom={15}
                             key={index}
                         />
-                    ))
-                }
+                    ))}
+                </ScrollView>
 
-                {fromAndToIsConfirmed && (
-                    <MapViewDirections
-                        origin={from.coordinates}
-                        destination={to.coordinates}
-                        waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}
-                        apikey={APIConfig.apiKey}
-                        strokeWidth={5}
-                        strokeColor="#027ebd"
-                        onError={cantBuildRouteAlert}
-                        onReady={onRouteReadyHandler}
-                    />
-                )}
-            </MapView>
+                <MapView
+                    ref={ref => {
+                        mapRef.current = ref;
+                    }}
+                    style={{ flex: 1 }}
+                    provider={PROVIDER_GOOGLE}
+                    showsUserLocation={true}
+                    customMapStyle={mapStyle}
+                    showsCompass={false}
+                    showsMyLocationButton={false}
+                >
+                    {from.isConfirmed && (
+                        <Marker
+                            title={from.text}
+                            coordinate={from.coordinates}
+                            image={require("../../../../../assets/images/maps-markers/From.png")}
+                        />)
+                    }
 
-            <TouchableOpacity
-                style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf" }]}
-                onPress={confirmOnPressHandler}
-                disabled={!routeIsConfirmed}
-            >
-                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                    {to.isConfirmed && (
+                        <Marker
+                            title={to.text}
+                            coordinate={to.coordinates}
+                            image={require("../../../../../assets/images/maps-markers/To.png")}
+                        />)
+                    }
+
+                    {stops.filter(stop => stop.isConfirmed)
+                        .map((stop, index) => (
+                            <Marker
+                                title={stop.text}
+                                coordinate={stop.coordinates}
+                                image={require("../../../../../assets/images/maps-markers/Stop.png")}
+                                key={index}
+                            />
+                        ))
+                    }
+
+                    {from.isConfirmed && to.isConfirmed && (
+                        <MapViewDirections
+                            origin={from.coordinates}
+                            destination={to.coordinates}
+                            waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}
+                            apikey={APIConfig.apiKey}
+                            strokeWidth={5}
+                            strokeColor="#027ebd"
+                            onError={cantBuildRouteAlert}
+                            onReady={onRouteReadyHandler}
+                        />
+                    )}
+                </MapView>
+
+                <TouchableOpacity
+                    style={[SearchJourneyStyle.confirmButton,
+                        { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf" }]}
+                    onPress={confirmOnPressHandler}
+                    disabled={!routeIsConfirmed}
+                >
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                     Confirm
-                </Text>
-            </TouchableOpacity>
+                    </Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
     );
 };
