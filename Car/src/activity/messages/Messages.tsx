@@ -64,13 +64,13 @@ const Messages = (props: MessagesProps) => {
 
     const searchInJourneyOrganizer = (text: string, chats: FilteredChat[]) => {
         return chats.filter(chat => {
-            const data =
+            const messageText =
                 chat.journey!.organizer!.name.toUpperCase() +
                 " " +
-                chat.journey!.organizer!.surname.toUpperCase();
-            const textData = text.toUpperCase();
+                chat.journey!.organizer!.surname.toUpperCase() +
+                "'S RIDE";
 
-            return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
+            return messageText.indexOf(text.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX;
         });
     };
 

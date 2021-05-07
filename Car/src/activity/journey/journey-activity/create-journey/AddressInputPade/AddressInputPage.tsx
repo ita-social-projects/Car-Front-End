@@ -61,7 +61,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
 
         mapRef.current?.animateCamera({
             center: coordinates
-        }, { duration: 2000 });
+        }, { duration: 1000 });
     };
 
     const setAddress = (address: string, coordinates: LatLng) => {
