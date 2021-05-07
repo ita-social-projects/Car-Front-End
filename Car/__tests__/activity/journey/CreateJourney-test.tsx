@@ -7,22 +7,26 @@ const renderer = shallowRenderer.createRenderer();
 test("renders correctly", async () =>
     expect(renderer.render(<CreateJourney props={undefined as any} />))
         .toMatchInlineSnapshot(`
-    <View
-      style={
-        Object {
-          "flex": 1,
+    <React.Fragment>
+      <View
+        style={
+          Object {
+            "height": "85%",
+          }
         }
-      }
-    >
-      <Indicator
-        color="#414045"
-        size="large"
-        text="Loading information..."
-      />
+      >
+        <Indicator
+          color="#414045"
+          size="large"
+          text="Loading information..."
+        />
+      </View>
       <View
         style={
           Object {
             "display": "none",
+            "flex": 0,
+            "height": 0,
           }
         }
       >
@@ -127,5 +131,5 @@ test("renders correctly", async () =>
           </Text>
         </ForwardRef>
       </View>
-    </View>
+    </React.Fragment>
   `));

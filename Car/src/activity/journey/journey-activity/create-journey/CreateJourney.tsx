@@ -221,15 +221,17 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;
 
     return (
-        <View style={{ flex: 1 }}>
+        <>
             {infoIsLoading && (
-                <Indicator
-                    size="large"
-                    color="#414045"
-                    text="Loading information..."
-                />
+                <View style={{ height: "85%" }}>
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text="Loading information..."
+                    />
+                </View>
             )}
-            <View style={infoIsLoading ? { display: "none" } : { flex: 1 }}>
+            <View style={infoIsLoading ? { display: "none", height: 0, flex: 0 } : { flex: 1 }}>
                 <ScrollView
                     ref={ref => (scrollViewRef.current = ref)}
                     onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
@@ -332,7 +334,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </>
     );
 };
 
