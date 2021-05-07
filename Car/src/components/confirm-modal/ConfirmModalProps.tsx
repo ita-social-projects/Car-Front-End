@@ -3,7 +3,8 @@ interface ConfirmModalProps {
     title: string,
     subtitle?: string,
     confirmText: string,
-    cancelText: string,
+    hideCancelButton?: boolean
+    cancelText?: string,
     onConfirm: () => void
     disableModal: () => void
 }

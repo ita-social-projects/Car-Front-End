@@ -33,11 +33,14 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
                                 </Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={props.disableModal}>
-                                <Text style={ConfirmModalStyle.boldText}>
-                                    {props.cancelText}
-                                </Text>
-                            </TouchableOpacity>
+                            {!props.hideCancelButton && (
+                                <TouchableOpacity onPress={props.disableModal}>
+                                    <Text style={ConfirmModalStyle.boldText}>
+                                        {props.cancelText}
+                                    </Text>
+                                </TouchableOpacity>
+                            )}
+
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
