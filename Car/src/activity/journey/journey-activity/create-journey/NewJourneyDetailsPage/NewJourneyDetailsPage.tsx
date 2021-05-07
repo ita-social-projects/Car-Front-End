@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
-import { ScrollView, TextInput, TouchableOpacity, View, Text, Alert } from "react-native";
+import { ScrollView, TextInput, TouchableOpacity, View, Text } from "react-native";
 import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datetime-picker/TouchableDateTimePicker";
 import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
-import FreeButtonChoiceAlert from "../../alerts/FreeButtonChoiceAlert";
-import PaidButtonChoiceAlert from "../../alerts/PaidButtonChoiceAlert";
 import AddressInputButton from "../AddressInputButton/AddressInputButton";
 import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
 import SwitchSelector from "../SwitchSelector/SwitchSelector";
@@ -23,6 +21,7 @@ import StopType from "../../../../../../models/stop/StopType";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import CreateJourneyModel from "../../../../../../models/journey/CreateJourneyModel";
 import Indicator from "../../../../../components/activity-indicator/Indicator";
+import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 
 const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
@@ -50,6 +49,11 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
+
+    const [freeButtonModalIsVisible, setFreeButtonModalIsVisible] = useState(false);
+    const [paidButtonModalIsVisible, setPaidButtonModalIsVisible] = useState(false);
+    const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
+    const [publishErrorModalIsVisible, setPublishErrorModalIsVisible] = useState(false);
 
     useEffect(() => {
         CarService.getAll(Number(user?.id)).then(result => {
@@ -97,23 +101,24 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then(() => {
-                Alert.alert("Ride successfully published");
-                navigation.navigate("Journey");
-            }).catch(() => Alert.alert("Ride publishing is failed"));
+                setSuccessfullyPublishModalIsVisible(true);
+            }).catch(() => setPublishErrorModalIsVisible(true));
 
         setRideIsPublishing(false);
     };
 
+    const isLoading = userCarIsLoading || rideIsPublishing || successfullyPublishModalIsVisible;
+
     return (
         <>
-            {userCarIsLoading || rideIsPublishing && (
+            {isLoading && (
                 <Indicator
                     size="large"
                     color="#414045"
                     text={rideIsPublishing ? "The ride is publishing..." : "Loading information..."}
                 />
             )}
-            {!userCarIsLoading && !rideIsPublishing && (
+            {!isLoading && (
                 <ScrollView style={CreateJourneyStyle.container}>
 
                     <AddressInputButton
@@ -198,12 +203,12 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                         leftButtonStyle={freeButtonStyle}
                         rightButtonStyle={paidButtonStyle}
                         onLeftButtonPress={() => {
-                            FreeButtonChoiceAlert();
+                            setFreeButtonModalIsVisible(true);
                             setFreeButtonStyle(SwitchSelectorStyle.activeButton);
                             setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
                         }}
                         onRightButtonPress={() => {
-                            PaidButtonChoiceAlert();
+                            setPaidButtonModalIsVisible(true);
                             setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
                             setPaidButtonStyle(SwitchSelectorStyle.activeButton);
                         }}
@@ -241,6 +246,52 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                     </View>
                 </ScrollView>
             )}
+
+            <ConfirmModal
+                visible={freeButtonModalIsVisible}
+                title={"Free ride!"}
+                subtitle={"Participants will be informed that your ride is totally free!"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => setFreeButtonModalIsVisible(false)}
+                disableModal={() => setFreeButtonModalIsVisible(false)}
+            />
+
+            <ConfirmModal
+                visible={paidButtonModalIsVisible}
+                title={"Paid ride!"}
+                subtitle={"Participants will be informed that they'll need to partially pay for a fuel."}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => setPaidButtonModalIsVisible(false)}
+                disableModal={() => setPaidButtonModalIsVisible(false)}
+            />
+
+            <ConfirmModal
+                visible={successfullyPublishModalIsVisible}
+                title={"Success"}
+                subtitle={"Ride successfully published"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setSuccessfullyPublishModalIsVisible(false);
+                    navigation.navigate("Journey");
+                }}
+                disableModal={() => {
+                    setSuccessfullyPublishModalIsVisible(false);
+                    navigation.navigate("Journey");
+                }}
+            />
+
+            <ConfirmModal
+                visible={publishErrorModalIsVisible}
+                title={"Error"}
+                subtitle={"Ride publishing is failed"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => setPublishErrorModalIsVisible(false)}
+                disableModal={() => setPublishErrorModalIsVisible(false)}
+            />
         </>
     );
 };
