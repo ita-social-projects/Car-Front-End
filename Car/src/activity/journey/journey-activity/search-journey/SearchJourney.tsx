@@ -47,7 +47,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
-    const [availableSeats, setAvailableSeats] = useState(INITIAL_PASSENGERS_COUNT);
+    const [passengersCount, setPassengersCount] = useState(INITIAL_PASSENGERS_COUNT);
     const [allButtonStyle, setAllButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
     const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
@@ -137,6 +137,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
         await JourneyService.getFilteredJourneys({
             departureTime: departureTime,
             hasLuggage: hasLuggage,
+            passengersCount: passengersCount,
             feeType:
                 allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
                     : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
@@ -224,8 +225,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
             />
 
             <SeatsInputSpinner
-                value={availableSeats}
-                onChange={(seats) => setAvailableSeats(seats)}
+                value={passengersCount}
+                onChange={(seats) => setPassengersCount(seats)}
                 title={"Passengers:"}
             />
 

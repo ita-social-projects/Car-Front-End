@@ -6,7 +6,8 @@ interface FilterJourneyModel{
     toStop: Stop,
     departureTime: Date,
     hasLuggage: boolean,
-    feeType: FeeType
+    feeType: FeeType,
+    passengersCount: number
 }
 
 export default FilterJourneyModel;
