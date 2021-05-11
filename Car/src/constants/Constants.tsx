@@ -46,12 +46,12 @@ export const INITIAL_LATITUDE = 49.843844;
 export const INITIAL_LONGITUDE = 24.025581;
 export const REFRESHER_TIMEOUT = 500;
 export const MILLISECONDS_IN_MONTH = 2629800000;
-export const HIDDEN_MAP_Z_INDEX = 100;
-export const SHOWN_MAP_Z_INDEX = 200;
+export const MILLISECONDS_IN_MINUTES = 60000;
 export const HTTP_STATUS_OK = 200;
 export const AVATAR_LOGO_SIZE_TO_TEXT_RATIO = 2.5;
 export const AVATAR_LOGO_SIZE_TO_PADDING_RATIO = 14;
 export const INITIAL_TIME = 0;
+export const INITIAL_ROUTE_DISTSNCE = 0;
 export const FIRST_LOADING_MESSAGES = 0;
 export const COUNT_OF_MESSAGES_TO_LOAD = 0;
 export const NUMBER_OF_STOPS_LIMIT = 7;
@@ -63,7 +63,11 @@ export const DEFAULT_AVAILABLE_SEATS_COUNT = 4;
 export const MINUTES_OFFSET = 10;
 export const MAX_PHOTO_FILE_SIZE = 7e+6;
 export const USER_STATE_CHANGE_EVENT_NAME = "onUserStateChange";
+export const INITIAL_PASSENGERS_COUNT = 1;
 export const DEFAULT_LOCATION_ICON_ID = 9;
+
+export const MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER = 2;
+export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
 
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,
