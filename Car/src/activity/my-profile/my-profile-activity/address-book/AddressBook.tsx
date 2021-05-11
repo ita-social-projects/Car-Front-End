@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Text, View, ScrollView } from "react-native";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { ActivityIndicator, Text, View, ScrollView, RefreshControl } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import Location from "../../../../../models/location/Location";
@@ -12,6 +12,24 @@ export default function AddressBook (props: {navigation: any}) {
     const { user } = useContext(AuthContext);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        loadLocations();
+    }, []);
+
+    const loadLocations = () => {
+        LocationService.getAll(Number(user?.id)).then((res) => {
+            setLocations(res.data);
+            setLoading(false);
+            setRefreshing(false);
+        });
+    };
+
+    useEffect(() => {
+        return props.navigation.addListener("focus", loadLocations);
+    }, [props.navigation]);
 
     let addLocationElement = (
         <View>
@@ -44,20 +62,13 @@ export default function AddressBook (props: {navigation: any}) {
         </View>
     );
 
-    useEffect(() => {
-        LocationService
-            .getAll(Number(user?.id))
-            .then((res: any) => {
-                setLocations(res.data);
-                setLoading(false);
-            })
-            .catch((e: any) => console.log(e));
-    }, []);
-
     return (
         <ScrollView
             style={[AddressBookStyle.container, { backgroundColor: DM("white") }]}
             contentContainerStyle={loading && AddressBookStyle.loading}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
+            }
         >
             <View
                 style={[
@@ -82,7 +93,7 @@ export default function AddressBook (props: {navigation: any}) {
                                                 name={
                                                     item?.type?.name
                                                         ? item?.type?.name
-                                                        : "location"
+                                                        : "star-outline"
                                                 }
                                                 size={25}
                                                 color={DM("#414045")}
