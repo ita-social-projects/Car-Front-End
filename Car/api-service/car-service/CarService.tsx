@@ -1,13 +1,14 @@
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
-import axios from "axios";
 import APIRoutes from "../APIRoutes";
+import CreateCarViewModel from "../../models/car/CreateCarViewModel";
 
 const route = APIRoutes.getCarUrl();
 
 const CarService = {
-    add: async (car: FormData) => axios.post(route, car),
+    add: async (car: CreateCarViewModel) =>
+        APIService.post<CreateCarViewModel>(route, car),
 
     update: async (car: UpdateCarViewModel) =>
         APIService.put<UpdateCarViewModel>(route, car),

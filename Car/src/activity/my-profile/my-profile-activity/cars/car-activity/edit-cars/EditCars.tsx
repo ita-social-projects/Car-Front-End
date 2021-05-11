@@ -24,6 +24,7 @@ import EditCarsStyle from "./EditCarsStyle";
 import DM from "../../../../../../components/styles/DM";
 import { FIRST_ELEMENT_INDEX, MAX_PLATE_NUMBER_LENGTH, MIN_PLATE_NUMBER_LENGTH } from "../../../../../../constants/Constants";
 import AuthContext from "../../../../../../components/auth/AuthContext";
+import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
 
 const EditCars = (navigation: any) => {
     const { user } = useContext(AuthContext);
@@ -94,20 +95,29 @@ const EditCars = (navigation: any) => {
 
     const saveCarHandle = async () => {
         setLoading(true);
-        const formData = new FormData();
+        let photoToAdd;
 
-        formData.append("ownerId", user?.id);
-        formData.append("modelId", Number(selectedModel?.value));
-        formData.append("color", Number(selectedColor?.value));
-        formData.append("plateNumber", plateNumber);
         if (photo !== null && photo !== undefined) {
-            formData.append("image", {
+            photoToAdd = {
                 name: photo.fileName,
                 type: photo.type,
                 uri: photo?.uri
-            });
+            };
         }
-        await CarService.add(formData)
+        else
+        {
+            photoToAdd = null;
+        }
+
+        let car: CreateCarViewModel = {
+            ownerId : Number(user?.id),
+            modelId : Number(selectedModel?.value),
+            color : Number(selectedColor?.value),
+            plateNumber: plateNumber,
+            photo : photoToAdd
+        };
+
+        await CarService.add(car)
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
         setLoading(false);

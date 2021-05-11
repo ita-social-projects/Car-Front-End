@@ -1,10 +1,13 @@
-import CarColor from "./CarColor";
-
 type CreateCarViewModel = null | {
-    ModelId: number;
-    Color: CarColor;
-    PlateNumber: string;
-    OwnerId: number;
+    ownerId: number;
+    modelId: number;
+    color: number;
+    plateNumber: string;
+    photo: {
+        name: string | undefined,
+        type: string | undefined,
+        uri: string | undefined
+    } | null
 };
 
 export default CreateCarViewModel;
