@@ -5,12 +5,19 @@ import AddressBook from "../../../src/activity/my-profile/my-profile-activity/ad
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<AddressBook navigation={undefined}/>)).toMatchInlineSnapshot(`
+    expect(renderer.render(<AddressBook navigation={undefined} />))
+        .toMatchInlineSnapshot(`
     <ScrollView
       contentContainerStyle={
         Object {
           "flex": 1,
         }
+      }
+      refreshControl={
+        <RefreshControlMock
+          onRefresh={[Function]}
+          refreshing={false}
+        />
       }
       style={
         Array [
