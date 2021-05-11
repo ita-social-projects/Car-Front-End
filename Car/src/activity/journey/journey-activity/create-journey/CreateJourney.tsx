@@ -10,7 +10,7 @@ import {
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    NUMBER_OF_STOPS_LIMIT, SECOND_ELEMENT_INDEX
+    NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
@@ -24,7 +24,6 @@ import WayPoint from "../../../../types/WayPoint";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
 import CreateJourneyProps from "./CreateJourneyProps";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import Stop from "../../../../../models/stop/Stop";
 import Address from "../../../../../models/Address";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
@@ -94,9 +93,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res: any) => {
-                setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
-                    .map((stop: Stop) => stop?.address));
+            .then((res) => {
+                setRecentAddresses(([] as Address[]).concat(
+                    ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
                 setRecentAddressesIsLoading(false);
             })
             .catch((e) => console.log(e));
