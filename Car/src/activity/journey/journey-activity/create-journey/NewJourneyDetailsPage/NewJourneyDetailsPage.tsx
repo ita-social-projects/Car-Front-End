@@ -95,7 +95,9 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                         journeyId: 0,
                         userId: Number(user?.id)
                     };
-                })
+                }),
+            durationInMinutes: Math.round(params.duration),
+            routeDistance: Math.round(params.routeDistance)
         };
 
         await JourneyService.add(newJourney)

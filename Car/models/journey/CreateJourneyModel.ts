@@ -1,5 +1,4 @@
 import Stop from "../stop/Stop";
-
 interface CreateJourneyModel {
     departureTime: Date,
     countOfSeats: number,
@@ -13,7 +12,9 @@ interface CreateJourneyModel {
         latitude: number,
         longitude: number
     }[],
-    stops: Stop[]
+    stops: Stop[],
+    durationInMinutes: number,
+    routeDistance: number
 }
 
 export default CreateJourneyModel;

@@ -5,7 +5,7 @@ import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
-    DELETE_COUNT, initialCamera, initialCoordinate,
+    DELETE_COUNT, INITIAL_ROUTE_DISTSNCE, INITIAL_TIME, initialCamera, initialCoordinate,
     initialWayPoint,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
@@ -35,6 +35,12 @@ interface CreateJourneyComponent {
     ({ props }: {props: CreateJourneyProps}): JSX.Element
 }
 
+interface OnRouteReadyResult {
+    coordinates: LatLng[],
+    distance: number,
+    duration: number
+}
+
 const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
 
     const params = props?.route?.params;
@@ -48,6 +54,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
     const [stops, setStops] = useState<WayPoint[]>([]);
+    const [duration, setDuration] = useState<number>(INITIAL_TIME);
+    const [routeDistance, setRouteDistance] = useState<number>(INITIAL_ROUTE_DISTSNCE);
     const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
     const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
 
@@ -55,6 +63,13 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [stopIndexForDeleting, setStopIndexForDeleting] = useState(NaN);
 
     const [errorModalIsVisible, setErrorModalIsVisible] = useState(false);
+
+    const mapRef = useRef<MapView | null>(null);
+    const scrollViewRef = useRef<ScrollView | null>();
+
+    const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
+    const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
+    const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
 
     useEffect(() => {
         if (params) {
@@ -72,13 +87,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             }
         }
     }, [params]);
-
-    const mapRef = useRef<MapView | null>(null);
-    const scrollViewRef = useRef<ScrollView | null>();
-
-    const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
-    const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
-    const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
 
     useEffect(() => {
         CreateJourney.numberOfAddedStop = 0;
@@ -102,7 +110,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     }, []);
 
     const animateCamera = (coordinates: LatLng) => {
-        console.log("animateCamera, mapRef.current is null - ", mapRef.current === null);
         mapRef.current?.animateCamera({
             ...initialCamera,
             center: coordinates
@@ -199,7 +206,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             from: from,
             to: to,
             stops: stops.filter(stop => stop.isConfirmed),
-            routePoints: routePoints
+            routePoints: routePoints,
+            duration: duration,
+            routeDistance: routeDistance
         });
     };
 
@@ -208,7 +217,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setErrorModalIsVisible(true);
     };
 
-    const onRouteReadyHandler = (result: {coordinates: LatLng[]}) => {
+    const onRouteReadyHandler = (result: OnRouteReadyResult) => {
+        console.log(JSON.stringify(result));
+        setRouteDistance(result.distance);
+        setDuration(result.duration);
         setRoutePoints(result.coordinates);
         setRouteIsConfirmed(true);
         mapRef.current?.fitToCoordinates(result.coordinates,
