@@ -27,6 +27,7 @@ describe("Chat Service test", () => {
                 token: "string",
                 journeyCount: 7
             },
+            journeyPoints: [],
             car: {
                 id: 1,
                 color: 0,

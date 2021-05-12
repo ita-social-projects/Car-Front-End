@@ -17,7 +17,8 @@ describe("Journey Service test", () => {
         participants: [],
         routeDistance: 2,
         schedule: null,
-        stops: []
+        stops: [],
+        journeyPoints: []
     }];
 
     let stopsData: Stop[][] = [[{
