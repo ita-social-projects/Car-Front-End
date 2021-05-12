@@ -31,6 +31,8 @@ import {
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import MapView, { Polyline, PROVIDER_GOOGLE } from "react-native-maps";
+import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 
 const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -40,6 +42,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
+    const mapRef = useRef<MapView | null>(null);
 
     useEffect(() => {
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
@@ -54,6 +57,8 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
 
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
+            mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
+                { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
             CarService.getById(res.data?.car?.id!).then((carRes) => {
                 setCar(carRes.data);
                 setLoading(false);
@@ -70,10 +75,26 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     return (
         <>
             <View style={[JourneyPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
-                <Text style={[JourneyPageStyle.pageText, { color: DM("#222222") }]}>
-                    Map implementation is in progress
-                </Text>
-
+                {/*<Text style={[JourneyPageStyle.pageText, { color: DM("#222222") }]}>*/}
+                {/*    Map implementation is in progress*/}
+                {/*</Text>*/}
+                <MapView
+                    ref={ref => {
+                        mapRef.current = ref;
+                    }}
+                    style={{ flex: 1 }}
+                    provider={PROVIDER_GOOGLE}
+                    showsUserLocation={true}
+                    customMapStyle={mapStyle}
+                    showsCompass={false}
+                    showsMyLocationButton={false}
+                >
+                    <Polyline
+                        coordinates={currentJourney?.journeyPoints ?? []}
+                        strokeWidth={5}
+                        strokeColor={"#027ebd"}
+                    />
+                </MapView>
             </View>
             <BottomPopup
                 refForChild={moreOptionsRef}

@@ -18,7 +18,6 @@ test("renders correctly", async () =>
         style={
           Array [
             Object {
-              "alignItems": "center",
               "flex": 1,
             },
             Object {
@@ -27,20 +26,46 @@ test("renders correctly", async () =>
           ]
         }
       >
-        <Text
-          style={
+        <MapView
+          customMapStyle={
             Array [
               Object {
-                "fontFamily": "Proxima Nova",
+                "featureType": "poi.business",
+                "stylers": Array [
+                  Object {
+                    "visibility": "off",
+                  },
+                ],
               },
               Object {
-                "color": "#222222",
+                "elementType": "labels.text",
+                "featureType": "poi.park",
+                "stylers": Array [
+                  Object {
+                    "visibility": "off",
+                  },
+                ],
               },
             ]
           }
+          provider="google"
+          showsCompass={false}
+          showsMyLocationButton={false}
+          showsUserLocation={true}
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
         >
-          Map implementation is in progress
-        </Text>
+          <MapPolyline
+            coordinates={Array []}
+            lineCap="round"
+            lineJoin="round"
+            strokeColor="#027ebd"
+            strokeWidth={5}
+          />
+        </MapView>
       </View>
       <BottomPopup
         enabledGestureInteraction={true}

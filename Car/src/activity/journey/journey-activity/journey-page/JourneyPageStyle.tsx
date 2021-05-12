@@ -3,8 +3,7 @@ import Font from "../../../../data/fonts/Font";
 
 const JourneyPageStyle = StyleSheet.create({
     pageContainer: {
-        flex: 1,
-        alignItems: "center"
+        flex: 1
     },
 
     pageText: {
