@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, Text, View, Dimensions } from "react-native";
+import { Dimensions, Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -17,22 +17,31 @@ import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import ImageService from "../../../../../api-service/image-service/ImageService";
 import {
+    FIRST_ELEMENT_INDEX,
     GRADIENT_END,
     GRADIENT_START,
     INITIAL_TIME,
     JOURNEY_CONTENT_HEIGHT,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+    MAX_POPUP_POSITION,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
-    MAX_POPUP_POSITION,
-    MIN_POPUP_POSITION,
+    MIN_POPUP_POSITION, ZERO_COORDINATE,
     ZERO_MARGIN
 } from "../../../../constants/Constants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import MapView, { Polyline, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
+import Stop from "../../../../../models/stop/Stop";
+
+const getStopCoordinates = (stop?: Stop) => {
+    return {
+        longitude: stop?.address?.longitude ?? ZERO_COORDINATE,
+        latitude: stop?.address?.latitude ?? ZERO_COORDINATE
+    };
+};
 
 const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
     const [currentJourney, setJourney] = useState<Journey>(null);
@@ -67,6 +76,10 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
         });
     }, []);
 
+    const getStopByType = (stopType: StopType) => {
+        return currentJourney?.stops.filter(stop => stop?.type === stopType)[FIRST_ELEMENT_INDEX];
+    };
+
     const moreOptionsRef = useRef<any>(null);
 
     const navbarHeight = Dimensions.get("screen").height - (Dimensions.get("window").height + getStatusBarHeight());
@@ -94,6 +107,27 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                         strokeWidth={5}
                         strokeColor={"#027ebd"}
                     />
+
+                    <Marker
+                        title={getStopByType(StopType.Start)?.address?.name}
+                        coordinate={getStopCoordinates(getStopByType(StopType.Start))}
+                        image={require("../../../../../assets/images/maps-markers/From.png")}
+                    />
+
+                    <Marker
+                        title={getStopByType(StopType.Finish)?.address?.name}
+                        coordinate={getStopCoordinates(getStopByType(StopType.Finish))}
+                        image={require("../../../../../assets/images/maps-markers/To.png")}
+                    />
+
+                    {currentJourney?.stops.filter(stop => stop?.type === StopType.Intermediate).map(stop => (
+                        <Marker
+                            key={stop?.id}
+                            title={stop?.address?.name}
+                            coordinate={getStopCoordinates(stop)}
+                            image={require("../../../../../assets/images/maps-markers/Stop.png")}
+                        />
+                    ))}
                 </MapView>
             </View>
             <BottomPopup

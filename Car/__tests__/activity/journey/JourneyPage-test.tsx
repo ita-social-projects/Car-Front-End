@@ -65,6 +65,34 @@ test("renders correctly", async () =>
             strokeColor="#027ebd"
             strokeWidth={5}
           />
+          <MapMarker
+            coordinate={
+              Object {
+                "latitude": 0,
+                "longitude": 0,
+              }
+            }
+            image={
+              Object {
+                "testUri": "../../../assets/images/maps-markers/From.png",
+              }
+            }
+            stopPropagation={false}
+          />
+          <MapMarker
+            coordinate={
+              Object {
+                "latitude": 0,
+                "longitude": 0,
+              }
+            }
+            image={
+              Object {
+                "testUri": "../../../assets/images/maps-markers/To.png",
+              }
+            }
+            stopPropagation={false}
+          />
         </MapView>
       </View>
       <BottomPopup
