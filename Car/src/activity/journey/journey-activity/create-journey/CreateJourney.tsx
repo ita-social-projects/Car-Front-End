@@ -224,7 +224,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setRoutePoints(result.coordinates);
         setRouteIsConfirmed(true);
         mapRef.current?.fitToCoordinates(result.coordinates,
-            { edgePadding: { top: 260, right: 20, left: 20, bottom: 120 } });
+            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 } });
     };
 
     const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;

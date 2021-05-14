@@ -2,6 +2,7 @@ import CarViewModel from "../car/CarViewModel";
 import Schedule from "../Schedule";
 import Stop from "../stop/Stop";
 import User from "../user/User";
+import JourneyPoint from "./JourneyPoint";
 
 type Journey = null | {
     id: number;
@@ -11,6 +12,7 @@ type Journey = null | {
     comments: string;
     isFree: boolean;
     schedule: Schedule;
+    journeyPoints: JourneyPoint[];
     participants: User[];
     stops: Stop[];
     organizer: User;
