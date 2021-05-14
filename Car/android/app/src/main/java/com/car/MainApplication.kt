@@ -15,8 +15,6 @@ import com.facebook.react.*
 import com.facebook.soloader.SoLoader
 import com.microsoft.signalr.HubConnection
 import java.lang.reflect.InvocationTargetException
-import com.rndetectnavbarandroid.RNDetectNavbarAndroidPackage;
-
 
 class MainApplication : Application(), ReactApplication {
 
