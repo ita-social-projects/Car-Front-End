@@ -5,12 +5,17 @@ import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
-    DELETE_COUNT, INITIAL_ROUTE_DISTSNCE, INITIAL_TIME, initialCamera, initialCoordinate,
+    DELETE_COUNT,
+    FIRST_ELEMENT_INDEX,
+    INITIAL_ROUTE_DISTSNCE,
+    INITIAL_TIME,
+    initialCamera,
+    initialCoordinate,
     initialWayPoint,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    NUMBER_OF_STOPS_LIMIT
+    NUMBER_OF_STOPS_LIMIT, RECENT_ADDRESSES_COUNT_LIMIT
 } from "../../../../constants/Constants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
@@ -109,6 +114,32 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             .catch((e) => console.log(e));
     }, []);
 
+    const filterRecentAddresses = () => {
+        const withoutAddressBook = recentAddresses.filter(address =>
+            savedLocations.every(location =>
+                location?.address?.longitude !== address?.longitude &&
+                location?.address?.latitude !== address?.latitude));
+
+        const result: Address[] = [];
+
+        withoutAddressBook.forEach(address => {
+            if (result.every(value => value?.latitude !== address?.latitude ||
+                value?.longitude !== address?.longitude))
+                result.push(address);
+        });
+
+        return result.length > RECENT_ADDRESSES_COUNT_LIMIT ?
+            result.slice(FIRST_ELEMENT_INDEX, RECENT_ADDRESSES_COUNT_LIMIT) :
+            result;
+
+    };
+
+    useEffect(() => {
+        if (!recentAddressesIsLoading && !savedLocationIsLoading) {
+            setRecentAddresses(filterRecentAddresses());
+        }
+    }, [recentAddressesIsLoading, savedLocationIsLoading]);
+
     const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
             ...initialCamera,
@@ -164,11 +195,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         CreateJourney.numberOfAddedStop = ++stops.length;
     };
 
-    const filterRecentAddresses = () =>
-        recentAddresses.filter(address => savedLocations.every(location =>
-            location?.address?.longitude !== address?.longitude &&
-            location?.address?.latitude !== address?.latitude));
-
     const onAddressInputButtonPressHandler = (placeholder: string,
         paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
 
@@ -177,7 +203,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 placeholder: placeholder,
                 paddingLeft: paddingLeft,
                 savedLocations: savedLocations,
-                recentAddresses: filterRecentAddresses(),
+                recentAddresses: recentAddresses,
                 previousScreen: "Create Journey",
                 wayPointId: wayPointId,
                 wayPoint: wayPoint,
