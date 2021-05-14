@@ -11,6 +11,7 @@ import HeaderRemoveCarButton from "../../../../../components/header-remove-car-b
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/Constants";
+import CarService from "../../../../../../api-service/car-service/CarService";
 
 const StackTabs = createStackNavigator();
 
@@ -18,6 +19,13 @@ const CarTabs = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
     const pressHandler = () => {
         setModalVisibility(true);
+    };
+
+    const deleteCar = (carId : any) => {
+        setModalVisibility(false);
+        CarService.deleteCar(carId).then(() => {
+            (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
+        });
     };
 
     return (
@@ -64,10 +72,7 @@ const CarTabs = () => {
                                     subtitle={"Do you want to remove info about your car?"}
                                     confirmText={"Yes, delete it"}
                                     cancelText={"No, keep it"}
-                                    onConfirm={() => {
-                                        setModalVisibility(false);
-                                        (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
-                                    }}
+                                    onConfirm={() => deleteCar(props.route.params.carId)}
                                 />
                             </>
                         );
