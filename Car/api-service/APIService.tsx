@@ -20,8 +20,8 @@ const APIService = {
         return Axios.put<T>(url, Object.assign({}, baseHeaders, params));
     },
 
-    delete<T> (url: string, params?: any) {
-        return Axios.delete<T>(url, Object.assign({}, baseHeaders, params));
+    delete (url: string, params?: any) {
+        return Axios.delete(url, Object.assign({}, baseHeaders, params));
     }
 };
 
