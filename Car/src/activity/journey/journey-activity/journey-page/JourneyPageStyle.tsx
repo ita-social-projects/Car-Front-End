@@ -204,10 +204,9 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     buttons: {
-        position: "absolute",
-        width: Dimensions.get("window").width,
-        top: 411,
-        paddingHorizontal: "5%"
+        width: "100%",
+        height: 100,
+        paddingHorizontal: "5%",
     },
 
     messageAllButtonText: {
