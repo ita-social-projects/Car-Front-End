@@ -1,6 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../CreateJourneyStyle";
-import { ScrollView, TextInput, TouchableOpacity, View, Text } from "react-native";
+import {
+    ScrollView,
+    TextInput,
+    TouchableOpacity,
+    View,
+    Text,
+    KeyboardAvoidingView,
+    Platform
+} from "react-native";
 import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datetime-picker/TouchableDateTimePicker";
 import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
@@ -101,9 +109,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then(() => {
-                setSuccessfullyPublishModalIsVisible(true);
-            }).catch(() => setPublishErrorModalIsVisible(true));
+            .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .catch(() => setPublishErrorModalIsVisible(true));
 
         setRideIsPublishing(false);
     };
@@ -120,136 +127,140 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                 />
             )}
             {!isLoading && (
-                <ScrollView style={CreateJourneyStyle.container}>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "position"}
+                >
+                    <ScrollView style={CreateJourneyStyle.container}>
 
-                    <AddressInputButton
-                        iconName={"location"}
-                        directionType={"From"}
-                        text={params.from.text}
-                        disabled={true}
-                        marginHorizontal={20}
-                        marginBottom={24}
-                    />
-                    <AddressInputButton
-                        iconName={"location"}
-                        directionType={"To"}
-                        text={params.to.text}
-                        disabled={true}
-                        marginHorizontal={20}
-                        marginBottom={24}
-                    />
-
-                    {params.stops.map((stop, index) => (
                         <AddressInputButton
                             iconName={"location"}
-                            directionType={"Via"}
-                            text={stop.text}
+                            directionType={"From"}
+                            text={params.from.text}
                             disabled={true}
                             marginHorizontal={20}
                             marginBottom={24}
-                            key={index}
                         />
-                    ))}
+                        <AddressInputButton
+                            iconName={"location"}
+                            directionType={"To"}
+                            text={params.to.text}
+                            disabled={true}
+                            marginHorizontal={20}
+                            marginBottom={24}
+                        />
 
-                    <TouchableDateTimePicker
-                        date={departureTime}
-                        setDate={(d) => {
-                            setDepartureTime(d);
-                            setDepartureTimeIsConfirmed(true);
-                        }}
-                        isConfirmed={departureTimeIsConfirmed}
-                        setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
-                    />
+                        {params.stops.map((stop, index) => (
+                            <AddressInputButton
+                                iconName={"location"}
+                                directionType={"Via"}
+                                text={stop.text}
+                                disabled={true}
+                                marginHorizontal={20}
+                                marginBottom={24}
+                                key={index}
+                            />
+                        ))}
 
-                    <SwitchSelector
-                        leftButtonStyle={ownCarButtonStyle}
-                        rightButtonStyle={taxiButtonStyle}
-                        onLeftButtonPress={() => {
-                            if (ownCarButtonStyle === SwitchSelectorStyle.activeButton) return;
-
-                            setIsVisibleCarDropDown(false);
-                            setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
-                            setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
-                        }}
-                        onRightButtonPress={() => {
-                            setOwnCarButtonStyle(SwitchSelectorStyle.inactiveButton);
-                            setTaxiButtonStyle(SwitchSelectorStyle.activeButton);
-                        }}
-                        title={"Ride Type"}
-                        leftButtonText={"Own car"}
-                        rightButtonText={"Taxi"}
-                    />
-
-                    {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
-                        <JourneyCreationDropDownPicker
-                            items={userCars.map((car) => ({
-                                label: car.name,
-                                value: car.id
-                            }))}
-                            paddingLeft={105}
-                            searchable={true}
-                            placeholder="Choose a Car:"
-                            isVisible={isVisibleCarDropDown}
-                            onOpen={() => setIsVisibleCarDropDown(true)}
-                            onChangeItem={(item) => {
-                                setSelectedCar({ id: item.value, name: item.label });
-                                setIsVisibleCarDropDown(false);
+                        <TouchableDateTimePicker
+                            date={departureTime}
+                            setDate={(d) => {
+                                setDepartureTime(d);
+                                setDepartureTimeIsConfirmed(true);
                             }}
-                            valueId={Number.isNaN(selectedCar.id) && userCars.length > EMPTY_COLLECTION_LENGTH ?
-                                userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
-                            }
-                        />)}
-
-                    <SwitchSelector
-                        leftButtonStyle={freeButtonStyle}
-                        rightButtonStyle={paidButtonStyle}
-                        onLeftButtonPress={() => {
-                            setFreeButtonModalIsVisible(true);
-                            setFreeButtonStyle(SwitchSelectorStyle.activeButton);
-                            setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
-                        }}
-                        onRightButtonPress={() => {
-                            setPaidButtonModalIsVisible(true);
-                            setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
-                            setPaidButtonStyle(SwitchSelectorStyle.activeButton);
-                        }}
-                        title={"Fee"}
-                        leftButtonText={"Free"}
-                        rightButtonText={"Paid"}
-                    />
-
-                    <SeatsInputSpinner
-                        value={availableSeats}
-                        onChange={seats => setAvailableSeats(seats)}
-                        title={"Available seats:"}
-                    />
-
-                    <View style={CreateJourneyStyle.commentsView}>
-                        <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
-                        <TextInput
-                            style={CreateJourneyStyle.textInputStyle}
-                            multiline={true}
-                            maxLength={100}
-                            numberOfLines={10}
-                            placeholder={"Write your comment"}
-                            placeholderTextColor={"#686262"}
-                            onChangeText={text => setComment(text)}
-                            value={comment}
+                            isConfirmed={departureTimeIsConfirmed}
+                            setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
                         />
-                        <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
-                    </View>
 
-                    <View style={CreateJourneyStyle.publishButtonContainer}>
-                        <TouchableOpacity
-                            style={[CreateJourneyStyle.publishButton,
-                                { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
-                            onPress={publishJourneyHandler}
-                            disabled={!departureTimeIsConfirmed}
-                        >
-                            <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
+                        <SwitchSelector
+                            leftButtonStyle={ownCarButtonStyle}
+                            rightButtonStyle={taxiButtonStyle}
+                            onLeftButtonPress={() => {
+                                if (ownCarButtonStyle === SwitchSelectorStyle.activeButton) return;
+
+                                setIsVisibleCarDropDown(false);
+                                setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
+                                setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
+                            }}
+                            onRightButtonPress={() => {
+                                setOwnCarButtonStyle(SwitchSelectorStyle.inactiveButton);
+                                setTaxiButtonStyle(SwitchSelectorStyle.activeButton);
+                            }}
+                            title={"Ride Type"}
+                            leftButtonText={"Own car"}
+                            rightButtonText={"Taxi"}
+                        />
+
+                        {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
+                            <JourneyCreationDropDownPicker
+                                items={userCars.map((car) => ({
+                                    label: car.name,
+                                    value: car.id
+                                }))}
+                                paddingLeft={105}
+                                searchable={true}
+                                placeholder="Choose a Car:"
+                                isVisible={isVisibleCarDropDown}
+                                onOpen={() => setIsVisibleCarDropDown(true)}
+                                onChangeItem={(item) => {
+                                    setSelectedCar({ id: item.value, name: item.label });
+                                    setIsVisibleCarDropDown(false);
+                                }}
+                                valueId={Number.isNaN(selectedCar.id) && userCars.length > EMPTY_COLLECTION_LENGTH ?
+                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
+                                }
+                            />)}
+
+                        <SwitchSelector
+                            leftButtonStyle={freeButtonStyle}
+                            rightButtonStyle={paidButtonStyle}
+                            onLeftButtonPress={() => {
+                                setFreeButtonModalIsVisible(true);
+                                setFreeButtonStyle(SwitchSelectorStyle.activeButton);
+                                setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
+                            }}
+                            onRightButtonPress={() => {
+                                setPaidButtonModalIsVisible(true);
+                                setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
+                                setPaidButtonStyle(SwitchSelectorStyle.activeButton);
+                            }}
+                            title={"Fee"}
+                            leftButtonText={"Free"}
+                            rightButtonText={"Paid"}
+                        />
+
+                        <SeatsInputSpinner
+                            value={availableSeats}
+                            onChange={seats => setAvailableSeats(seats)}
+                            title={"Available seats:"}
+                        />
+
+                        <View style={CreateJourneyStyle.commentsView}>
+                            <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
+                            <TextInput
+                                style={CreateJourneyStyle.textInputStyle}
+                                multiline={true}
+                                maxLength={100}
+                                numberOfLines={10}
+                                placeholder={"Write your comment"}
+                                placeholderTextColor={"#686262"}
+                                onChangeText={text => setComment(text)}
+                                value={comment}
+                            />
+                            <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
+                        </View>
+
+                        <View style={CreateJourneyStyle.publishButtonContainer}>
+                            <TouchableOpacity
+                                style={[CreateJourneyStyle.publishButton,
+                                    { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
+                                onPress={publishJourneyHandler}
+                                disabled={!departureTimeIsConfirmed}
+                            >
+                                <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </KeyboardAvoidingView>
             )}
 
             <ConfirmModal

@@ -1,9 +1,9 @@
-import React from "react";
-import { GooglePlacesAutocomplete, Place } from "react-native-google-places-autocomplete";
+import React, { useEffect, useRef } from "react";
+import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef, Place } from "react-native-google-places-autocomplete";
 import APIConfig from "../../../../../../api-service/APIConfig";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputStyles from "./AddressInputStyles";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import Location from "../../../../../../models/location/Location";
 import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Constants";
@@ -40,8 +40,19 @@ const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses 
 };
 
 const AddressInput = (props: AddressInputProps) => {
+    const ref = useRef<GooglePlacesAutocompleteRef | null>();
+
+    const keyboardDidHide = () => ref.current?.blur();
+
+    useEffect(() => {
+        Keyboard.addListener("keyboardDidHide", keyboardDidHide);
+
+        return () => Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
+    }, []);
+
     return (
         <GooglePlacesAutocomplete
+            ref={instance => (ref.current = instance)}
             predefinedPlaces={mapSavedLocationsToPlaces(props.savedLocations)
                 .concat(mapRecentAddressesToPlaces(props.recentAddresses))}
             onPress={props.onPress}
