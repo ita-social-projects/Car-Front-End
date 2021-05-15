@@ -65,7 +65,7 @@ export const MAX_PHOTO_FILE_SIZE = 7e+6;
 export const USER_STATE_CHANGE_EVENT_NAME = "onUserStateChange";
 export const INITIAL_PASSENGERS_COUNT = 1;
 export const DEFAULT_LOCATION_ICON_ID = 9;
-
+export const MAX_LOCATION_NAME_LENGTH = 15;
 export const MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER = 2;
 export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
 

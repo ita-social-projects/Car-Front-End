@@ -10,7 +10,7 @@ import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     initialCamera,
-    initialCoordinate, DEFAULT_LOCATION_ICON_ID
+    initialCoordinate, DEFAULT_LOCATION_ICON_ID, MAX_LOCATION_NAME_LENGTH
 } from "../../../../../../constants/Constants";
 
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
@@ -218,6 +218,7 @@ const AddLocation = () => {
                 <TextInput
                     style={AddLocationStyle.textInput}
                     value={locationName}
+                    maxLength={MAX_LOCATION_NAME_LENGTH}
                     placeholder={"Name the chosen address"}
                     placeholderTextColor={"grey"}
                     onChangeText={(fromInput) => {
