@@ -10,6 +10,7 @@ import android.os.Build
 import android.widget.RemoteViews
 import com.car.Entities.User
 import com.car.NotificationModule.NotificationPackage
+import com.car.SoftKeysModule.SoftKeysPackage
 import com.facebook.react.*
 import com.facebook.soloader.SoLoader
 import com.microsoft.signalr.HubConnection
@@ -31,6 +32,7 @@ class MainApplication : Application(), ReactApplication {
         override fun getPackages(): List<ReactPackage> {
             var packages = PackageList(this).packages
             packages.add(NotificationPackage())
+            packages.add(SoftKeysPackage())
             return packages
         }
 

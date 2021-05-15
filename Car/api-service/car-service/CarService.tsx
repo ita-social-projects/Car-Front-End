@@ -19,7 +19,10 @@ const CarService = {
         APIService.get<Array<CarViewModel>>(route + "by-user/" + id),
 
     getAvatar: async (id: number) =>
-        APIService.get<string>(route + id + "/photo")
+        APIService.get<string>(route + id + "/photo"),
+
+    deleteCar: async (id: number) =>
+        APIService.delete(route + id)
 };
 
 export default CarService;

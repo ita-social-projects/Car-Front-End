@@ -19,6 +19,7 @@ export const SINGLE_ELEMENT_COLLECTION_LENGTH = 1;
 export const THREE_ELEMENT_COLLECTION_LENGTH = 3;
 export const ZERO_OPACITY = 0;
 export const ZERO_MARGIN = 0;
+export const ZERO_COORDINATE = 0;
 export const HALF_OPACITY = 0.5;
 export const MAX_OPACITY = 1;
 export const ANIMATION_DURATION = 500;
@@ -68,6 +69,7 @@ export const DEFAULT_LOCATION_ICON_ID = 9;
 export const MAX_LOCATION_NAME_LENGTH = 15;
 export const MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER = 2;
 export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
+export const RECENT_ADDRESSES_COUNT_LIMIT = 5;
 
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,
