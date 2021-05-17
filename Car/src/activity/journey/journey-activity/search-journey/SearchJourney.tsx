@@ -20,6 +20,7 @@ import {
     initialWayPoint,
     initialCoordinate,
     SECOND_ELEMENT_INDEX,
+    EMPTY_COLLECTION_LENGTH,
 } from "../../../../constants/Constants";
 import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import WayPoint from "../../../../types/WayPoint";
@@ -33,7 +34,6 @@ import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import { LatLng } from "react-native-maps";
 import FeeType from "../../../../../models/journey/FeeType";
-import StopType from "../../../../../models/stop/StopType";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
@@ -135,6 +135,10 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
     const onConfirmButtonPress = async () => {
         await JourneyService.getFilteredJourneys({
+            fromLatitude: from.coordinates.latitude,
+            fromLongitude: from.coordinates.longitude,
+            toLatitude: to.coordinates.latitude,
+            toLongitude: to.coordinates.longitude,
             departureTime: departureTime,
             hasLuggage: hasLuggage,
             passengersCount: passengersCount,
@@ -142,33 +146,13 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
                     : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
                         : FeeType.Paid,
-            fromStop: {
-                address: {
-                    id: 0,
-                    latitude: from.coordinates.latitude,
-                    longitude: from.coordinates.longitude,
-                    name: from.text,
-                },
-                type: StopType.Start,
-                id: 0,
-                journeyId: 0,
-                userId: 0,
-            },
-            toStop: {
-                address: {
-                    id: 0,
-                    latitude: to.coordinates.latitude,
-                    longitude: to.coordinates.longitude,
-                    name: to.text,
-                },
-                type: StopType.Finish,
-                id: 0,
-                journeyId: 0,
-                userId: 0,
-            },
         })
             .then((res) => {
-                navigation.navigate("OK Search Result", { journeys: res.data });
+                if(res.data.length > EMPTY_COLLECTION_LENGTH) {
+                    navigation.navigate("OK Search Result", { journeys: res.data });
+                } else {
+                    navigation.navigate("Bad Search Result");
+                }
             })
             .catch((ex) => {
                 console.log(ex);
