@@ -25,7 +25,7 @@ test("should return correct URL", async () =>
     expect(APIRoutes.getModelUrl()).toBe("https://car-project.azurewebsites.net/api/models/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getNotificationsUrl()).toBe("https://car-project.azurewebsites.net/api/Notification/"));
+    expect(APIRoutes.getNotificationsUrl()).toBe("https://car-project.azurewebsites.net/api/notifications/"));
 
 test("should return correct URL", async () =>
     expect(APIRoutes.getPreferencesUrl()).toBe("https://car-project.azurewebsites.net/api/user-preferences/"));

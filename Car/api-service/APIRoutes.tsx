@@ -13,7 +13,7 @@ const APIRoutes = {
 
     getModelUrl: () => APIConfig.URL + "api/models/",
 
-    getNotificationsUrl: () => APIConfig.URL + "api/Notification/",
+    getNotificationsUrl: () => APIConfig.URL + "api/notifications/",
 
     getPreferencesUrl: () => APIConfig.URL + "api/user-preferences/",
 
