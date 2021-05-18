@@ -22,7 +22,10 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import EditCarsStyle from "./EditCarsStyle";
 import DM from "../../../../../../components/styles/DM";
-import { MAX_PLATE_NUMBER_LENGTH, MIN_PLATE_NUMBER_LENGTH } from "../../../../../../constants/Constants";
+import {
+    MAX_PLATE_NUMBER_LENGTH,
+    MIN_PLATE_NUMBER_LENGTH
+} from "../../../../../../constants/CarConstants";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import UpdateCarViewModel from "../../../../../../../models/car/UpdateCarViewModel";
 import { navigate } from "../../../../../../components/navigation/Navigation";
@@ -89,20 +92,13 @@ const EditCars = (navigation : any) => {
     }, []);
 
     function validatePlateNumber () {
-        let isValid;
-
-        if (
-            !plateNumber ||
-            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-            !plateNumber.match(/^[A-ZА-Я0-9-]+$/
-            )
-        ) {
-            isValid = false;
-        } else {
-            isValid = true;
-        }
-        setValidPlateNumber(isValid);
+        setValidPlateNumber(
+            Boolean(
+                plateNumber &&
+                plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
+                plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
+                plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+            ));
     }
 
     const uploadPhotoHandle = () => {
