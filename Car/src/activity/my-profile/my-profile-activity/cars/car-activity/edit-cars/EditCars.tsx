@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Image,
@@ -22,17 +22,17 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import EditCarsStyle from "./EditCarsStyle";
 import DM from "../../../../../../components/styles/DM";
-import { MAX_PLATE_NUMBER_LENGTH, MIN_PLATE_NUMBER_LENGTH } from "../../../../../../constants/CarConstants";
-import { FIRST_ELEMENT_INDEX } from "../../../../../../constants/GeneralConstants";
-import AuthContext from "../../../../../../components/auth/AuthContext";
-import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
+import {
+    MAX_PLATE_NUMBER_LENGTH,
+    MIN_PLATE_NUMBER_LENGTH
+} from "../../../../../../constants/CarConstants";
+import Indicator from "../../../../../../components/activity-indicator/Indicator";
+import UpdateCarViewModel from "../../../../../../../models/car/UpdateCarViewModel";
+import { navigate } from "../../../../../../components/navigation/Navigation";
 
-const EditCars = (navigation: any) => {
-    const { user } = useContext(AuthContext);
-
-    let modelPickerController: any;
-    let brandPickerController: any;
-    let colorPickerController: any;
+const EditCars = (navigation : any) => {
+    const [isLoading, setLoading] = useState(true);
+    const [isSaving, setSaving] = useState(false);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
     const [models, setModels] = useState({} as CarModel[]);
@@ -45,25 +45,6 @@ const EditCars = (navigation: any) => {
             }))
     );
 
-    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-
-    function validatePlateNumber () : boolean {
-        if (
-            !plateNumber ||
-            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
-        ) {
-            setValidPlateNumber(false);
-
-            return false;
-        } else {
-            setValidPlateNumber(true);
-
-            return true;
-        }
-    }
-
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
         null
     );
@@ -75,16 +56,50 @@ const EditCars = (navigation: any) => {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-
+    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
-    const [loading, setLoading] = useState(false);
+    let modelPickerController: any;
+    let brandPickerController: any;
+    let colorPickerController: any;
 
     useEffect(() => {
-        BrandService.getBrands().then((res) => {
-            setBrands(res.data);
+        BrandService.getBrands().then((response) => {
+            setBrands(response.data);
         });
+        let carId = Number(navigation.props.route.params.carId);
+
+        CarService.getById(carId).then((response) => {
+            const car = response.data;
+            const carModel = car?.model;
+            let carBrandItem : CarDropDownPickerItem = {
+                label: carModel?.brand?.name ?? "",
+                value: carModel?.brand?.id.toString() ?? ""
+            };
+            let carModelItem : CarDropDownPickerItem = {
+                label: carModel?.name ?? "",
+                value: carModel?.id.toString() ?? ""
+            };
+            const carColor = colors.find(obj => {
+                return obj.value === car?.color.toString();
+            });
+
+            selectBrandHandle(carBrandItem);
+            setColor(carColor!);
+            setPlateNumber(car?.plateNumber ?? "");
+            setModel(carModelItem);
+        }).catch((e: any) => console.log(e));
     }, []);
+
+    function validatePlateNumber () {
+        setValidPlateNumber(
+            Boolean(
+                plateNumber &&
+                plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
+                plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
+                plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+            ));
+    }
 
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
@@ -95,11 +110,11 @@ const EditCars = (navigation: any) => {
     };
 
     const saveCarHandle = async () => {
-        setLoading(true);
-        let photoToAdd;
+        setSaving(true);
+        let photoToUpdate;
 
         if (photo !== null && photo !== undefined) {
-            photoToAdd = {
+            photoToUpdate = {
                 name: photo.fileName,
                 type: photo.type,
                 uri: photo?.uri
@@ -107,29 +122,28 @@ const EditCars = (navigation: any) => {
         }
         else
         {
-            photoToAdd = null;
+            photoToUpdate = null;
         }
 
-        let car: CreateCarViewModel = {
-            ownerId : Number(user?.id),
+        const car: UpdateCarViewModel = {
+            id: Number(navigation.props.route.params.carId),
             modelId : Number(selectedModel?.value),
             color : Number(selectedColor?.value),
             plateNumber: plateNumber,
-            photo : photoToAdd
+            photo : photoToUpdate
         };
 
-        await CarService.add(car)
+        await CarService.update(car)
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
-        setLoading(false);
+        setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
-            setModels(res.data);
-            modelPickerController.selectItem(res.data[FIRST_ELEMENT_INDEX]?.id.toString());
-            modelPickerController.open();
+        ModelService.getModelsByBrandId(Number(brand.value)).then((response) => {
+            setModels(response.data);
+            setLoading(false);
         });
     };
 
@@ -153,6 +167,18 @@ const EditCars = (navigation: any) => {
         }))
         : null;
 
+    if (isLoading) return (
+        <View
+            style={[EditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
+        >
+            <Indicator
+                size="large"
+                color="#414045"
+                text="Loading information..."
+            />
+        </View>
+    );
+
     return (
         <View
             style={[EditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
@@ -169,13 +195,17 @@ const EditCars = (navigation: any) => {
                         {
                             backgroundColor: DM("#FFFFFF"),
                             borderColor: DM("#000000")
-                        }]}
-                    onPress={() => uploadPhotoHandle()}
+                        }]
+                    }
+                    onPress={() =>
+                        uploadPhotoHandle()
+                    }
                 >
                     <Text style={[EditCarsStyle.carButtonUploadText, { color: DM("black") }]}>
                         {Object.entries(photo).length
                             ? "Change photo"
-                            : "Upload photo"}
+                            : "Upload photo"
+                        }
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -187,6 +217,7 @@ const EditCars = (navigation: any) => {
                         items={brandItems}
                         zIndex={3000}
                         required={true}
+                        defaultValue={selectedBrand!.value}
                         selectHandle={(item: CarDropDownPickerItem) => {
                             selectBrandHandle(item);
                         }}
@@ -204,8 +235,8 @@ const EditCars = (navigation: any) => {
                         items={modelItems}
                         zIndex={2000}
                         required={true}
+                        defaultValue={selectedModel ? selectedModel.value : null}
                         disabled={!modelItems}
-                        defaultValue={null}
                         selectHandle={(item: CarDropDownPickerItem) =>
                             setModel(item)
                         }
@@ -223,6 +254,7 @@ const EditCars = (navigation: any) => {
                         items={colors}
                         zIndex={1000}
                         required={true}
+                        defaultValue={selectedColor!.value}
                         selectHandle={(item: CarDropDownPickerItem) =>
                             setColor(item)
                         }
@@ -235,15 +267,17 @@ const EditCars = (navigation: any) => {
                         }
                     />
                     <CarTextInput
+                        defaultValue={plateNumber}
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
-                        onEndEditing={()=>validatePlateNumber()}
+                        onEndEditing={() =>
+                            validatePlateNumber()
+                        }
                     />
-                    {
-                        isValidPlateNumber ? null :
-                            <Text style={{ color: DM("red") }}>
-                                This field must contain 4-10 characters, including numbers, letters, hyphens
-                            </Text>
+                    {isValidPlateNumber ? null :
+                        <Text style={{ color: DM("red") }}>
+                            This field must contain 4-10 characters, including numbers, letters, hyphens
+                        </Text>
                     }
                 </View>
                 <View style={EditCarsStyle.saveButtonContainer}>
@@ -255,12 +289,14 @@ const EditCars = (navigation: any) => {
                         </Text>
                     </Text>
                     <TouchableOpacity
-                        style={ !selectedBrand?.value ||
+                        style={
+                            !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
                             !isValidPlateNumber ?
-                            [EditCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
-                            : [EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                                [EditCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
+                                : [EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]
+                        }
                         disabled={
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
@@ -268,13 +304,13 @@ const EditCars = (navigation: any) => {
                             !isValidPlateNumber
                         }
                         onPress={() => {
-                            saveCarHandle().then(() => navigation.goBack());
+                            saveCarHandle().then(() => navigate("Cars"));
                         }}
                     >
                         <Text style={[EditCarsStyle.carButtonSaveText, { color: DM("white") }]}>
                             Save
                         </Text>
-                        {loading ? (
+                        {isSaving ? (
                             <ActivityIndicator
                                 style={EditCarsStyle.spinner}
                                 size={20}
