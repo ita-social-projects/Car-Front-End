@@ -142,128 +142,131 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
                         height: "100%", width: "100%" }}>
 
                         <View style={{ height: 300 }}>
-                            <ScrollView
-                                style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
-                            >
-                                {/* Car block */}
+                            <View style={{ height: "170%" }}>
 
-                                <View style={JourneyPageStyle.carContainer}>
-                                    <View style={JourneyPageStyle.carAvatarContainer}>
-                                        {car?.imageId ? (
-                                            <Image
-                                                source={{
-                                                    uri: ImageService.getImageById(car?.imageId)
-                                                }}
-                                                style={JourneyPageStyle.carAvatar}
-                                            />
-                                        ) : (
-                                            <Ionicons
-                                                name={"car"}
-                                                size={20}
-                                                color="#414045"
-                                            />
-                                        )}
-                                    </View>
-                                    <View style={JourneyPageStyle.carInfoContainer}>
-                                        <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
-                                            {car?.model?.brand?.name} {car?.model?.name}
-                                        </Text>
-                                        <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
-                                            {car?.plateNumber}
-                                        </Text>
-                                    </View>
-                                </View>
+                                <ScrollView
+                                    style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
+                                >
+                                    {/* Car block */}
 
-                                {/* Stops block */}
-
-                                <View style={JourneyPageStyle.stopsBlock}>
-                                    {currentJourney?.stops.length ? currentJourney?.stops.map((item) =>
-                                        <View key={item?.id} style={JourneyPageStyle.stopListItem}>
-                                            <View style={JourneyPageStyle.stopListItemRow}>
-                                                <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
-                                                {item?.type !== StopType.Finish && (
-                                                    <View style={[JourneyPageStyle.stopCustomLineIcon,
-                                                        { backgroundColor: DM("#AAA9AE") }
-                                                    ]} />
-                                                )}
-                                            </View>
-                                            <Text style={{ color: DM("black") }}>
-                                                {item?.address?.name}
+                                    <View style={JourneyPageStyle.carContainer}>
+                                        <View style={JourneyPageStyle.carAvatarContainer}>
+                                            {car?.imageId ? (
+                                                <Image
+                                                    source={{
+                                                        uri: ImageService.getImageById(car?.imageId)
+                                                    }}
+                                                    style={JourneyPageStyle.carAvatar}
+                                                />
+                                            ) : (
+                                                <Ionicons
+                                                    name={"car"}
+                                                    size={20}
+                                                    color="#414045"
+                                                />
+                                            )}
+                                        </View>
+                                        <View style={JourneyPageStyle.carInfoContainer}>
+                                            <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
+                                                {car?.model?.brand?.name} {car?.model?.name}
+                                            </Text>
+                                            <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
+                                                {car?.plateNumber}
                                             </Text>
                                         </View>
-                                    ) : (
-                                        <>
-                                            <View style={JourneyPageStyle.stopListItem}>
-                                                <View style={JourneyPageStyle.stopListItemRow}>
-                                                    <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
-                                                    <View style={[JourneyPageStyle.stopCustomLineIcon,
-                                                        { backgroundColor: DM("#AAA9AE") }]}
-                                                    />
-                                                </View>
-                                                <Text style={{ color: DM("black") }}>
-                                                Location A
-                                                </Text>
-                                            </View>
-                                            <View style={JourneyPageStyle.stopListItem}>
-                                                <View style={JourneyPageStyle.stopListItemRow}>
-                                                    <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
-                                                </View>
-                                                <Text style={{ color: DM("black") }}>
-                                                Location B
-                                                </Text>
-                                            </View>
-                                        </>
-                                    )}
-                                </View>
-
-                                {/* Participants block */}
-
-                                <Text style={[JourneyPageStyle.applicantsHeader, { color: DM("black") }]}>
-                                    SoftServians {currentJourney?.participants?.length}/
-                                    {currentJourney?.countOfSeats}
-                                </Text>
-                                {currentJourney?.participants.map((item, index) => (
-                                    <View key={index}>
-                                        <TouchableOpacity
-                                            style={JourneyPageStyle.applicant}
-                                            onPress={() =>
-                                                navigation.navigate("Applicant Page", {
-                                                    userId: item?.id
-                                                })
-                                            }
-                                        >
-                                            <View style={JourneyPageStyle.userImageBlock}>
-                                                <AvatarLogo user={item} size={38.5} />
-                                            </View>
-                                            <View style={JourneyPageStyle.userInfoBlock}>
-                                                <LinearTextGradient
-                                                    locations={[GRADIENT_START, GRADIENT_END]}
-                                                    colors={["#00A3CF", "#5552A0"]}
-                                                    start={{ x: 0, y: 0 }}
-                                                    end={{ x: 1, y: 0 }}
-                                                >
-                                                    <Text style={[JourneyPageStyle.applicantNameText,
-                                                        { color: DM("#00A3CF") }
-                                                    ]}>
-                                                        {item?.name} {item?.surname}
-                                                    </Text>
-                                                </LinearTextGradient>
-                                                <View style={JourneyPageStyle.userSecondaryInfoBlock}>
-                                                    <Text style={[JourneyPageStyle.userRoleText,
-                                                        { color: DM("#909095") }]}>
-                                                        {item?.position}
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                        </TouchableOpacity>
-
-                                        <Divider style={[JourneyPageStyle.separator,
-                                            { backgroundColor: DM("#C1C1C5") }]} />
                                     </View>
-                                ))}
 
-                                <View style={{ height: JOURNEY_CONTENT_HEIGHT }}/>
-                            </ScrollView>
+                                    {/* Stops block */}
+
+                                    <View style={JourneyPageStyle.stopsBlock}>
+                                        {currentJourney?.stops.length ? currentJourney?.stops.map((item) =>
+                                            <View key={item?.id} style={JourneyPageStyle.stopListItem}>
+                                                <View style={JourneyPageStyle.stopListItemRow}>
+                                                    <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+                                                    {item?.type !== StopType.Finish && (
+                                                        <View style={[JourneyPageStyle.stopCustomLineIcon,
+                                                            { backgroundColor: DM("#AAA9AE") }
+                                                        ]} />
+                                                    )}
+                                                </View>
+                                                <Text style={{ color: DM("black") }}>
+                                                    {item?.address?.name}
+                                                </Text>
+                                            </View>
+                                        ) : (
+                                            <>
+                                                <View style={JourneyPageStyle.stopListItem}>
+                                                    <View style={JourneyPageStyle.stopListItemRow}>
+                                                        <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+                                                        <View style={[JourneyPageStyle.stopCustomLineIcon,
+                                                            { backgroundColor: DM("#AAA9AE") }]}
+                                                        />
+                                                    </View>
+                                                    <Text style={{ color: DM("black") }}>
+                                                        Location A
+                                                    </Text>
+                                                </View>
+                                                <View style={JourneyPageStyle.stopListItem}>
+                                                    <View style={JourneyPageStyle.stopListItemRow}>
+                                                        <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
+                                                    </View>
+                                                    <Text style={{ color: DM("black") }}>
+                                                        Location B
+                                                    </Text>
+                                                </View>
+                                            </>
+                                        )}
+                                    </View>
+
+                                    {/* Participants block */}
+
+                                    <Text style={[JourneyPageStyle.applicantsHeader, { color: DM("black") }]}>
+                                    SoftServians {currentJourney?.participants?.length}/
+                                        {currentJourney?.countOfSeats}
+                                    </Text>
+                                    {currentJourney?.participants.map((item, index) => (
+                                        <View key={index}>
+                                            <TouchableOpacity
+                                                style={JourneyPageStyle.applicant}
+                                                onPress={() =>
+                                                    navigation.navigate("Applicant Page", {
+                                                        userId: item?.id
+                                                    })
+                                                }
+                                            >
+                                                <View style={JourneyPageStyle.userImageBlock}>
+                                                    <AvatarLogo user={item} size={38.5} />
+                                                </View>
+                                                <View style={JourneyPageStyle.userInfoBlock}>
+                                                    <LinearTextGradient
+                                                        locations={[GRADIENT_START, GRADIENT_END]}
+                                                        colors={["#00A3CF", "#5552A0"]}
+                                                        start={{ x: 0, y: 0 }}
+                                                        end={{ x: 1, y: 0 }}
+                                                    >
+                                                        <Text style={[JourneyPageStyle.applicantNameText,
+                                                            { color: DM("#00A3CF") }
+                                                        ]}>
+                                                            {item?.name} {item?.surname}
+                                                        </Text>
+                                                    </LinearTextGradient>
+                                                    <View style={JourneyPageStyle.userSecondaryInfoBlock}>
+                                                        <Text style={[JourneyPageStyle.userRoleText,
+                                                            { color: DM("#909095") }]}>
+                                                            {item?.position}
+                                                        </Text>
+                                                    </View>
+                                                </View>
+                                            </TouchableOpacity>
+
+                                            <Divider style={[JourneyPageStyle.separator,
+                                                { backgroundColor: DM("#C1C1C5") }]} />
+                                        </View>
+                                    ))}
+
+                                    <View style={{ height: JOURNEY_CONTENT_HEIGHT }}/>
+                                </ScrollView>
+                            </View>
                         </View>
 
                         {/* Buttons block */}
