@@ -24,12 +24,12 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
+import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import {
-    FIRST_ELEMENT_INDEX,
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH,
-    MAX_PHOTO_FILE_SIZE
-} from "../../../../../../constants/Constants";
+} from "../../../../../../constants/CarConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../../../../constants/GeneralConstants";
 import DM from "../../../../../../components/styles/DM";
 import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
 

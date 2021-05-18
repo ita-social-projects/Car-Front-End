@@ -7,7 +7,7 @@ import User from "../../../models/user/User";
 import LoginService from "../../../api-service/login-service/LoginService";
 import AuthContext from "./AuthContext";
 import { EventRegister } from "react-native-event-listeners";
-import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/Constants";
+import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/ProfileConstants";
 
 const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);

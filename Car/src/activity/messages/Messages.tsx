@@ -5,11 +5,14 @@ import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
 import MessagesStyle from "./MessagesStyle";
 import {
-    GRADIENT_END, GRADIENT_START,
     MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
-    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
-    NOT_EXISTING_ELEMENT_INDEX
-} from "../../constants/Constants";
+    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER
+} from "../../constants/MessageConstants";
+import {
+    GRADIENT_END,
+    GRADIENT_START
+} from "../../constants/StylesConstants";
+import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import DM from "../../components/styles/DM";
 import { chatsArrToFilteredChatsArr, FilteredChat, MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
