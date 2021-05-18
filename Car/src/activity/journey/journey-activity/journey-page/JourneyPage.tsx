@@ -1,21 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, View } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import JourneyPageStyle from "./JourneyPageStyle";
 import Journey from "../../../../../models/journey/Journey";
-import { Divider } from "react-native-elements";
-import moment from "moment";
-import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import StopType from "../../../../../models/stop/StopType";
-import * as navigation from "../../../../components/navigation/Navigation";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
     FIRST_ELEMENT_INDEX,
-    INITIAL_TIME,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MAX_POPUP_POSITION,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -31,6 +26,7 @@ import CarBlock from "./CarBlock/CarBlock";
 import StopsBlock from "./StopsBlock/StopsBlock";
 import ParticipantsBlock from "./ParticipantsBlock/ParticipantsBlock";
 import ButtonBlock from "./ButtonsBlock/ButtonsBlock";
+import DriverBlock from "./DriverBlock/DriverBlock";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -162,42 +158,7 @@ const JourneyPage = ({ props }: { props: JourneyPageProps }) => {
 
                     </View>
                 }
-                renderHeader={
-
-                    <View style={[JourneyPageStyle.contentView, { backgroundColor: DM("white") }]}>
-
-                        {/* Driver block */}
-
-                        <TouchableOpacity
-                            style={JourneyPageStyle.userBlock}
-                            onPress={() =>
-                                navigation.navigate("Applicant Page", {
-                                    userId: currentJourney?.organizer?.id
-                                })
-                            }
-                        >
-                            <View style={JourneyPageStyle.userImageBlock}>
-                                <AvatarLogo user={currentJourney?.organizer} size={38.5} />
-                            </View>
-                            <View style={JourneyPageStyle.userInfoBlock}>
-                                <Text style={[JourneyPageStyle.userNameText, { color: DM("black") }]}>
-                                    {currentJourney?.organizer?.name}{" "}
-                                    {currentJourney?.organizer?.surname}'s ride
-                                </Text>
-                                <View style={JourneyPageStyle.userSecondaryInfoBlock}>
-                                    <Text style={[JourneyPageStyle.userRoleText, { color: DM("#909095") }]}>
-                                        {currentJourney?.organizer?.position}
-                                    </Text>
-                                    <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
-                                        {moment(new Date(currentJourney?.departureTime ?? INITIAL_TIME)).calendar()}
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                        <View style={JourneyPageStyle.driverBlockWhiteSpace} />
-                        <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
-                    </View>
-                }
+                renderHeader={<DriverBlock journey={currentJourney}/>}
             />
         </>
     );

@@ -5,14 +5,7 @@ import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import React from "react";
-import Journey from "../../../../../../models/journey/Journey";
-
-interface ButtonBlockProps {
-    isDriver: boolean,
-    isPassenger: boolean,
-    isRequested: boolean,
-    journey: Journey
-}
+import ButtonBlockProps from "./ButtonBlockProps";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
     return (
@@ -62,8 +55,6 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                     </TouchableOpacity>
                 )}
             </View>
-            {/*<Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />*/}
-            {/*<Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />*/}
         </View>
     );
 };
