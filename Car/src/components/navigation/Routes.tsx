@@ -8,7 +8,7 @@ import AppTabs from "./app-tabs/AppTabs";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
-import { MILLISECONDS_IN_MONTH } from "../../constants/Constants";
+import { MILLISECONDS_IN_MONTH } from "../../constants/DimensionConstants";
 import { StatusBar } from "react-native";
 import DM from "../styles/DM";
 import changeNavigationBarColor from "react-native-navigation-bar-color";

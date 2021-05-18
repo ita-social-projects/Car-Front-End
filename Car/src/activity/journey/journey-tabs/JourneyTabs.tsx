@@ -21,21 +21,26 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 import {
-    ANIMATION_DURATION,
     CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
-    FIRST_ELEMENT_INDEX,
-    HALF_OPACITY,
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
+    NUMBER_OF_STOPS_LIMIT,
+    REQUEST_RIDE_POPUP_HEIGHT
+} from "../../../constants/JourneyConstants";
+import {
+    HALF_OPACITY,
     MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION, NUMBER_OF_STOPS_LIMIT,
+    MIN_POPUP_POSITION,
+    ZERO_OPACITY
+} from "../../../constants/StylesConstants";
+import {
+    ANIMATION_DURATION,
     SLEEP_DURATION,
-    ZERO_OPACITY,
     animateOpacity,
-    sleep,
-    REQUEST_RIDE_POPUP_HEIGHT
-} from "../../../constants/Constants";
+    sleep
+} from "../../../constants/AnimationConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
 import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";

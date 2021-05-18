@@ -6,7 +6,7 @@ import AddressInputStyles from "./AddressInputStyles";
 import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import Location from "../../../../../../models/location/Location";
-import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Constants";
+import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/AddressConstants";
 import Address from "../../../../../../models/Address";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";

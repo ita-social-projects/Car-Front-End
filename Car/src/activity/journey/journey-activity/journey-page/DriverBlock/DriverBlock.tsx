@@ -5,7 +5,7 @@ import * as navigation from "../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import moment from "moment";
-import { INITIAL_TIME } from "../../../../../constants/Constants";
+import { INITIAL_TIME } from "../../../../../constants/JourneyConstants";
 import { Divider } from "react-native-elements";
 import React from "react";
 import Journey from "../../../../../../models/journey/Journey";

@@ -5,9 +5,10 @@ import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import AuthContext from "../auth/AuthContext";
-import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION, MAX_ADDRESS_NAME_LENGTH } from "../../constants/Constants";
+import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/GeneralConstants";
 import DM from "../styles/DM";
 import Journey from "../../../models/journey/Journey";
+import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
 
 const getShortAddressName = (name: string) => {
     return name.length <= MAX_ADDRESS_NAME_LENGTH ?

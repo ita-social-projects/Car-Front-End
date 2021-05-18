@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import { LinearTextGradient } from "react-native-text-gradient";
-import { GRADIENT_END, GRADIENT_START } from "../../../../../constants/Constants";
+import { GRADIENT_END, GRADIENT_START } from "../../../../../constants/StylesConstants";
 import { Divider } from "react-native-elements";
 import React from "react";
 import Journey from "../../../../../../models/journey/Journey";

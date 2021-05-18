@@ -10,7 +10,7 @@ import DM from "../../../../../components/styles/DM";
 import HeaderRemoveCarButton from "../../../../../components/header-remove-car-button/HeaderRemoveCarButton";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../../components/navigation/Navigation";
-import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/Constants";
+import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/AnimationConstants";
 import CarService from "../../../../../../api-service/car-service/CarService";
 
 const StackTabs = createStackNavigator();

@@ -10,13 +10,16 @@ import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
-    FIRST_ELEMENT_INDEX,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
-    MAX_POPUP_POSITION,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
-    MIN_POPUP_POSITION, ZERO_COORDINATE
-} from "../../../../constants/Constants";
+} from "../../../../constants/JourneyConstants";
+import {
+    MAX_POPUP_POSITION,
+    MIN_POPUP_POSITION,
+    ZERO_COORDINATE
+} from "../../../../constants/StylesConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";

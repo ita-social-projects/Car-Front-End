@@ -12,7 +12,7 @@ import {
     THIRD_ELEMENT_INDEX,
     FOURTH_ELEMENT_INDEX,
     EMPTY_COLLECTION_LENGTH
-} from "../../constants/Constants";
+} from "../../constants/GeneralConstants";
 import DM from "../../components/styles/DM";
 import NavigationAddListener from "../../types/NavigationAddListener";
 

@@ -14,14 +14,18 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import * as navigation from "../../../../components/navigation/Navigation";
 import {
-    LEFT_PADDING_FOR_FROM_PLACEHOLDER,
-    LEFT_PADDING_FOR_TO_PLACEHOLDER,
-    INITIAL_PASSENGERS_COUNT,
     initialWayPoint,
     initialCoordinate,
+} from "../../../../constants/AddressConstants";
+import {
+    INITIAL_PASSENGERS_COUNT,
+    LEFT_PADDING_FOR_FROM_PLACEHOLDER,
+    LEFT_PADDING_FOR_TO_PLACEHOLDER,
+} from "../../../../constants/JourneyConstants";
+import {
     SECOND_ELEMENT_INDEX,
     EMPTY_COLLECTION_LENGTH,
-} from "../../../../constants/Constants";
+} from "../../../../constants/GeneralConstants";
 import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import WayPoint from "../../../../types/WayPoint";
 import Address from "../../../../../models/Address";

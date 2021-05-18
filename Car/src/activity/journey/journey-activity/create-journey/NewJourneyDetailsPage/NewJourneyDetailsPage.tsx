@@ -18,12 +18,12 @@ import SwitchSelector from "../SwitchSelector/SwitchSelector";
 import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../../components/auth/AuthContext";
+import { MINUTES_OFFSET } from "../../../../../constants/AnimationConstants";
+import { DEFAULT_AVAILABLE_SEATS_COUNT, } from "../../../../../constants/JourneyConstants";
 import {
-    DEFAULT_AVAILABLE_SEATS_COUNT,
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX,
-    MINUTES_OFFSET
-} from "../../../../../constants/Constants";
+    FIRST_ELEMENT_INDEX
+} from "../../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import StopType from "../../../../../../models/stop/StopType";
 import * as navigation from "../../../../../components/navigation/Navigation";

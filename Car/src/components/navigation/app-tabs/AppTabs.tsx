@@ -9,7 +9,7 @@ import AppTabsStyle from "./AppTabsStyle";
 import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
-import { EMPTY_COLLECTION_LENGTH } from "../../../constants/Constants";
+import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import DM from "../../styles/DM";
 import updateLocale from "../../styles/DTFormat";
 
