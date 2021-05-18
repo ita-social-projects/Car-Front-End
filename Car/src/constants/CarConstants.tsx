@@ -1,0 +1,2 @@
+export const MAX_PLATE_NUMBER_LENGTH = 10;
+export const MIN_PLATE_NUMBER_LENGTH = 4;

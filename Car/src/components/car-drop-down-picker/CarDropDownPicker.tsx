@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { DROP_DOWN_MAX_HEIGHT } from "../../constants/Constants";
+import { DROP_DOWN_MAX_HEIGHT } from "../../constants/StylesConstants";
 import DM from "../styles/DM";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
 import CarDropDownPickerProps from "./CarDropDownPickerProps";

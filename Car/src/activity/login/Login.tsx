@@ -3,7 +3,7 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
-import { REFRESHER_TIMEOUT } from "../../constants/Constants";
+import { REFRESHER_TIMEOUT } from "../../constants/AnimationConstants";
 import DM from "../../components/styles/DM";
 import NavigationAddAndRemoveListener from "../../types/NavigationAddAndRemoveListener";
 
