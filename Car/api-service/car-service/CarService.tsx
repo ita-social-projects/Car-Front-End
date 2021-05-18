@@ -1,13 +1,14 @@
 import CarViewModel from "../../models/car/CarViewModel";
 import APIService from "../APIService";
 import UpdateCarViewModel from "../../models/car/UpdateCarViewModel";
-import axios from "axios";
 import APIRoutes from "../APIRoutes";
+import CreateCarViewModel from "../../models/car/CreateCarViewModel";
 
 const route = APIRoutes.getCarUrl();
 
 const CarService = {
-    add: async (car: FormData) => axios.post(route, car),
+    add: async (car: CreateCarViewModel) =>
+        APIService.post<CreateCarViewModel>(route, car),
 
     update: async (car: UpdateCarViewModel) =>
         APIService.put<UpdateCarViewModel>(route, car),
@@ -18,7 +19,10 @@ const CarService = {
         APIService.get<Array<CarViewModel>>(route + "by-user/" + id),
 
     getAvatar: async (id: number) =>
-        APIService.get<string>(route + id + "/photo")
+        APIService.get<string>(route + id + "/photo"),
+
+    deleteCar: async (id: number) =>
+        APIService.delete(route + id)
 };
 
 export default CarService;

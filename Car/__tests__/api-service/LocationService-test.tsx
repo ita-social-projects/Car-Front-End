@@ -3,8 +3,15 @@ import "react-native";
 import APIService from "../../api-service/APIService";
 import LocationService from "../../api-service/location-service/LocationService";
 import Location from "../../models/location/Location";
+import CreateLocationModel from "../../models/location/CreateLocationModel";
 
 describe("Location Service test", () => {
+    let createLocationModelData: CreateLocationModel[] = [{
+        address: null,
+        name: "ABC",
+        typeId: 1,
+        userId: 1,
+    }];
     let locationData: Location[] = [{
         id: 1,
         address: null,
@@ -73,7 +80,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.add(locationData[0]).then((res) => {
+        LocationService.add(createLocationModelData[0]).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData[0]));
         });

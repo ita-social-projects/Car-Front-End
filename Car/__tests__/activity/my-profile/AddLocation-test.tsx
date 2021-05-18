@@ -70,24 +70,23 @@ test("renders correctly", async () =>
               Object {
                 "icon": [Function],
                 "label": "Work",
-                "value": 1,
+                "value": 4,
               },
               Object {
                 "icon": [Function],
                 "label": "Home",
-                "value": 2,
+                "value": 3,
               },
               Object {
                 "icon": [Function],
                 "label": "Other",
-                "value": 3,
+                "value": 9,
               },
             ]
           }
           onChangeItem={[Function]}
           onOpen={[Function]}
           placeholder="Choose the address type and the icon"
-          valueId={0}
         />
       </View>
       <MapView
@@ -160,6 +159,7 @@ test("renders correctly", async () =>
       </MapView>
       <ForwardRef
         disabled={true}
+        onPress={[Function]}
         style={
           Array [
             Object {

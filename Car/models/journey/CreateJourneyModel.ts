@@ -1,5 +1,5 @@
-import { LatLng } from "react-native-maps";
 import Stop from "../stop/Stop";
+import JourneyPoint from "./JourneyPoint";
 
 interface CreateJourneyModel {
     departureTime: Date,
@@ -9,8 +9,10 @@ interface CreateJourneyModel {
     organizerId: number,
     carId: number,
     isOnOwnCar: boolean,
-    routePoints: LatLng[],
-    stops: Stop[]
+    journeyPoints: JourneyPoint[],
+    stops: Stop[],
+    durationInMinutes: number,
+    routeDistance: number
 }
 
 export default CreateJourneyModel;

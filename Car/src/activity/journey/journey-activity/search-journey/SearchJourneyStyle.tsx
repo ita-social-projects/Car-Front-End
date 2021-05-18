@@ -3,7 +3,12 @@ import Font from "../../../../data/fonts/Font";
 
 const SearchJourneyStyle = StyleSheet.create({
     container: {
-        zIndex: 150,
+        backgroundColor: "#F2F2F2",
+    },
+
+    locationContainer: {
+        marginTop: 30,
+        marginHorizontal: 20,
     },
 
     loadingContainer: {
@@ -76,7 +81,13 @@ const SearchJourneyStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 16,
         lineHeight: 20
-    }
+    },
+
+    buttonContainer: {
+        flex: 1,
+        alignItems: "flex-end",
+        flexDirection: "row-reverse",
+    },
 });
 
 export default SearchJourneyStyle;

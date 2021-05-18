@@ -31,6 +31,7 @@ import {
     MAX_PHOTO_FILE_SIZE
 } from "../../../../../../constants/Constants";
 import DM from "../../../../../../components/styles/DM";
+import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
@@ -114,20 +115,29 @@ const AddCars = () => {
 
     const saveCarHandle = async () => {
         setLoading(true);
-        const formData = new FormData();
+        let photoToAdd;
 
-        formData.append("ownerId", user?.id);
-        formData.append("modelId", Number(selectedModel?.value));
-        formData.append("color", Number(selectedColor?.value));
-        formData.append("plateNumber", plateNumber);
         if (photo !== null && photo !== undefined) {
-            formData.append("image", {
+            photoToAdd = {
                 name: photo.fileName,
                 type: photo.type,
                 uri: photo?.uri
-            });
+            };
         }
-        await CarService.add(formData)
+        else
+        {
+            photoToAdd = null;
+        }
+
+        let car: CreateCarViewModel = {
+            ownerId : Number(user?.id),
+            modelId : Number(selectedModel?.value),
+            color : Number(selectedColor?.value),
+            plateNumber: plateNumber,
+            photo : photoToAdd
+        };
+
+        await CarService.add(car)
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
         setLoading(false);

@@ -17,7 +17,8 @@ describe("Journey Service test", () => {
         participants: [],
         routeDistance: 2,
         schedule: null,
-        stops: []
+        stops: [],
+        journeyPoints: []
     }];
 
     let stopsData: Stop[][] = [[{
@@ -25,42 +26,42 @@ describe("Journey Service test", () => {
         id: 1,
         journeyId: 1,
         type: 0,
-        user: null
+        userId: 0
     },
     {
         address: null,
         id: 2,
         journeyId: 1,
         type: 1,
-        user: null
+        userId: 0
     },
     {
         address: null,
         id: 3,
         journeyId: 1,
         type: 2,
-        user: null
+        userId: 0
     }],
     [{
         address: null,
         id: 4,
         journeyId: 2,
         type: 0,
-        user: null
+        userId: 0
     },
     {
         address: null,
         id: 5,
         journeyId: 2,
         type: 1,
-        user: null
+        userId: 0
     },
     {
         address: null,
         id: 6,
         journeyId: 2,
         type: 2,
-        user: null
+        userId: 0
     }]];
 
     test("should return journey", async () => {
