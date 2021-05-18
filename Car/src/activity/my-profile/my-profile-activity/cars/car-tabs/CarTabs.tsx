@@ -30,10 +30,8 @@ const CarTabs = () => {
     const deleteCar = (carId : any) => {
         setModalVisibility(false);
         CarService.deleteCar(carId).then((response) => {
-            console.log(response.status);
-            const status : number = 500;
-
-            status == StatusCodes.INTERNAL_SERVER_ERROR ? setDeleteModalVisibility(true) : hideDeleteConfirmModal();
+            response.status == StatusCodes.INTERNAL_SERVER_ERROR ?
+                setDeleteModalVisibility(true) : hideDeleteConfirmModal();
         });
     };
 
