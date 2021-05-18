@@ -4,15 +4,16 @@ import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native
 import DM from "../../../../../../components/styles/DM";
 import {
     initialWayPoint,
+    initialCamera,
+    initialCoordinate, DEFAULT_LOCATION_ICON_ID
+} from "../../../../../../constants/AddressConstants";
+import {
     THREE_ELEMENT_COLLECTION_LENGTH,
     THIRD_FROM_END_ELEMENT_INDEX,
     SECOND_FROM_END_ELEMENT_INDEX,
     FIRST_ELEMENT_INDEX,
-    SECOND_ELEMENT_INDEX,
-    initialCamera,
-    initialCoordinate, DEFAULT_LOCATION_ICON_ID
-} from "../../../../../../constants/Constants";
-
+    SECOND_ELEMENT_INDEX
+} from "../../../../../../constants/GeneralConstants";
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";

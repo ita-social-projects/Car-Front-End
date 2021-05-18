@@ -2,16 +2,18 @@ import React, { useState, useRef } from "react";
 import { Animated } from "react-native";
 import BottomSheet from "reanimated-bottom-sheet";
 import {
-    animateOpacity,
-    ANIMATION_DURATION,
-    FIRST_ELEMENT_INDEX,
     HALF_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_POSITION,
-    sleep,
-    SLEEP_DURATION,
     ZERO_OPACITY
-} from "../../constants/Constants";
+} from "../../constants/StylesConstants";
+import {
+    sleep,
+    animateOpacity,
+    ANIMATION_DURATION,
+    SLEEP_DURATION
+} from "../../constants/AnimationConstants";
+import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import BottomPopup from "../bottom-popup/BottomPopup";
 import BottomPopupProps from "../bottom-popup/BottomPopupProps";
 import DM from "../styles/DM";
