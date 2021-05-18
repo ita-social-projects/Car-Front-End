@@ -71,6 +71,10 @@ export const MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER = 2;
 export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
 export const RECENT_ADDRESSES_COUNT_LIMIT = 5;
 
+export enum StatusCodes {
+    INTERNAL_SERVER_ERROR = 500
+};
+
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,
     longitude: INITIAL_LONGITUDE

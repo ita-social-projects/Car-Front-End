@@ -65,6 +65,7 @@ module.exports = {
         "files": ["*Style.tsx", "Constants.tsx", "*-test.tsx"],
         "rules": {
             "no-magic-numbers": "off",
+            "unused-imports/no-unused-vars": "off",
         },
     }, ]
 };
