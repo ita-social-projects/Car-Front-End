@@ -91,313 +91,38 @@ test("renders correctly", async () =>
                 }
               }
             >
-              <View
+              <ScrollView
+                nestedScrollEnabled={true}
                 style={
-                  Object {
-                    "height": "170%",
-                  }
+                  Array [
+                    Object {
+                      "alignSelf": "center",
+                      "paddingHorizontal": "5%",
+                      "width": "100%",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                    },
+                  ]
                 }
               >
-                <ScrollView
-                  style={
-                    Array [
-                      Object {
-                        "alignSelf": "center",
-                        "paddingHorizontal": "5%",
-                        "width": "100%",
-                      },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                      },
-                    ]
-                  }
-                >
-                  <View
-                    style={
-                      Object {
-                        "flexDirection": "row",
-                        "paddingLeft": 16,
-                        "paddingTop": 22,
-                      }
-                    }
-                  >
-                    <View
-                      style={
-                        Object {
-                          "alignItems": "center",
-                          "height": 36,
-                          "justifyContent": "center",
-                          "width": 36,
-                        }
-                      }
-                    >
-                      <Icon
-                        allowFontScaling={false}
-                        color="#414045"
-                        name="car"
-                        size={20}
-                      />
-                    </View>
-                    <View
-                      style={
-                        Object {
-                          "paddingLeft": 10,
-                        }
-                      }
-                    >
-                      <Text
-                        style={
-                          Array [
-                            Object {
-                              "fontFamily": "Open Sans",
-                              "fontSize": 13,
-                              "lineHeight": 16,
-                              "paddingBottom": 4,
-                              "paddingTop": 1.25,
-                            },
-                            Object {
-                              "color": "#000000",
-                            },
-                          ]
-                        }
-                      >
-                         
-                      </Text>
-                      <Text
-                        style={
-                          Array [
-                            Object {
-                              "fontFamily": "Open Sans",
-                              "fontSize": 11,
-                              "lineHeight": 16,
-                            },
-                            Object {
-                              "color": "#414045",
-                            },
-                          ]
-                        }
-                      />
-                    </View>
-                  </View>
-                  <View
-                    style={
-                      Object {
-                        "justifyContent": "space-around",
-                        "marginLeft": 14,
-                        "marginTop": 20,
-                        "paddingBottom": 30,
-                        "width": "95%",
-                      }
-                    }
-                  >
-                    <React.Fragment>
-                      <View
-                        style={
-                          Object {
-                            "flexDirection": "row",
-                          }
-                        }
-                      >
-                        <View
-                          style={
-                            Object {
-                              "alignItems": "center",
-                              "flexDirection": "column",
-                            }
-                          }
-                        >
-                          <Icon
-                            allowFontScaling={false}
-                            color="#AAA9AE"
-                            name="ellipse"
-                            size={18}
-                          />
-                          <View
-                            style={
-                              Array [
-                                Object {
-                                  "height": 12,
-                                  "width": 2,
-                                },
-                                Object {
-                                  "backgroundColor": "#AAA9AE",
-                                },
-                              ]
-                            }
-                          />
-                        </View>
-                        <Text
-                          style={
-                            Object {
-                              "color": "black",
-                            }
-                          }
-                        >
-                          Location A
-                        </Text>
-                      </View>
-                      <View
-                        style={
-                          Object {
-                            "flexDirection": "row",
-                          }
-                        }
-                      >
-                        <View
-                          style={
-                            Object {
-                              "alignItems": "center",
-                              "flexDirection": "column",
-                            }
-                          }
-                        >
-                          <Icon
-                            allowFontScaling={false}
-                            color="#AAA9AE"
-                            name="ellipse"
-                            size={18}
-                          />
-                        </View>
-                        <Text
-                          style={
-                            Object {
-                              "color": "black",
-                            }
-                          }
-                        >
-                          Location B
-                        </Text>
-                      </View>
-                    </React.Fragment>
-                  </View>
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "fontFamily": "Proxima Nova",
-                          "fontSize": 16,
-                          "fontWeight": "bold",
-                          "justifyContent": "flex-start",
-                          "marginBottom": 10,
-                        },
-                        Object {
-                          "color": "black",
-                        },
-                      ]
-                    }
-                  >
-                    SoftServians 
-                    /
-                  </Text>
-                  <View
-                    style={
-                      Object {
-                        "height": 221,
-                      }
-                    }
-                  />
-                </ScrollView>
-              </View>
+                <CarBlock
+                  car={null}
+                />
+                <StopsBlock
+                  stops={Array []}
+                />
+                <ParticipantsBlock
+                  journey={null}
+                />
+              </ScrollView>
             </View>
-            <View
-              style={
-                Array [
-                  Object {
-                    "paddingHorizontal": "5%",
-                    "width": "100%",
-                  },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                  },
-                ]
-              }
-            >
-              <Themed.Divider
-                style={
-                  Array [
-                    Object {
-                      "height": 1,
-                      "width": "100%",
-                    },
-                    Object {
-                      "backgroundColor": "#C1C1C5",
-                    },
-                  ]
-                }
-              />
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                    "justifyContent": "flex-end",
-                    "marginBottom": 16,
-                    "marginTop": 16,
-                  }
-                }
-              >
-                <ForwardRef
-                  disabled={false}
-                  onPress={[Function]}
-                  style={
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "height": 51,
-                        "justifyContent": "center",
-                        "width": 337.5,
-                      },
-                      Object {
-                        "backgroundColor": "black",
-                      },
-                      false,
-                    ]
-                  }
-                >
-                  <Text
-                    style={
-                      Array [
-                        Object {
-                          "fontSize": 18,
-                          "fontWeight": "700",
-                          "textTransform": "uppercase",
-                        },
-                        Object {
-                          "color": "white",
-                        },
-                      ]
-                    }
-                  >
-                    Send request
-                  </Text>
-                </ForwardRef>
-              </View>
-              <Themed.Divider
-                style={
-                  Array [
-                    Object {
-                      "height": 1,
-                      "width": "100%",
-                    },
-                    Object {
-                      "backgroundColor": "#C1C1C5",
-                    },
-                  ]
-                }
-              />
-              <Themed.Divider
-                style={
-                  Array [
-                    Object {
-                      "height": 1,
-                      "width": "100%",
-                    },
-                    Object {
-                      "backgroundColor": "#C1C1C5",
-                    },
-                  ]
-                }
-              />
-            </View>
+            <ButtonBlock
+              isDriver={false}
+              isPassenger={false}
+              isRequested={false}
+              journey={null}
+            />
           </View>
         }
         renderHeader={
