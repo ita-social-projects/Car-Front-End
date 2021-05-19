@@ -7,10 +7,7 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {
-    ImagePickerResponse,
-    launchImageLibrary
-} from "react-native-image-picker/src";
+import { launchImageLibrary } from "react-native-image-picker/src";
 import BrandService from "../../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../../api-service/model-service/ModelService";
@@ -29,6 +26,8 @@ import {
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import UpdateCarViewModel from "../../../../../../../models/car/UpdateCarViewModel";
 import { navigate } from "../../../../../../components/navigation/Navigation";
+import ImageService from "../../../../../../../api-service/image-service/ImageService";
+import CarPhoto from "../../../../../../../models/car/CarPhoto";
 
 const EditCars = (navigation : any) => {
     const [isLoading, setLoading] = useState(true);
@@ -57,7 +56,7 @@ const EditCars = (navigation : any) => {
 
     const [plateNumber, setPlateNumber] = useState<string>("");
     const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
+    const [photo, setPhoto] = useState<CarPhoto>({} as CarPhoto);
 
     let modelPickerController: any;
     let brandPickerController: any;
@@ -68,6 +67,7 @@ const EditCars = (navigation : any) => {
             setBrands(response.data);
         });
         let carId = Number(navigation.props.route.params.carId);
+        //let carId = 1;
 
         CarService.getById(carId).then((response) => {
             const car = response.data;
@@ -84,6 +84,15 @@ const EditCars = (navigation : any) => {
                 return obj.value === car?.color.toString();
             });
 
+            if (car?.imageId !== null &&
+                car?.imageId.toString() !== undefined)
+            {
+                setPhoto({
+                    name: "",
+                    type: "",
+                    uri: ImageService.getImageById(car?.imageId?.toString() ?? "")
+                });
+            };
             selectBrandHandle(carBrandItem);
             setColor(carColor!);
             setPlateNumber(car?.plateNumber ?? "");
@@ -104,7 +113,11 @@ const EditCars = (navigation : any) => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
-                setPhoto(response);
+                setPhoto({
+                    name: response.fileName?.toString() ?? "",
+                    type: response.type?.toString() ?? "",
+                    uri: response.uri?.toString() ?? ""
+                });
             }
         });
     };
@@ -113,17 +126,8 @@ const EditCars = (navigation : any) => {
         setSaving(true);
         let photoToUpdate;
 
-        if (photo !== null && photo !== undefined) {
-            photoToUpdate = {
-                name: photo.fileName,
-                type: photo.type,
-                uri: photo?.uri
-            };
-        }
-        else
-        {
-            photoToUpdate = null;
-        }
+        (photo.name !== "" && photo.type !== "" && photo.uri !== "") ?
+            photoToUpdate = photo : photoToUpdate = null;
 
         const car: UpdateCarViewModel = {
             id: Number(navigation.props.route.params.carId),
