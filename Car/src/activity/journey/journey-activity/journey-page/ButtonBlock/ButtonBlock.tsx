@@ -6,6 +6,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import React from "react";
 import ButtonBlockProps from "./ButtonBlockProps";
+import ChatService from "../../../../../../api-service/chat-service/ChatService";
+import CreateChat from "../../../../../../models/Chat/CreateChat";
+import { StatusCodes } from "../../../../../constants/Constants";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
     return (
@@ -21,17 +24,26 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                             backgroundColor: DM("white"),
                             borderColor: DM("black") }
                         ]}
-                        onPress={() =>
-                            navigation.navigate("MessagesTabs", {
-                                screen: "Chat",
-                                params: {
-                                    chatId: props.journey?.id,
-                                    header:
-                                        props.journey?.organizer?.name + " " +
-                                        props.journey?.organizer?.surname + "'s ride"
+                        onPress={() => {
+                            var chat: CreateChat = {
+                                id: props.journey?.id!,
+                                name:
+                                    props.journey?.organizer?.name + " " +
+                                    props.journey?.organizer?.surname + "'s ride"
+                            };
+
+                            ChatService.addChat(chat).then((res) => {
+                                if (res.status === StatusCodes.OK) {
+                                    navigation.navigate("MessagesTabs", {
+                                        screen: "Chat",
+                                        params: {
+                                            chatId: props.journey?.id,
+                                            header: res.data.name
+                                        }
+                                    });
                                 }
-                            })
-                        }
+                            });
+                        }}
                     >
                         <Text style={[JourneyPageStyle.messageAllButtonText, { color: DM("black") }]}>
                             Message to all
