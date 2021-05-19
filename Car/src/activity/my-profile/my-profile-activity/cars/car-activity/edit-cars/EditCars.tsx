@@ -91,7 +91,7 @@ const EditCars = (navigation : any) => {
                     type: "",
                     uri: ImageService.getImageById(car?.imageId?.toString() ?? "")
                 });
-            };
+            }
             selectBrandHandle(carBrandItem);
             setColor(carColor!);
             setPlateNumber(car?.plateNumber ?? "");
