@@ -6,6 +6,7 @@ export const INITIAL_LATITUDE = 49.843844;
 export const INITIAL_LONGITUDE = 24.025581;
 export const RECENT_ADDRESSES_COUNT_LIMIT = 5;
 export const DEFAULT_LOCATION_ICON_ID = 9;
+export const MAX_ADDRESS_NAME_LENGTH = 45;
 
 export const initialCoordinate: LatLng = {
     latitude: INITIAL_LATITUDE,

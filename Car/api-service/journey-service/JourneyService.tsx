@@ -27,7 +27,10 @@ const JourneyService = {
         APIService.post<CreateJourneyModel>(route, journey),
 
     getFilteredJourneys: async (filter: FilterJourneyModel) =>
-        APIService.get<Array<Journey>>(route + "filter/", { params: filter })
+        APIService.get<Array<Journey>>(route + "filter/", { params: filter }),
+
+    delete: async (id: number) =>
+        APIService.delete(route + id)
 };
 
 export default JourneyService;
