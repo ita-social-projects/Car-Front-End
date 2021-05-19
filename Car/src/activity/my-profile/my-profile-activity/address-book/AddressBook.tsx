@@ -7,6 +7,11 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
+import {
+    FIRST_ELEMENT_INDEX,
+    MAX_ADDRESS_NAME_LENGTH,
+    THREE_ELEMENT_COLLECTION_LENGTH
+} from "../../../../constants/Constants";
 
 export default function AddressBook (props: {navigation: any}) {
     const { user } = useContext(AuthContext);
@@ -31,6 +36,17 @@ export default function AddressBook (props: {navigation: any}) {
         return props.navigation.addListener("focus", loadLocations);
     }, [props.navigation]);
 
+    const addressNameSubstring = (addressName: string) => {
+        return addressName.substr(FIRST_ELEMENT_INDEX,
+            MAX_ADDRESS_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
+    };
+
+    const mapAddressName = (addressName: string) => {
+        if (addressName.length <= MAX_ADDRESS_NAME_LENGTH)
+            return addressName;
+        else
+            return addressNameSubstring(addressName);
+    };
     let addLocationElement = (
         <View>
             <TouchableNavigationCard
@@ -81,6 +97,8 @@ export default function AddressBook (props: {navigation: any}) {
                 ) : locations.length ? (
                     <>
                         {locations.map((item: Location) => {
+                            // @ts-ignore
+                            // @ts-ignore
                             return (
                                 <View key={item?.id}>
                                     <TouchableNavigationCard
@@ -104,7 +122,7 @@ export default function AddressBook (props: {navigation: any}) {
                                             {item?.name}
                                         </Text>
                                         <Text style={[AddressBookStyle.address, { color: DM("#414045") }]}>
-                                            {item?.address?.name}
+                                            {mapAddressName(item!.address!.name)}
                                         </Text>
                                     </TouchableNavigationCard>
                                 </View>

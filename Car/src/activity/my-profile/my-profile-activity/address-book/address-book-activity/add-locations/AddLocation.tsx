@@ -186,9 +186,14 @@ const AddLocation = () => {
         );
     }, []);
 
+    const addressNameSubstring = (addressName: string) => {
+        return addressName.substr(FIRST_ELEMENT_INDEX,
+            MAX_LOCATION_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
+    };
+
     const saveLocationHandle = async () => {
         await LocationService.add({
-            name: locationName,
+            name: locationName ? locationName: addressNameSubstring(wayPoint.text),
             address: {
                 id: 0,
                 name: wayPoint.text,
@@ -214,34 +219,40 @@ const AddLocation = () => {
                     userLocation={userCoordinates}
                     recentAddresses={[]}
                 />
+                {wayPoint.isConfirmed && (
+                    <>
+                        <TextInput
+                            style={AddLocationStyle.textInput}
+                            value={locationName}
+                            maxLength={MAX_LOCATION_NAME_LENGTH}
+                            placeholder={"Name the chosen address"}
+                            placeholderTextColor={"grey"}
+                            onChangeText={(fromInput) => {
+                                setLocationName(fromInput);
+                            }}/>
 
-                <TextInput
-                    style={AddLocationStyle.textInput}
-                    value={locationName}
-                    maxLength={MAX_LOCATION_NAME_LENGTH}
-                    placeholder={"Name the chosen address"}
-                    placeholderTextColor={"grey"}
-                    onChangeText={(fromInput) => {
-                        setLocationName(fromInput);
-                    }}
-                />
+                        <LocationDropDownPicker
+                            items={[{
+                                label: "Work", value: 4,
+                                icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/>
+                            },
+                            {
+                                label: "Home", value: 3,
+                                icon: () => <Ionicons name="home-outline" size={25} color="#414045"/>
+                            },
+                            {
+                                label: "Other", value: DEFAULT_LOCATION_ICON_ID,
+                                icon: () => <Ionicons name="star-outline" size={25} color="#414045"/>
+                            }]}
 
-                <LocationDropDownPicker
-                    items={[{ label:"Work", value: 4 ,
-                        icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/> },
-                    { label:"Home", value: 3 ,
-                        icon: () => <Ionicons name="home-outline" size={25} color="#414045"/> },
-                    { label:"Other", value: DEFAULT_LOCATION_ICON_ID ,
-                        icon: () => <Ionicons name="star-outline" size={25} color="#414045"/> }]}
-
-                    placeholder= {"Choose the address type and the icon"}
-                    isVisible={isVisibleLocationDropDown}
-                    onOpen={() => setIsVisibleLocationDropDown(true)}
-                    onChangeItem={(item) => {
-                        setLocationType({ id: item.value, name: item.label });
-                        setIsVisibleLocationDropDown(false);
-                    }}
-                />
+                            placeholder={"Choose the address type and the icon"}
+                            isVisible={isVisibleLocationDropDown}
+                            onOpen={() => setIsVisibleLocationDropDown(true)}
+                            onChangeItem={(item) => {
+                                setLocationType({ id: item.value, name: item.label });
+                                setIsVisibleLocationDropDown(false);
+                            }}/></>
+                )}
             </View>
 
             <MapView
