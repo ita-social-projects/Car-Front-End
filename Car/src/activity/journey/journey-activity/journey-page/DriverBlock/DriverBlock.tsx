@@ -14,8 +14,6 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
     return (
         <View style={[JourneyPageStyle.contentView, { backgroundColor: DM("white") }]}>
 
-            {/* Driver block */}
-
             <TouchableOpacity
                 style={JourneyPageStyle.userBlock}
                 onPress={() =>

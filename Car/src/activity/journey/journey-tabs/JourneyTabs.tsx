@@ -250,7 +250,11 @@ const JourneyTabs = () => {
                                             <MenuButton text="Add stop" isIcon={true} />
                                             <MenuButton text="Edit route" isIcon={true} />
                                             <MenuButton text="Invite SoftServian" isIcon={true} />
-                                            <MenuButton text="Cancel ride" isIcon={true} />
+                                            <MenuButton
+                                                text="Cancel ride"
+                                                isIcon={true}
+                                                onPress={JourneyPage.cancelRide}
+                                            />
                                         </View>
                                     }
                                 />}

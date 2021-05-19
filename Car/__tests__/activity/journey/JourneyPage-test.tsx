@@ -142,5 +142,14 @@ test("renders correctly", async () =>
           }
         }
       />
+      <ConfirmModal
+        cancelText="No, keep it"
+        confirmText="Yes, delete it"
+        disableModal={[Function]}
+        onConfirm={[Function]}
+        subtitle="Are you sure you want to delete the stop?"
+        title="Stop deleting"
+        visible={false}
+      />
     </React.Fragment>
   `));
