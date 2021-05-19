@@ -28,7 +28,7 @@ import Stop from "../../../../../models/stop/Stop";
 import CarBlock from "./CarBlock/CarBlock";
 import StopsBlock from "./StopsBlock/StopsBlock";
 import ParticipantsBlock from "./ParticipantsBlock/ParticipantsBlock";
-import ButtonBlock from "./ButtonsBlock/ButtonsBlock";
+import ButtonBlock from "./ButtonBlock/ButtonBlock";
 import DriverBlock from "./DriverBlock/DriverBlock";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
