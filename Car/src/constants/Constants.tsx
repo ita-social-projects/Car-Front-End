@@ -73,6 +73,7 @@ export const MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT = 25;
 export const RECENT_ADDRESSES_COUNT_LIMIT = 5;
 
 export enum StatusCodes {
+    OK = 200,
     INTERNAL_SERVER_ERROR = 500
 };
 
