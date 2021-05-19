@@ -18,14 +18,18 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import {
     CHAT_POPUP_HEIGHT,
     COUNT_OF_MESSAGES_TO_LOAD,
-    FIRST_ELEMENT_INDEX,
-    FIRST_LOADING_MESSAGES,
+    FIRST_LOADING_MESSAGES
+} from "../../../../constants/MessageConstants";
+import {
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION,
+    MIN_POPUP_POSITION
+} from "../../../../constants/StylesConstants";
+import {
+    FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX
-} from "../../../../constants/Constants";
+} from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -271,7 +275,7 @@ const Chat = (properties: ChatProps) => {
             ) : (
                 <GiftedChat
                     renderAvatar={(data) => renderUserAvatar(data)}
-                    placeholder="Aa"
+                    placeholder="Type a message"
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     timeFormat="HH:mm"
                     dateFormat="DD.MM"

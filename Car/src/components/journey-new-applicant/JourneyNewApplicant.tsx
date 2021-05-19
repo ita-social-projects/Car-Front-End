@@ -8,7 +8,7 @@ import NewNotification from "../new-notification/NewNotification";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
-import { GRADIENT_END, GRADIENT_START } from "../../constants/Constants";
+import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
 import DM from "../styles/DM";
 import JourneyNewApplicantProps from "./JourneyNewApplicantProps";
 

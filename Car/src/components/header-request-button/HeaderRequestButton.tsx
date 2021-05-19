@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
-import * as navigation from "../navigation/Navigation";
+import ShadowedBottomPopup from "../shadowed-bottom-popup/ShadowedBottomPopup";
 import DM from "../styles/DM";
 import HeaderRequestButtonStyle from "./HeaderRequestButtonStyle";
 
@@ -8,7 +8,8 @@ const HeaderRequestButton = () => (
     <TouchableOpacity
         style={HeaderRequestButtonStyle.requestButton}
         onPress={() => {
-            navigation.navigate("Search Journey");
+            if(ShadowedBottomPopup)
+                ShadowedBottomPopup.pressHandle();
         }}
     >
         <Text style={[HeaderRequestButtonStyle.buttonText, { color: DM("#02A2CF") }]}>

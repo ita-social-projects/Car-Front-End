@@ -5,9 +5,16 @@ import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import AuthContext from "../auth/AuthContext";
-import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/Constants";
+import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/GeneralConstants";
 import DM from "../styles/DM";
 import Journey from "../../../models/journey/Journey";
+import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
+
+const getShortAddressName = (name: string) => {
+    return name.length <= MAX_ADDRESS_NAME_LENGTH ?
+        name :
+        name.substr(FIRST_ELEMENT_INDEX, MAX_ADDRESS_NAME_LENGTH) + "...";
+};
 
 const JourneyCard = (props: {journey?: Journey}) => {
     const journey = props.journey;
@@ -69,7 +76,6 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 </Text>
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
                                     {moment(new Date(journey?.departureTime ?? ""))
-                                        .utc()
                                         .calendar()}
                                 </Text>
                             </View>
@@ -84,7 +90,7 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 }]} />
                             <Text style={[JourneyCardStyle.stopsText, { color: DM("#414045") }]}>
                                 {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
-                                    ? journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
+                                    ? getShortAddressName(journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name!)
                                     : "Location A"}
                             </Text>
                         </View>
@@ -99,8 +105,8 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 {journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
                                     ?.address?.name === undefined
                                     ? "Location B"
-                                    : journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
-                                        ?.address?.name}
+                                    : getShortAddressName(journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
+                                        ?.address?.name!)}
                             </Text>
                         </View>
                     </View>

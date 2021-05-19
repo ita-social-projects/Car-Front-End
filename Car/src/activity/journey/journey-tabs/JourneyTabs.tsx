@@ -21,26 +21,35 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 import {
-    ANIMATION_DURATION,
     CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
-    FIRST_ELEMENT_INDEX,
-    HALF_OPACITY,
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
+    NUMBER_OF_STOPS_LIMIT,
+    REQUEST_RIDE_POPUP_HEIGHT
+} from "../../../constants/JourneyConstants";
+import {
+    HALF_OPACITY,
     MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION, NUMBER_OF_STOPS_LIMIT,
+    MIN_POPUP_POSITION,
+    ZERO_OPACITY
+} from "../../../constants/StylesConstants";
+import {
+    ANIMATION_DURATION,
     SLEEP_DURATION,
-    ZERO_OPACITY,
     animateOpacity,
     sleep
-} from "../../../constants/Constants";
+} from "../../../constants/AnimationConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
 import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
+import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
+import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 
 const JourneyTabs = () => {
+    const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
 
@@ -241,7 +250,11 @@ const JourneyTabs = () => {
                                             <MenuButton text="Add stop" isIcon={true} />
                                             <MenuButton text="Edit route" isIcon={true} />
                                             <MenuButton text="Invite SoftServian" isIcon={true} />
-                                            <MenuButton text="Cancel ride" isIcon={true} />
+                                            <MenuButton
+                                                text="Cancel ride"
+                                                isIcon={true}
+                                                onPress={JourneyPage.showCancelRidePopup}
+                                            />
                                         </View>
                                     }
                                 />}
@@ -261,7 +274,6 @@ const JourneyTabs = () => {
                 />
                 <StackTabs.Screen
                     name="OK Search Result"
-                    component={OkSearchResult}
                     options={{
                         title: "Search Results",
                         headerTitleAlign: "center",
@@ -269,6 +281,60 @@ const JourneyTabs = () => {
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
+                    children = {(props: any) => (
+                        <>
+                            <OkSearchResult journeys={props.route.params.journeys} />
+                            <ConfirmModal
+                                visible={isNewRequestModalVisible}
+                                title="ARE YOU SURE?"
+                                subtitle="You're about to create a ride request with new filters."
+                                confirmText="Yes, Create"
+                                cancelText="No, Go back"
+                                confirmColor={DM("black")}
+                                onConfirm={() => {
+                                    navigation.navigate("Search Journey");
+                                }}
+                                disableModal={() => setNewRequestModalVisible(false)}
+                            />
+                            <ShadowedBottomPopup
+                                snapPoints={[MIN_POPUP_HEIGHT, REQUEST_RIDE_POPUP_HEIGHT]}
+                                enabledInnerScrolling={false}
+                                initialSnap={0}
+                                renderHeader={
+                                    <View style={[JourneyPageStyle.headerTitleStyle,
+                                        { backgroundColor: DM("white") }
+                                    ]}>
+                                        <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                                            REQUEST A RIDE
+                                        </Text>
+                                    </View>
+                                }
+                                renderContent={
+                                    <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
+                                        <MenuButton
+                                            text="With the Privious Filters"
+                                            isIcon={true}
+                                            onPress={() => {
+                                                navigation.navigate("Search Journey");
+                                                if(ShadowedBottomPopup)
+                                                    ShadowedBottomPopup.pressHandle();
+                                            }}
+                                        />
+                                        <MenuButton
+                                            text="With New Filters"
+                                            isIcon={true}
+                                            onPress={() => {
+                                                if(ShadowedBottomPopup)
+                                                    ShadowedBottomPopup.pressHandle();
+                                                setNewRequestModalVisible(true);
+                                            }}
+                                        />
+                                    </View>
+                                }
+                            />
+                        </>
+                    )
+                    }
                 />
 
                 <StackTabs.Screen

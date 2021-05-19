@@ -5,82 +5,74 @@ import ChatService from "../../../api-service/chat-service/ChatService";
 import AuthContext from "../../components/auth/AuthContext";
 import MessagesStyle from "./MessagesStyle";
 import {
-    GRADIENT_END, GRADIENT_START,
     MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
-    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
-    NOT_EXISTING_ELEMENT_INDEX
-} from "../../constants/Constants";
+    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER
+} from "../../constants/MessageConstants";
+import {
+    GRADIENT_END,
+    GRADIENT_START
+} from "../../constants/StylesConstants";
+import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import DM from "../../components/styles/DM";
-import { chatsArrToFilteredChatsArr, FilteredChat, MessagesProps } from "./MessagesProps";
+import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { findAll } from "highlight-words-core";
+import Chat from "../../../models/Chat/Chat";
 
 const Messages = (props: MessagesProps) => {
-    const [filteredDataSource, setFilteredDataSource] = useState<FilteredChat[]>([]);
-    const [masterDataSource, setMasterDataSource] = useState<FilteredChat[]>([]);
+    const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
+    const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
 
-    useEffect(() => {
+    const getChats = () => {
         ChatService.getChat(user?.id).then((res) => {
-            let chats = chatsArrToFilteredChatsArr(res.data);
+            let chats = res.data;
 
             setMasterDataSource(JSON.parse(JSON.stringify(chats)));
 
-            setFilteredDataSource(getUniqueChats(chats));
+            setFilteredDataSource(chats);
         });
+    };
+
+    useEffect(() => {
+        getChats();
     }, []);
 
-    const getUniqueChats = (chats: FilteredChat[]) => {
-        chats.forEach(chat => {
-            chat.text = "";
-        });
+    useEffect(() => {
+        props.navigation.addListener("focus", getChats);
 
-        return [...new Map(chats.map(chat =>
-            [chat["chatId"], chat])).values()];
-    };
+        return () => {
+            props.navigation.removeListener("focus", getChats);
+        };
+    }, []);
 
     const setSearchFilter = (text: string) => {
         if (text.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
-            const arr = JSON.parse(JSON.stringify(masterDataSource));
-            const journeyOrganize = searchInJourneyOrganizer(text, arr);
-            const messages = searchInMessages(text, arr);
+            const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
 
-            journeyOrganize.length ?
-                setFilteredDataSource(getUniqueChats(journeyOrganize))
+            const searchInTitle = arr.filter(chat => {
+                let chatTitle = chat?.name.toUpperCase();
+
+                return chatTitle!.indexOf(text.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX;
+            });
+
+            searchInTitle.length ?
+                setFilteredDataSource(searchInTitle)
                 :
-                setFilteredDataSource(messages);
+                ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then(res => {
+                    setFilteredDataSource(res.data);
+                });
             setSearch(text);
         }
         else {
-            setFilteredDataSource(getUniqueChats(JSON.parse(JSON.stringify(masterDataSource))));
+            setFilteredDataSource(JSON.parse(JSON.stringify(masterDataSource)));
             setSearch(text);
         }
-    };
-
-    const searchInJourneyOrganizer = (text: string, chats: FilteredChat[]) => {
-        return chats.filter(chat => {
-            const messageText =
-                chat.journey!.organizer!.name.toUpperCase() +
-                " " +
-                chat.journey!.organizer!.surname.toUpperCase() +
-                "'S RIDE";
-
-            return messageText.indexOf(text.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX;
-        });
-    };
-
-    const searchInMessages = (text: string, chats: FilteredChat[]) => {
-        return chats.filter(chat => {
-            const data = chat.text.toUpperCase();
-            const textData = text.toUpperCase();
-
-            return data.indexOf(textData) > NOT_EXISTING_ELEMENT_INDEX;
-        });
     };
 
     const textHighlight = (textToHighlight: string, searchWords: string[]) => {
@@ -135,12 +127,8 @@ const Messages = (props: MessagesProps) => {
                         <TouchableOpacity
                             onPress={() => {
                                 navigation.navigate("Chat", {
-                                    chatId: item.chatId,
-                                    header:
-                                        item.journey!.organizer?.name +
-                                        " " +
-                                        item.journey!.organizer?.surname +
-                                        "'s ride"
+                                    chatId: item?.id,
+                                    header: item?.name
                                 });
                             }}
                         >
@@ -148,7 +136,7 @@ const Messages = (props: MessagesProps) => {
                                 <View style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}>
                                     <View style={MessagesStyle.avatarWrapper}>
                                         <AvatarLogo
-                                            user={item.journey!.organizer}
+                                            user={item?.journeyOrganizer}
                                             size={50}
                                         />
                                     </View>
@@ -160,16 +148,15 @@ const Messages = (props: MessagesProps) => {
                                             end={{ x: 1, y: 0 }}
                                         >
                                             <Text style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}>
-                                                {item.journey!.organizer?.name}{" "}
-                                                {item.journey!.organizer?.surname}'s ride
+                                                {item?.name}
                                             </Text>
                                         </LinearTextGradient>
-                                        {item.text ?
-                                            textHighlight(item.text, search.split(" "))
+                                        {item?.messageText ?
+                                            textHighlight(item.messageText, search.split(" "))
                                             :
                                             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                                                 Starts at: {moment(
-                                                    new Date(item.journey!.departureTime)
+                                                    new Date(item?.journey?.departureTime!)
                                                 ).utc().format("DD.MM HH:mm")}
                                             </Text>
                                         }

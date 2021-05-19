@@ -1,4 +1,5 @@
 import Stop from "../stop/Stop";
+import JourneyPoint from "./JourneyPoint";
 
 interface CreateJourneyModel {
     departureTime: Date,
@@ -8,12 +9,10 @@ interface CreateJourneyModel {
     organizerId: number,
     carId: number,
     isOnOwnCar: boolean,
-    journeyPoints: {
-        index: number,
-        latitude: number,
-        longitude: number
-    }[],
-    stops: Stop[]
+    journeyPoints: JourneyPoint[],
+    stops: Stop[],
+    durationInMinutes: number,
+    routeDistance: number
 }
 
 export default CreateJourneyModel;

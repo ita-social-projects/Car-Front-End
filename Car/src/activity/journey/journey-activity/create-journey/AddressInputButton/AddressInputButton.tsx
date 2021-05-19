@@ -1,6 +1,6 @@
 import TouchableMapBar from "../../../../../components/touchable-map-bar/TouchableMapBar";
 import React from "react";
-import { ZERO_MARGIN } from "../../../../../constants/Constants";
+import { ZERO_MARGIN } from "../../../../../constants/StylesConstants";
 import AddressInputButtonProps from "./AddressInputButtonProps";
 
 const AddressInputButton = (props: AddressInputButtonProps) => {

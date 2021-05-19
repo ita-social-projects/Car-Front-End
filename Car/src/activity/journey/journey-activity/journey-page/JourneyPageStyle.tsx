@@ -3,8 +3,7 @@ import Font from "../../../../data/fonts/Font";
 
 const JourneyPageStyle = StyleSheet.create({
     pageContainer: {
-        flex: 1,
-        alignItems: "center"
+        flex: 1
     },
 
     pageText: {
@@ -168,7 +167,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     stopsBlock: {
-        width: "100%",
+        width: "95%",
         justifyContent: "space-around",
         marginTop: 20,
         marginLeft: 14,
@@ -205,10 +204,8 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     buttons: {
-        position: "absolute",
-        width: Dimensions.get("window").width,
-        top: 411,
-        paddingHorizontal: "5%"
+        width: "100%",
+        paddingHorizontal: "5%",
     },
 
     messageAllButtonText: {

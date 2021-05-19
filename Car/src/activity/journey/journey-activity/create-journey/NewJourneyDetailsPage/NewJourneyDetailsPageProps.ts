@@ -7,7 +7,9 @@ interface NewJourneyDetailsPageProps {
             from: WayPoint,
             to: WayPoint,
             stops: WayPoint[],
-            routePoints: LatLng[]
+            routePoints: LatLng[],
+            routeDistance: number,
+            duration: number
         }
     }
 }
