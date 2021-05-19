@@ -125,7 +125,7 @@ const EditCars = (navigation : any) => {
         setSaving(true);
         let photoToUpdate;
 
-        (photo.name !== "" && photo.type !== "" && photo.uri !== "") ?
+        (photo.uri !== "") ?
             photoToUpdate = photo : photoToUpdate = null;
 
         const car: UpdateCarViewModel = {
