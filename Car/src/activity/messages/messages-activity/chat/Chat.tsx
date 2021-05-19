@@ -271,7 +271,7 @@ const Chat = (properties: ChatProps) => {
             ) : (
                 <GiftedChat
                     renderAvatar={(data) => renderUserAvatar(data)}
-                    placeholder="Aa"
+                    placeholder="Type a message"
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     timeFormat="HH:mm"
                     dateFormat="DD.MM"
