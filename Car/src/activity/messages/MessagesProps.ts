@@ -1,30 +1,7 @@
 import { ReactNode } from "react";
-import Chat from "../../../models/Chat";
-import Journey from "../../../models/journey/Journey";
+import NavigationAddAndRemoveListener from "../../types/NavigationAddAndRemoveListener";
 
-export interface MessagesProps {
+export interface MessagesProps extends NavigationAddAndRemoveListener {
     isOpenFilter: boolean,
-    component: ReactNode
-}
-
-export interface FilteredChat {
-    text: string,
-    chatId: number,
-    journey: Journey
-}
-
-export function chatsArrToFilteredChatsArr (chats: Chat[]): FilteredChat[] {
-    let arr: FilteredChat[] = [];
-
-    chats.forEach(chat => {
-        chat?.messages.forEach(msg => {
-            arr.push({
-                chatId: chat!.id,
-                text: msg!.text,
-                journey: chat!.journey!,
-            });
-        });
-    });
-
-    return arr;
+    component: ReactNode,
 }
