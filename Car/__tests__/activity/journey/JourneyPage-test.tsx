@@ -148,7 +148,25 @@ test("renders correctly", async () =>
         disableModal={[Function]}
         onConfirm={[Function]}
         subtitle="Are you sure you want to delete the stop?"
-        title="Stop deleting"
+        title="Ride canceling"
+        visible={false}
+      />
+      <ConfirmModal
+        confirmText="Ok"
+        disableModal={[Function]}
+        hideCancelButton={true}
+        onConfirm={[Function]}
+        subtitle="Ride was successfully canceled"
+        title="Ride canceling"
+        visible={false}
+      />
+      <ConfirmModal
+        confirmText="Ok"
+        disableModal={[Function]}
+        hideCancelButton={true}
+        onConfirm={[Function]}
+        subtitle="Ride canceling is failed"
+        title="Ride canceling"
         visible={false}
       />
     </React.Fragment>

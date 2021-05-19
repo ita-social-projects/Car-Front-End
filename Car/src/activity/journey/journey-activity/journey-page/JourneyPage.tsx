@@ -31,6 +31,7 @@ import ParticipantsBlock from "./ParticipantsBlock/ParticipantsBlock";
 import ButtonBlock from "./ButtonsBlock/ButtonsBlock";
 import DriverBlock from "./DriverBlock/DriverBlock";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import * as navigation from "../../../../components/navigation/Navigation";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -40,7 +41,7 @@ const getStopCoordinates = (stop?: Stop) => {
 };
 
 interface JourneyPageComponent {
-    cancelRide: () => void,
+    showCancelRidePopup: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: JourneyPageProps}): JSX.Element
 }
@@ -55,9 +56,11 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
+    const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
+    const [cancelRideErrorModalIsVisible, setCancelRideErrorModalIsVisible] = useState(false);
     const mapRef = useRef<MapView | null>(null);
 
-    useEffect(() => console.log("visible - ", cancelRideModalIsVisible), [cancelRideModalIsVisible]);
+    useEffect(() => console.log("journeyId - ", props.route.params.journeyId), []);
 
     useEffect(() => {
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
@@ -82,11 +85,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         });
     }, []);
 
-    JourneyPage.cancelRide = () => {
-        if (isLoading) return;
-
+    JourneyPage.showCancelRidePopup = () => {
         setCancelRideModalIsVisible(true);
-        console.log("id - ", currentJourney?.id);
     };
 
     const getStopByType = (stopType: StopType) => {
@@ -183,20 +183,47 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
             <ConfirmModal
                 visible={cancelRideModalIsVisible}
-                title={"Stop deleting"}
+                title={"Ride canceling"}
                 confirmText={"Yes, delete it"}
                 cancelText={"No, keep it"}
                 onConfirm={() => {
-                    console.log("Ride canceling...");
                     setCancelRideModalIsVisible(false);
+                    JourneyService.delete(props.route.params.journeyId)
+                        .then(() => setCancelRideSuccessModalIsVisible(true));
                 }}
                 disableModal={() => setCancelRideModalIsVisible(false)}
                 subtitle={"Are you sure you want to delete the stop?"}
+            />
+
+            <ConfirmModal
+                visible={cancelRideSuccessModalIsVisible}
+                title={"Ride canceling"}
+                confirmText={"Ok"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setCancelRideSuccessModalIsVisible(false);
+                    navigation.navigate("Journey");
+                }}
+                disableModal={() => {
+                    setCancelRideSuccessModalIsVisible(false);
+                    navigation.navigate("Journey");
+                }}
+                subtitle={"Ride was successfully canceled"}
+            />
+
+            <ConfirmModal
+                visible={cancelRideErrorModalIsVisible}
+                title={"Ride canceling"}
+                confirmText={"Ok"}
+                hideCancelButton={true}
+                onConfirm={() => setCancelRideErrorModalIsVisible(false)}
+                disableModal={() => setCancelRideErrorModalIsVisible(false)}
+                subtitle={"Ride canceling is failed"}
             />
         </>
     );
 };
 
-JourneyPage.cancelRide = () => console.log("Outer cancelRide()");
+JourneyPage.showCancelRidePopup = () => console.log("Outer cancelRide()");
 
 export default JourneyPage;

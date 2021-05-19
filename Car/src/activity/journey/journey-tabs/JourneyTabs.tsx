@@ -253,7 +253,7 @@ const JourneyTabs = () => {
                                             <MenuButton
                                                 text="Cancel ride"
                                                 isIcon={true}
-                                                onPress={JourneyPage.cancelRide}
+                                                onPress={JourneyPage.showCancelRidePopup}
                                             />
                                         </View>
                                     }
