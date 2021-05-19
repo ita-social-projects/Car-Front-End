@@ -3,6 +3,7 @@ interface CarTextInputProps {
     // eslint-disable-next-line unused-imports/no-unused-vars
     onChangeText?: (text: string) => void,
     placeHolder?: string,
+    defaultValue?: string,
     error?: Error,
     errorText?: string
     onEndEditing?: () => void

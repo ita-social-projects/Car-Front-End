@@ -24,21 +24,18 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
+import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import {
-    FIRST_ELEMENT_INDEX,
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH,
-    MAX_PHOTO_FILE_SIZE
-} from "../../../../../../constants/Constants";
+} from "../../../../../../constants/CarConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../../../../constants/GeneralConstants";
 import DM from "../../../../../../components/styles/DM";
 import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
-
-    let modelPickerController: any;
-    let brandPickerController: any;
-    let colorPickerController: any;
+    const [isSaving, setSaving] = useState(false);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
     const [models, setModels] = useState({} as CarModel[]);
@@ -51,25 +48,6 @@ const AddCars = () => {
             }))
     );
 
-    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-
-    function validatePlateNumber () : boolean {
-        if (
-            !plateNumber ||
-            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
-        ) {
-            setValidPlateNumber(false);
-
-            return false;
-        } else {
-            setValidPlateNumber(true);
-
-            return true;
-        }
-    }
-
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
         null
     );
@@ -81,10 +59,12 @@ const AddCars = () => {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-
+    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
-    const [loading, setLoading] = useState(false);
+    let modelPickerController: any;
+    let brandPickerController: any;
+    let colorPickerController: any;
 
     useEffect(() => {
         BrandService.getBrands().then((res) => {
@@ -105,6 +85,16 @@ const AddCars = () => {
         }
     };
 
+    function validatePlateNumber () {
+        setValidPlateNumber(
+            Boolean(
+                plateNumber &&
+                plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
+                plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
+                plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+            ));
+    }
+
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel && response.fileSize) {
@@ -114,7 +104,7 @@ const AddCars = () => {
     };
 
     const saveCarHandle = async () => {
-        setLoading(true);
+        setSaving(true);
         let photoToAdd;
 
         if (photo !== null && photo !== undefined) {
@@ -140,7 +130,7 @@ const AddCars = () => {
         await CarService.add(car)
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
-        setLoading(false);
+        setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
@@ -294,7 +284,7 @@ const AddCars = () => {
                         <Text style={[AddCarsStyle.carButtonSaveText, { color: DM("white") }]}>
                             Save
                         </Text>
-                        {loading ? (
+                        {isSaving ? (
                             <ActivityIndicator
                                 style={AddCarsStyle.spinner}
                                 size={20}
