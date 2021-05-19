@@ -28,6 +28,7 @@ const CarTextInput = (props: CarTextInputProps) => {
                             }}
                             placeholder={props.placeHolder}
                             placeholderTextColor={DM("gray")}
+                            defaultValue={props.defaultValue}
                             style={[
                                 CarTextInputStyle.textInputStyle,
                                 { color: DM("black") },

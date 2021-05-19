@@ -10,16 +10,19 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BottomSheet } from "react-native-elements";
 import {
-    ANIMATION_DURATION,
-    FIRST_ELEMENT_INDEX,
     HALF_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
     MIN_POPUP_POSITION,
     POPUP_HEIGHT_WITHOUT_USER_IMAGE,
     POPUP_HEIGHT_WITH_USER_IMAGE,
-    SLEEP_DURATION, ZERO_OPACITY
-} from "../../../../constants/Constants";
+    ZERO_OPACITY
+} from "../../../../constants/StylesConstants";
+import {
+    ANIMATION_DURATION,
+    SLEEP_DURATION
+} from "../../../../constants/AnimationConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import DM from "../../../../components/styles/DM";
 import User from "../../../../../models/user/User";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";

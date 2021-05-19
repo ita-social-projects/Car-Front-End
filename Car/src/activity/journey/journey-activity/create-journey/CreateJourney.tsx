@@ -5,18 +5,23 @@ import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
 import {
-    DELETE_COUNT,
-    FIRST_ELEMENT_INDEX,
-    INITIAL_ROUTE_DISTSNCE,
-    INITIAL_TIME,
     initialCamera,
     initialCoordinate,
     initialWayPoint,
+    RECENT_ADDRESSES_COUNT_LIMIT
+} from "../../../../constants/AddressConstants";
+import {
+    INITIAL_ROUTE_DISTANCE,
+    INITIAL_TIME,
+    NUMBER_OF_STOPS_LIMIT,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
-    LEFT_PADDING_FOR_VIA_PLACEHOLDER,
-    NUMBER_OF_STOPS_LIMIT, RECENT_ADDRESSES_COUNT_LIMIT
-} from "../../../../constants/Constants";
+    LEFT_PADDING_FOR_VIA_PLACEHOLDER
+} from "../../../../constants/JourneyConstants";
+import {
+    DELETE_COUNT,
+    FIRST_ELEMENT_INDEX
+} from "../../../../constants/GeneralConstants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
@@ -60,7 +65,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
     const [stops, setStops] = useState<WayPoint[]>([]);
     const [duration, setDuration] = useState<number>(INITIAL_TIME);
-    const [routeDistance, setRouteDistance] = useState<number>(INITIAL_ROUTE_DISTSNCE);
+    const [routeDistance, setRouteDistance] = useState<number>(INITIAL_ROUTE_DISTANCE);
     const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
     const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
 

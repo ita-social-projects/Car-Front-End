@@ -8,7 +8,7 @@ import {
     FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, SECOND_FROM_END_ELEMENT_INDEX,
     THIRD_FROM_END_ELEMENT_INDEX,
     THREE_ELEMENT_COLLECTION_LENGTH
-} from "../../../../../constants/Constants";
+} from "../../../../../constants/GeneralConstants";
 import APIConfig from "../../../../../../api-service/APIConfig";
 import WayPoint from "../../../../../types/WayPoint";
 import SearchJourneyStyle from "../../search-journey/SearchJourneyStyle";

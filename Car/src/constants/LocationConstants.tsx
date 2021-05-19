@@ -1,0 +1,2 @@
+export const MAX_LOCATION_NAME_LENGTH = 30;
+export const MAX_ADDRESS_NAME_LENGTH = 48;

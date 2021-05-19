@@ -1,9 +1,10 @@
-import Stop from "../stop/Stop";
 import FeeType from "./FeeType";
 
 interface FilterJourneyModel{
-    fromStop: Stop,
-    toStop: Stop,
+    fromLatitude: number,
+    fromLongitude: number,
+    toLatitude: number,
+    toLongitude: number,
     departureTime: Date,
     hasLuggage: boolean,
     feeType: FeeType,

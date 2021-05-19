@@ -174,7 +174,6 @@ test("renders correctly", async () =>
           }
         />
         <Screen
-          component={[Function]}
           name="OK Search Result"
           options={
             Object {
@@ -195,7 +194,9 @@ test("renders correctly", async () =>
               "title": "Search Results",
             }
           }
-        />
+        >
+          [Function]
+        </Screen>
         <Screen
           component={[Function]}
           name="Bad Search Result"

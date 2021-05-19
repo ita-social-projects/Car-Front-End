@@ -7,11 +7,8 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
-import {
-    FIRST_ELEMENT_INDEX,
-    MAX_ADDRESS_NAME_LENGTH,
-    THREE_ELEMENT_COLLECTION_LENGTH
-} from "../../../../constants/Constants";
+import { FIRST_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/GeneralConstants";
+import { MAX_ADDRESS_NAME_LENGTH } from "../../../../constants/LocationConstants";
 
 export default function AddressBook (props: {navigation: any}) {
     const { user } = useContext(AuthContext);

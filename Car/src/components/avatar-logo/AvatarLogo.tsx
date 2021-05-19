@@ -4,9 +4,9 @@ import stc from "string-to-color";
 import ImageService from "../../../api-service/image-service/ImageService";
 import {
     AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
-    AVATAR_LOGO_SIZE_TO_TEXT_RATIO,
-    FIRST_ELEMENT_INDEX
-} from "../../constants/Constants";
+    AVATAR_LOGO_SIZE_TO_TEXT_RATIO
+} from "../../constants/StylesConstants";
+import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import DM from "../styles/DM";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 import AvatarLogoProps from "./AvatarLogoProps";
