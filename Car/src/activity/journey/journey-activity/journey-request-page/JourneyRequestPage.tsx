@@ -13,14 +13,18 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import * as navigation from "../../../../components/navigation/Navigation";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
-    HTTP_STATUS_OK,
+    HTTP_STATUS_OK
+} from "../../../../constants/Constants";
+import {
     INITIAL_TIME,
     MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
-    MAX_POPUP_POSITION,
     MEDIUM_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
+} from "../../../../constants/JourneyConstants";
+import {
+    MAX_POPUP_POSITION,
     MIN_POPUP_POSITION
-} from "../../../../constants/Constants";
+} from "../../../../constants/StylesConstants";
 import DM from "../../../../components/styles/DM";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";

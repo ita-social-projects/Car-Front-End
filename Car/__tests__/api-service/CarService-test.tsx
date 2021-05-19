@@ -26,10 +26,13 @@ describe("Location Service test", () => {
     let updateCarViewModel: UpdateCarViewModel = {
         color: 1,
         id: 1,
-        imageId: "ABC",
         modelId: 1,
-        ownerId: 1,
-        plateNumber: "DEF"
+        plateNumber: "DEF",
+        photo: {
+            name: "Photo",
+            type: "JPG",
+            uri: "photo"
+        }
     };
 
     test("should return cars", async () => {

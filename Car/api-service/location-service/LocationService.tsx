@@ -1,12 +1,13 @@
 import APIService from "../APIService";
 import Location from "../../models/location/Location";
 import APIRoutes from "../APIRoutes";
+import CreateLocationModel from "../../models/location/CreateLocationModel";
 
 const route = APIRoutes.getLocationUrl();
 
 const LocationService = {
 
-    add: (location: Location) => APIService.post<Location>(route, location),
+    add: async (location: CreateLocationModel) => APIService.post<CreateLocationModel>(route, location),
 
     update: async (location: Location) => APIService.put<Location>(route, location),
 

@@ -9,20 +9,23 @@ import AddLocation from "../address-book-activity/add-locations/AddLocation";
 import EditLocation from "../address-book-activity/edit-locations/EditLocation";
 import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
 import BottomPopup from "../../../../../components/bottom-popup/BottomPopup";
+import { EDIT_ADDRESS_MORE_OPTIONS_POPUP_HEIGHT } from "../../../../../constants/AddressConstants";
 import {
-    ANIMATION_DURATION,
-    EDIT_ADDRESS_MORE_OPTIONS_POPUP_HEIGHT,
-    FIRST_ELEMENT_INDEX,
     MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION, MODAL_SLEEP_DURATION,
-    SLEEP_DURATION,
+    MIN_POPUP_POSITION,
     ZERO_OPACITY,
+    HALF_OPACITY
+} from "../../../../../constants/StylesConstants";
+import {
+    ANIMATION_DURATION,
+    MODAL_SLEEP_DURATION,
+    SLEEP_DURATION,
     animateOpacity,
-    HALF_OPACITY,
     sleep
-} from "../../../../../constants/Constants";
+} from "../../../../../constants/AnimationConstants";
+import { FIRST_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyPageStyle from "../../../../journey/journey-activity/journey-page/JourneyPageStyle";
 import RemoveAddressButton from "../../../../../components/menu-remove-address-button/RemoveAddressButton";
 import BottomSheet from "reanimated-bottom-sheet";

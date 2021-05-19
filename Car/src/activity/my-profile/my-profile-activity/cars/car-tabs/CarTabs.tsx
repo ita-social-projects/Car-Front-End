@@ -10,14 +10,31 @@ import DM from "../../../../../components/styles/DM";
 import HeaderRemoveCarButton from "../../../../../components/header-remove-car-button/HeaderRemoveCarButton";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../../components/navigation/Navigation";
-import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/Constants";
+import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/AnimationConstants";
+import { StatusCodes } from "../../../../../constants/Constants";
+import CarService from "../../../../../../api-service/car-service/CarService";
 
 const StackTabs = createStackNavigator();
 
 const CarTabs = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
+    const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
     const pressHandler = () => {
         setModalVisibility(true);
+    };
+
+    const hideDeleteConfirmModal = () => {
+        setDeleteModalVisibility(false);
+        (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
+    };
+
+    const deleteCar = (carId : any) => {
+        setModalVisibility(false);
+        CarService.deleteCar(carId).then((response) => {
+            response.status == StatusCodes.OK && hideDeleteConfirmModal();
+        }).catch((error) => {
+            error.response.status == StatusCodes.INTERNAL_SERVER_ERROR && setDeleteModalVisibility(true);
+        });
     };
 
     return (
@@ -64,10 +81,16 @@ const CarTabs = () => {
                                     subtitle={"Do you want to remove info about your car?"}
                                     confirmText={"Yes, delete it"}
                                     cancelText={"No, keep it"}
-                                    onConfirm={() => {
-                                        setModalVisibility(false);
-                                        (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
-                                    }}
+                                    onConfirm={() => deleteCar(props.route.params.carId)}
+                                />
+                                <ConfirmModal
+                                    disableModal={() => setDeleteModalVisibility(false)}
+                                    hideCancelButton={true}
+                                    visible={deleteModalVisibility}
+                                    title={"Car delete"}
+                                    subtitle={"Car is involved in journey and can not be deleted"}
+                                    confirmText={"Ok"}
+                                    onConfirm={() => hideDeleteConfirmModal()}
                                 />
                             </>
                         );

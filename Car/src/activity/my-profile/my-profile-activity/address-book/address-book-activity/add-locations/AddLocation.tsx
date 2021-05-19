@@ -1,18 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { PermissionsAndroid, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
 import DM from "../../../../../../components/styles/DM";
 import {
     initialWayPoint,
+    initialCamera,
+    initialCoordinate, DEFAULT_LOCATION_ICON_ID
+} from "../../../../../../constants/AddressConstants";
+import {
     THREE_ELEMENT_COLLECTION_LENGTH,
     THIRD_FROM_END_ELEMENT_INDEX,
     SECOND_FROM_END_ELEMENT_INDEX,
     FIRST_ELEMENT_INDEX,
-    SECOND_ELEMENT_INDEX,
-    initialCamera,
-    initialCoordinate
-} from "../../../../../../constants/Constants";
-
+    SECOND_ELEMENT_INDEX
+} from "../../../../../../constants/GeneralConstants";
+import { MAX_LOCATION_NAME_LENGTH } from "../../../../../../constants/LocationConstants";
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
@@ -26,6 +28,8 @@ import AddLocationStyle from "./AddLocationStyle";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AuthContext from "../../../../../../components/auth/AuthContext";
+import LocationService from "../../../../../../../api-service/location-service/LocationService";
 
 const CreateRequestWithAddressToGeocodingApi = (address: string) => {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
@@ -40,20 +44,23 @@ const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
 
 const AddLocation = () => {
 
+    const { user } = useContext(AuthContext);
+
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
-
-    const [isVisibleLocationDropDown, setIsVisibleLocationDropDown] = useState(false);
-
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const [selectedLocationType, setSelectedLocationType] =
-        useState<{id: number, name: string}>({ id: NaN, name: "" });
-
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
             ...prevState,
             coordinates: coordinates
         }));
     };
+
+    const [locationName, setLocationName] = useState<string>("");
+
+    const [isVisibleLocationDropDown, setIsVisibleLocationDropDown] = useState(false);
+
+    const [selectedLocationType, setLocationType] = useState<{id: number, name: string}>(
+        { id: DEFAULT_LOCATION_ICON_ID, name: "Other" }
+    );
 
     const setWayPointsTextAndIsConfirmed = (text: string, isConfirmed: boolean) => {
         setWayPoint(prevState => ({
@@ -62,11 +69,6 @@ const AddLocation = () => {
             text: text
         }));
     };
-
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const [location, setLocation] = useState<WayPoint>(initialWayPoint);
-
-    const [locationName, setLocationName] = useState("");
 
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
 
@@ -186,11 +188,22 @@ const AddLocation = () => {
         );
     }, []);
 
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const onAddressInputButtonPressHandler = (placeholder: string, paddingLeft: number) => {
-        navigation.navigate("AddLocation", {
-            placeholder: placeholder,
-            paddingLeft: paddingLeft,
+    const addressNameSubstring = (addressName: string) => {
+        return addressName.substr(FIRST_ELEMENT_INDEX,
+            MAX_LOCATION_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
+    };
+
+    const saveLocationHandle = async () => {
+        await LocationService.add({
+            name: locationName ? locationName: addressNameSubstring(wayPoint.text),
+            address: {
+                id: 0,
+                name: wayPoint.text,
+                latitude: wayPoint.coordinates.latitude,
+                longitude:wayPoint.coordinates.longitude
+            },
+            typeId: selectedLocationType.id,
+            userId: Number(user?.id),
         });
     };
 
@@ -208,34 +221,40 @@ const AddLocation = () => {
                     userLocation={userCoordinates}
                     recentAddresses={[]}
                 />
+                {wayPoint.isConfirmed && (
+                    <>
+                        <TextInput
+                            style={AddLocationStyle.textInput}
+                            value={locationName}
+                            maxLength={MAX_LOCATION_NAME_LENGTH}
+                            placeholder={"Name the chosen address"}
+                            placeholderTextColor={"grey"}
+                            onChangeText={(fromInput) => {
+                                setLocationName(fromInput);
+                            }}/>
 
-                <TextInput
-                    style={AddLocationStyle.textInput}
-                    value={locationName}
-                    placeholder={"Name the chosen address"}
-                    placeholderTextColor={"grey"}
-                    onChangeText={(fromInput) => {
-                        setLocationName(fromInput);
-                    }}
-                />
+                        <LocationDropDownPicker
+                            items={[{
+                                label: "Work", value: 4,
+                                icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/>
+                            },
+                            {
+                                label: "Home", value: 3,
+                                icon: () => <Ionicons name="home-outline" size={25} color="#414045"/>
+                            },
+                            {
+                                label: "Other", value: DEFAULT_LOCATION_ICON_ID,
+                                icon: () => <Ionicons name="star-outline" size={25} color="#414045"/>
+                            }]}
 
-                <LocationDropDownPicker
-                    items={[{ label:"Work", value: 1 ,
-                        icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/> },
-                    { label:"Home", value: 2 ,
-                        icon: () => <Ionicons name="home-outline" size={25} color="#414045"/> },
-                    { label:"Other", value: 3 ,
-                        icon: () => <Ionicons name="star-outline" size={25} color="#414045"/> }]}
-
-                    placeholder="Choose the address type and the icon"
-                    isVisible={isVisibleLocationDropDown}
-                    onOpen={() => setIsVisibleLocationDropDown(true)}
-                    onChangeItem={(item) => {
-                        setSelectedLocationType({ id: item.value, name: item.label });
-                        setIsVisibleLocationDropDown(false);
-                    }}
-                    valueId={0}
-                />
+                            placeholder={"Choose the address type and the icon"}
+                            isVisible={isVisibleLocationDropDown}
+                            onOpen={() => setIsVisibleLocationDropDown(true)}
+                            onChangeItem={(item) => {
+                                setLocationType({ id: item.value, name: item.label });
+                                setIsVisibleLocationDropDown(false);
+                            }}/></>
+                )}
             </View>
 
             <MapView
@@ -253,7 +272,6 @@ const AddLocation = () => {
                     style={CreateJourneyStyle.movableMarker}
                     draggable={true}
                     onDragEnd={mapEventHandler}
-                    //onDragEnd={markerOnDragEndHandler}
                     image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
                     coordinate={markerCoordinates}
                 />
@@ -262,8 +280,12 @@ const AddLocation = () => {
             <TouchableOpacity
                 style={[AddLocationStyle.saveButton,
                     { backgroundColor:  wayPoint.isConfirmed ? "black" : "darkgrey" }]}
-                /*onPress={confirmOnPressHandler}*/
+
                 disabled={!wayPoint.isConfirmed}
+                onPress={() => {
+                    saveLocationHandle().then(() =>
+                        navigation.goBack());
+                }}
             >
                 <Text style={[AddLocationStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
                     Save

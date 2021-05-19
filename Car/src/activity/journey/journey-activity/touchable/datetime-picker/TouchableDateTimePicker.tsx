@@ -3,7 +3,7 @@ import { Text, View, Modal, TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
 import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { MINUTES_OFFSET } from "../../../../../constants/Constants";
+import { MINUTES_OFFSET } from "../../../../../constants/AnimationConstants";
 import moment from "moment";
 
 const ZERO = 0;
