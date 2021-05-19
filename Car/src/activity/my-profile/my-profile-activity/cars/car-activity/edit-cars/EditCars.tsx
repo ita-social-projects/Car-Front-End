@@ -67,7 +67,6 @@ const EditCars = (navigation : any) => {
             setBrands(response.data);
         });
         let carId = Number(navigation.props.route.params.carId);
-        //let carId = 1;
 
         CarService.getById(carId).then((response) => {
             const car = response.data;
