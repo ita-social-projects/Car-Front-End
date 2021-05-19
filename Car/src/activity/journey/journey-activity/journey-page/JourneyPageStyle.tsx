@@ -167,7 +167,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     stopsBlock: {
-        width: "100%",
+        width: "95%",
         justifyContent: "space-around",
         marginTop: 20,
         marginLeft: 14,
@@ -205,7 +205,6 @@ const JourneyPageStyle = StyleSheet.create({
 
     buttons: {
         width: "100%",
-        height: 100,
         paddingHorizontal: "5%",
     },
 
