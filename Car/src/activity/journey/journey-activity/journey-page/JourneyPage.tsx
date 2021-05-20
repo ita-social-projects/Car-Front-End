@@ -96,8 +96,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const moreOptionsRef = useRef<any>(null);
 
-    // const BottomPopupWrapper = props.moreOptionsPopupIsOpen ? React.Fragment : Portal;
-
     return (
         <>
             <View style={[JourneyPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
