@@ -292,7 +292,8 @@ const JourneyTabs = () => {
                                 cancelText="No, Go back"
                                 confirmColor={DM("black")}
                                 onConfirm={() => {
-                                    navigation.navigate("Search Journey");
+                                    setNewRequestModalVisible(false);
+                                    (async () => sleep(SLEEP_DURATION))().then(() => navigation.navigate("Search Journey"));
                                 }}
                                 disableModal={() => setNewRequestModalVisible(false)}
                             />
@@ -312,7 +313,7 @@ const JourneyTabs = () => {
                                 renderContent={
                                     <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                         <MenuButton
-                                            text="With the Privious Filters"
+                                            text="With the Previous Filters"
                                             isIcon={true}
                                             onPress={() => {
                                                 navigation.navigate("Search Journey");
