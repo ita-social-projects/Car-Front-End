@@ -47,7 +47,7 @@ import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourney
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
-import { Host, Portal } from "react-native-portalize";
+import { Host } from "react-native-portalize";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
@@ -231,7 +231,6 @@ const JourneyTabs = () => {
                                 </Animated.View>
 
                                 {props.route.params.isDriver &&
-                                <Portal>
                                     <BottomPopup
                                         refForChild={moreOptionsRef}
                                         snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
@@ -262,8 +261,7 @@ const JourneyTabs = () => {
                                                 />
                                             </View>
                                         }
-                                    />
-                                </Portal>}
+                                    />}
                             </Host>
                         );
                     }}

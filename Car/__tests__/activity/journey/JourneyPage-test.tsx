@@ -16,7 +16,7 @@ const props: JourneyPageProps = {
             isPassenger: false,
         },
     },
-    moreOptionsPopupIsOpen: false
+    moreOptionsPopupIsOpen: false,
 };
 
 test("renders correctly", async () =>
@@ -82,7 +82,7 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "backgroundColor": "#FFFFFF",
-                  "height": 500,
+                  "height": "100%",
                   "width": "100%",
                 }
               }

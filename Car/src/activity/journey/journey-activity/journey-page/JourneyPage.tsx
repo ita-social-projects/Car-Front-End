@@ -157,7 +157,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                         enabledGestureInteraction={true}
                         enabledInnerScrolling={true}
                         renderContent={
-                            <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: 500 }}>
+                            <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
                                 <View style={{ height: 300 }}>
                                     <ScrollView
