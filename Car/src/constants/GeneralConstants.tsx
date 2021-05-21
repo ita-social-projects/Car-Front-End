@@ -10,3 +10,4 @@ export const EMPTY_COLLECTION_LENGTH = 0;
 export const SINGLE_ELEMENT_COLLECTION_LENGTH = 1;
 export const THREE_ELEMENT_COLLECTION_LENGTH = 3;
 export const DELETE_COUNT = 1;
+export const THREE_DOTS_LENGTH = 3;

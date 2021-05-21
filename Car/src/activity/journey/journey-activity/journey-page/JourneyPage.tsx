@@ -86,11 +86,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         });
     }, []);
 
-    JourneyPage.showCancelRidePopup = () => {
-        setCancelRideModalIsVisible(true);
-    };
+    JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);
 
-    const getStopByType = (stopType: StopType) => {
+    const getStopByType = (stopType: (StopType.Start | StopType.Finish)) => {
         return currentJourney?.stops.filter(stop => stop?.type === stopType)[FIRST_ELEMENT_INDEX];
     };
 

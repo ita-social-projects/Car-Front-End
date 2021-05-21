@@ -9,23 +9,19 @@ import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/Gene
 import DM from "../styles/DM";
 import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
-
-const getShortAddressName = (name: string) => {
-    return name.length <= MAX_ADDRESS_NAME_LENGTH ?
-        name :
-        name.substr(FIRST_ELEMENT_INDEX, MAX_ADDRESS_NAME_LENGTH) + "...";
-};
+import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
+import { MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
 
 const JourneyCard = (props: {journey?: Journey}) => {
     const journey = props.journey;
     const { user } = useContext(AuthContext);
-    const [isDriver, setDriver] = useState(false);
-    const [isPassenger, setPassenger] = useState(false);
+    const [isDriver, setIsDriver] = useState(false);
+    const [isPassenger, setIsPassenger] = useState(false);
 
     useEffect (() => {
-        journey?.participants.forEach((participant: any) =>
-            participant?.id == user?.id ? setPassenger(true) : () => <></>);
-        setDriver(journey?.organizer?.id == user?.id);
+        setIsPassenger(journey?.participants.some(
+            passenger => passenger?.id === user?.id) ?? false);
+        setIsDriver(journey?.organizer?.id == user?.id);
     }, []);
 
     const navigateJourney = () =>
@@ -34,6 +30,8 @@ const JourneyCard = (props: {journey?: Journey}) => {
             isDriver,
             isPassenger
         });
+
+    const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
 
     return (
         <View>
@@ -49,9 +47,7 @@ const JourneyCard = (props: {journey?: Journey}) => {
                             <View style={JourneyCardStyle.driverNameBlock}>
                                 <View>
                                     <Text style={[JourneyCardStyle.driverNameText, { color: DM("black") }]} >
-                                        {journey?.organizer?.name +
-                                            " " +
-                                            journey?.organizer?.surname}
+                                        {trimTheStringIfTooLong(fullName, MAX_USER_FULL_NAME_LENGTH)}
                                         's ride
                                     </Text>
                                 </View>
@@ -75,8 +71,7 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
-                                    {moment(new Date(journey?.departureTime ?? ""))
-                                        .calendar()}
+                                    {moment(new Date(journey?.departureTime ?? "")).calendar()}
                                 </Text>
                             </View>
                         </View>
@@ -90,8 +85,11 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 }]} />
                             <Text style={[JourneyCardStyle.stopsText, { color: DM("#414045") }]}>
                                 {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
-                                    ? getShortAddressName(journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name!)
-                                    : "Location A"}
+                                    ? trimTheStringIfTooLong(
+                                        journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name!,
+                                        MAX_ADDRESS_NAME_LENGTH)
+                                    : "Location A"
+                                }
                             </Text>
                         </View>
                         <View style={[JourneyCardStyle.stopStickIcon, { backgroundColor: DM("#AAA9AE") }]} />
@@ -105,8 +103,10 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                 {journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
                                     ?.address?.name === undefined
                                     ? "Location B"
-                                    : getShortAddressName(journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
-                                        ?.address?.name!)}
+                                    : trimTheStringIfTooLong(
+                                        [...journey?.stops].pop()?.address?.name!,
+                                        MAX_ADDRESS_NAME_LENGTH)
+                                }
                             </Text>
                         </View>
                     </View>
