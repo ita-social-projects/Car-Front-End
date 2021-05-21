@@ -13,9 +13,9 @@ import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datet
 import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
 import AddressInputButton from "../AddressInputButton/AddressInputButton";
-import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
+import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
 import SwitchSelector from "../SwitchSelector/SwitchSelector";
-import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
+import { activeButtonStyle, inactiveButtonStyle } from "../SwitchSelector/SwitchSelectorStyle";
 import CarService from "../../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../../components/auth/AuthContext";
 import { MINUTES_OFFSET } from "../../../../../constants/AnimationConstants";
@@ -31,29 +31,39 @@ import CreateJourneyModel from "../../../../../../models/journey/CreateJourneyMo
 import Indicator from "../../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 
-const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
+const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const params = props.route.params;
+    const journey = params.journey;
+    const carModel = journey?.car?.model;
 
     const { user } = useContext(AuthContext);
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
-    const [selectedCar, setSelectedCar] =
-        useState<{id: number, name: string}>({ id: NaN, name: "" });
+    const [selectedCar, setSelectedCar] = useState<{id: number, name: string}>({
+        id: journey?.car?.id ?? NaN,
+        name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
+    });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.activeButton);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(!journey || journey.isFree ?
+        activeButtonStyle : inactiveButtonStyle);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(!journey?.isFree ?
+        activeButtonStyle : inactiveButtonStyle);
 
-    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
-    const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(!journey || journey.isOnOwnCar ?
+        activeButtonStyle : inactiveButtonStyle);
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(!journey?.isOnOwnCar ?
+        activeButtonStyle : inactiveButtonStyle);
 
-    const [departureTime, setDepartureTime] = useState(addMinutesToDate(new Date(), MINUTES_OFFSET));
-    const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(false);
+    const [departureTime, setDepartureTime] = useState(
+        journey?.departureTime ?? addMinutesToDate(new Date(), MINUTES_OFFSET));
+    const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
-    const [availableSeats, setAvailableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
+    const [availableSeats, setAvailableSeats] = useState(
+        journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
-    const [comment, setComment] = useState("");
+    const [comment, setComment] = useState(journey?.comments ?? "");
 
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
@@ -83,8 +93,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: freeButtonStyle === SwitchSelectorStyle.activeButton,
-            isOnOwnCar: ownCarButtonStyle === SwitchSelectorStyle.activeButton,
+            isFree: freeButtonStyle === activeButtonStyle,
+            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: [{ ...params.from, stopType: StopType.Start },
@@ -175,22 +185,22 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             leftButtonStyle={ownCarButtonStyle}
                             rightButtonStyle={taxiButtonStyle}
                             onLeftButtonPress={() => {
-                                if (ownCarButtonStyle === SwitchSelectorStyle.activeButton) return;
+                                if (ownCarButtonStyle === activeButtonStyle) return;
 
                                 setIsVisibleCarDropDown(false);
-                                setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
-                                setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
+                                setOwnCarButtonStyle(activeButtonStyle);
+                                setTaxiButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
-                                setOwnCarButtonStyle(SwitchSelectorStyle.inactiveButton);
-                                setTaxiButtonStyle(SwitchSelectorStyle.activeButton);
+                                setOwnCarButtonStyle(inactiveButtonStyle);
+                                setTaxiButtonStyle(activeButtonStyle);
                             }}
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
                             rightButtonText={"Taxi"}
                         />
 
-                        {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
+                        {ownCarButtonStyle === activeButtonStyle && (
                             <JourneyCreationDropDownPicker
                                 items={userCars.map((car) => ({
                                     label: car.name,
@@ -215,13 +225,13 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
                                 setFreeButtonModalIsVisible(true);
-                                setFreeButtonStyle(SwitchSelectorStyle.activeButton);
-                                setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
+                                setFreeButtonStyle(activeButtonStyle);
+                                setPaidButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
                                 setPaidButtonModalIsVisible(true);
-                                setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
-                                setPaidButtonStyle(SwitchSelectorStyle.activeButton);
+                                setFreeButtonStyle(inactiveButtonStyle);
+                                setPaidButtonStyle(activeButtonStyle);
                             }}
                             title={"Fee"}
                             leftButtonText={"Free"}
@@ -312,4 +322,4 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     );
 };
 
-export default NewJourneyDetailsPage;
+export default JourneyDetailsPage;

@@ -14,6 +14,7 @@ describe("Chat Service test", () => {
             countOfSeats: 1,
             comments: "string",
             isFree: false,
+            isOnOwnCar: false,
             schedule: null,
             organizer: {
                 id: 3,

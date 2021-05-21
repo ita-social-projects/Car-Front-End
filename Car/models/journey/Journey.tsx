@@ -11,6 +11,7 @@ type Journey = null | {
     countOfSeats: number;
     comments: string;
     isFree: boolean;
+    isOnOwnCar: boolean;
     schedule: Schedule;
     journeyPoints: JourneyPoint[];
     participants: User[];

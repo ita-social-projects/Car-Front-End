@@ -13,6 +13,7 @@ describe("Journey Service test", () => {
         countOfSeats: 2,
         departureTime: new Date(),
         isFree: true,
+        isOnOwnCar: true,
         organizer: null,
         participants: [],
         routeDistance: 2,

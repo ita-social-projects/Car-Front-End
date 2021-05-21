@@ -233,7 +233,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const confirmOnPressHandler = () => {
-        navigation.navigate("New Journey Details", {
+        navigation.navigate("Journey Details", {
             from: from,
             to: to,
             stops: stops.filter(stop => stop.isConfirmed),

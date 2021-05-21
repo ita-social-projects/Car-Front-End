@@ -49,4 +49,7 @@ const SwitchSelectorStyle = StyleSheet.create({
     },
 });
 
+export const activeButtonStyle = SwitchSelectorStyle.activeButton;
+export const inactiveButtonStyle = SwitchSelectorStyle.inactiveButton;
+
 export default SwitchSelectorStyle;

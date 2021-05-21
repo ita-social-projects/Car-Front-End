@@ -85,7 +85,7 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="New Journey Details"
+          name="Journey Details"
           options={
             Object {
               "headerLeft": [Function],

@@ -43,7 +43,7 @@ import {
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
-import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";
+import JourneyDetailsPage from "../journey-activity/create-journey/JourneyDetailsPage/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
@@ -185,8 +185,8 @@ const JourneyTabs = () => {
                 />
 
                 <StackTabs.Screen
-                    name="New Journey Details"
-                    component={NewJourneyDetailsPage}
+                    name="Journey Details"
+                    component={JourneyDetailsPage}
                     options={{
                         headerTitle: "Add a ride",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
