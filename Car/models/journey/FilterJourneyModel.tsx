@@ -7,7 +7,7 @@ interface FilterJourneyModel{
     toLongitude: number,
     departureTime: Date,
     hasLuggage: boolean,
-    feeType: FeeType,
+    fee: FeeType,
     passengersCount: number
 }
 

@@ -287,7 +287,10 @@ const JourneyTabs = () => {
                     }}
                     children = {(props: any) => (
                         <>
-                            <OkSearchResult journeys={props.route.params.journeys} />
+                            <OkSearchResult
+                                journeys={props.route.params.journeys}
+                                displayFee={props.route.params.displayFee}
+                            />
                             <ConfirmModal
                                 visible={isNewRequestModalVisible}
                                 title="ARE YOU SURE?"
