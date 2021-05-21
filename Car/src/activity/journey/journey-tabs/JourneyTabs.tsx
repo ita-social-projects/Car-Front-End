@@ -297,7 +297,8 @@ const JourneyTabs = () => {
                                 confirmColor={DM("black")}
                                 onConfirm={() => {
                                     setNewRequestModalVisible(false);
-                                    (async () => sleep(SLEEP_DURATION))().then(() => navigation.navigate("Search Journey"));
+                                    (async () => sleep(SLEEP_DURATION))().then(() =>
+                                        navigation.navigate("Search Journey"));
                                 }}
                                 disableModal={() => setNewRequestModalVisible(false)}
                             />
