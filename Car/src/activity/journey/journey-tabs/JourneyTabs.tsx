@@ -287,7 +287,10 @@ const JourneyTabs = () => {
                     }}
                     children = {(props: any) => (
                         <>
-                            <OkSearchResult journeys={props.route.params.journeys} />
+                            <OkSearchResult
+                                journeys={props.route.params.journeys}
+                                displayFee={props.route.params.displayFee}
+                            />
                             <ConfirmModal
                                 visible={isNewRequestModalVisible}
                                 title="ARE YOU SURE?"
@@ -297,7 +300,8 @@ const JourneyTabs = () => {
                                 confirmColor={DM("black")}
                                 onConfirm={() => {
                                     setNewRequestModalVisible(false);
-                                    (async () => sleep(SLEEP_DURATION))().then(() => navigation.navigate("Search Journey"));
+                                    (async () => sleep(SLEEP_DURATION))()
+                                        .then(() => navigation.navigate("Search Journey"));
                                 }}
                                 disableModal={() => setNewRequestModalVisible(false)}
                             />

@@ -10,6 +10,11 @@ const JourneyCardStyle = StyleSheet.create({
         marginBottom: 16
     },
 
+    feeBlock: {
+        paddingTop: 10,
+        textAlign: "center"
+    },
+
     driverInfoBlock: {
         flexDirection: "row"
     },
