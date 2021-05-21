@@ -43,7 +43,7 @@ import {
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
-import JourneyDetailsPage from "../journey-activity/create-journey/JourneyDetailsPage/JourneyDetailsPage";
+import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
@@ -188,7 +188,7 @@ const JourneyTabs = () => {
                     name="Journey Details"
                     component={JourneyDetailsPage}
                     options={{
-                        headerTitle: "Add a ride",
+                        headerTitle: "Ride details",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton
@@ -253,7 +253,10 @@ const JourneyTabs = () => {
                                                 { backgroundColor: DM("white") }
                                             ]}>
                                                 <MenuButton text="Add stop" isIcon={true} />
-                                                <MenuButton text="Edit ride" isIcon={true} />
+                                                <MenuButton
+                                                    text="Edit ride"
+                                                    isIcon={true}
+                                                    onPress={JourneyPage.editJourney} />
                                                 <MenuButton
                                                     text="Cancel ride"
                                                     isIcon={true}

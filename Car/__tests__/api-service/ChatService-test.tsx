@@ -9,6 +9,7 @@ describe("Chat Service test", () => {
         name: "Maksym",
         journey: {
             id: 1,
+            duration: 1,
             routeDistance: 1,
             departureTime: new Date(),
             countOfSeats: 1,

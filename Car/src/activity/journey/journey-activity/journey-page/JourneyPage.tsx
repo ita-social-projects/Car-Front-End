@@ -10,15 +10,12 @@ import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
+    DEFAULT_DURATION, DEFAULT_ROUTE_DISTANCE,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
-import {
-    MAX_POPUP_POSITION,
-    MIN_POPUP_POSITION,
-    ZERO_COORDINATE
-} from "../../../../constants/StylesConstants";
+import { MAX_POPUP_POSITION, MIN_POPUP_POSITION, ZERO_COORDINATE } from "../../../../constants/StylesConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
@@ -33,6 +30,8 @@ import DriverBlock from "./DriverBlock/DriverBlock";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
+import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
+import { mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -43,6 +42,7 @@ const getStopCoordinates = (stop?: Stop) => {
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
+    editJourney: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: JourneyPageProps}): JSX.Element
 }
@@ -87,6 +87,25 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     }, []);
 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);
+
+    JourneyPage.editJourney = () => {
+        const props: JourneyDetailsPageProps = {
+            route: {
+                params: {
+                    journey: currentJourney,
+                    from: mapStopToWayPoint(getStopByType(StopType.Start)),
+                    to: mapStopToWayPoint(getStopByType(StopType.Finish)),
+                    stops: currentJourney?.stops.filter(stop =>
+                        stop?.type === StopType.Intermediate).map(mapStopToWayPoint) ?? [],
+                    duration: currentJourney?.duration ?? DEFAULT_DURATION,
+                    routeDistance: currentJourney?.routeDistance ?? DEFAULT_ROUTE_DISTANCE,
+                    routePoints: currentJourney?.journeyPoints ?? [],
+                }
+            }
+        };
+
+        navigation.navigate("Journey Details", props.route.params);
+    };
 
     const getStopByType = (stopType: (StopType.Start | StopType.Finish)) => {
         return currentJourney?.stops.filter(stop => stop?.type === stopType)[FIRST_ELEMENT_INDEX];
@@ -185,7 +204,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             <ConfirmModal
                 visible={cancelRideModalIsVisible}
                 title={"Ride canceling"}
-                confirmText={"Yes, delete it"}
+                confirmText={"Yes, cancel it"}
                 cancelText={"No, keep it"}
                 onConfirm={() => {
                     setCancelRideModalIsVisible(false);
@@ -193,7 +212,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                         .then(() => setCancelRideSuccessModalIsVisible(true));
                 }}
                 disableModal={() => setCancelRideModalIsVisible(false)}
-                subtitle={"Are you sure you want to delete the stop?"}
+                subtitle={"Are you sure you want to cancel the ride?"}
             />
 
             <ConfirmModal
@@ -226,5 +245,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 };
 
 JourneyPage.showCancelRidePopup = () => console.log("Outer cancelRide()");
+JourneyPage.editJourney = () => console.log("Outer editJourney()");
 
 export default JourneyPage;

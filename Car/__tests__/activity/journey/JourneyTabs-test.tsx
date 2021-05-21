@@ -89,7 +89,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Add a ride",
+              "headerTitle": "Ride details",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {

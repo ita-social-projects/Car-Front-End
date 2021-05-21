@@ -249,7 +249,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
-        console.log(JSON.stringify(result));
         setRouteDistance(result.distance);
         setDuration(result.duration);
         setRoutePoints(result.coordinates);

@@ -7,6 +7,7 @@ import JourneyPoint from "./JourneyPoint";
 type Journey = null | {
     id: number;
     routeDistance: number;
+    duration: number;
     departureTime: Date;
     countOfSeats: number;
     comments: string;

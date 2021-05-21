@@ -1,6 +1,6 @@
-import WayPoint from "../../../../../types/WayPoint";
+import WayPoint from "../../../../types/WayPoint";
 import { LatLng } from "react-native-maps";
-import Journey from "../../../../../../models/journey/Journey";
+import Journey from "../../../../../models/journey/Journey";
 
 interface JourneyDetailsPageProps {
     route: {

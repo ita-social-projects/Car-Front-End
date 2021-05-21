@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { CreateJourneyStyle } from "../CreateJourneyStyle";
+import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import {
     ScrollView,
     TextInput,
@@ -9,27 +9,28 @@ import {
     KeyboardAvoidingView,
     Platform
 } from "react-native";
-import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datetime-picker/TouchableDateTimePicker";
-import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
-import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
-import AddressInputButton from "../AddressInputButton/AddressInputButton";
+import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
+import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDropDownPicker";
+import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
+import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
-import SwitchSelector from "../SwitchSelector/SwitchSelector";
-import { activeButtonStyle, inactiveButtonStyle } from "../SwitchSelector/SwitchSelectorStyle";
-import CarService from "../../../../../../api-service/car-service/CarService";
-import AuthContext from "../../../../../components/auth/AuthContext";
-import { MINUTES_OFFSET } from "../../../../../constants/AnimationConstants";
-import { DEFAULT_AVAILABLE_SEATS_COUNT, } from "../../../../../constants/JourneyConstants";
+import SwitchSelector from "../create-journey/SwitchSelector/SwitchSelector";
+import { activeButtonStyle, inactiveButtonStyle } from "../create-journey/SwitchSelector/SwitchSelectorStyle";
+import CarService from "../../../../../api-service/car-service/CarService";
+import AuthContext from "../../../../components/auth/AuthContext";
+import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
+import { DEFAULT_AVAILABLE_SEATS_COUNT, INITIAL_TIME, } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
     FIRST_ELEMENT_INDEX
-} from "../../../../../constants/GeneralConstants";
-import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
-import StopType from "../../../../../../models/stop/StopType";
-import * as navigation from "../../../../../components/navigation/Navigation";
-import CreateJourneyModel from "../../../../../../models/journey/CreateJourneyModel";
-import Indicator from "../../../../../components/activity-indicator/Indicator";
-import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
+} from "../../../../constants/GeneralConstants";
+import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import StopType from "../../../../../models/stop/StopType";
+import * as navigation from "../../../../components/navigation/Navigation";
+import CreateJourneyModel from "../../../../../models/journey/CreateJourneyModel";
+import Indicator from "../../../../components/activity-indicator/Indicator";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import moment from "moment";
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -46,18 +47,24 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(!journey || journey.isFree ?
-        activeButtonStyle : inactiveButtonStyle);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(!journey?.isFree ?
-        activeButtonStyle : inactiveButtonStyle);
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(
+        journey?.isOnOwnCar && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(
+        journey?.isOnOwnCar && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
 
-    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(!journey || journey.isOnOwnCar ?
-        activeButtonStyle : inactiveButtonStyle);
-    const [taxiButtonStyle, setTaxiButtonStyle] = useState(!journey?.isOnOwnCar ?
-        activeButtonStyle : inactiveButtonStyle);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(
+        journey?.isFree && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(
+        journey?.isFree && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
 
-    const [departureTime, setDepartureTime] = useState(
-        journey?.departureTime ?? addMinutesToDate(new Date(), MINUTES_OFFSET));
+    useEffect(() => {
+        console.log("!journey?.isOnOwnCar - ", !journey?.isOnOwnCar);
+        console.log("journey?.isFree - ", journey?.isFree);
+    }, []);
+
+    const [departureTime, setDepartureTime] = useState<Date>(journey ?
+        moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
+        addMinutesToDate(new Date(), MINUTES_OFFSET));
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
     const [availableSeats, setAvailableSeats] = useState(
