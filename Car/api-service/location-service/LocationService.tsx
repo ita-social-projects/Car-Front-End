@@ -14,6 +14,8 @@ const LocationService = {
     getById: async (id: number) => APIService.get<Location>(route + id),
 
     getAll: async (id: number) => APIService.get<Array<Location>>(route + "by-user/" + id),
+
+    delete: async (id: number) => APIService.delete(route + id)
 };
 
 export default LocationService;
