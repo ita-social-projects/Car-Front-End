@@ -47,6 +47,7 @@ import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourney
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
+import { Host } from "react-native-portalize";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
@@ -218,7 +219,7 @@ const JourneyTabs = () => {
                     {(props: any) => {
 
                         return (
-                            <>
+                            <Host>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
                                     { opacity: layoutOpacity, backgroundColor: DM("#000000") }
                                 ]} />
@@ -226,39 +227,42 @@ const JourneyTabs = () => {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
                                 ]}>
-                                    <JourneyPage props={props} />
+                                    <JourneyPage props={{ ...props, moreOptionsPopupIsOpen: isOpen }} />
                                 </Animated.View>
 
-                                {props.route.params.isDriver && <BottomPopup
-                                    refForChild={moreOptionsRef}
-                                    snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
-                                    enabledInnerScrolling={false}
-                                    onCloseEnd={closeHandle}
-                                    initialSnap={0}
-                                    renderHeader={
+                                {props.route.params.isDriver &&
+                                    <BottomPopup
+                                        refForChild={moreOptionsRef}
+                                        snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                        enabledInnerScrolling={false}
+                                        onCloseEnd={closeHandle}
+                                        initialSnap={0}
+                                        renderHeader={
 
-                                        <View style={[JourneyPageStyle.headerTitleStyle,
-                                            { backgroundColor: DM("white") }
-                                        ]}>
-                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
-                                                MORE OPTIONS
-                                            </Text>
-                                        </View>
-                                    }
-                                    renderContent={
-                                        <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
-                                            <MenuButton text="Add stop" isIcon={true} />
-                                            <MenuButton text="Edit route" isIcon={true} />
-                                            <MenuButton text="Invite SoftServian" isIcon={true} />
-                                            <MenuButton
-                                                text="Cancel ride"
-                                                isIcon={true}
-                                                onPress={JourneyPage.showCancelRidePopup}
-                                            />
-                                        </View>
-                                    }
-                                />}
-                            </>
+                                            <View style={[JourneyPageStyle.headerTitleStyle,
+                                                { backgroundColor: DM("white") }
+                                            ]}>
+                                                <Text style={[JourneyPageStyle.headerTextStyle,
+                                                    { color: DM("black") }]}>
+                                                    MORE OPTIONS
+                                                </Text>
+                                            </View>
+                                        }
+                                        renderContent={
+                                            <View style={[JourneyPageStyle.panel,
+                                                { backgroundColor: DM("white") }
+                                            ]}>
+                                                <MenuButton text="Add stop" isIcon={true} />
+                                                <MenuButton text="Edit ride" isIcon={true} />
+                                                <MenuButton
+                                                    text="Cancel ride"
+                                                    isIcon={true}
+                                                    onPress={JourneyPage.showCancelRidePopup}
+                                                />
+                                            </View>
+                                        }
+                                    />}
+                            </Host>
                         );
                     }}
                 </StackTabs.Screen>
@@ -283,7 +287,10 @@ const JourneyTabs = () => {
                     }}
                     children = {(props: any) => (
                         <>
-                            <OkSearchResult journeys={props.route.params.journeys} />
+                            <OkSearchResult
+                                journeys={props.route.params.journeys}
+                                displayFee={props.route.params.displayFee}
+                            />
                             <ConfirmModal
                                 visible={isNewRequestModalVisible}
                                 title="ARE YOU SURE?"
@@ -292,7 +299,9 @@ const JourneyTabs = () => {
                                 cancelText="No, Go back"
                                 confirmColor={DM("black")}
                                 onConfirm={() => {
-                                    navigation.navigate("Search Journey");
+                                    setNewRequestModalVisible(false);
+                                    (async () => sleep(SLEEP_DURATION))().then(() =>
+                                        navigation.navigate("Search Journey"));
                                 }}
                                 disableModal={() => setNewRequestModalVisible(false)}
                             />
@@ -312,7 +321,7 @@ const JourneyTabs = () => {
                                 renderContent={
                                     <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                         <MenuButton
-                                            text="With the Privious Filters"
+                                            text="With the Previous Filters"
                                             isIcon={true}
                                             onPress={() => {
                                                 navigation.navigate("Search Journey");
