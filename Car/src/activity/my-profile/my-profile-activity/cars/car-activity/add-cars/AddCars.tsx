@@ -31,8 +31,6 @@ import {
 } from "../../../../../../constants/CarConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../../../../constants/GeneralConstants";
 import DM from "../../../../../../components/styles/DM";
-import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
-import CarPhoto from "../../../../../../../models/car/CarPhoto";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
@@ -61,7 +59,7 @@ const AddCars = () => {
 
     const [plateNumber, setPlateNumber] = useState<string>("");
     const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-    const [photo, setPhoto] = useState<CarPhoto>({} as CarPhoto);
+    const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
     let modelPickerController: any;
     let brandPickerController: any;
@@ -75,18 +73,14 @@ const AddCars = () => {
 
     const trySetPhoto = (photo: ImagePickerResponse) => {
         if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
-            setPhoto({
-                name: photo.fileName?.toString() ?? "",
-                type: photo.type?.toString() ?? "",
-                uri: photo.uri?.toString() ?? ""
-            });
+            setPhoto(photo);
         } else {
             Alert.alert("Error!", "File size should not exceed 7MB", [
                 {
                     text: "Ok"
                 }
             ]);
-            setPhoto({} as CarPhoto);
+            setPhoto({} as ImagePickerResponse);
         }
     };
 
@@ -110,18 +104,19 @@ const AddCars = () => {
 
     const saveCarHandle = async () => {
         setSaving(true);
-        let photoToAdd;
+        let car = new FormData();
 
-        (photo.name !== "" && photo.type !== "" && photo.uri !== "") ?
-            photoToAdd = photo : photoToAdd = null;
-
-        let car: CreateCarViewModel = {
-            ownerId : Number(user?.id),
-            modelId : Number(selectedModel?.value),
-            color : Number(selectedColor?.value),
-            plateNumber: plateNumber,
-            photo : photoToAdd
-        };
+        car.append("ownerId", user?.id);
+        car.append("modelId", Number(selectedModel?.value));
+        car.append("color", Number(selectedColor?.value));
+        car.append("plateNumber", plateNumber);
+        if (photo !== null && photo !== undefined) {
+            car.append("image", {
+                name: photo.fileName,
+                type: photo.type,
+                uri: photo.uri
+            });
+        }
 
         await CarService.add(car)
             .then((res) => console.log(res.data))
