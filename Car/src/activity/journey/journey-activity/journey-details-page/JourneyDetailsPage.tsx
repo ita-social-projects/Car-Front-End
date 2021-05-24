@@ -36,6 +36,8 @@ import CreateJourneyModel from "../../../../../models/journey/CreateJourneyModel
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
+import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
+import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -62,11 +64,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [paidButtonStyle, setPaidButtonStyle] = useState(
         journey?.isFree && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
 
-    useEffect(() => {
-        console.log("!journey?.isOnOwnCar - ", !journey?.isOnOwnCar);
-        console.log("journey?.isFree - ", journey?.isFree);
-    }, []);
-
     const [departureTime, setDepartureTime] = useState<Date>(journey ?
         moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
         addMinutesToDate(new Date(), MINUTES_OFFSET));
@@ -80,10 +77,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
 
-    const [freeButtonModalIsVisible, setFreeButtonModalIsVisible] = useState(false);
-    const [paidButtonModalIsVisible, setPaidButtonModalIsVisible] = useState(false);
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
-    const [publishErrorModalIsVisible, setPublishErrorModalIsVisible] = useState(false);
+
+    const [modal, setModal] = useState<ConfirmModalProps>({ ...freeRideModal, visible: false });
+    const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
         CarService.getAll(Number(user?.id)).then(result => {
@@ -132,7 +129,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then(() => setSuccessfullyPublishModalIsVisible(true))
-            .catch(() => setPublishErrorModalIsVisible(true));
+            .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);
     };
@@ -236,12 +233,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             leftButtonStyle={freeButtonStyle}
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
-                                setFreeButtonModalIsVisible(true);
+                                setModal(freeRideModal);
                                 setFreeButtonStyle(activeButtonStyle);
                                 setPaidButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
-                                setPaidButtonModalIsVisible(true);
+                                setModal(paidRideModal);
                                 setFreeButtonStyle(inactiveButtonStyle);
                                 setPaidButtonStyle(activeButtonStyle);
                             }}
@@ -304,23 +301,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             )}
 
             <ConfirmModal
-                visible={freeButtonModalIsVisible}
-                title={"Free ride!"}
-                subtitle={"Participants will be informed that your ride is totally free!"}
-                confirmText={"OK"}
-                hideCancelButton={true}
-                onConfirm={() => setFreeButtonModalIsVisible(false)}
-                disableModal={() => setFreeButtonModalIsVisible(false)}
-            />
-
-            <ConfirmModal
-                visible={paidButtonModalIsVisible}
-                title={"Paid ride!"}
-                subtitle={"Participants will be informed that they'll need to partially pay for a fuel."}
-                confirmText={"OK"}
-                hideCancelButton={true}
-                onConfirm={() => setPaidButtonModalIsVisible(false)}
-                disableModal={() => setPaidButtonModalIsVisible(false)}
+                {...modal}
+                onConfirm={disableModal}
+                disableModal={disableModal}
             />
 
             <ConfirmModal
@@ -337,16 +320,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     setSuccessfullyPublishModalIsVisible(false);
                     navigation.navigate("Journey");
                 }}
-            />
-
-            <ConfirmModal
-                visible={publishErrorModalIsVisible}
-                title={"Error"}
-                subtitle={"Ride publishing is failed"}
-                confirmText={"OK"}
-                hideCancelButton={true}
-                onConfirm={() => setPublishErrorModalIsVisible(false)}
-                disableModal={() => setPublishErrorModalIsVisible(false)}
             />
         </>
     );
