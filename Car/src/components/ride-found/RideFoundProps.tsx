@@ -7,6 +7,6 @@ interface RideFoundProps{
     user: UserModel,
     read?: boolean,
     date?: Date
-};
+}
 
 export default RideFoundProps;

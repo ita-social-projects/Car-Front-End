@@ -143,7 +143,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
                         setPaidButtonStyle(SwitchSelectorStyle.activeButton);
                         break;
-                };
+                }
 
                 setFrom(filter.from);
                 setTo(filter.to);
