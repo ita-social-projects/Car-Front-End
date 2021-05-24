@@ -23,6 +23,8 @@ const APIRoutes = {
 
     getLocationTypeUrl: () => APIConfig.URL + "api/location-types/",
 
+    getRequestUrl: () => APIConfig.URL + "api/requests/",
+
     getSignalRUrl: () => APIConfig.URL + "signalr/"
 };
 

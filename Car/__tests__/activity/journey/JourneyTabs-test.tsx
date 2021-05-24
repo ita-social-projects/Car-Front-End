@@ -169,7 +169,7 @@ test("renders correctly", async () =>
                   "color": "black",
                 },
               ],
-              "title": "Confirm Ride",
+              "title": "Create Ride Request",
             }
           }
         />

@@ -16,7 +16,6 @@ import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
 import Chat from "../../messages/messages-activity/chat/Chat";
-import JourneyRequestPage from "../journey-activity/journey-request-page/JourneyRequestPage";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
@@ -268,12 +267,12 @@ const JourneyTabs = () => {
                 </StackTabs.Screen>
                 <StackTabs.Screen
                     name="Journey Request Page"
-                    component={JourneyRequestPage}
+                    component={SearchJourney}
                     options={{
-                        title: "Confirm Ride",
+                        title: "Create Ride Request",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
-                        headerLeft: HeaderBackButton
+                        headerLeft: HeaderBackButton,
                     }}
                 />
                 <StackTabs.Screen
@@ -301,7 +300,7 @@ const JourneyTabs = () => {
                                 onConfirm={() => {
                                     setNewRequestModalVisible(false);
                                     (async () => sleep(SLEEP_DURATION))().then(() =>
-                                        navigation.navigate("Search Journey"));
+                                        navigation.navigate("Journey Request Page", { isRequest: true }));
                                 }}
                                 disableModal={() => setNewRequestModalVisible(false)}
                             />
@@ -324,7 +323,8 @@ const JourneyTabs = () => {
                                             text="With the Previous Filters"
                                             isIcon={true}
                                             onPress={() => {
-                                                navigation.navigate("Search Journey");
+                                                navigation.navigate("Journey Request Page",
+                                                    { isRequest: true, isPreviousFilter: true });
                                                 if(ShadowedBottomPopup)
                                                     ShadowedBottomPopup.pressHandle();
                                             }}
