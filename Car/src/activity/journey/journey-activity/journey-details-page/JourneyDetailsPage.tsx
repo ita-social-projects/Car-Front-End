@@ -78,6 +78,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
 
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
+    const [discardModalIsVisible, setDiscardModalIsVisible] = useState(false);
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...freeRideModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
@@ -275,7 +276,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
                                     { display: journey ? "flex" : "none" }]}
-                                onPress={() => {}}
+                                onPress={() => setDiscardModalIsVisible(true)}
                             >
                                 <Text style={CreateJourneyStyle.discardButtonText}>
                                     Discard changes
@@ -320,6 +321,19 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     setSuccessfullyPublishModalIsVisible(false);
                     navigation.navigate("Journey");
                 }}
+            />
+
+            <ConfirmModal
+                visible={discardModalIsVisible}
+                title={"Are you sure?"}
+                subtitle={"Are you sure you want to discard the changes?"}
+                confirmText={"Yes, discard"}
+                cancelText={"No, keep it"}
+                onConfirm={() => {
+                    setDiscardModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => setDiscardModalIsVisible(false)}
             />
         </>
     );
