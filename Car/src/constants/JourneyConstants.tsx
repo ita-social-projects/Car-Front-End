@@ -21,3 +21,6 @@ export const LEFT_PADDING_FOR_VIA_PLACEHOLDER = 50;
 export const MAX_USER_FULL_NAME_LENGTH = 25;
 export const DEFAULT_DURATION = 0;
 export const DEFAULT_ROUTE_DISTANCE = 0;
+export const MIN_AVAILABLE_SEATS_COUNT = 1;
+export const EDITING_FONT_SIZE = 14;
+export const CREATING_FONT_SIZE = 16;

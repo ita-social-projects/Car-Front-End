@@ -19,7 +19,12 @@ import { activeButtonStyle, inactiveButtonStyle } from "../create-journey/Switch
 import CarService from "../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
-import { DEFAULT_AVAILABLE_SEATS_COUNT, INITIAL_TIME, } from "../../../../constants/JourneyConstants";
+import {
+    CREATING_FONT_SIZE,
+    DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
+    INITIAL_TIME,
+    MIN_AVAILABLE_SEATS_COUNT,
+} from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
     FIRST_ELEMENT_INDEX
@@ -249,6 +254,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             value={availableSeats}
                             onChange={seats => setAvailableSeats(seats)}
                             title={"Available seats:"}
+                            minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
                         <View style={CreateJourneyStyle.commentsView}>
@@ -266,16 +272,33 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
                         </View>
 
-                        <View style={CreateJourneyStyle.publishButtonContainer}>
+                        <View style={[CreateJourneyStyle.publishButtonContainer,
+                            { flexDirection: journey ? "row" : "column" }]}>
+
+                            <TouchableOpacity
+                                style={[CreateJourneyStyle.discardButton,
+                                    { display: journey ? "flex" : "none" }]}
+                                onPress={() => {}}
+                            >
+                                <Text style={CreateJourneyStyle.discardButtonText}>
+                                    Discard changes
+                                </Text>
+                            </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
-                                onPress={publishJourneyHandler}
+                                onPress={journey ? () => {} : publishJourneyHandler}
                                 disabled={!departureTimeIsConfirmed}
                             >
-                                <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
+                                <Text style={[CreateJourneyStyle.publishButtonText,
+                                    { fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE }]}>
+                                    {journey ? "Apply changes" : "Publish"}
+                                </Text>
                             </TouchableOpacity>
+
                         </View>
+
                     </ScrollView>
                 </KeyboardAvoidingView>
             )}
