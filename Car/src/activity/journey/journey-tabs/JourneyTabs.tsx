@@ -256,7 +256,10 @@ const JourneyTabs = () => {
                                                 <MenuButton
                                                     text="Edit ride"
                                                     isIcon={true}
-                                                    onPress={JourneyPage.editJourney} />
+                                                    onPress={() => {
+                                                        JourneyPage.editJourney();
+                                                        pressHandle();
+                                                    }} />
                                                 <MenuButton
                                                     text="Cancel ride"
                                                     isIcon={true}

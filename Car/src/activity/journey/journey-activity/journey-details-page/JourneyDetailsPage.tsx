@@ -79,6 +79,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
     const [discardModalIsVisible, setDiscardModalIsVisible] = useState(false);
+    const [applyChangesModalIsVisible, setApplyChangesModalIsVisible] = useState(false);
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...freeRideModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
@@ -286,7 +287,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
-                                onPress={journey ? () => {} : publishJourneyHandler}
+                                onPress={journey ?
+                                    () => setApplyChangesModalIsVisible(true) :
+                                    publishJourneyHandler}
                                 disabled={!departureTimeIsConfirmed}
                             >
                                 <Text style={[CreateJourneyStyle.publishButtonText,
@@ -334,6 +337,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     navigation.goBack();
                 }}
                 disableModal={() => setDiscardModalIsVisible(false)}
+            />
+
+            <ConfirmModal
+                visible={applyChangesModalIsVisible}
+                confirmColor={"black"}
+                title={"CHANGES"}
+                subtitle={"After the changes is applied, all passengers will get notified. " +
+                        "Some of them might withdraw from the ride if change doesn't suit them"}
+                confirmText={"Apply"}
+                cancelText={"Cancel"}
+                onConfirm={() => {
+                    setApplyChangesModalIsVisible(false);
+                    console.log("Ride is updating...");
+                    props.navigation?.push("Journey Page", {
+                        journeyId: journey?.id,
+                        isDriver: true,
+                        isPassenger: false,
+                        afterEditing: true
+                    });
+                }}
+                disableModal={() => setApplyChangesModalIsVisible(false)}
             />
         </>
     );

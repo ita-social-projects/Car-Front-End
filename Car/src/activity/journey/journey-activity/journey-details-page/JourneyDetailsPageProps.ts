@@ -13,6 +13,10 @@ interface JourneyDetailsPageProps {
             duration: number,
             journey?: Journey
         }
+    },
+    navigation?: {
+        // eslint-disable-next-line unused-imports/no-unused-vars
+        push: (name: string, params: object) => void
     }
 }
 
