@@ -31,6 +31,7 @@ import RemoveAddressButton from "../../../../../components/menu-remove-address-b
 import BottomSheet from "reanimated-bottom-sheet";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
+import LocationService from "../../../../../../api-service/location-service/LocationService";
 
 const StackTabs = createStackNavigator();
 
@@ -52,6 +53,13 @@ export default function AddressBookTabs () {
     const fadeOut = () => {
         animateOpacity(layoutOpacity, ZERO_OPACITY, ANIMATION_DURATION);
         animateOpacity(addressOpacity, MAX_OPACITY, ANIMATION_DURATION);
+    };
+
+    const deleteLocation = (locationId : any) => {
+        LocationService.delete(locationId).then(() => {
+            setModalVisibility(false);
+            (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
+        });
     };
 
     const closeHandle = () => {
@@ -108,7 +116,7 @@ export default function AddressBookTabs () {
                         headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
                 >
-                    {() => {
+                    {(props: any) => {
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
@@ -156,10 +164,7 @@ export default function AddressBookTabs () {
                                     subtitle={"Do you want to delete your address information?"}
                                     confirmText={"Yes, delete it"}
                                     cancelText={"No, keep it"}
-                                    onConfirm={() => {
-                                        setModalVisibility(false);
-                                        (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
-                                    }}
+                                    onConfirm={() => deleteLocation(props.route.params.carId)}
                                 />
                             </>
                         );

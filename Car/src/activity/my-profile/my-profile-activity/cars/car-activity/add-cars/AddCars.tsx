@@ -31,14 +31,10 @@ import {
 } from "../../../../../../constants/CarConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../../../../constants/GeneralConstants";
 import DM from "../../../../../../components/styles/DM";
-import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
-
-    let modelPickerController: any;
-    let brandPickerController: any;
-    let colorPickerController: any;
+    const [isSaving, setSaving] = useState(false);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
     const [models, setModels] = useState({} as CarModel[]);
@@ -51,25 +47,6 @@ const AddCars = () => {
             }))
     );
 
-    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-
-    function validatePlateNumber () : boolean {
-        if (
-            !plateNumber ||
-            plateNumber.length < MIN_PLATE_NUMBER_LENGTH ||
-            plateNumber.length > MAX_PLATE_NUMBER_LENGTH ||
-            !plateNumber.match(/^[A-ZА-Я0-9-]+$/)
-        ) {
-            setValidPlateNumber(false);
-
-            return false;
-        } else {
-            setValidPlateNumber(true);
-
-            return true;
-        }
-    }
-
     const [selectedBrand, setBrand] = useState<CarDropDownPickerItem | null>(
         null
     );
@@ -81,10 +58,12 @@ const AddCars = () => {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-
+    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
     const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
-    const [loading, setLoading] = useState(false);
+    let modelPickerController: any;
+    let brandPickerController: any;
+    let colorPickerController: any;
 
     useEffect(() => {
         BrandService.getBrands().then((res) => {
@@ -101,9 +80,19 @@ const AddCars = () => {
                     text: "Ok"
                 }
             ]);
-            setPhoto({});
+            setPhoto({} as ImagePickerResponse);
         }
     };
+
+    function validatePlateNumber () {
+        setValidPlateNumber(
+            Boolean(
+                plateNumber &&
+                plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
+                plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
+                plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+            ));
+    }
 
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
@@ -114,33 +103,25 @@ const AddCars = () => {
     };
 
     const saveCarHandle = async () => {
-        setLoading(true);
-        let photoToAdd;
+        setSaving(true);
+        let car = new FormData();
 
+        car.append("ownerId", user?.id);
+        car.append("modelId", Number(selectedModel?.value));
+        car.append("color", Number(selectedColor?.value));
+        car.append("plateNumber", plateNumber);
         if (photo !== null && photo !== undefined) {
-            photoToAdd = {
+            car.append("image", {
                 name: photo.fileName,
                 type: photo.type,
-                uri: photo?.uri
-            };
+                uri: photo.uri
+            });
         }
-        else
-        {
-            photoToAdd = null;
-        }
-
-        let car: CreateCarViewModel = {
-            ownerId : Number(user?.id),
-            modelId : Number(selectedModel?.value),
-            color : Number(selectedColor?.value),
-            plateNumber: plateNumber,
-            photo : photoToAdd
-        };
 
         await CarService.add(car)
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
-        setLoading(false);
+        setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
@@ -294,7 +275,7 @@ const AddCars = () => {
                         <Text style={[AddCarsStyle.carButtonSaveText, { color: DM("white") }]}>
                             Save
                         </Text>
-                        {loading ? (
+                        {isSaving ? (
                             <ActivityIndicator
                                 style={AddCarsStyle.spinner}
                                 size={20}

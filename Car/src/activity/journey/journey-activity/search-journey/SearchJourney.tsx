@@ -146,14 +146,16 @@ const SearchJourney = (props: SearchJourneyProps) => {
             departureTime: departureTime,
             hasLuggage: hasLuggage,
             passengersCount: passengersCount,
-            feeType:
+            fee:
                 allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
                     : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
                         : FeeType.Paid,
         })
             .then((res) => {
                 if(res.data.length > EMPTY_COLLECTION_LENGTH) {
-                    navigation.navigate("OK Search Result", { journeys: res.data });
+                    let displayFee = allButtonStyle === SwitchSelectorStyle.activeButton;
+
+                    navigation.navigate("OK Search Result", { journeys: res.data, displayFee: displayFee });
                 } else {
                     navigation.navigate("Bad Search Result");
                 }

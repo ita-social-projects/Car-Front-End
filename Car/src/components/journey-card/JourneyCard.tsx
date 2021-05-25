@@ -10,9 +10,9 @@ import DM from "../styles/DM";
 import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
-import { MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
+import { JOURNEY_CARD_WITH_FEE_HEIGHT } from "../../constants/JourneyConstants";
 
-const JourneyCard = (props: {journey?: Journey}) => {
+const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
     const journey = props.journey;
     const { user } = useContext(AuthContext);
     const [isDriver, setIsDriver] = useState(false);
@@ -31,14 +31,14 @@ const JourneyCard = (props: {journey?: Journey}) => {
             isPassenger
         });
 
-    const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
-
     return (
         <View>
             <TouchableOpacity
                 onPress={navigateJourney}
             >
-                <View style={[JourneyCardStyle.component, { borderColor: DM("black") }]}>
+                <View style={[JourneyCardStyle.component,
+                    { borderColor: DM("black") },
+                    props.displayFee && { height: JOURNEY_CARD_WITH_FEE_HEIGHT }]}>
                     <View style={JourneyCardStyle.driverInfoBlock}>
                         <View style={JourneyCardStyle.imageBlock}>
                             <AvatarLogo user={journey?.organizer} size={38.5} />
@@ -47,7 +47,9 @@ const JourneyCard = (props: {journey?: Journey}) => {
                             <View style={JourneyCardStyle.driverNameBlock}>
                                 <View>
                                     <Text style={[JourneyCardStyle.driverNameText, { color: DM("black") }]} >
-                                        {trimTheStringIfTooLong(fullName, MAX_USER_FULL_NAME_LENGTH)}
+                                        {journey?.organizer?.name +
+                                            " " +
+                                            journey?.organizer?.surname}
                                         's ride
                                     </Text>
                                 </View>
@@ -71,7 +73,8 @@ const JourneyCard = (props: {journey?: Journey}) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
-                                    {moment(new Date(journey?.departureTime ?? "")).calendar()}
+                                    {moment(new Date(journey?.departureTime ?? ""))
+                                        .calendar()}
                                 </Text>
                             </View>
                         </View>

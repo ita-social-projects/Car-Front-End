@@ -26,10 +26,13 @@ describe("Location Service test", () => {
     let updateCarViewModel: UpdateCarViewModel = {
         color: 1,
         id: 1,
-        imageId: "ABC",
         modelId: 1,
-        ownerId: 1,
-        plateNumber: "DEF"
+        plateNumber: "DEF",
+        photo: {
+            name: "Photo",
+            type: "JPG",
+            uri: "photo"
+        }
     };
 
     test("should return cars", async () => {
@@ -110,7 +113,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.update(updateCarViewModel).then((res) => {
+        CarService.update({} as any).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(updateCarViewModel));
         });

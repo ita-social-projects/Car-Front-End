@@ -1,12 +1,11 @@
-import CarColor from "./CarColor";
+import CarPhoto from "./CarPhoto";
 
 type UpdateCarViewModel = null | {
     id: number;
     modelId: number;
-    color: CarColor;
+    color: number;
     plateNumber: string;
-    ownerId: number;
-    imageId: string | null;
+    photo: CarPhoto | null
 };
 
 export default UpdateCarViewModel;
