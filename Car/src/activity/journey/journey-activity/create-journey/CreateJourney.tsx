@@ -233,7 +233,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const confirmOnPressHandler = () => {
-        navigation.navigate("New Journey Details", {
+        navigation.navigate("Journey Details", {
             from: from,
             to: to,
             stops: stops.filter(stop => stop.isConfirmed),
@@ -249,7 +249,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
-        console.log(JSON.stringify(result));
         setRouteDistance(result.distance);
         setDuration(result.duration);
         setRoutePoints(result.coordinates);

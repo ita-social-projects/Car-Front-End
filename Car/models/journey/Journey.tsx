@@ -7,10 +7,12 @@ import JourneyPoint from "./JourneyPoint";
 type Journey = null | {
     id: number;
     routeDistance: number;
+    duration: number;
     departureTime: Date;
     countOfSeats: number;
     comments: string;
     isFree: boolean;
+    isOnOwnCar: boolean;
     schedule: Schedule;
     journeyPoints: JourneyPoint[];
     participants: User[];

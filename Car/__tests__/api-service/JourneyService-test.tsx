@@ -8,11 +8,13 @@ import Stop from "../../models/stop/Stop";
 describe("Journey Service test", () => {
     let journeyData: Journey[] = [{
         id: 1,
+        duration: 1,
         car: null,
         comments: "",
         countOfSeats: 2,
         departureTime: new Date(),
         isFree: true,
+        isOnOwnCar: true,
         organizer: null,
         participants: [],
         routeDistance: 2,
