@@ -12,9 +12,9 @@ const ErrorAlert = (message?: string, func?: () => void) => {
 
         Popup.show({
             type: "Warning",
-            title: "Error",
+            title: "The Internet?",
             button: true,
-            textBody: message,
+            textBody: "That thing is still around?",
             buttonText: "Retry",
             icon: (
                 <Image

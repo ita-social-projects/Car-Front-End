@@ -74,11 +74,11 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        JourneyService.getJourney(journeyId).then((res: any) => {
+        JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
                 { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
-            CarService.getById(res.data?.car?.id!).then((carRes: any) => {
+            CarService.getById(res.data?.car?.id!).then((carRes) => {
                 setCar(carRes.data);
                 setLoading(false);
                 moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);

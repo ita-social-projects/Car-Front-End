@@ -33,7 +33,7 @@ describe("User Service test", () => {
                     });
                 })
         );
-        UserService.getUser(userData.id).then((res: any) => {
+        UserService.getUser(userData.id).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(userData));
         });

@@ -32,7 +32,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                                     props.journey?.organizer?.surname + "'s ride"
                             };
 
-                            ChatService.addChat(chat).then((res: any) => {
+                            ChatService.addChat(chat).then((res) => {
                                 if (res.status === StatusCodes.OK) {
                                     navigation.navigate("MessagesTabs", {
                                         screen: "Chat",

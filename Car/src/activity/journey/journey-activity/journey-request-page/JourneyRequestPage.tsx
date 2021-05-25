@@ -43,7 +43,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
     let comments = "";
 
     useEffect(() => {
-        JourneyService.getJourney(journeyId).then((res: any) => {
+        JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
                 setRequested(isReq == "1");
@@ -62,7 +62,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                 jsonData:
                 `{"title": "New Applicant", "comments": "${comments}", "hasLuggage": "${isLuggage}"}`,
             }
-        ).then((res: any) => {
+        ).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
                 setRequested(true);
                 (async () => {

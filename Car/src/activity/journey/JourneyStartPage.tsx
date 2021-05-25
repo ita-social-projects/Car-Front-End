@@ -51,15 +51,15 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     }, []);
 
     const loadJourneys = () => {
-        JourneyService.getUpcomingJourneys(Number(user?.id)).then((res: any) =>
+        JourneyService.getUpcomingJourneys(Number(user?.id)).then((res) =>
             setUpcomingJourneys(res.data)
         ).then(() => setRefreshing(false));
 
-        JourneyService.getPastJourneys(Number(user?.id)).then((res1: any) =>
+        JourneyService.getPastJourneys(Number(user?.id)).then((res1) =>
             setPastJourneys(res1.data)
         ).then(() => setRefreshing(false));
 
-        JourneyService.getScheduledJourneys(Number(user?.id)).then((res2: any) =>
+        JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
             setScheduledJourneys(res2.data)
         ).then(() => setRefreshing(false));
     };
