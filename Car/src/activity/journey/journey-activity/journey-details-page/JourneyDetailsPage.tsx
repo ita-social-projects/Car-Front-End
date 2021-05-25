@@ -32,7 +32,7 @@ import {
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import StopType from "../../../../../models/stop/StopType";
 import * as navigation from "../../../../components/navigation/Navigation";
-import CreateJourneyModel from "../../../../../models/journey/CreateJourneyModel";
+import JourneyDto from "../../../../../models/journey/JourneyDto";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
@@ -99,7 +99,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const publishJourneyHandler = async () => {
         setRideIsPublishing(true);
 
-        const newJourney: CreateJourneyModel = {
+        const newJourney: JourneyDto = {
+            id: 0,
             carId: selectedCar.id,
             comments: comment,
             countOfSeats: availableSeats,
@@ -131,6 +132,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .catch(() => setModal(publishErrorModal));
+
+        setRideIsPublishing(false);
+    };
+
+    const updateJourneyHandler = async () => {
+        setRideIsPublishing(true);
+
+        const updatedJourney: JourneyDto = {
+            ...journey!,
+            carId: selectedCar.id,
+            comments: comment,
+            countOfSeats: availableSeats,
+            departureTime: departureTime,
+            isFree: freeButtonStyle === activeButtonStyle,
+            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
+            durationInMinutes: Number(journey?.duration),
+            organizerId: Number(journey?.organizer?.id)
+        };
+
+        await JourneyService.update(updatedJourney)
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);
@@ -350,12 +372,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 onConfirm={() => {
                     setApplyChangesModalIsVisible(false);
                     console.log("Ride is updating...");
-                    props.navigation?.push("Journey Page", {
-                        journeyId: journey?.id,
-                        isDriver: true,
-                        isPassenger: false,
-                        afterEditing: true
-                    });
+                    updateJourneyHandler()
+                        .then(() => props.navigation?.push("Journey Page", {
+                            journeyId: journey?.id,
+                            isDriver: true,
+                            isPassenger: false,
+                            afterEditing: true
+                        }));
                 }}
                 disableModal={() => setApplyChangesModalIsVisible(false)}
             />

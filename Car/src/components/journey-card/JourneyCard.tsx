@@ -10,7 +10,7 @@ import DM from "../styles/DM";
 import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
-import { JOURNEY_CARD_WITH_FEE_HEIGHT } from "../../constants/JourneyConstants";
+import { JOURNEY_CARD_WITH_FEE_HEIGHT, MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
 
 const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
     const journey = props.journey;
@@ -31,6 +31,8 @@ const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
             isPassenger
         });
 
+    const fullName = `${journey?.organizer?.name} ${journey?.organizer?.surname}`;
+
     return (
         <View>
             <TouchableOpacity
@@ -47,10 +49,7 @@ const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
                             <View style={JourneyCardStyle.driverNameBlock}>
                                 <View>
                                     <Text style={[JourneyCardStyle.driverNameText, { color: DM("black") }]} >
-                                        {journey?.organizer?.name +
-                                            " " +
-                                            journey?.organizer?.surname}
-                                        's ride
+                                        {trimTheStringIfTooLong(fullName, MAX_USER_FULL_NAME_LENGTH)}'s ride
                                     </Text>
                                 </View>
                                 <View style={JourneyCardStyle.moreOptionsBlock}>
@@ -73,8 +72,7 @@ const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
                                     {journey?.organizer?.position}
                                 </Text>
                                 <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
-                                    {moment(new Date(journey?.departureTime ?? ""))
-                                        .calendar()}
+                                    {moment(new Date(journey?.departureTime ?? "")).calendar()}
                                 </Text>
                             </View>
                         </View>
