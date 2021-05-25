@@ -22,7 +22,7 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
             <View>
                 <InputSpinner
                     max={4}
-                    min={props.minValue ?? MIN_AVAILABLE_SEATS_COUNT}
+                    min={Math.max(Number(props.minValue), MIN_AVAILABLE_SEATS_COUNT)}
                     step={1}
                     style={SeatsInputSpinnerStyle.spinnerContainer}
                     inputStyle={SeatsInputSpinnerStyle.input}
