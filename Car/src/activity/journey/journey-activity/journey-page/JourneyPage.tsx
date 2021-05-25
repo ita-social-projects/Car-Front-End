@@ -61,7 +61,18 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [cancelRideErrorModalIsVisible, setCancelRideErrorModalIsVisible] = useState(false);
     const mapRef = useRef<MapView | null>(null);
 
-    useEffect(() => console.log("journeyId - ", props.route.params.journeyId), []);
+    const fetchData = () => {
+        JourneyService.getJourney(journeyId).then((res) => {
+            setJourney(res.data);
+            mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
+                { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
+            CarService.getById(res.data?.car?.id!).then((carRes) => {
+                setCar(carRes.data);
+                setLoading(false);
+                moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
+            });
+        });
+    };
 
     useEffect(() => {
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
@@ -74,16 +85,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        JourneyService.getJourney(journeyId).then((res) => {
-            setJourney(res.data);
-            mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
-                { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
-            CarService.getById(res.data?.car?.id!).then((carRes) => {
-                setCar(carRes.data);
-                setLoading(false);
-                moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
-            });
-        });
+        fetchData();
+
+        return props.navigation?.addListener("focus", fetchData);
     }, []);
 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);

@@ -371,14 +371,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 cancelText={"Cancel"}
                 onConfirm={() => {
                     setApplyChangesModalIsVisible(false);
-                    console.log("Ride is updating...");
                     updateJourneyHandler()
-                        .then(() => props.navigation?.push("Journey Page", {
-                            journeyId: journey?.id,
-                            isDriver: true,
-                            isPassenger: false,
-                            afterEditing: true
-                        }));
+                        .then(() => navigation.goBack());
                 }}
                 disableModal={() => setApplyChangesModalIsVisible(false)}
             />
