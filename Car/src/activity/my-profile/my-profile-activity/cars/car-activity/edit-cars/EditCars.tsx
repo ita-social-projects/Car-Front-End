@@ -63,12 +63,12 @@ const EditCars = (navigation : any) => {
     let colorPickerController: any;
 
     useEffect(() => {
-        BrandService.getBrands().then((response) => {
+        BrandService.getBrands().then((response: any) => {
             setBrands(response.data);
         });
         let carId = Number(navigation.props.route.params.carId);
 
-        CarService.getById(carId).then((response) => {
+        CarService.getById(carId).then((response: any) => {
             const car = response.data;
             const carModel = car?.model;
             let carBrandItem : CarDropDownPickerItem = {
@@ -137,14 +137,14 @@ const EditCars = (navigation : any) => {
         };
 
         await CarService.update(car)
-            .then((res) => console.log(res.data))
+            .then((res: any) => console.log(res.data))
             .catch((err) => console.log(err));
         setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        ModelService.getModelsByBrandId(Number(brand.value)).then((response) => {
+        ModelService.getModelsByBrandId(Number(brand.value)).then((response: any) => {
             setModels(response.data);
             setLoading(false);
         });

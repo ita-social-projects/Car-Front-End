@@ -151,7 +151,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
                         : FeeType.Paid,
         })
-            .then((res) => {
+            .then((res: any) => {
                 if(res.data.length > EMPTY_COLLECTION_LENGTH) {
                     navigation.navigate("OK Search Result", { journeys: res.data });
                 } else {

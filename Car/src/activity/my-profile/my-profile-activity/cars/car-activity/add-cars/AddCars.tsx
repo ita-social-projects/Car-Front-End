@@ -68,7 +68,7 @@ const AddCars = () => {
     let colorPickerController: any;
 
     useEffect(() => {
-        BrandService.getBrands().then((res) => {
+        BrandService.getBrands().then((res: any) => {
             setBrands(res.data);
         });
     }, []);
@@ -124,14 +124,14 @@ const AddCars = () => {
         };
 
         await CarService.add(car)
-            .then((res) => console.log(res.data))
+            .then((res: any) => console.log(res.data))
             .catch((err) => console.log(err));
         setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res: any) => {
             setModels(res.data);
             modelPickerController.selectItem(res.data[FIRST_ELEMENT_INDEX]?.id.toString());
             modelPickerController.open();
