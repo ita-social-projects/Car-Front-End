@@ -40,7 +40,7 @@ describe("Chat Service test", () => {
                 })
         );
 
-        ChatService.getChat(1).then((res) => {
+        ChatService.getChat(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toEqual(JSON.stringify(chatsData));
         });
@@ -62,7 +62,7 @@ describe("Chat Service test", () => {
                 })
         );
 
-        ChatService.getCeratinChat(1, 0).then((res) => {
+        ChatService.getCeratinChat(1, 0).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
         });
@@ -84,7 +84,7 @@ describe("Chat Service test", () => {
                 })
         );
 
-        ChatService.getFilteredChats(filter).then((res) => {
+        ChatService.getFilteredChats(filter).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
         });

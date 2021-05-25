@@ -38,7 +38,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
 
     useEffect(() => {
         PreferencesService.getUserPreferences(Number(user?.id))
-            .then((res) => {
+            .then((res: any) => {
                 if (res.data) {
                     setSmokingAllowed(res.data.doAllowSmoking);
                     setEatingAllowed(res.data.doAllowEating);

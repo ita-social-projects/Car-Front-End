@@ -29,7 +29,9 @@ Axios.interceptors.request.use(
     },
 
     async (error: any) => {
-        ErrorAlert();
+        var message = error.response.data || error.message;
+
+        ErrorAlert(message);
 
         return Promise.reject(error);
     }
@@ -40,8 +42,10 @@ Axios.interceptors.response.use(
         return response;
     },
 
-    async (error: { response: { status: number } }) => {
-        ErrorAlert();
+    async (error: any) => {
+        var message = error.response.data || error.message;
+
+        ErrorAlert(message);
 
         return Promise.reject(error);
     }

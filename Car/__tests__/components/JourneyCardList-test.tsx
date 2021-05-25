@@ -75,6 +75,7 @@ test("renders correctly", async () =>
                   Object {
                     "borderColor": "black",
                   },
+                  undefined,
                 ]
               }
             >

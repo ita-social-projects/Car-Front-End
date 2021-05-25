@@ -30,7 +30,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.getNotification(1).then((res) => {
+        NotificationsService.getNotification(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData[0]));
         });
@@ -51,7 +51,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.getNotifications(1).then((res) => {
+        NotificationsService.getNotifications(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData));
         });
@@ -72,7 +72,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.getUnreadNotificationsNumber(1).then((res) => {
+        NotificationsService.getUnreadNotificationsNumber(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(res.data).toBe(4);
         });
@@ -93,7 +93,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.addNotification(notificationData[0]).then((res) => {
+        NotificationsService.addNotification(notificationData[0]).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData[0]));
         });
@@ -114,7 +114,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.updateNotification(notificationData[0]).then((res) => {
+        NotificationsService.updateNotification(notificationData[0]).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData[0]));
         });
@@ -135,7 +135,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.markAsRead(1).then((res) => {
+        NotificationsService.markAsRead(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData[0]));
         });

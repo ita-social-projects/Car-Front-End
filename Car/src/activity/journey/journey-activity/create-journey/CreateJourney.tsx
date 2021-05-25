@@ -103,7 +103,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         LocationService
             .getAll(Number(user?.id))
-            .then((res) => {
+            .then((res: any) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
             })
@@ -111,9 +111,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res) => {
+            .then((res: any) => {
                 setRecentAddresses(([] as Address[]).concat(
-                    ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
+                    ...res.data.map((recentStops: any) => recentStops.map((stop: any) => stop!.address))));
                 setRecentAddressesIsLoading(false);
             })
             .catch((e) => console.log(e));

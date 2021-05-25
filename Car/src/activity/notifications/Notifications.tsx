@@ -19,7 +19,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     );
 
     const refreshNotification = () => {
-        NotificationsService.getNotifications(Number(user?.id)).then((res) => {
+        NotificationsService.getNotifications(Number(user?.id)).then((res: any) => {
             if (res.data) {
                 setNotifications(res.data);
             }
