@@ -12,7 +12,7 @@ const Details = () => {
 
     useEffect(() => {
         UserService.getUser(Number(user?.id))
-            .then((res: any) => setUser(res.data))
+            .then((res) => setUser(res.data))
             .then(() => setLoading(false));
     });
 

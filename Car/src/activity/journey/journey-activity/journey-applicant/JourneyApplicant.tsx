@@ -14,7 +14,7 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        UserService.getUser(userId).then((res: any) =>
+        UserService.getUser(userId).then((res) =>
             (async () => setUser(res.data))().then(() => setLoading(false))
         );
     }, []);

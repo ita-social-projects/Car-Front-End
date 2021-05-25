@@ -12,8 +12,6 @@ import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import DM from "../../styles/DM";
 import updateLocale from "../../styles/DTFormat";
-import NetInfo from "@react-native-community/netinfo";
-import ErrorAlert from "../../error-alert/ErrorAlert";
 
 const Tabs = createBottomTabNavigator();
 
@@ -21,7 +19,7 @@ const AppTabs = () => {
     const { user } = useContext(AuthContext);
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
-    NotificationsService.getUnreadNotificationsNumber(user?.id).then((result: any) =>
+    NotificationsService.getUnreadNotificationsNumber(user?.id).then((result) =>
         setUnreadNotificationsNumber(result.data as number)
     );
 
@@ -31,18 +29,6 @@ const AppTabs = () => {
             setUnreadNotificationsNumber
         );
         updateLocale();
-    });
-
-    useEffect(() => {
-        const unsubscribe = NetInfo.addEventListener(state => {
-            if (!state.isInternetReachable) {
-                ErrorAlert("No internet connection");
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        };
     });
 
     const tabBarBadge = unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH

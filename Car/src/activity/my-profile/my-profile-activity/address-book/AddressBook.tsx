@@ -22,7 +22,7 @@ export default function AddressBook (props: {navigation: any}) {
     }, []);
 
     const loadLocations = () => {
-        LocationService.getAll(Number(user?.id)).then((res: any) => {
+        LocationService.getAll(Number(user?.id)).then((res) => {
             setLocations(res.data);
             setLoading(false);
             setRefreshing(false);

@@ -38,7 +38,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.getAll(1).then((res: any) => {
+        LocationService.getAll(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData));
         });
@@ -59,7 +59,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.getById(1).then((res: any) => {
+        LocationService.getById(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData[0]));
         });
@@ -80,7 +80,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.add(createLocationModelData[0]).then((res: any) => {
+        LocationService.add(createLocationModelData[0]).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData[0]));
         });
@@ -101,7 +101,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.update(locationData[0]).then((res: any) => {
+        LocationService.update(locationData[0]).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData[0]));
         });

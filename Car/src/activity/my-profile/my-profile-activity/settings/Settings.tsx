@@ -38,7 +38,7 @@ const Settings = (props: {navigation: any}) => {
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
     const loadUser = () =>
-        UserService.getUser(user!.id).then((res: any) => setUser(res.data));
+        UserService.getUser(user!.id).then((res) => setUser(res.data));
 
     const { loadStorageUser } = useContext(AuthContext);
 
@@ -111,7 +111,7 @@ const Settings = (props: {navigation: any}) => {
         }
 
         await UserService.updateUser(updatedUser);
-        await UserService.getUser(user!.id).then((res: any) => {
+        await UserService.getUser(user!.id).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
 

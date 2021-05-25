@@ -23,7 +23,7 @@ const Cars = (props: NavigationAddListener) => {
     }, []);
 
     const loadCars = () => {
-        CarService.getAll(Number(user?.id)).then((res: any) => {
+        CarService.getAll(Number(user?.id)).then((res) => {
             setCars(res.data);
             setLoading(false);
             setRefreshing(false);

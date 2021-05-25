@@ -26,7 +26,7 @@ describe("Model Service test", () => {
                     });
                 })
         );
-        ModelService.getModelsByBrandId(1).then((res: any) => {
+        ModelService.getModelsByBrandId(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(modelData));
         });
