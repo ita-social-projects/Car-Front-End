@@ -1,6 +1,5 @@
 import { FIRST_ELEMENT_INDEX, THREE_DOTS_LENGTH } from "../constants/GeneralConstants";
 import Stop from "../../models/stop/Stop";
-import WayPoint from "../types/WayPoint";
 import { ZERO_COORDINATE } from "../constants/StylesConstants";
 
 export const trimTheStringIfTooLong = (str: string, maxLength: number) => {
@@ -10,7 +9,7 @@ export const trimTheStringIfTooLong = (str: string, maxLength: number) => {
 };
 
 export const mapStopToWayPoint = (stop?: Stop) => {
-    const wayPoint: WayPoint = {
+    return {
         coordinates: {
             latitude: stop?.address?.latitude ?? ZERO_COORDINATE,
             longitude: stop?.address?.longitude ?? ZERO_COORDINATE
@@ -18,6 +17,4 @@ export const mapStopToWayPoint = (stop?: Stop) => {
         text: stop?.address?.name ?? "",
         isConfirmed: true
     };
-
-    return wayPoint;
 };

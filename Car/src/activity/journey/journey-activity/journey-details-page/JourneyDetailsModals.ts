@@ -4,8 +4,8 @@ const commonField = {
     visible: true,
     confirmText: "OK",
     hideCancelButton: true,
-    disableModal: () => {},
-    onConfirm: () => {}
+    disableModal: () => console.log("Disable modal"),
+    onConfirm: () => console.log("On confirm")
 };
 
 export const freeRideModal: ConfirmModalProps = {

@@ -89,7 +89,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);
 
     JourneyPage.editJourney = () => {
-        const props: JourneyDetailsPageProps = {
+        const properties: JourneyDetailsPageProps = {
             route: {
                 params: {
                     journey: currentJourney,
@@ -104,7 +104,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         };
 
-        navigation.navigate("Journey Details", props.route.params);
+        navigation.navigate("Journey Details", properties.route.params);
     };
 
     const getStopByType = (stopType: (StopType.Start | StopType.Finish)) => {
