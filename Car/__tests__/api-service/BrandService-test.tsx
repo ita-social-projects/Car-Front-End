@@ -26,7 +26,7 @@ describe("Brand Service test", () => {
                     });
                 })
         );
-        BrandService.getBrands().then((res) => {
+        BrandService.getBrands().then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(brandData));
         });

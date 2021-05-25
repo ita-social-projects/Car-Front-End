@@ -64,8 +64,8 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const [publishErrorModalIsVisible, setPublishErrorModalIsVisible] = useState(false);
 
     useEffect(() => {
-        CarService.getAll(Number(user?.id)).then(result => {
-            setUserCars(result.data.map(car => (
+        CarService.getAll(Number(user?.id)).then((result: any) => {
+            setUserCars(result.data.map((car: any) => (
                 {
                     id: Number(car?.id),
                     name: `${car?.model?.brand?.name} ${car?.model?.name}`

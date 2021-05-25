@@ -50,7 +50,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.getAll(1).then((res) => {
+        CarService.getAll(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(carViewModelData));
         });
@@ -71,7 +71,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.getById(1).then((res) => {
+        CarService.getById(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(carViewModelData[0]));
         });
@@ -92,7 +92,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.getAvatar(1).then((res) => {
+        CarService.getAvatar(1).then((res: any) => {
             expect(res.status).toBe(200);
             expect(res.data).toBe(carViewModelData[0]?.imageId);
         });
@@ -113,7 +113,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.update({} as any).then((res) => {
+        CarService.update({} as any).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(updateCarViewModel));
         });
@@ -134,7 +134,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.add({} as any).then((res) => {
+        CarService.add({} as any).then((res: any) => {
             expect(res.status).toBe(200);
         });
     });

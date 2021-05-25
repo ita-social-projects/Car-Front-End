@@ -33,7 +33,7 @@ describe("Login Service test", () => {
                     });
                 })
         );
-        LoginService.loginUser(userData).then((res) => {
+        LoginService.loginUser(userData).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(userData));
         });
