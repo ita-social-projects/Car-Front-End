@@ -30,7 +30,7 @@ const Messages = (props: MessagesProps) => {
     const { user } = useContext(AuthContext);
 
     const getChats = () => {
-        ChatService.getChat(user?.id).then((res) => {
+        ChatService.getChat(user?.id).then((res: any) => {
             let chats = res.data;
 
             setMasterDataSource(JSON.parse(JSON.stringify(chats)));
@@ -64,7 +64,7 @@ const Messages = (props: MessagesProps) => {
             searchInTitle.length ?
                 setFilteredDataSource(searchInTitle)
                 :
-                ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then(res => {
+                ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then((res: any) => {
                     setFilteredDataSource(res.data);
                 });
             setSearch(text);

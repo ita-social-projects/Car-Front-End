@@ -85,8 +85,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
-        CarService.getAll(Number(user?.id)).then(result => {
-            setUserCars(result.data.map(car => (
+        CarService.getAll(Number(user?.id)).then((result: any) => {
+            setUserCars(result.data.map((car: any) => (
                 {
                     id: Number(car?.id),
                     name: `${car?.model?.brand?.name} ${car?.model?.name}`
