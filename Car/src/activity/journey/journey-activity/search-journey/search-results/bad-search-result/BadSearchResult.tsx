@@ -22,7 +22,7 @@ const BadSearchResult = () => {
                 <TouchableOpacity
                     style={[BadSearchResultStyle.button, { backgroundColor: DM("#000000") }]}
                     onPress={() => {
-                        navigation.navigate("Search Journey");
+                        navigation.navigate("Journey Request Page", { isRequest: true });
                     }}
                 >
                     <Text style={[BadSearchResultStyle.buttonText, { color: DM("#FFFFFF") }]}>
