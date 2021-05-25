@@ -85,8 +85,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        fetchData();
-
         return props.navigation?.addListener("focus", fetchData);
     }, []);
 
