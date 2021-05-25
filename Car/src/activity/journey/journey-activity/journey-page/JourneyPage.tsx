@@ -32,6 +32,7 @@ import ButtonBlock from "./ButtonBlock/ButtonBlock";
 import DriverBlock from "./DriverBlock/DriverBlock";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
+import { Portal } from "react-native-portalize";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -141,45 +142,47 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 </MapView>
             </View>
 
-            <BottomPopup
-                refForChild={moreOptionsRef}
-                style={{ backgroundColor: DM("white") }}
-                snapPoints={[
-                    MAX_JOURNEY_PAGE_POPUP_HEIGHT,
-                    isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
-                ]}
-                initialSnap={MIN_POPUP_POSITION}
-                enabledGestureInteraction={true}
-                enabledInnerScrolling={true}
-                renderContent={
-                    <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
+            {!props.moreOptionsPopupIsOpen &&
+                <Portal>
+                    <BottomPopup
+                        refForChild={moreOptionsRef}
+                        style={{ backgroundColor: DM("white") }}
+                        snapPoints={[
+                            MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+                            isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
+                        ]}
+                        initialSnap={MIN_POPUP_POSITION}
+                        enabledGestureInteraction={true}
+                        enabledInnerScrolling={true}
+                        renderContent={
+                            <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
-                        <View style={{ height: 300 }}>
-                            {/*<View style={{ height: 300 }}>*/}
-                            <ScrollView
-                                nestedScrollEnabled={true}
-                                style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
-                            >
-                                <CarBlock car={car}/>
+                                <View style={{ height: 300 }}>
+                                    <ScrollView
+                                        nestedScrollEnabled={true}
+                                        style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
+                                    >
+                                        <CarBlock car={car}/>
 
-                                <StopsBlock stops={currentJourney?.stops ?? []}/>
+                                        <StopsBlock stops={currentJourney?.stops ?? []}/>
 
-                                <ParticipantsBlock journey={currentJourney} />
-                            </ScrollView>
-                            {/*</View>*/}
-                        </View>
+                                        <ParticipantsBlock journey={currentJourney} />
+                                    </ScrollView>
+                                </View>
 
-                        <ButtonBlock
-                            isDriver={isDriver}
-                            isPassenger={isPassenger}
-                            isRequested={isRequested}
-                            journey={currentJourney}
-                        />
+                                <ButtonBlock
+                                    isDriver={isDriver}
+                                    isPassenger={isPassenger}
+                                    isRequested={isRequested}
+                                    journey={currentJourney}
+                                />
 
-                    </View>
-                }
-                renderHeader={<DriverBlock journey={currentJourney}/>}
-            />
+                            </View>
+                        }
+                        renderHeader={<DriverBlock journey={currentJourney}/>}
+                    />
+                </Portal>
+            }
 
             <ConfirmModal
                 visible={cancelRideModalIsVisible}

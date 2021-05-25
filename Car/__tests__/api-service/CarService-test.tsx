@@ -113,7 +113,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.update(updateCarViewModel).then((res: any) => {
+        CarService.update({} as any).then((res: any) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(updateCarViewModel));
         });

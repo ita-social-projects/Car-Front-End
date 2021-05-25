@@ -9,7 +9,8 @@ interface JourneyPageProps {
     navigation?: {
         // eslint-disable-next-line unused-imports/no-unused-vars
         setOptions: (option: object) => void
-    }
+    },
+    moreOptionsPopupIsOpen: boolean
 }
 
 export default JourneyPageProps;

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
+    Alert,
     Image,
     ScrollView,
     Text,
     TouchableOpacity,
     View
 } from "react-native";
-import { launchImageLibrary } from "react-native-image-picker/src";
+import { ImagePickerResponse, launchImageLibrary } from "react-native-image-picker/src";
 import BrandService from "../../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../../api-service/model-service/ModelService";
@@ -24,9 +25,9 @@ import {
     MIN_PLATE_NUMBER_LENGTH
 } from "../../../../../../constants/CarConstants";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
-import UpdateCarViewModel from "../../../../../../../models/car/UpdateCarViewModel";
 import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
+import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
 
 const EditCars = (navigation : any) => {
@@ -56,7 +57,7 @@ const EditCars = (navigation : any) => {
 
     const [plateNumber, setPlateNumber] = useState<string>("");
     const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-    const [photo, setPhoto] = useState<CarPhoto>({} as CarPhoto);
+    const [photo, setPhoto] = useState({} as CarPhoto);
 
     let modelPickerController: any;
     let brandPickerController: any;
@@ -86,10 +87,12 @@ const EditCars = (navigation : any) => {
             if (car?.imageId !== null &&
                 car?.imageId.toString() !== undefined)
             {
+                const image = ImageService.getImageById(car?.imageId?.toString());
+
                 setPhoto({
-                    name: "",
-                    type: "",
-                    uri: ImageService.getImageById(car?.imageId?.toString() ?? "")
+                    name: "name",
+                    type: "image",
+                    uri: image
                 });
             }
             selectBrandHandle(carBrandItem);
@@ -112,29 +115,43 @@ const EditCars = (navigation : any) => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
-                setPhoto({
-                    name: response.fileName?.toString() ?? "",
-                    type: response.type?.toString() ?? "",
-                    uri: response.uri?.toString() ?? ""
-                });
+                trySetPhoto(response);
             }
         });
     };
 
+    const trySetPhoto = (photo: ImagePickerResponse) => {
+        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
+            setPhoto({
+                name: photo?.fileName?.toString() ?? "",
+                type: photo?.type?.toString() ?? "",
+                uri: photo.uri?.toString() ?? ""
+            });
+        } else {
+            Alert.alert("Error!", "File size should not exceed 7MB", [
+                {
+                    text: "Ok"
+                }
+            ]);
+            setPhoto({} as CarPhoto);
+        }
+    };
+
     const saveCarHandle = async () => {
         setSaving(true);
-        let photoToUpdate;
+        let car = new FormData();
 
-        (photo.uri !== "") ?
-            photoToUpdate = photo : photoToUpdate = null;
-
-        const car: UpdateCarViewModel = {
-            id: Number(navigation.props.route.params.carId),
-            modelId : Number(selectedModel?.value),
-            color : Number(selectedColor?.value),
-            plateNumber: plateNumber,
-            photo : photoToUpdate
-        };
+        car.append("id", Number(navigation.props.route.params.carId));
+        car.append("modelId", Number(selectedModel?.value));
+        car.append("color", Number(selectedColor?.value));
+        car.append("plateNumber", plateNumber);
+        if (photo !== null && photo !== undefined) {
+            car.append("image", {
+                name: photo.name,
+                type: photo.type,
+                uri: photo.uri
+            });
+        }
 
         await CarService.update(car)
             .then((res: any) => console.log(res.data))
