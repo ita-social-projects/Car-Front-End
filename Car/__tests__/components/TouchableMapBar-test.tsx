@@ -59,7 +59,9 @@ test("renders correctly", async () =>
         >
            
         </Text>
-        <ForwardRef>
+        <ForwardRef
+          disabled={true}
+        >
           <Icon
             allowFontScaling={false}
             color="#414045"
