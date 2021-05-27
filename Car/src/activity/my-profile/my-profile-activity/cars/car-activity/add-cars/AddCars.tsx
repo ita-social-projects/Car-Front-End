@@ -157,7 +157,7 @@ const AddCars = () => {
         <View
             style={[AddCarsStyle.wrapper, { backgroundColor: DM("white") }]}
         >
-            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("#C4C4C4") }]}>
+            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("light-gray") }]}>
                 {photo && (
                     <Image
                         source={{ uri: photo.uri }}
@@ -167,8 +167,8 @@ const AddCars = () => {
                 <TouchableOpacity
                     style={[AddCarsStyle.carButtonUpload,
                         {
-                            backgroundColor: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black")
                         }]}
                     onPress={() => uploadPhotoHandle()}
                 >
@@ -250,7 +250,7 @@ const AddCars = () => {
                 <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: DM("#414045") }}>
+                        <Text style={{ color: DM("gray") }}>
                             {" "}
                             - required field
                         </Text>
@@ -266,8 +266,8 @@ const AddCars = () => {
                             !selectedModel?.value ||
                             !selectedColor?.value ||
                             !isValidPlateNumber ?
-                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("#B8B8B8") }]
-                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
+                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("black") }]}
                         onPress={() => {
                             saveCarHandle().then(() => navigation.goBack());
                         }}
