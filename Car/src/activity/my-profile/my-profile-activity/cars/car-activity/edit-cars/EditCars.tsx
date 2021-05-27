@@ -213,8 +213,8 @@ const EditCars = (navigation : any) => {
                 <TouchableOpacity
                     style={[EditCarsStyle.carButtonUpload,
                         {
-                            backgroundColor: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black")
                         }]
                     }
                     onPress={() =>
@@ -303,7 +303,7 @@ const EditCars = (navigation : any) => {
                 <View style={EditCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: DM("#414045") }}>
+                        <Text style={{ color: DM("gray") }}>
                             {" "}
                             - required field
                         </Text>
@@ -314,8 +314,8 @@ const EditCars = (navigation : any) => {
                             !selectedModel?.value ||
                             !selectedColor?.value ||
                             !isValidPlateNumber ?
-                                [EditCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
-                                : [EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]
+                                [EditCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
+                                : [EditCarsStyle.carButtonSave, { backgroundColor: DM("black") }]
                         }
                         disabled={
                             !selectedBrand?.value ||

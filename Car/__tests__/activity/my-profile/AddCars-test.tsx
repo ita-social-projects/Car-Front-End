@@ -29,7 +29,7 @@ test("renders correctly", async () =>
               "justifyContent": "flex-end",
             },
             Object {
-              "backgroundColor": "#C4C4C4",
+              "backgroundColor": "light-gray",
             },
           ]
         }
@@ -64,8 +64,8 @@ test("renders correctly", async () =>
                 "paddingVertical": 14,
               },
               Object {
-                "backgroundColor": "#FFFFFF",
-                "borderColor": "#000000",
+                "backgroundColor": "white",
+                "borderColor": "black",
               },
             ]
           }
@@ -225,7 +225,7 @@ test("renders correctly", async () =>
             <Text
               style={
                 Object {
-                  "color": "#414045",
+                  "color": "gray",
                 }
               }
             >
@@ -246,7 +246,7 @@ test("renders correctly", async () =>
                   "paddingVertical": 14,
                 },
                 Object {
-                  "backgroundColor": "#B8B8B8",
+                  "backgroundColor": "gray",
                 },
               ]
             }
