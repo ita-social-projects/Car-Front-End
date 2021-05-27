@@ -14,8 +14,8 @@ import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDro
 import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
 import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
-import SwitchSelector from "../create-journey/SwitchSelector/SwitchSelector";
-import { activeButtonStyle, inactiveButtonStyle } from "../create-journey/SwitchSelector/SwitchSelectorStyle";
+import SwitchSelector from "../../../../components/SwitchSelector/SwitchSelector";
+import { activeButtonStyle, inactiveButtonStyle } from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 import CarService from "../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";

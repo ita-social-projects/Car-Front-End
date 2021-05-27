@@ -32,7 +32,7 @@ import Address from "../../../../../models/Address";
 import Geolocation from "@react-native-community/geolocation";
 import SearchJourneyProps from "./SearchJourneyProps";
 import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
-import SwitchSelectorStyle from "../create-journey/SwitchSelector/SwitchSelectorStyle";
+import SwitchSelectorStyle from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import { LatLng } from "react-native-maps";
 import FeeType from "../../../../../models/journey/FeeType";
