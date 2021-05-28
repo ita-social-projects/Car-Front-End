@@ -120,6 +120,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 setRecentAddressesIsLoading(false);
             })
             .catch((e) => console.log(e));
+
+        return props.navigation?.addListener("blur", () => {
+            props.closeMoreOptionPopup();
+        });
     }, []);
 
     const filterRecentAddresses = () => {

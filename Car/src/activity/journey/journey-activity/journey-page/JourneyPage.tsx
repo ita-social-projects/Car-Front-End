@@ -61,7 +61,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [cancelRideErrorModalIsVisible, setCancelRideErrorModalIsVisible] = useState(false);
     const mapRef = useRef<MapView | null>(null);
 
-    const fetchData = () => {
+    const onFocusHandler = () => {
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
             mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
@@ -85,7 +85,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        return props.navigation?.addListener("focus", fetchData);
+        return props.navigation?.addListener("focus", onFocusHandler);
     }, []);
 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);

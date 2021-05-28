@@ -8,7 +8,12 @@ interface CreateJourneyProps {
             wayPointId?: string,
             journey?: Journey
         }
-    }
+    },
+    navigation?: {
+        // eslint-disable-next-line unused-imports/no-unused-vars
+        addListener: (eventName: string, callback: () => void) => () => void
+    },
+    closeMoreOptionPopup: () => void
 }
 
 export default CreateJourneyProps;
