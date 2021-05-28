@@ -25,3 +25,4 @@ export const MIN_AVAILABLE_SEATS_COUNT = 1;
 export const EDITING_FONT_SIZE = 14;
 export const CREATING_FONT_SIZE = 16;
 export const JOURNEY_CARD_WITH_FEE_HEIGHT = 160;
+export const INITIAL_STOPS_COUNT = 0;

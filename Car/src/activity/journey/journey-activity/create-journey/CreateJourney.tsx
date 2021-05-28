@@ -11,17 +11,14 @@ import {
     RECENT_ADDRESSES_COUNT_LIMIT
 } from "../../../../constants/AddressConstants";
 import {
-    INITIAL_ROUTE_DISTANCE,
+    INITIAL_ROUTE_DISTANCE, INITIAL_STOPS_COUNT,
     INITIAL_TIME,
-    NUMBER_OF_STOPS_LIMIT,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
-    LEFT_PADDING_FOR_VIA_PLACEHOLDER
+    LEFT_PADDING_FOR_VIA_PLACEHOLDER,
+    NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/JourneyConstants";
-import {
-    DELETE_COUNT,
-    FIRST_ELEMENT_INDEX
-} from "../../../../constants/GeneralConstants";
+import { DELETE_COUNT, FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
@@ -37,6 +34,8 @@ import JourneyService from "../../../../../api-service/journey-service/JourneySe
 import Address from "../../../../../models/Address";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import { getJourneyStops, getStopByType, mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
+import StopType from "../../../../../models/stop/StopType";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -54,6 +53,7 @@ interface OnRouteReadyResult {
 const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
 
     const params = props?.route?.params;
+    const journey = params?.journey;
 
     const { user } = useContext(AuthContext);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
@@ -61,13 +61,16 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
 
-    const [from, setFrom] = useState<WayPoint>(initialWayPoint);
-    const [to, setTo] = useState<WayPoint>(initialWayPoint);
-    const [stops, setStops] = useState<WayPoint[]>([]);
-    const [duration, setDuration] = useState<number>(INITIAL_TIME);
-    const [routeDistance, setRouteDistance] = useState<number>(INITIAL_ROUTE_DISTANCE);
-    const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
-    const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
+    const [from, setFrom] = useState<WayPoint>(
+        journey ? mapStopToWayPoint(getStopByType(journey, StopType.Start)) : initialWayPoint);
+    const [to, setTo] = useState<WayPoint>(
+        journey ? mapStopToWayPoint(getStopByType(journey, StopType.Finish)) : initialWayPoint);
+    const [stops, setStops] = useState<WayPoint[]>(
+        journey ? getJourneyStops(journey)!.map(mapStopToWayPoint) : []);
+    const [duration, setDuration] = useState<number>(journey?.duration ?? INITIAL_TIME);
+    const [routeDistance, setRouteDistance] = useState<number>(journey?.routeDistance ?? INITIAL_ROUTE_DISTANCE);
+    const [routePoints, setRoutePoints] = useState<LatLng[]>(journey?.journeyPoints ?? []);
+    const [routeIsConfirmed, setRouteIsConfirmed] = useState(Boolean(journey));
 
     const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
     const [stopIndexForDeleting, setStopIndexForDeleting] = useState(NaN);
@@ -82,7 +85,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
 
     useEffect(() => {
-        if (params) {
+        if (params?.wayPoint) {
             animateCamera(params.wayPoint.coordinates);
 
             if (params.wayPointId === "From") {
@@ -99,7 +102,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     }, [params]);
 
     useEffect(() => {
-        CreateJourney.numberOfAddedStop = 0;
+        CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
 
         LocationService
             .getAll(Number(user?.id))
@@ -248,16 +251,24 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setErrorModalIsVisible(true);
     };
 
+    const fitCameraToCoordinates = (coordinates: LatLng[]) => {
+        mapRef.current?.fitToCoordinates(coordinates,
+            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 } });
+    };
+
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
         setRouteDistance(result.distance);
         setDuration(result.duration);
         setRoutePoints(result.coordinates);
         setRouteIsConfirmed(true);
-        mapRef.current?.fitToCoordinates(result.coordinates,
-            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 } });
+        fitCameraToCoordinates(result.coordinates);
     };
 
     const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;
+
+    useEffect(() => {
+        journey && fitCameraToCoordinates(journey.journeyPoints);
+    }, [infoIsLoading]);
 
     return (
         <>

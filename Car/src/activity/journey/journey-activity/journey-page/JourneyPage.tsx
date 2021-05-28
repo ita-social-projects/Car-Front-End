@@ -16,7 +16,6 @@ import {
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_POSITION, ZERO_COORDINATE } from "../../../../constants/StylesConstants";
-import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
@@ -31,7 +30,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
+import { getStopByType, mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -42,7 +41,8 @@ const getStopCoordinates = (stop?: Stop) => {
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
-    editJourney: () => void,
+    editJourneyDetails: () => void,
+    editJourneyRoute: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: {props: JourneyPageProps}): JSX.Element
 }
@@ -90,13 +90,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);
 
-    JourneyPage.editJourney = () => {
+    JourneyPage.editJourneyDetails = () => {
         const properties: JourneyDetailsPageProps = {
             route: {
                 params: {
                     journey: currentJourney,
-                    from: mapStopToWayPoint(getStopByType(StopType.Start)),
-                    to: mapStopToWayPoint(getStopByType(StopType.Finish)),
+                    from: mapStopToWayPoint(getStopByType(currentJourney, StopType.Start)),
+                    to: mapStopToWayPoint(getStopByType(currentJourney, StopType.Finish)),
                     stops: currentJourney?.stops.filter(stop =>
                         stop?.type === StopType.Intermediate).map(mapStopToWayPoint) ?? [],
                     duration: currentJourney?.duration ?? DEFAULT_DURATION,
@@ -109,8 +109,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         navigation.navigate("Journey Details", properties.route.params);
     };
 
-    const getStopByType = (stopType: (StopType.Start | StopType.Finish)) => {
-        return currentJourney?.stops.filter(stop => stop?.type === stopType)[FIRST_ELEMENT_INDEX];
+    JourneyPage.editJourneyRoute = () => {
+        navigation.navigate("Create Journey", { journey: currentJourney });
     };
 
     const moreOptionsRef = useRef<any>(null);
@@ -138,14 +138,14 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                             />
 
                             <Marker
-                                title={getStopByType(StopType.Start)?.address?.name}
-                                coordinate={getStopCoordinates(getStopByType(StopType.Start))}
+                                title={getStopByType(currentJourney, StopType.Start)?.address?.name}
+                                coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Start))}
                                 image={require("../../../../../assets/images/maps-markers/From.png")}
                             />
 
                             <Marker
-                                title={getStopByType(StopType.Finish)?.address?.name}
-                                coordinate={getStopCoordinates(getStopByType(StopType.Finish))}
+                                title={getStopByType(currentJourney, StopType.Finish)?.address?.name}
+                                coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Finish))}
                                 image={require("../../../../../assets/images/maps-markers/To.png")}
                             />
 
@@ -247,6 +247,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 };
 
 JourneyPage.showCancelRidePopup = () => console.log("Outer cancelRide()");
-JourneyPage.editJourney = () => console.log("Outer editJourney()");
+JourneyPage.editJourneyDetails = () => console.log("Outer editJourneyDetails()");
+JourneyPage.editJourneyRoute = () => console.log("Outer editJourneyRoute()");
 
 export default JourneyPage;

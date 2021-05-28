@@ -80,6 +80,7 @@ const JourneyTabs = () => {
 
     const pressHandle = () => {
         setOpen(!isOpen);
+        setVisibility(!isOpen);
 
         if (isOpen) {
             fadeOut();
@@ -237,7 +238,6 @@ const JourneyTabs = () => {
                                         onCloseEnd={closeHandle}
                                         initialSnap={0}
                                         renderHeader={
-
                                             <View style={[JourneyPageStyle.headerTitleStyle,
                                                 { backgroundColor: DM("white") }
                                             ]}>
@@ -251,12 +251,19 @@ const JourneyTabs = () => {
                                             <View style={[JourneyPageStyle.panel,
                                                 { backgroundColor: DM("white") }
                                             ]}>
-                                                <MenuButton text="Add stop" isIcon={true} />
                                                 <MenuButton
-                                                    text="Edit ride"
+                                                    text="Edit ride route"
                                                     isIcon={true}
                                                     onPress={() => {
-                                                        JourneyPage.editJourney();
+                                                        pressHandle();
+                                                        JourneyPage.editJourneyRoute();
+                                                    }}
+                                                />
+                                                <MenuButton
+                                                    text="Edit ride details"
+                                                    isIcon={true}
+                                                    onPress={() => {
+                                                        JourneyPage.editJourneyDetails();
                                                         pressHandle();
                                                     }} />
                                                 <MenuButton
