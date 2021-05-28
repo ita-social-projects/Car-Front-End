@@ -91,7 +91,7 @@ const JourneyTabs = () => {
         setOpen(false);
         setVisibility(false);
         fadeOut();
-        ref?.current?.snapTo(MIN_POPUP_POSITION);
+        ref?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
     return (

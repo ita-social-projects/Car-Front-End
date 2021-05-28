@@ -108,6 +108,7 @@ test("renders correctly", async () =>
               },
               Object {
                 "backgroundColor": "#afafaf",
+                "left": 629,
               },
             ]
           }

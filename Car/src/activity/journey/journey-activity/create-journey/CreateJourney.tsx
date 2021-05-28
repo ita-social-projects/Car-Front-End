@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
@@ -36,6 +36,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import { getJourneyStops, getStopByType, mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
 import StopType from "../../../../../models/stop/StopType";
+import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -102,6 +103,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     }, [params]);
 
     useEffect(() => {
+        journey && fitCameraToCoordinates(journey.journeyPoints, false);
         CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
 
         LocationService
@@ -122,7 +124,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             .catch((e) => console.log(e));
 
         return props.navigation?.addListener("blur", () => {
-            props.closeMoreOptionPopup();
+            journey && props.closeMoreOptionPopup();
         });
     }, []);
 
@@ -165,7 +167,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("You can use the location");
                 findUserLocation();
             } else {
                 console.log("Location permission denied");
@@ -181,7 +182,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             (position) => {
                 setUserLocationIsLoading(false);
                 setUserCoordinates(position.coords);
-                mapRef.current?.setCamera({ ...initialCamera, center: position.coords });
+                !journey && mapRef.current?.setCamera({ ...initialCamera, center: position.coords });
             },
             (error) => {
                 setUserLocationIsLoading(false);
@@ -255,24 +256,23 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setErrorModalIsVisible(true);
     };
 
-    const fitCameraToCoordinates = (coordinates: LatLng[]) => {
+    const fitCameraToCoordinates = (coordinates: LatLng[], animated: boolean) => {
         mapRef.current?.fitToCoordinates(coordinates,
-            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 } });
+            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 }, animated: animated });
     };
 
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
+        if (infoIsLoading) return;
+
+        console.log("onRouteReadyHandler");
         setRouteDistance(result.distance);
         setDuration(result.duration);
         setRoutePoints(result.coordinates);
         setRouteIsConfirmed(true);
-        fitCameraToCoordinates(result.coordinates);
+        fitCameraToCoordinates(result.coordinates, true);
     };
 
     const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;
-
-    useEffect(() => {
-        journey && fitCameraToCoordinates(journey.journeyPoints);
-    }, [infoIsLoading]);
 
     return (
         <>
@@ -378,12 +378,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
-                        { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf" }]}
-                    onPress={confirmOnPressHandler}
+                        { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf",
+                            left: Dimensions.get("screen").width -
+                                (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET) }]}
+                    onPress={journey ? () => {} : confirmOnPressHandler}
                     disabled={!routeIsConfirmed}
                 >
                     <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
-                    Confirm
+                        {journey ? "Update route" : "Confirm"}
                     </Text>
                 </TouchableOpacity>
             </View>
