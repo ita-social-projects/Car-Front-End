@@ -10,7 +10,6 @@ import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
-    DEFAULT_DURATION, DEFAULT_ROUTE_DISTANCE,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -30,7 +29,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { getStopByType, mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
+import { getStopByType, mapStopToWayPoint, timeStringToMinutes } from "../../../../utils/GeneralHelperFunctions";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -75,6 +74,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     };
 
     useEffect(() => {
+        console.log(journeyId);
+
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
@@ -91,6 +92,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);
 
     JourneyPage.editJourneyDetails = () => {
+        if (!currentJourney) return;
+
         const properties: JourneyDetailsPageProps = {
             route: {
                 params: {
@@ -98,10 +101,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     from: mapStopToWayPoint(getStopByType(currentJourney, StopType.Start)),
                     to: mapStopToWayPoint(getStopByType(currentJourney, StopType.Finish)),
                     stops: currentJourney?.stops.filter(stop =>
-                        stop?.type === StopType.Intermediate).map(mapStopToWayPoint) ?? [],
-                    duration: currentJourney?.duration ?? DEFAULT_DURATION,
-                    routeDistance: currentJourney?.routeDistance ?? DEFAULT_ROUTE_DISTANCE,
-                    routePoints: currentJourney?.journeyPoints ?? [],
+                        stop?.type === StopType.Intermediate).map(mapStopToWayPoint),
+                    duration:  timeStringToMinutes(currentJourney.duration),
+                    routeDistance: currentJourney.routeDistance,
+                    routePoints: currentJourney.journeyPoints,
                 }
             }
         };

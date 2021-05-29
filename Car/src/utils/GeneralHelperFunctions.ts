@@ -1,4 +1,8 @@
-import { FIRST_ELEMENT_INDEX, THREE_DOTS_LENGTH } from "../constants/GeneralConstants";
+import {
+    FIRST_ELEMENT_INDEX,
+    NUMBER_OF_MINUTES_IN_HOUR, SECOND_ELEMENT_INDEX,
+    TEN, THREE_DOTS_LENGTH
+} from "../constants/GeneralConstants";
 import Stop from "../../models/stop/Stop";
 import { ZERO_COORDINATE } from "../constants/StylesConstants";
 import StopType from "../../models/stop/StopType";
@@ -27,4 +31,19 @@ export const getStopByType = (journey: Journey, stopType: (StopType.Start | Stop
 
 export const getJourneyStops = (journey: Journey) => {
     return journey?.stops.filter(stop => stop?.type === StopType.Intermediate);
+};
+
+export const minutesToTimeString = (totalMinutes: number) => {
+    const minutes = Math.trunc(totalMinutes % NUMBER_OF_MINUTES_IN_HOUR);
+    const hours = Math.trunc(totalMinutes / NUMBER_OF_MINUTES_IN_HOUR);
+
+    return (hours < TEN ? "0" : "") + hours.toString() + ":" +
+        (minutes < TEN ? "0" : "") + minutes.toString() + ":00";
+};
+
+export const timeStringToMinutes = (timeString: string) => {
+    const parts = timeString.split(":");
+
+    return Number(parts[FIRST_ELEMENT_INDEX]) * NUMBER_OF_MINUTES_IN_HOUR
+        + Number(parts[SECOND_ELEMENT_INDEX]);
 };

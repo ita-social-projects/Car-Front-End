@@ -38,6 +38,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
+import { minutesToTimeString } from "../../../../utils/GeneralHelperFunctions";
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -85,6 +86,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
+        console.log("duration -", typeof journey?.duration);
         CarService.getAll(Number(user?.id)).then(result => {
             setUserCars(result.data.map(car => (
                 {
@@ -97,6 +99,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     }, []);
 
     const publishJourneyHandler = async () => {
+        console.log("duration - ", params.duration);
+
         setRideIsPublishing(true);
 
         const newJourney: JourneyDto = {
@@ -126,7 +130,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         userId: Number(user?.id)
                     };
                 }),
-            durationInMinutes: Math.round(params.duration),
+            duration: minutesToTimeString(params.duration),
             routeDistance: Math.round(params.routeDistance)
         };
 
@@ -138,18 +142,20 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const updateJourneyHandler = async () => {
+        if (!journey) return;
+
         setRideIsPublishing(true);
 
         const updatedJourney: JourneyDto = {
-            ...journey!,
+            ...journey,
             carId: selectedCar.id,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: freeButtonStyle === activeButtonStyle,
             isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
-            durationInMinutes: Number(journey?.duration),
-            organizerId: Number(journey?.organizer?.id)
+            duration: journey.duration,
+            organizerId: Number(journey.organizer?.id)
         };
 
         await JourneyService.update(updatedJourney)

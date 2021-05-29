@@ -235,8 +235,7 @@ const JourneyTabs = () => {
                                 ]}>
                                     <JourneyPage props={{
                                         ...props,
-                                        moreOptionsPopupIsOpen: isOpen,
-                                        closeMoreOptionPopup: () => pressHandle(ridePageMoreOptionsRef)
+                                        moreOptionsPopupIsOpen: isOpen
                                     }}/>
                                 </Animated.View>
 
