@@ -41,7 +41,10 @@ test("renders correctly", async () =>
             ]
           }
         >
-          NO RESULTS MATCHING YOUR SEARCH FILTERS
+          NO RESULTS MATCHING YOUR 
+          
+
+           SEARCH FILTERS
         </Text>
       </View>
       <View
