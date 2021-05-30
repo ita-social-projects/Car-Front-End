@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
-    Alert,
     Image,
     ScrollView,
     Text,
     TouchableOpacity,
     View
 } from "react-native";
-import { ImagePickerResponse, launchImageLibrary } from "react-native-image-picker/src";
+import { launchImageLibrary } from "react-native-image-picker/src";
 import BrandService from "../../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../../api-service/model-service/ModelService";
@@ -27,7 +26,6 @@ import {
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
-import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
 
 const EditCars = (navigation : any) => {
@@ -115,26 +113,13 @@ const EditCars = (navigation : any) => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
-                trySetPhoto(response);
+                setPhoto({
+                    name: response.fileName?.toString() ?? "",
+                    type: response.type?.toString() ?? "",
+                    uri: response.uri?.toString() ?? ""
+                });
             }
         });
-    };
-
-    const trySetPhoto = (photo: ImagePickerResponse) => {
-        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
-            setPhoto({
-                name: photo?.fileName?.toString() ?? "",
-                type: photo?.type?.toString() ?? "",
-                uri: photo.uri?.toString() ?? ""
-            });
-        } else {
-            Alert.alert("Error!", "File size should not exceed 7MB", [
-                {
-                    text: "Ok"
-                }
-            ]);
-            setPhoto({} as CarPhoto);
-        }
     };
 
     const saveCarHandle = async () => {
