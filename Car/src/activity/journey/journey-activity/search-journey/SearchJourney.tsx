@@ -31,30 +31,35 @@ import WayPoint from "../../../../types/WayPoint";
 import Address from "../../../../../models/Address";
 import Geolocation from "@react-native-community/geolocation";
 import SearchJourneyProps from "./SearchJourneyProps";
-import TouchableDateTimePicker from "../touchable/datetime-picker/TouchableDateTimePicker";
-import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
+import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
 import SwitchSelectorStyle from "../create-journey/SwitchSelector/SwitchSelectorStyle";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
-import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import { LatLng } from "react-native-maps";
 import FeeType from "../../../../../models/journey/FeeType";
+import Request from "../../../../../models/request/RequestModel";
+import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
+import AsyncStorage from "@react-native-community/async-storage";
+import Filter from "../../../../../models/journey/Filter";
+import RequestService from "../../../../../api-service/request-service/RequestService";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
 
     const { user } = useContext(AuthContext);
 
-    const [hasLuggage, setHasLuggage] = useState<boolean>(false);
+    const [hasLuggage] = useState<boolean>(false);
+
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
-    const [departureTime, setDepartureTime] = useState<Date>(new Date());
+    const [departureTime, setDepartureTime] = useState<Date>(addMinutesToDate(new Date(), MINUTES_OFFSET));
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
-    const [passengersCount, setPassengersCount] = useState(INITIAL_PASSENGERS_COUNT);
     const [allButtonStyle, setAllButtonStyle] = useState(SwitchSelectorStyle.activeButton);
     const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
     const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [isRequest, setIsRequest] = useState<boolean>(false);
+    const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
 
     useEffect(() => {
         LocationService
@@ -75,6 +80,14 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setFrom(params.wayPoint);
             } else if (params.wayPointId === "To") {
                 setTo(params.wayPoint);
+            }
+
+            if(!isRequest){
+                setIsRequest(Boolean(params?.isRequest));
+            }
+
+            if(!isPreviousFilter){
+                fillInFilters();
             }
         }
     }, [params]);
@@ -112,6 +125,33 @@ const SearchJourney = (props: SearchJourneyProps) => {
         }
     };
 
+    const fillInFilters = () => {
+        if(params?.isPreviousFilter as boolean){
+            setIsPreviousFilter(params?.isPreviousFilter as boolean);
+
+            AsyncStorage.getItem("searchFilter").then((res) => {
+                let filter: Filter = JSON.parse(res || "{}");
+
+                switch(filter.fee){
+                    case FeeType.Free:
+                        setAllButtonStyle(SwitchSelectorStyle.inactiveButton);
+                        setFreeButtonStyle(SwitchSelectorStyle.activeButton);
+                        setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
+                        break;
+                    case FeeType.Paid:
+                        setAllButtonStyle(SwitchSelectorStyle.inactiveButton);
+                        setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
+                        setPaidButtonStyle(SwitchSelectorStyle.activeButton);
+                        break;
+                }
+
+                setFrom(filter.from);
+                setTo(filter.to);
+                setDepartureTime(filter.departureTime);
+            });
+        }
+    };
+
     const onAddressInputButtonPressHandler = (
         placeholder: string,
         paddingLeft: number,
@@ -123,7 +163,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
             paddingLeft: paddingLeft,
             savedLocations: savedLocations,
             recentAddresses: filterRecentAddresses(),
-            previousScreen: "Search Journey",
+            previousScreen: isRequest ? "Journey Request Page" : "Search Journey",
             wayPointId: wayPointId,
             wayPoint: wayPoint,
             camera: {
@@ -138,29 +178,63 @@ const SearchJourney = (props: SearchJourneyProps) => {
     };
 
     const onConfirmButtonPress = async () => {
-        await JourneyService.getFilteredJourneys({
-            fromLatitude: from.coordinates.latitude,
-            fromLongitude: from.coordinates.longitude,
-            toLatitude: to.coordinates.latitude,
-            toLongitude: to.coordinates.longitude,
+        let fee = allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
+            : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
+                : FeeType.Paid;
+
+        let filterToSave: Filter = {
+            from: from,
+            to: to,
             departureTime: departureTime,
-            hasLuggage: hasLuggage,
-            passengersCount: passengersCount,
-            feeType:
-                allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
-                    : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
-                        : FeeType.Paid,
-        })
-            .then((res) => {
-                if(res.data.length > EMPTY_COLLECTION_LENGTH) {
-                    navigation.navigate("OK Search Result", { journeys: res.data });
-                } else {
-                    navigation.navigate("Bad Search Result");
-                }
+            fee: fee,
+        };
+
+        AsyncStorage.setItem("searchFilter", JSON.stringify(filterToSave));
+
+        let request: Request = {
+            from: {
+                latitude: from.coordinates.latitude,
+                longitude: from.coordinates.longitude
+            },
+            to: {
+                latitude: to.coordinates.latitude,
+                longitude: to.coordinates.longitude
+            },
+            fee: fee,
+            passengersCount: INITIAL_PASSENGERS_COUNT,
+            userId: Number(user?.id),
+            departureTime: departureTime
+        };
+
+        if(isRequest){
+            console.log(request);
+            RequestService.addRequest(request)
+                .then(() => navigation.navigate("Journey"))
+                .catch(() => navigation.navigate("Journey"));
+        } else{
+            await JourneyService.getFilteredJourneys({
+                fromLatitude: from.coordinates.latitude,
+                fromLongitude: from.coordinates.longitude,
+                toLatitude: to.coordinates.latitude,
+                toLongitude: to.coordinates.longitude,
+                departureTime: departureTime,
+                hasLuggage: hasLuggage,
+                passengersCount: INITIAL_PASSENGERS_COUNT,
+                fee: fee
             })
-            .catch((ex) => {
-                console.log(ex);
-            });
+                .then((res) => {
+                    if(res.data.length > EMPTY_COLLECTION_LENGTH) {
+                        let displayFee = allButtonStyle === SwitchSelectorStyle.activeButton;
+
+                        navigation.navigate("OK Search Result", { journeys: res.data, displayFee: displayFee });
+                    } else {
+                        navigation.navigate("Bad Search Result");
+                    }
+                })
+                .catch((ex) => {
+                    console.log(ex);
+                });
+        }
     };
 
     const filterRecentAddresses = () =>
@@ -210,12 +284,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setDate={(d) => setDepartureTime(d)}
                 isConfirmed={true}
                 setIsConfirmedToTrue={() => {}}
-            />
-
-            <SeatsInputSpinner
-                value={passengersCount}
-                onChange={(seats) => setPassengersCount(seats)}
-                title={"Passengers:"}
             />
 
             <View style={SwitchSelectorStyle.container}>
@@ -297,15 +365,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ marginHorizontal: 20, marginTop: 20 }}>
-                <ChooseOption
-                    text={"Do you have any luggage with you?"}
-                    value={hasLuggage}
-                    onValueChanged={(value: boolean) => {
-                        setHasLuggage(value);
-                    }}
-                />
-            </View>
             <View style={SearchJourneyStyle.buttonContainer}>
                 <TouchableOpacity
                     style={[CreateJourneyStyle.publishButton,
@@ -313,7 +372,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     onPress={() => {onConfirmButtonPress();}}
                     disabled={!(to.isConfirmed && from.isConfirmed)}
                 >
-                    <Text style={CreateJourneyStyle.publishButtonText}>Search</Text>
+                    <Text style={CreateJourneyStyle.publishButtonText}>
+                        {isRequest ? "Create Request" : "Search"}
+                    </Text>
                 </TouchableOpacity>
             </View>
         </View>

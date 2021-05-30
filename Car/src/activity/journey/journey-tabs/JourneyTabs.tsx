@@ -16,7 +16,6 @@ import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
 import Chat from "../../messages/messages-activity/chat/Chat";
-import JourneyRequestPage from "../journey-activity/journey-request-page/JourneyRequestPage";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
@@ -43,10 +42,11 @@ import {
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import DM from "../../../components/styles/DM";
 import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
-import NewJourneyDetailsPage from "../journey-activity/create-journey/NewJourneyDetailsPage/NewJourneyDetailsPage";
+import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
+import { Host } from "react-native-portalize";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
@@ -184,10 +184,10 @@ const JourneyTabs = () => {
                 />
 
                 <StackTabs.Screen
-                    name="New Journey Details"
-                    component={NewJourneyDetailsPage}
+                    name="Journey Details"
+                    component={JourneyDetailsPage}
                     options={{
-                        headerTitle: "Add a ride",
+                        headerTitle: "Ride details",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton
@@ -218,7 +218,7 @@ const JourneyTabs = () => {
                     {(props: any) => {
 
                         return (
-                            <>
+                            <Host>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
                                     { opacity: layoutOpacity, backgroundColor: DM("#000000") }
                                 ]} />
@@ -226,50 +226,59 @@ const JourneyTabs = () => {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
                                 ]}>
-                                    <JourneyPage props={props} />
+                                    <JourneyPage props={{ ...props, moreOptionsPopupIsOpen: isOpen }} />
                                 </Animated.View>
 
-                                {props.route.params.isDriver && <BottomPopup
-                                    refForChild={moreOptionsRef}
-                                    snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
-                                    enabledInnerScrolling={false}
-                                    onCloseEnd={closeHandle}
-                                    initialSnap={0}
-                                    renderHeader={
+                                {props.route.params.isDriver &&
+                                    <BottomPopup
+                                        refForChild={moreOptionsRef}
+                                        snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                        enabledInnerScrolling={false}
+                                        onCloseEnd={closeHandle}
+                                        initialSnap={0}
+                                        renderHeader={
 
-                                        <View style={[JourneyPageStyle.headerTitleStyle,
-                                            { backgroundColor: DM("white") }
-                                        ]}>
-                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
-                                                MORE OPTIONS
-                                            </Text>
-                                        </View>
-                                    }
-                                    renderContent={
-                                        <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
-                                            <MenuButton text="Add stop" isIcon={true} />
-                                            <MenuButton text="Edit route" isIcon={true} />
-                                            <MenuButton text="Invite SoftServian" isIcon={true} />
-                                            <MenuButton
-                                                text="Cancel ride"
-                                                isIcon={true}
-                                                onPress={JourneyPage.showCancelRidePopup}
-                                            />
-                                        </View>
-                                    }
-                                />}
-                            </>
+                                            <View style={[JourneyPageStyle.headerTitleStyle,
+                                                { backgroundColor: DM("white") }
+                                            ]}>
+                                                <Text style={[JourneyPageStyle.headerTextStyle,
+                                                    { color: DM("black") }]}>
+                                                    MORE OPTIONS
+                                                </Text>
+                                            </View>
+                                        }
+                                        renderContent={
+                                            <View style={[JourneyPageStyle.panel,
+                                                { backgroundColor: DM("white") }
+                                            ]}>
+                                                <MenuButton text="Add stop" isIcon={true} />
+                                                <MenuButton
+                                                    text="Edit ride"
+                                                    isIcon={true}
+                                                    onPress={() => {
+                                                        JourneyPage.editJourney();
+                                                        pressHandle();
+                                                    }} />
+                                                <MenuButton
+                                                    text="Cancel ride"
+                                                    isIcon={true}
+                                                    onPress={JourneyPage.showCancelRidePopup}
+                                                />
+                                            </View>
+                                        }
+                                    />}
+                            </Host>
                         );
                     }}
                 </StackTabs.Screen>
                 <StackTabs.Screen
                     name="Journey Request Page"
-                    component={JourneyRequestPage}
+                    component={SearchJourney}
                     options={{
-                        title: "Confirm Ride",
+                        title: "Create Ride Request",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
-                        headerLeft: HeaderBackButton
+                        headerLeft: HeaderBackButton,
                     }}
                 />
                 <StackTabs.Screen
@@ -283,7 +292,10 @@ const JourneyTabs = () => {
                     }}
                     children = {(props: any) => (
                         <>
-                            <OkSearchResult journeys={props.route.params.journeys} />
+                            <OkSearchResult
+                                journeys={props.route.params.journeys}
+                                displayFee={props.route.params.displayFee}
+                            />
                             <ConfirmModal
                                 visible={isNewRequestModalVisible}
                                 title="ARE YOU SURE?"
@@ -292,7 +304,9 @@ const JourneyTabs = () => {
                                 cancelText="No, Go back"
                                 confirmColor={DM("black")}
                                 onConfirm={() => {
-                                    navigation.navigate("Search Journey");
+                                    setNewRequestModalVisible(false);
+                                    (async () => sleep(SLEEP_DURATION))().then(() =>
+                                        navigation.navigate("Journey Request Page", { isRequest: true }));
                                 }}
                                 disableModal={() => setNewRequestModalVisible(false)}
                             />
@@ -312,10 +326,11 @@ const JourneyTabs = () => {
                                 renderContent={
                                     <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                         <MenuButton
-                                            text="With the Privious Filters"
+                                            text="With the Previous Filters"
                                             isIcon={true}
                                             onPress={() => {
-                                                navigation.navigate("Search Journey");
+                                                navigation.navigate("Journey Request Page",
+                                                    { isRequest: true, isPreviousFilter: true });
                                                 if(ShadowedBottomPopup)
                                                     ShadowedBottomPopup.pressHandle();
                                             }}

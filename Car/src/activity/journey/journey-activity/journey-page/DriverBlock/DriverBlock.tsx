@@ -5,12 +5,15 @@ import * as navigation from "../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
 import AvatarLogo from "../../../../../components/avatar-logo/AvatarLogo";
 import moment from "moment";
-import { INITIAL_TIME } from "../../../../../constants/JourneyConstants";
+import { INITIAL_TIME, MAX_USER_FULL_NAME_LENGTH } from "../../../../../constants/JourneyConstants";
 import { Divider } from "react-native-elements";
 import React from "react";
 import Journey from "../../../../../../models/journey/Journey";
+import { trimTheStringIfTooLong } from "../../../../../utils/GeneralHelperFunctions";
 
 const DriverBlock = ({ journey } : {journey: Journey}) => {
+    const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
+
     return (
         <View style={[JourneyPageStyle.contentView, { backgroundColor: DM("white") }]}>
 
@@ -27,8 +30,7 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
                 </View>
                 <View style={JourneyPageStyle.userInfoBlock}>
                     <Text style={[JourneyPageStyle.userNameText, { color: DM("black") }]}>
-                        {journey?.organizer?.name}{" "}
-                        {journey?.organizer?.surname}'s ride
+                        {trimTheStringIfTooLong(fullName, MAX_USER_FULL_NAME_LENGTH)}'s ride
                     </Text>
                     <View style={JourneyPageStyle.userSecondaryInfoBlock}>
                         <Text style={[JourneyPageStyle.userRoleText, { color: DM("#909095") }]}>

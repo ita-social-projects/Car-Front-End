@@ -6,7 +6,6 @@ import {
     View,
     TouchableOpacity,
     ScrollView,
-    Alert
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -24,15 +23,12 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import {
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH,
 } from "../../../../../../constants/CarConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../../../../constants/GeneralConstants";
 import DM from "../../../../../../components/styles/DM";
-import CreateCarViewModel from "../../../../../../../models/car/CreateCarViewModel";
-import CarPhoto from "../../../../../../../models/car/CarPhoto";
 
 const AddCars = () => {
     const { user } = useContext(AuthContext);
@@ -61,7 +57,7 @@ const AddCars = () => {
 
     const [plateNumber, setPlateNumber] = useState<string>("");
     const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-    const [photo, setPhoto] = useState<CarPhoto>({} as CarPhoto);
+    const [photo, setPhoto] = useState({} as ImagePickerResponse);
 
     let modelPickerController: any;
     let brandPickerController: any;
@@ -72,23 +68,6 @@ const AddCars = () => {
             setBrands(res.data);
         });
     }, []);
-
-    const trySetPhoto = (photo: ImagePickerResponse) => {
-        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
-            setPhoto({
-                name: photo.fileName?.toString() ?? "",
-                type: photo.type?.toString() ?? "",
-                uri: photo.uri?.toString() ?? ""
-            });
-        } else {
-            Alert.alert("Error!", "File size should not exceed 7MB", [
-                {
-                    text: "Ok"
-                }
-            ]);
-            setPhoto({} as CarPhoto);
-        }
-    };
 
     function validatePlateNumber () {
         setValidPlateNumber(
@@ -103,25 +82,26 @@ const AddCars = () => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel && response.fileSize) {
-                trySetPhoto(response);
+                setPhoto(response);
             }
         });
     };
 
     const saveCarHandle = async () => {
         setSaving(true);
-        let photoToAdd;
+        let car = new FormData();
 
-        (photo.name !== "" && photo.type !== "" && photo.uri !== "") ?
-            photoToAdd = photo : photoToAdd = null;
-
-        let car: CreateCarViewModel = {
-            ownerId : Number(user?.id),
-            modelId : Number(selectedModel?.value),
-            color : Number(selectedColor?.value),
-            plateNumber: plateNumber,
-            photo : photoToAdd
-        };
+        car.append("ownerId", user?.id);
+        car.append("modelId", Number(selectedModel?.value));
+        car.append("color", Number(selectedColor?.value));
+        car.append("plateNumber", plateNumber);
+        if (photo !== null && photo !== undefined) {
+            car.append("image", {
+                name: photo.fileName,
+                type: photo.type,
+                uri: photo.uri
+            });
+        }
 
         await CarService.add(car)
             .then((res) => console.log(res.data))
@@ -162,7 +142,7 @@ const AddCars = () => {
         <View
             style={[AddCarsStyle.wrapper, { backgroundColor: DM("white") }]}
         >
-            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("#C4C4C4") }]}>
+            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("light-gray") }]}>
                 {photo && (
                     <Image
                         source={{ uri: photo.uri }}
@@ -172,8 +152,8 @@ const AddCars = () => {
                 <TouchableOpacity
                     style={[AddCarsStyle.carButtonUpload,
                         {
-                            backgroundColor: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black")
                         }]}
                     onPress={() => uploadPhotoHandle()}
                 >
@@ -255,7 +235,7 @@ const AddCars = () => {
                 <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: DM("#414045") }}>
+                        <Text style={{ color: DM("gray") }}>
                             {" "}
                             - required field
                         </Text>
@@ -271,8 +251,8 @@ const AddCars = () => {
                             !selectedModel?.value ||
                             !selectedColor?.value ||
                             !isValidPlateNumber ?
-                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("#B8B8B8") }]
-                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
+                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("black") }]}
                         onPress={() => {
                             saveCarHandle().then(() => navigation.goBack());
                         }}

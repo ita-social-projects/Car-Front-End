@@ -1,8 +1,11 @@
 import Stop from "../stop/Stop";
 import JourneyPoint from "./JourneyPoint";
 
-interface CreateJourneyModel {
+interface JourneyDto {
+    id: number,
+    routeDistance: number,
     departureTime: Date,
+    durationInMinutes: number,
     countOfSeats: number,
     comments: string,
     isFree: boolean,
@@ -11,8 +14,6 @@ interface CreateJourneyModel {
     isOnOwnCar: boolean,
     journeyPoints: JourneyPoint[],
     stops: Stop[],
-    durationInMinutes: number,
-    routeDistance: number
 }
 
-export default CreateJourneyModel;
+export default JourneyDto;

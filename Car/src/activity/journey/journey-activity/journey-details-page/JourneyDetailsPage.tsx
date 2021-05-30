@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { CreateJourneyStyle } from "../CreateJourneyStyle";
+import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import {
     ScrollView,
     TextInput,
@@ -9,59 +9,80 @@ import {
     KeyboardAvoidingView,
     Platform
 } from "react-native";
-import TouchableDateTimePicker, { addMinutesToDate } from "../../touchable/datetime-picker/TouchableDateTimePicker";
-import JourneyCreationDropDownPicker from "../../dropdown-picker/JourneyCreationDropDownPicker";
-import SeatsInputSpinner from "../../input-spinner/SeatsInputSpinner";
-import AddressInputButton from "../AddressInputButton/AddressInputButton";
-import NewJourneyDetailsPageProps from "./NewJourneyDetailsPageProps";
-import SwitchSelector from "../SwitchSelector/SwitchSelector";
-import SwitchSelectorStyle from "../SwitchSelector/SwitchSelectorStyle";
-import CarService from "../../../../../../api-service/car-service/CarService";
-import AuthContext from "../../../../../components/auth/AuthContext";
-import { MINUTES_OFFSET } from "../../../../../constants/AnimationConstants";
-import { DEFAULT_AVAILABLE_SEATS_COUNT, } from "../../../../../constants/JourneyConstants";
+import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
+import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDropDownPicker";
+import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
+import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
+import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
+import SwitchSelector from "../create-journey/SwitchSelector/SwitchSelector";
+import { activeButtonStyle, inactiveButtonStyle } from "../create-journey/SwitchSelector/SwitchSelectorStyle";
+import CarService from "../../../../../api-service/car-service/CarService";
+import AuthContext from "../../../../components/auth/AuthContext";
+import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
+import {
+    CREATING_FONT_SIZE,
+    DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
+    INITIAL_TIME,
+    MIN_AVAILABLE_SEATS_COUNT,
+} from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
     FIRST_ELEMENT_INDEX
-} from "../../../../../constants/GeneralConstants";
-import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
-import StopType from "../../../../../../models/stop/StopType";
-import * as navigation from "../../../../../components/navigation/Navigation";
-import CreateJourneyModel from "../../../../../../models/journey/CreateJourneyModel";
-import Indicator from "../../../../../components/activity-indicator/Indicator";
-import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
+} from "../../../../constants/GeneralConstants";
+import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import StopType from "../../../../../models/stop/StopType";
+import * as navigation from "../../../../components/navigation/Navigation";
+import JourneyDto from "../../../../../models/journey/JourneyDto";
+import Indicator from "../../../../components/activity-indicator/Indicator";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import moment from "moment";
+import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
+import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
 
-const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
+const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const params = props.route.params;
+    const journey = params.journey;
+    const carModel = journey?.car?.model;
 
     const { user } = useContext(AuthContext);
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
-    const [selectedCar, setSelectedCar] =
-        useState<{id: number, name: string}>({ id: NaN, name: "" });
+    const [selectedCar, setSelectedCar] = useState<{id: number, name: string}>({
+        id: journey?.car?.id ?? NaN,
+        name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
+    });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.activeButton);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(
+        journey?.isOnOwnCar && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(
+        journey?.isOnOwnCar && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
 
-    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(SwitchSelectorStyle.activeButton);
-    const [taxiButtonStyle, setTaxiButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(
+        journey?.isFree && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(
+        journey?.isFree && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
 
-    const [departureTime, setDepartureTime] = useState(addMinutesToDate(new Date(), MINUTES_OFFSET));
-    const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(false);
+    const [departureTime, setDepartureTime] = useState<Date>(journey ?
+        moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
+        addMinutesToDate(new Date(), MINUTES_OFFSET));
+    const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
-    const [availableSeats, setAvailableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
+    const [availableSeats, setAvailableSeats] = useState(
+        journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
-    const [comment, setComment] = useState("");
+    const [comment, setComment] = useState(journey?.comments ?? "");
 
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
 
-    const [freeButtonModalIsVisible, setFreeButtonModalIsVisible] = useState(false);
-    const [paidButtonModalIsVisible, setPaidButtonModalIsVisible] = useState(false);
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
-    const [publishErrorModalIsVisible, setPublishErrorModalIsVisible] = useState(false);
+    const [discardModalIsVisible, setDiscardModalIsVisible] = useState(false);
+    const [applyChangesModalIsVisible, setApplyChangesModalIsVisible] = useState(false);
+
+    const [modal, setModal] = useState<ConfirmModalProps>({ ...freeRideModal, visible: false });
+    const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
         CarService.getAll(Number(user?.id)).then(result => {
@@ -78,13 +99,14 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
     const publishJourneyHandler = async () => {
         setRideIsPublishing(true);
 
-        const newJourney: CreateJourneyModel = {
+        const newJourney: JourneyDto = {
+            id: 0,
             carId: selectedCar.id,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: freeButtonStyle === SwitchSelectorStyle.activeButton,
-            isOnOwnCar: ownCarButtonStyle === SwitchSelectorStyle.activeButton,
+            isFree: freeButtonStyle === activeButtonStyle,
+            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: [{ ...params.from, stopType: StopType.Start },
@@ -110,7 +132,28 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then(() => setSuccessfullyPublishModalIsVisible(true))
-            .catch(() => setPublishErrorModalIsVisible(true));
+            .catch(() => setModal(publishErrorModal));
+
+        setRideIsPublishing(false);
+    };
+
+    const updateJourneyHandler = async () => {
+        setRideIsPublishing(true);
+
+        const updatedJourney: JourneyDto = {
+            ...journey!,
+            carId: selectedCar.id,
+            comments: comment,
+            countOfSeats: availableSeats,
+            departureTime: departureTime,
+            isFree: freeButtonStyle === activeButtonStyle,
+            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
+            durationInMinutes: Number(journey?.duration),
+            organizerId: Number(journey?.organizer?.id)
+        };
+
+        await JourneyService.update(updatedJourney)
+            .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);
     };
@@ -175,22 +218,22 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             leftButtonStyle={ownCarButtonStyle}
                             rightButtonStyle={taxiButtonStyle}
                             onLeftButtonPress={() => {
-                                if (ownCarButtonStyle === SwitchSelectorStyle.activeButton) return;
+                                if (ownCarButtonStyle === activeButtonStyle) return;
 
                                 setIsVisibleCarDropDown(false);
-                                setOwnCarButtonStyle(SwitchSelectorStyle.activeButton);
-                                setTaxiButtonStyle(SwitchSelectorStyle.inactiveButton);
+                                setOwnCarButtonStyle(activeButtonStyle);
+                                setTaxiButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
-                                setOwnCarButtonStyle(SwitchSelectorStyle.inactiveButton);
-                                setTaxiButtonStyle(SwitchSelectorStyle.activeButton);
+                                setOwnCarButtonStyle(inactiveButtonStyle);
+                                setTaxiButtonStyle(activeButtonStyle);
                             }}
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
                             rightButtonText={"Taxi"}
                         />
 
-                        {ownCarButtonStyle === SwitchSelectorStyle.activeButton && (
+                        {ownCarButtonStyle === activeButtonStyle && (
                             <JourneyCreationDropDownPicker
                                 items={userCars.map((car) => ({
                                     label: car.name,
@@ -214,14 +257,14 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             leftButtonStyle={freeButtonStyle}
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
-                                setFreeButtonModalIsVisible(true);
-                                setFreeButtonStyle(SwitchSelectorStyle.activeButton);
-                                setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
+                                setModal(freeRideModal);
+                                setFreeButtonStyle(activeButtonStyle);
+                                setPaidButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
-                                setPaidButtonModalIsVisible(true);
-                                setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
-                                setPaidButtonStyle(SwitchSelectorStyle.activeButton);
+                                setModal(paidRideModal);
+                                setFreeButtonStyle(inactiveButtonStyle);
+                                setPaidButtonStyle(activeButtonStyle);
                             }}
                             title={"Fee"}
                             leftButtonText={"Free"}
@@ -232,6 +275,7 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             value={availableSeats}
                             onChange={seats => setAvailableSeats(seats)}
                             title={"Available seats:"}
+                            minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
                         <View style={CreateJourneyStyle.commentsView}>
@@ -249,38 +293,43 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
                             <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
                         </View>
 
-                        <View style={CreateJourneyStyle.publishButtonContainer}>
+                        <View style={[CreateJourneyStyle.publishButtonContainer,
+                            { flexDirection: journey ? "row" : "column" }]}>
+
+                            <TouchableOpacity
+                                style={[CreateJourneyStyle.discardButton,
+                                    { display: journey ? "flex" : "none" }]}
+                                onPress={() => setDiscardModalIsVisible(true)}
+                            >
+                                <Text style={CreateJourneyStyle.discardButtonText}>
+                                    Discard changes
+                                </Text>
+                            </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
-                                onPress={publishJourneyHandler}
+                                onPress={journey ?
+                                    () => setApplyChangesModalIsVisible(true) :
+                                    publishJourneyHandler}
                                 disabled={!departureTimeIsConfirmed}
                             >
-                                <Text style={CreateJourneyStyle.publishButtonText}>Publish</Text>
+                                <Text style={[CreateJourneyStyle.publishButtonText,
+                                    { fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE }]}>
+                                    {journey ? "Apply changes" : "Publish"}
+                                </Text>
                             </TouchableOpacity>
+
                         </View>
+
                     </ScrollView>
                 </KeyboardAvoidingView>
             )}
 
             <ConfirmModal
-                visible={freeButtonModalIsVisible}
-                title={"Free ride!"}
-                subtitle={"Participants will be informed that your ride is totally free!"}
-                confirmText={"OK"}
-                hideCancelButton={true}
-                onConfirm={() => setFreeButtonModalIsVisible(false)}
-                disableModal={() => setFreeButtonModalIsVisible(false)}
-            />
-
-            <ConfirmModal
-                visible={paidButtonModalIsVisible}
-                title={"Paid ride!"}
-                subtitle={"Participants will be informed that they'll need to partially pay for a fuel."}
-                confirmText={"OK"}
-                hideCancelButton={true}
-                onConfirm={() => setPaidButtonModalIsVisible(false)}
-                disableModal={() => setPaidButtonModalIsVisible(false)}
+                {...modal}
+                onConfirm={disableModal}
+                disableModal={disableModal}
             />
 
             <ConfirmModal
@@ -300,16 +349,35 @@ const NewJourneyDetailsPage = (props: NewJourneyDetailsPageProps) => {
             />
 
             <ConfirmModal
-                visible={publishErrorModalIsVisible}
-                title={"Error"}
-                subtitle={"Ride publishing is failed"}
-                confirmText={"OK"}
-                hideCancelButton={true}
-                onConfirm={() => setPublishErrorModalIsVisible(false)}
-                disableModal={() => setPublishErrorModalIsVisible(false)}
+                visible={discardModalIsVisible}
+                title={"Are you sure?"}
+                subtitle={"Are you sure you want to discard the changes?"}
+                confirmText={"Yes, discard"}
+                cancelText={"No, keep it"}
+                onConfirm={() => {
+                    setDiscardModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => setDiscardModalIsVisible(false)}
+            />
+
+            <ConfirmModal
+                visible={applyChangesModalIsVisible}
+                confirmColor={"black"}
+                title={"CHANGES"}
+                subtitle={"After the changes is applied, all passengers will get notified. " +
+                        "Some of them might withdraw from the ride if change doesn't suit them"}
+                confirmText={"Apply"}
+                cancelText={"Cancel"}
+                onConfirm={() => {
+                    setApplyChangesModalIsVisible(false);
+                    updateJourneyHandler()
+                        .then(() => navigation.goBack());
+                }}
+                disableModal={() => setApplyChangesModalIsVisible(false)}
             />
         </>
     );
 };
 
-export default NewJourneyDetailsPage;
+export default JourneyDetailsPage;

@@ -69,6 +69,7 @@
         "react-native-maps": "^0.27.1",
         "react-native-maps-directions": "^1.8.0",
         "react-native-navigation-bar-color": "^2.0.1",
+        "react-native-portalize": "^1.0.7",
         "react-native-reanimated": "^1.13.2",
         "react-native-rename": "^2.7.0",
         "react-native-restart": "^0.0.20",
