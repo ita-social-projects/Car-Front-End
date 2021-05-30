@@ -155,9 +155,9 @@ const Messages = (props: MessagesProps) => {
                                             textHighlight(item.messageText, search.split(" "))
                                             :
                                             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
-                                                Starts at: {moment(
+                                                starts at {moment(
                                                     new Date(item?.journey?.departureTime!)
-                                                ).utc().format("DD.MM HH:mm")}
+                                                ).utc().format("DD.MM, HH:mm")}
                                             </Text>
                                         }
                                     </View>
