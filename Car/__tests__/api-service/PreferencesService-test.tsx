@@ -31,7 +31,7 @@ describe("Preferences Service test", () => {
         let response: UserPreferences;
 
         PreferencesService.getUserPreferences(preferencesData.id).then(
-            (res: any) => {
+            (res) => {
                 response = res.data;
                 expect(res.status).toBe(200);
                 expect(JSON.stringify(response)).toBe(JSON.stringify(preferencesData));
@@ -60,7 +60,7 @@ describe("Preferences Service test", () => {
         let response: UserPreferences;
 
         PreferencesService.updateUserPreferences(preferencesData).then(
-            (res: any) => {
+            (res) => {
                 response = res.data;
                 expect(res.status).toBe(200);
                 expect(JSON.stringify(response)).toBe(JSON.stringify(preferencesData));

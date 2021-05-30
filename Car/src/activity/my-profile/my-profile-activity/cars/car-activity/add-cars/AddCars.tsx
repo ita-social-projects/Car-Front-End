@@ -6,7 +6,6 @@ import {
     View,
     TouchableOpacity,
     ScrollView,
-    Alert
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -24,7 +23,6 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import {
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH,
@@ -66,23 +64,10 @@ const AddCars = () => {
     let colorPickerController: any;
 
     useEffect(() => {
-        BrandService.getBrands().then((res: any) => {
+        BrandService.getBrands().then((res) => {
             setBrands(res.data);
         });
     }, []);
-
-    const trySetPhoto = (photo: ImagePickerResponse) => {
-        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
-            setPhoto(photo);
-        } else {
-            Alert.alert("Error!", "File size should not exceed 7MB", [
-                {
-                    text: "Ok"
-                }
-            ]);
-            setPhoto({} as ImagePickerResponse);
-        }
-    };
 
     function validatePlateNumber () {
         setValidPlateNumber(
@@ -97,7 +82,7 @@ const AddCars = () => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel && response.fileSize) {
-                trySetPhoto(response);
+                setPhoto(response);
             }
         });
     };
@@ -119,14 +104,14 @@ const AddCars = () => {
         }
 
         await CarService.add(car)
-            .then((res: any) => console.log(res.data))
+            .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
         setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        ModelService.getModelsByBrandId(Number(brand.value)).then((res: any) => {
+        ModelService.getModelsByBrandId(Number(brand.value)).then((res) => {
             setModels(res.data);
             modelPickerController.selectItem(res.data[FIRST_ELEMENT_INDEX]?.id.toString());
             modelPickerController.open();
@@ -157,7 +142,7 @@ const AddCars = () => {
         <View
             style={[AddCarsStyle.wrapper, { backgroundColor: DM("white") }]}
         >
-            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("#C4C4C4") }]}>
+            <View style={[AddCarsStyle.carAvatarContainer, { backgroundColor: DM("light-gray") }]}>
                 {photo && (
                     <Image
                         source={{ uri: photo.uri }}
@@ -167,8 +152,8 @@ const AddCars = () => {
                 <TouchableOpacity
                     style={[AddCarsStyle.carButtonUpload,
                         {
-                            backgroundColor: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black")
                         }]}
                     onPress={() => uploadPhotoHandle()}
                 >
@@ -250,7 +235,7 @@ const AddCars = () => {
                 <View style={AddCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: DM("#414045") }}>
+                        <Text style={{ color: DM("gray") }}>
                             {" "}
                             - required field
                         </Text>
@@ -266,8 +251,8 @@ const AddCars = () => {
                             !selectedModel?.value ||
                             !selectedColor?.value ||
                             !isValidPlateNumber ?
-                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("#B8B8B8") }]
-                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]}
+                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
+                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("black") }]}
                         onPress={() => {
                             saveCarHandle().then(() => navigation.goBack());
                         }}

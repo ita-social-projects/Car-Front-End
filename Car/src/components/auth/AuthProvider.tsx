@@ -50,7 +50,7 @@ const AuthProvider = ({ children }: any) => {
                             hireDate: new Date()
                         };
 
-                        const dbUser: any = await LoginService.loginUser(tempUser);
+                        const dbUser = await LoginService.loginUser(tempUser);
 
                         if (!dbUser.data?.token) {
                             navigation.navigate("Login", {

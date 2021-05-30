@@ -2,7 +2,7 @@ import Journey from "../../models/journey/Journey";
 import APIService from "../APIService";
 import APIRoutes from "../APIRoutes";
 import Stop from "../../models/stop/Stop";
-import CreateJourneyModel from "../../models/journey/CreateJourneyModel";
+import JourneyDto from "../../models/journey/JourneyDto";
 import FilterJourneyModel from "../../models/journey/FilterJourneyModel";
 
 const route = APIRoutes.getJourneyUrl();
@@ -23,14 +23,17 @@ const JourneyService = {
     getRecentJourneyStops: async (id: number) =>
         APIService.get<Array<Array<Stop>>>(route + "recent/" + id),
 
-    add: async (journey: CreateJourneyModel) =>
-        APIService.post<CreateJourneyModel>(route, journey),
+    add: async (journey: JourneyDto) =>
+        APIService.post<JourneyDto>(route, journey),
 
     getFilteredJourneys: async (filter: FilterJourneyModel) =>
         APIService.get<Array<Journey>>(route + "filter/", { params: filter }),
 
     delete: async (id: number) =>
-        APIService.delete(route + id)
+        APIService.delete(route + id),
+
+    update: async (journey: JourneyDto) =>
+        APIService.put(route, journey)
 };
 
 export default JourneyService;

@@ -30,7 +30,7 @@ const Messages = (props: MessagesProps) => {
     const { user } = useContext(AuthContext);
 
     const getChats = () => {
-        ChatService.getChat(user?.id).then((res: any) => {
+        ChatService.getChat(user?.id).then((res) => {
             let chats = res.data;
 
             setMasterDataSource(JSON.parse(JSON.stringify(chats)));
@@ -64,7 +64,7 @@ const Messages = (props: MessagesProps) => {
             searchInTitle.length ?
                 setFilteredDataSource(searchInTitle)
                 :
-                ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then((res: any) => {
+                ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then(res => {
                     setFilteredDataSource(res.data);
                 });
             setSearch(text);
@@ -155,9 +155,9 @@ const Messages = (props: MessagesProps) => {
                                             textHighlight(item.messageText, search.split(" "))
                                             :
                                             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
-                                                Starts at: {moment(
+                                                starts at {moment(
                                                     new Date(item?.journey?.departureTime!)
-                                                ).utc().format("DD.MM HH:mm")}
+                                                ).utc().format("DD.MM, HH:mm")}
                                             </Text>
                                         }
                                     </View>

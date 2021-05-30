@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
-    Alert,
     Image,
     ScrollView,
     Text,
     TouchableOpacity,
     View
 } from "react-native";
-import { ImagePickerResponse, launchImageLibrary } from "react-native-image-picker/src";
+import { launchImageLibrary } from "react-native-image-picker/src";
 import BrandService from "../../../../../../../api-service/brand-service/BrandService";
 import CarService from "../../../../../../../api-service/car-service/CarService";
 import ModelService from "../../../../../../../api-service/model-service/ModelService";
@@ -27,7 +26,6 @@ import {
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
-import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
 
 const EditCars = (navigation : any) => {
@@ -64,12 +62,12 @@ const EditCars = (navigation : any) => {
     let colorPickerController: any;
 
     useEffect(() => {
-        BrandService.getBrands().then((response: any) => {
+        BrandService.getBrands().then((response) => {
             setBrands(response.data);
         });
         let carId = Number(navigation.props.route.params.carId);
 
-        CarService.getById(carId).then((response: any) => {
+        CarService.getById(carId).then((response) => {
             const car = response.data;
             const carModel = car?.model;
             let carBrandItem : CarDropDownPickerItem = {
@@ -115,26 +113,13 @@ const EditCars = (navigation : any) => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
-                trySetPhoto(response);
+                setPhoto({
+                    name: response.fileName?.toString() ?? "",
+                    type: response.type?.toString() ?? "",
+                    uri: response.uri?.toString() ?? ""
+                });
             }
         });
-    };
-
-    const trySetPhoto = (photo: ImagePickerResponse) => {
-        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
-            setPhoto({
-                name: photo?.fileName?.toString() ?? "",
-                type: photo?.type?.toString() ?? "",
-                uri: photo.uri?.toString() ?? ""
-            });
-        } else {
-            Alert.alert("Error!", "File size should not exceed 7MB", [
-                {
-                    text: "Ok"
-                }
-            ]);
-            setPhoto({} as CarPhoto);
-        }
     };
 
     const saveCarHandle = async () => {
@@ -154,14 +139,14 @@ const EditCars = (navigation : any) => {
         }
 
         await CarService.update(car)
-            .then((res: any) => console.log(res.data))
+            .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
         setSaving(false);
     };
 
     const selectBrandHandle = (brand: any) => {
         setBrand(brand);
-        ModelService.getModelsByBrandId(Number(brand.value)).then((response: any) => {
+        ModelService.getModelsByBrandId(Number(brand.value)).then((response) => {
             setModels(response.data);
             setLoading(false);
         });
@@ -213,8 +198,8 @@ const EditCars = (navigation : any) => {
                 <TouchableOpacity
                     style={[EditCarsStyle.carButtonUpload,
                         {
-                            backgroundColor: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black")
                         }]
                     }
                     onPress={() =>
@@ -303,7 +288,7 @@ const EditCars = (navigation : any) => {
                 <View style={EditCarsStyle.saveButtonContainer}>
                     <Text style={{ color: DM("red") }}>
                         *
-                        <Text style={{ color: DM("#414045") }}>
+                        <Text style={{ color: DM("gray") }}>
                             {" "}
                             - required field
                         </Text>
@@ -314,8 +299,8 @@ const EditCars = (navigation : any) => {
                             !selectedModel?.value ||
                             !selectedColor?.value ||
                             !isValidPlateNumber ?
-                                [EditCarsStyle.carButtonSave, { backgroundColor: DM("#808080") }]
-                                : [EditCarsStyle.carButtonSave, { backgroundColor: DM("#000000") }]
+                                [EditCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
+                                : [EditCarsStyle.carButtonSave, { backgroundColor: DM("black") }]
                         }
                         disabled={
                             !selectedBrand?.value ||

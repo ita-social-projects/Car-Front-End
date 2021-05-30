@@ -8,11 +8,13 @@ import Stop from "../../models/stop/Stop";
 describe("Journey Service test", () => {
     let journeyData: Journey[] = [{
         id: 1,
+        duration: 1,
         car: null,
         comments: "",
         countOfSeats: 2,
         departureTime: new Date(),
         isFree: true,
+        isOnOwnCar: true,
         organizer: null,
         participants: [],
         routeDistance: 2,
@@ -79,7 +81,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getJourney(1).then((res: any) => {
+        JourneyService.getJourney(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData[0]));
         });
@@ -100,7 +102,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getPastJourneys(1).then((res: any) => {
+        JourneyService.getPastJourneys(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -121,7 +123,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getUpcomingJourneys(1).then((res: any) => {
+        JourneyService.getUpcomingJourneys(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -142,7 +144,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getScheduledJourneys(1).then((res: any) => {
+        JourneyService.getScheduledJourneys(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -163,7 +165,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getRecentJourneyStops(1).then((res: any) => {
+        JourneyService.getRecentJourneyStops(1).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(stopsData));
         });

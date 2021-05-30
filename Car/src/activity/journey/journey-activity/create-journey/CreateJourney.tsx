@@ -103,7 +103,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         LocationService
             .getAll(Number(user?.id))
-            .then((res: any) => {
+            .then((res) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
             })
@@ -111,9 +111,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
         JourneyService
             .getRecentJourneyStops(Number(user?.id))
-            .then((res: any) => {
+            .then((res) => {
                 setRecentAddresses(([] as Address[]).concat(
-                    ...res.data.map((recentStops: any) => recentStops.map((stop: any) => stop!.address))));
+                    ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
                 setRecentAddressesIsLoading(false);
             })
             .catch((e) => console.log(e));
@@ -233,7 +233,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const confirmOnPressHandler = () => {
-        navigation.navigate("New Journey Details", {
+        navigation.navigate("Journey Details", {
             from: from,
             to: to,
             stops: stops.filter(stop => stop.isConfirmed),
@@ -249,7 +249,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
-        console.log(JSON.stringify(result));
         setRouteDistance(result.distance);
         setDuration(result.duration);
         setRoutePoints(result.coordinates);

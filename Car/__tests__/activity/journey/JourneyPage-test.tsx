@@ -148,10 +148,10 @@ test("renders correctly", async () =>
       </Unknown>
       <ConfirmModal
         cancelText="No, keep it"
-        confirmText="Yes, delete it"
+        confirmText="Yes, cancel it"
         disableModal={[Function]}
         onConfirm={[Function]}
-        subtitle="Are you sure you want to delete the stop?"
+        subtitle="Are you sure you want to cancel the ride?"
         title="Ride canceling"
         visible={false}
       />

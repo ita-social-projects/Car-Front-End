@@ -8,6 +8,8 @@ import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/GeneralConstan
 import User from "../../../models/user/User";
 import DM from "../styles/DM";
 import { EventRegister } from "react-native-event-listeners";
+import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
+import { MAX_USER_FULL_NAME_LENGTH_IN_PROFILE } from "../../constants/JourneyConstants";
 
 const AvatarLogoTitle = () => {
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
@@ -29,7 +31,7 @@ const AvatarLogoTitle = () => {
                 <AvatarLogo user={user} size={56} />
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
                     <Text style={[AvatarLogoTitleStyle.headerUserName, { color: DM("black") }]}>
-                        {user?.name + " " + user?.surname}
+                        {trimTheStringIfTooLong(user?.name + " " + user?.surname, MAX_USER_FULL_NAME_LENGTH_IN_PROFILE)}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
                         { color: DM("black") }

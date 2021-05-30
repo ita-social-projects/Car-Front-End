@@ -85,11 +85,11 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="New Journey Details"
+          name="Journey Details"
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Add a ride",
+              "headerTitle": "Ride details",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {

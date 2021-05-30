@@ -222,7 +222,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 passengersCount: INITIAL_PASSENGERS_COUNT,
                 fee: fee
             })
-                .then((res: any) => {
+                .then((res) => {
                     if(res.data.length > EMPTY_COLLECTION_LENGTH) {
                         let displayFee = allButtonStyle === SwitchSelectorStyle.activeButton;
 

@@ -58,7 +58,7 @@ const Chat = (properties: ChatProps) => {
 
         properties.navigation.setOptions({ headerTitle: properties.route.params.header });
 
-        UserService.getUser(user!.id).then((res: any) => setUser(res.data));
+        UserService.getUser(user!.id).then((res) => setUser(res.data));
 
     }, []);
 
