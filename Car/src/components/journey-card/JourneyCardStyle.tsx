@@ -10,13 +10,9 @@ const JourneyCardStyle = StyleSheet.create({
         marginBottom: 16
     },
 
-    feeText: {
-        textAlign: "right",
-        paddingRight: 12,
-        paddingTop: 0,
-        fontFamily: Font.OpenSans.Regular,
-        fontSize: 11,
-        lineHeight: 16
+    feeBlock: {
+        paddingTop: 10,
+        textAlign: "center"
     },
 
     driverInfoBlock: {

@@ -42,7 +42,7 @@ const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
                     { borderColor: DM("black") },
                     props.displayFee && { height: JOURNEY_CARD_WITH_FEE_HEIGHT }]}>
                     <View style={JourneyCardStyle.driverInfoBlock}>
-                        <View style={[JourneyCardStyle.imageBlock, props.displayFee && { paddingBottom: 5.75 }]}>
+                        <View style={JourneyCardStyle.imageBlock}>
                             <AvatarLogo user={journey?.organizer} size={38.5} />
                         </View>
                         <View style={JourneyCardStyle.driverTextBlock}>
@@ -77,13 +77,6 @@ const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
                             </View>
                         </View>
                     </View>
-                    { props.displayFee &&
-                        <View>
-                            <Text style={JourneyCardStyle.feeText}>
-                                {journey?.isFree ? "Free" : "Paid"}
-                            </Text>
-                        </View>
-                    }
                     <View style={JourneyCardStyle.stopsBlock}>
                         <View style={JourneyCardStyle.firstStopBlock}>
                             <View style={[JourneyCardStyle.stopCircleIcon,
