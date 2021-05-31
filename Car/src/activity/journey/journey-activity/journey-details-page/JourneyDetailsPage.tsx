@@ -158,7 +158,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             organizerId: Number(journey.organizer?.id)
         };
 
-        await JourneyService.update(updatedJourney)
+        await JourneyService.updateDetails(updatedJourney)
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);

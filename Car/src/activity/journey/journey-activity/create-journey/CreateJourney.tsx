@@ -90,6 +90,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
     const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
+    const [routeIsUpdating, setRouteIsUpdating] = useState(false);
 
     useEffect(() => {
         if (params?.wayPoint) {
@@ -109,7 +110,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     }, [params]);
 
     useEffect(() => {
-        journey && fitCameraToCoordinates(journey.journeyPoints, false);
+        // journey && fitCameraToCoordinates(journey.journeyPoints, false);
         CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
 
         LocationService
@@ -159,6 +160,13 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             setRecentAddresses(filterRecentAddresses());
         }
     }, [recentAddressesIsLoading, savedLocationIsLoading]);
+
+    useEffect(() => {
+        if (journey && !recentAddressesIsLoading && !savedLocationIsLoading && !userLocationIsLoading) {
+            console.log("effect");
+            fitCameraToCoordinates(journey.journeyPoints, false);
+        }
+    }, [recentAddressesIsLoading, savedLocationIsLoading, userLocationIsLoading]);
 
     const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
@@ -258,6 +266,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const onUpdateRoutePressHandler = async () => {
+        setRouteIsUpdating(true);
+
         const updatedJourney: JourneyDto = {
             ...journey!,
             carId: journey!.car!.id,
@@ -285,8 +295,11 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 })
         };
 
-        await JourneyService.update(updatedJourney)
+        await JourneyService.updateRoute(updatedJourney)
+            .then(() => navigation.goBack())
             .catch(() => console.warn("update error"));
+
+        setRouteIsUpdating(false);
     };
 
     const cantBuildRouteAlert = () => {
@@ -300,7 +313,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
-        if (infoIsLoading) return;
+        if (isLoading) return;
 
         setRouteDistance(result.distance);
         setDuration(result.duration);
@@ -309,20 +322,21 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         fitCameraToCoordinates(result.coordinates, true);
     };
 
-    const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;
+    const isLoading = recentAddressesIsLoading ||
+        savedLocationIsLoading || userLocationIsLoading || routeIsUpdating;
 
     return (
         <>
-            {infoIsLoading && (
+            {isLoading && (
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
                         color="#414045"
-                        text="Loading information..."
+                        text={routeIsUpdating ? "Route updating..." : "Loading information..."}
                     />
                 </View>
             )}
-            <View style={infoIsLoading ? { display: "none", height: 0, flex: 0 } : { flex: 1 }}>
+            <View style={isLoading ? { display: "none", height: 0, flex: 0 } : { flex: 1 }}>
                 <ScrollView
                     ref={ref => (scrollViewRef.current = ref)}
                     onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
