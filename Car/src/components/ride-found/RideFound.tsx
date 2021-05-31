@@ -8,7 +8,7 @@ import RideFoundProps from "./RideFoundProps";
 import RideFoundStyle from "./RideFoundStyle";
 
 const RideFound = (props: RideFoundProps) => {
-    const title = "Ride found"!;
+    const title = "created a ride";
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
