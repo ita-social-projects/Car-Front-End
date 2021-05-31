@@ -12,6 +12,8 @@ const RideFound = (props: RideFoundProps) => {
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
     return (
         <View>
             <TouchableOpacity
