@@ -1,37 +1,39 @@
 import APIRoutes from "../../api-service/APIRoutes";
 
-test("should return correct URL", async () =>
-    expect(APIRoutes.getBrandUrl()).toBe("https://car-api-project.azurewebsites.net/api/brands/"));
+const expectedApiUrl = "https://car-api-project.azurewebsites.net/";
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getCarUrl()).toBe("https://car-api-project.azurewebsites.net/api/cars/"));
+    expect(APIRoutes.getBrandUrl()).toBe(expectedApiUrl + "api/brands/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getChatUrl()).toBe("https://car-api-project.azurewebsites.net/api/user-chats/"));
+    expect(APIRoutes.getCarUrl()).toBe(expectedApiUrl + "api/cars/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getJourneyUrl()).toBe("https://car-api-project.azurewebsites.net/api/journeys/"));
+    expect(APIRoutes.getChatUrl()).toBe(expectedApiUrl + "api/user-chats/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getLocationTypeUrl()).toBe("https://car-api-project.azurewebsites.net/api/location-types/"));
+    expect(APIRoutes.getJourneyUrl()).toBe(expectedApiUrl + "api/journeys/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getLocationUrl()).toBe("https://car-api-project.azurewebsites.net/api/locations/"));
+    expect(APIRoutes.getLocationTypeUrl()).toBe(expectedApiUrl + "api/location-types/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getLoginUrl()).toBe("https://car-api-project.azurewebsites.net/api/login/"));
+    expect(APIRoutes.getLocationUrl()).toBe(expectedApiUrl + "api/locations/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getModelUrl()).toBe("https://car-api-project.azurewebsites.net/api/models/"));
+    expect(APIRoutes.getLoginUrl()).toBe(expectedApiUrl + "api/login/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getNotificationsUrl()).toBe("https://car-api-project.azurewebsites.net/api/notifications/"));
+    expect(APIRoutes.getModelUrl()).toBe(expectedApiUrl + "api/models/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getPreferencesUrl()).toBe("https://car-api-project.azurewebsites.net/api/user-preferences/"));
+    expect(APIRoutes.getNotificationsUrl()).toBe(expectedApiUrl + "api/notifications/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getSignalRUrl()).toBe("https://car-api-project.azurewebsites.net/signalr/"));
+    expect(APIRoutes.getPreferencesUrl()).toBe(expectedApiUrl + "api/user-preferences/"));
 
 test("should return correct URL", async () =>
-    expect(APIRoutes.getUserUrl()).toBe("https://car-api-project.azurewebsites.net/api/users/"));
+    expect(APIRoutes.getSignalRUrl()).toBe(expectedApiUrl + "signalr/"));
+
+test("should return correct URL", async () =>
+    expect(APIRoutes.getUserUrl()).toBe(expectedApiUrl + "api/users/"));
