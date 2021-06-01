@@ -1,8 +1,8 @@
-import UserModel from "../../types/UserModel";
+import User from "../../../models/user/User";
 
 interface NewNotificationProps {
     read?: boolean,
-    user?: UserModel | null,
+    user?: User | null,
     notificationTitle?: string,
     date?: Date
 }

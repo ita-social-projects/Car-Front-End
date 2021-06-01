@@ -1,10 +1,10 @@
-import UserModel from "../../types/UserModel";
+import User from "../../../models/user/User";
 
 interface RideFoundProps{
     visible?: boolean,
     notificationId: number,
     notificationData: string,
-    user: UserModel,
+    user: User,
     read?: boolean,
     date?: Date
 }

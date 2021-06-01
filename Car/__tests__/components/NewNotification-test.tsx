@@ -8,7 +8,18 @@ test("renders correctly", async () =>
     expect(
         renderer.render(
             <NewNotification
-                user={{ name: "Abc", surname: "Abc", position: "Abc" }}
+                user={{
+                    id: 0,
+                    name: "Abc",
+                    surname: "Abc",
+                    position: "Abc",
+                    location: "Abc",
+                    email: "Abc",
+                    token: "Abc",
+                    hireDate: new Date("2021-01-01T20:00:00.000Z"),
+                    imageId: null,
+                    journeyCount: 0,
+                }}
                 read={true}
             />
         )
@@ -37,9 +48,16 @@ test("renders correctly", async () =>
               size={38.5}
               user={
                 Object {
+                  "email": "Abc",
+                  "hireDate": 2021-01-01T20:00:00.000Z,
+                  "id": 0,
+                  "imageId": null,
+                  "journeyCount": 0,
+                  "location": "Abc",
                   "name": "Abc",
                   "position": "Abc",
                   "surname": "Abc",
+                  "token": "Abc",
                 }
               }
             />
@@ -105,7 +123,18 @@ test("renders correctly", async () =>
     expect(
         renderer.render(
             <NewNotification
-                user={{ name: "Abc", surname: "Abc", position: "Abc" }}
+                user={{
+                    id: 0,
+                    name: "Abc",
+                    surname: "Abc",
+                    position: "Abc",
+                    location: "Abc",
+                    email: "Abc",
+                    token: "Abc",
+                    hireDate: new Date("2021-01-01T20:00:00.000Z"),
+                    imageId: null,
+                    journeyCount: 0,
+                }}
             />
         )
     ).toMatchInlineSnapshot(`
@@ -137,9 +166,16 @@ test("renders correctly", async () =>
               size={38.5}
               user={
                 Object {
+                  "email": "Abc",
+                  "hireDate": 2021-01-01T20:00:00.000Z,
+                  "id": 0,
+                  "imageId": null,
+                  "journeyCount": 0,
+                  "location": "Abc",
                   "name": "Abc",
                   "position": "Abc",
                   "surname": "Abc",
+                  "token": "Abc",
                 }
               }
             />

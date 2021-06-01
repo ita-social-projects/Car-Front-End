@@ -1,10 +1,11 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import User from "../../../models/user/User";
 import AvatarLogoTitle from "../avatar-logo-title/AvatarLogoTitle";
 import DM from "../styles/DM";
 import NotificationComponentsStyle from "./NotificationComponentsStyle";
 
-const NotificationHeader = (props: { title: string, message: string, disableModal: () => void}) => {
+const NotificationHeader = (props: { title: string, message: string, sender: User, disableModal: () => void}) => {
     return (
         <View>
             <View style={NotificationComponentsStyle.headerContainer}>
@@ -26,7 +27,7 @@ const NotificationHeader = (props: { title: string, message: string, disableModa
                     </TouchableOpacity>
                 </View>
                 <View style={NotificationComponentsStyle.avatarLogo}>
-                    <AvatarLogoTitle />
+                    <AvatarLogoTitle userToDisplay={props.sender} />
                 </View>
             </View>
             <View style={[NotificationComponentsStyle.messageContainer, {

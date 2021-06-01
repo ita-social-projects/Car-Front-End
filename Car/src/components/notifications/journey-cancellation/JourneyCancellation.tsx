@@ -29,6 +29,7 @@ const JourneyCancellation = (props: JourneyNewApplicantProps) => {
                 <NotificationHeader
                     title="RIDE IS CANCELED"
                     message="The driver has canceled your ride!"
+                    sender={props.user}
                     disableModal={() => setModalVisible(false)}
                 />
             </NotificationModalBase>
