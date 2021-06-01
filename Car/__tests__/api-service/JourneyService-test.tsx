@@ -8,7 +8,7 @@ import Stop from "../../models/stop/Stop";
 describe("Journey Service test", () => {
     let journeyData: Journey[] = [{
         id: 1,
-        duration: 1,
+        duration: "",
         car: null,
         comments: "",
         countOfSeats: 2,
