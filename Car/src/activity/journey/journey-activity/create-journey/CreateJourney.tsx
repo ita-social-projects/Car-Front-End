@@ -116,8 +116,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     }, [params]);
 
     useEffect(() => {
-        journey && fitCameraToCoordinates(journey.journeyPoints, false);
         CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
+
+        if (journey) {
+            fitCameraToCoordinates(journey.journeyPoints, false);
+            props.navigation?.setOptions({ headerTitle: "Edit ride route" });
+        }
 
         LocationService
             .getAll(Number(user?.id))
@@ -169,7 +173,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
     useEffect(() => {
         if (journey && !recentAddressesIsLoading && !savedLocationIsLoading && !userLocationIsLoading) {
-            console.log("effect");
             fitCameraToCoordinates(journey.journeyPoints, false);
         }
     }, [recentAddressesIsLoading, savedLocationIsLoading, userLocationIsLoading]);

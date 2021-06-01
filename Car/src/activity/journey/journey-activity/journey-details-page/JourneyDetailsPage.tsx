@@ -86,7 +86,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
-        console.log("duration -", typeof journey?.duration);
         CarService.getAll(Number(user?.id)).then(result => {
             setUserCars(result.data.map(car => (
                 {
@@ -99,8 +98,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     }, []);
 
     const publishJourneyHandler = async () => {
-        console.log("duration - ", params.duration);
-
         setRideIsPublishing(true);
 
         const newJourney: JourneyDto = {
@@ -169,6 +166,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         if (!journey) return false;
 
         return journey.car?.id === selectedCar.id &&
+            new Date(journey.departureTime).getTime() === departureTime.getTime() &&
             journey.comments === comment &&
             journey.countOfSeats === availableSeats &&
             journey.isFree === (freeButtonStyle === activeButtonStyle) &&
