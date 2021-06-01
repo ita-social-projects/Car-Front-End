@@ -79,6 +79,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
 
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
+    const [successfullyUpdateModalIsVisible, setSuccessfullyUpdateModalIsVisible] = useState(false);
     const [discardModalIsVisible, setDiscardModalIsVisible] = useState(false);
     const [applyChangesModalIsVisible, setApplyChangesModalIsVisible] = useState(false);
 
@@ -159,6 +160,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.updateDetails(updatedJourney)
+            .then(() => setSuccessfullyUpdateModalIsVisible(true))
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);
@@ -355,6 +357,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             />
 
             <ConfirmModal
+                visible={successfullyUpdateModalIsVisible}
+                title={"Success"}
+                subtitle={"Ride details successfully updated"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+            />
+
+            <ConfirmModal
                 visible={discardModalIsVisible}
                 title={"Are you sure?"}
                 subtitle={"Are you sure you want to discard the changes?"}
@@ -377,8 +395,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 cancelText={"Cancel"}
                 onConfirm={() => {
                     setApplyChangesModalIsVisible(false);
-                    updateJourneyHandler()
-                        .then(() => navigation.goBack());
+                    updateJourneyHandler();
                 }}
                 disableModal={() => setApplyChangesModalIsVisible(false)}
             />

@@ -56,6 +56,9 @@ interface OnRouteReadyResult {
     duration: number
 }
 
+const INVALID_ROUTE = "Cant build route. Please chose another way points";
+const ROUTE_UPDATE_ERROR = "Route update is failed";
+
 const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
 
     const params = props?.route?.params;
@@ -80,9 +83,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [routeIsConfirmed, setRouteIsConfirmed] = useState(Boolean(journey));
 
     const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
+    const [successfullyUpdateModalIsVisible, setSuccessfullyUpdateModalIsVisible] = useState(false);
+    const [applyChangesModalIsVisible, setApplyChangesModalIsVisible] = useState(false);
     const [stopIndexForDeleting, setStopIndexForDeleting] = useState(NaN);
 
     const [errorModalIsVisible, setErrorModalIsVisible] = useState(false);
+    const [errorModalText, setErrorModalText] = useState(INVALID_ROUTE);
 
     const mapRef = useRef<MapView | null>(null);
     const scrollViewRef = useRef<ScrollView | null>();
@@ -296,8 +302,11 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         };
 
         await JourneyService.updateRoute(updatedJourney)
-            .then(() => navigation.goBack())
-            .catch(() => console.warn("update error"));
+            .then(() => setSuccessfullyUpdateModalIsVisible(true))
+            .catch(() => {
+                setErrorModalIsVisible(true);
+                setErrorModalText(ROUTE_UPDATE_ERROR);
+            });
 
         setRouteIsUpdating(false);
     };
@@ -305,6 +314,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const cantBuildRouteAlert = () => {
         setRouteIsConfirmed(false);
         setErrorModalIsVisible(true);
+        setErrorModalText(INVALID_ROUTE);
     };
 
     const fitCameraToCoordinates = (coordinates: LatLng[], animated: boolean) => {
@@ -432,7 +442,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                         { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf",
                             left: Dimensions.get("screen").width -
                                 (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET) }]}
-                    onPress={journey ? onUpdateRoutePressHandler : onConfirmPressHandler}
+                    onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
                     disabled={!routeIsConfirmed}
                 >
                     <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
@@ -457,11 +467,42 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             <ConfirmModal
                 visible={errorModalIsVisible}
                 title={"Error"}
-                subtitle={"Cant build route. Please chose another way points"}
+                subtitle={errorModalText}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => setErrorModalIsVisible(false)}
                 disableModal={() => setErrorModalIsVisible(false)}
+            />
+
+            <ConfirmModal
+                visible={successfullyUpdateModalIsVisible}
+                title={"Success"}
+                subtitle={"Ride route successfully updated"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+            />
+
+            <ConfirmModal
+                visible={applyChangesModalIsVisible}
+                confirmColor={"black"}
+                title={"CHANGES"}
+                subtitle={"After the changes is applied, all passengers will get notified. " +
+                "Some of them might withdraw from the ride if change doesn't suit them"}
+                confirmText={"Apply"}
+                cancelText={"Cancel"}
+                onConfirm={() => {
+                    setApplyChangesModalIsVisible(false);
+                    onUpdateRoutePressHandler();
+                }}
+                disableModal={() => setApplyChangesModalIsVisible(false)}
             />
         </>
     );
