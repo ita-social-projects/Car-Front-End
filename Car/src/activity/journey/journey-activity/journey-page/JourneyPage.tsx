@@ -74,8 +74,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     };
 
     useEffect(() => {
-        console.log(journeyId);
-
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 

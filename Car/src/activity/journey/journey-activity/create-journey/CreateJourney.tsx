@@ -169,7 +169,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
     useEffect(() => {
         if (journey && !recentAddressesIsLoading && !savedLocationIsLoading && !userLocationIsLoading) {
-            console.log("effect");
             fitCameraToCoordinates(journey.journeyPoints, false);
         }
     }, [recentAddressesIsLoading, savedLocationIsLoading, userLocationIsLoading]);
