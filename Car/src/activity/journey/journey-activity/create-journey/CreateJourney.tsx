@@ -116,7 +116,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     }, [params]);
 
     useEffect(() => {
-        // journey && fitCameraToCoordinates(journey.journeyPoints, false);
+        journey && fitCameraToCoordinates(journey.journeyPoints, false);
         CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
 
         LocationService
@@ -261,7 +261,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     };
 
     const onConfirmPressHandler = () => {
-        const props: JourneyDetailsPageProps = {
+        const properties: JourneyDetailsPageProps = {
             route: {
                 params: {
                     from: from,
@@ -274,7 +274,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             }
         };
 
-        navigation.navigate("Journey Details", props.route.params);
+        navigation.navigate("Journey Details", properties.route.params);
     };
 
     const onUpdateRoutePressHandler = async () => {
