@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import JourneyNewApplicantProps from "../../journey-new-applicant/JourneyNewApplicantProps";
 import NewNotification from "../../new-notification/NewNotification";
@@ -28,12 +28,9 @@ const JourneyCancellation = (props: JourneyNewApplicantProps) => {
             <NotificationModalBase isVisible={modalVisible!}>
                 <NotificationHeader
                     title="RIDE IS CANCELED"
+                    message="The driver has canceled your ride!"
                     disableModal={() => setModalVisible(false)}
                 />
-
-                <Text>
-                    Aaa
-                </Text>
             </NotificationModalBase>
         </>
     );

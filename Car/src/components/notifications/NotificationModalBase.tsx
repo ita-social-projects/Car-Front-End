@@ -11,13 +11,8 @@ const NotificationModalBase = (props: {isVisible: boolean, children?: ReactNode}
             transparent
             statusBarTranslucent
         >
-            <View style={[NotificationComponentsStyle.body, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
-                <View style={[NotificationComponentsStyle.container,
-                    {
-                        shadowColor: DM("#414045"),
-                        backgroundColor: DM("#FFFFFF"),
-                        borderColor: DM("rgba(151, 151, 151, 0.233556)"),
-                    }]}>
+            <View style={[NotificationComponentsStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
+                <View style={[NotificationComponentsStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
                     {props.children}
                 </View>
             </View>

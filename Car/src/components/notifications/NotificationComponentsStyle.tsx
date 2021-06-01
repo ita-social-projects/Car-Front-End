@@ -1,38 +1,46 @@
-import { Platform } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 
 const NotificationComponentsStyle = EStyleSheet.create({
-    container: {
-        flex: 1,
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderTopLeftRadius: 16,
-        borderTopRightRadius: 16,
-        borderBottomRightRadius: 16,
-        borderBottomLeftRadius: 16,
-        margin: 10,
-        marginTop: Platform.OS === "ios" ? 52 : 32,
-        marginBottom: 32,
-        paddingTop: 23,
-        paddingBottom: 23,
-        paddingHorizontal: 25,
-        shadowOffset: { width: 0, height: 16 },
-        shadowOpacity: 0.2,
-        shadowRadius: 6.27,
-        elevation: 10
-    },
-
-    headerContainer: {
-        width: "50%"
+    window: {
+        width: "90%",
+        height: "90%",
+        borderRadius: 15,
+        padding: 20,
     },
 
     profileContainer: {
         width: "80%"
     },
 
-    body: {
-        height: "100%"
+    messageContainer: {
+        paddingVertical: 14,
+        paddingHorizontal: 30,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+    },
+
+    message: {
+        textAlign: "center",
+        lineHeight: 21,
+        fontSize: 18,
+        fontWeight: "700"
+    },
+
+    avatarLogo: {
+        marginLeft: -16
+    },
+
+    headerContainer: {
+        height:120
+    },
+
+    background: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
 
     circleGrad: {
@@ -46,10 +54,9 @@ const NotificationComponentsStyle = EStyleSheet.create({
     },
 
     row: {
-        flex: 0,
         flexDirection: "row",
         flexWrap: "wrap",
-        alignItems: "flex-start"
+        justifyContent: "space-between"
     },
 
     title: {
