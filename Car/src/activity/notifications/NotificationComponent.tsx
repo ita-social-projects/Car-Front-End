@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import JourneyNewApplicant from "../../components/journey-new-applicant/JourneyNewApplicant";
+import JourneyCancellation from "../../components/notifications/journey-cancellation/JourneyCancellation";
 import RideFound from "../../components/ride-found/RideFound";
 
 const NotificationComponent = (props: any) => {
     const [isModalVisible] = useState(false);
     const componentsEnum: any = {
         1: JourneyNewApplicant,
+        3: JourneyCancellation,
         11: RideFound
     };
 
