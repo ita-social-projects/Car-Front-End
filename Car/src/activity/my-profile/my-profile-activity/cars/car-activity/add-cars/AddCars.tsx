@@ -6,7 +6,6 @@ import {
     View,
     TouchableOpacity,
     ScrollView,
-    Alert
 } from "react-native";
 import {
     ImagePickerResponse,
@@ -24,7 +23,6 @@ import CarDropDownPicker from "../../../../../../components/car-drop-down-picker
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddCarsStyle from "./AddCarsStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import { MAX_PHOTO_FILE_SIZE } from "../../../../../../constants/ProfileConstants";
 import {
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH,
@@ -71,19 +69,6 @@ const AddCars = () => {
         });
     }, []);
 
-    const trySetPhoto = (photo: ImagePickerResponse) => {
-        if (photo.fileSize! < MAX_PHOTO_FILE_SIZE) {
-            setPhoto(photo);
-        } else {
-            Alert.alert("Error!", "File size should not exceed 7MB", [
-                {
-                    text: "Ok"
-                }
-            ]);
-            setPhoto({} as ImagePickerResponse);
-        }
-    };
-
     function validatePlateNumber () {
         setValidPlateNumber(
             Boolean(
@@ -97,7 +82,7 @@ const AddCars = () => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel && response.fileSize) {
-                trySetPhoto(response);
+                setPhoto(response);
             }
         });
     };

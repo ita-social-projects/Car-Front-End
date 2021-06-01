@@ -147,7 +147,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
                 setFrom(filter.from);
                 setTo(filter.to);
-                setDepartureTime(filter.departureTime);
+                setDepartureTime(new Date(filter.departureTime));
             });
         }
     };

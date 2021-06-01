@@ -9,7 +9,7 @@ const BadSearchResult = () => {
         <View style={[BadSearchResultStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
             <View style={BadSearchResultStyle.textContainer}>
                 <Text style={[BadSearchResultStyle.text, { color: DM("#000000") }]}>
-                    NO RESULTS MATCHING YOUR SEARCH FILTERS
+                    NO RESULTS MATCHING YOUR {"\n"} SEARCH FILTERS
                 </Text>
             </View>
             <View style={BadSearchResultStyle.imageContainer}>
@@ -22,7 +22,7 @@ const BadSearchResult = () => {
                 <TouchableOpacity
                     style={[BadSearchResultStyle.button, { backgroundColor: DM("#000000") }]}
                     onPress={() => {
-                        navigation.navigate("Journey Request Page", { isRequest: true });
+                        navigation.navigate("Journey Request Page", { isRequest: true, isPreviousFilter: true });
                     }}
                 >
                     <Text style={[BadSearchResultStyle.buttonText, { color: DM("#FFFFFF") }]}>
