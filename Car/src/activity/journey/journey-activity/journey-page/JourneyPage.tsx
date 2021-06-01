@@ -29,7 +29,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { getStopByType, mapStopToWayPoint, timeStringToMinutes } from "../../../../utils/GeneralHelperFunctions";
+import { getStopByType, mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -102,7 +102,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     to: mapStopToWayPoint(getStopByType(currentJourney, StopType.Finish)),
                     stops: currentJourney?.stops.filter(stop =>
                         stop?.type === StopType.Intermediate).map(mapStopToWayPoint),
-                    duration:  timeStringToMinutes(currentJourney.duration),
+                    duration:  currentJourney.duration,
                     routeDistance: currentJourney.routeDistance,
                     routePoints: currentJourney.journeyPoints,
                 }

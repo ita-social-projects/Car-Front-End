@@ -12,7 +12,6 @@ import {
 } from "../../../../constants/AddressConstants";
 import {
     INITIAL_ROUTE_DISTANCE, INITIAL_STOPS_COUNT,
-    INITIAL_TIME,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
@@ -37,17 +36,19 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import {
     getJourneyStops,
     getStopByType,
-    mapStopToWayPoint, minutesToTimeString, timeStringToMinutes
+    mapStopToWayPoint,
+    minutesToTimeString
 } from "../../../../utils/GeneralHelperFunctions";
 import StopType from "../../../../../models/stop/StopType";
 import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
+import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
     numberOfAddedStop: number,
     // eslint-disable-next-line unused-imports/no-unused-vars
-    ({ props }: {props: CreateJourneyProps}): JSX.Element
+    ({ props }: { props: CreateJourneyProps }): JSX.Element
 }
 
 interface OnRouteReadyResult {
@@ -59,7 +60,7 @@ interface OnRouteReadyResult {
 const INVALID_ROUTE = "Cant build route. Please chose another way points";
 const ROUTE_UPDATE_ERROR = "Route update is failed";
 
-const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
+const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourneyProps }) => {
 
     const params = props?.route?.params;
     const journey = params?.journey;
@@ -76,8 +77,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         journey ? mapStopToWayPoint(getStopByType(journey, StopType.Finish)) : initialWayPoint);
     const [stops, setStops] = useState<WayPoint[]>(
         journey ? getJourneyStops(journey)!.map(mapStopToWayPoint) : []);
-    const [duration, setDuration] = useState<number>(
-        journey ? timeStringToMinutes(journey.duration) : INITIAL_TIME);
+    const [duration, setDuration] = useState(journey ? journey.duration : "");
     const [routeDistance, setRouteDistance] = useState<number>(journey?.routeDistance ?? INITIAL_ROUTE_DISTANCE);
     const [routePoints, setRoutePoints] = useState<LatLng[]>(journey?.journeyPoints ?? []);
     const [routeIsConfirmed, setRouteIsConfirmed] = useState(Boolean(journey));
@@ -261,14 +261,20 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     };
 
     const onConfirmPressHandler = () => {
-        navigation.navigate("Journey Details", {
-            from: from,
-            to: to,
-            stops: stops.filter(stop => stop.isConfirmed),
-            routePoints: routePoints,
-            duration: duration,
-            routeDistance: routeDistance
-        });
+        const props: JourneyDetailsPageProps = {
+            route: {
+                params: {
+                    from: from,
+                    to: to,
+                    stops: stops.filter(stop => stop.isConfirmed),
+                    routePoints: routePoints,
+                    duration: duration,
+                    routeDistance: routeDistance
+                }
+            }
+        };
+
+        navigation.navigate("Journey Details", props.route.params);
     };
 
     const onUpdateRoutePressHandler = async () => {
@@ -278,7 +284,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             ...journey!,
             carId: journey!.car!.id,
             organizerId: Number(journey?.organizer?.id),
-            duration: minutesToTimeString(duration),
+            duration: duration,
             routeDistance: Math.round(routeDistance),
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
@@ -311,6 +317,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setRouteIsUpdating(false);
     };
 
+    const noChanges = () => {
+        if (!journey) return false;
+
+        return journey.duration === duration &&
+            journey.routeDistance === routeDistance &&
+            journey.journeyPoints.every((value, index) => routePoints[index] === value);
+    };
+
     const cantBuildRouteAlert = () => {
         setRouteIsConfirmed(false);
         setErrorModalIsVisible(true);
@@ -325,8 +339,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
         if (isLoading) return;
 
-        setRouteDistance(result.distance);
-        setDuration(result.duration);
+        setRouteDistance(Math.round(result.distance));
+        setDuration(minutesToTimeString(result.duration));
         setRoutePoints(result.coordinates);
         setRouteIsConfirmed(true);
         fitCameraToCoordinates(result.coordinates, true);
@@ -334,6 +348,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
     const isLoading = recentAddressesIsLoading ||
         savedLocationIsLoading || userLocationIsLoading || routeIsUpdating;
+
+    const confirmDisabled = !routeIsConfirmed || noChanges();
 
     return (
         <>
@@ -439,11 +455,13 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
-                        { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf",
+                        {
+                            backgroundColor: confirmDisabled ? "#afafaf" : "black",
                             left: Dimensions.get("screen").width -
-                                (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET) }]}
+                                (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
+                        }]}
                     onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
-                    disabled={!routeIsConfirmed}
+                    disabled={confirmDisabled}
                 >
                     <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                         {journey ? "Update route" : "Confirm"}

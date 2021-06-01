@@ -38,7 +38,6 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
-import { minutesToTimeString } from "../../../../utils/GeneralHelperFunctions";
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -131,7 +130,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         userId: Number(user?.id)
                     };
                 }),
-            duration: minutesToTimeString(params.duration),
+            duration: params.duration,
             routeDistance: Math.round(params.routeDistance)
         };
 
@@ -166,7 +165,19 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         setRideIsPublishing(false);
     };
 
+    const noChanges = () => {
+        if (!journey) return false;
+
+        return journey.car?.id === selectedCar.id &&
+            journey.comments === comment &&
+            journey.countOfSeats === availableSeats &&
+            journey.isFree === (freeButtonStyle === activeButtonStyle) &&
+            journey.isOnOwnCar === (ownCarButtonStyle === activeButtonStyle);
+    };
+
     const isLoading = userCarIsLoading || rideIsPublishing || successfullyPublishModalIsVisible;
+
+    const confirmDisabled = !departureTimeIsConfirmed || noChanges();
 
     return (
         <>
@@ -316,11 +327,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
-                                    { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
+                                    { backgroundColor: confirmDisabled ? "#afafaf" : "black" }]}
                                 onPress={journey ?
                                     () => setApplyChangesModalIsVisible(true) :
                                     publishJourneyHandler}
-                                disabled={!departureTimeIsConfirmed}
+                                disabled={confirmDisabled}
                             >
                                 <Text style={[CreateJourneyStyle.publishButtonText,
                                     { fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE }]}>

@@ -10,7 +10,7 @@ interface JourneyDetailsPageProps {
             stops: WayPoint[],
             routePoints: LatLng[],
             routeDistance: number,
-            duration: number,
+            duration: string,
             journey?: Journey
         }
     },
