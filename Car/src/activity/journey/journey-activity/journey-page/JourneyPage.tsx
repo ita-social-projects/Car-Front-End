@@ -29,7 +29,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { getStopByType, mapStopToWayPoint } from "../../../../utils/GeneralHelperFunctions";
+import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {

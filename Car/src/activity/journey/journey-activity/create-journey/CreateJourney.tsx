@@ -38,7 +38,7 @@ import {
     getStopByType,
     mapStopToWayPoint,
     minutesToTimeString
-} from "../../../../utils/GeneralHelperFunctions";
+} from "../../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../../models/stop/StopType";
 import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
