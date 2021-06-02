@@ -8,10 +8,10 @@ const RideFoundStyle = EStyleSheet.create({
         borderWidth: 1,
         borderStyle: "solid",
         borderRadius: 16,
-        marginHorizontal: 30,
-        marginVertical: 220,
-        paddingHorizontal: 30,
-        paddingTop: 25,
+        marginHorizontal: "7%",
+        marginVertical: "57%",
+        paddingHorizontal: "7%",
+        paddingTop: "8%",
         shadowOffset: { width: 0, height: 16 },
         shadowOpacity: 0.2,
         shadowRadius: 6,
@@ -27,13 +27,13 @@ const RideFoundStyle = EStyleSheet.create({
     },
 
     messageContainer: {
-        marginTop: 25
+        marginTop: "10%"
     },
 
     buttonsContainer: {
         width: "100%",
-        height: 120,
-        marginTop: 30
+        height: "45%",
+        marginTop: "10%"
     },
 
     button : {

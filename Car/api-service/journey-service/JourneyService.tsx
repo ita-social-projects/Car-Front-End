@@ -32,8 +32,11 @@ const JourneyService = {
     delete: async (id: number) =>
         APIService.delete(route + id),
 
-    update: async (journey: JourneyDto) =>
-        APIService.put(route, journey)
+    updateRoute: async (journey: JourneyDto) =>
+        APIService.put(route + "update-route/", journey),
+
+    updateDetails: async (journey: JourneyDto) =>
+        APIService.put(route + "update-details/", journey)
 };
 
 export default JourneyService;

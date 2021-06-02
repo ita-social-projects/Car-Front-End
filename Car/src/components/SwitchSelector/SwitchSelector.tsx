@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { CreateJourneyStyle } from "../CreateJourneyStyle";
+import { CreateJourneyStyle } from "../../activity/journey/journey-activity/create-journey/CreateJourneyStyle";
 import SwitchSelectorProps from "./SwitchSelectorProps";
 import SwitchSelectorStyle from "./SwitchSelectorStyle";
 

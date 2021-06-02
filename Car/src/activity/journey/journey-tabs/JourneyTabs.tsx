@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useRef, useState } from "react";
+import React, { RefObject, useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
@@ -56,7 +56,8 @@ const JourneyTabs = () => {
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
 
-    const moreOptionsRef = useRef<BottomSheet>(null);
+    const ridePageMoreOptionsRef = useRef<BottomSheet>(null);
+    const createRideMoreOptionsRef = useRef<BottomSheet>(null);
 
     const StackTabs = createStackNavigator();
 
@@ -78,19 +79,19 @@ const JourneyTabs = () => {
         (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
     };
 
-    const pressHandle = () => {
+    const pressHandle = (ref: RefObject<BottomSheet>) => {
         setOpen(!isOpen);
+        setVisibility(!isOpen);
+        isOpen ? fadeOut() : fadeIn();
+        ref?.current?.snapTo(isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION);
 
-        if (isOpen) {
-            fadeOut();
-        } else {
-            fadeIn();
-        }
+    };
 
-        moreOptionsRef?.current?.snapTo(
-            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
-        );
-
+    const closeMoreOptionPopup = (ref: RefObject<BottomSheet>) => {
+        setOpen(false);
+        setVisibility(false);
+        fadeOut();
+        ref?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
     return (
@@ -114,7 +115,8 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
-                        headerRight: () => HeaderEllipsis({ onPress: pressHandle })
+                        headerRight: () => HeaderEllipsis(
+                            { onPress: () => pressHandle(createRideMoreOptionsRef) })
                     }}
                 >
                     {(props: any) => {
@@ -128,11 +130,15 @@ const JourneyTabs = () => {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
                                 ]}>
-                                    <CreateJourney props={props} />
+                                    <CreateJourney props={{
+                                        ...props,
+                                        moreOptionsPopupIsOpen: isOpen,
+                                        closeMoreOptionPopup: () => closeMoreOptionPopup(createRideMoreOptionsRef)
+                                    }} />
                                 </Animated.View>
 
                                 <BottomPopup
-                                    refForChild={moreOptionsRef}
+                                    refForChild={createRideMoreOptionsRef}
                                     snapPoints={[MIN_POPUP_HEIGHT, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
@@ -154,7 +160,7 @@ const JourneyTabs = () => {
                                                 iconName={"add-circle-outline"}
                                                 onPress={() => {
                                                     CreateJourney.addStopPressHandler();
-                                                    pressHandle();
+                                                    pressHandle(createRideMoreOptionsRef);
                                                 }}
                                                 disabled={CreateJourney.numberOfAddedStop === NUMBER_OF_STOPS_LIMIT}
                                             />
@@ -212,7 +218,8 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,
-                        headerRight: () => HeaderEllipsis({ onPress: pressHandle })
+                        headerRight: () => HeaderEllipsis(
+                            { onPress: () => pressHandle(ridePageMoreOptionsRef) })
                     }}
                 >
                     {(props: any) => {
@@ -226,18 +233,20 @@ const JourneyTabs = () => {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
                                 ]}>
-                                    <JourneyPage props={{ ...props, moreOptionsPopupIsOpen: isOpen }} />
+                                    <JourneyPage props={{
+                                        ...props,
+                                        moreOptionsPopupIsOpen: isOpen
+                                    }}/>
                                 </Animated.View>
 
                                 {props.route.params.isDriver &&
                                     <BottomPopup
-                                        refForChild={moreOptionsRef}
+                                        refForChild={ridePageMoreOptionsRef}
                                         snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                         enabledInnerScrolling={false}
                                         onCloseEnd={closeHandle}
                                         initialSnap={0}
                                         renderHeader={
-
                                             <View style={[JourneyPageStyle.headerTitleStyle,
                                                 { backgroundColor: DM("white") }
                                             ]}>
@@ -251,13 +260,20 @@ const JourneyTabs = () => {
                                             <View style={[JourneyPageStyle.panel,
                                                 { backgroundColor: DM("white") }
                                             ]}>
-                                                <MenuButton text="Add stop" isIcon={true} />
                                                 <MenuButton
-                                                    text="Edit ride"
+                                                    text="Edit ride route"
                                                     isIcon={true}
                                                     onPress={() => {
-                                                        JourneyPage.editJourney();
-                                                        pressHandle();
+                                                        pressHandle(ridePageMoreOptionsRef);
+                                                        JourneyPage.editJourneyRoute();
+                                                    }}
+                                                />
+                                                <MenuButton
+                                                    text="Edit ride details"
+                                                    isIcon={true}
+                                                    onPress={() => {
+                                                        JourneyPage.editJourneyDetails();
+                                                        pressHandle(ridePageMoreOptionsRef);
                                                     }} />
                                                 <MenuButton
                                                     text="Cancel ride"
