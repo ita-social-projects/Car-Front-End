@@ -34,6 +34,7 @@ import Address from "../../../../../models/Address";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import {
+    createStopArrayFromWayPoint,
     getJourneyStops,
     getStopByType,
     mapStopToWayPoint,
@@ -281,6 +282,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     };
 
     const onUpdateRoutePressHandler = async () => {
+        if (!journey) return;
+
         setRouteIsUpdating(true);
 
         const updatedJourney: JourneyDto = {
@@ -291,23 +294,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             routeDistance: Math.round(routeDistance),
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
-            stops: [{ ...from, stopType: StopType.Start },
-                ...stops.map(stop => ({ ...stop, stopType: StopType.Intermediate })),
-                { ...to, stopType: StopType.Finish }]
-                .map((stop) => {
-                    return {
-                        address: {
-                            id: 0,
-                            latitude: stop.coordinates.latitude,
-                            longitude: stop.coordinates.longitude,
-                            name: stop.text
-                        },
-                        type: stop.stopType,
-                        id: 0,
-                        journeyId: journey!.id,
-                        userId: Number(user?.id)
-                    };
-                })
+            stops: createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id)
         };
 
         await JourneyService.updateRoute(updatedJourney)

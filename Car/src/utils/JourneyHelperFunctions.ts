@@ -2,12 +2,13 @@ import {
     FIRST_ELEMENT_INDEX,
     NUMBER_OF_MINUTES_IN_HOUR,
     SECOND_ELEMENT_INDEX,
-    TEN
+    TEN, ZERO_ID
 } from "../constants/GeneralConstants";
 import Stop from "../../models/stop/Stop";
 import { ZERO_COORDINATE } from "../constants/StylesConstants";
 import StopType from "../../models/stop/StopType";
 import Journey from "../../models/journey/Journey";
+import WayPoint from "../types/WayPoint";
 
 export const mapStopToWayPoint = (stop?: Stop) => {
     return {
@@ -41,4 +42,25 @@ export const timeStringToMinutes = (timeString: string) => {
 
     return Number(parts[FIRST_ELEMENT_INDEX]) * NUMBER_OF_MINUTES_IN_HOUR
         + Number(parts[SECOND_ELEMENT_INDEX]);
+};
+
+export const createStopArrayFromWayPoint = (from: WayPoint,
+    to: WayPoint, stops: WayPoint[], userId: number, journeyId: number = ZERO_ID) => {
+    return [{ ...from, stopType: StopType.Start },
+        ...stops.filter(stop => stop.isConfirmed).map(stop => ({ ...stop, stopType: StopType.Intermediate })),
+        { ...to, stopType: StopType.Finish }]
+        .map((stop) => {
+            return {
+                address: {
+                    id: 0,
+                    latitude: stop.coordinates.latitude,
+                    longitude: stop.coordinates.longitude,
+                    name: stop.text
+                },
+                type: stop.stopType,
+                id: 0,
+                journeyId: journeyId,
+                userId: userId
+            };
+        });
 };
