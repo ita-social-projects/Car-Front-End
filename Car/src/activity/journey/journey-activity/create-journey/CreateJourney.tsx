@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
@@ -11,17 +11,13 @@ import {
     RECENT_ADDRESSES_COUNT_LIMIT
 } from "../../../../constants/AddressConstants";
 import {
-    INITIAL_ROUTE_DISTANCE,
-    INITIAL_TIME,
-    NUMBER_OF_STOPS_LIMIT,
+    INITIAL_ROUTE_DISTANCE, INITIAL_STOPS_COUNT,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
-    LEFT_PADDING_FOR_VIA_PLACEHOLDER
+    LEFT_PADDING_FOR_VIA_PLACEHOLDER,
+    NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/JourneyConstants";
-import {
-    DELETE_COUNT,
-    FIRST_ELEMENT_INDEX
-} from "../../../../constants/GeneralConstants";
+import { DELETE_COUNT, FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
@@ -37,12 +33,22 @@ import JourneyService from "../../../../../api-service/journey-service/JourneySe
 import Address from "../../../../../models/Address";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import {
+    getJourneyStops,
+    getStopByType,
+    mapStopToWayPoint,
+    minutesToTimeString
+} from "../../../../utils/GeneralHelperFunctions";
+import StopType from "../../../../../models/stop/StopType";
+import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
+import JourneyDto from "../../../../../models/journey/JourneyDto";
+import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
     numberOfAddedStop: number,
     // eslint-disable-next-line unused-imports/no-unused-vars
-    ({ props }: {props: CreateJourneyProps}): JSX.Element
+    ({ props }: { props: CreateJourneyProps }): JSX.Element
 }
 
 interface OnRouteReadyResult {
@@ -51,9 +57,13 @@ interface OnRouteReadyResult {
     duration: number
 }
 
-const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyProps}) => {
+const INVALID_ROUTE = "Cant build route. Please chose another way points";
+const ROUTE_UPDATE_ERROR = "Route update is failed";
+
+const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourneyProps }) => {
 
     const params = props?.route?.params;
+    const journey = params?.journey;
 
     const { user } = useContext(AuthContext);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
@@ -61,18 +71,24 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
 
-    const [from, setFrom] = useState<WayPoint>(initialWayPoint);
-    const [to, setTo] = useState<WayPoint>(initialWayPoint);
-    const [stops, setStops] = useState<WayPoint[]>([]);
-    const [duration, setDuration] = useState<number>(INITIAL_TIME);
-    const [routeDistance, setRouteDistance] = useState<number>(INITIAL_ROUTE_DISTANCE);
-    const [routePoints, setRoutePoints] = useState<LatLng[]>([]);
-    const [routeIsConfirmed, setRouteIsConfirmed] = useState(false);
+    const [from, setFrom] = useState<WayPoint>(
+        journey ? mapStopToWayPoint(getStopByType(journey, StopType.Start)) : initialWayPoint);
+    const [to, setTo] = useState<WayPoint>(
+        journey ? mapStopToWayPoint(getStopByType(journey, StopType.Finish)) : initialWayPoint);
+    const [stops, setStops] = useState<WayPoint[]>(
+        journey ? getJourneyStops(journey)!.map(mapStopToWayPoint) : []);
+    const [duration, setDuration] = useState(journey ? journey.duration : "");
+    const [routeDistance, setRouteDistance] = useState<number>(journey?.routeDistance ?? INITIAL_ROUTE_DISTANCE);
+    const [routePoints, setRoutePoints] = useState<LatLng[]>(journey?.journeyPoints ?? []);
+    const [routeIsConfirmed, setRouteIsConfirmed] = useState(Boolean(journey));
 
     const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
+    const [successfullyUpdateModalIsVisible, setSuccessfullyUpdateModalIsVisible] = useState(false);
+    const [applyChangesModalIsVisible, setApplyChangesModalIsVisible] = useState(false);
     const [stopIndexForDeleting, setStopIndexForDeleting] = useState(NaN);
 
     const [errorModalIsVisible, setErrorModalIsVisible] = useState(false);
+    const [errorModalText, setErrorModalText] = useState(INVALID_ROUTE);
 
     const mapRef = useRef<MapView | null>(null);
     const scrollViewRef = useRef<ScrollView | null>();
@@ -80,9 +96,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
     const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
+    const [routeIsUpdating, setRouteIsUpdating] = useState(false);
 
     useEffect(() => {
-        if (params) {
+        if (params?.wayPoint) {
             animateCamera(params.wayPoint.coordinates);
 
             if (params.wayPointId === "From") {
@@ -99,7 +116,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
     }, [params]);
 
     useEffect(() => {
-        CreateJourney.numberOfAddedStop = 0;
+        CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
+
+        if (journey) {
+            fitCameraToCoordinates(journey.journeyPoints, false);
+            props.navigation?.setOptions({ headerTitle: "Edit ride route" });
+        }
 
         LocationService
             .getAll(Number(user?.id))
@@ -117,6 +139,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 setRecentAddressesIsLoading(false);
             })
             .catch((e) => console.log(e));
+
+        return props.navigation?.addListener("blur", () => {
+            journey && props.closeMoreOptionPopup();
+        });
     }, []);
 
     const filterRecentAddresses = () => {
@@ -145,6 +171,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         }
     }, [recentAddressesIsLoading, savedLocationIsLoading]);
 
+    useEffect(() => {
+        if (journey && !recentAddressesIsLoading && !savedLocationIsLoading && !userLocationIsLoading) {
+            fitCameraToCoordinates(journey.journeyPoints, false);
+        }
+    }, [recentAddressesIsLoading, savedLocationIsLoading, userLocationIsLoading]);
+
     const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
             ...initialCamera,
@@ -158,7 +190,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
                 .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("You can use the location");
                 findUserLocation();
             } else {
                 console.log("Location permission denied");
@@ -174,7 +205,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             (position) => {
                 setUserLocationIsLoading(false);
                 setUserCoordinates(position.coords);
-                mapRef.current?.setCamera({ ...initialCamera, center: position.coords });
+                !journey && mapRef.current?.setCamera({ ...initialCamera, center: position.coords });
             },
             (error) => {
                 setUserLocationIsLoading(false);
@@ -232,45 +263,109 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
         setDeleteModalIsVisible(true);
     };
 
-    const confirmOnPressHandler = () => {
-        navigation.navigate("Journey Details", {
-            from: from,
-            to: to,
-            stops: stops.filter(stop => stop.isConfirmed),
-            routePoints: routePoints,
+    const onConfirmPressHandler = () => {
+        const properties: JourneyDetailsPageProps = {
+            route: {
+                params: {
+                    from: from,
+                    to: to,
+                    stops: stops.filter(stop => stop.isConfirmed),
+                    routePoints: routePoints,
+                    duration: duration,
+                    routeDistance: routeDistance
+                }
+            }
+        };
+
+        navigation.navigate("Journey Details", properties.route.params);
+    };
+
+    const onUpdateRoutePressHandler = async () => {
+        setRouteIsUpdating(true);
+
+        const updatedJourney: JourneyDto = {
+            ...journey!,
+            carId: journey!.car!.id,
+            organizerId: Number(journey?.organizer?.id),
             duration: duration,
-            routeDistance: routeDistance
-        });
+            routeDistance: Math.round(routeDistance),
+            journeyPoints: routePoints.map((point, index) =>
+                ({ ...point, index: index, journeyId: journey?.id })),
+            stops: [{ ...from, stopType: StopType.Start },
+                ...stops.map(stop => ({ ...stop, stopType: StopType.Intermediate })),
+                { ...to, stopType: StopType.Finish }]
+                .map((stop) => {
+                    return {
+                        address: {
+                            id: 0,
+                            latitude: stop.coordinates.latitude,
+                            longitude: stop.coordinates.longitude,
+                            name: stop.text
+                        },
+                        type: stop.stopType,
+                        id: 0,
+                        journeyId: journey!.id,
+                        userId: Number(user?.id)
+                    };
+                })
+        };
+
+        await JourneyService.updateRoute(updatedJourney)
+            .then(() => setSuccessfullyUpdateModalIsVisible(true))
+            .catch(() => {
+                setErrorModalIsVisible(true);
+                setErrorModalText(ROUTE_UPDATE_ERROR);
+            });
+
+        setRouteIsUpdating(false);
+    };
+
+    const noChanges = () => {
+        if (!journey) return false;
+
+        return journey.duration === duration &&
+            journey.routeDistance === routeDistance &&
+            journey.journeyPoints.every((value, index) => routePoints[index] === value);
     };
 
     const cantBuildRouteAlert = () => {
         setRouteIsConfirmed(false);
         setErrorModalIsVisible(true);
+        setErrorModalText(INVALID_ROUTE);
+    };
+
+    const fitCameraToCoordinates = (coordinates: LatLng[], animated: boolean) => {
+        mapRef.current?.fitToCoordinates(coordinates,
+            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 }, animated: animated });
     };
 
     const onRouteReadyHandler = (result: OnRouteReadyResult) => {
-        setRouteDistance(result.distance);
-        setDuration(result.duration);
+        if (isLoading) return;
+
+        setRouteDistance(Math.round(result.distance));
+        setDuration(minutesToTimeString(result.duration));
         setRoutePoints(result.coordinates);
         setRouteIsConfirmed(true);
-        mapRef.current?.fitToCoordinates(result.coordinates,
-            { edgePadding: { top: 800, right: 20, left: 20, bottom: 400 } });
+        fitCameraToCoordinates(result.coordinates, true);
     };
 
-    const infoIsLoading = recentAddressesIsLoading || savedLocationIsLoading || userLocationIsLoading;
+    const isLoading = recentAddressesIsLoading ||
+        savedLocationIsLoading || userLocationIsLoading || routeIsUpdating;
+
+    const confirmDisabled = !routeIsConfirmed || noChanges();
 
     return (
         <>
-            {infoIsLoading && (
+            {isLoading && (
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
                         color="#414045"
-                        text="Loading information..."
+                        text={routeIsUpdating ? "Route updating..." : "Loading information..."}
                     />
                 </View>
             )}
-            <View style={infoIsLoading ? { display: "none", height: 0, flex: 0 } : { flex: 1 }}>
+            <View style={isLoading ? { display: "none", height: 0, flex: 0 } : { flex: 1 }}>
                 <ScrollView
                     ref={ref => (scrollViewRef.current = ref)}
                     onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
@@ -363,12 +458,16 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
 
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
-                        { backgroundColor:  routeIsConfirmed ? "black" : "#afafaf" }]}
-                    onPress={confirmOnPressHandler}
-                    disabled={!routeIsConfirmed}
+                        {
+                            backgroundColor: confirmDisabled ? "#afafaf" : "black",
+                            left: Dimensions.get("screen").width -
+                                (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
+                        }]}
+                    onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
+                    disabled={confirmDisabled}
                 >
                     <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
-                    Confirm
+                        {journey ? "Update route" : "Confirm"}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -389,11 +488,42 @@ const CreateJourney: CreateJourneyComponent = ({ props }: {props: CreateJourneyP
             <ConfirmModal
                 visible={errorModalIsVisible}
                 title={"Error"}
-                subtitle={"Cant build route. Please chose another way points"}
+                subtitle={errorModalText}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => setErrorModalIsVisible(false)}
                 disableModal={() => setErrorModalIsVisible(false)}
+            />
+
+            <ConfirmModal
+                visible={successfullyUpdateModalIsVisible}
+                title={"Success"}
+                subtitle={"Ride route successfully updated"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+            />
+
+            <ConfirmModal
+                visible={applyChangesModalIsVisible}
+                confirmColor={"black"}
+                title={"CHANGES"}
+                subtitle={"After the changes is applied, all passengers will get notified. " +
+                "Some of them might withdraw from the ride if change doesn't suit them"}
+                confirmText={"Apply"}
+                cancelText={"Cancel"}
+                onConfirm={() => {
+                    setApplyChangesModalIsVisible(false);
+                    onUpdateRoutePressHandler();
+                }}
+                disableModal={() => setApplyChangesModalIsVisible(false)}
             />
         </>
     );

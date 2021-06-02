@@ -108,6 +108,7 @@ test("renders correctly", async () =>
               },
               Object {
                 "backgroundColor": "#afafaf",
+                "left": 629,
               },
             ]
           }
@@ -147,6 +148,25 @@ test("renders correctly", async () =>
         onConfirm={[Function]}
         subtitle="Cant build route. Please chose another way points"
         title="Error"
+        visible={false}
+      />
+      <ConfirmModal
+        confirmText="OK"
+        disableModal={[Function]}
+        hideCancelButton={true}
+        onConfirm={[Function]}
+        subtitle="Ride route successfully updated"
+        title="Success"
+        visible={false}
+      />
+      <ConfirmModal
+        cancelText="Cancel"
+        confirmColor="black"
+        confirmText="Apply"
+        disableModal={[Function]}
+        onConfirm={[Function]}
+        subtitle="After the changes is applied, all passengers will get notified. Some of them might withdraw from the ride if change doesn't suit them"
+        title="CHANGES"
         visible={false}
       />
     </React.Fragment>

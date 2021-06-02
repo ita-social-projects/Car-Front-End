@@ -14,8 +14,8 @@ import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDro
 import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
 import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
-import SwitchSelector from "../create-journey/SwitchSelector/SwitchSelector";
-import { activeButtonStyle, inactiveButtonStyle } from "../create-journey/SwitchSelector/SwitchSelectorStyle";
+import SwitchSelector from "../../../../components/SwitchSelector/SwitchSelector";
+import { activeButtonStyle, inactiveButtonStyle } from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 import CarService from "../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
@@ -78,6 +78,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
 
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
+    const [successfullyUpdateModalIsVisible, setSuccessfullyUpdateModalIsVisible] = useState(false);
     const [discardModalIsVisible, setDiscardModalIsVisible] = useState(false);
     const [applyChangesModalIsVisible, setApplyChangesModalIsVisible] = useState(false);
 
@@ -126,7 +127,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         userId: Number(user?.id)
                     };
                 }),
-            durationInMinutes: Math.round(params.duration),
+            duration: params.duration,
             routeDistance: Math.round(params.routeDistance)
         };
 
@@ -138,27 +139,43 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const updateJourneyHandler = async () => {
+        if (!journey) return;
+
         setRideIsPublishing(true);
 
         const updatedJourney: JourneyDto = {
-            ...journey!,
+            ...journey,
             carId: selectedCar.id,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: freeButtonStyle === activeButtonStyle,
             isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
-            durationInMinutes: Number(journey?.duration),
-            organizerId: Number(journey?.organizer?.id)
+            duration: journey.duration,
+            organizerId: Number(journey.organizer?.id)
         };
 
-        await JourneyService.update(updatedJourney)
+        await JourneyService.updateDetails(updatedJourney)
+            .then(() => setSuccessfullyUpdateModalIsVisible(true))
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);
     };
 
+    const noChanges = () => {
+        if (!journey) return false;
+
+        return journey.car?.id === selectedCar.id &&
+            new Date(journey.departureTime).getTime() === departureTime.getTime() &&
+            journey.comments === comment &&
+            journey.countOfSeats === availableSeats &&
+            journey.isFree === (freeButtonStyle === activeButtonStyle) &&
+            journey.isOnOwnCar === (ownCarButtonStyle === activeButtonStyle);
+    };
+
     const isLoading = userCarIsLoading || rideIsPublishing || successfullyPublishModalIsVisible;
+
+    const confirmDisabled = !departureTimeIsConfirmed || noChanges();
 
     return (
         <>
@@ -308,11 +325,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
-                                    { backgroundColor: departureTimeIsConfirmed ? "black" : "#afafaf" }]}
+                                    { backgroundColor: confirmDisabled ? "#afafaf" : "black" }]}
                                 onPress={journey ?
                                     () => setApplyChangesModalIsVisible(true) :
                                     publishJourneyHandler}
-                                disabled={!departureTimeIsConfirmed}
+                                disabled={confirmDisabled}
                             >
                                 <Text style={[CreateJourneyStyle.publishButtonText,
                                     { fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE }]}>
@@ -349,6 +366,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             />
 
             <ConfirmModal
+                visible={successfullyUpdateModalIsVisible}
+                title={"Success"}
+                subtitle={"Ride details successfully updated"}
+                confirmText={"OK"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setSuccessfullyUpdateModalIsVisible(false);
+                    navigation.goBack();
+                }}
+            />
+
+            <ConfirmModal
                 visible={discardModalIsVisible}
                 title={"Are you sure?"}
                 subtitle={"Are you sure you want to discard the changes?"}
@@ -371,8 +404,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 cancelText={"Cancel"}
                 onConfirm={() => {
                     setApplyChangesModalIsVisible(false);
-                    updateJourneyHandler()
-                        .then(() => navigation.goBack());
+                    updateJourneyHandler();
                 }}
                 disableModal={() => setApplyChangesModalIsVisible(false)}
             />

@@ -5,7 +5,7 @@ interface JourneyDto {
     id: number,
     routeDistance: number,
     departureTime: Date,
-    durationInMinutes: number,
+    duration: string,
     countOfSeats: number,
     comments: string,
     isFree: boolean,

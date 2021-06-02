@@ -36,12 +36,15 @@ test("renders correctly", async () =>
           >
             <View
               style={
-                Object {
-                  "paddingBottom": 16.75,
-                  "paddingLeft": 18.75,
-                  "paddingRight": 10.75,
-                  "paddingTop": 14.75,
-                }
+                Array [
+                  Object {
+                    "paddingBottom": 16.75,
+                    "paddingLeft": 18.75,
+                    "paddingRight": 10.75,
+                    "paddingTop": 14.75,
+                  },
+                  undefined,
+                ]
               }
             >
               <AvatarLogo
