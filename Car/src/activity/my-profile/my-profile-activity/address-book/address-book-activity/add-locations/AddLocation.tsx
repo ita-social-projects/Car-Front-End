@@ -19,28 +19,17 @@ import { mapStyle } from "../../../../../journey/journey-activity/map-address/Se
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import Geolocation from "@react-native-community/geolocation";
-import APIConfig from "../../../../../../../api-service/APIConfig";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
-
 import AddLocationStyle from "./AddLocationStyle";
-
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
-
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AuthContext from "../../../../../../components/auth/AuthContext";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
-
-const CreateRequestWithAddressToGeocodingApi = (address: string) => {
-    return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-        address.replace(" ", "+") +
-        "&key=" + APIConfig.apiKey;
-};
-
-const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
-    return "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-        `${coordinates.latitude},${coordinates.longitude}&key=${APIConfig.apiKey}`;
-};
+import {
+    CreateRequestWithAddressToGeocodingApi,
+    CreateRequestWithCoordinatesToGeocodingApi
+} from "../../../../../../utils/AddressHelperFunctions";
 
 const AddLocation = () => {
 

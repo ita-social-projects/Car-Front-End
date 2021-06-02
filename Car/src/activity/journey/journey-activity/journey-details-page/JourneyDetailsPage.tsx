@@ -30,7 +30,6 @@ import {
     FIRST_ELEMENT_INDEX
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
-import StopType from "../../../../../models/stop/StopType";
 import * as navigation from "../../../../components/navigation/Navigation";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import Indicator from "../../../../components/activity-indicator/Indicator";
@@ -38,6 +37,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
+import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -110,23 +110,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
-            stops: [{ ...params.from, stopType: StopType.Start },
-                ...params.stops.map(stop => ({ ...stop, stopType: StopType.Intermediate })),
-                { ...params.to, stopType: StopType.Finish }]
-                .map((value) => {
-                    return {
-                        address: {
-                            id: 0,
-                            latitude: value.coordinates.latitude,
-                            longitude: value.coordinates.longitude,
-                            name: value.text
-                        },
-                        type: value.stopType,
-                        id: 0,
-                        journeyId: 0,
-                        userId: Number(user?.id)
-                    };
-                }),
+            stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
             duration: params.duration,
             routeDistance: Math.round(params.routeDistance)
         };

@@ -28,42 +28,48 @@ describe("Journey Service test", () => {
         id: 1,
         journeyId: 1,
         type: 0,
-        userId: 0
+        userId: 0,
+        index: 0
     },
     {
         address: null,
         id: 2,
         journeyId: 1,
         type: 1,
-        userId: 0
+        userId: 0,
+        index: 1
     },
     {
         address: null,
         id: 3,
         journeyId: 1,
         type: 2,
-        userId: 0
+        userId: 0,
+        index: 2
     }],
     [{
         address: null,
         id: 4,
         journeyId: 2,
         type: 0,
-        userId: 0
+        userId: 0,
+        index: 3
     },
     {
         address: null,
         id: 5,
         journeyId: 2,
         type: 1,
-        userId: 0
+        userId: 0,
+        index: 4
     },
     {
         address: null,
         id: 6,
         journeyId: 2,
         type: 2,
-        userId: 0
+        userId: 0,
+        index: 5
     }]];
 
     test("should return journey", async () => {
