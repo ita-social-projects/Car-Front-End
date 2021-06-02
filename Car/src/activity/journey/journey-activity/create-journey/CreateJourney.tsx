@@ -287,8 +287,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         setRouteIsUpdating(true);
 
         const updatedJourney: JourneyDto = {
-            ...journey!,
-            carId: journey!.car!.id,
+            ...journey,
+            carId: journey.car!.id,
             organizerId: Number(journey?.organizer?.id),
             duration: duration,
             routeDistance: Math.round(routeDistance),
