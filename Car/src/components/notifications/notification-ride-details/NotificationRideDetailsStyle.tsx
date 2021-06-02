@@ -7,7 +7,7 @@ const NotificationRideDetailsStyle = EStyleSheet.create({
 
     header: {
         marginBottom: 8,
-        fontSize: 13,
+        fontSize: "1.1rem",
         fontWeight: "700",
     },
 
@@ -17,13 +17,13 @@ const NotificationRideDetailsStyle = EStyleSheet.create({
     },
 
     label: {
-        fontSize: 11,
+        fontSize: "1rem",
         fontWeight: "700",
         lineHeight: 16,
     },
 
     value: {
-        fontSize: 11,
+        fontSize: "0.9rem",
         fontWeight: "400",
         lineHeight: 16,
     }

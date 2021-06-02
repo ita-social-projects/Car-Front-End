@@ -9,7 +9,7 @@ const NotificationRideStopsStyle = EStyleSheet.create({
 
     header: {
         marginBottom: 8,
-        fontSize: 13,
+        fontSize: "1.1rem",
         fontWeight: "700",
     },
 
@@ -36,8 +36,8 @@ const NotificationRideStopsStyle = EStyleSheet.create({
 
     circleGrad: {
         borderRadius: 90,
-        height: "0.8rem",
-        width: "0.8rem",
+        height: "0.7rem",
+        width: "0.7rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -58,9 +58,18 @@ const NotificationRideStopsStyle = EStyleSheet.create({
         justifyContent: "center", // IOS
         flex: 1,
         fontFamily: Font.OpenSans.Bold,
-        fontSize: "1rem",
+        fontSize: "0.9rem",
         lineHeight: "1.1rem",
-        paddingTop: "0.3rem" // Circle's Border Compensation
+        paddingTop: "0.9rem", // Circle's Border Compensation
+    },
+
+    activeStopAddress: {
+        textAlignVertical: "center", // ANDROID
+        justifyContent: "center", // IOS
+        flex: 1,
+        fontWeight: "400",
+        lineHeight: "1.1rem",
+        paddingTop: "0.9rem" // Circle's Border Compensation
     },
 });
 
