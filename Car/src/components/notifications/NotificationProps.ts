@@ -1,6 +1,6 @@
 import User from "../../../models/user/User";
 
-interface JourneyNewApplicantProps {
+interface NotificationProps {
     visible?: boolean,
     notificationId: number,
     notificationData: string,
@@ -9,4 +9,4 @@ interface JourneyNewApplicantProps {
     date?: Date
 }
 
-export default JourneyNewApplicantProps;
+export default NotificationProps;

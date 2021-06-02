@@ -24,7 +24,7 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                 }}
             >
                 <NewNotification
-                    user={props.user}
+                    user={props.sender}
                     notificationTitle={JSON.parse(props.notificationData).title}
                     read={props.read}
                     date={props.date}
@@ -70,18 +70,18 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                             ]}
                         >
                             <AvatarLogo
-                                user={props.user}
+                                user={props.sender}
                                 size={49}
                             />
                             <View style={JourneyNewApplicantStyle.profileContainer}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={[JourneyNewApplicantStyle.name, { color: DM("#000000") }]}>
-                                        {props.user!.name +
+                                        {props.sender!.name +
                                             " " +
-                                            props.user!.surname}
+                                            props.sender!.surname}
                                     </Text>
                                     <Text style={[JourneyNewApplicantStyle.bio, { color: DM("#000000") }]}>
-                                        {props.user!.position}
+                                        {props.sender!.position}
                                     </Text>
                                     <Text style={[JourneyNewApplicantStyle.achievements, { color: DM("#000000") }]} >
                                         123 rides, 2 badges
@@ -140,8 +140,9 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
                             <Text style={[JourneyNewApplicantStyle.optionsHeader, { color: DM("#000000") }]} >
-                                {props.user!.name}’s stop in your ride
+                                {props.sender!.name}’s stop in your ride
                             </Text>
+                            {/* ------------------------------ */}
                             <View
                                 style={[
                                     JourneyNewApplicantStyle.stop,
@@ -228,7 +229,7 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                                         <Text style={[JourneyNewApplicantStyle.activeStopName,
                                             { color: DM("#909095") }]
                                         } >
-                                            {props.user!.name}'s stop A.2 ‏
+                                            {props.sender!.name}'s stop A.2 ‏
                                         </Text>
                                         <Text
                                             style={{

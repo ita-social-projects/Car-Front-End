@@ -8,7 +8,7 @@ test("renders correctly", async () =>
     expect(
         renderer.render(
             <JourneyNewApplicant
-                user={{
+                sender={{
                     id: 0,
                     name: "Abc",
                     surname: "Abc",
