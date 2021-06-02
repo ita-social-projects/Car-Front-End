@@ -6,6 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../models/stop/Stop";
 import StopType from "../../../../models/stop/StopType";
+import { FIRST_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import { GRADIENT_END, GRADIENT_START } from "../../../constants/StylesConstants";
 import Font from "../../../data/fonts/Font";
 import AuthContext from "../../auth/AuthContext";
@@ -18,9 +19,35 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const { user } = useContext(AuthContext);
 
+    const filterStops = (stops: Stop[]) => {
+        const array = stops.filter(stop =>
+            stop?.type == StopType.Start
+            ||
+            stop?.type == StopType.Finish
+            ||
+            stop?.userId == user?.id
+        );
+
+        return array.filter((obj, pos, arr) => {
+            return arr.map(mapObj => mapObj?.address?.latitude).indexOf(obj?.address?.latitude) === pos
+                   &&
+                   arr.map(mapObj => mapObj?.address?.longitude).indexOf(obj?.address?.longitude) === pos;
+        });
+    };
+
+    const ADDRESS_LENGTH = 25;
+
+    const addressName = (addressName: string) => {
+        if (addressName.length <= ADDRESS_LENGTH)
+            return addressName;
+        else
+            return addressName.substr(FIRST_ELEMENT_INDEX,
+                ADDRESS_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
+    };
+
     useEffect(() => {
         JourneyService.getJourney(props.journeyId).then(res => {
-            setStops(res.data?.stops);
+            setStops(filterStops(res.data?.stops!));
         });
     }, []);
 
@@ -29,7 +56,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
             user?.id == stop?.userId ?
                 <Circle
                     color="#FFFFFF"
-                    radius="1.1rem"
+                    radius="1.3rem"
                 >
                     <LinearGradient
                         style={[style.circleGrad, { backgroundColor: DM("#FFFFFF") }]}
@@ -59,7 +86,11 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                     end={{ x: 1, y: 0 }}
                 >
                     <Text style={[style.activeStopName, { color: DM("#909095") }]}>
-                        {`${user!.name}'s stop ${stop?.address?.name}`}‏
+                        {`${user!.name}'s stop `}‏
+                    </Text>
+
+                    <Text style={[style.activeStopAddress, { color: DM("#909095") }]}>
+                        {`(${addressName(stop?.address?.name!)})`}‏
                     </Text>
 
                     <Text
@@ -69,7 +100,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                 </LinearTextGradient>
                 :
                 <Text style={{ color: DM("black") }}>
-                    {stop?.address?.name}
+                    {`${addressName(stop?.address?.name!)}`}
                 </Text>
         );
     };

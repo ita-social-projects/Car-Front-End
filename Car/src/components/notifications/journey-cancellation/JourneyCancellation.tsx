@@ -10,6 +10,7 @@ import NotificationProps from "../NotificationProps";
 
 const JourneyCancellation = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
+    const data = JSON.parse(props.notificationData);
 
     return (
         <>
@@ -21,7 +22,7 @@ const JourneyCancellation = (props: NotificationProps) => {
             >
                 <NewNotification
                     user={props.sender}
-                    notificationTitle={JSON.parse(props.notificationData).title}
+                    notificationTitle={data.title}
                     read={props.read}
                     date={props.date}
                 />
@@ -36,15 +37,15 @@ const JourneyCancellation = (props: NotificationProps) => {
                 />
 
                 <NotificationRideDetails
-                    departureTime={new Date}
-                    availableSeats={2}
-                    isFree={true}
-                    withBaggage={true}
+                    departureTime={data.departureTime}
+                    availableSeats={data.availableSeats}
+                    isFree={data.isFree}
+                    withBaggage={data.withBaggage}
                 />
 
                 <NotificationRideStops
                     title={`${props.sender?.name}'s ride`}
-                    journeyId={197}
+                    journeyId={data.JourneyId}
                 />
             </NotificationModalBase>
         </>
