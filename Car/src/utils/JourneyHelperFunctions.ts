@@ -49,7 +49,7 @@ export const createStopArrayFromWayPoint = (from: WayPoint,
     return [{ ...from, stopType: StopType.Start },
         ...stops.filter(stop => stop.isConfirmed).map(stop => ({ ...stop, stopType: StopType.Intermediate })),
         { ...to, stopType: StopType.Finish }]
-        .map((stop) => {
+        .map((stop, index) => {
             return {
                 address: {
                     id: 0,
@@ -57,6 +57,7 @@ export const createStopArrayFromWayPoint = (from: WayPoint,
                     longitude: stop.coordinates.longitude,
                     name: stop.text
                 },
+                index: index,
                 type: stop.stopType,
                 id: 0,
                 journeyId: journeyId,
