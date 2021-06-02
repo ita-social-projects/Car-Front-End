@@ -3,6 +3,8 @@ import { TouchableOpacity } from "react-native";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import JourneyNewApplicantProps from "../../journey-new-applicant/JourneyNewApplicantProps";
 import NewNotification from "../../new-notification/NewNotification";
+import NotificationButtonGroup from "../NotificationButtonGroup";
+import NotificationConfirmButton from "../NotificationConfirmButton";
 import NotificationHeader from "../NotificationHeader";
 import NotificationModalBase from "../NotificationModalBase";
 
@@ -32,6 +34,9 @@ const JourneyCancellation = (props: JourneyNewApplicantProps) => {
                     sender={props.user}
                     disableModal={() => setModalVisible(false)}
                 />
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton onConfirm={() => setModalVisible(false)} />
+                </NotificationButtonGroup>
             </NotificationModalBase>
         </>
     );
