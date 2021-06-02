@@ -4,7 +4,6 @@ import Font from "../../data/fonts/Font";
 const NotificationComponentsStyle = EStyleSheet.create({
     window: {
         width: "90%",
-        height: "90%",
         borderRadius: 15,
         padding: 20,
     },
@@ -84,6 +83,16 @@ const NotificationComponentsStyle = EStyleSheet.create({
         textTransform: "capitalize",
     },
 
+    button: {
+        paddingVertical: 12,
+        paddingHorizontal: 18
+    },
+
+    buttonText: {
+        fontSize: 18,
+        fontWeight: "700"
+
+    },
 });
 
 export default NotificationComponentsStyle;

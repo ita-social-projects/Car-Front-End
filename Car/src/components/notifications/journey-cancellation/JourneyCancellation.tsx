@@ -4,6 +4,8 @@ import NotificationsService from "../../../../api-service/notifications-service/
 import NewNotification from "../../new-notification/NewNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
+import NotificationButtonGroup from "../NotificationButtonGroup";
+import NotificationConfirmButton from "../NotificationConfirmButton";
 import NotificationHeader from "../NotificationHeader";
 import NotificationModalBase from "../NotificationModalBase";
 import NotificationProps from "../NotificationProps";
@@ -47,6 +49,9 @@ const JourneyCancellation = (props: NotificationProps) => {
                     title={`${props.sender?.name}'s ride`}
                     journeyId={data.JourneyId}
                 />
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton onConfirm={() => setModalVisible(false)} />
+                </NotificationButtonGroup>
             </NotificationModalBase>
         </>
     );
