@@ -66,6 +66,7 @@ module.exports = {
         "rules": {
             "no-magic-numbers": "off",
             "unused-imports/no-unused-vars": "off",
+            "max-len": "off",
         },
     }, ]
 };

@@ -11,3 +11,6 @@ export const SINGLE_ELEMENT_COLLECTION_LENGTH = 1;
 export const THREE_ELEMENT_COLLECTION_LENGTH = 3;
 export const DELETE_COUNT = 1;
 export const THREE_DOTS_LENGTH = 3;
+export const NUMBER_OF_MINUTES_IN_HOUR = 60;
+export const TEN = 10;
+export const ZERO_ID = 0;
