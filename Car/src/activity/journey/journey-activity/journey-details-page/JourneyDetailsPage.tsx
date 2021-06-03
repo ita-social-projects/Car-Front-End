@@ -27,7 +27,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX
+    FIRST_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import * as navigation from "../../../../components/navigation/Navigation";
@@ -38,6 +38,13 @@ import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
+import Journey from "../../../../../models/journey/Journey";
+
+const getCarId = (journey?: Journey) => {
+    if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
+
+    return journey.car!.id;
+};
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -48,8 +55,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const { user } = useContext(AuthContext);
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
-    const [selectedCar, setSelectedCar] = useState<{id: number, name: string}>({
-        id: journey?.car?.id ?? NaN,
+    const [selectedCar, setSelectedCar] = useState<{id: number | null, name: string}>({
+        id: getCarId(journey),
         name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
     });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
@@ -93,6 +100,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     name: `${car?.model?.brand?.name} ${car?.model?.name}`
                 }
             )));
+            if (result.data.length === EMPTY_COLLECTION_LENGTH) {
+                setOwnCarButtonStyle(inactiveButtonStyle);
+                setTaxiButtonStyle(activeButtonStyle);
+            }
             setUserCarIsLoading(false);
         });
     }, []);
@@ -102,7 +113,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const newJourney: JourneyDto = {
             id: 0,
-            carId: selectedCar.id,
+            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -129,7 +140,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const updatedJourney: JourneyDto = {
             ...journey,
-            carId: selectedCar.id,
+            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -149,7 +160,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const noChanges = () => {
         if (!journey) return false;
 
-        return journey.car?.id === selectedCar.id &&
+        return (journey.car?.id === ZERO_ID || journey.car?.id === selectedCar.id) &&
             new Date(journey.departureTime).getTime() === departureTime.getTime() &&
             journey.comments === comment &&
             journey.countOfSeats === availableSeats &&
@@ -232,6 +243,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
                             rightButtonText={"Taxi"}
+                            disableLeftButton={userCars.length === EMPTY_COLLECTION_LENGTH}
                         />
 
                         {ownCarButtonStyle === activeButtonStyle && (
@@ -249,7 +261,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     setSelectedCar({ id: item.value, name: item.label });
                                     setIsVisibleCarDropDown(false);
                                 }}
-                                valueId={Number.isNaN(selectedCar.id) && userCars.length > EMPTY_COLLECTION_LENGTH ?
+                                valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
                                     userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
                                 }
                             />)}

@@ -11,16 +11,21 @@ const SwitchSelector = (props: SwitchSelectorProps) => {
             <View style={{ flexDirection: "row" }}>
 
                 <TouchableOpacity
-                    style={[SwitchSelectorStyle.leftButton, props.leftButtonStyle]}
-                    onPress={props.onLeftButtonPress}>
-                    <Text style={[SwitchSelectorStyle.buttonText, props.leftButtonStyle]}>
+                    style={[SwitchSelectorStyle.leftButton, props.disableLeftButton ?
+                        { backgroundColor: "#afafaf" } : props.leftButtonStyle]}
+                    onPress={props.onLeftButtonPress}
+                    disabled={props.disableLeftButton}
+                >
+                    <Text style={[SwitchSelectorStyle.buttonText, props.disableLeftButton ?
+                        { backgroundColor: "#afafaf", color: "white" } : props.leftButtonStyle]}>
                         {props.leftButtonText}
                     </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={[SwitchSelectorStyle.rightButton, props.rightButtonStyle]}
-                    onPress={props.onRightButtonPress}>
+                    onPress={props.onRightButtonPress}
+                >
                     <Text style={[SwitchSelectorStyle.buttonText, props.rightButtonStyle]}>
                         {props.rightButtonText}
                     </Text>

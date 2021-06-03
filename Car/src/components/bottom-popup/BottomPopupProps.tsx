@@ -1,7 +1,7 @@
-import { MutableRefObject, ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface BottomPopupProps {
-    refForChild?: MutableRefObject<any>,
+    refForChild?: any,
     snapPoints?: (string | number)[],
     renderContent?: ReactNode,
     renderHeader?: ReactNode,

@@ -30,6 +30,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
+import { ZERO_ID } from "../../../../constants/GeneralConstants";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -65,12 +66,25 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             setJourney(res.data);
             mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
                 { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
+
+            if (res.data?.car?.id === ZERO_ID) {
+                endLoading();
+
+                return;
+            }
+
             CarService.getById(res.data?.car?.id!).then((carRes) => {
                 setCar(carRes.data);
-                setLoading(false);
-                moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
+                endLoading();
             });
         });
+    };
+
+    const endLoading = () => {
+        console.log("end loading");
+        setLoading(false);
+        console.log(moreOptionsRef?.current === null);
+        moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
     useEffect(() => {
@@ -165,7 +179,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             {!props.moreOptionsPopupIsOpen &&
                 <Portal>
                     <BottomPopup
-                        refForChild={moreOptionsRef}
+                        refForChild={(ref: any) => (moreOptionsRef.current = ref)}
                         style={{ backgroundColor: DM("white") }}
                         snapPoints={[
                             MAX_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -182,7 +196,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                         nestedScrollEnabled={true}
                                         style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
                                     >
-                                        <CarBlock car={car}/>
+                                        <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
 
                                         <StopsBlock stops={currentJourney?.stops ?? []}/>
 

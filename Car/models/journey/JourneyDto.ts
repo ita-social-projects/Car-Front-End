@@ -10,7 +10,7 @@ interface JourneyDto {
     comments: string,
     isFree: boolean,
     organizerId: number,
-    carId: number,
+    carId: number | null,
     isOnOwnCar: boolean,
     journeyPoints: JourneyPoint[],
     stops: Stop[],
