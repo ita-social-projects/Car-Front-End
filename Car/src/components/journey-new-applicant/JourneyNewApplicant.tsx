@@ -5,7 +5,6 @@ import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import NewNotification from "../new-notification/NewNotification";
-import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
@@ -17,19 +16,14 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
 
     return (
         <View>
-            <TouchableOpacity
-                onPress={() => {
-                    setModalVisible(!modalVisible);
-                    NotificationsService.markAsRead(props.notificationId);
-                }}
-            >
-                <NewNotification
-                    user={props.user}
-                    notificationTitle={JSON.parse(props.notificationData).title}
-                    read={props.read}
-                    date={props.date}
-                />
-            </TouchableOpacity>
+            <NewNotification
+                notificationId={props.notificationId}
+                user={props.user}
+                notificationTitle={JSON.parse(props.notificationData).title}
+                read={props.read}
+                date={props.date}
+                openModal={() => setModalVisible(true)}
+            />
             <Modal
                 visible={modalVisible}
                 animationType="fade"

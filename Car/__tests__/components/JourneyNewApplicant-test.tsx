@@ -26,27 +26,25 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <View>
-      <ForwardRef
-        onPress={[Function]}
-      >
-        <NewNotification
-          notificationTitle="New Applicant"
-          user={
-            Object {
-              "email": "Abc",
-              "hireDate": 2021-01-01T20:00:00.000Z,
-              "id": 0,
-              "imageId": null,
-              "journeyCount": 0,
-              "location": "Abc",
-              "name": "Abc",
-              "position": "Abc",
-              "surname": "Abc",
-              "token": "Abc",
-            }
+      <NewNotification
+        notificationId={0}
+        notificationTitle="New Applicant"
+        openModal={[Function]}
+        user={
+          Object {
+            "email": "Abc",
+            "hireDate": 2021-01-01T20:00:00.000Z,
+            "id": 0,
+            "imageId": null,
+            "journeyCount": 0,
+            "location": "Abc",
+            "name": "Abc",
+            "position": "Abc",
+            "surname": "Abc",
+            "token": "Abc",
           }
-        />
-      </ForwardRef>
+        }
+      />
       <Component
         animationType="fade"
         hardwareAccelerated={false}
