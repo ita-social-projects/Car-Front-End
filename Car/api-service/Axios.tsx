@@ -9,16 +9,7 @@ Axios.interceptors.request.use(
         const token = await AuthManager.getAPIToken();
 
         if (token) {
-            req.headers = {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token
-            };
-        } else {
-            req.headers = {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            };
+            req.headers.Authorization = "Bearer " + token;
         }
 
         if (req.method === "put") {
