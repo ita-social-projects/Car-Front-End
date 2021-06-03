@@ -69,6 +69,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 setCar(carRes.data);
                 setLoading(false);
                 moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
+            }).catch(() => {
+                console.log("car catch");
+                setLoading(false);
+                moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
             });
         });
     };

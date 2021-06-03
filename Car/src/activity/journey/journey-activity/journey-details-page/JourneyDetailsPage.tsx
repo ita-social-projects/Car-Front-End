@@ -48,8 +48,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const { user } = useContext(AuthContext);
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
-    const [selectedCar, setSelectedCar] = useState<{id: number, name: string}>({
-        id: journey?.car?.id ?? NaN,
+    const [selectedCar, setSelectedCar] = useState<{id: number | null, name: string}>({
+        id: journey?.car?.id ?? null,
         name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
     });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
@@ -93,6 +93,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     name: `${car?.model?.brand?.name} ${car?.model?.name}`
                 }
             )));
+            if (result.data.length === EMPTY_COLLECTION_LENGTH) {
+                setOwnCarButtonStyle(inactiveButtonStyle);
+                setTaxiButtonStyle(activeButtonStyle);
+            }
             setUserCarIsLoading(false);
         });
     }, []);
@@ -102,7 +106,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const newJourney: JourneyDto = {
             id: 0,
-            carId: selectedCar.id,
+            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -129,7 +133,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const updatedJourney: JourneyDto = {
             ...journey,
-            carId: selectedCar.id,
+            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -232,6 +236,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
                             rightButtonText={"Taxi"}
+                            disableLeftButton={userCars.length === EMPTY_COLLECTION_LENGTH}
                         />
 
                         {ownCarButtonStyle === activeButtonStyle && (
@@ -249,8 +254,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     setSelectedCar({ id: item.value, name: item.label });
                                     setIsVisibleCarDropDown(false);
                                 }}
-                                valueId={Number.isNaN(selectedCar.id) && userCars.length > EMPTY_COLLECTION_LENGTH ?
-                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
+                                valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
+                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id ?? NaN
                                 }
                             />)}
 
