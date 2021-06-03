@@ -72,11 +72,7 @@ test("renders correctly", async () =>
           enabledGestureInteraction={true}
           enabledInnerScrolling={true}
           initialSnap={1}
-          refForChild={
-            Object {
-              "current": null,
-            }
-          }
+          refForChild={[Function]}
           renderContent={
             <View
               style={
@@ -111,6 +107,7 @@ test("renders correctly", async () =>
                 >
                   <CarBlock
                     car={null}
+                    isOnOwnCar={false}
                   />
                   <StopsBlock
                     stops={Array []}

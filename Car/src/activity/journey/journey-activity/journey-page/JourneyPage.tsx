@@ -76,15 +76,14 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             CarService.getById(res.data?.car?.id!).then((carRes) => {
                 setCar(carRes.data);
                 endLoading();
-            }).catch(() => {
-                console.log("car catch");
-                endLoading();
             });
         });
     };
 
     const endLoading = () => {
+        console.log("end loading");
         setLoading(false);
+        console.log(moreOptionsRef?.current === null);
         moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
@@ -180,7 +179,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             {!props.moreOptionsPopupIsOpen &&
                 <Portal>
                     <BottomPopup
-                        refForChild={moreOptionsRef}
+                        refForChild={(ref: any) => (moreOptionsRef.current = ref)}
                         style={{ backgroundColor: DM("white") }}
                         snapPoints={[
                             MAX_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -197,7 +196,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                         nestedScrollEnabled={true}
                                         style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
                                     >
-                                        <CarBlock car={car}/>
+                                        <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
 
                                         <StopsBlock stops={currentJourney?.stops ?? []}/>
 
