@@ -27,7 +27,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX
+    FIRST_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import * as navigation from "../../../../components/navigation/Navigation";
@@ -38,6 +38,13 @@ import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
+import Journey from "../../../../../models/journey/Journey";
+
+const getCarId = (journey?: Journey) => {
+    if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
+
+    return journey.car!.id;
+};
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
@@ -49,7 +56,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [selectedCar, setSelectedCar] = useState<{id: number | null, name: string}>({
-        id: journey?.car?.id ?? null,
+        id: getCarId(journey),
         name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
     });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
@@ -255,7 +262,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     setIsVisibleCarDropDown(false);
                                 }}
                                 valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
-                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id ?? NaN
+                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
                                 }
                             />)}
 
