@@ -135,7 +135,7 @@ test("renders correctly", async () =>
           }
           snapPoints={
             Array [
-              510,
+              515,
               0,
             ]
           }

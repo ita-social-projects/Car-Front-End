@@ -30,6 +30,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
+import { ZERO_ID } from "../../../../constants/GeneralConstants";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -65,16 +66,26 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             setJourney(res.data);
             mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
                 { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
+
+            if (res.data?.car?.id === ZERO_ID) {
+                endLoading();
+
+                return;
+            }
+
             CarService.getById(res.data?.car?.id!).then((carRes) => {
                 setCar(carRes.data);
-                setLoading(false);
-                moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
+                endLoading();
             }).catch(() => {
                 console.log("car catch");
-                setLoading(false);
-                moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
+                endLoading();
             });
         });
+    };
+
+    const endLoading = () => {
+        setLoading(false);
+        moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
     useEffect(() => {

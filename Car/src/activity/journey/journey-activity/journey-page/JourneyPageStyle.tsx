@@ -97,7 +97,11 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     driverBlockWhiteSpace: {
-        height: 27,
+        height: 15,
+    },
+
+    feeText: {
+        textAlign: "right"
     },
 
     userImageBlock: {

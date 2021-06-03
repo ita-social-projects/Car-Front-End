@@ -160,7 +160,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const noChanges = () => {
         if (!journey) return false;
 
-        return journey.car?.id === selectedCar.id &&
+        return (journey.car?.id === ZERO_ID || journey.car?.id === selectedCar.id) &&
             new Date(journey.departureTime).getTime() === departureTime.getTime() &&
             journey.comments === comment &&
             journey.countOfSeats === availableSeats &&
