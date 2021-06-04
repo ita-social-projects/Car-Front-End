@@ -305,7 +305,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         type: stop.stopType,
                         id: 0,
                         journeyId: journey!.id,
-                        userId: Number(user?.id)
+                        userId: Number(user?.id),
+                        index: 0
                     };
                 })
         };

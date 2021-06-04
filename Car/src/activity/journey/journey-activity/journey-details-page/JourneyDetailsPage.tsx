@@ -124,7 +124,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         type: value.stopType,
                         id: 0,
                         journeyId: 0,
-                        userId: Number(user?.id)
+                        userId: Number(user?.id),
+                        index: 0
                     };
                 }),
             duration: params.duration,
