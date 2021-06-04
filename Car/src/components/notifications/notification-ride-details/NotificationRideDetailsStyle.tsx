@@ -6,13 +6,13 @@ const NotificationRideDetailsStyle = EStyleSheet.create({
     },
 
     header: {
-        marginBottom: 8,
+        marginBottom: "1rem",
         fontSize: "1.1rem",
         fontWeight: "700",
     },
 
     detailsContainer: {
-        marginBottom: 4,
+        marginBottom: "0.7rem",
         flexDirection: "row",
     },
 

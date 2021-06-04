@@ -7,6 +7,7 @@ type Stop = null | {
     address: Address;
     userId: number;
     journeyId: number;
+    index: number;
 };
 
 export default Stop;

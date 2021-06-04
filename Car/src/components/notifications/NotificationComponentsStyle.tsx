@@ -4,6 +4,7 @@ import Font from "../../data/fonts/Font";
 const NotificationComponentsStyle = EStyleSheet.create({
     window: {
         width: "90%",
+        height: "90%",
         borderRadius: 15,
         padding: 20,
     },

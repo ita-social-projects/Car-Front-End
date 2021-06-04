@@ -11,30 +11,37 @@ const NotificationRideStopsStyle = EStyleSheet.create({
         marginBottom: 8,
         fontSize: "1.1rem",
         fontWeight: "700",
+        marginLeft: "0.2rem", // Circle's Size Compensation
     },
 
     stopsBlock: {
-        width: "95%",
-        justifyContent: "space-around",
-        marginTop: 8,
-        paddingBottom: 30,
+        width: "100%",
     },
 
     stopListItem: {
-        flexDirection: "row"
+        flexDirection: "row",
     },
 
     stopListItemRow: {
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
     },
 
     stopCustomLineIcon: {
-        height: 12,
-        width: 2
+        height: "0.8rem",
+        width: "0.2rem",
     },
 
-    circleGrad: {
+    activeCustomLineIcon: {
+        height: "1.1rem",
+        width: "0.2rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 5
+    },
+
+    intermidiateCircleGrad: {
         borderRadius: 90,
         height: "0.7rem",
         width: "0.7rem",
@@ -44,32 +51,29 @@ const NotificationRideStopsStyle = EStyleSheet.create({
         zIndex: 5
     },
 
+    circleGrad: {
+        borderRadius: 90,
+        height: "1rem",
+        width: "1rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 5
+    },
+
     stopName: {
-        textAlignVertical: "center", // ANDROID
-        justifyContent: "center", // IOS
-        flex: 1,
-        fontFamily: Font.OpenSans.Regular,
-        fontSize: "1rem",
-        lineHeight: "1.1rem",
+        alignSelf: "flex-end",
+        width: "90%",
+        marginBottom: "0.1rem"
     },
 
     activeStopName: {
-        textAlignVertical: "center", // ANDROID
-        justifyContent: "center", // IOS
-        flex: 1,
         fontFamily: Font.OpenSans.Bold,
         fontSize: "0.9rem",
-        lineHeight: "1.1rem",
-        paddingTop: "0.9rem", // Circle's Border Compensation
     },
 
     activeStopAddress: {
-        textAlignVertical: "center", // ANDROID
-        justifyContent: "center", // IOS
-        flex: 1,
-        fontWeight: "400",
-        lineHeight: "1.1rem",
-        paddingTop: "0.9rem" // Circle's Border Compensation
+        fontWeight: "600",
     },
 });
 

@@ -6,9 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../models/stop/Stop";
 import StopType from "../../../../models/stop/StopType";
-import { FIRST_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import { GRADIENT_END, GRADIENT_START } from "../../../constants/StylesConstants";
-import Font from "../../../data/fonts/Font";
 import AuthContext from "../../auth/AuthContext";
 import Circle from "../../styles/Circle";
 import DM from "../../styles/DM";
@@ -18,6 +16,9 @@ import NotificationRideStopsProps from "./NotificationRideStopsProps";
 const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const { user } = useContext(AuthContext);
+    const one = 1;
+    const minusOne = -1;
+    const zero = 0;
 
     const filterStops = (stops: Stop[]) => {
         const array = stops.filter(stop =>
@@ -26,23 +27,17 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
             stop?.type == StopType.Finish
             ||
             stop?.userId == user?.id
-        );
+        ).sort((a) => (a?.userId === user?.id) ? minusOne : zero);
 
-        return array.filter((obj, pos, arr) => {
-            return arr.map(mapObj => mapObj?.address?.latitude).indexOf(obj?.address?.latitude) === pos
-                   &&
-                   arr.map(mapObj => mapObj?.address?.longitude).indexOf(obj?.address?.longitude) === pos;
-        });
-    };
-
-    const ADDRESS_LENGTH = 25;
-
-    const addressName = (addressName: string) => {
-        if (addressName.length <= ADDRESS_LENGTH)
-            return addressName;
-        else
-            return addressName.substr(FIRST_ELEMENT_INDEX,
-                ADDRESS_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
+        return array.filter((value, index, arr) => {
+            return (
+                arr.map(mapObj => mapObj?.address?.latitude)
+                    .indexOf(value?.address?.latitude) === index
+                &&
+                arr.map(mapObj => mapObj?.address?.longitude)
+                    .indexOf(value?.address?.longitude) === index
+            );
+        }).sort((a, b) => (a?.index! > b?.index!) ? one : minusOne);
     };
 
     useEffect(() => {
@@ -51,77 +46,100 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
         });
     }, []);
 
-    const circle = (stop: Stop) => {
-        return (
-            user?.id == stop?.userId ?
-                <Circle
-                    color="#FFFFFF"
-                    radius="1.3rem"
-                >
-                    <LinearGradient
-                        style={[style.circleGrad, { backgroundColor: DM("#FFFFFF") }]}
-                        colors={["#00A3CF", "#5552A0"]}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                    />
-                </Circle>
-                :
-                <Circle
-                    color={DM("#FFFFFF")}
-                    radius="1.3rem"
-                >
-                    <Circle color={DM("#C1C1C5")} radius="1rem" />
-                </Circle>
-        );
-    };
-
-    const text = (stop: Stop) => {
-        return (
-            user?.id == stop?.userId ?
-                <LinearTextGradient
-                    style={[style.stopName, { color: DM("#909095") }]}
-                    locations={[GRADIENT_START, GRADIENT_END]}
-                    colors={["#00A3CF", "#5552A0"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                >
-                    <Text style={[style.activeStopName, { color: DM("#909095") }]}>
-                        {`${user!.name}'s stop `}‏
-                    </Text>
-
-                    <Text style={[style.activeStopAddress, { color: DM("#909095") }]}>
-                        {`(${addressName(stop?.address?.name!)})`}‏
-                    </Text>
-
-                    <Text
-                        style={{ fontFamily: Font.OpenSans.Regular }}
-                    >
-                    </Text>
-                </LinearTextGradient>
-                :
-                <Text style={{ color: DM("black") }}>
-                    {`${addressName(stop?.address?.name!)}`}
-                </Text>
-        );
-    };
-
     return (
         <>
             <View style={style.container}>
                 <Text style={style.header}>{props.title}</Text>
 
                 <View style={style.stopsBlock}>
-                    {stops?.length ? stops.map((item) =>
+                    {stops?.length ? stops.map((item, index) =>
                         <View key={item?.id} style={style.stopListItem}>
                             <View style={style.stopListItemRow}>
-                                {circle(item)}
-                                {item?.type !== StopType.Finish && (
-                                    <View style={[style.stopCustomLineIcon,
-                                        { backgroundColor: DM("#AAA9AE") }
-                                    ]} />
+
+                                {index !== zero && (
+                                    item?.userId === user?.id ?
+                                        <View style={[style.stopCustomLineIcon,
+                                            { backgroundColor: DM("#AAA9AE") }
+                                        ]}>
+                                            <LinearGradient
+                                                style={[style.activeCustomLineIcon,
+                                                    { backgroundColor: DM("#FFFFFF") }
+                                                ]}
+                                                colors={["#00A3CF", "#5552A0"]}
+                                                start={{ x: 0, y: 0 }}
+                                                end={{ x: 1, y: 1 }}
+                                            />
+                                        </View>
+                                        :
+                                        <View style={[style.stopCustomLineIcon,
+                                            { backgroundColor: DM("#AAA9AE") }
+                                        ]}/>
                                 )}
+
+                                {user?.id == item?.userId ?
+                                    <Circle
+                                        color="#FFFFFF"
+                                        radius="1.3rem"
+                                    >
+                                        <LinearGradient
+                                            style={[
+                                                index === zero || index === stops.length - one ?
+                                                    style.circleGrad
+                                                    :
+                                                    style.intermidiateCircleGrad,
+                                                { backgroundColor: DM("#FFFFFF") }
+                                            ]}
+                                            colors={["#00A3CF", "#5552A0"]}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                        />
+                                    </Circle>
+                                    :
+                                    <Circle
+                                        color="#FFFFFF"
+                                        radius="1.3rem"
+                                    >
+                                        <Circle color={DM("#C1C1C5")} radius="1rem" />
+                                    </Circle>
+                                }
                             </View>
-                            {text(item)}
+
+                            {user?.id == item?.userId ?
+                                <LinearTextGradient
+                                    style={[style.stopName, { color: DM("#909095") }]}
+                                    locations={[GRADIENT_START, GRADIENT_END]}
+                                    colors={["#00A3CF", "#5552A0"]}
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 0 }}
+                                    numberOfLines={1}
+                                    ellipsizeMode={"tail"}
+                                >
+                                    {index !== zero ?
+                                        <>
+                                            <Text style={[style.activeStopName, { color: DM("#909095") }]}>
+                                                {`${user!.name}'s Stop `}‏
+                                            </Text>
+
+                                            <Text style={[style.activeStopAddress, { color: DM("#909095") }]}>
+                                                {`(${item?.address?.name!})`}‏
+                                            </Text>
+                                        </>
+                                        :
+                                        <Text style={[style.activeStopAddress, { color: DM("#909095") }]}>
+                                            {`${item?.address?.name!}`}‏
+                                        </Text>
+                                    }
+
+                                </LinearTextGradient>
+                                :
+                                <Text
+                                    style={[style.stopName, { color: DM("black") }]}
+                                    ellipsizeMode={"tail"}
+                                    numberOfLines={1}
+                                >
+                                    {`${item?.address?.name!}`}
+                                </Text>
+                            }
                         </View>
                     ) : (
                         <>
