@@ -8,6 +8,7 @@ interface SwitchSelectorProps {
     title: string,
     leftButtonText: string,
     rightButtonText: string,
+    disableLeftButton?: boolean
 }
 
 export default SwitchSelectorProps;

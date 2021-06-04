@@ -5,17 +5,21 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import DM from "../../../../../components/styles/DM";
 import React from "react";
 import CarViewModel from "../../../../../../models/car/CarViewModel";
+import { CAR_IMAGE_BORDER_RADIUS, TAXI_IMAGE_BORDER_RADIUS } from "../../../../../constants/StylesConstants";
 
-const CarBlock = ({ car }: {car: CarViewModel}) => {
+const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
     return (
         <View style={JourneyPageStyle.carContainer}>
             <View style={JourneyPageStyle.carAvatarContainer}>
-                {car?.imageId ? (
+                {car?.imageId || !isOnOwnCar ? (
                     <Image
-                        source={{
-                            uri: ImageService.getImageById(car?.imageId)
-                        }}
-                        style={JourneyPageStyle.carAvatar}
+                        source={car?.imageId ?
+                            { uri: ImageService.getImageById(car.imageId) } :
+                            require("../../../../../../assets/images/journey/taxi2.png")
+                        }
+                        style={[JourneyPageStyle.carAvatar,
+                            { borderRadius: car?.imageId ? CAR_IMAGE_BORDER_RADIUS : TAXI_IMAGE_BORDER_RADIUS,
+                                resizeMode: car?.imageId ? "cover" : "contain" }]}
                     />
                 ) : (
                     <Ionicons
@@ -26,12 +30,20 @@ const CarBlock = ({ car }: {car: CarViewModel}) => {
                 )}
             </View>
             <View style={JourneyPageStyle.carInfoContainer}>
-                <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
-                    {car?.model?.brand?.name} {car?.model?.name}
-                </Text>
-                <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
-                    {car?.plateNumber}
-                </Text>
+                {
+                    isOnOwnCar ? (
+                        <>
+                            <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
+                                {car?.model?.brand?.name} {car?.model?.name}
+                            </Text>
+                            <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
+                                {car?.plateNumber}
+                            </Text>
+                        </>
+                    ) : (
+                        <Text style={JourneyPageStyle.taxiText}>Taxi</Text>
+                    )
+                }
             </View>
         </View>
     );

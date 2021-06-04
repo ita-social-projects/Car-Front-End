@@ -9,24 +9,16 @@ import {
     THIRD_FROM_END_ELEMENT_INDEX,
     THREE_ELEMENT_COLLECTION_LENGTH
 } from "../../../../../constants/GeneralConstants";
-import APIConfig from "../../../../../../api-service/APIConfig";
 import WayPoint from "../../../../../types/WayPoint";
 import SearchJourneyStyle from "../../search-journey/SearchJourneyStyle";
 import DM from "../../../../../components/styles/DM";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import AddressInputPageStyle from "./AddressInputPageStyle";
 import AddressInputPageProps from "./AddressInputPageProps";
-
-const CreateRequestWithAddressToGeocodingApi = (address: string) => {
-    return "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-        address.replace(" ", "+") +
-        "&key=" + APIConfig.apiKey;
-};
-
-const CreateRequestWithCoordinatesToGeocodingApi = (coordinates: LatLng) => {
-    return "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-        `${coordinates.latitude},${coordinates.longitude}&key=${APIConfig.apiKey}`;
-};
+import {
+    CreateRequestWithAddressToGeocodingApi,
+    CreateRequestWithCoordinatesToGeocodingApi
+} from "../../../../../utils/AddressHelperFunctions";
 
 const AddressInputPage = (props: AddressInputPageProps) => {
     const params = props.route.params;
