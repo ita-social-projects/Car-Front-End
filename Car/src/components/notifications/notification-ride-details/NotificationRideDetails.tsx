@@ -11,8 +11,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
 
             <View style={style.detailsContainer}>
                 <Text style={style.label}>Departure time: </Text>
-                <Text style={style.value}>{moment(new Date(props.departureTime!))
-                    .utc().format("DD.MM, HH:mm")}
+                <Text style={style.value}>{moment(new Date(props.departureTime!)).calendar()}
                 </Text>
             </View>
 
