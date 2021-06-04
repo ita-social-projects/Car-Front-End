@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Modal, View } from "react-native";
-import DM from "../styles/DM";
-import NotificationComponentsStyle from "./NotificationComponentsStyle";
+import DM from "../../styles/DM";
+import NotificationModalBaseStyle from "./NotificationModalBaseStyle";
 
 const NotificationModalBase = (props: {isVisible: boolean, children?: ReactNode}) => {
     return (
@@ -11,8 +11,8 @@ const NotificationModalBase = (props: {isVisible: boolean, children?: ReactNode}
             transparent
             statusBarTranslucent
         >
-            <View style={[NotificationComponentsStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
-                <View style={[NotificationComponentsStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
+            <View style={[NotificationModalBaseStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
+                <View style={[NotificationModalBaseStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
                     {props.children}
                 </View>
             </View>

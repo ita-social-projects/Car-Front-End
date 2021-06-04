@@ -1,15 +1,15 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
-import DM from "../styles/DM";
-import NotificationComponentsStyle from "./NotificationComponentsStyle";
+import DM from "../../styles/DM";
+import NotificationButtonsStyle from "./NotificationButtonsStyle";
 
 const NotificationDeclineButton = (props: { declineText?: string, onDecline: () => void }) => {
     return (
         <TouchableOpacity
             onPress={ props.onDecline }
-            style={[NotificationComponentsStyle.button]}
+            style={[NotificationButtonsStyle.button]}
         >
-            <Text style={[NotificationComponentsStyle.buttonText, { color: DM("#EC6400") }]}>
+            <Text style={[NotificationButtonsStyle.buttonText, { color: DM("#EC6400") }]}>
                 {props.declineText || "Decline"}
             </Text>
         </TouchableOpacity>

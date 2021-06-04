@@ -1,6 +1,6 @@
 import User from "../../../models/user/User";
 
-interface NewNotificationProps {
+interface MinimizedNotification {
     notificationId: number,
     openModal: () => void,
     read?: boolean,
@@ -9,4 +9,4 @@ interface NewNotificationProps {
     date?: Date
 }
 
-export default NewNotificationProps;
+export default MinimizedNotification;

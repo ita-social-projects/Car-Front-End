@@ -1,17 +1,17 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import User from "../../../models/user/User";
-import AvatarLogoTitle from "../avatar-logo-title/AvatarLogoTitle";
-import DM from "../styles/DM";
-import NotificationComponentsStyle from "./NotificationComponentsStyle";
+import AvatarLogoTitle from "../../avatar-logo-title/AvatarLogoTitle";
+import DM from "../../styles/DM";
+import NotificationHeaderProps from "./NotificationHeaderProps";
+import NotificationHeaderStyle from "./NotificationHeaderStyle";
 
-const NotificationHeader = (props: { title: string, message: string, sender: User, disableModal: () => void}) => {
+const NotificationHeader = (props: NotificationHeaderProps) => {
     return (
         <View>
-            <View style={NotificationComponentsStyle.headerContainer}>
-                <View style={NotificationComponentsStyle.row}>
+            <View style={NotificationHeaderStyle.headerContainer}>
+                <View style={NotificationHeaderStyle.row}>
                     <View>
-                        <Text style={[NotificationComponentsStyle.header,
+                        <Text style={[NotificationHeaderStyle.header,
                             { color: DM("#000000") }]}
                         >
                             {props.title}
@@ -20,21 +20,21 @@ const NotificationHeader = (props: { title: string, message: string, sender: Use
                     <TouchableOpacity
                         onPress={props.disableModal}
                     >
-                        <Text style={[NotificationComponentsStyle.snooze,
+                        <Text style={[NotificationHeaderStyle.snooze,
                             { color: DM("#02A2CF") }]} >
                             Snooze
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={NotificationComponentsStyle.avatarLogo}>
+                <View style={NotificationHeaderStyle.avatarLogo}>
                     <AvatarLogoTitle userToDisplay={props.sender} />
                 </View>
             </View>
-            <View style={[NotificationComponentsStyle.messageContainer, {
+            <View style={[NotificationHeaderStyle.messageContainer, {
                 borderTopColor: DM("#C1C1C5"),
                 borderBottomColor: DM("#C1C1C5")
             }]}>
-                <Text style={[NotificationComponentsStyle.message, { color: DM("black") }]}>
+                <Text style={[NotificationHeaderStyle.message, { color: DM("black") }]}>
                     {props.message}
                 </Text>
             </View>

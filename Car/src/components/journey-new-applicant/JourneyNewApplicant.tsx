@@ -4,7 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
-import NewNotification from "../new-notification/NewNotification";
+import MinimizedNotification from "../minimized-notification/MinimizedNotification";
 import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
@@ -16,7 +16,7 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
 
     return (
         <View>
-            <NewNotification
+            <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
                 notificationTitle={JSON.parse(props.notificationData).title}

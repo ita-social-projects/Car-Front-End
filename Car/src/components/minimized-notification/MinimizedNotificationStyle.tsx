@@ -1,7 +1,7 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 
-const NewNotificationStyle = EStyleSheet.create({
+const MinimizedNotification = EStyleSheet.create({
     content: {
         width: "65%"
     },
@@ -67,4 +67,4 @@ const NewNotificationStyle = EStyleSheet.create({
     }
 });
 
-export default NewNotificationStyle;
+export default MinimizedNotification;

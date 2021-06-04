@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import NewNotification from "../../new-notification/NewNotification";
+import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
-import NotificationButtonGroup from "../NotificationButtonGroup";
-import NotificationConfirmButton from "../NotificationConfirmButton";
-import NotificationHeader from "../NotificationHeader";
-import NotificationModalBase from "../NotificationModalBase";
+import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
+import NotificationHeader from "../notification-header/NotificationHeader";
+import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
 import NotificationProps from "../NotificationProps";
+import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 
 const JourneyCancellation = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
@@ -13,7 +13,7 @@ const JourneyCancellation = (props: NotificationProps) => {
 
     return (
         <>
-            <NewNotification
+            <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
                 notificationTitle={"Ride is canceled"}

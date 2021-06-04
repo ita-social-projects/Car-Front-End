@@ -1,5 +1,5 @@
 import React from "react";
-import NewNotification from "../../src/components/new-notification/NewNotification";
+import MinimizedNotification from "../../src/components/minimized-notification/MinimizedNotification";
 import shallowRender from "react-test-renderer/shallow";
 
 const renderer = shallowRender.createRenderer();
@@ -7,7 +7,7 @@ const renderer = shallowRender.createRenderer();
 test("renders correctly", async () =>
     expect(
         renderer.render(
-            <NewNotification
+            <MinimizedNotification
                 user={{
                     id: 0,
                     name: "Abc",
@@ -128,7 +128,7 @@ test("renders correctly", async () =>
 test("renders correctly", async () =>
     expect(
         renderer.render(
-            <NewNotification
+            <MinimizedNotification
                 user={{
                     id: 0,
                     name: "Abc",

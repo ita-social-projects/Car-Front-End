@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Modal, Text } from "react-native";
 import * as navigation from "../navigation/Navigation";
-import NewNotification from "../new-notification/NewNotification";
+import MinimizedNotification from "../minimized-notification/MinimizedNotification";
 import DM from "../styles/DM";
-import RideFoundProps from "./RideFoundProps";
 import RideFoundStyle from "./RideFoundStyle";
+import NotificationProps from "../notifications/NotificationProps";
 
-const RideFound = (props: RideFoundProps) => {
+const RideFound = (props: NotificationProps) => {
     const title = "created a ride";
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
     return (
         <View>
-            <NewNotification
+            <MinimizedNotification
                 notificationId={props.notificationId}
-                user={props.user}
+                user={props.sender}
                 notificationTitle={title}
                 read={props.read}
                 date={props.date}

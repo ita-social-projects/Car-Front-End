@@ -1,14 +1,7 @@
 import EStyleSheet from "react-native-extended-stylesheet";
-import Font from "../../data/fonts/Font";
+import Font from "../../../data/fonts/Font";
 
-const NotificationComponentsStyle = EStyleSheet.create({
-    window: {
-        width: "90%",
-        height: "90%",
-        borderRadius: 15,
-        padding: 20,
-    },
-
+const NotificationHeaderStyle = EStyleSheet.create({
     profileContainer: {
         width: "80%"
     },
@@ -33,24 +26,6 @@ const NotificationComponentsStyle = EStyleSheet.create({
 
     headerContainer: {
         height:120
-    },
-
-    background: {
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0, 0, 0, 0.5)"
-    },
-
-    circleGrad: {
-        borderRadius: 90,
-        height: "0.8rem",
-        width: "0.8rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 5
     },
 
     row: {
@@ -83,17 +58,6 @@ const NotificationComponentsStyle = EStyleSheet.create({
         letterSpacing: 0.875,
         textTransform: "capitalize",
     },
-
-    button: {
-        paddingVertical: 12,
-        paddingHorizontal: 18
-    },
-
-    buttonText: {
-        fontSize: 18,
-        fontWeight: "700"
-
-    },
 });
 
-export default NotificationComponentsStyle;
+export default NotificationHeaderStyle;

@@ -1,15 +1,15 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
-import DM from "../styles/DM";
-import NotificationComponentsStyle from "./NotificationComponentsStyle";
+import DM from "../../styles/DM";
+import NotificationButtonsStyle from "./NotificationButtonsStyle";
 
 const NotificationConfirmButton = (props: { confirmText?: string, onConfirm: () => void }) => {
     return (
         <TouchableOpacity
             onPress={ props.onConfirm }
-            style={[NotificationComponentsStyle.button, { backgroundColor: DM("black") }]}
+            style={[NotificationButtonsStyle.button, { backgroundColor: DM("black") }]}
         >
-            <Text style={[NotificationComponentsStyle.buttonText, { color: DM("white") }]}>
+            <Text style={[NotificationButtonsStyle.buttonText, { color: DM("white") }]}>
                 {props.confirmText || "OK"}
             </Text>
         </TouchableOpacity>

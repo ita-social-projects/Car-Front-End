@@ -26,7 +26,7 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <View>
-      <NewNotification
+      <MinimizedNotification
         notificationId={0}
         notificationTitle="New Applicant"
         openModal={[Function]}

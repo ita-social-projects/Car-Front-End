@@ -2,14 +2,14 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import ContainerStyle from "../styles/flex/Container";
 import RowStyle from "../styles/flex/Row";
-import NewNotificationStyle from "./NewNotificationStyle";
+import MinimizedNotificationStyle from "./MinimizedNotificationStyle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import DM from "../styles/DM";
-import NewNotificationProps from "./NewNotificationProps";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import MinimizedNotificationProps from "./MinimizedNotificationProps";
 
-const NewNotification = (props: NewNotificationProps) => (
+const MinimizedNotification = (props: MinimizedNotificationProps) => (
     <TouchableOpacity
         onPress={() => {
             props.openModal();
@@ -20,28 +20,28 @@ const NewNotification = (props: NewNotificationProps) => (
             <View
                 style={[
                     ContainerStyle.container,
-                    NewNotificationStyle.notificationContainer
+                    MinimizedNotificationStyle.notificationContainer
                 ]}
             >
-                <View style={[RowStyle.row, NewNotificationStyle.center]}>
-                    <View style={NewNotificationStyle.avatar}>
+                <View style={[RowStyle.row, MinimizedNotificationStyle.center]}>
+                    <View style={MinimizedNotificationStyle.avatar}>
                         <AvatarLogo user={props.user} size={38.5} />
                     </View>
-                    <View style={NewNotificationStyle.content}>
-                        <Text style={[NewNotificationStyle.name, { color: DM("#02A2CF") }]}>
+                    <View style={MinimizedNotificationStyle.content}>
+                        <Text style={[MinimizedNotificationStyle.name, { color: DM("#02A2CF") }]}>
                             {props.user!.name + " " + props.user!.surname}
                         </Text>
-                        <Text style={[NewNotificationStyle.title, { color: DM("#909095") }]}>
+                        <Text style={[MinimizedNotificationStyle.title, { color: DM("#909095") }]}>
                             {props.notificationTitle}
                         </Text>
                     </View>
-                    <View style={NewNotificationStyle.time}>
+                    <View style={MinimizedNotificationStyle.time}>
                         <Text
                             style={
                                 props.read
-                                    ? [NewNotificationStyle.dateRead,
+                                    ? [MinimizedNotificationStyle.dateRead,
                                         { color: DM("#909095") }]
-                                    : [NewNotificationStyle.dateUnread,
+                                    : [MinimizedNotificationStyle.dateUnread,
                                         { color: DM("#02a2cf") }]
                             }
                         >
@@ -53,7 +53,7 @@ const NewNotification = (props: NewNotificationProps) => (
             <View
                 style={
                     props.read
-                        ? [NewNotificationStyle.optionsLineRead,
+                        ? [MinimizedNotificationStyle.optionsLineRead,
                             {
                                 borderTopColor: DM("rgba(0,0,0,0)"),
                                 borderLeftColor: DM("rgba(0,0,0,0)"),
@@ -61,7 +61,7 @@ const NewNotification = (props: NewNotificationProps) => (
                                 borderBottomColor: DM("#C1C1C5"),
                                 backgroundColor: DM("rgba(0,0,0,0)"),
                             }]
-                        : [NewNotificationStyle.optionsLineUnread,
+                        : [MinimizedNotificationStyle.optionsLineUnread,
                             {
                                 borderTopColor: DM("rgba(0,0,0,0)"),
                                 borderLeftColor: DM("rgba(0,0,0,0)"),
@@ -75,4 +75,4 @@ const NewNotification = (props: NewNotificationProps) => (
     </TouchableOpacity>
 );
 
-export default NewNotification;
+export default MinimizedNotification;
