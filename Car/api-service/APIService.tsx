@@ -2,7 +2,7 @@ import Axios from "./Axios";
 
 const baseHeaders = {
     headers: {
-        "Context-Type": "application/json",
+        "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest"
     }
 };

@@ -42,6 +42,11 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
                     </View>
                 </View>
             </TouchableOpacity>
+            <View>
+                <Text style={JourneyPageStyle.feeText}>
+                    {journey?.isFree ? "Free" : "Paid"}
+                </Text>
+            </View>
             <View style={JourneyPageStyle.driverBlockWhiteSpace} />
             <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
         </View>

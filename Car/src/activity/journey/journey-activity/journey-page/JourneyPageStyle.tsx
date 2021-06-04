@@ -20,6 +20,13 @@ const JourneyPageStyle = StyleSheet.create({
         paddingLeft: 10,
     },
 
+    taxiText: {
+        fontWeight: "700",
+        fontSize: 15,
+        textAlignVertical: "center",
+        height: 30
+    },
+
     lining: {
         position: "absolute",
         top: -10,
@@ -45,7 +52,7 @@ const JourneyPageStyle = StyleSheet.create({
     carAvatar: {
         width: 38.5,
         height: 38.5,
-        borderRadius: 38.5,
+        borderRadius: 38.5
     },
 
     carAvatarContainer: {
@@ -97,7 +104,11 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     driverBlockWhiteSpace: {
-        height: 27,
+        height: 15,
+    },
+
+    feeText: {
+        textAlign: "right"
     },
 
     userImageBlock: {

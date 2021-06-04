@@ -8,7 +8,7 @@ interface JourneyCreationDropDownPickerProps {
     onChangeItem: (item: {label: string, value: number}, index: number) => void,
     isVisible: boolean,
     onOpen: () => void,
-    valueId: number
+    valueId: number | null
 }
 
 export default JourneyCreationDropDownPickerProps;
