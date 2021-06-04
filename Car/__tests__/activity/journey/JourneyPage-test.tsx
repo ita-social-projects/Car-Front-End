@@ -14,6 +14,7 @@ const props: JourneyPageProps = {
             journeyId: 1,
             isDriver: false,
             isPassenger: false,
+            applicantStops: []
         },
     },
     moreOptionsPopupIsOpen: false,

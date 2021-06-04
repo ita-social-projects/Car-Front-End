@@ -167,8 +167,16 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                             {currentJourney.stops.filter(stop =>
                                 stop?.type === StopType.Intermediate).map(stop => (
                                 <Marker
-                                    key={stop?.id}
+                                    key={stop?.index}
                                     title={stop?.address?.name}
+                                    coordinate={getStopCoordinates(stop)}
+                                    image={require("../../../../../assets/images/maps-markers/Stop.png")}
+                                />))}
+
+                            {props.route.params.applicantStops?.map(stop => (
+                                <Marker
+                                    key={stop?.index}
+                                    title={"Your stop"}
                                     coordinate={getStopCoordinates(stop)}
                                     image={require("../../../../../assets/images/maps-markers/Stop.png")}
                                 />))}
