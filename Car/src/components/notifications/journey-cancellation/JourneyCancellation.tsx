@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
-import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import NewNotification from "../../new-notification/NewNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../NotificationButtonGroup";
@@ -15,20 +13,14 @@ const JourneyCancellation = (props: NotificationProps) => {
 
     return (
         <>
-            <TouchableOpacity
-                onPress={() => {
-                    setModalVisible(!modalVisible);
-                    NotificationsService.markAsRead(props.notificationId);
-                }}
-            >
-                <NewNotification
-                    user={props.sender}
-                    notificationTitle={data.title}
-                    read={props.read}
-                    date={props.date}
-                />
-            </TouchableOpacity>
-
+            <NewNotification
+                notificationId={props.notificationId}
+                user={props.sender}
+                notificationTitle={"Ride is canceled"}
+                read={props.read}
+                date={props.date}
+                openModal={() => setModalVisible(true)}
+            />
             <NotificationModalBase isVisible={modalVisible!}>
                 <NotificationHeader
                     title="RIDE IS CANCELED"
