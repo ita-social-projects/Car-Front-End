@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -189,7 +189,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                         renderContent={
                             <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
-                                <View style={{ height: 300 }}>
+                                <View style={JourneyPageStyle.detailsBlock}>
                                     <ScrollView
                                         nestedScrollEnabled={true}
                                         style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
@@ -197,6 +197,17 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                         <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
 
                                         <StopsBlock stops={currentJourney?.stops ?? []}/>
+
+                                        {
+                                            currentJourney?.comments ?
+                                                (
+                                                    <Text style={JourneyPageStyle.commentsBlock}>
+                                                        <Text style={JourneyPageStyle.commentsLabel}>Comments: </Text>
+                                                        <Text>{currentJourney.comments}</Text>
+                                                    </Text>
+                                                ) :
+                                                (<></>)
+                                        }
 
                                         <ParticipantsBlock journey={currentJourney} />
                                     </ScrollView>
