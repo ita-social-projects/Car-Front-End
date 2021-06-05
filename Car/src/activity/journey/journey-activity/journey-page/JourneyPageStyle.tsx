@@ -102,7 +102,8 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     commentsBlock: {
-        paddingBottom: 15
+        paddingBottom: 15,
+        fontSize: 15
     },
 
     commentsLabel: {
