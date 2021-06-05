@@ -81,9 +81,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     };
 
     const endLoading = () => {
-        console.log("end loading");
         setLoading(false);
-        console.log(moreOptionsRef?.current === null);
         moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
 

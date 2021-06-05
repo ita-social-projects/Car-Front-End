@@ -24,9 +24,7 @@ test("renders correctly", async () =>
       <View
         style={
           Object {
-            "display": "none",
-            "flex": 0,
-            "height": 0,
+            "flex": 1,
           }
         }
       >
