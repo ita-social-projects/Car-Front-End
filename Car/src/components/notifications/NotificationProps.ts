@@ -1,12 +1,12 @@
 import User from "../../../models/user/User";
 
-interface RideFoundProps{
+interface NotificationProps {
     visible?: boolean,
     notificationId: number,
     notificationData: string,
-    user: User,
+    sender: User,
     read?: boolean,
     date?: Date
 }
 
-export default RideFoundProps;
+export default NotificationProps;

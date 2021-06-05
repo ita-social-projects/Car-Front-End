@@ -8,27 +8,43 @@ test("renders correctly", async () =>
     expect(
         renderer.render(
             <JourneyNewApplicant
-                user={{ name: "Abc", surname: "Abc", position: "Abc" }}
+                sender={{
+                    id: 0,
+                    name: "Abc",
+                    surname: "Abc",
+                    position: "Abc",
+                    location: "Abc",
+                    email: "Abc",
+                    token: "Abc",
+                    hireDate: new Date("2021-01-01T20:00:00.000Z"),
+                    imageId: null,
+                    journeyCount: 0,
+                }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
                 notificationId={0}
             />
         )
     ).toMatchInlineSnapshot(`
     <View>
-      <ForwardRef
-        onPress={[Function]}
-      >
-        <NewNotification
-          notificationTitle="New Applicant"
-          user={
-            Object {
-              "name": "Abc",
-              "position": "Abc",
-              "surname": "Abc",
-            }
+      <MinimizedNotification
+        notificationId={0}
+        notificationTitle="New Applicant"
+        openModal={[Function]}
+        user={
+          Object {
+            "email": "Abc",
+            "hireDate": 2021-01-01T20:00:00.000Z,
+            "id": 0,
+            "imageId": null,
+            "journeyCount": 0,
+            "location": "Abc",
+            "name": "Abc",
+            "position": "Abc",
+            "surname": "Abc",
+            "token": "Abc",
           }
-        />
-      </ForwardRef>
+        }
+      />
       <Component
         animationType="fade"
         hardwareAccelerated={false}
@@ -103,9 +119,16 @@ test("renders correctly", async () =>
                 size={49}
                 user={
                   Object {
+                    "email": "Abc",
+                    "hireDate": 2021-01-01T20:00:00.000Z,
+                    "id": 0,
+                    "imageId": null,
+                    "journeyCount": 0,
+                    "location": "Abc",
                     "name": "Abc",
                     "position": "Abc",
                     "surname": "Abc",
+                    "token": "Abc",
                   }
                 }
               />

@@ -11,13 +11,15 @@ import { EventRegister } from "react-native-event-listeners";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { MAX_USER_FULL_NAME_LENGTH_IN_PROFILE } from "../../constants/JourneyConstants";
 
-const AvatarLogoTitle = () => {
-    const [user, setUser] = useState<User>(useContext(AuthContext).user);
+const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
+    const contextUser = useContext(AuthContext).user;
+
+    const [user, setUser] = useState<User>(props.userToDisplay || contextUser);
 
     useEffect(() => {
         const changeEvent = EventRegister.addEventListener(
             USER_STATE_CHANGE_EVENT_NAME,
-            u => setUser(u)
+            u => setUser(props.userToDisplay || u)
         );
 
         return () => {
