@@ -4,8 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { LinearTextGradient } from "react-native-text-gradient";
 import Font from "../../data/fonts/Font";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
-import NewNotification from "../new-notification/NewNotification";
-import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import MinimizedNotification from "../minimized-notification/MinimizedNotification";
 import Circle from "../styles/Circle";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
@@ -17,19 +16,14 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
 
     return (
         <View>
-            <TouchableOpacity
-                onPress={() => {
-                    setModalVisible(!modalVisible);
-                    NotificationsService.markAsRead(props.notificationId);
-                }}
-            >
-                <NewNotification
-                    user={props.user}
-                    notificationTitle={JSON.parse(props.notificationData).title}
-                    read={props.read}
-                    date={props.date}
-                />
-            </TouchableOpacity>
+            <MinimizedNotification
+                notificationId={props.notificationId}
+                user={props.sender}
+                notificationTitle={JSON.parse(props.notificationData).title}
+                read={props.read}
+                date={props.date}
+                openModal={() => setModalVisible(true)}
+            />
             <Modal
                 visible={modalVisible}
                 animationType="fade"
@@ -70,18 +64,18 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                             ]}
                         >
                             <AvatarLogo
-                                user={props.user}
+                                user={props.sender}
                                 size={49}
                             />
                             <View style={JourneyNewApplicantStyle.profileContainer}>
                                 <View style={JourneyNewApplicantStyle.profile}>
                                     <Text style={[JourneyNewApplicantStyle.name, { color: DM("#000000") }]}>
-                                        {props.user.name +
+                                        {props.sender!.name +
                                             " " +
-                                            props.user.surname}
+                                            props.sender!.surname}
                                     </Text>
                                     <Text style={[JourneyNewApplicantStyle.bio, { color: DM("#000000") }]}>
-                                        {props.user.position}
+                                        {props.sender!.position}
                                     </Text>
                                     <Text style={[JourneyNewApplicantStyle.achievements, { color: DM("#000000") }]} >
                                         123 rides, 2 badges
@@ -140,8 +134,9 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                         </View>
                         <View style={[JourneyNewApplicantStyle.stops]}>
                             <Text style={[JourneyNewApplicantStyle.optionsHeader, { color: DM("#000000") }]} >
-                                {props.user.name}’s stop in your ride
+                                {props.sender!.name}’s stop in your ride
                             </Text>
+                            {/* ------------------------------ */}
                             <View
                                 style={[
                                     JourneyNewApplicantStyle.stop,
@@ -228,7 +223,7 @@ const JourneyNewApplicant = (props: JourneyNewApplicantProps) => {
                                         <Text style={[JourneyNewApplicantStyle.activeStopName,
                                             { color: DM("#909095") }]
                                         } >
-                                            {props.user.name}'s stop A.2 ‏
+                                            {props.sender!.name}'s stop A.2 ‏
                                         </Text>
                                         <Text
                                             style={{

@@ -172,12 +172,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         }
     }, [recentAddressesIsLoading, savedLocationIsLoading]);
 
-    useEffect(() => {
-        if (journey && !recentAddressesIsLoading && !savedLocationIsLoading && !userLocationIsLoading) {
-            fitCameraToCoordinates(journey.journeyPoints, false);
-        }
-    }, [recentAddressesIsLoading, savedLocationIsLoading, userLocationIsLoading]);
-
     const animateCamera = (coordinates: LatLng) => {
         mapRef.current?.animateCamera({
             ...initialCamera,
@@ -352,7 +346,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     />
                 </View>
             )}
-            <View style={isLoading ? { display: "none", height: 0, flex: 0 } : { flex: 1 }}>
+            <View style={{ flex: 1 }}>
                 <ScrollView
                     ref={ref => (scrollViewRef.current = ref)}
                     onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}

@@ -113,6 +113,7 @@ test("renders correctly", async () =>
                   <StopsBlock
                     stops={Array []}
                   />
+                  <React.Fragment />
                   <ParticipantsBlock
                     journey={null}
                   />

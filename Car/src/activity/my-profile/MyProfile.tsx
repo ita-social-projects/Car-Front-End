@@ -66,7 +66,7 @@ const MyProfile = (props: {navigation: any}) => {
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Address book</Text>
+                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Address Book</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard

@@ -97,6 +97,19 @@ const JourneyPageStyle = StyleSheet.create({
         alignSelf: "center",
     },
 
+    detailsBlock: {
+        height: 300
+    },
+
+    commentsBlock: {
+        paddingBottom: 15,
+        fontSize: 15
+    },
+
+    commentsLabel: {
+        fontWeight: "bold"
+    },
+
     userBlock: {
         flexDirection: "row",
         justifyContent: "space-around",
@@ -182,7 +195,7 @@ const JourneyPageStyle = StyleSheet.create({
         justifyContent: "space-around",
         marginTop: 20,
         marginLeft: 14,
-        paddingBottom: 30,
+        paddingBottom: 15,
     },
 
     stopListItem: {

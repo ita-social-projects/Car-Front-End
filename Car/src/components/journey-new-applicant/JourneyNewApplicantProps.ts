@@ -1,10 +1,10 @@
-import UserModel from "../../types/UserModel";
+import User from "../../../models/user/User";
 
 interface JourneyNewApplicantProps {
     visible?: boolean,
     notificationId: number,
     notificationData: string,
-    user: UserModel,
+    sender: User,
     read?: boolean,
     date?: Date
 }

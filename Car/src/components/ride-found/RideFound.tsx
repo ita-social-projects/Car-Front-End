@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Modal, Text } from "react-native";
-import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Stop from "../../../models/stop/Stop";
 import * as navigation from "../navigation/Navigation";
-import NewNotification from "../new-notification/NewNotification";
 import DM from "../styles/DM";
-import RideFoundProps from "./RideFoundProps";
 import RideFoundStyle from "./RideFoundStyle";
+import NotificationProps from "../notifications/NotificationProps";
+import MinimizedNotification from "../minimized-notification/MinimizedNotification";
 
-const RideFound = (props: RideFoundProps) => {
+const RideFound = (props: NotificationProps) => {
     const title = "created a ride";
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -24,19 +23,14 @@ const RideFound = (props: RideFoundProps) => {
 
     return (
         <View>
-            <TouchableOpacity
-                onPress={() => {
-                    NotificationsService.markAsRead(props.notificationId);
-                    setIsModalVisible(!isModalVisible);
-                }}
-            >
-                <NewNotification
-                    user={props.user}
-                    notificationTitle={title}
-                    read={props.read}
-                    date={props.date}
-                />
-            </TouchableOpacity>
+            <MinimizedNotification
+                notificationId={props.notificationId}
+                user={props.sender}
+                notificationTitle={title}
+                read={props.read}
+                date={props.date}
+                openModal={() => setIsModalVisible(true)}
+            />
             <Modal
                 visible={isModalVisible}
                 transparent={true}
