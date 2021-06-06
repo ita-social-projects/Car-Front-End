@@ -173,7 +173,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
                             {props.route.params.applicantStops?.map(stop => (
                                 <Marker
-                                    key={stop?.index!}
+                                    key={stop?.index}
                                     title={stop?.address?.name}
                                     coordinate={getStopCoordinates(stop)}
                                     image={require("../../../../../assets/images/maps-markers/Stop.png")}

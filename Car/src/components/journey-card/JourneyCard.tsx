@@ -13,7 +13,7 @@ import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { JOURNEY_CARD_WITH_FEE_HEIGHT, MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
 import Stop from "../../../models/stop/Stop";
 
-const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean, applicantStops?: Stop[]}) => {
+const JourneyCard = (props: {journey?: Journey, displayFee?: boolean, applicantStops?: Stop[]}) => {
     const journey = props.journey;
     const { user } = useContext(AuthContext);
     const [isDriver, setIsDriver] = useState(false);
