@@ -141,7 +141,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
-            comments: comment,
+            comments: comment.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: freeButtonStyle === activeButtonStyle,

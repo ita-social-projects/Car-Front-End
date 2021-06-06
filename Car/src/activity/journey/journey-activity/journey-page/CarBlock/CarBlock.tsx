@@ -6,6 +6,7 @@ import DM from "../../../../../components/styles/DM";
 import React from "react";
 import CarViewModel from "../../../../../../models/car/CarViewModel";
 import { CAR_IMAGE_BORDER_RADIUS, TAXI_IMAGE_BORDER_RADIUS } from "../../../../../constants/StylesConstants";
+import CarColor from "../../../../../../models/car/CarColor";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
     return (
@@ -34,7 +35,7 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                     isOnOwnCar ? (
                         <>
                             <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
-                                {car?.model?.brand?.name} {car?.model?.name}
+                                {CarColor[car?.color!]} {car?.model?.brand?.name} {car?.model?.name}
                             </Text>
                             <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
                                 {car?.plateNumber}
