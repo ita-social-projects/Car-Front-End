@@ -4,13 +4,32 @@ import { Divider } from "react-native-elements";
 import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
-import React from "react";
+import React, { useContext } from "react";
 import ButtonBlockProps from "./ButtonBlockProps";
 import ChatService from "../../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../../models/Chat/CreateChat";
 import { StatusCodes } from "../../../../../constants/Constants";
+import NotificationsService from "../../../../../../api-service/notifications-service/NotificationsService";
+import AuthContext from "../../../../../components/auth/AuthContext";
+import NotificationType from "../../../../../../models/notification/NotificationType";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
+
+    const { user } = useContext(AuthContext);
+
+    /* eslint-disable unused-imports/no-unused-vars */
+    const OnRequestHandler = () => {
+        NotificationsService.addNotification({
+            senderId: user?.id!,
+            recieverId: props.journey?.organizer?.id!,
+            type: NotificationType.PassengerApply,
+            jsonData: JSON.stringify({ applicantStops: props.applicantStops })
+        });
+
+        AsyncStorage.setItem("journeyId" + props.journey?.id!, "1");
+    };
+
     return (
         <View style={[
             JourneyPageStyle.buttons,

@@ -2,7 +2,9 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../../api-service/APIService";
 import NotificationsService from "../../api-service/notifications-service/NotificationsService";
+import CreateNotificationModel from "../../models/notification/CreateNotificationModel";
 import Notification from "../../models/notification/Notification";
+import NotificationType from "../../models/notification/NotificationType";
 
 describe("Location Service test", () => {
     let notificationData: Notification[] = [{
@@ -14,6 +16,13 @@ describe("Location Service test", () => {
         receiverId: 1,
         user: null,
     }];
+
+    let notificationToAdd: CreateNotificationModel = {
+        senderId: 1,
+        recieverId: 1,
+        type: NotificationType.AcceptedInvitation,
+        jsonData: ""
+    };
 
     test("should return notification", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
@@ -93,7 +102,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.addNotification(notificationData[0]).then((res) => {
+        NotificationsService.addNotification(notificationToAdd).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData[0]));
         });

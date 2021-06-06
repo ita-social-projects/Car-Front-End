@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Modal, Text } from "react-native";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import Stop from "../../../models/stop/Stop";
 import * as navigation from "../navigation/Navigation";
 import NewNotification from "../new-notification/NewNotification";
 import DM from "../styles/DM";
@@ -11,6 +12,15 @@ const RideFound = (props: RideFoundProps) => {
     const title = "created a ride";
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [applicantStops, setApplicantStops] = useState<Array<Stop>>();
+
+    useEffect(() => {
+        let stops: Array<Stop> = JSON
+            .parse(props.notificationData.toLowerCase())
+            .applicantstops;
+
+        setApplicantStops(stops);
+    }, []);
 
     return (
         <View>
@@ -61,6 +71,7 @@ const RideFound = (props: RideFoundProps) => {
                                             journeyId: JSON.parse(
                                                 props.notificationData
                                             ).journeyId,
+                                            applicantStops: applicantStops,
                                             isDriver: false,
                                             isPassenger: false,
                                         },

@@ -14,7 +14,7 @@ const props: JourneyPageProps = {
             journeyId: 1,
             isDriver: false,
             isPassenger: false,
-            applicantStops: []
+            applicantStops: [],
         },
     },
     moreOptionsPopupIsOpen: false,
@@ -119,6 +119,7 @@ test("renders correctly", async () =>
                 </ScrollView>
               </View>
               <ButtonBlock
+                applicantStops={Array []}
                 isDriver={false}
                 isPassenger={false}
                 isRequested={false}
