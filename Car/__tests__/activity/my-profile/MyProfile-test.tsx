@@ -353,7 +353,7 @@ test("renders correctly", async () =>
                     ]
                   }
                 >
-                  Address book
+                  Address Book
                 </Text>
               </View>
             </View>
