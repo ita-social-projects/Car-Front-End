@@ -17,12 +17,22 @@ const AuthProvider = ({ children }: any) => {
         EventRegister.emit(USER_STATE_CHANGE_EVENT_NAME, updatedUser);
     };
 
+    const navigateLoginWithResetIndicator = () =>
+        navigation.navigate("Login", { resetIndicator: true });
+
     return (
         <AuthContext.Provider
             value={{
                 user,
                 login: async () => {
-                    await AuthManager.signInAsync();
+                    let loginCanceled = false;
+
+                    await AuthManager.signInAsync().catch(() => {
+                        loginCanceled = true;
+                        navigateLoginWithResetIndicator();
+                    });
+
+                    if (loginCanceled) return;
 
                     let accessToken = await AuthManager.getAccessTokenAsync();
 
@@ -30,9 +40,7 @@ const AuthProvider = ({ children }: any) => {
                         const userGraph = await GraphManager.getUserAsync();
 
                         if (!userGraph) {
-                            navigation.navigate("Login", {
-                                resetIndicator: true
-                            });
+                            navigateLoginWithResetIndicator();
 
                             return;
                         }
@@ -53,21 +61,18 @@ const AuthProvider = ({ children }: any) => {
                         const dbUser = await LoginService.loginUser(tempUser);
 
                         if (!dbUser.data?.token) {
-                            navigation.navigate("Login", {
-                                resetIndicator: true
-                            });
+                            navigateLoginWithResetIndicator();
 
                             return;
                         }
 
                         const token: any = dbUser.data?.token;
 
-                        AuthManager.saveAPIToken(token);
+                        await AuthManager.saveAPIToken(token);
 
-                        AsyncStorage.setItem(
+                        await AsyncStorage.setItem(
                             "user",
-                            JSON.stringify(dbUser.data)
-                        );
+                            JSON.stringify(dbUser.data));
 
                         updateUserState(dbUser.data);
 
