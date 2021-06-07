@@ -1,8 +1,6 @@
 import SaveLocationButtonProps from "./SaveLocationButtonProps";
-import AddLocationStyle
-    from "../../activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/AddLocationStyle";
-import * as navigation from "../navigation/Navigation";
-import {Text, TouchableOpacity} from "react-native";
+import AddLocationStyle from "../../activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/AddLocationStyle";
+import { Text, TouchableOpacity } from "react-native";
 import DM from "../styles/DM";
 import React from "react";
 
