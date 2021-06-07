@@ -213,6 +213,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 .catch(() => navigation.navigate("Journey"));
         } else{
             await JourneyService.getFilteredJourneys({
+                applicantId: user?.id!,
                 fromLatitude: from.coordinates.latitude,
                 fromLongitude: from.coordinates.longitude,
                 toLatitude: to.coordinates.latitude,
@@ -220,13 +221,17 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 departureTime: departureTime,
                 hasLuggage: hasLuggage,
                 passengersCount: INITIAL_PASSENGERS_COUNT,
-                fee: fee
+                fee: fee,
             })
                 .then((res) => {
-                    if(res.data.length > EMPTY_COLLECTION_LENGTH) {
-                        let displayFee = allButtonStyle === SwitchSelectorStyle.activeButton;
+                    if (res.data.length > EMPTY_COLLECTION_LENGTH) {
+                        let displayFee =
+                            allButtonStyle === SwitchSelectorStyle.activeButton;
 
-                        navigation.navigate("OK Search Result", { journeys: res.data, displayFee: displayFee });
+                        navigation.navigate("OK Search Result", {
+                            journeys: res.data,
+                            displayFee: displayFee,
+                        });
                     } else {
                         navigation.navigate("Bad Search Result");
                     }

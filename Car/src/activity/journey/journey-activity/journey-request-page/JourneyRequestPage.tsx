@@ -56,9 +56,9 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
     const sendRequest = () => {
         NotificationsService.addNotification(
             {
-                senderId: user?.id,
-                receiverId: currentJourney?.organizer?.id!,
-                type: 1,
+                senderId: user?.id!,
+                recieverId: currentJourney?.organizer?.id!,
+                type: 0,
                 jsonData:
                 `{"title": "New Applicant", "comments": "${comments}", "hasLuggage": "${isLuggage}"}`,
             }

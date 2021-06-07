@@ -1,6 +1,7 @@
 import APIService from "../APIService";
 import Notification from "../../models/notification/Notification";
 import APIRoutes from "../APIRoutes";
+import CreateNotificationModel from "../../models/notification/CreateNotificationModel";
 
 const route = APIRoutes.getNotificationsUrl();
 
@@ -20,7 +21,7 @@ const NotificationsService = {
     markAsRead: async (notificationId: number) =>
         APIService.put(route + notificationId),
 
-    addNotification: async (notification: any) =>
+    addNotification: async (notification: CreateNotificationModel) =>
         APIService.post(route, notification),
 };
 

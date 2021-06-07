@@ -11,8 +11,9 @@ import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { JOURNEY_CARD_WITH_FEE_HEIGHT, MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
+import Stop from "../../../models/stop/Stop";
 
-const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
+const JourneyCard = (props: {journey?: Journey, displayFee?: boolean, applicantStops?: Stop[]}) => {
     const journey = props.journey;
     const { user } = useContext(AuthContext);
     const [isDriver, setIsDriver] = useState(false);
@@ -28,7 +29,8 @@ const JourneyCard = (props: {journey?: Journey, displayFee?: Boolean}) => {
         navigation.navigate("Journey Page", {
             journeyId: journey?.id,
             isDriver,
-            isPassenger
+            isPassenger,
+            applicantStops: props.applicantStops
         });
 
     const fullName = `${journey?.organizer?.name} ${journey?.organizer?.surname}`;
