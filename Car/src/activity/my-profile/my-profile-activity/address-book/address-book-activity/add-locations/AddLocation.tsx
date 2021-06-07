@@ -1,19 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { PermissionsAndroid, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Platform, TextInput, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
-import DM from "../../../../../../components/styles/DM";
 import {
     initialWayPoint,
     initialCamera,
     initialCoordinate, DEFAULT_LOCATION_ICON_ID
 } from "../../../../../../constants/AddressConstants";
-import {
-    THREE_ELEMENT_COLLECTION_LENGTH,
-    THIRD_FROM_END_ELEMENT_INDEX,
-    SECOND_FROM_END_ELEMENT_INDEX,
-    FIRST_ELEMENT_INDEX,
-    SECOND_ELEMENT_INDEX
-} from "../../../../../../constants/GeneralConstants";
 import { MAX_LOCATION_NAME_LENGTH } from "../../../../../../constants/LocationConstants";
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
@@ -27,9 +19,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AuthContext from "../../../../../../components/auth/AuthContext";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
 import {
-    CreateRequestWithAddressToGeocodingApi,
-    CreateRequestWithCoordinatesToGeocodingApi
-} from "../../../../../../utils/AddressHelperFunctions";
+    androidPermission,
+    animateCamera,
+    setCoordinatesByDescription,
+    setAddressByCoordinates,
+    addressNameSubstring
+} from "../../../../../../utils/LocationHelperFunctions";
+import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
 
 const AddLocation = () => {
 
@@ -78,42 +74,6 @@ const AddLocation = () => {
         setWayPointsTextAndIsConfirmed(address, true);
     };
 
-    const removeRegionAndPostalCode = (json: string) => {
-        const addressArray = json.split(", ");
-        const endIndex = addressArray.length > THREE_ELEMENT_COLLECTION_LENGTH ?
-            THIRD_FROM_END_ELEMENT_INDEX :
-            SECOND_FROM_END_ELEMENT_INDEX;
-
-        return addressArray.slice(FIRST_ELEMENT_INDEX, endIndex).join(", ");
-    };
-
-    const setAddressByCoordinates = (coordinates: LatLng) => {
-        fetch(CreateRequestWithCoordinatesToGeocodingApi(coordinates))
-            .then((res) => res.json())
-            .then((json) => {
-                let resultedAddress = json.results[SECOND_ELEMENT_INDEX].formatted_address;
-
-                resultedAddress = removeRegionAndPostalCode(resultedAddress);
-                setAddress(resultedAddress, coordinates);
-            });
-    };
-
-    const setCoordinatesByDescription = (description: string) => {
-
-        fetch(CreateRequestWithAddressToGeocodingApi(description))
-            .then(result => result.json())
-            .then(json => {
-                const latLng = json.results[FIRST_ELEMENT_INDEX].geometry.location;
-
-                console.log(latLng);
-
-                const coordinates: LatLng = { latitude: latLng.lat, longitude: latLng.lng };
-
-                setWayPointsCoordinates(coordinates);
-                animateCameraAndMoveMarker(coordinates);
-            });
-    };
-
     const addressInputOnPressHandler = (data: any) => {
         if (data.geometry) {
             const point = data.geometry.location;
@@ -121,7 +81,7 @@ const AddLocation = () => {
             setWayPointsCoordinates({ latitude: point.lat, longitude: point.lng });
             animateCameraAndMoveMarker({ latitude: point.lat, longitude: point.lng });
         } else {
-            setCoordinatesByDescription(data.description);
+            setCoordinatesByDescription(data.description, setWayPointsCoordinates, animateCameraAndMoveMarker);
         }
 
         setWayPointsTextAndIsConfirmed(data.description, true);
@@ -131,32 +91,8 @@ const AddLocation = () => {
     };
 
     const mapEventHandler = (event: MapEvent) => {
-        setAddressByCoordinates(event.nativeEvent.coordinate);
-
+        setAddressByCoordinates(setAddress, event.nativeEvent.coordinate);
         animateCameraAndMoveMarker(event.nativeEvent.coordinate);
-    };
-
-    const animateCamera = (coordinates: LatLng) => {
-        setMarkerCoordinates(coordinates);
-
-        mapRef.current?.animateCamera({
-            center: coordinates
-        }, { duration: 1000 });
-    };
-
-    const androidPermission = async () => {
-        try {
-            const granted = await PermissionsAndroid
-                .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("You can use the location");
-            } else {
-                console.log("Location permission denied");
-            }
-        } catch (err) {
-            console.warn(err);
-        }
     };
 
     useEffect(() => {
@@ -168,7 +104,7 @@ const AddLocation = () => {
         Geolocation.getCurrentPosition(
             (position) => {
                 setUserCoordinates(position.coords);
-                animateCamera(position.coords);
+                animateCamera(setMarkerCoordinates, position.coords, mapRef);
             },
             (error) => {
                 console.log(error);
@@ -176,11 +112,6 @@ const AddLocation = () => {
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
     }, []);
-
-    const addressNameSubstring = (addressName: string) => {
-        return addressName.substr(FIRST_ELEMENT_INDEX,
-            MAX_LOCATION_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
-    };
 
     const saveLocationHandle = async () => {
         await LocationService.add({
@@ -265,21 +196,12 @@ const AddLocation = () => {
                     coordinate={markerCoordinates}
                 />
             </MapView>
-
-            <TouchableOpacity
-                style={[AddLocationStyle.saveButton,
-                    { backgroundColor:  wayPoint.isConfirmed ? "black" : "darkgrey" }]}
-
-                disabled={!wayPoint.isConfirmed}
+            <SaveLocationButton
+                wayPointConfirmation={wayPoint.isConfirmed}
                 onPress={() => {
                     saveLocationHandle().then(() =>
-                        navigation.goBack());
-                }}
-            >
-                <Text style={[AddLocationStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
-                    Save
-                </Text>
-            </TouchableOpacity>
+                        navigation.goBack());}}
+            />
         </View>
     );
 };
