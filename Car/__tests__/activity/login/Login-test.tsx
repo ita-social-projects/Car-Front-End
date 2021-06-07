@@ -5,15 +5,11 @@ import Login from "../../../src/activity/login/Login";
 const renderer = shallowRender.createRenderer();
 
 const navigation = {
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    addListener: (event: string, callback: () => void) => () => void {},
-
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    removeListener: (event: string, callback: () => void) => () => void {},
+    addListener: () => () => {},
 };
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Login navigation={navigation}/>)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Login navigation={navigation} route={undefined as any}/>)).toMatchInlineSnapshot(`
     <View
       style={
         Array [

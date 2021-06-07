@@ -43,11 +43,7 @@ test("renders correctly", async () =>
         enabledInnerScrolling={false}
         initialSnap={1}
         onCloseEnd={[Function]}
-        refForChild={
-          Object {
-            "current": null,
-          }
-        }
+        refForChild={[Function]}
         renderContent={
           <KeyboardAwareScrollView
             enableAutomaticScroll={true}

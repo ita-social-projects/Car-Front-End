@@ -109,45 +109,9 @@ test("renders correctly", async () =>
           title="Address"
         />
       </MapView>
-      <ForwardRef
-        disabled={true}
+      <SaveLocationButton
         onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#000000",
-              "flexDirection": "row",
-              "justifyContent": "space-around",
-              "left": 660,
-              "paddingHorizontal": 16,
-              "paddingVertical": 14,
-              "position": "absolute",
-              "top": 1098,
-            },
-            Object {
-              "backgroundColor": "darkgrey",
-            },
-          ]
-        }
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "lineHeight": 20,
-                "textTransform": "uppercase",
-              },
-              Object {
-                "color": "white",
-              },
-            ]
-          }
-        >
-          Save
-        </Text>
-      </ForwardRef>
+        wayPointConfirmation={false}
+      />
     </View>
   `));

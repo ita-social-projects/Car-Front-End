@@ -33,11 +33,7 @@ test("renders correctly", async () =>
         enabledGestureInteraction={false}
         enabledInnerScrolling={false}
         initialSnap={1}
-        refForChild={
-          Object {
-            "current": null,
-          }
-        }
+        refForChild={[Function]}
         renderContent={
           <View
             style={

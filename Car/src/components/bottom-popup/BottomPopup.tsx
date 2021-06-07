@@ -7,7 +7,7 @@ import BottomPopupProps from "./BottomPopupProps";
 
 const BottomPopup = (props: BottomPopupProps) => (
     <BottomSheet
-        ref={props.refForChild}
+        ref={props.refForChild as any}
         snapPoints={props.snapPoints as any}
         renderContent={() => props.renderContent}
         renderHeader={() => (

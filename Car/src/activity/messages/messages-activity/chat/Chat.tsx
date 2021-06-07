@@ -311,7 +311,7 @@ const Chat = (properties: ChatProps) => {
                 />
             )}
             <BottomPopup
-                refForChild={moreOptionsRef}
+                refForChild={(ref) => (moreOptionsRef.current = ref)}
                 snapPoints={[CHAT_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
                 enabledInnerScrolling={false}
                 enabledGestureInteraction={false}
