@@ -43,6 +43,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Filter from "../../../../../models/journey/Filter";
 import RequestService from "../../../../../api-service/request-service/RequestService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
@@ -63,6 +64,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
+    const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
 
     useEffect(() => {
         LocationService
@@ -215,16 +218,10 @@ const SearchJourney = (props: SearchJourneyProps) => {
             console.log(request);
             RequestService.addRequest(request)
                 .then(() => {
-                    navigation.navigate("Journey");
-                    setTimeout(() => {
-                        setIsLoading(false);
-                    }, MIN_DELAY_MS);
+                    setSuccessModalVisible(true);
                 })
                 .catch(() => {
-                    navigation.navigate("Journey");
-                    setTimeout(() => {
-                        setIsLoading(false);
-                    }, MIN_DELAY_MS);
+                    setErrorModalVisible(true);
                 });
         } else{
             await JourneyService.getFilteredJourneys({
@@ -261,7 +258,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 })
                 .catch((ex) => {
                     console.log(ex);
-                    setIsLoading(false);
+                    setErrorModalVisible(true);
                 });
         }
     };
@@ -418,6 +415,44 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         </TouchableOpacity>
                     </View>
                 </View>
+            )}
+            {isRequest && (
+                <>
+                    <ConfirmModal
+                        visible={successModalVisible}
+                        title={"Success"}
+                        subtitle={"Request successfully created!"}
+                        confirmText={"OK"}
+                        hideCancelButton={true}
+                        onConfirm={() => {
+                            setSuccessModalVisible(false);
+                            setIsLoading(false);
+                            navigation.navigate("Journey");
+                        }}
+                        disableModal={() => {
+                            setSuccessModalVisible(false);
+                            setIsLoading(false);
+                            navigation.navigate("Journey");
+                        }}
+                    />
+                    <ConfirmModal
+                        visible={errorModalVisible}
+                        title={"Error"}
+                        subtitle={"Unexpected error occured :("}
+                        confirmText={"OK"}
+                        hideCancelButton={true}
+                        onConfirm={() => {
+                            setErrorModalVisible(false);
+                            setIsLoading(false);
+                            navigation.navigate("Journey");
+                        }}
+                        disableModal={() => {
+                            setErrorModalVisible(false);
+                            setIsLoading(false);
+                            navigation.navigate("Journey");
+                        }}
+                    />
+                </>
             )}
         </>
     );
