@@ -138,7 +138,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
             </Text>
 
             <BottomPopup
-                refForChild={moreOptionsRef}
+                refForChild={ref => (moreOptionsRef.current = ref)}
                 style={{ backgroundColor: DM("white") }}
                 snapPoints={[
                     MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
