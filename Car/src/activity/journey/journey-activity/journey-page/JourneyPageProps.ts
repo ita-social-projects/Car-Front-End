@@ -15,7 +15,8 @@ interface JourneyPageProps {
         // eslint-disable-next-line unused-imports/no-unused-vars
         addListener: (eventName: string, callback: () => void) => () => void
     },
-    moreOptionsPopupIsOpen: boolean
+    moreOptionsPopupIsOpen: boolean,
+    closeMoreOptionsPopup: () => void
 }
 
 export default JourneyPageProps;
