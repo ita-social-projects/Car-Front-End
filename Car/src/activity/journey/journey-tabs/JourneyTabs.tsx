@@ -56,8 +56,8 @@ const JourneyTabs = () => {
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
 
-    const ridePageMoreOptionsRef = useRef<BottomSheet>(null);
-    const createRideMoreOptionsRef = useRef<BottomSheet>(null);
+    const ridePageMoreOptionsRef = useRef<any>(null);
+    const createRideMoreOptionsRef = useRef<any>(null);
 
     const StackTabs = createStackNavigator();
 
@@ -88,6 +88,7 @@ const JourneyTabs = () => {
     };
 
     const closeMoreOptionPopup = (ref: RefObject<BottomSheet>) => {
+        console.log("closeMoreOptionPopup");
         setOpen(false);
         setVisibility(false);
         fadeOut();
@@ -138,7 +139,7 @@ const JourneyTabs = () => {
                                 </Animated.View>
 
                                 <BottomPopup
-                                    refForChild={createRideMoreOptionsRef}
+                                    refForChild={(ref) => (createRideMoreOptionsRef.current = ref)}
                                     snapPoints={[MIN_POPUP_HEIGHT, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
@@ -235,13 +236,14 @@ const JourneyTabs = () => {
                                 ]}>
                                     <JourneyPage props={{
                                         ...props,
-                                        moreOptionsPopupIsOpen: isOpen
+                                        moreOptionsPopupIsOpen: isOpen,
+                                        closeMoreOptionsPopup: () => closeMoreOptionPopup(ridePageMoreOptionsRef)
                                     }}/>
                                 </Animated.View>
 
                                 {props.route.params.isDriver &&
                                     <BottomPopup
-                                        refForChild={ridePageMoreOptionsRef}
+                                        refForChild={ref => (ridePageMoreOptionsRef.current = ref)}
                                         snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                         enabledInnerScrolling={false}
                                         onCloseEnd={closeHandle}

@@ -18,6 +18,7 @@ const props: JourneyPageProps = {
         },
     },
     moreOptionsPopupIsOpen: false,
+    closeMoreOptionsPopup: () => 0
 };
 
 test("renders correctly", async () =>

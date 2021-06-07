@@ -96,7 +96,17 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        return props.navigation?.addListener("focus", onFocusHandler);
+        const unsubscribeFromFocus = props.navigation?.addListener("focus", onFocusHandler);
+        const unsubscribeFromBlur = props.navigation?.addListener(
+            "blur", () => {
+                console.log("blur");
+                props.closeMoreOptionsPopup();
+            });
+
+        return () => {
+            unsubscribeFromFocus!();
+            unsubscribeFromBlur!();
+        };
     }, []);
 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);

@@ -28,7 +28,6 @@ import {
 import { FIRST_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyPageStyle from "../../../../journey/journey-activity/journey-page/JourneyPageStyle";
 import RemoveAddressButton from "../../../../../components/menu-remove-address-button/RemoveAddressButton";
-import BottomSheet from "reanimated-bottom-sheet";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 import LocationService from "../../../../../../api-service/location-service/LocationService";
@@ -41,7 +40,7 @@ export default function AddressBookTabs () {
     const [isVisible, setVisibility] = useState(false);
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const addressOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
-    const moreOptionsRef = useRef<BottomSheet>(null);
+    const moreOptionsRef = useRef<any>(null);
 
     const fadeIn = () => {
         setVisibility(true);
@@ -129,7 +128,7 @@ export default function AddressBookTabs () {
                                     <EditLocation />
                                 </Animated.View>
                                 <BottomPopup
-                                    refForChild={moreOptionsRef}
+                                    refForChild={ref => (moreOptionsRef.current = ref)}
                                     snapPoints={[MIN_POPUP_HEIGHT, EDIT_ADDRESS_MORE_OPTIONS_POPUP_HEIGHT]}
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
