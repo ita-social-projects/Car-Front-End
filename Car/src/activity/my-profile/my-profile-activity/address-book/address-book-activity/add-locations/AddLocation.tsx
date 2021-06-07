@@ -26,6 +26,7 @@ import {
     addressNameSubstring
 } from "../../../../../../utils/LocationHelperFunctions";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
+import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
 
 const AddLocation = () => {
 
@@ -58,6 +59,7 @@ const AddLocation = () => {
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
 
     const mapRef = useRef<MapView | null>(null);
+    const addressInputRef = useRef<GooglePlacesAutocompleteRef | null>();
 
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
 
@@ -91,6 +93,7 @@ const AddLocation = () => {
     };
 
     const mapEventHandler = (event: MapEvent) => {
+        addressInputRef.current?.blur();
         setAddressByCoordinates(setAddress, event.nativeEvent.coordinate);
         animateCameraAndMoveMarker(event.nativeEvent.coordinate);
     };
@@ -140,6 +143,7 @@ const AddLocation = () => {
                     savedLocations={[]}
                     userLocation={userCoordinates}
                     recentAddresses={[]}
+                    refFor={(ref) => (addressInputRef.current = ref)}
                 />
                 {wayPoint.isConfirmed && (
                     <>
@@ -198,9 +202,7 @@ const AddLocation = () => {
             </MapView>
             <SaveLocationButton
                 wayPointConfirmation={wayPoint.isConfirmed}
-                onPress={() => {
-                    saveLocationHandle().then(() =>
-                        navigation.goBack());}}
+                onPress={() => saveLocationHandle().then(() => navigation.goBack())}
             />
         </View>
     );
