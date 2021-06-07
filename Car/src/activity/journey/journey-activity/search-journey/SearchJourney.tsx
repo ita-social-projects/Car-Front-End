@@ -272,6 +272,18 @@ const SearchJourney = (props: SearchJourneyProps) => {
             )
         );
 
+    const errorModalDisableHandler = () => {
+        setErrorModalVisible(false);
+        setIsLoading(false);
+        navigation.navigate("Journey");
+    };
+
+    const successModalDisableHandler = () => {
+        setSuccessModalVisible(false);
+        setIsLoading(false);
+        navigation.navigate("Journey");
+    };
+
     return (
         <>
             {isLoading && (
@@ -425,14 +437,10 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         confirmText={"OK"}
                         hideCancelButton={true}
                         onConfirm={() => {
-                            setSuccessModalVisible(false);
-                            setIsLoading(false);
-                            navigation.navigate("Journey");
+                            successModalDisableHandler();
                         }}
                         disableModal={() => {
-                            setSuccessModalVisible(false);
-                            setIsLoading(false);
-                            navigation.navigate("Journey");
+                            successModalDisableHandler();
                         }}
                     />
                     <ConfirmModal
@@ -442,14 +450,10 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         confirmText={"OK"}
                         hideCancelButton={true}
                         onConfirm={() => {
-                            setErrorModalVisible(false);
-                            setIsLoading(false);
-                            navigation.navigate("Journey");
+                            errorModalDisableHandler();
                         }}
                         disableModal={() => {
-                            setErrorModalVisible(false);
-                            setIsLoading(false);
-                            navigation.navigate("Journey");
+                            errorModalDisableHandler();
                         }}
                     />
                 </>
