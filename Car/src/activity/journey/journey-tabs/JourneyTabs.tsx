@@ -318,8 +318,8 @@ const JourneyTabs = () => {
                                 visible={isNewRequestModalVisible}
                                 title="ARE YOU SURE?"
                                 subtitle="You're about to create a ride request with new filters."
-                                confirmText="Yes, Create"
-                                cancelText="No, Go back"
+                                confirmText="Yes, create"
+                                cancelText="No, go back"
                                 confirmColor={DM("black")}
                                 onConfirm={() => {
                                     setNewRequestModalVisible(false);
@@ -344,7 +344,7 @@ const JourneyTabs = () => {
                                 renderContent={
                                     <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
                                         <MenuButton
-                                            text="With the Previous Filters"
+                                            text="With the previous filters"
                                             isIcon={true}
                                             onPress={() => {
                                                 navigation.navigate("Journey Request Page",
@@ -354,7 +354,7 @@ const JourneyTabs = () => {
                                             }}
                                         />
                                         <MenuButton
-                                            text="With New Filters"
+                                            text="With new filters"
                                             isIcon={true}
                                             onPress={() => {
                                                 if(ShadowedBottomPopup)
