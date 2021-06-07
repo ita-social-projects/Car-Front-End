@@ -25,6 +25,7 @@ import {
 import {
     SECOND_ELEMENT_INDEX,
     EMPTY_COLLECTION_LENGTH,
+    MIN_DELAY_MS,
 } from "../../../../constants/GeneralConstants";
 import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import WayPoint from "../../../../types/WayPoint";
@@ -41,6 +42,8 @@ import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
 import AsyncStorage from "@react-native-community/async-storage";
 import Filter from "../../../../../models/journey/Filter";
 import RequestService from "../../../../../api-service/request-service/RequestService";
+import Indicator from "../../../../components/activity-indicator/Indicator";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
@@ -60,6 +63,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
+    const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
 
     useEffect(() => {
         LocationService
@@ -206,11 +212,17 @@ const SearchJourney = (props: SearchJourneyProps) => {
             departureTime: departureTime
         };
 
+        setIsLoading(true);
+
         if(isRequest){
             console.log(request);
             RequestService.addRequest(request)
-                .then(() => navigation.navigate("Journey"))
-                .catch(() => navigation.navigate("Journey"));
+                .then(() => {
+                    setSuccessModalVisible(true);
+                })
+                .catch(() => {
+                    setErrorModalVisible(true);
+                });
         } else{
             await JourneyService.getFilteredJourneys({
                 applicantId: user?.id!,
@@ -232,12 +244,21 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             journeys: res.data,
                             displayFee: displayFee,
                         });
+
+                        setTimeout(() => {
+                            setIsLoading(false);
+                        }, MIN_DELAY_MS);
+
                     } else {
                         navigation.navigate("Bad Search Result");
+                        setTimeout(() => {
+                            setIsLoading(false);
+                        }, MIN_DELAY_MS);
                     }
                 })
                 .catch((ex) => {
                     console.log(ex);
+                    setErrorModalVisible(true);
                 });
         }
     };
@@ -251,138 +272,193 @@ const SearchJourney = (props: SearchJourneyProps) => {
             )
         );
 
+    const errorModalDisableHandler = () => {
+        setErrorModalVisible(false);
+        setIsLoading(false);
+        navigation.navigate("Journey");
+    };
+
+    const successModalDisableHandler = () => {
+        setSuccessModalVisible(false);
+        setIsLoading(false);
+        navigation.navigate("Journey");
+    };
+
     return (
-        <View style={SearchJourneyStyle.screenContainer}>
-            <View style={SearchJourneyStyle.locationContainer}>
-                <AddressInputButton
-                    iconName={"location"}
-                    directionType={"From"}
-                    text={from.text}
-                    onPress={() =>
-                        onAddressInputButtonPressHandler(
-                            "From",
-                            LEFT_PADDING_FOR_FROM_PLACEHOLDER,
-                            "From",
-                            from
-                        )
-                    }
-                    marginBottom={15}
-                />
-                <AddressInputButton
-                    iconName={"location"}
-                    directionType={"To"}
-                    text={to.text}
-                    onPress={() =>
-                        onAddressInputButtonPressHandler(
-                            "To",
-                            LEFT_PADDING_FOR_TO_PLACEHOLDER,
-                            "To",
-                            to
-                        )
-                    }
-                    marginBottom={15}
-                />
-            </View>
-
-            <TouchableDateTimePicker
-                date={departureTime}
-                setDate={(d) => setDepartureTime(d)}
-                isConfirmed={true}
-                setIsConfirmedToTrue={() => {}}
-            />
-
-            <View style={SwitchSelectorStyle.container}>
-                <Text style={CreateJourneyStyle.text}>Fee</Text>
-                <View style={{ flexDirection: "row" }}>
-                    <TouchableOpacity
-                        style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
-                        onPress={() => {
-                            setAllButtonStyle(SwitchSelectorStyle.activeButton);
-                            setFreeButtonStyle(
-                                SwitchSelectorStyle.inactiveButton
-                            );
-                            setPaidButtonStyle(
-                                SwitchSelectorStyle.inactiveButton
-                            );
-                        }}
-                    >
-                        <Text
-                            style={[
-                                SwitchSelectorStyle.buttonText,
-                                allButtonStyle,
-                            ]}
-                        >
-                            All
-                        </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={[
-                            SwitchSelectorStyle.leftButton,
-                            freeButtonStyle,
-                        ]}
-                        onPress={() => {
-                            setAllButtonStyle(
-                                SwitchSelectorStyle.inactiveButton
-                            );
-                            setFreeButtonStyle(
-                                SwitchSelectorStyle.activeButton
-                            );
-                            setPaidButtonStyle(
-                                SwitchSelectorStyle.inactiveButton
-                            );
-                        }}
-                    >
-                        <Text
-                            style={[
-                                SwitchSelectorStyle.buttonText,
-                                freeButtonStyle,
-                            ]}
-                        >
-                            Free
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[
-                            SwitchSelectorStyle.rightButton,
-                            paidButtonStyle,
-                        ]}
-                        onPress={() => {
-                            setAllButtonStyle(
-                                SwitchSelectorStyle.inactiveButton
-                            );
-                            setFreeButtonStyle(
-                                SwitchSelectorStyle.inactiveButton
-                            );
-                            setPaidButtonStyle(
-                                SwitchSelectorStyle.activeButton
-                            );
-                        }}
-                    >
-                        <Text
-                            style={[
-                                SwitchSelectorStyle.buttonText,
-                                paidButtonStyle,
-                            ]}
-                        >
-                            Paid
-                        </Text>
-                    </TouchableOpacity>
+        <>
+            {isLoading && (
+                <View style={{ height: "85%" }}>
+                    <Indicator
+                        size="large"
+                        color="#414045"
+                        text={isRequest ? "Creating request..." : "Searching..."}
+                    />
                 </View>
-            </View>
-            <View style={SearchJourneyStyle.buttonContainer}>
-                <TouchableOpacity
-                    style={[CreateJourneyStyle.publishButton,
-                        { backgroundColor: !(to.isConfirmed && from.isConfirmed) ? "#afafaf" : "black" }]}
-                    onPress={() => {onConfirmButtonPress();}}
-                    disabled={!(to.isConfirmed && from.isConfirmed)}
-                >
-                    <Text style={CreateJourneyStyle.publishButtonText}>
-                        {isRequest ? "Create Request" : "Search"}
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+            )}
+            {!isLoading && (
+                <View style={SearchJourneyStyle.screenContainer}>
+                    <View style={SearchJourneyStyle.locationContainer}>
+                        <AddressInputButton
+                            iconName={"location"}
+                            directionType={"From"}
+                            text={from.text}
+                            onPress={() =>
+                                onAddressInputButtonPressHandler(
+                                    "From",
+                                    LEFT_PADDING_FOR_FROM_PLACEHOLDER,
+                                    "From",
+                                    from
+                                )
+                            }
+                            marginBottom={15}
+                        />
+                        <AddressInputButton
+                            iconName={"location"}
+                            directionType={"To"}
+                            text={to.text}
+                            onPress={() =>
+                                onAddressInputButtonPressHandler(
+                                    "To",
+                                    LEFT_PADDING_FOR_TO_PLACEHOLDER,
+                                    "To",
+                                    to
+                                )
+                            }
+                            marginBottom={15}
+                        />
+                    </View>
+
+                    <TouchableDateTimePicker
+                        date={departureTime}
+                        setDate={(d) => setDepartureTime(d)}
+                        isConfirmed={true}
+                        setIsConfirmedToTrue={() => {}}
+                    />
+
+                    <View style={SwitchSelectorStyle.container}>
+                        <Text style={CreateJourneyStyle.text}>Fee</Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <TouchableOpacity
+                                style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
+                                onPress={() => {
+                                    setAllButtonStyle(SwitchSelectorStyle.activeButton);
+                                    setFreeButtonStyle(
+                                        SwitchSelectorStyle.inactiveButton
+                                    );
+                                    setPaidButtonStyle(
+                                        SwitchSelectorStyle.inactiveButton
+                                    );
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        SwitchSelectorStyle.buttonText,
+                                        allButtonStyle,
+                                    ]}
+                                >
+                                    All
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[
+                                    SwitchSelectorStyle.leftButton,
+                                    freeButtonStyle,
+                                ]}
+                                onPress={() => {
+                                    setAllButtonStyle(
+                                        SwitchSelectorStyle.inactiveButton
+                                    );
+                                    setFreeButtonStyle(
+                                        SwitchSelectorStyle.activeButton
+                                    );
+                                    setPaidButtonStyle(
+                                        SwitchSelectorStyle.inactiveButton
+                                    );
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        SwitchSelectorStyle.buttonText,
+                                        freeButtonStyle,
+                                    ]}
+                                >
+                                    Free
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[
+                                    SwitchSelectorStyle.rightButton,
+                                    paidButtonStyle,
+                                ]}
+                                onPress={() => {
+                                    setAllButtonStyle(
+                                        SwitchSelectorStyle.inactiveButton
+                                    );
+                                    setFreeButtonStyle(
+                                        SwitchSelectorStyle.inactiveButton
+                                    );
+                                    setPaidButtonStyle(
+                                        SwitchSelectorStyle.activeButton
+                                    );
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        SwitchSelectorStyle.buttonText,
+                                        paidButtonStyle,
+                                    ]}
+                                >
+                                    Paid
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={SearchJourneyStyle.buttonContainer}>
+                        <TouchableOpacity
+                            style={[CreateJourneyStyle.publishButton,
+                                { backgroundColor: !(to.isConfirmed && from.isConfirmed) ? "#afafaf" : "black" }]}
+                            onPress={() => {onConfirmButtonPress();}}
+                            disabled={!(to.isConfirmed && from.isConfirmed)}
+                        >
+                            <Text style={CreateJourneyStyle.publishButtonText}>
+                                {isRequest ? "Create Request" : "Search"}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            )}
+            {isRequest && (
+                <>
+                    <ConfirmModal
+                        visible={successModalVisible}
+                        title={"Success"}
+                        subtitle={"Request successfully created!"}
+                        confirmText={"OK"}
+                        hideCancelButton={true}
+                        onConfirm={() => {
+                            successModalDisableHandler();
+                        }}
+                        disableModal={() => {
+                            successModalDisableHandler();
+                        }}
+                    />
+                    <ConfirmModal
+                        visible={errorModalVisible}
+                        title={"Error"}
+                        subtitle={"Unexpected error occured :("}
+                        confirmText={"OK"}
+                        hideCancelButton={true}
+                        onConfirm={() => {
+                            errorModalDisableHandler();
+                        }}
+                        disableModal={() => {
+                            errorModalDisableHandler();
+                        }}
+                    />
+                </>
+            )}
+        </>
     );
 };
 

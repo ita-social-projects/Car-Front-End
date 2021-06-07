@@ -7,13 +7,23 @@ import React from "react";
 const SaveLocationButton = (props: SaveLocationButtonProps) => {
     return (
         <TouchableOpacity
-            style={[AddLocationStyle.saveButton,
-                { backgroundColor:  props.wayPointConfirmation ? "black" : "darkgrey" }]}
-
+            style={[
+                AddLocationStyle.saveButton,
+                {
+                    backgroundColor: props.wayPointConfirmation
+                        ? "black"
+                        : "darkgrey",
+                },
+            ]}
             disabled={!props.wayPointConfirmation}
             onPress={props.onPress}
         >
-            <Text style={[AddLocationStyle.saveButtonSaveText, { color: DM(DM("white")) }]}>
+            <Text
+                style={[
+                    AddLocationStyle.saveButtonSaveText,
+                    { color: DM(DM("white")) },
+                ]}
+            >
                 Save
             </Text>
         </TouchableOpacity>
