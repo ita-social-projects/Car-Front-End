@@ -62,7 +62,7 @@ module.exports = {
         "semi": ["error", "always"],
     },
     "overrides": [{
-        "files": ["*Style.tsx", "Constants.tsx", "*-test.tsx", "JourneyConstants.tsx", "StylesConstants.tsx"],
+        "files": ["*Style.tsx", "Constants.tsx", "LocationHelperFunctions.ts", "*-test.tsx", "JourneyConstants.tsx", "StylesConstants.tsx"],
         "rules": {
             "no-magic-numbers": "off",
             "unused-imports/no-unused-vars": "off",
