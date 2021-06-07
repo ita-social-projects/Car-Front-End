@@ -32,6 +32,7 @@ test("renders correctly", async () =>
           paddingLeft={90}
           placeholder="Address"
           recentAddresses={Array []}
+          refFor={[Function]}
           savedLocations={Array []}
           userLocation={
             Object {

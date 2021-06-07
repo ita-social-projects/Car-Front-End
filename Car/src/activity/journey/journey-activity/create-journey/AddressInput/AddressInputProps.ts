@@ -1,4 +1,5 @@
-import { GooglePlaceData, GooglePlaceDetail } from "react-native-google-places-autocomplete";
+import { GooglePlaceData, GooglePlaceDetail, GooglePlacesAutocompleteRef }
+    from "react-native-google-places-autocomplete";
 import Location from "../../../../../../models/location/Location";
 import Address from "../../../../../../models/Address";
 import { LatLng } from "react-native-maps";
@@ -14,7 +15,9 @@ interface AddressInputProps {
     onClearIconPress: () => void,
     savedLocations: Location[],
     recentAddresses: Address[],
-    userLocation: LatLng
+    userLocation: LatLng,
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    refFor?: (r: GooglePlacesAutocompleteRef | null) => void
 }
 
 export default AddressInputProps;

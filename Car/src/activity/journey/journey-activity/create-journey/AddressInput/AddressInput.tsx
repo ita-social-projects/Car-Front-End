@@ -52,7 +52,10 @@ const AddressInput = (props: AddressInputProps) => {
 
     return (
         <GooglePlacesAutocomplete
-            ref={instance => (ref.current = instance)}
+            ref={instance => {
+                ref.current = instance;
+                props.refFor && props.refFor(instance);
+            }}
             predefinedPlaces={mapSavedLocationsToPlaces(props.savedLocations)
                 .concat(mapRecentAddressesToPlaces(props.recentAddresses))}
             onPress={props.onPress}
