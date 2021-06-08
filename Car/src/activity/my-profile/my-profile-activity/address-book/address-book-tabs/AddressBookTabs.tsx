@@ -125,7 +125,7 @@ export default function AddressBookTabs () {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: addressOpacity, backgroundColor: DM("#FFFFFF") }
                                 ]}>
-                                    <EditLocation />
+                                    <EditLocation locationId={props.route.params.carId}/>
                                 </Animated.View>
                                 <BottomPopup
                                     refForChild={ref => (moreOptionsRef.current = ref)}
