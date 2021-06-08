@@ -96,7 +96,17 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        return props.navigation?.addListener("focus", onFocusHandler);
+        const unsubscribeFromFocus = props.navigation?.addListener("focus", onFocusHandler);
+        const unsubscribeFromBlur = props.navigation?.addListener(
+            "blur", () => {
+                console.log("blur");
+                props.closeMoreOptionsPopup();
+            });
+
+        return () => {
+            unsubscribeFromFocus!();
+            unsubscribeFromBlur!();
+        };
     }, []);
 
     JourneyPage.showCancelRidePopup = () => setCancelRideModalIsVisible(true);
@@ -165,7 +175,15 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                             {currentJourney.stops.filter(stop =>
                                 stop?.type === StopType.Intermediate).map(stop => (
                                 <Marker
-                                    key={stop?.id}
+                                    key={stop?.index}
+                                    title={stop?.address?.name}
+                                    coordinate={getStopCoordinates(stop)}
+                                    image={require("../../../../../assets/images/maps-markers/Stop.png")}
+                                />))}
+
+                            {props.route.params.applicantStops?.map(stop => (
+                                <Marker
+                                    key={stop?.index}
                                     title={stop?.address?.name}
                                     coordinate={getStopCoordinates(stop)}
                                     image={require("../../../../../assets/images/maps-markers/Stop.png")}
@@ -218,6 +236,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     isPassenger={isPassenger}
                                     isRequested={isRequested}
                                     journey={currentJourney}
+                                    applicantStops={props.route.params.applicantStops}
                                 />
 
                             </View>

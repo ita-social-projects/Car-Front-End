@@ -11,6 +11,7 @@ import CreateChat from "../../../../../../models/Chat/CreateChat";
 import { StatusCodes } from "../../../../../constants/Constants";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
+
     return (
         <View style={[
             JourneyPageStyle.buttons,

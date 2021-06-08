@@ -26,6 +26,7 @@ import {
     addressNameSubstring
 } from "../../../../../../utils/LocationHelperFunctions";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
+import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
 
 const AddLocation = () => {
 
@@ -58,6 +59,7 @@ const AddLocation = () => {
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
 
     const mapRef = useRef<MapView | null>(null);
+    const addressInputRef = useRef<GooglePlacesAutocompleteRef | null>();
 
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
 
@@ -91,6 +93,7 @@ const AddLocation = () => {
     };
 
     const mapEventHandler = (event: MapEvent) => {
+        addressInputRef.current?.blur();
         setAddressByCoordinates(setAddress, event.nativeEvent.coordinate);
         animateCameraAndMoveMarker(event.nativeEvent.coordinate);
     };
@@ -140,6 +143,7 @@ const AddLocation = () => {
                     savedLocations={[]}
                     userLocation={userCoordinates}
                     recentAddresses={[]}
+                    refFor={(ref) => (addressInputRef.current = ref)}
                 />
                 {wayPoint.isConfirmed && (
                     <>
@@ -158,14 +162,14 @@ const AddLocation = () => {
                                 label: "Work", value: 4,
                                 icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/>
                             },
-                            {
-                                label: "Home", value: 3,
-                                icon: () => <Ionicons name="home-outline" size={25} color="#414045"/>
-                            },
-                            {
-                                label: "Other", value: DEFAULT_LOCATION_ICON_ID,
-                                icon: () => <Ionicons name="star-outline" size={25} color="#414045"/>
-                            }]}
+                                {
+                                    label: "Home", value: 3,
+                                    icon: () => <Ionicons name="home-outline" size={25} color="#414045"/>
+                                },
+                                {
+                                    label: "Other", value: DEFAULT_LOCATION_ICON_ID,
+                                    icon: () => <Ionicons name="star-outline" size={25} color="#414045"/>
+                                }]}
 
                             placeholder={"Choose the address type and the icon"}
                             isVisible={isVisibleLocationDropDown}
@@ -198,9 +202,7 @@ const AddLocation = () => {
             </MapView>
             <SaveLocationButton
                 wayPointConfirmation={wayPoint.isConfirmed}
-                onPress={() => {
-                    saveLocationHandle().then(() =>
-                        navigation.goBack());}}
+                onPress={() => saveLocationHandle().then(() => navigation.goBack())}
             />
         </View>
     );

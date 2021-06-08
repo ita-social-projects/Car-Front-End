@@ -298,6 +298,7 @@ const EditCars = (navigation : any) => {
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
+                            !plateNumber ||
                             !isValidPlateNumber ?
                                 [EditCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
                                 : [EditCarsStyle.carButtonSave, { backgroundColor: DM("black") }]
@@ -306,6 +307,7 @@ const EditCars = (navigation : any) => {
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
+                            !plateNumber ||
                             !isValidPlateNumber
                         }
                         onPress={() => {

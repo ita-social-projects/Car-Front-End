@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { Animated } from "react-native";
-import BottomSheet from "reanimated-bottom-sheet";
 import {
     HALF_OPACITY,
     MAX_POPUP_POSITION,
@@ -31,7 +30,7 @@ const ShadowedBottomPopup : ShadowedBottomPopupComponent = (props: BottomPopupPr
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
-    const moreOptionsRef = useRef<BottomSheet>(null);
+    const moreOptionsRef = useRef<any>(null);
 
     const fadeIn = () => {
         setVisibility(true);
@@ -69,7 +68,7 @@ const ShadowedBottomPopup : ShadowedBottomPopupComponent = (props: BottomPopupPr
 
             <BottomPopup
                 style={props.style}
-                refForChild={moreOptionsRef}
+                refForChild={ref => (moreOptionsRef.current = ref)}
                 snapPoints={props.snapPoints}
                 enabledInnerScrolling={props.enabledInnerScrolling}
                 onCloseEnd={() => {

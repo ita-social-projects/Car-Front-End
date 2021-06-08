@@ -245,11 +245,13 @@ const AddCars = () => {
                             !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
+                            !plateNumber ||
                             !isValidPlateNumber
                         }
                         style={ !selectedBrand?.value ||
                             !selectedModel?.value ||
                             !selectedColor?.value ||
+                            !plateNumber ||
                             !isValidPlateNumber ?
                             [AddCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
                             : [AddCarsStyle.carButtonSave, { backgroundColor: DM("black") }]}

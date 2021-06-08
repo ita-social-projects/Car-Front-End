@@ -5,19 +5,19 @@ import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 import { REFRESHER_TIMEOUT } from "../../constants/AnimationConstants";
 import DM from "../../components/styles/DM";
-import NavigationAddAndRemoveListener from "../../types/NavigationAddAndRemoveListener";
+import LoginProps from "./LoginProps";
 
-const Login = (properties: NavigationAddAndRemoveListener) => {
+const Login = (properties: LoginProps) => {
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    const refresher = async (props: any) => {
+    const refresher = async (intervalId: number) => {
         const apiToken = await AuthManager.getAPIToken();
         const accessToken = await AuthManager.getAccessTokenAsync();
 
         if (apiToken) {
-            clearInterval(props);
+            clearInterval(intervalId);
             loadingProcess(false);
         }
         if (!apiToken && accessToken) {
@@ -29,18 +29,20 @@ const Login = (properties: NavigationAddAndRemoveListener) => {
     };
 
     const startRefresher = () => {
-        var intervalId = setInterval(() => {
-            refresher(intervalId);
+        var intervalId = setInterval(async () => {
+            await refresher(intervalId);
         }, REFRESHER_TIMEOUT);
     };
 
     useEffect(() => {
-        properties.navigation.addListener("focus", startRefresher);
-
-        return () => {
-            properties.navigation.removeListener("focus", startRefresher);
-        };
+        return properties.navigation.addListener("focus", startRefresher);
     }, []);
+
+    useEffect(() => {
+        if (properties.route.params?.resetIndicator) {
+            loadingProcess(false);
+        }
+    }, [properties]);
 
     function loadingProcess (value: boolean) {
         setButtonDisabled(value);
@@ -87,7 +89,6 @@ const Login = (properties: NavigationAddAndRemoveListener) => {
                         onPress={() => {
                             login();
                             loadingProcess(true);
-                            setButtonDisabled(true);
                         }}
                     >
                         <Text style={[LoginStyle.buttonText, { color: DM("white") }]}>Login</Text>

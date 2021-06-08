@@ -3,9 +3,9 @@ import { FlatList, View } from "react-native";
 import JourneyCard from "../../../../../../components/journey-card/JourneyCard";
 import DM from "../../../../../../components/styles/DM";
 import OkSearchResultStyle from "./OkSearchResultStyle";
-import Journey from "../../../../../../../models/journey/Journey";
+import ApplicantJourney from "../../../../../../../models/journey/ApplicantJourney";
 
-const OkSearchResult = (props : { journeys: Journey[], displayFee: Boolean }) => (
+const OkSearchResult = (props : { journeys: ApplicantJourney[], displayFee: boolean}) => (
     <View style={[OkSearchResultStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
         <FlatList
             ListHeaderComponent={<View />}
@@ -13,7 +13,12 @@ const OkSearchResult = (props : { journeys: Journey[], displayFee: Boolean }) =>
             style={OkSearchResultStyle.list}
             data={props.journeys}
             keyExtractor={(item, index) => "" + item + index}
-            renderItem={({ item }) => <JourneyCard journey={item} displayFee={props.displayFee} />}
+            renderItem={({ item }) => (
+                <JourneyCard
+                    journey={item.journey}
+                    displayFee={props.displayFee}
+                    applicantStops={item.applicantStops}
+                />)}
         />
     </View>
 );

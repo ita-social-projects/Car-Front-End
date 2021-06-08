@@ -1,6 +1,7 @@
 import FeeType from "./FeeType";
 
-interface FilterJourneyModel{
+interface FilterJourney{
+    applicantId: number,
     fromLatitude: number,
     fromLongitude: number,
     toLatitude: number,
@@ -11,4 +12,4 @@ interface FilterJourneyModel{
     passengersCount: number
 }
 
-export default FilterJourneyModel;
+export default FilterJourney;
