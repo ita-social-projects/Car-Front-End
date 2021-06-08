@@ -41,9 +41,12 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     };
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId).then(res => {
-            setStops(filterStops(res.data?.stops!));
-        });
+        if (props.journeyId !== undefined)
+        {
+            JourneyService.getJourney(props.journeyId).then(res => {
+                setStops(filterStops(res.data?.stops!));
+            });
+        }
     }, []);
 
     return (
