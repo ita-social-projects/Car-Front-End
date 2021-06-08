@@ -11,6 +11,26 @@ import CreateChat from "../../../../../../models/Chat/CreateChat";
 import { StatusCodes } from "../../../../../constants/Constants";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
+    const onMessageToAllPress = () => {
+        const chat: CreateChat = {
+            id: props.journey?.id!,
+            name:
+                props.journey?.organizer?.name + " " +
+                props.journey?.organizer?.surname + "'s ride"
+        };
+
+        ChatService.addChat(chat).then((res) => {
+            if (res.status === StatusCodes.OK) {
+                navigation.navigate("MessagesTabs", {
+                    screen: "Chat",
+                    params: {
+                        chatId: props.journey?.id,
+                        header: res.data.name
+                    }
+                });
+            }
+        });
+    };
 
     return (
         <View style={[
@@ -23,28 +43,8 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                     <TouchableOpacity
                         style={[JourneyPageStyle.messageAllButton, {
                             backgroundColor: DM("white"),
-                            borderColor: DM("black") }
-                        ]}
-                        onPress={() => {
-                            var chat: CreateChat = {
-                                id: props.journey?.id!,
-                                name:
-                                    props.journey?.organizer?.name + " " +
-                                    props.journey?.organizer?.surname + "'s ride"
-                            };
-
-                            ChatService.addChat(chat).then((res) => {
-                                if (res.status === StatusCodes.OK) {
-                                    navigation.navigate("MessagesTabs", {
-                                        screen: "Chat",
-                                        params: {
-                                            chatId: props.journey?.id,
-                                            header: res.data.name
-                                        }
-                                    });
-                                }
-                            });
-                        }}
+                            borderColor: DM("black") }]}
+                        onPress={onMessageToAllPress}
                     >
                         <Text style={[JourneyPageStyle.messageAllButtonText, { color: DM("black") }]}>
                             Message to all

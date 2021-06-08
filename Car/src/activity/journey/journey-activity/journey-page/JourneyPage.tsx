@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -31,6 +31,7 @@ import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import { ZERO_ID } from "../../../../constants/GeneralConstants";
+import CommentsBlock from "./CommentsBlock/CommentsBlock";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -43,8 +44,9 @@ interface JourneyPageComponent {
     showCancelRidePopup: () => void,
     editJourneyDetails: () => void,
     editJourneyRoute: () => void,
+
     // eslint-disable-next-line unused-imports/no-unused-vars
-    ({ props }: {props: JourneyPageProps}): JSX.Element
+    ({ props }: { props: JourneyPageProps }): JSX.Element
 }
 
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
@@ -86,7 +88,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     };
 
     useEffect(() => {
-        !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
+        !isDriver && props.navigation?.setOptions({ headerRight: () => <View/> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
         (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
@@ -122,7 +124,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     to: mapStopToWayPoint(getStopByType(currentJourney, StopType.Finish)),
                     stops: currentJourney?.stops.filter(stop =>
                         stop?.type === StopType.Intermediate).map(mapStopToWayPoint),
-                    duration:  currentJourney.duration,
+                    duration: currentJourney.duration,
                     routeDistance: currentJourney.routeDistance,
                     routePoints: currentJourney.journeyPoints,
                 }
@@ -132,9 +134,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         navigation.navigate("Journey Details", properties.route.params);
     };
 
-    JourneyPage.editJourneyRoute = () => {
+    JourneyPage.editJourneyRoute = () =>
         navigation.navigate("Create Journey", { journey: currentJourney });
-    };
 
     const moreOptionsRef = useRef<any>(null);
 
@@ -187,63 +188,52 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     title={stop?.address?.name}
                                     coordinate={getStopCoordinates(stop)}
                                     image={require("../../../../../assets/images/maps-markers/Stop.png")}
-                                />))}
+                                />))
+                            }
                         </>)}
                 </MapView>
             </View>
 
             {!props.moreOptionsPopupIsOpen &&
-                <Portal>
-                    <BottomPopup
-                        refForChild={(ref: any) => (moreOptionsRef.current = ref)}
-                        style={{ backgroundColor: DM("white") }}
-                        snapPoints={[
-                            MAX_JOURNEY_PAGE_POPUP_HEIGHT,
-                            isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
-                        ]}
-                        initialSnap={MIN_POPUP_POSITION}
-                        enabledGestureInteraction={true}
-                        enabledInnerScrolling={true}
-                        renderContent={
-                            <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
+            <Portal>
+                <BottomPopup
+                    refForChild={(ref: any) => (moreOptionsRef.current = ref)}
+                    style={{ backgroundColor: DM("white") }}
+                    snapPoints={[
+                        MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+                        isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
+                    ]}
+                    initialSnap={MIN_POPUP_POSITION}
+                    enabledGestureInteraction={true}
+                    enabledInnerScrolling={true}
+                    renderContent={
+                        <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
-                                <View style={JourneyPageStyle.detailsBlock}>
-                                    <ScrollView
-                                        nestedScrollEnabled={true}
-                                        style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
-                                    >
-                                        <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-
-                                        <StopsBlock stops={currentJourney?.stops ?? []}/>
-
-                                        {
-                                            currentJourney?.comments ?
-                                                (
-                                                    <Text style={JourneyPageStyle.commentsBlock}>
-                                                        <Text style={JourneyPageStyle.commentsLabel}>Comments: </Text>
-                                                        <Text>{currentJourney.comments}</Text>
-                                                    </Text>
-                                                ) :
-                                                (<></>)
-                                        }
-
-                                        <ParticipantsBlock journey={currentJourney} />
-                                    </ScrollView>
-                                </View>
-
-                                <ButtonBlock
-                                    isDriver={isDriver}
-                                    isPassenger={isPassenger}
-                                    isRequested={isRequested}
-                                    journey={currentJourney}
-                                    applicantStops={props.route.params.applicantStops}
-                                />
-
+                            <View style={JourneyPageStyle.detailsBlock}>
+                                <ScrollView
+                                    nestedScrollEnabled={true}
+                                    style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
+                                >
+                                    <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
+                                    <StopsBlock stops={currentJourney?.stops ?? []}/>
+                                    <CommentsBlock comments={currentJourney?.comments} />
+                                    <ParticipantsBlock journey={currentJourney}/>
+                                </ScrollView>
                             </View>
-                        }
-                        renderHeader={<DriverBlock journey={currentJourney}/>}
-                    />
-                </Portal>
+
+                            <ButtonBlock
+                                isDriver={isDriver}
+                                isPassenger={isPassenger}
+                                isRequested={isRequested}
+                                journey={currentJourney}
+                                applicantStops={props.route.params.applicantStops}
+                            />
+
+                        </View>
+                    }
+                    renderHeader={<DriverBlock journey={currentJourney}/>}
+                />
+            </Portal>
             }
 
             <ConfirmModal
