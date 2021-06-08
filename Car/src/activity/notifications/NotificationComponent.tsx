@@ -3,8 +3,8 @@ import { View } from "react-native";
 import JourneyNewApplicant from "../../components/journey-new-applicant/JourneyNewApplicant";
 import JourneyCancellation from "../../components/notifications/journey-cancellation/JourneyCancellation";
 import JourneyDetailsUpdate from "../../components/notifications/journey-details-update/JourneyDetailsUpdate";
-import PassengerWithdrawal from "../../components/notifications/passenger-withdrawal/PassengerWithdrawal";
 import RideFound from "../../components/ride-found/RideFound";
+import PassengerWithdrawal from "../../components/notifications/passenger-withdrawal/PassengerWithdrawal";
 
 const NotificationComponent = (props: any) => {
     const [isModalVisible] = useState(false);

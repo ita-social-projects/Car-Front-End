@@ -6,7 +6,7 @@ import {
     initialCamera,
     initialCoordinate, DEFAULT_LOCATION_ICON_ID
 } from "../../../../../../constants/AddressConstants";
-import { MAX_LOCATION_NAME_LENGTH } from "../../../../../../constants/LocationConstants";
+import { LOCATION_TYPES, MAX_LOCATION_NAME_LENGTH } from "../../../../../../constants/LocationConstants";
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
@@ -15,7 +15,6 @@ import { CreateJourneyStyle } from "../../../../../journey/journey-activity/crea
 import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import AddLocationStyle from "./AddLocationStyle";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import AuthContext from "../../../../../../components/auth/AuthContext";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
 import {
@@ -158,18 +157,8 @@ const AddLocation = () => {
                             }}/>
 
                         <LocationDropDownPicker
-                            items={[{
-                                label: "Work", value: 4,
-                                icon: () => <Ionicons name="ios-briefcase-outline" size={25} color="#414045"/>
-                            },
-                                {
-                                    label: "Home", value: 3,
-                                    icon: () => <Ionicons name="home-outline" size={25} color="#414045"/>
-                                },
-                                {
-                                    label: "Other", value: DEFAULT_LOCATION_ICON_ID,
-                                    icon: () => <Ionicons name="star-outline" size={25} color="#414045"/>
-                                }]}
+                            fast-food-outline
+                            items={LOCATION_TYPES}
 
                             placeholder={"Choose the address type and the icon"}
                             isVisible={isVisibleLocationDropDown}
