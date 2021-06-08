@@ -1,0 +1,49 @@
+import React, { useState } from "react";
+import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
+import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
+import NotificationHeader from "../notification-header/NotificationHeader";
+import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
+import NotificationProps from "../NotificationProps";
+import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
+import * as navigation from "../../navigation/Navigation";
+
+const JourneyDetailsUpdate = (props: NotificationProps) => {
+    const [modalVisible, setModalVisible] = useState(props.visible);
+    const data = JSON.parse(props.notificationData);
+
+    return (
+        <>
+            <MinimizedNotification
+                notificationId={props.notificationId}
+                user={props.sender}
+                notificationTitle={"Ride details have been updated"}
+                read={props.read}
+                date={props.date}
+                openModal={() => setModalVisible(true)}
+            />
+            <NotificationModalBase isVisible={modalVisible!}>
+                <NotificationHeader
+                    title="RIDE DETAILS ARE UPDATE!"
+                    message={`The details of the ${props.sender?.name}'s ride have been updated!`}
+                    sender={props.sender}
+                    disableModal={() => setModalVisible(false)}
+                />
+
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        confirmText={"VIEW"}
+                        onConfirm={() => {
+                            navigation.navigate("Journey Page", {
+                                journeyId: data.journeyId,
+                                isDriver: false,
+                                isPassenger: true
+                            });
+                        }}
+                    />
+                </NotificationButtonGroup>
+            </NotificationModalBase>
+        </>
+    );
+};
+
+export default JourneyDetailsUpdate;
