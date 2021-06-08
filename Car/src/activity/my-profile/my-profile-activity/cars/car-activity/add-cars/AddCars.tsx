@@ -56,8 +56,9 @@ const AddCars = () => {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
-    const [photo, setPhoto] = useState({} as ImagePickerResponse);
+    const [isValidPlateNumber, setValidPlateNumber] = useState<boolean>(true);
+    const [isValidCar, setValidCar] = useState<Boolean>(false);
+    const [photo, setPhoto] = useState<ImagePickerResponse>({} as ImagePickerResponse);
 
     let modelPickerController: any;
     let brandPickerController: any;
@@ -68,6 +69,19 @@ const AddCars = () => {
             setBrands(res.data);
         });
     }, []);
+
+    useEffect(() => validateCar,
+        [plateNumber, selectedBrand, selectedColor, selectedModel]);
+
+    function validateCar () {
+        setValidCar(Boolean(
+            selectedBrand?.value &&
+            selectedModel?.value &&
+            selectedColor?.value &&
+            plateNumber &&
+            isValidPlateNumber
+        ));
+    }
 
     function validatePlateNumber () {
         setValidPlateNumber(
@@ -222,7 +236,9 @@ const AddCars = () => {
                     <CarTextInput
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
-                        onEndEditing={()=>validatePlateNumber()}
+                        onBlur={()=>
+                            validatePlateNumber()
+                        }
                     />
                     {
                         isValidPlateNumber ? null :
@@ -242,19 +258,12 @@ const AddCars = () => {
                     </Text>
                     <TouchableOpacity
                         disabled={
-                            !selectedBrand?.value ||
-                            !selectedModel?.value ||
-                            !selectedColor?.value ||
-                            !plateNumber ||
-                            !isValidPlateNumber
+                            !isValidCar
                         }
-                        style={ !selectedBrand?.value ||
-                            !selectedModel?.value ||
-                            !selectedColor?.value ||
-                            !plateNumber ||
-                            !isValidPlateNumber ?
-                            [AddCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
-                            : [AddCarsStyle.carButtonSave, { backgroundColor: DM("black") }]}
+                        style={
+                            !isValidCar ?
+                                [AddCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
+                                : [AddCarsStyle.carButtonSave, { backgroundColor: DM("black") }]}
                         onPress={() => {
                             saveCarHandle().then(() => navigation.goBack());
                         }}
