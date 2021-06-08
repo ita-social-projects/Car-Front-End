@@ -186,6 +186,7 @@ test("renders correctly", async () =>
               <View
                 style={
                   Object {
+                    "paddingHorizontal": 15,
                     "paddingTop": 8,
                   }
                 }
@@ -228,7 +229,8 @@ test("renders correctly", async () =>
               <View
                 style={
                   Object {
-                    "paddingTop": 17,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 17,
                   }
                 }
               >
@@ -252,9 +254,9 @@ test("renders correctly", async () =>
                       Object {
                         "alignItems": "center",
                         "borderWidth": 3,
-                        "height": 51,
+                        "height": 50,
                         "justifyContent": "center",
-                        "width": 300,
+                        "paddingHorizontal": 15,
                       },
                       Object {
                         "backgroundColor": "white",

@@ -126,6 +126,9 @@ test("renders correctly", async () =>
                 isPassenger={false}
                 isRequested={false}
                 journey={null}
+                onSendRequestPress={[Function]}
+                requestMode={false}
+                sendRequest={[Function]}
               />
             </View>
           }
