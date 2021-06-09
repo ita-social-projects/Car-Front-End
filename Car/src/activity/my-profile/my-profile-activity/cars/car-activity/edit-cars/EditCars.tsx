@@ -54,7 +54,8 @@ const EditCars = (navigation : any) => {
     );
 
     const [plateNumber, setPlateNumber] = useState<string>("");
-    const [isValidPlateNumber, setValidPlateNumber] = useState(true);
+    const [isValidPlateNumber, setValidPlateNumber] = useState<boolean>(true);
+    const [isValidCar, setValidCar] = useState<boolean>(true);
     const [photo, setPhoto] = useState({} as CarPhoto);
 
     let modelPickerController: any;
@@ -99,6 +100,19 @@ const EditCars = (navigation : any) => {
             setModel(carModelItem);
         }).catch((e: any) => console.log(e));
     }, []);
+
+    useEffect(() => validateCar,
+        [plateNumber, selectedBrand, selectedColor, selectedModel, isLoading]);
+
+    function validateCar () {
+        setValidCar(Boolean(
+            selectedBrand?.value &&
+            selectedModel?.value &&
+            selectedColor?.value &&
+            plateNumber &&
+            isValidPlateNumber
+        ));
+    }
 
     function validatePlateNumber () {
         setValidPlateNumber(
@@ -275,7 +289,7 @@ const EditCars = (navigation : any) => {
                         defaultValue={plateNumber}
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
-                        onEndEditing={() =>
+                        onBlur={() =>
                             validatePlateNumber()
                         }
                     />
@@ -295,20 +309,12 @@ const EditCars = (navigation : any) => {
                     </Text>
                     <TouchableOpacity
                         style={
-                            !selectedBrand?.value ||
-                            !selectedModel?.value ||
-                            !selectedColor?.value ||
-                            !plateNumber ||
-                            !isValidPlateNumber ?
+                            !isValidCar ?
                                 [EditCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
                                 : [EditCarsStyle.carButtonSave, { backgroundColor: DM("black") }]
                         }
                         disabled={
-                            !selectedBrand?.value ||
-                            !selectedModel?.value ||
-                            !selectedColor?.value ||
-                            !plateNumber ||
-                            !isValidPlateNumber
+                            !isValidCar
                         }
                         onPress={() => {
                             saveCarHandle().then(() => navigate("Cars"));

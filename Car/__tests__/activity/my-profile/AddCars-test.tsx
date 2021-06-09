@@ -197,8 +197,8 @@ test("renders correctly", async () =>
             zIndex={1000}
           />
           <CarTextInput
+            onBlur={[Function]}
             onChangeText={[Function]}
-            onEndEditing={[Function]}
             placeHolder="Plate number"
           />
         </View>

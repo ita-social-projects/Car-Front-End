@@ -6,7 +6,7 @@ interface CarTextInputProps {
     defaultValue?: string,
     error?: Error,
     errorText?: string
-    onEndEditing?: () => void
+    onBlur?: () => void
 }
 
 export default CarTextInputProps;
