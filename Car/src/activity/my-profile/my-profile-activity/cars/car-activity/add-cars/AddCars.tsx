@@ -57,7 +57,7 @@ const AddCars = () => {
 
     const [plateNumber, setPlateNumber] = useState<string>("");
     const [isValidPlateNumber, setValidPlateNumber] = useState<boolean>(true);
-    const [isValidCar, setValidCar] = useState<Boolean>(false);
+    const [isValidCar, setValidCar] = useState<boolean>(false);
     const [photo, setPhoto] = useState<ImagePickerResponse>({} as ImagePickerResponse);
 
     let modelPickerController: any;
