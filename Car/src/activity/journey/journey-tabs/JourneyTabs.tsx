@@ -88,7 +88,6 @@ const JourneyTabs = () => {
     };
 
     const closeMoreOptionPopup = (ref: RefObject<BottomSheet>) => {
-        console.log("closeMoreOptionPopup");
         setOpen(false);
         setVisibility(false);
         fadeOut();

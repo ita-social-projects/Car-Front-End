@@ -7,6 +7,7 @@ export const JOURNEY_CONTENT_HEIGHT = 201 + getStatusBarHeight();
 export const MIN_JOURNEY_PAGE_POPUP_HEIGHT = 0;
 export const MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT = 110 + getStatusBarHeight();
 export const MAX_JOURNEY_PAGE_POPUP_HEIGHT = 495 + getStatusBarHeight();
+export const REQUEST_MODE_JOURNEY_PAGE_POPUP_HEIGHT = 390 + getStatusBarHeight();
 export const MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT = 0;
 export const MEDIUM_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT = 147;
 export const MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT = 412;

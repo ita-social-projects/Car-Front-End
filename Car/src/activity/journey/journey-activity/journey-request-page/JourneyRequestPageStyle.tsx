@@ -90,11 +90,17 @@ const JourneyRequestPageStyle = StyleSheet.create({
     textInput: {
         height: 80,
         borderWidth: 2,
+        borderColor: "black",
+        fontSize: 15,
+        paddingLeft: 10,
+        textAlignVertical: "top",
+        // height: 80,
+        // borderWidth: 2,
         fontFamily: Font.OpenSans.Regular,
-        fontSize: 16,
-        lineHeight: 24,
-        padding: 16,
-        textAlignVertical: "top"
+        // fontSize: 16,
+        // lineHeight: 24,
+        // paddingHorizontal: 16,
+        // textAlignVertical: "top"
     },
 
     hintText: {
@@ -105,7 +111,8 @@ const JourneyRequestPageStyle = StyleSheet.create({
     },
 
     commentsContainer: {
-        paddingTop: 8
+        paddingTop: 8,
+        paddingHorizontal: 15
     },
 
     commentsText: {
@@ -115,7 +122,8 @@ const JourneyRequestPageStyle = StyleSheet.create({
     },
 
     chooseOptionContainer: {
-        paddingTop: 17,
+        paddingVertical: 17,
+        paddingHorizontal: 15
     },
 
     confirmButtonText: {
@@ -128,8 +136,8 @@ const JourneyRequestPageStyle = StyleSheet.create({
         borderWidth: 3,
         justifyContent: "center",
         alignItems: "center",
-        height: 51,
-        width: Dimensions.get("screen").width * 0.4
+        height: 50,
+        paddingHorizontal: 15
     },
 
     pressedButton: {
