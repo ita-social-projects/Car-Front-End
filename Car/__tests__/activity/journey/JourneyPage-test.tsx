@@ -18,7 +18,7 @@ const props: JourneyPageProps = {
         },
     },
     moreOptionsPopupIsOpen: false,
-    closeMoreOptionsPopup: () => 0
+    closeMoreOptionsPopup: () => 0,
 };
 
 test("renders correctly", async () =>
@@ -114,7 +114,7 @@ test("renders correctly", async () =>
                   <StopsBlock
                     stops={Array []}
                   />
-                  <React.Fragment />
+                  <CommentsBlock />
                   <ParticipantsBlock
                     journey={null}
                   />
@@ -126,6 +126,9 @@ test("renders correctly", async () =>
                 isPassenger={false}
                 isRequested={false}
                 journey={null}
+                onSendRequestPress={[Function]}
+                requestMode={false}
+                sendRequest={[Function]}
               />
             </View>
           }

@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import ErrorAlert from "../src/components/error-alert/ErrorAlert";
 import AuthManager from "../src/components/auth/AuthManager";
+import RNRestart from "react-native-restart";
+import { StatusCodes } from "../src/constants/Constants";
 
 const Axios = axios.create({ timeout: 20000 });
 
@@ -33,10 +35,16 @@ Axios.interceptors.response.use(
         return response;
     },
 
-    async (error: any) => {
-        var message = error.message || error.response.data;
+    async (error: AxiosError) => {
+        if (axios.isAxiosError(error)) {
+            error.response?.status === StatusCodes.UNAUTHORIZED &&
+            (async () => { await AuthManager.signOutAsync(); })().then(() =>
+                RNRestart.Restart());
+        } else {
+            var message = error!.message || error!.response!.data;
 
-        ErrorAlert(message);
+            ErrorAlert(message);
+        }
 
         return Promise.reject(error);
     }

@@ -9,8 +9,29 @@ import ButtonBlockProps from "./ButtonBlockProps";
 import ChatService from "../../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../../models/Chat/CreateChat";
 import { StatusCodes } from "../../../../../constants/Constants";
+import JourneyRequestPageStyle from "../../journey-request-page/JourneyRequestPageStyle";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
+    const onMessageToAllPress = () => {
+        const chat: CreateChat = {
+            id: props.journey?.id!,
+            name:
+                props.journey?.organizer?.name + " " +
+                props.journey?.organizer?.surname + "'s ride"
+        };
+
+        ChatService.addChat(chat).then((res) => {
+            if (res.status === StatusCodes.OK) {
+                navigation.navigate("MessagesTabs", {
+                    screen: "Chat",
+                    params: {
+                        chatId: props.journey?.id,
+                        header: res.data.name
+                    }
+                });
+            }
+        });
+    };
 
     return (
         <View style={[
@@ -23,28 +44,8 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                     <TouchableOpacity
                         style={[JourneyPageStyle.messageAllButton, {
                             backgroundColor: DM("white"),
-                            borderColor: DM("black") }
-                        ]}
-                        onPress={() => {
-                            var chat: CreateChat = {
-                                id: props.journey?.id!,
-                                name:
-                                    props.journey?.organizer?.name + " " +
-                                    props.journey?.organizer?.surname + "'s ride"
-                            };
-
-                            ChatService.addChat(chat).then((res) => {
-                                if (res.status === StatusCodes.OK) {
-                                    navigation.navigate("MessagesTabs", {
-                                        screen: "Chat",
-                                        params: {
-                                            chatId: props.journey?.id,
-                                            header: res.data.name
-                                        }
-                                    });
-                                }
-                            });
-                        }}
+                            borderColor: DM("black") }]}
+                        onPress={onMessageToAllPress}
                     >
                         <Text style={[JourneyPageStyle.messageAllButtonText, { color: DM("black") }]}>
                             Message to all
@@ -52,20 +53,35 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                     </TouchableOpacity>
                 )}
                 {!props.isDriver && !props.isPassenger && (
-                    <TouchableOpacity
-                        style={[
-                            JourneyPageStyle.requestButton,
-                            { backgroundColor: DM("black") },
-                            props.isRequested && { backgroundColor: DM("#00000033") }]}
-                        onPress={() => navigation.navigate("Journey Request Page", {
-                            journeyId: props.journey?.id
-                        })}
-                        disabled={props.isRequested}
-                    >
-                        <Text style={[JourneyPageStyle.requestButtonText, { color: DM("white") }]}>
-                            {props.isRequested ? "Requested" : "Send request"}
-                        </Text>
-                    </TouchableOpacity>
+                    props.requestMode ? (
+                        <TouchableOpacity
+                            style={[
+                                JourneyRequestPageStyle.confirmButton,
+                                {
+                                    backgroundColor: DM("white"),
+                                    borderColor: DM("black")
+                                }]}
+                            onPress={props.sendRequest}
+                            disabled={props.isRequested}
+                        >
+                            <Text style={[JourneyRequestPageStyle.confirmButtonText, { color: DM("black") }]}>
+                                Confirm
+                            </Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity
+                            style={[
+                                JourneyPageStyle.requestButton,
+                                { backgroundColor: DM("black") },
+                                props.isRequested && { backgroundColor: DM("#00000033") }]}
+                            onPress={props.onSendRequestPress}
+                            disabled={props.isRequested}
+                        >
+                            <Text style={[JourneyPageStyle.requestButtonText, { color: DM("white") }]}>
+                                {props.isRequested ? "Requested" : "Send request"}
+                            </Text>
+                        </TouchableOpacity>
+                    )
                 )}
             </View>
         </View>
