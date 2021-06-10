@@ -4,6 +4,7 @@ import APIService from "../../api-service/APIService";
 import LocationService from "../../api-service/location-service/LocationService";
 import Location from "../../models/location/Location";
 import CreateLocationModel from "../../models/location/CreateLocationModel";
+import UpdateLocationModel from "../../models/location/UpdateLocationModel";
 
 describe("Location Service test", () => {
     let createLocationModelData: CreateLocationModel[] = [{
@@ -11,6 +12,12 @@ describe("Location Service test", () => {
         name: "ABC",
         typeId: 1,
         userId: 1,
+    }];
+    let updateLocationModelData: UpdateLocationModel[] = [{
+        id: 1,
+        address: null,
+        name: "ABC",
+        typeId: 1,
     }];
     let locationData: Location[] = [{
         id: 1,
@@ -101,7 +108,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.update(locationData[0]).then((res) => {
+        LocationService.update(updateLocationModelData[0]).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData[0]));
         });
