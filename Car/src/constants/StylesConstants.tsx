@@ -1,6 +1,7 @@
 import { Dimensions } from "react-native";
 
 export const DROP_DOWN_MAX_HEIGHT = Dimensions.get("window").height / 4;
+export const TAB_WIDTH = Dimensions.get("window").width / 4;
 export const GRADIENT_START = 0;
 export const GRADIENT_END = 1;
 export const ZERO_OPACITY = 0;
