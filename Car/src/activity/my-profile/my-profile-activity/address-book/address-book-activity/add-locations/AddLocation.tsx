@@ -117,7 +117,7 @@ const AddLocation = () => {
 
     const saveLocationHandle = async () => {
         await LocationService.add({
-            name: locationName ? locationName: addressNameSubstring(wayPoint.text),
+            name: locationName || addressNameSubstring(wayPoint.text),
             address: {
                 id: 0,
                 name: wayPoint.text,
@@ -162,6 +162,7 @@ const AddLocation = () => {
 
                             placeholder={"Choose the address type and the icon"}
                             isVisible={isVisibleLocationDropDown}
+                            defaultValue={selectedLocationType.id}
                             onOpen={() => setIsVisibleLocationDropDown(true)}
                             onChangeItem={(item) => {
                                 setLocationType({ id: item.value, name: item.label });
