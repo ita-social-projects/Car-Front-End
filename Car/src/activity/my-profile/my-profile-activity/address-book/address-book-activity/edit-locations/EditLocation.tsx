@@ -130,7 +130,7 @@ const EditLocation = (props: EditLocationProps) => {
         setWayPointsTextAndIsConfirmed(data.description, true);
     };
 
-    const updateCar = async () => {
+    const updateLocation = async () => {
         await LocationService.update({
             id: props.locationId,
             name: locationName ? locationName: addressNameSubstring(wayPoint.text),
@@ -200,7 +200,7 @@ const EditLocation = (props: EditLocationProps) => {
             </MapView>
             <SaveLocationButton
                 wayPointConfirmation={wayPoint.isConfirmed}
-                onPress={() => updateCar().then(() => navigation.goBack())}
+                onPress={() => updateLocation().then(() => navigation.goBack())}
             />
         </View>
     );
