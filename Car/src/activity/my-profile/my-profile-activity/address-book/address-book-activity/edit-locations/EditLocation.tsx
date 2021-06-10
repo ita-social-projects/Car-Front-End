@@ -133,7 +133,7 @@ const EditLocation = (props: EditLocationProps) => {
     const updateLocation = async () => {
         await LocationService.update({
             id: props.locationId,
-            name: locationName ? locationName: addressNameSubstring(wayPoint.text),
+            name: locationName || addressNameSubstring(wayPoint.text),
             address: {
                 name: wayPoint.text,
                 latitude: wayPoint.coordinates.latitude,

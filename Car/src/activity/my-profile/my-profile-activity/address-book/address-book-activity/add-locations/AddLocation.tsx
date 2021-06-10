@@ -117,7 +117,7 @@ const AddLocation = () => {
 
     const saveLocationHandle = async () => {
         await LocationService.add({
-            name: locationName ? locationName: addressNameSubstring(wayPoint.text),
+            name: locationName || addressNameSubstring(wayPoint.text),
             address: {
                 id: 0,
                 name: wayPoint.text,
