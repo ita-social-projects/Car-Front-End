@@ -36,6 +36,7 @@ const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
                 onChangeItem={props.onChangeItem}
                 isVisible={props.isVisible}
                 onOpen={props.onOpen}
+                defaultValue={props.defaultValue}
 
                 controller={instance => {
                     controller.current = instance;

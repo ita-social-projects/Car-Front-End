@@ -162,6 +162,7 @@ const AddLocation = () => {
 
                             placeholder={"Choose the address type and the icon"}
                             isVisible={isVisibleLocationDropDown}
+                            defaultValue={selectedLocationType.id}
                             onOpen={() => setIsVisibleLocationDropDown(true)}
                             onChangeItem={(item) => {
                                 setLocationType({ id: item.value, name: item.label });
