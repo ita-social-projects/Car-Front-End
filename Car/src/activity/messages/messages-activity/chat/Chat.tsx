@@ -275,7 +275,6 @@ const Chat = (properties: ChatProps) => {
             ) : (
                 <GiftedChat
                     renderAvatar={(data) => renderUserAvatar(data)}
-                    placeholder="Type a message"
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     timeFormat="HH:mm"
                     dateFormat="DD.MM"
@@ -308,6 +307,8 @@ const Chat = (properties: ChatProps) => {
                     loadEarlier={isLoadMessage}
                     onLoadEarlier={loadEarlierMessages}
                     isLoadingEarlier={isLoadingEarlier}
+                    infiniteScroll={true}
+                    renderLoadEarlier={() => <View /> }
                 />
             )}
             <BottomPopup
