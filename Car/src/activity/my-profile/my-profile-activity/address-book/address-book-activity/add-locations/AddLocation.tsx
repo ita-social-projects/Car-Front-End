@@ -159,10 +159,8 @@ const AddLocation = () => {
                         <LocationDropDownPicker
                             fast-food-outline
                             items={LOCATION_TYPES}
-
                             placeholder={"Choose the address type and the icon"}
                             isVisible={isVisibleLocationDropDown}
-                            defaultValue={selectedLocationType.id}
                             onOpen={() => setIsVisibleLocationDropDown(true)}
                             onChangeItem={(item) => {
                                 setLocationType({ id: item.value, name: item.label });

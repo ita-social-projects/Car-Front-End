@@ -29,7 +29,12 @@ import SaveLocationButton from "../../../../../../components/save-location-butto
 const EditLocation = (props: EditLocationProps) => {
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
-    const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
+    const [wayPoint, setWayPoint] = useState<WayPoint>({
+        ...initialWayPoint, coordinates : {
+            latitude: initialCoordinate.latitude,
+            longitude: initialCoordinate.longitude
+        }
+    });
     const [locationName, setLocationName] = useState<string>("");
     const [isVisibleLocationDropDown, setIsVisibleLocationDropDown] = useState(false);
     const [locationType, setLocationType] = useState<{id: number, name: string}>(
