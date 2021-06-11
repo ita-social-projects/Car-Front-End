@@ -12,8 +12,28 @@ import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import DM from "../../styles/DM";
 import updateLocale from "../../styles/DTFormat";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { TAB_WIDTH } from "../../../constants/StylesConstants";
 
 const Tabs = createBottomTabNavigator();
+
+const CustomTabButton = (props: any) => (
+    <TouchableOpacity
+        {...props}
+        style={
+            props.accessibilityState.selected
+                ? [
+                    props.style,
+                    {
+                        borderTopColor: DM("black"),
+                        borderTopWidth: 2,
+                        width: TAB_WIDTH,
+                    },
+                ]
+                : [props.style, { width: TAB_WIDTH }]
+        }
+    />
+);
 
 const AppTabs = () => {
     const { user } = useContext(AuthContext);
@@ -66,24 +86,29 @@ const AppTabs = () => {
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: DM("black"),
-                inactiveTintColor: DM("#AAA9AE")
+                inactiveTintColor: DM("#AAA9AE"),
             }}
         >
             <Tabs.Screen
                 name="MessagesTabs"
                 component={MessagesTabs}
                 options={() => ({
-                    tabBarLabel: "Chats"
+                    tabBarLabel: "Chats",
+                    tabBarButton: CustomTabButton
                 })}
             />
             <Tabs.Screen
-                options={{ tabBarLabel: "My Profile" }}
+                options={() => ({
+                    tabBarLabel: "My Profile",
+                    tabBarButton: CustomTabButton
+                })}
                 name="MyProfileTabs"
                 component={MyProfileTabs}
             />
             <Tabs.Screen
                 options={() => ({
-                    tabBarLabel: "Ride"
+                    tabBarLabel: "Ride",
+                    tabBarButton: CustomTabButton
                 })}
                 name="JourneyTabs"
                 component={JourneyTabs}
@@ -92,6 +117,7 @@ const AppTabs = () => {
                 options={{
                     tabBarLabel: "Notifications",
                     tabBarBadge: tabBarBadge,
+                    tabBarButton: CustomTabButton,
                 }}
                 name="NotificationsTabs"
                 component={NotificationsTabs}
