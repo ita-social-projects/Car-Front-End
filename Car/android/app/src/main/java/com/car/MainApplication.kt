@@ -14,13 +14,6 @@ import java.lang.reflect.InvocationTargetException
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage
 
 class MainApplication : Application(), ReactApplication {
-
-    lateinit var notificationManager : NotificationManager
-    lateinit var notificationChannel: NotificationChannel
-    lateinit var builder : Notification.Builder
-    private val channelId = "com.car"
-    private val description = "Test notification"
-
     private val mReactNativeHost: ReactNativeHost = object : ReactNativeHost(this) {
         override fun getUseDeveloperSupport(): Boolean {
             return BuildConfig.DEBUG
