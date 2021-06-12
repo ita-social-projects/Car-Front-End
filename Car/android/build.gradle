@@ -3,6 +3,10 @@
 buildscript {
     ext.kotlin_version = "1.4.31"
     ext {
+        googlePlayServicesVersion = "+"
+        firebaseMessagingVersion = "21.1.0"
+
+
         buildToolsVersion = "29.0.2"
         minSdkVersion = 21
         compileSdkVersion = 29
