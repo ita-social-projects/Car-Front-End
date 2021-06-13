@@ -68,5 +68,10 @@ module.exports = {
             "unused-imports/no-unused-vars": "off",
             "max-len": "off",
         },
-    }, ]
+    }, ],
+    "settings": {
+        "react": {
+            "version" : "detect"
+        }
+    }
 };
