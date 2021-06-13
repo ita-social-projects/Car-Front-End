@@ -186,6 +186,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-background-actions')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.microsoft.signalr:signalr:1.0.0"
 
