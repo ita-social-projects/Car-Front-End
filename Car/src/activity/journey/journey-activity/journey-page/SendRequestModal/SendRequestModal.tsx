@@ -18,6 +18,7 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                 <View style={SendRequestModalStyle.background}>
                     <TouchableWithoutFeedback>
                         <View style={SendRequestModalStyle.window}>
+
                             <View style={SendRequestModalStyle.closeButtonContainer}>
                                 <TouchableOpacity
                                     style={SendRequestModalStyle.closeButton}
@@ -26,9 +27,11 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     <Ionicons name={"close"} size={30} color={"black"}/>
                                 </TouchableOpacity>
                             </View>
+
                             <Text style={SendRequestModalStyle.title}>
                                 Send request to driver
                             </Text>
+
                             <View style={SendRequestModalStyle.commentsContainer}>
                                 <Text style={[SendRequestModalStyle.commentsText, { color: DM("#414045") }]}>
                                     Comments
@@ -48,6 +51,7 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     Up to 100 symbols
                                 </Text>
                             </View>
+
                             <View style={SendRequestModalStyle.chooseOptionContainer}>
                                 <ChooseOption
                                     text={"Have you got any luggage with you?"}
@@ -55,6 +59,7 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     onValueChanged={props.onWithLuggageChange}
                                 />
                             </View>
+
                             <View style={{ alignItems: "flex-end" }}>
                                 <TouchableOpacity
                                     style={[
@@ -69,6 +74,7 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     Confirm
                                     </Text>
                                 </TouchableOpacity>
+
                             </View>
                         </View>
                     </TouchableWithoutFeedback>

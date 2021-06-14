@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
@@ -30,9 +30,18 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
-import { ZERO_ID } from "../../../../constants/GeneralConstants";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID } from "../../../../constants/GeneralConstants";
 import CommentsBlock from "./CommentsBlock/CommentsBlock";
 import SendRequestModal from "./SendRequestModal/SendRequestModal";
+import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
+import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import AuthContext from "../../../../components/auth/AuthContext";
+import NotificationType from "../../../../../models/notification/NotificationType";
+import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
+import {
+    requestSendingFailedModal, requestSuccessfullySentModal,
+    rideCancelingErrorModal
+} from "./Modals/JourneyPageModals";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -50,7 +59,7 @@ interface JourneyPageComponent {
 }
 
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
-
+    const { user } = useContext(AuthContext);
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
@@ -61,7 +70,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [requestModalIsVisible, setRequestModalIsVisible] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
-    const [cancelRideErrorModalIsVisible, setCancelRideErrorModalIsVisible] = useState(false);
+
+    const [modal, setModal] = useState<ConfirmModalProps>({ ...rideCancelingErrorModal, visible: false });
+    const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
+
     const mapRef = useRef<MapView | null>(null);
 
     const [withLuggage, setWithLuggage] = useState(false);
@@ -102,13 +114,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        const unsubscribeFromFocus = props.navigation?.addListener("focus", onFocusHandler);
-        const unsubscribeFromBlur = props.navigation?.addListener(
+        const unsubscribeFromFocus = props.navigation!.addListener("focus", onFocusHandler);
+        const unsubscribeFromBlur = props.navigation!.addListener(
             "blur", () => props.closeMoreOptionsPopup());
 
         return () => {
-            unsubscribeFromFocus!();
-            unsubscribeFromBlur!();
+            unsubscribeFromFocus();
+            unsubscribeFromBlur();
         };
     }, []);
 
@@ -139,7 +151,29 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         navigation.navigate("Create Journey", { journey: currentJourney });
 
     const sendRequest = () => {
-        console.log("Request sending...");
+        const jsonData = JSON.stringify({
+            comments: requestComments,
+            hasLuggage: withLuggage,
+            start: props.route.params.applicantStops[FIRST_ELEMENT_INDEX],
+            finish: props.route.params.applicantStops[SECOND_ELEMENT_INDEX]
+        });
+
+        NotificationsService.addNotification({
+            senderId: user!.id,
+            receiverId: currentJourney?.organizer?.id!,
+            type: NotificationType.PassengerApply,
+            jsonData: jsonData
+        }).then((res) => {
+            if (res.status == HTTP_STATUS_OK) {
+                setRequested(true);
+                (async () => {
+                    await AsyncStorage.setItem("journeyId" + currentJourney?.id, "1");
+                })().then(() => {
+                    setModal(requestSuccessfullySentModal);
+                    setRequestModalIsVisible(false);
+                });
+            }
+        }).catch(() => setModal(requestSendingFailedModal));
     };
 
     const moreOptionsRef = useRef<any>(null);
@@ -250,7 +284,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 onConfirm={() => {
                     setCancelRideModalIsVisible(false);
                     JourneyService.delete(props.route.params.journeyId)
-                        .then(() => setCancelRideSuccessModalIsVisible(true));
+                        .then(() => setCancelRideSuccessModalIsVisible(true))
+                        .catch(() => setModal(rideCancelingErrorModal));
                 }}
                 disableModal={() => setCancelRideModalIsVisible(false)}
                 subtitle={"Are you sure you want to cancel the ride?"}
@@ -262,24 +297,20 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 confirmText={"Ok"}
                 hideCancelButton={true}
                 onConfirm={() => {
-                    setCancelRideSuccessModalIsVisible(false);
+                    setCancelRideModalIsVisible(false);
                     navigation.navigate("Journey");
                 }}
                 disableModal={() => {
-                    setCancelRideSuccessModalIsVisible(false);
+                    setCancelRideModalIsVisible(false);
                     navigation.navigate("Journey");
                 }}
                 subtitle={"Ride was successfully canceled"}
             />
 
             <ConfirmModal
-                visible={cancelRideErrorModalIsVisible}
-                title={"Ride canceling"}
-                confirmText={"Ok"}
-                hideCancelButton={true}
-                onConfirm={() => setCancelRideErrorModalIsVisible(false)}
-                disableModal={() => setCancelRideErrorModalIsVisible(false)}
-                subtitle={"Ride canceling is failed"}
+                {...modal}
+                onConfirm={disableModal}
+                disableModal={disableModal}
             />
 
             <SendRequestModal

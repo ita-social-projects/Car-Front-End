@@ -167,7 +167,7 @@ test("renders correctly", async () =>
         visible={false}
       />
       <ConfirmModal
-        confirmText="Ok"
+        confirmText="OK"
         disableModal={[Function]}
         hideCancelButton={true}
         onConfirm={[Function]}
