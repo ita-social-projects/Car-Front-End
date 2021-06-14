@@ -7,9 +7,7 @@ interface ButtonBlockProps {
     isRequested: boolean,
     journey: Journey,
     applicantStops?: Stop[],
-    onSendRequestPress: () => void,
-    requestMode: boolean,
-    sendRequest: () => void
+    onSendRequestPress: () => void
 }
 
 export default ButtonBlockProps;

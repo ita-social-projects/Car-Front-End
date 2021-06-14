@@ -9,6 +9,8 @@ import { ZERO_COORDINATE } from "../constants/StylesConstants";
 import StopType from "../../models/stop/StopType";
 import Journey from "../../models/journey/Journey";
 import WayPoint from "../types/WayPoint";
+import { Marker } from "react-native-maps";
+import React from "react";
 
 export const mapStopToWayPoint = (stop?: Stop) => {
     return {
@@ -65,3 +67,19 @@ export const createStopArrayFromWayPoint = (from: WayPoint,
             };
         });
 };
+
+export const getStopCoordinates = (stop?: Stop) => {
+    return {
+        longitude: stop?.address?.longitude ?? ZERO_COORDINATE,
+        latitude: stop?.address?.latitude ?? ZERO_COORDINATE
+    };
+};
+
+export const mapStopToMarker = (stop: Stop) => (
+    <Marker
+        key={stop?.index}
+        title={stop?.address?.name}
+        coordinate={getStopCoordinates(stop)}
+        image={require("../../assets/images/maps-markers/Stop.png")}
+    />
+);
