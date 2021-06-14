@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import {
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
-    MIN_JOURNEY_PAGE_POPUP_HEIGHT, REQUEST_MODE_JOURNEY_PAGE_POPUP_HEIGHT,
+    MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_POSITION, ZERO_COORDINATE } from "../../../../constants/StylesConstants";
 import DM from "../../../../components/styles/DM";
@@ -32,8 +32,7 @@ import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageP
 import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import { ZERO_ID } from "../../../../constants/GeneralConstants";
 import CommentsBlock from "./CommentsBlock/CommentsBlock";
-import JourneyRequestPageStyle from "../journey-request-page/JourneyRequestPageStyle";
-import ChooseOption from "../../../../components/choose-opton/ChooseOption";
+import SendRequestModal from "./SendRequestModal/SendRequestModal";
 
 const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -46,7 +45,6 @@ interface JourneyPageComponent {
     showCancelRidePopup: () => void,
     editJourneyDetails: () => void,
     editJourneyRoute: () => void,
-
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: { props: JourneyPageProps }): JSX.Element
 }
@@ -60,13 +58,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
-    const [requestMode, setRequestMode] = useState(false);
+    const [requestModalIsVisible, setRequestModalIsVisible] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
     const [cancelRideErrorModalIsVisible, setCancelRideErrorModalIsVisible] = useState(false);
     const mapRef = useRef<MapView | null>(null);
 
-    const [withBaggage, setWithBaggage] = useState(false);
+    const [withLuggage, setWithLuggage] = useState(false);
     const [requestComments, setRequestComments] = useState("");
 
     const onFocusHandler = () => {
@@ -146,8 +144,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const moreOptionsRef = useRef<any>(null);
 
-    useEffect(() => console.log("upd"));
-
     return (
         <>
             <View style={[JourneyPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
@@ -191,7 +187,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     image={require("../../../../../assets/images/maps-markers/Stop.png")}
                                 />))}
 
-                            {props.route.params.applicantStops?.map(stop => (
+                            {!isDriver && props.route.params.applicantStops?.map(stop => (
                                 <Marker
                                     key={stop?.index}
                                     title={stop?.address?.name}
@@ -209,7 +205,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     refForChild={(ref: any) => (moreOptionsRef.current = ref)}
                     style={{ backgroundColor: DM("white") }}
                     snapPoints={[
-                        requestMode ? REQUEST_MODE_JOURNEY_PAGE_POPUP_HEIGHT : MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+                        MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                         isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
                     ]}
                     initialSnap={MIN_POPUP_POSITION}
@@ -218,51 +214,17 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     renderContent={
                         <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
-                            {requestMode ? (
-                                <>
-                                    <View style={JourneyRequestPageStyle.commentsContainer}>
-                                        <Text style={[JourneyRequestPageStyle.commentsText, { color: DM("#414045") }]}>
-                                            Comments
-                                        </Text>
-                                        <TextInput
-                                            style={[JourneyRequestPageStyle.textInput,
-                                                { borderColor: DM("black"), color: DM("#000000") }]}
-                                            multiline={true}
-                                            maxLength={100}
-                                            numberOfLines={10}
-                                            value={requestComments}
-                                            placeholder={"Any comments?"}
-                                            placeholderTextColor={DM("#888888")}
-                                            onChangeText={(text) => {
-                                                console.log(text);
-                                                setRequestComments(text);
-                                            }}
-                                        />
-                                        <Text style={[JourneyRequestPageStyle.hintText, { color: DM("#000000") }]}>
-                                            Up to 100 symbols
-                                        </Text>
-                                    </View>
-                                    <View style={JourneyRequestPageStyle.chooseOptionContainer}>
-                                        <ChooseOption
-                                            text={"Have you got any luggage with you?"}
-                                            value={withBaggage}
-                                            onValueChanged={(value) => setWithBaggage(value)}
-                                        />
-                                    </View>
-                                </>
-                            ) : (
-                                <View style={JourneyPageStyle.detailsBlock}>
-                                    <ScrollView
-                                        nestedScrollEnabled={true}
-                                        style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
-                                    >
-                                        <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                        <StopsBlock stops={currentJourney?.stops ?? []}/>
-                                        <CommentsBlock comments={currentJourney?.comments} />
-                                        <ParticipantsBlock journey={currentJourney}/>
-                                    </ScrollView>
-                                </View>
-                            )}
+                            <View style={JourneyPageStyle.detailsBlock}>
+                                <ScrollView
+                                    nestedScrollEnabled={true}
+                                    style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
+                                >
+                                    <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
+                                    <StopsBlock stops={currentJourney?.stops ?? []}/>
+                                    <CommentsBlock comments={currentJourney?.comments} />
+                                    <ParticipantsBlock journey={currentJourney}/>
+                                </ScrollView>
+                            </View>
 
                             <ButtonBlock
                                 isDriver={isDriver}
@@ -270,9 +232,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 isRequested={isRequested}
                                 journey={currentJourney}
                                 applicantStops={props.route.params.applicantStops}
-                                onSendRequestPress={() => setRequestMode(true)}
-                                requestMode={requestMode}
-                                sendRequest={sendRequest}
+                                onSendRequestPress={() => setRequestModalIsVisible(true)}
                             />
 
                         </View>
@@ -320,6 +280,16 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 onConfirm={() => setCancelRideErrorModalIsVisible(false)}
                 disableModal={() => setCancelRideErrorModalIsVisible(false)}
                 subtitle={"Ride canceling is failed"}
+            />
+
+            <SendRequestModal
+                comments={requestComments}
+                onCommentsChange={text => setRequestComments(text)}
+                visible={requestModalIsVisible}
+                disableNodal={() => setRequestModalIsVisible(false)}
+                withLuggage={withLuggage}
+                onWithLuggageChange={value => setWithLuggage(value)}
+                onConfirmPress={sendRequest}
             />
         </>
     );

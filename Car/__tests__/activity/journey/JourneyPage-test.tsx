@@ -127,8 +127,6 @@ test("renders correctly", async () =>
                 isRequested={false}
                 journey={null}
                 onSendRequestPress={[Function]}
-                requestMode={false}
-                sendRequest={[Function]}
               />
             </View>
           }
@@ -176,6 +174,15 @@ test("renders correctly", async () =>
         subtitle="Ride canceling is failed"
         title="Ride canceling"
         visible={false}
+      />
+      <SendRequestModal
+        comments=""
+        disableNodal={[Function]}
+        onCommentsChange={[Function]}
+        onConfirmPress={[Function]}
+        onWithLuggageChange={[Function]}
+        visible={false}
+        withLuggage={false}
       />
     </React.Fragment>
   `));
