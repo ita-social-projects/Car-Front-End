@@ -14,12 +14,11 @@ import {
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
-import { MAX_POPUP_POSITION, MIN_POPUP_POSITION, ZERO_COORDINATE } from "../../../../constants/StylesConstants";
+import { MAX_POPUP_POSITION, MIN_POPUP_POSITION } from "../../../../constants/StylesConstants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
-import Stop from "../../../../../models/stop/Stop";
 import CarBlock from "./CarBlock/CarBlock";
 import StopsBlock from "./StopsBlock/StopsBlock";
 import ParticipantsBlock from "./ParticipantsBlock/ParticipantsBlock";
@@ -29,7 +28,12 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
+import {
+    getStopByType,
+    getStopCoordinates,
+    mapStopToMarker,
+    mapStopToWayPoint
+} from "../../../../utils/JourneyHelperFunctions";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID } from "../../../../constants/GeneralConstants";
 import CommentsBlock from "./CommentsBlock/CommentsBlock";
 import SendRequestModal from "./SendRequestModal/SendRequestModal";
@@ -39,16 +43,10 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import NotificationType from "../../../../../models/notification/NotificationType";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import {
-    requestSendingFailedModal, requestSuccessfullySentModal,
+    requestSendingFailedModal,
+    requestSuccessfullySentModal,
     rideCancelingErrorModal
 } from "./Modals/JourneyPageModals";
-
-const getStopCoordinates = (stop?: Stop) => {
-    return {
-        longitude: stop?.address?.longitude ?? ZERO_COORDINATE,
-        latitude: stop?.address?.latitude ?? ZERO_COORDINATE
-    };
-};
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -212,23 +210,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 image={require("../../../../../assets/images/maps-markers/To.png")}
                             />
 
-                            {currentJourney.stops.filter(stop =>
-                                stop?.type === StopType.Intermediate).map(stop => (
-                                <Marker
-                                    key={stop?.index}
-                                    title={stop?.address?.name}
-                                    coordinate={getStopCoordinates(stop)}
-                                    image={require("../../../../../assets/images/maps-markers/Stop.png")}
-                                />))}
+                            {currentJourney.stops.filter(stop => stop?.type === StopType.Intermediate)
+                                .map(mapStopToMarker)}
 
-                            {!isDriver && props.route.params.applicantStops?.map(stop => (
-                                <Marker
-                                    key={stop?.index}
-                                    title={stop?.address?.name}
-                                    coordinate={getStopCoordinates(stop)}
-                                    image={require("../../../../../assets/images/maps-markers/Stop.png")}
-                                />))
-                            }
+                            {!isDriver && props.route.params.applicantStops?.map(mapStopToMarker)}
                         </>)}
                 </MapView>
             </View>
@@ -245,6 +230,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     initialSnap={MIN_POPUP_POSITION}
                     enabledGestureInteraction={true}
                     enabledInnerScrolling={true}
+                    renderHeader={<DriverBlock journey={currentJourney}/>}
                     renderContent={
                         <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
@@ -271,7 +257,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
                         </View>
                     }
-                    renderHeader={<DriverBlock journey={currentJourney}/>}
                 />
             </Portal>
             }
