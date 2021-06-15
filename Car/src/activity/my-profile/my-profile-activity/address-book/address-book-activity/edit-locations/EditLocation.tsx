@@ -2,7 +2,6 @@ import { Platform, TextInput, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import EditLocationProps from "./EditLocationProps";
 import {
-    addressNameSubstring,
     androidPermission,
     animateCamera, setAddressByCoordinates, setCoordinatesByDescription
 } from "../../../../../../utils/LocationHelperFunctions";
@@ -21,7 +20,7 @@ import WayPoint from "../../../../../../types/WayPoint";
 import AddLocationStyle from "../add-locations/AddLocationStyle";
 import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
-import { LOCATION_TYPES, MAX_LOCATION_NAME_LENGTH } from "../../../../../../constants/LocationConstants";
+import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
@@ -138,7 +137,7 @@ const EditLocation = (props: EditLocationProps) => {
     const updateLocation = async () => {
         await LocationService.update({
             id: props.locationId,
-            name: locationName || addressNameSubstring(wayPoint.text),
+            name: locationName || wayPoint.text,
             address: {
                 name: wayPoint.text,
                 latitude: wayPoint.coordinates.latitude,
@@ -165,7 +164,6 @@ const EditLocation = (props: EditLocationProps) => {
                 <TextInput
                     style={AddLocationStyle.textInput}
                     value={locationName}
-                    maxLength={MAX_LOCATION_NAME_LENGTH}
                     placeholder={"Name the chosen address"}
                     placeholderTextColor={"grey"}
                     onChangeText={(fromInput) => {

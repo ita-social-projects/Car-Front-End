@@ -6,7 +6,7 @@ import {
     initialCamera,
     initialCoordinate, DEFAULT_LOCATION_ICON_ID
 } from "../../../../../../constants/AddressConstants";
-import { LOCATION_TYPES, MAX_LOCATION_NAME_LENGTH } from "../../../../../../constants/LocationConstants";
+import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
@@ -22,7 +22,6 @@ import {
     animateCamera,
     setCoordinatesByDescription,
     setAddressByCoordinates,
-    addressNameSubstring
 } from "../../../../../../utils/LocationHelperFunctions";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
@@ -117,7 +116,7 @@ const AddLocation = () => {
 
     const saveLocationHandle = async () => {
         await LocationService.add({
-            name: locationName || addressNameSubstring(wayPoint.text),
+            name: locationName || wayPoint.text,
             address: {
                 id: 0,
                 name: wayPoint.text,
@@ -149,7 +148,6 @@ const AddLocation = () => {
                         <TextInput
                             style={AddLocationStyle.textInput}
                             value={locationName}
-                            maxLength={MAX_LOCATION_NAME_LENGTH}
                             placeholder={"Name the chosen address"}
                             placeholderTextColor={"grey"}
                             onChangeText={(fromInput) => {
