@@ -47,6 +47,8 @@ import {
     requestSuccessfullySentModal,
     rideCancelingErrorModal
 } from "./Modals/JourneyPageModals";
+import Stop from "../../../../../models/stop/Stop";
+import { initialCamera } from "../../../../constants/AddressConstants";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -77,6 +79,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [withLuggage, setWithLuggage] = useState(false);
     const [requestComments, setRequestComments] = useState("");
 
+    const applicantStops = props.route.params.applicantStops;
+
     const onFocusHandler = () => {
         JourneyService.getJourney(journeyId).then((res) => {
             setJourney(res.data);
@@ -104,6 +108,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     useEffect(() => {
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View/> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
+
+        applicantStops.forEach((stop) => (stop!.address!.name =
+            `${user!.name} ${user!.surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ? "Start" : "Finish"}`));
 
         (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
             if (isReq == "1") {
@@ -152,8 +159,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         const jsonData = JSON.stringify({
             comments: requestComments,
             hasLuggage: withLuggage,
-            start: props.route.params.applicantStops[FIRST_ELEMENT_INDEX],
-            finish: props.route.params.applicantStops[SECOND_ELEMENT_INDEX]
+            start: applicantStops[FIRST_ELEMENT_INDEX],
+            finish: applicantStops[SECOND_ELEMENT_INDEX]
         });
 
         NotificationsService.addNotification({
@@ -175,6 +182,34 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     };
 
     const moreOptionsRef = useRef<any>(null);
+
+    const getStopsForBottomPopup: () => Stop[] = () => {
+        if (!currentJourney) return [];
+
+        if (isDriver) {
+            return currentJourney.stops;
+        }
+
+        const stopsSource = isPassenger ? currentJourney.stops : applicantStops;
+
+        return [
+            getStopByType(currentJourney, StopType.Start)!,
+            stopsSource.filter(stop => stop!.userId === user!.id &&
+                stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+            stopsSource.filter(stop => stop!.userId === user!.id &&
+                stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+            getStopByType(currentJourney, StopType.Finish)!
+        ];
+    };
+
+    const onStopPressHandler = (stop: Stop) => {
+        moreOptionsRef.current?.snapTo(SECOND_ELEMENT_INDEX);
+
+        mapRef.current?.animateCamera({
+            ...initialCamera,
+            center: { latitude: stop!.address!.latitude, longitude: stop!.address!.longitude }
+        }, { duration: 1000 });
+    };
 
     return (
         <>
@@ -213,7 +248,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                             {currentJourney.stops.filter(stop => stop?.type === StopType.Intermediate)
                                 .map(mapStopToMarker)}
 
-                            {!isDriver && props.route.params.applicantStops?.map(mapStopToMarker)}
+                            {!isDriver && applicantStops?.map(mapStopToMarker)}
                         </>)}
                 </MapView>
             </View>
@@ -240,7 +275,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
                                 >
                                     <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                    <StopsBlock stops={currentJourney?.stops ?? []}/>
+                                    <StopsBlock
+                                        stops={getStopsForBottomPopup() ?? []}
+                                        onStopPress={onStopPressHandler}
+                                    />
                                     <CommentsBlock comments={currentJourney?.comments} />
                                     <ParticipantsBlock journey={currentJourney}/>
                                 </ScrollView>
@@ -251,7 +289,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 isPassenger={isPassenger}
                                 isRequested={isRequested}
                                 journey={currentJourney}
-                                applicantStops={props.route.params.applicantStops}
+                                applicantStops={applicantStops}
                                 onSendRequestPress={() => setRequestModalIsVisible(true)}
                             />
 
