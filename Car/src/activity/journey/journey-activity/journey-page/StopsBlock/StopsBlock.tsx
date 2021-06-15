@@ -9,8 +9,8 @@ import Stop from "../../../../../../models/stop/Stop";
 const StopsBlock = ({ stops }: {stops: Stop[]}) => {
     return (
         <View style={JourneyPageStyle.stopsBlock}>
-            {stops.length ? stops.map((item) =>
-                <View key={item?.id} style={JourneyPageStyle.stopListItem}>
+            {stops.length ? stops.map((item, index) =>
+                <View key={index} style={JourneyPageStyle.stopListItem}>
                     <View style={JourneyPageStyle.stopListItemRow}>
                         <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                         {item?.type !== StopType.Finish && (

@@ -47,6 +47,7 @@ import {
     requestSuccessfullySentModal,
     rideCancelingErrorModal
 } from "./Modals/JourneyPageModals";
+import Stop from "../../../../../models/stop/Stop";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -176,6 +177,25 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const moreOptionsRef = useRef<any>(null);
 
+    const getStopsForBottomPopup: () => Stop[] = () => {
+        if (!currentJourney) return [];
+
+        if (isDriver) {
+            return currentJourney.stops;
+        }
+
+        const stopsSource = isPassenger ? currentJourney.stops : props.route.params.applicantStops;
+
+        return [
+            getStopByType(currentJourney, StopType.Start)!,
+            stopsSource.filter(stop => stop!.userId === user!.id &&
+                stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+            stopsSource.filter(stop => stop!.userId === user!.id &&
+                stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+            getStopByType(currentJourney, StopType.Finish)!
+        ];
+    };
+
     return (
         <>
             <View style={[JourneyPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
@@ -240,7 +260,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
                                 >
                                     <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                    <StopsBlock stops={currentJourney?.stops ?? []}/>
+                                    <StopsBlock stops={getStopsForBottomPopup() ?? []}/>
                                     <CommentsBlock comments={currentJourney?.comments} />
                                     <ParticipantsBlock journey={currentJourney}/>
                                 </ScrollView>
