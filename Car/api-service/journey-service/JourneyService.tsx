@@ -32,6 +32,9 @@ const JourneyService = {
     delete: async (id: number) =>
         APIService.delete(route + id),
 
+    cancel: async (id: number) =>
+        APIService.put(route + "cancel/" + id),
+
     updateRoute: async (journey: JourneyDto) =>
         APIService.put(route + "update-route/", journey),
 

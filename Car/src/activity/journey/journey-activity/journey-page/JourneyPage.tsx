@@ -289,7 +289,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 cancelText={"No, keep it"}
                 onConfirm={() => {
                     setCancelRideModalIsVisible(false);
-                    JourneyService.delete(props.route.params.journeyId)
+                    JourneyService.cancel(props.route.params.journeyId)
                         .then(() => setCancelRideSuccessModalIsVisible(true));
                 }}
                 disableModal={() => setCancelRideModalIsVisible(false)}
