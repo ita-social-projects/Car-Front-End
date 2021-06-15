@@ -84,7 +84,6 @@ const JourneyTabs = () => {
         setVisibility(!isOpen);
         isOpen ? fadeOut() : fadeIn();
         ref?.current?.snapTo(isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION);
-
     };
 
     const closeMoreOptionPopup = (ref: RefObject<BottomSheet>) => {

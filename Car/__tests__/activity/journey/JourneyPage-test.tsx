@@ -112,6 +112,7 @@ test("renders correctly", async () =>
                     isOnOwnCar={false}
                   />
                   <StopsBlock
+                    onStopPress={[Function]}
                     stops={Array []}
                   />
                   <CommentsBlock />
