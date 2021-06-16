@@ -100,9 +100,7 @@ const RideFound = (props: NotificationProps) => {
                                     </TouchableOpacity>
 
                                     <TouchableOpacity
-                                        onPress={() => {
-                                            setIsModalVisible(false);
-                                        }}
+                                        onPress={() => setIsModalVisible(false)}
                                         style={[RideFoundStyle.button]}
                                     >
                                         <Text style={RideFoundStyle.skipButtonText}>Skip</Text>
