@@ -5,6 +5,7 @@ type CreateNotificationModel = null | {
     receiverId: number;
     type: NotificationType;
     jsonData: string;
+    journeyId: number;
 }
 
 export default CreateNotificationModel;

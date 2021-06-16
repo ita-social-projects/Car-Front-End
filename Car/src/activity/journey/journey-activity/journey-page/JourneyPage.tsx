@@ -167,7 +167,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             senderId: user!.id,
             receiverId: currentJourney?.organizer?.id!,
             type: NotificationType.PassengerApply,
-            jsonData: jsonData
+            jsonData: jsonData,
+            journeyId: currentJourney?.id!
         }).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
                 setRequested(true);
@@ -306,7 +307,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 cancelText={"No, keep it"}
                 onConfirm={() => {
                     setCancelRideModalIsVisible(false);
-                    JourneyService.delete(props.route.params.journeyId)
+                    JourneyService.cancel(props.route.params.journeyId)
                         .then(() => setCancelRideSuccessModalIsVisible(true))
                         .catch(() => setModal(rideCancelingErrorModal));
                 }}

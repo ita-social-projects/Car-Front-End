@@ -36,7 +36,8 @@ const NotificationComponent = (props: any) => {
                 sender: props.item!.sender,
                 visible: isModalVisible,
                 read: props.item!.isRead,
-                date: new Date(props.item!.createdAt)
+                date: new Date(props.item!.createdAt),
+                journeyId: props.item!.journeyId
             })}
         </View>
     );
