@@ -35,6 +35,9 @@ const JourneyService = {
     cancel: async (id: number) =>
         APIService.put(route + "cancel/" + id),
 
+    isJourneyCanceled: async (id: number) =>
+        APIService.get<boolean>(route + "is-canceled/" + id),
+
     updateRoute: async (journey: JourneyDto) =>
         APIService.put(route + "update-route/", journey),
 
