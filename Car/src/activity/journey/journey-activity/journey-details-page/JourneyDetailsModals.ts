@@ -1,12 +1,5 @@
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-
-const commonField = {
-    visible: true,
-    confirmText: "OK",
-    hideCancelButton: true,
-    disableModal: () => console.log("Disable modal"),
-    onConfirm: () => console.log("On confirm")
-};
+import { commonField } from "../../../../constants/ModalConstants";
 
 export const freeRideModal: ConfirmModalProps = {
     ...commonField,

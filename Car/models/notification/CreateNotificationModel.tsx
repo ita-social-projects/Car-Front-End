@@ -2,7 +2,7 @@ import NotificationType from "./NotificationType";
 
 type CreateNotificationModel = null | {
     senderId: number;
-    recieverId: number;
+    receiverId: number;
     type: NotificationType;
     jsonData: string;
     journeyId: number;

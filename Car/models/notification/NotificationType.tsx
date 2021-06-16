@@ -1,15 +1,18 @@
 /* eslint-disable unused-imports/no-unused-vars */
+/* eslint-disable no-magic-numbers */
+
 enum NotificationType {
-    PassengerApply,
-    ApplicationApproval,
-    JourneyCancellation,
-    JourneyDetailsUpdate,
-    JourneyInvitation,
-    AcceptedInvitation,
-    RejectedInvitation,
-    PassengerWithdrawal,
-    HRMarketingMessage,
-    HRMarketingSurvey,
+    PassengerApply = 1,
+    ApplicationApproval = 2,
+    JourneyCancellation = 3,
+    JourneyDetailsUpdate = 4,
+    JourneyInvitation = 5,
+    AcceptedInvitation = 6,
+    RejectedInvitation = 7,
+    PassengerWithdrawal = 8,
+    HRMarketingMessage = 9,
+    HRMarketingSurvey = 10,
+    RequestedJourneyCreated = 11,
 }
 
 export default NotificationType;

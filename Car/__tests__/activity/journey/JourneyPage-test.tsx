@@ -112,6 +112,7 @@ test("renders correctly", async () =>
                     isOnOwnCar={false}
                   />
                   <StopsBlock
+                    onStopPress={[Function]}
                     stops={Array []}
                   />
                   <CommentsBlock />
@@ -127,8 +128,6 @@ test("renders correctly", async () =>
                 isRequested={false}
                 journey={null}
                 onSendRequestPress={[Function]}
-                requestMode={false}
-                sendRequest={[Function]}
               />
             </View>
           }
@@ -169,13 +168,22 @@ test("renders correctly", async () =>
         visible={false}
       />
       <ConfirmModal
-        confirmText="Ok"
+        confirmText="OK"
         disableModal={[Function]}
         hideCancelButton={true}
         onConfirm={[Function]}
         subtitle="Ride canceling is failed"
         title="Ride canceling"
         visible={false}
+      />
+      <SendRequestModal
+        comments=""
+        disableNodal={[Function]}
+        onCommentsChange={[Function]}
+        onConfirmPress={[Function]}
+        onWithLuggageChange={[Function]}
+        visible={false}
+        withLuggage={false}
       />
     </React.Fragment>
   `));
