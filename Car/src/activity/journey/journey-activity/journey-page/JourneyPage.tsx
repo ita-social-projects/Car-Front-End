@@ -109,7 +109,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View/> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
-        applicantStops.forEach((stop) => (stop!.address!.name =
+        applicantStops?.forEach((stop) => (stop!.address!.name =
             `${user!.name} ${user!.surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ? "Start" : "Finish"}`));
 
         (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {

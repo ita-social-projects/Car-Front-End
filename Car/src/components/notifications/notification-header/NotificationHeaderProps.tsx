@@ -4,6 +4,7 @@ interface NotificationHeaderProps {
     title: string,
     message: string,
     sender: User,
+    withoutSnooze?: boolean,
     disableModal: () => void
 }
 
