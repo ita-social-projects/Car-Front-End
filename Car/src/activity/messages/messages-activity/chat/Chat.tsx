@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Clipboard, TouchableOpacity, View } from "react-native";
+import { Animated, Clipboard, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     Bubble,
+    BubbleProps,
     GiftedChat,
+    IMessage,
     InputToolbar,
     Send,
 } from "react-native-gifted-chat";
@@ -18,9 +20,10 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import {
     CHAT_POPUP_HEIGHT,
     COUNT_OF_MESSAGES_TO_LOAD,
-    FIRST_LOADING_MESSAGES
 } from "../../../../constants/MessageConstants";
 import {
+    HALF_OPACITY,
+    MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
     MIN_POPUP_POSITION
@@ -37,14 +40,17 @@ import MenuButton from "../../../../components/menu-button/MenuButton";
 import ChatProps from "./ChatProps";
 
 const Chat = (properties: ChatProps) => {
-    const [messages, setMessages] = useState<object[]>([]);
+    const [messages, setMessages] = useState<IMessage[]>([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [connection, setConnection] = useState<HubConnection>();
     const [isLoading, setSpinner] = useState(true);
     const [isSendDisabled, setDisabled] = useState(true);
     const [isLoadingEarlier, setLoadingEarlier] = useState(false);
+    const [isLoadingNewer, setLoadingNewer] = useState(false);
     const [isLoadMessage, setLoadMessage] = useState(true);
+    const fadeAnim = useRef(new Animated.Value(HALF_OPACITY)).current;
+    const chatRef = useRef<GiftedChat>(null);
 
     useEffect(() => {
         (() => {
@@ -70,7 +76,15 @@ const Chat = (properties: ChatProps) => {
                     properties.route.params.chatId.toString()
                 ).catch((err: any) => console.log(err));
             });
-            loadMessages(FIRST_LOADING_MESSAGES)
+
+            let id = properties.route.params.messageId;
+            let messagesBelow = 2;
+
+            if (id) {
+                id += messagesBelow;
+            }
+
+            loadMessages(id)
                 .then((res) => {
                     setMessages(res);
                     setSpinner(false);
@@ -131,30 +145,47 @@ const Chat = (properties: ChatProps) => {
         }
     };
 
-    const renderBubble = (props: any) => (
-        <Bubble
-            {...props}
-            wrapperStyle={{
-                left: {
-                    backgroundColor: DM("#F1F1F4")
-                },
-                right: {
-                    backgroundColor: DM("#EB7A89")
-                }
+    React.useEffect(() => {
+        Animated.timing(
+            fadeAnim,
+            {
+                toValue: 1,
+                duration: 5000,
+                useNativeDriver: true
+            }
+        ).start();
+    }, [fadeAnim]);
+
+    const renderBubble = (props: BubbleProps<IMessage>) => (
+        <Animated.View
+            style={{
+                opacity: props.currentMessage?._id === properties.route.params.messageId ? fadeAnim : MAX_OPACITY
             }}
-            textStyle={{
-                left: {
-                    color: DM("#000000"),
-                    paddingHorizontal: 8,
-                    paddingVertical: 2
-                },
-                right: {
-                    color: "#FFFFFF",
-                    paddingHorizontal: 8,
-                    paddingVertical: 2
-                }
-            }}
-        />
+        >
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    left: {
+                        backgroundColor: DM("#F1F1F4"),
+                    },
+                    right: {
+                        backgroundColor: DM("#EB7A89"),
+                    }
+                }}
+                textStyle={{
+                    left: {
+                        color: DM("#000000"),
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
+                    },
+                    right: {
+                        color: "#FFFFFF",
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
+                    }
+                }}
+            />
+        </Animated.View>
     );
 
     const renderSend = (props: any) => (
@@ -225,7 +256,7 @@ const Chat = (properties: ChatProps) => {
         let tempChat: any = [];
 
         return ChatService.getCeratinChat(
-            properties?.route?.params?.chatId, messageId)
+            properties?.route.params.chatId, messageId)
             .then((res: any) => {
                 res.data?.forEach((data: any) => {
                     const messageToAdd = {
@@ -245,7 +276,8 @@ const Chat = (properties: ChatProps) => {
                 if (tempChat.length < COUNT_OF_MESSAGES_TO_LOAD) {
                     setLoadMessage(false);
                 }
-            }).then(() => tempChat);
+            })
+            .then(() => tempChat);
     };
 
     const loadEarlierMessages = () => {
@@ -264,6 +296,49 @@ const Chat = (properties: ChatProps) => {
             });
     };
 
+    const loadNewerMessages = () => {
+        setLoadingNewer(true);
+        let firstElement = messages[FIRST_ELEMENT_INDEX];
+        let messagesBelow = 51;
+        let id = Number(firstElement._id) + messagesBelow;
+
+        loadMessages(id).then(res => {
+            setMessages((previousMessages) => {
+                let temp = GiftedChat.append(
+                    res,
+                    previousMessages as any
+                );
+
+                const onlyUniqueMessages = (arr: IMessage[]) =>
+                    arr.filter((value, index, array) =>
+                        array.map(obj => obj._id)
+                            .indexOf(value._id) === index);
+
+                const sortMessagesById = (arr: IMessage[]) =>
+                    arr.sort((a,b) => Number(b._id) - Number(a._id));
+
+                return sortMessagesById(onlyUniqueMessages(temp));
+            });
+            setLoadingNewer(false);
+        });
+        let miliseconds = 10;
+
+        setTimeout(() => {
+            chatRef.current?._messageContainerRef?.current?.scrollToItem({
+                animated: false, item: firstElement, viewPosition: 0.2 });
+        }, miliseconds);
+    };
+
+    let zero = 0;
+    const scrollHandler = {
+        onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+            if (event.nativeEvent.contentOffset.y === zero && !isLoadingNewer) {
+                loadNewerMessages();
+            }
+        },
+        initialNumToRender: 51,
+    };
+
     return (
         <View style={[ChatStyle.chatWrapper, { backgroundColor: DM("white") }]}>
             {isLoading ? (
@@ -274,6 +349,8 @@ const Chat = (properties: ChatProps) => {
                 />
             ) : (
                 <GiftedChat
+                    listViewProps={scrollHandler}
+                    ref={chatRef}
                     renderAvatar={(data) => renderUserAvatar(data)}
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     timeFormat="HH:mm"
@@ -308,7 +385,13 @@ const Chat = (properties: ChatProps) => {
                     onLoadEarlier={loadEarlierMessages}
                     isLoadingEarlier={isLoadingEarlier}
                     infiniteScroll={true}
-                    renderLoadEarlier={() => <View /> }
+                    renderLoadEarlier={() => isLoadingEarlier ?
+                        <Indicator
+                            size="large"
+                            color={DM("#414045")}
+                            text="Loading information..."
+                        /> : <View />
+                    }
                 />
             )}
             <BottomPopup

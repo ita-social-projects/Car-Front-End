@@ -9,6 +9,7 @@ describe("Chat Service test", () => {
         id: 1,
         name: "string",
         messageText: "string",
+        messageId: 1,
         journey: {
             departureTime: new Date()
         },
