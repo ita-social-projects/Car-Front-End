@@ -112,6 +112,7 @@ test("renders correctly", async () =>
                     isOnOwnCar={false}
                   />
                   <StopsBlock
+                    notHighlightedTextColor="black"
                     onStopPress={[Function]}
                     stops={Array []}
                   />
@@ -165,6 +166,15 @@ test("renders correctly", async () =>
         onConfirm={[Function]}
         subtitle="Ride was successfully canceled"
         title="Ride canceling"
+        visible={false}
+      />
+      <ConfirmModal
+        confirmText="Ok"
+        disableModal={[Function]}
+        hideCancelButton={true}
+        onConfirm={[Function]}
+        subtitle="Your request was successfully sent to the driver"
+        title="Request sending"
         visible={false}
       />
       <ConfirmModal

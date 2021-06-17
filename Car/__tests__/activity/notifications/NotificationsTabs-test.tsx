@@ -37,6 +37,28 @@ test("renders correctly", async () =>
             }
           }
         />
+        <Screen
+          component={[Function]}
+          name="Route View"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "View Stops",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "black",
+                },
+              ],
+            }
+          }
+        />
       </StackNavigator>
     </View>
   `));

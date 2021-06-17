@@ -44,7 +44,6 @@ import NotificationType from "../../../../../models/notification/NotificationTyp
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import {
     requestSendingFailedModal,
-    requestSuccessfullySentModal,
     rideCancelingErrorModal
 } from "./Modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
@@ -70,6 +69,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [requestModalIsVisible, setRequestModalIsVisible] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
+    const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false);
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...rideCancelingErrorModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
@@ -159,8 +159,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         const jsonData = JSON.stringify({
             comments: requestComments,
             hasLuggage: withLuggage,
-            start: applicantStops[FIRST_ELEMENT_INDEX],
-            finish: applicantStops[SECOND_ELEMENT_INDEX]
+            start: applicantStops?.[FIRST_ELEMENT_INDEX],
+            finish: applicantStops?.[SECOND_ELEMENT_INDEX]
         });
 
         NotificationsService.addNotification({
@@ -175,7 +175,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 (async () => {
                     await AsyncStorage.setItem("journeyId" + currentJourney?.id, "1");
                 })().then(() => {
-                    setModal(requestSuccessfullySentModal);
+                    setRequestSuccessfullySentModalIsVisible(true);
                     setRequestModalIsVisible(false);
                 });
             }
@@ -195,9 +195,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
         return [
             getStopByType(currentJourney, StopType.Start)!,
-            stopsSource.filter(stop => stop!.userId === user!.id &&
+            stopsSource!.filter(stop => stop!.userId === user!.id &&
                 stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-            stopsSource.filter(stop => stop!.userId === user!.id &&
+            stopsSource!.filter(stop => stop!.userId === user!.id &&
                 stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
             getStopByType(currentJourney, StopType.Finish)!
         ];
@@ -279,6 +279,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     <StopsBlock
                                         stops={getStopsForBottomPopup() ?? []}
                                         onStopPress={onStopPressHandler}
+                                        notHighlightedTextColor={"black"}
                                     />
                                     <CommentsBlock comments={currentJourney?.comments} />
                                     <ParticipantsBlock journey={currentJourney}/>
@@ -329,6 +330,22 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     navigation.navigate("Journey");
                 }}
                 subtitle={"Ride was successfully canceled"}
+            />
+
+            <ConfirmModal
+                visible={requestSuccessfullySentModalIsVisible}
+                title={"Request sending"}
+                confirmText={"Ok"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setRequestSuccessfullySentModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setRequestSuccessfullySentModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                subtitle={"Your request was successfully sent to the driver"}
             />
 
             <ConfirmModal

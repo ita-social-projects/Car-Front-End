@@ -244,6 +244,17 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontFamily: Font.ProximaNova.Bold,
         fontSize: "1.1rem",
         letterSpacing: "0.05rem"
+    },
+
+    applicantStopsText: {
+        fontWeight: "bold",
+        fontSize: 16,
+        paddingTop: 15,
+        paddingBottom: 5
+    },
+
+    tipsText: {
+        color: "#717172"
     }
 });
 
