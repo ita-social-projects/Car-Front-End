@@ -86,11 +86,13 @@ test("renders correctly", async () =>
               2,
             ]
           }
+          notHighlightedTextColor="#AAA9AE"
           onStopPress={[Function]}
           stops={Array []}
         />
         <NotificationButtonGroup>
           <NotificationConfirmButton
+            confirmText="ACCEPT"
             onConfirm={[Function]}
           />
           <NotificationDeclineButton

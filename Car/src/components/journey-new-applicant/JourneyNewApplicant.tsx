@@ -12,19 +12,23 @@ import WithLuggage from "./WithLuggage/WithLuggage";
 import StopsBlock from "../../activity/journey/journey-activity/journey-page/StopsBlock/StopsBlock";
 import Stop from "../../../models/stop/Stop";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
-import { getStopByType } from "../../utils/JourneyHelperFunctions";
+import { getStopByType, getStopCoordinates } from "../../utils/JourneyHelperFunctions";
 import StopType from "../../../models/stop/StopType";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
+import JourneyPoint from "../../../models/journey/JourneyPoint";
+import * as navigation from "../../components/navigation/Navigation";
 
 const JourneyNewApplicant = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible ?? false);
     const data = JSON.parse(props.notificationData);
     const [stops, setStops] = useState<Stop[]>([]);
-    const senders = data?.start?.address.name.slice(FIRST_ELEMENT_INDEX, " start".length);
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
+    const senders = data?.start?.address.name.slice(FIRST_ELEMENT_INDEX, -" start".length);
 
     useEffect(() => {
         JourneyService.getJourney(props.journeyId!).then(res => {
+            setJourneyPoints(res.data!.journeyPoints);
             setStops([
                 getStopByType(res.data, StopType.Start)!,
                 data?.start,
@@ -33,6 +37,15 @@ const JourneyNewApplicant = (props: NotificationProps) => {
             ]);
         });
     }, []);
+
+    const onStopPressHandler = (stop: Stop) => {
+        setModalVisible(false);
+        navigation.navigate("Route View", {
+            stops: stops,
+            journeyPoints: journeyPoints,
+            cameraCoordinates: getStopCoordinates(stop)
+        });
+    };
 
     return (
         <>
@@ -61,16 +74,20 @@ const JourneyNewApplicant = (props: NotificationProps) => {
                 <Text style={JourneyNewApplicantStyle.tipsText}>Tap on stop to view it on the map</Text>
                 <StopsBlock
                     stops={stops}
-                    onStopPress={stop => console.log(stop)}
+                    onStopPress={onStopPressHandler}
                     highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                    notHighlightedTextColor={"#AAA9AE"}
                 />
 
                 <NotificationButtonGroup>
-                    <NotificationConfirmButton onConfirm={() => setModalVisible(false)} />
+                    <NotificationConfirmButton
+                        confirmText={"ACCEPT"}
+                        onConfirm={() => setModalVisible(false)}
+                    />
 
                     <NotificationDeclineButton
                         declineText={"Decline"}
-                        onDecline={() => setModalVisible(true)}
+                        onDecline={() => setModalVisible(false)}
                     />
                 </NotificationButtonGroup>
             </NotificationModalBase>

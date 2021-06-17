@@ -11,10 +11,14 @@ interface StopsBlockProps {
     stops: Stop[],
     // eslint-disable-next-line unused-imports/no-unused-vars
     onStopPress: (stop: Stop) => void,
-    highlightedStops?: number[]
+    highlightedStops?: number[],
+    notHighlightedTextColor: string
 }
 
-const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
+const StopsBlock = ({ stops, onStopPress, highlightedStops, notHighlightedTextColor }: StopsBlockProps) => {
+    const getTextColor = (index: number) =>
+        highlightedStops?.includes(index) ? "#0086cf" : notHighlightedTextColor;
+
     const getDotColor = (index: number) =>
         highlightedStops?.includes(index) ? "#0086cf" : "#AAA9AE";
 
@@ -43,7 +47,7 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                             ]} />
                         )}
                     </View>
-                    <Text style={{ color: DM(getDotColor(index)) }}>
+                    <Text style={{ color: DM(getTextColor(index)) }}>
                         {item?.address?.name}
                     </Text>
                 </TouchableOpacity>

@@ -279,6 +279,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     <StopsBlock
                                         stops={getStopsForBottomPopup() ?? []}
                                         onStopPress={onStopPressHandler}
+                                        notHighlightedTextColor={"black"}
                                     />
                                     <CommentsBlock comments={currentJourney?.comments} />
                                     <ParticipantsBlock journey={currentJourney}/>
