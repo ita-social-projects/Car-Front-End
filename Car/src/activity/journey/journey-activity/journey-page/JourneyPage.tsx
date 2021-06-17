@@ -159,8 +159,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         const jsonData = JSON.stringify({
             comments: requestComments,
             hasLuggage: withLuggage,
-            start: applicantStops[FIRST_ELEMENT_INDEX],
-            finish: applicantStops[SECOND_ELEMENT_INDEX]
+            start: applicantStops?.[FIRST_ELEMENT_INDEX],
+            finish: applicantStops?.[SECOND_ELEMENT_INDEX]
         });
 
         NotificationsService.addNotification({
@@ -195,9 +195,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
         return [
             getStopByType(currentJourney, StopType.Start)!,
-            stopsSource.filter(stop => stop!.userId === user!.id &&
+            stopsSource!.filter(stop => stop!.userId === user!.id &&
                 stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-            stopsSource.filter(stop => stop!.userId === user!.id &&
+            stopsSource!.filter(stop => stop!.userId === user!.id &&
                 stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
             getStopByType(currentJourney, StopType.Finish)!
         ];
