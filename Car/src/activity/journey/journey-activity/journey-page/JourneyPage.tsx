@@ -44,7 +44,6 @@ import NotificationType from "../../../../../models/notification/NotificationTyp
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
 import {
     requestSendingFailedModal,
-    requestSuccessfullySentModal,
     rideCancelingErrorModal
 } from "./Modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
@@ -70,6 +69,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [requestModalIsVisible, setRequestModalIsVisible] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
+    const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false);
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...rideCancelingErrorModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
@@ -175,7 +175,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 (async () => {
                     await AsyncStorage.setItem("journeyId" + currentJourney?.id, "1");
                 })().then(() => {
-                    setModal(requestSuccessfullySentModal);
+                    setRequestSuccessfullySentModalIsVisible(true);
                     setRequestModalIsVisible(false);
                 });
             }
@@ -329,6 +329,22 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     navigation.navigate("Journey");
                 }}
                 subtitle={"Ride was successfully canceled"}
+            />
+
+            <ConfirmModal
+                visible={requestSuccessfullySentModalIsVisible}
+                title={"Request sending"}
+                confirmText={"Ok"}
+                hideCancelButton={true}
+                onConfirm={() => {
+                    setRequestSuccessfullySentModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setRequestSuccessfullySentModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                subtitle={"Your request was successfully sent to the driver"}
             />
 
             <ConfirmModal

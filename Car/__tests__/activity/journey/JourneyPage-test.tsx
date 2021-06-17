@@ -168,6 +168,15 @@ test("renders correctly", async () =>
         visible={false}
       />
       <ConfirmModal
+        confirmText="Ok"
+        disableModal={[Function]}
+        hideCancelButton={true}
+        onConfirm={[Function]}
+        subtitle="Your request was successfully sent to the driver"
+        title="Request sending"
+        visible={false}
+      />
+      <ConfirmModal
         confirmText="OK"
         disableModal={[Function]}
         hideCancelButton={true}
