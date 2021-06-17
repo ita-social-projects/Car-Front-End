@@ -17,19 +17,22 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
                             {props.title}
                         </Text>
                     </View>
-                    <TouchableOpacity
-                        onPress={props.disableModal}
-                    >
-                        <Text style={[NotificationHeaderStyle.snooze,
-                            { color: DM("#02A2CF") }]} >
-                            Snooze
-                        </Text>
-                    </TouchableOpacity>
+                    {!props.withoutSnooze &&
+                        <TouchableOpacity
+                            onPress={props.disableModal}
+                        >
+                            <Text style={[NotificationHeaderStyle.snooze,
+                                { color: DM("#02A2CF") }]} >
+                                Snooze
+                            </Text>
+                        </TouchableOpacity>
+                    }
                 </View>
                 <View style={NotificationHeaderStyle.avatarLogo}>
                     <AvatarLogoTitle userToDisplay={props.sender} />
                 </View>
             </View>
+            {!props.withoutMessage &&
             <View style={[NotificationHeaderStyle.messageContainer, {
                 borderTopColor: DM("#C1C1C5"),
                 borderBottomColor: DM("#C1C1C5")
@@ -38,6 +41,7 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
                     {props.message}
                 </Text>
             </View>
+            }
         </View>
     );
 };

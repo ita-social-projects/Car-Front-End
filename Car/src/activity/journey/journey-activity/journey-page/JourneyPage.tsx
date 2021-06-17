@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -12,14 +12,13 @@ import AsyncStorage from "@react-native-community/async-storage";
 import {
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
-    MIN_JOURNEY_PAGE_POPUP_HEIGHT, REQUEST_MODE_JOURNEY_PAGE_POPUP_HEIGHT,
+    MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
-import { MAX_POPUP_POSITION, MIN_POPUP_POSITION, ZERO_COORDINATE } from "../../../../constants/StylesConstants";
+import { MAX_POPUP_POSITION, MIN_POPUP_POSITION } from "../../../../constants/StylesConstants";
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../map-address/SearchJourneyMapStyle";
-import Stop from "../../../../../models/stop/Stop";
 import CarBlock from "./CarBlock/CarBlock";
 import StopsBlock from "./StopsBlock/StopsBlock";
 import ParticipantsBlock from "./ParticipantsBlock/ParticipantsBlock";
@@ -29,30 +28,37 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { getStopByType, mapStopToWayPoint } from "../../../../utils/JourneyHelperFunctions";
-import { ZERO_ID } from "../../../../constants/GeneralConstants";
+import {
+    getStopByType,
+    getStopCoordinates,
+    mapStopToMarker,
+    mapStopToWayPoint
+} from "../../../../utils/JourneyHelperFunctions";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID } from "../../../../constants/GeneralConstants";
 import CommentsBlock from "./CommentsBlock/CommentsBlock";
-import JourneyRequestPageStyle from "../journey-request-page/JourneyRequestPageStyle";
-import ChooseOption from "../../../../components/choose-opton/ChooseOption";
-
-const getStopCoordinates = (stop?: Stop) => {
-    return {
-        longitude: stop?.address?.longitude ?? ZERO_COORDINATE,
-        latitude: stop?.address?.latitude ?? ZERO_COORDINATE
-    };
-};
+import SendRequestModal from "./SendRequestModal/SendRequestModal";
+import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
+import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import AuthContext from "../../../../components/auth/AuthContext";
+import NotificationType from "../../../../../models/notification/NotificationType";
+import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
+import {
+    requestSendingFailedModal,
+    rideCancelingErrorModal
+} from "./Modals/JourneyPageModals";
+import Stop from "../../../../../models/stop/Stop";
+import { initialCamera } from "../../../../constants/AddressConstants";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
     editJourneyDetails: () => void,
     editJourneyRoute: () => void,
-
     // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: { props: JourneyPageProps }): JSX.Element
 }
 
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
-
+    const { user } = useContext(AuthContext);
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
@@ -60,14 +66,20 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
-    const [requestMode, setRequestMode] = useState(false);
+    const [requestModalIsVisible, setRequestModalIsVisible] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
-    const [cancelRideErrorModalIsVisible, setCancelRideErrorModalIsVisible] = useState(false);
+    const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false);
+
+    const [modal, setModal] = useState<ConfirmModalProps>({ ...rideCancelingErrorModal, visible: false });
+    const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
+
     const mapRef = useRef<MapView | null>(null);
 
-    const [withBaggage, setWithBaggage] = useState(false);
+    const [withLuggage, setWithLuggage] = useState(false);
     const [requestComments, setRequestComments] = useState("");
+
+    const applicantStops = props.route.params.applicantStops;
 
     const onFocusHandler = () => {
         JourneyService.getJourney(journeyId).then((res) => {
@@ -97,6 +109,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View/> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
+        applicantStops?.forEach((stop) => (stop!.address!.name =
+            `${user!.name} ${user!.surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ? "Start" : "Finish"}`));
+
         (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
             if (isReq == "1") {
                 setRequested(true);
@@ -104,13 +119,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         });
 
-        const unsubscribeFromFocus = props.navigation?.addListener("focus", onFocusHandler);
-        const unsubscribeFromBlur = props.navigation?.addListener(
+        const unsubscribeFromFocus = props.navigation!.addListener("focus", onFocusHandler);
+        const unsubscribeFromBlur = props.navigation!.addListener(
             "blur", () => props.closeMoreOptionsPopup());
 
         return () => {
-            unsubscribeFromFocus!();
-            unsubscribeFromBlur!();
+            unsubscribeFromFocus();
+            unsubscribeFromBlur();
         };
     }, []);
 
@@ -141,12 +156,61 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         navigation.navigate("Create Journey", { journey: currentJourney });
 
     const sendRequest = () => {
-        console.log("Request sending...");
+        const jsonData = JSON.stringify({
+            comments: requestComments,
+            hasLuggage: withLuggage,
+            start: applicantStops?.[FIRST_ELEMENT_INDEX],
+            finish: applicantStops?.[SECOND_ELEMENT_INDEX]
+        });
+
+        NotificationsService.addNotification({
+            senderId: user!.id,
+            receiverId: currentJourney?.organizer?.id!,
+            type: NotificationType.PassengerApply,
+            jsonData: jsonData,
+            journeyId: currentJourney?.id!
+        }).then((res) => {
+            if (res.status == HTTP_STATUS_OK) {
+                setRequested(true);
+                (async () => {
+                    await AsyncStorage.setItem("journeyId" + currentJourney?.id, "1");
+                })().then(() => {
+                    setRequestSuccessfullySentModalIsVisible(true);
+                    setRequestModalIsVisible(false);
+                });
+            }
+        }).catch(() => setModal(requestSendingFailedModal));
     };
 
     const moreOptionsRef = useRef<any>(null);
 
-    useEffect(() => console.log("upd"));
+    const getStopsForBottomPopup: () => Stop[] = () => {
+        if (!currentJourney) return [];
+
+        if (isDriver) {
+            return currentJourney.stops;
+        }
+
+        const stopsSource = isPassenger ? currentJourney.stops : applicantStops;
+
+        return [
+            getStopByType(currentJourney, StopType.Start)!,
+            stopsSource!.filter(stop => stop!.userId === user!.id &&
+                stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+            stopsSource!.filter(stop => stop!.userId === user!.id &&
+                stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+            getStopByType(currentJourney, StopType.Finish)!
+        ];
+    };
+
+    const onStopPressHandler = (stop: Stop) => {
+        moreOptionsRef.current?.snapTo(SECOND_ELEMENT_INDEX);
+
+        mapRef.current?.animateCamera({
+            ...initialCamera,
+            center: { latitude: stop!.address!.latitude, longitude: stop!.address!.longitude }
+        }, { duration: 1000 });
+    };
 
     return (
         <>
@@ -182,23 +246,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 image={require("../../../../../assets/images/maps-markers/To.png")}
                             />
 
-                            {currentJourney.stops.filter(stop =>
-                                stop?.type === StopType.Intermediate).map(stop => (
-                                <Marker
-                                    key={stop?.index}
-                                    title={stop?.address?.name}
-                                    coordinate={getStopCoordinates(stop)}
-                                    image={require("../../../../../assets/images/maps-markers/Stop.png")}
-                                />))}
+                            {currentJourney.stops.filter(stop => stop?.type === StopType.Intermediate)
+                                .map(mapStopToMarker)}
 
-                            {props.route.params.applicantStops?.map(stop => (
-                                <Marker
-                                    key={stop?.index}
-                                    title={stop?.address?.name}
-                                    coordinate={getStopCoordinates(stop)}
-                                    image={require("../../../../../assets/images/maps-markers/Stop.png")}
-                                />))
-                            }
+                            {!isDriver && applicantStops?.map(mapStopToMarker)}
                         </>)}
                 </MapView>
             </View>
@@ -209,75 +260,43 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     refForChild={(ref: any) => (moreOptionsRef.current = ref)}
                     style={{ backgroundColor: DM("white") }}
                     snapPoints={[
-                        requestMode ? REQUEST_MODE_JOURNEY_PAGE_POPUP_HEIGHT : MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+                        MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                         isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
                     ]}
                     initialSnap={MIN_POPUP_POSITION}
                     enabledGestureInteraction={true}
                     enabledInnerScrolling={true}
+                    renderHeader={<DriverBlock journey={currentJourney}/>}
                     renderContent={
                         <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
 
-                            {requestMode ? (
-                                <>
-                                    <View style={JourneyRequestPageStyle.commentsContainer}>
-                                        <Text style={[JourneyRequestPageStyle.commentsText, { color: DM("#414045") }]}>
-                                            Comments
-                                        </Text>
-                                        <TextInput
-                                            style={[JourneyRequestPageStyle.textInput,
-                                                { borderColor: DM("black"), color: DM("#000000") }]}
-                                            multiline={true}
-                                            maxLength={100}
-                                            numberOfLines={10}
-                                            value={requestComments}
-                                            placeholder={"Any comments?"}
-                                            placeholderTextColor={DM("#888888")}
-                                            onChangeText={(text) => {
-                                                console.log(text);
-                                                setRequestComments(text);
-                                            }}
-                                        />
-                                        <Text style={[JourneyRequestPageStyle.hintText, { color: DM("#000000") }]}>
-                                            Up to 100 symbols
-                                        </Text>
-                                    </View>
-                                    <View style={JourneyRequestPageStyle.chooseOptionContainer}>
-                                        <ChooseOption
-                                            text={"Have you got any luggage with you?"}
-                                            value={withBaggage}
-                                            onValueChanged={(value) => setWithBaggage(value)}
-                                        />
-                                    </View>
-                                </>
-                            ) : (
-                                <View style={JourneyPageStyle.detailsBlock}>
-                                    <ScrollView
-                                        nestedScrollEnabled={true}
-                                        style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
-                                    >
-                                        <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                        <StopsBlock stops={currentJourney?.stops ?? []}/>
-                                        <CommentsBlock comments={currentJourney?.comments} />
-                                        <ParticipantsBlock journey={currentJourney}/>
-                                    </ScrollView>
-                                </View>
-                            )}
+                            <View style={JourneyPageStyle.detailsBlock}>
+                                <ScrollView
+                                    nestedScrollEnabled={true}
+                                    style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
+                                >
+                                    <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
+                                    <StopsBlock
+                                        stops={getStopsForBottomPopup() ?? []}
+                                        onStopPress={onStopPressHandler}
+                                        notHighlightedTextColor={"black"}
+                                    />
+                                    <CommentsBlock comments={currentJourney?.comments} />
+                                    <ParticipantsBlock journey={currentJourney}/>
+                                </ScrollView>
+                            </View>
 
                             <ButtonBlock
                                 isDriver={isDriver}
                                 isPassenger={isPassenger}
                                 isRequested={isRequested}
                                 journey={currentJourney}
-                                applicantStops={props.route.params.applicantStops}
-                                onSendRequestPress={() => setRequestMode(true)}
-                                requestMode={requestMode}
-                                sendRequest={sendRequest}
+                                applicantStops={applicantStops}
+                                onSendRequestPress={() => setRequestModalIsVisible(true)}
                             />
 
                         </View>
                     }
-                    renderHeader={<DriverBlock journey={currentJourney}/>}
                 />
             </Portal>
             }
@@ -289,8 +308,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 cancelText={"No, keep it"}
                 onConfirm={() => {
                     setCancelRideModalIsVisible(false);
-                    JourneyService.delete(props.route.params.journeyId)
-                        .then(() => setCancelRideSuccessModalIsVisible(true));
+                    JourneyService.cancel(props.route.params.journeyId)
+                        .then(() => setCancelRideSuccessModalIsVisible(true))
+                        .catch(() => setModal(rideCancelingErrorModal));
                 }}
                 disableModal={() => setCancelRideModalIsVisible(false)}
                 subtitle={"Are you sure you want to cancel the ride?"}
@@ -302,24 +322,46 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 confirmText={"Ok"}
                 hideCancelButton={true}
                 onConfirm={() => {
-                    setCancelRideSuccessModalIsVisible(false);
+                    setCancelRideModalIsVisible(false);
                     navigation.navigate("Journey");
                 }}
                 disableModal={() => {
-                    setCancelRideSuccessModalIsVisible(false);
+                    setCancelRideModalIsVisible(false);
                     navigation.navigate("Journey");
                 }}
                 subtitle={"Ride was successfully canceled"}
             />
 
             <ConfirmModal
-                visible={cancelRideErrorModalIsVisible}
-                title={"Ride canceling"}
+                visible={requestSuccessfullySentModalIsVisible}
+                title={"Request sending"}
                 confirmText={"Ok"}
                 hideCancelButton={true}
-                onConfirm={() => setCancelRideErrorModalIsVisible(false)}
-                disableModal={() => setCancelRideErrorModalIsVisible(false)}
-                subtitle={"Ride canceling is failed"}
+                onConfirm={() => {
+                    setRequestSuccessfullySentModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                disableModal={() => {
+                    setRequestSuccessfullySentModalIsVisible(false);
+                    navigation.goBack();
+                }}
+                subtitle={"Your request was successfully sent to the driver"}
+            />
+
+            <ConfirmModal
+                {...modal}
+                onConfirm={disableModal}
+                disableModal={disableModal}
+            />
+
+            <SendRequestModal
+                comments={requestComments}
+                onCommentsChange={text => setRequestComments(text)}
+                visible={requestModalIsVisible}
+                disableNodal={() => setRequestModalIsVisible(false)}
+                withLuggage={withLuggage}
+                onWithLuggageChange={value => setWithLuggage(value)}
+                onConfirmPress={sendRequest}
             />
         </>
     );

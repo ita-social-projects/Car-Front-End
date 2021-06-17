@@ -6,7 +6,8 @@ interface NotificationProps {
     notificationData: string,
     sender: User,
     read?: boolean,
-    date?: Date
+    date?: Date,
+    journeyId?: number
 }
 
 export default NotificationProps;

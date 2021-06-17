@@ -5,6 +5,7 @@ import React from "react";
 
 export const MAX_LOCATION_NAME_LENGTH = 30;
 export const MAX_ADDRESS_NAME_LENGTH = 48;
+export const MAX_LOCATION_NAME_LENGTH_VIEW = 20;
 
 export const LOCATION_TYPES : LocationDropDownItem[] = [{
     label: "Home", value: 3,

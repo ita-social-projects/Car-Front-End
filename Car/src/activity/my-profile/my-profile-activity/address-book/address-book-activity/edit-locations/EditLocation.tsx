@@ -1,15 +1,210 @@
-import { Text, View } from "react-native";
-import React from "react";
+import { Platform, TextInput, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import EditLocationProps from "./EditLocationProps";
+import {
+    androidPermission,
+    animateCamera, setAddressByCoordinates, setCoordinatesByDescription
+} from "../../../../../../utils/LocationHelperFunctions";
+import Geolocation from "@react-native-community/geolocation";
+import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import {
+    DEFAULT_LOCATION_ICON_ID,
+    initialCamera,
+    initialCoordinate,
+    initialWayPoint
+} from "../../../../../../constants/AddressConstants";
+import LocationService from "../../../../../../../api-service/location-service/LocationService";
+import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
+import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
+import WayPoint from "../../../../../../types/WayPoint";
+import AddLocationStyle from "../add-locations/AddLocationStyle";
+import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
+import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
+import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
+import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
+import * as navigation from "../../../../../../components/navigation/Navigation";
+import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
 
 const EditLocation = (props: EditLocationProps) => {
-    console.log(props.locationId);
+    const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
+    const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
+    const [wayPoint, setWayPoint] = useState<WayPoint>({
+        ...initialWayPoint, coordinates : {
+            latitude: initialCoordinate.latitude,
+            longitude: initialCoordinate.longitude
+        }
+    });
+    const [locationName, setLocationName] = useState<string>("");
+    const [isVisibleLocationDropDown, setIsVisibleLocationDropDown] = useState(false);
+    const [locationType, setLocationType] = useState<{id: number, name: string}>(
+        { id: DEFAULT_LOCATION_ICON_ID, name: "Other" }
+    );
+
+    const mapRef = useRef<MapView | null>(null);
+    const addressInputRef = useRef<GooglePlacesAutocompleteRef | null>();
+
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            androidPermission();
+        } else {
+            Geolocation.requestAuthorization();
+        }
+        LocationService.getById(props.locationId).then((response) => {
+            const location = response.data;
+
+            setLocationName(String(location?.name));
+            setLocationType({
+                id: Number(location?.type?.id),
+                name: String(location?.type?.name)
+            });
+            setWayPoint({
+                isConfirmed: true,
+                text: String(location?.address?.name),
+                coordinates: {
+                    latitude: Number(location?.address?.latitude),
+                    longitude: Number(location?.address?.longitude)
+                }
+            });
+        }).catch((e: any) => console.log(e));
+    }, []);
+
+    useEffect(() => {
+        Geolocation.getCurrentPosition(
+            (position) => {
+                setUserCoordinates(position.coords);
+                animateCamera(setMarkerCoordinates,
+                    wayPoint.coordinates,
+                    mapRef);
+            },
+            (error) => {
+                console.log(error);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+    }, [wayPoint]);
+
+    const setAddress = (address: string, coordinates: LatLng) => {
+        setWayPointsCoordinates(coordinates);
+        setWayPointsTextAndIsConfirmed(address, true);
+    };
+
+    const setWayPointsCoordinates = (coordinates: LatLng) => {
+        setWayPoint(prevState => ({
+            ...prevState,
+            coordinates: coordinates
+        }));
+    };
+
+    const setWayPointsTextAndIsConfirmed = (text: string, isConfirmed: boolean) => {
+        setWayPoint(prevState => ({
+            ...prevState,
+            isConfirmed: isConfirmed,
+            text: text
+        }));
+    };
+
+    const animateCameraAndMoveMarker = (coordinates: LatLng) => {
+        setMarkerCoordinates(coordinates);
+
+        mapRef.current?.animateCamera({
+            center: coordinates
+        }, { duration: 2000 });
+    };
+
+    const mapEventHandler = (event: MapEvent) => {
+        addressInputRef.current?.blur();
+        setAddressByCoordinates(setAddress, event.nativeEvent.coordinate);
+        animateCameraAndMoveMarker(event.nativeEvent.coordinate);
+    };
+
+    const addressInputOnChangeTextHandler = (text: string) => {
+        setWayPointsTextAndIsConfirmed(text, false);
+    };
+
+    const addressInputOnPressHandler = (data: any) => {
+        if (data.geometry) {
+            const point = data.geometry.location;
+
+            setWayPointsCoordinates({ latitude: point.lat, longitude: point.lng });
+            animateCameraAndMoveMarker({ latitude: point.lat, longitude: point.lng });
+        } else {
+            setCoordinatesByDescription(data.description, setWayPointsCoordinates, animateCameraAndMoveMarker);
+        }
+
+        setWayPointsTextAndIsConfirmed(data.description, true);
+    };
+
+    const updateLocation = async () => {
+        await LocationService.update({
+            id: props.locationId,
+            name: locationName || wayPoint.text,
+            address: {
+                name: wayPoint.text,
+                latitude: wayPoint.coordinates.latitude,
+                longitude: wayPoint.coordinates.longitude,
+            },
+            typeId: locationType.id
+        });};
 
     return(
-        <View>
-            <Text style={{ textAlign:"center" }}>
-                Editing location is in progress
-            </Text>
+        <View style={{ flex: 1 }}>
+            <View style={AddLocationStyle.inputContainer}>
+                <AddressInput
+                    placeholder={"Address"}
+                    paddingLeft={90}
+                    address={wayPoint.text}
+                    onChangeText={addressInputOnChangeTextHandler}
+                    onPress={addressInputOnPressHandler}
+                    onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
+                    savedLocations={[]}
+                    userLocation={userCoordinates}
+                    recentAddresses={[]}
+                    refFor={(ref) => (addressInputRef.current = ref)}
+                />
+                <TextInput
+                    style={AddLocationStyle.textInput}
+                    value={locationName}
+                    placeholder={"Name the chosen address"}
+                    placeholderTextColor={"grey"}
+                    onChangeText={(fromInput) => {
+                        setLocationName(fromInput);
+                    }}/>
+                <LocationDropDownPicker
+                    fast-food-outline
+                    items={LOCATION_TYPES}
+
+                    placeholder={"Choose the address type and the icon"}
+                    isVisible={isVisibleLocationDropDown}
+                    onOpen={() => setIsVisibleLocationDropDown(true)}
+                    defaultValue={locationType.id}
+                    onChangeItem={(item) => {
+                        setLocationType({ id: item.value, name: item.label });
+                        setIsVisibleLocationDropDown(false);
+                    }}/>
+            </View>
+            <MapView
+                ref={ref => (mapRef.current = ref)}
+                style={{ height: "100%" }}
+                provider={PROVIDER_GOOGLE}
+                showsUserLocation={true}
+                initialCamera={initialCamera}
+                customMapStyle={mapStyle}
+                onLongPress={mapEventHandler}
+                showsCompass={false}
+            >
+                <Marker
+                    title={"Address"}
+                    style={CreateJourneyStyle.movableMarker}
+                    draggable={true}
+                    onDragEnd={mapEventHandler}
+                    image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
+                    coordinate={markerCoordinates}
+                />
+            </MapView>
+            <SaveLocationButton
+                wayPointConfirmation={wayPoint.isConfirmed}
+                onPress={() => updateLocation().then(() => navigation.goBack())}
+            />
         </View>
     );
 };

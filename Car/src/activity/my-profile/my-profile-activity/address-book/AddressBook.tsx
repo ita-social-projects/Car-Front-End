@@ -8,7 +8,8 @@ import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 import { FIRST_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/GeneralConstants";
-import { MAX_ADDRESS_NAME_LENGTH } from "../../../../constants/LocationConstants";
+import { MAX_LOCATION_NAME_LENGTH_VIEW } from "../../../../constants/LocationConstants";
+import { MAX_ADDRESS_NAME_LENGTH } from "../../../../constants/AddressConstants";
 
 export default function AddressBook (props: {navigation: any}) {
     const { user } = useContext(AuthContext);
@@ -33,17 +34,13 @@ export default function AddressBook (props: {navigation: any}) {
         return props.navigation.addListener("focus", loadLocations);
     }, [props.navigation]);
 
-    const addressNameSubstring = (addressName: string) => {
-        return addressName.substr(FIRST_ELEMENT_INDEX,
-            MAX_ADDRESS_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
-    };
+    const addressNameSubstring = (addressName: string) =>
+        addressName.substr(FIRST_ELEMENT_INDEX,
+            MAX_LOCATION_NAME_LENGTH_VIEW - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
 
-    const mapAddressName = (addressName: string) => {
-        if (addressName.length <= MAX_ADDRESS_NAME_LENGTH)
-            return addressName;
-        else
-            return addressNameSubstring(addressName);
-    };
+    const mapName = (addressName: string, maxLength: number) =>
+        addressName.length <= maxLength ? addressName : addressNameSubstring(addressName);
+
     let addLocationElement = (
         <View>
             <TouchableNavigationCard
@@ -116,10 +113,10 @@ export default function AddressBook (props: {navigation: any}) {
                                         }
                                     >
                                         <Text style={[AddressBookStyle.name, { color: DM("black") }]}>
-                                            {item?.name}
+                                            {mapName(item!.name, MAX_LOCATION_NAME_LENGTH_VIEW)}
                                         </Text>
                                         <Text style={[AddressBookStyle.address, { color: DM("#414045") }]}>
-                                            {mapAddressName(item!.address!.name)}
+                                            {mapName(item!.address!.name, MAX_ADDRESS_NAME_LENGTH)}
                                         </Text>
                                     </TouchableNavigationCard>
                                 </View>

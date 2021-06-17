@@ -9,6 +9,7 @@ type Notification = null | {
     receiverId: number;
     notificationType: NotificationType;
     notificationData: string;
+    journeyId: number;
 };
 
 export default Notification;

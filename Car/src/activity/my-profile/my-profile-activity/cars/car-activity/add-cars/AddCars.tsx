@@ -89,7 +89,7 @@ const AddCars = () => {
                 plateNumber &&
                 plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
                 plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
-                plateNumber.match(/^[A-ZА-Я0-9-]+$/)
+                plateNumber.match(/^[A-ZА-ЯҐЄІЇ0-9-]+$/)
             ));
     }
 

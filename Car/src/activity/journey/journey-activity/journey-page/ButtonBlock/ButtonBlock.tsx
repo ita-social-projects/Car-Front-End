@@ -9,7 +9,6 @@ import ButtonBlockProps from "./ButtonBlockProps";
 import ChatService from "../../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../../models/Chat/CreateChat";
 import { StatusCodes } from "../../../../../constants/Constants";
-import JourneyRequestPageStyle from "../../journey-request-page/JourneyRequestPageStyle";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
     const onMessageToAllPress = () => {
@@ -53,35 +52,18 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                     </TouchableOpacity>
                 )}
                 {!props.isDriver && !props.isPassenger && (
-                    props.requestMode ? (
-                        <TouchableOpacity
-                            style={[
-                                JourneyRequestPageStyle.confirmButton,
-                                {
-                                    backgroundColor: DM("white"),
-                                    borderColor: DM("black")
-                                }]}
-                            onPress={props.sendRequest}
-                            disabled={props.isRequested}
-                        >
-                            <Text style={[JourneyRequestPageStyle.confirmButtonText, { color: DM("black") }]}>
-                                Confirm
-                            </Text>
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity
-                            style={[
-                                JourneyPageStyle.requestButton,
-                                { backgroundColor: DM("black") },
-                                props.isRequested && { backgroundColor: DM("#00000033") }]}
-                            onPress={props.onSendRequestPress}
-                            disabled={props.isRequested}
-                        >
-                            <Text style={[JourneyPageStyle.requestButtonText, { color: DM("white") }]}>
-                                {props.isRequested ? "Requested" : "Send request"}
-                            </Text>
-                        </TouchableOpacity>
-                    )
+                    <TouchableOpacity
+                        style={[
+                            JourneyPageStyle.requestButton,
+                            { backgroundColor: DM("black") },
+                            props.isRequested && { backgroundColor: DM("#00000033") }]}
+                        onPress={props.onSendRequestPress}
+                        disabled={props.isRequested}
+                    >
+                        <Text style={[JourneyPageStyle.requestButtonText, { color: DM("white") }]}>
+                            {props.isRequested ? "Requested" : "Send request"}
+                        </Text>
+                    </TouchableOpacity>
                 )}
             </View>
         </View>

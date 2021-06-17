@@ -36,11 +36,7 @@ test("renders correctly", async () =>
       <Screen
         component={[Function]}
         name="MyProfileTabs"
-        options={
-          Object {
-            "tabBarLabel": "My Profile",
-          }
-        }
+        options={[Function]}
       />
       <Screen
         component={[Function]}
@@ -53,6 +49,7 @@ test("renders correctly", async () =>
         options={
           Object {
             "tabBarBadge": undefined,
+            "tabBarButton": [Function],
             "tabBarLabel": "Notifications",
           }
         }

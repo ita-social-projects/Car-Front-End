@@ -14,12 +14,14 @@ describe("Location Service test", () => {
         notificationData: "ABC",
         notificationType: 1,
         receiverId: 1,
+        journeyId: 1,
         user: null,
     }];
 
     let notificationToAdd: CreateNotificationModel = {
         senderId: 1,
-        recieverId: 1,
+        receiverId: 1,
+        journeyId: 1,
         type: NotificationType.AcceptedInvitation,
         jsonData: ""
     };
