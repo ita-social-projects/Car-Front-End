@@ -71,12 +71,10 @@ const JourneyNewApplicant = (props: NotificationProps) => {
                 <WithLuggage hasLuggage={data?.hasLuggage}/>
 
                 <Text style={JourneyNewApplicantStyle.applicantStopsText}>{senders} stops in your ride</Text>
-                <Text style={JourneyNewApplicantStyle.tipsText}>Tap on stop to view it on the map</Text>
                 <StopsBlock
                     stops={stops}
                     onStopPress={onStopPressHandler}
                     highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
-                    notHighlightedTextColor={"#AAA9AE"}
                 />
 
                 <NotificationButtonGroup>

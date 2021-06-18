@@ -112,7 +112,12 @@ test("renders correctly", async () =>
                     isOnOwnCar={false}
                   />
                   <StopsBlock
-                    notHighlightedTextColor="black"
+                    highlightedStops={
+                      Array [
+                        1,
+                        2,
+                      ]
+                    }
                     onStopPress={[Function]}
                     stops={Array []}
                   />
