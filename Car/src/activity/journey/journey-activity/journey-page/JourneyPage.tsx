@@ -34,7 +34,12 @@ import {
     mapStopToMarker,
     mapStopToWayPoint
 } from "../../../../utils/JourneyHelperFunctions";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID } from "../../../../constants/GeneralConstants";
+import {
+    FIRST_ELEMENT_INDEX,
+    SECOND_ELEMENT_INDEX,
+    THIRD_ELEMENT_INDEX,
+    ZERO_ID
+} from "../../../../constants/GeneralConstants";
 import CommentsBlock from "./CommentsBlock/CommentsBlock";
 import SendRequestModal from "./SendRequestModal/SendRequestModal";
 import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
@@ -279,7 +284,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     <StopsBlock
                                         stops={getStopsForBottomPopup() ?? []}
                                         onStopPress={onStopPressHandler}
-                                        notHighlightedTextColor={"black"}
+                                        highlightedStops={isDriver ?
+                                            [...Array(currentJourney?.stops.length).keys()] :
+                                            [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                                     />
                                     <CommentsBlock comments={currentJourney?.comments} />
                                     <ParticipantsBlock journey={currentJourney}/>

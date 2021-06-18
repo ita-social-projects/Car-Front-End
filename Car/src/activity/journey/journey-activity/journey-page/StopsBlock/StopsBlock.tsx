@@ -11,19 +11,17 @@ interface StopsBlockProps {
     stops: Stop[],
     // eslint-disable-next-line unused-imports/no-unused-vars
     onStopPress: (stop: Stop) => void,
-    highlightedStops?: number[],
-    notHighlightedTextColor: string
+    highlightedStops: number[]
 }
 
-const StopsBlock = ({ stops, onStopPress, highlightedStops, notHighlightedTextColor }: StopsBlockProps) => {
-    const getTextColor = (index: number) =>
-        highlightedStops?.includes(index) ? "#0086cf" : notHighlightedTextColor;
+const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
+    const isHighlightedStop = (index: number) => highlightedStops?.includes(index);
 
-    const getDotColor = (index: number) =>
-        highlightedStops?.includes(index) ? "#0086cf" : "#AAA9AE";
+    const getDotAndTextColor = (index: number) =>
+        isHighlightedStop(index) ? "#0086cf" : "#AAA9AE";
 
     const getLineColor = (index: number) =>
-        highlightedStops?.includes(index) &&
+        isHighlightedStop(index) &&
         highlightedStops?.includes(index + NEXT_INDEX_CORRECTION) ?
             "#0086cf" : "#AAA9AE";
 
@@ -39,7 +37,7 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops, notHighlightedTextCo
                         <Ionicons
                             name={"ellipse"}
                             size={15}
-                            color={getDotColor(index)}
+                            color={getDotAndTextColor(index)}
                         />
                         {item?.type !== StopType.Finish && (
                             <View style={[JourneyPageStyle.stopCustomLineIcon,
@@ -47,7 +45,10 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops, notHighlightedTextCo
                             ]} />
                         )}
                     </View>
-                    <Text style={{ color: DM(getTextColor(index)) }}>
+                    <Text style={{
+                        color: DM(getDotAndTextColor(index)),
+                        textDecorationLine: isHighlightedStop(index) ? "underline" : "none"
+                    }}>
                         {item?.address?.name}
                     </Text>
                 </TouchableOpacity>
