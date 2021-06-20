@@ -63,7 +63,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
 
     const closeRow = (index: number) => {
         if (prevOpened && prevOpened !== rows[index]) {
-            prevOpened!.close();
+            prevOpened.close();
         }
         setPrevOpened(rows[index]);
     };
