@@ -3,7 +3,7 @@ import { Dimensions, PermissionsAndroid, Platform, ScrollView, Text, TouchableOp
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { mapStyle } from "../map-address/SearchJourneyMapStyle";
+import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
 import {
     initialCamera,
     initialCoordinate,
@@ -24,7 +24,6 @@ import Geolocation from "@react-native-community/geolocation";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Location from "../../../../../models/location/Location";
-import AddressInputButton from "./AddressInputButton/AddressInputButton";
 import * as navigation from "../../../../components/navigation/Navigation";
 import WayPoint from "../../../../types/WayPoint";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
@@ -46,6 +45,7 @@ import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { isDarkMode } from "../../../../components/navigation/Routes";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
+import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,

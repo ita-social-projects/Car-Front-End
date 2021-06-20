@@ -27,12 +27,10 @@ import {
     EMPTY_COLLECTION_LENGTH,
     MIN_DELAY_MS,
 } from "../../../../constants/GeneralConstants";
-import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import WayPoint from "../../../../types/WayPoint";
 import Address from "../../../../../models/Address";
 import Geolocation from "@react-native-community/geolocation";
 import SearchJourneyProps from "./SearchJourneyProps";
-import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
 import SwitchSelectorStyle from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import { LatLng } from "react-native-maps";
@@ -45,6 +43,8 @@ import RequestService from "../../../../../api-service/request-service/RequestSe
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import DM from "../../../../components/styles/DM";
+import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
+import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
@@ -59,9 +59,21 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
-    const [allButtonStyle, setAllButtonStyle] = useState(SwitchSelectorStyle.activeButton);
-    const [freeButtonStyle, setFreeButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(SwitchSelectorStyle.inactiveButton);
+    const [allButtonStyle, setAllButtonStyle] = useState({
+        backgroundColor: DM("#000000"),
+        color: DM("#FFFFFF"),
+        borderColor: DM("#000000")
+    });
+    const [freeButtonStyle, setFreeButtonStyle] = useState({
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000"),
+        borderColor: DM("#000000")
+    });
+    const [paidButtonStyle, setPaidButtonStyle] = useState({
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000"),
+        borderColor: DM("#000000")
+    });
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -141,14 +153,38 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
                 switch(filter.fee){
                     case FeeType.Free:
-                        setAllButtonStyle(SwitchSelectorStyle.inactiveButton);
-                        setFreeButtonStyle(SwitchSelectorStyle.activeButton);
-                        setPaidButtonStyle(SwitchSelectorStyle.inactiveButton);
+                        setAllButtonStyle({
+                            backgroundColor: DM("#FFFFFF"),
+                            color: DM("#000000"),
+                            borderColor: DM("#000000")
+                        });
+                        setFreeButtonStyle({
+                            backgroundColor: DM("#000000"),
+                            color: DM("#FFFFFF"),
+                            borderColor: DM("#000000")
+                        });
+                        setPaidButtonStyle({
+                            backgroundColor: DM("#FFFFFF"),
+                            color: DM("#000000"),
+                            borderColor: DM("#000000")
+                        });
                         break;
                     case FeeType.Paid:
-                        setAllButtonStyle(SwitchSelectorStyle.inactiveButton);
-                        setFreeButtonStyle(SwitchSelectorStyle.inactiveButton);
-                        setPaidButtonStyle(SwitchSelectorStyle.activeButton);
+                        setAllButtonStyle({
+                            backgroundColor: DM("#FFFFFF"),
+                            color: DM("#000000"),
+                            borderColor: DM("#000000")
+                        });
+                        setFreeButtonStyle({
+                            backgroundColor: DM("#FFFFFF"),
+                            color: DM("#000000"),
+                            borderColor: DM("#000000")
+                        });
+                        setPaidButtonStyle({
+                            backgroundColor: DM("#000000"),
+                            color: DM("#FFFFFF"),
+                            borderColor: DM("#000000")
+                        });
                         break;
                 }
 
@@ -342,13 +378,21 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             <TouchableOpacity
                                 style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
                                 onPress={() => {
-                                    setAllButtonStyle(SwitchSelectorStyle.activeButton);
-                                    setFreeButtonStyle(
-                                        SwitchSelectorStyle.inactiveButton
-                                    );
-                                    setPaidButtonStyle(
-                                        SwitchSelectorStyle.inactiveButton
-                                    );
+                                    setAllButtonStyle({
+                                        backgroundColor: DM("#000000"),
+                                        color: DM("#FFFFFF"),
+                                        borderColor: DM("#000000")
+                                    });
+                                    setFreeButtonStyle({
+                                        backgroundColor: DM("#FFFFFF"),
+                                        color: DM("#000000"),
+                                        borderColor: DM("#000000")
+                                    });
+                                    setPaidButtonStyle({
+                                        backgroundColor: DM("#FFFFFF"),
+                                        color: DM("#000000"),
+                                        borderColor: DM("#000000")
+                                    });
                                 }}
                             >
                                 <Text
@@ -367,15 +411,21 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     freeButtonStyle,
                                 ]}
                                 onPress={() => {
-                                    setAllButtonStyle(
-                                        SwitchSelectorStyle.inactiveButton
-                                    );
-                                    setFreeButtonStyle(
-                                        SwitchSelectorStyle.activeButton
-                                    );
-                                    setPaidButtonStyle(
-                                        SwitchSelectorStyle.inactiveButton
-                                    );
+                                    setAllButtonStyle({
+                                        backgroundColor: DM("#FFFFFF"),
+                                        color: DM("#000000"),
+                                        borderColor: DM("#000000")
+                                    });
+                                    setFreeButtonStyle({
+                                        backgroundColor: DM("#000000"),
+                                        color: DM("#FFFFFF"),
+                                        borderColor: DM("#000000")
+                                    });
+                                    setPaidButtonStyle({
+                                        backgroundColor: DM("#FFFFFF"),
+                                        color: DM("#000000"),
+                                        borderColor: DM("#000000")
+                                    });
                                 }}
                             >
                                 <Text
@@ -393,15 +443,21 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     paidButtonStyle,
                                 ]}
                                 onPress={() => {
-                                    setAllButtonStyle(
-                                        SwitchSelectorStyle.inactiveButton
-                                    );
-                                    setFreeButtonStyle(
-                                        SwitchSelectorStyle.inactiveButton
-                                    );
-                                    setPaidButtonStyle(
-                                        SwitchSelectorStyle.activeButton
-                                    );
+                                    setAllButtonStyle({
+                                        backgroundColor: DM("#FFFFFF"),
+                                        color: DM("#000000"),
+                                        borderColor: DM("#000000")
+                                    });
+                                    setFreeButtonStyle({
+                                        backgroundColor: DM("#FFFFFF"),
+                                        color: DM("#000000"),
+                                        borderColor: DM("#000000")
+                                    });
+                                    setPaidButtonStyle({
+                                        backgroundColor: DM("#000000"),
+                                        color: DM("#FFFFFF"),
+                                        borderColor: DM("#000000")
+                                    });
                                 }}
                             >
                                 <Text

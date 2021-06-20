@@ -9,10 +9,6 @@ import {
     KeyboardAvoidingView,
     Platform
 } from "react-native";
-import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
-import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDropDownPicker";
-import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
-import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
 import SwitchSelector from "../../../../components/SwitchSelector/SwitchSelector";
 import { activeButtonStyle, inactiveButtonStyle } from "../../../../components/SwitchSelector/SwitchSelectorStyle";
@@ -39,6 +35,10 @@ import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModal
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
+import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
+import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
+import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
+import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;

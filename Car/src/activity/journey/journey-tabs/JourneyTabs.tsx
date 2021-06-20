@@ -14,7 +14,7 @@ import MenuButton from "../../../components/menu-button/MenuButton";
 import BottomPopup from "../../../components/bottom-popup/BottomPopup";
 import BottomSheet from "reanimated-bottom-sheet";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
-import SearchJourneyMap from "../journey-activity/map-address/SearchJourneyMap";
+import SearchJourneyMap from "../journey-activity/search-journey-map/SearchJourneyMap";
 import Chat from "../../messages/messages-activity/chat/Chat";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
@@ -41,12 +41,12 @@ import {
 } from "../../../constants/AnimationConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import DM from "../../../components/styles/DM";
-import AddressInputPage from "../journey-activity/create-journey/AddressInputPade/AddressInputPage";
 import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import { Host } from "react-native-portalize";
+import AddressInputPage from "../journey-activity/address-input-page/AddressInputPage";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
