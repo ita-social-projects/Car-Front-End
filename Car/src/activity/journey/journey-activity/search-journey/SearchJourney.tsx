@@ -44,6 +44,7 @@ import Filter from "../../../../../models/journey/Filter";
 import RequestService from "../../../../../api-service/request-service/RequestService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import DM from "../../../../components/styles/DM";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
@@ -290,13 +291,13 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
-                        color="#414045"
+                        color={DM("#414045")}
                         text={isRequest ? "Creating request..." : "Searching..."}
                     />
                 </View>
             )}
             {!isLoading && (
-                <View style={SearchJourneyStyle.screenContainer}>
+                <View style={[SearchJourneyStyle.screenContainer, { backgroundColor: DM("white") }]}>
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
                             iconName={"location"}
@@ -336,7 +337,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     />
 
                     <View style={SwitchSelectorStyle.container}>
-                        <Text style={CreateJourneyStyle.text}>Fee</Text>
+                        <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>Fee</Text>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity
                                 style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
@@ -417,11 +418,14 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     <View style={SearchJourneyStyle.buttonContainer}>
                         <TouchableOpacity
                             style={[CreateJourneyStyle.publishButton,
-                                { backgroundColor: !(to.isConfirmed && from.isConfirmed) ? "#afafaf" : "black" }]}
+                                {
+                                    backgroundColor: !(to.isConfirmed && from.isConfirmed) ?
+                                        DM("#afafaf") : DM("black")
+                                }]}
                             onPress={() => {onConfirmButtonPress();}}
                             disabled={!(to.isConfirmed && from.isConfirmed)}
                         >
-                            <Text style={CreateJourneyStyle.publishButtonText}>
+                            <Text style={[CreateJourneyStyle.publishButtonText, { color: DM("white") }]}>
                                 {isRequest ? "Create Request" : "Search"}
                             </Text>
                         </TouchableOpacity>

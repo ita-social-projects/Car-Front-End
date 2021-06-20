@@ -26,7 +26,7 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                     <Ionicons
                         name={"car"}
                         size={20}
-                        color="#414045"
+                        color={DM("#414045")}
                     />
                 )}
             </View>
@@ -42,7 +42,7 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                             </Text>
                         </>
                     ) : (
-                        <Text style={JourneyPageStyle.taxiText}>Taxi</Text>
+                        <Text style={[JourneyPageStyle.taxiText, { color: DM("black") }]}>Taxi</Text>
                     )
                 }
             </View>

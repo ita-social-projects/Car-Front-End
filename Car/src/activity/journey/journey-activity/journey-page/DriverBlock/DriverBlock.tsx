@@ -43,7 +43,7 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
                 </View>
             </TouchableOpacity>
             <View>
-                <Text style={JourneyPageStyle.feeText}>
+                <Text style={[JourneyPageStyle.feeText, { color: DM("black") }]}>
                     {journey?.isFree ? "Free" : "Paid"}
                 </Text>
             </View>
