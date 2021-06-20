@@ -44,6 +44,8 @@ import StopType from "../../../../../models/stop/StopType";
 import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
+import { isDarkMode } from "../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -392,7 +394,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={mapStyle}
+                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >

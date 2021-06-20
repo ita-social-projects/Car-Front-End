@@ -2,6 +2,8 @@ import React from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "./SearchJourneyMapStyle";
 import SearchJourneyMapProps from "./SearchJourneyMapProps";
+import { isDarkMode } from "../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 
 const SearchJourneyMap = (props: SearchJourneyMapProps) => {
     return (
@@ -14,7 +16,7 @@ const SearchJourneyMap = (props: SearchJourneyMapProps) => {
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01
             }}
-            customMapStyle={mapStyle}
+            customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
         >
             <Marker
                 image={require("../../../../../assets/images/maps-markers/with_shade.png")}

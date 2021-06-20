@@ -26,7 +26,7 @@ const AddressInputRow = ({ data }: {data: GooglePlaceData}) => {
                     color={DM("#414045")}
                 />
             </View>
-            <Text>{data.description || (data as any).vicinity}</Text>
+            <Text style={{ color: DM("black") }}>{data.description || (data as any).vicinity}</Text>
         </View>
     );
 };

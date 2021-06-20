@@ -7,7 +7,6 @@ const AddressInputStyles = StyleSheet.create({
         top: 10,
         zIndex: 1,
         fontSize: 18,
-        color: "grey"
     },
     listView: {
         position: "relative",
@@ -15,9 +14,7 @@ const AddressInputStyles = StyleSheet.create({
         height: 270
     },
     textInput: {
-        color: "black",
         fontSize: 18,
-        borderColor: "black",
         borderWidth: 2,
         borderRadius: 0,
         paddingLeft: 58,

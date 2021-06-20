@@ -10,6 +10,7 @@ import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../../../../constants/Ad
 import Address from "../../../../../../models/Address";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import DM from "../../../../../components/styles/DM";
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations => {
@@ -66,7 +67,7 @@ const AddressInput = (props: AddressInputProps) => {
                 radius: 30000
             }}
             renderLeftButton={() => (
-                <Text style={AddressInputStyles.placeholder}>
+                <Text style={[AddressInputStyles.placeholder, { color: DM("black") }]}>
                     {props.placeholder + ":"}
                 </Text>
             )}
@@ -76,7 +77,7 @@ const AddressInput = (props: AddressInputProps) => {
                         <FontAwesome
                             name={"map-marker"}
                             size={30}
-                            color={"#5355fc"}
+                            color={DM("#5355fc")}
                         />
                     </View>) :
                     (<TouchableOpacity
@@ -86,7 +87,7 @@ const AddressInput = (props: AddressInputProps) => {
                         <Ionicons
                             name={"close"}
                             size={30}
-                            color={"black"}
+                            color={DM("black")}
                         />
                     </TouchableOpacity>))}
             styles={{
@@ -94,7 +95,19 @@ const AddressInput = (props: AddressInputProps) => {
                 ...{
                     textInput: {
                         ...AddressInputStyles.textInput,
-                        paddingLeft: props.paddingLeft
+                        paddingLeft: props.paddingLeft,
+                        color: DM("black"),
+                        backgroundColor: DM("white"),
+                        borderColor: DM("black")
+                    },
+                    row: {
+                        backgroundColor: DM("white")
+                    },
+                    separator: {
+                        backgroundColor: DM("gray")
+                    },
+                    description: {
+                        color: DM("black")
                     }
                 }
             }}

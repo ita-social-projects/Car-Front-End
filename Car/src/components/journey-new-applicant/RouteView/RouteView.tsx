@@ -8,6 +8,8 @@ import { initialCamera } from "../../../constants/AddressConstants";
 import SearchJourneyStyle from "../../../activity/journey/journey-activity/search-journey/SearchJourneyStyle";
 import { Text, TouchableOpacity } from "react-native";
 import DM from "../../styles/DM";
+import { darkMapStyle } from "../../../constants/DarkMapStyleConstant";
+import { isDarkMode } from "../../navigation/Routes";
 
 interface RouteViewProps {
     route: {
@@ -29,7 +31,7 @@ const RouteView = (props: RouteViewProps) => {
                 initialCamera={{ ...initialCamera, center: params.cameraCoordinates }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                customMapStyle={mapStyle}
+                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                 showsCompass={false}
                 showsMyLocationButton={false}
             >

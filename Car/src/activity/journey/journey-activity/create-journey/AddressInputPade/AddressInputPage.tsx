@@ -19,6 +19,8 @@ import {
     CreateRequestWithAddressToGeocodingApi,
     CreateRequestWithCoordinatesToGeocodingApi
 } from "../../../../../utils/AddressHelperFunctions";
+import { darkMapStyle } from "../../../../../constants/DarkMapStyleConstant";
+import { isDarkMode } from "../../../../../components/navigation/Routes";
 
 const AddressInputPage = (props: AddressInputPageProps) => {
     const params = props.route.params;
@@ -142,7 +144,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={{ ...params.camera, center: centerCoordinates }}
-                customMapStyle={mapStyle}
+                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
             >

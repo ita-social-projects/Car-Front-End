@@ -53,6 +53,8 @@ import {
 } from "./Modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
+import { isDarkMode } from "../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -227,7 +229,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={mapStyle}
+                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >

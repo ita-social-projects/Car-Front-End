@@ -25,6 +25,9 @@ import {
 } from "../../../../../../utils/LocationHelperFunctions";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
+import DM from "../../../../../../components/styles/DM";
+import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
+import { isDarkMode } from "../../../../../../components/navigation/Routes";
 
 const AddLocation = () => {
 
@@ -146,10 +149,15 @@ const AddLocation = () => {
                 {wayPoint.isConfirmed && (
                     <>
                         <TextInput
-                            style={AddLocationStyle.textInput}
+                            style={[AddLocationStyle.textInput,
+                                {
+                                    borderColor: DM("black"),
+                                    backgroundColor: DM("white"),
+                                    color: DM("black")
+                                }]}
                             value={locationName}
                             placeholder={"Name the chosen address"}
-                            placeholderTextColor={"grey"}
+                            placeholderTextColor={DM("grey")}
                             onChangeText={(fromInput) => {
                                 setLocationName(fromInput);
                             }}/>
@@ -173,7 +181,7 @@ const AddLocation = () => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}
-                customMapStyle={mapStyle}
+                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
             >
