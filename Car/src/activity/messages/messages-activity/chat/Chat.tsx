@@ -31,13 +31,20 @@ import {
 import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
-    THIRD_ELEMENT_INDEX
+    THIRD_ELEMENT_INDEX,
+    ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import MenuButton from "../../../../components/menu-button/MenuButton";
 import ChatProps from "./ChatProps";
+import { INITIAL_NUMBER_TO_RENDER,
+    MILLISECONDS,
+    NUMBER_OF_MESSAGES_BELOW_FOCUSED,
+    NUMBER_OF_NEW_MESSAGES,
+    START_LIST_POSITION
+} from "../../../../constants/ChatsConstants";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -77,17 +84,18 @@ const Chat = (properties: ChatProps) => {
                 ).catch((err: any) => console.log(err));
             });
 
-            let id = properties.route.params.messageId;
-            let messagesBelow = 2;
+            let messageToFocusId = properties.route.params.messageId || ZERO_ID;
+            let messageId = ZERO_ID;
 
-            if (id) {
-                id += messagesBelow;
+            if (messageToFocusId) {
+                messageId = messageToFocusId + NUMBER_OF_MESSAGES_BELOW_FOCUSED;
             }
 
-            loadMessages(id)
-                .then((res) => {
+            loadMessages(messageId)
+                .then((res: IMessage[]) => {
                     setMessages(res);
                     setSpinner(false);
+                    focusOnMessage(res.find(msg => msg._id === messageToFocusId)!);
                 });
 
             connection.onreconnected(() => {
@@ -159,7 +167,7 @@ const Chat = (properties: ChatProps) => {
     const renderBubble = (props: BubbleProps<IMessage>) => (
         <Animated.View
             style={{
-                opacity: props.currentMessage?._id === properties.route.params.messageId ? fadeAnim : MAX_OPACITY
+                opacity: props.currentMessage?._id === properties.route.params.messageId ? fadeAnim : MAX_OPACITY,
             }}
         >
             <Bubble
@@ -253,9 +261,9 @@ const Chat = (properties: ChatProps) => {
     };
 
     const loadMessages = (messageId: number): Promise<any> => {
-        let tempChat: any = [];
+        let tempChat: IMessage[] = [];
 
-        return ChatService.getCeratinChat(
+        return ChatService.getCertainChat(
             properties?.route.params.chatId, messageId)
             .then((res: any) => {
                 res.data?.forEach((data: any) => {
@@ -298,11 +306,10 @@ const Chat = (properties: ChatProps) => {
 
     const loadNewerMessages = () => {
         setLoadingNewer(true);
-        let firstElement = messages[FIRST_ELEMENT_INDEX];
-        let messagesBelow = 51;
-        let id = Number(firstElement._id) + messagesBelow;
+        let firstMessage = messages[FIRST_ELEMENT_INDEX];
+        let id = Number(firstMessage._id) + NUMBER_OF_NEW_MESSAGES;
 
-        loadMessages(id).then(res => {
+        loadMessages(id).then((res: IMessage[]) => {
             setMessages((previousMessages) => {
                 let temp = GiftedChat.append(
                     res,
@@ -317,26 +324,27 @@ const Chat = (properties: ChatProps) => {
                 const sortMessagesById = (arr: IMessage[]) =>
                     arr.sort((a,b) => Number(b._id) - Number(a._id));
 
-                return sortMessagesById(onlyUniqueMessages(temp));
+                return onlyUniqueMessages(sortMessagesById(temp));
             });
             setLoadingNewer(false);
+            focusOnMessage(firstMessage);
         });
-        let miliseconds = 10;
-
-        setTimeout(() => {
-            chatRef.current?._messageContainerRef?.current?.scrollToItem({
-                animated: false, item: firstElement, viewPosition: 0.2 });
-        }, miliseconds);
     };
 
-    let zero = 0;
-    const scrollHandler = {
+    const focusOnMessage = (message: IMessage) => {
+        setTimeout(() => {
+            chatRef.current?._messageContainerRef?.current?.scrollToItem({
+                animated: false, item: message, viewPosition: 0.1 });
+        }, MILLISECONDS);
+    };
+
+    const listProps = {
         onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-            if (event.nativeEvent.contentOffset.y === zero && !isLoadingNewer) {
+            if (event.nativeEvent.contentOffset.y === START_LIST_POSITION && !isLoadingNewer) {
                 loadNewerMessages();
             }
         },
-        initialNumToRender: 51,
+        initialNumToRender: INITIAL_NUMBER_TO_RENDER,
     };
 
     return (
@@ -349,7 +357,7 @@ const Chat = (properties: ChatProps) => {
                 />
             ) : (
                 <GiftedChat
-                    listViewProps={scrollHandler}
+                    listViewProps={listProps}
                     ref={chatRef}
                     renderAvatar={(data) => renderUserAvatar(data)}
                     messagesContainerStyle={{ paddingBottom: 10 }}

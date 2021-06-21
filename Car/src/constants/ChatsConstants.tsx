@@ -1,0 +1,5 @@
+export const NUMBER_OF_MESSAGES_BELOW_FOCUSED = 25;
+export const NUMBER_OF_NEW_MESSAGES = 51;
+export const MILLISECONDS = 5;
+export const START_LIST_POSITION = 0;
+export const INITIAL_NUMBER_TO_RENDER = 60;
