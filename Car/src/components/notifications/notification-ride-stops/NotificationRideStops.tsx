@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { LinearTextGradient } from "react-native-text-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../models/stop/Stop";
 import StopType from "../../../../models/stop/StopType";
-import { GRADIENT_END, GRADIENT_START } from "../../../constants/StylesConstants";
+import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION, LESS_THAN_ZERO, MORE_THAN_ZERO, ZERO } from "../../../constants/GeneralConstants";
 import AuthContext from "../../auth/AuthContext";
 import Circle from "../../styles/Circle";
 import DM from "../../styles/DM";
@@ -16,19 +15,12 @@ import NotificationRideStopsProps from "./NotificationRideStopsProps";
 const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const { user } = useContext(AuthContext);
-    const one = 1;
-    const minusOne = -1;
-    const zero = 0;
 
-    const filterStops = (stops: Stop[]) => {
-        const array = stops.filter(stop =>
-            stop?.type == StopType.Start
-            ||
-            stop?.type == StopType.Finish
-            ||
-            stop?.userId == user?.id
-        ).sort((a) => (a?.userId === user?.id) ? minusOne : zero);
+    const sortStopsByUserId = (array: Stop[]) => {
+        return array.sort((a) => (a?.userId === user?.id) ? LESS_THAN_ZERO : ZERO);
+    };
 
+    const getUniqueStops = (array: Stop[]) => {
         return array.filter((value, index, arr) => {
             return (
                 arr.map(mapObj => mapObj?.address?.latitude)
@@ -37,16 +29,33 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                 arr.map(mapObj => mapObj?.address?.longitude)
                     .indexOf(value?.address?.longitude) === index
             );
-        }).sort((a, b) => (a?.index! > b?.index!) ? one : minusOne);
+        });
+    };
+
+    const sortStopsByIndex = (array: Stop[]) => {
+        return array.sort((a, b) => (a?.index! > b?.index!) ? MORE_THAN_ZERO : LESS_THAN_ZERO);
+    };
+
+    const filterStops = (stops: Stop[]) => {
+        let array = stops.filter(stop =>
+            stop?.type == StopType.Start
+            ||
+            stop?.type == StopType.Finish
+            ||
+            stop?.userId == user?.id
+        );
+
+        array = sortStopsByUserId(array);
+        array = getUniqueStops(array);
+        array = sortStopsByIndex(array);
+
+        return array;
     };
 
     useEffect(() => {
-        if (props.journeyId !== undefined)
-        {
-            JourneyService.getJourney(props.journeyId).then(res => {
-                setStops(filterStops(res.data?.stops!));
-            });
-        }
+        JourneyService.getJourney(props.journeyId).then(res => {
+            setStops(filterStops(res.data?.stops!));
+        });
     }, []);
 
     return (
@@ -59,7 +68,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                         <View key={item?.id} style={style.stopListItem}>
                             <View style={style.stopListItemRow}>
 
-                                {index !== zero && (
+                                {index !== FIRST_ELEMENT_INDEX && (
                                     item?.userId === user?.id ?
                                         <View style={[style.stopCustomLineIcon,
                                             { backgroundColor: DM("#AAA9AE") }
@@ -86,7 +95,8 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                     >
                                         <LinearGradient
                                             style={[
-                                                index === zero || index === stops.length - one ?
+                                                index === FIRST_ELEMENT_INDEX ||
+                                                index === stops.length - LAST_INDEX_CORRECTION ?
                                                     style.circleGrad
                                                     :
                                                     style.intermidiateCircleGrad,
@@ -108,32 +118,28 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                             </View>
 
                             {user?.id == item?.userId ?
-                                <LinearTextGradient
-                                    style={[style.stopName, { color: DM("#909095") }]}
-                                    locations={[GRADIENT_START, GRADIENT_END]}
-                                    colors={["#00A3CF", "#5552A0"]}
-                                    start={{ x: 0, y: 0 }}
-                                    end={{ x: 1, y: 0 }}
+                                <Text
+                                    style={[style.stopName, { color: DM("#00A3CF") }]}
                                     numberOfLines={1}
                                     ellipsizeMode={"tail"}
                                 >
-                                    {index !== zero ?
+                                    {index !== FIRST_ELEMENT_INDEX ?
                                         <>
-                                            <Text style={[style.activeStopName, { color: DM("#909095") }]}>
+                                            <Text style={[style.activeStopName, { color: DM("#00A3CF") }]}>
                                                 {`${user!.name}'s Stop `}‏
                                             </Text>
 
-                                            <Text style={[style.activeStopAddress, { color: DM("#909095") }]}>
+                                            <Text style={[style.activeStopAddress, { color: DM("#00A3CF") }]}>
                                                 {`(${item?.address?.name!})`}‏
                                             </Text>
                                         </>
                                         :
-                                        <Text style={[style.activeStopAddress, { color: DM("#909095") }]}>
+                                        <Text style={[style.activeStopAddress, { color: DM("#00A3CF") }]}>
                                             {`${item?.address?.name!}`}‏
                                         </Text>
                                     }
 
-                                </LinearTextGradient>
+                                </Text>
                                 :
                                 <Text
                                     style={[style.stopName, { color: DM("black") }]}

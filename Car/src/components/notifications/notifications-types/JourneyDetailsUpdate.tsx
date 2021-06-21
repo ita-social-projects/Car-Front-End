@@ -9,7 +9,6 @@ import * as navigation from "../../navigation/Navigation";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 
 const JourneyDetailsUpdate = (props: NotificationProps) => {
-    const data = JSON.parse(props.notificationData);
     const [isRideCanceled, setIsRideCanceled] = useState<boolean>(true);
     const [modalVisible, setModalVisible] = useState(props.visible);
 
@@ -44,7 +43,7 @@ const JourneyDetailsUpdate = (props: NotificationProps) => {
                             setModalVisible(false);
                             if(!isRideCanceled){
                                 navigation.navigate("Journey Page", {
-                                    journeyId: data.journeyId,
+                                    journeyId: props.journeyId,
                                     isDriver: false,
                                     isPassenger: true
                                 });
