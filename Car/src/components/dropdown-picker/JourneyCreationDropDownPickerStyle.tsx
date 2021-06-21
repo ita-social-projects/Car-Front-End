@@ -33,7 +33,6 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
         position: "absolute",
-        color: "gray",
         marginTop: 35,
         marginLeft: 35,
         zIndex: 10,

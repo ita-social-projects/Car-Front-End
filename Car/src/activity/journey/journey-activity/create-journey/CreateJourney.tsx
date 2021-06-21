@@ -343,7 +343,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
-                        color="#414045"
+                        color={DM("#414045")}
                         text={routeIsUpdating ? "Route updating..." : "Loading information..."}
                     />
                 </View>
@@ -442,14 +442,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
                         {
-                            backgroundColor: confirmDisabled ? "#afafaf" : "black",
+                            backgroundColor: confirmDisabled ? DM("gray") : DM("black"),
                             left: Dimensions.get("screen").width -
                                 (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
                         }]}
                     onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
                     disabled={confirmDisabled}
                 >
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM("white") }]}>
                         {journey ? "Update route" : "Confirm"}
                     </Text>
                 </TouchableOpacity>

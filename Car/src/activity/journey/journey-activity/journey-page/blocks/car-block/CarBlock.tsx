@@ -9,15 +9,16 @@ import { CAR_IMAGE_BORDER_RADIUS, TAXI_IMAGE_BORDER_RADIUS } from "../../../../.
 import JourneyPageStyle from "../../JourneyPageStyle";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
+    const image = car?.imageId ?
+        { uri: ImageService.getImageById(car.imageId) } :
+        require("../../../../../../../assets/images/journey/taxi2.png");
+
     return (
         <View style={JourneyPageStyle.carContainer}>
             <View style={JourneyPageStyle.carAvatarContainer}>
                 {car?.imageId || !isOnOwnCar ? (
                     <Image
-                        source={car?.imageId ?
-                            { uri: ImageService.getImageById(car.imageId) } :
-                            require("../../../../../../../assets/images/journey/taxi2.png")
-                        }
+                        source={image}
                         style={[JourneyPageStyle.carAvatar,
                             { borderRadius: car?.imageId ? CAR_IMAGE_BORDER_RADIUS : TAXI_IMAGE_BORDER_RADIUS,
                                 resizeMode: car?.imageId ? "cover" : "contain" }]}

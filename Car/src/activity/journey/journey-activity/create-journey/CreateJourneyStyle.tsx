@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
-        backgroundColor: "#F2F2F2",
         paddingTop: 25
     },
 
@@ -44,7 +43,6 @@ export const CreateJourneyStyle = StyleSheet.create({
     textInputStyle: {
         height: 100,
         borderWidth: 2,
-        borderColor: "black",
         fontSize: 15,
         paddingLeft: 10,
         textAlignVertical: "top",
@@ -69,13 +67,12 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
-        backgroundColor: "#000000",
         flexDirection: "row",
+        borderWidth: 2
     },
 
     publishButtonText: {
         paddingHorizontal: 6,
-        color: "white",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 14,
@@ -85,7 +82,8 @@ export const CreateJourneyStyle = StyleSheet.create({
     discardButton: {
         marginBottom: 20,
         paddingHorizontal: 16,
-        paddingVertical: 12
+        paddingVertical: 12,
+        borderWidth: 2
     },
 
     discardButtonText: {
@@ -107,7 +105,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         zIndex: 1,
         width: "100%",
         paddingHorizontal: 10,
-        height: 240,
-        marginTop: 25
+        height: 265,
+        marginTop: 0
     }
 });

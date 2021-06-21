@@ -17,7 +17,7 @@ interface SeatsInputSpinnerProps {
 const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
     return (
         <View style={SeatsInputSpinnerStyle.container}>
-            <Text style={SeatsInputSpinnerStyle.descriptionText}>
+            <Text style={[SeatsInputSpinnerStyle.descriptionText, { color: DM("black") }]}>
                 {props.title}
             </Text>
             <View>
@@ -25,13 +25,13 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
                     max={4}
                     min={Math.max(Number(props.minValue), MIN_AVAILABLE_SEATS_COUNT)}
                     step={1}
-                    style={SeatsInputSpinnerStyle.spinnerContainer}
-                    inputStyle={SeatsInputSpinnerStyle.input}
-                    colorPress={"#65656A"}
-                    colorLeft={"white"}
-                    colorRight={"black"}
-                    background={"white"}
-                    textColor={"black"}
+                    style={[SeatsInputSpinnerStyle.spinnerContainer, { borderColor: DM("black") }]}
+                    inputStyle={[SeatsInputSpinnerStyle.input, { borderColor: DM("black") }]}
+                    colorPress={DM("#65656A")}
+                    colorLeft={DM("white")}
+                    colorRight={DM("black")}
+                    background={DM("white")}
+                    textColor={DM("black")}
                     height={44}
                     buttonLeftImage={<Entypo name="minus" size={20} color={DM("black")} />}
                     buttonRightImage={<Entypo name="plus" size={20} color={DM("white")} />}

@@ -476,7 +476,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             style={[CreateJourneyStyle.publishButton,
                                 {
                                     backgroundColor: !(to.isConfirmed && from.isConfirmed) ?
-                                        DM("#afafaf") : DM("black")
+                                        DM("gray") : DM("black"),
+                                    borderWidth: 0,
                                 }]}
                             onPress={() => {onConfirmButtonPress();}}
                             disabled={!(to.isConfirmed && from.isConfirmed)}
