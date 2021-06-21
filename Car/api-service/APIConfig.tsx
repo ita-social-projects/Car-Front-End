@@ -1,6 +1,6 @@
 const APIConfig = {
     URL: "https://car-api-project.azurewebsites.net/",
-    apiKey: "AIzaSyA4BK5svjc6bumMDsjlaiGtjpIZBAFU8Fg",
+    apiKey: "AIzaSyCklRDdIQY-TUYRyla9HQRUokdVTgokhuA",
 };
 
 export default APIConfig;
