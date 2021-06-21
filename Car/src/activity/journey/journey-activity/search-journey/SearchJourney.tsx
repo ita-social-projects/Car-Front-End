@@ -59,21 +59,22 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
-    const [allButtonStyle, setAllButtonStyle] = useState({
+
+    const activeButtonStyle = {
         backgroundColor: DM("#000000"),
         color: DM("#FFFFFF"),
         borderColor: DM("#000000")
-    });
-    const [freeButtonStyle, setFreeButtonStyle] = useState({
+    };
+
+    const inactiveButtonStyle = {
         backgroundColor: DM("#FFFFFF"),
         color: DM("#000000"),
         borderColor: DM("#000000")
-    });
-    const [paidButtonStyle, setPaidButtonStyle] = useState({
-        backgroundColor: DM("#FFFFFF"),
-        color: DM("#000000"),
-        borderColor: DM("#000000")
-    });
+    };
+
+    const [allButtonStyle, setAllButtonStyle] = useState(activeButtonStyle);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(inactiveButtonStyle);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(inactiveButtonStyle);
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -153,38 +154,14 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
                 switch(filter.fee){
                     case FeeType.Free:
-                        setAllButtonStyle({
-                            backgroundColor: DM("#FFFFFF"),
-                            color: DM("#000000"),
-                            borderColor: DM("#000000")
-                        });
-                        setFreeButtonStyle({
-                            backgroundColor: DM("#000000"),
-                            color: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
-                        });
-                        setPaidButtonStyle({
-                            backgroundColor: DM("#FFFFFF"),
-                            color: DM("#000000"),
-                            borderColor: DM("#000000")
-                        });
+                        setAllButtonStyle(inactiveButtonStyle);
+                        setFreeButtonStyle(activeButtonStyle);
+                        setPaidButtonStyle(inactiveButtonStyle);
                         break;
                     case FeeType.Paid:
-                        setAllButtonStyle({
-                            backgroundColor: DM("#FFFFFF"),
-                            color: DM("#000000"),
-                            borderColor: DM("#000000")
-                        });
-                        setFreeButtonStyle({
-                            backgroundColor: DM("#FFFFFF"),
-                            color: DM("#000000"),
-                            borderColor: DM("#000000")
-                        });
-                        setPaidButtonStyle({
-                            backgroundColor: DM("#000000"),
-                            color: DM("#FFFFFF"),
-                            borderColor: DM("#000000")
-                        });
+                        setAllButtonStyle(inactiveButtonStyle);
+                        setFreeButtonStyle(inactiveButtonStyle);
+                        setPaidButtonStyle(activeButtonStyle);
                         break;
                 }
 
@@ -378,21 +355,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             <TouchableOpacity
                                 style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
                                 onPress={() => {
-                                    setAllButtonStyle({
-                                        backgroundColor: DM("#000000"),
-                                        color: DM("#FFFFFF"),
-                                        borderColor: DM("#000000")
-                                    });
-                                    setFreeButtonStyle({
-                                        backgroundColor: DM("#FFFFFF"),
-                                        color: DM("#000000"),
-                                        borderColor: DM("#000000")
-                                    });
-                                    setPaidButtonStyle({
-                                        backgroundColor: DM("#FFFFFF"),
-                                        color: DM("#000000"),
-                                        borderColor: DM("#000000")
-                                    });
+                                    setAllButtonStyle(activeButtonStyle);
+                                    setFreeButtonStyle(inactiveButtonStyle);
+                                    setPaidButtonStyle(inactiveButtonStyle);
                                 }}
                             >
                                 <Text
@@ -411,21 +376,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     freeButtonStyle,
                                 ]}
                                 onPress={() => {
-                                    setAllButtonStyle({
-                                        backgroundColor: DM("#FFFFFF"),
-                                        color: DM("#000000"),
-                                        borderColor: DM("#000000")
-                                    });
-                                    setFreeButtonStyle({
-                                        backgroundColor: DM("#000000"),
-                                        color: DM("#FFFFFF"),
-                                        borderColor: DM("#000000")
-                                    });
-                                    setPaidButtonStyle({
-                                        backgroundColor: DM("#FFFFFF"),
-                                        color: DM("#000000"),
-                                        borderColor: DM("#000000")
-                                    });
+                                    setAllButtonStyle(inactiveButtonStyle);
+                                    setFreeButtonStyle(activeButtonStyle);
+                                    setPaidButtonStyle(inactiveButtonStyle);
                                 }}
                             >
                                 <Text
@@ -443,21 +396,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     paidButtonStyle,
                                 ]}
                                 onPress={() => {
-                                    setAllButtonStyle({
-                                        backgroundColor: DM("#FFFFFF"),
-                                        color: DM("#000000"),
-                                        borderColor: DM("#000000")
-                                    });
-                                    setFreeButtonStyle({
-                                        backgroundColor: DM("#FFFFFF"),
-                                        color: DM("#000000"),
-                                        borderColor: DM("#000000")
-                                    });
-                                    setPaidButtonStyle({
-                                        backgroundColor: DM("#000000"),
-                                        color: DM("#FFFFFF"),
-                                        borderColor: DM("#000000")
-                                    });
+                                    setAllButtonStyle(inactiveButtonStyle);
+                                    setFreeButtonStyle(inactiveButtonStyle);
+                                    setPaidButtonStyle(activeButtonStyle);
                                 }}
                             >
                                 <Text
