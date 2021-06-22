@@ -20,12 +20,17 @@ test("renders correctly", async () =>
     >
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "center",
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            },
+            Object {
+              "backgroundColor": "white",
+            },
+          ]
         }
       >
         <ActivityIndicator

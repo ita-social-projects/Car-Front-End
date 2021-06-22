@@ -6,33 +6,42 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { Divider } from "react-native-elements";
 import LocationDropDownPickerStyle from "./LocationDropDownPickerStyle";
+import DM from "../styles/DM";
 
 const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
     const controller = useRef<any>(null);
 
     return (
         <View style={LocationDropDownPickerStyle.container}>
-            <Text style={[LocationDropDownPickerStyle.staticPlaceholder]}>
+            <Text style={[LocationDropDownPickerStyle.staticPlaceholder, { color: DM("black") }]}>
             </Text>
             <DropDownPicker
-                style={LocationDropDownPickerStyle.style}
+                style={[LocationDropDownPickerStyle.style,
+                    {
+                        borderColor: DM("black"),
+                        backgroundColor: DM("white")
+                    }]}
                 arrowStyle={LocationDropDownPickerStyle.arrow}
                 customArrowDown={() => (
-                    <Ionicons name="caret-down-outline" size={18} />
+                    <Ionicons name="caret-down-outline" size={18} color={DM("black")} />
                 )}
                 customArrowUp={() => (
-                    <Ionicons name="caret-up-outline" size={18} />
+                    <Ionicons name="caret-up-outline" size={18} color={DM("black")} />
                 )}
                 renderSeperator={() => (
-                    <Divider style={LocationDropDownPickerStyle.divider} />
+                    <Divider style={{ backgroundColor: DM("gray") }} />
                 )}
-                dropDownStyle={LocationDropDownPickerStyle.dropDownStyle}
-                selectedLabelStyle={LocationDropDownPickerStyle.selectedLabelStyle}
+                dropDownStyle={[LocationDropDownPickerStyle.dropDownStyle,
+                    {
+                        backgroundColor: DM("white"),
+                        borderColor: DM("black")
+                    }]}
+                selectedLabelStyle={[LocationDropDownPickerStyle.selectedLabelStyle, { color: DM("black") }]}
                 itemStyle={LocationDropDownPickerStyle.itemStyle}
                 items={props.items}
-                placeholderStyle={LocationDropDownPickerStyle.staticPlaceholder}
+                placeholderStyle={[LocationDropDownPickerStyle.staticPlaceholder, { color: DM("black") }]}
                 placeholder={props.placeholder}
-                labelStyle={LocationDropDownPickerStyle.labelStyle}
+                labelStyle={[LocationDropDownPickerStyle.labelStyle, { color: DM("black") }]}
                 onChangeItem={props.onChangeItem}
                 isVisible={props.isVisible}
                 onOpen={props.onOpen}

@@ -14,16 +14,19 @@ import {
     initialWayPoint
 } from "../../../../../../constants/AddressConstants";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
-import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
+import { mapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import AddLocationStyle from "../add-locations/AddLocationStyle";
-import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
 import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
+import DM from "../../../../../../components/styles/DM";
+import { isDarkMode } from "../../../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
+import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const EditLocation = (props: EditLocationProps) => {
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
@@ -162,10 +165,15 @@ const EditLocation = (props: EditLocationProps) => {
                     refFor={(ref) => (addressInputRef.current = ref)}
                 />
                 <TextInput
-                    style={AddLocationStyle.textInput}
+                    style={[AddLocationStyle.textInput,
+                        {
+                            backgroundColor: DM("white"),
+                            color: DM("black"),
+                            borderColor: DM("black")
+                        }]}
                     value={locationName}
                     placeholder={"Name the chosen address"}
-                    placeholderTextColor={"grey"}
+                    placeholderTextColor={DM("grey")}
                     onChangeText={(fromInput) => {
                         setLocationName(fromInput);
                     }}/>
@@ -188,7 +196,7 @@ const EditLocation = (props: EditLocationProps) => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}
-                customMapStyle={mapStyle}
+                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
             >
