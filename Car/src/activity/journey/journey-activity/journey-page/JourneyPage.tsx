@@ -18,12 +18,8 @@ import { MAX_POPUP_POSITION, MIN_POPUP_POSITION } from "../../../../constants/St
 import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
-import { mapStyle } from "../map-address/SearchJourneyMapStyle";
-import CarBlock from "./CarBlock/CarBlock";
-import StopsBlock from "./StopsBlock/StopsBlock";
-import ParticipantsBlock from "./ParticipantsBlock/ParticipantsBlock";
-import ButtonBlock from "./ButtonBlock/ButtonBlock";
-import DriverBlock from "./DriverBlock/DriverBlock";
+import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
+import ButtonBlock from "./blocks/button-block/ButtonBlock";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
@@ -34,9 +30,12 @@ import {
     mapStopToMarker,
     mapStopToWayPoint
 } from "../../../../utils/JourneyHelperFunctions";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID } from "../../../../constants/GeneralConstants";
-import CommentsBlock from "./CommentsBlock/CommentsBlock";
-import SendRequestModal from "./SendRequestModal/SendRequestModal";
+import {
+    FIRST_ELEMENT_INDEX,
+    SECOND_ELEMENT_INDEX,
+    THIRD_ELEMENT_INDEX,
+    ZERO_ID
+} from "../../../../constants/GeneralConstants";
 import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import AuthContext from "../../../../components/auth/AuthContext";
@@ -45,9 +44,17 @@ import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModal
 import {
     requestSendingFailedModal,
     rideCancelingErrorModal
-} from "./Modals/JourneyPageModals";
+} from "../../../../components/modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
+import { isDarkMode } from "../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
+import CarBlock from "./blocks/car-block/CarBlock";
+import CommentsBlock from "./blocks/comments-block/CommentsBlock";
+import DriverBlock from "./blocks/driver-block/DriverBlock";
+import ParticipantsBlock from "./blocks/participants-block/ParticipantsBlock";
+import SendRequestModal from "./blocks/send-request-modal/SendRequestModal";
+import StopsBlock from "./blocks/stops-block/StopsBlock";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -222,7 +229,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={mapStyle}
+                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >
@@ -279,7 +286,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     <StopsBlock
                                         stops={getStopsForBottomPopup() ?? []}
                                         onStopPress={onStopPressHandler}
-                                        notHighlightedTextColor={"black"}
+                                        highlightedStops={isDriver ?
+                                            [...Array(currentJourney?.stops.length).keys()] :
+                                            [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                                     />
                                     <CommentsBlock comments={currentJourney?.comments} />
                                     <ParticipantsBlock journey={currentJourney}/>

@@ -32,8 +32,8 @@ test("renders correctly", async () =>
           onContentSizeChange={[Function]}
           style={
             Object {
-              "height": 240,
-              "marginTop": 25,
+              "height": 265,
+              "marginTop": 0,
               "paddingHorizontal": 10,
               "position": "absolute",
               "width": "100%",
@@ -105,7 +105,7 @@ test("renders correctly", async () =>
                 "top": 1098,
               },
               Object {
-                "backgroundColor": "#afafaf",
+                "backgroundColor": "gray",
                 "left": 629,
               },
             ]

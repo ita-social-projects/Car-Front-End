@@ -2,11 +2,9 @@ import { StyleSheet } from "react-native";
 
 const LocationDropDownPickerStyle = StyleSheet.create({
     dropDownStyle: {
-        backgroundColor: "#fafafa",
         marginTop: 5,
         borderWidth: 2,
         borderTopWidth: 0,
-        borderColor: "white",
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0
     },
@@ -17,7 +15,6 @@ const LocationDropDownPickerStyle = StyleSheet.create({
 
     style: {
         alignItems: "center",
-        borderColor: "black",
         borderWidth: 2,
         paddingVertical: 3,
         borderTopRightRadius: 0,
@@ -34,14 +31,9 @@ const LocationDropDownPickerStyle = StyleSheet.create({
     staticPlaceholder: {
         fontSize: 18,
         lineHeight: 24,
-        color: "gray",
         top:-1,
         left:-4,
         zIndex: 10,
-    },
-
-    divider: {
-        backgroundColor: "gray",
     },
 
     itemStyle: {
@@ -51,14 +43,12 @@ const LocationDropDownPickerStyle = StyleSheet.create({
 
     labelStyle:{
         fontSize: 16,
-        color:"black",
         top:3,
         left:3,
     },
 
     selectedLabelStyle: {
         fontSize: 18,
-        color:"black",
         top:0,
         left:3,
     }

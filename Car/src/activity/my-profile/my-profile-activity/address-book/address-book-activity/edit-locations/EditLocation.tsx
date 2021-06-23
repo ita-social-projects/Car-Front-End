@@ -14,16 +14,22 @@ import {
     initialWayPoint
 } from "../../../../../../constants/AddressConstants";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
-import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
+import { mapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import AddLocationStyle from "../add-locations/AddLocationStyle";
-import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
 import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
+import EditCarsStyle from "../../../cars/car-activity/edit-cars/EditCarsStyle";
+import DM from "../../../../../../components/styles/DM";
+import Indicator from "../../../../../../components/activity-indicator/Indicator";
+import DM from "../../../../../../components/styles/DM";
+import { isDarkMode } from "../../../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
+import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const EditLocation = (props: EditLocationProps) => {
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
@@ -34,6 +40,7 @@ const EditLocation = (props: EditLocationProps) => {
             longitude: initialCoordinate.longitude
         }
     });
+    const [isLoading, setLoading] = useState(true);
     const [locationName, setLocationName] = useState<string>("");
     const [isVisibleLocationDropDown, setIsVisibleLocationDropDown] = useState(false);
     const [locationType, setLocationType] = useState<{id: number, name: string}>(
@@ -81,6 +88,7 @@ const EditLocation = (props: EditLocationProps) => {
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
+        setLoading(false);
     }, [wayPoint]);
 
     const setAddress = (address: string, coordinates: LatLng) => {
@@ -147,65 +155,78 @@ const EditLocation = (props: EditLocationProps) => {
         });};
 
     return(
-        <View style={{ flex: 1 }}>
-            <View style={AddLocationStyle.inputContainer}>
-                <AddressInput
-                    placeholder={"Address"}
-                    paddingLeft={90}
-                    address={wayPoint.text}
-                    onChangeText={addressInputOnChangeTextHandler}
-                    onPress={addressInputOnPressHandler}
-                    onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
-                    savedLocations={[]}
-                    userLocation={userCoordinates}
-                    recentAddresses={[]}
-                    refFor={(ref) => (addressInputRef.current = ref)}
-                />
-                <TextInput
-                    style={AddLocationStyle.textInput}
-                    value={locationName}
-                    placeholder={"Name the chosen address"}
-                    placeholderTextColor={"grey"}
-                    onChangeText={(fromInput) => {
-                        setLocationName(fromInput);
-                    }}/>
-                <LocationDropDownPicker
-                    fast-food-outline
-                    items={LOCATION_TYPES}
-
-                    placeholder={"Choose the address type and the icon"}
-                    isVisible={isVisibleLocationDropDown}
-                    onOpen={() => setIsVisibleLocationDropDown(true)}
-                    defaultValue={locationType.id}
-                    onChangeItem={(item) => {
-                        setLocationType({ id: item.value, name: item.label });
-                        setIsVisibleLocationDropDown(false);
-                    }}/>
-            </View>
-            <MapView
-                ref={ref => (mapRef.current = ref)}
-                style={{ height: "100%" }}
-                provider={PROVIDER_GOOGLE}
-                showsUserLocation={true}
-                initialCamera={initialCamera}
-                customMapStyle={mapStyle}
-                onLongPress={mapEventHandler}
-                showsCompass={false}
+        isLoading ? (
+            <View
+                style={[EditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
             >
-                <Marker
-                    title={"Address"}
-                    style={CreateJourneyStyle.movableMarker}
-                    draggable={true}
-                    onDragEnd={mapEventHandler}
-                    image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
-                    coordinate={markerCoordinates}
+                <Indicator
+                    size="large"
+                    color="#414045"
+                    text="Loading information..."
                 />
-            </MapView>
-            <SaveLocationButton
-                wayPointConfirmation={wayPoint.isConfirmed}
-                onPress={() => updateLocation().then(() => navigation.goBack())}
-            />
-        </View>
+            </View>
+        ) :
+            (
+                <View style={{ flex: 1 }}>
+                    <View style={AddLocationStyle.inputContainer}>
+                        <AddressInput
+                            placeholder={"Address"}
+                            paddingLeft={90}
+                            address={wayPoint.text}
+                            onChangeText={addressInputOnChangeTextHandler}
+                            onPress={addressInputOnPressHandler}
+                            onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
+                            savedLocations={[]}
+                            userLocation={userCoordinates}
+                            recentAddresses={[]}
+                            refFor={(ref) => (addressInputRef.current = ref)}
+                        />
+                        <TextInput
+                            style={AddLocationStyle.textInput}
+                            value={locationName}
+                            placeholder={"Name the chosen address"}
+                            placeholderTextColor={"grey"}
+                            onChangeText={(fromInput) => {
+                                setLocationName(fromInput);
+                            }}/>
+                        <LocationDropDownPicker
+                            fast-food-outline
+                            items={LOCATION_TYPES}
+
+                            placeholder={"Choose the address type and the icon"}
+                            isVisible={isVisibleLocationDropDown}
+                            onOpen={() => setIsVisibleLocationDropDown(true)}
+                            defaultValue={locationType.id}
+                            onChangeItem={(item) => {
+                                setLocationType({ id: item.value, name: item.label });
+                                setIsVisibleLocationDropDown(false);
+                            }}/>
+                    </View>
+                    <MapView
+                        ref={ref => (mapRef.current = ref)}
+                        style={{ height: "100%" }}
+                        provider={PROVIDER_GOOGLE}
+                        showsUserLocation={true}
+                        initialCamera={initialCamera}
+                        customMapStyle={mapStyle}
+                        onLongPress={mapEventHandler}
+                        showsCompass={false}
+                    >
+                        <Marker
+                            title={"Address"}
+                            style={CreateJourneyStyle.movableMarker}
+                            draggable={true}
+                            onDragEnd={mapEventHandler}
+                            image={require("../../../../../../../assets/images/maps-markers/with_shade.png")}
+                            coordinate={markerCoordinates}
+                        />
+                    </MapView>
+                    <SaveLocationButton
+                        wayPointConfirmation={wayPoint.isConfirmed}
+                        onPress={() => updateLocation().then(() => navigation.goBack())}
+                    />
+                </View>
+            )
     );
 };
 
