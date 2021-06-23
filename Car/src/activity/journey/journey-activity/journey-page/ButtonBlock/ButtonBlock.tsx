@@ -21,12 +21,9 @@ const ButtonBlock = (props: ButtonBlockProps) => {
 
         ChatService.addChat(chat).then((res) => {
             if (res.status === StatusCodes.OK) {
-                navigation.navigate("MessagesTabs", {
-                    screen: "Chat",
-                    params: {
-                        chatId: props.journey?.id,
-                        header: res.data.name
-                    }
+                navigation.navigate("Chat", {
+                    chatId: props.journey?.id,
+                    header: res.data.name
                 });
             }
         });
