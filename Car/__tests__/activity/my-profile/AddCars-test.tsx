@@ -207,7 +207,7 @@ test("renders correctly", async () =>
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "marginBottom": 15,
+              "marginBottom": 66,
               "marginLeft": 24,
               "marginRight": 24,
               "zIndex": 0,

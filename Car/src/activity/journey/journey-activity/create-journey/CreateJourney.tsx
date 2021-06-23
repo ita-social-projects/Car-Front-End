@@ -3,7 +3,7 @@ import { Dimensions, PermissionsAndroid, Platform, ScrollView, Text, TouchableOp
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { mapStyle } from "../map-address/SearchJourneyMapStyle";
+import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
 import {
     initialCamera,
     initialCoordinate,
@@ -24,7 +24,6 @@ import Geolocation from "@react-native-community/geolocation";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import Location from "../../../../../models/location/Location";
-import AddressInputButton from "./AddressInputButton/AddressInputButton";
 import * as navigation from "../../../../components/navigation/Navigation";
 import WayPoint from "../../../../types/WayPoint";
 import { CreateJourneyStyle } from "./CreateJourneyStyle";
@@ -44,6 +43,9 @@ import StopType from "../../../../../models/stop/StopType";
 import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
+import { isDarkMode } from "../../../../components/navigation/Routes";
+import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
+import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -341,7 +343,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
-                        color="#414045"
+                        color={DM("#414045")}
                         text={routeIsUpdating ? "Route updating..." : "Loading information..."}
                     />
                 </View>
@@ -392,7 +394,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={mapStyle}
+                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >
@@ -440,14 +442,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
                         {
-                            backgroundColor: confirmDisabled ? "#afafaf" : "black",
+                            backgroundColor: confirmDisabled ? DM("gray") : DM("black"),
                             left: Dimensions.get("screen").width -
                                 (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
                         }]}
                     onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
                     disabled={confirmDisabled}
                 >
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM("white") }]}>
                         {journey ? "Update route" : "Confirm"}
                     </Text>
                 </TouchableOpacity>

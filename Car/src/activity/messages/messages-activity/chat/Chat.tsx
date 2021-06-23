@@ -224,6 +224,9 @@ const Chat = (properties: ChatProps) => {
                 overflow: "scroll",
                 backgroundColor: DM("white"),
             }}
+            textInputStyle={{
+                color: DM("black")
+            }}
         />
     );
 

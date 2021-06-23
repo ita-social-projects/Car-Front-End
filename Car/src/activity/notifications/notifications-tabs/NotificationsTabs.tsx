@@ -4,7 +4,7 @@ import { View } from "react-native";
 import DM from "../../../components/styles/DM";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import Notifications from "../Notifications";
-import RouteView from "../../../components/journey-new-applicant/RouteView/RouteView";
+import RouteView from "../../../components/journey-new-applicant/route-view/RouteView";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 
 const StackTabs = createStackNavigator();
