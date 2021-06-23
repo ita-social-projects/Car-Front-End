@@ -6,7 +6,8 @@ interface ChatProps {
     route: {
         params: {
             chatId: number,
-            header: string
+            header: string,
+            messageId: number,
         }
     }
 }

@@ -105,7 +105,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
             renderItem={({ item }) => (
                 <Swipeable
                     renderRightActions={() => renderActions(item.id)}
-                    ref={(ref) => (rows[notifications.indexOf(item)] = ref!)}
+                    ref={(ref: any) => (rows[notifications.indexOf(item)] = ref!)}
                     onSwipeableWillOpen={() =>
                         closeRow(notifications.indexOf(item))
                     }

@@ -111,6 +111,14 @@ const SimpleMessageStyle = StyleSheet.create({
         paddingTop: 10,
         lineHeight: 16,
         fontFamily: Font.OpenSans.SemiBold
+    },
+
+    highlightedText: {
+        backgroundColor: "grey",
+        color: "white",
+        borderWidth: 4,
+        borderColor: "black",
+        borderRadius: 30
     }
 });
 
