@@ -324,20 +324,17 @@ const Chat = (properties: ChatProps) => {
                         array.map(obj => obj._id)
                             .indexOf(value._id) === index);
 
-                const sortMessagesById = (arr: IMessage[]) =>
-                    arr.sort((a,b) => Number(b._id) - Number(a._id));
-
-                return onlyUniqueMessages(sortMessagesById(temp));
+                return onlyUniqueMessages(temp.sort((a,b) => Number(b._id) - Number(a._id)));
             });
             setLoadingNewer(false);
             focusOnMessage(firstMessage);
         });
     };
 
-    const focusOnMessage = (message: IMessage) => {
+    const focusOnMessage = (msg: IMessage) => {
         setTimeout(() => {
             chatRef.current?._messageContainerRef?.current?.scrollToItem({
-                animated: false, item: message, viewPosition: 0.1 });
+                animated: false, item: msg, viewPosition: 0.1 });
         }, MILLISECONDS);
     };
 
