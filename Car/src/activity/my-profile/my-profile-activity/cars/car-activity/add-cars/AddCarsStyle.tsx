@@ -45,7 +45,7 @@ const AddCarsStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         zIndex: 0,
-        marginBottom: 15,
+        marginBottom: 66,
         marginRight: 24,
         marginLeft: 24,
     },

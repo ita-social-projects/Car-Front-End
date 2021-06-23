@@ -7,9 +7,8 @@ import NotificationHeader from "../notifications/notification-header/Notificatio
 import NotificationButtonGroup from "../notifications/notification-buttons/NotificationButtonGroup";
 import NotificationConfirmButton from "../notifications/notification-buttons/NotificationConfirmButton";
 import NotificationDeclineButton from "../notifications/notification-buttons/NotificationDeclineButton";
-import RequestComment from "./RequestComments/RequestComment";
-import WithLuggage from "./WithLuggage/WithLuggage";
-import StopsBlock from "../../activity/journey/journey-activity/journey-page/StopsBlock/StopsBlock";
+import RequestComment from "./request-comments/RequestComment";
+import WithLuggage from "./with-luggage/WithLuggage";
 import Stop from "../../../models/stop/Stop";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import { getStopByType, getStopCoordinates } from "../../utils/JourneyHelperFunctions";
@@ -18,6 +17,7 @@ import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "
 import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import JourneyPoint from "../../../models/journey/JourneyPoint";
 import * as navigation from "../../components/navigation/Navigation";
+import StopsBlock from "../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 
 const JourneyNewApplicant = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible ?? false);

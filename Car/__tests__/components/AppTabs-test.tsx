@@ -16,8 +16,10 @@ test("renders correctly", async () =>
       screenOptions={[Function]}
       tabBarOptions={
         Object {
-          "activeTintColor": "black",
-          "inactiveTintColor": "#AAA9AE",
+          "activeBackgroundColor": "#414045",
+          "activeTintColor": "#ffffff",
+          "inactiveBackgroundColor": "#ffffff",
+          "inactiveTintColor": "#414045",
           "labelStyle": Object {
             "fontFamily": "Open Sans",
             "fontSize": 10,
@@ -49,7 +51,10 @@ test("renders correctly", async () =>
         options={
           Object {
             "tabBarBadge": undefined,
-            "tabBarButton": [Function],
+            "tabBarBadgeStyle": Object {
+              "backgroundColor": "#EC6400",
+              "color": "#ffffff",
+            },
             "tabBarLabel": "Notifications",
           }
         }

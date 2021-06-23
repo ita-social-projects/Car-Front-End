@@ -9,13 +9,8 @@ import {
     KeyboardAvoidingView,
     Platform
 } from "react-native";
-import TouchableDateTimePicker, { addMinutesToDate } from "../touchable/datetime-picker/TouchableDateTimePicker";
-import JourneyCreationDropDownPicker from "../dropdown-picker/JourneyCreationDropDownPicker";
-import SeatsInputSpinner from "../input-spinner/SeatsInputSpinner";
-import AddressInputButton from "../create-journey/AddressInputButton/AddressInputButton";
 import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
 import SwitchSelector from "../../../../components/SwitchSelector/SwitchSelector";
-import { activeButtonStyle, inactiveButtonStyle } from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 import CarService from "../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../components/auth/AuthContext";
 import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
@@ -39,6 +34,11 @@ import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModal
 import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
+import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
+import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
+import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
+import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
+import DM from "../../../../components/styles/DM";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -61,20 +61,34 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     });
     const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
 
+    const activeButtonStyle = {
+        backgroundColor: DM("#000000"),
+        color: DM("#FFFFFF"),
+        borderColor: DM("#000000")
+    };
+
+    const inactiveButtonStyle = {
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000"),
+        borderColor: DM("#000000")
+    };
+
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(
         journey?.isOnOwnCar && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(
         journey?.isOnOwnCar && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
 
     const [freeButtonStyle, setFreeButtonStyle] = useState(
-        journey?.isFree && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(
         journey?.isFree && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(
+        journey?.isFree && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
 
     const [departureTime, setDepartureTime] = useState<Date>(journey ?
         moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
         addMinutesToDate(new Date(), MINUTES_OFFSET));
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
+
+    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar && journey || !journey);
 
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
@@ -177,7 +191,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             {isLoading && (
                 <Indicator
                     size="large"
-                    color="#414045"
+                    color={DM("#414045")}
                     text={rideIsPublishing ? "The ride is publishing..." : "Loading information..."}
                 />
             )}
@@ -185,7 +199,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "position"}
                 >
-                    <ScrollView style={CreateJourneyStyle.container}>
+                    <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: DM("white") }]}>
 
                         <AddressInputButton
                             iconName={"location"}
@@ -230,13 +244,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             leftButtonStyle={ownCarButtonStyle}
                             rightButtonStyle={taxiButtonStyle}
                             onLeftButtonPress={() => {
-                                if (ownCarButtonStyle === activeButtonStyle) return;
-
+                                setOwnCar(true);
                                 setIsVisibleCarDropDown(false);
                                 setOwnCarButtonStyle(activeButtonStyle);
                                 setTaxiButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
+                                setOwnCar(false);
                                 setOwnCarButtonStyle(inactiveButtonStyle);
                                 setTaxiButtonStyle(activeButtonStyle);
                             }}
@@ -246,7 +260,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             disableLeftButton={userCars.length === EMPTY_COLLECTION_LENGTH}
                         />
 
-                        {ownCarButtonStyle === activeButtonStyle && (
+                        {isOwnCar && (
                             <JourneyCreationDropDownPicker
                                 items={userCars.map((car) => ({
                                     label: car.name,
@@ -292,18 +306,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <View style={CreateJourneyStyle.commentsView}>
-                            <Text style={CreateJourneyStyle.commentsCaption}>Comments</Text>
+                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Comments</Text>
                             <TextInput
-                                style={CreateJourneyStyle.textInputStyle}
+                                style={[CreateJourneyStyle.textInputStyle,
+                                    {
+                                        borderColor: DM("black"),
+                                        color: DM("black")
+                                    }]}
                                 multiline={true}
                                 maxLength={100}
                                 numberOfLines={10}
                                 placeholder={"Write your comment"}
-                                placeholderTextColor={"#686262"}
+                                placeholderTextColor={DM("#686262")}
                                 onChangeText={text => setComment(text)}
                                 value={comment}
                             />
-                            <Text style={{ color: "#686262", paddingTop: 5 }}>Up to 100 symbols</Text>
+                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>Up to 100 symbols</Text>
                         </View>
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
@@ -311,7 +329,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
-                                    { display: journey ? "flex" : "none" }]}
+                                    {
+                                        display: journey ? "flex" : "none",
+                                        borderColor: DM("black")
+                                    }]}
                                 onPress={() => setDiscardModalIsVisible(true)}
                             >
                                 <Text style={CreateJourneyStyle.discardButtonText}>
@@ -321,14 +342,20 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
-                                    { backgroundColor: confirmDisabled ? "#afafaf" : "black" }]}
+                                    {
+                                        backgroundColor: confirmDisabled ? DM("gray") : DM("black"),
+                                        borderColor: confirmDisabled ? DM("gray") : DM("black")
+                                    }]}
                                 onPress={journey ?
                                     () => setApplyChangesModalIsVisible(true) :
                                     publishJourneyHandler}
                                 disabled={confirmDisabled}
                             >
                                 <Text style={[CreateJourneyStyle.publishButtonText,
-                                    { fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE }]}>
+                                    {
+                                        fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE,
+                                        color: DM("white")
+                                    }]}>
                                     {journey ? "Apply changes" : "Publish"}
                                 </Text>
                             </TouchableOpacity>
