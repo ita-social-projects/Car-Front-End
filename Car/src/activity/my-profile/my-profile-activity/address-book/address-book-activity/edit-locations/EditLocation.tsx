@@ -26,9 +26,6 @@ import SaveLocationButton from "../../../../../../components/save-location-butto
 import EditCarsStyle from "../../../cars/car-activity/edit-cars/EditCarsStyle";
 import DM from "../../../../../../components/styles/DM";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
-import DM from "../../../../../../components/styles/DM";
-import { isDarkMode } from "../../../../../../components/navigation/Routes";
-import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const EditLocation = (props: EditLocationProps) => {

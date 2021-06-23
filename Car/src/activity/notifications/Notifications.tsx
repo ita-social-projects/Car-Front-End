@@ -104,8 +104,8 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
             keyExtractor={(item, key) => "" + key + item}
             renderItem={({ item }) => (
                 <Swipeable
-                    renderRightActions={() => renderActions(item.id)}
-                    ref={(ref) => (rows[notifications.indexOf(item)] = ref!)}
+                    renderRightActions={() => renderActions(item!.id)}
+                    ref={(ref: any) => (rows[notifications.indexOf(item)] = ref!)}
                     onSwipeableWillOpen={() =>
                         closeRow(notifications.indexOf(item))
                     }
