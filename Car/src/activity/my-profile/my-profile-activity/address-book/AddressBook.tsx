@@ -63,10 +63,10 @@ export default function AddressBook (props: {navigation: any}) {
         </View>
     );
 
-    const EllipsizedText = (props : { text: string, style: any}) => (
+    const EllipsizedText = (textProps : { text: string, style: any}) => (
         <View style={{ width: Dimensions.get("window").width - ADDRESS_NAME_WIDTH_CUT }}>
-            <Text numberOfLines={ADDRESS_NAME_MAX_LINES_COUNT} ellipsizeMode={"tail"} style={props.style}>
-                {props.text}
+            <Text numberOfLines={ADDRESS_NAME_MAX_LINES_COUNT} ellipsizeMode={"tail"} style={textProps.style}>
+                {textProps.text}
             </Text>
         </View>
     );
