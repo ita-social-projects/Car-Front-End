@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Text, View, ScrollView, RefreshControl } from "react-native";
+import { ActivityIndicator, Text, View, ScrollView, RefreshControl, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import Location from "../../../../../models/location/Location";
@@ -7,9 +7,7 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
-import { FIRST_ELEMENT_INDEX, THREE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/GeneralConstants";
-import { MAX_LOCATION_NAME_LENGTH_VIEW } from "../../../../constants/LocationConstants";
-import { MAX_ADDRESS_NAME_LENGTH } from "../../../../constants/AddressConstants";
+import { ADDRESS_NAME_MAX_LINES_COUNT, ADDRESS_NAME_WIDTH_CUT } from "../../../../constants/AddressConstants";
 
 export default function AddressBook (props: {navigation: any}) {
     const { user } = useContext(AuthContext);
@@ -33,13 +31,6 @@ export default function AddressBook (props: {navigation: any}) {
     useEffect(() => {
         return props.navigation.addListener("focus", loadLocations);
     }, [props.navigation]);
-
-    const addressNameSubstring = (addressName: string) =>
-        addressName.substr(FIRST_ELEMENT_INDEX,
-            MAX_LOCATION_NAME_LENGTH_VIEW - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
-
-    const mapName = (addressName: string, maxLength: number) =>
-        addressName.length <= maxLength ? addressName : addressNameSubstring(addressName);
 
     let addLocationElement = (
         <View>
@@ -69,6 +60,14 @@ export default function AddressBook (props: {navigation: any}) {
                     with personal one.
                 </Text>
             )}
+        </View>
+    );
+
+    const EllipsizedText = (textProps : { text: string, style: any}) => (
+        <View style={{ width: Dimensions.get("window").width - ADDRESS_NAME_WIDTH_CUT }}>
+            <Text numberOfLines={ADDRESS_NAME_MAX_LINES_COUNT} ellipsizeMode={"tail"} style={textProps.style}>
+                {textProps.text}
+            </Text>
         </View>
     );
 
@@ -112,12 +111,15 @@ export default function AddressBook (props: {navigation: any}) {
                                             />
                                         }
                                     >
-                                        <Text style={[AddressBookStyle.name, { color: DM("black") }]}>
-                                            {mapName(item!.name, MAX_LOCATION_NAME_LENGTH_VIEW)}
-                                        </Text>
-                                        <Text style={[AddressBookStyle.address, { color: DM("#414045") }]}>
-                                            {mapName(item!.address!.name, MAX_ADDRESS_NAME_LENGTH)}
-                                        </Text>
+                                        <EllipsizedText
+                                            text={item!.name}
+                                            style={[AddressBookStyle.name, { color: DM("black") }]}
+                                        />
+
+                                        <EllipsizedText
+                                            text={item!.address!.name}
+                                            style={[AddressBookStyle.address, { color: DM("#414045") }]}
+                                        />
                                     </TouchableNavigationCard>
                                 </View>
                             );
