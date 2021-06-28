@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
 import NotificationHeader from "../notification-header/NotificationHeader";
@@ -6,17 +6,9 @@ import NotificationModalBase from "../notification-modal-base/NotificationModalB
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import * as navigation from "../../navigation/Navigation";
-import JourneyService from "../../../../api-service/journey-service/JourneyService";
 
 const JourneyDetailsUpdate = (props: NotificationProps) => {
-    const [isRideCanceled, setIsRideCanceled] = useState<boolean>(true);
     const [modalVisible, setModalVisible] = useState(props.visible);
-
-    useEffect(() => {
-        JourneyService.isJourneyCanceled(props.journeyId!).then(res => {
-            setIsRideCanceled(res.data);
-        });
-    }, []);
 
     return (
         <>
@@ -38,16 +30,14 @@ const JourneyDetailsUpdate = (props: NotificationProps) => {
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton
-                        confirmText={isRideCanceled? "OK" : "VIEW"}
+                        confirmText={"VIEW"}
                         onConfirm={() => {
                             setModalVisible(false);
-                            if(!isRideCanceled){
-                                navigation.navigate("Journey Page", {
-                                    journeyId: props.journeyId,
-                                    isDriver: false,
-                                    isPassenger: true
-                                });
-                            }
+                            navigation.navigate("Journey Page", {
+                                journeyId: props.journeyId,
+                                isDriver: false,
+                                isPassenger: true
+                            });
                         }}
                     />
                 </NotificationButtonGroup>
