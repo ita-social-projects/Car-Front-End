@@ -6,16 +6,12 @@ import DM from "../styles/DM";
 import RideFoundStyle from "./RideFoundStyle";
 import NotificationProps from "../notifications/NotificationProps";
 import MinimizedNotification from "../minimized-notification/MinimizedNotification";
-import JourneyService from "../../../api-service/journey-service/JourneyService";
-import NotificationConfirmButton from "../notifications/notification-buttons/NotificationConfirmButton";
-import NotificationButtonGroup from "../notifications/notification-buttons/NotificationButtonGroup";
 
 const RideFound = (props: NotificationProps) => {
     const title = "created a ride";
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [applicantStops, setApplicantStops] = useState<Array<Stop>>();
-    const [isRideCanceled, setIsRideCanceled] = useState<boolean>(false);
 
     useEffect(() => {
         let stops: Array<Stop> = JSON
@@ -23,10 +19,6 @@ const RideFound = (props: NotificationProps) => {
             .applicantstops;
 
         setApplicantStops(stops);
-
-        JourneyService.isJourneyCanceled(props.journeyId!).then(res => {
-            setIsRideCanceled(res.data);
-        });
     }, []);
 
     return (
@@ -65,48 +57,31 @@ const RideFound = (props: NotificationProps) => {
                         </View>
 
                         <View style={RideFoundStyle.buttonsContainer}>
-                            {
-                                isRideCanceled &&
-                                <NotificationButtonGroup>
-                                    <NotificationConfirmButton
-                                        onConfirm={() => {
-                                            setIsModalVisible(false);
-                                        }}
-                                    />
-                                </NotificationButtonGroup>
-                            }
-                            {
-                                !isRideCanceled &&
-                                <>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            setIsModalVisible(false);
-                                            navigation.navigate("JourneyTabs", {
-                                                screen: "Journey Page",
-                                                params: {
-                                                    journeyId: JSON.parse(
-                                                        props.notificationData
-                                                    ).journeyId,
-                                                    applicantStops: applicantStops,
-                                                    isDriver: false,
-                                                    isPassenger: false,
-                                                },
-                                            });
-                                        }}
-                                        style={[RideFoundStyle.button,
-                                            { backgroundColor: "#D80056" }]}
-                                    >
-                                        <Text style={RideFoundStyle.viewButtonText}>View</Text>
-                                    </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setIsModalVisible(false);
+                                    navigation.navigate("JourneyTabs", {
+                                        screen: "Journey Page",
+                                        params: {
+                                            journeyId: props.journeyId,
+                                            applicantStops: applicantStops,
+                                            isDriver: false,
+                                            isPassenger: false,
+                                        },
+                                    });
+                                }}
+                                style={[RideFoundStyle.button,
+                                    { backgroundColor: "#D80056" }]}
+                            >
+                                <Text style={RideFoundStyle.viewButtonText}>View</Text>
+                            </TouchableOpacity>
 
-                                    <TouchableOpacity
-                                        onPress={() => setIsModalVisible(false)}
-                                        style={[RideFoundStyle.button]}
-                                    >
-                                        <Text style={RideFoundStyle.skipButtonText}>Skip</Text>
-                                    </TouchableOpacity>
-                                </>
-                            }
+                            <TouchableOpacity
+                                onPress={() => setIsModalVisible(false)}
+                                style={[RideFoundStyle.button]}
+                            >
+                                <Text style={RideFoundStyle.skipButtonText}>Skip</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
