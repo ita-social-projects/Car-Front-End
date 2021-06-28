@@ -63,9 +63,7 @@ const RideFound = (props: NotificationProps) => {
                                     navigation.navigate("JourneyTabs", {
                                         screen: "Journey Page",
                                         params: {
-                                            journeyId: JSON.parse(
-                                                props.notificationData
-                                            ).journeyId,
+                                            journeyId: props.journeyId,
                                             applicantStops: applicantStops,
                                             isDriver: false,
                                             isPassenger: false,
