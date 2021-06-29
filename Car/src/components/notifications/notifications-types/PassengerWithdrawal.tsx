@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
@@ -7,10 +7,19 @@ import NotificationModalBase from "../notification-modal-base/NotificationModalB
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
+import JourneyService from "../../../../api-service/journey-service/JourneyService";
+import Journey from "../../../../models/journey/Journey";
 
 const PassengerWithdrawal = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
+    const [journey, setJourney] = useState<Journey>();
     const data = JSON.parse(props.notificationData);
+
+    useEffect(() => {
+        JourneyService.getJourney(props.journeyId!, true).then(res => {
+            setJourney(res.data);
+        });
+    }, []);
 
     return (
         <>
@@ -39,7 +48,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
 
                 <NotificationRideStops
                     title={"Your route"}
-                    journeyId={props.journeyId!}
+                    stops={journey?.stops!}
                     stopsOwner={props.sender}
                 />
 

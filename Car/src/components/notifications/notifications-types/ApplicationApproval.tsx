@@ -18,7 +18,7 @@ const ApplicationApproval = (props: NotificationProps) => {
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [journey, setJourney] = useState<Journey>();
 
-    const userId = useContext(AuthContext).user!.id;
+    const user = useContext(AuthContext).user;
     const data = JSON.parse(props.notificationData);
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const ApplicationApproval = (props: NotificationProps) => {
                 <NotificationRideStops
                     title={"Your route"}
                     stops={journey?.stops!}
-                    stopsOwner={props.sender}
+                    stopsOwner={user}
                 />
 
                 <NotificationButtonGroup>
@@ -77,7 +77,7 @@ const ApplicationApproval = (props: NotificationProps) => {
                 cancelText="No, keep it"
                 disableModal={() => setConfirmationModalVisible(false)}
                 onConfirm={() => {
-                    JourneyService.deleteUser(props.journeyId!, userId);
+                    JourneyService.deleteUser(props.journeyId!, user?.id!);
                     setConfirmationModalVisible(false);
                     setNotificationModalVisible(false);
                 }}
