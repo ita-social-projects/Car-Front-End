@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
@@ -11,13 +11,21 @@ import NotificationRideStops from "../notification-ride-stops/NotificationRideSt
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import AuthContext from "../../auth/AuthContext";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
+import Journey from "../../../../models/journey/Journey";
 
 const ApplicationApproval = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
+    const [journey, setJourney] = useState<Journey>();
 
     const userId = useContext(AuthContext).user!.id;
     const data = JSON.parse(props.notificationData);
+
+    useEffect(() => {
+        JourneyService.getJourney(props.journeyId!, true).then(res => {
+            setJourney(res.data);
+        });
+    }, []);
 
     return (
         <>
@@ -47,7 +55,8 @@ const ApplicationApproval = (props: NotificationProps) => {
 
                 <NotificationRideStops
                     title={"Your route"}
-                    journeyId={props.journeyId!}
+                    stops={journey?.stops!}
+                    stopsOwner={props.sender}
                 />
 
                 <NotificationButtonGroup>

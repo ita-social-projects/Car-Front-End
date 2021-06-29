@@ -40,6 +40,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 <NotificationRideStops
                     title={"Your route"}
                     journeyId={props.journeyId!}
+                    stopsOwner={props.sender}
                 />
 
                 <NotificationButtonGroup>
