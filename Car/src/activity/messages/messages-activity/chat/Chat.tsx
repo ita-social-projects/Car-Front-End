@@ -39,11 +39,12 @@ import DM from "../../../../components/styles/DM";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import MenuButton from "../../../../components/menu-button/MenuButton";
 import ChatProps from "./ChatProps";
-import { INITIAL_NUMBER_TO_RENDER,
+import {
+    INITIAL_NUMBER_TO_RENDER,
     MILLISECONDS,
     NUMBER_OF_MESSAGES_BELOW_FOCUSED,
     NUMBER_OF_NEW_MESSAGES,
-    START_LIST_POSITION
+    OFFSET_TO_LOAD_NEW_MESSAGES,
 } from "../../../../constants/ChatsConstants";
 
 const Chat = (properties: ChatProps) => {
@@ -324,7 +325,7 @@ const Chat = (properties: ChatProps) => {
                         array.map(obj => obj._id)
                             .indexOf(value._id) === index);
 
-                return onlyUniqueMessages(temp.sort((a,b) => Number(b._id) - Number(a._id)));
+                return onlyUniqueMessages(temp.sort((a, b) => Number(b._id) - Number(a._id)));
             });
             setLoadingNewer(false);
             focusOnMessage(firstMessage);
@@ -334,13 +335,14 @@ const Chat = (properties: ChatProps) => {
     const focusOnMessage = (msg: IMessage) => {
         setTimeout(() => {
             chatRef.current?._messageContainerRef?.current?.scrollToItem({
-                animated: false, item: msg, viewPosition: 0.1 });
+                animated: false, item: msg, viewPosition: 0.1
+            });
         }, MILLISECONDS);
     };
 
     const listProps = {
-        onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-            if (event.nativeEvent.contentOffset.y === START_LIST_POSITION && !isLoadingNewer) {
+        onScrollEndDrag: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+            if (event.nativeEvent.contentOffset.y < OFFSET_TO_LOAD_NEW_MESSAGES && !isLoadingNewer) {
                 loadNewerMessages();
             }
         },
@@ -357,6 +359,7 @@ const Chat = (properties: ChatProps) => {
                 />
             ) : (
                 <GiftedChat
+                    scrollToBottom
                     listViewProps={listProps}
                     ref={chatRef}
                     renderAvatar={(data) => renderUserAvatar(data)}
@@ -375,7 +378,6 @@ const Chat = (properties: ChatProps) => {
                     }}
                     text={message}
                     onSend={onSend}
-                    scrollToBottom
                     alwaysShowSend
                     user={{
                         _id: user?.id!,
