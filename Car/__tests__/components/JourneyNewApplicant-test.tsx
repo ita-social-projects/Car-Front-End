@@ -76,9 +76,6 @@ test("renders correctly", async () =>
         <Text>
            stops in your ride
         </Text>
-        <Text>
-          Tap on stop to view it on the map
-        </Text>
         <StopsBlock
           highlightedStops={
             Array [
@@ -86,7 +83,6 @@ test("renders correctly", async () =>
               2,
             ]
           }
-          notHighlightedTextColor="#AAA9AE"
           onStopPress={[Function]}
           stops={Array []}
         />

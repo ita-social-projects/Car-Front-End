@@ -7,12 +7,11 @@ import {
     initialCoordinate, DEFAULT_LOCATION_ICON_ID
 } from "../../../../../../constants/AddressConstants";
 import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
-import { mapStyle } from "../../../../../journey/journey-activity/map-address/SearchJourneyMapStyle";
+import { mapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import Geolocation from "@react-native-community/geolocation";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
-import AddressInput from "../../../../../journey/journey-activity/create-journey/AddressInput/AddressInput";
 import AddLocationStyle from "./AddLocationStyle";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import AuthContext from "../../../../../../components/auth/AuthContext";
@@ -25,6 +24,10 @@ import {
 } from "../../../../../../utils/LocationHelperFunctions";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
+import DM from "../../../../../../components/styles/DM";
+import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
+import { isDarkMode } from "../../../../../../components/navigation/Routes";
+import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const AddLocation = () => {
 
@@ -146,10 +149,15 @@ const AddLocation = () => {
                 {wayPoint.isConfirmed && (
                     <>
                         <TextInput
-                            style={AddLocationStyle.textInput}
+                            style={[AddLocationStyle.textInput,
+                                {
+                                    borderColor: DM("black"),
+                                    backgroundColor: DM("white"),
+                                    color: DM("black")
+                                }]}
                             value={locationName}
                             placeholder={"Name the chosen address"}
-                            placeholderTextColor={"grey"}
+                            placeholderTextColor={DM("grey")}
                             onChangeText={(fromInput) => {
                                 setLocationName(fromInput);
                             }}/>
@@ -173,7 +181,7 @@ const AddLocation = () => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}
-                customMapStyle={mapStyle}
+                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
             >

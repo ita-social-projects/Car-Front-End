@@ -8,7 +8,13 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 
 test("renders correctly", async () =>
     expect(
-        renderer.render(<Messages isOpenFilter={false} component={undefined} navigation={undefined as any}/>)
+        renderer.render(
+            <Messages
+                isOpenFilter={false}
+                component={undefined}
+                navigation={undefined as any}
+            />
+        )
     ).toMatchInlineSnapshot(`
     <ForwardRef(SafeAreaView)
       style={
@@ -17,6 +23,7 @@ test("renders correctly", async () =>
         }
       }
     >
+      <View />
       <View
         style={
           Array [
@@ -30,63 +37,64 @@ test("renders correctly", async () =>
           ]
         }
       >
-        <View />
-        <FlatList
-          data={Array []}
-          disableVirtualization={false}
-          horizontal={false}
-          initialNumToRender={10}
-          keyExtractor={[Function]}
-          maxToRenderPerBatch={10}
-          numColumns={1}
-          onEndReachedThreshold={2}
-          removeClippedSubviews={false}
-          renderItem={[Function]}
-          scrollEventThrottle={50}
-          updateCellsBatchingPeriod={50}
-          windowSize={21}
-        />
-        <React.Fragment>
-          <View
-            style={
-              Object {
-                "flex": 100,
-                "marginTop": 20,
-              }
-            }
-          >
-            <Text
+        <View>
+          <FlatList
+            data={Array []}
+            disableVirtualization={false}
+            horizontal={false}
+            initialNumToRender={10}
+            keyExtractor={[Function]}
+            maxToRenderPerBatch={10}
+            numColumns={1}
+            onEndReachedThreshold={2}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            updateCellsBatchingPeriod={50}
+            windowSize={21}
+          />
+          <React.Fragment>
+            <View
               style={
                 Object {
-                  "fontFamily": "Milliard",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                  "textAlign": "center",
+                  "flex": 100,
+                  "marginTop": 20,
                 }
               }
             >
-              CURRENTLY YOU DO NOT HAVE ANY
-              
+              <Text
+                style={
+                  Object {
+                    "fontFamily": "Milliard",
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                CURRENTLY YOU DO NOT HAVE ANY
+                
 
-              CHATS
-            </Text>
-            <Image
-              source={
-                Object {
-                  "testUri": "../../../assets/images/chat/no-chats.png",
+                CHATS
+              </Text>
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../../assets/images/chat/no-chats.png",
+                  }
                 }
-              }
-              style={
-                Object {
-                  "height": 225,
-                  "marginTop": 45,
-                  "resizeMode": "stretch",
-                  "width": 396,
+                style={
+                  Object {
+                    "height": 225,
+                    "marginTop": 45,
+                    "resizeMode": "stretch",
+                    "width": 396,
+                  }
                 }
-              }
-            />
-          </View>
-        </React.Fragment>
+              />
+            </View>
+          </React.Fragment>
+        </View>
       </View>
     </ForwardRef(SafeAreaView)>
   `));

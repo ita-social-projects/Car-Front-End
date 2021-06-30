@@ -1,6 +1,6 @@
 import React from "react";
 import shallowRenderer from "react-test-renderer/shallow";
-import SearchJourneyMap from "../../../src/activity/journey/journey-activity/map-address/SearchJourneyMap";
+import SearchJourneyMap from "../../../src/activity/journey/journey-activity/search-journey-map/SearchJourneyMap";
 
 const renderer = shallowRenderer.createRenderer();
 

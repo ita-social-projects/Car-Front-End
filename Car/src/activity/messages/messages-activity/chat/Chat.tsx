@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Clipboard, TouchableOpacity, View } from "react-native";
+import { Animated, Clipboard, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     Bubble,
+    BubbleProps,
     GiftedChat,
+    IMessage,
     InputToolbar,
     Send,
 } from "react-native-gifted-chat";
@@ -18,9 +20,10 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import {
     CHAT_POPUP_HEIGHT,
     COUNT_OF_MESSAGES_TO_LOAD,
-    FIRST_LOADING_MESSAGES
 } from "../../../../constants/MessageConstants";
 import {
+    HALF_OPACITY,
+    MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
     MIN_POPUP_POSITION
@@ -28,23 +31,34 @@ import {
 import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
-    THIRD_ELEMENT_INDEX
+    THIRD_ELEMENT_INDEX,
+    ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import MenuButton from "../../../../components/menu-button/MenuButton";
 import ChatProps from "./ChatProps";
+import {
+    INITIAL_NUMBER_TO_RENDER,
+    MILLISECONDS,
+    NUMBER_OF_MESSAGES_BELOW_FOCUSED,
+    NUMBER_OF_NEW_MESSAGES,
+    OFFSET_TO_LOAD_NEW_MESSAGES,
+} from "../../../../constants/ChatsConstants";
 
 const Chat = (properties: ChatProps) => {
-    const [messages, setMessages] = useState<object[]>([]);
+    const [messages, setMessages] = useState<IMessage[]>([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [connection, setConnection] = useState<HubConnection>();
     const [isLoading, setSpinner] = useState(true);
     const [isSendDisabled, setDisabled] = useState(true);
     const [isLoadingEarlier, setLoadingEarlier] = useState(false);
+    const [isLoadingNewer, setLoadingNewer] = useState(false);
     const [isLoadMessage, setLoadMessage] = useState(true);
+    const fadeAnim = useRef(new Animated.Value(HALF_OPACITY)).current;
+    const chatRef = useRef<GiftedChat>(null);
 
     useEffect(() => {
         (() => {
@@ -70,10 +84,19 @@ const Chat = (properties: ChatProps) => {
                     properties.route.params.chatId.toString()
                 ).catch((err: any) => console.log(err));
             });
-            loadMessages(FIRST_LOADING_MESSAGES)
-                .then((res) => {
+
+            let messageToFocusId = properties.route.params.messageId || ZERO_ID;
+            let messageId = ZERO_ID;
+
+            if (messageToFocusId) {
+                messageId = messageToFocusId + NUMBER_OF_MESSAGES_BELOW_FOCUSED;
+            }
+
+            loadMessages(messageId)
+                .then((res: IMessage[]) => {
                     setMessages(res);
                     setSpinner(false);
+                    focusOnMessage(res.find(msg => msg._id === messageToFocusId)!);
                 });
 
             connection.onreconnected(() => {
@@ -131,30 +154,47 @@ const Chat = (properties: ChatProps) => {
         }
     };
 
-    const renderBubble = (props: any) => (
-        <Bubble
-            {...props}
-            wrapperStyle={{
-                left: {
-                    backgroundColor: DM("#F1F1F4")
-                },
-                right: {
-                    backgroundColor: DM("#EB7A89")
-                }
+    React.useEffect(() => {
+        Animated.timing(
+            fadeAnim,
+            {
+                toValue: 1,
+                duration: 5000,
+                useNativeDriver: true
+            }
+        ).start();
+    }, [fadeAnim]);
+
+    const renderBubble = (props: BubbleProps<IMessage>) => (
+        <Animated.View
+            style={{
+                opacity: props.currentMessage?._id === properties.route.params.messageId ? fadeAnim : MAX_OPACITY,
             }}
-            textStyle={{
-                left: {
-                    color: DM("#000000"),
-                    paddingHorizontal: 8,
-                    paddingVertical: 2
-                },
-                right: {
-                    color: "#FFFFFF",
-                    paddingHorizontal: 8,
-                    paddingVertical: 2
-                }
-            }}
-        />
+        >
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    left: {
+                        backgroundColor: DM("#F1F1F4"),
+                    },
+                    right: {
+                        backgroundColor: DM("#EB7A89"),
+                    }
+                }}
+                textStyle={{
+                    left: {
+                        color: DM("#000000"),
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
+                    },
+                    right: {
+                        color: "#FFFFFF",
+                        paddingHorizontal: 8,
+                        paddingVertical: 2
+                    }
+                }}
+            />
+        </Animated.View>
     );
 
     const renderSend = (props: any) => (
@@ -184,6 +224,9 @@ const Chat = (properties: ChatProps) => {
                 height: "100%",
                 overflow: "scroll",
                 backgroundColor: DM("white"),
+            }}
+            textInputStyle={{
+                color: DM("black")
             }}
         />
     );
@@ -222,10 +265,10 @@ const Chat = (properties: ChatProps) => {
     };
 
     const loadMessages = (messageId: number): Promise<any> => {
-        let tempChat: any = [];
+        let tempChat: IMessage[] = [];
 
-        return ChatService.getCeratinChat(
-            properties?.route?.params?.chatId, messageId)
+        return ChatService.getCertainChat(
+            properties?.route.params.chatId, messageId)
             .then((res: any) => {
                 res.data?.forEach((data: any) => {
                     const messageToAdd = {
@@ -245,7 +288,8 @@ const Chat = (properties: ChatProps) => {
                 if (tempChat.length < COUNT_OF_MESSAGES_TO_LOAD) {
                     setLoadMessage(false);
                 }
-            }).then(() => tempChat);
+            })
+            .then(() => tempChat);
     };
 
     const loadEarlierMessages = () => {
@@ -264,6 +308,47 @@ const Chat = (properties: ChatProps) => {
             });
     };
 
+    const loadNewerMessages = () => {
+        setLoadingNewer(true);
+        let firstMessage = messages[FIRST_ELEMENT_INDEX];
+        let id = Number(firstMessage._id) + NUMBER_OF_NEW_MESSAGES;
+
+        loadMessages(id).then((res: IMessage[]) => {
+            setMessages((previousMessages) => {
+                let temp = GiftedChat.append(
+                    res,
+                    previousMessages as any
+                );
+
+                const onlyUniqueMessages = (arr: IMessage[]) =>
+                    arr.filter((value, index, array) =>
+                        array.map(obj => obj._id)
+                            .indexOf(value._id) === index);
+
+                return onlyUniqueMessages(temp.sort((a, b) => Number(b._id) - Number(a._id)));
+            });
+            setLoadingNewer(false);
+            focusOnMessage(firstMessage);
+        });
+    };
+
+    const focusOnMessage = (msg: IMessage) => {
+        setTimeout(() => {
+            chatRef.current?._messageContainerRef?.current?.scrollToItem({
+                animated: false, item: msg, viewPosition: 0.1
+            });
+        }, MILLISECONDS);
+    };
+
+    const listProps = {
+        onScrollEndDrag: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+            if (event.nativeEvent.contentOffset.y < OFFSET_TO_LOAD_NEW_MESSAGES && !isLoadingNewer) {
+                loadNewerMessages();
+            }
+        },
+        initialNumToRender: INITIAL_NUMBER_TO_RENDER,
+    };
+
     return (
         <View style={[ChatStyle.chatWrapper, { backgroundColor: DM("white") }]}>
             {isLoading ? (
@@ -274,8 +359,10 @@ const Chat = (properties: ChatProps) => {
                 />
             ) : (
                 <GiftedChat
+                    scrollToBottom
+                    listViewProps={listProps}
+                    ref={chatRef}
                     renderAvatar={(data) => renderUserAvatar(data)}
-                    placeholder="Type a message"
                     messagesContainerStyle={{ paddingBottom: 10 }}
                     timeFormat="HH:mm"
                     dateFormat="DD.MM"
@@ -291,7 +378,6 @@ const Chat = (properties: ChatProps) => {
                     }}
                     text={message}
                     onSend={onSend}
-                    scrollToBottom
                     alwaysShowSend
                     user={{
                         _id: user?.id!,
@@ -308,6 +394,14 @@ const Chat = (properties: ChatProps) => {
                     loadEarlier={isLoadMessage}
                     onLoadEarlier={loadEarlierMessages}
                     isLoadingEarlier={isLoadingEarlier}
+                    infiniteScroll={true}
+                    renderLoadEarlier={() => isLoadingEarlier ?
+                        <Indicator
+                            size="large"
+                            color={DM("#414045")}
+                            text="Loading information..."
+                        /> : <View />
+                    }
                 />
             )}
             <BottomPopup

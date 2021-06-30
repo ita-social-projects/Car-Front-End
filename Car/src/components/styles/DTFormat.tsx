@@ -3,6 +3,8 @@ import moment from "moment";
 export default function updateLocale (): void {
     moment.updateLocale("en", {
         relativeTime: {
+            s: "now",
+            ss: "now",
             m: "1 min",
             mm: "%d min",
             h: "1 h",

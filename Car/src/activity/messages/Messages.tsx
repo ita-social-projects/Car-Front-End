@@ -22,37 +22,41 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
+import Indicator from "../../components/activity-indicator/Indicator";
 
 const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState("");
     const { user } = useContext(AuthContext);
 
     const getChats = () => {
-        ChatService.getChat(user?.id).then((res) => {
-            let chats = res.data;
+        if (!search) {
+            setIsLoading(true);
+            ChatService.getChat(user?.id).then((res) => {
+                let chats = res.data;
 
-            setMasterDataSource(JSON.parse(JSON.stringify(chats)));
+                setMasterDataSource(JSON.parse(JSON.stringify(chats)));
 
-            setFilteredDataSource(chats);
-        });
+                setFilteredDataSource(chats);
+                setIsLoading(false);
+            });
+        }
     };
 
     useEffect(() => {
-        getChats();
-    }, []);
-
-    useEffect(() => {
         props.navigation.addListener("focus", getChats);
+        getChats();
 
         return () => {
             props.navigation.removeListener("focus", getChats);
         };
-    }, []);
+    }, [search]);
 
     const setSearchFilter = (text: string) => {
         if (text.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
+            setIsLoading(true);
             const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
 
             const searchInTitle = arr.filter(chat => {
@@ -66,6 +70,7 @@ const Messages = (props: MessagesProps) => {
                 :
                 ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then(res => {
                     setFilteredDataSource(res.data);
+                    setIsLoading(false);
                 });
             setSearch(text);
         }
@@ -88,7 +93,7 @@ const Messages = (props: MessagesProps) => {
                         : (
                             <Text
                                 key={index}
-                                style={chunk.highlight && { backgroundColor: DM("yellow") }}
+                                style={MessagesStyle.highlightedText}
                             >
                                 {text}
                             </Text>
@@ -98,28 +103,9 @@ const Messages = (props: MessagesProps) => {
         );
     };
 
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
-                {props.isOpenFilter ? (
-                    <SearchBar
-                        maxLength={MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT}
-                        searchIcon={{ color: DM("black"), size: 28 }}
-                        onChangeText={(text) => setSearchFilter(text)}
-                        onClear={() => setSearchFilter("")}
-                        placeholder={"Search in Messages"}
-                        value={search}
-                        containerStyle={[MessagesStyle.containerStyle, { backgroundColor: DM("white") }]}
-                        inputContainerStyle={[MessagesStyle.inputContainerStyle,
-                            {
-                                backgroundColor: DM("white"),
-                                borderColor: DM("black"),
-                                borderBottomColor: DM("black")
-                            }]}
-                    />
-                ) : (
-                    <View />
-                )}
+    const chatsList = () => {
+        return (
+            <View>
                 <FlatList
                     data={filteredDataSource}
                     keyExtractor={(msg, index) => index.toString() + msg}
@@ -128,7 +114,8 @@ const Messages = (props: MessagesProps) => {
                             onPress={() => {
                                 navigation.navigate("Chat", {
                                     chatId: item?.id,
-                                    header: item?.name
+                                    messageId: item?.messageId,
+                                    header: item?.name,
                                 });
                             }}
                         >
@@ -200,6 +187,41 @@ const Messages = (props: MessagesProps) => {
                             </View>
                         </>
                     )
+                }
+            </View>
+        );
+    };
+
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            {props.isOpenFilter ? (
+                <SearchBar
+                    maxLength={MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT}
+                    searchIcon={{ color: DM("black"), size: 28 }}
+                    onChangeText={(text) => setSearchFilter(text)}
+                    onClear={() => setSearchFilter("")}
+                    placeholder={"Search in Messages"}
+                    value={search}
+                    containerStyle={[MessagesStyle.containerStyle, { backgroundColor: DM("white") }]}
+                    inputContainerStyle={[MessagesStyle.inputContainerStyle,
+                        {
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black"),
+                            borderBottomColor: DM("black")
+                        }]}
+                />
+            ) : (
+                <View />
+            )}
+
+            <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
+                {isLoading ?
+                    <Indicator
+                        size="large"
+                        color={DM("#414045")}
+                        text="Loading information..."
+                    /> :
+                    chatsList()
                 }
             </View>
         </SafeAreaView>

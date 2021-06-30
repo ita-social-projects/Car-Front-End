@@ -5,6 +5,12 @@ const NotificationsStyle = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
+    },
+    deleteButton: {
+        backgroundColor: "#FF0000",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "15%"
     }
 });
 

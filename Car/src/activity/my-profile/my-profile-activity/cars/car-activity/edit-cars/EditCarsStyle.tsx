@@ -28,7 +28,6 @@ const EditCarsStyle = StyleSheet.create({
     },
 
     inputsContainer: {
-        height: "600%",
         marginRight: 24,
         marginLeft: 24
     },
@@ -42,6 +41,7 @@ const EditCarsStyle = StyleSheet.create({
     },
 
     saveButtonContainer: {
+        marginBottom: 70,
         flexDirection: "row",
         justifyContent: "space-between"
     },
