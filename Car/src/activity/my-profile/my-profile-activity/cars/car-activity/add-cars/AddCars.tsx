@@ -89,7 +89,7 @@ const AddCars = () => {
                 plateNumber &&
                 plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
                 plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
-                plateNumber.match(/^[A-ZА-ЯҐЄІЇ0-9-]+$/)
+                plateNumber.match(/^[A-Za-zА-ЯҐЄІЇа-яґєії0-9- ]+$/)
             ));
     }
 
@@ -243,7 +243,7 @@ const AddCars = () => {
                     {
                         isValidPlateNumber ? null :
                             <Text style={{ color: DM("red") }}>
-                                This field must contain 4-10 characters, including numbers, letters, hyphens
+                                This field must contain 1-10 characters, including numbers, letters, hyphens, space
                             </Text>
                     }
 
