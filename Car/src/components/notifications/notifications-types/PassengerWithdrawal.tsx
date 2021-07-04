@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
@@ -7,19 +7,9 @@ import NotificationModalBase from "../notification-modal-base/NotificationModalB
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
-import JourneyService from "../../../../api-service/journey-service/JourneyService";
-import Journey from "../../../../models/journey/Journey";
 
 const PassengerWithdrawal = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
-    const [journey, setJourney] = useState<Journey>();
-    const data = JSON.parse(props.notificationData);
-
-    useEffect(() => {
-        JourneyService.getJourney(props.journeyId!, true).then(res => {
-            setJourney(res.data);
-        });
-    }, []);
 
     return (
         <>
@@ -31,6 +21,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 date={props.date}
                 openModal={() => setModalVisible(true)}
             />
+
             <NotificationModalBase isVisible={modalVisible!} styles={[{ height: "90%" }]}>
                 <NotificationHeader
                     title="WITHDRAWAL"
@@ -40,15 +31,12 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 />
 
                 <NotificationRideDetails
-                    departureTime={data.departureTime}
-                    availableSeats={data.availableSeats}
-                    isFree={data.isFree}
-                    withBaggage={data.withBaggage}
+                    journeyId={props.journeyId!}
                 />
 
                 <NotificationRideStops
                     title={"Your route"}
-                    stops={journey?.stops!}
+                    journeyId={props.journeyId!}
                     stopsOwner={props.sender}
                 />
 

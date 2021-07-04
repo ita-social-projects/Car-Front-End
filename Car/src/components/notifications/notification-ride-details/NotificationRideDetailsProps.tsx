@@ -1,8 +1,5 @@
 interface NotificationRideDetailsProps {
-    departureTime?: Date,
-    isFree?: boolean,
-    availableSeats?: number,
-    withBaggage?: boolean,
+    journeyId: number,
 }
 
 export default NotificationRideDetailsProps;

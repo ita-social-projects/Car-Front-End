@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../models/stop/Stop";
 import StopType from "../../../../models/stop/StopType";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION, LESS_THAN_ZERO, MORE_THAN_ZERO, ZERO } from "../../../constants/GeneralConstants";
@@ -15,6 +16,16 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });
     const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        JourneyService.getJourney(props.journeyId!, true).then(res => {
+            setStops(filterStops(res.data?.stops!));
+
+            if (res.data?.stops![FIRST_ELEMENT_INDEX]?.isCancelled) {
+                setColors({ first: "#f20a0a", second: "#a60707" });
+            }
+        });
+    }, []);
 
     const getStops = (stops: Stop[]) =>
         stops.filter(stop =>
@@ -45,14 +56,6 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
 
         return arr;
     };
-
-    useEffect(() => {
-        setStops(filterStops(props.stops));
-
-        if (true) {
-            setColors({ first: "#f20a0a", second: "#a60707" });
-        }
-    }, []);
 
     return (
         <>

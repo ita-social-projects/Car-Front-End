@@ -8,7 +8,7 @@ import FilterJourneyModel from "../../models/journey/FilterJourneyModel";
 const route = APIRoutes.getJourneyUrl();
 
 const JourneyService = {
-    getJourney: async (journeyId: number, withCancelledStops?: boolean) =>
+    getJourney: async (journeyId: number, withCancelledStops: boolean = false) =>
         APIService.get<Journey>(route + journeyId + "/" + withCancelledStops),
 
     getPastJourneys: async (userId: number) =>
