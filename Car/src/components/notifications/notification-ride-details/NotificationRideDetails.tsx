@@ -11,7 +11,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const withBaggage = true;
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId!).then(res => {
+        JourneyService.getJourney(props.journeyId).then(res => {
             setJourney(res.data);
         });
 
@@ -36,7 +36,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
             {journey?.participants &&
                 <View style={style.detailsContainer}>
                     <Text style={style.label}>Available seats: </Text>
-                    <Text style={style.value}>{journey?.countOfSeats! - journey?.participants.length!}</Text>
+                    <Text style={style.value}>{journey?.countOfSeats - journey?.participants.length}</Text>
                 </View>
             }
 

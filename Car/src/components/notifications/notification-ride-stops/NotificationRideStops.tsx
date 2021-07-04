@@ -18,7 +18,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId!, true).then(res => {
+        JourneyService.getJourney(props.journeyId, true).then(res => {
             setStops(filterStops(res.data?.stops!));
 
             if (res.data?.stops![FIRST_ELEMENT_INDEX]?.isCancelled) {
@@ -27,8 +27,8 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
         });
     }, []);
 
-    const getStops = (stops: Stop[]) =>
-        stops.filter(stop =>
+    const getStops = (arr: Stop[]) =>
+        arr.filter(stop =>
             stop?.type === StopType.Start
             ||
             stop?.type === StopType.Finish
