@@ -9,7 +9,6 @@ import NotificationConfirmButton from "../notification-buttons/NotificationConfi
 
 const JourneyCancellation = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
-    const data = JSON.parse(props.notificationData);
 
     return (
         <>
@@ -30,10 +29,7 @@ const JourneyCancellation = (props: NotificationProps) => {
                 />
 
                 <NotificationRideDetails
-                    departureTime={data.departureTime}
-                    availableSeats={data.availableSeats}
-                    isFree={data.isFree}
-                    withBaggage={data.withBaggage}
+                    journeyId={props.journeyId!}
                 />
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setModalVisible(false)} />

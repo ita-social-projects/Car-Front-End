@@ -8,6 +8,7 @@ type Stop = null | {
     address: Address;
     userId: number;
     journeyId: number;
+    isCancelled: boolean;
 };
 
 export default Stop;

@@ -10,7 +10,6 @@ import NotificationRideStops from "../notification-ride-stops/NotificationRideSt
 
 const PassengerWithdrawal = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
-    const data = JSON.parse(props.notificationData);
 
     return (
         <>
@@ -22,6 +21,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 date={props.date}
                 openModal={() => setModalVisible(true)}
             />
+
             <NotificationModalBase isVisible={modalVisible!} styles={[{ height: "90%" }]}>
                 <NotificationHeader
                     title="WITHDRAWAL"
@@ -31,15 +31,13 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 />
 
                 <NotificationRideDetails
-                    departureTime={data.departureTime}
-                    availableSeats={data.availableSeats}
-                    isFree={data.isFree}
-                    withBaggage={data.withBaggage}
+                    journeyId={props.journeyId!}
                 />
 
                 <NotificationRideStops
                     title={"Your route"}
                     journeyId={props.journeyId!}
+                    stopsOwner={props.sender}
                 />
 
                 <NotificationButtonGroup>

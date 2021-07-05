@@ -14,14 +14,30 @@ import NotificationRideStopsProps from "./NotificationRideStopsProps";
 
 const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
+    const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });
     const { user } = useContext(AuthContext);
 
-    const sortStopsByUserId = (array: Stop[]) => {
-        return array.sort((a) => (a?.userId === user?.id) ? LESS_THAN_ZERO : ZERO);
-    };
+    useEffect(() => {
+        JourneyService.getJourney(props.journeyId, true).then(res => {
+            setStops(filterStops(res.data?.stops!));
 
-    const getUniqueStops = (array: Stop[]) => {
-        return array.filter((value, index, arr) => {
+            if (res.data?.stops![FIRST_ELEMENT_INDEX]?.isCancelled) {
+                setColors({ first: "#f20a0a", second: "#a60707" });
+            }
+        });
+    }, []);
+
+    const getStops = (arr: Stop[]) =>
+        arr.filter(stop =>
+            stop?.type === StopType.Start
+            ||
+            stop?.type === StopType.Finish
+            ||
+            stop?.userId === props.stopsOwner?.id
+        );
+
+    const getUniqueStops = (array: Stop[]) =>
+        array.filter((value, index, arr) => {
             return (
                 arr.map(mapObj => mapObj?.address?.latitude)
                     .indexOf(value?.address?.latitude) === index
@@ -30,33 +46,16 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                     .indexOf(value?.address?.longitude) === index
             );
         });
-    };
-
-    const sortStopsByIndex = (array: Stop[]) => {
-        return array.sort((a, b) => (a?.index! > b?.index!) ? MORE_THAN_ZERO : LESS_THAN_ZERO);
-    };
 
     const filterStops = (stops: Stop[]) => {
-        let array = stops.filter(stop =>
-            stop?.type == StopType.Start
-            ||
-            stop?.type == StopType.Finish
-            ||
-            stop?.userId == user?.id
-        );
+        let arr = getStops(stops);
 
-        array = sortStopsByUserId(array);
-        array = getUniqueStops(array);
-        array = sortStopsByIndex(array);
+        arr.sort((a) => (a?.userId === user?.id) ? LESS_THAN_ZERO : ZERO);
+        arr = getUniqueStops(arr);
+        arr.sort((a, b) => (a?.index! > b?.index!) ? MORE_THAN_ZERO : LESS_THAN_ZERO);
 
-        return array;
+        return arr;
     };
-
-    useEffect(() => {
-        JourneyService.getJourney(props.journeyId).then(res => {
-            setStops(filterStops(res.data?.stops!));
-        });
-    }, []);
 
     return (
         <>
@@ -69,7 +68,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                             <View style={style.stopListItemRow}>
 
                                 {index !== FIRST_ELEMENT_INDEX && (
-                                    item?.userId === user?.id ?
+                                    item?.userId === props.stopsOwner?.id ?
                                         <View style={[style.stopCustomLineIcon,
                                             { backgroundColor: DM("#AAA9AE") }
                                         ]}>
@@ -77,7 +76,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                                 style={[style.activeCustomLineIcon,
                                                     { backgroundColor: DM("#FFFFFF") }
                                                 ]}
-                                                colors={["#00A3CF", "#5552A0"]}
+                                                colors={[colors.first, colors.second]}
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
                                             />
@@ -85,10 +84,10 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                         :
                                         <View style={[style.stopCustomLineIcon,
                                             { backgroundColor: DM("#AAA9AE") }
-                                        ]}/>
+                                        ]} />
                                 )}
 
-                                {user?.id == item?.userId ?
+                                {item?.userId === props.stopsOwner?.id ?
                                     <Circle
                                         color="#FFFFFF"
                                         radius="1.3rem"
@@ -96,13 +95,13 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                         <LinearGradient
                                             style={[
                                                 index === FIRST_ELEMENT_INDEX ||
-                                                index === stops.length - LAST_INDEX_CORRECTION ?
+                                                    index === stops.length - LAST_INDEX_CORRECTION ?
                                                     style.circleGrad
                                                     :
                                                     style.intermidiateCircleGrad,
                                                 { backgroundColor: DM("#FFFFFF") }
                                             ]}
-                                            colors={["#00A3CF", "#5552A0"]}
+                                            colors={[colors.first, colors.second]}
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                         />
@@ -117,27 +116,21 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                 }
                             </View>
 
-                            {user?.id == item?.userId ?
+                            {item?.userId === props.stopsOwner?.id ?
                                 <Text
-                                    style={[style.stopName, { color: DM("#00A3CF") }]}
+                                    style={[style.stopName]}
                                     numberOfLines={1}
                                     ellipsizeMode={"tail"}
                                 >
-                                    {index !== FIRST_ELEMENT_INDEX ?
-                                        <>
-                                            <Text style={[style.activeStopName, { color: DM("#00A3CF") }]}>
-                                                {`${user!.name}'s Stop `}‏
-                                            </Text>
-
-                                            <Text style={[style.activeStopAddress, { color: DM("#00A3CF") }]}>
-                                                {`(${item?.address?.name!})`}‏
-                                            </Text>
-                                        </>
-                                        :
-                                        <Text style={[style.activeStopAddress, { color: DM("#00A3CF") }]}>
-                                            {`${item?.address?.name!}`}‏
+                                    <>
+                                        <Text style={[style.activeStopName, { color: DM(colors.first) }]}>
+                                            {`${props.stopsOwner?.name}'s Stop `}‏
                                         </Text>
-                                    }
+
+                                        <Text style={[style.activeStopAddress, { color: DM(colors.first) }]}>
+                                            {`(${item?.address?.name!})`}‏
+                                        </Text>
+                                    </>
 
                                 </Text>
                                 :
