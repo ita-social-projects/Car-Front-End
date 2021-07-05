@@ -16,8 +16,7 @@ const ApplicationApproval = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
 
-    const userId = useContext(AuthContext).user!.id;
-    const data = JSON.parse(props.notificationData);
+    const user = useContext(AuthContext).user;
 
     return (
         <>
@@ -40,13 +39,12 @@ const ApplicationApproval = (props: NotificationProps) => {
                 />
 
                 <NotificationRideDetails
-                    departureTime={data.departureTime}
-                    isFree={data.isFree}
-                    withBaggage={data.withBaggage}
+                    journeyId={props.journeyId!}
                 />
 
                 <NotificationRideStops
                     title={"Your route"}
+                    stopsOwner={user}
                     journeyId={props.journeyId!}
                 />
 
@@ -68,7 +66,7 @@ const ApplicationApproval = (props: NotificationProps) => {
                 cancelText="No, keep it"
                 disableModal={() => setConfirmationModalVisible(false)}
                 onConfirm={() => {
-                    JourneyService.deleteUser(props.journeyId!, userId);
+                    JourneyService.deleteUser(props.journeyId!, user?.id!);
                     setConfirmationModalVisible(false);
                     setNotificationModalVisible(false);
                 }}

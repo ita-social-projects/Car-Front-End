@@ -28,7 +28,7 @@ const NotificationRideStopsStyle = EStyleSheet.create({
     },
 
     stopCustomLineIcon: {
-        height: "0.8rem",
+        height: "1rem",
         width: "0.2rem",
     },
 

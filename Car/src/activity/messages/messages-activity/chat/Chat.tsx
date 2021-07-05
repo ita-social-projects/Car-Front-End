@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Animated, Clipboard, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
+    AvatarProps,
     Bubble,
     BubbleProps,
     GiftedChat,
@@ -46,6 +47,7 @@ import {
     NUMBER_OF_NEW_MESSAGES,
     OFFSET_TO_LOAD_NEW_MESSAGES,
 } from "../../../../constants/ChatsConstants";
+import Message from "../../../../../models/Message";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -231,7 +233,7 @@ const Chat = (properties: ChatProps) => {
         />
     );
 
-    const renderUserAvatar = (data: any) => (
+    const renderUserAvatar = (data: Readonly<AvatarProps<any>> | any) => (
         <TouchableOpacity
             onPress={() =>
                 navigation.navigate("Applicant Page", {
@@ -270,15 +272,15 @@ const Chat = (properties: ChatProps) => {
         return ChatService.getCertainChat(
             properties?.route.params.chatId, messageId)
             .then((res: any) => {
-                res.data?.forEach((data: any) => {
-                    const messageToAdd = {
-                        _id: data?.id,
-                        text: data?.text,
-                        createdAt: new Date(data.createdAt),
+                res.data?.forEach((data: Message) => {
+                    const messageToAdd: IMessage = {
+                        _id: data?.id!,
+                        text: data?.text!,
+                        createdAt: new Date(data!.createdAt),
                         user: {
-                            _id: data?.senderId,
-                            name: data?.name + "|"
-                                + data?.surname + "|"
+                            _id: data?.senderId!,
+                            name: data?.senderName + "|"
+                                + data?.senderSurname + "|"
                                 + data?.imageId
                         }
                     };

@@ -1,34 +1,47 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import JourneyService from "../../../../api-service/journey-service/JourneyService";
+import Journey from "../../../../models/journey/Journey";
 import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
 import style from "./NotificationRideDetailsStyle";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
+    const [journey, setJourney] = useState<Journey>();
+    const withBaggage = true;
+
+    useEffect(() => {
+        JourneyService.getJourney(props.journeyId).then(res => {
+            setJourney(res.data);
+        });
+
+        console.log("Details");
+    }, []);
+
     return (
         <View style={style.container}>
             <Text style={style.header}>Ride details</Text>
 
             <View style={style.detailsContainer}>
                 <Text style={style.label}>Departure time: </Text>
-                <Text style={style.value}>{moment(new Date(props.departureTime!)).calendar()}
+                <Text style={style.value}>{moment(new Date(journey?.departureTime!)).calendar()}
                 </Text>
             </View>
 
             <View style={style.detailsContainer}>
                 <Text style={style.label}>Fee: </Text>
-                <Text style={style.value}>{props.isFree ? "free" : "paid"}</Text>
+                <Text style={style.value}>{journey?.isFree ? "free" : "paid"}</Text>
             </View>
 
-            {props.availableSeats &&
+            {journey?.participants &&
                 <View style={style.detailsContainer}>
                     <Text style={style.label}>Available seats: </Text>
-                    <Text style={style.value}>{props.availableSeats}</Text>
+                    <Text style={style.value}>{journey?.countOfSeats - journey?.participants.length}</Text>
                 </View>
             }
 
             <View style={style.detailsContainer}>
-                <Text style={style.value}>{props.withBaggage ? "With baggage" : "Without baggage"}</Text>
+                <Text style={style.value}>{withBaggage ? "With baggage" : "Without baggage"}</Text>
             </View>
         </View>
     );

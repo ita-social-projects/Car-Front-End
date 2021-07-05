@@ -46,8 +46,8 @@ export const timeStringToMinutes = (timeString: string) => {
         + Number(parts[SECOND_ELEMENT_INDEX]);
 };
 
-export const createStopArrayFromWayPoint = (from: WayPoint,
-    to: WayPoint, stops: WayPoint[], userId: number, journeyId: number = ZERO_ID) => {
+export const createStopArrayFromWayPoint =
+(from: WayPoint, to: WayPoint, stops: WayPoint[], userId: number, journeyId: number = ZERO_ID) => {
     return [{ ...from, stopType: StopType.Start },
         ...stops.filter(stop => stop.isConfirmed).map(stop => ({ ...stop, stopType: StopType.Intermediate })),
         { ...to, stopType: StopType.Finish }]
@@ -63,7 +63,8 @@ export const createStopArrayFromWayPoint = (from: WayPoint,
                 type: stop.stopType,
                 id: 0,
                 journeyId: journeyId,
-                userId: userId
+                userId: userId,
+                isCancelled: false,
             };
         });
 };
