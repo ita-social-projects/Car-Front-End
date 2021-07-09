@@ -55,7 +55,7 @@ const AuthProvider = ({ children }: any) => {
                             token: "",
                             imageId: null,
                             journeyCount: 0,
-                            hireDate: new Date()
+                            hireDate: new Date(new Date().getMinutes()),
                         };
 
                         const dbUser = await LoginService.loginUser(tempUser);
