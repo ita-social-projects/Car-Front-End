@@ -70,7 +70,7 @@ const AddCars = () => {
         });
     }, []);
 
-    useEffect(() => validateCar,
+    useEffect(() => validateCar(),
         [plateNumber, selectedBrand, selectedColor, selectedModel]);
 
     function validateCar () {
