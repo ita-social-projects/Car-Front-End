@@ -22,10 +22,7 @@ const CarTextInput = (props: CarTextInputProps) => {
                             *
                         </Text>
                         <TextInput
-                            autoCapitalize={"characters"}
-                            onChangeText={(text: string) =>{
-                                props.onChangeText?.call(props, text.toUpperCase());
-                            }}
+                            onChangeText={(text: string) => props.onChangeText!(text)}
                             placeholder={props.placeHolder}
                             placeholderTextColor={DM("gray")}
                             defaultValue={props.defaultValue}
