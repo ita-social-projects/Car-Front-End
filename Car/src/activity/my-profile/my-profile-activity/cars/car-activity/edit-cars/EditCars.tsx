@@ -101,7 +101,7 @@ const EditCars = (navigation : any) => {
         }).catch((e: any) => console.log(e));
     }, []);
 
-    useEffect(() => validateCar,
+    useEffect(() => validateCar(),
         [plateNumber, selectedBrand, selectedColor, selectedModel, isLoading]);
 
     function validateCar () {
@@ -120,7 +120,7 @@ const EditCars = (navigation : any) => {
                 plateNumber &&
                 plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
                 plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
-                plateNumber.match(/^[A-ZА-ЯҐЄІЇ0-9-]+$/)
+                plateNumber.match(/^[A-Za-zА-ЯҐЄІЇа-яґєії0-9- ]+$/)
             ));
     }
 
