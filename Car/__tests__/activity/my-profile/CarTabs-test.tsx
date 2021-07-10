@@ -38,7 +38,6 @@ test("renders correctly", async () =>
           }
         />
         <Screen
-          component={[Function]}
           name="AddCars"
           options={
             Object {
@@ -58,7 +57,9 @@ test("renders correctly", async () =>
               ],
             }
           }
-        />
+        >
+          [Function]
+        </Screen>
         <Screen
           name="EditCars"
           options={

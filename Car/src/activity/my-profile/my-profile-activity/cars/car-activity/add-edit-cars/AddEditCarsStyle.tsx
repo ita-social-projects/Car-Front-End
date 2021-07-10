@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const EditCarsStyle = StyleSheet.create({
+const AddEditCarsStyle = StyleSheet.create({
     wrapper: {
         flex: 1,
     },
@@ -75,4 +75,4 @@ const EditCarsStyle = StyleSheet.create({
     }
 });
 
-export default EditCarsStyle;
+export default AddEditCarsStyle;
