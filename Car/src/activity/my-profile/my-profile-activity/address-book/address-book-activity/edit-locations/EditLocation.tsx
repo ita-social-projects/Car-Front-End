@@ -23,10 +23,10 @@ import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
-import EditCarsStyle from "../../../cars/car-activity/edit-cars/EditCarsStyle";
 import DM from "../../../../../../components/styles/DM";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
+import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
 
 const EditLocation = (props: EditLocationProps) => {
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
@@ -154,7 +154,7 @@ const EditLocation = (props: EditLocationProps) => {
     return(
         isLoading ? (
             <View
-                style={[EditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
+                style={[AddEditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
             >
                 <Indicator
                     size="large"

@@ -1,9 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { View } from "react-native";
-import AddCars from "../car-activity/add-cars/AddCars";
 import Cars from "../Cars";
-import EditCars from "../car-activity/edit-cars/EditCars";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 import DM from "../../../../../components/styles/DM";
@@ -13,6 +11,7 @@ import * as navigation from "../../../../../components/navigation/Navigation";
 import { MODAL_SLEEP_DURATION, sleep } from "../../../../../constants/AnimationConstants";
 import { StatusCodes } from "../../../../../constants/Constants";
 import CarService from "../../../../../../api-service/car-service/CarService";
+import AddEditCars from "../car-activity/add-edit-cars/AddEditCars";
 
 const StackTabs = createStackNavigator();
 
@@ -52,14 +51,15 @@ const CarTabs = () => {
                 />
                 <StackTabs.Screen
                     name="AddCars"
-                    component={AddCars}
                     options={{
                         headerTitle: "Add a Car",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton
                     }}
-                />
+                >
+                    {() => <AddEditCars type={"add"} />}
+                </StackTabs.Screen>
                 <StackTabs.Screen
                     name="EditCars"
                     options={{
@@ -71,9 +71,11 @@ const CarTabs = () => {
                     }}
                 >
                     {(props: any) =>{
+                        console.log(props);
+
                         return (
                             <>
-                                <EditCars props={props} />
+                                <AddEditCars type={"edit"} carId={props.route.params.carId} />
                                 <ConfirmModal
                                     disableModal={() => setModalVisibility(false)}
                                     visible={modalVisibility}
