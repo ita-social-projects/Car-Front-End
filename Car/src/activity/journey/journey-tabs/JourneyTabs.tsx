@@ -192,7 +192,7 @@ const JourneyTabs = () => {
                     name="Journey Details"
                     component={JourneyDetailsPage}
                     options={{
-                        headerTitle: "Ride details",
+                        headerTitle: "Ride Details",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton
