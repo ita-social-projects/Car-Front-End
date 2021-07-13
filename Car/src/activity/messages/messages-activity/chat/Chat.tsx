@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Animated, Clipboard, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from "react-native";
+import Clipboard from "@react-native-community/clipboard";
+import { Animated, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import {
     AvatarProps,
