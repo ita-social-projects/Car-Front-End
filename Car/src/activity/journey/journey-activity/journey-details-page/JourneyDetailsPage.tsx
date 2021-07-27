@@ -25,8 +25,10 @@ import {
     FIRST_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import LocationService from "../../../../../api-service/location-service/LocationService";
 import * as navigation from "../../../../components/navigation/Navigation";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
+import Location from "../../../../../models/location/Location";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
@@ -53,6 +55,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const carModel = journey?.car?.model;
 
     const { user } = useContext(AuthContext);
+
+    const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [selectedCar, setSelectedCar] = useState<{ id: number | null, name: string }>({
@@ -95,6 +99,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const [comment, setComment] = useState(journey?.comments ?? "");
 
+    const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
 
@@ -120,10 +125,28 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             }
             setUserCarIsLoading(false);
         });
+
+        LocationService
+            .getAll(Number(user?.id))
+            .then((res) => {
+                setSavedLocations(res.data);
+                setSavedLocationIsLoading(false);
+            })
+            .catch((e) => console.log(e));
     }, []);
 
     const publishJourneyHandler = async () => {
         setRideIsPublishing(true);
+
+        for(let location of savedLocations)
+        {
+            if(location?.name === params.from.text && location.address?.latitude === params.from.coordinates.latitude &&
+                location.address.longitude === params.from.coordinates.longitude)
+                params.from.text = location.address?.name;
+            if(location?.name === params.to.text && location.address?.latitude === params.to.coordinates.latitude &&
+                location.address.longitude === params.to.coordinates.longitude)
+                params.to.text = location.address?.name;
+        }
 
         const newJourney: JourneyDto = {
             id: 0,
@@ -182,7 +205,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             journey.isOnOwnCar === (ownCarButtonStyle === activeButtonStyle);
     };
 
-    const isLoading = userCarIsLoading || rideIsPublishing || successfullyPublishModalIsVisible;
+    const isLoading = userCarIsLoading || rideIsPublishing
+        || successfullyPublishModalIsVisible || savedLocationIsLoading;
 
     const confirmDisabled = !departureTimeIsConfirmed || noChanges();
 
