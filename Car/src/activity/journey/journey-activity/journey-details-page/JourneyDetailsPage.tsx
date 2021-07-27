@@ -55,11 +55,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const { user } = useContext(AuthContext);
 
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
-    const [selectedCar, setSelectedCar] = useState<{id: number | null, name: string}>({
+    const [selectedCar, setSelectedCar] = useState<{ id: number | null, name: string }>({
         id: getCarId(journey),
         name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
     });
-    const [userCars, setUserCars] = useState<{id: number, name: string}[]>([]);
+    const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
 
     const activeButtonStyle = {
         backgroundColor: DM("#000000"),
@@ -127,12 +127,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const newJourney: JourneyDto = {
             id: 0,
-            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
+            carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: freeButtonStyle === activeButtonStyle,
-            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
+            isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
+            isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
@@ -422,7 +422,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 confirmColor={"black"}
                 title={"CHANGES"}
                 subtitle={"After the changes is applied, all passengers will get notified. " +
-                        "Some of them might withdraw from the ride if change doesn't suit them"}
+                    "Some of them might withdraw from the ride if change doesn't suit them"}
                 confirmText={"Apply"}
                 cancelText={"Cancel"}
                 onConfirm={() => {
