@@ -331,7 +331,6 @@ const Chat = (properties: ChatProps) => {
                 return onlyUniqueMessages(temp.sort((a, b) => Number(b._id) - Number(a._id)));
             });
             setLoadingNewer(false);
-            focusOnMessage(firstMessage);
         });
     };
 
