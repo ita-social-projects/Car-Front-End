@@ -6,15 +6,11 @@ import NotificationHeader from "../notification-header/NotificationHeader";
 import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
-import NotificationDeclineButton from "../notification-buttons/NotificationDeclineButton";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
-import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import AuthContext from "../../auth/AuthContext";
-import ConfirmModal from "../../confirm-modal/ConfirmModal";
 
-const ApplicationApproval = (props: NotificationProps) => {
+const ApplicationRejection = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
-    const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
 
     const user = useContext(AuthContext).user;
 
@@ -23,7 +19,7 @@ const ApplicationApproval = (props: NotificationProps) => {
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"Driver approved your request!"}
+                notificationTitle={"Driver declined your request!"}
                 read={props.read}
                 date={props.date}
                 openModal={() => setNotificationModalVisible(true)}
@@ -31,8 +27,8 @@ const ApplicationApproval = (props: NotificationProps) => {
 
             <NotificationModalBase isVisible={notificationModalVisible!} styles={[{ height: "85%" }]}>
                 <NotificationHeader
-                    title="REQUEST IS APPROVED"
-                    message="The driver has approved your request!"
+                    title="REQUEST IS DECLINED"
+                    message="The driver has declined your request!"
                     sender={props.sender}
                     withoutSnooze
                     disableModal={() => setNotificationModalVisible(false)}
@@ -50,29 +46,10 @@ const ApplicationApproval = (props: NotificationProps) => {
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />
-
-                    <NotificationDeclineButton
-                        declineText={"Withdraw"}
-                        onDecline={() => setConfirmationModalVisible(true)}
-                    />
                 </NotificationButtonGroup>
             </NotificationModalBase>
-
-            <ConfirmModal
-                visible={confirmationModalVisible}
-                title="ARE YOU SURE?"
-                subtitle="Are you sure you want to withdraw the appoved request?"
-                confirmText="Yes, withdraw"
-                cancelText="No, keep it"
-                disableModal={() => setConfirmationModalVisible(false)}
-                onConfirm={() => {
-                    JourneyService.deleteUser(props.journeyId!, user?.id!);
-                    setConfirmationModalVisible(false);
-                    setNotificationModalVisible(false);
-                }}
-            />
         </>
     );
 };
 
-export default ApplicationApproval;
+export default ApplicationRejection;

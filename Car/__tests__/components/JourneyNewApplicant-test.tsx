@@ -22,6 +22,7 @@ test("renders correctly", async () =>
                 }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
                 notificationId={0}
+                onDelete={(x) => console.log(x)}
             />
         )
     ).toMatchInlineSnapshot(`
@@ -96,6 +97,33 @@ test("renders correctly", async () =>
             onDecline={[Function]}
           />
         </NotificationButtonGroup>
+        <ConfirmModal
+          confirmText="Ok"
+          disableModal={[Function]}
+          hideCancelButton={true}
+          onConfirm={[Function]}
+          subtitle="Your approvement was successfully sent to the applicant!"
+          title="Request is approved"
+          visible={false}
+        />
+        <ConfirmModal
+          confirmText="Ok"
+          disableModal={[Function]}
+          hideCancelButton={true}
+          onConfirm={[Function]}
+          subtitle="Your rejection was successfully sent to the applicant!"
+          title="Request is declined"
+          visible={false}
+        />
+        <ConfirmModal
+          cancelText="No, keep it"
+          confirmText="Yes, withdraw"
+          disableModal={[Function]}
+          onConfirm={[Function]}
+          subtitle="Are you sure you want to decline passanger's request?"
+          title="ARE YOU SURE?"
+          visible={false}
+        />
       </NotificationModalBase>
     </React.Fragment>
   `));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Text } from "react-native";
 import MinimizedNotification from "../minimized-notification/MinimizedNotification";
 import NotificationProps from "../notifications/NotificationProps";
@@ -18,16 +18,27 @@ import JourneyNewApplicantStyle from "./JourneyNewApplicantStyle";
 import JourneyPoint from "../../../models/journey/JourneyPoint";
 import * as navigation from "../../components/navigation/Navigation";
 import StopsBlock from "../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
+import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
+import AuthContext from "../../components/auth/AuthContext";
+import { HTTP_STATUS_OK } from "../../constants/Constants";
+import Journey from "../../../models/journey/Journey";
+import ConfirmModal from "../confirm-modal/ConfirmModal";
 
 const JourneyNewApplicant = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible ?? false);
+    const [approveModalVisible,setApproveModalVisible] = useState(false);
+    const [declineModalVisible,setDeclineModalVisible] = useState(false);
+    const [confirmationModalVisible,setConfirmationModalVisible] = useState(false);
     const data = JSON.parse(props.notificationData);
     const [stops, setStops] = useState<Stop[]>([]);
+    const [journey, setJourney] = useState<Journey>();
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const senders = data?.start?.address.name.slice(FIRST_ELEMENT_INDEX, -" start".length);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         JourneyService.getJourney(props.journeyId!).then(res => {
+            setJourney(res.data);
             setJourneyPoints(res.data!.journeyPoints);
             setStops([
                 getStopByType(res.data, StopType.Start)!,
@@ -37,6 +48,40 @@ const JourneyNewApplicant = (props: NotificationProps) => {
             ]);
         });
     }, []);
+
+    const sendRejection = () => {
+        NotificationsService.addNotification(
+            {
+                senderId: user?.id!,
+                receiverId:props.sender?.id!,
+                journeyId: journey?.id!,
+                type: 12,
+                jsonData:"{}",
+            }
+        ).then((res)=> {
+            if(res.status == HTTP_STATUS_OK) {
+                setDeclineModalVisible(true);
+                NotificationsService.deleteNotification(props.notificationId);
+            }
+        });
+    };
+
+    const sendApprove = () => {
+        NotificationsService.addNotification(
+            {
+                senderId: user?.id!,
+                receiverId:props.sender?.id!,
+                journeyId: journey?.id!,
+                type:2,
+                jsonData:"{}",
+            }
+        ).then((res)=> {
+            if(res.status == HTTP_STATUS_OK) {
+                setApproveModalVisible(true);
+                NotificationsService.deleteNotification(props.notificationId);
+            }
+        });
+    };
 
     const onStopPressHandler = (stop: Stop) => {
         setModalVisible(false);
@@ -80,14 +125,64 @@ const JourneyNewApplicant = (props: NotificationProps) => {
                 <NotificationButtonGroup>
                     <NotificationConfirmButton
                         confirmText={"ACCEPT"}
-                        onConfirm={() => setModalVisible(false)}
+                        onConfirm={sendApprove}
                     />
 
                     <NotificationDeclineButton
                         declineText={"Decline"}
-                        onDecline={() => setModalVisible(false)}
+                        onDecline={() => setConfirmationModalVisible(true)}
                     />
                 </NotificationButtonGroup>
+
+                <ConfirmModal
+                    visible={approveModalVisible}
+                    title="Request is approved"
+                    subtitle="Your approvement was successfully sent to the applicant!"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={() => {
+                        setApproveModalVisible(false);
+                        setModalVisible(false);
+                        props.onDelete(props.notificationId);
+                    }}
+                    onConfirm={() => {
+                        setApproveModalVisible(false);
+                        setModalVisible(false);
+                        props.onDelete(props.notificationId);
+                    }}
+                />
+
+                <ConfirmModal
+                    visible={declineModalVisible}
+                    title="Request is declined"
+                    subtitle="Your rejection was successfully sent to the applicant!"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={() => {
+                        setDeclineModalVisible(false);
+                        setModalVisible(false);
+                        props.onDelete(props.notificationId);
+                    }}
+                    onConfirm={() => {
+                        setDeclineModalVisible(false);
+                        setModalVisible(false);
+                        props.onDelete(props.notificationId);
+                    }}
+                />
+
+                <ConfirmModal
+                    visible={confirmationModalVisible}
+
+                    title="ARE YOU SURE?"
+                    subtitle="Are you sure you want to decline passanger's request?"
+                    confirmText="Yes, withdraw"
+                    cancelText="No, keep it"
+                    disableModal={() => setConfirmationModalVisible(false)}
+                    onConfirm={() => {
+                        setConfirmationModalVisible(false);
+                        sendRejection();
+                    }}
+                />
             </NotificationModalBase>
 
         </>);

@@ -11,6 +11,7 @@ import AcceptedInvitation from "../../components/notifications/notifications-typ
 import RejectedInvitation from "../../components/notifications/notifications-types/RejectedInvitation";
 import HRMarketingMessage from "../../components/notifications/notifications-types/HRMarketingMessage";
 import HRMarketingSurvey from "../../components/notifications/notifications-types/HRMarketingSurvey";
+import ApplicationRejection from "../../components/notifications/notifications-types/ApplicationRejection";
 
 const NotificationComponent = (props: any) => {
     const [isModalVisible] = useState(false);
@@ -25,7 +26,8 @@ const NotificationComponent = (props: any) => {
         8: PassengerWithdrawal,
         9: HRMarketingMessage,
         10: HRMarketingSurvey,
-        11: RideFound
+        11: RideFound,
+        12: ApplicationRejection
     };
 
     return (
@@ -37,7 +39,8 @@ const NotificationComponent = (props: any) => {
                 visible: isModalVisible,
                 read: props.item!.isRead,
                 date: new Date(props.item!.createdAt),
-                journeyId: props.item!.journeyId
+                journeyId: props.item!.journeyId,
+                onDelete: props.onDelete
             })}
         </View>
     );
