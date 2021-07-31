@@ -94,7 +94,8 @@ const JourneyNewApplicant = (props: JourneyNewApplicantViewProps) => {
         navigation.navigate("Route View", {
             stops: stops,
             journeyPoints: journeyPoints,
-            cameraCoordinates: getStopCoordinates(stop)
+            cameraCoordinates: getStopCoordinates(stop),
+            notification: props.route.params.notification
         });
     };
 
@@ -144,12 +145,10 @@ const JourneyNewApplicant = (props: JourneyNewApplicantViewProps) => {
                         disableModal={() => {
                             setApproveModalVisible(false);
                             navigation.goBack();
-                            params.onDelete(params.notificationId);
                         }}
                         onConfirm={() => {
                             setApproveModalVisible(false);
                             navigation.goBack();
-                            params.onDelete(params.notificationId);
                         }}
                     />
 
@@ -162,12 +161,10 @@ const JourneyNewApplicant = (props: JourneyNewApplicantViewProps) => {
                         disableModal={() => {
                             setDeclineModalVisible(false);
                             navigation.goBack();
-                            params.onDelete(params.notificationId);
                         }}
                         onConfirm={() => {
                             setDeclineModalVisible(false);
                             navigation.goBack();
-                            params.onDelete(params.notificationId);
                         }}
                     />
 
