@@ -9,7 +9,7 @@ interface NotificationProps {
     date?: Date,
     journeyId?: number
     // eslint-disable-next-line
-    onDelete: (id: number) => void
+    onDelete?: (id: number) => void
 }
 
 export default NotificationProps;
