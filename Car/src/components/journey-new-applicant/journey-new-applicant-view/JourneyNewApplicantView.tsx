@@ -31,7 +31,7 @@ interface JourneyNewApplicantViewProps {
     }
 }
 
-const JourneyNewApplicant = (props: JourneyNewApplicantViewProps) => {
+const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const params = props.route.params.notification;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
     const [declineModalVisible,setDeclineModalVisible] = useState(false);
@@ -186,4 +186,4 @@ const JourneyNewApplicant = (props: JourneyNewApplicantViewProps) => {
         </>);
 };
 
-export default JourneyNewApplicant;
+export default JourneyNewApplicantView;

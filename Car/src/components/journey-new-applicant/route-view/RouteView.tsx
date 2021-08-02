@@ -52,6 +52,10 @@ const RouteView = (props: RouteViewProps) => {
             }
         });
     };
+    const navigateBack = () => {
+        setApproveModalVisible(false);
+        navigation.navigate("Notifications");
+    };
 
     return (
         <>
@@ -85,17 +89,8 @@ const RouteView = (props: RouteViewProps) => {
                 subtitle="Your approvement was successfully sent to the applicant!"
                 confirmText="Ok"
                 hideCancelButton={true}
-                disableModal={() => {
-                    setApproveModalVisible(false);
-                    //params.notification?.onDelete(params.notification?.notificationId!);
-                    navigation.navigate("Notifications");
-                }}
-                onConfirm={() => {
-                    setApproveModalVisible(false);
-                    //params.notification?.onDelete(params.notification?.notificationId);
-                    navigation.navigate("Notifications");
-
-                }}
+                disableModal={navigateBack}
+                onConfirm={navigateBack}
             />
         </>
     );
