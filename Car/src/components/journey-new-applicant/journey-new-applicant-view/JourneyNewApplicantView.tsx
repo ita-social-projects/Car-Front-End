@@ -173,7 +173,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
                         title="ARE YOU SURE?"
                         subtitle="Are you sure you want to decline passanger's request?"
-                        confirmText="Yes, withdraw"
+                        confirmText="Yes, decline"
                         cancelText="No, keep it"
                         disableModal={() => setConfirmationModalVisible(false)}
                         onConfirm={() => {

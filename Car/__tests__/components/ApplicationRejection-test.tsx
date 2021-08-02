@@ -25,13 +25,12 @@ test("renders correctly", async () =>
             />
         )
     ).toMatchInlineSnapshot(`
-    <React.Fragment>
-      <MinimizedNotification
-        notificationId={0}
-        notificationTitle="Driver declined your request!"
-        openModal={[Function]}
-        user={
-          Object {
+    <ApplicationAnswer
+      notification={
+        Object {
+          "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
+          "notificationId": 0,
+          "sender": Object {
             "email": "Abc",
             "hireDate": 2021-01-01T20:00:00.000Z,
             "id": 0,
@@ -42,48 +41,11 @@ test("renders correctly", async () =>
             "position": "Abc",
             "surname": "Abc",
             "token": "Abc",
-          }
+          },
         }
-      />
-      <NotificationModalBase
-        styles={
-          Array [
-            Object {
-              "height": "85%",
-            },
-          ]
-        }
-      >
-        <NotificationHeader
-          disableModal={[Function]}
-          message="The driver has declined your request!"
-          sender={
-            Object {
-              "email": "Abc",
-              "hireDate": 2021-01-01T20:00:00.000Z,
-              "id": 0,
-              "imageId": null,
-              "journeyCount": 0,
-              "location": "Abc",
-              "name": "Abc",
-              "position": "Abc",
-              "surname": "Abc",
-              "token": "Abc",
-            }
-          }
-          title="REQUEST IS DECLINED"
-          withoutSnooze={true}
-        />
-        <NotificationRideDetails />
-        <NotificationRideStops
-          stopsOwner={null}
-          title="Your route"
-        />
-        <NotificationButtonGroup>
-          <NotificationConfirmButton
-            onConfirm={[Function]}
-          />
-        </NotificationButtonGroup>
-      </NotificationModalBase>
-    </React.Fragment>
+      }
+      notificationHeaderMessage="The driver has declined your request!"
+      notificationHeaderTittle="REQUEST IS DECLINED"
+      notificationTittle="Driver declined your request!"
+    />
   `));

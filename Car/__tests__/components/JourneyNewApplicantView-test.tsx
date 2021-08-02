@@ -131,7 +131,7 @@ test("renders correctly", async () =>
           />
           <ConfirmModal
             cancelText="No, keep it"
-            confirmText="Yes, withdraw"
+            confirmText="Yes, decline"
             disableModal={[Function]}
             onConfirm={[Function]}
             subtitle="Are you sure you want to decline passanger's request?"
