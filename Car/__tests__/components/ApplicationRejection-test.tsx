@@ -1,13 +1,13 @@
 import React from "react";
 import shallowRender from "react-test-renderer/shallow";
-import JourneyNewApplicant from "../../src/components/journey-new-applicant/JourneyNewApplicant";
+import ApplicationRejection from "../../src/components/notifications/notifications-types/ApplicationRejection";
 
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
     expect(
         renderer.render(
-            <JourneyNewApplicant
+            <ApplicationRejection
                 sender={{
                     id: 0,
                     name: "Abc",
@@ -25,13 +25,12 @@ test("renders correctly", async () =>
             />
         )
     ).toMatchInlineSnapshot(`
-    <React.Fragment>
-      <MinimizedNotification
-        notificationId={0}
-        notificationTitle="New applicant"
-        openModal={[Function]}
-        user={
-          Object {
+    <ApplicationAnswer
+      notification={
+        Object {
+          "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
+          "notificationId": 0,
+          "sender": Object {
             "email": "Abc",
             "hireDate": 2021-01-01T20:00:00.000Z,
             "id": 0,
@@ -42,8 +41,11 @@ test("renders correctly", async () =>
             "position": "Abc",
             "surname": "Abc",
             "token": "Abc",
-          }
+          },
         }
-      />
-    </React.Fragment>
+      }
+      notificationHeaderMessage="The driver has declined your request!"
+      notificationHeaderTittle="REQUEST IS DECLINED"
+      notificationTittle="Driver declined your request!"
+    />
   `));

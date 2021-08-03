@@ -92,6 +92,9 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
             props.navigation.removeListener("focus", refreshNotification);
         };
     }, []);
+    const handleDelete = (id:number) =>{
+        setNotifications(notifications.filter(x => x?.id != id));
+    };
 
     return (
         <FlatList
@@ -111,7 +114,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
                     }
                     overshootRight={false}
                 >
-                    <NotificationComponent item={item} />
+                    <NotificationComponent item={item} onDelete ={handleDelete} />
                 </Swipeable>
             )}
         />

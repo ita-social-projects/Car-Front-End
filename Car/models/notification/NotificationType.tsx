@@ -13,6 +13,7 @@ enum NotificationType {
     HRMarketingMessage = 9,
     HRMarketingSurvey = 10,
     RequestedJourneyCreated = 11,
+    ApplicationRejection = 12
 }
 
 export default NotificationType;
