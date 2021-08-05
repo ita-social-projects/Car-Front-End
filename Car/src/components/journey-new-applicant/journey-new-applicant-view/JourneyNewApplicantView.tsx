@@ -96,7 +96,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             params.sender?.id!
         ).then((res) => {
             console.log(res.data);
-            if(res.status == HTTP_STATUS_OK && res.data == true) {
+            if(res.status == HTTP_STATUS_OK && res.data) {
                 sendApprove();
             }
             else{

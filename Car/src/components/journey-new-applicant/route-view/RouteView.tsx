@@ -65,7 +65,7 @@ const RouteView = (props: RouteViewProps) => {
             params.notification?.sender?.id!
         ).then((res) => {
             console.log(res.data);
-            if(res.status == HTTP_STATUS_OK && res.data == true) {
+            if(res.status == HTTP_STATUS_OK && res.data) {
                 sendApprove();
             }
             else{
