@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export default function updateLocale (): void {
+const updateLocale = (): void => {
     moment.updateLocale("en", {
         relativeTime: {
             s: "now",
@@ -21,3 +21,5 @@ export default function updateLocale (): void {
     });
     moment.locale("en");
 };
+
+export default updateLocale;
