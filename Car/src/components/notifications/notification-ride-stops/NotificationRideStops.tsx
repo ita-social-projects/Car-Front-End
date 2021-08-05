@@ -47,8 +47,8 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
             );
         });
 
-    const filterStops = (stops: Stop[]) => {
-        let arr = getStops(stops);
+    const filterStops = (myStops: Stop[]) => {
+        let arr = getStops(myStops);
 
         arr.sort((a) => (a?.userId === user?.id) ? LESS_THAN_ZERO : ZERO);
         arr = getUniqueStops(arr);
