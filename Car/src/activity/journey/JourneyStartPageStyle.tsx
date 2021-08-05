@@ -14,35 +14,36 @@ const JourneyStartPageStyle = StyleSheet.create({
     segmentControlContainer: {
         height: 56,
         flexDirection: "row",
-        paddingTop: 24
+        paddingTop: 24,
+        margin: -1,
     },
 
     allJourneys: {
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 2,
-        width: 54
+        width: "25%",
     },
 
     pastJourneys: {
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 2,
-        width: 62
+        width: "25%",
     },
 
     upcomingJourneys: {
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 2,
-        width: 98
+        width: "25%",
     },
 
     scheduledJourneys: {
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 2,
-        width: 103
+        width: "25%",
     },
 
     buttonText: {
