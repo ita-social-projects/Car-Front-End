@@ -182,4 +182,24 @@ describe("Journey Service test", () => {
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(stopsData));
         });
     });
+    test("should return boolean that indicating whether the user has been successfully added", async () => {
+        jest.spyOn(APIService, "put").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<boolean>>(function (resolve) {
+                    resolve({
+                        data: true,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type":"application/json"
+                        }
+                    });
+                })
+        );
+        JourneyService.addUser(1,1).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(true));
+        });
+    });
 });

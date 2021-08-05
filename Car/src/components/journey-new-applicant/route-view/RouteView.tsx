@@ -16,6 +16,7 @@ import { HTTP_STATUS_OK } from "../../../constants/Constants";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import NotificationProps from "../../notifications/NotificationProps";
 import * as navigation from "../../../components/navigation/Navigation";
+import JourneyService from "../../../../api-service/journey-service/JourneyService";
 
 interface RouteViewProps {
     route: {
@@ -32,6 +33,7 @@ const RouteView = (props: RouteViewProps) => {
     const { user } = useContext(AuthContext);
     const params = props.route.params;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
 
     const sendApprove = () => {
         console.log(params);
@@ -57,6 +59,21 @@ const RouteView = (props: RouteViewProps) => {
         navigation.navigate("Notifications");
     };
 
+    const approveUser = () => {
+        JourneyService.addUser(
+            params.notification?.journeyId!,
+            params.notification?.sender?.id!
+        ).then((res) => {
+            console.log(res.data);
+            if(res.status == HTTP_STATUS_OK && res.data == true) {
+                sendApprove();
+            }
+            else{
+                setErrorModalVisible(true);
+            }
+        });
+    };
+
     return (
         <>
             <MapView
@@ -76,7 +93,7 @@ const RouteView = (props: RouteViewProps) => {
 
                 {params.stops.map(mapStopToMarker)}
             </MapView>
-            <TouchableOpacity onPress = {sendApprove}
+            <TouchableOpacity onPress = {approveUser}
                 style={[SearchJourneyStyle.confirmButton, { backgroundColor: "black" }]}
             >
                 <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
@@ -91,6 +108,20 @@ const RouteView = (props: RouteViewProps) => {
                 hideCancelButton={true}
                 disableModal={navigateBack}
                 onConfirm={navigateBack}
+            />
+
+            <ConfirmModal
+                visible={errorModalVisible}
+                title="Error"
+                subtitle="Failed to add the user to the ride!"
+                confirmText="Ok"
+                hideCancelButton={true}
+                disableModal={() => {
+                    setErrorModalVisible(false);
+                }}
+                onConfirm={() => {
+                    setErrorModalVisible(false);
+                }}
             />
         </>
     );

@@ -36,6 +36,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [approveModalVisible,setApproveModalVisible] = useState(false);
     const [declineModalVisible,setDeclineModalVisible] = useState(false);
     const [confirmationModalVisible,setConfirmationModalVisible] = useState(false);
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
     const data = JSON.parse(params.notificationData);
     const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
@@ -89,6 +90,20 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             }
         });
     };
+    const approveUser = () => {
+        JourneyService.addUser(
+            journey?.id!,
+            params.sender?.id!
+        ).then((res) => {
+            console.log(res.data);
+            if(res.status == HTTP_STATUS_OK && res.data == true) {
+                sendApprove();
+            }
+            else{
+                setErrorModalVisible(true);
+            }
+        });
+    };
 
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Route View", {
@@ -127,7 +142,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                     <NotificationButtonGroup>
                         <NotificationConfirmButton
                             confirmText={"ACCEPT"}
-                            onConfirm={sendApprove}
+                            onConfirm={approveUser}
                         />
 
                         <NotificationDeclineButton
@@ -179,6 +194,20 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                         onConfirm={() => {
                             setConfirmationModalVisible(false);
                             sendRejection();
+                        }}
+                    />
+
+                    <ConfirmModal
+                        visible={errorModalVisible}
+                        title="Error"
+                        subtitle="Failed to add the user to the ride!"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={() => {
+                            setErrorModalVisible(false);
+                        }}
+                        onConfirm={() => {
+                            setErrorModalVisible(false);
                         }}
                     />
                 </View>
