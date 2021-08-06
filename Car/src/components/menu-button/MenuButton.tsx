@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -16,6 +16,7 @@ const MenuButton = (props: MenuButtonProps) => {
     const [colorText, setColorText] = useState(black);
     const [colorIcon, setColorIcon] = useState(black);
     const [colorSeparator, setColorSeparator] = useState(DM("#C1C1C5"));
+    let color = props.disabled ? disabledColor : colorIcon;
 
     const changeColorToBlack = () => {
         setColorText(white);
@@ -30,6 +31,10 @@ const MenuButton = (props: MenuButtonProps) => {
         setColorIcon(black);
         setColorSeparator(DM("#C1C1C5"));
     };
+
+    useEffect(() => {
+        color = props.disabled ? disabledColor : colorIcon;
+    });
 
     return (
         <TouchableWithoutFeedback
@@ -58,7 +63,7 @@ const MenuButton = (props: MenuButtonProps) => {
                     {props.isIcon ? (
                         <View style={MenuButtonStyle.container}>
                             <Icon
-                                color={props.disabled ? disabledColor : colorIcon}
+                                color={color}
                                 name={props.iconName ?? "chevron-right"}
                                 size={30}
                                 style={MenuButtonStyle.Icon}
