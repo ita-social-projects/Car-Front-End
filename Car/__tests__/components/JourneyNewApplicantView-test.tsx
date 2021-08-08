@@ -138,6 +138,15 @@ test("renders correctly", async () =>
             title="ARE YOU SURE?"
             visible={false}
           />
+          <ConfirmModal
+            confirmText="Ok"
+            disableModal={[Function]}
+            hideCancelButton={true}
+            onConfirm={[Function]}
+            subtitle="Failed to add the user to the ride!"
+            title="Error"
+            visible={false}
+          />
         </View>
       </View>
     </React.Fragment>

@@ -40,12 +40,14 @@ const SwitchSelectorStyle = StyleSheet.create({
 
     inactiveButton: {
         backgroundColor: "#FFFFFF",
-        color: "#000000"
+        color: "#000000",
+        borderColor: "#000000"
     },
 
     activeButton: {
         backgroundColor: "#000000",
-        color: "#FFFFFF"
+        color: "#FFFFFF",
+        borderColor: "#000000"
     },
 });
 

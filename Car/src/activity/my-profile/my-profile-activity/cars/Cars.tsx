@@ -62,6 +62,51 @@ const Cars = (props: NavigationAddListener) => {
             )}
         </View>
     );
+    const renderCars = ()=> {
+        return(
+            cars.length ? (
+                <>
+                    {cars.map((item) => {
+                        return (
+                            <View key={item!.id}>
+                                <TouchableNavigationCard
+                                    carId={item!.id}
+                                    navigationName="EditCars"
+                                    cardName="Edit Car Info"
+                                    picture={
+                                        item!.imageId ? (
+                                            <Image
+                                                source={{
+                                                    uri: ImageService.getImageById(item?.imageId!)
+                                                }}
+                                                style={CarsStyle.carAvatar}
+                                            />
+                                        ) : (
+                                            <Ionicons
+                                                name={"car"}
+                                                size={20}
+                                                color={DM("#414045")}
+                                            />
+                                        )
+                                    }
+                                >
+                                    <Text style={[CarsStyle.brand, { color: DM("black") }]}>
+                                        {item!.model?.brand?.name}
+                                    </Text>
+                                    <Text style={[CarsStyle.model, { color: DM("#414045") }]}>
+                                        {item!.model?.name}
+                                    </Text>
+                                </TouchableNavigationCard>
+                            </View>
+                        );
+                    })}
+                    {addCarElement}
+                </>
+            ) : (
+                addCarElement
+            )
+        );
+    };
 
     return (
         <ScrollView
@@ -80,47 +125,7 @@ const Cars = (props: NavigationAddListener) => {
                         color="#414045"
                         text="Loading information..."
                     />
-                ) : cars.length ? (
-                    <>
-                        {cars.map((item) => {
-                            return (
-                                <View key={item!.id}>
-                                    <TouchableNavigationCard
-                                        carId={item!.id}
-                                        navigationName="EditCars"
-                                        cardName="Edit Car Info"
-                                        picture={
-                                            item!.imageId ? (
-                                                <Image
-                                                    source={{
-                                                        uri: ImageService.getImageById(item?.imageId!)
-                                                    }}
-                                                    style={CarsStyle.carAvatar}
-                                                />
-                                            ) : (
-                                                <Ionicons
-                                                    name={"car"}
-                                                    size={20}
-                                                    color={DM("#414045")}
-                                                />
-                                            )
-                                        }
-                                    >
-                                        <Text style={[CarsStyle.brand, { color: DM("black") }]}>
-                                            {item!.model?.brand?.name}
-                                        </Text>
-                                        <Text style={[CarsStyle.model, { color: DM("#414045") }]}>
-                                            {item!.model?.name}
-                                        </Text>
-                                    </TouchableNavigationCard>
-                                </View>
-                            );
-                        })}
-                        {addCarElement}
-                    </>
-                ) : (
-                    addCarElement
-                )}
+                ) : renderCars()}
             </View>
         </ScrollView>
     );

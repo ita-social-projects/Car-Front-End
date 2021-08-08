@@ -57,7 +57,7 @@ test("renders correctly", async () =>
     <Image
       source={
         Object {
-          "uri": "https://drive.google.com/uc?id=AbCdE&export=view",
+          "uri": "https://carstorageaccount.blob.core.windows.net/images/AbCdE",
         }
       }
       style={

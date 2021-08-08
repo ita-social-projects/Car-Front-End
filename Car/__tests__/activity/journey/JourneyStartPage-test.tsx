@@ -106,6 +106,7 @@ test("renders correctly", async () =>
           Object {
             "flexDirection": "row",
             "height": 56,
+            "margin": -1,
             "paddingTop": 24,
           }
         }
@@ -119,7 +120,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 54,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#000000",
@@ -158,7 +159,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 62,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#FFFFFF",
@@ -197,7 +198,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 98,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#FFFFFF",
@@ -236,7 +237,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 103,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#FFFFFF",
