@@ -198,15 +198,18 @@ const SearchJourney = (props: SearchJourneyProps) => {
     };
 
     const onConfirmButtonPress = async () => {
-        let fee = FeeType.Paid;
+        let fee: FeeType;
 
-        if(JSON.stringify(allButtonStyle)===JSON.stringify(SwitchSelectorStyle.activeButton))
-        {
-            fee = FeeType.All;
-        }
-        if(JSON.stringify(freeButtonStyle)===JSON.stringify(SwitchSelectorStyle.activeButton))
-        {
-            fee = FeeType.Free;
+        switch(JSON.stringify(SwitchSelectorStyle.activeButton)) {
+            case JSON.stringify(allButtonStyle):
+                fee = FeeType.All;
+                break;
+            case JSON.stringify(freeButtonStyle):
+                fee = FeeType.Free;
+                break;
+            default:
+                fee = FeeType.Paid;
+                break;
         }
 
         let filterToSave: Filter = {
