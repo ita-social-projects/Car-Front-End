@@ -155,7 +155,6 @@ const Settings = (props: {navigation: any}) => {
                                     onPress={() => {
                                         pressHandle();
                                         (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
-                                        setBottomPopupShown(false);
                                     }}>
                                     <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
                                     Add photo
