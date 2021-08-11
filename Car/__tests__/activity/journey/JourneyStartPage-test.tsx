@@ -22,7 +22,7 @@ test("renders correctly", async () =>
       style={
         Array [
           Object {
-            "paddingHorizontal": 15,
+            "paddingHorizontal": 14,
           },
           Object {
             "backgroundColor": "white",
@@ -106,7 +106,6 @@ test("renders correctly", async () =>
           Object {
             "flexDirection": "row",
             "height": 56,
-            "margin": -1,
             "paddingTop": 24,
           }
         }
