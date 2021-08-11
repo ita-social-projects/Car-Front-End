@@ -11,6 +11,8 @@ import NotificationRideStops from "../notification-ride-stops/NotificationRideSt
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import AuthContext from "../../auth/AuthContext";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
+import { HTTP_STATUS_OK } from "../../../constants/Constants";
+import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -23,8 +25,27 @@ interface ApplicationAnswerProps {
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.notification.visible);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
+    const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
     const data = JSON.parse(props.notification.notificationData);
+
+    const sendWithdraw = () => {
+        JourneyService.deleteUser(
+            props.notification.journeyId!,
+            user?.id!
+        ).then((res) => {
+            if(res.status === HTTP_STATUS_OK) {
+                setWithdrawModalVisible(true);
+                NotificationsService.deleteNotification(props.notification.notificationId);
+            }
+        });
+    };
+    const closeAndDelete = () => {
+        setWithdrawModalVisible(false);
+        setNotificationModalVisible(false);
+        if(props.notification.onDelete)
+            props.notification.onDelete(props.notification.notificationId);
+    };
 
     return (
         <>
@@ -67,19 +88,29 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 </NotificationButtonGroup>
             </NotificationModalBase>
             {props.withWithdraw &&
-                <ConfirmModal
-                    visible={confirmationModalVisible}
-                    title="ARE YOU SURE?"
-                    subtitle="Are you sure you want to withdraw the appoved request?"
-                    confirmText="Yes, withdraw"
-                    cancelText="No, keep it"
-                    disableModal={() => setConfirmationModalVisible(false)}
-                    onConfirm={() => {
-                        JourneyService.deleteUser(props.notification.journeyId!, user?.id!);
-                        setConfirmationModalVisible(false);
-                        setNotificationModalVisible(false);
-                    }}
-                />
+                <>
+                    <ConfirmModal
+                        visible={confirmationModalVisible}
+                        title="ARE YOU SURE?"
+                        subtitle="Are you sure you want to withdraw the appoved request?"
+                        confirmText="Yes, withdraw"
+                        cancelText="No, keep it"
+                        disableModal={() => setConfirmationModalVisible(false)}
+                        onConfirm={() => {
+                            setConfirmationModalVisible(false);
+                            sendWithdraw();
+                        }}
+                    />
+                    <ConfirmModal
+                        visible={withdrawModalVisible}
+                        title="Ride is withdrawn"
+                        subtitle="Your withdrawal was successfully sent to the driver"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={closeAndDelete}
+                        onConfirm={closeAndDelete}
+                    />
+                </>
             }
         </>
     );

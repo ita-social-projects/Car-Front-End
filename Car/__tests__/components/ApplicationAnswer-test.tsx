@@ -97,14 +97,25 @@ test("renders correctly", async () =>
           />
         </NotificationButtonGroup>
       </NotificationModalBase>
-      <ConfirmModal
-        cancelText="No, keep it"
-        confirmText="Yes, withdraw"
-        disableModal={[Function]}
-        onConfirm={[Function]}
-        subtitle="Are you sure you want to withdraw the appoved request?"
-        title="ARE YOU SURE?"
-        visible={false}
-      />
+      <React.Fragment>
+        <ConfirmModal
+          cancelText="No, keep it"
+          confirmText="Yes, withdraw"
+          disableModal={[Function]}
+          onConfirm={[Function]}
+          subtitle="Are you sure you want to withdraw the appoved request?"
+          title="ARE YOU SURE?"
+          visible={false}
+        />
+        <ConfirmModal
+          confirmText="Ok"
+          disableModal={[Function]}
+          hideCancelButton={true}
+          onConfirm={[Function]}
+          subtitle="Your withdrawal was successfully sent to the driver"
+          title="Ride is withdrawn"
+          visible={false}
+        />
+      </React.Fragment>
     </React.Fragment>
   `));
