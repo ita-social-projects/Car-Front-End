@@ -71,6 +71,53 @@ export default function AddressBook (props: {navigation: any}) {
         </View>
     );
 
+    const renderLocations = () => {
+        return(
+            locations.length ? (
+                <>
+                    {locations.map((item: Location) => {
+                        // @ts-ignore
+                        // @ts-ignore
+                        return (
+                            <View key={item?.id}>
+                                <TouchableNavigationCard
+                                    navigation={props.navigation}
+                                    carId={item?.id}
+                                    navigationName="EditLocation"
+                                    cardName="Edit a Address"
+                                    picture={
+                                        <Ionicons
+                                            name={
+                                                item?.type?.name
+                                                    ? item?.type?.name
+                                                    : "star-outline"
+                                            }
+                                            size={25}
+                                            color={DM("#414045")}
+                                        />
+                                    }
+                                >
+                                    <EllipsizedText
+                                        text={item!.name}
+                                        style={[AddressBookStyle.name, { color: DM("black") }]}
+                                    />
+
+                                    <EllipsizedText
+                                        text={item!.address!.name}
+                                        style={[AddressBookStyle.address, { color: DM("#414045") }]}
+                                    />
+                                </TouchableNavigationCard>
+                            </View>
+                        );
+                    })}
+                    {addLocationElement}
+                </>
+            ) : (
+                addLocationElement
+            )
+        );
+    };
+
     return (
         <ScrollView
             style={[AddressBookStyle.container, { backgroundColor: DM("white") }]}
@@ -87,48 +134,7 @@ export default function AddressBook (props: {navigation: any}) {
             >
                 {loading ? (
                     <ActivityIndicator size={40} color={DM("black")} />
-                ) : locations.length ? (
-                    <>
-                        {locations.map((item: Location) => {
-                            // @ts-ignore
-                            // @ts-ignore
-                            return (
-                                <View key={item?.id}>
-                                    <TouchableNavigationCard
-                                        navigation={props.navigation}
-                                        carId={item?.id}
-                                        navigationName="EditLocation"
-                                        cardName="Edit a Address"
-                                        picture={
-                                            <Ionicons
-                                                name={
-                                                    item?.type?.name
-                                                        ? item?.type?.name
-                                                        : "star-outline"
-                                                }
-                                                size={25}
-                                                color={DM("#414045")}
-                                            />
-                                        }
-                                    >
-                                        <EllipsizedText
-                                            text={item!.name}
-                                            style={[AddressBookStyle.name, { color: DM("black") }]}
-                                        />
-
-                                        <EllipsizedText
-                                            text={item!.address!.name}
-                                            style={[AddressBookStyle.address, { color: DM("#414045") }]}
-                                        />
-                                    </TouchableNavigationCard>
-                                </View>
-                            );
-                        })}
-                        {addLocationElement}
-                    </>
-                ) : (
-                    addLocationElement
-                )}
+                ) : renderLocations()}
             </View>
         </ScrollView>
     );

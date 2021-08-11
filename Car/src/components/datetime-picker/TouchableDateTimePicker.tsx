@@ -12,7 +12,7 @@ const ZERO = 0;
 interface TouchableDateTimePickerProps {
     date: Date,
     isConfirmed: boolean,
-    setIsConfirmedToTrue: () => void,
+    setIsConfirmedToTrue?: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     setDate: (date: Date) => void,
 }
@@ -33,7 +33,10 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
 
     const onDonePress = () => {
         setShow(false);
-        props.setIsConfirmedToTrue();
+        if(props.setIsConfirmedToTrue)
+        {
+            props.setIsConfirmedToTrue();
+        }
     };
 
     return (

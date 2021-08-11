@@ -198,9 +198,19 @@ const SearchJourney = (props: SearchJourneyProps) => {
     };
 
     const onConfirmButtonPress = async () => {
-        let fee = allButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.All
-            : freeButtonStyle === SwitchSelectorStyle.activeButton ? FeeType.Free
-                : FeeType.Paid;
+        let fee: FeeType;
+
+        switch(JSON.stringify(SwitchSelectorStyle.activeButton)) {
+            case JSON.stringify(allButtonStyle):
+                fee = FeeType.All;
+                break;
+            case JSON.stringify(freeButtonStyle):
+                fee = FeeType.Free;
+                break;
+            default:
+                fee = FeeType.Paid;
+                break;
+        }
 
         let filterToSave: Filter = {
             from: from,
@@ -346,7 +356,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         date={departureTime}
                         setDate={(d) => setDepartureTime(d)}
                         isConfirmed={true}
-                        setIsConfirmedToTrue={() => {}}
                     />
 
                     <View style={SwitchSelectorStyle.container}>

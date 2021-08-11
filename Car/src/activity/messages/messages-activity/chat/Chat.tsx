@@ -90,14 +90,17 @@ const Chat = (properties: ChatProps) => {
 
     }, []);
 
+    const invokeConncetion = () => {
+        connection?.invoke(
+            "EnterToGroup",
+            properties.route.params.chatId.toString()
+        ).catch((err: any) => console.log(err));
+    };
+
     useEffect(() => {
         if (connection) {
             connection.start().then(() => {
-                connection.invoke(
-                    "EnterToGroup",
-                    properties.route.params.chatId.toString(),
-                    AndroidKeyboardAdjust.setAdjustResize()
-                ).catch((err: any) => console.log(err));
+                invokeConncetion();
             });
 
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
@@ -115,10 +118,7 @@ const Chat = (properties: ChatProps) => {
                 });
 
             connection.onreconnected(() => {
-                connection.invoke(
-                    "EnterToGroup",
-                    properties.route.params.chatId.toString()
-                ).catch((err: any) => console.log(err));
+                invokeConncetion();
             });
 
             connection.on("RecieveMessage", (receivedMessage: any) => {
@@ -271,9 +271,9 @@ const Chat = (properties: ChatProps) => {
     let selectedMessage: any;
     let isOpen: boolean = false;
 
-    const showPopup = (context: any, message: any) => {
+    const showPopup = (context: any, myMessage: any) => {
         isOpen = !isOpen;
-        selectedMessage = message;
+        selectedMessage = myMessage;
 
         moreOptionsRef?.current?.snapTo(
             isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
@@ -345,7 +345,9 @@ const Chat = (properties: ChatProps) => {
                         array.map(obj => obj._id)
                             .indexOf(value._id) === index);
 
-                return onlyUniqueMessages(temp.sort((a, b) => Number(b._id) - Number(a._id)));
+                temp.sort((a, b) => Number(b._id) - Number(a._id));
+
+                return onlyUniqueMessages(temp);
             });
             setLoadingNewer(false);
         });

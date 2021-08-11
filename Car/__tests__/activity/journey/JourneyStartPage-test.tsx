@@ -22,7 +22,7 @@ test("renders correctly", async () =>
       style={
         Array [
           Object {
-            "paddingHorizontal": 15,
+            "paddingHorizontal": 14,
           },
           Object {
             "backgroundColor": "white",
@@ -119,7 +119,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 54,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#000000",
@@ -158,7 +158,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 62,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#FFFFFF",
@@ -197,7 +197,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 98,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#FFFFFF",
@@ -236,7 +236,7 @@ test("renders correctly", async () =>
                 "alignItems": "center",
                 "borderWidth": 2,
                 "justifyContent": "center",
-                "width": 103,
+                "width": "25%",
               },
               Object {
                 "backgroundColor": "#FFFFFF",
