@@ -41,8 +41,13 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
-    const senders = data?.start?.address.name.slice(FIRST_ELEMENT_INDEX, -" start".length);
+    const senders = data?.applicantStops[FIRST_ELEMENT_INDEX]?.address.name
+        .slice(FIRST_ELEMENT_INDEX, -" start".length);
     const { user } = useContext(AuthContext);
+    const jsonData = JSON.stringify({
+        hasLuggage: data?.hasLuggage,
+        applicantStops: data?.applicantStops
+    });
 
     useEffect(() => {
         JourneyService.getJourney(params.journeyId!).then(res => {
@@ -50,21 +55,24 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             setJourneyPoints(res.data!.journeyPoints);
             setStops([
                 getStopByType(res.data, StopType.Start)!,
-                data?.start,
-                data?.finish,
+                data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
+                    stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
+                    stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
                 getStopByType(res.data, StopType.Finish)!
             ]);
         });
     }, []);
 
     const sendRejection = () => {
+
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
                 journeyId: journey?.id!,
                 type: 12,
-                jsonData:"{}",
+                jsonData: jsonData,
             }
         ).then((res)=> {
             if(res.status == HTTP_STATUS_OK) {
@@ -75,13 +83,14 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     };
 
     const sendApprove = () => {
+
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
                 journeyId: journey?.id!,
                 type:2,
-                jsonData:"{}",
+                jsonData: jsonData,
             }
         ).then((res)=> {
             if(res.status == HTTP_STATUS_OK) {
@@ -92,11 +101,11 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     };
     const approveUser = () => {
         JourneyService.addUser(
-            journey?.id!,
-            params.sender?.id!
+            params.journeyId!,
+            params.sender?.id!,
+            data?.applicantStops
         ).then((res) => {
-            console.log(res.data);
-            if(res.status == HTTP_STATUS_OK && res.data) {
+            if(res.status === HTTP_STATUS_OK && res.data) {
                 sendApprove();
             }
             else{

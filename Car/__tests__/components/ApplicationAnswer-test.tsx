@@ -80,7 +80,9 @@ test("renders correctly", async () =>
           title="Header Title"
           withoutSnooze={true}
         />
-        <NotificationRideDetails />
+        <NotificationRideDetails
+          withBaggage="true"
+        />
         <NotificationRideStops
           stopsOwner={null}
           title="Your route"

@@ -23,8 +23,8 @@ interface ApplicationAnswerProps {
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.notification.visible);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
-
     const user = useContext(AuthContext).user;
+    const data = JSON.parse(props.notification.notificationData);
 
     return (
         <>
@@ -46,7 +46,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     disableModal={() => setNotificationModalVisible(false)}
                 />
 
-                <NotificationRideDetails
+                <NotificationRideDetails withBaggage = {data?.hasLuggage}
                     journeyId={props.notification.journeyId!}
                 />
 
