@@ -11,8 +11,7 @@
         "noEmit": true,
         "strict": true,
         "target": "esnext",
-        "skipLibCheck": true,
-        "noImplicitAny": false
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules/**/*",
