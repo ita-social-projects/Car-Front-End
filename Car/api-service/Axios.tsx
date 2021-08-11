@@ -35,7 +35,7 @@ Axios.interceptors.response.use(
         return response;
     },
 
-    async (error: AxiosError) => {
+    async (error?: AxiosError) => {
         if (axios.isAxiosError(error)) {
             error.response?.status === StatusCodes.UNAUTHORIZED &&
             (async () => { await AuthManager.signOutAsync(); })().then(() =>
