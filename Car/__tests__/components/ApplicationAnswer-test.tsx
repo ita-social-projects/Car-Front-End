@@ -54,9 +54,7 @@ test("renders correctly", async () =>
       <NotificationModalBase
         styles={
           Array [
-            Object {
-              "height": "85%",
-            },
+            Object {},
           ]
         }
       >
