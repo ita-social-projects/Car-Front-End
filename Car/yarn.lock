@@ -6468,6 +6468,11 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
   "version" "17.0.1"
 
+"react-native-android-keyboard-adjust@^1.2.0":
+  "integrity" "sha512-Q280bmf0zXnzLbHU9DcVoKZSKihd0s3hltz2kIUCJ5Q9EhLVR/pjgZ3Bwd1VgrHxQPnduHXdCp0432msklRMow=="
+  "resolved" "https://registry.npmjs.org/react-native-android-keyboard-adjust/-/react-native-android-keyboard-adjust-1.2.0.tgz"
+  "version" "1.2.0"
+
 "react-native-app-auth@^6.0.1":
   "integrity" "sha512-72qhhvc0dxHfaUr6LxuJbCfEr5HNqwvYxPrpOCfZCa6x8km1zY11BWGU5/8qUPErIylr2qA1PSXyfeAZUcpgFA=="
   "resolved" "https://registry.npmjs.org/react-native-app-auth/-/react-native-app-auth-6.0.1.tgz"

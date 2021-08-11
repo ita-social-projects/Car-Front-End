@@ -10,7 +10,10 @@ test("renders correctly", async () =>
             <Chat route={undefined as any} navigation={undefined as any} />
         )
     ).toMatchInlineSnapshot(`
-    <View
+    <KeyboardAvoidingView
+      behavior="padding"
+      enabled={true}
+      keyboardVerticalOffset={0}
       style={
         Array [
           Object {
@@ -24,11 +27,15 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <Indicator
-        color="#414045"
-        size="large"
-        text="Loading information..."
-      />
+      <TouchableWithoutFeedback
+        onPress={[Function]}
+      >
+        <Indicator
+          color="#414045"
+          size="large"
+          text="Loading information..."
+        />
+      </TouchableWithoutFeedback>
       <BottomPopup
         enabledGestureInteraction={false}
         enabledInnerScrolling={false}
@@ -60,5 +67,5 @@ test("renders correctly", async () =>
           ]
         }
       />
-    </View>
+    </KeyboardAvoidingView>
   `));
