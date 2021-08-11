@@ -3,7 +3,7 @@ import Font from "../../data/fonts/Font";
 
 const JourneyStartPageStyle = StyleSheet.create({
     page: {
-        paddingHorizontal: 15
+        paddingHorizontal: 14
     },
 
     tabsStyle: {
@@ -15,7 +15,6 @@ const JourneyStartPageStyle = StyleSheet.create({
         height: 56,
         flexDirection: "row",
         paddingTop: 24,
-        margin: -1,
     },
 
     allJourneys: {
