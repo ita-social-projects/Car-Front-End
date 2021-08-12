@@ -74,6 +74,14 @@ const SettingsStyle = StyleSheet.create({
         width: Dimensions.get("screen").width,
         position: "absolute",
         zIndex: Platform.OS === "ios" ? -1 : 50,
+    },
+
+    spinner: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        marginHorizontal: 32,
+        marginVertical: 46,
     }
 });
 
