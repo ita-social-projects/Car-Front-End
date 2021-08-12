@@ -25,9 +25,9 @@ const HeaderLogoutButton = () => {
                 subtitle="You are about to logout from the App"
                 confirmText="Yes, log out"
                 cancelText="No, stay"
-                onConfirm={() => {
-                    (async () => { await AuthManager.signOutAsync(); })().then(() =>
-                        RNRestart.Restart());
+                onConfirm={async () => {
+                    await AuthManager.signOutAsync();
+                    RNRestart.Restart();
                 }}
                 disableModal={() => setModalVisible(false)}
             />
