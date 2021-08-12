@@ -35,6 +35,7 @@ const Settings = (props: {navigation: any}) => {
     const [isRefreshing, setRefreshing] = useState(false);
     const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
     const [isSaving, setSaving] = useState(false);
+    const [isAnimating, setAnimating] = useState(false);
 
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
@@ -54,11 +55,13 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const fadeIn = () => {
+        setAnimating(true);
         Animated.timing(opacity, {
             toValue: HALF_OPACITY,
             duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
+        sleep(SLEEP_DURATION).then(() => setAnimating(false));
     };
 
     const avatarLogoTitleFadeIn = () => {
@@ -73,11 +76,13 @@ const Settings = (props: {navigation: any}) => {
         new Promise(resolve => setTimeout(resolve, milliseconds));
 
     const fadeOut = () => {
+        setAnimating(true);
         Animated.timing(opacity, {
             toValue: ZERO_OPACITY,
             duration: ANIMATION_DURATION,
             useNativeDriver: true
         }).start();
+        sleep(SLEEP_DURATION).then(() => setAnimating(false));
     };
 
     const avatarLogoTitleFadeOut = () => {
@@ -89,12 +94,16 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const closeHandle = () => {
+        if(isAnimating)
+            return;
         setOpen(false);
         fadeOut();
         (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {
+        if(isAnimating)
+            return;
         setOpen(!isOpen);
 
         if (isOpen) {
