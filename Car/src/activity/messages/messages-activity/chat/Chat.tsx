@@ -101,6 +101,7 @@ const Chat = (properties: ChatProps) => {
         if (connection) {
             connection.start().then(() => {
                 invokeConncetion();
+                AndroidKeyboardAdjust.setAdjustResize();
             });
 
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
