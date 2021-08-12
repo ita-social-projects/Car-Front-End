@@ -166,8 +166,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         const jsonData = JSON.stringify({
             comments: requestComments,
             hasLuggage: withLuggage,
-            start: applicantStops?.[FIRST_ELEMENT_INDEX],
-            finish: applicantStops?.[SECOND_ELEMENT_INDEX]
+            applicantStops: applicantStops
         });
 
         NotificationsService.addNotification({
@@ -195,7 +194,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         if (!currentJourney) return [];
 
         if (isDriver) {
-            return currentJourney.stops;
+            return [getStopByType(currentJourney, StopType.Start)!,
+                    getStopByType(currentJourney, StopType.Finish)!];
         }
 
         const stopsSource = isPassenger ? currentJourney.stops : applicantStops;

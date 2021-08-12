@@ -14,10 +14,6 @@ Axios.interceptors.request.use(
             req.headers.Authorization = "Bearer " + token;
         }
 
-        if (req.method === "put") {
-            console.log(req.data._parts);
-        }
-
         return req;
     },
 

@@ -8,7 +8,6 @@ import style from "./NotificationRideDetailsStyle";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const [journey, setJourney] = useState<Journey>();
-    const withBaggage = true;
 
     useEffect(() => {
         JourneyService.getJourney(props.journeyId).then(res => {
@@ -33,7 +32,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
                 <Text style={style.value}>{journey?.isFree ? "free" : "paid"}</Text>
             </View>
 
-            {journey?.participants &&
+            {props.withSeats && journey?.participants &&
                 <View style={style.detailsContainer}>
                     <Text style={style.label}>Available seats: </Text>
                     <Text style={style.value}>{journey?.countOfSeats - journey?.participants.length}</Text>
@@ -41,7 +40,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
             }
 
             <View style={style.detailsContainer}>
-                <Text style={style.value}>{withBaggage ? "With baggage" : "Without baggage"}</Text>
+                <Text style={style.value}>{props.withBaggage ? "With a baggage" : "Without a baggage"}</Text>
             </View>
         </View>
     );
