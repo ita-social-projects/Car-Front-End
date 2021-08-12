@@ -53,6 +53,8 @@ const RouteView = (props: RouteViewProps) => {
             if(res.status == HTTP_STATUS_OK) {
                 setApproveModalVisible(true);
                 NotificationsService.deleteNotification(params.notification?.notificationId);
+                if(params.notification.onDelete)
+                    params.notification.onDelete(params.notification.notificationId);
             }
         });
     };
