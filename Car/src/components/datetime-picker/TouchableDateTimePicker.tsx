@@ -33,7 +33,7 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
 
     const onDonePress = () => {
         setShow(false);
-        if(props.setIsConfirmedToTrue!=null)
+        if(props.setIsConfirmedToTrue)
         {
             props.setIsConfirmedToTrue();
         }

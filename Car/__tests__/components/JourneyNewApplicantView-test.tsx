@@ -1,8 +1,49 @@
 import React from "react";
 import shallowRender from "react-test-renderer/shallow";
 import JourneyNewApplicantView from "../../src/components/journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantView";
+import Stop from "../../models/stop/Stop";
+import Address from "../../models/Address";
 
 const renderer = shallowRender.createRenderer();
+const address: Address = {
+    id: 1,
+    name: "Address",
+    latitude: 1,
+    longitude: 1,
+};
+const stops: Stop[] = [
+    {
+        address: address,
+        id: 1,
+        journeyId: 1,
+        type: 0,
+        userId: 0,
+        index: 0,
+        isCancelled: false,
+    },
+    {
+        address: address,
+        id: 2,
+        journeyId: 1,
+        type: 1,
+        userId: 0,
+        index: 1,
+        isCancelled: false,
+    },
+    {
+        address: address,
+        id: 3,
+        journeyId: 1,
+        type: 2,
+        userId: 0,
+        index: 2,
+        isCancelled: false,
+    },
+];
+const jsonData = JSON.stringify({
+    journeyId: 1,
+    applicantStops: stops,
+});
 
 test("renders correctly", async () =>
     expect(
@@ -24,7 +65,7 @@ test("renders correctly", async () =>
                                 imageId: null,
                                 journeyCount: 0,
                             },
-                            notificationData: `{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`,
+                            notificationData: jsonData,
                             notificationId: 0,
                         },
                     },
@@ -81,14 +122,11 @@ test("renders correctly", async () =>
             </View>
           </View>
           <View>
-            <RequestComment
-              comments="Abc"
-            />
+            <RequestComment />
           </View>
-          <WithLuggage
-            hasLuggage="true"
-          />
+          <WithLuggage />
           <Text>
+            A
              stops in your ride
           </Text>
           <View>
