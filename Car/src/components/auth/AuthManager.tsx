@@ -13,12 +13,15 @@ const AuthManager = {
     },
 
     signOutAsync: async () => {
-        AsyncStorage.removeItem("userToken");
-        AsyncStorage.removeItem("refreshToken");
-        AsyncStorage.removeItem("expireTime");
-        AsyncStorage.removeItem("idToken");
-        AsyncStorage.removeItem("user");
-        AsyncStorage.removeItem("APIToken");
+        const promises: Promise<void>[] = [];
+
+        promises.push(AsyncStorage.removeItem("userToken"));
+        promises.push(AsyncStorage.removeItem("refreshToken"));
+        promises.push(AsyncStorage.removeItem("expireTime"));
+        promises.push(AsyncStorage.removeItem("idToken"));
+        promises.push(AsyncStorage.removeItem("user"));
+        promises.push(AsyncStorage.removeItem("APIToken"));
+        await Promise.all(promises);
     },
 
     getIdToken: async () => {
