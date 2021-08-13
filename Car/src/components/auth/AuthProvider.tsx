@@ -8,6 +8,9 @@ import LoginService from "../../../api-service/login-service/LoginService";
 import AuthContext from "./AuthContext";
 import { EventRegister } from "react-native-event-listeners";
 import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/ProfileConstants";
+import UserService from "../../../api-service/user-service/UserService";
+import messaging from "@react-native-firebase/messaging";
+import ImageService from "../../../api-service/image-service/ImageService";
 
 const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);
@@ -19,6 +22,20 @@ const AuthProvider = ({ children }: any) => {
 
     const navigateLoginWithResetIndicator = () =>
         navigation.navigate("Login", { resetIndicator: true });
+
+    const saveTokenToDatabase = async (token: string | null, user: User) => {
+        const updatedUser = new FormData();
+
+        updatedUser.append("id", user?.id);
+        updatedUser.append("image",
+            (user?.imageId) ? ImageService.getImageById(user?.imageId) : null);
+        updatedUser.append("fcmtoken", token);
+
+        await UserService.updateUser(updatedUser);
+        await UserService.getUser(user!.id).then((res) => {
+            AsyncStorage.setItem("user", JSON.stringify(res.data));
+        });
+    };
 
     return (
         <AuthContext.Provider
@@ -53,6 +70,7 @@ const AuthProvider = ({ children }: any) => {
                             position: userGraph.jobTitle,
                             id: 0,
                             token: "",
+                            fcmtoken: null,
                             imageId: null,
                             journeyCount: 0,
                             hireDate: new Date(new Date().getMinutes()),
@@ -76,11 +94,18 @@ const AuthProvider = ({ children }: any) => {
 
                         updateUserState(dbUser.data);
 
+                        messaging()
+                            .getToken()
+                            .then(token => saveTokenToDatabase(token, dbUser.data));
+
+                        messaging().onTokenRefresh(token => saveTokenToDatabase(token, dbUser.data));
+
                         navigation.navigate("AppTabs");
                     }
                 },
 
                 logout: async () => {
+                    await saveTokenToDatabase(null, user);
                     await AuthManager.signOutAsync();
                     updateUserState(null);
                 },
