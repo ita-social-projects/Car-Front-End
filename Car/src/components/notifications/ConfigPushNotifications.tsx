@@ -2,7 +2,7 @@ import PushNotification from "react-native-push-notification";
 import * as navigation from "../navigation/Navigation";
 import messaging from "@react-native-firebase/messaging";
 
-const configPushNotifications = () => {
+const ConfigPushNotifications = () => {
     PushNotification.createChannel({
         channelId: "all-notifications",
         channelName: "All notifications channel",
@@ -34,4 +34,4 @@ const configPushNotifications = () => {
     messaging().setBackgroundMessageHandler(showNotification);
 };
 
-export default configPushNotifications;
+export default ConfigPushNotifications;

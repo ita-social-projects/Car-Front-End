@@ -23,16 +23,16 @@ const AuthProvider = ({ children }: any) => {
     const navigateLoginWithResetIndicator = () =>
         navigation.navigate("Login", { resetIndicator: true });
 
-    const saveTokenToDatabase = async (token: string | null, user: User) => {
+    const saveTokenToDatabase = async (token: string | null, userToUpdate: User) => {
         const updatedUser = new FormData();
 
-        updatedUser.append("id", user?.id);
+        updatedUser.append("id", userToUpdate?.id);
         updatedUser.append("image",
-            (user?.imageId) ? ImageService.getImageById(user?.imageId) : null);
+            (userToUpdate?.imageId) ? ImageService.getImageById(userToUpdate?.imageId) : null);
         updatedUser.append("fcmtoken", token);
 
         await UserService.updateUser(updatedUser);
-        await UserService.getUser(user!.id).then((res) => {
+        await UserService.getUser(userToUpdate!.id).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
     };
@@ -96,9 +96,9 @@ const AuthProvider = ({ children }: any) => {
 
                         messaging()
                             .getToken()
-                            .then(token => saveTokenToDatabase(token, dbUser.data));
+                            .then(tokenToSave => saveTokenToDatabase(tokenToSave, dbUser.data));
 
-                        messaging().onTokenRefresh(token => saveTokenToDatabase(token, dbUser.data));
+                        messaging().onTokenRefresh(tokenToSave => saveTokenToDatabase(tokenToSave, dbUser.data));
 
                         navigation.navigate("AppTabs");
                     }
