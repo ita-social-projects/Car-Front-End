@@ -191,6 +191,7 @@ dependencies {
     implementation "com.microsoft.signalr:signalr:1.0.0"
     implementation 'com.android.support:multidex:1.0.3'
 
+
     implementation project(':react-native-navigation-bar-color')
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
