@@ -11,6 +11,7 @@ const testUser: User = {
     location: "string",
     email: "abc@gmail.com",
     token: "string",
+    fcmtoken: null,
     hireDate: new Date(0),
     imageId: "string | null",
     journeyCount: 0,
