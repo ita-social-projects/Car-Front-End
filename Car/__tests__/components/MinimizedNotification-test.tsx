@@ -74,7 +74,7 @@ test("renders correctly", async () =>
               <Image
                 source={
                   Object {
-                    "uri": "https://drive.google.com/uc?id=string | null&export=view",
+                    "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
                   }
                 }
                 style={
@@ -207,7 +207,7 @@ test("renders correctly", async () =>
               <Image
                 source={
                   Object {
-                    "uri": "https://drive.google.com/uc?id=string | null&export=view",
+                    "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
                   }
                 }
                 style={
