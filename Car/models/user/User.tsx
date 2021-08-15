@@ -6,6 +6,7 @@ type User = null | {
     location: string;
     email: string;
     token: string;
+    fcmtoken: string | null;
     hireDate: Date;
     imageId: string | null;
     journeyCount: number;

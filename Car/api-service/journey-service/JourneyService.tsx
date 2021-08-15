@@ -47,8 +47,8 @@ const JourneyService = {
     deleteUser: async (journeyId: number, userId: number) =>
         APIService.delete(route + "delete-user/" + journeyId + "/" + userId),
 
-    addUser: async (journeyId: number, userId: number) =>
-        APIService.put(route + "add-user/" +journeyId + "/" + userId)
+    addUser: async (journeyId: number, userId: number, applicantStops: Stop[]) =>
+        APIService.put(route + "add-user/" +journeyId + "/" + userId, applicantStops)
 };
 
 export default JourneyService;

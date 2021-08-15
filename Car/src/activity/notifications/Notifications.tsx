@@ -8,10 +8,11 @@ import NotificationStyle from "./NotificationStyle";
 import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 import DM from "../../components/styles/DM";
 import NavigationAddAndRemoveListener from "../../types/NavigationAddAndRemoveListener";
-import { TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import NotificationsStyle from "./NotificationsStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Indicator from "../../components/activity-indicator/Indicator";
 
 const CustomDelete = (props: { pressHandler: () => void }) => {
     return (
@@ -30,7 +31,7 @@ const CustomDelete = (props: { pressHandler: () => void }) => {
 
 const Notifications = (props: NavigationAddAndRemoveListener) => {
     const { user } = useContext(AuthContext);
-
+    const [isLoading, setIsLoading] = useState(true);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
         NotificationsService.getUnreadNotificationsNumber(user?.id)
@@ -41,9 +42,11 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     let rows: Array<Swipeable> = [];
 
     const refreshNotification = () => {
+        setIsLoading(true);
         NotificationsService.getNotifications(Number(user?.id)).then((res) => {
             if (res.data) {
                 setNotifications(res.data);
+                setIsLoading(false);
             }
         });
     };
@@ -95,29 +98,73 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     const handleDelete = (id:number) =>{
         setNotifications(notifications.filter(x => x?.id != id));
     };
+    const renderNotifications = () => {
+        return(
+            <FlatList
+                style={[
+                    NotificationStyle.headerContainer,
+                    { backgroundColor: DM("#FFFFFF") },
+                ]}
+                onScroll={() => prevOpened?.close()}
+                data={notifications}
+                keyExtractor={(item, key) => "" + key + item}
+                renderItem={({ item }) => (
+                    <Swipeable
+                        renderRightActions={() => renderActions(item.id)}
+                        ref={(ref: any) => (rows[notifications.indexOf(item)] = ref!)}
+                        onSwipeableWillOpen={() =>
+                            closeRow(notifications.indexOf(item))
+                        }
+                        overshootRight={false}
+                    >
+                        <NotificationComponent item={item} onDelete ={handleDelete} />
+                    </Swipeable>
+                )}
+            />
+        );
+    };
+
+    const renderNoNotificationsImage = () => {
+        return(
+            <>
+                <View style={[NotificationsStyle.noNotificationsContainer,
+                    { backgroundColor: DM("#FFFFFF") }]}>
+                    <Text style={NotificationsStyle.noNotificationsStyle}>
+                        CURRENTLY YOU DO NOT HAVE ANY
+                        {"\n"}
+                        NOTIFICATIONS
+                    </Text>
+                    <Image
+                        style={NotificationsStyle.noNotificationsImageStyle}
+                        source={require("../../../assets/images/notifications/no-notifications.png")}
+                    />
+                </View>
+            </>
+        );
+
+    };
+
+    const renderNotificationList = () => {
+        return (
+            <>
+                { notifications?.length ?
+                    renderNotifications() : renderNoNotificationsImage()
+                }
+            </>
+        );
+    };
 
     return (
-        <FlatList
-            style={[
-                NotificationStyle.headerContainer,
-                { backgroundColor: DM("#FFFFFF") },
-            ]}
-            onScroll={() => prevOpened?.close()}
-            data={notifications}
-            keyExtractor={(item, key) => "" + key + item}
-            renderItem={({ item }) => (
-                <Swipeable
-                    renderRightActions={() => renderActions(item.id)}
-                    ref={(ref: any) => (rows[notifications.indexOf(item)] = ref!)}
-                    onSwipeableWillOpen={() =>
-                        closeRow(notifications.indexOf(item))
-                    }
-                    overshootRight={false}
-                >
-                    <NotificationComponent item={item} onDelete ={handleDelete} />
-                </Swipeable>
-            )}
-        />
+        <View style={[NotificationsStyle.container, { backgroundColor: DM("white") }]}>
+            {isLoading ?
+                <Indicator
+                    size="large"
+                    color={DM("#414045")}
+                    text="Loading information..."
+                /> :
+                renderNotificationList()
+            }
+        </View>
     );
 };
 

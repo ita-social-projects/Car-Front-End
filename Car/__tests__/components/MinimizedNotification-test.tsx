@@ -11,6 +11,7 @@ const testUser: User = {
     location: "string",
     email: "abc@gmail.com",
     token: "string",
+    fcmtoken: null,
     hireDate: new Date(0),
     imageId: "string | null",
     journeyCount: 0,
@@ -74,7 +75,7 @@ test("renders correctly", async () =>
               <Image
                 source={
                   Object {
-                    "uri": "https://drive.google.com/uc?id=string | null&export=view",
+                    "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
                   }
                 }
                 style={
@@ -207,7 +208,7 @@ test("renders correctly", async () =>
               <Image
                 source={
                   Object {
-                    "uri": "https://drive.google.com/uc?id=string | null&export=view",
+                    "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
                   }
                 }
                 style={

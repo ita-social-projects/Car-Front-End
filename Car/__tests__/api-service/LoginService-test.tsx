@@ -15,6 +15,7 @@ describe("Login Service test", () => {
         hireDate: new Date("2020-10-11"),
         email: "peter@gmail.com",
         token: "",
+        fcmtoken : null,
         journeyCount: 8
     };
 

@@ -16,6 +16,7 @@ test("renders correctly", async () =>
                     location: "Abc",
                     email: "Abc",
                     token: "Abc",
+                    fcmtoken: null,
                     hireDate: new Date("2021-01-01T20:00:00.000Z"),
                     imageId: null,
                     journeyCount: 0,
@@ -32,6 +33,7 @@ test("renders correctly", async () =>
           "notificationId": 0,
           "sender": Object {
             "email": "Abc",
+            "fcmtoken": null,
             "hireDate": 2021-01-01T20:00:00.000Z,
             "id": 0,
             "imageId": null,
