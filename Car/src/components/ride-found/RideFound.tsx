@@ -15,8 +15,8 @@ const RideFound = (props: NotificationProps) => {
 
     useEffect(() => {
         let stops: Array<Stop> = JSON
-            .parse(props.notificationData.toLowerCase())
-            .applicantstops;
+            .parse(props.notificationData)
+            .applicantStops;
 
         setApplicantStops(stops);
     }, []);

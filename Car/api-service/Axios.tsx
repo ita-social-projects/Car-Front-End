@@ -14,10 +14,6 @@ Axios.interceptors.request.use(
             req.headers.Authorization = "Bearer " + token;
         }
 
-        if (req.method === "put") {
-            console.log(req.data._parts);
-        }
-
         return req;
     },
 
@@ -35,7 +31,7 @@ Axios.interceptors.response.use(
         return response;
     },
 
-    async (error: AxiosError) => {
+    async (error?: AxiosError) => {
         if (axios.isAxiosError(error)) {
             error.response?.status === StatusCodes.UNAUTHORIZED &&
             (async () => { await AuthManager.signOutAsync(); })().then(() =>

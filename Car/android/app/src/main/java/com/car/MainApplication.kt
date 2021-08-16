@@ -15,6 +15,7 @@ import com.facebook.react.*
 import com.facebook.soloader.SoLoader
 import com.microsoft.signalr.HubConnection
 import java.lang.reflect.InvocationTargetException
+import net.zubricky.AndroidKeyboardAdjust.AndroidKeyboardAdjustPackage;
 
 class MainApplication : Application(), ReactApplication {
 

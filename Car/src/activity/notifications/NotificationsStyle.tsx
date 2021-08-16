@@ -11,7 +11,25 @@ const NotificationsStyle = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: "15%"
-    }
+    },
+    noNotificationsContainer: {
+        flex: 100,
+        paddingTop: 40,
+    },
+    noNotificationsStyle: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 16,
+        fontFamily: "Milliard",
+        marginTop: 10,
+    },
+    noNotificationsImageStyle: {
+        marginTop: 65,
+        marginLeft: 20,
+        width: 359,
+        height: 212,
+        resizeMode: "stretch"
+    },
 });
 
 export default NotificationsStyle;

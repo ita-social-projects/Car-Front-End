@@ -1,6 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Clipboard from "@react-native-community/clipboard";
-import { Animated, NativeScrollEvent, NativeSyntheticEvent, TouchableOpacity, View } from "react-native";
+import {
+    Animated,
+    NativeScrollEvent,
+    NativeSyntheticEvent,
+    TouchableOpacity,
+    View,
+    KeyboardAvoidingView,
+    Platform,
+    TouchableWithoutFeedback,
+    Keyboard
+} from "react-native";
 import { Icon } from "react-native-elements";
 import {
     AvatarProps,
@@ -49,6 +59,7 @@ import {
     OFFSET_TO_LOAD_NEW_MESSAGES,
 } from "../../../../constants/ChatsConstants";
 import Message from "../../../../../models/Message";
+import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -90,6 +101,7 @@ const Chat = (properties: ChatProps) => {
         if (connection) {
             connection.start().then(() => {
                 invokeConncetion();
+                AndroidKeyboardAdjust.setAdjustResize();
             });
 
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
@@ -133,7 +145,8 @@ const Chat = (properties: ChatProps) => {
             return () => {
                 connection?.invoke(
                     "LeaveTheGroup",
-                    properties.route.params.chatId.toString()
+                    properties.route.params.chatId.toString(),
+                    AndroidKeyboardAdjust.setAdjustPan()
                 );
             };
         }
@@ -268,6 +281,10 @@ const Chat = (properties: ChatProps) => {
         );
     };
 
+    const hidePopup = () => {
+        moreOptionsRef?.current?.snapTo(MIN_POPUP_POSITION);
+    };
+
     const loadMessages = (messageId: number): Promise<any> => {
         let tempChat: IMessage[] = [];
 
@@ -355,60 +372,67 @@ const Chat = (properties: ChatProps) => {
     };
 
     return (
-        <View style={[ChatStyle.chatWrapper, { backgroundColor: DM("white") }]}>
-            {isLoading ? (
-                <Indicator
-                    size="large"
-                    color={DM("#414045")}
-                    text="Loading information..."
-                />
-            ) : (
-                <GiftedChat
-                    scrollToBottom
-                    listViewProps={listProps}
-                    ref={chatRef}
-                    renderAvatar={(data) => renderUserAvatar(data)}
-                    messagesContainerStyle={{ paddingBottom: 10 }}
-                    timeFormat="HH:mm"
-                    dateFormat="DD.MM"
-                    messages={messages as any[]}
-                    onInputTextChanged={(value) => {
-                        if (value.trim()) {
-                            setMessage(value);
-                            setDisabled(false);
-                        } else {
-                            setMessage(value);
-                            setDisabled(true);
-                        }
-                    }}
-                    text={message}
-                    onSend={onSend}
-                    alwaysShowSend
-                    user={{
-                        _id: user?.id!,
-                        name: user?.name + "|" + user?.surname
-                    }}
-                    renderBubble={renderBubble}
-                    renderSend={renderSend}
-                    minInputToolbarHeight={44}
-                    minComposerHeight={44}
-                    maxComposerHeight={120}
-                    renderInputToolbar={renderInputToolbar}
-                    maxInputLength={500}
-                    onLongPress={showPopup}
-                    loadEarlier={isLoadMessage}
-                    onLoadEarlier={loadEarlierMessages}
-                    isLoadingEarlier={isLoadingEarlier}
-                    infiniteScroll={true}
-                    renderLoadEarlier={() => isLoadingEarlier ?
-                        <Indicator
-                            size="large"
-                            color={DM("#414045")}
-                            text="Loading information..."
-                        /> : <View />
-                    }
-                />
-            )}
+        <KeyboardAvoidingView
+            style={[ChatStyle.chatWrapper, { backgroundColor: DM("white"), }]}
+            behavior={Platform.OS === "ios" ? "padding" : undefined}>
+            <TouchableWithoutFeedback
+                onPress={() => {Keyboard.dismiss(); hidePopup();}}>
+                {isLoading ? (
+                    <Indicator
+                        size="large"
+                        color={DM("#414045")}
+                        text="Loading information..."
+                    />
+                ) : (
+                    <View style={{ flex: 1 }}>
+                        <GiftedChat
+                            scrollToBottom
+                            listViewProps={listProps}
+                            ref={chatRef}
+                            renderAvatar={(data) => renderUserAvatar(data)}
+                            messagesContainerStyle={{ paddingBottom: 10 }}
+                            timeFormat="HH:mm"
+                            dateFormat="DD.MM"
+                            messages={messages as any[]}
+                            onInputTextChanged={(value) => {
+                                if (value.trim()) {
+                                    setMessage(value);
+                                    setDisabled(false);
+                                } else {
+                                    setMessage(value);
+                                    setDisabled(true);
+                                }
+                            }}
+                            text={message}
+                            onSend={onSend}
+                            alwaysShowSend
+                            user={{
+                                _id: user?.id!,
+                                name: user?.name + "|" + user?.surname
+                            }}
+                            renderBubble={renderBubble}
+                            renderSend={renderSend}
+                            minInputToolbarHeight={44}
+                            minComposerHeight={44}
+                            maxComposerHeight={120}
+                            renderInputToolbar={renderInputToolbar}
+                            maxInputLength={500}
+                            onLongPress={showPopup}
+                            loadEarlier={isLoadMessage}
+                            onLoadEarlier={loadEarlierMessages}
+                            isLoadingEarlier={isLoadingEarlier}
+                            infiniteScroll={true}
+                            renderLoadEarlier={() => isLoadingEarlier ?
+                                <Indicator
+                                    size="large"
+                                    color={DM("#414045")}
+                                    text="Loading information..."
+                                /> : <View />
+                            }
+                        />
+                    </View>
+                )}
+            </TouchableWithoutFeedback>
             <BottomPopup
                 refForChild={(ref) => (moreOptionsRef.current = ref)}
                 snapPoints={[CHAT_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
@@ -421,12 +445,12 @@ const Chat = (properties: ChatProps) => {
                         <MenuButton text="Copy text" onPress={() => {
                             moreOptionsRef.current.snapTo(MIN_POPUP_POSITION);
                             Clipboard.setString(selectedMessage.text);
-                        }} />
-                        <MenuButton text="Cancel" onPress={() => moreOptionsRef.current.snapTo(MIN_POPUP_POSITION)} />
+                        }}/>
+                        <MenuButton text="Cancel" onPress={hidePopup} />
                     </View>
                 }
             />
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 

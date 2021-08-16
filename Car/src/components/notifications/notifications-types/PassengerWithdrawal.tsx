@@ -22,7 +22,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 openModal={() => setModalVisible(true)}
             />
 
-            <NotificationModalBase isVisible={modalVisible!} styles={[{ height: "90%" }]}>
+            <NotificationModalBase isVisible={modalVisible!} styles={[]}>
                 <NotificationHeader
                     title="WITHDRAWAL"
                     message="The passenger has withdrawn your ride!"

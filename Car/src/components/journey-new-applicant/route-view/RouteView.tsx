@@ -34,23 +34,27 @@ const RouteView = (props: RouteViewProps) => {
     const params = props.route.params;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
     const [errorModalVisible, setErrorModalVisible] = useState(false);
+    const data = JSON.parse(params.notification.notificationData);
+    const jsonData = JSON.stringify({
+        hasLuggage: data?.hasLuggage,
+        applicantStops: data?.applicantStops
+    });
 
     const sendApprove = () => {
-        console.log(params);
-        console.log(params.notification?.sender?.id);
-        console.log(params.notification?.journeyId!);
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.notification?.sender?.id!,
                 journeyId: params.notification?.journeyId!,
                 type:2,
-                jsonData:"{}",
+                jsonData: jsonData,
             }
         ).then((res)=> {
             if(res.status == HTTP_STATUS_OK) {
                 setApproveModalVisible(true);
                 NotificationsService.deleteNotification(params.notification?.notificationId);
+                if(params.notification.onDelete)
+                    params.notification.onDelete(params.notification.notificationId);
             }
         });
     };
@@ -62,7 +66,8 @@ const RouteView = (props: RouteViewProps) => {
     const approveUser = () => {
         JourneyService.addUser(
             params.notification?.journeyId!,
-            params.notification?.sender?.id!
+            params.notification?.sender?.id!,
+            data?.applicantStops
         ).then((res) => {
             if(res.status === HTTP_STATUS_OK && res.data) {
                 sendApprove();
