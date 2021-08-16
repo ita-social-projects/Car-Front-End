@@ -26,11 +26,7 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <ApplicationAnswer
-      IsAvailableSeatsVisible={false}
-      IsBaggageVisible={false}
       IsDepartureTimeVisible={true}
-      IsDetailsTitleVisible={false}
-      IsFeeVisible={false}
       IsStopsTitleVisible={true}
       notification={
         Object {
