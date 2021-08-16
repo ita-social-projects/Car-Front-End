@@ -31,7 +31,7 @@ const CustomDelete = (props: { pressHandler: () => void }) => {
 
 const Notifications = (props: NavigationAddAndRemoveListener) => {
     const { user } = useContext(AuthContext);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
         NotificationsService.getUnreadNotificationsNumber(user?.id)
@@ -42,11 +42,10 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     let rows: Array<Swipeable> = [];
 
     const refreshNotification = () => {
-        setIsLoading(true);
+
         NotificationsService.getNotifications(Number(user?.id)).then((res) => {
             if (res.data) {
                 setNotifications(res.data);
-                setIsLoading(false);
             }
         });
     };
@@ -73,7 +72,9 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
 
     useEffect(() => {
         if (isFocused) {
+            setIsLoading(true);
             refreshNotification();
+            setIsLoading(false);
         } else {
             prevOpened?.close();
         }
