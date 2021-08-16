@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
+apply plugin: 'com.google.gms.google-services'
 apply plugin: "kotlin-android-extensions"
 
 import com.android.build.OutputFile
@@ -138,7 +139,7 @@ android {
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [appAuthRedirectScheme: "car"]
-
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -188,7 +189,9 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.microsoft.signalr:signalr:1.0.0"
-    
+    implementation 'com.android.support:multidex:1.0.3'
+
+
     implementation project(':react-native-navigation-bar-color')
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -223,6 +226,7 @@ dependencies {
     }
     implementation 'com.google.android.gms:play-services-base:17.6.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    compile project(":react-native-android-keyboard-adjust")
 }
 
 // Run this once to be able to run the application with BUCK

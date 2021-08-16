@@ -5,6 +5,8 @@ interface NotificationRideDetailsProps {
     IsDepartureTimeVisible?: boolean;
     IsDetailsTitleVisible?: boolean;
     journeyId: number,
+    withSeats?: boolean
+    withBaggage?: boolean
 }
 
 export default NotificationRideDetailsProps;

@@ -17,7 +17,6 @@ import StopsBlock from "../../../activity/journey/journey-activity/journey-page/
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import AuthContext from "../../../components/auth/AuthContext";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";
-import Journey from "../../../../models/journey/Journey";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import AvatarLogoTitle from "../../avatar-logo-title/AvatarLogoTitle";
 import DM from "../../styles/DM";
@@ -39,32 +38,38 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [errorModalVisible, setErrorModalVisible] = useState(false);
     const data = JSON.parse(params.notificationData);
     const [stops, setStops] = useState<Stop[]>([]);
-    const [journey, setJourney] = useState<Journey>();
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
-    const senders = data?.start?.address.name.slice(FIRST_ELEMENT_INDEX, -" start".length);
+    const senders = data?.applicantStops[FIRST_ELEMENT_INDEX]?.address.name
+        .slice(FIRST_ELEMENT_INDEX, -" start".length);
     const { user } = useContext(AuthContext);
+    const jsonData = JSON.stringify({
+        hasLuggage: data?.hasLuggage,
+        applicantStops: data?.applicantStops
+    });
 
     useEffect(() => {
         JourneyService.getJourney(params.journeyId!).then(res => {
-            setJourney(res.data);
             setJourneyPoints(res.data!.journeyPoints);
             setStops([
                 getStopByType(res.data, StopType.Start)!,
-                data?.start,
-                data?.finish,
+                data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
+                    stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
+                    stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
                 getStopByType(res.data, StopType.Finish)!
             ]);
         });
     }, []);
 
     const sendRejection = () => {
+
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
-                journeyId: journey?.id!,
+                journeyId: params.journeyId!,
                 type: 12,
-                jsonData:"{}",
+                jsonData: jsonData,
             }
         ).then((res)=> {
             if(res.status == HTTP_STATUS_OK) {
@@ -75,25 +80,30 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     };
 
     const sendApprove = () => {
+
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
-                journeyId: journey?.id!,
+                journeyId: params.journeyId!,
                 type:2,
-                jsonData:"{}",
+                jsonData: jsonData,
             }
         ).then((res)=> {
             if(res.status == HTTP_STATUS_OK) {
                 setApproveModalVisible(true);
                 NotificationsService.deleteNotification(params.notificationId);
+                if(props.route.params.notification.onDelete)
+                    props.route.params.notification.onDelete(props.route.params.notification.notificationId);
             }
+
         });
     };
     const approveUser = () => {
         JourneyService.addUser(
-            journey?.id!,
-            params.sender?.id!
+            params.journeyId!,
+            params.sender?.id!,
+            data?.applicantStops
         ).then((res) => {
             if(res.status === HTTP_STATUS_OK && res.data) {
                 sendApprove();

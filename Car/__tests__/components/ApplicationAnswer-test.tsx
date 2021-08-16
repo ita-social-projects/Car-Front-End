@@ -17,6 +17,7 @@ test("renders correctly", async () =>
                         location: "Abc",
                         email: "Abc",
                         token: "Abc",
+                        fcmtoken: null,
                         hireDate: new Date("2021-01-01T20:00:00.000Z"),
                         imageId: null,
                         journeyCount: 0,
@@ -45,6 +46,7 @@ test("renders correctly", async () =>
         user={
           Object {
             "email": "Abc",
+            "fcmtoken": null,
             "hireDate": 2021-01-01T20:00:00.000Z,
             "id": 0,
             "imageId": null,
@@ -57,13 +59,21 @@ test("renders correctly", async () =>
           }
         }
       />
-      <NotificationModalBase>
+
+      <NotificationModalBase
+        styles={
+          Array [
+            Object {},
+          ]
+        }
+      >
         <NotificationHeader
           disableModal={[Function]}
           message="Header message"
           sender={
             Object {
               "email": "Abc",
+              "fcmtoken": null,
               "hireDate": 2021-01-01T20:00:00.000Z,
               "id": 0,
               "imageId": null,
@@ -84,6 +94,7 @@ test("renders correctly", async () =>
           IsDepartureTimeVisible={true}
           IsDetailsTitleVisible={true}
           IsFeeVisible={true}
+          withBaggage="true"
         />
         <NotificationRideStops
           IsStopsTitleVisible={true}
@@ -100,14 +111,25 @@ test("renders correctly", async () =>
           />
         </NotificationButtonGroup>
       </NotificationModalBase>
-      <ConfirmModal
-        cancelText="No, keep it"
-        confirmText="Yes, withdraw"
-        disableModal={[Function]}
-        onConfirm={[Function]}
-        subtitle="Are you sure you want to withdraw the appoved request?"
-        title="ARE YOU SURE?"
-        visible={false}
-      />
+      <React.Fragment>
+        <ConfirmModal
+          cancelText="No, keep it"
+          confirmText="Yes, withdraw"
+          disableModal={[Function]}
+          onConfirm={[Function]}
+          subtitle="Are you sure you want to withdraw the appoved request?"
+          title="ARE YOU SURE?"
+          visible={false}
+        />
+        <ConfirmModal
+          confirmText="Ok"
+          disableModal={[Function]}
+          hideCancelButton={true}
+          onConfirm={[Function]}
+          subtitle="Your withdrawal was successfully sent to the driver"
+          title="Ride is withdrawn"
+          visible={false}
+        />
+      </React.Fragment>
     </React.Fragment>
   `));

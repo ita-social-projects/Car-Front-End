@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Animated, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Animated, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SettingsStyle from "./SettingsStyle";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
@@ -34,8 +34,12 @@ const Settings = (props: {navigation: any}) => {
     const [isVisible, setVisibility] = useState(false);
     const [isRefreshing, setRefreshing] = useState(false);
     const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [isSaving, setSaving] = useState(false);
+    const [isAnimating, setAnimating] = useState(false);
 
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
+
+    const avatarLogoTitleOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
     const loadUser = () =>
         UserService.getUser(user!.id).then((res) => setUser(res.data));
@@ -51,7 +55,17 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const fadeIn = () => {
+        setAnimating(true);
         Animated.timing(opacity, {
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
+            useNativeDriver: true
+        }).start();
+        sleep(SLEEP_DURATION).then(() => setAnimating(false));
+    };
+
+    const avatarLogoTitleFadeIn = () => {
+        Animated.timing(avatarLogoTitleOpacity, {
             toValue: HALF_OPACITY,
             duration: ANIMATION_DURATION,
             useNativeDriver: true
@@ -61,19 +75,35 @@ const Settings = (props: {navigation: any}) => {
     const sleep = (milliseconds: number) =>
         new Promise(resolve => setTimeout(resolve, milliseconds));
 
-    const fadeOut = () => Animated.timing(opacity, {
-        toValue: ZERO_OPACITY,
-        duration: ANIMATION_DURATION,
-        useNativeDriver: true
-    }).start();
+    const fadeOut = () => {
+        setAnimating(true);
+        Animated.timing(opacity, {
+            toValue: ZERO_OPACITY,
+            duration: ANIMATION_DURATION,
+            useNativeDriver: true
+        }).start();
+        sleep(SLEEP_DURATION).then(() => setAnimating(false));
+    };
+
+    const avatarLogoTitleFadeOut = () => {
+        Animated.timing(avatarLogoTitleOpacity, {
+            toValue: ZERO_OPACITY,
+            duration: ANIMATION_DURATION,
+            useNativeDriver: true
+        }).start();
+    };
 
     const closeHandle = () => {
+        if(isAnimating)
+            return;
         setOpen(false);
         fadeOut();
         (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
     };
 
     const pressHandle = () => {
+        if(isAnimating)
+            return;
         setOpen(!isOpen);
 
         if (isOpen) {
@@ -98,6 +128,9 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const saveUser = async (photo: ImagePickerResponse) => {
+        setSaving(true);
+        avatarLogoTitleFadeIn();
+
         const updatedUser = new FormData();
 
         updatedUser.append("id", user?.id);
@@ -109,6 +142,7 @@ const Settings = (props: {navigation: any}) => {
                 uri: photo?.uri,
             });
         }
+        updatedUser.append("fcmtoken", user?.fcmtoken);
 
         await UserService.updateUser(updatedUser);
         await UserService.getUser(user!.id).then((res) => {
@@ -121,6 +155,9 @@ const Settings = (props: {navigation: any}) => {
             setUser(newUser);
             loadStorageUser();
         });
+
+        setSaving(false);
+        avatarLogoTitleFadeOut();
     };
 
     const moreOptionsRef = useRef<BottomSheet>(null) as any;
@@ -224,7 +261,23 @@ const Settings = (props: {navigation: any}) => {
                                     backgroundColor: DM("#FFFFFF")
                                 }]}
                             onPress={pressHandle}>
-                            <AvatarLogoTitle />
+                            <Animated.View style={isSaving && [{ opacity: avatarLogoTitleOpacity }]}>
+                                <AvatarLogoTitle />
+                            </Animated.View>
+
+                            {isSaving ? (
+
+                                <ActivityIndicator
+                                    style={SettingsStyle.spinner}
+                                    size={26}
+                                    color={DM("#414045")}
+                                />
+
+                            ) : (
+
+                                <></>
+
+                            )}
                         </TouchableOpacity>
                         <TouchableNavigationCard
                             navigation={props.navigation}

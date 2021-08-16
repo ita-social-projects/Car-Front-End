@@ -15,6 +15,7 @@ describe("User Service test", () => {
         hireDate: new Date("2020-04-09"),
         email: "tom@gmail.com",
         token: "",
+        fcmtoken : null,
         journeyCount: 8,
     };
 

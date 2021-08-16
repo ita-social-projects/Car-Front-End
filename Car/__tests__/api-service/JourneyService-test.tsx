@@ -197,7 +197,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.addUser(1,1).then((res) => {
+        JourneyService.addUser(1,1, stopsData[0]).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(true));
         });

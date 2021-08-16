@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Stop from "../../../../models/stop/Stop";
 import StopType from "../../../../models/stop/StopType";
-import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION, LESS_THAN_ZERO, MORE_THAN_ZERO, ZERO } from "../../../constants/GeneralConstants";
-import AuthContext from "../../auth/AuthContext";
+import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../../constants/GeneralConstants";
 import Circle from "../../styles/Circle";
 import DM from "../../styles/DM";
 import style from "../notification-ride-stops/NotificationRideStopsStyle";
@@ -15,7 +14,6 @@ import NotificationRideStopsProps from "./NotificationRideStopsProps";
 const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });
-    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         JourneyService.getJourney(props.journeyId, true).then(res => {
@@ -50,9 +48,9 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const filterStops = (myStops: Stop[]) => {
         let arr = getStops(myStops);
 
-        arr.sort((a) => (a?.userId === user?.id) ? LESS_THAN_ZERO : ZERO);
         arr = getUniqueStops(arr);
-        arr.sort((a, b) => (a?.index! > b?.index!) ? MORE_THAN_ZERO : LESS_THAN_ZERO);
+        arr.sort(function (a ,b) {
+            return a?.type! - b?.type! || a?.index! - b?.index!;});
 
         return arr;
     };
