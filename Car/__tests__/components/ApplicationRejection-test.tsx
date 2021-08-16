@@ -27,6 +27,8 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <ApplicationAnswer
+      IsDepartureTimeVisible={true}
+      IsStopsTitleVisible={true}
       notification={
         Object {
           "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
@@ -46,8 +48,8 @@ test("renders correctly", async () =>
           },
         }
       }
-      notificationHeaderMessage="The driver has declined your request!"
-      notificationHeaderTittle="REQUEST IS DECLINED"
-      notificationTittle="Driver declined your request!"
+      notificationHeaderMessage="The driver has rejected your request!"
+      notificationHeaderTittle="REQUEST IS REJECTED"
+      notificationTittle="Driver rejected your request!"
     />
   `));

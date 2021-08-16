@@ -7,9 +7,11 @@ const ApplicationRejection = (props: NotificationProps) => {
     return (
         <ApplicationAnswer
             notification = {props}
-            notificationTittle = "Driver declined your request!"
-            notificationHeaderTittle = "REQUEST IS DECLINED"
-            notificationHeaderMessage = "The driver has declined your request!"
+            notificationTittle = "Driver rejected your request!"
+            notificationHeaderTittle = "REQUEST IS REJECTED"
+            notificationHeaderMessage = "The driver has rejected your request!"
+            IsDepartureTimeVisible={true}
+            IsStopsTitleVisible={true}
         />
     );
 };
