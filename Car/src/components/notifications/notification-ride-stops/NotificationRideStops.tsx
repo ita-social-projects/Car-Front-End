@@ -10,8 +10,9 @@ import AuthContext from "../../auth/AuthContext";
 import Circle from "../../styles/Circle";
 import DM from "../../styles/DM";
 import style from "../notification-ride-stops/NotificationRideStopsStyle";
+import NotificationRideStopsProps from "./NotificationRideStopsProps";
 
-const NotificationRideStops = (props: any) => {
+const NotificationRideStops = (props: NotificationRideStopsProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });
     const { user } = useContext(AuthContext);

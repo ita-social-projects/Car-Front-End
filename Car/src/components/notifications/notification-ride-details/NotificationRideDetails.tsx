@@ -4,8 +4,9 @@ import { Text, View } from "react-native";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../models/journey/Journey";
 import style from "./NotificationRideDetailsStyle";
+import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
 
-const NotificationRideDetails = (props: any) => {
+const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const [journey, setJourney] = useState<Journey>();
     const withBaggage = true;
 
@@ -15,7 +16,7 @@ const NotificationRideDetails = (props: any) => {
         });
     }, []);
 
-    const IsPropertyShown = (value: any) => value !== false;
+    const IsPropertyShown = (value: any) => value;
 
     return (
         <View style={style.container}>

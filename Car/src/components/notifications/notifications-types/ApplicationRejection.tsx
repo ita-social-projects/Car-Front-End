@@ -10,11 +10,7 @@ const ApplicationRejection = (props: NotificationProps) => {
             notificationTittle = "Driver rejected your request!"
             notificationHeaderTittle = "REQUEST IS REJECTED"
             notificationHeaderMessage = "The driver has rejected your request!"
-            IsAvailableSeatsVisible = {false}
-            IsBaggageVisible={false}
             IsDepartureTimeVisible={true}
-            IsDetailsTitleVisible={false}
-            IsFeeVisible={false}
             IsStopsTitleVisible={true}
         />
     );

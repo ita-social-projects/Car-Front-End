@@ -18,12 +18,12 @@ interface ApplicationAnswerProps {
     notificationHeaderTittle: string,
     notificationHeaderMessage: string,
     withWithdraw?: boolean,
-    IsDetailsTitleVisible: boolean,
-    IsDepartureTimeVisible: boolean,
-    IsFeeVisible: boolean,
-    IsAvailableSeatsVisible: boolean,
-    IsBaggageVisible: boolean,
-    IsStopsTitleVisible: boolean,
+    IsDetailsTitleVisible?: boolean,
+    IsDepartureTimeVisible?: boolean,
+    IsFeeVisible?: boolean,
+    IsAvailableSeatsVisible?: boolean,
+    IsBaggageVisible?: boolean,
+    IsStopsTitleVisible?: boolean,
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
@@ -54,19 +54,17 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
 
                 <NotificationRideDetails
                     journeyId={props.notification.journeyId!}
-                    IsDetailsTitleVisible={props.IsDetailsTitleVisible}
-                    IsDepartureTimeVisible={props.IsDepartureTimeVisible}
-                    IsFeeVisible={props.IsFeeVisible}
                     IsAvailableSeatsVisible={props.IsAvailableSeatsVisible}
                     IsBaggageVisible={props.IsBaggageVisible}
-                />
+                    IsDepartureTimeVisible={props.IsDepartureTimeVisible}
+                    IsDetailsTitleVisible={props.IsDetailsTitleVisible}
+                    IsFeeVisible={props.IsFeeVisible}/>
 
                 <NotificationRideStops
                     title={"Your route"}
                     stopsOwner={user}
                     journeyId={props.notification.journeyId!}
-                    IsStopsTitleVisible={props.IsStopsTitleVisible}
-                />
+                    IsStopsTitleVisible/>
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />
