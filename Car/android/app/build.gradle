@@ -141,6 +141,11 @@ android {
         manifestPlaceholders = [appAuthRedirectScheme: "car"]
         multiDexEnabled true
     }
+    dexOptions {
+        incremental = true
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
     splits {
         abi {
             reset()
