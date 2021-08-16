@@ -10,9 +10,8 @@ import AuthContext from "../../auth/AuthContext";
 import Circle from "../../styles/Circle";
 import DM from "../../styles/DM";
 import style from "../notification-ride-stops/NotificationRideStopsStyle";
-import NotificationRideStopsProps from "./NotificationRideStopsProps";
 
-const NotificationRideStops = (props: NotificationRideStopsProps) => {
+const NotificationRideStops = (props: any) => {
     const [stops, setStops] = useState<Stop[]>();
     const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });
     const { user } = useContext(AuthContext);
@@ -57,10 +56,12 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
         return arr;
     };
 
+    const IsPropertyShown = (value: any) => value !== false;
+
     return (
         <>
             <View style={style.container}>
-                <Text style={style.header}>{props.title}</Text>
+                {IsPropertyShown(props.IsStopsTitleVisible) && <Text style={style.header}>{props.title}</Text>}
 
                 <View style={style.stopsBlock}>
                     {stops?.length ? stops.map((item, index) =>
@@ -126,7 +127,6 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                         <Text style={[style.activeStopName, { color: DM(colors.first) }]}>
                                             {`${props.stopsOwner?.name}'s Stop `}‏
                                         </Text>
-
                                         <Text style={[style.activeStopAddress, { color: DM(colors.first) }]}>
                                             {`(${item?.address?.name!})`}‏
                                         </Text>

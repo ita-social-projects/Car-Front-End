@@ -10,8 +10,13 @@ const ApplicationApproval = (props: NotificationProps) => {
             notificationHeaderTittle = "REQUEST IS APPROVED"
             notificationHeaderMessage = "The driver has approved your request!"
             withWithdraw
+            IsAvailableSeatsVisible
+            IsBaggageVisible
+            IsDepartureTimeVisible
+            IsDetailsTitleVisible
+            IsFeeVisible
+            IsStopsTitleVisible
         />
-
     );
 };
 

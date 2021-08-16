@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../models/journey/Journey";
-import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
 import style from "./NotificationRideDetailsStyle";
 
-const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
+const NotificationRideDetails = (props: any) => {
     const [journey, setJourney] = useState<Journey>();
     const withBaggage = true;
 
@@ -14,35 +13,37 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
         JourneyService.getJourney(props.journeyId).then(res => {
             setJourney(res.data);
         });
-
-        console.log("Details");
     }, []);
+
+    const IsPropertyShown = (value: any) => value !== false;
 
     return (
         <View style={style.container}>
-            <Text style={style.header}>Ride details</Text>
+            <View>
+                {IsPropertyShown(props.IsDetailsTitleVisible) && <Text style={style.header}>Ride details</Text>}
+            </View>
 
-            <View style={style.detailsContainer}>
+            {IsPropertyShown(props.IsDepartureTimeVisible) && <View style={style.detailsContainer}>
                 <Text style={style.label}>Departure time: </Text>
                 <Text style={style.value}>{moment(new Date(journey?.departureTime!)).calendar()}
                 </Text>
-            </View>
+            </View>}
 
-            <View style={style.detailsContainer}>
+            {IsPropertyShown(props.IsFeeVisible) && <View style={style.detailsContainer}>
                 <Text style={style.label}>Fee: </Text>
                 <Text style={style.value}>{journey?.isFree ? "free" : "paid"}</Text>
-            </View>
+            </View>}
 
-            {journey?.participants &&
+            {IsPropertyShown(props.IsAvailableSeatsVisible) && journey?.participants &&
                 <View style={style.detailsContainer}>
                     <Text style={style.label}>Available seats: </Text>
                     <Text style={style.value}>{journey?.countOfSeats - journey?.participants.length}</Text>
                 </View>
             }
 
-            <View style={style.detailsContainer}>
+            {IsPropertyShown(props.IsBaggageVisible) && <View style={style.detailsContainer}>
                 <Text style={style.value}>{withBaggage ? "With baggage" : "Without baggage"}</Text>
-            </View>
+            </View>}
         </View>
     );
 };

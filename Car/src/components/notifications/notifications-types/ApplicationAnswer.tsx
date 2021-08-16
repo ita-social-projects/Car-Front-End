@@ -17,7 +17,13 @@ interface ApplicationAnswerProps {
     notificationTittle: string,
     notificationHeaderTittle: string,
     notificationHeaderMessage: string,
-    withWithdraw?: boolean
+    withWithdraw?: boolean,
+    IsDetailsTitleVisible: boolean,
+    IsDepartureTimeVisible: boolean,
+    IsFeeVisible: boolean,
+    IsAvailableSeatsVisible: boolean,
+    IsBaggageVisible: boolean,
+    IsStopsTitleVisible: boolean,
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
@@ -37,7 +43,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 openModal={() => setNotificationModalVisible(true)}
             />
 
-            <NotificationModalBase isVisible={notificationModalVisible!} styles={[{ height: "85%" }]}>
+            <NotificationModalBase isVisible={notificationModalVisible!}>
                 <NotificationHeader
                     title={props.notificationHeaderTittle}
                     message={props.notificationHeaderMessage}
@@ -48,12 +54,18 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
 
                 <NotificationRideDetails
                     journeyId={props.notification.journeyId!}
+                    IsDetailsTitleVisible={props.IsDetailsTitleVisible}
+                    IsDepartureTimeVisible={props.IsDepartureTimeVisible}
+                    IsFeeVisible={props.IsFeeVisible}
+                    IsAvailableSeatsVisible={props.IsAvailableSeatsVisible}
+                    IsBaggageVisible={props.IsBaggageVisible}
                 />
 
                 <NotificationRideStops
                     title={"Your route"}
                     stopsOwner={user}
                     journeyId={props.notification.journeyId!}
+                    IsStopsTitleVisible={props.IsStopsTitleVisible}
                 />
 
                 <NotificationButtonGroup>

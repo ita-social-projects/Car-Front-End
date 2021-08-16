@@ -3,7 +3,6 @@ import Font from "../../../data/fonts/Font";
 
 const NotificationRideStopsStyle = EStyleSheet.create({
     container: {
-        flex: 1,
         marginTop: 24,
     },
 
