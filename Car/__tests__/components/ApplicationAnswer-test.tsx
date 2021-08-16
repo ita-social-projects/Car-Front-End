@@ -29,6 +29,12 @@ test("renders correctly", async () =>
                 notificationHeaderTittle="Header Title"
                 notificationTittle="Tittle"
                 withWithdraw
+                IsAvailableSeatsVisible
+                IsBaggageVisible
+                IsDepartureTimeVisible
+                IsDetailsTitleVisible
+                IsFeeVisible
+                IsStopsTitleVisible
             />
         )
     ).toMatchInlineSnapshot(`
@@ -53,6 +59,7 @@ test("renders correctly", async () =>
           }
         }
       />
+
       <NotificationModalBase
         styles={
           Array [
@@ -82,9 +89,15 @@ test("renders correctly", async () =>
           withoutSnooze={true}
         />
         <NotificationRideDetails
+          IsAvailableSeatsVisible={true}
+          IsBaggageVisible={true}
+          IsDepartureTimeVisible={true}
+          IsDetailsTitleVisible={true}
+          IsFeeVisible={true}
           withBaggage="true"
         />
         <NotificationRideStops
+          IsStopsTitleVisible={true}
           stopsOwner={null}
           title="Your route"
         />

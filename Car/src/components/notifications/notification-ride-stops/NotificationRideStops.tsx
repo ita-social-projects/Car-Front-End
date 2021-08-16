@@ -55,10 +55,12 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
         return arr;
     };
 
+    const IsPropertyShown = (value: any) => value !== false;
+
     return (
         <>
             <View style={style.container}>
-                <Text style={style.header}>{props.title}</Text>
+                {IsPropertyShown(props.IsStopsTitleVisible) && <Text style={style.header}>{props.title}</Text>}
 
                 <View style={style.stopsBlock}>
                     {stops?.length ? stops.map((item, index) =>
@@ -124,7 +126,6 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                         <Text style={[style.activeStopName, { color: DM(colors.first) }]}>
                                             {`${props.stopsOwner?.name}'s Stop `}‏
                                         </Text>
-
                                         <Text style={[style.activeStopAddress, { color: DM(colors.first) }]}>
                                             {`(${item?.address?.name!})`}‏
                                         </Text>
