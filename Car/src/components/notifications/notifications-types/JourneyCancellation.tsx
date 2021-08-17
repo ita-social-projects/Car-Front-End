@@ -26,7 +26,7 @@ const JourneyCancellation = (props: NotificationProps) => {
             <NotificationModalBase isVisible={modalVisible!}>
                 <NotificationHeader
                     title="RIDE IS CANCELED"
-                    message="The driver has canceled your ride!"
+                    message={"The driver has canceled \nyour ride!"}
                     sender={props.sender}
                     disableModal={() => setModalVisible(false)}
                 />
@@ -41,7 +41,7 @@ const JourneyCancellation = (props: NotificationProps) => {
                 />
 
                 <NotificationRideStops
-                    title={"Your route"}
+                    title={ `${props.sender?.name}'s route`}
                     stopsOwner={user}
                     journeyId={props.journeyId!}
                     IsStopsTitleVisible/>
