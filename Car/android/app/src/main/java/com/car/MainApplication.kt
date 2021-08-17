@@ -1,4 +1,4 @@
-package com.car;
+package com.softserveinc.car;
 
 import android.app.*
 import android.content.Context
@@ -8,8 +8,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.widget.RemoteViews
-import com.car.Entities.User
-import com.car.NotificationModule.NotificationPackage
+import com.softserveinc.car.Entities.User
+import com.softserveinc.car.NotificationModule.NotificationPackage
 import com.car.SoftKeysModule.SoftKeysPackage
 import com.facebook.react.*
 import com.facebook.soloader.SoLoader
@@ -22,7 +22,7 @@ class MainApplication : Application(), ReactApplication {
     lateinit var notificationManager : NotificationManager
     lateinit var notificationChannel: NotificationChannel
     lateinit var builder : Notification.Builder
-    private val channelId = "com.car"
+    private val channelId = "com.softserveinc.car"
     private val description = "Test notification"
 
     private val mReactNativeHost: ReactNativeHost = object : ReactNativeHost(this) {

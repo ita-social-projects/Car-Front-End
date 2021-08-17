@@ -1,4 +1,4 @@
-package com.car
+package com.softserveinc.car
 
 import android.app.*
 import android.content.Context
@@ -9,8 +9,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.widget.RemoteViews
-import com.car.Entities.Message
-import com.car.Entities.User
+import com.softserveinc.car.Entities.Message
+import com.softserveinc.car.Entities.User
 import com.facebook.react.bridge.ReactMethod
 import com.microsoft.signalr.HubConnection
 import com.microsoft.signalr.HubConnectionBuilder
@@ -22,7 +22,7 @@ class NotificationService : Service() {
     lateinit var notificationManager : NotificationManager
     lateinit var notificationChannel: NotificationChannel
     lateinit var builder : Notification.Builder
-    private val channelId = "com.car"
+    private val channelId = "com.softserveinc.car"
     private val description = "Test notification"
 
     override fun onBind(intent: Intent): IBinder? {
