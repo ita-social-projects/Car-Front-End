@@ -1,4 +1,4 @@
-package com.car.NotificationModule
+package com.softserveinc.car.NotificationModule
 
 import android.view.View
 import com.facebook.react.ReactPackage

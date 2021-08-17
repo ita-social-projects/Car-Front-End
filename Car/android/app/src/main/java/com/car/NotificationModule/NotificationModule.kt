@@ -1,4 +1,4 @@
-package com.car.NotificationModule
+package com.softserveinc.car.NotificationModule
 
 import android.widget.Toast
 import com.facebook.react.bridge.ReactContextBaseJavaModule

@@ -1,4 +1,4 @@
-package com.car.Entities
+package com.softserveinc.car.Entities
 
 import java.sql.Date
 
