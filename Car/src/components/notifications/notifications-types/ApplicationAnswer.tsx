@@ -64,7 +64,6 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 openModal={() => setNotificationModalVisible(true)}
             />
 
-
             <NotificationModalBase isVisible={notificationModalVisible!} styles={[{}]}>
                 <NotificationHeader
                     title={props.notificationHeaderTittle}

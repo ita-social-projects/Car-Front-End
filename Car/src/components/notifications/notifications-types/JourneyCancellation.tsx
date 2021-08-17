@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
@@ -6,9 +6,12 @@ import NotificationHeader from "../notification-header/NotificationHeader";
 import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
+import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
+import AuthContext from "../../auth/AuthContext";
 
 const JourneyCancellation = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
+    const user = useContext(AuthContext).user;
 
     return (
         <>
@@ -30,7 +33,19 @@ const JourneyCancellation = (props: NotificationProps) => {
 
                 <NotificationRideDetails
                     journeyId={props.journeyId!}
+                    IsBaggageVisible
+                    IsAvailableSeatsVisible
+                    IsFeeVisible
+                    IsDepartureTimeVisible
+                    IsDetailsTitleVisible
                 />
+
+                <NotificationRideStops
+                    title={"Your route"}
+                    stopsOwner={user}
+                    journeyId={props.journeyId!}
+                    IsStopsTitleVisible/>
+
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setModalVisible(false)} />
                 </NotificationButtonGroup>
