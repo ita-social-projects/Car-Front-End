@@ -1,4 +1,4 @@
-package com.car.Entities
+package com.softserveinc.car.Entities
 
 data class Chat (
         public var id: Int,

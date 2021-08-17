@@ -59,7 +59,6 @@ test("renders correctly", async () =>
           }
         }
       />
-
       <NotificationModalBase
         styles={
           Array [

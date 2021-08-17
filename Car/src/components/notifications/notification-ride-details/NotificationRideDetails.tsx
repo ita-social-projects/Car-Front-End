@@ -10,7 +10,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const [journey, setJourney] = useState<Journey>();
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId).then(res => {
+        JourneyService.getJourney(props.journeyId, true).then(res => {
             setJourney(res.data);
         });
     }, []);
