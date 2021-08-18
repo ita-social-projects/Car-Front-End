@@ -5,4 +5,8 @@ module.exports = {
     transformIgnorePatterns: [
         "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|react-native-reanimated)",
     ],
+    collectCoverage: true,
+    collectCoverageFrom: ["src/**/*.{ts,tsx,js,jsx}",
+        "api-service/**/*.{ts,tsx,js,jsx}",
+    ],
 };
