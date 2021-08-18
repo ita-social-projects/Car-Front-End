@@ -138,4 +138,24 @@ describe("Location Service test", () => {
             expect(res.status).toBe(200);
         });
     });
+
+    test("should delete car", async () => {
+        jest.spyOn(APIService, "delete").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<UpdateCarViewModel>>(function (resolve) {
+                    resolve({
+                        data: {} as any,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "multipart/Form-data"
+                        }
+                    });
+                })
+        );
+        CarService.deleteCar({} as any).then((res) => {
+            expect(res.status).toBe(200);
+        });
+    });
 });

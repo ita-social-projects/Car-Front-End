@@ -151,4 +151,24 @@ describe("Location Service test", () => {
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData[0]));
         });
     });
+
+    test("should delete notification", async () => {
+        jest.spyOn(APIService, "put").mockImplementation(
+            () =>
+                new Promise<AxiosResponse>(function (resolve) {
+                    resolve({
+                        data: {},
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+        NotificationsService.deleteNotification(0).then((res) => {
+            expect(res.status).toBe(200);
+        });
+    });
 });
