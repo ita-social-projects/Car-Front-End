@@ -143,10 +143,10 @@ const Chat = (properties: ChatProps) => {
             setMessage("");
 
             return () => {
+                AndroidKeyboardAdjust.setAdjustPan();
                 connection?.invoke(
                     "LeaveTheGroup",
-                    properties.route.params.chatId.toString(),
-                    AndroidKeyboardAdjust.setAdjustPan()
+                    properties.route.params.chatId.toString()
                 );
             };
         }
