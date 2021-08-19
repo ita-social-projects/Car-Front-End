@@ -8,7 +8,9 @@ const route = APIRoutes.getUserUrl();
 const UserService = {
     getUser: async (id: number) => APIService.get<User>(route + id),
 
-    updateUser: async (user: FormData) => Axios.put<FormData>(route, user)
+    updateUserImage: async (user: FormData) => Axios.put<FormData>(route + "image", user),
+
+    updateUserFcmtoken: async (user: FormData) => Axios.put<FormData>(route + "fcmtoken", user)
 };
 
 export default UserService;

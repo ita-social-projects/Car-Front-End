@@ -27,11 +27,9 @@ const AuthProvider = ({ children }: any) => {
         const updatedUser = new FormData();
 
         updatedUser.append("id", userToUpdate?.id);
-        updatedUser.append("image",
-            (userToUpdate?.imageId) ? ImageService.getImageById(userToUpdate?.imageId) : null);
         updatedUser.append("fcmtoken", token);
 
-        await UserService.updateUser(updatedUser);
+        await UserService.updateUserFcmtoken(updatedUser);
         await UserService.getUser(userToUpdate!.id).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
