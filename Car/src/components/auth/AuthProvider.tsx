@@ -10,7 +10,6 @@ import { EventRegister } from "react-native-event-listeners";
 import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/ProfileConstants";
 import UserService from "../../../api-service/user-service/UserService";
 import messaging from "@react-native-firebase/messaging";
-import ImageService from "../../../api-service/image-service/ImageService";
 
 const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User>(null);
