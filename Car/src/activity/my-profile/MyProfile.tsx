@@ -12,13 +12,14 @@ const MyProfile = (props: { navigation: any }) => {
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
-        return props.navigation.addListener("focus", () => {
-            UserService.getUser(user!.id)
-                .then((res) => {
-                    AsyncStorage.setItem("user", JSON.stringify(res.data));
-                })
-                .then(() => loadStorageUser());
-        });
+        if (props.navigation)
+            return props.navigation.addListener("focus", () => {
+                UserService.getUser(user!.id)
+                    .then((res) => {
+                        AsyncStorage.setItem("user", JSON.stringify(res.data));
+                    })
+                    .then(() => loadStorageUser());
+            });
     }, [props.navigation]);
 
     return (
