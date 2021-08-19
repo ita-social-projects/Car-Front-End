@@ -1,11 +1,27 @@
-import React from "react";
+import AsyncStorage from "@react-native-community/async-storage";
+import React, { useContext, useEffect } from "react";
 import { Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import UserService from "../../../api-service/user-service/UserService";
+import AuthContext from "../../components/auth/AuthContext";
 import DM from "../../components/styles/DM";
 import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
-const MyProfile = (props: {navigation: any}) => {
+const MyProfile = (props: { navigation: any }) => {
+    const { user, loadStorageUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (props.navigation)
+            return props.navigation.addListener("focus", () => {
+                UserService.getUser(user!.id)
+                    .then((res) => {
+                        AsyncStorage.setItem("user", JSON.stringify(res.data));
+                    })
+                    .then(() => loadStorageUser());
+            });
+    }, [props.navigation]);
+
     return (
         <View style={[MyProfileStyle.container, { backgroundColor: DM("white") }]}>
             <TouchableNavigationCard
