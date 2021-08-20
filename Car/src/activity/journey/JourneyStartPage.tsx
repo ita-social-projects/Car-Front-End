@@ -1,8 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/journey/Journey";
-import AuthContext from "../../components/auth/AuthContext";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
 import TouchableNavigationBlock from "../../components/touchable-navigation-block/TouchableNavigationBlock";
@@ -34,7 +33,6 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(inactiveButtonStyle);
     const [scheduledButtonStyle, setScheduledButtonStyle] = useState(inactiveButtonStyle);
 
-    const { user } = useContext(AuthContext);
     const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
     const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>(
         []
@@ -51,15 +49,15 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     }, []);
 
     const loadJourneys = () => {
-        JourneyService.getUpcomingJourneys(Number(user?.id)).then((res) =>
+        JourneyService.getUpcomingJourneys().then((res) =>
             setUpcomingJourneys(res.data)
         ).then(() => setRefreshing(false));
 
-        JourneyService.getPastJourneys(Number(user?.id)).then((res1) =>
+        JourneyService.getPastJourneys().then((res1) =>
             setPastJourneys(res1.data)
         ).then(() => setRefreshing(false));
 
-        JourneyService.getScheduledJourneys(Number(user?.id)).then((res2) =>
+        JourneyService.getScheduledJourneys().then((res2) =>
             setScheduledJourneys(res2.data)
         ).then(() => setRefreshing(false));
     };

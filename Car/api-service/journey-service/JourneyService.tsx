@@ -11,17 +11,17 @@ const JourneyService = {
     getJourney: async (journeyId: number, withCancelledStops: boolean = false) =>
         APIService.get<Journey>(route + journeyId + "/" + withCancelledStops),
 
-    getPastJourneys: async (userId: number) =>
-        APIService.get<Array<Journey>>(route + "past/" + userId),
+    getPastJourneys: async () =>
+        APIService.get<Array<Journey>>(route + "past"),
 
-    getUpcomingJourneys: async (userId: number) =>
-        APIService.get<Array<Journey>>(route + "upcoming/" + userId),
+    getUpcomingJourneys: async () =>
+        APIService.get<Array<Journey>>(route + "upcoming"),
 
-    getScheduledJourneys: async (userId: number) =>
-        APIService.get<Array<Journey>>(route + "scheduled/" + userId),
+    getScheduledJourneys: async () =>
+        APIService.get<Array<Journey>>(route + "scheduled"),
 
-    getRecentJourneyStops: async (id: number) =>
-        APIService.get<Array<Array<Stop>>>(route + "recent/" + id),
+    getRecentJourneyStops: async () =>
+        APIService.get<Array<Array<Stop>>>(route + "recent"),
 
     add: async (journey: JourneyDto) =>
         APIService.post<JourneyDto>(route, journey),

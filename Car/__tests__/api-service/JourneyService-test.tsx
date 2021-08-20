@@ -144,7 +144,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getPastJourneys(1).then((res) => {
+        JourneyService.getPastJourneys().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -165,7 +165,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getUpcomingJourneys(1).then((res) => {
+        JourneyService.getUpcomingJourneys().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -186,7 +186,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getScheduledJourneys(1).then((res) => {
+        JourneyService.getScheduledJourneys().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -207,7 +207,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getRecentJourneyStops(1).then((res) => {
+        JourneyService.getRecentJourneyStops().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(stopsData));
         });

@@ -1,12 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyTabs from "../../../activity/journey/journey-tabs/JourneyTabs";
 import MessagesTabs from "../../../activity/messages/messages-tabs/MessagesTabs";
 import MyProfileTabs from "../../../activity/my-profile/my-profile-tabs/MyProfileTabs";
 import NotificationsTabs from "../../../activity/notifications/notifications-tabs/NotificationsTabs";
 import AppTabsStyle from "./AppTabsStyle";
-import AuthContext from "../../auth/AuthContext";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
@@ -16,10 +15,9 @@ import updateLocale from "../../styles/DTFormat";
 const Tabs = createBottomTabNavigator();
 
 const AppTabs = () => {
-    const { user } = useContext(AuthContext);
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
-    NotificationsService.getUnreadNotificationsNumber(user?.id).then((result) =>
+    NotificationsService.getUnreadNotificationsNumber().then((result) =>
         setUnreadNotificationsNumber(result.data as number)
     );
 
