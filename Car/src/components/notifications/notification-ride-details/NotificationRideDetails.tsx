@@ -15,7 +15,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
         });
     }, []);
 
-    const IsPropertyShown = (value: any) => value;
+    const IsPropertyShown = (value: any) => value !== false;
 
     return (
         <View style={style.container}>

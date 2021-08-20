@@ -24,6 +24,8 @@ target 'Car' do
 
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
+  pod 'ReactNativeExceptionHandler', :path => '../node_modules/react-native-exception-handler'
+
   target 'CarTests' do
     inherit! :complete
     # Pods for testing

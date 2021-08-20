@@ -142,10 +142,8 @@ const Settings = (props: {navigation: any}) => {
                 uri: photo?.uri,
             });
         }
-        updatedUser.append("fcmtoken", user?.fcmtoken);
 
-        await UserService.updateUser(updatedUser);
-        await UserService.getUser(user!.id).then((res) => {
+        await UserService.updateUserImage(updatedUser).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
 
