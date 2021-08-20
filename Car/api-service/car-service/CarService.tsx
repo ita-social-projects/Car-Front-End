@@ -15,8 +15,8 @@ const CarService = {
     getById: async (id: number) =>
         APIService.get<CarViewModel>(route + id),
 
-    getAll: async (id: number) =>
-        APIService.get<Array<CarViewModel>>(route + "by-user/" + id),
+    getAll: async () =>
+        APIService.get<Array<CarViewModel>>(route + "by-user"),
 
     getAvatar: async (id: number) =>
         APIService.get<string>(route + id + "/photo"),

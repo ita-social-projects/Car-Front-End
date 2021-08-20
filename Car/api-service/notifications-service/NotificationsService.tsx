@@ -9,11 +9,11 @@ const NotificationsService = {
     getNotification: async (id: number) =>
         APIService.get<Notification>(route + id),
 
-    getNotifications: async (userId: number) =>
-        APIService.get<Array<Notification>>(route + "notifications/" + userId),
+    getNotifications: async () =>
+        APIService.get<Array<Notification>>(route + "notifications"),
 
-    getUnreadNotificationsNumber: async (userId: number | undefined) =>
-        APIService.get(route + "unreadNumber/" + userId),
+    getUnreadNotificationsNumber: async () =>
+        APIService.get(route + "unreadNumber"),
 
     updateNotification: async (notification: Notification) =>
         APIService.put<Notification>(route, notification),

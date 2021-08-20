@@ -112,7 +112,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
-        CarService.getAll(Number(user?.id)).then(result => {
+        CarService.getAll().then(result => {
             setUserCars(result.data.map(car => (
                 {
                     id: Number(car?.id),
@@ -127,7 +127,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
 
         LocationService
-            .getAll(Number(user?.id))
+            .getAll()
             .then((res) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);

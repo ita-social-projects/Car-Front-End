@@ -62,7 +62,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.getNotifications(1).then((res) => {
+        NotificationsService.getNotifications().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(notificationData));
         });
@@ -83,7 +83,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        NotificationsService.getUnreadNotificationsNumber(1).then((res) => {
+        NotificationsService.getUnreadNotificationsNumber().then((res) => {
             expect(res.status).toBe(200);
             expect(res.data).toBe(4);
         });

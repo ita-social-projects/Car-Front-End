@@ -83,12 +83,12 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
     useEffect(() => {
         LocationService
-            .getAll(Number(user?.id))
+            .getAll()
             .then((res: any) => setSavedLocations(res.data))
             .catch((e: any) => console.log(e));
 
         JourneyService
-            .getRecentJourneyStops(Number(user?.id))
+            .getRecentJourneyStops()
             .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
                 .map((stop: Stop) => stop?.address)))
             .catch((e) => console.log(e));

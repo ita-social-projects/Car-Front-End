@@ -1,16 +1,14 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, Text, View, ScrollView, RefreshControl, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import Location from "../../../../../models/location/Location";
-import AuthContext from "../../../../components/auth/AuthContext";
 import DM from "../../../../components/styles/DM";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 import { ADDRESS_NAME_MAX_LINES_COUNT, ADDRESS_NAME_WIDTH_CUT } from "../../../../constants/AddressConstants";
 
 export default function AddressBook (props: {navigation: any}) {
-    const { user } = useContext(AuthContext);
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -21,7 +19,7 @@ export default function AddressBook (props: {navigation: any}) {
     }, []);
 
     const loadLocations = () => {
-        LocationService.getAll(Number(user?.id)).then((res) => {
+        LocationService.getAll().then((res) => {
             setLocations(res.data);
             setLoading(false);
             setRefreshing(false);

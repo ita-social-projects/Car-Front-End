@@ -41,7 +41,7 @@ describe("Chat Service test", () => {
                 })
         );
 
-        ChatService.getChat(1).then((res) => {
+        ChatService.getChat().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toEqual(JSON.stringify(chatsData));
         });

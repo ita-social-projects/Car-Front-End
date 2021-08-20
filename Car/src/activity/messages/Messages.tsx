@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ChatService from "../../../api-service/chat-service/ChatService";
-import AuthContext from "../../components/auth/AuthContext";
 import MessagesStyle from "./MessagesStyle";
 import {
     MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
@@ -29,12 +28,11 @@ const Messages = (props: MessagesProps) => {
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState("");
-    const { user } = useContext(AuthContext);
 
     const getChats = () => {
         if (!search) {
             setIsLoading(true);
-            ChatService.getChat(user?.id).then((res) => {
+            ChatService.getChat().then((res) => {
                 let chats = res.data;
 
                 setMasterDataSource(JSON.parse(JSON.stringify(chats)));

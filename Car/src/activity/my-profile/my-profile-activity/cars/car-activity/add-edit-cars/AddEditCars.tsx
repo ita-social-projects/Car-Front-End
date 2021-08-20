@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Image,
@@ -27,10 +27,8 @@ import Indicator from "../../../../../../components/activity-indicator/Indicator
 import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
-import AuthContext from "../../../../../../components/auth/AuthContext";
 
 const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
-    const { user } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(props.type === "edit");
     const [isSaving, setSaving] = useState(false);
 
@@ -157,7 +155,6 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
         }
 
         if(props.type === "add") {
-            car.append("ownerId", user?.id);
             await CarService.add(car)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log(err));
