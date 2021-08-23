@@ -57,7 +57,7 @@ describe("User Service test", () => {
                 })
         );
 
-        UserService.updateUserImage({} as any).then((res) => {
+        UserService.updateUserImage({} as any, {}).then((res) => {
             expect(res.status).toBe(200);
         });
     });

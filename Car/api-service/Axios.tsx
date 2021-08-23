@@ -32,10 +32,13 @@ Axios.interceptors.response.use(
     },
 
     async (error?: AxiosError) => {
-        if (axios.isAxiosError(error)) {
+        if (axios.isCancel(error)) {
+            console.log("catch cancel");
+        }
+        else if (axios.isAxiosError(error)) {
             error.response?.status === StatusCodes.UNAUTHORIZED &&
-            (async () => { await AuthManager.signOutAsync(); })().then(() =>
-                RNRestart.Restart());
+                (async () => { await AuthManager.signOutAsync(); })().then(() =>
+                    RNRestart.Restart());
         } else {
             var message = error!.message || error!.response!.data;
 
