@@ -6,6 +6,6 @@ const ConfigTextScaling = () => {
 
     TextInput.defaultProps = TextInput.defaultProps || {};
     TextInput.defaultProps.allowFontScaling = false;
-}
+};
 
 export default ConfigTextScaling;
