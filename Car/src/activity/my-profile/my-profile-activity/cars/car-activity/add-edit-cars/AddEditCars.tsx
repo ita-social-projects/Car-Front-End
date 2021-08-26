@@ -81,7 +81,6 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         AppState.addEventListener("change", changeHandler);
 
         return () => {
-            source.current.cancel("cancel");
             AppState.removeEventListener("change", changeHandler);
         };
     }, [plateNumber, selectedBrand, selectedColor, selectedModel, photo]);
@@ -116,8 +115,8 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     const image = ImageService.getImageById(car?.imageId?.toString());
 
                     setPhoto({
-                        name: "name",
-                        type: "image",
+                        name: car?.imageId,
+                        type: "image/jpeg",
                         uri: image
                     });
                 }
@@ -182,11 +181,20 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             });
         }
 
+        const errorHandle = error => {
+            if (axios.isCancel(error))
+                throw error;
+            else
+                console.log(error);
+        };
+
         if (props.type === "add") {
-            await CarService.add(car, { cancelToken: source.current.token });
+            await CarService.add(car, { cancelToken: source.current.token })
+                .catch(errorHandle);
         }
         else {
-            await CarService.update(car, { cancelToken: source.current.token });
+            await CarService.update(car, { cancelToken: source.current.token })
+                .catch(errorHandle);
         }
         setSaving(false);
     };
