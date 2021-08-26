@@ -77,22 +77,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         borderColor: DM("#000000")
     };
 
-    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(
-        journey?.isOnOwnCar && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
-    const [taxiButtonStyle, setTaxiButtonStyle] = useState(
-        journey?.isOnOwnCar && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
+    const setButtonStyle = (shouldBeHighlighted : boolean) =>{
+        if(shouldBeHighlighted)
+            return activeButtonStyle;
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(
-        journey?.isFree && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(
-        journey?.isFree && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
+        return inactiveButtonStyle;
+    };
+
+    let highlightOwnCarButton : boolean = !journey || journey?.isOnOwnCar;
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
+
+    let highlightPaidButton : boolean = !journey || !journey?.isFree;
+    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
+    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
     const [departureTime, setDepartureTime] = useState<Date>(journey ?
         moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
         addMinutesToDate(new Date(), MINUTES_OFFSET));
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
-    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar && journey || !journey);
+    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
 
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
