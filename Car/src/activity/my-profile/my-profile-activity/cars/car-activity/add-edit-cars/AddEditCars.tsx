@@ -181,23 +181,20 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             });
         }
 
+        const errorHandle = error => {
+            if (axios.isCancel(error))
+                throw error;
+            else
+                console.log(error);
+        };
+
         if (props.type === "add") {
             await CarService.add(car, { cancelToken: source.current.token })
-                .catch(error => {
-                    if (axios.isCancel(error))
-                        throw error;
-                    else
-                        console.log(error);
-                });
+                .catch(errorHandle);
         }
         else {
             await CarService.update(car, { cancelToken: source.current.token })
-                .catch(error => {
-                    if (axios.isCancel(error))
-                        throw error;
-                    else
-                        console.log(error);
-                });
+                .catch(errorHandle);
         }
         setSaving(false);
     };
