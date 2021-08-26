@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     ActivityIndicator,
+    AppState,
     Image,
     ScrollView,
     Text,
@@ -27,8 +28,9 @@ import Indicator from "../../../../../../components/activity-indicator/Indicator
 import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
+import axios from "axios";
 
-const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
+const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     const [isLoading, setLoading] = useState(props.type === "edit");
     const [isSaving, setSaving] = useState(false);
 
@@ -58,6 +60,32 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
     const [isValidCar, setValidCar] = useState<boolean>(true);
     const [photo, setPhoto] = useState({} as CarPhoto);
 
+    const source = useRef(axios.CancelToken.source());
+    const isCanceled = useRef(false);
+    const isStarted = useRef(false);
+
+    useEffect(() => {
+        const changeHandler = nextAppState => {
+            if (nextAppState.match(/inactive|background/) && isStarted.current) {
+                source.current.cancel("cancel");
+                source.current = axios.CancelToken.source();
+                isCanceled.current = true;
+                isStarted.current = false;
+            }
+            else if (isCanceled.current && nextAppState === "active") {
+                saveCarHandle().then(() => navigate("Cars"));
+                isCanceled.current = false;
+            }
+        };
+
+        AppState.addEventListener("change", changeHandler);
+
+        return () => {
+            source.current.cancel("cancel");
+            AppState.removeEventListener("change", changeHandler);
+        };
+    }, [plateNumber, selectedBrand, selectedColor, selectedModel, photo]);
+
     let modelPickerController: any;
     let brandPickerController: any;
     let colorPickerController: any;
@@ -67,16 +95,15 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
             setBrands(response.data);
         });
 
-        if(props.type === "edit")
-        {
+        if (props.type === "edit") {
             CarService.getById(props.carId!).then((response) => {
                 const car = response.data;
                 const carModel = car?.model;
-                let carBrandItem : CarDropDownPickerItem = {
+                let carBrandItem: CarDropDownPickerItem = {
                     label: carModel?.brand?.name ?? "",
                     value: carModel?.brand?.id.toString() ?? ""
                 };
-                let carModelItem : CarDropDownPickerItem = {
+                let carModelItem: CarDropDownPickerItem = {
                     label: carModel?.name ?? "",
                     value: carModel?.id.toString() ?? ""
                 };
@@ -85,8 +112,7 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
                 });
 
                 if (car?.imageId !== null &&
-                    car?.imageId.toString() !== undefined)
-                {
+                    car?.imageId.toString() !== undefined) {
                     const image = ImageService.getImageById(car?.imageId?.toString());
 
                     setPhoto({
@@ -99,14 +125,14 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
                 setColor(carColor!);
                 setPlateNumber(car?.plateNumber ?? "");
                 setModel(carModelItem);
-            }).catch((e: any) => console.log(e));
+            });
         }
-    }, []);
+    }, [props.type]);
 
     useEffect(() => validateCar(),
         [plateNumber, selectedBrand, selectedColor, selectedModel, isLoading]);
 
-    function validateCar () {
+    const validateCar = () => {
         setValidCar(Boolean(
             selectedBrand?.value &&
             selectedModel?.value &&
@@ -114,9 +140,9 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
             plateNumber &&
             isValidPlateNumber
         ));
-    }
+    };
 
-    function validatePlateNumber () {
+    const validatePlateNumber = () => {
         setValidPlateNumber(
             Boolean(
                 plateNumber &&
@@ -124,7 +150,7 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
                 plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
                 plateNumber.match(/^[A-Za-zА-ЯҐЄІЇа-яґєії0-9- ]+$/)
             ));
-    }
+    };
 
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
@@ -140,7 +166,9 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
 
     const saveCarHandle = async () => {
         setSaving(true);
-        let car = new FormData();
+        isStarted.current = true;
+
+        const car = new FormData();
 
         car.append("id", Number(props.carId));
         car.append("modelId", Number(selectedModel?.value));
@@ -154,15 +182,11 @@ const AddEditCars = (props: {type: "add" | "edit", carId?: number}) => {
             });
         }
 
-        if(props.type === "add") {
-            await CarService.add(car)
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err));
+        if (props.type === "add") {
+            await CarService.add(car, { cancelToken: source.current.token });
         }
         else {
-            await CarService.update(car)
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err));
+            await CarService.update(car, { cancelToken: source.current.token });
         }
         setSaving(false);
     };

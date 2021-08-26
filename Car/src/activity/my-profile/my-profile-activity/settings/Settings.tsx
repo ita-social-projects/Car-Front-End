@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Animated, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Animated, AppState, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SettingsStyle from "./SettingsStyle";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
@@ -26,8 +26,9 @@ import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import DM from "../../../../components/styles/DM";
 import User from "../../../../../models/user/User";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import axios from "axios";
 
-const Settings = (props: {navigation: any}) => {
+const Settings = (props: { navigation: any }) => {
 
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
@@ -48,6 +49,33 @@ const Settings = (props: {navigation: any}) => {
 
     useEffect(() => {
         loadUser();
+    }, []);
+
+    const source = useRef(axios.CancelToken.source());
+    const photoTmp = useRef(null as ImagePickerResponse | null);
+    const isCanceled = useRef(false);
+    const isStarted = useRef(false);
+
+    useEffect(() => {
+        const changeHandler = nextAppState => {
+            if (nextAppState.match(/inactive|background/) && isStarted.current) {
+                source.current.cancel("cancel");
+                source.current = axios.CancelToken.source();
+                isCanceled.current = true;
+                isStarted.current = false;
+            }
+            else if (isCanceled.current && nextAppState === "active" && photoTmp.current) {
+                saveUser(photoTmp.current);
+                isCanceled.current = false;
+            }
+        };
+
+        AppState.addEventListener("change", changeHandler);
+
+        return () => {
+            source.current.cancel("cancel");
+            AppState.removeEventListener("change", changeHandler);
+        };
     }, []);
 
     const onRefresh = () => {
@@ -94,7 +122,7 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const closeHandle = () => {
-        if(isAnimating)
+        if (isAnimating)
             return;
         setOpen(false);
         fadeOut();
@@ -102,7 +130,7 @@ const Settings = (props: {navigation: any}) => {
     };
 
     const pressHandle = () => {
-        if(isAnimating)
+        if (isAnimating)
             return;
         setOpen(!isOpen);
 
@@ -122,12 +150,14 @@ const Settings = (props: {navigation: any}) => {
     const uploadPhotoHandle = () => {
         launchImageLibrary({ mediaType: "photo" }, (response) => {
             if (!response.didCancel) {
+                photoTmp.current = response;
                 saveUser(response);
             }
         });
     };
 
     const saveUser = async (photo: ImagePickerResponse) => {
+        isStarted.current = true;
         setSaving(true);
         avatarLogoTitleFadeIn();
 
@@ -142,11 +172,10 @@ const Settings = (props: {navigation: any}) => {
                 uri: photo?.uri,
             });
         }
-        updatedUser.append("fcmtoken", user?.fcmtoken);
 
-        await UserService.updateUser(updatedUser);
-        await UserService.getUser(user!.id).then((res) => {
+        await UserService.updateUserImage(updatedUser, { cancelToken: source.current.token }).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
+            photoTmp.current = null;
         });
 
         await AsyncStorage.getItem("user").then((res) => {
@@ -194,7 +223,7 @@ const Settings = (props: {navigation: any}) => {
                                         (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                     }}>
                                     <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
-                                    Add photo
+                                        Add photo
                                     </Text>
                                 </TouchableOpacity>
 
@@ -208,7 +237,7 @@ const Settings = (props: {navigation: any}) => {
                                             (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                         }}>
                                         <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
-                                        Change photo
+                                            Change photo
                                         </Text>
                                     </TouchableOpacity>
 
@@ -224,7 +253,7 @@ const Settings = (props: {navigation: any}) => {
                                                 .then(() => setDeleteModalVisible(true));
                                         }}>
                                         <Text style={[SettingsStyle.deleteAvatarText, { color: DM("#EC6400") }]}>
-                                        Delete photo
+                                            Delete photo
                                         </Text>
                                     </TouchableOpacity>
                                 </>
@@ -235,7 +264,7 @@ const Settings = (props: {navigation: any}) => {
                     renderHeader={
                         <View style={{ backgroundColor: DM("#FFFFFF") }}>
                             <Text style={[SettingsStyle.moreOptionsHeader, { color: DM("black") }]}>
-                            Edit Profile
+                                Edit Profile
                             </Text>
                         </View>}
                     enabledInnerScrolling={false}
@@ -250,7 +279,7 @@ const Settings = (props: {navigation: any}) => {
         <>
             <ScrollView
                 style={[SettingsStyle.mainContainer, { backgroundColor: DM("#FFFFFF") }]}
-                refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh}/>}>
+                refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}>
                 <View style={SettingsStyle.container}>
                     <View style={SettingsStyle.bottomContainer}>
                         <TouchableOpacity
@@ -314,7 +343,7 @@ const Settings = (props: {navigation: any}) => {
                         style={isVisible && [SettingsStyle.layout, { opacity, backgroundColor: DM("#000000") }]} />
                 </View>
             </ScrollView>
-            { renderBottomPopup() }
+            {renderBottomPopup()}
             <ConfirmModal
                 visible={isDeleteModalVisible}
                 title="ARE YOU SURE?"

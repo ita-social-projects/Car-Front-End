@@ -40,7 +40,7 @@ describe("User Service test", () => {
         });
     });
 
-    test("should update user", async () => {
+    test("should update users image", async () => {
 
         jest.spyOn(axios, "put").mockImplementation(
             () =>
@@ -57,7 +57,29 @@ describe("User Service test", () => {
                 })
         );
 
-        UserService.updateUser({} as any).then((res) => {
+        UserService.updateUserImage({} as any, {}).then((res) => {
+            expect(res.status).toBe(200);
+        });
+    });
+
+    test("should update users fcmtoken", async () => {
+
+        jest.spyOn(axios, "put").mockImplementation(
+            () =>
+                new Promise<AxiosResponse>(function (resolve) {
+                    resolve({
+                        data: {} as any,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "miltipart/Form-data"
+                        }
+                    });
+                })
+        );
+
+        UserService.updateUserFcmtoken({} as any).then((res) => {
             expect(res.status).toBe(200);
         });
     });

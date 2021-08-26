@@ -3,6 +3,7 @@ import APIService from "../../api-service/APIService";
 import ChatService from "../../api-service/chat-service/ChatService";
 import Chat from "../../models/Chat/Chat";
 import ChatFilter from "../../models/Chat/ChatFilter";
+import CreateChat from "../../models/Chat/CreateChat";
 
 describe("Chat Service test", () => {
     let chatsData: Chat[] = [{
@@ -23,6 +24,11 @@ describe("Chat Service test", () => {
     let filter: ChatFilter = {
         searchText: "string",
         chats: chatsData,
+    };
+
+    let newChat: CreateChat = {
+        id: 1,
+        name: "string"
     };
 
     test("should return chats", async () => {
@@ -86,6 +92,28 @@ describe("Chat Service test", () => {
         );
 
         ChatService.getFilteredChats(filter).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
+        });
+    });
+
+    test("should add chat", async () => {
+        jest.spyOn(APIService, "post").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<Chat>>(function (resolve) {
+                    resolve({
+                        data: chatsData[0],
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+
+        ChatService.addChat(newChat).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
         });
