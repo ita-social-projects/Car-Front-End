@@ -25,7 +25,7 @@ import {
 import {
     SECOND_ELEMENT_INDEX,
     EMPTY_COLLECTION_LENGTH,
-    MIN_DELAY_MS,
+    MIN_DELAY_MS, FIRST_ELEMENT_INDEX,
 } from "../../../../constants/GeneralConstants";
 import WayPoint from "../../../../types/WayPoint";
 import Address from "../../../../../models/Address";
@@ -45,6 +45,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import DM from "../../../../components/styles/DM";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
+import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const params = props?.route?.params;
@@ -81,6 +82,11 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
     const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
 
+    const [userQuantity] = useState<{ id: number, name: string }[]>([
+        { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }]);
+    const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
+    const [selectedQuantity, setSelectedQuantity] = useState<{ id: number | null, name: string }>({ id: 1, name: "1" });
+
     useEffect(() => {
         LocationService
             .getAll()
@@ -102,11 +108,11 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setTo(params.wayPoint);
             }
 
-            if(!isRequest){
+            if (!isRequest) {
                 setIsRequest(Boolean(params?.isRequest));
             }
 
-            if(!isPreviousFilter){
+            if (!isPreviousFilter) {
                 fillInFilters();
             }
         }
@@ -146,13 +152,13 @@ const SearchJourney = (props: SearchJourneyProps) => {
     };
 
     const fillInFilters = () => {
-        if(params?.isPreviousFilter as boolean){
+        if (params?.isPreviousFilter as boolean) {
             setIsPreviousFilter(params?.isPreviousFilter as boolean);
 
             AsyncStorage.getItem("searchFilter").then((res) => {
                 let filter: Filter = JSON.parse(res || "{}");
 
-                switch(filter.fee){
+                switch (filter.fee) {
                     case FeeType.Free:
                         setAllButtonStyle(inactiveButtonStyle);
                         setFreeButtonStyle(activeButtonStyle);
@@ -200,7 +206,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const onConfirmButtonPress = async () => {
         let fee: FeeType;
 
-        switch(JSON.stringify(SwitchSelectorStyle.activeButton)) {
+        switch (JSON.stringify(SwitchSelectorStyle.activeButton)) {
             case JSON.stringify(allButtonStyle):
                 fee = FeeType.All;
                 break;
@@ -238,7 +244,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
         setIsLoading(true);
 
-        if(isRequest){
+        if (isRequest) {
             console.log(request);
             RequestService.addRequest(request)
                 .then(() => {
@@ -247,7 +253,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 .catch(() => {
                     setErrorModalVisible(true);
                 });
-        } else{
+        } else {
             await JourneyService.getFilteredJourneys({
                 applicantId: user?.id!,
                 fromLatitude: from.coordinates.latitude,
@@ -358,6 +364,25 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         isConfirmed={true}
                     />
 
+                    <JourneyCreationDropDownPicker
+                        items={userQuantity.map((car) => ({
+                            label: car.name,
+                            value: car.id
+                        }))}
+                        paddingLeft={105}
+                        searchable={true}
+                        placeholder="Choose a Car:"
+                        isVisible={isVisibleQuantityDropDown}
+                        onOpen={() => setIsVisibleQuantityDropDown(true)}
+                        onChangeItem={(item) => {
+                            setSelectedQuantity({ id: item.value, name: item.label });
+                            setIsVisibleQuantityDropDown(false);
+                        }}
+                        valueId={selectedQuantity.id === null && userQuantity.length > EMPTY_COLLECTION_LENGTH ?
+                            userQuantity[FIRST_ELEMENT_INDEX].id : selectedQuantity.id
+                        }
+                    />
+
                     <View style={SwitchSelectorStyle.container}>
                         <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>Fee</Text>
                         <View style={{ flexDirection: "row" }}>
@@ -429,7 +454,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                         DM("gray") : DM("black"),
                                     borderWidth: 0,
                                 }]}
-                            onPress={() => {onConfirmButtonPress();}}
+                            onPress={() => {
+                                onConfirmButtonPress();
+                            }}
                             disabled={!(to.isConfirmed && from.isConfirmed)}
                         >
                             <Text style={[CreateJourneyStyle.publishButtonText, { color: DM("white") }]}>
