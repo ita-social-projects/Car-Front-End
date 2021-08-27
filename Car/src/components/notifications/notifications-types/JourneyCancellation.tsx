@@ -33,11 +33,13 @@ const JourneyCancellation = (props: NotificationProps) => {
 
                 <NotificationRideDetails
                     journeyId={props.journeyId!}
+                    userId={user?.id!}
                     IsBaggageVisible
                     IsAvailableSeatsVisible
                     IsFeeVisible
                     IsDepartureTimeVisible
                     IsDetailsTitleVisible
+                    withSeats
                 />
 
                 <NotificationRideStops

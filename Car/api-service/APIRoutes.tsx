@@ -25,7 +25,9 @@ const APIRoutes = {
 
     getRequestUrl: () => APIConfig.URL + "api/requests/",
 
-    getSignalRUrl: () => APIConfig.URL + "signalr/"
+    getSignalRUrl: () => APIConfig.URL + "signalr/",
+
+    getJourneyUserUrl: () => APIConfig.URL + "api/journeyusers/"
 };
 
 export default APIRoutes;

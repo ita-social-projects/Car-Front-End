@@ -93,7 +93,6 @@ test("renders correctly", async () =>
           IsDepartureTimeVisible={true}
           IsDetailsTitleVisible={true}
           IsFeeVisible={true}
-          withBaggage="true"
         />
         <NotificationRideStops
           IsStopsTitleVisible={true}

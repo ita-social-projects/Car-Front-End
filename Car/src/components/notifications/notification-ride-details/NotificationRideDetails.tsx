@@ -5,13 +5,23 @@ import JourneyService from "../../../../api-service/journey-service/JourneyServi
 import Journey from "../../../../models/journey/Journey";
 import style from "./NotificationRideDetailsStyle";
 import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
+import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const [journey, setJourney] = useState<Journey>();
+    const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId, true).then(res => {
-            setJourney(res.data);
+        JourneyService.getJourneyWithJourneyUser(props.journeyId, props.userId, true).then(res => {
+            setJourney(res.data.item1);
+            if(props.journeyUser == null)
+            {
+                setJourneyUser(res.data.item2);
+            }
+            else
+            {
+                setJourneyUser(props.journeyUser);
+            }
         });
     }, []);
 
@@ -42,7 +52,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
             }
 
             {IsPropertyShown(props.IsBaggageVisible) && <View style={style.detailsContainer}>
-                <Text style={style.value}>{props.withBaggage ? "With baggage" : "Without baggage"}</Text>
+                <Text style={style.value}>{journeyUser?.withBaggage? "With baggage" : "Without baggage"}</Text>
             </View>}
         </View>
     );
