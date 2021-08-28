@@ -67,6 +67,35 @@ describe("JourneySearch Test", () => {
             isConfirmed={true}
             setDate={[Function]}
           />
+          <JourneyCreationDropDownPicker
+            isVisible={false}
+            items={
+              Array [
+                Object {
+                  "label": "1",
+                  "value": 1,
+                },
+                Object {
+                  "label": "2",
+                  "value": 2,
+                },
+                Object {
+                  "label": "3",
+                  "value": 3,
+                },
+                Object {
+                  "label": "4",
+                  "value": 4,
+                },
+              ]
+            }
+            onChangeItem={[Function]}
+            onOpen={[Function]}
+            paddingLeft={105}
+            placeholder="Choose a Car:"
+            searchable={true}
+            valueId={1}
+          />
           <View
             style={
               Object {
