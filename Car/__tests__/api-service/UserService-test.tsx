@@ -17,6 +17,7 @@ describe("User Service test", () => {
         token: "",
         fcmtoken : null,
         journeyCount: 8,
+        phoneNumber: null,
     };
 
     test("should get user", async () => {
