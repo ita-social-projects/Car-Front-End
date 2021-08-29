@@ -37,3 +37,6 @@ test("should return correct URL", async () =>
 
 test("should return correct URL", async () =>
     expect(APIRoutes.getUserUrl()).toBe(expectedApiUrl + "api/users/"));
+
+test("should return correct URL", async () =>
+    expect(APIRoutes.getJourneyUserUrl()).toBe(expectedApiUrl + "api/journeyusers/"));

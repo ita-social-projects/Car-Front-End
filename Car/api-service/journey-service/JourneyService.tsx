@@ -4,6 +4,8 @@ import APIRoutes from "../APIRoutes";
 import Stop from "../../models/stop/Stop";
 import JourneyDto from "../../models/journey/JourneyDto";
 import FilterJourneyModel from "../../models/journey/FilterJourneyModel";
+import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
+import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
 
 const route = APIRoutes.getJourneyUrl();
 
@@ -47,8 +49,12 @@ const JourneyService = {
     deleteUser: async (journeyId: number, userId: number) =>
         APIService.delete(route + "delete-user/" + journeyId + "/" + userId),
 
-    addUser: async (journeyId: number, userId: number, applicantStops: Stop[]) =>
-        APIService.put(route + "add-user/" +journeyId + "/" + userId, applicantStops)
+    addUser: async (journeyApplyModel: JourneyApplyModel) =>
+        APIService.put(route + "add-user/", journeyApplyModel),
+
+    getJourneyWithJourneyUser: async (journeyId:number, userId: number, withCancelledStops: boolean = false) =>
+        APIService.get<JourneyWithUserModel>(route + "journey-user/"
+        + journeyId + "/" + userId + "/" + withCancelledStops)
 };
 
 export default JourneyService;
