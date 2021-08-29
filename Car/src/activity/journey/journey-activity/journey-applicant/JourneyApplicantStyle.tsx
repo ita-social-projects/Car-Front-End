@@ -40,7 +40,8 @@ const JourneyApplicantStyle = StyleSheet.create({
     },
 
     bottomContainer: {
-        paddingTop: 13
+        paddingTop: 13,
+        width: "70%",
     },
 
     positionContainer: {
@@ -50,6 +51,23 @@ const JourneyApplicantStyle = StyleSheet.create({
 
     locationContainer: {
         flexDirection: "row"
+    },
+
+    mobileText: {
+        flex: 133,
+        fontFamily: Font.OpenSans.Bold,
+        fontWeight: "bold",
+        fontSize: 13,
+    },
+
+    mobileData: {
+
+    },
+
+    mobileContainer: {
+        flexDirection: "row",
+        paddingBottom: 16,
+        justifyContent: "space-between",
     },
 
     detailsText: {

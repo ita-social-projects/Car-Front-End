@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
@@ -7,11 +7,14 @@ import JourneyApplicantStyle from "./JourneyApplicantStyle";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/GeneralConstants";
 import DM from "../../../../components/styles/DM";
+import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
+import Clipboard from "@react-native-community/clipboard";
 
 const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
     const { userId } = props.route.params;
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
+    const [isCallingButtonVisible, setCallingButtonVisible] = useState(false);
 
     useEffect(() => {
         UserService.getUser(userId).then((res) =>
@@ -67,17 +70,39 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                         </View>
                         <View style={JourneyApplicantStyle.locationContainer}>
                             <Text style={[JourneyApplicantStyle.locationText, { color: DM("black") }]}>
-                                Location:
+                                Location: {user?.location}
                             </Text>
                             <Text style={[JourneyApplicantStyle.locationData, { color: DM("#02A2CF") }]}>
                                 {user?.location}
                             </Text>
                         </View>
+                        <View style={[JourneyApplicantStyle.mobileContainer, { marginTop: 10 }]}>
+                            <Text style={[JourneyApplicantStyle.mobileText, { color: DM("black") }]}>
+                                Mobile:
+                            </Text>
+                            <TouchableOpacity onPress={() => setCallingButtonVisible(!isCallingButtonVisible)}>
+                                <Text style={[JourneyApplicantStyle.mobileData, { color: DM("#02A2CF") }]}>
+                                    {user?.phoneNumber}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={JourneyApplicantStyle.whitespaceBlock} />
                 </ScrollView>
             )}
-
+            <ConfirmModal
+                confirmText={"Call " + user?.name}
+                disableModal={() => {
+                    console.log("log");
+                    setCallingButtonVisible(false);
+                    Clipboard.setString(user?.phoneNumber != null ? user?.phoneNumber.toString() : " ");}}
+                onConfirm={() => {Linking.openURL(`tel:${user?.phoneNumber}`);}}
+                title={user?.name + " " + user?.surname}
+                visible={isCallingButtonVisible}
+                cancelText={"Copy number"}
+                confirmColor={"#d80056"}
+                hideCancelButton={false}
+                subtitle={user?.phoneNumber != null ? user?.phoneNumber.toString() : undefined}/>
         </View>
     );
 };
