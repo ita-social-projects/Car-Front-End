@@ -52,7 +52,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
             }
 
             {IsPropertyShown(props.IsBaggageVisible) && <View style={style.detailsContainer}>
-                <Text style={style.value}>{journeyUser?.withBaggage? "With baggage" : "Without baggage"}</Text>
+                <Text style={style.value}>{journeyUser?.withBaggage? "With luggage" : "Without luggage"}</Text>
             </View>}
         </View>
     );
