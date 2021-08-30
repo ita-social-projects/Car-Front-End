@@ -29,6 +29,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                     message="The passenger has withdrawn your ride!"
                     sender={props.sender}
                     disableModal={() => setModalVisible(false)}
+                    withoutSnooze
                 />
 
                 <NotificationRideDetails
