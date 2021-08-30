@@ -85,7 +85,6 @@ test("renders correctly", async () =>
             }
           }
           title="Header Title"
-          withoutSnooze={true}
         />
         <NotificationRideDetails
           IsAvailableSeatsVisible={true}

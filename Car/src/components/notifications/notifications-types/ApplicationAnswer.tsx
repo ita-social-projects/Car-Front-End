@@ -68,7 +68,6 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     title={props.notificationHeaderTittle}
                     message={props.notificationHeaderMessage}
                     sender={props.notification.sender}
-                    withoutSnooze
                     disableModal={() => setNotificationModalVisible(false)}
                 />
 
