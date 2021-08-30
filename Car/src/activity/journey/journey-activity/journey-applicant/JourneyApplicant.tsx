@@ -78,11 +78,11 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                         </View>
                         <View style={[JourneyApplicantStyle.mobileContainer, { marginTop: 10 }]}>
                             <Text style={[JourneyApplicantStyle.mobileText, { color: DM("black") }]}>
-                                Mobile:
+
                             </Text>
                             <TouchableOpacity onPress={() => setCallingButtonVisible(!isCallingButtonVisible)}>
                                 <Text style={[JourneyApplicantStyle.mobileData, { color: DM("#02A2CF") }]}>
-                                    {user?.phoneNumber}
+
                                 </Text>
                             </TouchableOpacity>
                         </View>
