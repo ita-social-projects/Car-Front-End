@@ -71,6 +71,7 @@ const AuthProvider = ({ children }: any) => {
                             imageId: null,
                             journeyCount: 0,
                             hireDate: new Date(new Date().getMinutes()),
+                            phoneNumber: null,
                         };
 
                         const dbUser = await LoginService.loginUser(tempUser);

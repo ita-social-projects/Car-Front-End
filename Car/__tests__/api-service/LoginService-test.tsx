@@ -16,7 +16,8 @@ describe("Login Service test", () => {
         email: "peter@gmail.com",
         token: "",
         fcmtoken : null,
-        journeyCount: 8
+        journeyCount: 8,
+        phoneNumber: null,
     };
 
     test("should login user", async () => {
