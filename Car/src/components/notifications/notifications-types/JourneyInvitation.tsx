@@ -1,30 +1,194 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import JourneyService from "../../../../api-service/journey-service/JourneyService";
+import Journey from "../../../../models/journey/Journey";
+import { HTTP_STATUS_OK } from "../../../constants/Constants";
+import AuthContext from "../../auth/AuthContext";
+import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
+import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
+import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
+import NotificationDeclineButton from "../notification-buttons/NotificationDeclineButton";
 import NotificationHeader from "../notification-header/NotificationHeader";
 import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
+import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
+import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
 import NotificationProps from "../NotificationProps";
+import InvitationType from "../../../../models/invitation/InvitationType";
+import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 
 const JourneyInvitation = (props: NotificationProps) => {
-    const [modalVisible, setModalVisible] = useState(props.visible);
+    const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
+    const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
+    const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
+    const [acceptModalVisible, setAcceptModalVisible] = useState(false);
+    const [journey, setJourney] = useState<Journey>();
+    const user = useContext(AuthContext).user;
+    //const data = JSON.parse(props.notificationData);
+
+    useEffect(() => {
+        console.log("getting journey");
+        JourneyService.getJourney(props.journeyId!, false).then(res => {
+            console.log("got journey");
+            setJourney(res.data);
+        });
+    }, []);
+
+    const sendDecline = () => {
+        JourneyService.updateInvitation(
+            {
+                id: 0,
+                type: InvitationType.Rejected,
+                invitedUserId: user!.id,
+                journeyId: journey!.id,
+            }
+        ).then((res) => {
+            if(res.status === HTTP_STATUS_OK) {
+                NotificationsService.addNotification(
+                    {
+                        senderId: user?.id!,
+                        receiverId: journey!.organizer?.id!,
+                        journeyId: props.journeyId!,
+                        type: 7,
+                        jsonData:
+                            "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
+                    }
+                ).then((res) => {
+                    if (res.status == HTTP_STATUS_OK) {
+                        setWithdrawModalVisible(true);
+                        NotificationsService.deleteNotification(props.notificationId);
+                    }
+                });
+            }
+        });
+    };
+
+    const closeAndDelete = () => {
+        setWithdrawModalVisible(false);
+        setNotificationModalVisible(false);
+        if(props.onDelete)
+            props.onDelete(props.notificationId);
+    };
+
+    const acceptInvitation = () => {
+        JourneyService.addUser(
+            {
+                journeyUser: {
+                    journeyId: journey!.id,
+                    userId: user!.id,
+                    withBaggage: false,
+                },
+                ApplicantStops: []
+            }
+        ).then(res => {
+            if (res.status == HTTP_STATUS_OK) {
+                NotificationsService.addNotification(
+                    {
+                        senderId: user?.id!,
+                        receiverId: journey!.organizer?.id!,
+                        journeyId: props.journeyId!,
+                        type: 6,
+                        jsonData:
+                                "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
+                    }
+                ).then((res) => {
+                    if (res.status == HTTP_STATUS_OK) {
+                        JourneyService.updateInvitation(
+                            {
+                                id: 0,
+                                type: InvitationType.Accepted,
+                                invitedUserId: user!.id,
+                                journeyId: journey!.id,
+                            }
+                        ).then(res => {
+                            if (res.status == HTTP_STATUS_OK) {
+                                setAcceptModalVisible(true);
+                                NotificationsService.deleteNotification(props.notificationId);
+                            }
+                        });
+                    }
+                })
+                ;
+            }
+        });
+    };
 
     return (
         <>
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"Journey Invitation (Not implemented!)"}
+                notificationTitle={"Journey Invitation"}
                 read={props.read}
                 date={props.date}
-                openModal={() => setModalVisible(true)}
+                openModal={() => setNotificationModalVisible(true)}
             />
-            <NotificationModalBase isVisible={modalVisible!}>
+            <NotificationModalBase isVisible={notificationModalVisible!}>
                 <NotificationHeader
-                    title="Not implemented!"
-                    message=""
+                    title="Invitation"
+                    message="The driver is inviting you to join a ride!"
                     sender={props.sender}
-                    disableModal={() => setModalVisible(false)}
+                    disableModal={() => setNotificationModalVisible(false)}
                 />
+
+                <NotificationRideDetails
+                    userId={user!.id}
+                    journeyId={props.journeyId!}
+                    withSeats={true}
+                />
+
+                <NotificationRideStops
+                    title={"Your route"}
+                    stopsOwner={user}
+                    journeyId={props.journeyId!}
+                    IsStopsTitleVisible/>
+
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        confirmText={"Ok"}
+                        onConfirm={() => {
+                            acceptInvitation();
+                        }} />
+                    <NotificationDeclineButton
+                        declineText={"Decline"}
+                        onDecline={() => {
+                            setConfirmationModalVisible(true);
+                        }}
+                    />
+
+                </NotificationButtonGroup>
             </NotificationModalBase>
+            <>
+                <ConfirmModal
+                    visible={confirmationModalVisible}
+                    title="ARE YOU SURE?"
+                    subtitle="Are you sure you want to decline the invite?"
+                    confirmText="Yes, decline"
+                    cancelText="No, keep it"
+                    disableModal={() => setConfirmationModalVisible(false)}
+                    onConfirm={() => {
+                        setConfirmationModalVisible(false);
+                        sendDecline();
+                    }}
+                />
+                <ConfirmModal
+                    visible={withdrawModalVisible}
+                    title="Ride is withdrawn"
+                    subtitle="Your refusal was successfully sent to the driver"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={closeAndDelete}
+                    onConfirm={closeAndDelete}
+                />
+                <ConfirmModal
+                    visible={acceptModalVisible}
+                    title="Invitation is accepted!"
+                    subtitle="You were successfully added to the ride!"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={() => {setAcceptModalVisible(false); setNotificationModalVisible(false);}}
+                    onConfirm={() => {setAcceptModalVisible(false); setNotificationModalVisible(false);}}
+                />
+            </>
         </>
     );
 };

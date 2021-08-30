@@ -47,6 +47,7 @@ import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/Shado
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import { Host } from "react-native-portalize";
 import AddressInputPage from "../journey-activity/address-input-page/AddressInputPage";
+import JourneyInvitationsPage from "../journey-activity/journey-invitations/JourneyInvitationsPage";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
@@ -193,6 +194,17 @@ const JourneyTabs = () => {
                     component={JourneyDetailsPage}
                     options={{
                         headerTitle: "Ride Details",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleAlign: "center",
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Journey Invitations"
+                    component={JourneyInvitationsPage}
+                    options={{
+                        headerTitle: "Ride Invitations",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton

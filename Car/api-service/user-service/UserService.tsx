@@ -9,6 +9,8 @@ const route = APIRoutes.getUserUrl();
 const UserService = {
     getUser: async (id: number) => APIService.get<User>(route + id),
 
+    getAllUsers: async () => APIService.get<User[]>(route + "all-users/"),
+
     updateUserImage: async (user: FormData, config: AxiosRequestConfig = {}) => Axios.put<FormData>(
         route + "image",
         user,

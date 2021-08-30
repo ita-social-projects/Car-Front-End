@@ -1,3 +1,4 @@
+import Invitation from "../invitation/Invitation";
 import Stop from "../stop/Stop";
 import JourneyPoint from "./JourneyPoint";
 
@@ -14,6 +15,7 @@ interface JourneyDto {
     isOnOwnCar: boolean,
     journeyPoints: JourneyPoint[],
     stops: Stop[],
+    invitations: Invitation[],
 }
 
 export default JourneyDto;
