@@ -26,7 +26,6 @@ const JourneyDetailsUpdate = (props: NotificationProps) => {
                     message={`The details of the ${props.sender?.name}'s ride have been updated!`}
                     sender={props.sender}
                     disableModal={() => setModalVisible(false)}
-                    withoutSnooze
                 />
 
                 <NotificationButtonGroup>

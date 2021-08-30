@@ -23,7 +23,6 @@ const HRMarketingMessage = (props: NotificationProps) => {
                     message=""
                     sender={props.sender}
                     disableModal={() => setModalVisible(false)}
-                    withoutSnooze
                 />
             </NotificationModalBase>
         </>

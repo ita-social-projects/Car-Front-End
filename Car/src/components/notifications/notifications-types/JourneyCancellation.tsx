@@ -29,7 +29,6 @@ const JourneyCancellation = (props: NotificationProps) => {
                     message={"The driver has canceled \nyour ride!"}
                     sender={props.sender}
                     disableModal={() => setModalVisible(false)}
-                    withoutSnooze
                 />
 
                 <NotificationRideDetails
