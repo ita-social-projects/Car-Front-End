@@ -96,6 +96,26 @@ test("renders correctly", async () =>
         />
         <NotificationRideStops
           IsStopsTitleVisible={true}
+          notification={
+            Object {
+              "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
+              "notificationId": 0,
+              "sender": Object {
+                "email": "Abc",
+                "fcmtoken": null,
+                "hireDate": 2021-01-01T20:00:00.000Z,
+                "id": 0,
+                "imageId": null,
+                "journeyCount": 0,
+                "location": "Abc",
+                "name": "Abc",
+                "position": "Abc",
+                "surname": "Abc",
+                "token": "Abc",
+              },
+            }
+          }
+          onStopPress={[Function]}
           stopsOwner={null}
           title="Your route"
         />
