@@ -224,6 +224,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
             to: to,
             departureTime: departureTime,
             fee: fee,
+            quantity: selectedQuantity.id != null ? selectedQuantity.id : INITIAL_PASSENGERS_COUNT,
         };
 
         AsyncStorage.setItem("searchFilter", JSON.stringify(filterToSave));
@@ -238,7 +239,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 longitude: to.coordinates.longitude
             },
             fee: fee,
-            passengersCount: INITIAL_PASSENGERS_COUNT,
+            passengersCount: filterToSave.quantity,
             userId: Number(user?.id),
             departureTime: departureTime
         };
@@ -263,7 +264,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 toLongitude: to.coordinates.longitude,
                 departureTime: departureTime,
                 hasLuggage: hasLuggage,
-                passengersCount: INITIAL_PASSENGERS_COUNT,
+                passengersCount: selectedQuantity.id != null ? selectedQuantity.id : INITIAL_PASSENGERS_COUNT,
                 fee: fee,
             })
                 .then((res) => {
