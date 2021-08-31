@@ -20,7 +20,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     useEffect(() => {
         JourneyService.getJourney(props.journeyId, true).then(res => {
             setStops(filterStops(res.data?.stops!));
-            setJourneyPoints(res.data?.journeyPoints!);
+            setJourneyPoints(res.data?.journeyPoints);
 
             if (res.data?.stops![FIRST_ELEMENT_INDEX]?.isCancelled) {
                 setColors({ first: "#f20a0a", second: "#a60707" });
