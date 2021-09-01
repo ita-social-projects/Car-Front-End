@@ -7,10 +7,19 @@ import NotificationModalBase from "../notification-modal-base/NotificationModalB
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
+import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
+import Stop from "../../../../models/stop/Stop";
+import JourneyPoint from "../../../../models/journey/JourneyPoint";
 
 const PassengerWithdrawal = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
     const data = JSON.parse(props.notificationData);
+
+    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    {
+        setModalVisible(false);
+        onStopPressHandler(stop,stops,journeyPoints, notification);
+    };
 
     return (
         <>
@@ -41,6 +50,8 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                     title={"Your route"}
                     journeyId={props.journeyId!}
                     stopsOwner={props.sender}
+                    onStopPress={onStopPress}
+                    notification={props}
                 />
 
                 <NotificationButtonGroup>
