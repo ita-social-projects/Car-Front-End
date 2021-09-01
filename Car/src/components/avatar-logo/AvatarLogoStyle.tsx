@@ -13,6 +13,12 @@ const AvatarLogoTitle = StyleSheet.create({
         fontWeight: "700",
         textTransform: "uppercase",
     },
+
+    spinner: {
+        position: "absolute",
+        marginHorizontal: 0,
+        marginVertical: 0,
+    }
 });
 
 export default AvatarLogoTitle;
