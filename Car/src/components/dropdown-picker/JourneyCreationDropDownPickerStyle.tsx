@@ -10,7 +10,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         marginRight: 17,
         borderWidth: 2,
         borderTopWidth: 0,
-        position: "relative",
+        position: "absolute",
     },
 
     style: {

@@ -239,7 +239,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 longitude: to.coordinates.longitude
             },
             fee: fee,
-            passengersCount: filterToSave.quantity,
+            passengersCount: selectedQuantity.id != null ? selectedQuantity.id : INITIAL_PASSENGERS_COUNT,
             userId: Number(user?.id),
             departureTime: departureTime
         };
@@ -328,7 +328,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 </View>
             )}
             {!isLoading && (
-                <View style={[SearchJourneyStyle.screenContainer, { backgroundColor: DM("white") }]}>
+                <ScrollView style={[SearchJourneyStyle.screenContainer,
+                    { backgroundColor: DM("white") }]}
+                >
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
                             iconName={"location"}
@@ -365,29 +367,89 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         isConfirmed={true}
                     />
                     <View>
-                        <ScrollView>
-                            <JourneyCreationDropDownPicker
-                                items={userQuantity.map((car) => ({
-                                    label: car.name,
-                                    value: car.id
-                                }))}
-                                paddingLeft={100}
-                                searchable={true}
-                                placeholder="Passengers:"
-                                isVisible={isVisibleQuantityDropDown}
-                                onOpen={() => setIsVisibleQuantityDropDown(true)}
-                                onChangeItem={(item) => {
-                                    setSelectedQuantity({ id: item.value, name: item.label });
-                                    setIsVisibleQuantityDropDown(false);
-                                }}
-                                valueId={selectedQuantity.id}
-                            />
-                        </ScrollView>
+                        <JourneyCreationDropDownPicker
+                            items={userQuantity.map((car) => ({
+                                label: car.name,
+                                value: car.id
+                            }))}
+                            paddingLeft={100}
+                            searchable={false}
+                            placeholder="Passengers:"
+                            isVisible={isVisibleQuantityDropDown}
+                            onOpen={() => setIsVisibleQuantityDropDown(true)}
+                            onChangeItem={(item) => {
+                                setSelectedQuantity({ id: item.value, name: item.label });
+                                setIsVisibleQuantityDropDown(false);
+                            }}
+                            valueId={selectedQuantity.id}
+                        />
                     </View>
+                    <View style={SwitchSelectorStyle.container}>
+                        <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>Fee</Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <TouchableOpacity
+                                style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
+                                onPress={() => {
+                                    setAllButtonStyle(activeButtonStyle);
+                                    setFreeButtonStyle(inactiveButtonStyle);
+                                    setPaidButtonStyle(inactiveButtonStyle);
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        SwitchSelectorStyle.buttonText,
+                                        allButtonStyle,
+                                    ]}
+                                >
+                                    All
+                                </Text>
+                            </TouchableOpacity>
 
-                    <View style={SearchJourneyStyle.buttonContainer}>
+                            <TouchableOpacity
+                                style={[
+                                    SwitchSelectorStyle.leftButton,
+                                    freeButtonStyle,
+                                ]}
+                                onPress={() => {
+                                    setAllButtonStyle(inactiveButtonStyle);
+                                    setFreeButtonStyle(activeButtonStyle);
+                                    setPaidButtonStyle(inactiveButtonStyle);
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        SwitchSelectorStyle.buttonText,
+                                        freeButtonStyle,
+                                    ]}
+                                >
+                                    Free
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[
+                                    SwitchSelectorStyle.rightButton,
+                                    paidButtonStyle,
+                                ]}
+                                onPress={() => {
+                                    setAllButtonStyle(inactiveButtonStyle);
+                                    setFreeButtonStyle(inactiveButtonStyle);
+                                    setPaidButtonStyle(activeButtonStyle);
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        SwitchSelectorStyle.buttonText,
+                                        paidButtonStyle,
+                                    ]}
+                                >
+                                    Paid
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={[SearchJourneyStyle.publishButtonContainer]}>
                         <TouchableOpacity
-                            style={[CreateJourneyStyle.publishButton,
+                            style={[SearchJourneyStyle.publishButton,
                                 {
                                     backgroundColor: !(to.isConfirmed && from.isConfirmed) ?
                                         DM("gray") : DM("black"),
@@ -403,7 +465,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                </View>
+                </ScrollView>
             )}
             {isRequest && (
                 <>
