@@ -33,7 +33,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -41,6 +41,7 @@ import TouchableDateTimePicker, { addMinutesToDate } from "../../../../component
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 import DM from "../../../../components/styles/DM";
+import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -193,8 +194,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.updateDetails(updatedJourney)
-            .then(() => setSuccessfullyUpdateModalIsVisible(true))
-            .catch(() => setModal(publishErrorModal));
+            .then((res) => {
+                if(res.status === HTTP_STATUS_OK)
+                {
+                    setSuccessfullyUpdateModalIsVisible(true);
+                }
+                else{
+                    setModal(updateErrorModal);
+                }
+
+            })
+            .catch(() => setModal(updateErrorModal));
 
         setRideIsPublishing(false);
     };

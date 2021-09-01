@@ -111,6 +111,7 @@ test("renders correctly", async () =>
                 "journeyCount": 0,
                 "location": "Abc",
                 "name": "Abc",
+                "phoneNumber": null,
                 "position": "Abc",
                 "surname": "Abc",
                 "token": "Abc",

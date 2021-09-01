@@ -18,3 +18,9 @@ export const publishErrorModal: ConfirmModalProps = {
     title: "Error",
     subtitle: "Ride publishing is failed",
 };
+
+export const updateErrorModal: ConfirmModalProps = {
+    ...commonField,
+    title: "Error",
+    subtitle: "Ride update is failed",
+};
