@@ -10,6 +10,7 @@ import NotificationRideStops from "../notification-ride-stops/NotificationRideSt
 
 const PassengerWithdrawal = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
+    const data = JSON.parse(props.notificationData);
 
     return (
         <>
@@ -32,6 +33,8 @@ const PassengerWithdrawal = (props: NotificationProps) => {
 
                 <NotificationRideDetails
                     journeyId={props.journeyId!}
+                    userId={props.sender?.id!}
+                    journeyUser={data.journeyUser}
                 />
 
                 <NotificationRideStops

@@ -65,9 +65,14 @@ const RouteView = (props: RouteViewProps) => {
 
     const approveUser = () => {
         JourneyService.addUser(
-            params.notification?.journeyId!,
-            params.notification?.sender?.id!,
-            data?.applicantStops
+            {
+                journeyUser: {
+                    journeyId: params.notification?.journeyId!,
+                    userId: params.notification?.sender?.id!,
+                    withBaggage: data?.hasLuggage
+                },
+                ApplicantStops: data?.applicantStops
+            }
         ).then((res) => {
             if(res.status === HTTP_STATUS_OK && res.data) {
                 sendApprove();

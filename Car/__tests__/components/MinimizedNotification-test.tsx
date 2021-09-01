@@ -15,6 +15,7 @@ const testUser: User = {
     hireDate: new Date(0),
     imageId: "string | null",
     journeyCount: 0,
+    phoneNumber: null,
 };
 
 test("renders correctly", async () =>

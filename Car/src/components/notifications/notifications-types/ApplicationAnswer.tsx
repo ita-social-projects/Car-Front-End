@@ -33,7 +33,6 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
-    const data = JSON.parse(props.notification.notificationData);
 
     const sendWithdraw = () => {
         JourneyService.deleteUser(
@@ -69,12 +68,12 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     title={props.notificationHeaderTittle}
                     message={props.notificationHeaderMessage}
                     sender={props.notification.sender}
-                    withoutSnooze
                     disableModal={() => setNotificationModalVisible(false)}
                 />
 
-                <NotificationRideDetails withBaggage = {data?.hasLuggage}
+                <NotificationRideDetails
                     journeyId={props.notification.journeyId!}
+                    userId={user?.id!}
                     IsAvailableSeatsVisible={props.IsAvailableSeatsVisible}
                     IsBaggageVisible={props.IsBaggageVisible}
                     IsDepartureTimeVisible={props.IsDepartureTimeVisible}

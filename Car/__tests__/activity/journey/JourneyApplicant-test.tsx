@@ -27,5 +27,15 @@ test("renders correctly", async () =>
         size="large"
         text="Loading information..."
       />
+      <ConfirmModal
+        cancelText="Copy number"
+        confirmColor="#d80056"
+        confirmText="Call undefined"
+        disableModal={[Function]}
+        hideCancelButton={false}
+        onConfirm={[Function]}
+        title="undefined undefined"
+        visible={false}
+      />
     </View>
   `));

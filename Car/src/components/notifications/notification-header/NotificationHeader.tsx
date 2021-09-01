@@ -17,7 +17,7 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
                             {props.title}
                         </Text>
                     </View>
-                    {!props.withoutSnooze &&
+                    {props.withSnooze &&
                         <TouchableOpacity
                             onPress={props.disableModal}
                         >
