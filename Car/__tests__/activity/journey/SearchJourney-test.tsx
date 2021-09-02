@@ -262,9 +262,12 @@ describe("JourneySearch Test", () => {
               Array [
                 Object {
                   "alignItems": "flex-end",
+                  "flex": 10,
                   "flexDirection": "row",
+                  "height": "100%",
                   "justifyContent": "flex-end",
                   "marginVertical": 24,
+                  "paddingTop": "60%",
                 },
               ]
             }

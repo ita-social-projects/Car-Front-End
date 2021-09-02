@@ -88,6 +88,9 @@ const SearchJourneyStyle = StyleSheet.create({
         marginVertical: 24,
         flexDirection: "row",
         justifyContent: "flex-end",
+        flex: 10,
+        height: "100%",
+        paddingTop: "60%",
     },
 
     publishButton: {

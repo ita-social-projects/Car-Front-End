@@ -328,8 +328,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 </View>
             )}
             {!isLoading && (
-                <ScrollView style={[SearchJourneyStyle.screenContainer,
-                    { backgroundColor: DM("white") }]}
+                <ScrollView
+                    style={[SearchJourneyStyle.screenContainer,
+                        { backgroundColor: DM("white") }]}
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
