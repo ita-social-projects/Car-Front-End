@@ -182,12 +182,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const updatedJourney: JourneyDto = {
             ...journey,
-            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
+            carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
             comments: comment.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: freeButtonStyle === activeButtonStyle,
-            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
+            isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
+            isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
             organizerId: Number(journey.organizer?.id)
         };
