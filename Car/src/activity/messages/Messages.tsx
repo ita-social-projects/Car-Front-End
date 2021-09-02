@@ -79,7 +79,7 @@ const Messages = (props: MessagesProps) => {
     };
 
     const textHighlight = (textToHighlight: string, searchWords: string[]) => {
-        const chunks = findAll({ textToHighlight, searchWords });
+        const chunks = findAll({ textToHighlight, searchWords, autoEscape: true });
 
         return (
             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
