@@ -10,6 +10,7 @@ type User = null | {
     hireDate: Date;
     imageId: string | null;
     journeyCount: number;
+    phoneNumber: number | null;
 };
 
 export default User;

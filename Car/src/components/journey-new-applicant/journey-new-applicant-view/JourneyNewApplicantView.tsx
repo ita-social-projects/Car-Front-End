@@ -101,9 +101,14 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     };
     const approveUser = () => {
         JourneyService.addUser(
-            params.journeyId!,
-            params.sender?.id!,
-            data?.applicantStops
+            {
+                journeyUser: {
+                    journeyId: params.journeyId!,
+                    userId: params.sender?.id!,
+                    withBaggage: data?.hasLuggage
+                },
+                ApplicantStops: data?.applicantStops
+            }
         ).then((res) => {
             if(res.status === HTTP_STATUS_OK && res.data) {
                 sendApprove();

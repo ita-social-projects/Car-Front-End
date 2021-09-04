@@ -1,9 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
-import AuthContext from "../../../../components/auth/AuthContext";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
@@ -12,7 +11,6 @@ import DM from "../../../../components/styles/DM";
 import NavigationAddListener from "../../../../types/NavigationAddListener";
 
 const Cars = (props: NavigationAddListener) => {
-    const { user } = useContext(AuthContext);
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -23,7 +21,7 @@ const Cars = (props: NavigationAddListener) => {
     }, []);
 
     const loadCars = () => {
-        CarService.getAll(Number(user?.id)).then((res) => {
+        CarService.getAll().then((res) => {
             setCars(res.data);
             setLoading(false);
             setRefreshing(false);

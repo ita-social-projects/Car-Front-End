@@ -15,6 +15,7 @@ const testUser: User = {
     hireDate: new Date(0),
     imageId: "string | null",
     journeyCount: 0,
+    phoneNumber: null,
 };
 
 test("renders correctly", async () =>
@@ -72,12 +73,7 @@ test("renders correctly", async () =>
             }
           >
             <View>
-              <Image
-                source={
-                  Object {
-                    "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
-                  }
-                }
+              <View
                 style={
                   Array [
                     Object {
@@ -86,13 +82,48 @@ test("renders correctly", async () =>
                       "justifyContent": "center",
                     },
                     Object {
-                      "backgroundColor": "#6a88d6",
+                      "backgroundColor": "transparent",
                       "height": 38.5,
                       "width": 38.5,
                     },
                   ]
                 }
-              />
+              >
+                <ActivityIndicator
+                  animating={true}
+                  color="#414045"
+                  hidesWhenStopped={true}
+                  size={17.906976744186046}
+                  style={
+                    Object {
+                      "marginHorizontal": 0,
+                      "marginVertical": 0,
+                      "position": "absolute",
+                    }
+                  }
+                />
+                <Image
+                  source={
+                    Object {
+                      "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
+                    }
+                  }
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "borderRadius": 1000,
+                        "justifyContent": "center",
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                        "height": 38.5,
+                        "width": 38.5,
+                      },
+                    ]
+                  }
+                />
+              </View>
             </View>
             <View>
               <Text
@@ -205,12 +236,7 @@ test("renders correctly", async () =>
             }
           >
             <View>
-              <Image
-                source={
-                  Object {
-                    "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
-                  }
-                }
+              <View
                 style={
                   Array [
                     Object {
@@ -219,13 +245,48 @@ test("renders correctly", async () =>
                       "justifyContent": "center",
                     },
                     Object {
-                      "backgroundColor": "#6a88d6",
+                      "backgroundColor": "transparent",
                       "height": 38.5,
                       "width": 38.5,
                     },
                   ]
                 }
-              />
+              >
+                <ActivityIndicator
+                  animating={true}
+                  color="#414045"
+                  hidesWhenStopped={true}
+                  size={17.906976744186046}
+                  style={
+                    Object {
+                      "marginHorizontal": 0,
+                      "marginVertical": 0,
+                      "position": "absolute",
+                    }
+                  }
+                />
+                <Image
+                  source={
+                    Object {
+                      "uri": "https://carstorageaccount.blob.core.windows.net/images/string | null",
+                    }
+                  }
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "borderRadius": 1000,
+                        "justifyContent": "center",
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                        "height": 38.5,
+                        "width": 38.5,
+                      },
+                    ]
+                  }
+                />
+              </View>
             </View>
             <View>
               <Text

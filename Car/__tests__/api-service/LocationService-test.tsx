@@ -11,7 +11,6 @@ describe("Location Service test", () => {
         address: null,
         name: "ABC",
         typeId: 1,
-        userId: 1,
     }];
     let updateLocationModelData: UpdateLocationModel[] = [{
         id: 1,
@@ -45,7 +44,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        LocationService.getAll(1).then((res) => {
+        LocationService.getAll().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(locationData));
         });

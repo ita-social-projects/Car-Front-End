@@ -21,6 +21,7 @@ test("renders correctly", async () =>
                         hireDate: new Date("2021-01-01T20:00:00.000Z"),
                         imageId: null,
                         journeyCount: 0,
+                        phoneNumber: null,
                     },
                     notificationData: `{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`,
                     notificationId: 0,
@@ -53,6 +54,7 @@ test("renders correctly", async () =>
             "journeyCount": 0,
             "location": "Abc",
             "name": "Abc",
+            "phoneNumber": null,
             "position": "Abc",
             "surname": "Abc",
             "token": "Abc",
@@ -79,13 +81,13 @@ test("renders correctly", async () =>
               "journeyCount": 0,
               "location": "Abc",
               "name": "Abc",
+              "phoneNumber": null,
               "position": "Abc",
               "surname": "Abc",
               "token": "Abc",
             }
           }
           title="Header Title"
-          withoutSnooze={true}
         />
         <NotificationRideDetails
           IsAvailableSeatsVisible={true}
@@ -93,10 +95,30 @@ test("renders correctly", async () =>
           IsDepartureTimeVisible={true}
           IsDetailsTitleVisible={true}
           IsFeeVisible={true}
-          withBaggage="true"
         />
         <NotificationRideStops
           IsStopsTitleVisible={true}
+          notification={
+            Object {
+              "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
+              "notificationId": 0,
+              "sender": Object {
+                "email": "Abc",
+                "fcmtoken": null,
+                "hireDate": 2021-01-01T20:00:00.000Z,
+                "id": 0,
+                "imageId": null,
+                "journeyCount": 0,
+                "location": "Abc",
+                "name": "Abc",
+                "phoneNumber": null,
+                "position": "Abc",
+                "surname": "Abc",
+                "token": "Abc",
+              },
+            }
+          }
+          onStopPress={[Function]}
           stopsOwner={null}
           title="Your route"
         />

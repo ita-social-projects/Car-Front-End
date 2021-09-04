@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Platform, TextInput, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
 import {
@@ -14,7 +14,6 @@ import Geolocation from "@react-native-community/geolocation";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import AddLocationStyle from "./AddLocationStyle";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
-import AuthContext from "../../../../../../components/auth/AuthContext";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
 import {
     androidPermission,
@@ -30,9 +29,6 @@ import { isDarkMode } from "../../../../../../components/navigation/Routes";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const AddLocation = () => {
-
-    const { user } = useContext(AuthContext);
-
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
@@ -127,7 +123,6 @@ const AddLocation = () => {
                 longitude:wayPoint.coordinates.longitude
             },
             typeId: selectedLocationType.id,
-            userId: Number(user?.id),
         });
     };
 

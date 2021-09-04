@@ -33,7 +33,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -41,6 +41,7 @@ import TouchableDateTimePicker, { addMinutesToDate } from "../../../../component
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 import DM from "../../../../components/styles/DM";
+import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -77,22 +78,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         borderColor: DM("#000000")
     };
 
-    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(
-        journey?.isOnOwnCar && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
-    const [taxiButtonStyle, setTaxiButtonStyle] = useState(
-        journey?.isOnOwnCar && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
+    const setButtonStyle = (shouldBeHighlighted : boolean) =>{
+        if(shouldBeHighlighted)
+            return activeButtonStyle;
 
-    const [freeButtonStyle, setFreeButtonStyle] = useState(
-        journey?.isFree && journey || !journey ? inactiveButtonStyle : activeButtonStyle);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(
-        journey?.isFree && journey || !journey ? activeButtonStyle : inactiveButtonStyle);
+        return inactiveButtonStyle;
+    };
+
+    let highlightOwnCarButton : boolean = !journey || journey?.isOnOwnCar;
+    const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
+    const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
+
+    let highlightPaidButton : boolean = !journey || !journey?.isFree;
+    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
+    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
     const [departureTime, setDepartureTime] = useState<Date>(journey ?
         moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
         addMinutesToDate(new Date(), MINUTES_OFFSET));
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
-    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar && journey || !journey);
+    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
 
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
@@ -112,7 +118,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
 
     useEffect(() => {
-        CarService.getAll(Number(user?.id)).then(result => {
+        CarService.getAll().then(result => {
             setUserCars(result.data.map(car => (
                 {
                     id: Number(car?.id),
@@ -127,7 +133,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
 
         LocationService
-            .getAll(Number(user?.id))
+            .getAll()
             .then((res) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
@@ -177,19 +183,28 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const updatedJourney: JourneyDto = {
             ...journey,
-            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
+            carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
             comments: comment.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: freeButtonStyle === activeButtonStyle,
-            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
+            isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
+            isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
             organizerId: Number(journey.organizer?.id)
         };
 
         await JourneyService.updateDetails(updatedJourney)
-            .then(() => setSuccessfullyUpdateModalIsVisible(true))
-            .catch(() => setModal(publishErrorModal));
+            .then((res) => {
+                if(res.status === HTTP_STATUS_OK)
+                {
+                    setSuccessfullyUpdateModalIsVisible(true);
+                }
+                else{
+                    setModal(updateErrorModal);
+                }
+
+            })
+            .catch(() => setModal(updateErrorModal));
 
         setRideIsPublishing(false);
     };

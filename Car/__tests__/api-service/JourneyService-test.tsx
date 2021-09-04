@@ -2,6 +2,9 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../../api-service/APIService";
 import JourneyService from "../../api-service/journey-service/JourneyService";
+import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
+import JourneyUserDto from "../../models/journey-user/JourneyUserDto";
+import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
 import FeeType from "../../models/journey/FeeType";
 import FilterJourney from "../../models/journey/FilterJourneyModel";
 import Journey from "../../models/journey/Journey";
@@ -25,6 +28,12 @@ describe("Journey Service test", () => {
         stops: [],
         journeyPoints: []
     }];
+
+    let journeyUserData: JourneyUserDto = {
+        journeyId: 1,
+        userId: 1,
+        withBaggage: true
+    };
 
     let stopsData: Stop[][] = [[{
         address: null,
@@ -81,6 +90,16 @@ describe("Journey Service test", () => {
         isCancelled: false
     }]];
 
+    let journeyApplyData: JourneyApplyModel = {
+        journeyUser: journeyUserData,
+        ApplicantStops: stopsData[0]
+    };
+
+    let journeyWithUserData: JourneyWithUserModel = {
+        item1: journeyData[0],
+        item2: journeyUserData
+    };
+
     let journeyDTO : JourneyDto = {
         id: 0,
         routeDistance: 1,
@@ -129,6 +148,27 @@ describe("Journey Service test", () => {
         });
     });
 
+    test("should return journey with journey user", async () => {
+        jest.spyOn(APIService, "get").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<JourneyWithUserModel>>(function (resolve) {
+                    resolve({
+                        data: journeyWithUserData,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+        JourneyService.getJourneyWithJourneyUser(1,1).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyWithUserData));
+        });
+    });
+
     test("should return past journeys", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
@@ -144,7 +184,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getPastJourneys(1).then((res) => {
+        JourneyService.getPastJourneys().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -165,7 +205,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getUpcomingJourneys(1).then((res) => {
+        JourneyService.getUpcomingJourneys().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -186,7 +226,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getScheduledJourneys(1).then((res) => {
+        JourneyService.getScheduledJourneys().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData));
         });
@@ -207,7 +247,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.getRecentJourneyStops(1).then((res) => {
+        JourneyService.getRecentJourneyStops().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(stopsData));
         });
@@ -227,7 +267,7 @@ describe("Journey Service test", () => {
                     });
                 })
         );
-        JourneyService.addUser(1,1, stopsData[0]).then((res) => {
+        JourneyService.addUser(journeyApplyData).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(true));
         });

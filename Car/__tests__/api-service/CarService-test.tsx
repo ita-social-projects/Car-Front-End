@@ -50,7 +50,7 @@ describe("Location Service test", () => {
                     });
                 })
         );
-        CarService.getAll(1).then((res) => {
+        CarService.getAll().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(carViewModelData));
         });

@@ -20,6 +20,7 @@ test("renders correctly", async () =>
                     hireDate: new Date("2021-01-01T20:00:00.000Z"),
                     imageId: null,
                     journeyCount: 0,
+                    phoneNumber: null,
                 }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
                 notificationId={0}
@@ -41,6 +42,7 @@ test("renders correctly", async () =>
             "journeyCount": 0,
             "location": "Abc",
             "name": "Abc",
+            "phoneNumber": null,
             "position": "Abc",
             "surname": "Abc",
             "token": "Abc",

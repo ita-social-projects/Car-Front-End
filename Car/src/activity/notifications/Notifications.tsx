@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Swipeable } from "react-native-gesture-handler";
 import NotificationsService from "../../../api-service/notifications-service/NotificationsService";
 import Notification from "../../../models/notification/Notification";
-import AuthContext from "../../components/auth/AuthContext";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
 import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
@@ -30,11 +29,10 @@ const CustomDelete = (props: { pressHandler: () => void }) => {
 };
 
 const Notifications = (props: NavigationAddAndRemoveListener) => {
-    const { user } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
-        NotificationsService.getUnreadNotificationsNumber(user?.id)
+        NotificationsService.getUnreadNotificationsNumber()
     );
     const [prevOpened, setPrevOpened] = useState<Swipeable>();
     const isFocused = useIsFocused();
@@ -43,7 +41,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
 
     const refreshNotification = () => {
 
-        NotificationsService.getNotifications(Number(user?.id)).then((res) => {
+        NotificationsService.getNotifications().then((res) => {
             if (res.data) {
                 setNotifications(res.data);
             }

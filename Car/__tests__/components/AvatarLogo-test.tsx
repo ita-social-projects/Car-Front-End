@@ -54,12 +54,7 @@ test("renders correctly", async () =>
             )
             .toJSON()
     ).toMatchInlineSnapshot(`
-    <Image
-      source={
-        Object {
-          "uri": "https://carstorageaccount.blob.core.windows.net/images/AbCdE",
-        }
-      }
+    <View
       style={
         Array [
           Object {
@@ -68,13 +63,48 @@ test("renders correctly", async () =>
             "justifyContent": "center",
           },
           Object {
-            "backgroundColor": "#c3b2b6",
+            "backgroundColor": "transparent",
             "height": undefined,
             "width": undefined,
           },
         ]
       }
-    />
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#414045"
+        hidesWhenStopped={true}
+        size={NaN}
+        style={
+          Object {
+            "marginHorizontal": 0,
+            "marginVertical": 0,
+            "position": "absolute",
+          }
+        }
+      />
+      <Image
+        source={
+          Object {
+            "uri": "https://carstorageaccount.blob.core.windows.net/images/AbCdE",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 1000,
+              "justifyContent": "center",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "height": undefined,
+              "width": undefined,
+            },
+          ]
+        }
+      />
+    </View>
   `));
 
 test("renders correctly", async () =>

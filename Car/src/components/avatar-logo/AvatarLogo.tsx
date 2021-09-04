@@ -1,9 +1,10 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View, ActivityIndicator } from "react-native";
 import stc from "string-to-color";
 import ImageService from "../../../api-service/image-service/ImageService";
 import {
     AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
+    AVATAR_LOGO_SIZE_TO_SPINER_RATIO,
     AVATAR_LOGO_SIZE_TO_TEXT_RATIO
 } from "../../constants/StylesConstants";
 import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
@@ -24,7 +25,7 @@ const AvatarLogo = (props: AvatarLogoProps) => {
         {
             height: props?.size,
             width: props?.size,
-            backgroundColor: backgroundColor
+            backgroundColor: props.user?.imageId ? "transparent" : backgroundColor
         }
     ];
 
@@ -38,10 +39,19 @@ const AvatarLogo = (props: AvatarLogoProps) => {
 
     return (
         props.user?.imageId ? (
-            <Image
-                source={{ uri: ImageService.getImageById(props.user?.imageId) }}
+            <View
                 style={avatarStyle}
-            />
+            >
+                <ActivityIndicator
+                    style={AvatarLogoStyle.spinner}
+                    size={size / AVATAR_LOGO_SIZE_TO_SPINER_RATIO}
+                    color={DM("#414045")}
+                />
+                <Image
+                    source={{ uri: ImageService.getImageById(props.user?.imageId) }}
+                    style={avatarStyle}
+                />
+            </View>
         ) : (
             <View
                 style={avatarStyle}

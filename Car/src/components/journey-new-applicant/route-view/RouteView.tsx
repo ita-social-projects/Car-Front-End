@@ -24,7 +24,8 @@ interface RouteViewProps {
             journeyPoints: JourneyPoint[],
             stops: Stop[],
             cameraCoordinates: LatLng,
-            notification: NotificationProps
+            notification: NotificationProps,
+            withoutAccept?: boolean
         }
     }
 }
@@ -65,9 +66,14 @@ const RouteView = (props: RouteViewProps) => {
 
     const approveUser = () => {
         JourneyService.addUser(
-            params.notification?.journeyId!,
-            params.notification?.sender?.id!,
-            data?.applicantStops
+            {
+                journeyUser: {
+                    journeyId: params.notification?.journeyId!,
+                    userId: params.notification?.sender?.id!,
+                    withBaggage: data?.hasLuggage
+                },
+                ApplicantStops: data?.applicantStops
+            }
         ).then((res) => {
             if(res.status === HTTP_STATUS_OK && res.data) {
                 sendApprove();
@@ -97,36 +103,40 @@ const RouteView = (props: RouteViewProps) => {
 
                 {params.stops.map(mapStopToMarker)}
             </MapView>
-            <TouchableOpacity onPress = {approveUser}
-                style={[SearchJourneyStyle.confirmButton, { backgroundColor: "black" }]}
-            >
-                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+            {!props.route.params.withoutAccept &&
+            <>
+                <TouchableOpacity onPress = {approveUser}
+                    style={[SearchJourneyStyle.confirmButton, { backgroundColor: "black" }]}
+                >
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
                     ACCEPT
-                </Text>
-            </TouchableOpacity>
-            <ConfirmModal
-                visible={approveModalVisible}
-                title="Request is approved"
-                subtitle="Your approvement was successfully sent to the applicant!"
-                confirmText="Ok"
-                hideCancelButton={true}
-                disableModal={navigateBack}
-                onConfirm={navigateBack}
-            />
+                    </Text>
+                </TouchableOpacity>
+                <ConfirmModal
+                    visible={approveModalVisible}
+                    title="Request is approved"
+                    subtitle="Your approvement was successfully sent to the applicant!"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={navigateBack}
+                    onConfirm={navigateBack}
+                />
 
-            <ConfirmModal
-                visible={errorModalVisible}
-                title="Error"
-                subtitle="Failed to add the user to the ride!"
-                confirmText="Ok"
-                hideCancelButton={true}
-                disableModal={() => {
-                    setErrorModalVisible(false);
-                }}
-                onConfirm={() => {
-                    setErrorModalVisible(false);
-                }}
-            />
+                <ConfirmModal
+                    visible={errorModalVisible}
+                    title="Error"
+                    subtitle="Failed to add the user to the ride!"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={() => {
+                        setErrorModalVisible(false);
+                    }}
+                    onConfirm={() => {
+                        setErrorModalVisible(false);
+                    }}
+                />
+            </>
+            }
         </>
     );
 };
