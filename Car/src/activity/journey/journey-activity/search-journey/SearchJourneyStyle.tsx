@@ -46,7 +46,7 @@ const SearchJourneyStyle = StyleSheet.create({
 
     screenContainer: {
         width: "100%",
-        height: "100%"
+        height: "100%",
     },
 
     mapContainer: {
@@ -83,10 +83,23 @@ const SearchJourneyStyle = StyleSheet.create({
         lineHeight: 20
     },
 
-    buttonContainer: {
-        flex: 1,
+    publishButtonContainer: {
         alignItems: "flex-end",
-        flexDirection: "row-reverse",
+        marginVertical: 24,
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        flex: 10,
+        height: "100%",
+        paddingTop: "60%",
+    },
+
+    publishButton: {
+        marginRight: 20,
+        marginBottom: 20,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        flexDirection: "row",
+        borderWidth: 2,
     },
 });
 

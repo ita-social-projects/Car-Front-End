@@ -26,7 +26,7 @@ describe("JourneySearch Test", () => {
         wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
         expect(toJSON(wrapper)).toMatchInlineSnapshot(`
       <Fragment>
-        <View
+        <ScrollView
           style={
             Array [
               Object {
@@ -67,6 +67,37 @@ describe("JourneySearch Test", () => {
             isConfirmed={true}
             setDate={[Function]}
           />
+          <View>
+            <JourneyCreationDropDownPicker
+              isVisible={false}
+              items={
+                Array [
+                  Object {
+                    "label": "1",
+                    "value": 1,
+                  },
+                  Object {
+                    "label": "2",
+                    "value": 2,
+                  },
+                  Object {
+                    "label": "3",
+                    "value": 3,
+                  },
+                  Object {
+                    "label": "4",
+                    "value": 4,
+                  },
+                ]
+              }
+              onChangeItem={[Function]}
+              onOpen={[Function]}
+              paddingLeft={100}
+              placeholder="Passengers:"
+              searchable={false}
+              valueId={1}
+            />
+          </View>
           <View
             style={
               Object {
@@ -228,11 +259,17 @@ describe("JourneySearch Test", () => {
           </View>
           <View
             style={
-              Object {
-                "alignItems": "flex-end",
-                "flex": 1,
-                "flexDirection": "row-reverse",
-              }
+              Array [
+                Object {
+                  "alignItems": "flex-end",
+                  "flex": 10,
+                  "flexDirection": "row",
+                  "height": "100%",
+                  "justifyContent": "flex-end",
+                  "marginVertical": 24,
+                  "paddingTop": "60%",
+                },
+              ]
             }
           >
             <ForwardRef
@@ -275,7 +312,7 @@ describe("JourneySearch Test", () => {
               </Text>
             </ForwardRef>
           </View>
-        </View>
+        </ScrollView>
       </Fragment>
     `);
     });
