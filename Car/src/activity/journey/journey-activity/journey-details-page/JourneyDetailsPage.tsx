@@ -33,7 +33,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -45,6 +45,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
 import Invitation from "../../../../../models/invitation/Invitation";
+import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -208,12 +209,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         const updatedJourney: JourneyDto = {
             ...journey,
-            carId: ownCarButtonStyle === activeButtonStyle ? selectedCar.id : null,
+            carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
             comments: comment.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: freeButtonStyle === activeButtonStyle,
-            isOnOwnCar: ownCarButtonStyle === activeButtonStyle,
+            isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
+            isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
             invitations: newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
                 return {
@@ -226,8 +227,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.updateDetails(updatedJourney)
-            .then(() => setSuccessfullyUpdateModalIsVisible(true))
-            .catch(() => setModal(publishErrorModal));
+            .then((res) => {
+                if(res.status === HTTP_STATUS_OK)
+                {
+                    setSuccessfullyUpdateModalIsVisible(true);
+                }
+                else{
+                    setModal(updateErrorModal);
+                }
+
+            })
+            .catch(() => setModal(updateErrorModal));
 
         setRideIsPublishing(false);
     };

@@ -8,10 +8,19 @@ import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
 import AuthContext from "../../auth/AuthContext";
+import Stop from "../../../../models/stop/Stop";
+import JourneyPoint from "../../../../models/journey/JourneyPoint";
+import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
 
 const RejectedInvitation = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
     const user = useContext(AuthContext).user;
+
+    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    {
+        setNotificationModalVisible(false);
+        onStopPressHandler(stop,stops,journeyPoints, notification);
+    };
 
     return (
         <>
@@ -40,7 +49,9 @@ const RejectedInvitation = (props: NotificationProps) => {
                     title={"Your route"}
                     stopsOwner={user}
                     journeyId={props.journeyId!}
-                    IsStopsTitleVisible/>
+                    IsStopsTitleVisible
+                    onStopPress = {onStopPress}
+                    notification = {props}/>
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />

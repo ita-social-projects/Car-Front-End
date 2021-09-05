@@ -15,6 +15,9 @@ import NotificationRideStops from "../notification-ride-stops/NotificationRideSt
 import NotificationProps from "../NotificationProps";
 import InvitationType from "../../../../models/invitation/InvitationType";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
+import Stop from "../../../../models/stop/Stop";
+import JourneyPoint from "../../../../models/journey/JourneyPoint";
+import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
 
 const JourneyInvitation = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
@@ -23,7 +26,6 @@ const JourneyInvitation = (props: NotificationProps) => {
     const [acceptModalVisible, setAcceptModalVisible] = useState(false);
     const [journey, setJourney] = useState<Journey>();
     const user = useContext(AuthContext).user;
-    //const data = JSON.parse(props.notificationData);
 
     useEffect(() => {
         console.log("getting journey");
@@ -32,6 +34,12 @@ const JourneyInvitation = (props: NotificationProps) => {
             setJourney(res.data);
         });
     }, []);
+
+    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    {
+        setNotificationModalVisible(false);
+        onStopPressHandler(stop,stops,journeyPoints, notification);
+    };
 
     const sendDecline = () => {
         JourneyService.updateInvitation(
@@ -140,7 +148,9 @@ const JourneyInvitation = (props: NotificationProps) => {
                     title={"Your route"}
                     stopsOwner={user}
                     journeyId={props.journeyId!}
-                    IsStopsTitleVisible/>
+                    IsStopsTitleVisible
+                    onStopPress = {onStopPress}
+                    notification = {props}/>
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton

@@ -10,7 +10,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         marginRight: 17,
         borderWidth: 2,
         borderTopWidth: 0,
-        borderColor: "gray",
+        position: "absolute",
     },
 
     style: {
@@ -24,7 +24,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         borderTopRightRadius: 0,
         borderTopLeftRadius: 0,
         borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0
+        borderBottomRightRadius: 0,
     },
 
     arrow: {

@@ -8,11 +8,14 @@ import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import NotificationDeclineButton from "../notification-buttons/NotificationDeclineButton";
 import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
+import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import AuthContext from "../../auth/AuthContext";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
+import Stop from "../../../../models/stop/Stop";
+import JourneyPoint from "../../../../models/journey/JourneyPoint";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -33,6 +36,12 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
+
+    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    {
+        setNotificationModalVisible(false);
+        onStopPressHandler(stop,stops,journeyPoints, notification);
+    };
 
     const sendWithdraw = () => {
         JourneyService.deleteUser(
@@ -84,7 +93,10 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     title={"Your route"}
                     stopsOwner={user}
                     journeyId={props.notification.journeyId!}
-                    IsStopsTitleVisible/>
+                    IsStopsTitleVisible
+                    onStopPress = {onStopPress}
+                    notification = {props.notification}
+                />
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />
