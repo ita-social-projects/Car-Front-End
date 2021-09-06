@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
     ScrollView,
-    StyleSheet,
     Text, TextInput, ToastAndroid, TouchableOpacity, View
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -13,6 +12,7 @@ import { DELETE_COUNT, ZERO } from "../../../../constants/GeneralConstants";
 import { CREATING_FONT_SIZE } from "../../../../constants/JourneyConstants";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import JourneyInvitationsPageProps from "./JourneyInvitationsPageProps";
+import { JourneyInvitationsPageStyle } from "./JourneyInvitationsPageStyle";
 
 const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     const params = props.route.params;
@@ -63,25 +63,6 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
         return (id === ZERO) ? "" : allUsers.find((us) => us?.id === id)!.email;
     };
 
-    const styles = StyleSheet.create({
-        row: {
-            flexDirection: "row",
-            alignItems: "center",
-            paddingRight: 50,
-            justifyContent: "space-between"
-        },
-        clearIcon: {
-            position: "absolute",
-            top: 15,
-            right: 10
-        },
-        statusIcon: {
-            position: "absolute",
-            top: 15,
-            right: 30
-        },
-    });
-
     return (
         <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: DM("white") }]}>
             {
@@ -89,7 +70,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                     <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Existing
                         invitation</Text>
                     {existingInvitations.map((us, index) => (
-                        <View key={index} style={styles.row}>
+                        <View key={index} style={JourneyInvitationsPageStyle.row}>
                             <Text style={{ color: DM("#686262"), paddingTop: 5 }}>{
                                 getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
                             <Text style={{ color: DM("#686262"), paddingTop: 5 }}>
@@ -118,7 +99,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         />
 
                         <TouchableOpacity
-                            style={styles.clearIcon}
+                            style={JourneyInvitationsPageStyle.clearIcon}
                             onPress={() => onInvitationDeleteIconPress(index)}
                         >
                             <Ionicons
@@ -133,7 +114,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
 
                         {invitedUsers[index].email !== "" && (
                             <TouchableOpacity
-                                style={styles.statusIcon}
+                                style={JourneyInvitationsPageStyle.statusIcon}
                                 onPress={() =>{
                                     let statusInfo : string = invitedUsers[index].isCorrect ?
                                         "Great! We found user with such an email!"

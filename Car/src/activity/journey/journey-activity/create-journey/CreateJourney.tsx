@@ -290,8 +290,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             routeDistance: Math.round(routeDistance),
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
-            stops: createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id),
-            invitations: []
+            stops: createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id)
         };
 
         await JourneyService.updateRoute(updatedJourney)
