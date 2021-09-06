@@ -336,7 +336,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     />
                     {!isValidPlateNumber &&
                         <Text style={{ color: DM("red") }}>
-                            This field must contain 4-10 characters, including numbers, letters, hyphens, space
+                            This field must contain 1-10 characters, including numbers, letters, hyphens, space
                         </Text>
                     }
                 </View>
