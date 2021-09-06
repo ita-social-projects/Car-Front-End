@@ -28,9 +28,7 @@ const JourneyInvitation = (props: NotificationProps) => {
     const user = useContext(AuthContext).user;
 
     useEffect(() => {
-        console.log("getting journey");
         JourneyService.getJourney(props.journeyId!, false).then(res => {
-            console.log("got journey");
             setJourney(res.data);
         });
     }, []);
@@ -182,7 +180,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                 />
                 <ConfirmModal
                     visible={withdrawModalVisible}
-                    title="Ride is withdrawn"
+                    title="Invitation is rejected"
                     subtitle="Your refusal was successfully sent to the driver"
                     confirmText="Ok"
                     hideCancelButton={true}
