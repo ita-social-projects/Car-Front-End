@@ -89,7 +89,7 @@ const CarTabs = () => {
                                     disableModal={() => setDeleteModalVisibility(false)}
                                     hideCancelButton={true}
                                     visible={deleteModalVisibility}
-                                    title={"Car delete"}
+                                    title={"Unable to delete a car"}
                                     subtitle={"Car is involved in journey and can not be deleted"}
                                     confirmText={"Ok"}
                                     onConfirm={() => hideDeleteConfirmModal()}
