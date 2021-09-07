@@ -131,6 +131,9 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     useEffect(() => validateCar(),
         [plateNumber, selectedBrand, selectedColor, selectedModel, isLoading]);
 
+    useEffect(() => validatePlateNumber(),
+        [plateNumber]);
+
     const validateCar = () => {
         setValidCar(Boolean(
             selectedBrand?.value &&
