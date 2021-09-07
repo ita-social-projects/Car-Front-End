@@ -12,7 +12,7 @@ interface JourneyDetailsPageProps {
             routeDistance: number,
             duration: string,
             journey?: Journey,
-            newInvitations?: {email:string; isCorrect: Boolean}[]
+            newInvitations?: {email:string; isCorrect: boolean}[]
         }
     },
     navigation?: {

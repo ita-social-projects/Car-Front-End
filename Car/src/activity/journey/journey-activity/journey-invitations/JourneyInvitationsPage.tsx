@@ -24,7 +24,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             journey.invitations
             : []
     );
-    const [invitedUsers, setInvitedUsers] = useState<{email:string; isCorrect: Boolean}[]>(
+    const [invitedUsers, setInvitedUsers] = useState<{email:string; isCorrect: boolean}[]>(
         params.newInvitations ?? []
     );
 

@@ -18,6 +18,7 @@ import NotificationsService from "../../../../api-service/notifications-service/
 import Stop from "../../../../models/stop/Stop";
 import JourneyPoint from "../../../../models/journey/JourneyPoint";
 import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
+import { ACCEPTED_INVITATION_TYPE, REJECTED_INVITATION_TYPE } from "../../../constants/NotificationConstants";
 
 const JourneyInvitation = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
@@ -39,6 +40,24 @@ const JourneyInvitation = (props: NotificationProps) => {
         onStopPressHandler(stop,stops,journeyPoints, notification);
     };
 
+    const sendInvitationAnswerNotificationToDriver = (notificationType: number, modalToShow : () => void) => {
+        NotificationsService.addNotification(
+            {
+                senderId: user?.id!,
+                receiverId: journey!.organizer?.id!,
+                journeyId: props.journeyId!,
+                type: notificationType,
+                jsonData:
+                    "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
+            }
+        ).then((res) => {
+            if (res.status == HTTP_STATUS_OK) {
+                modalToShow();
+                NotificationsService.deleteNotification(props.notificationId);
+            }
+        });
+    };
+
     const sendDecline = () => {
         JourneyService.updateInvitation(
             {
@@ -47,23 +66,9 @@ const JourneyInvitation = (props: NotificationProps) => {
                 invitedUserId: user!.id,
                 journeyId: journey!.id,
             }
-        ).then((res) => {
-            if(res.status === HTTP_STATUS_OK) {
-                NotificationsService.addNotification(
-                    {
-                        senderId: user?.id!,
-                        receiverId: journey!.organizer?.id!,
-                        journeyId: props.journeyId!,
-                        type: 7,
-                        jsonData:
-                            "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
-                    }
-                ).then((res) => {
-                    if (res.status == HTTP_STATUS_OK) {
-                        setWithdrawModalVisible(true);
-                        NotificationsService.deleteNotification(props.notificationId);
-                    }
-                });
+        ).then((updatingInvitationResult) => {
+            if(updatingInvitationResult.status === HTTP_STATUS_OK) {
+                sendInvitationAnswerNotificationToDriver(REJECTED_INVITATION_TYPE, () => setWithdrawModalVisible(true));
             }
         });
     };
@@ -85,32 +90,19 @@ const JourneyInvitation = (props: NotificationProps) => {
                 },
                 ApplicantStops: []
             }
-        ).then(res => {
-            if (res.status == HTTP_STATUS_OK) {
-                NotificationsService.addNotification(
+        ).then(addingUserResult => {
+            if (addingUserResult.status == HTTP_STATUS_OK) {
+                JourneyService.updateInvitation(
                     {
-                        senderId: user?.id!,
-                        receiverId: journey!.organizer?.id!,
-                        journeyId: props.journeyId!,
-                        type: 6,
-                        jsonData:
-                                "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
+                        id: 0,
+                        type: InvitationType.Accepted,
+                        invitedUserId: user!.id,
+                        journeyId: journey!.id,
                     }
-                ).then((res) => {
-                    if (res.status == HTTP_STATUS_OK) {
-                        JourneyService.updateInvitation(
-                            {
-                                id: 0,
-                                type: InvitationType.Accepted,
-                                invitedUserId: user!.id,
-                                journeyId: journey!.id,
-                            }
-                        ).then(res => {
-                            if (res.status == HTTP_STATUS_OK) {
-                                setAcceptModalVisible(true);
-                                NotificationsService.deleteNotification(props.notificationId);
-                            }
-                        });
+                ).then((updatingInvitationResult) => {
+                    if (updatingInvitationResult.status == HTTP_STATUS_OK) {
+                        sendInvitationAnswerNotificationToDriver(ACCEPTED_INVITATION_TYPE,
+                            () => setAcceptModalVisible(true));
                     }
                 })
                 ;

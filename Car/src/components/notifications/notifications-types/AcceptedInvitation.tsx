@@ -1,64 +1,17 @@
-import React, { useContext, useState } from "react";
-import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
-import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
-import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
-import NotificationHeader from "../notification-header/NotificationHeader";
-import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
+import React from "react";
 import NotificationProps from "../NotificationProps";
-import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
-import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
-import AuthContext from "../../auth/AuthContext";
-import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
-import Stop from "../../../../models/stop/Stop";
-import JourneyPoint from "../../../../models/journey/JourneyPoint";
+import InvitationAnswer from "./InvitationAnswer";
 
-const AcceptedInvitation = (props: NotificationProps) => {
-    const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
-    const user = useContext(AuthContext).user;
-
-    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
-    {
-        setNotificationModalVisible(false);
-        onStopPressHandler(stop,stops,journeyPoints, notification);
-    };
+const RejectedInvitation = (props: NotificationProps) => {
 
     return (
-        <>
-            <MinimizedNotification
-                notificationId={props.notificationId}
-                user={props.sender}
-                notificationTitle={"Passenger accepted your invitation!"}
-                read={props.read}
-                date={props.date}
-                openModal={() => setNotificationModalVisible(true)}
-            />
-
-            <NotificationModalBase isVisible={notificationModalVisible!} styles={[{}]}>
-                <NotificationHeader
-                    title={"INVITATION IS ACCEPTED"}
-                    message={"The passenger has accepted your invitation!"}
-                    sender={props.sender}
-                    disableModal={() => setNotificationModalVisible(false)}
-                />
-
-                <NotificationRideDetails
-                    journeyId={props.journeyId!}
-                    userId={user?.id!}/>
-
-                <NotificationRideStops
-                    title={"Your route"}
-                    stopsOwner={user}
-                    journeyId={props.journeyId!}
-                    IsStopsTitleVisible
-                    onStopPress = {onStopPress}
-                    notification = {props}/>
-
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />
-                </NotificationButtonGroup>
-            </NotificationModalBase>
-        </>
+        <InvitationAnswer
+            notification={props}
+            notificationTittle={"Passenger accepted your invitation!"}
+            notificationHeaderTittle= {"INVITATION IS ACCEPTED"}
+            notificationHeaderMessage= {"The passenger has accepted your invitation!"}
+        />
     );
 };
 
-export default AcceptedInvitation;
+export default RejectedInvitation;

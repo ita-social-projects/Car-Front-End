@@ -115,7 +115,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
     const [usersIsLoading, setUsersIsLoading] = useState(true);
-    const [newInvitations, setNewInvitations] = useState<{email:string; isCorrect: Boolean}[]>(
+    const [newInvitations, setNewInvitations] = useState<{email:string; isCorrect: boolean}[]>(
         params.newInvitations ?? []
     );
 
@@ -160,6 +160,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
     }, []);
 
+    const createAllInvitationsArrayFromNewInvitations = () : Invitation[] => {
+        return newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
+            return {
+                id: 0,
+                invitedUserId: allUsers.find((us) => us?.email === invitedUser.email)!.id,
+                journeyId: 0,
+                type: 0
+            };}).concat(existingInvitations);
+    };
+
     const publishJourneyHandler = async () => {
         setRideIsPublishing(true);
 
@@ -184,13 +194,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
-            invitations: newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
-                return {
-                    id: 0,
-                    invitedUserId: allUsers.find((us) => us?.email === invitedUser.email)!.id,
-                    journeyId: 0,
-                    type: 0
-                };}).concat(existingInvitations),
+            invitations: createAllInvitationsArrayFromNewInvitations(),
             duration: params.duration,
             routeDistance: Math.round(params.routeDistance)
         };
@@ -216,13 +220,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
-            invitations: newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
-                return {
-                    id: 0,
-                    invitedUserId: allUsers.find((us) => us?.email === invitedUser.email)!.id,
-                    journeyId: 0,
-                    type: 0
-                };}).concat(existingInvitations),
+            invitations: createAllInvitationsArrayFromNewInvitations(),
             organizerId: Number(journey.organizer?.id)
         };
 
