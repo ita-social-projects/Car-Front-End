@@ -5,6 +5,11 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingTop: 25
     },
 
+    dropDownPickerContainer: {
+        marginHorizontal: 20,
+        marginTop: 24
+    },
+
     recentJourneyText: {
         paddingBottom: 5,
         paddingLeft: 10,

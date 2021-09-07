@@ -300,24 +300,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         {isOwnCar && (
-                            <JourneyCreationDropDownPicker
-                                items={userCars.map((car) => ({
-                                    label: car.name,
-                                    value: car.id
-                                }))}
-                                paddingLeft={105}
-                                searchable={true}
-                                placeholder="Choose a Car:"
-                                isVisible={isVisibleCarDropDown}
-                                onOpen={() => setIsVisibleCarDropDown(true)}
-                                onChangeItem={(item) => {
-                                    setSelectedCar({ id: item.value, name: item.label });
-                                    setIsVisibleCarDropDown(false);
-                                }}
-                                valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
-                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
-                                }
-                            />)}
+                            <View style = {CreateJourneyStyle.dropDownPickerContainer}>
+                                <JourneyCreationDropDownPicker
+                                    items={userCars.map((car) => ({
+                                        label: car.name,
+                                        value: car.id
+                                    }))}
+                                    paddingLeft={105}
+                                    searchable={true}
+                                    placeholder="Choose a Car:"
+                                    isVisible={isVisibleCarDropDown}
+                                    onOpen={() => setIsVisibleCarDropDown(true)}
+                                    onChangeItem={(item) => {
+                                        setSelectedCar({ id: item.value, name: item.label });
+                                        setIsVisibleCarDropDown(false);
+                                    }}
+                                    valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
+                                        userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
+                                    }
+                                />
+                            </View>
+                        )}
 
                         <SwitchSelector
                             leftButtonStyle={freeButtonStyle}
