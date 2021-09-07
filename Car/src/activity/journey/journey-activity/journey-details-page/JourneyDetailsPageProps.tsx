@@ -11,7 +11,8 @@ interface JourneyDetailsPageProps {
             routePoints: LatLng[],
             routeDistance: number,
             duration: string,
-            journey?: Journey
+            journey?: Journey,
+            newInvitations?: {email:string; isCorrect: boolean}[]
         }
     },
     navigation?: {
