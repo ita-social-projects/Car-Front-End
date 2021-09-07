@@ -8,6 +8,7 @@ import NotificationsTabs from "../../../activity/notifications/notifications-tab
 import AppTabsStyle from "./AppTabsStyle";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
+import ChatService from "../../../../api-service/chat-service/ChatService";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import DM from "../../styles/DM";
 import updateLocale from "../../styles/DTFormat";
@@ -16,9 +17,14 @@ const Tabs = createBottomTabNavigator();
 
 const AppTabs = () => {
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
+    let [unreadMessagesNumber, setUnreadMessagesNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
     NotificationsService.getUnreadNotificationsNumber().then((result) =>
         setUnreadNotificationsNumber(result.data as number)
+    );
+
+    ChatService.getAllUnreadMessagesNumber().then((result) =>
+        setUnreadMessagesNumber(result.data as number)
     );
 
     useEffect(() => {
@@ -26,12 +32,22 @@ const AppTabs = () => {
             "updateUnreadNotificationsNumber",
             setUnreadNotificationsNumber
         );
+
+        SignalRHubConnection.on(
+            "updateUnreadMessagesNumber",
+            setUnreadMessagesNumber
+        );
+
         updateLocale();
     });
 
     const tabBarBadge = unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH
         ? unreadNotificationsNumber.toString()
         : undefined;
+
+    const tabBarUnreadMessages = unreadMessagesNumber > EMPTY_COLLECTION_LENGTH
+        ? unreadMessagesNumber.toString()
+        :undefined;
 
     return (
         <Tabs.Navigator
@@ -74,6 +90,8 @@ const AppTabs = () => {
                 component={MessagesTabs}
                 options={() => ({
                     tabBarLabel: "Chats",
+                    tabBarBadge : tabBarUnreadMessages,
+                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: "#ffffff" }
                 })}
             />
             <Tabs.Screen
