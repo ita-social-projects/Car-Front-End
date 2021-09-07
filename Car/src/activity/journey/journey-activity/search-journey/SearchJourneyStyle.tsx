@@ -6,6 +6,11 @@ const SearchJourneyStyle = StyleSheet.create({
         backgroundColor: "#F2F2F2",
     },
 
+    dropDownContainer: {
+        marginHorizontal: 20,
+        marginTop: 20
+    },
+
     locationContainer: {
         marginTop: 30,
         marginHorizontal: 20,

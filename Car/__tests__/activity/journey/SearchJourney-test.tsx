@@ -67,7 +67,14 @@ describe("JourneySearch Test", () => {
             isConfirmed={true}
             setDate={[Function]}
           />
-          <View>
+          <View
+            style={
+              Object {
+                "marginHorizontal": 20,
+                "marginTop": 20,
+              }
+            }
+          >
             <JourneyCreationDropDownPicker
               isVisible={false}
               items={

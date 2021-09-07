@@ -367,7 +367,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         setDate={(d) => setDepartureTime(d)}
                         isConfirmed={true}
                     />
-                    <View>
+                    <View style = {SearchJourneyStyle.dropDownContainer}>
                         <JourneyCreationDropDownPicker
                             items={userQuantity.map((car) => ({
                                 label: car.name,
