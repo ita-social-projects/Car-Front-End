@@ -2,7 +2,7 @@ import React from "react";
 import NotificationProps from "../NotificationProps";
 import InvitationAnswer from "./InvitationAnswer";
 
-const RejectedInvitation = (props: NotificationProps) => {
+const AcceptedInvitation = (props: NotificationProps) => {
 
     return (
         <InvitationAnswer
@@ -14,4 +14,4 @@ const RejectedInvitation = (props: NotificationProps) => {
     );
 };
 
-export default RejectedInvitation;
+export default AcceptedInvitation;
