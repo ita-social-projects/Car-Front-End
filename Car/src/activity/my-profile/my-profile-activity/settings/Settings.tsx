@@ -310,7 +310,7 @@ const Settings = (props: { navigation: any }) => {
                         </TouchableOpacity>
                         <TouchableNavigationCard
                             navigation={props.navigation}
-                            navigationName="AppSettings"
+                            navigationName="Settings"
                             cardName="App Settings"
                             angle="0"
                         >

@@ -9,6 +9,7 @@ import TouchableNavigationCard from "../../../../../../components/touchable-navi
 import TouchableNavigationCardStyle
     from "../../../../../../components/touchable-navigation-card/TouchableNavigationCardStyle";
 import ChooseOptionStyle from "../../../../../../components/choose-opton/ChooseOptionStyle";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const AppSettings = (props: {navigation: any}) => {
     const [isDarkMode, setDarkMode] = useState(false);
@@ -24,8 +25,14 @@ const AppSettings = (props: {navigation: any}) => {
             <TouchableOpacity
                 style={[
                     TouchableNavigationCardStyle.cardContainer,
-                    { borderBottomColor: DM(Platform.OS === "ios" ? "rgba(0,0,0,0.5)" : "#C1C1C5"), }]}>
+                    { borderBottomColor: DM(Platform.OS === "ios" ? "rgba(0,0,0,0.5)" : "#C1C1C5"), }]}
+            >
                 <ChooseOption
+                    picture={<Ionicons
+                        name={"moon-outline"}
+                        size={20}
+                        color={DM("#414045")}
+                    />}
                     text={"Dark Mode"}
                     value={isDarkMode}
                     onValueChanged={(value: boolean) => {
@@ -39,6 +46,11 @@ const AppSettings = (props: {navigation: any}) => {
                 navigationName="Language"
                 cardName="Language"
                 angle="0"
+                picture={<Ionicons
+                    name={"globe-outline"}
+                    size={20}
+                    color={DM("#414045")}
+                />}
             >
                 <Text style={ChooseOptionStyle.preferenceNameText}>Language</Text>
             </TouchableNavigationCard>
@@ -47,6 +59,11 @@ const AppSettings = (props: {navigation: any}) => {
                 navigationName="Payment"
                 cardName="Payment"
                 angle="0"
+                picture={<Ionicons
+                    name={"wallet-outline"}
+                    size={20}
+                    color={DM("#414045")}
+                />}
             >
                 <Text style={ChooseOptionStyle.preferenceNameText}>Payment</Text>
             </TouchableNavigationCard>
@@ -55,6 +72,11 @@ const AppSettings = (props: {navigation: any}) => {
                 navigationName="HelpCenter"
                 cardName="Help Center"
                 angle="0"
+                picture={<Ionicons
+                    name={"help-circle-outline"}
+                    size={20}
+                    color={DM("#414045")}
+                />}
             >
                 <Text style={ChooseOptionStyle.preferenceNameText}>Help Center</Text>
             </TouchableNavigationCard>

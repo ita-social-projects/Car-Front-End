@@ -12,7 +12,7 @@ test("renders correctly", async () =>
         Array [
           Object {
             "flex": 1,
-            "paddingHorizontal": 10,
+            "paddingHorizontal": 5,
           },
           Object {
             "backgroundColor": "white",
@@ -45,6 +45,38 @@ test("renders correctly", async () =>
             }
           }
         >
+          <View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <View>
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#414045",
+                        "fontSize": 20,
+                      },
+                      undefined,
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+          </View>
           <View
             style={
               Object {
@@ -119,7 +151,28 @@ test("renders correctly", async () =>
                 }
               }
             >
-              <View />
+              <View>
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#414045",
+                        "fontSize": 20,
+                      },
+                      undefined,
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
               <View>
                 <Text
                   style={
@@ -186,7 +239,28 @@ test("renders correctly", async () =>
                 }
               }
             >
-              <View />
+              <View>
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#414045",
+                        "fontSize": 20,
+                      },
+                      undefined,
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
               <View>
                 <Text
                   style={
@@ -253,7 +327,28 @@ test("renders correctly", async () =>
                 }
               }
             >
-              <View />
+              <View>
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#414045",
+                        "fontSize": 20,
+                      },
+                      undefined,
+                      Object {
+                        "fontFamily": "Ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
               <View>
                 <Text
                   style={

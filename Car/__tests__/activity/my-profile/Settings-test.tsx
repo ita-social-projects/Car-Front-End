@@ -79,7 +79,7 @@ test("renders correctly", async () =>
             <TouchableNavigationCard
               angle="0"
               cardName="App Settings"
-              navigationName="AppSettings"
+              navigationName="Settings"
             >
               <Text
                 style={
