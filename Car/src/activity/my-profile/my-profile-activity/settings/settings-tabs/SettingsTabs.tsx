@@ -10,6 +10,9 @@ import HeaderBackButton from "../../../../../components/header-back-button/Heade
 import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderLogoutButton from "../../../../../components/header-logout-button/HeaderLogoutButton";
 import DM from "../../../../../components/styles/DM";
+import Language from "../settings-activity/app-settings/app-settings-activity/Language";
+import Payment from "../settings-activity/app-settings/app-settings-activity/Payment";
+import HelpCenter from "../settings-activity/app-settings/app-settings-activity/HelpCenter";
 
 const StackTabs = createStackNavigator();
 
@@ -54,6 +57,39 @@ const SettingsTabs = () => {
                     component={ChatSettings}
                     options={{
                         headerTitle: "Chats Settings",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderEllipsis
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Language"
+                    component={Language}
+                    options={{
+                        headerTitle: "Language",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderEllipsis
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Payment"
+                    component={Payment}
+                    options={{
+                        headerTitle: "Payment",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerLeft: HeaderBackButton,
+                        headerRight: HeaderEllipsis
+                    }}
+                />
+                <StackTabs.Screen
+                    name="HelpCenter"
+                    component={HelpCenter}
+                    options={{
+                        headerTitle: "Help Center",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerLeft: HeaderBackButton,

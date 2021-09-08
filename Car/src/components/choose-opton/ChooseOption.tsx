@@ -13,17 +13,12 @@ const ChooseOption = (props: ChooseOptionProps) => {
                     {props.text}
                 </Text>
             </View>
-            <View style={ChooseOptionStyle.switchContainer}>
+            <View>
                 <Switch
                     style={ChooseOptionStyle.switch}
                     value={props.value}
                     onValueChange={(value) => props.onValueChanged(value)}
                 />
-            </View>
-            <View style={ChooseOptionStyle.preferenceValueContainer}>
-                <Text style={[ChooseOptionStyle.preferenceValueText, { color: DM("black") }]}>
-                    {props.value ? "Yes" : "No"}
-                </Text>
             </View>
         </View>
     );
