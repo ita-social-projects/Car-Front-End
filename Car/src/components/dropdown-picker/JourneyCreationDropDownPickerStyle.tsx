@@ -5,6 +5,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         borderWidth: 2,
         borderTopWidth: 0,
         paddingHorizontal: 4,
+        paddingLeft: 10,
         position: "absolute",
     },
 

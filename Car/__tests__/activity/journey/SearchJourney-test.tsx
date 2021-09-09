@@ -31,6 +31,7 @@ describe("JourneySearch Test", () => {
             Array [
               Object {
                 "height": "100%",
+                "paddingVertical": 20,
                 "width": "100%",
               },
               Object {
@@ -42,37 +43,55 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                "marginHorizontal": 20,
-                "marginTop": 30,
+                "paddingHorizontal": 16,
+                "paddingVertical": 10,
               }
             }
           >
             <AddressInputButton
               directionType="From"
               iconName="location"
-              marginBottom={15}
-              onPress={[Function]}
-              text=""
-            />
-            <AddressInputButton
-              directionType="To"
-              iconName="location"
-              marginBottom={15}
               onPress={[Function]}
               text=""
             />
           </View>
-          <TouchableDateTimePicker
-            date={1970-01-01T00:00:00.000Z}
-            isConfirmed={true}
-            setDate={[Function]}
-          />
           <View
             style={
               Object {
-                "marginHorizontal": 20,
-                "marginTop": 20,
+                "paddingHorizontal": 16,
+                "paddingVertical": 10,
               }
+            }
+          >
+            <AddressInputButton
+              directionType="To"
+              iconName="location"
+              onPress={[Function]}
+              text=""
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "paddingHorizontal": 16,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <TouchableDateTimePicker
+              date={1970-01-01T00:00:00.000Z}
+              isConfirmed={true}
+              setDate={[Function]}
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "paddingHorizontal": 16,
+                  "paddingVertical": 10,
+                },
+              ]
             }
           >
             <JourneyCreationDropDownPicker
@@ -269,12 +288,11 @@ describe("JourneySearch Test", () => {
               Array [
                 Object {
                   "alignItems": "flex-end",
-                  "flex": 10,
+                  "flex": 1,
                   "flexDirection": "row",
                   "height": "100%",
                   "justifyContent": "flex-end",
                   "marginVertical": 24,
-                  "paddingTop": "60%",
                 },
               ]
             }
