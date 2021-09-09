@@ -16,7 +16,7 @@ const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps
 
     return (
         <View>
-            <Text style={[JourneyCreationDropDownPickerStyle.staticPlaceholder, { color: DM("gray") }]}>
+            <Text style={[JourneyCreationDropDownPickerStyle.placeholderStyle, { color: DM("gray") }]}>
                 {props.placeholder}
             </Text>
             <DropDownPicker
