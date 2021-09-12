@@ -16,7 +16,9 @@ const UserService = {
         user,
         config),
 
-    updateUserFcmtoken: async (user: FormData) => Axios.put<FormData>(route + "fcmtoken", user)
+    addUserFcmtoken: async (token: FormData) => APIService.post<FormData>(route + "fcmtoken/", token),
+
+    deleteUserFcmtoken: async (token: string) => APIService.delete(route + "fcmtoken/" + token)
 };
 
 export default UserService;
