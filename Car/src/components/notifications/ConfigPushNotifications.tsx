@@ -14,8 +14,12 @@ const ConfigPushNotifications = () => {
         onNotification: (notification) => {
             const clicked = notification.userInteraction;
 
-            if (clicked && notification.data.navigateTab) {
-                navigation.navigate(notification.data.navigateTab);
+            if (clicked) {
+                let params : { chatId : number } | undefined;
+
+                if(notification.data.navigateTab === "Chat")
+                    params = { chatId: +notification.data.chatId };
+                navigation.navigate(notification.data.navigateTab, params);
             }
         },
 
@@ -25,8 +29,10 @@ const ConfigPushNotifications = () => {
         PushNotification.localNotification({
             channelId: "all-notifications",
             message: remoteMessage.notification?.body,
-            title: remoteMessage.notification?.title,// eslint-disable-next-line max-len
+            title: remoteMessage.notification?.title,
+            // eslint-disable-next-line max-len
             largeIconUrl: "https://media-exp1.licdn.com/dms/image/C4E0BAQEhqEYDn2-LkA/company-logo_200_200/0/1580391093627?e=2159024400&v=beta&t=dmRP8IQMGiZ683h8dALtCWl1YY29f7ggubgd8u5VEJs",
+            userInfo: remoteMessage.data,
         });
     };
 
