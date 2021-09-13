@@ -1,15 +1,17 @@
 import React from "react";
 import NotificationProps from "../NotificationProps";
-import InvitationAnswer from "./InvitationAnswer";
+import ApplicationAnswer from "./ApplicationAnswer";
 
 const RejectedInvitation = (props: NotificationProps) => {
 
     return (
-        <InvitationAnswer
-            notification={props}
-            notificationTittle={"Passenger rejected your invitation!"}
-            notificationHeaderTittle= {"INVITATION IS REJECTED"}
-            notificationHeaderMessage= {"The passenger has rejected your invitation!"}
+        <ApplicationAnswer
+            notification = {props}
+            notificationTittle = "Passenger rejected your invitation!"
+            notificationHeaderTittle = "INVITATION IS REJECTED"
+            notificationHeaderMessage = "The passenger has rejected your invitation!"
+            IsDepartureTimeVisible={true}
+            IsStopsTitleVisible={true}
         />
     );
 };
