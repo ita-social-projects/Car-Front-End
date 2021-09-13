@@ -345,8 +345,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     from
                                 )
                             }
-                            marginBottom={15}
                         />
+                    </View>
+                    <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
                             iconName={"location"}
                             directionType={"To"}
@@ -359,15 +360,16 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     to
                                 )
                             }
-                            marginBottom={15}
                         />
                     </View>
-                    <TouchableDateTimePicker
-                        date={departureTime}
-                        setDate={(d) => setDepartureTime(d)}
-                        isConfirmed={true}
-                    />
-                    <View style = {SearchJourneyStyle.dropDownContainer}>
+                    <View style={SearchJourneyStyle.locationContainer}>
+                        <TouchableDateTimePicker
+                            date={departureTime}
+                            setDate={(d) => setDepartureTime(d)}
+                            isConfirmed={true}
+                        />
+                    </View>
+                    <View style = {[SearchJourneyStyle.locationContainer]}>
                         <JourneyCreationDropDownPicker
                             items={userQuantity.map((car) => ({
                                 label: car.name,

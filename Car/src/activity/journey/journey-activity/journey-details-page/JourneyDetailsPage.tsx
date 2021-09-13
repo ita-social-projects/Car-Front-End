@@ -46,6 +46,7 @@ import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
 import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -270,23 +271,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     behavior={Platform.OS === "ios" ? "padding" : "position"}
                 >
                     <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: DM("white") }]}>
-
-                        <AddressInputButton
-                            iconName={"location"}
-                            directionType={"From"}
-                            text={params.from.text}
-                            disabled={true}
-                            marginHorizontal={20}
-                            marginBottom={24}
-                        />
-                        <AddressInputButton
-                            iconName={"location"}
-                            directionType={"To"}
-                            text={params.to.text}
-                            disabled={true}
-                            marginHorizontal={20}
-                            marginBottom={24}
-                        />
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            <AddressInputButton
+                                iconName={"location"}
+                                directionType={"From"}
+                                text={params.from.text}
+                                disabled={true}
+                            />
+                        </View>
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            <AddressInputButton
+                                iconName={"location"}
+                                directionType={"To"}
+                                text={params.to.text}
+                                disabled={true}
+                            />
+                        </View>
 
                         {params.stops.map((stop, index) => (
                             <AddressInputButton
@@ -299,17 +299,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 key={index}
                             />
                         ))}
-
-                        <TouchableDateTimePicker
-                            date={departureTime}
-                            setDate={(d) => {
-                                setDepartureTime(d);
-                                setDepartureTimeIsConfirmed(true);
-                            }}
-                            isConfirmed={departureTimeIsConfirmed}
-                            setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
-                        />
-
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            <TouchableDateTimePicker
+                                date={departureTime}
+                                setDate={(d) => {
+                                    setDepartureTime(d);
+                                    setDepartureTimeIsConfirmed(true);
+                                }}
+                                isConfirmed={departureTimeIsConfirmed}
+                                setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
+                            />
+                        </View>
                         <SwitchSelector
                             leftButtonStyle={ownCarButtonStyle}
                             rightButtonStyle={taxiButtonStyle}
