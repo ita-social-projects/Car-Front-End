@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
+import {
+    FlatList,
+    SafeAreaView,
+    Text,
+    TouchableOpacity,
+    View,
+    Image,
+} from "react-native";
 import { SearchBar } from "react-native-elements";
 import ChatService from "../../../api-service/chat-service/ChatService";
 import MessagesStyle from "./MessagesStyle";
 import {
+    FIRST_ELEMENT_OF_THE_ARRAY,
     MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
-    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER
+    MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
 } from "../../constants/MessageConstants";
-import {
-    GRADIENT_END,
-    GRADIENT_START
-} from "../../constants/StylesConstants";
+import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
 import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import DM from "../../components/styles/DM";
 import { MessagesProps } from "./MessagesProps";
@@ -22,26 +27,39 @@ import moment from "moment";
 import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
 import Indicator from "../../components/activity-indicator/Indicator";
+import Badge from "../../components/badge/Badge";
+// import ReceivedMessages from "../../../models/received-messages/ReceivedMessages";
 
 const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingChats, setisLoadingChats] = useState(false);
     const [search, setSearch] = useState("");
 
     const getChats = () => {
         if (!search) {
-            setIsLoading(true);
+            setisLoadingChats(true);
             ChatService.getChat().then((res) => {
                 let chats = res.data;
 
                 setMasterDataSource(JSON.parse(JSON.stringify(chats)));
 
                 setFilteredDataSource(chats);
-                setIsLoading(false);
+                setisLoadingChats(false);
             });
         }
     };
+
+    // const getUnreadMessages = () => {
+    //     setIsLoadingUnreadMessages(true);
+    //     ReceivedMessagesService.getunreadmessages().then((res) => {
+    //         let unreadmessages = res.data;
+
+    //         setMasterDataSourceUnreadMessages(JSON.parse(JSON.stringify(unreadmessages)));
+
+    //         setIsLoadingUnreadMessages(false);
+    //     });
+    // };
 
     useEffect(() => {
         props.navigation.addListener("focus", getChats);
@@ -54,25 +72,29 @@ const Messages = (props: MessagesProps) => {
 
     const setSearchFilter = (text: string) => {
         if (text.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
-            setIsLoading(true);
+            setisLoadingChats(true);
             const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
+            //const unreadMessagesArr: number[] = JSON.parse(JSON.stringify(masterDataSourceUnreadMessages));
 
-            const searchInTitle = arr.filter(chat => {
+            const searchInTitle = arr.filter((chat) => {
                 let chatTitle = chat?.name.toUpperCase();
 
-                return chatTitle!.indexOf(text.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX;
+                return (
+                    chatTitle!.indexOf(text.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX
+                );
             });
 
-            searchInTitle.length ?
-                setFilteredDataSource(searchInTitle)
-                :
-                ChatService.getFilteredChats({ searchText: text, chats: masterDataSource }).then(res => {
+            searchInTitle.length
+                ? setFilteredDataSource(searchInTitle)
+                : ChatService.getFilteredChats({
+                    searchText: text,
+                    chats: masterDataSource,
+                }).then((res) => {
                     setFilteredDataSource(res.data);
-                    setIsLoading(false);
+                    setisLoadingChats(false);
                 });
             setSearch(text);
-        }
-        else {
+        } else {
             setFilteredDataSource(JSON.parse(JSON.stringify(masterDataSource)));
             setSearch(text);
         }
@@ -84,18 +106,18 @@ const Messages = (props: MessagesProps) => {
         return (
             <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
                 {chunks.map((chunk, index) => {
-                    const text = textToHighlight.substr(chunk.start, chunk.end - chunk.start);
+                    const text = textToHighlight.substr(
+                        chunk.start,
+                        chunk.end - chunk.start
+                    );
 
-                    return (!chunk.highlight)
-                        ? text
-                        : (
-                            <Text
-                                key={index}
-                                style={MessagesStyle.highlightedText}
-                            >
-                                {text}
-                            </Text>
-                        );
+                    return !chunk.highlight ? (
+                        text
+                    ) : (
+                        <Text key={index} style={MessagesStyle.highlightedText}>
+                            {text}
+                        </Text>
+                    );
                 })}
             </Text>
         );
@@ -118,12 +140,11 @@ const Messages = (props: MessagesProps) => {
                             }}
                         >
                             <View style={MessagesStyle.main}>
-                                <View style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}>
+                                <View
+                                    style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}
+                                >
                                     <View style={MessagesStyle.avatarWrapper}>
-                                        <AvatarLogo
-                                            user={item?.journeyOrganizer}
-                                            size={50}
-                                        />
+                                        <AvatarLogo user={item?.journeyOrganizer} size={50} />
                                     </View>
                                     <View style={MessagesStyle.dataWrapper}>
                                         <LinearTextGradient
@@ -132,21 +153,39 @@ const Messages = (props: MessagesProps) => {
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 0 }}
                                         >
-                                            <Text style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}>
+                                            <Text
+                                                style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}
+                                            >
                                                 {item?.name}
                                             </Text>
                                         </LinearTextGradient>
-                                        {item?.messageText ?
+                                        {item?.messageText ? (
                                             textHighlight(item.messageText, search.split(" "))
-                                            :
-                                            <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
-                                                starts at {moment(
-                                                    new Date(item?.journey?.departureTime!)
-                                                ).format("DD.MM, HH:mm")}
+                                        ) : (
+                                            <Text
+                                                style={[
+                                                    MessagesStyle.textStyle,
+                                                    { color: DM("black") },
+                                                ]}
+                                            >
+                                                starts at{" "}
+                                                {moment(new Date(item?.journey?.departureTime!)).format(
+                                                    "DD.MM, HH:mm"
+                                                )}
                                             </Text>
-                                        }
+                                        )}
                                     </View>
-
+                                    <View>
+                                        <View>
+                                            <Badge
+                                                size={20}
+                                                value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                                    .unreadMessagesCount }/>
+                                        </View>
+                                    </View>
+                                    <Text>
+                                        {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY].unreadmessagesCount}
+                                    </Text>
                                     <View style={MessagesStyle.iconWrapper}>
                                         <View>
                                             <Ionicons
@@ -161,31 +200,29 @@ const Messages = (props: MessagesProps) => {
                         </TouchableOpacity>
                     )}
                 />
-                {
-                    filteredDataSource?.length ? (
-                        <View style={MessagesStyle.warningContainer}>
-                            <Text style={MessagesStyle.warningMessageStyle}>
-                                Each chat will be deleted 2 weeks after the trip
+                {filteredDataSource?.length ? (
+                    <View style={MessagesStyle.warningContainer}>
+                        <Text style={MessagesStyle.warningMessageStyle}>
+                            Each chat will be deleted 2 weeks after the trip
+                            {"\n"}
+                            departure time
+                        </Text>
+                    </View>
+                ) : (
+                    <>
+                        <View style={MessagesStyle.noMessageContainer}>
+                            <Text style={MessagesStyle.noMessageStyle}>
+                                CURRENTLY YOU DO NOT HAVE ANY
                                 {"\n"}
-                                departure time
+                                CHATS
                             </Text>
+                            <Image
+                                style={MessagesStyle.noChatImageStyle}
+                                source={require("../../../assets/images/chat/no-chats.png")}
+                            />
                         </View>
-                    ) : (
-                        <>
-                            <View style={MessagesStyle.noMessageContainer}>
-                                <Text style={MessagesStyle.noMessageStyle}>
-                                    CURRENTLY YOU DO NOT HAVE ANY
-                                    {"\n"}
-                                    CHATS
-                                </Text>
-                                <Image
-                                    style={MessagesStyle.noChatImageStyle}
-                                    source={require("../../../assets/images/chat/no-chats.png")}
-                                />
-                            </View>
-                        </>
-                    )
-                }
+                    </>
+                )}
             </View>
         );
     };
@@ -200,27 +237,33 @@ const Messages = (props: MessagesProps) => {
                     onClear={() => setSearchFilter("")}
                     placeholder={"Search in Messages"}
                     value={search}
-                    containerStyle={[MessagesStyle.containerStyle, { backgroundColor: DM("white") }]}
-                    inputContainerStyle={[MessagesStyle.inputContainerStyle,
+                    containerStyle={[
+                        MessagesStyle.containerStyle,
+                        { backgroundColor: DM("white") },
+                    ]}
+                    inputContainerStyle={[
+                        MessagesStyle.inputContainerStyle,
                         {
                             backgroundColor: DM("white"),
                             borderColor: DM("black"),
-                            borderBottomColor: DM("black")
-                        }]}
+                            borderBottomColor: DM("black"),
+                        },
+                    ]}
                 />
             ) : (
                 <View />
             )}
 
             <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
-                {isLoading ?
+                {isLoadingChats ? (
                     <Indicator
                         size="large"
                         color={DM("#414045")}
                         text="Loading information..."
-                    /> :
+                    />
+                ) : (
                     chatsList()
-                }
+                )}
             </View>
         </SafeAreaView>
     );
