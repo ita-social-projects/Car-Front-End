@@ -28,7 +28,6 @@ import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
 import Indicator from "../../components/activity-indicator/Indicator";
 import Badge from "../../components/badge/Badge";
-// import ReceivedMessages from "../../../models/received-messages/ReceivedMessages";
 
 const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
@@ -49,17 +48,6 @@ const Messages = (props: MessagesProps) => {
             });
         }
     };
-
-    // const getUnreadMessages = () => {
-    //     setIsLoadingUnreadMessages(true);
-    //     ReceivedMessagesService.getunreadmessages().then((res) => {
-    //         let unreadmessages = res.data;
-
-    //         setMasterDataSourceUnreadMessages(JSON.parse(JSON.stringify(unreadmessages)));
-
-    //         setIsLoadingUnreadMessages(false);
-    //     });
-    // };
 
     useEffect(() => {
         props.navigation.addListener("focus", getChats);
@@ -183,9 +171,6 @@ const Messages = (props: MessagesProps) => {
                                                     .unreadMessagesCount }/>
                                         </View>
                                     </View>
-                                    <Text>
-                                        {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY].unreadmessagesCount}
-                                    </Text>
                                     <View style={MessagesStyle.iconWrapper}>
                                         <View>
                                             <Ionicons

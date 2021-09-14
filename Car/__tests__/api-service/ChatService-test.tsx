@@ -14,6 +14,9 @@ describe("Chat Service test", () => {
         journey: {
             departureTime: new Date()
         },
+        receivedMessages:[{
+            unreadMessagesCount:1
+        }],
         journeyOrganizer: {
             name: "string",
             surname: "string",
