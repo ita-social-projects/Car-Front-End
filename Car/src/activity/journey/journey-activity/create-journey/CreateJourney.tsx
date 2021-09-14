@@ -221,13 +221,15 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         }
     }, []);
 
+    useEffect(() => {
+        CreateJourney.numberOfAddedStop = stops.length;
+    });
+
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
 
         setStops(prevState => [...prevState, initialWayPoint]);
-        CreateJourney.numberOfAddedStop = ++stops.length;
     };
-
     const onAddressInputButtonPressHandler = (placeholder: string,
         paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
 
