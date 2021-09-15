@@ -9,12 +9,16 @@ const route = APIRoutes.getUserUrl();
 const UserService = {
     getUser: async (id: number) => APIService.get<User>(route + id),
 
+    getAllUsers: async () => APIService.get<User[]>(route + "all-users/"),
+
     updateUserImage: async (user: FormData, config: AxiosRequestConfig = {}) => Axios.put<FormData>(
         route + "image",
         user,
         config),
 
-    updateUserFcmtoken: async (user: FormData) => Axios.put<FormData>(route + "fcmtoken", user)
+    addUserFcmtoken: async (token: FormData) => APIService.post<FormData>(route + "fcmtoken/", token),
+
+    deleteUserFcmtoken: async (token: string) => APIService.delete(route + "fcmtoken/" + token)
 };
 
 export default UserService;

@@ -26,6 +26,7 @@ describe("Journey Service test", () => {
         routeDistance: 2,
         schedule: null,
         stops: [],
+        invitations: [],
         journeyPoints: []
     }];
 
@@ -112,7 +113,8 @@ describe("Journey Service test", () => {
         isOnOwnCar: true,
         carId: 0,
         journeyPoints: [],
-        stops: []
+        stops: [],
+        invitations: []
     };
 
     let filter : FilterJourney = {

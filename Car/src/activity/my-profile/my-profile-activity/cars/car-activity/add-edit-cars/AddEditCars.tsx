@@ -129,7 +129,13 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     }, [props.type]);
 
     useEffect(() => validateCar(),
-        [plateNumber, selectedBrand, selectedColor, selectedModel, isLoading]);
+        [selectedBrand, selectedColor, selectedModel, isLoading]);
+
+    useEffect(() => validatePlateNumber(),
+        [plateNumber]);
+
+    useEffect(() => validatePlateNumber(),
+        [plateNumber]);
 
     const validateCar = () => {
         setValidCar(Boolean(
@@ -330,13 +336,10 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                         defaultValue={plateNumber}
                         onChangeText={setPlateNumber}
                         placeHolder="Plate number"
-                        onBlur={() =>
-                            validatePlateNumber()
-                        }
                     />
                     {!isValidPlateNumber &&
                         <Text style={{ color: DM("red") }}>
-                            This field must contain 4-10 characters, including numbers, letters, hyphens, space
+                            This field must contain 1-10 characters, including numbers, letters, hyphens, space
                         </Text>
                     }
                 </View>
@@ -350,12 +353,12 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     </Text>
                     <TouchableOpacity
                         style={
-                            !isValidCar ?
+                            (!isValidCar || !isValidPlateNumber) ?
                                 [AddEditCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
                                 : [AddEditCarsStyle.carButtonSave, { backgroundColor: DM("black") }]
                         }
                         disabled={
-                            !isValidCar
+                            !isValidCar || !isValidPlateNumber
                         }
                         onPress={() => {
                             saveCarHandle().then(() => navigate("Cars"));

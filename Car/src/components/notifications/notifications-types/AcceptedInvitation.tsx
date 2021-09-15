@@ -1,31 +1,18 @@
-import React, { useState } from "react";
-import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
-import NotificationHeader from "../notification-header/NotificationHeader";
-import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
+import React from "react";
 import NotificationProps from "../NotificationProps";
+import ApplicationAnswer from "./ApplicationAnswer";
 
 const AcceptedInvitation = (props: NotificationProps) => {
-    const [modalVisible, setModalVisible] = useState(props.visible);
 
     return (
-        <>
-            <MinimizedNotification
-                notificationId={props.notificationId}
-                user={props.sender}
-                notificationTitle={"Accepted Invitation (Not implemented!)"}
-                read={props.read}
-                date={props.date}
-                openModal={() => setModalVisible(true)}
-            />
-            <NotificationModalBase isVisible={modalVisible!}>
-                <NotificationHeader
-                    title="Not implemented!"
-                    message=""
-                    sender={props.sender}
-                    disableModal={() => setModalVisible(false)}
-                />
-            </NotificationModalBase>
-        </>
+        <ApplicationAnswer
+            notification = {props}
+            notificationTittle = "Passenger accepted your invitation!"
+            notificationHeaderTittle = "INVITATION IS ACCEPTED"
+            notificationHeaderMessage = "The passenger has accepted your invitation!"
+            IsDepartureTimeVisible={true}
+            IsStopsTitleVisible={true}
+        />
     );
 };
 

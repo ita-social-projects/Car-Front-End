@@ -59,25 +59,25 @@ const Messages = (props: MessagesProps) => {
     }, [search]);
 
     const setSearchFilter = (text: string) => {
-        if (text.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
-            setisLoadingChats(true);
+        let textTrimmed = text.trim();
+
+        if (textTrimmed.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
+            setIsLoading(true);
+
             const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
             //const unreadMessagesArr: number[] = JSON.parse(JSON.stringify(masterDataSourceUnreadMessages));
 
             const searchInTitle = arr.filter((chat) => {
                 let chatTitle = chat?.name.toUpperCase();
 
-                return (
-                    chatTitle!.indexOf(text.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX
-                );
+                return chatTitle!.indexOf(textTrimmed.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX;
             });
 
-            searchInTitle.length
-                ? setFilteredDataSource(searchInTitle)
-                : ChatService.getFilteredChats({
-                    searchText: text,
-                    chats: masterDataSource,
-                }).then((res) => {
+            searchInTitle.length ?
+                setFilteredDataSource(searchInTitle)
+                :
+                ChatService.getFilteredChats({ searchText: textTrimmed, chats: masterDataSource }).then(res => {
+
                     setFilteredDataSource(res.data);
                     setisLoadingChats(false);
                 });
