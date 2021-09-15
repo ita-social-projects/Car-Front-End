@@ -32,19 +32,19 @@ import Badge from "../../components/badge/Badge";
 const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
-    const [isLoadingChats, setisLoadingChats] = useState(false);
+    const [isLoading, setisLoading] = useState(false);
     const [search, setSearch] = useState("");
 
     const getChats = () => {
         if (!search) {
-            setisLoadingChats(true);
+            setisLoading(true);
             ChatService.getChat().then((res) => {
                 let chats = res.data;
 
                 setMasterDataSource(JSON.parse(JSON.stringify(chats)));
 
                 setFilteredDataSource(chats);
-                setisLoadingChats(false);
+                setisLoading(false);
             });
         }
     };
@@ -62,7 +62,7 @@ const Messages = (props: MessagesProps) => {
         let textTrimmed = text.trim();
 
         if (textTrimmed.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
-            setIsLoading(true);
+            setisLoading(true);
 
             const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
             //const unreadMessagesArr: number[] = JSON.parse(JSON.stringify(masterDataSourceUnreadMessages));
@@ -79,7 +79,7 @@ const Messages = (props: MessagesProps) => {
                 ChatService.getFilteredChats({ searchText: textTrimmed, chats: masterDataSource }).then(res => {
 
                     setFilteredDataSource(res.data);
-                    setisLoadingChats(false);
+                    setisLoading(false);
                 });
             setSearch(text);
         } else {
@@ -240,7 +240,7 @@ const Messages = (props: MessagesProps) => {
             )}
 
             <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
-                {isLoadingChats ? (
+                {isLoading ? (
                     <Indicator
                         size="large"
                         color={DM("#414045")}
