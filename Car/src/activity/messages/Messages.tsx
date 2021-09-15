@@ -65,7 +65,6 @@ const Messages = (props: MessagesProps) => {
             setisLoading(true);
 
             const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
-            //const unreadMessagesArr: number[] = JSON.parse(JSON.stringify(masterDataSourceUnreadMessages));
 
             const searchInTitle = arr.filter((chat) => {
                 let chatTitle = chat?.name.toUpperCase();
