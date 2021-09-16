@@ -134,11 +134,11 @@ test("renders correctly", async () =>
       </NotificationModalBase>
       <React.Fragment>
         <ConfirmModal
-          cancelText="No, keep it"
+          cancelText="No, come back"
           confirmText="Yes, withdraw"
           disableModal={[Function]}
           onConfirm={[Function]}
-          subtitle="Are you sure you want to withdraw the appoved request?"
+          subtitle="Are you sure you want to withdraw the ride?"
           title="ARE YOU SURE?"
           visible={false}
         />

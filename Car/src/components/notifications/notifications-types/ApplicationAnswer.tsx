@@ -113,9 +113,9 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     <ConfirmModal
                         visible={confirmationModalVisible}
                         title="ARE YOU SURE?"
-                        subtitle="Are you sure you want to withdraw the appoved request?"
+                        subtitle="Are you sure you want to withdraw the ride?"
                         confirmText="Yes, withdraw"
-                        cancelText="No, keep it"
+                        cancelText="No, come back"
                         disableModal={() => setConfirmationModalVisible(false)}
                         onConfirm={() => {
                             setConfirmationModalVisible(false);
