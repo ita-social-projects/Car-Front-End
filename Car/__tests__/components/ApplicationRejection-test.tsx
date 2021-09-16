@@ -28,8 +28,9 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <ApplicationAnswer
-      IsDepartureTimeVisible={true}
-      IsStopsTitleVisible={true}
+      IsBaggageVisible={false}
+      IsDetailsTitleVisible={false}
+      IsFeeVisible={false}
       notification={
         Object {
           "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
