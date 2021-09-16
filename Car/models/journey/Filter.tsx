@@ -6,6 +6,7 @@ interface Filter{
     from: WayPoint,
     to: WayPoint,
     fee: FeeType,
+    quantity: number,
 }
 
 export default Filter;

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import HeaderLogoutButtonStyle from "./HeaderLogoutButtonStyle";
 import RNRestart from "react-native-restart";
 import DM from "../styles/DM";
 import ConfirmModal from "../confirm-modal/ConfirmModal";
-import AuthManager from "../auth/AuthManager";
+import AuthContext from "../auth/AuthContext";
 
 const HeaderLogoutButton = () => {
+    const { logout } = useContext(AuthContext);
     const [isModalVisible, setModalVisible] = useState(false);
 
     return (
@@ -26,7 +27,7 @@ const HeaderLogoutButton = () => {
                 confirmText="Yes, log out"
                 cancelText="No, stay"
                 onConfirm={async () => {
-                    await AuthManager.signOutAsync();
+                    await logout();
                     RNRestart.Restart();
                 }}
                 disableModal={() => setModalVisible(false)}

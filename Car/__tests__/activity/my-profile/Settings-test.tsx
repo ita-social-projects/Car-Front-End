@@ -78,26 +78,6 @@ test("renders correctly", async () =>
             </ForwardRef>
             <TouchableNavigationCard
               angle="0"
-              cardName="App Settings"
-              navigationName="AppSettings"
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "fontWeight": "bold",
-                    },
-                    Object {
-                      "color": "#000000",
-                    },
-                  ]
-                }
-              >
-                App Settings
-              </Text>
-            </TouchableNavigationCard>
-            <TouchableNavigationCard
-              angle="0"
               cardName="Notifications Settings"
               navigationName="NotificationSettings"
             >

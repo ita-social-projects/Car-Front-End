@@ -310,16 +310,6 @@ const Settings = (props: { navigation: any }) => {
                         </TouchableOpacity>
                         <TouchableNavigationCard
                             navigation={props.navigation}
-                            navigationName="AppSettings"
-                            cardName="App Settings"
-                            angle="0"
-                        >
-                            <Text style={[SettingsStyle.cardText, { color: DM("#000000") }]}>
-                                App Settings
-                            </Text>
-                        </TouchableNavigationCard>
-                        <TouchableNavigationCard
-                            navigation={props.navigation}
                             navigationName="NotificationSettings"
                             cardName="Notifications Settings"
                             angle="0"

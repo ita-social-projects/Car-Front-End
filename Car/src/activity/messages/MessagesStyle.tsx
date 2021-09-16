@@ -119,7 +119,7 @@ const SimpleMessageStyle = StyleSheet.create({
         borderWidth: 4,
         borderColor: "black",
         borderRadius: 30
-    }
+    },
 });
 
 export default SimpleMessageStyle;

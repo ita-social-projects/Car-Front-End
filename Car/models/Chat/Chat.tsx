@@ -8,6 +8,9 @@ type Chat = null | {
         surname: string,
         imageID: string,
     },
+    receivedMessages:[{
+        unreadMessagesCount: number,
+    }],
     journey: {
         departureTime: Date
     }

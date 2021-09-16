@@ -41,7 +41,12 @@ import TouchableDateTimePicker, { addMinutesToDate } from "../../../../component
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 import DM from "../../../../components/styles/DM";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import UserService from "../../../../../api-service/user-service/UserService";
+import User from "../../../../../models/user/User";
+import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -54,6 +59,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const params = props.route.params;
     const journey = params.journey;
     const carModel = journey?.car?.model;
+    const existingInvitations: Invitation[] = journey? journey.invitations : [];
 
     const { user } = useContext(AuthContext);
 
@@ -65,6 +71,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
     });
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
+    const [allUsers, setAllUsers] = useState<User[]>([]);
 
     const activeButtonStyle = {
         backgroundColor: DM("#000000"),
@@ -85,11 +92,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         return inactiveButtonStyle;
     };
 
-    let highlightOwnCarButton : boolean = !journey || journey?.isOnOwnCar;
+    let highlightOwnCarButton : boolean = !journey || journey.isOnOwnCar;
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
-    let highlightPaidButton : boolean = !journey || !journey?.isFree;
+    let highlightPaidButton : boolean = !journey || !journey.isFree;
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
@@ -108,6 +115,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
+    const [usersIsLoading, setUsersIsLoading] = useState(true);
+    const [newInvitations, setNewInvitations] = useState<{email:string; isCorrect: boolean}[]>(
+        params.newInvitations ?? []
+    );
 
     const [successfullyPublishModalIsVisible, setSuccessfullyPublishModalIsVisible] = useState(false);
     const [successfullyUpdateModalIsVisible, setSuccessfullyUpdateModalIsVisible] = useState(false);
@@ -116,6 +127,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...freeRideModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
+
+    useEffect(() => {
+        setNewInvitations(params.newInvitations ?? []);
+    }, [params]);
 
     useEffect(() => {
         CarService.getAll().then(result => {
@@ -139,7 +154,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 setSavedLocationIsLoading(false);
             })
             .catch((e) => console.log(e));
+
+        UserService.getAllUsers().then((res) => {
+            setAllUsers(res.data);
+            setUsersIsLoading(false);
+        });
     }, []);
+
+    const createAllInvitationsArrayFromNewInvitations = () : Invitation[] => {
+        return newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
+            return {
+                id: 0,
+                invitedUserId: allUsers.find((us) => us?.email === invitedUser.email)!.id,
+                journeyId: 0,
+                type: 0
+            };}).concat(existingInvitations);
+    };
 
     const publishJourneyHandler = async () => {
         setRideIsPublishing(true);
@@ -165,6 +195,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
+            invitations: createAllInvitationsArrayFromNewInvitations(),
             duration: params.duration,
             routeDistance: Math.round(params.routeDistance)
         };
@@ -190,6 +221,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
+            invitations: createAllInvitationsArrayFromNewInvitations(),
             organizerId: Number(journey.organizer?.id)
         };
 
@@ -221,7 +253,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const isLoading = userCarIsLoading || rideIsPublishing
-        || successfullyPublishModalIsVisible || savedLocationIsLoading;
+        || successfullyPublishModalIsVisible || savedLocationIsLoading || usersIsLoading;
 
     const confirmDisabled = !departureTimeIsConfirmed || noChanges();
 
@@ -239,23 +271,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     behavior={Platform.OS === "ios" ? "padding" : "position"}
                 >
                     <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: DM("white") }]}>
-
-                        <AddressInputButton
-                            iconName={"location"}
-                            directionType={"From"}
-                            text={params.from.text}
-                            disabled={true}
-                            marginHorizontal={20}
-                            marginBottom={24}
-                        />
-                        <AddressInputButton
-                            iconName={"location"}
-                            directionType={"To"}
-                            text={params.to.text}
-                            disabled={true}
-                            marginHorizontal={20}
-                            marginBottom={24}
-                        />
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            <AddressInputButton
+                                iconName={"location"}
+                                directionType={"From"}
+                                text={params.from.text}
+                                disabled={true}
+                            />
+                        </View>
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            <AddressInputButton
+                                iconName={"location"}
+                                directionType={"To"}
+                                text={params.to.text}
+                                disabled={true}
+                            />
+                        </View>
 
                         {params.stops.map((stop, index) => (
                             <AddressInputButton
@@ -268,17 +299,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 key={index}
                             />
                         ))}
-
-                        <TouchableDateTimePicker
-                            date={departureTime}
-                            setDate={(d) => {
-                                setDepartureTime(d);
-                                setDepartureTimeIsConfirmed(true);
-                            }}
-                            isConfirmed={departureTimeIsConfirmed}
-                            setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
-                        />
-
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            <TouchableDateTimePicker
+                                date={departureTime}
+                                setDate={(d) => {
+                                    setDepartureTime(d);
+                                    setDepartureTimeIsConfirmed(true);
+                                }}
+                                isConfirmed={departureTimeIsConfirmed}
+                                setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
+                            />
+                        </View>
                         <SwitchSelector
                             leftButtonStyle={ownCarButtonStyle}
                             rightButtonStyle={taxiButtonStyle}
@@ -300,24 +331,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         {isOwnCar && (
-                            <JourneyCreationDropDownPicker
-                                items={userCars.map((car) => ({
-                                    label: car.name,
-                                    value: car.id
-                                }))}
-                                paddingLeft={105}
-                                searchable={true}
-                                placeholder="Choose a Car:"
-                                isVisible={isVisibleCarDropDown}
-                                onOpen={() => setIsVisibleCarDropDown(true)}
-                                onChangeItem={(item) => {
-                                    setSelectedCar({ id: item.value, name: item.label });
-                                    setIsVisibleCarDropDown(false);
-                                }}
-                                valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
-                                    userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
-                                }
-                            />)}
+                            <View style = {CreateJourneyStyle.dropDownPickerContainer}>
+                                <JourneyCreationDropDownPicker
+                                    items={userCars.map((car) => ({
+                                        label: car.name,
+                                        value: car.id
+                                    }))}
+                                    paddingLeft={105}
+                                    searchable={true}
+                                    placeholder="Choose a Car:"
+                                    isVisible={isVisibleCarDropDown}
+                                    onOpen={() => setIsVisibleCarDropDown(true)}
+                                    onChangeItem={(item) => {
+                                        setSelectedCar({ id: item.value, name: item.label });
+                                        setIsVisibleCarDropDown(false);
+                                    }}
+                                    valueId={selectedCar.id === null && userCars.length > EMPTY_COLLECTION_LENGTH ?
+                                        userCars[FIRST_ELEMENT_INDEX].id : selectedCar.id
+                                    }
+                                />
+                            </View>
+                        )}
 
                         <SwitchSelector
                             leftButtonStyle={freeButtonStyle}
@@ -361,6 +395,42 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 value={comment}
                             />
                             <Text style={{ color: DM("#686262"), paddingTop: 5 }}>Up to 100 symbols</Text>
+                        </View>
+
+                        <View style={CreateJourneyStyle.invitationsView}>
+                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Invited
+                            SoftServians</Text>
+                            <TouchableOpacity style={CreateJourneyStyle.invitationsLink}
+                                onPress={ () =>
+                                    navigation.navigate("Journey Invitations",
+                                        { journey: journey, newInvitations: newInvitations, allUsers: allUsers })
+                                }
+                            >
+                                <Ionicons
+                                    style={[
+                                        { transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE") }
+                                    ]}
+                                    name={"people-circle-outline"}
+                                    size={35}
+                                    color={"#414045"}
+                                />
+                                <View style={{ marginLeft: 17 }}>
+                                    <Text style={CreateJourneyStyle.invitationsCaption}>Invited SoftServians</Text>
+                                    <Text style={CreateJourneyStyle.invitationsDesctiption}>
+                                        {existingInvitations.length +
+                                        newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
+                                        for that Ride</Text>
+                                </View>
+                                <Ionicons
+                                    style={[
+                                        { transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE"),
+                                            marginLeft: 35 }
+                                    ]}
+                                    name={"chevron-forward-outline"}
+                                    size={25}
+                                    color={"#414045"}
+                                />
+                            </TouchableOpacity>
                         </View>
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,

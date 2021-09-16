@@ -5,6 +5,11 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingTop: 25
     },
 
+    dropDownPickerContainer: {
+        marginHorizontal: 20,
+        marginTop: 24
+    },
+
     recentJourneyText: {
         paddingBottom: 5,
         paddingLeft: 10,
@@ -40,6 +45,19 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginRight: 20
     },
 
+    invitationsView: {
+        marginTop: 24,
+        marginLeft: 20,
+        marginRight: 20
+    },
+
+    invitationsLink: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        paddingVertical: 15
+    },
+
     textInputStyle: {
         height: 100,
         borderWidth: 2,
@@ -48,10 +66,27 @@ export const CreateJourneyStyle = StyleSheet.create({
         textAlignVertical: "top",
     },
 
+    invitationInputStyle: {
+        height: 45,
+        borderWidth: 2,
+        fontSize: 15,
+        paddingLeft: 10,
+    },
+
     commentsCaption: {
         fontSize: 17,
         fontWeight: "bold",
         marginBottom: 8
+    },
+
+    invitationsCaption: {
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 2
+    },
+
+    invitationsDesctiption: {
+        fontSize: 12,
     },
 
     publishButtonContainer: {

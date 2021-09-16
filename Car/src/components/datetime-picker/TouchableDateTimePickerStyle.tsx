@@ -8,9 +8,6 @@ const TouchableDateTimePickerStyle = StyleSheet.create({
         paddingLeft: 8,
         paddingBottom: 8,
         paddingTop: 8,
-        marginRight: 20,
-        marginLeft: 20,
-        marginTop: 5,
         fontFamily: Platform.OS === "ios" ? "Open Sans" : "OpenSans-Regular.ttf"
     },
 
