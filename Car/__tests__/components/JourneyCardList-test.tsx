@@ -1,6 +1,57 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import CarViewModel from "../../models/car/CarViewModel";
+import Journey from "../../models/journey/Journey";
+import Schedule from "../../models/Schedule";
 import JourneyCardList from "../../src/components/journey-card/JourneyCardList";
+
+let journeys: Journey[] = [
+    {
+        id: 1,
+        routeDistance: 0,
+        duration: "",
+        departureTime: new Date(0),
+        countOfSeats: 0,
+        comments: "",
+        isFree: true,
+        isOnOwnCar: true,
+        schedule: {} as Schedule,
+        journeyPoints: [],
+        participants: [
+            {
+                id: 1,
+                name: "",
+                surname: "",
+                position: "",
+                location: "",
+                token: "",
+                fcmtoken: "",
+                email: "",
+                hireDate: new Date(0),
+                imageId: "",
+                journeyCount: 0,
+                phoneNumber: 0,
+            },
+        ],
+        stops: [],
+        invitations: [],
+        organizer: {
+            id: 1,
+            name: "",
+            surname: "",
+            position: "",
+            location: "",
+            token: "",
+            fcmtoken: "",
+            email: "",
+            hireDate: new Date(0),
+            imageId: "",
+            journeyCount: 0,
+            phoneNumber: 0,
+        },
+        car: {} as CarViewModel,
+    },
+];
 
 test("renders correctly", async () =>
     expect(
@@ -8,41 +59,8 @@ test("renders correctly", async () =>
     ).toMatchInlineSnapshot("<View />"));
 
 test("renders correctly", async () =>
-    expect(
-        renderer
-            .create(
-                <JourneyCardList
-                    journey={[
-                        {
-                            id: 1,
-                            organizer: {
-                                id: 1,
-                                name: "ABC",
-                                surname: "BCD",
-                                position: "CDE",
-                            },
-                            departureTime: "",
-                            participants: [
-                                {
-                                    id: 2,
-                                    name: "ABC",
-                                    surname: "BCD",
-                                    position: "CDE",
-                                },
-                                {
-                                    id: 3,
-                                    name: "ABC",
-                                    surname: "BCD",
-                                    position: "CDE",
-                                },
-                            ],
-                            stops: [{}, {}],
-                        },
-                    ]}
-                />
-            )
-            .toJSON()
-    ).toMatchInlineSnapshot(`
+    expect(renderer.create(<JourneyCardList journey={journeys} />).toJSON())
+        .toMatchInlineSnapshot(`
     <View>
       <View>
         <View>
@@ -108,7 +126,7 @@ test("renders correctly", async () =>
                           "justifyContent": "center",
                         },
                         Object {
-                          "backgroundColor": "#d1d8a6",
+                          "backgroundColor": "#52bb13",
                           "height": 38.5,
                           "width": 38.5,
                         },
@@ -132,7 +150,7 @@ test("renders correctly", async () =>
                         ]
                       }
                     >
-                      AB
+                      NaN
                     </Text>
                   </View>
                 </View>
@@ -170,7 +188,7 @@ test("renders correctly", async () =>
                           ]
                         }
                       >
-                        ABC BCD
+                         
                         's ride
                       </Text>
                     </View>
@@ -227,7 +245,7 @@ test("renders correctly", async () =>
                         ]
                       }
                     >
-                      CDE
+                      
                     </Text>
                     <Text
                       style={
@@ -244,7 +262,7 @@ test("renders correctly", async () =>
                         ]
                       }
                     >
-                      Invalid date
+                      01/01/1970
                     </Text>
                   </View>
                 </View>
