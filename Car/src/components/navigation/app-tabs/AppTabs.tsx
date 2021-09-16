@@ -8,7 +8,7 @@ import NotificationsTabs from "../../../activity/notifications/notifications-tab
 import AppTabsStyle from "./AppTabsStyle";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
-import ChatService from "../../../../api-service/chat-service/ChatService";
+import ReceivedMessagesService from "../../../../api-service/received-messages-service/ReceivedMessagesService";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import DM from "../../styles/DM";
 import updateLocale from "../../styles/DTFormat";
@@ -23,7 +23,7 @@ const AppTabs = () => {
         setUnreadNotificationsNumber(result.data as number)
     );
 
-    ChatService.getAllUnreadMessagesNumber().then((result) =>
+    ReceivedMessagesService.getAllUnreadMessagesNumber().then((result) =>
         setUnreadMessagesNumber(result.data as number)
     );
 
