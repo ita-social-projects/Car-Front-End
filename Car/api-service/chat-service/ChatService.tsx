@@ -21,7 +21,6 @@ const ChatService = {
 
     getAllUnreadMessagesNumber: async () =>
         APIService.get(route + "unreadNumber")
-
 };
 
 export default ChatService;
