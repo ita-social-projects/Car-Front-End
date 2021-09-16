@@ -60,6 +60,7 @@ import {
 } from "../../../../constants/ChatsConstants";
 import Message from "../../../../../models/Message";
 import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
+import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -103,7 +104,6 @@ const Chat = (properties: ChatProps) => {
                 invokeConncetion();
                 AndroidKeyboardAdjust.setAdjustResize();
             });
-
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
             let messageId = ZERO_ID;
 
@@ -117,6 +117,8 @@ const Chat = (properties: ChatProps) => {
                     setSpinner(false);
                     focusOnMessage(res.find(msg => msg._id === messageToFocusId)!);
                 });
+
+            ReceivedMessagesService.markAsRead(properties.route.params.chatId);
 
             connection.onreconnected(() => {
                 invokeConncetion();
