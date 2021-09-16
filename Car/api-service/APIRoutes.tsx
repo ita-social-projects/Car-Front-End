@@ -29,7 +29,7 @@ const APIRoutes = {
 
     getJourneyUserUrl: () => APIConfig.URL + "api/journeyusers/",
 
-    getReceivedMessagesUrl: () => APIConfig.URL + "api/receivedmessages",
+    getReceivedMessagesUrl: () => APIConfig.URL + "api/receivedmessages/",
 };
 
 export default APIRoutes;

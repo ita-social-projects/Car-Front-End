@@ -17,10 +17,7 @@ const ChatService = {
         APIService.post<Chat[]>(route + "filter/", filter),
 
     addChat: async (data: CreateChat) =>
-        APIService.post<CreateChat>(route, data),
-
-    getAllUnreadMessagesNumber: async () =>
-        APIService.get(route + "unreadNumber")
+        APIService.post<CreateChat>(route, data)
 };
 
 export default ChatService;
