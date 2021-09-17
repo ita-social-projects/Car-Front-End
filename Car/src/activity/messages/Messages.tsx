@@ -16,13 +16,12 @@ import {
     MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
 } from "../../constants/MessageConstants";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
-import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
+import { NOT_EXISTING_ELEMENT_INDEX, ZERO } from "../../constants/GeneralConstants";
 import DM from "../../components/styles/DM";
 import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import { LinearTextGradient } from "react-native-text-gradient";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
@@ -163,21 +162,17 @@ const Messages = (props: MessagesProps) => {
                                         )}
                                     </View>
                                     <View>
-                                        <View>
-                                            <Badge
-                                                size={20}
-                                                value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
-                                                    .unreadMessagesCount }/>
-                                        </View>
-                                    </View>
-                                    <View style={MessagesStyle.iconWrapper}>
-                                        <View>
-                                            <Ionicons
-                                                name={"chatbubbles"}
-                                                size={20}
-                                                color={DM("black")}
-                                            />
-                                        </View>
+                                        {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                            .unreadMessagesCount === ZERO ? (<View />)
+                                            :
+                                            (
+                                                <View>
+                                                    <Badge
+                                                        size={20}
+                                                        value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                                            .unreadMessagesCount }/>
+                                                </View>
+                                            )}
                                     </View>
                                 </View>
                             </View>

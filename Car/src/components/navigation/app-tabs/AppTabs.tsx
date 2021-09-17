@@ -47,7 +47,7 @@ const AppTabs = () => {
 
     const tabBarUnreadMessages = unreadMessagesNumber > EMPTY_COLLECTION_LENGTH
         ? unreadMessagesNumber.toString()
-        :undefined;
+        : undefined;
 
     return (
         <Tabs.Navigator
