@@ -103,6 +103,7 @@ const Chat = (properties: ChatProps) => {
             connection.start().then(() => {
                 invokeConncetion();
                 AndroidKeyboardAdjust.setAdjustResize();
+                ReceivedMessagesService.markAsRead(properties.route.params.chatId);
             });
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
             let messageId = ZERO_ID;
@@ -117,8 +118,6 @@ const Chat = (properties: ChatProps) => {
                     setSpinner(false);
                     focusOnMessage(res.find(msg => msg._id === messageToFocusId)!);
                 });
-
-            ReceivedMessagesService.markAsRead(properties.route.params.chatId);
 
             connection.onreconnected(() => {
                 invokeConncetion();
@@ -141,6 +140,7 @@ const Chat = (properties: ChatProps) => {
                         } as any
                     )
                 );
+                ReceivedMessagesService.markAsRead(properties.route.params.chatId);
             });
             setMessage("");
 
