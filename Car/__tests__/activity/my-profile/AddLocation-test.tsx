@@ -20,7 +20,6 @@ test("renders correctly", async () =>
             "position": "absolute",
             "right": 10,
             "top": 25,
-            "zIndex": 1,
           }
         }
       >
@@ -83,6 +82,7 @@ test("renders correctly", async () =>
         style={
           Object {
             "height": "100%",
+            "zIndex": -2,
           }
         }
       >
