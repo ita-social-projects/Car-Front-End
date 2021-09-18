@@ -134,7 +134,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
 
             <MapView
                 ref={ref => (mapRef.current = ref)}
-                style={{ height: "100%" }}
+                style={AddressInputPageStyle.mapContainer}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={{ ...params.camera, center: centerCoordinates }}

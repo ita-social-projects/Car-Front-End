@@ -6,8 +6,11 @@ const AddressInputPageStyle = StyleSheet.create({
         top: 25,
         left: 10,
         right: 10,
-        zIndex: 1
-    }
+    },
+    mapContainer: {
+        zIndex: -2,
+        height: "100%",
+    },
 });
 
 export default AddressInputPageStyle;
