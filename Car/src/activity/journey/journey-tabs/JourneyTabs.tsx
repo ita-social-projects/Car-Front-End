@@ -49,6 +49,7 @@ import { Host } from "react-native-portalize";
 import AddressInputPage from "../journey-activity/address-input-page/AddressInputPage";
 import ScheduleBottomPopup from "../../../components/schedule-bottom-popup/ScheduleBottomPopup";
 import WeekDay from "../../../components/schedule-bottom-popup/WeekDay";
+import JourneyInvitationsPage from "../journey-activity/journey-invitations/JourneyInvitationsPage";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
@@ -288,6 +289,17 @@ const JourneyTabs = () => {
                         );
                     }}
                 </StackTabs.Screen>
+
+                <StackTabs.Screen
+                    name="Journey Invitations"
+                    component={JourneyInvitationsPage}
+                    options={{
+                        headerTitle: "Ride Invitations",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleAlign: "center",
+                        headerLeft: HeaderBackButton
+                    }}
+                />
 
                 <StackTabs.Screen
                     name="Search Journey"

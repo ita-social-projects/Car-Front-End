@@ -6,6 +6,7 @@ import JourneyDto from "../../models/journey/JourneyDto";
 import FilterJourneyModel from "../../models/journey/FilterJourneyModel";
 import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
 import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
+import Invitation from "../../models/invitation/Invitation";
 
 const route = APIRoutes.getJourneyUrl();
 
@@ -45,6 +46,9 @@ const JourneyService = {
 
     updateDetails: async (journey: JourneyDto) =>
         APIService.put(route + "update-details/", journey),
+
+    updateInvitation: async (invitation: Invitation) =>
+        APIService.put(route + "update-invitation/", invitation),
 
     deleteUser: async (journeyId: number, userId: number) =>
         APIService.delete(route + "delete-user/" + journeyId + "/" + userId),

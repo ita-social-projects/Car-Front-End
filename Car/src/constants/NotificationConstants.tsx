@@ -1,0 +1,2 @@
+export const ACCEPTED_INVITATION_TYPE = 6;
+export const REJECTED_INVITATION_TYPE = 7;

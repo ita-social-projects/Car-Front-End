@@ -26,11 +26,12 @@ describe("JourneySearch Test", () => {
         wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
         expect(toJSON(wrapper)).toMatchInlineSnapshot(`
       <Fragment>
-        <View
+        <ScrollView
           style={
             Array [
               Object {
                 "height": "100%",
+                "paddingVertical": 20,
                 "width": "100%",
               },
               Object {
@@ -42,31 +43,87 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                "marginHorizontal": 20,
-                "marginTop": 30,
+                "paddingHorizontal": 16,
+                "paddingVertical": 10,
               }
             }
           >
             <AddressInputButton
               directionType="From"
               iconName="location"
-              marginBottom={15}
-              onPress={[Function]}
-              text=""
-            />
-            <AddressInputButton
-              directionType="To"
-              iconName="location"
-              marginBottom={15}
               onPress={[Function]}
               text=""
             />
           </View>
-          <TouchableDateTimePicker
-            date={1970-01-01T00:00:00.000Z}
-            isConfirmed={true}
-            setDate={[Function]}
-          />
+          <View
+            style={
+              Object {
+                "paddingHorizontal": 16,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <AddressInputButton
+              directionType="To"
+              iconName="location"
+              onPress={[Function]}
+              text=""
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "paddingHorizontal": 16,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <TouchableDateTimePicker
+              date={1970-01-01T00:00:00.000Z}
+              isConfirmed={true}
+              setDate={[Function]}
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "paddingHorizontal": 16,
+                  "paddingVertical": 10,
+                },
+              ]
+            }
+          >
+            <JourneyCreationDropDownPicker
+              isVisible={false}
+              items={
+                Array [
+                  Object {
+                    "label": "1",
+                    "value": 1,
+                  },
+                  Object {
+                    "label": "2",
+                    "value": 2,
+                  },
+                  Object {
+                    "label": "3",
+                    "value": 3,
+                  },
+                  Object {
+                    "label": "4",
+                    "value": 4,
+                  },
+                ]
+              }
+              onChangeItem={[Function]}
+              onOpen={[Function]}
+              paddingLeft={100}
+              placeholder="Passengers:"
+              searchable={false}
+              valueId={1}
+            />
+          </View>
           <View
             style={
               Object {
@@ -228,11 +285,16 @@ describe("JourneySearch Test", () => {
           </View>
           <View
             style={
-              Object {
-                "alignItems": "flex-end",
-                "flex": 1,
-                "flexDirection": "row-reverse",
-              }
+              Array [
+                Object {
+                  "alignItems": "flex-end",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "height": "100%",
+                  "justifyContent": "flex-end",
+                  "marginVertical": 24,
+                },
+              ]
             }
           >
             <ForwardRef
@@ -275,7 +337,7 @@ describe("JourneySearch Test", () => {
               </Text>
             </ForwardRef>
           </View>
-        </View>
+        </ScrollView>
       </Fragment>
     `);
     });

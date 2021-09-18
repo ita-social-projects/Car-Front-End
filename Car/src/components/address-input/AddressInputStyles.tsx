@@ -9,9 +9,9 @@ const AddressInputStyles = StyleSheet.create({
         fontSize: 18,
     },
     listView: {
-        position: "relative",
-        zIndex: 100,
-        height: 270
+        position: "absolute",
+        top: 50,
+        zIndex: 1
     },
     textInput: {
         fontSize: 18,

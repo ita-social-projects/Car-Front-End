@@ -172,7 +172,7 @@ const AddLocation = () => {
 
             <MapView
                 ref={ref => (mapRef.current = ref)}
-                style={{ height: "100%" }}
+                style={AddLocationStyle.mapContainer}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}

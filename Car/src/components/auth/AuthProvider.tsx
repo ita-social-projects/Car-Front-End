@@ -22,13 +22,12 @@ const AuthProvider = ({ children }: any) => {
     const navigateLoginWithResetIndicator = () =>
         navigation.navigate("Login", { resetIndicator: true });
 
-    const saveTokenToDatabase = async (token: string | null, userToUpdate: User) => {
-        const updatedUser = new FormData();
+    const addTokenToDatabase = async (token: string, userToUpdate: User) => {
+        const fcmTokenForm = new FormData();
 
-        updatedUser.append("id", userToUpdate?.id);
-        updatedUser.append("fcmtoken", token);
+        fcmTokenForm.append("token", token);
 
-        await UserService.updateUserFcmtoken(updatedUser);
+        await UserService.addUserFcmtoken(fcmTokenForm);
         await UserService.getUser(userToUpdate!.id).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
@@ -94,16 +93,21 @@ const AuthProvider = ({ children }: any) => {
 
                         messaging()
                             .getToken()
-                            .then(tokenToSave => saveTokenToDatabase(tokenToSave, dbUser.data));
+                            .then(tokenToSave => {
+                                if(tokenToSave)
+                                    addTokenToDatabase(tokenToSave, dbUser.data);
+                            });
 
-                        messaging().onTokenRefresh(tokenToSave => saveTokenToDatabase(tokenToSave, dbUser.data));
+                        messaging().onTokenRefresh(tokenToSave => addTokenToDatabase(tokenToSave, dbUser.data));
 
                         navigation.navigate("AppTabs");
                     }
                 },
 
                 logout: async () => {
-                    await saveTokenToDatabase(null, user);
+                    let tokenToDelete = await messaging().getToken();
+
+                    await UserService.deleteUserFcmtoken(tokenToDelete);
                     await AuthManager.signOutAsync();
                     updateUserState(null);
                 },

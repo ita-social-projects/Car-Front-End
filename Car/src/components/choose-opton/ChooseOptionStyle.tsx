@@ -11,10 +11,6 @@ const ChooseOptionStyle = StyleSheet.create({
         flex: 1
     },
 
-    switchContainer: {
-        paddingRight: 20
-    },
-
     switch: {
         height: 28,
         width: 36

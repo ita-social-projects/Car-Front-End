@@ -4,16 +4,28 @@ import { Switch } from "react-native-gesture-handler";
 import DM from "../styles/DM";
 import ChooseOptionStyle from "./ChooseOptionStyle";
 import ChooseOptionProps from "./ChooseOptionProps";
+import TouchableNavigationCardStyle from "../touchable-navigation-card/TouchableNavigationCardStyle";
 
 const ChooseOption = (props: ChooseOptionProps) => {
     return (
         <View style={ChooseOptionStyle.preferencesContainer}>
+            <View style={TouchableNavigationCardStyle.cardInformationContainer}>
+                <View style={{ flexDirection: "row" }}>
+                    {props.picture != undefined ? (
+                        <View style={TouchableNavigationCardStyle.pictureContainer}>
+                            {props.picture}
+                        </View>
+                    ) : (
+                        <View />
+                    )}
+                </View>
+            </View>
             <View style={ChooseOptionStyle.preferenceNameContainer}>
                 <Text style={[ChooseOptionStyle.preferenceNameText, { color: DM("black") }]}>
                     {props.text}
                 </Text>
             </View>
-            <View style={ChooseOptionStyle.switchContainer}>
+            <View>
                 <Switch
                     trackColor={{ false: DM("gray"), true: DM("#414045") }}
                     thumbColor={DM("white")}
@@ -21,11 +33,6 @@ const ChooseOption = (props: ChooseOptionProps) => {
                     value={props.value}
                     onValueChange={(value) => props.onValueChanged(value)}
                 />
-            </View>
-            <View style={ChooseOptionStyle.preferenceValueContainer}>
-                <Text style={[ChooseOptionStyle.preferenceValueText, { color: DM("black") }]}>
-                    {props.value ? "Yes" : "No"}
-                </Text>
             </View>
         </View>
     );

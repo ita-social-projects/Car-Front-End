@@ -63,9 +63,9 @@ describe("User Service test", () => {
         });
     });
 
-    test("should update users fcmtoken", async () => {
+    test("should add user fcmtoken", async () => {
 
-        jest.spyOn(axios, "put").mockImplementation(
+        jest.spyOn(axios, "post").mockImplementation(
             () =>
                 new Promise<AxiosResponse>(function (resolve) {
                     resolve({
@@ -80,7 +80,29 @@ describe("User Service test", () => {
                 })
         );
 
-        UserService.updateUserFcmtoken({} as any).then((res) => {
+        UserService.addUserFcmtoken({} as any).then((res) => {
+            expect(res.status).toBe(200);
+        });
+    });
+
+    test("should delete user fcmtoken", async () => {
+
+        jest.spyOn(axios, "delete").mockImplementation(
+            () =>
+                new Promise<AxiosResponse>(function (resolve) {
+                    resolve({
+                        data: {} as any,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "miltipart/Form-data"
+                        }
+                    });
+                })
+        );
+
+        UserService.deleteUserFcmtoken({} as any).then((res) => {
             expect(res.status).toBe(200);
         });
     });

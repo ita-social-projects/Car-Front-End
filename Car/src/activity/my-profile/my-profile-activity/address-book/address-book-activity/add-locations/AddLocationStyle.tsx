@@ -7,9 +7,11 @@ const AddLocationStyle = StyleSheet.create({
         top: 25,
         left: 10,
         right: 10,
-        zIndex: 1,
     },
-
+    mapContainer :{
+        zIndex:-2,
+        height: "100%",
+    },
     textInput: {
         color: "black",
         backgroundColor: "white",
