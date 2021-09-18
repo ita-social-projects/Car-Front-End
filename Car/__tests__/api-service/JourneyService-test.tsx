@@ -112,7 +112,8 @@ describe("Journey Service test", () => {
         isOnOwnCar: true,
         carId: 0,
         journeyPoints: [],
-        stops: []
+        stops: [],
+        weekDay: null
     };
 
     let filter : FilterJourney = {

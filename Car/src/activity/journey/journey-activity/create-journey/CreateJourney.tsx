@@ -46,6 +46,7 @@ import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageP
 import { isDarkMode } from "../../../../components/navigation/Routes";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
+import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -67,6 +68,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
     const params = props?.route?.params;
     const journey = params?.journey;
+
+    if(props)
+        props.weekDay.current = props.weekDay.current || (journey?.schedule?.days ?? WeekDay.None);
+    const weekDay = props?.weekDay?.current;
 
     const { user } = useContext(AuthContext);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
@@ -261,6 +266,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     };
 
     const onConfirmPressHandler = () => {
+        console.log(weekDay);
         const properties: JourneyDetailsPageProps = {
             route: {
                 params: {
@@ -269,7 +275,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     stops: stops.filter(stop => stop.isConfirmed),
                     routePoints: routePoints,
                     duration: duration,
-                    routeDistance: routeDistance
+                    routeDistance: routeDistance,
+                    weekDay: weekDay,
                 }
             }
         };
@@ -290,7 +297,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             routeDistance: Math.round(routeDistance),
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
-            stops: createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id)
+            stops: createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id),
+            weekDay: weekDay || null,
         };
 
         await JourneyService.updateRoute(updatedJourney)
@@ -499,7 +507,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 confirmColor={"black"}
                 title={"CHANGES"}
                 subtitle={"After the changes is applied, all passengers will get notified. " +
-                "Some of them might withdraw from the ride if change doesn't suit them"}
+                    "Some of them might withdraw from the ride if change doesn't suit them"}
                 confirmText={"Apply"}
                 cancelText={"Cancel"}
                 onConfirm={() => {

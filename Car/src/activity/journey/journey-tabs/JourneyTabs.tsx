@@ -47,6 +47,8 @@ import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/Shado
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import { Host } from "react-native-portalize";
 import AddressInputPage from "../journey-activity/address-input-page/AddressInputPage";
+import ScheduleBottomPopup from "../../../components/schedule-bottom-popup/ScheduleBottomPopup";
+import WeekDay from "../../../components/schedule-bottom-popup/WeekDay";
 
 const JourneyTabs = () => {
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
@@ -58,6 +60,7 @@ const JourneyTabs = () => {
 
     const ridePageMoreOptionsRef = useRef<any>(null);
     const createRideMoreOptionsRef = useRef<any>(null);
+    const scheduleMoreOptionsRef = useRef<any>(null);
 
     const StackTabs = createStackNavigator();
 
@@ -119,6 +122,10 @@ const JourneyTabs = () => {
                     }}
                 >
                     {(props: any) => {
+                        /* eslint-disable */
+                        const weekDayRef = useRef<WeekDay>(WeekDay.None);
+                        const isScheduleOpened = useRef(false);
+                        /* eslint-enable */
 
                         return (
                             <>
@@ -132,13 +139,14 @@ const JourneyTabs = () => {
                                     <CreateJourney props={{
                                         ...props,
                                         moreOptionsPopupIsOpen: isOpen,
-                                        closeMoreOptionPopup: () => closeMoreOptionPopup(createRideMoreOptionsRef)
+                                        closeMoreOptionPopup: () => closeMoreOptionPopup(createRideMoreOptionsRef),
+                                        weekDay: weekDayRef,
                                     }} />
                                 </Animated.View>
 
                                 <BottomPopup
-                                    refForChild={(ref) => (createRideMoreOptionsRef.current = ref)}
-                                    snapPoints={[MIN_POPUP_HEIGHT, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                    refForChild={ref => (createRideMoreOptionsRef.current = ref)}
+                                    snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
                                     enabledInnerScrolling={false}
                                     onCloseEnd={closeHandle}
                                     initialSnap={0}
@@ -164,6 +172,14 @@ const JourneyTabs = () => {
                                                 disabled={CreateJourney.numberOfAddedStop === NUMBER_OF_STOPS_LIMIT}
                                             />
                                             <MenuButton
+                                                text="Schedule a ride"
+                                                isIcon={true}
+                                                onPress={() => {
+                                                    scheduleMoreOptionsRef.current?.snapTo(MAX_POPUP_POSITION);
+                                                    isScheduleOpened.current = true;
+                                                }}
+                                            />
+                                            <MenuButton
                                                 text="Change Preferences"
                                                 isIcon={true}
                                                 onPress={() => navigation.navigate("MyProfileTabs",
@@ -171,6 +187,15 @@ const JourneyTabs = () => {
                                             />
                                         </View>
                                     }
+                                />
+                                <ScheduleBottomPopup
+                                    weekDay={weekDayRef}
+                                    refForChild={scheduleMoreOptionsRef}
+                                    isOpened={isScheduleOpened}
+                                    onCloseEnd={() => {
+                                        isScheduleOpened.current = false;
+                                        closeMoreOptionPopup(createRideMoreOptionsRef);
+                                    }}
                                 />
                             </>
                         );
@@ -190,14 +215,79 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Journey Details"
-                    component={JourneyDetailsPage}
                     options={{
                         headerTitle: "Ride Details",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerTitleAlign: "center",
-                        headerLeft: HeaderBackButton
+                        headerLeft: HeaderBackButton,
+                        headerRight: () => HeaderEllipsis(
+                            { onPress: () => pressHandle(createRideMoreOptionsRef) })
                     }}
-                />
+                >
+                    {(props: any) => {
+                        /* eslint-disable */
+                        const weekDayRef = useRef<WeekDay>(WeekDay.None);
+                        const isScheduleOpened = useRef(false);
+                        /* eslint-enable */
+
+                        return (
+                            <>
+                                <Animated.View style={isVisible && [HeaderStyle.layout,
+                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                ]} />
+
+                                <JourneyDetailsPage
+                                    route={props.route}
+                                    weekDay={weekDayRef}
+                                />
+
+                                <BottomPopup
+                                    refForChild={ref => (createRideMoreOptionsRef.current = ref)}
+                                    snapPoints={[MIN_POPUP_HEIGHT, CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                    enabledInnerScrolling={false}
+                                    onCloseEnd={closeHandle}
+                                    initialSnap={0}
+                                    renderHeader={
+                                        <View style={[JourneyPageStyle.headerTitleStyle,
+                                            { backgroundColor: DM("white") }
+                                        ]}>
+                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                                                MORE OPTIONS
+                                            </Text>
+                                        </View>
+                                    }
+                                    renderContent={
+                                        <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
+                                            <MenuButton
+                                                text="Schedule a ride"
+                                                isIcon={true}
+                                                onPress={() => {
+                                                    scheduleMoreOptionsRef.current?.snapTo(MAX_POPUP_POSITION);
+                                                    isScheduleOpened.current = true;
+                                                }}
+                                            />
+                                            <MenuButton
+                                                text="Change Preferences"
+                                                isIcon={true}
+                                                onPress={() => navigation.navigate("MyProfileTabs",
+                                                    { screen: "Preferences" })}
+                                            />
+                                        </View>
+                                    }
+                                />
+                                <ScheduleBottomPopup
+                                    weekDay={weekDayRef}
+                                    refForChild={scheduleMoreOptionsRef}
+                                    isOpened={isScheduleOpened}
+                                    onCloseEnd={() => {
+                                        isScheduleOpened.current = false;
+                                        closeMoreOptionPopup(createRideMoreOptionsRef);
+                                    }}
+                                />
+                            </>
+                        );
+                    }}
+                </StackTabs.Screen>
 
                 <StackTabs.Screen
                     name="Search Journey"
@@ -236,7 +326,7 @@ const JourneyTabs = () => {
                                         ...props,
                                         moreOptionsPopupIsOpen: isOpen,
                                         closeMoreOptionsPopup: () => closeMoreOptionPopup(ridePageMoreOptionsRef)
-                                    }}/>
+                                    }} />
                                 </Animated.View>
 
                                 {props.route.params.isDriver &&
@@ -306,7 +396,7 @@ const JourneyTabs = () => {
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
-                    children = {(props: any) => (
+                    children={(props: any) => (
                         <>
                             <OkSearchResult
                                 journeys={props.route.params.journeys}
@@ -347,7 +437,7 @@ const JourneyTabs = () => {
                                             onPress={() => {
                                                 navigation.navigate("Journey Request Page",
                                                     { isRequest: true, isPreviousFilter: true });
-                                                if(ShadowedBottomPopup)
+                                                if (ShadowedBottomPopup)
                                                     ShadowedBottomPopup.pressHandle();
                                             }}
                                         />
@@ -355,7 +445,7 @@ const JourneyTabs = () => {
                                             text="With new filters"
                                             isIcon={true}
                                             onPress={() => {
-                                                if(ShadowedBottomPopup)
+                                                if (ShadowedBottomPopup)
                                                     ShadowedBottomPopup.pressHandle();
                                                 setNewRequestModalVisible(true);
                                             }}

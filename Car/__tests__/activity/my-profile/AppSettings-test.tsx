@@ -65,6 +65,7 @@ test("renders correctly", async () =>
             onChange={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            onTintColor="#414045"
             style={
               Array [
                 Object {
@@ -77,6 +78,8 @@ test("renders correctly", async () =>
                 },
               ]
             }
+            thumbTintColor="white"
+            tintColor="gray"
             value={false}
           />
         </View>

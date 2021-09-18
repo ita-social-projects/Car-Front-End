@@ -15,6 +15,8 @@ const ChooseOption = (props: ChooseOptionProps) => {
             </View>
             <View style={ChooseOptionStyle.switchContainer}>
                 <Switch
+                    trackColor={{ false: DM("gray"), true: DM("#414045") }}
+                    thumbColor={DM("white")}
                     style={ChooseOptionStyle.switch}
                     value={props.value}
                     onValueChange={(value) => props.onValueChanged(value)}

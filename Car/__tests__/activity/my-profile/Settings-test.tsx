@@ -74,7 +74,6 @@ test("renders correctly", async () =>
               >
                 <AvatarLogoTitle />
               </ForwardRef(AnimatedComponentWrapper)>
-              <React.Fragment />
             </ForwardRef>
             <TouchableNavigationCard
               angle="0"

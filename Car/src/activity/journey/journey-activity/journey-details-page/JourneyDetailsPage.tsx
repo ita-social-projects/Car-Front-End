@@ -42,6 +42,7 @@ import JourneyCreationDropDownPicker from "../../../../components/dropdown-picke
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 import DM from "../../../../components/styles/DM";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -50,10 +51,13 @@ const getCarId = (journey?: Journey) => {
 };
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
-
     const params = props.route.params;
     const journey = params.journey;
+
+    props.weekDay!.current = props.weekDay?.current || params.weekDay || journey?.schedule?.days || WeekDay.None;
+
     const carModel = journey?.car?.model;
+    const weekDay = props.weekDay!.current;
 
     const { user } = useContext(AuthContext);
 
@@ -166,7 +170,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
             stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
             duration: params.duration,
-            routeDistance: Math.round(params.routeDistance)
+            routeDistance: Math.round(params.routeDistance),
+            weekDay: weekDay || null,
         };
 
         await JourneyService.add(newJourney)
@@ -190,7 +195,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
-            organizerId: Number(journey.organizer?.id)
+            organizerId: Number(journey.organizer?.id),
+            weekDay: weekDay || null,
         };
 
         await JourneyService.updateDetails(updatedJourney)
@@ -202,7 +208,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 else{
                     setModal(updateErrorModal);
                 }
-
             })
             .catch(() => setModal(updateErrorModal));
 
