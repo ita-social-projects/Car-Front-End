@@ -17,8 +17,8 @@ test("renders correctly", async () =>
       tabBarOptions={
         Object {
           "activeBackgroundColor": "#414045",
-          "activeTintColor": "#ffffff",
-          "inactiveBackgroundColor": "#ffffff",
+          "activeTintColor": "#FFFFFF",
+          "inactiveBackgroundColor": "#FFFFFF",
           "inactiveTintColor": "#414045",
           "labelStyle": Object {
             "fontFamily": "Open Sans",

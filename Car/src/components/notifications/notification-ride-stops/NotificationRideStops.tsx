@@ -63,7 +63,8 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     return (
         <>
             <View style={style.container}>
-                {IsPropertyShown(props.IsStopsTitleVisible) && <Text style={style.header}>{props.title}</Text>}
+                {IsPropertyShown(props.IsStopsTitleVisible) && <Text style={{ ...style.header, color: DM("black") }}>
+                    {props.title}</Text>}
 
                 <View style={style.stopsBlock}>
                     {stops?.length ? stops.map((item, index) =>
