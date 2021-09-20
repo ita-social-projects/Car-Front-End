@@ -1,4 +1,5 @@
 import User from "../../../models/user/User";
+import Journey from "../../../models/journey/Journey";
 
 interface NotificationProps {
     visible?: boolean,
@@ -10,6 +11,7 @@ interface NotificationProps {
     journeyId?: number
     // eslint-disable-next-line
     onDelete?: (id: number) => void
+    journey?: Journey
 }
 
 export default NotificationProps;

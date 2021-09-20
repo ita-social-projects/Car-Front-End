@@ -194,8 +194,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         if (!currentJourney) return [];
 
         if (isDriver) {
-            return [getStopByType(currentJourney, StopType.Start)!,
-                    getStopByType(currentJourney, StopType.Finish)!];
+            return currentJourney.stops.filter(stop => stop!.userId === user!.id);
         }
 
         const stopsSource = isPassenger ? currentJourney.stops : applicantStops;

@@ -7,7 +7,6 @@ import NotificationModalBase from "../notification-modal-base/NotificationModalB
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import NotificationDeclineButton from "../notification-buttons/NotificationDeclineButton";
-import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
 import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import AuthContext from "../../auth/AuthContext";
@@ -16,6 +15,13 @@ import { HTTP_STATUS_OK } from "../../../constants/Constants";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import Stop from "../../../../models/stop/Stop";
 import JourneyPoint from "../../../../models/journey/JourneyPoint";
+import { Text, View } from "react-native";
+import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
+import { SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
+import { getJourneyStops } from "../../../utils/JourneyHelperFunctions";
+import JourneyNewApplicantViewStyle
+    from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
+import Journey from "../../../../models/journey/Journey";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -29,6 +35,7 @@ interface ApplicationAnswerProps {
     IsAvailableSeatsVisible?: boolean,
     IsBaggageVisible?: boolean,
     IsStopsTitleVisible?: boolean,
+    journey?: Journey
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
@@ -36,6 +43,8 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
+    const [stops] = useState<Stop[]>(
+        (props?.notification.journey ? getJourneyStops(props.notification.journey) : []) as Stop[]);
 
     const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
@@ -88,15 +97,16 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     IsDepartureTimeVisible={props.IsDepartureTimeVisible}
                     IsDetailsTitleVisible={props.IsDetailsTitleVisible}
                     IsFeeVisible={props.IsFeeVisible}/>
-
-                <NotificationRideStops
-                    title={"Your route"}
-                    stopsOwner={user}
-                    journeyId={props.notification.journeyId!}
-                    IsStopsTitleVisible
-                    onStopPress = {onStopPress}
-                    notification = {props.notification}
-                />
+                <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>
+                    {props.notification.sender!.name} {props.notification.sender!.surname}`s stops in your ride
+                </Text>
+                <View>
+                    <StopsBlock
+                        stops={stops}
+                        onStopPress={() => onStopPress}
+                        highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                    />
+                </View>
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />
@@ -109,29 +119,29 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 </NotificationButtonGroup>
             </NotificationModalBase>
             {props.withWithdraw &&
-                <>
-                    <ConfirmModal
-                        visible={confirmationModalVisible}
-                        title="ARE YOU SURE?"
-                        subtitle="Are you sure you want to withdraw the ride?"
-                        confirmText="Yes, withdraw"
-                        cancelText="No, come back"
-                        disableModal={() => setConfirmationModalVisible(false)}
-                        onConfirm={() => {
-                            setConfirmationModalVisible(false);
-                            sendWithdraw();
-                        }}
-                    />
-                    <ConfirmModal
-                        visible={withdrawModalVisible}
-                        title="Ride is withdrawn"
-                        subtitle="Your withdrawal was successfully sent to the driver"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={closeAndDelete}
-                        onConfirm={closeAndDelete}
-                    />
-                </>
+            <>
+                <ConfirmModal
+                    visible={confirmationModalVisible}
+                    title="ARE YOU SURE?"
+                    subtitle="Are you sure you want to withdraw the ride?"
+                    confirmText="Yes, withdraw"
+                    cancelText="No, come back"
+                    disableModal={() => setConfirmationModalVisible(false)}
+                    onConfirm={() => {
+                        setConfirmationModalVisible(false);
+                        sendWithdraw();
+                    }}
+                />
+                <ConfirmModal
+                    visible={withdrawModalVisible}
+                    title="Ride is withdrawn"
+                    subtitle="Your withdrawal was successfully sent to the driver"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={closeAndDelete}
+                    onConfirm={closeAndDelete}
+                />
+            </>
             }
         </>
     );
