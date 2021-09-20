@@ -222,6 +222,7 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                                 borderColor: isEdited ? DM("black") : DM("gray")
                             }]}
                             onPress={schedule}
+                            disabled={!isEdited}
                         >
                             <Text
                                 style={[ScheduleBottomPopupStyles.scheduleButtonText, {
