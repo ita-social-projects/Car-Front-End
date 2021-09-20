@@ -5,32 +5,32 @@ module.exports = {
     },
 
     dependencies: {
-        'react-native-exception-handler': {
+        "react-native-exception-handler": {
             platforms: {
                 ios: null,
             },
         },
-        '@react-native-community/geolocation': {
+        "@react-native-community/geolocation": {
             platforms: {
                 ios: null,
             },
         },
-        'react-native-image-picker': {
+        "react-native-image-picker": {
             platforms: {
                 ios: null,
             },
         },
-        'react-native-restart': {
+        "react-native-restart": {
             platforms: {
                 ios: null,
             },
         },
-        'react-native-text-gradient': {
+        "react-native-text-gradient": {
             platforms: {
                 ios: null,
             },
         },
-        'react-native-linear-gradient': {
+        "react-native-linear-gradient": {
             platforms: {
                 ios: null,
             },
