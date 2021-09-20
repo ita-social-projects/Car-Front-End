@@ -79,10 +79,10 @@ const AppTabs = () => {
             })}
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
-                activeTintColor: DM("#ffffff"),
+                activeTintColor: DM("#FFFFFF"),
                 inactiveTintColor: DM("#414045"),
                 activeBackgroundColor: DM("#414045"),
-                inactiveBackgroundColor: DM("#ffffff"),
+                inactiveBackgroundColor: DM("#FFFFFF"),
             }}
         >
             <Tabs.Screen

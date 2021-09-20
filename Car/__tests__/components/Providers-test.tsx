@@ -8,7 +8,11 @@ jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
 
 test("renders correctly", async () =>
     expect(renderer.render(<Providers />)).toMatchInlineSnapshot(`
-    <AuthProvider>
-      <Routes />
-    </AuthProvider>
+    <AppearanceProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </ThemeProvider>
+    </AppearanceProvider>
   `));

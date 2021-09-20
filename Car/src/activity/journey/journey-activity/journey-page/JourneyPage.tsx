@@ -47,7 +47,7 @@ import {
 } from "../../../../components/modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
-import { isDarkMode } from "../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import CarBlock from "./blocks/car-block/CarBlock";
 import CommentsBlock from "./blocks/comments-block/CommentsBlock";

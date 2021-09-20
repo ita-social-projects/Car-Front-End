@@ -3,6 +3,8 @@ import AuthProvider from "../auth/AuthProvider";
 import ErrorAlert from "../error-alert/ErrorAlert";
 import Routes from "./Routes";
 import NetInfo from "@react-native-community/netinfo";
+import { AppearanceProvider } from "react-native-appearance";
+import { ThemeProvider } from "../theme/ThemeProvider";
 
 const Providers = () => {
     useEffect(() => {
@@ -18,9 +20,13 @@ const Providers = () => {
     });
 
     return (
-        <AuthProvider>
-            <Routes />
-        </AuthProvider>
+        <AppearanceProvider>
+            <ThemeProvider>
+                <AuthProvider>
+                    <Routes />
+                </AuthProvider>
+            </ThemeProvider>
+        </AppearanceProvider>
     );
 };
 
