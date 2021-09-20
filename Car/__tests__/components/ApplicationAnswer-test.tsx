@@ -111,7 +111,6 @@ test("renders correctly", async () =>
               ]
             }
             onStopPress={[Function]}
-            stops={Array []}
           />
         </View>
         <NotificationButtonGroup>

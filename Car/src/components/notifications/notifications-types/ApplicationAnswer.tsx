@@ -18,10 +18,8 @@ import JourneyPoint from "../../../../models/journey/JourneyPoint";
 import { Text, View } from "react-native";
 import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import { SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
-import { getJourneyStops } from "../../../utils/JourneyHelperFunctions";
 import JourneyNewApplicantViewStyle
     from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
-import Journey from "../../../../models/journey/Journey";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -35,7 +33,6 @@ interface ApplicationAnswerProps {
     IsAvailableSeatsVisible?: boolean,
     IsBaggageVisible?: boolean,
     IsStopsTitleVisible?: boolean,
-    journey?: Journey
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
@@ -43,8 +40,8 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
-    const [stops] = useState<Stop[]>(
-        (props?.notification.journey ? getJourneyStops(props.notification.journey) : []) as Stop[]);
+
+    const [stops] = useState<Stop[]>((JSON.parse(props.notification.notificationData).applicantStops));
 
     const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
@@ -63,6 +60,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
             }
         });
     };
+
     const closeAndDelete = () => {
         setWithdrawModalVisible(false);
         setNotificationModalVisible(false);
