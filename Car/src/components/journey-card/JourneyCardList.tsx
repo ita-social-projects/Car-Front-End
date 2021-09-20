@@ -1,10 +1,29 @@
 import React from "react";
 import { View } from "react-native";
 import Journey from "../../../models/journey/Journey";
+import { LESS_THAN_ZERO, MORE_THAN_ZERO, ZERO } from "../../constants/GeneralConstants";
 import JourneyCard from "./JourneyCard";
 
-const JourneyCardList = (props: { journey: any[] }) => {
+interface JourneyCardListProps {
+    journey: Journey[],
+    ascending?: boolean
+}
+
+const JourneyCardList = (props:JourneyCardListProps) => {
     const journey: Journey[] = props.journey;
+
+    journey.sort((a: Journey, b: Journey) => compare(a,b, props.ascending));
+
+    function compare (a: Journey, b: Journey, ascendingOrder?:boolean) {
+        if (a?.departureTime! < b?.departureTime!){
+            return ascendingOrder?LESS_THAN_ZERO:MORE_THAN_ZERO;
+        }
+        if (a?.departureTime! > b?.departureTime!){
+            return ascendingOrder?MORE_THAN_ZERO:LESS_THAN_ZERO;
+        }
+
+        return ZERO;
+    }
 
     return (
         <View>
