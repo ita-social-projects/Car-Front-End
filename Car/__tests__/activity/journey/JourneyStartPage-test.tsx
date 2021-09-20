@@ -275,6 +275,7 @@ test("renders correctly", async () =>
         }
       >
         <JourneyCardList
+          ascending={true}
           journey={Array []}
         />
         <JourneyCardList
