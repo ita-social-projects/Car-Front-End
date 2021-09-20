@@ -203,7 +203,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             Upcoming
                         </Text>
                     )}
-                    {<JourneyCardList journey={upcomingJourneys} />}
+                    {<JourneyCardList journey={upcomingJourneys} ascending/>}
 
                     {pastJourneys.length > EMPTY_COLLECTION_LENGTH && (
                         <Text style={[JourneyStartPageStyle.tabTextStyle, { color: DM("black") }]}>
@@ -227,7 +227,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
             )}
             {selectedIndex === THIRD_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
-                    {<JourneyCardList journey={upcomingJourneys} />}
+                    {<JourneyCardList journey={upcomingJourneys} ascending/>}
                 </View>
             )}
             {selectedIndex === FOURTH_ELEMENT_INDEX && (
