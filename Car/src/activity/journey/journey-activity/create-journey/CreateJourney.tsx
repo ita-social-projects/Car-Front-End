@@ -268,7 +268,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     };
 
     const onConfirmPressHandler = () => {
-        console.log(weekDay);
         const properties: JourneyDetailsPageProps = {
             route: {
                 params: {
@@ -318,7 +317,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
         return journey.duration === duration &&
             journey.routeDistance === routeDistance &&
-            journey.journeyPoints.every((value, index) => routePoints[index] === value);
+            journey.journeyPoints.every((value, index) => routePoints[index] === value) &&
+            journey.schedule?.days === weekDay;
     };
 
     const cantBuildRouteAlert = () => {

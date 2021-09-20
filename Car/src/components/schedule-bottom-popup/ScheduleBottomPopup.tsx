@@ -12,14 +12,14 @@ import WeekDay from "./WeekDay";
 const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
     const activeButtonStyle = {
         backgroundColor: DM("black"),
+        borderColor: DM("black"),
         color: DM("#FFFFFF"),
-        borderColor: DM("black")
     };
 
     const inactiveButtonStyle = {
         backgroundColor: DM("gray"),
+        borderColor: DM("gray"),
         color: DM("#FFFFFF"),
-        borderColor: DM("gray")
     };
 
     const weekDay = props.weekDay;
@@ -31,6 +31,11 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
         toggle ?
             activeButtonStyle :
             inactiveButtonStyle;
+
+    const isActiveButtonStyle = (style): boolean =>
+        style.color === activeButtonStyle.color &&
+        style.backgroundColor === activeButtonStyle.backgroundColor &&
+        style.borderColor === activeButtonStyle.borderColor;
 
     const reverseButtonStyle = (buttonStyle) =>
         getButtonStyle(!isActiveButtonStyle(buttonStyle));
@@ -44,8 +49,6 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
     const [sundayButtonStyle, setSundayButtonStyle] = useState(getButtonStyleByDay(WeekDay.Sunday));
     const [isWeekdays, setIsWeekdays] = useState(false);
     const [isEdited, setEdited] = useState(false);
-
-    const isActiveButtonStyle = (style): boolean => style == activeButtonStyle;
 
     const getWeekdays = (): WeekDay => {
         let weekDays: WeekDay = WeekDay.None;
