@@ -33,7 +33,8 @@ const AddEditCarsStyle = StyleSheet.create({
     },
 
     dropDownContainer: {
-        marginVertical: 24
+        marginVertical: 24,
+        zIndex:1
     },
 
     dropDownPicker: {
