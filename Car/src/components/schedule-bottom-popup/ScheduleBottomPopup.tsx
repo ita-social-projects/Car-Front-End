@@ -92,8 +92,6 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
             setEdited(false);
         else
             setEdited(true);
-
-        return () => { };
     }, [mondayButtonStyle,
         tuesdayButtonStyle,
         wednesdayButtonStyle,
@@ -111,8 +109,6 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
         setFridayButtonStyle(getButtonStyleByDay(WeekDay.Friday));
         setSaturdayButtonStyle(getButtonStyleByDay(WeekDay.Saturday));
         setSundayButtonStyle(getButtonStyleByDay(WeekDay.Sunday));
-
-        return () => { };
     }, [props]);
 
     useEffect(() => {
@@ -129,8 +125,6 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
 
         if (props.refForChild.current && props.isOpened.current)
             props.refForChild.current.snapTo(MAX_POPUP_POSITION);
-
-        return () => { };
     }, [mondayButtonStyle,
         tuesdayButtonStyle,
         wednesdayButtonStyle,
