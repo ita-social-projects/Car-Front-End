@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
@@ -17,9 +17,11 @@ import Stop from "../../../../models/stop/Stop";
 import JourneyPoint from "../../../../models/journey/JourneyPoint";
 import { Text, View } from "react-native";
 import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
-import { SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import JourneyNewApplicantViewStyle
     from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
+import { getStopByType } from "../../../utils/JourneyHelperFunctions";
+import StopType from "../../../../models/stop/StopType";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -40,8 +42,21 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
+    const [stops, setStops] = useState<Stop[]>();
+    const data = JSON.parse(props.notification.notificationData);
 
-    const [stops] = useState<Stop[]>((JSON.parse(props.notification.notificationData).applicantStops));
+    useEffect(() => {
+        JourneyService.getJourney(props.notification.journeyId).then(res => {
+            setStops([
+                getStopByType(res.data, StopType.Start)!,
+                data?.applicantStops!.filter((stop:Stop) =>
+                    stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                data?.applicantStops!.filter((stop:Stop) =>
+                    stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                getStopByType(res.data, StopType.Finish)!
+            ]);
+        });
+    }, []);
 
     const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
@@ -100,7 +115,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 </Text>
                 <View>
                     <StopsBlock
-                        stops={stops}
+                        stops={stops ? stops : []}
                         onStopPress={() => onStopPress}
                         highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                     />

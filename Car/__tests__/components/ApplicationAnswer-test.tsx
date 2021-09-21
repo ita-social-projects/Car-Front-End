@@ -23,6 +23,7 @@ test("renders correctly", async () =>
                         journeyCount: 0,
                         phoneNumber: null,
                     },
+                    journeyId: 1,
                     notificationData: `{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`,
                     notificationId: 0,
                 }}
@@ -95,6 +96,7 @@ test("renders correctly", async () =>
           IsDepartureTimeVisible={true}
           IsDetailsTitleVisible={true}
           IsFeeVisible={true}
+          journeyId={1}
         />
         <Text>
           Abc
@@ -111,6 +113,7 @@ test("renders correctly", async () =>
               ]
             }
             onStopPress={[Function]}
+            stops={Array []}
           />
         </View>
         <NotificationButtonGroup>
