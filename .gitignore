@@ -12,29 +12,6 @@ buck-out/
 /ReactAndroid/src/main/jni/prebuilt/lib/
 /ReactAndroid/src/main/gen
 
-# Xcode
-!/*.xcodeproj
-!/*.pbxproj
-!/*.xcworkspacedata
-!/*.xcsettings
-!/*.xcscheme
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
-project.xcworkspace
-
 # Gradle
 build/
 /packages/react-native-gradle-plugin/build/
@@ -47,8 +24,8 @@ build/
 /ReactAndroid/gradle/
 /ReactAndroid/gradlew
 /ReactAndroid/gradlew.bat
-/template/android/app/build/
-/template/android/build/
+android/app/build/
+android/build/
 
 # Android Studio
 .project
@@ -71,9 +48,6 @@ node_modules/
 .nvm
 /bots/node_modules/
 package-lock.json
-
-# OS X
-.DS_Store
 
 # Test generated files
 /ReactAndroid/src/androidTest/assets/AndroidTestBundle.js
@@ -99,8 +73,6 @@ third-party/
 
 # CocoaPods
 Pods/
-Podfile.lock
-/packages/rn-tester/Gemfile.lock
 
 # Ignore RNTester specific Pods, but keep the offline_mirrors here.
 /packages/rn-tester/Pods/*
@@ -118,3 +90,40 @@ Podfile.lock
 
 # Android memory profiler files
 *.hprof
+
+# Mac OS X Finder
+.DS_Store
+
+# Private Keys
+*.pem
+
+# Xcode legacy
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+
+# Xcode
+xcuserdata/
+project.xcworkspace/
+DerivedData/
+
+# build products
+build/
+*.[oa]
+
+# repositories
+.hg
+.svn
+CVS
+
+# automatic backup files
+*~.nib
+*.swp
+*~
+*(Autosaved).rtfd/
+Backup[ ]of[ ]*.pages/
+Backup[ ]of[ ]*.key/
+Backup[ ]of[ ]*.numbers/
