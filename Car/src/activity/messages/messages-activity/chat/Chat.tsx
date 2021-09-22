@@ -44,7 +44,8 @@ import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX,
-    ZERO_ID
+    ZERO_ID,
+    MINUTES_IN_HOUR
 } from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
@@ -61,6 +62,8 @@ import {
 import Message from "../../../../../models/Message";
 import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
+import moment from "moment-timezone";
+import * as RNLocalize from "react-native-localize";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -127,13 +130,15 @@ const Chat = (properties: ChatProps) => {
             });
 
             connection.on("RecieveMessage", (receivedMessage: any) => {
+                let creationMessageDate = new Date(receivedMessage.createdAt);
+
                 setMessages((previousMessages) =>
                     GiftedChat.append(
                         previousMessages as any,
                         {
                             _id: receivedMessage.id,
                             text: receivedMessage.text,
-                            createdAt: new Date(receivedMessage.createdAt),
+                            createdAt: new Date(creationMessageDate),
                             user: {
                                 _id: receivedMessage.senderId,
                                 name: receivedMessage?.sender?.name + "|"
@@ -299,10 +304,15 @@ const Chat = (properties: ChatProps) => {
             properties?.route.params.chatId, messageId)
             .then((res: any) => {
                 res.data?.forEach((data: Message) => {
+                    let messageCreatedAt = new Date(data!.createdAt);
                     const messageToAdd: IMessage = {
                         _id: data?.id!,
                         text: data?.text!,
-                        createdAt: new Date(data!.createdAt),
+                        createdAt: Platform.OS === "ios"// no automatic time offset for Ios
+                            ? new Date(messageCreatedAt
+                                .setHours(messageCreatedAt.getHours()
+                                + moment.tz(RNLocalize.getTimeZone()).utcOffset() / MINUTES_IN_HOUR))
+                            : new Date(data!.createdAt),
                         user: {
                             _id: data?.senderId!,
                             name: data?.senderName + "|"

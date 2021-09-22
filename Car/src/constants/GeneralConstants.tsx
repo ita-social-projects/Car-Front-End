@@ -20,3 +20,5 @@ export const MIN_DELAY_MS = 1;
 export const LESS_THAN_ZERO = -1;
 export const ZERO = 0;
 export const MORE_THAN_ZERO = 1;
+
+export const MINUTES_IN_HOUR = 60;
