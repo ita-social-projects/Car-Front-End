@@ -417,11 +417,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     ]}
                                     name={"people-circle-outline"}
                                     size={35}
-                                    color={"#414045"}
+                                    color={DM("#414045")}
                                 />
                                 <View style={{ marginLeft: 17 }}>
-                                    <Text style={CreateJourneyStyle.invitationsCaption}>Invited SoftServians</Text>
-                                    <Text style={CreateJourneyStyle.invitationsDesctiption}>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: DM("black") }}>
+                                        Invited SoftServians</Text>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsDesctiption, color: DM("black") }}>
                                         {existingInvitations.length +
                                         newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
                                         for that Ride</Text>
@@ -433,7 +434,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     ]}
                                     name={"chevron-forward-outline"}
                                     size={25}
-                                    color={"#414045"}
+                                    color={DM("#414045")}
                                 />
                             </TouchableOpacity>
                         </View>

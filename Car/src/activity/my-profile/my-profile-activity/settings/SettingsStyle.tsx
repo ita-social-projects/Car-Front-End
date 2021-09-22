@@ -1,6 +1,45 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
+export const SwitchSelectorStyle = StyleSheet.create({
+    container: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginLeft: 21,
+        marginRight: 0,
+        marginTop: 24,
+        fontSize: 13,
+        lineHeight: 16
+    },
+
+    leftButton: {
+        paddingHorizontal: 16,
+        paddingVertical: 6,
+        backgroundColor: "#000000",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        borderWidth: 2
+    },
+
+    rightButton: {
+        paddingHorizontal: 16,
+        paddingVertical: 4,
+        backgroundColor: "white",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        borderWidth: 2,
+        marginRight: 20,
+    },
+
+    buttonText: {
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        fontSize: 12,
+        lineHeight: 13,
+    }
+});
+
 const SettingsStyle = StyleSheet.create({
     mainContainer: {
         flex: 1,

@@ -47,7 +47,7 @@ import {
 } from "../../../../components/modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
-import { isDarkMode } from "../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import CarBlock from "./blocks/car-block/CarBlock";
 import CommentsBlock from "./blocks/comments-block/CommentsBlock";
@@ -196,8 +196,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         if (!currentJourney) return [];
 
         if (isDriver) {
-            return [getStopByType(currentJourney, StopType.Start)!,
-                    getStopByType(currentJourney, StopType.Finish)!];
+            return currentJourney.stops.filter(stop => stop!.userId === user!.id);
         }
 
         const stopsSource = isPassenger ? currentJourney.stops : applicantStops;

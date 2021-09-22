@@ -1,4 +1,4 @@
-import { isDarkMode } from "../navigation/Routes";
+import { isDarkMode } from "../theme/ThemeProvider";
 
 const DM = (color: string, forceDark?: boolean) => {
 

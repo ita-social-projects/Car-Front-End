@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs to get your location</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs to get your location</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>This app needs to get your location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs to get your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs to get your location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -45,6 +45,17 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Milliard-Black.ttf</string>
+		<string>Milliard-BlackItalic.ttf</string>
+		<string>Milliard-Bold.ttf</string>
+		<string>Milliard-BoldItalic.ttf</string>
+		<string>Milliard-Book.ttf</string>
+		<string>Milliard-BookItalic.ttf</string>
+		<string>Milliard-ExtraBold.ttf</string>
+		<string>Milliard-ExtraBoldItalic.ttf</string>
+		<string>Milliard-ExtraLight.ttf</string>
+		<string>Milliard-ExtraLightItalic.ttf</string>
+		<string>Milliard-Hairline.ttf</string>
 		<string>open_sans_bold.ttf</string>
 		<string>open_sans_extrabold.ttf</string>
 		<string>open_sans_light.ttf</string>

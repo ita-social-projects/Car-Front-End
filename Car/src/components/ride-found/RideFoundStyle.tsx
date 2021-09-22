@@ -2,24 +2,18 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../data/fonts/Font";
 
 const RideFoundStyle = EStyleSheet.create({
-    container: {
-        height: "50%",
+    body: {
         flex: 1,
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderRadius: 16,
-        marginHorizontal: "7%",
-        marginVertical: "57%",
-        paddingHorizontal: "7%",
-        paddingTop: "8%",
-        shadowOffset: { width: 0, height: 16 },
-        shadowOpacity: 0.2,
-        shadowRadius: 6,
-        elevation: 10,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
 
-    body: {
-        height: "100%",
+    container: {
+        width: "90%",
+        borderRadius: 15,
+        padding: 20,
     },
 
     headerContainer: {

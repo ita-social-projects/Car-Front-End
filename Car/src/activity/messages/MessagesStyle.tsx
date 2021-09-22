@@ -80,9 +80,8 @@ const SimpleMessageStyle = StyleSheet.create({
 
     noMessageStyle: {
         textAlign: "center",
-        fontWeight: "bold",
         fontSize: 16,
-        fontFamily: "Milliard"
+        fontFamily: Font.Milliard.Bold
     },
 
     noChatImageStyle: {

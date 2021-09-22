@@ -115,6 +115,165 @@ test("renders correctly", async () =>
                 Chats Settings
               </Text>
             </TouchableNavigationCard>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "fontSize": 13,
+                  "lineHeight": 16,
+                  "marginLeft": 21,
+                  "marginRight": 0,
+                  "marginTop": 24,
+                }
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "flex": 1,
+                      "fontWeight": "bold",
+                    },
+                    Object {
+                      "color": "black",
+                    },
+                  ]
+                }
+              >
+                App theme
+              </Text>
+              <View
+                style={
+                  Object {
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <ForwardRef
+                  onPress={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#000000",
+                        "borderWidth": 2,
+                        "flexDirection": "row",
+                        "justifyContent": "flex-end",
+                        "paddingHorizontal": 16,
+                        "paddingVertical": 6,
+                      },
+                      Object {
+                        "backgroundColor": "#000000",
+                        "borderColor": "#000000",
+                        "color": "#FFFFFF",
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    style={
+                      Array [
+                        Object {
+                          "fontSize": 12,
+                          "fontWeight": "bold",
+                          "lineHeight": 13,
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "backgroundColor": "#000000",
+                          "borderColor": "#000000",
+                          "color": "#FFFFFF",
+                        },
+                      ]
+                    }
+                  >
+                    Light
+                  </Text>
+                </ForwardRef>
+                <ForwardRef
+                  onPress={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#000000",
+                        "borderWidth": 2,
+                        "flexDirection": "row",
+                        "justifyContent": "flex-end",
+                        "paddingHorizontal": 16,
+                        "paddingVertical": 6,
+                      },
+                      Object {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#000000",
+                        "color": "#000000",
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    style={
+                      Array [
+                        Object {
+                          "fontSize": 12,
+                          "fontWeight": "bold",
+                          "lineHeight": 13,
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "backgroundColor": "#FFFFFF",
+                          "borderColor": "#000000",
+                          "color": "#000000",
+                        },
+                      ]
+                    }
+                  >
+                    Dark
+                  </Text>
+                </ForwardRef>
+                <ForwardRef
+                  onPress={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "white",
+                        "borderWidth": 2,
+                        "flexDirection": "row",
+                        "justifyContent": "flex-end",
+                        "marginRight": 20,
+                        "paddingHorizontal": 16,
+                        "paddingVertical": 4,
+                      },
+                      Object {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#000000",
+                        "color": "#000000",
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    style={
+                      Array [
+                        Object {
+                          "fontSize": 12,
+                          "fontWeight": "bold",
+                          "lineHeight": 13,
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "backgroundColor": "#FFFFFF",
+                          "borderColor": "#000000",
+                          "color": "#000000",
+                        },
+                      ]
+                    }
+                  >
+                    As system
+                  </Text>
+                </ForwardRef>
+              </View>
+            </View>
           </View>
           <ForwardRef(AnimatedComponentWrapper)
             style={false}

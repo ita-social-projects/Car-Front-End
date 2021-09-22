@@ -108,7 +108,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                 ]}
                                 name={"close"}
                                 size={22}
-                                color={"#414045"}
+                                color={DM("#414045")}
                             />
                         </TouchableOpacity>
 
@@ -133,7 +133,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                             : "alert-circle-outline"
                                     }
                                     size={22}
-                                    color={"#414045"}
+                                    color={DM("#414045")}
                                 />
                             </TouchableOpacity>
                         )}

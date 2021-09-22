@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Font from "../../data/fonts/Font";
 
 const NotificationsStyle = StyleSheet.create({
     container: {
@@ -18,9 +19,8 @@ const NotificationsStyle = StyleSheet.create({
     },
     noNotificationsStyle: {
         textAlign: "center",
-        fontWeight: "bold",
         fontSize: 16,
-        fontFamily: "Milliard",
+        fontFamily: Font.Milliard.Bold,
         marginTop: 10,
     },
     noNotificationsImageStyle: {
