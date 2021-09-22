@@ -58,10 +58,10 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
         });
     }, []);
 
-    const onStopPress = (stop:Stop, stops, journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    const onStopPress = (stop:Stop, journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
         setNotificationModalVisible(false);
-        onStopPressHandler(stop,stops,journeyPoints, notification);
+        onStopPressHandler(stop,stops ?? [],journeyPoints, notification);
     };
 
     const sendWithdraw = () => {

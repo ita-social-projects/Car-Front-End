@@ -287,8 +287,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
         let arrayOfPassengerStops = journey.stops.filter(stop => stop!.userId !== user!.id);
 
-        arrayOfPassengerStops.map((item, index) => {
-            arrayOfPassengerStops[index]!.id = 0; arrayOfPassengerStops[index]!.address!.id = 0;
+        arrayOfPassengerStops.forEach((item) => {
+            item!.id = 0; item!.address!.id = 0;
         });
 
         const updatedJourney: JourneyDto = {
