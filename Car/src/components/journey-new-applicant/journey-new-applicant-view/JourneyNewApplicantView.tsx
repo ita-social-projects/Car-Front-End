@@ -144,7 +144,8 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                     </View>
                     <WithLuggage hasLuggage={data?.hasLuggage}/>
 
-                    <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>{senders} stops in your ride</Text>
+                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: DM("black") }}>
+                        {senders} stops in your ride</Text>
                     <View style={JourneyNewApplicantViewStyle.stopsBlock}>
                         <StopsBlock
                             stops={stops}

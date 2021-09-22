@@ -65,6 +65,7 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
+                    "color": "black",
                     "fontFamily": "Milliard",
                     "fontSize": 16,
                     "fontWeight": "bold",
