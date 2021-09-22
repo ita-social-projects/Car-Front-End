@@ -59,11 +59,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const params = props.route.params;
     const journey = params.journey;
 
-    props.weekDay!.current = props.weekDay?.current ||
+    params.weekDay!.current = props.weekDay!.current = props.weekDay?.current ||
         params.weekDay?.current ||
         journey?.schedule?.days ||
         WeekDay.None;
-    params.weekDay!.current = props.weekDay!.current;
 
     const carModel = journey?.car?.model;
     const weekDay = props.weekDay!.current;
@@ -116,9 +115,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         return tomorrow;
     };
 
-    const [departureTime, setDepartureTime] = useState<Date>(weekDay ? getTomorrow() : (journey ?
-        moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
-        addMinutesToDate(new Date(), MINUTES_OFFSET)));
+    const getDepartureTime = (): Date =>{
+        if (weekDay)
+            return getTomorrow();
+        else if (journey)
+            return moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate();
+        else
+            return addMinutesToDate(new Date(), MINUTES_OFFSET);
+    };
+
+    const [departureTime, setDepartureTime] = useState<Date>(getDepartureTime());
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
     const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
