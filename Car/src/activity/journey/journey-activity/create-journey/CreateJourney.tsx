@@ -71,7 +71,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
     if(props)
         props.weekDay.current = props.weekDay.current || (journey?.schedule?.days ?? WeekDay.None);
-    const weekDay = props?.weekDay?.current;
+    const weekDay = props?.weekDay;
 
     const { user } = useContext(AuthContext);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
@@ -299,7 +299,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
             stops: createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id),
-            weekDay: weekDay || null,
+            weekDay: weekDay?.current || null,
         };
 
         await JourneyService.updateRoute(updatedJourney)
@@ -318,7 +318,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         return journey.duration === duration &&
             journey.routeDistance === routeDistance &&
             journey.journeyPoints.every((value, index) => routePoints[index] === value) &&
-            journey.schedule?.days === weekDay;
+            journey.schedule?.days === weekDay?.current;
     };
 
     const cantBuildRouteAlert = () => {

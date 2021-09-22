@@ -15,6 +15,7 @@ interface TouchableDateTimePickerProps {
     setIsConfirmedToTrue?: () => void,
     // eslint-disable-next-line unused-imports/no-unused-vars
     setDate: (date: Date) => void,
+    onlyTime: boolean,
 }
 
 export const addMinutesToDate = (date: Date, minutes: number) => {
@@ -53,7 +54,11 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                 </Text>
                 <Text style={[TouchableDateTimePickerStyle.dateTimeText,
                     { color: props.isConfirmed ? DM("black") : DM("#909095") }]}>
-                    {moment(props.date).format("DD.MM; ddd; HH:mm")}
+                    {
+                        props.onlyTime ?
+                            moment(props.date).format("HH:mm") :
+                            moment(props.date).format("DD.MM; ddd; HH:mm")
+                    }
                 </Text>
                 <View>
                     <Ionicons
@@ -105,6 +110,7 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                                     is24hourSource={"device"}
                                     textColor={DM("black")}
                                     fadeToColor={DM("white")}
+                                    mode={props.onlyTime ? "time" : "datetime"}
                                 />
                             </View>
                         </View>

@@ -14,7 +14,7 @@ interface JourneyDetailsPageProps {
             routeDistance: number,
             duration: string,
             journey?: Journey,
-            weekDay: WeekDay,
+            weekDay: MutableRefObject<WeekDay>,
             newInvitations?: {email:string; isCorrect: boolean}[]
         }
     },

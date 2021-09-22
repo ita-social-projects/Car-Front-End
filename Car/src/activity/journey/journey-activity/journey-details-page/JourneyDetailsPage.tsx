@@ -13,7 +13,7 @@ import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
 import SwitchSelector from "../../../../components/SwitchSelector/SwitchSelector";
 import CarService from "../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../components/auth/AuthContext";
-import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
+import { DAY_OFFSET, MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
 import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
@@ -59,7 +59,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const params = props.route.params;
     const journey = params.journey;
 
-    props.weekDay!.current = props.weekDay?.current || params.weekDay || journey?.schedule?.days || WeekDay.None;
+    props.weekDay!.current = props.weekDay?.current ||
+        params.weekDay?.current ||
+        journey?.schedule?.days ||
+        WeekDay.None;
+    params.weekDay!.current = props.weekDay!.current;
 
     const carModel = journey?.car?.model;
     const weekDay = props.weekDay!.current;
@@ -104,9 +108,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
-    const [departureTime, setDepartureTime] = useState<Date>(journey ?
+    const getTomorrow = (): Date => {
+        const tomorrow = new Date();
+
+        tomorrow.setDate(tomorrow.getDate() + DAY_OFFSET);
+
+        return tomorrow;
+    };
+
+    const [departureTime, setDepartureTime] = useState<Date>(weekDay ? getTomorrow() : (journey ?
         moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
-        addMinutesToDate(new Date(), MINUTES_OFFSET));
+        addMinutesToDate(new Date(), MINUTES_OFFSET)));
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
     const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
@@ -313,6 +325,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 }}
                                 isConfirmed={departureTimeIsConfirmed}
                                 setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
+                                onlyTime={weekDay ? true : false}
                             />
                         </View>
                         <SwitchSelector
