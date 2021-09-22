@@ -153,8 +153,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     duration: currentJourney.duration,
                     routeDistance: currentJourney.routeDistance,
                     routePoints: currentJourney.journeyPoints,
-                    // eslint-disable-next-line
-                    weekDay: useRef(currentJourney?.schedule?.days ?? WeekDay.None),
+                    weekDay: currentJourney?.schedule?.days ?? WeekDay.None,
                 }
             }
         };

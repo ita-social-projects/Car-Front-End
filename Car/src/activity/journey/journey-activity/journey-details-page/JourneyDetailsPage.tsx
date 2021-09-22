@@ -59,8 +59,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const params = props.route.params;
     const journey = params.journey;
 
-    params.weekDay!.current = props.weekDay!.current = props.weekDay?.current ||
-        params.weekDay?.current ||
+    props.weekDay!.current = props.weekDay?.current ||
+        params.weekDay ||
         journey?.schedule?.days ||
         WeekDay.None;
 

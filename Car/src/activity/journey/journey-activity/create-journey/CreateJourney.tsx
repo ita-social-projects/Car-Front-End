@@ -278,7 +278,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     routePoints: routePoints,
                     duration: duration,
                     routeDistance: routeDistance,
-                    weekDay: weekDay,
+                    weekDay: weekDay.current,
                 }
             }
         };
