@@ -26,8 +26,6 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
                             <Text style={{ ...ConfirmModalStyle.subtitleText, color: DM("black") }}>
                                 {props.subtitle}
                             </Text>
-                            <View />
-                            <View />
                             <TouchableOpacity
                                 style={confirmStyle}
                                 onPress={props.onConfirm}
