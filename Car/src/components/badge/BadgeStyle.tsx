@@ -3,17 +3,17 @@ import { StyleSheet } from "react-native";
 const BadgeStyle = StyleSheet.create({
     text:{
         color:"black",
-        fontSize:12
+        fontSize:10
     },
 
     container: {
-        width:30,
-        height:30,
-        borderRadius: 15,
+        width:24,
+        height:24,
+        borderRadius: 12,
         backgroundColor:"orange",
         alignItems:"center",
         justifyContent:"center",
-        top:10,
+        marginVertical:35,
     }
 });
 
