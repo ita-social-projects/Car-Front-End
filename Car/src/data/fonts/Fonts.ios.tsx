@@ -12,3 +12,12 @@ export const OpenSans = {
     Bold: "Open Sans Bold",
     Light: "Open Sans Light"
 };
+
+export const Milliard = {
+    Regular: "Milliard Hairline",
+    ExtraBold: "Milliard ExtraBold",
+    SemiBold: "Milliard SemiBold",
+    Bold: "Milliard Bold",
+    Light: "Milliard Light",
+    Black: "Milliard Black"
+};
