@@ -1,14 +1,23 @@
 export const ProximaNova = {
-    Regular: "Proxima Nova",
-    Bold: "Proxima Nova",
-    ExtraBold: "Proxima Nova",
-    Black: "Proxima Nova"
+    Regular: "Proxima Nova Rg Regular",
+    Bold: "Proxima Nova Rg Bold",
+    ExtraBold: "Proxima Nova Extrabold",
+    Black: "Proxima Nova Black"
 };
 
 export const OpenSans = {
-    Regular: "Open Sans",
-    ExtraBold: "Open Sans",
-    SemiBold: "Open Sans",
-    Bold: "Open Sans",
-    Light: "Open Sans"
+    Regular: "Open Sans Regular",
+    ExtraBold: "Open Sans ExtraBold",
+    SemiBold: "Open Sans SemiBold",
+    Bold: "Open Sans Bold",
+    Light: "Open Sans Light"
+};
+
+export const Milliard = {
+    Regular: "Milliard Hairline",
+    ExtraBold: "Milliard ExtraBold",
+    SemiBold: "Milliard SemiBold",
+    Bold: "Milliard Bold",
+    Light: "Milliard Light",
+    Black: "Milliard Black"
 };

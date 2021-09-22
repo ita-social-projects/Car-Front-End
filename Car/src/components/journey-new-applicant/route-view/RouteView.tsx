@@ -9,7 +9,7 @@ import SearchJourneyStyle from "../../../activity/journey/journey-activity/searc
 import { Text, TouchableOpacity } from "react-native";
 import DM from "../../styles/DM";
 import { darkMapStyle } from "../../../constants/DarkMapStyleConstant";
-import { isDarkMode } from "../../navigation/Routes";
+import { isDarkMode } from "../../theme/ThemeProvider";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import AuthContext from "../../auth/AuthContext";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";

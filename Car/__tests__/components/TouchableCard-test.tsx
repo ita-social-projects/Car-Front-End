@@ -85,7 +85,7 @@ test("renders correctly", async () =>
                 Array [
                   Object {
                     "flex": 2,
-                    "fontFamily": "Open Sans",
+                    "fontFamily": "Open Sans Regular",
                     "fontSize": 14,
                     "fontStyle": "normal",
                     "fontWeight": "bold",
@@ -104,7 +104,7 @@ test("renders correctly", async () =>
                 Array [
                   Object {
                     "flex": 4,
-                    "fontFamily": "Open Sans",
+                    "fontFamily": "Open Sans Regular",
                     "fontSize": 12,
                   },
                   Object {

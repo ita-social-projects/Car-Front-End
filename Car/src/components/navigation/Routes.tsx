@@ -11,11 +11,9 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { MILLISECONDS_IN_MONTH } from "../../constants/DimensionConstants";
 import { StatusBar } from "react-native";
 import DM from "../styles/DM";
-import changeNavigationBarColor from "react-native-navigation-bar-color";
+import { isDarkMode } from "../theme/ThemeProvider";
 
 const Stack = createStackNavigator<AuthParamList>();
-
-export let isDarkMode: boolean;
 
 const Routes = () => {
     const { user, loadStorageUser } = useContext(AuthContext);
@@ -42,15 +40,6 @@ const Routes = () => {
         })().then(() =>
             (async () => loadStorageUser())().then(() => setLoading(false))
         );
-
-        AsyncStorage.getItem("isDarkMode").then((res) => {
-            changeNavigationBarColor(
-                res === "true" ? "#121212" : "#FFFFFF",
-                res === "true" ? false : true,
-                true
-            );
-            isDarkMode = res === "true";
-        });
     }, []);
 
     const navigator = user ? (

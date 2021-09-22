@@ -15,6 +15,17 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* CarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CarTests.m */; };
 		31DC366353AAEFC38948B0EC /* libPods-Car-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C45CC52B11EB4B1FF3DB6D8 /* libPods-Car-tvOSTests.a */; };
+		3F391C4326FB30030089A6C9 /* Milliard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3B26FB2FEE0089A6C9 /* Milliard-Black.ttf */; };
+		3F391C4426FB300B0089A6C9 /* Milliard-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3C26FB2FEE0089A6C9 /* Milliard-BlackItalic.ttf */; };
+		3F391C4526FB300E0089A6C9 /* Milliard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3E26FB2FEE0089A6C9 /* Milliard-Bold.ttf */; };
+		3F391C4626FB30100089A6C9 /* Milliard-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3926FB2FEE0089A6C9 /* Milliard-BoldItalic.ttf */; };
+		3F391C4726FB30120089A6C9 /* Milliard-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3A26FB2FEE0089A6C9 /* Milliard-Book.ttf */; };
+		3F391C4826FB30150089A6C9 /* Milliard-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3D26FB2FEE0089A6C9 /* Milliard-BookItalic.ttf */; };
+		3F391C4926FB30190089A6C9 /* Milliard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3F26FB2FEE0089A6C9 /* Milliard-ExtraBold.ttf */; };
+		3F391C4A26FB301B0089A6C9 /* Milliard-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C4026FB2FEE0089A6C9 /* Milliard-ExtraBoldItalic.ttf */; };
+		3F391C4B26FB301D0089A6C9 /* Milliard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C4126FB2FEE0089A6C9 /* Milliard-ExtraLight.ttf */; };
+		3F391C4C26FB301F0089A6C9 /* Milliard-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3826FB2FEE0089A6C9 /* Milliard-ExtraLightItalic.ttf */; };
+		3F391C4D26FB30210089A6C9 /* Milliard-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C4226FB2FEE0089A6C9 /* Milliard-Hairline.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		82DC1EB56F5680D27CF2C00C /* libPods-Car.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13D9EF937B19FD179A992E /* libPods-Car.a */; };
 		854D378725DBF45B000FA61B /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
@@ -75,6 +86,17 @@
 		2D3FF1042AFE175215BED891 /* Pods-Car-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Car-tvOSTests/Pods-Car-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2DBA3E495B464EB38AA15529 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		3B5B534830BE49F525877750 /* Pods-Car-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Car-tvOS/Pods-Car-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		3F391C3826FB2FEE0089A6C9 /* Milliard-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraLightItalic.ttf"; path = "../assets/fonts/Milliard-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3926FB2FEE0089A6C9 /* Milliard-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-BoldItalic.ttf"; path = "../assets/fonts/Milliard-BoldItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3A26FB2FEE0089A6C9 /* Milliard-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Book.ttf"; path = "../assets/fonts/Milliard-Book.ttf"; sourceTree = "<group>"; };
+		3F391C3B26FB2FEE0089A6C9 /* Milliard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Black.ttf"; path = "../assets/fonts/Milliard-Black.ttf"; sourceTree = "<group>"; };
+		3F391C3C26FB2FEE0089A6C9 /* Milliard-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-BlackItalic.ttf"; path = "../assets/fonts/Milliard-BlackItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3D26FB2FEE0089A6C9 /* Milliard-BookItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-BookItalic.ttf"; path = "../assets/fonts/Milliard-BookItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3E26FB2FEE0089A6C9 /* Milliard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Bold.ttf"; path = "../assets/fonts/Milliard-Bold.ttf"; sourceTree = "<group>"; };
+		3F391C3F26FB2FEE0089A6C9 /* Milliard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraBold.ttf"; path = "../assets/fonts/Milliard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		3F391C4026FB2FEE0089A6C9 /* Milliard-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraBoldItalic.ttf"; path = "../assets/fonts/Milliard-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		3F391C4126FB2FEE0089A6C9 /* Milliard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraLight.ttf"; path = "../assets/fonts/Milliard-ExtraLight.ttf"; sourceTree = "<group>"; };
+		3F391C4226FB2FEE0089A6C9 /* Milliard-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Hairline.ttf"; path = "../assets/fonts/Milliard-Hairline.ttf"; sourceTree = "<group>"; };
 		43548857ECBB4B52AA319E86 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4C45CC52B11EB4B1FF3DB6D8 /* libPods-Car-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Car-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE752ED83FC4B1DA4EA90E4 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -254,6 +276,17 @@
 		EC614EAA683A425A92AE60A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3F391C3B26FB2FEE0089A6C9 /* Milliard-Black.ttf */,
+				3F391C3C26FB2FEE0089A6C9 /* Milliard-BlackItalic.ttf */,
+				3F391C3E26FB2FEE0089A6C9 /* Milliard-Bold.ttf */,
+				3F391C3926FB2FEE0089A6C9 /* Milliard-BoldItalic.ttf */,
+				3F391C3A26FB2FEE0089A6C9 /* Milliard-Book.ttf */,
+				3F391C3D26FB2FEE0089A6C9 /* Milliard-BookItalic.ttf */,
+				3F391C3F26FB2FEE0089A6C9 /* Milliard-ExtraBold.ttf */,
+				3F391C4026FB2FEE0089A6C9 /* Milliard-ExtraBoldItalic.ttf */,
+				3F391C4126FB2FEE0089A6C9 /* Milliard-ExtraLight.ttf */,
+				3F391C3826FB2FEE0089A6C9 /* Milliard-ExtraLightItalic.ttf */,
+				3F391C4226FB2FEE0089A6C9 /* Milliard-Hairline.ttf */,
 				85C271AF25CEC817008C047B /* open_sans_bold.ttf */,
 				85C271AD25CEC817008C047B /* open_sans_extrabold.ttf */,
 				85C271B225CEC817008C047B /* open_sans_light.ttf */,
@@ -333,6 +366,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				83FBEAAAE28AF3D1ED4FB1C1 /* [CP] Copy Pods Resources */,
+				CEAE8F64AB6927213BA6EB3D /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -444,18 +478,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85C271B825CEC817008C047B /* proxima_nova_reg.ttf in Resources */,
-				85C271B625CEC817008C047B /* open_sans_bold.ttf in Resources */,
-				85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */,
-				85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */,
 				85C271B925CEC817008C047B /* open_sans_light.ttf in Resources */,
-				85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */,
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				85C271B725CEC817008C047B /* open_sans_regular.ttf in Resources */,
-				854D378725DBF45B000FA61B /* main.jsbundle in Resources */,
-				854D390525DDDA91000FA61B /* Images.xcassets in Resources */,
+				3F391C4B26FB301D0089A6C9 /* Milliard-ExtraLight.ttf in Resources */,
+				85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */,
+				85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */,
+				85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */,
+				3F391C4626FB30100089A6C9 /* Milliard-BoldItalic.ttf in Resources */,
+				85C271B825CEC817008C047B /* proxima_nova_reg.ttf in Resources */,
 				85D90D6225D0633D00090E13 /* proxima_nova_black.ttf in Resources */,
+				3F391C4926FB30190089A6C9 /* Milliard-ExtraBold.ttf in Resources */,
+				3F391C4C26FB301F0089A6C9 /* Milliard-ExtraLightItalic.ttf in Resources */,
+				3F391C4D26FB30210089A6C9 /* Milliard-Hairline.ttf in Resources */,
 				85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */,
+				3F391C4A26FB301B0089A6C9 /* Milliard-ExtraBoldItalic.ttf in Resources */,
+				3F391C4726FB30120089A6C9 /* Milliard-Book.ttf in Resources */,
+				85C271B625CEC817008C047B /* open_sans_bold.ttf in Resources */,
+				3F391C4826FB30150089A6C9 /* Milliard-BookItalic.ttf in Resources */,
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				3F391C4326FB30030089A6C9 /* Milliard-Black.ttf in Resources */,
+				854D378725DBF45B000FA61B /* main.jsbundle in Resources */,
+				3F391C4426FB300B0089A6C9 /* Milliard-BlackItalic.ttf in Resources */,
+				3F391C4526FB300E0089A6C9 /* Milliard-Bold.ttf in Resources */,
+				854D390525DDDA91000FA61B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +627,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Car-CarTests/Pods-Car-CarTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CEAE8F64AB6927213BA6EB3D /* [CP-User] [RNFB] Core Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Core Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"info:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"info:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"info: -> RNFB build script started\"\necho \"info: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"info:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"info:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  _RN_ROOT_EXISTS=$(ruby -e \"require 'rubygems';require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\" || echo '')\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    _JSON_OUTPUT_BASE64=$(python -c 'import json,sys,base64;print(base64.b64encode(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"').read())['${_JSON_ROOT}'])))' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"info: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"info: <- RNFB build script finished\"\n";
 		};
 		D6B06DE5BD35A8DE8669B16B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

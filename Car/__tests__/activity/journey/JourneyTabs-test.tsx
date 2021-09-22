@@ -25,7 +25,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -47,7 +47,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -71,7 +71,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -93,7 +93,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -117,7 +117,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -139,7 +139,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -160,7 +160,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -184,7 +184,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -206,7 +206,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -230,7 +230,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -253,7 +253,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -275,7 +275,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -299,7 +299,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,

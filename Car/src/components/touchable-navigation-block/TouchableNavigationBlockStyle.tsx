@@ -30,7 +30,8 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     viewContainer: {
         paddingHorizontal: 10,
         justifyContent: "center",
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center"
     }
 });
 
