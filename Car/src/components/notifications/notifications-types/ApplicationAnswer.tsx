@@ -58,7 +58,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
         });
     }, []);
 
-    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    const onStopPress = (stop:Stop, stops, journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
         setNotificationModalVisible(false);
         onStopPressHandler(stop,stops,journeyPoints, notification);
@@ -66,7 +66,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
 
     const sendWithdraw = () => {
         JourneyService.deleteUser(
-            props.notification.journeyId!,
+            props.notification.journeyId,
             user?.id!
         ).then((res) => {
             if(res.status === HTTP_STATUS_OK) {
@@ -103,7 +103,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 />
 
                 <NotificationRideDetails
-                    journeyId={props.notification.journeyId!}
+                    journeyId={props.notification.journeyId}
                     userId={user?.id!}
                     IsAvailableSeatsVisible={props.IsAvailableSeatsVisible}
                     IsBaggageVisible={props.IsBaggageVisible}

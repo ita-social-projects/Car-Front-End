@@ -284,15 +284,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         if (!journey) return;
 
         setRouteIsUpdating(true);
-        console.log(JSON.stringify(journey.stops, null, "   "));
-        console.log(JSON.stringify(journey.stops.length, null, "   "));
 
-        let newArray = journey.stops.filter(stop => stop!.userId !== user!.id);
+        let arrayOfPassengerStops = journey.stops.filter(stop => stop!.userId !== user!.id);
 
-        for(let i = 0; i < newArray.length; i++){
-            newArray[i]!.address!.id = 0;
-            newArray[i]!.id = 0;
-        }
+        arrayOfPassengerStops.map((item, index) => {
+            arrayOfPassengerStops[index]!.id = 0; arrayOfPassengerStops[index]!.address!.id = 0;
+        });
 
         const updatedJourney: JourneyDto = {
             ...journey,
@@ -303,11 +300,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
             stops: (createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id) as Stop[]).
-                concat(newArray)
+                concat(arrayOfPassengerStops)
         };
-
-        console.log(JSON.stringify(updatedJourney.stops, null, "   "));
-        console.log(JSON.stringify(updatedJourney.stops.length, null, "   "));
 
         await JourneyService.updateRoute(updatedJourney)
             .then(() => setSuccessfullyUpdateModalIsVisible(true))
