@@ -33,7 +33,7 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => (
             searchablePlaceholder="Manual input"
             searchablePlaceholderTextColor={DM("gray")}
             searchableError={() => <Text style={{ color: DM("black") }}>Not Found</Text>}
-            searchTextInputProps={{ style: { color: DM("black") } }}
+            searchTextInputProps={{ style: { color: DM("black"), marginVertical: 10 } }}
             searchableStyle={{ color: DM("black") }}
             placeholder={props.placeHolder}
             defaultValue={props.defaultValue}

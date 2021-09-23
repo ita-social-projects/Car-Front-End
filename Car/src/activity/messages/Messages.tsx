@@ -165,7 +165,6 @@ const Messages = (props: MessagesProps) => {
                                     <View>
                                         <View>
                                             <Badge
-                                                size={20}
                                                 value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
                                                     .unreadMessagesCount }/>
                                         </View>

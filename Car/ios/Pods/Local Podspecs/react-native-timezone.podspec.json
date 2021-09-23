@@ -1,0 +1,23 @@
+{
+  "name": "react-native-timezone",
+  "version": "2.0.0",
+  "summary": "React Native library to extract mobile timezone",
+  "license": "MIT",
+  "authors": {
+    "name": "Samitha9125"
+  },
+  "homepage": "https://github.com/samitha9125/react-native-timezone#readme",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/samitha9125/react-native-timezone.git",
+    "tag": "master"
+  },
+  "source_files": "ios/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}
