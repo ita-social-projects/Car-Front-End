@@ -21,7 +21,7 @@ test("renders correctly", async () =>
           "inactiveBackgroundColor": "#FFFFFF",
           "inactiveTintColor": "#414045",
           "labelStyle": Object {
-            "fontFamily": "Open Sans",
+            "fontFamily": "Open Sans Bold",
             "fontSize": 10,
             "fontStyle": "normal",
             "fontWeight": "800",

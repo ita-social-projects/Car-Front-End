@@ -8,23 +8,11 @@ inhibit_all_warnings!
 target 'Car' do
   config = use_native_modules!
 
+  pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+
   use_react_native!(:path => config["reactNativePath"])
-
-  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
-  
-  pod 'RNTextGradientView', :path => '../node_modules/react-native-text-gradient'
-
-  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
-
-
-
-
-  pod 'react-native-restart', :path => '../node_modules/react-native-restart'
-
-
-  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
-
-  pod 'ReactNativeExceptionHandler', :path => '../node_modules/react-native-exception-handler'
 
   target 'CarTests' do
     inherit! :complete
@@ -39,16 +27,6 @@ target 'Car' do
         end
       end
     end
-  end
-
-  # Enables Flipper.
-  #
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable these next few lines.
-  use_flipper!
-  post_install do |installer|
-    flipper_post_install(installer)
-    min_OSTarget_post_install(installer)
   end
 end
 

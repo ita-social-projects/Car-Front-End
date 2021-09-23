@@ -14,7 +14,7 @@ test("renders correctly", async () =>
             Object {
               "borderWidth": 2.3,
               "flexDirection": "row",
-              "fontFamily": "Open Sans",
+              "fontFamily": "Open Sans Regular",
               "padding": 8,
             },
             Object {
@@ -31,7 +31,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Open Sans",
+                "fontFamily": "Open Sans Regular",
                 "fontSize": 17,
                 "marginLeft": 5,
               },

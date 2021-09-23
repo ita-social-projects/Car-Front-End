@@ -66,9 +66,8 @@ test("renders correctly", async () =>
                 style={
                   Object {
                     "color": "black",
-                    "fontFamily": "Milliard",
+                    "fontFamily": "Milliard Bold",
                     "fontSize": 16,
-                    "fontWeight": "bold",
                     "textAlign": "center",
                   }
                 }

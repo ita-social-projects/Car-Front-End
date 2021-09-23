@@ -74,7 +74,6 @@ test("renders correctly", async () =>
               >
                 <AvatarLogoTitle />
               </ForwardRef(AnimatedComponentWrapper)>
-              <React.Fragment />
             </ForwardRef>
             <TouchableNavigationCard
               angle="0"
@@ -314,7 +313,7 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Open Sans",
+                      "fontFamily": "Open Sans Bold",
                       "fontSize": 13,
                       "fontWeight": "700",
                       "lineHeight": 16,
@@ -342,7 +341,7 @@ test("renders correctly", async () =>
               style={
                 Array [
                   Object {
-                    "fontFamily": "Proxima Nova",
+                    "fontFamily": "Proxima Nova Extrabold",
                     "fontSize": 14,
                     "lineHeight": 16,
                     "paddingBottom": 33,
