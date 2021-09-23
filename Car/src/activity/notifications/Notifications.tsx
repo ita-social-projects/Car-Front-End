@@ -128,7 +128,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
             <>
                 <View style={[NotificationsStyle.noNotificationsContainer,
                     { backgroundColor: DM("#FFFFFF") }]}>
-                    <Text style={NotificationsStyle.noNotificationsStyle}>
+                    <Text style={{ ...NotificationsStyle.noNotificationsStyle, color: DM("black") }}>
                         CURRENTLY YOU DO NOT HAVE ANY
                         {"\n"}
                         NOTIFICATIONS
