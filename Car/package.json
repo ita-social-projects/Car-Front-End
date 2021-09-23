@@ -21,7 +21,7 @@
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "start": "react-native start",
-        "test": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && jest -u --coverage",
+        "test": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./ && jest --coverage",
         "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx ./",
         "postinstall": "cd .. && husky install || husky install || 0"
     },
