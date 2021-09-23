@@ -7,12 +7,13 @@ import FilterJourneyModel from "../../models/journey/FilterJourneyModel";
 import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
 import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
 import Invitation from "../../models/invitation/Invitation";
+import { AxiosRequestConfig } from "axios";
 
 const route = APIRoutes.getJourneyUrl();
 
 const JourneyService = {
-    getJourney: async (journeyId: number, withCancelledStops: boolean = false) =>
-        APIService.get<Journey>(route + journeyId + "/" + withCancelledStops),
+    getJourney: async (journeyId: number, withCancelledStops: boolean = false, config: AxiosRequestConfig = {}) =>
+        APIService.get<Journey>(route + journeyId + "/" + withCancelledStops, config),
 
     getPastJourneys: async () =>
         APIService.get<Array<Journey>>(route + "past"),

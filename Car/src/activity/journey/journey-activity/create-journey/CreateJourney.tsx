@@ -17,7 +17,7 @@ import {
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/JourneyConstants";
-import { DELETE_COUNT, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
+import { DELETE_COUNT, FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
@@ -223,7 +223,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     }, []);
 
     useEffect(() => {
-        CreateJourney.numberOfAddedStop = stops.length+SECOND_ELEMENT_INDEX;
+        CreateJourney.numberOfAddedStop = stops.length;
     });
 
     CreateJourney.addStopPressHandler = () => {
