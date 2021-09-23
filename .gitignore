@@ -72,7 +72,7 @@ third-party/
 /packages/react-native-codegen/**/*.xcodeproj
 
 # CocoaPods
-/ios/Pods/
+Pods/
 
 # Ignore RNTester specific Pods, but keep the offline_mirrors here.
 /packages/rn-tester/Pods/*
