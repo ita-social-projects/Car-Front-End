@@ -4,6 +4,12 @@ import AppTabs from "../../src/components/navigation/app-tabs/AppTabs";
 
 const renderer = shallowRender.createRenderer();
 
+jest.mock("react-native-localize", () => {
+    return {
+        getTimeZone: jest.fn(),
+    };
+});
+
 test("renders correctly", async () =>
     expect(renderer.render(<AppTabs />)).toMatchInlineSnapshot(`
     <BottomTabNavigator

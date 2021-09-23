@@ -63,7 +63,7 @@ import Message from "../../../../../models/Message";
 import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
 import moment from "moment-timezone";
-import * as RNLocalize from "react-native-localize";
+import RNLocalize from "react-native-localize";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
