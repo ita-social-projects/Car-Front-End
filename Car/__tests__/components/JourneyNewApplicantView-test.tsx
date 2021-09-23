@@ -128,7 +128,13 @@ test("renders correctly", async () =>
             <RequestComment />
           </View>
           <WithLuggage />
-          <Text>
+          <Text
+            style={
+              Object {
+                "color": "black",
+              }
+            }
+          >
             A
              stops in your ride
           </Text>
