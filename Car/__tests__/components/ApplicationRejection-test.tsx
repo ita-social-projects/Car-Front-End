@@ -24,6 +24,7 @@ test("renders correctly", async () =>
                 }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
                 notificationId={0}
+                journeyId={0}
             />
         )
     ).toMatchInlineSnapshot(`
@@ -33,6 +34,7 @@ test("renders correctly", async () =>
       IsFeeVisible={false}
       notification={
         Object {
+          "journeyId": 0,
           "notificationData": "{\\"title\\": \\"New Applicant\\", \\"comments\\": \\"Abc\\", \\"hasLuggage\\": \\"true\\"}",
           "notificationId": 0,
           "sender": Object {
