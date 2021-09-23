@@ -17,11 +17,6 @@ const Providers = () => {
     }
 
     useEffect(() => {
-        // const unsubscribe = NetInfo.addEventListener(state => {
-        //     if (!state.isInternetReachable) {
-        //         ErrorAlert("No internet connection");
-        //     }
-        // });
         GetConnection();
 
         return () => {
