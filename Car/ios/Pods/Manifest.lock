@@ -617,9 +617,9 @@ SPEC CHECKSUMS:
   react-native-app-auth: 480fd56b54aa4447bc19a0eac81133add8e75ce5
   react-native-appearance: fc2014516054585d531e07aa0b40ab0de1d2be85
   react-native-date-picker: 242eec7af56cea5fb2706d5db5d3837060b3884b
-  react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
+  react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
-  react-native-image-picker: a2b7ee36dabe1e511dab6fb79918633a4fd3d7ce
+  react-native-image-picker: 8b4ccafb47395aabe98d3af89f089e020cacd6d1
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-netinfo: 34f4d7a42f49157f3b45c14217d256bce7dc9682
   react-native-restart: 6cc683e208c080581c147d0875609e64572a9443
