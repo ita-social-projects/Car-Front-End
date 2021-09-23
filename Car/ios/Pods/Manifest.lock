@@ -621,9 +621,10 @@ SPEC CHECKSUMS:
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
   react-native-image-picker: 8b4ccafb47395aabe98d3af89f089e020cacd6d1
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-netinfo: 92e6e4476eb8bf6fc2d7c0a6ca0a1406f663d73a
-  react-native-restart: a01029aadfe8e71f9e8205fdb17da2f0a4472d50
-  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-netinfo: 8917788f12f8c422d16a56f840a1b06faa56e2b6
+  react-native-restart: 6cc683e208c080581c147d0875609e64572a9443
+  react-native-safe-area-context: 86612d2c9a9e94e288319262d10b5f93f0b395f5
+  react-native-timezone: d0a3f444682dc6fd6878911e5d225eb10e3849ee
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
