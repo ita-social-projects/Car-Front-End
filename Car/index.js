@@ -5,7 +5,7 @@ import { name as appName } from "./app.json";
 import ConfigPushNotifications from "./src/components/notifications/ConfigPushNotifications";
 import ConfigTextScaling from "./src/components/text/ConfigTextScaling";
 
-if (Platform.OS === 'android') {
+if (Platform.OS === "android") {
     ConfigPushNotifications();
 }
 

@@ -103,7 +103,7 @@ const Chat = (properties: ChatProps) => {
             connection.start().then(() => {
                 invokeConncetion();
 
-                if (Platform.OS === 'android')
+                if (Platform.OS === "android")
                     AndroidKeyboardAdjust.setAdjustResize();
 
                 ReceivedMessagesService.markAsRead(properties.route.params.chatId);
@@ -148,7 +148,7 @@ const Chat = (properties: ChatProps) => {
             setMessage("");
 
             return () => {
-                if (Platform.OS === 'android')
+                if (Platform.OS === "android")
                     AndroidKeyboardAdjust.setAdjustPan();
 
                 connection?.invoke(

@@ -25,7 +25,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -47,7 +47,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -71,7 +71,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -84,16 +84,16 @@ test("renders correctly", async () =>
           }
         />
         <Screen
-          component={[Function]}
           name="Journey Details"
           options={
             Object {
               "headerLeft": [Function],
+              "headerRight": [Function],
               "headerTitle": "Ride Details",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -104,7 +104,9 @@ test("renders correctly", async () =>
               ],
             }
           }
-        />
+        >
+          [Function]
+        </Screen>
         <Screen
           component={[Function]}
           name="Journey Invitations"
@@ -115,7 +117,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -137,7 +139,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -158,7 +160,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -182,7 +184,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -204,7 +206,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -228,7 +230,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -251,7 +253,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -273,7 +275,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,
@@ -297,7 +299,7 @@ test("renders correctly", async () =>
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
-                  "fontFamily": "Open Sans",
+                  "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
                   "marginLeft": 20,

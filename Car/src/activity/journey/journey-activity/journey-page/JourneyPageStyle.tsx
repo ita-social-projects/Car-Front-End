@@ -74,7 +74,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     panel: {
-        height: 200,
+        height: 240,
     },
 
     headerTitleStyle: {
