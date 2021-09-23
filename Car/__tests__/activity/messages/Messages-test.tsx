@@ -70,6 +70,7 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
+                    "color": "black",
                     "fontFamily": "Milliard Bold",
                     "fontSize": 16,
                     "textAlign": "center",

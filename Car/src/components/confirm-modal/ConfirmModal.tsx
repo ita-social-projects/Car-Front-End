@@ -37,7 +37,7 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
 
                             {!props.hideCancelButton && (
                                 <TouchableOpacity onPress={props.disableModal}>
-                                    <Text style={ConfirmModalStyle.boldText}>
+                                    <Text style={{ ...ConfirmModalStyle.boldText, color: DM("black") }}>
                                         {props.cancelText}
                                     </Text>
                                 </TouchableOpacity>

@@ -170,6 +170,7 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
+                    "color": "black",
                     "fontFamily": undefined,
                     "fontSize": 16,
                     "fontWeight": "700",

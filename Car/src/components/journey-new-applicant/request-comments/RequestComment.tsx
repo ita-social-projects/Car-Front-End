@@ -19,7 +19,7 @@ const RequestComment = ({ comments } : {comments?: string}) => {
                 }
             ]}
         >
-            <Text style={JourneyNewApplicantStyle.commentsText} >
+            <Text style={{ ...JourneyNewApplicantStyle.commentsText, color: DM("black") }} >
                 {comments}
             </Text>
             <View style={[JourneyNewApplicantStyle.commentsBoxAfter,
