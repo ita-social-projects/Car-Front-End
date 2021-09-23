@@ -12,3 +12,12 @@ export const OpenSans = {
     Bold: "open_sans_bold",
     Light: "open_sans_light"
 };
+
+export const Milliard = {
+    Regular: "Milliard-Hairline",
+    ExtraBold: "Milliard-ExtraBold",
+    SemiBold: "Milliard-SemiBold",
+    Bold: "Milliard-Bold",
+    Light: "Milliard-Light",
+    Black: "Milliard-Black"
+};

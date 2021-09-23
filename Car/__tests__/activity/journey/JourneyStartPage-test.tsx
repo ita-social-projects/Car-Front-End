@@ -87,7 +87,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Proxima Nova",
+                "fontFamily": "Proxima Nova Black",
                 "fontSize": 20,
                 "fontWeight": "700",
                 "textTransform": "uppercase",
@@ -135,7 +135,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova",
+                  "fontFamily": "Proxima Nova Extrabold",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
@@ -174,7 +174,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova",
+                  "fontFamily": "Proxima Nova Extrabold",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
@@ -213,7 +213,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova",
+                  "fontFamily": "Proxima Nova Extrabold",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
@@ -252,7 +252,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova",
+                  "fontFamily": "Proxima Nova Extrabold",
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
@@ -275,6 +275,7 @@ test("renders correctly", async () =>
         }
       >
         <JourneyCardList
+          ascending={true}
           journey={Array []}
         />
         <JourneyCardList

@@ -25,7 +25,7 @@ import SaveLocationButton from "../../../../../../components/save-location-butto
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
 import DM from "../../../../../../components/styles/DM";
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
-import { isDarkMode } from "../../../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const AddLocation = () => {

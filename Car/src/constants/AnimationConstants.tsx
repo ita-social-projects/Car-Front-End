@@ -5,6 +5,7 @@ export const SLEEP_DURATION = 700;
 export const MODAL_SLEEP_DURATION = 100;
 export const REFRESHER_TIMEOUT = 500;
 export const MINUTES_OFFSET = 10;
+export const DAY_OFFSET = 1;
 
 export const animateOpacity = (layout: Animated.Value, opacity: number, duration: number) : void => {
     Animated.timing(layout, {

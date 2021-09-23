@@ -51,12 +51,12 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
         JourneyService.getJourney(props.notification.journeyId, false, { cancelToken: source.current.token })
             .then(res => {
                 setStops([
-                getStopByType(res.data, StopType.Start)!,
-                data?.applicantStops!.filter((stop:Stop) =>
-                    stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                data?.applicantStops!.filter((stop:Stop) =>
-                    stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                getStopByType(res.data, StopType.Finish)!
+                    getStopByType(res.data, StopType.Start)!,
+                    data?.applicantStops!.filter((stop:Stop) =>
+                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                    data?.applicantStops!.filter((stop:Stop) =>
+                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                    getStopByType(res.data, StopType.Finish)!
                 ]);
             });
 
@@ -115,7 +115,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     IsDepartureTimeVisible={props.IsDepartureTimeVisible}
                     IsDetailsTitleVisible={props.IsDetailsTitleVisible}
                     IsFeeVisible={props.IsFeeVisible}/>
-
+              
                 <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>
                     {props.notification.sender!.name} {props.notification.sender!.surname}`s stops in your ride
                 </Text>

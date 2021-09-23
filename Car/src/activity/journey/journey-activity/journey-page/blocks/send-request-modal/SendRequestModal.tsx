@@ -17,18 +17,18 @@ const SendRequestModal = (props: SendRequestModalProps) => {
             <TouchableWithoutFeedback onPress={props.disableNodal}>
                 <View style={SendRequestModalStyle.background}>
                     <TouchableWithoutFeedback>
-                        <View style={SendRequestModalStyle.window}>
+                        <View style={{ ...SendRequestModalStyle.window, backgroundColor: DM("white") }}>
 
                             <View style={SendRequestModalStyle.closeButtonContainer}>
                                 <TouchableOpacity
                                     style={SendRequestModalStyle.closeButton}
                                     onPress={props.disableNodal}
                                 >
-                                    <Ionicons name={"close"} size={30} color={"black"}/>
+                                    <Ionicons name={"close"} size={30} color={DM("black")}/>
                                 </TouchableOpacity>
                             </View>
 
-                            <Text style={SendRequestModalStyle.title}>
+                            <Text style={{ ...SendRequestModalStyle.title, color: DM("black") }}>
                                 Send request to driver
                             </Text>
 

@@ -2,7 +2,7 @@ import React from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "./SearchJourneyMapStyle";
 import SearchJourneyMapProps from "./SearchJourneyMapProps";
-import { isDarkMode } from "../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 
 const SearchJourneyMap = (props: SearchJourneyMapProps) => {

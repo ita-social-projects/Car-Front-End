@@ -102,7 +102,10 @@ const Chat = (properties: ChatProps) => {
         if (connection) {
             connection.start().then(() => {
                 invokeConncetion();
-                AndroidKeyboardAdjust.setAdjustResize();
+
+                if (Platform.OS === "android")
+                    AndroidKeyboardAdjust.setAdjustResize();
+
                 ReceivedMessagesService.markAsRead(properties.route.params.chatId);
             });
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
@@ -145,7 +148,9 @@ const Chat = (properties: ChatProps) => {
             setMessage("");
 
             return () => {
-                AndroidKeyboardAdjust.setAdjustPan();
+                if (Platform.OS === "android")
+                    AndroidKeyboardAdjust.setAdjustPan();
+
                 connection?.invoke(
                     "LeaveTheGroup",
                     properties.route.params.chatId.toString()

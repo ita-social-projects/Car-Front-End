@@ -13,7 +13,7 @@ import JourneyDetailsPageProps from "./JourneyDetailsPageProps";
 import SwitchSelector from "../../../../components/SwitchSelector/SwitchSelector";
 import CarService from "../../../../../api-service/car-service/CarService";
 import AuthContext from "../../../../components/auth/AuthContext";
-import { MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
+import { DAY_OFFSET, MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
 import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
@@ -46,6 +46,7 @@ import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
 import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 
 const getCarId = (journey?: Journey) => {
@@ -55,10 +56,16 @@ const getCarId = (journey?: Journey) => {
 };
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
-
     const params = props.route.params;
     const journey = params.journey;
+
+    props.weekDay!.current = props.weekDay?.current ||
+        params.weekDay ||
+        journey?.schedule?.days ||
+        WeekDay.None;
+
     const carModel = journey?.car?.model;
+    const weekDay = props.weekDay!.current;
     const existingInvitations: Invitation[] = journey? journey.invitations : [];
 
     const { user } = useContext(AuthContext);
@@ -100,9 +107,24 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
-    const [departureTime, setDepartureTime] = useState<Date>(journey ?
-        moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate() :
-        addMinutesToDate(new Date(), MINUTES_OFFSET));
+    const getTomorrow = (): Date => {
+        const tomorrow = new Date();
+
+        tomorrow.setDate(tomorrow.getDate() + DAY_OFFSET);
+
+        return tomorrow;
+    };
+
+    const getDepartureTime = (): Date =>{
+        if (weekDay)
+            return getTomorrow();
+        else if (journey)
+            return moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate();
+        else
+            return addMinutesToDate(new Date(), MINUTES_OFFSET);
+    };
+
+    const [departureTime, setDepartureTime] = useState<Date>(getDepartureTime());
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
     const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
@@ -197,7 +219,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
             invitations: createAllInvitationsArrayFromNewInvitations(),
             duration: params.duration,
-            routeDistance: Math.round(params.routeDistance)
+            routeDistance: Math.round(params.routeDistance),
+            weekDay: weekDay || null,
         };
 
         await JourneyService.add(newJourney)
@@ -221,8 +244,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
+            weekDay: weekDay || null,
             invitations: createAllInvitationsArrayFromNewInvitations(),
-            organizerId: Number(journey.organizer?.id)
+            organizerId: Number(journey.organizer?.id),
         };
 
         await JourneyService.updateDetails(updatedJourney)
@@ -234,7 +258,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 else{
                     setModal(updateErrorModal);
                 }
-
             })
             .catch(() => setModal(updateErrorModal));
 
@@ -308,6 +331,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 }}
                                 isConfirmed={departureTimeIsConfirmed}
                                 setIsConfirmedToTrue={() => setDepartureTimeIsConfirmed(true)}
+                                onlyTime={weekDay ? true : false}
                             />
                         </View>
                         <SwitchSelector
@@ -412,11 +436,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     ]}
                                     name={"people-circle-outline"}
                                     size={35}
-                                    color={"#414045"}
+                                    color={DM("#414045")}
                                 />
                                 <View style={{ marginLeft: 17 }}>
-                                    <Text style={CreateJourneyStyle.invitationsCaption}>Invited SoftServians</Text>
-                                    <Text style={CreateJourneyStyle.invitationsDesctiption}>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: DM("black") }}>
+                                        Invited SoftServians</Text>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsDesctiption, color: DM("black") }}>
                                         {existingInvitations.length +
                                         newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
                                         for that Ride</Text>
@@ -428,7 +453,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     ]}
                                     name={"chevron-forward-outline"}
                                     size={25}
-                                    color={"#414045"}
+                                    color={DM("#414045")}
                                 />
                             </TouchableOpacity>
                         </View>

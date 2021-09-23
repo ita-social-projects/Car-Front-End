@@ -17,7 +17,7 @@ import {
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/JourneyConstants";
-import { DELETE_COUNT, FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
+import { DELETE_COUNT, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
@@ -43,9 +43,10 @@ import StopType from "../../../../../models/stop/StopType";
 import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { isDarkMode } from "../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
+import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import Stop from "../../../../../models/stop/Stop";
 
 interface CreateJourneyComponent {
@@ -68,6 +69,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
     const params = props?.route?.params;
     const journey = params?.journey;
+
+    if(props)
+        props.weekDay.current = props.weekDay.current || (journey?.schedule?.days ?? WeekDay.None);
+    const weekDay = props?.weekDay;
 
     const { user } = useContext(AuthContext);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
@@ -223,7 +228,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     }, []);
 
     useEffect(() => {
-        CreateJourney.numberOfAddedStop = stops.length;
+        CreateJourney.numberOfAddedStop = stops.length+SECOND_ELEMENT_INDEX;
     });
 
     CreateJourney.addStopPressHandler = () => {
@@ -272,7 +277,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     stops: stops.filter(stop => stop.isConfirmed),
                     routePoints: routePoints,
                     duration: duration,
-                    routeDistance: routeDistance
+                    routeDistance: routeDistance,
+                    weekDay: weekDay.current,
                 }
             }
         };
@@ -300,7 +306,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
             stops: (createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id) as Stop[]).
-                concat(arrayOfPassengerStops)
+                concat(arrayOfPassengerStops),
+            weekDay: weekDay?.current || null,
         };
 
         await JourneyService.updateRoute(updatedJourney)
@@ -318,7 +325,8 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
         return journey.duration === duration &&
             journey.routeDistance === routeDistance &&
-            journey.journeyPoints.every((value, index) => routePoints[index] === value);
+            journey.journeyPoints.every((value, index) => routePoints[index] === value) &&
+            journey.schedule?.days === weekDay?.current;
     };
 
     const cantBuildRouteAlert = () => {
@@ -509,7 +517,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 confirmColor={"black"}
                 title={"CHANGES"}
                 subtitle={"After the changes is applied, all passengers will get notified. " +
-                "Some of them might withdraw from the ride if change doesn't suit them"}
+                    "Some of them might withdraw from the ride if change doesn't suit them"}
                 confirmText={"Apply"}
                 cancelText={"Cancel"}
                 onConfirm={() => {

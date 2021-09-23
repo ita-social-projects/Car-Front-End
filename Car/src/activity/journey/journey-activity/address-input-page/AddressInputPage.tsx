@@ -5,7 +5,7 @@ import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native
 import AddressInputPageStyle from "./AddressInputPageStyle";
 import AddressInputPageProps from "./AddressInputPageProps";
 import AddressInput from "../../../../components/address-input/AddressInput";
-import { isDarkMode } from "../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../components/theme/ThemeProvider";
 import DM from "../../../../components/styles/DM";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import { THREE_ELEMENT_COLLECTION_LENGTH, THIRD_FROM_END_ELEMENT_INDEX, SECOND_FROM_END_ELEMENT_INDEX, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";

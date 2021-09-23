@@ -195,7 +195,7 @@ const Messages = (props: MessagesProps) => {
                 ) : (
                     <>
                         <View style={MessagesStyle.noMessageContainer}>
-                            <Text style={MessagesStyle.noMessageStyle}>
+                            <Text style={{ ...MessagesStyle.noMessageStyle, color: DM("black") }}>
                                 CURRENTLY YOU DO NOT HAVE ANY
                                 {"\n"}
                                 CHATS

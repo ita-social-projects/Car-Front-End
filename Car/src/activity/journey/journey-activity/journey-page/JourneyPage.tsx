@@ -47,7 +47,7 @@ import {
 } from "../../../../components/modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
-import { isDarkMode } from "../../../../components/navigation/Routes";
+import { isDarkMode } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import CarBlock from "./blocks/car-block/CarBlock";
 import CommentsBlock from "./blocks/comments-block/CommentsBlock";
@@ -55,6 +55,7 @@ import DriverBlock from "./blocks/driver-block/DriverBlock";
 import ParticipantsBlock from "./blocks/participants-block/ParticipantsBlock";
 import SendRequestModal from "./blocks/send-request-modal/SendRequestModal";
 import StopsBlock from "./blocks/stops-block/StopsBlock";
+import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -152,6 +153,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     duration: currentJourney.duration,
                     routeDistance: currentJourney.routeDistance,
                     routePoints: currentJourney.journeyPoints,
+                    weekDay: currentJourney?.schedule?.days ?? WeekDay.None,
                 }
             }
         };
