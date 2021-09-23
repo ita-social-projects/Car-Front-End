@@ -66,6 +66,7 @@ test("renders correctly", async () =>
                                 journeyCount: 0,
                                 phoneNumber: null,
                             },
+                            journeyId: 0,
                             notificationData: jsonData,
                             notificationId: 0,
                         },

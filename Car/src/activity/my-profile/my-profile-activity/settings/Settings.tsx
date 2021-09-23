@@ -325,17 +325,13 @@ const Settings = (props: { navigation: any }) => {
                                 <AvatarLogoTitle />
                             </Animated.View>
 
-                            {isSaving ? (
+                            {isSaving && (
 
                                 <ActivityIndicator
                                     style={SettingsStyle.spinner}
                                     size={26}
                                     color={DM("#414045")}
                                 />
-
-                            ) : (
-
-                                <></>
 
                             )}
                         </TouchableOpacity>

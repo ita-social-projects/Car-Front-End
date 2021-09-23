@@ -137,7 +137,7 @@ test("renders correctly", async () =>
                       style={
                         Array [
                           Object {
-                            "fontFamily": "Open Sans",
+                            "fontFamily": "Open Sans Bold",
                             "fontWeight": "700",
                             "textTransform": "uppercase",
                           },
@@ -235,7 +235,7 @@ test("renders correctly", async () =>
                         Array [
                           Object {
                             "alignItems": "center",
-                            "fontFamily": "Open Sans",
+                            "fontFamily": "Open Sans Regular",
                             "fontSize": 11,
                             "lineHeight": 16,
                           },
@@ -300,7 +300,7 @@ test("renders correctly", async () =>
                     style={
                       Array [
                         Object {
-                          "fontFamily": "Open Sans",
+                          "fontFamily": "Open Sans Regular",
                           "fontSize": 11,
                           "lineHeight": 16,
                           "paddingLeft": 6,
@@ -354,7 +354,7 @@ test("renders correctly", async () =>
                     style={
                       Array [
                         Object {
-                          "fontFamily": "Open Sans",
+                          "fontFamily": "Open Sans Regular",
                           "fontSize": 11,
                           "lineHeight": 16,
                           "paddingLeft": 6,

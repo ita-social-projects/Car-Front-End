@@ -1,3 +1,4 @@
+import WeekDay from "../../src/components/schedule-bottom-popup/WeekDay";
 import Invitation from "../invitation/Invitation";
 import Stop from "../stop/Stop";
 import JourneyPoint from "./JourneyPoint";
@@ -15,6 +16,7 @@ interface JourneyDto {
     isOnOwnCar: boolean,
     journeyPoints: JourneyPoint[],
     stops: Stop[],
+    weekDay: WeekDay | null,
     invitations: Invitation[],
 }
 

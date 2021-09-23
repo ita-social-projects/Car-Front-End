@@ -88,7 +88,7 @@ test("renders correctly", async () =>
               style={
                 Array [
                   Object {
-                    "fontFamily": "Open Sans",
+                    "fontFamily": "Open Sans Bold",
                     "fontSize": 13,
                     "fontWeight": "700",
                     "lineHeight": 16,
@@ -108,6 +108,7 @@ test("renders correctly", async () =>
               onChange={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              onTintColor="#414045"
               style={
                 Array [
                   Object {
@@ -120,6 +121,8 @@ test("renders correctly", async () =>
                   },
                 ]
               }
+              thumbTintColor="white"
+              tintColor="gray"
               value={false}
             />
           </View>
@@ -177,7 +180,7 @@ test("renders correctly", async () =>
                 <Text
                   style={
                     Object {
-                      "fontFamily": "Open Sans",
+                      "fontFamily": "Open Sans Bold",
                       "fontSize": 13,
                       "fontWeight": "700",
                       "lineHeight": 16,
@@ -265,7 +268,7 @@ test("renders correctly", async () =>
                 <Text
                   style={
                     Object {
-                      "fontFamily": "Open Sans",
+                      "fontFamily": "Open Sans Bold",
                       "fontSize": 13,
                       "fontWeight": "700",
                       "lineHeight": 16,
@@ -353,7 +356,7 @@ test("renders correctly", async () =>
                 <Text
                   style={
                     Object {
-                      "fontFamily": "Open Sans",
+                      "fontFamily": "Open Sans Bold",
                       "fontSize": 13,
                       "fontWeight": "700",
                       "lineHeight": 16,

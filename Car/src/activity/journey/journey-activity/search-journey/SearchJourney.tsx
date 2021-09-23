@@ -364,6 +364,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
                         <TouchableDateTimePicker
+                            onlyTime={false}
                             date={departureTime}
                             setDate={(d) => setDepartureTime(d)}
                             isConfirmed={true}
