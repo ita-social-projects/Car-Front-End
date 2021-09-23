@@ -28,6 +28,7 @@ import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
 import Indicator from "../../components/activity-indicator/Indicator";
 import Badge from "../../components/badge/Badge";
+import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
 
 const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
@@ -156,9 +157,10 @@ const Messages = (props: MessagesProps) => {
                                                 ]}
                                             >
                                                 starts at{" "}
-                                                {moment(new Date(item?.journey?.departureTime!)).format(
-                                                    "DD.MM, HH:mm"
-                                                )}
+                                                {moment(getDateWithCorrectUtc(new Date(item!.journey.departureTime)))
+                                                    .format(
+                                                        "DD.MM, HH:mm"
+                                                    )}
                                             </Text>
                                         )}
                                     </View>

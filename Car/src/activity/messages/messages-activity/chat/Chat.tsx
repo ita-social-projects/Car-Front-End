@@ -44,8 +44,7 @@ import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX,
-    ZERO_ID,
-    MINUTES_IN_HOUR
+    ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import DM from "../../../../components/styles/DM";
@@ -62,8 +61,7 @@ import {
 import Message from "../../../../../models/Message";
 import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
-import moment from "moment-timezone";
-import RNLocalize from "react-native-localize";
+import { getDateWithCorrectUtc } from "../../../../utils/ChatHelperFunctions";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -304,14 +302,11 @@ const Chat = (properties: ChatProps) => {
             properties?.route.params.chatId, messageId)
             .then((res: any) => {
                 res.data?.forEach((data: Message) => {
-                    let messageCreatedAt = new Date(data!.createdAt);
                     const messageToAdd: IMessage = {
                         _id: data?.id!,
                         text: data?.text!,
-                        createdAt: Platform.OS === "ios"// no automatic time offset for Ios
-                            ? new Date(messageCreatedAt
-                                .setHours(messageCreatedAt.getHours()
-                                + moment.tz(RNLocalize.getTimeZone()).utcOffset() / MINUTES_IN_HOUR))
+                        createdAt: Platform.OS === "ios"// no automatic Utc time offset for Ios
+                            ? getDateWithCorrectUtc(new Date(data!.createdAt))
                             : new Date(data!.createdAt),
                         user: {
                             _id: data?.senderId!,

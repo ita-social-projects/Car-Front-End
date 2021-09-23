@@ -81,6 +81,7 @@ describe("JourneySearch Test", () => {
             <TouchableDateTimePicker
               date={1970-01-01T00:00:00.000Z}
               isConfirmed={true}
+              onlyTime={false}
               setDate={[Function]}
             />
           </View>

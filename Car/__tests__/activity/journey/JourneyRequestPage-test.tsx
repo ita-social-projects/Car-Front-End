@@ -29,7 +29,7 @@ test("renders correctly", async () =>
         style={
           Array [
             Object {
-              "fontFamily": "Proxima Nova",
+              "fontFamily": "Proxima Nova Extrabold",
             },
             Object {
               "color": "#222222",
@@ -107,7 +107,7 @@ test("renders correctly", async () =>
                     style={
                       Array [
                         Object {
-                          "fontFamily": "Open Sans",
+                          "fontFamily": "Open Sans Regular",
                           "fontSize": 15,
                           "fontWeight": "700",
                         },
@@ -132,7 +132,7 @@ test("renders correctly", async () =>
                       style={
                         Array [
                           Object {
-                            "fontFamily": "Open Sans",
+                            "fontFamily": "Open Sans Regular",
                             "fontSize": 13,
                             "fontWeight": "100",
                           },
@@ -146,7 +146,7 @@ test("renders correctly", async () =>
                       style={
                         Array [
                           Object {
-                            "fontFamily": "Open Sans",
+                            "fontFamily": "Open Sans ExtraBold",
                             "fontSize": 13,
                             "fontWeight": "700",
                           },
@@ -195,7 +195,7 @@ test("renders correctly", async () =>
                   style={
                     Array [
                       Object {
-                        "fontFamily": "Open Sans",
+                        "fontFamily": "Open Sans Bold",
                         "fontWeight": "700",
                         "paddingBottom": 4,
                       },
@@ -212,7 +212,7 @@ test("renders correctly", async () =>
                   style={
                     Array [
                       Object {
-                        "fontFamily": "Open Sans",
+                        "fontFamily": "Open Sans Regular",
                         "fontSize": 13,
                         "lineHeight": 18,
                         "paddingTop": 4,

@@ -8,6 +8,10 @@ inhibit_all_warnings!
 target 'Car' do
   config = use_native_modules!
 
+  pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+
   use_react_native!(:path => config["reactNativePath"])
 
   target 'CarTests' do

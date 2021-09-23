@@ -66,6 +66,7 @@ test("renders correctly", async () =>
           <View
             style={
               Object {
+                "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "center",
                 "paddingHorizontal": 10,
@@ -87,7 +88,7 @@ test("renders correctly", async () =>
                 Object {
                   "color": "#FFFFFF",
                   "flex": 1,
-                  "fontFamily": "Proxima Nova",
+                  "fontFamily": "Proxima Nova Rg Bold",
                   "fontSize": 24,
                   "justifyContent": "center",
                   "marginLeft": 20,

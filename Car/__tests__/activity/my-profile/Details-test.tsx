@@ -43,7 +43,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Proxima Nova",
+                "fontFamily": "Proxima Nova Extrabold",
                 "fontSize": 14,
                 "fontWeight": "700",
               },

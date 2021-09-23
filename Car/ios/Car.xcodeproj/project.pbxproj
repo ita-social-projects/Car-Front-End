@@ -15,6 +15,17 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* CarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CarTests.m */; };
 		31DC366353AAEFC38948B0EC /* libPods-Car-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C45CC52B11EB4B1FF3DB6D8 /* libPods-Car-tvOSTests.a */; };
+		3F391C4326FB30030089A6C9 /* Milliard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3B26FB2FEE0089A6C9 /* Milliard-Black.ttf */; };
+		3F391C4426FB300B0089A6C9 /* Milliard-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3C26FB2FEE0089A6C9 /* Milliard-BlackItalic.ttf */; };
+		3F391C4526FB300E0089A6C9 /* Milliard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3E26FB2FEE0089A6C9 /* Milliard-Bold.ttf */; };
+		3F391C4626FB30100089A6C9 /* Milliard-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3926FB2FEE0089A6C9 /* Milliard-BoldItalic.ttf */; };
+		3F391C4726FB30120089A6C9 /* Milliard-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3A26FB2FEE0089A6C9 /* Milliard-Book.ttf */; };
+		3F391C4826FB30150089A6C9 /* Milliard-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3D26FB2FEE0089A6C9 /* Milliard-BookItalic.ttf */; };
+		3F391C4926FB30190089A6C9 /* Milliard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3F26FB2FEE0089A6C9 /* Milliard-ExtraBold.ttf */; };
+		3F391C4A26FB301B0089A6C9 /* Milliard-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C4026FB2FEE0089A6C9 /* Milliard-ExtraBoldItalic.ttf */; };
+		3F391C4B26FB301D0089A6C9 /* Milliard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C4126FB2FEE0089A6C9 /* Milliard-ExtraLight.ttf */; };
+		3F391C4C26FB301F0089A6C9 /* Milliard-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C3826FB2FEE0089A6C9 /* Milliard-ExtraLightItalic.ttf */; };
+		3F391C4D26FB30210089A6C9 /* Milliard-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F391C4226FB2FEE0089A6C9 /* Milliard-Hairline.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		82DC1EB56F5680D27CF2C00C /* libPods-Car.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13D9EF937B19FD179A992E /* libPods-Car.a */; };
 		854D378725DBF45B000FA61B /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
@@ -75,6 +86,17 @@
 		2D3FF1042AFE175215BED891 /* Pods-Car-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Car-tvOSTests/Pods-Car-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2DBA3E495B464EB38AA15529 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		3B5B534830BE49F525877750 /* Pods-Car-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Car-tvOS/Pods-Car-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		3F391C3826FB2FEE0089A6C9 /* Milliard-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraLightItalic.ttf"; path = "../assets/fonts/Milliard-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3926FB2FEE0089A6C9 /* Milliard-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-BoldItalic.ttf"; path = "../assets/fonts/Milliard-BoldItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3A26FB2FEE0089A6C9 /* Milliard-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Book.ttf"; path = "../assets/fonts/Milliard-Book.ttf"; sourceTree = "<group>"; };
+		3F391C3B26FB2FEE0089A6C9 /* Milliard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Black.ttf"; path = "../assets/fonts/Milliard-Black.ttf"; sourceTree = "<group>"; };
+		3F391C3C26FB2FEE0089A6C9 /* Milliard-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-BlackItalic.ttf"; path = "../assets/fonts/Milliard-BlackItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3D26FB2FEE0089A6C9 /* Milliard-BookItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-BookItalic.ttf"; path = "../assets/fonts/Milliard-BookItalic.ttf"; sourceTree = "<group>"; };
+		3F391C3E26FB2FEE0089A6C9 /* Milliard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Bold.ttf"; path = "../assets/fonts/Milliard-Bold.ttf"; sourceTree = "<group>"; };
+		3F391C3F26FB2FEE0089A6C9 /* Milliard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraBold.ttf"; path = "../assets/fonts/Milliard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		3F391C4026FB2FEE0089A6C9 /* Milliard-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraBoldItalic.ttf"; path = "../assets/fonts/Milliard-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		3F391C4126FB2FEE0089A6C9 /* Milliard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-ExtraLight.ttf"; path = "../assets/fonts/Milliard-ExtraLight.ttf"; sourceTree = "<group>"; };
+		3F391C4226FB2FEE0089A6C9 /* Milliard-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Milliard-Hairline.ttf"; path = "../assets/fonts/Milliard-Hairline.ttf"; sourceTree = "<group>"; };
 		43548857ECBB4B52AA319E86 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4C45CC52B11EB4B1FF3DB6D8 /* libPods-Car-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Car-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE752ED83FC4B1DA4EA90E4 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -254,6 +276,17 @@
 		EC614EAA683A425A92AE60A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3F391C3B26FB2FEE0089A6C9 /* Milliard-Black.ttf */,
+				3F391C3C26FB2FEE0089A6C9 /* Milliard-BlackItalic.ttf */,
+				3F391C3E26FB2FEE0089A6C9 /* Milliard-Bold.ttf */,
+				3F391C3926FB2FEE0089A6C9 /* Milliard-BoldItalic.ttf */,
+				3F391C3A26FB2FEE0089A6C9 /* Milliard-Book.ttf */,
+				3F391C3D26FB2FEE0089A6C9 /* Milliard-BookItalic.ttf */,
+				3F391C3F26FB2FEE0089A6C9 /* Milliard-ExtraBold.ttf */,
+				3F391C4026FB2FEE0089A6C9 /* Milliard-ExtraBoldItalic.ttf */,
+				3F391C4126FB2FEE0089A6C9 /* Milliard-ExtraLight.ttf */,
+				3F391C3826FB2FEE0089A6C9 /* Milliard-ExtraLightItalic.ttf */,
+				3F391C4226FB2FEE0089A6C9 /* Milliard-Hairline.ttf */,
 				85C271AF25CEC817008C047B /* open_sans_bold.ttf */,
 				85C271AD25CEC817008C047B /* open_sans_extrabold.ttf */,
 				85C271B225CEC817008C047B /* open_sans_light.ttf */,
@@ -445,18 +478,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85C271B825CEC817008C047B /* proxima_nova_reg.ttf in Resources */,
-				85C271B625CEC817008C047B /* open_sans_bold.ttf in Resources */,
-				85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */,
-				85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */,
 				85C271B925CEC817008C047B /* open_sans_light.ttf in Resources */,
-				85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */,
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				85C271B725CEC817008C047B /* open_sans_regular.ttf in Resources */,
-				854D378725DBF45B000FA61B /* main.jsbundle in Resources */,
-				854D390525DDDA91000FA61B /* Images.xcassets in Resources */,
+				3F391C4B26FB301D0089A6C9 /* Milliard-ExtraLight.ttf in Resources */,
+				85C271B325CEC817008C047B /* open_sans_semibold.ttf in Resources */,
+				85C271B525CEC817008C047B /* proxima_nova_bold.ttf in Resources */,
+				85D90D6325D0633D00090E13 /* proxima_nova_extrabold.ttf in Resources */,
+				3F391C4626FB30100089A6C9 /* Milliard-BoldItalic.ttf in Resources */,
+				85C271B825CEC817008C047B /* proxima_nova_reg.ttf in Resources */,
 				85D90D6225D0633D00090E13 /* proxima_nova_black.ttf in Resources */,
+				3F391C4926FB30190089A6C9 /* Milliard-ExtraBold.ttf in Resources */,
+				3F391C4C26FB301F0089A6C9 /* Milliard-ExtraLightItalic.ttf in Resources */,
+				3F391C4D26FB30210089A6C9 /* Milliard-Hairline.ttf in Resources */,
 				85C271B425CEC817008C047B /* open_sans_extrabold.ttf in Resources */,
+				3F391C4A26FB301B0089A6C9 /* Milliard-ExtraBoldItalic.ttf in Resources */,
+				3F391C4726FB30120089A6C9 /* Milliard-Book.ttf in Resources */,
+				85C271B625CEC817008C047B /* open_sans_bold.ttf in Resources */,
+				3F391C4826FB30150089A6C9 /* Milliard-BookItalic.ttf in Resources */,
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				3F391C4326FB30030089A6C9 /* Milliard-Black.ttf in Resources */,
+				854D378725DBF45B000FA61B /* main.jsbundle in Resources */,
+				3F391C4426FB300B0089A6C9 /* Milliard-BlackItalic.ttf in Resources */,
+				3F391C4526FB300E0089A6C9 /* Milliard-Bold.ttf in Resources */,
+				854D390525DDDA91000FA61B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
