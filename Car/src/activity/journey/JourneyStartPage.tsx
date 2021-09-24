@@ -18,13 +18,14 @@ import NavigationAddListener from "../../types/NavigationAddListener";
 const JourneyStartPage = (props: NavigationAddListener) => {
 
     const activeButtonStyle = {
-        backgroundColor: DM("#000000"),
-        color: DM("#FFFFFF")
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000"),
+        borderBottomWidth: 2,
     };
 
     const inactiveButtonStyle = {
         backgroundColor: DM("#FFFFFF"),
-        color: DM("#000000")
+        color: DM("#8C8F8E")
     };
 
     const [selectedIndex, setSelectedIndex] = useState(FIRST_ELEMENT_INDEX);
@@ -102,98 +103,153 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 </Text>
             </View>
             <View style={JourneyStartPageStyle.segmentControlContainer}>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={[JourneyStartPageStyle.allJourneys, allButtonStyle, { borderColor: DM("black") }]}
-                    onPress={() => {
-                        setSelectedIndex(FIRST_ELEMENT_INDEX);
-                        setAllButtonStyle(activeButtonStyle);
-                        setPastButtonStyle(inactiveButtonStyle);
-                        setUpcomingButtonStyle(inactiveButtonStyle);
-                        setScheduledButtonStyle(inactiveButtonStyle);
-                    }}
+                <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    //pagingEnabled={true}
+                    contentContainerStyle={{ flexGrow: 1 }}
                 >
-                    <Text
-                        style={[
-                            JourneyStartPageStyle.buttonText,
-                            allButtonStyle
-                        ]}
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={[JourneyStartPageStyle.allJourneys, allButtonStyle, { borderColor: DM("black") }]}
+                        onPress={() => {
+                            setSelectedIndex(FIRST_ELEMENT_INDEX);
+                            setAllButtonStyle(activeButtonStyle);
+                            setPastButtonStyle(inactiveButtonStyle);
+                            setUpcomingButtonStyle(inactiveButtonStyle);
+                            setScheduledButtonStyle(inactiveButtonStyle);
+                        }}
                     >
-                        All
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={[
-                        JourneyStartPageStyle.pastJourneys,
-                        pastButtonStyle,
-                        { borderColor: DM("black") }
-                    ]}
-                    onPress={() => {
-                        setSelectedIndex(SECOND_ELEMENT_INDEX);
-                        setAllButtonStyle(inactiveButtonStyle);
-                        setPastButtonStyle(activeButtonStyle);
-                        setUpcomingButtonStyle(inactiveButtonStyle);
-                        setScheduledButtonStyle(inactiveButtonStyle);
-                    }}
-                >
-                    <Text
+                        <Text
+                            style={[
+                                JourneyStartPageStyle.buttonText,
+                                allButtonStyle
+                            ]}
+                        >
+                            All
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={1}
                         style={[
-                            JourneyStartPageStyle.buttonText,
-                            pastButtonStyle
+                            JourneyStartPageStyle.pastJourneys,
+                            pastButtonStyle,
+                            { borderColor: DM("black") }
                         ]}
+                        onPress={() => {
+                            setSelectedIndex(SECOND_ELEMENT_INDEX);
+                            setAllButtonStyle(inactiveButtonStyle);
+                            setPastButtonStyle(activeButtonStyle);
+                            setUpcomingButtonStyle(inactiveButtonStyle);
+                            setScheduledButtonStyle(inactiveButtonStyle);
+                        }}
                     >
-                        Past
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={[
-                        JourneyStartPageStyle.upcomingJourneys,
-                        upcomingButtonStyle,
-                        { borderColor: DM("black") }
-                    ]}
-                    onPress={() => {
-                        setSelectedIndex(THIRD_ELEMENT_INDEX);
-                        setAllButtonStyle(inactiveButtonStyle);
-                        setPastButtonStyle(inactiveButtonStyle);
-                        setUpcomingButtonStyle(activeButtonStyle);
-                        setScheduledButtonStyle(inactiveButtonStyle);
-                    }}
-                >
-                    <Text
+                        <Text
+                            style={[
+                                JourneyStartPageStyle.buttonText,
+                                pastButtonStyle
+                            ]}
+                        >
+                            Past
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={1}
                         style={[
-                            JourneyStartPageStyle.buttonText,
-                            upcomingButtonStyle
+                            JourneyStartPageStyle.upcomingJourneys,
+                            upcomingButtonStyle,
+                            { borderColor: DM("black") }
                         ]}
+                        onPress={() => {
+                            setSelectedIndex(THIRD_ELEMENT_INDEX);
+                            setAllButtonStyle(inactiveButtonStyle);
+                            setPastButtonStyle(inactiveButtonStyle);
+                            setUpcomingButtonStyle(activeButtonStyle);
+                            setScheduledButtonStyle(inactiveButtonStyle);
+                        }}
                     >
-                        Upcoming
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={[
-                        JourneyStartPageStyle.scheduledJourneys,
-                        scheduledButtonStyle,
-                        { borderColor: DM("black") }
-                    ]}
-                    onPress={() => {
-                        setSelectedIndex(FOURTH_ELEMENT_INDEX);
-                        setAllButtonStyle(inactiveButtonStyle);
-                        setPastButtonStyle(inactiveButtonStyle);
-                        setUpcomingButtonStyle(inactiveButtonStyle);
-                        setScheduledButtonStyle(activeButtonStyle);
-                    }}
-                >
-                    <Text
+                        <Text
+                            style={[
+                                JourneyStartPageStyle.buttonText,
+                                upcomingButtonStyle
+                            ]}
+                        >
+                            Upcoming
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={1}
                         style={[
-                            JourneyStartPageStyle.buttonText,
-                            scheduledButtonStyle
+                            JourneyStartPageStyle.scheduledJourneys,
+                            scheduledButtonStyle,
+                            { borderColor: DM("black") }
                         ]}
+                        onPress={() => {
+                            setSelectedIndex(FOURTH_ELEMENT_INDEX);
+                            setAllButtonStyle(inactiveButtonStyle);
+                            setPastButtonStyle(inactiveButtonStyle);
+                            setUpcomingButtonStyle(inactiveButtonStyle);
+                            setScheduledButtonStyle(activeButtonStyle);
+                        }}
                     >
-                        Regular
-                    </Text>
-                </TouchableOpacity>
+                        <Text
+                            style={[
+                                JourneyStartPageStyle.buttonText,
+                                scheduledButtonStyle
+                            ]}
+                        >
+                            Regular
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={[
+                            JourneyStartPageStyle.scheduledJourneys,
+                            scheduledButtonStyle,
+                            { borderColor: DM("black") }
+                        ]}
+                        onPress={() => {
+                            setSelectedIndex(FIRST_ELEMENT_INDEX);
+                            setAllButtonStyle(inactiveButtonStyle);
+                            setPastButtonStyle(inactiveButtonStyle);
+                            setUpcomingButtonStyle(inactiveButtonStyle);
+                            setScheduledButtonStyle(activeButtonStyle);
+                        }}
+                    >
+                        <Text
+                            style={[
+                                JourneyStartPageStyle.buttonText,
+                                scheduledButtonStyle
+                            ]}
+                        >
+                            Test
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={[
+                            JourneyStartPageStyle.scheduledJourneys,
+                            scheduledButtonStyle,
+                            { borderColor: DM("black") }
+                        ]}
+                        onPress={() => {
+                            setSelectedIndex(FIRST_ELEMENT_INDEX);
+                            setAllButtonStyle(inactiveButtonStyle);
+                            setPastButtonStyle(inactiveButtonStyle);
+                            setUpcomingButtonStyle(inactiveButtonStyle);
+                            setScheduledButtonStyle(activeButtonStyle);
+                        }}
+                    >
+                        <Text
+                            style={[
+                                JourneyStartPageStyle.buttonText,
+                                upcomingButtonStyle
+                            ]}
+                        >
+                            Test2
+                        </Text>
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
 
             {selectedIndex === FIRST_ELEMENT_INDEX && (
@@ -203,7 +259,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             Upcoming
                         </Text>
                     )}
-                    {<JourneyCardList journey={upcomingJourneys} ascending/>}
+                    {<JourneyCardList journey={upcomingJourneys} ascending />}
 
                     {pastJourneys.length > EMPTY_COLLECTION_LENGTH && (
                         <Text style={[JourneyStartPageStyle.tabTextStyle, { color: DM("black") }]}>
@@ -227,7 +283,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
             )}
             {selectedIndex === THIRD_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
-                    {<JourneyCardList journey={upcomingJourneys} ascending/>}
+                    {<JourneyCardList journey={upcomingJourneys} ascending />}
                 </View>
             )}
             {selectedIndex === FOURTH_ELEMENT_INDEX && (
