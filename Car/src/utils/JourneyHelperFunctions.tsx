@@ -78,7 +78,6 @@ export const getStopCoordinates = (stop?: Stop) => {
 
 export const mapStopToMarker = (stop: Stop) => (
     <Marker
-        key={stop?.index}
         title={stop?.address?.name}
         coordinate={getStopCoordinates(stop)}
         image={require("../../assets/images/maps-markers/Stop.png")}
