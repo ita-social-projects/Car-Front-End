@@ -294,7 +294,6 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerRight": [Function],
               "headerTitle": "Chat",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
