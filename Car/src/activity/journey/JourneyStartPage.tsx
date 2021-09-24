@@ -102,13 +102,14 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     MANAGE RIDES
                 </Text>
             </View>
-            <View style={JourneyStartPageStyle.segmentControlContainer}>
-                <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    //pagingEnabled={true}
-                    contentContainerStyle={{ flexGrow: 1 }}
-                >
+            <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                pagingEnabled={true}
+                contentContainerStyle={{ flexGrow: 10 }}
+            >
+                <View style={JourneyStartPageStyle.segmentControlContainer}>
+
                     <TouchableOpacity
                         activeOpacity={1}
                         style={[JourneyStartPageStyle.allJourneys, allButtonStyle, { borderColor: DM("black") }]}
@@ -213,44 +214,20 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             setAllButtonStyle(inactiveButtonStyle);
                             setPastButtonStyle(inactiveButtonStyle);
                             setUpcomingButtonStyle(inactiveButtonStyle);
-                            setScheduledButtonStyle(activeButtonStyle);
+                            setScheduledButtonStyle(inactiveButtonStyle);
                         }}
                     >
                         <Text
                             style={[
                                 JourneyStartPageStyle.buttonText,
-                                scheduledButtonStyle
+                                pastButtonStyle
                             ]}
                         >
-                            Test
+                            Requested
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            JourneyStartPageStyle.scheduledJourneys,
-                            scheduledButtonStyle,
-                            { borderColor: DM("black") }
-                        ]}
-                        onPress={() => {
-                            setSelectedIndex(FIRST_ELEMENT_INDEX);
-                            setAllButtonStyle(inactiveButtonStyle);
-                            setPastButtonStyle(inactiveButtonStyle);
-                            setUpcomingButtonStyle(inactiveButtonStyle);
-                            setScheduledButtonStyle(activeButtonStyle);
-                        }}
-                    >
-                        <Text
-                            style={[
-                                JourneyStartPageStyle.buttonText,
-                                upcomingButtonStyle
-                            ]}
-                        >
-                            Test2
-                        </Text>
-                    </TouchableOpacity>
-                </ScrollView>
-            </View>
+                </View>
+            </ScrollView>
 
             {selectedIndex === FIRST_ELEMENT_INDEX && (
                 <View style={JourneyStartPageStyle.tabStyle}>
