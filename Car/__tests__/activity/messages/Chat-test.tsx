@@ -4,6 +4,12 @@ import Chat from "../../../src/activity/messages/messages-activity/chat/Chat";
 
 const renderer = shallowRenderer.createRenderer();
 
+jest.mock("react-native-localize", () => {
+    return {
+        getTimeZone: jest.fn(),
+    };
+});
+
 test("renders correctly", async () =>
     expect(
         renderer.render(

@@ -6,7 +6,7 @@ import BadgeProps from "./BadgeProps";
 const Badge = (props: BadgeProps) => {
     return (
         <View style={BadgeStyle.container}>
-            <Text style={BadgeStyle.text}>{props.value ?? "aboba"}</Text>
+            <Text style={BadgeStyle.text}>{props.value ?? ""}</Text>
         </View>
     );
 };
