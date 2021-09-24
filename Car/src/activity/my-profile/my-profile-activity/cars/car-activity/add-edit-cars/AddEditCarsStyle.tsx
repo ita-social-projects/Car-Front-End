@@ -28,8 +28,7 @@ const AddEditCarsStyle = StyleSheet.create({
     },
 
     inputsContainer: {
-        marginRight: 24,
-        marginLeft: 24
+        margin: 24
     },
 
     dropDownContainer: {
@@ -42,6 +41,7 @@ const AddEditCarsStyle = StyleSheet.create({
     },
 
     saveButtonContainer: {
+        marginTop: 16,
         marginBottom: 70,
         flexDirection: "row",
         justifyContent: "space-between"
