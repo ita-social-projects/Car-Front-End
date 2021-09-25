@@ -10,12 +10,14 @@ import NotificationsService from "../../../../api-service/notifications-service/
 import SignalRHubConnection from "../../../../api-service/SignalRHubConnection";
 import ReceivedMessagesService from "../../../../api-service/received-messages-service/ReceivedMessagesService";
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
-import DM from "../../styles/DM";
+//import DM from "../../styles/DM";
 import updateLocale from "../../styles/DTFormat";
+import { useTheme } from "../../theme/ThemeProvider";
 
 const Tabs = createBottomTabNavigator();
 
 const AppTabs = () => {
+    const { DM } = useTheme();
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
     let [unreadMessagesNumber, setUnreadMessagesNumber] = useState(EMPTY_COLLECTION_LENGTH);
 

@@ -22,9 +22,9 @@ import {
     ANIMATION_DURATION,
     SLEEP_DURATION
 } from "../../../../constants/AnimationConstants";
-import RNRestart from "react-native-restart";
+//import RNRestart from "react-native-restart";
 import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
-import DM from "../../../../components/styles/DM";
+//import DM from "../../../../components/styles/DM";
 import User from "../../../../../models/user/User";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import axios from "axios";
@@ -32,7 +32,7 @@ import { CreateJourneyStyle } from "../../../journey/journey-activity/create-jou
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 
 const Settings = (props: { navigation: any }) => {
-    const { setScheme, theme } = useTheme();
+    const { setScheme, theme, DM } = useTheme();
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
@@ -68,7 +68,7 @@ const Settings = (props: { navigation: any }) => {
 
     const changeAppScheme = (value) => {
         setScheme(value);
-        AsyncStorage.setItem("theme", value).then(() => RNRestart.Restart());
+        AsyncStorage.setItem("theme", value);//.then(() => RNRestart.Restart());
     };
 
     const avatarLogoTitleOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
