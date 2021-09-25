@@ -77,6 +77,18 @@ const JourneyStartPageStyle = StyleSheet.create({
         fontSize: 14,
         textTransform: "uppercase",
         paddingBottom: 16
+    },
+
+    activeButtonStyle: {
+        backgroundColor: "#000000",
+        color: "#FFFFFF",
+        borderColor: "black"
+    },
+
+    inactiveButtonStyle: {
+        backgroundColor: "#FFFFFF",
+        color: "#000000",
+        borderColor: "black"
     }
 });
 

@@ -93,7 +93,7 @@ const AppTabs = () => {
                 options={() => ({
                     tabBarLabel: "Chats",
                     tabBarBadge : tabBarUnreadMessages,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: "#ffffff" }
+                    tabBarBadgeStyle: { backgroundColor: "#fcba03", color: "#ffffff" }
                 })}
             />
             <Tabs.Screen

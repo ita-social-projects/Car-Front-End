@@ -38,7 +38,6 @@ import {
     sleep
 } from "../../../constants/AnimationConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
-import DM from "../../../components/styles/DM";
 import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
 import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
@@ -48,8 +47,10 @@ import AddressInputPage from "../journey-activity/address-input-page/AddressInpu
 import WeekDay from "../../../components/schedule-bottom-popup/WeekDay";
 import JourneyInvitationsPage from "../journey-activity/journey-invitations/JourneyInvitationsPage";
 import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-more-options-popup/CreateJourneyMoreOptionsPopup";
+import { useTheme } from "../../../components/theme/ThemeProvider";
 
 const JourneyTabs = () => {
+    const { DM } = useTheme();
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
