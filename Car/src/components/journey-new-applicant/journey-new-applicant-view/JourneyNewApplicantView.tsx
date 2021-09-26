@@ -19,7 +19,7 @@ import AuthContext from "../../../components/auth/AuthContext";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import AvatarLogoTitle from "../../avatar-logo-title/AvatarLogoTitle";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import JourneyNewApplicantViewStyle from "./JourneyNewApplicantViewStyle";
 
 interface JourneyNewApplicantViewProps {
@@ -31,6 +31,7 @@ interface JourneyNewApplicantViewProps {
 }
 
 const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
+    const { DM } = useTheme();
     const params = props.route.params.notification;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
     const [declineModalVisible,setDeclineModalVisible] = useState(false);

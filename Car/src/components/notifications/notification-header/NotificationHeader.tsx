@@ -1,11 +1,13 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import AvatarLogoTitle from "../../avatar-logo-title/AvatarLogoTitle";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import NotificationHeaderProps from "./NotificationHeaderProps";
 import NotificationHeaderStyle from "./NotificationHeaderStyle";
 
 const NotificationHeader = (props: NotificationHeaderProps) => {
+    const { DM } = useTheme();
+
     return (
         <View>
             <View style={NotificationHeaderStyle.headerContainer}>

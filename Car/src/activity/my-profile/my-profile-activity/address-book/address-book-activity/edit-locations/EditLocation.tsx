@@ -23,12 +23,13 @@ import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
 
 const EditLocation = (props: EditLocationProps) => {
+    const { DM } = useTheme();
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
     const [wayPoint, setWayPoint] = useState<WayPoint>({

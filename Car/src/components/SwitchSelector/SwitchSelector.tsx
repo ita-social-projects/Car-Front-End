@@ -3,9 +3,11 @@ import React from "react";
 import { CreateJourneyStyle } from "../../activity/journey/journey-activity/create-journey/CreateJourneyStyle";
 import SwitchSelectorProps from "./SwitchSelectorProps";
 import SwitchSelectorStyle from "./SwitchSelectorStyle";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 
 const SwitchSelector = (props: SwitchSelectorProps) => {
+    const { DM } = useTheme();
+
     return (
         <View style={SwitchSelectorStyle.container}>
             <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>{props.title}</Text>

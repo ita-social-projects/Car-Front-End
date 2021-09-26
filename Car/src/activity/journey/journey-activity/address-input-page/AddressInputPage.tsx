@@ -5,8 +5,7 @@ import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from "react-native
 import AddressInputPageStyle from "./AddressInputPageStyle";
 import AddressInputPageProps from "./AddressInputPageProps";
 import AddressInput from "../../../../components/address-input/AddressInput";
-import { isDarkMode } from "../../../../components/theme/ThemeProvider";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import { THREE_ELEMENT_COLLECTION_LENGTH, THIRD_FROM_END_ELEMENT_INDEX, SECOND_FROM_END_ELEMENT_INDEX, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import WayPoint from "../../../../types/WayPoint";
@@ -17,6 +16,7 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import * as navigation from "../../../../components/navigation/Navigation";
 
 const AddressInputPage = (props: AddressInputPageProps) => {
+    const { DM, isThemeDark } = useTheme();
     const params = props.route.params;
 
     const centerCoordinates = params.wayPoint.isConfirmed ?
@@ -138,7 +138,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={{ ...params.camera, center: centerCoordinates }}
-                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
             >

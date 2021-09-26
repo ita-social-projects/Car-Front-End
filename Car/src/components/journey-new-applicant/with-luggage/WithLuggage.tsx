@@ -1,9 +1,11 @@
 import JourneyNewApplicantStyle from "../JourneyNewApplicantStyle";
 import { Text, View } from "react-native";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import React from "react";
 
 const WithLuggage = ({ hasLuggage } : {hasLuggage?: boolean}) => {
+    const { DM } = useTheme();
+
     return (
         <View
             style={[

@@ -8,11 +8,12 @@ import Stop from "../../../../models/stop/Stop";
 import StopType from "../../../../models/stop/StopType";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../../constants/GeneralConstants";
 import Circle from "../../styles/Circle";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import style from "../notification-ride-stops/NotificationRideStopsStyle";
 import NotificationRideStopsProps from "./NotificationRideStopsProps";
 
 const NotificationRideStops = (props: NotificationRideStopsProps) => {
+    const { DM } = useTheme();
     const [stops, setStops] = useState<Stop[]>();
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
     const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });

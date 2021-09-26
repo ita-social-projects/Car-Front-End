@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Modal, Text, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import ConfirmModalProps from "./ConfirmModalProps";
 import ConfirmModalStyle from "./ConfirmModalStyle";
 
 const ConfirmModal = ((props: ConfirmModalProps) => {
+    const { DM } = useTheme();
     const confirmStyle = props.confirmColor == null ?
         ConfirmModalStyle.confirmButton :
         [ConfirmModalStyle.confirmButton, { backgroundColor: props.confirmColor }];

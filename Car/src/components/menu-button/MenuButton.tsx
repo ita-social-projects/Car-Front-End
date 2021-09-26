@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import MenuButtonStyle from "./MenuButtonStyle";
 import MenuButtonProps from "./MenuButtonProps";
 
 const MenuButton = (props: MenuButtonProps) => {
+    const { DM } = useTheme();
 
     const black = DM("#000000");
     const white = DM("#FFFFFF");

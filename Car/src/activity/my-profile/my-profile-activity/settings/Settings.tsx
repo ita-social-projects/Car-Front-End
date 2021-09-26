@@ -22,9 +22,7 @@ import {
     ANIMATION_DURATION,
     SLEEP_DURATION
 } from "../../../../constants/AnimationConstants";
-//import RNRestart from "react-native-restart";
 import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
-//import DM from "../../../../components/styles/DM";
 import User from "../../../../../models/user/User";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import axios from "axios";

@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import Entypo from "react-native-vector-icons/Entypo";
 import { MIN_AVAILABLE_SEATS_COUNT } from "../../constants/JourneyConstants";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import { SeatsInputSpinnerStyle } from "./SeatsInputSpinnerStyle";
 
 interface SeatsInputSpinnerProps {
@@ -15,6 +15,8 @@ interface SeatsInputSpinnerProps {
 }
 
 const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
+    const { DM } = useTheme();
+
     return (
         <View style={SeatsInputSpinnerStyle.container}>
             <Text style={[SeatsInputSpinnerStyle.descriptionText, { color: DM("black") }]}>

@@ -1,12 +1,14 @@
 import { Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import React from "react";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
 import SendRequestModalStyle from "./SendRequestModalStyle";
 import SendRequestModalProps from "./SendRequestModalProps";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
+    const { DM } = useTheme();
+
     return (
         <Modal
             visible={props.visible}

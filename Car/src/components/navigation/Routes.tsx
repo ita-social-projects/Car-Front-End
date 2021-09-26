@@ -10,13 +10,12 @@ import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
 import { MILLISECONDS_IN_MONTH } from "../../constants/DimensionConstants";
 import { StatusBar } from "react-native";
-import DM from "../styles/DM";
 import { useTheme } from "../theme/ThemeProvider";
 
 const Stack = createStackNavigator<AuthParamList>();
 
 const Routes = () => {
-    const { isThemeDark } = useTheme();
+    const { DM, isThemeDark } = useTheme();
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
     const { Root } = require("popup-ui");

@@ -6,11 +6,12 @@ import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/GeneralConstants";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import Clipboard from "@react-native-community/clipboard";
 
 const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
+    const { DM } = useTheme();
     const { userId } = props.route.params;
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);

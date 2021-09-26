@@ -3,12 +3,13 @@ import { ActivityIndicator, Text, View, ScrollView, RefreshControl, Dimensions }
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import Location from "../../../../../models/location/Location";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AddressBookStyle from "./AddressBookStyle";
 import { ADDRESS_NAME_MAX_LINES_COUNT, ADDRESS_NAME_WIDTH_CUT } from "../../../../constants/AddressConstants";
 
 export default function AddressBook (props: {navigation: any}) {
+    const { DM } = useTheme();
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);

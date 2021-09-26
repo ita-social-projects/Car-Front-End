@@ -3,7 +3,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import React from "react";
 import Stop from "../../../../../../../models/stop/Stop";
 import StopType from "../../../../../../../models/stop/StopType";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { NEXT_INDEX_CORRECTION } from "../../../../../../constants/GeneralConstants";
 import JourneyPageStyle from "../../JourneyPageStyle";
 
@@ -15,6 +15,7 @@ interface StopsBlockProps {
 }
 
 const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
+    const { DM } = useTheme();
     const isHighlightedStop = (index: number) => highlightedStops?.includes(index);
 
     const getDotAndTextColor = (index: number) =>

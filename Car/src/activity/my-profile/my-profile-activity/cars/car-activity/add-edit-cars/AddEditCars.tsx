@@ -19,7 +19,7 @@ import CarDropDownPickerItem from "../../../../../../components/car-drop-down-pi
 import CarDropDownPicker from "../../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddEditCarsStyle from "./AddEditCarsStyle";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import {
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH
@@ -31,6 +31,7 @@ import CarPhoto from "../../../../../../../models/car/CarPhoto";
 import axios from "axios";
 
 const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
+    const { DM } = useTheme();
     const [isLoading, setLoading] = useState(props.type === "edit");
     const [isSaving, setSaving] = useState(false);
 

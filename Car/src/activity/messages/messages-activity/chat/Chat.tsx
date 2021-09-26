@@ -47,7 +47,7 @@ import {
     ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import MenuButton from "../../../../components/menu-button/MenuButton";
 import ChatProps from "./ChatProps";
@@ -63,6 +63,7 @@ import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
 
 const Chat = (properties: ChatProps) => {
+    const { DM } = useTheme();
     const [messages, setMessages] = useState<IMessage[]>([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(useContext(AuthContext).user);

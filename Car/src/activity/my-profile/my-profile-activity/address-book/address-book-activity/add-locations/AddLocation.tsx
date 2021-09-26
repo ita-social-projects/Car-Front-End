@@ -23,12 +23,12 @@ import {
 } from "../../../../../../utils/LocationHelperFunctions";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
 import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomplete";
-import DM from "../../../../../../components/styles/DM";
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
-import { isDarkMode } from "../../../../../../components/theme/ThemeProvider";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 
 const AddLocation = () => {
+    const { DM, isThemeDark } = useTheme();
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
@@ -176,7 +176,7 @@ const AddLocation = () => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 initialCamera={initialCamera}
-                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
             >

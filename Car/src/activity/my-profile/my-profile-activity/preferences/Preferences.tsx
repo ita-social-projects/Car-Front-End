@@ -6,11 +6,12 @@ import UserPreferences from "../../../../../models/user/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import PreferencesStyle from "./PreferencesStyle";
 import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
 
 export default function Preferences (props: NavigationAddAndRemoveListener) {
+    const { DM } = useTheme();
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");

@@ -7,7 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Invitation from "../../../../../models/invitation/Invitation";
 import InvitationType from "../../../../../models/invitation/InvitationType";
 import * as navigation from "../../../../components/navigation/Navigation";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { DELETE_COUNT, ZERO } from "../../../../constants/GeneralConstants";
 import { CREATING_FONT_SIZE } from "../../../../constants/JourneyConstants";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
@@ -15,6 +15,7 @@ import JourneyInvitationsPageProps from "./JourneyInvitationsPageProps";
 import { JourneyInvitationsPageStyle } from "./JourneyInvitationsPageStyle";
 
 const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
+    const { DM } = useTheme();
     const params = props.route.params;
     const journey = params.journey;
 

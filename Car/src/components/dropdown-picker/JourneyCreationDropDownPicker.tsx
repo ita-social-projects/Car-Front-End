@@ -5,9 +5,10 @@ import { Divider } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPickerStyle from "./JourneyCreationDropDownPickerStyle";
 import JourneyCreationDropDownPickerProps from "./JourneyCreationDropDownPickerProps";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 
 const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps) => {
+    const { DM } = useTheme();
     const controller = useRef<any>(null);
 
     useEffect(() => {

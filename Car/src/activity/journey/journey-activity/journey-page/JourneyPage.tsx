@@ -15,7 +15,6 @@ import {
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_POSITION } from "../../../../constants/StylesConstants";
-import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
@@ -47,7 +46,7 @@ import {
 } from "../../../../components/modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
-import { isDarkMode } from "../../../../components/theme/ThemeProvider";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import CarBlock from "./blocks/car-block/CarBlock";
 import CommentsBlock from "./blocks/comments-block/CommentsBlock";
@@ -66,6 +65,7 @@ interface JourneyPageComponent {
 }
 
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
+    const { DM, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
@@ -230,7 +230,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                    customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >
