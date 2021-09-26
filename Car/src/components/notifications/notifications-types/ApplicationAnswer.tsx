@@ -22,6 +22,7 @@ import JourneyNewApplicantViewStyle
     from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
 import { getStopByType } from "../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../models/stop/StopType";
+import { useTheme } from "../../theme/ThemeProvider";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -38,6 +39,7 @@ interface ApplicationAnswerProps {
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
+    const { DM } = useTheme();
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.notification.visible);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
@@ -110,7 +112,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     IsDepartureTimeVisible={props.IsDepartureTimeVisible}
                     IsDetailsTitleVisible={props.IsDetailsTitleVisible}
                     IsFeeVisible={props.IsFeeVisible}/>
-                <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>
+                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: DM("black") }}>
                     {props.notification.sender!.name} {props.notification.sender!.surname}`s stops in your ride
                 </Text>
                 <View>

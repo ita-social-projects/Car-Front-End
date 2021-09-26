@@ -27,9 +27,10 @@ import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
+import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 
 const EditLocation = (props: EditLocationProps) => {
-    const { DM } = useTheme();
+    const { DM, isThemeDark } = useTheme();
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
     const [wayPoint, setWayPoint] = useState<WayPoint>({
@@ -180,7 +181,12 @@ const EditLocation = (props: EditLocationProps) => {
                             refFor={(ref) => (addressInputRef.current = ref)}
                         />
                         <TextInput
-                            style={AddLocationStyle.textInput}
+                            style={[AddLocationStyle.textInput,
+                                {
+                                    borderColor: DM("black"),
+                                    backgroundColor: DM("white"),
+                                    color: DM("black")
+                                }]}
                             value={locationName}
                             placeholder={"Name the chosen address"}
                             placeholderTextColor={"grey"}
@@ -206,7 +212,7 @@ const EditLocation = (props: EditLocationProps) => {
                         provider={PROVIDER_GOOGLE}
                         showsUserLocation={true}
                         initialCamera={initialCamera}
-                        customMapStyle={mapStyle}
+                        customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                         onLongPress={mapEventHandler}
                         showsCompass={false}
                     >
