@@ -20,12 +20,23 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const activeButtonStyle = {
         backgroundColor: DM("#FFFFFF"),
         color: DM("#000000"),
-        borderBottomWidth: 2,
+        borderBottomWidth: 2
+    };
+
+    const activeButtonTextStyle = {
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#000000")
     };
 
     const inactiveButtonStyle = {
         backgroundColor: DM("#FFFFFF"),
-        color: DM("#8C8F8E")
+        color: DM("#8C8F8E"),
+        borderBottomWidth: 0
+    };
+
+    const inactiveButtonTextStyle = {
+        backgroundColor: DM("#FFFFFF"),
+        color: DM("#8C8F8E"),
     };
 
     const [selectedIndex, setSelectedIndex] = useState(FIRST_ELEMENT_INDEX);
@@ -33,6 +44,10 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const [pastButtonStyle, setPastButtonStyle] = useState(inactiveButtonStyle);
     const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(inactiveButtonStyle);
     const [scheduledButtonStyle, setScheduledButtonStyle] = useState(inactiveButtonStyle);
+    const [allButtonTextStyle, setAllButtonTextStyle] = useState(activeButtonTextStyle);
+    const [pastButtonTextStyle, setPastButtonTextStyle] = useState(inactiveButtonTextStyle);
+    const [upcomingButtonTextStyle, setUpcomingButtonTextStyle] = useState(inactiveButtonTextStyle);
+    const [scheduledButtonTextStyle, setScheduledButtonTextStyle] = useState(inactiveButtonTextStyle);
 
     const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
     const [upcomingJourneys, setUpcomingJourneys] = useState<Array<Journey>>(
@@ -119,12 +134,16 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             setPastButtonStyle(inactiveButtonStyle);
                             setUpcomingButtonStyle(inactiveButtonStyle);
                             setScheduledButtonStyle(inactiveButtonStyle);
+                            setAllButtonTextStyle(activeButtonTextStyle);
+                            setPastButtonTextStyle(inactiveButtonTextStyle);
+                            setUpcomingButtonTextStyle(inactiveButtonTextStyle);
+                            setScheduledButtonTextStyle(inactiveButtonTextStyle);
                         }}
                     >
                         <Text
                             style={[
                                 JourneyStartPageStyle.buttonText,
-                                allButtonStyle
+                                allButtonTextStyle
                             ]}
                         >
                             All
@@ -143,12 +162,16 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             setPastButtonStyle(activeButtonStyle);
                             setUpcomingButtonStyle(inactiveButtonStyle);
                             setScheduledButtonStyle(inactiveButtonStyle);
+                            setAllButtonTextStyle(inactiveButtonTextStyle);
+                            setPastButtonTextStyle(activeButtonTextStyle);
+                            setUpcomingButtonTextStyle(inactiveButtonTextStyle);
+                            setScheduledButtonTextStyle(inactiveButtonTextStyle);
                         }}
                     >
                         <Text
                             style={[
                                 JourneyStartPageStyle.buttonText,
-                                pastButtonStyle
+                                pastButtonTextStyle
                             ]}
                         >
                             Past
@@ -167,12 +190,16 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             setPastButtonStyle(inactiveButtonStyle);
                             setUpcomingButtonStyle(activeButtonStyle);
                             setScheduledButtonStyle(inactiveButtonStyle);
+                            setAllButtonTextStyle(inactiveButtonTextStyle);
+                            setPastButtonTextStyle(inactiveButtonTextStyle);
+                            setUpcomingButtonTextStyle(activeButtonTextStyle);
+                            setScheduledButtonTextStyle(inactiveButtonTextStyle);
                         }}
                     >
                         <Text
                             style={[
                                 JourneyStartPageStyle.buttonText,
-                                upcomingButtonStyle
+                                upcomingButtonTextStyle
                             ]}
                         >
                             Upcoming
@@ -191,39 +218,19 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             setPastButtonStyle(inactiveButtonStyle);
                             setUpcomingButtonStyle(inactiveButtonStyle);
                             setScheduledButtonStyle(activeButtonStyle);
+                            setAllButtonTextStyle(inactiveButtonTextStyle);
+                            setPastButtonTextStyle(inactiveButtonTextStyle);
+                            setUpcomingButtonTextStyle(inactiveButtonTextStyle);
+                            setScheduledButtonTextStyle(activeButtonTextStyle);
                         }}
                     >
                         <Text
                             style={[
                                 JourneyStartPageStyle.buttonText,
-                                scheduledButtonStyle
+                                scheduledButtonTextStyle
                             ]}
                         >
                             Regular
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            JourneyStartPageStyle.scheduledJourneys,
-                            scheduledButtonStyle,
-                            { borderColor: DM("black") }
-                        ]}
-                        onPress={() => {
-                            setSelectedIndex(FIRST_ELEMENT_INDEX);
-                            setAllButtonStyle(inactiveButtonStyle);
-                            setPastButtonStyle(inactiveButtonStyle);
-                            setUpcomingButtonStyle(inactiveButtonStyle);
-                            setScheduledButtonStyle(inactiveButtonStyle);
-                        }}
-                    >
-                        <Text
-                            style={[
-                                JourneyStartPageStyle.buttonText,
-                                pastButtonStyle
-                            ]}
-                        >
-                            Requested
                         </Text>
                     </TouchableOpacity>
                 </View>

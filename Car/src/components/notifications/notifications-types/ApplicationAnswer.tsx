@@ -115,7 +115,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     IsDepartureTimeVisible={props.IsDepartureTimeVisible}
                     IsDetailsTitleVisible={props.IsDetailsTitleVisible}
                     IsFeeVisible={props.IsFeeVisible}/>
-              
+
                 <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>
                     {props.notification.sender!.name} {props.notification.sender!.surname}`s stops in your ride
                 </Text>
