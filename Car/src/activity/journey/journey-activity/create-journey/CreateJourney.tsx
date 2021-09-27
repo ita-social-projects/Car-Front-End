@@ -18,7 +18,6 @@ import {
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/JourneyConstants";
 import { DELETE_COUNT, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
-import APIConfig from "../../../../../api-service/APIConfig";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -48,6 +47,8 @@ import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import Stop from "../../../../../models/stop/Stop";
+import appInsights from "../../../../components/telemetry/AppInsights";
+import CredentialsManager from "../../../../../credentials/credentials.json";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -70,7 +71,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const params = props?.route?.params;
     const journey = params?.journey;
 
-    if(props)
+    if (props)
         props.weekDay.current = props.weekDay.current || (journey?.schedule?.days ?? WeekDay.None);
     const weekDay = props?.weekDay;
 
@@ -138,7 +139,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => appInsights.trackException({ exception: e }));
 
         JourneyService
             .getRecentJourneyStops()
@@ -147,7 +148,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
                 setRecentAddressesIsLoading(false);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => appInsights.trackException({ exception: e }));
 
         return props.navigation?.addListener("blur", () => {
             journey && props.closeMoreOptionPopup();
@@ -195,11 +196,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 findUserLocation();
             } else {
-                console.log("Location permission denied");
                 setUserLocationIsLoading(false);
             }
-        } catch (err) {
-            console.warn(err);
+        } catch (e) {
+            appInsights.trackException({ exception: e as Error });
         }
     };
 
@@ -212,7 +212,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             },
             (error) => {
                 setUserLocationIsLoading(false);
-                console.log(error);
+                appInsights.trackException({ exception: { name: "GeolocationError", message: error.message } });
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
@@ -228,7 +228,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     }, []);
 
     useEffect(() => {
-        CreateJourney.numberOfAddedStop = stops.length+SECOND_ELEMENT_INDEX;
+        CreateJourney.numberOfAddedStop = stops.length + SECOND_ELEMENT_INDEX;
     });
 
     CreateJourney.addStopPressHandler = () => {
@@ -448,7 +448,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                             origin={from.coordinates}
                             destination={to.coordinates}
                             waypoints={stops.filter(stop => stop.isConfirmed).map(stop => stop.coordinates)}
-                            apikey={APIConfig.apiKey}
+                            apikey={CredentialsManager.mapApiKey}
                             strokeWidth={5}
                             strokeColor="#027ebd"
                             onError={cantBuildRouteAlert}
@@ -462,7 +462,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         {
                             backgroundColor: confirmDisabled ? DM("gray") : DM("black"),
                             left: Dimensions.get("screen").width -
-                                (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
+                            (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
                         }]}
                     onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
                     disabled={confirmDisabled}

@@ -84,8 +84,6 @@ const AddressInputPage = (props: AddressInputPageProps) => {
             .then(json => {
                 const latLng = json.results[FIRST_ELEMENT_INDEX].geometry.location;
 
-                console.log(latLng);
-
                 const coordinates: LatLng = { latitude: latLng.lat, longitude: latLng.lng };
 
                 setWayPointsCoordinates(coordinates);

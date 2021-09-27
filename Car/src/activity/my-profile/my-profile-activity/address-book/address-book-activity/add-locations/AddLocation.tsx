@@ -27,6 +27,7 @@ import DM from "../../../../../../components/styles/DM";
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import { isDarkMode } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
+import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const AddLocation = () => {
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
@@ -107,7 +108,7 @@ const AddLocation = () => {
                 animateCamera(setMarkerCoordinates, position.coords, mapRef);
             },
             (error) => {
-                console.log(error);
+                appInsights.trackException({ exception: { name: "GeolocationError", message: error.message } });
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );

@@ -61,6 +61,7 @@ import {
 import Message from "../../../../../models/Message";
 import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
+import appInsights from "../../../../components/telemetry/AppInsights";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -95,7 +96,7 @@ const Chat = (properties: ChatProps) => {
         connection?.invoke(
             "EnterToGroup",
             properties.route.params.chatId.toString()
-        ).catch((err: any) => console.log(err));
+        ).catch((e) => appInsights.trackException({ exception: e }));
     };
 
     useEffect(() => {
@@ -170,7 +171,7 @@ const Chat = (properties: ChatProps) => {
                         SenderId: user?.id,
                         ChatId: properties.route.params.chatId
                     })
-                    .catch((err: any) => console.log(err));
+                    .catch((e) => appInsights.trackException({ exception: e }));
                 setMessage("");
             }
         } else {

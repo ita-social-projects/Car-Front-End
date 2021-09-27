@@ -3,6 +3,7 @@ import ErrorAlert from "../src/components/error-alert/ErrorAlert";
 import AuthManager from "../src/components/auth/AuthManager";
 import RNRestart from "react-native-restart";
 import { StatusCodes } from "../src/constants/Constants";
+import appInsights from "../src/components/telemetry/AppInsights";
 
 const Axios = axios.create({ timeout: 20000 });
 
@@ -32,17 +33,17 @@ Axios.interceptors.response.use(
     },
 
     async (error?: AxiosError) => {
-        if (axios.isCancel(error)) {
-            console.log("catch cancel");
-        }
-        else if (axios.isAxiosError(error)) {
-            error.response?.status === StatusCodes.UNAUTHORIZED &&
-                (async () => { await AuthManager.signOutAsync(); })().then(() =>
-                    RNRestart.Restart());
-        } else {
-            var message = error!.message || error!.response!.data;
+        if (!axios.isCancel(error)) {
+            appInsights.trackException({ exception: error });
+            if (axios.isAxiosError(error)) {
+                error.response?.status === StatusCodes.UNAUTHORIZED &&
+                    (async () => { await AuthManager.signOutAsync(); })().then(() =>
+                        RNRestart.Restart());
+            } else {
+                var message = error!.message || error!.response!.data;
 
-            ErrorAlert(message);
+                ErrorAlert(message);
+            }
         }
 
         return Promise.reject(error);
