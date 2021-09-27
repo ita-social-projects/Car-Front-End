@@ -62,6 +62,7 @@ import Message from "../../../../../models/Message";
 import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
 import appInsights from "../../../../components/telemetry/AppInsights";
+import { getDateWithCorrectUtc } from "../../../../utils/ChatHelperFunctions";
 
 const Chat = (properties: ChatProps) => {
     const [messages, setMessages] = useState<IMessage[]>([]);
@@ -128,13 +129,15 @@ const Chat = (properties: ChatProps) => {
             });
 
             connection.on("RecieveMessage", (receivedMessage: any) => {
+                let creationMessageDate = new Date(receivedMessage.createdAt);
+
                 setMessages((previousMessages) =>
                     GiftedChat.append(
                         previousMessages as any,
                         {
                             _id: receivedMessage.id,
                             text: receivedMessage.text,
-                            createdAt: new Date(receivedMessage.createdAt),
+                            createdAt: new Date(creationMessageDate),
                             user: {
                                 _id: receivedMessage.senderId,
                                 name: receivedMessage?.sender?.name + "|"
@@ -303,7 +306,9 @@ const Chat = (properties: ChatProps) => {
                     const messageToAdd: IMessage = {
                         _id: data?.id!,
                         text: data?.text!,
-                        createdAt: new Date(data!.createdAt),
+                        createdAt: Platform.OS === "ios"// no automatic Utc time offset for Ios
+                            ? getDateWithCorrectUtc(new Date(data!.createdAt))
+                            : new Date(data!.createdAt),
                         user: {
                             _id: data?.senderId!,
                             name: data?.senderName + "|"

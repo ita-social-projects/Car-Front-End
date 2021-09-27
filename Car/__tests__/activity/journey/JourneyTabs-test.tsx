@@ -4,6 +4,12 @@ import JourneyTabs from "../../../src/activity/journey/journey-tabs/JourneyTabs"
 
 const renderer = shallowRenderer.createRenderer();
 
+jest.mock("react-native-localize", () => {
+    return {
+        getTimeZone: jest.fn(),
+    };
+});
+
 test("renders correctly", async () =>
     expect(renderer.render(<JourneyTabs />)).toMatchInlineSnapshot(`
     <View
@@ -294,7 +300,6 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerRight": [Function],
               "headerTitle": "Chat",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
