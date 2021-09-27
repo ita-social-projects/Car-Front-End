@@ -5,7 +5,7 @@ import Adapter from "enzyme-adapter-react-16";
 jest.mock("./src/components/telemetry/AppInsights", () => {
     return {
         // eslint-disable-next-line
-        trackException: jest.fn((error)=>{}),
+        trackException: jest.fn((error) => { }),
     };
 });
 jest.mock("@react-native-community/netinfo", () => mockRNCNetInfo);
