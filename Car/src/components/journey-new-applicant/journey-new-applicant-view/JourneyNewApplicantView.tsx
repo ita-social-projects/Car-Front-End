@@ -150,7 +150,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                         <WithLuggage hasLuggage={data?.hasLuggage}/>
 
                         <NotificationRideDetails
-                            journeyId = {params.journeyId!}
+                            journeyId = {params.journeyId}
                             userId = {params.sender!.id}
                             IsBaggageVisible={false}
                             passangersCount = {data?.passangersCount}
