@@ -86,7 +86,13 @@ test("renders correctly", async () =>
           ]
         }
       >
-        <ScrollView>
+        <ScrollView
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+            }
+          }
+        >
           <View
             style={
               Array [

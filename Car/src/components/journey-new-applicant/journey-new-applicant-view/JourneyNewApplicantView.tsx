@@ -136,7 +136,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     return (
         <>
             <View style={[JourneyNewApplicantViewStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
-                <ScrollView>
+                <ScrollView style = {{ backgroundColor: DM("#FFFFFF") }}>
                     <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
                         <View style={[JourneyNewApplicantViewStyle.headerContainer]}>
                             <View style={JourneyNewApplicantViewStyle.avatarLogo}>
