@@ -22,7 +22,6 @@ import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import { LinearTextGradient } from "react-native-text-gradient";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
@@ -169,15 +168,6 @@ const Messages = (props: MessagesProps) => {
                                             <Badge
                                                 value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
                                                     .unreadMessagesCount }/>
-                                        </View>
-                                    </View>
-                                    <View style={MessagesStyle.iconWrapper}>
-                                        <View>
-                                            <Ionicons
-                                                name={"chatbubbles"}
-                                                size={20}
-                                                color={DM("black")}
-                                            />
                                         </View>
                                     </View>
                                 </View>
