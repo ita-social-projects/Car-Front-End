@@ -48,6 +48,7 @@ const RideFound = (props: NotificationProps) => {
                             isDriver: false,
                             isPassenger: false,
                             passangersCount: data?.passangersCount
+
                         },
                     });
                 }}

@@ -4,6 +4,12 @@ import AppTabs from "../../src/components/navigation/app-tabs/AppTabs";
 
 const renderer = shallowRender.createRenderer();
 
+jest.mock("react-native-localize", () => {
+    return {
+        getTimeZone: jest.fn(),
+    };
+});
+
 test("renders correctly", async () =>
     expect(renderer.render(<AppTabs />)).toMatchInlineSnapshot(`
     <BottomTabNavigator
@@ -21,7 +27,7 @@ test("renders correctly", async () =>
           "inactiveBackgroundColor": "#FFFFFF",
           "inactiveTintColor": "#414045",
           "labelStyle": Object {
-            "fontFamily": "Open Sans",
+            "fontFamily": "Open Sans Bold",
             "fontSize": 10,
             "fontStyle": "normal",
             "fontWeight": "800",

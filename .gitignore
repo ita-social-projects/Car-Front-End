@@ -1,18 +1,132 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-.idea/
-.vscode/
-.vs/
-build/
-.gradle/
-.DS_Store
-coverage/
-node_modules/
-local.properties
 
 # BUCK
 buck-out/
 \.buckd/
 *.keystore
 !debug.keystore
+/.lsp.buckd
+/.lsp-buck-out
+/ReactAndroid/src/main/jni/prebuilt/lib/
+/ReactAndroid/src/main/gen
+
+# Gradle
+build/
+/packages/react-native-gradle-plugin/build/
+/packages/rn-tester/android/app/.cxx/
+/packages/rn-tester/android/app/build/
+/packages/rn-tester/android/app/gradle/
+/packages/rn-tester/android/app/gradlew
+/packages/rn-tester/android/app/gradlew.bat
+/ReactAndroid/build/
+/ReactAndroid/gradle/
+/ReactAndroid/gradlew
+/ReactAndroid/gradlew.bat
+android/app/build/
+android/build/
+
+# Android Studio
+.project
+.settings
+.classpath
+
+# Watchman
+.watchmanconfig
+
+# Android
+.idea/
+.gradle/
+local.properties
+*.iml
+/android/
+
+# Node
+node_modules/
+*.log
+.nvm
+/bots/node_modules/
+package-lock.json
+
+# Test generated files
+/ReactAndroid/src/androidTest/assets/AndroidTestBundle.js
+*.js.meta
+
+coverage/
+third-party/
+
+# Root dir shouldn't have Xcode project
+/*.xcodeproj
+
+# ReactCommon subdir shouldn't have Xcode project
+/ReactCommon//*.xcodeproj
+/packages/rn-tester/build
+/packages/rn-tester/android/app/build/*
+
+# Libs that shouldn't have Xcode project
+/Libraries/FBLazyVector//*.xcodeproj
+/Libraries/RCTRequired//*.xcodeproj
+/React/CoreModules//*.xcodeproj
+/React/FBReactNativeSpec//*.xcodeproj
+/packages/react-native-codegen/**/*.xcodeproj
+
+# CocoaPods
+Pods/
+
+# Ignore RNTester specific Pods, but keep the offline_mirrors here.
+/packages/rn-tester/Pods/*
+!/packages/rn-tester/Pods/offline_mirrors
+
+# react-native-codegen
+/React/FBReactNativeSpec/FBReactNativeSpec
+/packages/react-native-codegen/lib
+/ReactCommon/react/renderer/components/rncore/
+/packages/rn-tester/NativeModuleExample/ScreenshotManagerSpec*
+
+# Visual studio
+.vscode/
+.vs/
+
+# Android memory profiler files
+*.hprof
+
+# Mac OS X Finder
+.DS_Store
+
+# Private Keys
+*.pem
+
+# Xcode legacy
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+
+# Xcode
+xcuserdata/
+project.xcworkspace/
+DerivedData/
+
+# build products
+build/
+*.[oa]
+
+# repositories
+.hg
+.svn
+CVS
+
+# automatic backup files
+*~.nib
+*.swp
+*~
+*(Autosaved).rtfd/
+Backup[ ]of[ ]*.pages/
+Backup[ ]of[ ]*.key/
+Backup[ ]of[ ]*.numbers/
+
+# credentials
+Car/credentials/credentials.json

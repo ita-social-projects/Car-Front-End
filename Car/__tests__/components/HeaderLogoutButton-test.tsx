@@ -29,7 +29,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Open Sans",
+                "fontFamily": "Open Sans ExtraBold",
                 "fontSize": 20,
                 "fontWeight": "700",
               },
@@ -170,6 +170,7 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
+                    "color": "black",
                     "fontFamily": undefined,
                     "fontSize": 16,
                     "fontWeight": "700",

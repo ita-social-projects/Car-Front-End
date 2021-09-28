@@ -156,8 +156,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                             passangersCount = {data?.passangersCount}
                             withPassangers
                         />
-
-                        <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>
+                        <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: DM("black") }}>
                             {senders} stops in your ride
                         </Text>
                         <View style={JourneyNewApplicantViewStyle.stopsBlock}>
@@ -195,7 +194,6 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                                 navigation.goBack();
                             }}
                         />
-
                         <ConfirmModal
                             visible={declineModalVisible}
                             title="Request is declined"

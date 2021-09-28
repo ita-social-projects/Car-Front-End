@@ -24,6 +24,7 @@ test("renders correctly", async () =>
                 }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
                 notificationId={0}
+                journeyId={0}
             />
         )
     ).toMatchInlineSnapshot(`

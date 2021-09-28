@@ -5,6 +5,11 @@ import Messages from "../../../src/activity/messages/Messages";
 const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-gesture-handler", () => require("react-native"));
+jest.mock("react-native-localize", () => {
+    return {
+        getTimeZone: jest.fn(),
+    };
+});
 
 test("renders correctly", async () =>
     expect(
@@ -65,9 +70,9 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
-                    "fontFamily": "Milliard",
+                    "color": "black",
+                    "fontFamily": "Milliard Bold",
                     "fontSize": 16,
-                    "fontWeight": "bold",
                     "textAlign": "center",
                   }
                 }

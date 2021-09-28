@@ -56,6 +56,7 @@ import DriverBlock from "./blocks/driver-block/DriverBlock";
 import ParticipantsBlock from "./blocks/participants-block/ParticipantsBlock";
 import SendRequestModal from "./blocks/send-request-modal/SendRequestModal";
 import StopsBlock from "./blocks/stops-block/StopsBlock";
+import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -155,6 +156,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     duration: currentJourney.duration,
                     routeDistance: currentJourney.routeDistance,
                     routePoints: currentJourney.journeyPoints,
+                    weekDay: currentJourney?.schedule?.days ?? WeekDay.None,
                 }
             }
         };
@@ -198,8 +200,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         if (!currentJourney) return [];
 
         if (isDriver) {
-            return [getStopByType(currentJourney, StopType.Start)!,
-                    getStopByType(currentJourney, StopType.Finish)!];
+            return currentJourney.stops.filter(stop => stop!.userId === user!.id);
         }
 
         const stopsSource = isPassenger ? currentJourney.stops : applicantStops;

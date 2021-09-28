@@ -22,12 +22,12 @@ import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
 import { LinearTextGradient } from "react-native-text-gradient";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
 import Indicator from "../../components/activity-indicator/Indicator";
 import Badge from "../../components/badge/Badge";
+import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
 
 const Messages = (props: MessagesProps) => {
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
@@ -156,27 +156,18 @@ const Messages = (props: MessagesProps) => {
                                                 ]}
                                             >
                                                 starts at{" "}
-                                                {moment(new Date(item?.journey?.departureTime!)).format(
-                                                    "DD.MM, HH:mm"
-                                                )}
+                                                {moment(getDateWithCorrectUtc(new Date(item!.journey.departureTime)))
+                                                    .format(
+                                                        "DD.MM, HH:mm"
+                                                    )}
                                             </Text>
                                         )}
                                     </View>
                                     <View>
                                         <View>
                                             <Badge
-                                                size={20}
                                                 value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
                                                     .unreadMessagesCount }/>
-                                        </View>
-                                    </View>
-                                    <View style={MessagesStyle.iconWrapper}>
-                                        <View>
-                                            <Ionicons
-                                                name={"chatbubbles"}
-                                                size={20}
-                                                color={DM("black")}
-                                            />
                                         </View>
                                     </View>
                                 </View>
@@ -195,7 +186,7 @@ const Messages = (props: MessagesProps) => {
                 ) : (
                     <>
                         <View style={MessagesStyle.noMessageContainer}>
-                            <Text style={MessagesStyle.noMessageStyle}>
+                            <Text style={{ ...MessagesStyle.noMessageStyle, color: DM("black") }}>
                                 CURRENTLY YOU DO NOT HAVE ANY
                                 {"\n"}
                                 CHATS

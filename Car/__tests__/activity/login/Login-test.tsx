@@ -36,7 +36,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Proxima Nova",
+                "fontFamily": "Proxima Nova Rg Bold",
                 "fontSize": 14,
                 "letterSpacing": 0.2,
                 "lineHeight": 16,
@@ -63,7 +63,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Proxima Nova",
+                "fontFamily": "Proxima Nova Rg Bold",
                 "fontSize": 20,
                 "letterSpacing": 0.2,
                 "textTransform": "uppercase",
@@ -119,7 +119,7 @@ test("renders correctly", async () =>
               style={
                 Array [
                   Object {
-                    "fontFamily": "Proxima Nova",
+                    "fontFamily": "Proxima Nova Rg Bold",
                     "fontSize": 16,
                     "textTransform": "uppercase",
                   },
