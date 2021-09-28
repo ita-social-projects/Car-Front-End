@@ -108,21 +108,28 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
-    const getTomorrow = (): Date => {
-        const tomorrow = new Date();
+    const getNextDay = (date: Date): Date => {
+        date.setDate(date.getDate() + DAY_OFFSET);
 
-        tomorrow.setDate(tomorrow.getDate() + DAY_OFFSET);
+        return date;
+    };
 
-        return tomorrow;
+    const getDepartureTimeIfScheduled = (date: Date): Date =>{
+        if(weekDay)
+            return getNextDay(date);
+
+        return date;
     };
 
     const getDepartureTime = (): Date =>{
-        if (weekDay)
-            return getTomorrow();
-        else if (journey)
-            return moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate();
+        let date;
+
+        if (journey)
+            date = moment(new Date(journey?.departureTime ?? INITIAL_TIME)).toDate();
         else
-            return addMinutesToDate(new Date(), MINUTES_OFFSET);
+            date = addMinutesToDate(new Date(), MINUTES_OFFSET);
+
+        return getDepartureTimeIfScheduled(date);
     };
 
     const [departureTime, setDepartureTime] = useState<Date>(getDepartureTime());
