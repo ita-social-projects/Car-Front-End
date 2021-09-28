@@ -275,6 +275,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         navigation.navigate("OK Search Result", {
                             journeys: res.data,
                             displayFee: displayFee,
+                            passangersCount: selectedQuantity.id != null ? selectedQuantity.id
+                                : INITIAL_PASSENGERS_COUNT,
                         });
 
                         setTimeout(() => {

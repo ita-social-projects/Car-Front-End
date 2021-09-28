@@ -10,6 +10,19 @@ const SendRequestModalStyle = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.6)"
     },
 
+    dropDown:{
+        left: 0,
+        right: 0,
+        marginBottom: 100,
+        position: "absolute",
+    },
+
+    dropDownContainer:
+    {
+        marginBottom: 50,
+        marginTop: 20
+    },
+
     window: {
         width: "90%",
         backgroundColor: "white",

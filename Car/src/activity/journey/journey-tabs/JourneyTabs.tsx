@@ -323,6 +323,7 @@ const JourneyTabs = () => {
                             <OkSearchResult
                                 journeys={props.route.params.journeys}
                                 displayFee={props.route.params.displayFee}
+                                passangersCount = {props.route.params.passangersCount}
                             />
                             <ConfirmModal
                                 visible={isNewRequestModalVisible}

@@ -21,6 +21,9 @@ import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import AvatarLogoTitle from "../../avatar-logo-title/AvatarLogoTitle";
 import DM from "../../styles/DM";
 import JourneyNewApplicantViewStyle from "./JourneyNewApplicantViewStyle";
+import NotificationRideDetails from "../../notifications/notification-ride-details/NotificationRideDetails";
+import { ScrollView } from "react-native-gesture-handler";
+import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 interface JourneyNewApplicantViewProps {
     route: {
@@ -44,7 +47,8 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const { user } = useContext(AuthContext);
     const jsonData = JSON.stringify({
         hasLuggage: data?.hasLuggage,
-        applicantStops: data?.applicantStops
+        applicantStops: data?.applicantStops,
+        passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
     });
 
     useEffect(() => {
@@ -105,7 +109,8 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                 journeyUser: {
                     journeyId: params.journeyId!,
                     userId: params.sender?.id!,
-                    withBaggage: data?.hasLuggage
+                    withBaggage: data?.hasLuggage,
+                    passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
                 },
                 ApplicantStops: data?.applicantStops
             }
@@ -131,100 +136,111 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     return (
         <>
             <View style={[JourneyNewApplicantViewStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
-                <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
-
-                    <View style={[JourneyNewApplicantViewStyle.headerContainer]}>
-                        <View style={JourneyNewApplicantViewStyle.avatarLogo}>
-                            <AvatarLogoTitle userToDisplay={params.sender} />
+                <ScrollView>
+                    <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
+                        <View style={[JourneyNewApplicantViewStyle.headerContainer]}>
+                            <View style={JourneyNewApplicantViewStyle.avatarLogo}>
+                                <AvatarLogoTitle userToDisplay={params.sender} />
+                            </View>
                         </View>
-                    </View>
 
-                    <View>
-                        <RequestComment comments={data?.comments?.trim()}/>
-                    </View>
-                    <WithLuggage hasLuggage={data?.hasLuggage}/>
+                        <View>
+                            <RequestComment comments={data?.comments?.trim()}/>
+                        </View>
+                        <WithLuggage hasLuggage={data?.hasLuggage}/>
 
-                    <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>{senders} stops in your ride</Text>
-                    <View style={JourneyNewApplicantViewStyle.stopsBlock}>
-                        <StopsBlock
-                            stops={stops}
-                            onStopPress={onStopPressHandler}
-                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
-                        />
-                    </View>
-
-                    <NotificationButtonGroup>
-                        <NotificationConfirmButton
-                            confirmText={"ACCEPT"}
-                            onConfirm={approveUser}
+                        <NotificationRideDetails
+                            journeyId = {params.journeyId!}
+                            userId = {params.sender!.id}
+                            IsBaggageVisible={false}
+                            passangersCount = {data?.passangersCount}
+                            withPassangers
                         />
 
-                        <NotificationDeclineButton
-                            declineText={"Decline"}
-                            onDecline={() => setConfirmationModalVisible(true)}
+                        <Text style={JourneyNewApplicantViewStyle.applicantStopsText}>
+                            {senders} stops in your ride
+                        </Text>
+                        <View style={JourneyNewApplicantViewStyle.stopsBlock}>
+                            <StopsBlock
+                                stops={stops}
+                                onStopPress={onStopPressHandler}
+                                highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                            />
+                        </View>
+
+                        <NotificationButtonGroup>
+                            <NotificationConfirmButton
+                                confirmText={"ACCEPT"}
+                                onConfirm={approveUser}
+                            />
+
+                            <NotificationDeclineButton
+                                declineText={"Decline"}
+                                onDecline={() => setConfirmationModalVisible(true)}
+                            />
+                        </NotificationButtonGroup>
+
+                        <ConfirmModal
+                            visible={approveModalVisible}
+                            title="Request is approved"
+                            subtitle="Your approvement was successfully sent to the applicant!"
+                            confirmText="Ok"
+                            hideCancelButton={true}
+                            disableModal={() => {
+                                setApproveModalVisible(false);
+                                navigation.goBack();
+                            }}
+                            onConfirm={() => {
+                                setApproveModalVisible(false);
+                                navigation.goBack();
+                            }}
                         />
-                    </NotificationButtonGroup>
 
-                    <ConfirmModal
-                        visible={approveModalVisible}
-                        title="Request is approved"
-                        subtitle="Your approvement was successfully sent to the applicant!"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={() => {
-                            setApproveModalVisible(false);
-                            navigation.goBack();
-                        }}
-                        onConfirm={() => {
-                            setApproveModalVisible(false);
-                            navigation.goBack();
-                        }}
-                    />
+                        <ConfirmModal
+                            visible={declineModalVisible}
+                            title="Request is declined"
+                            subtitle="Your rejection was successfully sent to the applicant!"
+                            confirmText="Ok"
+                            hideCancelButton={true}
+                            disableModal={() => {
+                                setDeclineModalVisible(false);
+                                navigation.goBack();
+                            }}
+                            onConfirm={() => {
+                                setDeclineModalVisible(false);
+                                navigation.goBack();
+                            }}
+                        />
 
-                    <ConfirmModal
-                        visible={declineModalVisible}
-                        title="Request is declined"
-                        subtitle="Your rejection was successfully sent to the applicant!"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={() => {
-                            setDeclineModalVisible(false);
-                            navigation.goBack();
-                        }}
-                        onConfirm={() => {
-                            setDeclineModalVisible(false);
-                            navigation.goBack();
-                        }}
-                    />
+                        <ConfirmModal
+                            visible={confirmationModalVisible}
 
-                    <ConfirmModal
-                        visible={confirmationModalVisible}
+                            title="ARE YOU SURE?"
+                            subtitle="Are you sure you want to decline passanger's request?"
+                            confirmText="Yes, decline"
+                            cancelText="No, keep it"
+                            disableModal={() => setConfirmationModalVisible(false)}
+                            onConfirm={() => {
+                                setConfirmationModalVisible(false);
+                                sendRejection();
+                            }}
+                        />
 
-                        title="ARE YOU SURE?"
-                        subtitle="Are you sure you want to decline passanger's request?"
-                        confirmText="Yes, decline"
-                        cancelText="No, keep it"
-                        disableModal={() => setConfirmationModalVisible(false)}
-                        onConfirm={() => {
-                            setConfirmationModalVisible(false);
-                            sendRejection();
-                        }}
-                    />
-
-                    <ConfirmModal
-                        visible={errorModalVisible}
-                        title="Error"
-                        subtitle="Failed to add the user to the ride!"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={() => {
-                            setErrorModalVisible(false);
-                        }}
-                        onConfirm={() => {
-                            setErrorModalVisible(false);
-                        }}
-                    />
-                </View>
+                        <ConfirmModal
+                            visible={errorModalVisible}
+                            title="Error"
+                            subtitle="Failed to add the user to the ride!"
+                            confirmText="Ok"
+                            hideCancelButton={true}
+                            disableModal={() => {
+                                setErrorModalVisible(false);
+                            }}
+                            onConfirm={() => {
+                                setErrorModalVisible(false);
+                            }}
+                        />
+                    </View>
+                </ScrollView>
             </View>
         </>);
 };

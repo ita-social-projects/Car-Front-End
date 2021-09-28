@@ -1,12 +1,19 @@
 import { Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import DM from "../../../../../../components/styles/DM";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
 import SendRequestModalStyle from "./SendRequestModalStyle";
 import SendRequestModalProps from "./SendRequestModalProps";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import JourneyCreationDropDownPicker from "../../../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
+    const userQuantity :{ id: number, name: string }[] = [
+        { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }];
+    const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
+    const [selectedQuantity, setSelectedQuantity] =
+        useState({ id: props.passangersCount, name: props.passangersCount.toString() });
+
     return (
         <Modal
             visible={props.visible}
@@ -51,7 +58,27 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     Up to 100 symbols
                                 </Text>
                             </View>
-
+                            <View style ={SendRequestModalStyle.dropDownContainer}>
+                                <View style ={SendRequestModalStyle.dropDown}>
+                                    <JourneyCreationDropDownPicker
+                                        items={userQuantity.map((car) => ({
+                                            label: car.name,
+                                            value: car.id
+                                        }))}
+                                        paddingLeft={100}
+                                        searchable={false}
+                                        placeholder="Passengers:"
+                                        isVisible={isVisibleQuantityDropDown}
+                                        onOpen={() => setIsVisibleQuantityDropDown(true)}
+                                        onChangeItem={(item) => {
+                                            setSelectedQuantity({ id: item.value, name: item.label });
+                                            props.onPassangersCountChange(item.value);
+                                            setIsVisibleQuantityDropDown(false);
+                                        }}
+                                        valueId={selectedQuantity.id}
+                                    />
+                                </View>
+                            </View>
                             <View style={SendRequestModalStyle.chooseOptionContainer}>
                                 <ChooseOption
                                     text={"Have you got any luggage with you?"}
