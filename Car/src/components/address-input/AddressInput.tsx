@@ -3,7 +3,7 @@ import { Keyboard, Text, View, TouchableOpacity } from "react-native";
 import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef, Place } from "react-native-google-places-autocomplete";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import APIConfig from "../../../api-service/APIConfig";
+import CredentialsManager from "../../../credentials/credentials.json";
 import Address from "../../../models/Address";
 import Location from "../../../models/location/Location";
 import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../constants/AddressConstants";
@@ -61,7 +61,7 @@ const AddressInput = (props: AddressInputProps) => {
                 .concat(mapRecentAddressesToPlaces(props.recentAddresses))}
             onPress={props.onPress}
             query={{
-                key: APIConfig.apiKey,
+                key: CredentialsManager.mapApiKey,
                 language: "ua",
                 location: `${props.userLocation.latitude},${props.userLocation.longitude}`,
                 radius: 30000

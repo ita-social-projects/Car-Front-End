@@ -29,6 +29,7 @@ import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
 import axios from "axios";
+import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     const [isLoading, setLoading] = useState(props.type === "edit");
@@ -186,7 +187,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             if (axios.isCancel(error))
                 throw error;
             else
-                console.log(error);
+                appInsights.trackException({ exception: error });
         };
 
         if (props.type === "add") {

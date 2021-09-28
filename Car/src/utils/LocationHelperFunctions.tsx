@@ -12,6 +12,7 @@ import {
     THREE_ELEMENT_COLLECTION_LENGTH
 } from "../constants/GeneralConstants";
 import { MAX_LOCATION_NAME_LENGTH } from "../constants/LocationConstants";
+import appInsights from "../components/telemetry/AppInsights";
 
 export const androidPermission = async () => {
     try {
@@ -23,8 +24,8 @@ export const androidPermission = async () => {
         } else {
             console.log("Location permission denied");
         }
-    } catch (err) {
-        console.warn(err);
+    } catch (e) {
+        appInsights.trackException({ exception: e as Error });
     }
 };
 
@@ -44,8 +45,6 @@ export const setCoordinatesByDescription =
             .then(result => result.json())
             .then(json => {
                 const latLng = json.results[FIRST_ELEMENT_INDEX].geometry.location;
-
-                console.log(latLng);
 
                 const coordinates: LatLng = { latitude: latLng.lat, longitude: latLng.lng };
 
