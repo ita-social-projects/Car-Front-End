@@ -14,7 +14,7 @@ import {
     initialWayPoint
 } from "../../../../../../constants/AddressConstants";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
-import { mapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
+import { mapStyle as lightMapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import AddLocationStyle from "../add-locations/AddLocationStyle";
@@ -32,6 +32,7 @@ import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const EditLocation = (props: EditLocationProps) => {
     const { DM, isThemeDark } = useTheme();
+    const mapStyle = isThemeDark ? darkMapStyle : lightMapStyle;
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
     const [wayPoint, setWayPoint] = useState<WayPoint>({
@@ -213,7 +214,7 @@ const EditLocation = (props: EditLocationProps) => {
                         provider={PROVIDER_GOOGLE}
                         showsUserLocation={true}
                         initialCamera={initialCamera}
-                        customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
+                        customMapStyle={mapStyle}
                         onLongPress={mapEventHandler}
                         showsCompass={false}
                     >
