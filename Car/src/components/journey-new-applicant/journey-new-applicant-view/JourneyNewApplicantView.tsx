@@ -52,7 +52,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     });
 
     useEffect(() => {
-        JourneyService.getJourney(params.journeyId!).then(res => {
+        JourneyService.getJourney(params.journeyId).then(res => {
             setJourneyPoints(res.data!.journeyPoints);
             setStops([
                 getStopByType(res.data, StopType.Start)!,
@@ -71,7 +71,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
-                journeyId: params.journeyId!,
+                journeyId: params.journeyId,
                 type: 12,
                 jsonData: jsonData,
             }
@@ -89,7 +89,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
-                journeyId: params.journeyId!,
+                journeyId: params.journeyId,
                 type:2,
                 jsonData: jsonData,
             }
@@ -107,7 +107,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
         JourneyService.addUser(
             {
                 journeyUser: {
-                    journeyId: params.journeyId!,
+                    journeyId: params.journeyId,
                     userId: params.sender?.id!,
                     withBaggage: data?.hasLuggage,
                     passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
