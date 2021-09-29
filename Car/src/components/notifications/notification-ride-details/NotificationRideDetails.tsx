@@ -7,6 +7,7 @@ import style from "./NotificationRideDetailsStyle";
 import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
 import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
 import { useTheme } from "../../theme/ThemeProvider";
+import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const { DM } = useTheme();
@@ -60,6 +61,14 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
                 <Text style={{ ...style.value, color: DM("black") }}>
                     {journeyUser?.withBaggage? "With luggage" : "Without luggage"}</Text>
             </View>}
+
+            { props.withPassangers &&
+                 <View style={style.detailsContainer}>
+                     <Text style={{ ...style.label, color: DM("black") }}>Passangers: </Text>
+                     <Text style={{ ...style.value, color: DM("black") }}>
+                         {props.passangersCount ?? DEFAULT_PASSANGERS_COUNT}</Text>
+                 </View>
+            }
         </View>
     );
 };

@@ -5,7 +5,7 @@ import OkSearchResult from "../../../src/activity/journey/journey-activity/searc
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<OkSearchResult journeys={[]} displayFee={false} />))
+    expect(renderer.render(<OkSearchResult journeys={[]} displayFee={false} passangersCount={1} />))
         .toMatchInlineSnapshot(`
     <View
       style={

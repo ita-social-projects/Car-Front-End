@@ -12,7 +12,9 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <View />
+      <Text>
+        I'm traveling without luggage.
+      </Text>
       <View
         style={
           Array [

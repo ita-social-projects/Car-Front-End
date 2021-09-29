@@ -5,11 +5,16 @@ import OkSearchResultStyle from "./OkSearchResultStyle";
 import ApplicantJourney from "../../../../../../../models/journey/ApplicantJourney";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 
-const OkSearchResult = (props : {journeys: ApplicantJourney[], displayFee: boolean}) => {
+const OkSearchResult = (props : {journeys: ApplicantJourney[], displayFee: boolean, passangersCount: number}) => {
     const { DM } = useTheme();
 
     return (
-        <View style={[OkSearchResultStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
+        <View
+            style={[
+                OkSearchResultStyle.container,
+                { backgroundColor: DM("#FFFFFF") },
+            ]}
+        >
             <FlatList
                 ListHeaderComponent={<View />}
                 ListHeaderComponentStyle={OkSearchResultStyle.listHeader}
@@ -21,7 +26,9 @@ const OkSearchResult = (props : {journeys: ApplicantJourney[], displayFee: boole
                         journey={item.journey}
                         displayFee={props.displayFee}
                         applicantStops={item.applicantStops}
-                    />)}
+                        passangersCount={props.passangersCount}
+                    />
+                )}
             />
         </View>
     );

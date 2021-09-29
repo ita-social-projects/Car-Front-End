@@ -13,13 +13,11 @@ const WithLuggage = ({ hasLuggage } : {hasLuggage?: boolean}) => {
                 JourneyNewApplicantStyle.options
             ]}
         >
-            {hasLuggage ? (
-                <Text style={JourneyNewApplicantStyle.optionsHeader} >
-                    I'm traveling with luggage.
-                </Text>
-            ) : (
-                <View />
-            )}
+            <Text style={JourneyNewApplicantStyle.optionsHeader} >
+                {hasLuggage? ("I'm traveling with luggage.")
+                    : ("I'm traveling without luggage.")}
+            </Text>
+
             <View style={[JourneyNewApplicantStyle.optionsLine,
                 {
                     borderTopColor: DM("rgba(0,0,0,0)"),
