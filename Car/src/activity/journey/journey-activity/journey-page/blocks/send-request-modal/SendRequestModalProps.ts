@@ -7,7 +7,10 @@ interface SendRequestModalProps {
     withLuggage: boolean,
     // eslint-disable-next-line unused-imports/no-unused-vars
     onWithLuggageChange: (value: boolean) => void,
-    onConfirmPress: () => void
+    passangersCount: number,
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    onPassangersCountChange: (value: number) => void,
+    onConfirmPress: () => void,
 }
 
 export default SendRequestModalProps;

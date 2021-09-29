@@ -196,7 +196,9 @@ test("renders correctly", async () =>
         disableNodal={[Function]}
         onCommentsChange={[Function]}
         onConfirmPress={[Function]}
+        onPassangersCountChange={[Function]}
         onWithLuggageChange={[Function]}
+        passangersCount={1}
         visible={false}
         withLuggage={false}
       />

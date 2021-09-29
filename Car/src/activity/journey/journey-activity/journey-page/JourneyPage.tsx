@@ -10,6 +10,7 @@ import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
+    DEFAULT_PASSANGERS_COUNT,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -86,6 +87,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const [withLuggage, setWithLuggage] = useState(false);
     const [requestComments, setRequestComments] = useState("");
+    const [passangersCount, setPassangersCount] =
+        useState(props.route.params.passangersCount?? DEFAULT_PASSANGERS_COUNT);
 
     const applicantStops = props.route.params.applicantStops;
 
@@ -168,7 +171,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         const jsonData = JSON.stringify({
             comments: requestComments,
             hasLuggage: withLuggage,
-            applicantStops: applicantStops
+            applicantStops: applicantStops,
+            passangersCount: passangersCount
         });
 
         NotificationsService.addNotification({
@@ -372,6 +376,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 withLuggage={withLuggage}
                 onWithLuggageChange={value => setWithLuggage(value)}
                 onConfirmPress={sendRequest}
+                passangersCount={passangersCount}
+                onPassangersCountChange={value => setPassangersCount(value)}
             />
         </>
     );

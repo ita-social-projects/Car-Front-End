@@ -87,6 +87,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                     journeyId: journey!.id,
                     userId: user!.id,
                     withBaggage: false,
+                    passangersCount: 1
                 },
                 ApplicantStops: []
             }

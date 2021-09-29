@@ -9,7 +9,9 @@ interface NotificationRideDetailsProps {
     journeyId: number,
     userId: number,
     withSeats?: boolean,
-    journeyUser?: JourneyUserDto
+    journeyUser?: JourneyUserDto,
+    passangersCount?: number,
+    withPassangers?: boolean
 }
 
 export default NotificationRideDetailsProps;

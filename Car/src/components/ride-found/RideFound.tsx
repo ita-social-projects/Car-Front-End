@@ -11,10 +11,10 @@ const RideFound = (props: NotificationProps) => {
 
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [applicantStops, setApplicantStops] = useState<Array<Stop>>();
+    const data = JSON.parse(props.notificationData);
 
     useEffect(() => {
-        let stops: Array<Stop> = JSON
-            .parse(props.notificationData)
+        let stops: Array<Stop> = data
             .applicantStops;
 
         setApplicantStops(stops);
@@ -47,6 +47,8 @@ const RideFound = (props: NotificationProps) => {
                             applicantStops: applicantStops,
                             isDriver: false,
                             isPassenger: false,
+                            passangersCount: data?.passangersCount
+
                         },
                     });
                 }}
