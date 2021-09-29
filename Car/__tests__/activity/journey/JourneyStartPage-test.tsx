@@ -121,13 +121,7 @@ test("renders correctly", async () =>
                 "justifyContent": "center",
                 "width": "25%",
               },
-              Object {
-                "backgroundColor": "#000000",
-                "color": "#FFFFFF",
-              },
-              Object {
-                "borderColor": "black",
-              },
+              Object {},
             ]
           }
         >
@@ -139,10 +133,7 @@ test("renders correctly", async () =>
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
-                Object {
-                  "backgroundColor": "#000000",
-                  "color": "#FFFFFF",
-                },
+                Object {},
               ]
             }
           >
@@ -160,13 +151,7 @@ test("renders correctly", async () =>
                 "justifyContent": "center",
                 "width": "25%",
               },
-              Object {
-                "backgroundColor": "#FFFFFF",
-                "color": "#000000",
-              },
-              Object {
-                "borderColor": "black",
-              },
+              Object {},
             ]
           }
         >
@@ -178,10 +163,7 @@ test("renders correctly", async () =>
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "color": "#000000",
-                },
+                Object {},
               ]
             }
           >
@@ -199,13 +181,7 @@ test("renders correctly", async () =>
                 "justifyContent": "center",
                 "width": "25%",
               },
-              Object {
-                "backgroundColor": "#FFFFFF",
-                "color": "#000000",
-              },
-              Object {
-                "borderColor": "black",
-              },
+              Object {},
             ]
           }
         >
@@ -217,10 +193,7 @@ test("renders correctly", async () =>
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "color": "#000000",
-                },
+                Object {},
               ]
             }
           >
@@ -238,13 +211,7 @@ test("renders correctly", async () =>
                 "justifyContent": "center",
                 "width": "25%",
               },
-              Object {
-                "backgroundColor": "#FFFFFF",
-                "color": "#000000",
-              },
-              Object {
-                "borderColor": "black",
-              },
+              Object {},
             ]
           }
         >
@@ -256,10 +223,7 @@ test("renders correctly", async () =>
                   "fontWeight": "700",
                   "textTransform": "uppercase",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "color": "#000000",
-                },
+                Object {},
               ]
             }
           >

@@ -54,7 +54,7 @@ const Settings = (props: { navigation: any }) => {
 
     const changeAppScheme = (value) => {
         setScheme(value);
-        AsyncStorage.setItem("theme", value);//.then(() => RNRestart.Restart());
+        AsyncStorage.setItem("theme", value);
     };
 
     const avatarLogoTitleOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];

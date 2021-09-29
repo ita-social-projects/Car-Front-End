@@ -162,11 +162,7 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 16,
                         "paddingVertical": 6,
                       },
-                      Object {
-                        "backgroundColor": "#000000",
-                        "borderColor": "#000000",
-                        "color": "#FFFFFF",
-                      },
+                      Object {},
                     ]
                   }
                 >
@@ -179,11 +175,7 @@ test("renders correctly", async () =>
                           "lineHeight": 13,
                           "textTransform": "uppercase",
                         },
-                        Object {
-                          "backgroundColor": "#000000",
-                          "borderColor": "#000000",
-                          "color": "#FFFFFF",
-                        },
+                        Object {},
                       ]
                     }
                   >
@@ -202,11 +194,7 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 16,
                         "paddingVertical": 6,
                       },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                        "borderColor": "#000000",
-                        "color": "#000000",
-                      },
+                      Object {},
                     ]
                   }
                 >
@@ -219,11 +207,7 @@ test("renders correctly", async () =>
                           "lineHeight": 13,
                           "textTransform": "uppercase",
                         },
-                        Object {
-                          "backgroundColor": "#FFFFFF",
-                          "borderColor": "#000000",
-                          "color": "#000000",
-                        },
+                        Object {},
                       ]
                     }
                   >
@@ -244,11 +228,7 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 16,
                         "paddingVertical": 4,
                       },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                        "borderColor": "#000000",
-                        "color": "#000000",
-                      },
+                      Object {},
                     ]
                   }
                 >
@@ -261,11 +241,7 @@ test("renders correctly", async () =>
                           "lineHeight": 13,
                           "textTransform": "uppercase",
                         },
-                        Object {
-                          "backgroundColor": "#FFFFFF",
-                          "borderColor": "#000000",
-                          "color": "#000000",
-                        },
+                        Object {},
                       ]
                     }
                   >
