@@ -46,7 +46,7 @@ const RouteView = (props: RouteViewProps) => {
             {
                 senderId: user?.id!,
                 receiverId:params.notification?.sender?.id!,
-                journeyId: params.notification?.journeyId!,
+                journeyId: params.notification?.journeyId,
                 type:2,
                 jsonData: jsonData,
             }
@@ -68,7 +68,7 @@ const RouteView = (props: RouteViewProps) => {
         JourneyService.addUser(
             {
                 journeyUser: {
-                    journeyId: params.notification?.journeyId!,
+                    journeyId: params.notification?.journeyId,
                     userId: params.notification?.sender?.id!,
                     withBaggage: data?.hasLuggage
                 },

@@ -29,7 +29,7 @@ const JourneyInvitation = (props: NotificationProps) => {
     const user = useContext(AuthContext).user;
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId!, false).then(res => {
+        JourneyService.getJourney(props.journeyId, false).then(res => {
             setJourney(res.data);
         });
     }, []);
@@ -45,7 +45,7 @@ const JourneyInvitation = (props: NotificationProps) => {
             {
                 senderId: user?.id!,
                 receiverId: journey!.organizer?.id!,
-                journeyId: props.journeyId!,
+                journeyId: props.journeyId,
                 type: notificationType,
                 jsonData:
                     "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
@@ -130,14 +130,14 @@ const JourneyInvitation = (props: NotificationProps) => {
 
                 <NotificationRideDetails
                     userId={user!.id}
-                    journeyId={props.journeyId!}
+                    journeyId={props.journeyId}
                     withSeats={true}
                 />
 
                 <NotificationRideStops
                     title={"Your route"}
                     stopsOwner={user}
-                    journeyId={props.journeyId!}
+                    journeyId={props.journeyId}
                     IsStopsTitleVisible
                     onStopPress = {onStopPress}
                     notification = {props}/>
