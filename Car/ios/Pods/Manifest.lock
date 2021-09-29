@@ -283,12 +283,14 @@ PODS:
     - React
   - react-native-maps (0.27.1):
     - React
-  - react-native-netinfo (6.0.0):
+  - react-native-netinfo (6.0.2):
     - React-Core
   - react-native-restart (0.0.20):
     - React-Core
   - react-native-safe-area-context (3.1.9):
     - React-Core
+  - react-native-timezone (2.0.0):
+    - React
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
   - React-RCTAnimation (0.63.4):
@@ -363,6 +365,8 @@ PODS:
     - React-Core
   - RNCPushNotificationIOS (1.10.1):
     - React-Core
+  - RNDeviceInfo (8.3.3):
+    - React-Core
   - RNFBApp (12.4.0):
     - Firebase/CoreOnly (= 8.4.0)
     - React-Core
@@ -371,6 +375,8 @@ PODS:
     - React-Core
     - RNFBApp
   - RNGestureHandler (1.10.3):
+    - React-Core
+  - RNLocalize (2.1.4):
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
@@ -419,6 +425,7 @@ DEPENDENCIES:
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-restart (from `../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-timezone (from `../node_modules/react-native-timezone`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -436,9 +443,11 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
@@ -516,6 +525,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-restart"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-timezone:
+    :path: "../node_modules/react-native-timezone"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -550,12 +561,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-picker/picker"
   RNCPushNotificationIOS:
     :path: "../node_modules/@react-native-community/push-notification-ios"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -599,16 +614,17 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-app-auth: 17266057a5be3e4b5d9e055aa257c43884eac027
-  react-native-appearance: 0f0e5fc2fcef70e03d48c8fe6b00b9158c2ba8aa
+  react-native-app-auth: 480fd56b54aa4447bc19a0eac81133add8e75ce5
+  react-native-appearance: fc2014516054585d531e07aa0b40ab0de1d2be85
   react-native-date-picker: 242eec7af56cea5fb2706d5db5d3837060b3884b
-  react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
+  react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
-  react-native-image-picker: a2b7ee36dabe1e511dab6fb79918633a4fd3d7ce
+  react-native-image-picker: 8b4ccafb47395aabe98d3af89f089e020cacd6d1
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
-  react-native-restart: a01029aadfe8e71f9e8205fdb17da2f0a4472d50
-  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-netinfo: 8917788f12f8c422d16a56f840a1b06faa56e2b6
+  react-native-restart: 6cc683e208c080581c147d0875609e64572a9443
+  react-native-safe-area-context: 86612d2c9a9e94e288319262d10b5f93f0b395f5
+  react-native-timezone: d0a3f444682dc6fd6878911e5d225eb10e3849ee
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -620,15 +636,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   ReactNativeExceptionHandler: b11ff67c78802b2f62eed0e10e75cb1ef7947c60
-  ReactNativeGetLocation: b3749bd268b1d9cb913ed1ca40d952854eaf9b1b
-  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
-  RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
-  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
+  ReactNativeGetLocation: 7ed719807f65206e20b6793896372b11ad835d6d
+  RNCAsyncStorage: cb9a623793918c6699586281f0b51cbc38f046f9
+  RNCClipboard: 5e299c6df8e0c98f3d7416b86ae563d3a9f768a3
+  RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNCPicker: f7a40b21b915b7a187624d52f52b7bc2f73ea413
-  RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
+  RNCPushNotificationIOS: 089da3b657e1e3d464f38195fd2e3069608ef5af
+  RNDeviceInfo: 0d6865ab0a57d9192bdd4e4f5894340b846c3e53
   RNFBApp: 97b2da195d4606716b284a7c8a988dd8ed5cec41
   RNFBMessaging: ee81245484ef7e835975d09c2cd4000dfa2ae5e7
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNLocalize: 8bc7ebf44e0f18898cc62f0061561d07fabf6ff9
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSentry: 68644ef607b780551cc555f084869764f2566652

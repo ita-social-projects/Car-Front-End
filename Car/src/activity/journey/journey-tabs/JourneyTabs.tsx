@@ -435,8 +435,7 @@ const JourneyTabs = () => {
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
-                        headerLeft: HeaderBackButton,
-                        headerRight: HeaderEllipsis
+                        headerLeft: HeaderBackButton
                     }}
                 />
             </StackTabs.Navigator>

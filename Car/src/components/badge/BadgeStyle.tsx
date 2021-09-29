@@ -2,18 +2,18 @@ import { StyleSheet } from "react-native";
 
 const BadgeStyle = StyleSheet.create({
     text:{
-        color:"black",
-        fontSize:12
+        color:"white",
+        fontSize:10
     },
 
     container: {
-        width:30,
-        height:30,
-        borderRadius: 15,
-        backgroundColor:"orange",
+        width:22,
+        height:22,
+        borderRadius: 11,
+        backgroundColor:"#FF5104",
         alignItems:"center",
         justifyContent:"center",
-        top:10,
+        marginVertical: 24
     }
 });
 

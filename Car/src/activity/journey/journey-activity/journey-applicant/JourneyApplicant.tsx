@@ -94,7 +94,6 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
             <ConfirmModal
                 confirmText={"Call " + user?.name}
                 disableModal={() => {
-                    console.log("log");
                     setCallingButtonVisible(false);
                     Clipboard.setString(user?.phoneNumber != null ? user?.phoneNumber.toString() : " ");}}
                 onConfirm={() => {Linking.openURL(`tel:${user?.phoneNumber}`);}}

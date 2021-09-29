@@ -72,8 +72,6 @@ const CarTabs = () => {
                     }}
                 >
                     {(props: any) =>{
-                        console.log(props);
-
                         return (
                             <>
                                 <AddEditCars type={"edit"} carId={props.route.params.carId} />

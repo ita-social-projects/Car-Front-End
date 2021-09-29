@@ -1,5 +1,4 @@
 interface BadgeProps{
-    size: number,
     value: number | undefined
 }
 

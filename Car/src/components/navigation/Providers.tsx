@@ -7,15 +7,20 @@ import { AppearanceProvider } from "react-native-appearance";
 import { ThemeProvider } from "../theme/ThemeProvider";
 
 const Providers = () => {
+    async function GetConnection () {
+        const connection = await NetInfo.fetch();
+
+        if (connection.isInternetReachable === null)
+            setTimeout(GetConnection);
+        else if (!connection.isInternetReachable)
+            ErrorAlert("No internet connection");
+    }
+
     useEffect(() => {
-        const unsubscribe = NetInfo.addEventListener(state => {
-            if (!state.isInternetReachable) {
-                ErrorAlert("No internet connection");
-            }
-        });
+        GetConnection();
 
         return () => {
-            unsubscribe();
+            GetConnection();
         };
     });
 

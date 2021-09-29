@@ -88,7 +88,7 @@ test("renders correctly", async () =>
             Array [
               Object {
                 "fontFamily": "Proxima Nova Black",
-                "fontSize": 20,
+                "fontSize": 25,
                 "fontWeight": "700",
                 "textTransform": "uppercase",
               },
@@ -101,19 +101,24 @@ test("renders correctly", async () =>
           MANAGE RIDES
         </Text>
       </View>
-      <View
+      <ScrollView
+        contentContainerStyle={
+          Object {
+            "flexGrow": 10,
+          }
+        }
+        horizontal={true}
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
         style={
           Object {
-            "flexDirection": "row",
-            "height": 56,
-            "paddingTop": 24,
+            "width": "100%",
           }
         }
       >
-        <ForwardRef
-          activeOpacity={1}
-          onPress={[Function]}
+        <View
           style={
+<<<<<<< HEAD
             Array [
               Object {
                 "alignItems": "center",
@@ -123,16 +128,28 @@ test("renders correctly", async () =>
               },
               Object {},
             ]
+=======
+            Object {
+              "flexDirection": "row",
+              "height": 56,
+              "paddingTop": 24,
+              "width": 450,
+            }
+>>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
           }
         >
-          <Text
+          <ForwardRef
+            activeOpacity={1}
+            onPress={[Function]}
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova Extrabold",
-                  "fontWeight": "700",
-                  "textTransform": "uppercase",
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "width": "13%",
                 },
+<<<<<<< HEAD
                 Object {},
               ]
             }
@@ -156,13 +173,49 @@ test("renders correctly", async () =>
           }
         >
           <Text
+=======
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 2,
+                  "color": "#000000",
+                },
+                Object {
+                  "borderColor": "black",
+                },
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova Extrabold",
+                    "fontWeight": "300",
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#000000",
+                  },
+                ]
+              }
+            >
+              All
+            </Text>
+          </ForwardRef>
+          <ForwardRef
+            activeOpacity={1}
+            onPress={[Function]}
+>>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova Extrabold",
-                  "fontWeight": "700",
-                  "textTransform": "uppercase",
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "width": "13%",
                 },
+<<<<<<< HEAD
                 Object {},
               ]
             }
@@ -186,13 +239,49 @@ test("renders correctly", async () =>
           }
         >
           <Text
+=======
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 0,
+                  "color": "#8C8F8E",
+                },
+                Object {
+                  "borderColor": "black",
+                },
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova Extrabold",
+                    "fontWeight": "300",
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#8C8F8E",
+                  },
+                ]
+              }
+            >
+              Past
+            </Text>
+          </ForwardRef>
+          <ForwardRef
+            activeOpacity={1}
+            onPress={[Function]}
+>>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
             style={
               Array [
                 Object {
-                  "fontFamily": "Proxima Nova Extrabold",
-                  "fontWeight": "700",
-                  "textTransform": "uppercase",
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "width": "24%",
                 },
+<<<<<<< HEAD
                 Object {},
               ]
             }
@@ -216,21 +305,83 @@ test("renders correctly", async () =>
           }
         >
           <Text
-            style={
-              Array [
+=======
                 Object {
-                  "fontFamily": "Proxima Nova Extrabold",
-                  "fontWeight": "700",
-                  "textTransform": "uppercase",
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 0,
+                  "color": "#8C8F8E",
                 },
-                Object {},
+                Object {
+                  "borderColor": "black",
+                },
               ]
             }
           >
-            Regular
-          </Text>
-        </ForwardRef>
-      </View>
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova Extrabold",
+                    "fontWeight": "300",
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#8C8F8E",
+                  },
+                ]
+              }
+            >
+              Upcoming
+            </Text>
+          </ForwardRef>
+          <ForwardRef
+            activeOpacity={1}
+            onPress={[Function]}
+>>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "width": "20%",
+                },
+<<<<<<< HEAD
+                Object {},
+=======
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 0,
+                  "color": "#8C8F8E",
+                },
+                Object {
+                  "borderColor": "black",
+                },
+>>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontFamily": "Proxima Nova Extrabold",
+                    "fontWeight": "300",
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#8C8F8E",
+                  },
+                ]
+              }
+            >
+              Regular
+            </Text>
+          </ForwardRef>
+        </View>
+      </ScrollView>
       <View
         style={
           Object {

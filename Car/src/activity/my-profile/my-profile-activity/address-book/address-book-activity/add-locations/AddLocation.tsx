@@ -26,6 +26,7 @@ import { GooglePlacesAutocompleteRef } from "react-native-google-places-autocomp
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
+import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const AddLocation = () => {
     const { DM, isThemeDark } = useTheme();
@@ -107,7 +108,7 @@ const AddLocation = () => {
                 animateCamera(setMarkerCoordinates, position.coords, mapRef);
             },
             (error) => {
-                console.log(error);
+                appInsights.trackException({ exception: { name: "GeolocationError", message: error.message } });
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );

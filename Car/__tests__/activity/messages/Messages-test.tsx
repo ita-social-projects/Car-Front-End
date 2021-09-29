@@ -5,6 +5,11 @@ import Messages from "../../../src/activity/messages/Messages";
 const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-gesture-handler", () => require("react-native"));
+jest.mock("react-native-localize", () => {
+    return {
+        getTimeZone: jest.fn(),
+    };
+});
 
 test("renders correctly", async () =>
     expect(

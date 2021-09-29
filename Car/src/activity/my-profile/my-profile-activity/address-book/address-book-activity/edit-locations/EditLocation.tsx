@@ -28,6 +28,7 @@ import Indicator from "../../../../../../components/activity-indicator/Indicator
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
+import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const EditLocation = (props: EditLocationProps) => {
     const { DM, isThemeDark } = useTheme();
@@ -71,7 +72,7 @@ const EditLocation = (props: EditLocationProps) => {
                     longitude: Number(location?.address?.longitude)
                 }
             });
-        }).catch((e: any) => console.log(e));
+        }).catch((e) => appInsights.trackException({ exception: e }));
     }, []);
 
     useEffect(() => {
@@ -83,7 +84,7 @@ const EditLocation = (props: EditLocationProps) => {
                     mapRef);
             },
             (error) => {
-                console.log(error);
+                appInsights.trackException({ exception: { name: "GeolocationError", message: error.message } });
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );

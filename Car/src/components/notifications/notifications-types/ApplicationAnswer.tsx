@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
 import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
@@ -23,6 +23,7 @@ import JourneyNewApplicantViewStyle
 import { getStopByType } from "../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../models/stop/StopType";
 import { useTheme } from "../../theme/ThemeProvider";
+import axios from "axios";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -46,18 +47,22 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const user = useContext(AuthContext).user;
     const [stops, setStops] = useState<Stop[]>();
     const data = JSON.parse(props.notification.notificationData);
+    const source = useRef(axios.CancelToken.source());
 
     useEffect(() => {
-        JourneyService.getJourney(props.notification.journeyId).then(res => {
-            setStops([
-                getStopByType(res.data, StopType.Start)!,
-                data?.applicantStops!.filter((stop:Stop) =>
-                    stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                data?.applicantStops!.filter((stop:Stop) =>
-                    stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                getStopByType(res.data, StopType.Finish)!
-            ]);
-        });
+        JourneyService.getJourney(props.notification.journeyId, false, { cancelToken: source.current.token })
+            .then(res => {
+                setStops([
+                    getStopByType(res.data, StopType.Start)!,
+                    data?.applicantStops!.filter((stop:Stop) =>
+                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                    data?.applicantStops!.filter((stop:Stop) =>
+                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                    getStopByType(res.data, StopType.Finish)!
+                ]);
+            });
+
+        return () => source.current.cancel();
     }, []);
 
     const onStopPress = (stop:Stop, journeyPoints: JourneyPoint[], notification: NotificationProps) =>

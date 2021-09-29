@@ -46,6 +46,7 @@ import AddressInputButton from "../../../../components/address-input-button/Addr
 import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
+import appInsights from "../../../../components/telemetry/AppInsights";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const { DM, DMStyleObject } = useTheme();
@@ -81,13 +82,13 @@ const SearchJourney = (props: SearchJourneyProps) => {
         LocationService
             .getAll()
             .then((res: any) => setSavedLocations(res.data))
-            .catch((e: any) => console.log(e));
+            .catch((e) => appInsights.trackException({ exception: e }));
 
         JourneyService
             .getRecentJourneyStops()
             .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
                 .map((stop: Stop) => stop?.address)))
-            .catch((e) => console.log(e));
+            .catch((e) => appInsights.trackException({ exception: e }));
     }, []);
 
     useEffect(() => {
@@ -119,7 +120,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setUserCoordinates(position.coords);
             },
             (error) => {
-                console.log(error);
+                appInsights.trackException({ exception: { name: "GeolocationError", message: error.message } });
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
@@ -137,7 +138,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 console.log("Location permission denied");
             }
         } catch (err) {
-            console.warn(err);
+            appInsights.trackException({ exception: err as Error });
         }
     };
 
@@ -236,13 +237,13 @@ const SearchJourney = (props: SearchJourneyProps) => {
         setIsLoading(true);
 
         if (isRequest) {
-            console.log(request);
             RequestService.addRequest(request)
                 .then(() => {
                     setSuccessModalVisible(true);
                 })
-                .catch(() => {
+                .catch((e) => {
                     setErrorModalVisible(true);
+                    appInsights.trackException({ exception: e });
                 });
         } else {
             await JourneyService.getFilteredJourneys({
@@ -277,8 +278,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         }, MIN_DELAY_MS);
                     }
                 })
-                .catch((ex) => {
-                    console.log(ex);
+                .catch((e) => {
+                    appInsights.trackException({ exception: e });
                     setErrorModalVisible(true);
                 });
         }

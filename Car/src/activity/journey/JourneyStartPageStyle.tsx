@@ -15,40 +15,41 @@ const JourneyStartPageStyle = StyleSheet.create({
         height: 56,
         flexDirection: "row",
         paddingTop: 24,
+        width: 450, // scrollview doesn't work with %
     },
 
     allJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 2,
-        width: "25%",
+        width: "13%",
+        flexDirection:"row",
     },
 
     pastJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 2,
-        width: "25%",
+        width: "13%",
+        flexDirection:"row",
     },
 
     upcomingJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 2,
-        width: "25%",
+        width: "24%",
+        flexDirection:"row",
     },
 
     scheduledJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 2,
-        width: "25%",
+        width: "20%",
+        flexDirection:"row",
     },
 
     buttonText: {
         textTransform: "uppercase",
         fontFamily: Font.ProximaNova.ExtraBold,
-        fontWeight: "700"
+        fontWeight: "300",
     },
 
     manageJourneysContainer: {
@@ -58,7 +59,7 @@ const JourneyStartPageStyle = StyleSheet.create({
     manageJourneysText: {
         fontFamily: Font.ProximaNova.Black,
         fontWeight: "700",
-        fontSize: 20,
+        fontSize: 25,
         textTransform: "uppercase"
     },
 
@@ -89,7 +90,12 @@ const JourneyStartPageStyle = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         color: "#000000",
         borderColor: "black"
-    }
+    },
+
+    scrollViewStyle:{
+        width:"100%",
+        //flex: 1
+    },
 });
 
 export default JourneyStartPageStyle;
