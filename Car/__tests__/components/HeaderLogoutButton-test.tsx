@@ -109,6 +109,7 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "color": "black",
+                  "marginVertical": 20,
                 }
               }
             >

@@ -35,7 +35,8 @@ const ConfirmModalStyle = StyleSheet.create({
         paddingVertical: 10,
     },
     subtitleText: {
-        color: "#AFAEAE"
+        color: "#AFAEAE",
+        marginVertical: 20,
     }
 }
 );
