@@ -81,15 +81,25 @@ const JourneyStartPageStyle = StyleSheet.create({
     },
 
     activeButtonStyle: {
-        backgroundColor: "#000000",
-        color: "#FFFFFF",
-        borderColor: "black"
+        backgroundColor: "#FFFFFF",
+        color: "#000000",
+        borderBottomWidth: 2
+    },
+
+    activeButtonTextStyle: {
+        backgroundColor: "#FFFFFF",
+        color: "#000000"
     },
 
     inactiveButtonStyle: {
         backgroundColor: "#FFFFFF",
-        color: "#000000",
-        borderColor: "black"
+        color: "#8C8F8E",
+        borderBottomWidth: 0
+    },
+
+    inactiveButtonTextStyle: {
+        backgroundColor: "#FFFFFF",
+        color: "#8C8F8E",
     },
 
     scrollViewStyle:{

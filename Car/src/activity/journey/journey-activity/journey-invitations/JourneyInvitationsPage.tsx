@@ -72,9 +72,9 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         invitation</Text>
                     {existingInvitations.map((us, index) => (
                         <View key={index} style={JourneyInvitationsPageStyle.row}>
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>{
+                            <Text style={{ color: DM("#1C1C1C"), paddingTop: 5 }}>{
                                 getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>
+                            <Text style={{ color: DM("#1C1C1C"), paddingTop: 5 }}>
                                 {InvitationType[existingInvitations[index]!.type]} </Text>
                         </View>
                     ))}

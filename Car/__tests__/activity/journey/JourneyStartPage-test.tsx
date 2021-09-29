@@ -118,24 +118,12 @@ test("renders correctly", async () =>
       >
         <View
           style={
-<<<<<<< HEAD
-            Array [
-              Object {
-                "alignItems": "center",
-                "borderWidth": 2,
-                "justifyContent": "center",
-                "width": "25%",
-              },
-              Object {},
-            ]
-=======
             Object {
               "flexDirection": "row",
               "height": 56,
               "paddingTop": 24,
               "width": 450,
             }
->>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
           }
         >
           <ForwardRef
@@ -149,36 +137,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "13%",
                 },
-<<<<<<< HEAD
                 Object {},
-              ]
-            }
-          >
-            All
-          </Text>
-        </ForwardRef>
-        <ForwardRef
-          activeOpacity={1}
-          onPress={[Function]}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "borderWidth": 2,
-                "justifyContent": "center",
-                "width": "25%",
-              },
-              Object {},
-            ]
-          }
-        >
-          <Text
-=======
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 2,
-                  "color": "#000000",
-                },
                 Object {
                   "borderColor": "black",
                 },
@@ -193,10 +152,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#000000",
-                  },
+                  Object {},
                 ]
               }
             >
@@ -206,7 +162,6 @@ test("renders correctly", async () =>
           <ForwardRef
             activeOpacity={1}
             onPress={[Function]}
->>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
             style={
               Array [
                 Object {
@@ -215,36 +170,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "13%",
                 },
-<<<<<<< HEAD
                 Object {},
-              ]
-            }
-          >
-            Past
-          </Text>
-        </ForwardRef>
-        <ForwardRef
-          activeOpacity={1}
-          onPress={[Function]}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "borderWidth": 2,
-                "justifyContent": "center",
-                "width": "25%",
-              },
-              Object {},
-            ]
-          }
-        >
-          <Text
-=======
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#8C8F8E",
-                },
                 Object {
                   "borderColor": "black",
                 },
@@ -259,10 +185,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#8C8F8E",
-                  },
+                  Object {},
                 ]
               }
             >
@@ -272,7 +195,6 @@ test("renders correctly", async () =>
           <ForwardRef
             activeOpacity={1}
             onPress={[Function]}
->>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
             style={
               Array [
                 Object {
@@ -281,36 +203,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "24%",
                 },
-<<<<<<< HEAD
                 Object {},
-              ]
-            }
-          >
-            Upcoming
-          </Text>
-        </ForwardRef>
-        <ForwardRef
-          activeOpacity={1}
-          onPress={[Function]}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "borderWidth": 2,
-                "justifyContent": "center",
-                "width": "25%",
-              },
-              Object {},
-            ]
-          }
-        >
-          <Text
-=======
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#8C8F8E",
-                },
                 Object {
                   "borderColor": "black",
                 },
@@ -325,10 +218,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#8C8F8E",
-                  },
+                  Object {},
                 ]
               }
             >
@@ -338,7 +228,6 @@ test("renders correctly", async () =>
           <ForwardRef
             activeOpacity={1}
             onPress={[Function]}
->>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
             style={
               Array [
                 Object {
@@ -347,18 +236,10 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "20%",
                 },
-<<<<<<< HEAD
                 Object {},
-=======
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#8C8F8E",
-                },
                 Object {
                   "borderColor": "black",
                 },
->>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
               ]
             }
           >
@@ -370,10 +251,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#8C8F8E",
-                  },
+                  Object {},
                 ]
               }
             >

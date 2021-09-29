@@ -196,7 +196,6 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "color": "black",
-                  "marginVertical": 10,
                 }
               }
               underlineColorAndroid="transparent"
@@ -236,8 +235,6 @@ test("renders correctly", async () =>
       </View>
     </View>
   `));
-<<<<<<< HEAD
-=======
 
 test("renders correctly", async () =>
     expect(renderer.create(<CarDropDownPicker required={true} />).toJSON())
@@ -460,7 +457,6 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "color": "black",
-                  "marginVertical": 10,
                 }
               }
               underlineColorAndroid="transparent"
@@ -500,4 +496,3 @@ test("renders correctly", async () =>
       </View>
     </View>
   `));
->>>>>>> 65b20dbd34c65ffa9e9ff6ec287677669be3f116
