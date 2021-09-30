@@ -9,14 +9,16 @@ import Settings from "../Settings";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderLogoutButton from "../../../../../components/header-logout-button/HeaderLogoutButton";
-import DM from "../../../../../components/styles/DM";
 import Language from "../settings-activity/app-settings/app-settings-activity/Language";
 import Payment from "../settings-activity/app-settings/app-settings-activity/Payment";
 import HelpCenter from "../settings-activity/app-settings/app-settings-activity/HelpCenter";
+import { useTheme } from "../../../../../components/theme/ThemeProvider";
 
 const StackTabs = createStackNavigator();
 
 const SettingsTabs = () => {
+    const { DM } = useTheme();
+
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
             <StackTabs.Navigator>

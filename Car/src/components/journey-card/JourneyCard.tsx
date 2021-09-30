@@ -6,7 +6,7 @@ import AvatarLogo from "../avatar-logo/AvatarLogo";
 import moment from "moment";
 import AuthContext from "../auth/AuthContext";
 import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/GeneralConstants";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
@@ -15,6 +15,7 @@ import Stop from "../../../models/stop/Stop";
 
 const JourneyCard =
     (props: {journey?: Journey, displayFee?: boolean, applicantStops?: Stop[], passangersCount?: number}) => {
+        const { DM } = useTheme();
         const journey = props.journey;
         const { user } = useContext(AuthContext);
         const [isDriver, setIsDriver] = useState(false);

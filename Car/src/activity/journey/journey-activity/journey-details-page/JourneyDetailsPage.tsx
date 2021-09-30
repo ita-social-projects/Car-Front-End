@@ -40,7 +40,7 @@ import AddressInputButton from "../../../../components/address-input-button/Addr
 import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
@@ -57,6 +57,7 @@ const getCarId = (journey?: Journey) => {
 };
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
+    const { DM } = useTheme();
     const params = props.route.params;
     const journey = params.journey;
 

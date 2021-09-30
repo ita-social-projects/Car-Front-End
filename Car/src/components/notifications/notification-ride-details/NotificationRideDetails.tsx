@@ -6,10 +6,11 @@ import Journey from "../../../../models/journey/Journey";
 import style from "./NotificationRideDetailsStyle";
 import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
 import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
+    const { DM } = useTheme();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
 

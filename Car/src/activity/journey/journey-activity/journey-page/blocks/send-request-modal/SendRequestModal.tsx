@@ -1,6 +1,6 @@
 import { Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import React, { useState } from "react";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
 import SendRequestModalStyle from "./SendRequestModalStyle";
 import SendRequestModalProps from "./SendRequestModalProps";
@@ -8,6 +8,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPicker from "../../../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
+    const { DM } = useTheme();
     const userQuantity :{ id: number, name: string }[] = [
         { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }];
     const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);

@@ -10,11 +10,12 @@ import HeaderStyle from "../../../components/styles/HeaderStyle";
 import AddressBookTabs from "../my-profile-activity/address-book/address-book-tabs/AddressBookTabs";
 import SettingsTabs from "../my-profile-activity/settings/settings-tabs/SettingsTabs";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
-import DM from "../../../components/styles/DM";
+import { useTheme } from "../../../components/theme/ThemeProvider";
 
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = () => {
+    const { DM } = useTheme();
 
     return (
         <View style={[HeaderStyle.container, { backgroundColor: DM("#FFFFFF") }]}>

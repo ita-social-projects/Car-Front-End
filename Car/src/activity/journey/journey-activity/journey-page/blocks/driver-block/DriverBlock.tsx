@@ -1,5 +1,5 @@
 import JourneyPageStyle from "../../JourneyPageStyle";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
@@ -12,6 +12,7 @@ import Journey from "../../../../../../../models/journey/Journey";
 import { trimTheStringIfTooLong } from "../../../../../../utils/GeneralHelperFunctions";
 
 const DriverBlock = ({ journey } : {journey: Journey}) => {
+    const { DM } = useTheme();
     const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
 
     return (

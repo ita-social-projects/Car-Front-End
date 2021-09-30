@@ -1,10 +1,12 @@
 import SaveLocationButtonProps from "./SaveLocationButtonProps";
 import AddLocationStyle from "../../activity/my-profile/my-profile-activity/address-book/address-book-activity/add-locations/AddLocationStyle";
 import { Text, TouchableOpacity } from "react-native";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import React from "react";
 
 const SaveLocationButton = (props: SaveLocationButtonProps) => {
+    const { DM } = useTheme();
+
     return (
         <TouchableOpacity
             style={[

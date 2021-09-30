@@ -5,8 +5,9 @@ import renderer from "react-test-renderer";
 import TouchableNavigationCard from "../../src/components/touchable-navigation-card/TouchableNavigationCard";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<TouchableNavigationCard navigationName={""}/>).toJSON())
-        .toMatchInlineSnapshot(`
+    expect(
+        renderer.create(<TouchableNavigationCard navigationName={""} />).toJSON()
+    ).toMatchInlineSnapshot(`
     <View>
       <View
         accessible={true}

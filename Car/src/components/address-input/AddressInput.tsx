@@ -7,7 +7,7 @@ import CredentialsManager from "../../../credentials/credentials.json";
 import Address from "../../../models/Address";
 import Location from "../../../models/location/Location";
 import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../constants/AddressConstants";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import AddressInputStyles from "./AddressInputStyles";
@@ -41,6 +41,7 @@ const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses 
 };
 
 const AddressInput = (props: AddressInputProps) => {
+    const { DM } = useTheme();
     const ref = useRef<GooglePlacesAutocompleteRef | null>();
 
     const keyboardDidHide = () => ref.current?.blur();

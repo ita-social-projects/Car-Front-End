@@ -1,11 +1,13 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import TouchableCardStyle from "./TouchableCardStyle";
 import TouchableCardProps from "./TouchableCardProps";
 
 const TouchableCard = (props: TouchableCardProps) => {
+    const { DM } = useTheme();
+
     return (
         <View style={{ backgroundColor: DM("white") }}>
             <TouchableOpacity

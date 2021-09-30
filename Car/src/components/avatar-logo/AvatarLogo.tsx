@@ -8,12 +8,12 @@ import {
     AVATAR_LOGO_SIZE_TO_TEXT_RATIO
 } from "../../constants/StylesConstants";
 import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 import AvatarLogoProps from "./AvatarLogoProps";
 
 const AvatarLogo = (props: AvatarLogoProps) => {
-
+    const { DM } = useTheme();
     const userAvatarText = props.user ?
         props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
 

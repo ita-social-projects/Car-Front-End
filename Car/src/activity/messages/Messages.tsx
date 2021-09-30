@@ -17,7 +17,7 @@ import {
 } from "../../constants/MessageConstants";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
 import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
-import DM from "../../components/styles/DM";
+import { useTheme } from "../../components/theme/ThemeProvider";
 import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
 import AvatarLogo from "../../components/avatar-logo/AvatarLogo";
@@ -30,6 +30,7 @@ import Badge from "../../components/badge/Badge";
 import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
 
 const Messages = (props: MessagesProps) => {
+    const { DM } = useTheme();
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
     const [isLoading, setisLoading] = useState(false);

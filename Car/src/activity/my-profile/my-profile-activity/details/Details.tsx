@@ -3,10 +3,11 @@ import { Text, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import DetailsStyle from "./DetailsStyle";
 
 const Details = () => {
+    const { DM } = useTheme();
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [isLoading, setLoading] = useState(true);
 

@@ -4,11 +4,12 @@ import React from "react";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
 import CarColor from "../../../../../../../models/car/CarColor";
 import CarViewModel from "../../../../../../../models/car/CarViewModel";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { CAR_IMAGE_BORDER_RADIUS, TAXI_IMAGE_BORDER_RADIUS } from "../../../../../../constants/StylesConstants";
 import JourneyPageStyle from "../../JourneyPageStyle";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
+    const { DM } = useTheme();
     const image = car?.imageId ?
         { uri: ImageService.getImageById(car.imageId) } :
         require("../../../../../../../assets/images/journey/taxi2.png");

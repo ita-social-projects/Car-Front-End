@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { GooglePlaceData } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 
 const styles = StyleSheet.create({
     row: {
@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
 });
 
 const AddressInputRow = ({ data }: {data: GooglePlaceData}) => {
+    const { DM } = useTheme();
+
     return (
         <View style={styles.row}>
             <View style={styles.iconContainer}>

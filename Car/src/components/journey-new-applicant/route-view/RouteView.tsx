@@ -7,9 +7,8 @@ import { mapStopToMarker } from "../../../utils/JourneyHelperFunctions";
 import { initialCamera } from "../../../constants/AddressConstants";
 import SearchJourneyStyle from "../../../activity/journey/journey-activity/search-journey/SearchJourneyStyle";
 import { Text, TouchableOpacity } from "react-native";
-import DM from "../../styles/DM";
 import { darkMapStyle } from "../../../constants/DarkMapStyleConstant";
-import { isDarkMode } from "../../theme/ThemeProvider";
+import { useTheme } from "../../theme/ThemeProvider";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import AuthContext from "../../auth/AuthContext";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";
@@ -32,6 +31,7 @@ interface RouteViewProps {
 }
 
 const RouteView = (props: RouteViewProps) => {
+    const { DM, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
     const params = props.route.params;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
@@ -94,7 +94,7 @@ const RouteView = (props: RouteViewProps) => {
                 initialCamera={{ ...initialCamera, center: params.cameraCoordinates }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                 showsCompass={false}
                 showsMyLocationButton={false}
             >

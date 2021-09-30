@@ -6,12 +6,13 @@ import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/ProfileConstants";
 import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/GeneralConstants";
 import User from "../../../models/user/User";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import { EventRegister } from "react-native-event-listeners";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { MAX_USER_FULL_NAME_LENGTH_IN_PROFILE } from "../../constants/JourneyConstants";
 
 const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
+    const { DM } = useTheme();
     const contextUser = useContext(AuthContext).user;
 
     const [user, setUser] = useState<User>(props.userToDisplay || contextUser);

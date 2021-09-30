@@ -1,13 +1,14 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import TouchableMapBarStyle from "./TouchableMapBarStyle";
 import TouchableMapBarProps from "./TouchableMapBarProps";
 
 const DEFAULT_MARGIN_HORIZONTAL = 20;
 
 const TouchableMapBar = (props: TouchableMapBarProps) => {
+    const { DM } = useTheme();
     let marginBottom = parseInt(props.marginBottom ?? "");
     let marginTop = parseInt(props.marginTop ?? "");
     let flex = parseInt(props.flex ?? "");
