@@ -72,7 +72,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                 <ScrollView style={[PreferencesStyle.container, { backgroundColor: DM("white") }]}>
                     <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
-                            text={"Do you allow smoking in your car?"}
+                            text={"Allow smoking in your car"}
                             value={isSmokingAllowed}
                             onValueChanged={(value: boolean) =>
                                 setSmokingAllowed(value)
@@ -81,7 +81,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     </View>
                     <View>
                         <ChooseOption
-                            text={"Do you allow eating in your car?"}
+                            text={"Allow eating in your car"}
                             value={isEatingAllowed}
                             onValueChanged={(value: boolean) => setEatingAllowed(value)}
                         />
