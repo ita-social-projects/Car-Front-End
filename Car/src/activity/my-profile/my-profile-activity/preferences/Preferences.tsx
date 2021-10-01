@@ -15,7 +15,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");
-    const [remainingSymbols, setRemainingSymbols] = useState(PREFERENCES_COMMENTS_MAX_LENGTH);
+    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
     const [isLoading, setLoading] = useState(true);
 
     const { user } = useContext(AuthContext);
@@ -45,8 +45,9 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     setSmokingAllowed(res.data.doAllowSmoking);
                     setEatingAllowed(res.data.doAllowEating);
                     setComments(res.data.comments);
-                    setRemainingSymbols(res.data.comments ?
-                        PREFERENCES_COMMENTS_MAX_LENGTH - res.data.comments.length : PREFERENCES_COMMENTS_MAX_LENGTH);
+                    setRemainingSymbolsText(res.data.comments ?
+                        `${PREFERENCES_COMMENTS_MAX_LENGTH - res.data.comments.length} symbols remaining`
+                        : "Up to 100 symbols");
                     setUserPreferences(res.data);
                 }
             })
@@ -104,11 +105,11 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                             numberOfLines={10}
                             value={comments}
                             onChangeText={(text) => { setComments(text);
-                                setRemainingSymbols(PREFERENCES_COMMENTS_MAX_LENGTH - text.length);}}
+                                setRemainingSymbolsText(
+                                    `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
                         />
                         <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
-                            {remainingSymbols === PREFERENCES_COMMENTS_MAX_LENGTH ?
-                                "Up to 100 symbols" : `${remainingSymbols} symbols remaining` }
+                            {remainingSymbolsText}
                         </Text>
                         <View style={PreferencesStyle.whitespaceBlock} />
                     </View>
