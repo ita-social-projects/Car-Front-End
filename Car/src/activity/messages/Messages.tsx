@@ -15,6 +15,9 @@ import {
     MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
     MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
 } from "../../constants/MessageConstants";
+import {
+    ZERO
+} from "../../constants/GeneralConstants";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
 import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import { useTheme } from "../../components/theme/ThemeProvider";
@@ -165,11 +168,16 @@ const Messages = (props: MessagesProps) => {
                                         )}
                                     </View>
                                     <View>
-                                        <View>
-                                            <Badge
-                                                value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
-                                                    .unreadMessagesCount }/>
-                                        </View>
+                                        {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                            .unreadMessagesCount !== ZERO ?
+                                            <View>
+                                                <Badge
+                                                    value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                                        .unreadMessagesCount }/>
+                                            </View>
+                                            :
+                                            <View></View>
+                                        }
                                     </View>
                                 </View>
                             </View>
