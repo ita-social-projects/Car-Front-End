@@ -169,14 +169,12 @@ const Messages = (props: MessagesProps) => {
                                     </View>
                                     <View>
                                         {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
-                                            .unreadMessagesCount == ZERO ?
+                                            .unreadMessagesCount !== ZERO &&
                                             <View>
                                                 <Badge
                                                     value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
                                                         .unreadMessagesCount }/>
                                             </View>
-                                            :
-                                            <View></View>
                                         }
                                     </View>
                                 </View>

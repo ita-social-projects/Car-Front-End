@@ -14,7 +14,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
+        borderBottomRightRadius: 0
     },
 
     arrow: {
@@ -28,7 +28,6 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
         marginTop: 12,
         marginLeft: 15,
         color: "#909095",
-        zIndex: 10
     },
 
     divider: {

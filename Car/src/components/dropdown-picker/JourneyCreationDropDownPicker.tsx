@@ -17,46 +17,50 @@ const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps
 
     return (
         <View>
-            <Text style={[JourneyCreationDropDownPickerStyle.placeholderStyle, { color: DM("gray") }]}>
-                {props.placeholder}
-            </Text>
-            <DropDownPicker
-                items={props?.items}
-                controller={instance => {
-                    controller.current = instance;
-                }}
-                customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} color={DM("black")}/>)}
-                customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} color={DM("black")}/>)}
-                arrowStyle={JourneyCreationDropDownPickerStyle.arrow}
-                searchable={props.searchable}
-                searchablePlaceholder={"Manual input"}
-                searchableStyle={JourneyCreationDropDownPickerStyle.searchable}
-                renderSeperator={() => (<Divider style={JourneyCreationDropDownPickerStyle.divider} />)}
-                zIndex={props.zIndex}
-                placeholder={""}
-                style={[JourneyCreationDropDownPickerStyle.style,
-                    {
-                        backgroundColor: DM("white"),
-                        borderColor: DM("black")
-                    }]}
-                dropDownStyle={[JourneyCreationDropDownPickerStyle.dropDownStyle,
-                    {
-                        backgroundColor: DM("white"),
-                        borderColor: DM("black"),
+            <View style={{ zIndex: 1 }}>
+                <Text style={[JourneyCreationDropDownPickerStyle.placeholderStyle, { color: DM("gray") }]}>
+                    {props.placeholder}
+                </Text>
+            </View>
+            <View>
+                <DropDownPicker
+                    items={props?.items}
+                    controller={instance => {
+                        controller.current = instance;
+                    }}
+                    customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} color={DM("black")} />)}
+                    customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} color={DM("black")} />)}
+                    arrowStyle={JourneyCreationDropDownPickerStyle.arrow}
+                    searchable={props.searchable}
+                    searchablePlaceholder={"Manual input"}
+                    searchableStyle={JourneyCreationDropDownPickerStyle.searchable}
+                    renderSeperator={() => (<Divider style={JourneyCreationDropDownPickerStyle.divider} />)}
+                    zIndex={props.zIndex}
+                    placeholder={""}
+                    style={[JourneyCreationDropDownPickerStyle.style,
+                        {
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black")
+                        }]}
+                    dropDownStyle={[JourneyCreationDropDownPickerStyle.dropDownStyle,
+                        {
+                            backgroundColor: DM("white"),
+                            borderColor: DM("black"),
 
-                    }]}
-                selectedLabelStyle={[JourneyCreationDropDownPickerStyle.selectedLabelStyle,
-                    {
-                        paddingLeft: props.paddingLeft,
-                        color: DM("black"),
-                        backgroundColor: DM("white")
-                    }]}
-                itemStyle={{ justifyContent: "flex-start" }}
-                labelStyle={{ color: DM("black") }}
-                onChangeItem={props.onChangeItem}
-                isVisible={props.isVisible}
-                onOpen={props.onOpen}
-            />
+                        }]}
+                    selectedLabelStyle={[JourneyCreationDropDownPickerStyle.selectedLabelStyle,
+                        {
+                            paddingLeft: props.paddingLeft,
+                            color: DM("black"),
+                            backgroundColor: DM("white")
+                        }]}
+                    itemStyle={{ justifyContent: "flex-start" }}
+                    labelStyle={{ color: DM("black") }}
+                    onChangeItem={props.onChangeItem}
+                    isVisible={props.isVisible}
+                    onOpen={props.onOpen}
+                />
+            </View>
         </View>
     );
 };
