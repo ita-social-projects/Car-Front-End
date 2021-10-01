@@ -15,11 +15,11 @@ import {
     MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT,
     MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
 } from "../../constants/MessageConstants";
+import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
 import {
+    NOT_EXISTING_ELEMENT_INDEX,
     ZERO
 } from "../../constants/GeneralConstants";
-import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
-import { NOT_EXISTING_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import { useTheme } from "../../components/theme/ThemeProvider";
 import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
@@ -169,7 +169,7 @@ const Messages = (props: MessagesProps) => {
                                     </View>
                                     <View>
                                         {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
-                                            .unreadMessagesCount !== ZERO ?
+                                            .unreadMessagesCount == ZERO ?
                                             <View>
                                                 <Badge
                                                     value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
