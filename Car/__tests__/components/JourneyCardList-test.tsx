@@ -15,7 +15,7 @@ let journeys: Journey[] = [
         comments: "",
         isFree: true,
         isOnOwnCar: true,
-        schedule: {} as Schedule,
+        schedule: null as Schedule,
         journeyPoints: [],
         participants: [
             {
@@ -276,7 +276,7 @@ test("renders correctly", async () =>
                     ]
                   }
                 >
-                  Every  at 03:00
+                  01/01/1970
                 </Text>
                 <View>
                   <Text
