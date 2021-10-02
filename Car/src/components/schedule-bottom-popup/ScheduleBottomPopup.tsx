@@ -221,7 +221,7 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                             <Text
                                 style={[ScheduleBottomPopupStyles.scheduleButtonText, {
                                     color: isEdited ? DM("black") : DM("gray") }]}>
-                                Schedule
+                                Save
                             </Text>
                         </TouchableOpacity>
                     </View>

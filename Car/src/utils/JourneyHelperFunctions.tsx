@@ -11,6 +11,9 @@ import Journey from "../../models/journey/Journey";
 import WayPoint from "../types/WayPoint";
 import { Marker } from "react-native-maps";
 import React from "react";
+import WeekDay from "../components/schedule-bottom-popup/WeekDay";
+import moment from "moment";
+import { capitalize } from "./GeneralHelperFunctions";
 
 export const mapStopToWayPoint = (stop?: Stop) => {
     return {
@@ -47,27 +50,27 @@ export const timeStringToMinutes = (timeString: string) => {
 };
 
 export const createStopArrayFromWayPoint =
-(from: WayPoint, to: WayPoint, stops: WayPoint[], userId: number, journeyId: number = ZERO_ID) => {
-    return [{ ...from, stopType: StopType.Start },
-        ...stops.filter(stop => stop.isConfirmed).map(stop => ({ ...stop, stopType: StopType.Intermediate })),
-        { ...to, stopType: StopType.Finish }]
-        .map((stop, index) => {
-            return {
-                address: {
+    (from: WayPoint, to: WayPoint, stops: WayPoint[], userId: number, journeyId: number = ZERO_ID) => {
+        return [{ ...from, stopType: StopType.Start },
+            ...stops.filter(stop => stop.isConfirmed).map(stop => ({ ...stop, stopType: StopType.Intermediate })),
+            { ...to, stopType: StopType.Finish }]
+            .map((stop, index) => {
+                return {
+                    address: {
+                        id: 0,
+                        latitude: stop.coordinates.latitude,
+                        longitude: stop.coordinates.longitude,
+                        name: stop.text
+                    },
+                    index: index,
+                    type: stop.stopType,
                     id: 0,
-                    latitude: stop.coordinates.latitude,
-                    longitude: stop.coordinates.longitude,
-                    name: stop.text
-                },
-                index: index,
-                type: stop.stopType,
-                id: 0,
-                journeyId: journeyId,
-                userId: userId,
-                isCancelled: false,
-            };
-        });
-};
+                    journeyId: journeyId,
+                    userId: userId,
+                    isCancelled: false,
+                };
+            });
+    };
 
 export const getStopCoordinates = (stop?: Stop) => {
     return {
@@ -83,3 +86,31 @@ export const mapStopToMarker = (stop: Stop) => (
         image={require("../../assets/images/maps-markers/Stop.png")}
     />
 );
+
+export const weekDayToString = (weekDay: WeekDay): string => {
+    let result: string[] = [];
+
+    if (weekDay & WeekDay.Monday)
+        result.push("Mon");
+    if (weekDay & WeekDay.Tuesday)
+        result.push("Tue");
+    if (weekDay & WeekDay.Wednesday)
+        result.push("Wed");
+    if (weekDay & WeekDay.Thursday)
+        result.push("Thu");
+    if (weekDay & WeekDay.Friday)
+        result.push("Fri");
+    if (weekDay & WeekDay.Saturday)
+        result.push("Sat");
+    if (weekDay & WeekDay.Sunday)
+        result.push("Sun");
+
+    return result.join(", ");
+};
+
+export const getTimeToShow = (journey?: Journey): string =>{
+    return journey?.schedule ?
+        // eslint-disable-next-line
+        `Every ${weekDayToString(journey.schedule.days)} at ${moment(new Date(journey?.departureTime ?? "")).format("HH:mm")}` :
+        capitalize(moment(new Date(journey?.departureTime ?? "")).calendar());
+};

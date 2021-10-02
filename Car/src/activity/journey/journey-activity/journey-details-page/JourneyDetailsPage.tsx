@@ -67,7 +67,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
     const carModel = journey?.car?.model;
     const weekDay = props.weekDay!.current;
-    const existingInvitations: Invitation[] = journey? journey.invitations : [];
+    const existingInvitations: Invitation[] = journey ? journey.invitations : [];
 
     const { user } = useContext(AuthContext);
 
@@ -93,35 +93,37 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         borderColor: DM("#000000")
     };
 
-    const setButtonStyle = (shouldBeHighlighted : boolean) =>{
-        if(shouldBeHighlighted)
+    const setButtonStyle = (shouldBeHighlighted: boolean) => {
+        if (shouldBeHighlighted)
             return activeButtonStyle;
 
         return inactiveButtonStyle;
     };
 
-    let highlightOwnCarButton : boolean = !journey || journey.isOnOwnCar;
+    let highlightOwnCarButton: boolean = !journey || journey.isOnOwnCar;
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
-    let highlightPaidButton : boolean = !journey || !journey.isFree;
+    let highlightPaidButton: boolean = !journey || !journey.isFree;
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
 
     const getNextDay = (date: Date): Date => {
-        date.setDate(date.getDate() + DAY_OFFSET);
+        const dateOffset = date.getDate() - (new Date()).getDate() + DAY_OFFSET;
+
+        date.setDate(date.getDate() + (dateOffset > DAY_OFFSET ? dateOffset : DAY_OFFSET));
 
         return date;
     };
 
-    const getDepartureTimeIfScheduled = (date: Date): Date =>{
-        if(weekDay)
+    const getDepartureTimeIfScheduled = (date: Date): Date => {
+        if (weekDay)
             return getNextDay(date);
 
         return date;
     };
 
-    const getDepartureTime = (): Date =>{
+    const getDepartureTime = (): Date => {
         let date;
 
         if (journey)
@@ -146,7 +148,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
     const [usersIsLoading, setUsersIsLoading] = useState(true);
-    const [newInvitations, setNewInvitations] = useState<{email:string; isCorrect: boolean}[]>(
+    const [newInvitations, setNewInvitations] = useState<{ email: string; isCorrect: boolean }[]>(
         params.newInvitations ?? []
     );
 
@@ -161,6 +163,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     useEffect(() => {
         setNewInvitations(params.newInvitations ?? []);
     }, [params]);
+
+    useEffect(() =>{
+        if(weekDay)
+            setDepartureTime(getDepartureTime());
+    }, [weekDay]);
 
     useEffect(() => {
         CarService.getAll().then(result => {
@@ -191,25 +198,27 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
     }, []);
 
-    const createAllInvitationsArrayFromNewInvitations = () : Invitation[] => {
+    const createAllInvitationsArrayFromNewInvitations = (): Invitation[] => {
         return newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
             return {
                 id: 0,
                 invitedUserId: allUsers.find((us) => us?.email === invitedUser.email)!.id,
                 journeyId: 0,
                 type: 0
-            };}).concat(existingInvitations);
+            };
+        }).concat(existingInvitations);
     };
 
     const publishJourneyHandler = async () => {
         setRideIsPublishing(true);
 
-        for(let location of savedLocations)
-        {
-            if(location?.name === params.from.text && location.address?.latitude === params.from.coordinates.latitude &&
+        for (let location of savedLocations) {
+            if (location?.name === params.from.text &&
+                location.address?.latitude === params.from.coordinates.latitude &&
                 location.address.longitude === params.from.coordinates.longitude)
                 params.from.text = location.address?.name;
-            if(location?.name === params.to.text && location.address?.latitude === params.to.coordinates.latitude &&
+            if (location?.name === params.to.text &&
+                location.address?.latitude === params.to.coordinates.latitude &&
                 location.address.longitude === params.to.coordinates.longitude)
                 params.to.text = location.address?.name;
         }
@@ -259,11 +268,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.updateDetails(updatedJourney)
             .then((res) => {
-                if(res.status === HTTP_STATUS_OK)
-                {
+                if (res.status === HTTP_STATUS_OK) {
                     setSuccessfullyUpdateModalIsVisible(true);
                 }
-                else{
+                else {
                     setModal(updateErrorModal);
                 }
             })
@@ -363,7 +371,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         {isOwnCar && (
-                            <View style = {CreateJourneyStyle.dropDownPickerContainer}>
+                            <View style={CreateJourneyStyle.dropDownPickerContainer}>
                                 <JourneyCreationDropDownPicker
                                     items={userCars.map((car) => ({
                                         label: car.name,
@@ -431,9 +439,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Invited
-                            SoftServians</Text>
+                                SoftServians</Text>
                             <TouchableOpacity style={CreateJourneyStyle.invitationsLink}
-                                onPress={ () =>
+                                onPress={() =>
                                     navigation.navigate("Journey Invitations",
                                         { journey: journey, newInvitations: newInvitations, allUsers: allUsers })
                                 }
@@ -451,13 +459,15 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                         Invited SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption, color: DM("black") }}>
                                         {existingInvitations.length +
-                                        newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
                                         for that Ride</Text>
                                 </View>
                                 <Ionicons
                                     style={[
-                                        { transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE"),
-                                            marginLeft: 35 }
+                                        {
+                                            transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE"),
+                                            marginLeft: 35
+                                        }
                                     ]}
                                     name={"chevron-forward-outline"}
                                     size={25}

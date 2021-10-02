@@ -4,14 +4,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
 import AvatarLogo from "../../../../../../components/avatar-logo/AvatarLogo";
-import moment from "moment";
-import { INITIAL_TIME, MAX_USER_FULL_NAME_LENGTH } from "../../../../../../constants/JourneyConstants";
+import { MAX_USER_FULL_NAME_LENGTH } from "../../../../../../constants/JourneyConstants";
 import { Divider } from "react-native-elements";
 import React from "react";
 import Journey from "../../../../../../../models/journey/Journey";
 import { trimTheStringIfTooLong } from "../../../../../../utils/GeneralHelperFunctions";
+import { getTimeToShow } from "../../../../../../utils/JourneyHelperFunctions";
 
-const DriverBlock = ({ journey } : {journey: Journey}) => {
+const DriverBlock = ({ journey }: { journey: Journey }) => {
     const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
 
     return (
@@ -36,13 +36,13 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
                         <Text style={[JourneyPageStyle.userRoleText, { color: DM("#909095") }]}>
                             {journey?.organizer?.position}
                         </Text>
-                        <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
-                            {moment(new Date(journey?.departureTime ?? INITIAL_TIME)).calendar()}
-                        </Text>
                     </View>
                 </View>
             </TouchableOpacity>
-            <View>
+            <View style={JourneyPageStyle.journeyDetailBlock}>
+                <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
+                    {getTimeToShow(journey)}
+                </Text>
                 <Text style={[JourneyPageStyle.feeText, { color: DM("black") }]}>
                     {journey?.isFree ? "Free" : "Paid"}
                 </Text>

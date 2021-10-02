@@ -4,7 +4,6 @@ import JourneyService from "../../../../../api-service/journey-service/JourneySe
 import Journey from "../../../../../models/journey/Journey";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import JourneyRequestPageStyle from "./JourneyRequestPageStyle";
-import Moment from "moment";
 import { Divider } from "react-native-elements";
 import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
@@ -16,7 +15,6 @@ import {
     HTTP_STATUS_OK
 } from "../../../../constants/Constants";
 import {
-    INITIAL_TIME,
     MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
@@ -28,8 +26,10 @@ import {
 import DM from "../../../../components/styles/DM";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { getTimeToShow } from "../../../../utils/JourneyHelperFunctions";
+import JourneyPageStyle from "../journey-page/JourneyPageStyle";
 
-const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => {
+const JourneyRequestPage = (props: { route: { params: { journeyId: number } } }) => {
 
     const [currentJourney, setJourney] = useState({} as Journey);
     const { user } = useContext(AuthContext);
@@ -61,7 +61,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                 journeyId: journeyId,
                 type: 0,
                 jsonData:
-                `{"title": "New Applicant", "comments": "${comments}", "hasLuggage": "${isLuggage}"}`,
+                    `{"title": "New Applicant", "comments": "${comments}", "hasLuggage": "${isLuggage}"}`,
             }
         ).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
@@ -135,7 +135,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
     return (
         <View style={[JourneyRequestPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
             <Text style={[JourneyRequestPageStyle.pageText, { color: DM("#222222") }]}>
-                    Map implementation is in progress
+                Map implementation is in progress
             </Text>
 
             <BottomPopup
@@ -171,11 +171,16 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                                         <Text style={[JourneyRequestPageStyle.userRoleText, { color: DM("#909095") }]}>
                                             {currentJourney?.organizer?.position}
                                         </Text>
-                                        <Text style={[JourneyRequestPageStyle.dateText, { color: DM("#02A2CF") }]}>
-                                            {Moment(currentJourney?.departureTime ?? INITIAL_TIME).calendar()}
-                                        </Text>
                                     </View>
                                 </View>
+                            </View>
+                            <View style={JourneyPageStyle.journeyDetailBlock}>
+                                <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
+                                    {getTimeToShow(currentJourney)}
+                                </Text>
+                                <Text style={[JourneyPageStyle.feeText, { color: DM("black") }]}>
+                                    {currentJourney?.isFree ? "Free" : "Paid"}
+                                </Text>
                             </View>
 
                             <View style={JourneyRequestPageStyle.driverBlockWhiteSpace} />
@@ -190,7 +195,7 @@ const JourneyRequestPage = (props: {route: {params: { journeyId: number }}}) => 
                                 </Text>
                                 <Comments />
                                 <Text style={[JourneyRequestPageStyle.hintText, { color: DM("#000000") }]}>
-                                        Up to 100 symbols
+                                    Up to 100 symbols
                                 </Text>
                             </View>
                             <View style={JourneyRequestPageStyle.chooseOptionContainer}>

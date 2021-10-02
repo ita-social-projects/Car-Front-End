@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Modal, TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
 import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
@@ -26,9 +26,14 @@ export const addMinutesToDate = (date: Date, minutes: number) => {
 
 const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
     const [show, setShow] = useState(false);
+    const [date, setDate] = useState(props.date);
+
+    useEffect(() => {
+        setDate(props.date);
+    }, [props.onlyTime]);
 
     const onResetPress = () => {
-        props.setDate(addMinutesToDate(new Date(), MINUTES_OFFSET));
+        props.setDate(date);
         setShow(false);
     };
 

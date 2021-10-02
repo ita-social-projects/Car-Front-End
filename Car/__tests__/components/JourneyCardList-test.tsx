@@ -92,8 +92,8 @@ test("renders correctly", async () =>
                   },
                   Object {
                     "borderColor": "black",
+                    "height": 138,
                   },
-                  undefined,
                 ]
               }
             >
@@ -108,12 +108,13 @@ test("renders correctly", async () =>
                   style={
                     Array [
                       Object {
-                        "paddingBottom": 16.75,
                         "paddingLeft": 18.75,
                         "paddingRight": 10.75,
                         "paddingTop": 14.75,
                       },
-                      undefined,
+                      Object {
+                        "paddingBottom": 5.75,
+                      },
                     ]
                   }
                 >
@@ -247,30 +248,57 @@ test("renders correctly", async () =>
                     >
                       
                     </Text>
-                    <Text
-                      style={
-                        Array [
-                          Object {
-                            "fontFamily": undefined,
-                            "fontSize": 11,
-                            "fontWeight": "700",
-                            "lineHeight": 16,
-                          },
-                          Object {
-                            "color": "#02A2CF",
-                          },
-                        ]
-                      }
-                    >
-                      01/01/1970
-                    </Text>
                   </View>
                 </View>
               </View>
               <View
                 style={
                   Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "paddingLeft": 70,
+                    "paddingRight": 16,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontFamily": undefined,
+                        "fontSize": 11,
+                        "fontWeight": "700",
+                        "lineHeight": 16,
+                      },
+                      Object {
+                        "color": "#02A2CF",
+                      },
+                    ]
+                  }
+                >
+                  Every  at 03:00
+                </Text>
+                <View>
+                  <Text
+                    style={
+                      Object {
+                        "fontFamily": "Open Sans Regular",
+                        "fontSize": 11,
+                        "lineHeight": 16,
+                        "paddingTop": 0,
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    Free
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  Object {
                     "paddingLeft": 16,
+                    "paddingTop": 8,
                   }
                 }
               >
