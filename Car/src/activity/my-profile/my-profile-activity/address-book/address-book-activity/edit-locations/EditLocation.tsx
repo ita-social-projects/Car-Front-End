@@ -14,7 +14,7 @@ import {
     initialWayPoint
 } from "../../../../../../constants/AddressConstants";
 import LocationService from "../../../../../../../api-service/location-service/LocationService";
-import { mapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
+import { mapStyle as lightMapStyle } from "../../../../../journey/journey-activity/search-journey-map/SearchJourneyMapStyle";
 import { CreateJourneyStyle } from "../../../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import WayPoint from "../../../../../../types/WayPoint";
 import AddLocationStyle from "../add-locations/AddLocationStyle";
@@ -23,13 +23,16 @@ import { LOCATION_TYPES } from "../../../../../../constants/LocationConstants";
 import LocationDropDownPicker from "../../../../../../components/location-drop-down-picker/LocationDropDownPicker";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import SaveLocationButton from "../../../../../../components/save-location-button/SaveLocationButton";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
+import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const EditLocation = (props: EditLocationProps) => {
+    const { DM, isThemeDark } = useTheme();
+    const mapStyle = isThemeDark ? darkMapStyle : lightMapStyle;
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
     const [wayPoint, setWayPoint] = useState<WayPoint>({
@@ -180,7 +183,12 @@ const EditLocation = (props: EditLocationProps) => {
                             refFor={(ref) => (addressInputRef.current = ref)}
                         />
                         <TextInput
-                            style={AddLocationStyle.textInput}
+                            style={[AddLocationStyle.textInput,
+                                {
+                                    borderColor: DM("black"),
+                                    backgroundColor: DM("white"),
+                                    color: DM("black")
+                                }]}
                             value={locationName}
                             placeholder={"Name the chosen address"}
                             placeholderTextColor={"grey"}

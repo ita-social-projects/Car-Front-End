@@ -5,12 +5,14 @@ import { Divider } from "react-native-elements";
 import React from "react";
 import Journey from "../../../../../../../models/journey/Journey";
 import AvatarLogo from "../../../../../../components/avatar-logo/AvatarLogo";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { GRADIENT_START, GRADIENT_END } from "../../../../../../constants/StylesConstants";
 import JourneyPageStyle from "../../JourneyPageStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 
 const ParticipantsBlock = ({ journey } : {journey: Journey}) => {
+    const { DM } = useTheme();
+
     return (
         <>
             <Text style={[JourneyPageStyle.applicantsHeader, { color: DM("black") }]}>

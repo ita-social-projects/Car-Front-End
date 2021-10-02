@@ -23,7 +23,7 @@ import {
     MAX_POPUP_POSITION,
     MIN_POPUP_POSITION
 } from "../../../../constants/StylesConstants";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { getTimeToShow } from "../../../../utils/JourneyHelperFunctions";
@@ -31,6 +31,7 @@ import JourneyPageStyle from "../journey-page/JourneyPageStyle";
 
 const JourneyRequestPage = (props: { route: { params: { journeyId: number } } }) => {
 
+    const { DM } = useTheme();
     const [currentJourney, setJourney] = useState({} as Journey);
     const { user } = useContext(AuthContext);
     const { journeyId } = props.route.params;

@@ -5,7 +5,7 @@ import TouchableDateTimePickerStyle from "./TouchableDateTimePickerStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { MINUTES_OFFSET } from "../../constants/AnimationConstants";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 
 const ZERO = 0;
 
@@ -25,6 +25,7 @@ export const addMinutesToDate = (date: Date, minutes: number) => {
 };
 
 const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
+    const { DM } = useTheme();
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(props.date);
 

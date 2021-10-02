@@ -7,10 +7,11 @@ import TouchableNavigationCard from "../../../../components/touchable-navigation
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import CarsStyle from "./CarsStyle";
 import ImageService from "../../../../../api-service/image-service/ImageService";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import NavigationAddListener from "../../../../types/NavigationAddListener";
 
 const Cars = (props: NavigationAddListener) => {
+    const { DM } = useTheme();
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);

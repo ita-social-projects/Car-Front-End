@@ -3,10 +3,12 @@ import { Platform, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableNavigationCardStyle from "./TouchableNavigationCardStyle";
 import * as navigation from "../navigation/Navigation";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import TouchableNavigationCardProps from "./TouchableNavigationCardProps";
 
 const TouchableNavigationCard = (props: TouchableNavigationCardProps) => {
+    const { DM } = useTheme();
+
     return (
         <View>
             <TouchableOpacity

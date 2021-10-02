@@ -1,9 +1,11 @@
 import JourneyNewApplicantStyle from "../JourneyNewApplicantStyle";
 import { Text, View } from "react-native";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import React from "react";
 
 const WithLuggage = ({ hasLuggage } : {hasLuggage?: boolean}) => {
+    const { DM } = useTheme();
+
     return (
         <View
             style={[
@@ -11,13 +13,11 @@ const WithLuggage = ({ hasLuggage } : {hasLuggage?: boolean}) => {
                 JourneyNewApplicantStyle.options
             ]}
         >
-            {hasLuggage ? (
-                <Text style={JourneyNewApplicantStyle.optionsHeader} >
-                    I'm traveling with luggage.
-                </Text>
-            ) : (
-                <View />
-            )}
+            <Text style={JourneyNewApplicantStyle.optionsHeader} >
+                {hasLuggage? ("I'm traveling with luggage.")
+                    : ("I'm traveling without luggage.")}
+            </Text>
+
             <View style={[JourneyNewApplicantStyle.optionsLine,
                 {
                     borderTopColor: DM("rgba(0,0,0,0)"),

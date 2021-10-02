@@ -6,9 +6,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { Divider } from "react-native-elements";
 import LocationDropDownPickerStyle from "./LocationDropDownPickerStyle";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 
 const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
+    const { DM } = useTheme();
     const controller = useRef<any>(null);
 
     return (

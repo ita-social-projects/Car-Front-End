@@ -6,11 +6,12 @@ import UserPreferences from "../../../../../models/user/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import PreferencesStyle from "./PreferencesStyle";
 import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
 
 export default function Preferences (props: NavigationAddAndRemoveListener) {
+    const { DM } = useTheme();
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");
@@ -71,7 +72,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                 <ScrollView style={[PreferencesStyle.container, { backgroundColor: DM("white") }]}>
                     <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
-                            text={"Do you allow smoking in your car?"}
+                            text={"Allow smoking in your car"}
                             value={isSmokingAllowed}
                             onValueChanged={(value: boolean) =>
                                 setSmokingAllowed(value)
@@ -80,7 +81,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     </View>
                     <View>
                         <ChooseOption
-                            text={"Do you allow eating in your car?"}
+                            text={"Allow eating in your car"}
                             value={isEatingAllowed}
                             onValueChanged={(value: boolean) => setEatingAllowed(value)}
                         />

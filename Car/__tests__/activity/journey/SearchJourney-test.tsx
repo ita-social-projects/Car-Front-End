@@ -172,11 +172,7 @@ describe("JourneySearch Test", () => {
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
                     },
-                    Object {
-                      "backgroundColor": "#000000",
-                      "borderColor": "#000000",
-                      "color": "#FFFFFF",
-                    },
+                    Object {},
                   ]
                 }
               >
@@ -189,11 +185,7 @@ describe("JourneySearch Test", () => {
                         "lineHeight": 18,
                         "textTransform": "uppercase",
                       },
-                      Object {
-                        "backgroundColor": "#000000",
-                        "borderColor": "#000000",
-                        "color": "#FFFFFF",
-                      },
+                      Object {},
                     ]
                   }
                 >
@@ -212,11 +204,7 @@ describe("JourneySearch Test", () => {
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
                     },
-                    Object {
-                      "backgroundColor": "#FFFFFF",
-                      "borderColor": "#000000",
-                      "color": "#000000",
-                    },
+                    Object {},
                   ]
                 }
               >
@@ -229,11 +217,7 @@ describe("JourneySearch Test", () => {
                         "lineHeight": 18,
                         "textTransform": "uppercase",
                       },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                        "borderColor": "#000000",
-                        "color": "#000000",
-                      },
+                      Object {},
                     ]
                   }
                 >
@@ -254,11 +238,7 @@ describe("JourneySearch Test", () => {
                       "paddingHorizontal": 16,
                       "paddingVertical": 4,
                     },
-                    Object {
-                      "backgroundColor": "#FFFFFF",
-                      "borderColor": "#000000",
-                      "color": "#000000",
-                    },
+                    Object {},
                   ]
                 }
               >
@@ -271,11 +251,7 @@ describe("JourneySearch Test", () => {
                         "lineHeight": 18,
                         "textTransform": "uppercase",
                       },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                        "borderColor": "#000000",
-                        "color": "#000000",
-                      },
+                      Object {},
                     ]
                   }
                 >

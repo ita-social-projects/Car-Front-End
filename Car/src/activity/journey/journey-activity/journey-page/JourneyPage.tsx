@@ -10,12 +10,12 @@ import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
+    DEFAULT_PASSANGERS_COUNT,
     MAX_JOURNEY_PAGE_POPUP_HEIGHT,
     MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
     MIN_JOURNEY_PAGE_POPUP_HEIGHT,
 } from "../../../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_POSITION } from "../../../../constants/StylesConstants";
-import DM from "../../../../components/styles/DM";
 import JourneyPageProps from "./JourneyPageProps";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
@@ -47,7 +47,7 @@ import {
 } from "../../../../components/modals/JourneyPageModals";
 import Stop from "../../../../../models/stop/Stop";
 import { initialCamera } from "../../../../constants/AddressConstants";
-import { isDarkMode } from "../../../../components/theme/ThemeProvider";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import CarBlock from "./blocks/car-block/CarBlock";
 import CommentsBlock from "./blocks/comments-block/CommentsBlock";
@@ -66,6 +66,7 @@ interface JourneyPageComponent {
 }
 
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
+    const { DM, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
@@ -86,6 +87,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const [withLuggage, setWithLuggage] = useState(false);
     const [requestComments, setRequestComments] = useState("");
+    const [passangersCount, setPassangersCount] =
+        useState(props.route.params.passangersCount?? DEFAULT_PASSANGERS_COUNT);
 
     const applicantStops = props.route.params.applicantStops;
 
@@ -168,7 +171,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         const jsonData = JSON.stringify({
             comments: requestComments,
             hasLuggage: withLuggage,
-            applicantStops: applicantStops
+            applicantStops: applicantStops,
+            passangersCount: passangersCount
         });
 
         NotificationsService.addNotification({
@@ -230,7 +234,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                    customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >
@@ -372,6 +376,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 withLuggage={withLuggage}
                 onWithLuggageChange={value => setWithLuggage(value)}
                 onConfirmPress={sendRequest}
+                passangersCount={passangersCount}
+                onPassangersCountChange={value => setPassangersCount(value)}
             />
         </>
     );

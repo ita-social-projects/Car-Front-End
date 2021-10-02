@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Platform } from "react-native";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AppSettingsStyle from "./AppSettingsStyle";
 import RNRestart from "react-native-restart";
 import TouchableNavigationCard from "../../../../../../components/touchable-navigation-card/TouchableNavigationCard";
@@ -12,6 +12,7 @@ import ChooseOptionStyle from "../../../../../../components/choose-opton/ChooseO
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const AppSettings = (props: {navigation: any}) => {
+    const { DM } = useTheme();
     const [isDarkMode, setDarkMode] = useState(false);
 
     useEffect(() => {

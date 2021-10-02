@@ -9,7 +9,8 @@ describe("JourneyUser Service test", () => {
     let journeyUserData: JourneyUserDto = {
         journeyId: 1,
         userId: 1,
-        withBaggage: true
+        withBaggage: true,
+        passangersCount: 1
     };
 
     test("should return journeyUser", async () => {

@@ -196,7 +196,6 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "color": "black",
-                  "marginVertical": 10,
                 }
               }
               underlineColorAndroid="transparent"
@@ -458,7 +457,6 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "color": "black",
-                  "marginVertical": 10,
                 }
               }
               underlineColorAndroid="transparent"

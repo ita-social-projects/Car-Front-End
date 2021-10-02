@@ -7,9 +7,8 @@ import { mapStopToMarker } from "../../../utils/JourneyHelperFunctions";
 import { initialCamera } from "../../../constants/AddressConstants";
 import SearchJourneyStyle from "../../../activity/journey/journey-activity/search-journey/SearchJourneyStyle";
 import { Text, TouchableOpacity } from "react-native";
-import DM from "../../styles/DM";
 import { darkMapStyle } from "../../../constants/DarkMapStyleConstant";
-import { isDarkMode } from "../../theme/ThemeProvider";
+import { useTheme } from "../../theme/ThemeProvider";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
 import AuthContext from "../../auth/AuthContext";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";
@@ -17,6 +16,7 @@ import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import NotificationProps from "../../notifications/NotificationProps";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
+import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 interface RouteViewProps {
     route: {
@@ -31,6 +31,7 @@ interface RouteViewProps {
 }
 
 const RouteView = (props: RouteViewProps) => {
+    const { DM, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
     const params = props.route.params;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
@@ -38,7 +39,8 @@ const RouteView = (props: RouteViewProps) => {
     const data = JSON.parse(params.notification.notificationData);
     const jsonData = JSON.stringify({
         hasLuggage: data?.hasLuggage,
-        applicantStops: data?.applicantStops
+        applicantStops: data?.applicantStops,
+        passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
     });
 
     const sendApprove = () => {
@@ -46,7 +48,7 @@ const RouteView = (props: RouteViewProps) => {
             {
                 senderId: user?.id!,
                 receiverId:params.notification?.sender?.id!,
-                journeyId: params.notification?.journeyId!,
+                journeyId: params.notification?.journeyId,
                 type:2,
                 jsonData: jsonData,
             }
@@ -68,9 +70,10 @@ const RouteView = (props: RouteViewProps) => {
         JourneyService.addUser(
             {
                 journeyUser: {
-                    journeyId: params.notification?.journeyId!,
+                    journeyId: params.notification?.journeyId,
                     userId: params.notification?.sender?.id!,
-                    withBaggage: data?.hasLuggage
+                    withBaggage: data?.hasLuggage,
+                    passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
                 },
                 ApplicantStops: data?.applicantStops
             }
@@ -91,7 +94,7 @@ const RouteView = (props: RouteViewProps) => {
                 initialCamera={{ ...initialCamera, center: params.cameraCoordinates }}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                 showsCompass={false}
                 showsMyLocationButton={false}
             >

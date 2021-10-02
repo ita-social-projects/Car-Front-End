@@ -1,9 +1,11 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import NotificationButtonsStyle from "./NotificationButtonsStyle";
 
 const NotificationConfirmButton = (props: { confirmText?: string, onConfirm: () => void }) => {
+    const { DM } = useTheme();
+
     return (
         <TouchableOpacity
             onPress={ props.onConfirm }

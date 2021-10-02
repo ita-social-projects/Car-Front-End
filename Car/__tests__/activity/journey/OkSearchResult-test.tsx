@@ -1,10 +1,11 @@
+import React from "react";
 import shallowRender from "react-test-renderer/shallow";
 import OkSearchResult from "../../../src/activity/journey/journey-activity/search-journey/search-results/ok-search-result/OkSearchResult";
 
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(OkSearchResult({ journeys: [], displayFee: false })))
+    expect(renderer.render(<OkSearchResult journeys={[]} displayFee={false} passangersCount={1} />))
         .toMatchInlineSnapshot(`
     <View
       style={
