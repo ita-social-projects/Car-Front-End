@@ -29,7 +29,7 @@ const JourneyCardList = (props:JourneyCardListProps) => {
         <View>
             {journey.map((item) => (
                 <View key={item?.id}>
-                    <JourneyCard journey={item} />
+                    <JourneyCard journey={item} displayFee={true}/>
                 </View>
             ))}
         </View>
