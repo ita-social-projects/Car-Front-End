@@ -58,7 +58,6 @@
         "jest-worker": "^24.9.0",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.33",
-        "npm": "^7.24.2",
         "popup-ui": "^1.2.2",
         "prettier": "^2.2.1",
         "react": "16.13.1",
