@@ -13,12 +13,12 @@ const Login = (properties: LoginProps) => {
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    const refresher = async (intervalId: number) => {
+    const refresher = async (interval: NodeJS.Timer) => {
         const apiToken = await AuthManager.getAPIToken();
         const accessToken = await AuthManager.getAccessTokenAsync();
 
         if (apiToken) {
-            clearInterval(intervalId);
+            clearInterval(interval);
             loadingProcess(false);
         }
         if (!apiToken && accessToken) {
@@ -30,8 +30,8 @@ const Login = (properties: LoginProps) => {
     };
 
     const startRefresher = () => {
-        var intervalId = setInterval(async () => {
-            await refresher(intervalId);
+        var interval = setInterval(async () => {
+            await refresher(interval);
         }, REFRESHER_TIMEOUT);
     };
 
