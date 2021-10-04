@@ -7,24 +7,24 @@ import WayPoint from "../../../src/types/WayPoint";
 import toJSON from "enzyme-to-json";
 
 const props: SearchJourneyProps = {
-    route: {
-        params: {
-            isRequest: true,
-            isPreviousFilter: true,
-            wayPoint: {} as WayPoint,
-            wayPointId: "",
-        },
+  route: {
+    params: {
+      isRequest: true,
+      isPreviousFilter: true,
+      wayPoint: {} as WayPoint,
+      wayPointId: "",
     },
+  },
 };
 
 describe("JourneySearch Test", () => {
-    let wrapper = shallow(<SearchJourney {...props} />);
+  let wrapper = shallow(<SearchJourney {...props} />);
 
-    it("should match inline snapshot", async () => {
-        const date = new Date(0);
+  it("should match inline snapshot", async () => {
+    const date = new Date(0);
 
-        wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
-        expect(toJSON(wrapper)).toMatchInlineSnapshot(`
+    wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
+    expect(toJSON(wrapper)).toMatchInlineSnapshot(`
       <Fragment>
         <ScrollView
           style={
@@ -89,9 +89,14 @@ describe("JourneySearch Test", () => {
             style={
               Array [
                 Object {
-                  "paddingHorizontal": 16,
-                  "paddingVertical": 10,
+                  "zIndex": 1,
                 },
+                Array [
+                  Object {
+                    "paddingHorizontal": 16,
+                    "paddingVertical": 10,
+                  },
+                ],
               ]
             }
           >
@@ -123,6 +128,7 @@ describe("JourneySearch Test", () => {
               placeholder="Passengers:"
               searchable={false}
               valueId={1}
+              zIndex={2}
             />
           </View>
           <View
@@ -317,5 +323,5 @@ describe("JourneySearch Test", () => {
         </ScrollView>
       </Fragment>
     `);
-    });
+  });
 });

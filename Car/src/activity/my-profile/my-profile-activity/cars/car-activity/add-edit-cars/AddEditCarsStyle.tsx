@@ -73,7 +73,7 @@ const AddEditCarsStyle = StyleSheet.create({
 
     spinner: {
         marginLeft: 5
-    }
+    },
 });
 
 export default AddEditCarsStyle;

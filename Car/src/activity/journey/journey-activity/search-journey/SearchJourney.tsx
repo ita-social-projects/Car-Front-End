@@ -362,7 +362,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             isConfirmed={true}
                         />
                     </View>
-                    <View style = {[SearchJourneyStyle.locationContainer]}>
+                    <View style = {[Platform.OS !== "android" && { zIndex: 1 },[SearchJourneyStyle.locationContainer]]}>
                         <JourneyCreationDropDownPicker
                             items={userQuantity.map((car) => ({
                                 label: car.name,
@@ -378,6 +378,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                 setIsVisibleQuantityDropDown(false);
                             }}
                             valueId={selectedQuantity.id}
+                            zIndex={2}
                         />
                     </View>
                     <View style={SwitchSelectorStyle.container}>
