@@ -92,14 +92,13 @@ const SearchJourney = (props: SearchJourneyProps) => {
     useEffect(() => {
         LocationService
             .getAll()
-            .then((res: any) => setSavedLocations(res.data))
-            .catch((e) => appInsights.trackException({ exception: e }));
+            .then((res: any) => setSavedLocations(res.data));
 
         JourneyService
             .getRecentJourneyStops()
             .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
-                .map((stop: Stop) => stop?.address)))
-            .catch((e) => appInsights.trackException({ exception: e }));
+                .map((stop: Stop) => stop?.address)));
+
     }, []);
 
     useEffect(() => {
@@ -252,9 +251,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 .then(() => {
                     setSuccessModalVisible(true);
                 })
-                .catch((e) => {
+                .catch(() => {
                     setErrorModalVisible(true);
-                    appInsights.trackException({ exception: e });
                 });
         } else {
             await JourneyService.getFilteredJourneys({
@@ -291,8 +289,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         }, MIN_DELAY_MS);
                     }
                 })
-                .catch((e) => {
-                    appInsights.trackException({ exception: e });
+                .catch(() => {
                     setErrorModalVisible(true);
                 });
         }

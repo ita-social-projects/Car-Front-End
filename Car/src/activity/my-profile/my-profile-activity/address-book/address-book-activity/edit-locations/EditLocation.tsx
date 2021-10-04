@@ -70,7 +70,7 @@ const EditLocation = (props: EditLocationProps) => {
                     longitude: Number(location?.address?.longitude)
                 }
             });
-        }).catch((e) => appInsights.trackException({ exception: e }));
+        });
     }, []);
 
     useEffect(() => {

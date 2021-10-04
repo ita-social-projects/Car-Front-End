@@ -29,11 +29,12 @@ import { navigate } from "../../../../../../components/navigation/Navigation";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
 import CarPhoto from "../../../../../../../models/car/CarPhoto";
 import axios from "axios";
-import appInsights from "../../../../../../components/telemetry/AppInsights";
+import ConfirmModal from "../../../../../../components/confirm-modal/ConfirmModal";
 
 const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     const [isLoading, setLoading] = useState(props.type === "edit");
     const [isSaving, setSaving] = useState(false);
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
     const [models, setModels] = useState({} as CarModel[]);
@@ -165,6 +166,16 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         });
     };
 
+    const errorHandler = error => {
+        if (axios.isCancel(error))
+            throw error;
+        else
+        {
+            setSaving(false);
+            setErrorModalVisible(true);
+        }
+    };
+
     const saveCarHandle = async () => {
         setSaving(true);
         isStarted.current = true;
@@ -183,20 +194,11 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             });
         }
 
-        const errorHandle = error => {
-            if (axios.isCancel(error))
-                throw error;
-            else
-                appInsights.trackException({ exception: error });
-        };
-
         if (props.type === "add") {
-            await CarService.add(car, { cancelToken: source.current.token })
-                .catch(errorHandle);
+            await CarService.add(car, { cancelToken: source.current.token });
         }
         else {
-            await CarService.update(car, { cancelToken: source.current.token })
-                .catch(errorHandle);
+            await CarService.update(car, { cancelToken: source.current.token });
         }
         setSaving(false);
     };
@@ -355,7 +357,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                             !isValidCar || !isValidPlateNumber
                         }
                         onPress={() => {
-                            saveCarHandle().then(() => navigate("Cars"));
+                            saveCarHandle().then(() => navigate("Cars")).catch(errorHandler);
                         }}
                     >
                         <Text style={[AddEditCarsStyle.carButtonSaveText, { color: DM("white") }]}>
@@ -371,6 +373,16 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                             <></>
                         )}
                     </TouchableOpacity>
+                    <ConfirmModal
+                        title = "Error"
+                        subtitle = {props.type === "add" ? "Failed to add the car"
+                            : "Failed to update the car"}
+                        visible = {errorModalVisible}
+                        confirmText = "Ok"
+                        onConfirm = {() => setErrorModalVisible(false)}
+                        disableModal = {() => setErrorModalVisible(false)}
+                        hideCancelButton={true}
+                    />
                 </View>
             </ScrollView>
         </View>

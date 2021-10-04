@@ -2,6 +2,10 @@ import { setJSExceptionHandler, setNativeExceptionHandler } from "react-native-e
 import ErrorAlert from "../error-alert/ErrorAlert";
 import RNRestart from "react-native-restart";
 import appInsights from "../telemetry/AppInsights";
+import {
+    setUnhandledPromiseRejectionTracker,
+} from "react-native-promise-rejection-utils";
+import axios from "axios";
 
 const JSErrorHandler = (error, isFatal) => {
     appInsights.trackException({ exception: error });
@@ -14,6 +18,16 @@ const NativeErrorHandler = error => {
     appInsights.trackException({ exception: error });
     ErrorAlert("Ups, something went wrong", () => RNRestart.Restart());
 };
+
+const UnhandledPromiseRejectionErrrorHandler = (id,error) => {
+
+    if(!axios.isCancel(error))
+    {
+        ErrorAlert("Ups, something went wrong", () => RNRestart.Restart());
+    }
+};
+
+setUnhandledPromiseRejectionTracker(UnhandledPromiseRejectionErrrorHandler);
 
 setJSExceptionHandler(JSErrorHandler, true);
 

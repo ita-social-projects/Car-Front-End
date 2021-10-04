@@ -7537,6 +7537,11 @@
   "resolved" "https://registry.npmjs.org/react-native-portalize/-/react-native-portalize-1.0.7.tgz"
   "version" "1.0.7"
 
+"react-native-promise-rejection-utils@^0.0.1":
+  "integrity" "sha512-ToQv5u8zzYf+c1TTBD18UwDozSWGkekSPJ44xovsWZMF5I21DzEbO3P9UStjMWiFuI24CZiRbOoZHlvgjMtP+A=="
+  "resolved" "https://registry.npmjs.org/react-native-promise-rejection-utils/-/react-native-promise-rejection-utils-0.0.1.tgz"
+  "version" "0.0.1"
+
 "react-native-push-notification@^7.4.0":
   "integrity" "sha512-Ac3Ep71e2D8Q/Vy0OHBAO5JwhsFsNSuf9knkpXQWS0B9488nIZJLEMuTpF8610xPvGw7XxVrL/q0oZO5F1pOzw=="
   "resolved" "https://registry.npmjs.org/react-native-push-notification/-/react-native-push-notification-7.4.0.tgz"
