@@ -250,6 +250,13 @@ const JourneyPageStyle = StyleSheet.create({
         fontSize: 18,
         textTransform: "uppercase"
     },
+
+    journeyDetailBlock: {
+        paddingLeft: 60,
+        paddingRight: 16,
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
 });
 
 export default JourneyPageStyle;

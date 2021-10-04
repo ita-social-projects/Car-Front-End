@@ -34,11 +34,12 @@ Axios.interceptors.response.use(
 
     async (error?: AxiosError) => {
         if (!axios.isCancel(error)) {
-            appInsights.trackException({ exception: error });
             if (axios.isAxiosError(error)) {
                 error.response?.status === StatusCodes.UNAUTHORIZED &&
-                    (async () => { await AuthManager.signOutAsync(); })().then(() =>
-                        RNRestart.Restart());
+                    (async () => { await AuthManager.signOutAsync(); })().then(() => {
+                        appInsights.trackException({ exception: error });
+                        RNRestart.Restart();
+                    });
             } else {
                 var message = error!.message || error!.response!.data;
 

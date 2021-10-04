@@ -22,8 +22,8 @@ test("renders correctly", async () =>
               },
               Object {
                 "borderColor": "black",
+                "height": 138,
               },
-              undefined,
             ]
           }
         >
@@ -38,7 +38,6 @@ test("renders correctly", async () =>
               style={
                 Array [
                   Object {
-                    "paddingBottom": 16.75,
                     "paddingLeft": 18.75,
                     "paddingRight": 10.75,
                     "paddingTop": 14.75,
@@ -129,30 +128,42 @@ test("renders correctly", async () =>
                     ]
                   }
                 />
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "fontFamily": undefined,
-                        "fontSize": 11,
-                        "fontWeight": "700",
-                        "lineHeight": 16,
-                      },
-                      Object {
-                        "color": "#02A2CF",
-                      },
-                    ]
-                  }
-                >
-                  Invalid date
-                </Text>
               </View>
             </View>
           </View>
           <View
             style={
               Object {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingLeft": 70,
+                "paddingRight": 16,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontFamily": undefined,
+                    "fontSize": 11,
+                    "fontWeight": "700",
+                    "lineHeight": 16,
+                  },
+                  Object {
+                    "color": "#02A2CF",
+                  },
+                ]
+              }
+            >
+              Invalid date
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
                 "paddingLeft": 16,
+                "paddingTop": 8,
               }
             }
           >

@@ -142,24 +142,49 @@ test("renders correctly", async () =>
                         ]
                       }
                     />
-                    <Text
-                      style={
-                        Array [
-                          Object {
-                            "fontFamily": "Open Sans ExtraBold",
-                            "fontSize": 13,
-                            "fontWeight": "700",
-                          },
-                          Object {
-                            "color": "#02A2CF",
-                          },
-                        ]
-                      }
-                    >
-                      01/01/1970
-                    </Text>
                   </View>
                 </View>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "paddingLeft": 60,
+                    "paddingRight": 16,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontFamily": "Open Sans ExtraBold",
+                        "fontSize": 13,
+                        "fontWeight": "700",
+                      },
+                      Object {
+                        "color": "#02A2CF",
+                      },
+                    ]
+                  }
+                >
+                  Invalid date
+                </Text>
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "textAlign": "right",
+                      },
+                      Object {
+                        "color": "black",
+                      },
+                    ]
+                  }
+                >
+                  Paid
+                </Text>
               </View>
               <View
                 style={
