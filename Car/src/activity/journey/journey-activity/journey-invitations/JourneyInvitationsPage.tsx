@@ -7,7 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Invitation from "../../../../../models/invitation/Invitation";
 import InvitationType from "../../../../../models/invitation/InvitationType";
 import * as navigation from "../../../../components/navigation/Navigation";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { DELETE_COUNT, ZERO } from "../../../../constants/GeneralConstants";
 import { CREATING_FONT_SIZE } from "../../../../constants/JourneyConstants";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
@@ -15,6 +15,7 @@ import JourneyInvitationsPageProps from "./JourneyInvitationsPageProps";
 import { JourneyInvitationsPageStyle } from "./JourneyInvitationsPageStyle";
 
 const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
+    const { DM } = useTheme();
     const params = props.route.params;
     const journey = params.journey;
 
@@ -71,9 +72,9 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         invitation</Text>
                     {existingInvitations.map((us, index) => (
                         <View key={index} style={JourneyInvitationsPageStyle.row}>
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>{
+                            <Text style={{ color: DM("#1C1C1C"), paddingTop: 5 }}>{
                                 getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>
+                            <Text style={{ color: DM("#1C1C1C"), paddingTop: 5 }}>
                                 {InvitationType[existingInvitations[index]!.type]} </Text>
                         </View>
                     ))}

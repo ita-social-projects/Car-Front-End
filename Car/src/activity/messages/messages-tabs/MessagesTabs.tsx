@@ -8,11 +8,12 @@ import Messages from "../Messages";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import JourneyApplicant from "../../journey/journey-activity/journey-applicant/JourneyApplicant";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
-import DM from "../../../components/styles/DM";
+import { useTheme } from "../../../components/theme/ThemeProvider";
 
 const StackTabs = createStackNavigator();
 
 const MessagesTabs = () => {
+    const { DM } = useTheme();
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const setIsOpen = () => {
@@ -20,7 +21,7 @@ const MessagesTabs = () => {
     };
 
     return (
-        <View style={HeaderStyle.container}>
+        <View style={{ ...HeaderStyle.container, backgroundColor: "#fcba03" }}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Messages"

@@ -4,7 +4,7 @@ import { View } from "react-native";
 import Cars from "../Cars";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
-import DM from "../../../../../components/styles/DM";
+import { useTheme } from "../../../../../components/theme/ThemeProvider";
 import HeaderRemoveCarButton from "../../../../../components/header-remove-car-button/HeaderRemoveCarButton";
 import ConfirmModal from "../../../../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../../../../components/navigation/Navigation";
@@ -16,6 +16,7 @@ import AddEditCars from "../car-activity/add-edit-cars/AddEditCars";
 const StackTabs = createStackNavigator();
 
 const CarTabs = () => {
+    const { DM } = useTheme();
     const [modalVisibility, setModalVisibility] = useState(false);
     const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
     const pressHandler = () => {

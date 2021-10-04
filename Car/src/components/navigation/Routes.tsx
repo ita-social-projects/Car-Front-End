@@ -10,12 +10,12 @@ import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
 import { MILLISECONDS_IN_MONTH } from "../../constants/DimensionConstants";
 import { StatusBar } from "react-native";
-import DM from "../styles/DM";
-import { isDarkMode } from "../theme/ThemeProvider";
+import { useTheme } from "../theme/ThemeProvider";
 
 const Stack = createStackNavigator<AuthParamList>();
 
 const Routes = () => {
+    const { DM, isThemeDark } = useTheme();
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
     const { Root } = require("popup-ui");
@@ -62,7 +62,7 @@ const Routes = () => {
                 barStyle={DM("dark-content") as any}
             />
             <NavigationContainer
-                theme={isDarkMode ? DarkTheme : undefined}
+                theme={isThemeDark ? DarkTheme : undefined}
                 ref={navigationRef}
             >
                 {isLoading ? (

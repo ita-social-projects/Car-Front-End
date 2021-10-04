@@ -4,11 +4,12 @@ import { Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import UserService from "../../../api-service/user-service/UserService";
 import AuthContext from "../../components/auth/AuthContext";
-import DM from "../../components/styles/DM";
+import { useTheme } from "../../components/theme/ThemeProvider";
 import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: { navigation: any }) => {
+    const { DM } = useTheme();
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {

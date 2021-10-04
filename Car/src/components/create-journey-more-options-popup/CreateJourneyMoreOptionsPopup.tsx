@@ -7,10 +7,11 @@ import { MAX_POPUP_POSITION, MIN_POPUP_HEIGHT } from "../../constants/StylesCons
 import BottomPopup from "../bottom-popup/BottomPopup";
 import MenuButton from "../menu-button/MenuButton";
 import ScheduleBottomPopup from "../schedule-bottom-popup/ScheduleBottomPopup";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import CreateJourneyMoreOptionsPopupProps from "./CreateJourneyMoreOptionsPopupProps";
 
 const CreateJourneyMoreOptionsPopup = (props: CreateJourneyMoreOptionsPopupProps) => {
+    const { DM } = useTheme();
 
     return (
         <>

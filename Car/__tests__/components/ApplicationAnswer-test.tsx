@@ -98,7 +98,13 @@ test("renders correctly", async () =>
           IsFeeVisible={true}
           journeyId={1}
         />
-        <Text>
+        <Text
+          style={
+            Object {
+              "color": "black",
+            }
+          }
+        >
           Abc
            
           Abc

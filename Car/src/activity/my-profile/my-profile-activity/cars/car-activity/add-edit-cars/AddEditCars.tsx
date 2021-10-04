@@ -6,7 +6,8 @@ import {
     ScrollView,
     Text,
     TouchableOpacity,
-    View
+    View,
+    Platform
 } from "react-native";
 import { launchImageLibrary } from "react-native-image-picker/src";
 import BrandService from "../../../../../../../api-service/brand-service/BrandService";
@@ -19,7 +20,7 @@ import CarDropDownPickerItem from "../../../../../../components/car-drop-down-pi
 import CarDropDownPicker from "../../../../../../components/car-drop-down-picker/CarDropDownPicker";
 import CarTextInput from "../../../../../../components/car-text-input/CarTextInput";
 import AddEditCarsStyle from "./AddEditCarsStyle";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import {
     MAX_PLATE_NUMBER_LENGTH,
     MIN_PLATE_NUMBER_LENGTH
@@ -32,6 +33,7 @@ import axios from "axios";
 import ConfirmModal from "../../../../../../components/confirm-modal/ConfirmModal";
 
 const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
+    const { DM } = useTheme();
     const [isLoading, setLoading] = useState(props.type === "edit");
     const [isSaving, setSaving] = useState(false);
     const [errorModalVisible, setErrorModalVisible] = useState(false);
@@ -274,61 +276,67 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                 </TouchableOpacity>
             </View>
             <ScrollView style={AddEditCarsStyle.inputsContainer}>
-                <CarDropDownPicker
-                    style={AddEditCarsStyle.dropDownPicker}
-                    placeHolder="Brand"
-                    items={brandItems}
-                    zIndex={3000}
-                    required={true}
-                    defaultValue={props.type === "edit" ? selectedBrand!.value : null}
-                    selectHandle={(item: CarDropDownPickerItem) => {
-                        selectBrandHandle(item);
-                    }}
-                    controller={(instance: any) =>
-                        (brandPickerController = instance)
-                    }
-                    onOpen={() => {
-                        colorPickerController.close();
-                        modelPickerController.close();
-                    }}
-                />
-                <CarDropDownPicker
-                    style={AddEditCarsStyle.dropDownPicker}
-                    placeHolder="Model"
-                    items={modelItems}
-                    zIndex={2000}
-                    required={true}
-                    defaultValue={selectedModel ? selectedModel.value : null}
-                    disabled={!modelItems}
-                    selectHandle={(item: CarDropDownPickerItem) =>
-                        setModel(item)
-                    }
-                    onOpen={() => {
-                        colorPickerController.close();
-                        brandPickerController.close();
-                    }}
-                    controller={(instance: any) =>
-                        (modelPickerController = instance)
-                    }
-                />
-                <CarDropDownPicker
-                    style={AddEditCarsStyle.dropDownPicker}
-                    placeHolder="Color"
-                    items={colors}
-                    zIndex={1000}
-                    required={true}
-                    defaultValue={props.type === "edit" ? selectedColor!.value : null}
-                    selectHandle={(item: CarDropDownPickerItem) =>
-                        setColor(item)
-                    }
-                    onOpen={() => {
-                        brandPickerController.close();
-                        modelPickerController.close();
-                    }}
-                    controller={(instance: any) =>
-                        (colorPickerController = instance)
-                    }
-                />
+                <View style= {Platform.OS !== "android" ? { zIndex: 3 } : {} }>
+                    <CarDropDownPicker
+                        style={AddEditCarsStyle.dropDownPicker}
+                        placeHolder="Brand"
+                        items={brandItems}
+                        zIndex={3000}
+                        required={true}
+                        defaultValue={props.type === "edit" ? selectedBrand!.value : null}
+                        selectHandle={(item: CarDropDownPickerItem) => {
+                            selectBrandHandle(item);
+                        }}
+                        controller={(instance: any) =>
+                            (brandPickerController = instance)
+                        }
+                        onOpen={() => {
+                            colorPickerController.close();
+                            modelPickerController.close();
+                        }}
+                    />
+                </View>
+                <View style= {Platform.OS !== "android" ? { zIndex: 2 } : {} }>
+                    <CarDropDownPicker
+                        style={AddEditCarsStyle.dropDownPicker}
+                        placeHolder="Model"
+                        items={modelItems}
+                        zIndex={2000}
+                        required={true}
+                        defaultValue={selectedModel ? selectedModel.value : null}
+                        disabled={!modelItems}
+                        selectHandle={(item: CarDropDownPickerItem) =>
+                            setModel(item)
+                        }
+                        onOpen={() => {
+                            colorPickerController.close();
+                            brandPickerController.close();
+                        }}
+                        controller={(instance: any) =>
+                            (modelPickerController = instance)
+                        }
+                    />
+                </View>
+                <View style= {Platform.OS !== "android" ? { zIndex: 1 } : {} }>
+                    <CarDropDownPicker
+                        style={AddEditCarsStyle.dropDownPicker}
+                        placeHolder="Color"
+                        items={colors}
+                        zIndex={1000}
+                        required={true}
+                        defaultValue={props.type === "edit" ? selectedColor!.value : null}
+                        selectHandle={(item: CarDropDownPickerItem) =>
+                            setColor(item)
+                        }
+                        onOpen={() => {
+                            brandPickerController.close();
+                            modelPickerController.close();
+                        }}
+                        controller={(instance: any) =>
+                            (colorPickerController = instance)
+                        }
+                    />
+                </View>
                 <CarTextInput
                     defaultValue={plateNumber}
                     onChangeText={setPlateNumber}

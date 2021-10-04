@@ -5,7 +5,7 @@ import Notification from "../../../models/notification/Notification";
 import NotificationComponent from "./NotificationComponent";
 import NotificationStyle from "./NotificationStyle";
 import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
-import DM from "../../components/styles/DM";
+import { useTheme } from "../../components/theme/ThemeProvider";
 import NavigationAddAndRemoveListener from "../../types/NavigationAddAndRemoveListener";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
@@ -29,6 +29,7 @@ const CustomDelete = (props: { pressHandler: () => void }) => {
 };
 
 const Notifications = (props: NavigationAddAndRemoveListener) => {
+    const { DM } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(

@@ -33,8 +33,10 @@ Axios.interceptors.response.use(
             appInsights.trackException({ exception: error });
             if (axios.isAxiosError(error)) {
                 error.response?.status === StatusCodes.UNAUTHORIZED &&
-                    (async () => { await AuthManager.signOutAsync(); })().then(() =>
-                        RNRestart.Restart());
+                    (async () => { await AuthManager.signOutAsync(); })().then(() => {
+
+                        RNRestart.Restart();
+                    });
             }
         }
 

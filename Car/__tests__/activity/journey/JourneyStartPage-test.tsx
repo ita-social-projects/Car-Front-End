@@ -137,11 +137,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "13%",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 2,
-                  "color": "#000000",
-                },
+                Object {},
                 Object {
                   "borderColor": "black",
                 },
@@ -156,10 +152,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#000000",
-                  },
+                  Object {},
                 ]
               }
             >
@@ -177,11 +170,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "13%",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#8C8F8E",
-                },
+                Object {},
                 Object {
                   "borderColor": "black",
                 },
@@ -196,10 +185,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#8C8F8E",
-                  },
+                  Object {},
                 ]
               }
             >
@@ -217,11 +203,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "24%",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#8C8F8E",
-                },
+                Object {},
                 Object {
                   "borderColor": "black",
                 },
@@ -236,10 +218,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#8C8F8E",
-                  },
+                  Object {},
                 ]
               }
             >
@@ -257,11 +236,7 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "20%",
                 },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#8C8F8E",
-                },
+                Object {},
                 Object {
                   "borderColor": "black",
                 },
@@ -276,10 +251,7 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {
-                    "backgroundColor": "#FFFFFF",
-                    "color": "#8C8F8E",
-                  },
+                  Object {},
                 ]
               }
             >

@@ -22,9 +22,7 @@ import {
     ANIMATION_DURATION,
     SLEEP_DURATION
 } from "../../../../constants/AnimationConstants";
-import RNRestart from "react-native-restart";
 import { FIRST_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
-import DM from "../../../../components/styles/DM";
 import User from "../../../../../models/user/User";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import axios from "axios";
@@ -32,7 +30,7 @@ import { CreateJourneyStyle } from "../../../journey/journey-activity/create-jou
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 
 const Settings = (props: { navigation: any }) => {
-    const { setScheme, theme } = useTheme();
+    const { setScheme, theme, DM, DMStyleObject } = useTheme();
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
@@ -43,23 +41,11 @@ const Settings = (props: { navigation: any }) => {
 
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
-    const activeButtonStyle = {
-        backgroundColor: DM("#000000"),
-        color: DM("#FFFFFF"),
-        borderColor: DM("#000000")
-    };
-
-    const inactiveButtonStyle = {
-        backgroundColor: DM("#FFFFFF"),
-        color: DM("#000000"),
-        borderColor: DM("#000000")
-    };
-
     const setButtonStyle = (shouldBeHighlighted : boolean) =>{
         if(shouldBeHighlighted)
-            return activeButtonStyle;
+            return SwitchSelectorStyle.activeButtonStyle;
 
-        return inactiveButtonStyle;
+        return SwitchSelectorStyle.inactiveButtonStyle;
     };
 
     const [lightButtonStyle, setLightButtonStyle] = useState(setButtonStyle(theme === "light"));
@@ -68,7 +54,7 @@ const Settings = (props: { navigation: any }) => {
 
     const changeAppScheme = (value) => {
         setScheme(value);
-        AsyncStorage.setItem("theme", value).then(() => RNRestart.Restart());
+        AsyncStorage.setItem("theme", value);
     };
 
     const avatarLogoTitleOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
@@ -359,18 +345,18 @@ const Settings = (props: { navigation: any }) => {
                             <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>App theme</Text>
                             <View style={{ flexDirection: "row" }}>
                                 <TouchableOpacity
-                                    style={[SwitchSelectorStyle.leftButton, lightButtonStyle]}
+                                    style={[SwitchSelectorStyle.leftButton, DMStyleObject(lightButtonStyle)]}
                                     onPress={() => {
-                                        setLightButtonStyle(activeButtonStyle);
-                                        setDarkButtonStyle(inactiveButtonStyle);
-                                        setSystemButtonStyle(inactiveButtonStyle);
+                                        setLightButtonStyle(SwitchSelectorStyle.activeButtonStyle);
+                                        setDarkButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
+                                        setSystemButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
                                         changeAppScheme("light");
                                     }}
                                 >
                                     <Text
                                         style={[
                                             SwitchSelectorStyle.buttonText,
-                                            lightButtonStyle,
+                                            DMStyleObject(lightButtonStyle),
                                         ]}
                                     >
                                     Light
@@ -380,19 +366,19 @@ const Settings = (props: { navigation: any }) => {
                                 <TouchableOpacity
                                     style={[
                                         SwitchSelectorStyle.leftButton,
-                                        darkButtonStyle,
+                                        DMStyleObject(darkButtonStyle),
                                     ]}
                                     onPress={() => {
-                                        setLightButtonStyle(inactiveButtonStyle);
-                                        setDarkButtonStyle(activeButtonStyle);
-                                        setSystemButtonStyle(inactiveButtonStyle);
+                                        setLightButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
+                                        setDarkButtonStyle(SwitchSelectorStyle.activeButtonStyle);
+                                        setSystemButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
                                         changeAppScheme("dark");
                                     }}
                                 >
                                     <Text
                                         style={[
                                             SwitchSelectorStyle.buttonText,
-                                            darkButtonStyle,
+                                            DMStyleObject(darkButtonStyle),
                                         ]}
                                     >
                                     Dark
@@ -401,19 +387,19 @@ const Settings = (props: { navigation: any }) => {
                                 <TouchableOpacity
                                     style={[
                                         SwitchSelectorStyle.rightButton,
-                                        systemButtonStyle,
+                                        DMStyleObject(systemButtonStyle),
                                     ]}
                                     onPress={() => {
-                                        setLightButtonStyle(inactiveButtonStyle);
-                                        setDarkButtonStyle(inactiveButtonStyle);
-                                        setSystemButtonStyle(activeButtonStyle);
+                                        setLightButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
+                                        setDarkButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
+                                        setSystemButtonStyle(SwitchSelectorStyle.activeButtonStyle);
                                         changeAppScheme("system");
                                     }}
                                 >
                                     <Text
                                         style={[
                                             SwitchSelectorStyle.buttonText,
-                                            systemButtonStyle,
+                                            DMStyleObject(systemButtonStyle),
                                         ]}
                                     >
                                     As system

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Dimensions, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import DM from "../../../../components/styles/DM";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
 import {
@@ -42,7 +41,7 @@ import StopType from "../../../../../models/stop/StopType";
 import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
-import { isDarkMode } from "../../../../components/theme/ThemeProvider";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
@@ -67,7 +66,7 @@ const INVALID_ROUTE = "Cant build route. Please chose another way points";
 const ROUTE_UPDATE_ERROR = "Route update is failed";
 
 const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourneyProps }) => {
-
+    const { DM, isThemeDark } = useTheme();
     const params = props?.route?.params;
     const journey = params?.journey;
 
@@ -410,7 +409,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     style={{ flex: 1 }}
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
-                    customMapStyle={isDarkMode ? darkMapStyle : mapStyle}
+                    customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                     showsCompass={false}
                     showsMyLocationButton={false}
                 >

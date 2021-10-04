@@ -1,18 +1,18 @@
-import DM from "../../src/components/styles/DM";
+import { DM } from "../../src/components/theme/ThemeProvider";
 
-test("should not transform color", async () => expect(DM("black")).toBe("black"));
-test("should not transform color", async () => expect(DM("white")).toBe("white"));
-test("should not transform color", async () => expect(DM("#FFFFFF")).toBe("#FFFFFF"));
-test("should not transform color", async () => expect(DM("#000000")).toBe("#000000"));
-test("should not transform color", async () => expect(DM("ABC")).toBe("ABC"));
-test("should not transform color", async () => expect(DM("light-content")).toBe("light-content"));
-test("should not transform color", async () => expect(DM("dark-content")).toBe("dark-content"));
-test("should not transform color", async () => expect(DM("#FAFAFA")).toBe("#FAFAFA"));
-test("should not transform color", async () => expect(DM("#F0F0F0")).toBe("#F0F0F0"));
-test("should not transform color", async () => expect(DM("#414045")).toBe("#414045"));
-test("should not transform color", async () => expect(DM("#F1F1F4")).toBe("#F1F1F4"));
-test("should not transform color", async () => expect(DM("#00000033")).toBe("#00000033"));
-test("should not transform color", async () => expect(DM("#909095")).toBe("#909095"));
+test("should not transform color", async () => expect(DM("black", false)).toBe("black"));
+test("should not transform color", async () => expect(DM("white", false)).toBe("white"));
+test("should not transform color", async () => expect(DM("#FFFFFF", false)).toBe("#FFFFFF"));
+test("should not transform color", async () => expect(DM("#000000", false)).toBe("#000000"));
+test("should not transform color", async () => expect(DM("ABC", false)).toBe("ABC"));
+test("should not transform color", async () => expect(DM("light-content", false)).toBe("light-content"));
+test("should not transform color", async () => expect(DM("dark-content", false)).toBe("dark-content"));
+test("should not transform color", async () => expect(DM("#FAFAFA", false)).toBe("#FAFAFA"));
+test("should not transform color", async () => expect(DM("#F0F0F0", false)).toBe("#F0F0F0"));
+test("should not transform color", async () => expect(DM("#414045", false)).toBe("#414045"));
+test("should not transform color", async () => expect(DM("#F1F1F4", false)).toBe("#F1F1F4"));
+test("should not transform color", async () => expect(DM("#00000033", false)).toBe("#00000033"));
+test("should not transform color", async () => expect(DM("#909095", false)).toBe("#909095"));
 
 test("should not transform color", async () => expect(DM("ABC", true)).toBe("ABC"));
 test("should transform color", async () => expect(DM("#121212", false)).toBe("#FFFFFF"));

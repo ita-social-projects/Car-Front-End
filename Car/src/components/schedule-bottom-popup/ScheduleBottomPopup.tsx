@@ -4,12 +4,13 @@ import { Switch } from "react-native-gesture-handler";
 import { JOURNEY_MORE_OPTIONS_POPUP_HEIGHT } from "../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_HEIGHT, MIN_POPUP_POSITION } from "../../constants/StylesConstants";
 import BottomPopup from "../bottom-popup/BottomPopup";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import ScheduleBottomPopupProps from "./ScheduleBottomPopupProps";
 import ScheduleBottomPopupStyles from "./ScheduleBottomPopupStyles";
 import WeekDay from "./WeekDay";
 
 const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
+    const { DM } = useTheme();
     const activeButtonStyle = {
         backgroundColor: DM("black"),
         borderColor: DM("black"),
@@ -221,7 +222,7 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                             <Text
                                 style={[ScheduleBottomPopupStyles.scheduleButtonText, {
                                     color: isEdited ? DM("black") : DM("gray") }]}>
-                                Schedule
+                                Save
                             </Text>
                         </TouchableOpacity>
                     </View>

@@ -6,10 +6,12 @@ import Journey from "../../../../models/journey/Journey";
 import style from "./NotificationRideDetailsStyle";
 import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
 import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
-import DM from "../../styles/DM";
+import { capitalize } from "../../../utils/GeneralHelperFunctions";
+import { useTheme } from "../../theme/ThemeProvider";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
+    const { DM } = useTheme();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
 
@@ -39,7 +41,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
             {IsPropertyShown(props.IsDepartureTimeVisible) && <View style={style.detailsContainer}>
                 <Text style={{ ...style.label, color: DM("black") }}>Departure time: </Text>
                 <Text style={{ ...style.value, color: DM("black") }}>
-                    {moment(new Date(journey?.departureTime!)).calendar()}
+                    {capitalize(moment(new Date(journey?.departureTime!)).calendar())}
                 </Text>
             </View>}
 

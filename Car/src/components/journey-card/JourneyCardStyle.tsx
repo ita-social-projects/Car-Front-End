@@ -12,7 +12,6 @@ const JourneyCardStyle = StyleSheet.create({
 
     feeText: {
         textAlign: "right",
-        paddingRight: 12,
         paddingTop: 0,
         fontFamily: Font.OpenSans.Regular,
         fontSize: 11,
@@ -27,7 +26,6 @@ const JourneyCardStyle = StyleSheet.create({
         paddingTop: 14.75,
         paddingLeft: 18.75,
         paddingRight: 10.75,
-        paddingBottom: 16.75
     },
 
     driverTextBlock: {
@@ -55,6 +53,13 @@ const JourneyCardStyle = StyleSheet.create({
         justifyContent: "space-between"
     },
 
+    journeyDetailBlock: {
+        paddingLeft: 70,
+        paddingRight: 16,
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+
     driverNameText: {
         fontFamily: Font.OpenSans.Extrabold,
         fontSize: 16,
@@ -78,7 +83,8 @@ const JourneyCardStyle = StyleSheet.create({
     },
 
     stopsBlock: {
-        paddingLeft: 16
+        paddingLeft: 16,
+        paddingTop: 8
     },
 
     firstStopBlock: {

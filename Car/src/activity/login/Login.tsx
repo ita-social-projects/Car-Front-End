@@ -4,10 +4,11 @@ import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
 import { REFRESHER_TIMEOUT } from "../../constants/AnimationConstants";
-import DM from "../../components/styles/DM";
+import { useTheme } from "../../components/theme/ThemeProvider";
 import LoginProps from "./LoginProps";
 
 const Login = (properties: LoginProps) => {
+    const { DM } = useTheme();
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);

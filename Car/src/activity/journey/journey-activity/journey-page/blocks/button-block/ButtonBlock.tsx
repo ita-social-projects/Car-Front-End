@@ -1,5 +1,5 @@
 import JourneyPageStyle from "../../JourneyPageStyle";
-import DM from "../../../../../../components/styles/DM";
+import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { Divider } from "react-native-elements";
 import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -11,6 +11,7 @@ import CreateChat from "../../../../../../../models/Chat/CreateChat";
 import { StatusCodes } from "../../../../../../constants/Constants";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
+    const { DM } = useTheme();
     const onMessageToAllPress = () => {
         const chat: CreateChat = {
             id: props.journey?.id!,

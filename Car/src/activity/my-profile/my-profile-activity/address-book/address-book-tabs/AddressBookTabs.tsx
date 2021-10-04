@@ -4,7 +4,7 @@ import { Animated, Text, View } from "react-native";
 import HeaderStyle from "../../../../../components/styles/HeaderStyle";
 import AddressBook from "../AddressBook";
 import HeaderBackButton from "../../../../../components/header-back-button/HeaderBackButton";
-import DM from "../../../../../components/styles/DM";
+import { useTheme } from "../../../../../components/theme/ThemeProvider";
 import AddLocation from "../address-book-activity/add-locations/AddLocation";
 import EditLocation from "../address-book-activity/edit-locations/EditLocation";
 import HeaderEllipsis from "../../../../../components/header-ellipsis/HeaderEllipsis";
@@ -35,6 +35,7 @@ import LocationService from "../../../../../../api-service/location-service/Loca
 const StackTabs = createStackNavigator();
 
 export default function AddressBookTabs () {
+    const { DM } = useTheme();
     const [modalVisibility, setModalVisibility] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);

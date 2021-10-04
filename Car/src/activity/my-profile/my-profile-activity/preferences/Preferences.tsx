@@ -6,14 +6,17 @@ import UserPreferences from "../../../../../models/user/UserPreferences";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import AuthContext from "../../../../components/auth/AuthContext";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
-import DM from "../../../../components/styles/DM";
+import { useTheme } from "../../../../components/theme/ThemeProvider";
 import PreferencesStyle from "./PreferencesStyle";
 import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
+import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../../../constants/GeneralConstants";
 
 export default function Preferences (props: NavigationAddAndRemoveListener) {
+    const { DM } = useTheme();
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");
+    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
     const [isLoading, setLoading] = useState(true);
 
     const { user } = useContext(AuthContext);
@@ -43,6 +46,9 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     setSmokingAllowed(res.data.doAllowSmoking);
                     setEatingAllowed(res.data.doAllowEating);
                     setComments(res.data.comments);
+                    setRemainingSymbolsText(res.data.comments ?
+                        `${PREFERENCES_COMMENTS_MAX_LENGTH - res.data.comments.length} symbols remaining`
+                        : "Up to 100 symbols");
                     setUserPreferences(res.data);
                 }
             })
@@ -71,7 +77,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                 <ScrollView style={[PreferencesStyle.container, { backgroundColor: DM("white") }]}>
                     <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
-                            text={"Do you allow smoking in your car?"}
+                            text={"Allow smoking in your car"}
                             value={isSmokingAllowed}
                             onValueChanged={(value: boolean) =>
                                 setSmokingAllowed(value)
@@ -80,7 +86,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     </View>
                     <View>
                         <ChooseOption
-                            text={"Do you allow eating in your car?"}
+                            text={"Allow eating in your car"}
                             value={isEatingAllowed}
                             onValueChanged={(value: boolean) => setEatingAllowed(value)}
                         />
@@ -99,10 +105,12 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                             maxLength={100}
                             numberOfLines={10}
                             value={comments}
-                            onChangeText={(text) => setComments(text)}
+                            onChangeText={(text) => { setComments(text);
+                                setRemainingSymbolsText(
+                                    `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
                         />
                         <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
-                            Up to 100 symbols
+                            {remainingSymbolsText}
                         </Text>
                         <View style={PreferencesStyle.whitespaceBlock} />
                     </View>

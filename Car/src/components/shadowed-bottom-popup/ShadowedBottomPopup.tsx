@@ -15,7 +15,7 @@ import {
 import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import BottomPopup from "../bottom-popup/BottomPopup";
 import BottomPopupProps from "../bottom-popup/BottomPopupProps";
-import DM from "../styles/DM";
+import { useTheme } from "../theme/ThemeProvider";
 import HeaderStyle from "../styles/HeaderStyle";
 
 interface ShadowedBottomPopupComponent {
@@ -25,6 +25,7 @@ interface ShadowedBottomPopupComponent {
 }
 
 const ShadowedBottomPopup : ShadowedBottomPopupComponent = (props: BottomPopupProps) => {
+    const { DM } = useTheme();
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
 

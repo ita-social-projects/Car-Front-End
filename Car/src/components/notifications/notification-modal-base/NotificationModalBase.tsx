@@ -1,9 +1,11 @@
 import React, { ReactNode } from "react";
 import { Modal, StyleProp, View, ViewStyle } from "react-native";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import NotificationModalBaseStyle from "./NotificationModalBaseStyle";
 
 const NotificationModalBase = (props: {isVisible: boolean, styles?: StyleProp<ViewStyle>, children?: ReactNode}) => {
+    const { DM } = useTheme();
+
     return (
         <Modal
             visible={props.isVisible}

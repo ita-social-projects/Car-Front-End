@@ -1,9 +1,11 @@
 import { Text, View } from "react-native";
 import JourneyNewApplicantStyle from "../JourneyNewApplicantStyle";
-import DM from "../../styles/DM";
+import { useTheme } from "../../theme/ThemeProvider";
 import React from "react";
 
 const RequestComment = ({ comments } : {comments?: string}) => {
+    const { DM } = useTheme();
+
     if (!comments) {
         return null;
     }
