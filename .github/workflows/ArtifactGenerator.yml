@@ -43,7 +43,9 @@ jobs:
       - name: Build app for using only in simulator
         run: |
              cd Car/ios
-             xcodebuild CODE_SIGNING_ALLOWED="NO" CODE_SIGN_IDENTITY="" -workspace Car.xcworkspace -scheme Car -sdk "iphonesimulator" -destination "generic/platform=iOS Simulator" -configuration Release archive -archivePath $PWD/build/car.xcarchive
+             xcodebuild -workspace Car.xcworkspace -scheme Car -sdk "iphoneos" -destination "generic/platform=iOS" -configuration Release archive -archivePath $PWD/build/car.xcarchive
+             xcodebuild -exportArchive -archivePath $PWD/build/SoftServeCarMobile.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
+      #xcodebuild CODE_SIGNING_ALLOWED="NO" CODE_SIGN_IDENTITY="" -workspace Car.xcworkspace -scheme Car -sdk "iphonesimulator" -destination "generic/platform=iOS Simulator" -configuration Release archive -archivePath $PWD/build/car.xcarchive
       #Than u will have devaccount or certificate for Ad-hoc deployment use this command instead of command which is above
       # xcodebuild -workspace Car.xcworkspace -scheme Car -sdk "iphoneos" -destination "generic/platform=iOS" -configuration Release archive -archivePath $PWD/build/car.xcarchive
       #After that use command for creating ipa from xcarchive (u will have to create exportOptions.plist file (read about it in the internet)):
