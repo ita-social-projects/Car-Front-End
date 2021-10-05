@@ -244,19 +244,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) =>{
-                //let [a, b] = res.data;
-
-                if(res.data[IS_DEPARTURE_TIME_VALID] === true){
+                if(res.data.isDepartureTimeValid === true){
                     setSuccessfullyPublishModalIsVisible(true);
                 }
-                else if (res.data[IS_DEPARTURE_TIME_VALID] === false){
+                else if (res.data.isDepartureTimeValid === false){
                     setModal(invalidJourneyTimeModal);
-                }
-                else{
-                    //console.log(a);
-                    //console.log(b);
-                    //console.log(res.data[IS_DEPARTURE_TIME_VALID - 1]);
-                    res.data[IS_DEPARTURE_TIME_VALID];
                 }
             })
             .catch(() => setModal(publishErrorModal));

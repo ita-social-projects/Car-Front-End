@@ -8,6 +8,7 @@ import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
 import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
 import Invitation from "../../models/invitation/Invitation";
 import { AxiosRequestConfig } from "axios";
+import JourneyTimeModel from "../../models/journey/JoruneyTimeModel";
 
 const route = APIRoutes.getJourneyUrl();
 
@@ -28,7 +29,7 @@ const JourneyService = {
         APIService.get<Array<Array<Stop>>>(route + "recent"),
 
     add: async (journey: JourneyDto) =>
-        APIService.post<[JourneyDto, boolean]>(route, journey),
+        APIService.post<JourneyTimeModel>(route, journey),
 
     getFilteredJourneys: async (filter: FilterJourneyModel) =>
         APIService.get<Array<Journey>>(route + "filter/", { params: filter }),
