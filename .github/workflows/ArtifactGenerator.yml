@@ -2,7 +2,6 @@ name: Build Android and iOS
 on:
   push:
     branches: [ develop ]
-
 jobs:
   android_app: 
     runs-on: ubuntu-latest
