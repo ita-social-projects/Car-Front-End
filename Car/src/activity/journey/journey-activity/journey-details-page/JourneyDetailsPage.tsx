@@ -48,7 +48,6 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import appInsights from "../../../../components/telemetry/AppInsights";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -190,8 +189,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             .then((res) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
-            })
-            .catch((e) => appInsights.trackException({ exception: e }));
+            });
 
         UserService.getAllUsers().then((res) => {
             setAllUsers(res.data);
