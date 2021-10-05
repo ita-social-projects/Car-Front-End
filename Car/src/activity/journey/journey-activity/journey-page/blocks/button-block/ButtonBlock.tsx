@@ -1,7 +1,7 @@
 import JourneyPageStyle from "../../JourneyPageStyle";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { Divider } from "react-native-elements";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import React from "react";
@@ -38,7 +38,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
             <Divider style={[JourneyPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
             <View style={JourneyPageStyle.buttonsBlock}>
                 {(props.isDriver || props.isPassenger) && (
-                    <TouchableOpacity
+                    <Pressable
                         style={[JourneyPageStyle.messageAllButton, {
                             backgroundColor: DM("white"),
                             borderColor: DM("black") }]}
@@ -47,7 +47,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                         <Text style={[JourneyPageStyle.messageAllButtonText, { color: DM("black") }]}>
                             Message to all
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 )}
                 {!props.isDriver && !props.isPassenger && (
                     <TouchableOpacity
