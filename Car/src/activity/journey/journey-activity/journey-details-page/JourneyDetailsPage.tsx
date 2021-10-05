@@ -19,10 +19,11 @@ import {
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
     MIN_AVAILABLE_SEATS_COUNT,
+    IS_DEPARTURE_TIME_VALID
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID
+    FIRST_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -33,7 +34,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal, invalidJourneyTimeModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -243,25 +244,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) =>{
-                if(res.data[SECOND_ELEMENT_INDEX] === true){
+                let [a, b] = res.data;
+
+                if(res.data[IS_DEPARTURE_TIME_VALID] === true){
                     setSuccessfullyPublishModalIsVisible(true);
                 }
+                else if (res.data[IS_DEPARTURE_TIME_VALID] === false){
+                    setModal(invalidJourneyTimeModal);
+                }
                 else{
-                    setModal(publishErrorModal);// todo: create new modal
+                    //console.log(a);
+                    console.log(b);
+                    //console.log(res.data[IS_DEPARTURE_TIME_VALID - 1]);
+                    res.data[IS_DEPARTURE_TIME_VALID];
                 }
             })
             .catch(() => setModal(publishErrorModal));
-
-        // let promise = JourneyService.add(newJourney);
-        // let res = await promise.then((r) => r.data);
-        // const [test, bol] = res;
-
-        // if(bol === false){
-        //     setModal(publishErrorModal);
-        // }
-        // else{
-        //     setSuccessfullyPublishModalIsVisible(true);
-        // }
 
         setRideIsPublishing(false);
     };
