@@ -30,7 +30,6 @@ jobs:
           name: car-app-android.v1.0.${{ github.run_number }}.apk
           path: /home/runner/work/Car-Front-End/Car-Front-End/Car/android/app/build/outputs/apk/release/
   ios_app: 
-  #this build is only for simulator!
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -47,7 +46,7 @@ jobs:
           npm install
           cd ios
           pod install
-      - name: Build app for using only in simulator
+      - name: Build app
         run: |
              cd Car/ios
              xcodebuild CODE_SIGNING_ALLOWED="NO" CODE_SIGN_IDENTITY="" -workspace Car.xcworkspace -scheme Car -sdk "iphoneos" -destination "generic/platform=iOS Simulator" -configuration Release archive -archivePath $PWD/build/car.xcarchive
@@ -56,7 +55,7 @@ jobs:
       #After that use command for creating ipa from xcarchive (u will have to create exportOptions.plist file (read about it in the internet)):
       # xcodebuild -exportArchive -archivePath $PWD/build/SoftServeCarMobile.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
       #Since u can't open .xcarchive via terminal u have to change it's extension
-      - name: Simualtor app extraction from xcarchive
+      - name: App extraction from xcarchive
         run: |
            cd Car/ios/build/
            mv car.xcarchive car
