@@ -34,6 +34,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - name: create-credentials-manager
+        id: create-credentials-manager
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "credentials.json"
+          json: ${{ secrets.CREDENTIALS }}
+          dir: './Car/credentials'
       - name: Install npm dependencies
         run: |
           cd Car
