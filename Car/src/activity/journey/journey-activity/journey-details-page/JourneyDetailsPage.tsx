@@ -22,7 +22,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, ZERO_ID
+    FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -242,8 +242,26 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .then((res) =>{
+                if(res.data[SECOND_ELEMENT_INDEX] === true){
+                    setSuccessfullyPublishModalIsVisible(true);
+                }
+                else{
+                    setModal(publishErrorModal);// todo: create new modal
+                }
+            })
             .catch(() => setModal(publishErrorModal));
+
+        // let promise = JourneyService.add(newJourney);
+        // let res = await promise.then((r) => r.data);
+        // const [test, bol] = res;
+
+        // if(bol === false){
+        //     setModal(publishErrorModal);
+        // }
+        // else{
+        //     setSuccessfullyPublishModalIsVisible(true);
+        // }
 
         setRideIsPublishing(false);
     };

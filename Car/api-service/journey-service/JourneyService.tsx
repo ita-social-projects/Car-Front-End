@@ -28,7 +28,7 @@ const JourneyService = {
         APIService.get<Array<Array<Stop>>>(route + "recent"),
 
     add: async (journey: JourneyDto) =>
-        APIService.post<JourneyDto>(route, journey),
+        APIService.post<[JourneyDto, boolean]>(route, journey),
 
     getFilteredJourneys: async (filter: FilterJourneyModel) =>
         APIService.get<Array<Journey>>(route + "filter/", { params: filter }),
