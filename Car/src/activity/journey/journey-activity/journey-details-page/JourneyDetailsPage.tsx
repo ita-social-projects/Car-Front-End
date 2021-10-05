@@ -244,7 +244,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) =>{
-                let [a, b] = res.data;
+                //let [a, b] = res.data;
 
                 if(res.data[IS_DEPARTURE_TIME_VALID] === true){
                     setSuccessfullyPublishModalIsVisible(true);
@@ -254,7 +254,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 }
                 else{
                     //console.log(a);
-                    console.log(b);
+                    //console.log(b);
                     //console.log(res.data[IS_DEPARTURE_TIME_VALID - 1]);
                     res.data[IS_DEPARTURE_TIME_VALID];
                 }
