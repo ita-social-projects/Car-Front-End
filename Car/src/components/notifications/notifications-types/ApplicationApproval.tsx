@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../auth/AuthContext";
 import NotificationProps from "../NotificationProps";
 import ApplicationAnswer from "./ApplicationAnswer";
 
 const ApplicationApproval = (props: NotificationProps) => {
+    const user = useContext(AuthContext).user;
+
     return (
         <ApplicationAnswer
             notification = {props}
@@ -10,6 +13,7 @@ const ApplicationApproval = (props: NotificationProps) => {
             notificationHeaderTittle = "REQUEST IS APPROVED"
             notificationHeaderMessage = "The driver has approved your request!"
             withWithdraw
+            journeyUserId = {user?.id!}
         />
     );
 };

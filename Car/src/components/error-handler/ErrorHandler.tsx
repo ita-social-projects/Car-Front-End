@@ -3,9 +3,12 @@ import ErrorAlert from "../error-alert/ErrorAlert";
 import RNRestart from "react-native-restart";
 import appInsights from "../telemetry/AppInsights";
 import {
+    getUnhandledPromiseRejectionTracker,
     setUnhandledPromiseRejectionTracker,
 } from "react-native-promise-rejection-utils";
 import axios from "axios";
+
+const prevTracker = getUnhandledPromiseRejectionTracker();
 
 const JSErrorHandler = (error, isFatal) => {
     appInsights.trackException({ exception: error });
@@ -23,7 +26,12 @@ const UnhandledPromiseRejectionErrrorHandler = (id,error) => {
 
     if(!axios.isCancel(error))
     {
-        ErrorAlert("Ups, something went wrong", () => RNRestart.Restart());
+        if(axios.isAxiosError(error)) {
+            ErrorAlert("Ups, something went wrong", () => RNRestart.Restart());
+        }
+    }
+    if (prevTracker !== undefined) {
+        prevTracker(id, error);
     }
 };
 

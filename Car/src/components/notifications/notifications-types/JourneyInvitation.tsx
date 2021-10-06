@@ -133,6 +133,13 @@ const JourneyInvitation = (props: NotificationProps) => {
                     userId={user!.id}
                     journeyId={props.journeyId}
                     withSeats={true}
+                    journey={journey!}
+                    journeyUser={{
+                        journeyId: journey!.id,
+                        userId: user!.id,
+                        withBaggage: false,
+                        passangersCount: 1
+                    }}
                 />
 
                 <NotificationRideStops

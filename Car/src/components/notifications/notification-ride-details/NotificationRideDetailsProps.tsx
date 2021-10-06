@@ -1,6 +1,9 @@
 import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
+import Journey from "../../../../models/journey/Journey";
 
 interface NotificationRideDetailsProps {
+    journey: Journey,
+    journeyUser: JourneyUserDto,
     IsBaggageVisible?: boolean;
     IsAvailableSeatsVisible?: boolean;
     IsFeeVisible?: boolean;
@@ -9,7 +12,6 @@ interface NotificationRideDetailsProps {
     journeyId: number,
     userId: number,
     withSeats?: boolean,
-    journeyUser?: JourneyUserDto,
     passangersCount?: number,
     withPassangers?: boolean
 }

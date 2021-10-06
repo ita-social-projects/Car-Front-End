@@ -30,6 +30,7 @@ test("renders correctly", async () =>
                 notificationHeaderMessage="Header message"
                 notificationHeaderTittle="Header Title"
                 notificationTittle="Tittle"
+                journeyUserId = {1}
                 withWithdraw
                 IsAvailableSeatsVisible
                 IsBaggageVisible
@@ -37,6 +38,7 @@ test("renders correctly", async () =>
                 IsDetailsTitleVisible
                 IsFeeVisible
                 IsStopsTitleVisible
+
             />
         )
     ).toMatchInlineSnapshot(`
