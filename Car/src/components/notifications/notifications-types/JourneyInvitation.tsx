@@ -11,7 +11,6 @@ import NotificationDeclineButton from "../notification-buttons/NotificationDecli
 import NotificationHeader from "../notification-header/NotificationHeader";
 import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
-import NotificationRideStops from "../notification-ride-stops/NotificationRideStops";
 import NotificationProps from "../NotificationProps";
 import InvitationType from "../../../../models/invitation/InvitationType";
 import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
@@ -19,6 +18,10 @@ import Stop from "../../../../models/stop/Stop";
 import JourneyPoint from "../../../../models/journey/JourneyPoint";
 import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
 import { ACCEPTED_INVITATION_TYPE, REJECTED_INVITATION_TYPE } from "../../../constants/NotificationConstants";
+
+import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
+import { SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
+import StopType from "../../../../models/stop/StopType";
 
 const JourneyInvitation = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
@@ -89,7 +92,23 @@ const JourneyInvitation = (props: NotificationProps) => {
                     withBaggage: false,
                     passangersCount: 1
                 },
-                ApplicantStops: []
+                ApplicantStops: (journey?.stops.
+                    map((stop, index) => {
+                        return {
+                            address: {
+                                id: 0,
+                                latitude: stop!.address!.latitude,
+                                longitude: stop!.address!.longitude,
+                                name: stop!.address!.name
+                            },
+                            index: index,
+                            type: StopType.Intermediate,
+                            id: 0,
+                            journeyId: journey.id,
+                            userId: user!.id,
+                            isCancelled: false,
+                        };
+                    })) ?? []
             }
         ).then(addingUserResult => {
             if (addingUserResult.status == HTTP_STATUS_OK) {
@@ -142,13 +161,11 @@ const JourneyInvitation = (props: NotificationProps) => {
                     }}
                 />
 
-                <NotificationRideStops
-                    title={"Your route"}
-                    stopsOwner={user}
-                    journeyId={props.journeyId}
-                    IsStopsTitleVisible
-                    onStopPress = {onStopPress}
-                    notification = {props}/>
+                <StopsBlock
+                    stops={journey?.stops ?? []}
+                    onStopPress={() => onStopPress}
+                    highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                />
 
                 <NotificationButtonGroup>
                     <NotificationConfirmButton

@@ -147,12 +147,14 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     };
 
     const validatePlateNumber = () => {
+        let plateNumberTrimmed : string = plateNumber.trim();
+
         setValidPlateNumber(
             Boolean(
-                plateNumber &&
-                plateNumber.length >= MIN_PLATE_NUMBER_LENGTH &&
-                plateNumber.length <= MAX_PLATE_NUMBER_LENGTH &&
-                plateNumber.match(/^[A-Za-zА-ЯҐЄІЇа-яґєії0-9- ]+$/)
+                !plateNumber ||
+                (plateNumberTrimmed.length >= MIN_PLATE_NUMBER_LENGTH &&
+                plateNumberTrimmed.length <= MAX_PLATE_NUMBER_LENGTH &&
+                plateNumberTrimmed.match(/^[A-Za-zА-ЯҐЄІЇа-яґєії0-9- ]+$/))
             ));
     };
 
@@ -187,7 +189,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         car.append("id", Number(props.carId));
         car.append("modelId", Number(selectedModel?.value));
         car.append("color", Number(selectedColor?.value));
-        car.append("plateNumber", plateNumber);
+        car.append("plateNumber", plateNumber.trim());
         if (photo !== null && photo !== undefined) {
             car.append("image", {
                 name: photo.name,
