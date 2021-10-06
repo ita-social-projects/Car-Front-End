@@ -51,6 +51,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
         applicantStops: data?.applicantStops,
         passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
     });
+    const [journeyIsFinished, setJourneyIsFinished] = useState(false);
 
     useEffect(() => {
         JourneyService.getJourney(params.journeyId).then(res => {
@@ -64,6 +65,13 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                 getStopByType(res.data, StopType.Finish)!
             ]);
         });
+    }, []);
+
+    useEffect(() => {
+        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.journeyId, user!.id, true)
+            .then(res => {
+                setJourneyIsFinished(new Date(res.data.item1!.departureTime) < new Date());
+            });
     }, []);
 
     const sendRejection = () => {
@@ -170,11 +178,13 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
                         <NotificationButtonGroup>
                             <NotificationConfirmButton
+                                disabled={journeyIsFinished}
                                 confirmText={"ACCEPT"}
                                 onConfirm={approveUser}
                             />
 
                             <NotificationDeclineButton
+                                disabled={journeyIsFinished}
                                 declineText={"Decline"}
                                 onDecline={() => setConfirmationModalVisible(true)}
                             />
