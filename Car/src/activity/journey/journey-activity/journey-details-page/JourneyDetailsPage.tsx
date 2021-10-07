@@ -192,8 +192,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             .then((res) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
-            })
-            .catch((e) => appInsights.trackException({ exception: e }));
+            });
 
         UserService.getAllUsers().then((res) => {
             setAllUsers(res.data);
