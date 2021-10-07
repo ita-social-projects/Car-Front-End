@@ -1,5 +1,5 @@
 const APIConfig = {
-    URL: "https://car-api-project.azurewebsites.net/",
+    URL: "http://localhost:5000/",
 };
 
 export default APIConfig;
