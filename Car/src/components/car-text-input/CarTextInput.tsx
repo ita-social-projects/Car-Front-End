@@ -19,9 +19,6 @@ const CarTextInput = (props: CarTextInputProps) => {
             render={() => (
                 <>
                     <View style={[CarTextInputStyle.container, { borderColor: DM("black") }]}>
-                        <Text style={[CarTextInputStyle.requiredPointer, { color: DM("red") }]}>
-                            *
-                        </Text>
                         <TextInput
                             onChangeText={(text: string) => props.onChangeText!(text)}
                             placeholder={props.placeHolder}

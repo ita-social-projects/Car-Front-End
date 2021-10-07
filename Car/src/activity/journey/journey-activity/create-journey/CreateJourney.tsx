@@ -137,8 +137,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             .then((res) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
-            })
-            .catch((e) => appInsights.trackException({ exception: e }));
+            });
 
         JourneyService
             .getRecentJourneyStops()
@@ -146,8 +145,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 setRecentAddresses(([] as Address[]).concat(
                     ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
                 setRecentAddressesIsLoading(false);
-            })
-            .catch((e) => appInsights.trackException({ exception: e }));
+            });
 
         return props.navigation?.addListener("blur", () => {
             journey && props.closeMoreOptionPopup();
