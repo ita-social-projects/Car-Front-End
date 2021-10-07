@@ -247,12 +247,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             .then((res) => {
                 const newChat : CreateChat = {
                     id: res.data.id,
-                    name: 
+                    name:
                         user?.name + " " +
                         user?.surname + "'s ride"
-                }
+                };
+
                 ChatService.addChat(newChat)
-                .then(() => setSuccessfullyPublishModalIsVisible(true))
+                    .then(() => setSuccessfullyPublishModalIsVisible(true));
             })
             .catch(() => setModal(publishErrorModal));
 
