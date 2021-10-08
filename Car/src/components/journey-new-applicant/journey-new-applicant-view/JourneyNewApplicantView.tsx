@@ -56,6 +56,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     useEffect(() => {
         JourneyService.getJourney(params.journeyId).then(res => {
             setJourneyPoints(res.data!.journeyPoints);
+            setJourneyIsFinished(new Date(res.data!.departureTime) < new Date());
             setStops([
                 getStopByType(res.data, StopType.Start)!,
                 data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
@@ -65,13 +66,6 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                 getStopByType(res.data, StopType.Finish)!
             ]);
         });
-    }, []);
-
-    useEffect(() => {
-        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.journeyId, user!.id, true)
-            .then(res => {
-                setJourneyIsFinished(new Date(res.data.item1!.departureTime) < new Date());
-            });
     }, []);
 
     const sendRejection = () => {
