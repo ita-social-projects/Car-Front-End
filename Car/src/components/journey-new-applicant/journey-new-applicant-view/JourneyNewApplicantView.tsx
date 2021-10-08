@@ -51,10 +51,12 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
         applicantStops: data?.applicantStops,
         passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
     });
+    const [journeyIsFinished, setJourneyIsFinished] = useState(false);
 
     useEffect(() => {
         JourneyService.getJourney(params.journeyId).then(res => {
             setJourneyPoints(res.data!.journeyPoints);
+            setJourneyIsFinished(new Date(res.data!.departureTime) < new Date());
             setStops([
                 getStopByType(res.data, StopType.Start)!,
                 data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
@@ -170,11 +172,13 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
                         <NotificationButtonGroup>
                             <NotificationConfirmButton
+                                disabled={journeyIsFinished}
                                 confirmText={"ACCEPT"}
                                 onConfirm={approveUser}
                             />
 
                             <NotificationDeclineButton
+                                disabled={journeyIsFinished}
                                 declineText={"Decline"}
                                 onDecline={() => setConfirmationModalVisible(true)}
                             />
