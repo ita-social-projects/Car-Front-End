@@ -25,17 +25,22 @@ import StopType from "../../../../models/stop/StopType";
 
 const JourneyInvitation = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
+    const [wasOpened, setWasOpened] = useState(false);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const [acceptModalVisible, setAcceptModalVisible] = useState(false);
     const [journey, setJourney] = useState<Journey>();
     const user = useContext(AuthContext).user;
 
-    useEffect(() => {
-        JourneyService.getJourney(props.journeyId, false).then(res => {
-            setJourney(res.data);
-        });
-    }, []);
+    useEffect(()=> {
+        if(!wasOpened&&notificationModalVisible)
+        {
+            setWasOpened(true);
+            JourneyService.getJourney(props.journeyId, false).then(res => {
+                setJourney(res.data);
+            });
+        }
+    }, [notificationModalVisible]);
 
     const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
@@ -67,7 +72,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                 id: 0,
                 type: InvitationType.Rejected,
                 invitedUserId: user!.id,
-                journeyId: journey!.id,
+                journeyId: props.journeyId,
             }
         ).then((updatingInvitationResult) => {
             if(updatingInvitationResult.status === HTTP_STATUS_OK) {
@@ -87,7 +92,7 @@ const JourneyInvitation = (props: NotificationProps) => {
         JourneyService.addUser(
             {
                 journeyUser: {
-                    journeyId: journey!.id,
+                    journeyId: props.journeyId,
                     userId: user!.id,
                     withBaggage: false,
                     passangersCount: 1
@@ -104,7 +109,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                             index: index,
                             type: StopType.Intermediate,
                             id: 0,
-                            journeyId: journey.id,
+                            journeyId: props.journeyId,
                             userId: user!.id,
                             isCancelled: false,
                         };
@@ -117,7 +122,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                         id: 0,
                         type: InvitationType.Accepted,
                         invitedUserId: user!.id,
-                        journeyId: journey!.id,
+                        journeyId: props.journeyId,
                     }
                 ).then((updatingInvitationResult) => {
                     if (updatingInvitationResult.status == HTTP_STATUS_OK) {
@@ -154,7 +159,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                     withSeats={true}
                     journey={journey!}
                     journeyUser={{
-                        journeyId: journey!.id,
+                        journeyId: props.journeyId,
                         userId: user!.id,
                         withBaggage: false,
                         passangersCount: 1

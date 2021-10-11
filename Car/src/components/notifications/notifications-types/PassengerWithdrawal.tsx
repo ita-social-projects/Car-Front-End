@@ -28,6 +28,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
+    const [wasOpened, setWasOpened] = useState(false);
     const source = useRef(axios.CancelToken.source());
 
     const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
@@ -37,23 +38,25 @@ const PassengerWithdrawal = (props: NotificationProps) => {
     };
 
     useEffect(() => {
-        JourneyService.getJourney(props.journeyId, false, { cancelToken: source.current.token })
-            .then(res => {
-                setJourney(res.data);
-                setJourneyUser(data.journeyUser);
+        if(!wasOpened&&modalVisible)
+        {
+            setWasOpened(true);
+            JourneyService.getJourney(props.journeyId, false, { cancelToken: source.current.token })
+                .then(res => {
+                    setJourney(res.data);
+                    setJourneyUser(data.journeyUser);
 
-                setStops([
+                    setStops([
                     getStopByType(res.data, StopType.Start)!,
                     res.data!.stops.filter((stop:Stop) =>
                         stop!.index === FIRST_ELEMENT_INDEX && stop!.userId === props.sender?.id)[FIRST_ELEMENT_INDEX],
                     res.data!.stops.filter((stop:Stop) =>
                         stop!.index === SECOND_ELEMENT_INDEX && stop!.userId === props.sender?.id)[FIRST_ELEMENT_INDEX],
                     getStopByType(res.data, StopType.Finish)!
-                ]);
-            });
-
-        return () => source.current.cancel();
-    }, []);
+                    ]);
+                });
+        }
+    }, [modalVisible]);
 
     return (
         <>

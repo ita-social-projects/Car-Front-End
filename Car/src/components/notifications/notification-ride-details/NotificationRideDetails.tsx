@@ -40,14 +40,14 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
 
             {IsPropertyShown(props.IsBaggageVisible) && <View style={style.detailsContainer}>
                 <Text style={{ ...style.value, color: DM("black") }}>
-                    {props.journeyUser.withBaggage? "With luggage" : "Without luggage"}</Text>
+                    {props.journeyUser?.withBaggage? "With luggage" : "Without luggage"}</Text>
             </View>}
 
             { props.withPassangers &&
                  <View style={style.detailsContainer}>
                      <Text style={{ ...style.label, color: DM("black") }}>Passangers: </Text>
                      <Text style={{ ...style.value, color: DM("black") }}>
-                         {props.journeyUser.passangersCount ?? DEFAULT_PASSANGERS_COUNT}</Text>
+                         {props.journeyUser?.passangersCount ?? DEFAULT_PASSANGERS_COUNT}</Text>
                  </View>
             }
         </View>

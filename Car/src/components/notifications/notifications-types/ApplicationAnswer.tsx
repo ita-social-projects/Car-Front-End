@@ -53,27 +53,30 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const data = JSON.parse(props.notification.notificationData);
     const source = useRef(axios.CancelToken.source());
+    const [wasOpened,setWasOpened] = useState(false);
 
     useEffect(() => {
-        JourneyService.getJourneyWithJourneyUser(props.notification.journeyId,
-            props.journeyUserId,
-            false,
-            { cancelToken: source.current.token })
-            .then(res => {
-                setJourney(res.data.item1);
-                setJourneyUser(res.data.item2);
-                setStops([
-                    getStopByType(res.data.item1, StopType.Start)!,
-                    data?.applicantStops!.filter((stop:Stop) =>
-                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    data?.applicantStops!.filter((stop:Stop) =>
-                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    getStopByType(res.data.item1, StopType.Finish)!
-                ]);
-            });
-
-        return () => source.current.cancel();
-    }, []);
+        if(!wasOpened&&notificationModalVisible)
+        {
+            setWasOpened(true);
+            JourneyService.getJourneyWithJourneyUser(props.notification.journeyId,
+                props.journeyUserId,
+                false,
+                { cancelToken: source.current.token })
+                .then(res => {
+                    setJourney(res.data.item1);
+                    setJourneyUser(res.data.item2);
+                    setStops([
+                        getStopByType(res.data.item1, StopType.Start)!,
+                        data?.applicantStops!.filter((stop:Stop) =>
+                            stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                        data?.applicantStops!.filter((stop:Stop) =>
+                            stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                        getStopByType(res.data.item1, StopType.Finish)!
+                    ]);
+                });
+        }
+    }, [notificationModalVisible]);
 
     const onStopPress = (stop:Stop, journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
