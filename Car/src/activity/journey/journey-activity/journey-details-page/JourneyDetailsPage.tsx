@@ -22,7 +22,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, ZERO_ID
+    FIRST_ELEMENT_INDEX, PREFERENCES_COMMENTS_MAX_LENGTH, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -48,6 +48,7 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
+import PreferencesStyle from "../../../my-profile/my-profile-activity/preferences/PreferencesStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -143,6 +144,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
     const [comment, setComment] = useState(journey?.comments ?? "");
+    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
 
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
@@ -418,22 +420,29 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <View style={CreateJourneyStyle.commentsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Comments</Text>
-                            <TextInput
-                                style={[CreateJourneyStyle.textInputStyle,
-                                    {
-                                        borderColor: DM("black"),
-                                        color: DM("black")
-                                    }]}
-                                multiline={true}
-                                maxLength={100}
-                                numberOfLines={10}
-                                placeholder={"Write your comment"}
-                                placeholderTextColor={DM("#686262")}
-                                onChangeText={text => setComment(text)}
-                                value={comment}
-                            />
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>Up to 100 symbols</Text>
+                            <View style={PreferencesStyle.commentsContainer}>
+                                <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
+                                    Comments
+                                </Text>
+                                <TextInput
+                                    style={[PreferencesStyle.textInput,
+                                        {
+                                            borderColor: DM("black"),
+                                            color: DM("black")
+                                        }]}
+                                    multiline={true}
+                                    maxLength={100}
+                                    numberOfLines={10}
+                                    value={comment}
+                                    onChangeText={(text) => { setComment(text);
+                                        setRemainingSymbolsText(
+                                            `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
+                                />
+                                <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
+                                    {remainingSymbolsText}
+                                </Text>
+                                <View style={PreferencesStyle.whitespaceBlock} />
+                            </View>
                         </View>
 
                         <View style={CreateJourneyStyle.invitationsView}>

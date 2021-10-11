@@ -6,6 +6,8 @@ import SendRequestModalStyle from "./SendRequestModalStyle";
 import SendRequestModalProps from "./SendRequestModalProps";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPicker from "../../../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
+import PreferencesStyle from "../../../../../my-profile/my-profile-activity/preferences/PreferencesStyle";
+import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../../../../../constants/GeneralConstants";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
     const { DM } = useTheme();
@@ -14,6 +16,8 @@ const SendRequestModal = (props: SendRequestModalProps) => {
     const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
     const [selectedQuantity, setSelectedQuantity] =
         useState({ id: props.passangersCount, name: props.passangersCount.toString() });
+    const [comment, setComment] = useState("");
+    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
 
     return (
         <Modal
@@ -40,24 +44,28 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                 Send request to driver
                             </Text>
 
-                            <View style={SendRequestModalStyle.commentsContainer}>
-                                <Text style={[SendRequestModalStyle.commentsText, { color: DM("#414045") }]}>
-                                    Comments
+                            <View style={PreferencesStyle.commentsContainer}>
+                                <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
+                                        Comments
                                 </Text>
                                 <TextInput
-                                    style={[SendRequestModalStyle.textInput,
-                                        { borderColor: DM("black"), color: DM("#000000") }]}
+                                    style={[PreferencesStyle.textInput,
+                                        {
+                                            borderColor: DM("black"),
+                                            color: DM("black")
+                                        }]}
                                     multiline={true}
                                     maxLength={100}
                                     numberOfLines={10}
-                                    value={props.comments}
-                                    placeholder={"Any comments?"}
-                                    placeholderTextColor={DM("#888888")}
-                                    onChangeText={props.onCommentsChange}
+                                    value={comment}
+                                    onChangeText={(text) => { setComment(text);
+                                        setRemainingSymbolsText(
+                                            `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
                                 />
-                                <Text style={[SendRequestModalStyle.hintText, { color: DM("#000000") }]}>
-                                    Up to 100 symbols
+                                <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
+                                    {remainingSymbolsText}
                                 </Text>
+                                <View style={PreferencesStyle.whitespaceBlock} />
                             </View>
                             <View style ={SendRequestModalStyle.dropDownContainer}>
                                 <View style ={SendRequestModalStyle.dropDown}>
