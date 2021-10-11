@@ -56,7 +56,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
     useEffect(() => {
         JourneyService.getJourney(params.journeyId).then(res => {
-            setJourney(res.data!);
+            setJourney(res.data);
             setJourneyPoints(res.data!.journeyPoints);
             setStops([
                 getStopByType(res.data, StopType.Start)!,

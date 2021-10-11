@@ -31,10 +31,10 @@ const PassengerWithdrawal = (props: NotificationProps) => {
     const [wasOpened, setWasOpened] = useState(false);
     const source = useRef(axios.CancelToken.source());
 
-    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    const onStopPress = (stop:Stop, myStops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
         setModalVisible(false);
-        onStopPressHandler(stop,stops,journeyPoints, notification);
+        onStopPressHandler(stop,myStops,journeyPoints, notification);
     };
 
     useEffect(() => {
