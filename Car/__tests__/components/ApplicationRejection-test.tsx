@@ -15,7 +15,6 @@ test("renders correctly", async () =>
                     position: "Abc",
                     location: "Abc",
                     email: "Abc",
-                    token: "Abc",
                     fcmtoken: null,
                     hireDate: new Date("2021-01-01T20:00:00.000Z"),
                     imageId: null,
@@ -49,7 +48,6 @@ test("renders correctly", async () =>
             "phoneNumber": null,
             "position": "Abc",
             "surname": "Abc",
-            "token": "Abc",
           },
         }
       }

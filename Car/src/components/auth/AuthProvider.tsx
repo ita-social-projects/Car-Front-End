@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import AuthManager from "./AuthManager";
-import GraphManager from "./GraphManager";
 import * as navigation from "../navigation/Navigation";
 import User from "../../../models/user/User";
 import LoginService from "../../../api-service/login-service/LoginService";
@@ -40,7 +39,8 @@ const AuthProvider = ({ children }: any) => {
                 login: async () => {
                     let loginCanceled = false;
 
-                    await AuthManager.signInAsync().catch(() => {
+                    await AuthManager.signInAsync().catch((e) => {
+                        console.log(e);
                         loginCanceled = true;
                         navigateLoginWithResetIndicator();
                     });
@@ -50,7 +50,14 @@ const AuthProvider = ({ children }: any) => {
                     let accessToken = await AuthManager.getAccessTokenAsync();
 
                     if (accessToken) {
-                        const userGraph = await GraphManager.getUserAsync();
+                        const userGraph = {
+                            mail: "andriidzendzia@gmail.com",
+                            userPrincipalName:"dsffgdghf",
+                            givenName: "asad",
+                            surname: "sdf",
+                            officeLocation: "das",
+                            jobTitle: "ddd"
+                        };//await GraphManager.getUserAsync();
 
                         if (!userGraph) {
                             navigateLoginWithResetIndicator();
@@ -65,7 +72,6 @@ const AuthProvider = ({ children }: any) => {
                             location: userGraph.officeLocation,
                             position: userGraph.jobTitle,
                             id: 0,
-                            token: "",
                             fcmtoken: null,
                             imageId: null,
                             journeyCount: 0,
@@ -75,15 +81,7 @@ const AuthProvider = ({ children }: any) => {
 
                         const dbUser = await LoginService.loginUser(tempUser);
 
-                        if (!dbUser.data?.token) {
-                            navigateLoginWithResetIndicator();
-
-                            return;
-                        }
-
-                        const token: any = dbUser.data?.token;
-
-                        await AuthManager.saveAPIToken(token);
+                        console.log(dbUser);
 
                         await AsyncStorage.setItem(
                             "user",

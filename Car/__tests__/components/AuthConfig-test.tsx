@@ -1,19 +1,17 @@
 import AuthConfig from "../../src/components/auth/AuthConfig";
 
-test("should be correct", async () => expect(AuthConfig.clientId).toBe("16cd707a-5326-4c1f-8b79-f2f25597d4df"));
+test("should be correct", async () => expect(AuthConfig.clientId).toBe("cb3b5999-b5fc-40c5-9890-15d1c0130b45"));
 test("should be correct", async () => expect(AuthConfig.redirectUrl).toBe("car://auth/"));
 test("should be correct", async () => expect(JSON.stringify(AuthConfig.scopes)).toBe(JSON.stringify([
     "openid",
     "offline_access",
     "profile",
-    "User.Read",
-    "MailboxSettings.Read",
-    "Calendars.ReadWrite"
+    "https://ProjectCar.onmicrosoft.com/ProjectCarAPI/ApiAccess"
 ])));
 test("should be correct", async () => expect(AuthConfig.additionalParameters?.prompt).toBe("select_account"));
 test("should be correct", async () =>
     expect(AuthConfig.serviceConfiguration?.authorizationEndpoint)
-        .toBe("https://login.microsoftonline.com/common/oauth2/v2.0/authorize"));
+        .toBe("https://ProjectCar.b2clogin.com/ProjectCar.onmicrosoft.com/B2C_1_login/oauth2/v2.0/authorize"));
 test("should be correct", async () =>
     expect(AuthConfig.serviceConfiguration?.tokenEndpoint)
-        .toBe("https://login.microsoftonline.com/common/oauth2/v2.0/token"));
+        .toBe("https://ProjectCar.b2clogin.com/ProjectCar.onmicrosoft.com/B2C_1_login/oauth2/v2.0/token"));

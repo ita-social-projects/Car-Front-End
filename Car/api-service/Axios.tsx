@@ -8,7 +8,8 @@ const Axios = axios.create({ timeout: 20000 });
 
 Axios.interceptors.request.use(
     async (req: any) => {
-        const token = await AuthManager.getAPIToken();
+        await AuthManager.refreshAsync();
+        const token = await AuthManager.getAccessTokenAsync();
 
         if (token) {
             req.headers.Authorization = "Bearer " + token;
@@ -31,6 +32,7 @@ Axios.interceptors.response.use(
     async (error?: AxiosError) => {
         if (!axios.isCancel(error)) {
             appInsights.trackException({ exception: error });
+            console.log(error);
             if (axios.isAxiosError(error)) {
                 error.response?.status === StatusCodes.UNAUTHORIZED &&
                     (async () => { await AuthManager.signOutAsync(); })().then(() => {

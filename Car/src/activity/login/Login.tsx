@@ -14,14 +14,14 @@ const Login = (properties: LoginProps) => {
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const refresher = async (interval: NodeJS.Timer) => {
-        const apiToken = await AuthManager.getAPIToken();
+        const user = await AuthManager.getUser();
         const accessToken = await AuthManager.getAccessTokenAsync();
 
-        if (apiToken) {
+        if (user) {
             clearInterval(interval);
             loadingProcess(false);
         }
-        if (!apiToken && accessToken) {
+        if (!user && accessToken) {
             loadingProcess(true);
         }
         if (!accessToken) {
