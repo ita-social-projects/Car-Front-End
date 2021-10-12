@@ -6,27 +6,21 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 import React from "react";
 import ButtonBlockProps from "./ButtonBlockProps";
-import ChatService from "../../../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../../../models/Chat/CreateChat";
-import { StatusCodes } from "../../../../../../constants/Constants";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
     const { DM } = useTheme();
-    const onMessageToAllPress = () => {
-        const chat: CreateChat = {
-            id: props.journey?.id!,
-            name:
-                props.journey?.organizer?.name + " " +
-                props.journey?.organizer?.surname + "'s ride"
-        };
+    const chat: CreateChat = {
+        id: props.journey?.id!,
+        name:
+            props.journey?.organizer?.name + " " +
+            props.journey?.organizer?.surname + "'s ride"
+    };
 
-        ChatService.addChat(chat).then((res) => {
-            if (res.status === StatusCodes.OK) {
-                navigation.navigate("Chat", {
-                    chatId: props.journey?.id,
-                    header: res.data.name
-                });
-            }
+    const onMessageToAllPress = () => {
+        navigation.navigate("Chat", {
+            chatId: chat.id,
+            header: chat.name
         });
     };
 

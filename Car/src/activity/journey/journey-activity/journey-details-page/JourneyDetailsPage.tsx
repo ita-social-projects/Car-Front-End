@@ -48,6 +48,9 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
+import appInsights from "../../../../components/telemetry/AppInsights";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import CreateChat from "../../../../../models/Chat/CreateChat";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -240,13 +243,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then((res) =>{
-                if(res.data.isDepartureTimeValid === true){
-                    setSuccessfullyPublishModalIsVisible(true);
-                }
-                else if (res.data.isDepartureTimeValid === false){
-                    setModal(invalidJourneyTimeModal);
-                }
+            .then((res) => {
+                const newChat : CreateChat = {
+                    id: res.data.id,
+                    name:
+                        user?.name + " " +
+                        user?.surname + "'s ride"
+                };
+
+                ChatService.addChat(newChat)
+                    .then(() => setSuccessfullyPublishModalIsVisible(true));
             })
             .catch(() => setModal(publishErrorModal));
 
