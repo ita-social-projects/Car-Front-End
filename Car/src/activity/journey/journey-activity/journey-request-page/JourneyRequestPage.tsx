@@ -31,7 +31,7 @@ import JourneyPageStyle from "../journey-page/JourneyPageStyle";
 
 const JourneyRequestPage = (props: { route: { params: { journeyId: number } } }) => {
 
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [currentJourney, setJourney] = useState({} as Journey);
     const { user } = useContext(AuthContext);
     const { journeyId } = props.route.params;
@@ -98,15 +98,15 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
             <TextInput
                 style={[JourneyRequestPageStyle.textInput,
                     {
-                        borderColor: DM("black"),
-                        color: DM("#000000"),
+                        borderColor: colors.primary,
+                        color: colors.primary,
                     }]}
                 multiline={true}
                 maxLength={100}
                 numberOfLines={10}
                 value={text}
                 placeholder={"Any comments?"}
-                placeholderTextColor={DM("#888888")}
+                placeholderTextColor={colors.secondaryDark}
                 onChangeText={(fromInput) => {
                     comments = fromInput;
                     setText(fromInput);
@@ -134,14 +134,14 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
     const moreOptionsRef = useRef<any>(null);
 
     return (
-        <View style={[JourneyRequestPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
-            <Text style={[JourneyRequestPageStyle.pageText, { color: DM("#222222") }]}>
+        <View style={[JourneyRequestPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
+            <Text style={[JourneyRequestPageStyle.pageText, { color: colors.hover }]}>
                 Map implementation is in progress
             </Text>
 
             <BottomPopup
                 refForChild={ref => (moreOptionsRef.current = ref)}
-                style={{ backgroundColor: DM("white") }}
+                style={{ backgroundColor: colors.white }}
                 snapPoints={[
                     MAX_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
                     isLoading ? MIN_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_REQUEST_PAGE_POPUP_HEIGHT,
@@ -152,7 +152,7 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                 onCloseEnd={Keyboard.dismiss}
                 renderContent={
                     <KeyboardAwareScrollView
-                        style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: DM("white") }]}
+                        style={[JourneyRequestPageStyle.mainContainer, { backgroundColor: colors.white }]}
                         enableOnAndroid
                     >
                         <View style={JourneyRequestPageStyle.contentView}>
@@ -164,38 +164,38 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                                     <AvatarLogo user={currentJourney?.organizer} size={38.5} />
                                 </View>
                                 <View style={JourneyRequestPageStyle.userInfoBlock}>
-                                    <Text style={[JourneyRequestPageStyle.userNameText, { color: DM("black") }]}>
+                                    <Text style={[JourneyRequestPageStyle.userNameText, { color: colors.primary }]}>
                                         {currentJourney?.organizer?.name}{" "}
                                         {currentJourney?.organizer?.surname}'s ride
                                     </Text>
                                     <View style={JourneyRequestPageStyle.userSecondaryInfoBlock}>
-                                        <Text style={[JourneyRequestPageStyle.userRoleText, { color: DM("#909095") }]}>
+                                        <Text style={[JourneyRequestPageStyle.userRoleText, { color: colors.secondaryDark }]}>
                                             {currentJourney?.organizer?.position}
                                         </Text>
                                     </View>
                                 </View>
                             </View>
                             <View style={JourneyPageStyle.journeyDetailBlock}>
-                                <Text style={[JourneyPageStyle.dateText, { color: DM("#02A2CF") }]}>
+                                <Text style={[JourneyPageStyle.dateText, { color: colors.accentBlue }]}>
                                     {getTimeToShow(currentJourney)}
                                 </Text>
-                                <Text style={[JourneyPageStyle.feeText, { color: DM("black") }]}>
+                                <Text style={[JourneyPageStyle.feeText, { color: colors.primary }]}>
                                     {currentJourney?.isFree ? "Free" : "Paid"}
                                 </Text>
                             </View>
 
                             <View style={JourneyRequestPageStyle.driverBlockWhiteSpace} />
 
-                            <Divider style={[JourneyRequestPageStyle.separator, { backgroundColor: DM("#C1C1C5") }]} />
+                            <Divider style={[JourneyRequestPageStyle.separator, { backgroundColor: colors.secondaryLight }]} />
 
                             {/* Additional Info */}
 
                             <View style={JourneyRequestPageStyle.commentsContainer}>
-                                <Text style={[JourneyRequestPageStyle.commentsText, { color: DM("#414045") }]}>
+                                <Text style={[JourneyRequestPageStyle.commentsText, { color: colors.hover }]}>
                                     Comments
                                 </Text>
                                 <Comments />
-                                <Text style={[JourneyRequestPageStyle.hintText, { color: DM("#000000") }]}>
+                                <Text style={[JourneyRequestPageStyle.hintText, { color: colors.primary }]}>
                                     Up to 100 symbols
                                 </Text>
                             </View>
@@ -210,8 +210,8 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                                     style={[
                                         JourneyRequestPageStyle.confirmButton,
                                         {
-                                            backgroundColor: DM("white"),
-                                            borderColor: DM("black")
+                                            backgroundColor: colors.white,
+                                            borderColor: colors.primary
                                         },
                                         isRequested && JourneyRequestPageStyle.pressedButton]}
                                     onPress={() =>
@@ -219,14 +219,14 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                                     }
                                     disabled={isRequested}
                                 >
-                                    <Text style={[JourneyRequestPageStyle.confirmButtonText, { color: DM("black") }]}>
+                                    <Text style={[JourneyRequestPageStyle.confirmButtonText, { color: colors.primary }]}>
                                         {isRequested ? "Requested" : "Confirm"}
                                     </Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
 
-                        <View style={[JourneyRequestPageStyle.lining, { backgroundColor: DM("white") }]} />
+                        <View style={[JourneyRequestPageStyle.lining, { backgroundColor: colors.white }]} />
                     </KeyboardAwareScrollView>
                 }
             />

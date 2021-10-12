@@ -6,7 +6,7 @@ import { useTheme } from "../theme/ThemeProvider";
 import HeaderBackButtonStyle from "./HeaderBackButtonStyle";
 
 const HeaderBackButton = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <TouchableOpacity
@@ -18,10 +18,10 @@ const HeaderBackButton = () => {
             <Ionicons
                 name={"chevron-back-outline"}
                 size={35}
-                color={DM("#02A2CF")}
+                color={colors.accentBlue}
             />
             <View style={HeaderBackButtonStyle.backButtonTextContainer}>
-                <Text style={[HeaderBackButtonStyle.backButtonText, { color: DM("#02A2CF") }]}>
+                <Text style={[HeaderBackButtonStyle.backButtonText, { color: colors.accentBlue }]}>
                 Back
                 </Text>
             </View>

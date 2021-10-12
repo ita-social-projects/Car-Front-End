@@ -16,7 +16,7 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import * as navigation from "../../../../components/navigation/Navigation";
 
 const AddressInputPage = (props: AddressInputPageProps) => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const params = props.route.params;
 
     const centerCoordinates = params.wayPoint.isConfirmed ?
@@ -151,12 +151,12 @@ const AddressInputPage = (props: AddressInputPageProps) => {
 
             <TouchableOpacity
                 style={[SearchJourneyStyle.confirmButton,
-                    { backgroundColor:  !wayPoint.isConfirmed ? DM("gray") : DM("black") }]}
+                    { backgroundColor:  !wayPoint.isConfirmed ? colors.secondaryDark : colors.primary }]}
                 onPress={() => navigation.navigate(
                     params.previousScreen, { wayPoint: wayPoint, wayPointId: params.wayPointId })}
                 disabled={!wayPoint.isConfirmed}
             >
-                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM("white") }]}>
+                <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
                     Confirm
                 </Text>
             </TouchableOpacity>

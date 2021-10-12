@@ -38,18 +38,6 @@ export const SwitchSelectorStyle = StyleSheet.create({
         fontSize: 12,
         lineHeight: 13,
     },
-
-    activeButtonStyle: {
-        backgroundColor: "#000000",
-        color: "#FFFFFF",
-        borderColor: "#000000"
-    },
-
-    inactiveButtonStyle: {
-        backgroundColor: "#FFFFFF",
-        color: "#000000",
-        borderColor: "#000000"
-    }
 });
 
 const SettingsStyle = StyleSheet.create({

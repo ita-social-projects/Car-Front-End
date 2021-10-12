@@ -15,7 +15,7 @@ import { getTimeToShow } from "../../utils/JourneyHelperFunctions";
 
 const JourneyCard =
     (props: {journey?: Journey, displayFee?: boolean, applicantStops?: Stop[], passangersCount?: number}) => {
-        const { DM } = useTheme();
+        const { colors } = useTheme();
         const journey = props.journey;
         const { user } = useContext(AuthContext);
         const [isDriver, setIsDriver] = useState(false);
@@ -44,7 +44,7 @@ const JourneyCard =
                     onPress={navigateJourney}
                 >
                     <View style={[JourneyCardStyle.component,
-                        { borderColor: DM("black"),
+                        { borderColor: colors.primary,
                             height: JOURNEY_CARD_WITH_FEE_HEIGHT }]}>
                         <View style={JourneyCardStyle.driverInfoBlock}>
                             <View style={[JourneyCardStyle.imageBlock, props.displayFee && { paddingBottom: 5.75 }]}>
@@ -53,7 +53,7 @@ const JourneyCard =
                             <View style={JourneyCardStyle.driverTextBlock}>
                                 <View style={JourneyCardStyle.driverNameBlock}>
                                     <View>
-                                        <Text style={[JourneyCardStyle.driverNameText, { color: DM("black") }]} >
+                                        <Text style={[JourneyCardStyle.driverNameText, { color: colors.primary }]} >
                                             {trimTheStringIfTooLong(fullName, MAX_USER_FULL_NAME_LENGTH)}'s ride
                                         </Text>
                                     </View>
@@ -73,19 +73,20 @@ const JourneyCard =
                                     </View>
                                 </View>
                                 <View style={JourneyCardStyle.driverPositionBlock}>
-                                    <Text style={[JourneyCardStyle.driverPositionText, { color: DM("#909095") }]} >
+                                    <Text style={[JourneyCardStyle.driverPositionText,
+                                        { color: colors.secondaryDark }]} >
                                         {journey?.organizer?.position}
                                     </Text>
                                 </View>
                             </View>
                         </View>
                         <View style={JourneyCardStyle.journeyDetailBlock}>
-                            <Text style={[JourneyCardStyle.timeText, { color: DM("#02A2CF") }]}>
+                            <Text style={[JourneyCardStyle.timeText, { color: colors.accentBlue }]}>
                                 {getTimeToShow(journey)}
                             </Text>
                             {props.displayFee &&
                             <View>
-                                <Text style={JourneyCardStyle.feeText}>
+                                <Text style={{ ...JourneyCardStyle.feeText, color: colors.primary }}>
                                     {journey?.isFree ? "Free" : "Paid"}
                                 </Text>
                             </View>
@@ -95,10 +96,10 @@ const JourneyCard =
                             <View style={JourneyCardStyle.firstStopBlock}>
                                 <View style={[JourneyCardStyle.stopCircleIcon,
                                     {
-                                        backgroundColor: DM("#AAA9AE"),
-                                        borderColor: DM("#FFFFFF")
+                                        backgroundColor: colors.secondaryLight,
+                                        borderColor: colors.white
                                     }]} />
-                                <Text style={[JourneyCardStyle.stopsText, { color: DM("#414045") }]}>
+                                <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
                                     {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
                                         ? trimTheStringIfTooLong(
                                         journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name!,
@@ -107,14 +108,15 @@ const JourneyCard =
                                     }
                                 </Text>
                             </View>
-                            <View style={[JourneyCardStyle.stopStickIcon, { backgroundColor: DM("#AAA9AE") }]} />
+                            <View style={[JourneyCardStyle.stopStickIcon,
+                                { backgroundColor: colors.secondaryLight }]} />
                             <View style={JourneyCardStyle.lastStopBlock}>
                                 <View style={[JourneyCardStyle.stopCircleIcon,
                                     {
-                                        backgroundColor: DM("#AAA9AE"),
-                                        borderColor: DM("#FFFFFF")
+                                        backgroundColor: colors.secondaryLight,
+                                        borderColor: colors.white
                                     }]} />
-                                <Text style={[JourneyCardStyle.stopsText, { color: DM("#414045") }]}>
+                                <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
                                     {journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
                                         ?.address?.name === undefined
                                         ? "Location B"

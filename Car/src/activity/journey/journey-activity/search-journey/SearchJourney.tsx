@@ -49,7 +49,7 @@ import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
 
 const SearchJourney = (props: SearchJourneyProps) => {
-    const { DM, DMStyleObject } = useTheme();
+    const { colors } = useTheme();
     const params = props?.route?.params;
 
     const { user } = useContext(AuthContext);
@@ -63,10 +63,23 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
 
-    const [allButtonStyle, setAllButtonStyle] = useState(SearchJourneyStyle.activeButtonStyle);
-    const [freeButtonStyle, setFreeButtonStyle] = useState(SearchJourneyStyle.inactiveButtonStyle);
+    const activeButtonStyle = {
+        backgroundColor: colors.primary,
+        color: colors.white,
+        borderColor: colors.primary
+    };
+
+    const inactiveButtonStyle = {
+        backgroundColor: colors.white,
+        color: colors.primary,
+        borderColor: colors.primary
+    };
+
+    const [selectedFee, setSelectedFee] = useState(FeeType.All);
+    const [allButtonStyle, setAllButtonStyle] = useState(activeButtonStyle);
+    const [freeButtonStyle, setFreeButtonStyle] = useState(inactiveButtonStyle);
     // eslint-disable-next-line unused-imports/no-unused-vars
-    const [paidButtonStyle, setPaidButtonStyle] = useState(SearchJourneyStyle.inactiveButtonStyle);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(inactiveButtonStyle);
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -89,6 +102,12 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 .map((stop: Stop) => stop?.address)));
 
     }, []);
+
+    useEffect(() => {
+        setAllButtonStyle(selectedFee === FeeType.All ? activeButtonStyle : inactiveButtonStyle);
+        setFreeButtonStyle(selectedFee === FeeType.Free ? activeButtonStyle : inactiveButtonStyle);
+        setPaidButtonStyle(selectedFee === FeeType.Paid ? activeButtonStyle : inactiveButtonStyle);
+    }, [colors, selectedFee]);
 
     useEffect(() => {
         if (params) {
@@ -150,14 +169,14 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
                 switch (filter.fee) {
                     case FeeType.Free:
-                        setAllButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                        setFreeButtonStyle(SearchJourneyStyle.activeButtonStyle);
-                        setPaidButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
+                        setAllButtonStyle(inactiveButtonStyle);
+                        setFreeButtonStyle(activeButtonStyle);
+                        setPaidButtonStyle(inactiveButtonStyle);
                         break;
                     case FeeType.Paid:
-                        setAllButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                        setFreeButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                        setPaidButtonStyle(SearchJourneyStyle.activeButtonStyle);
+                        setAllButtonStyle(inactiveButtonStyle);
+                        setFreeButtonStyle(inactiveButtonStyle);
+                        setPaidButtonStyle(activeButtonStyle);
                         break;
                 }
 
@@ -194,19 +213,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
     };
 
     const onConfirmButtonPress = async () => {
-        let fee: FeeType;
-
-        switch (JSON.stringify(SwitchSelectorStyle.activeButton)) {
-            case JSON.stringify(allButtonStyle):
-                fee = FeeType.All;
-                break;
-            case JSON.stringify(freeButtonStyle):
-                fee = FeeType.Free;
-                break;
-            default:
-                fee = FeeType.Paid;
-                break;
-        }
+        let fee: FeeType = selectedFee;
 
         let filterToSave: Filter = {
             from: from,
@@ -258,7 +265,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 .then((res) => {
                     if (res.data.length > EMPTY_COLLECTION_LENGTH) {
                         let displayFee =
-                            allButtonStyle === SwitchSelectorStyle.activeButton;
+                            allButtonStyle === activeButtonStyle;
 
                         navigation.navigate("OK Search Result", {
                             journeys: res.data,
@@ -311,7 +318,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
-                        color={DM("#414045")}
+                        color={colors.hover}
                         text={isRequest ? "Creating request..." : "Searching..."}
                     />
                 </View>
@@ -319,7 +326,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
             {!isLoading && (
                 <ScrollView
                     style={[SearchJourneyStyle.screenContainer,
-                        { backgroundColor: DM("white") }]}
+                        { backgroundColor: colors.white }]}
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
@@ -379,20 +386,18 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         />
                     </View>
                     <View style={SwitchSelectorStyle.container}>
-                        <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>Fee</Text>
+                        <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>Fee</Text>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity
-                                style={[SwitchSelectorStyle.leftButton, DMStyleObject(allButtonStyle)]}
+                                style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
                                 onPress={() => {
-                                    setAllButtonStyle(SearchJourneyStyle.activeButtonStyle);
-                                    setFreeButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                                    setPaidButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
+                                    setSelectedFee(FeeType.All);
                                 }}
                             >
                                 <Text
                                     style={[
                                         SwitchSelectorStyle.buttonText,
-                                        DMStyleObject(allButtonStyle),
+                                        allButtonStyle,
                                     ]}
                                 >
                                     All
@@ -402,18 +407,16 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             <TouchableOpacity
                                 style={[
                                     SwitchSelectorStyle.leftButton,
-                                    DMStyleObject(freeButtonStyle),
+                                    freeButtonStyle,
                                 ]}
                                 onPress={() => {
-                                    setAllButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                                    setFreeButtonStyle(SearchJourneyStyle.activeButtonStyle);
-                                    setPaidButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
+                                    setSelectedFee(FeeType.Free);
                                 }}
                             >
                                 <Text
                                     style={[
                                         SwitchSelectorStyle.buttonText,
-                                        DMStyleObject(freeButtonStyle),
+                                        freeButtonStyle,
                                     ]}
                                 >
                                     Free
@@ -422,18 +425,16 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             <TouchableOpacity
                                 style={[
                                     SwitchSelectorStyle.rightButton,
-                                    DMStyleObject(paidButtonStyle),
+                                    paidButtonStyle,
                                 ]}
                                 onPress={() => {
-                                    setAllButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                                    setFreeButtonStyle(SearchJourneyStyle.inactiveButtonStyle);
-                                    setPaidButtonStyle(SearchJourneyStyle.activeButtonStyle);
+                                    setSelectedFee(FeeType.Paid);
                                 }}
                             >
                                 <Text
                                     style={[
                                         SwitchSelectorStyle.buttonText,
-                                        DMStyleObject(paidButtonStyle),
+                                        paidButtonStyle,
                                     ]}
                                 >
                                     Paid
@@ -446,7 +447,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             style={[SearchJourneyStyle.publishButton,
                                 {
                                     backgroundColor: !(to.isConfirmed && from.isConfirmed) ?
-                                        DM("gray") : DM("black"),
+                                        colors.secondaryDark : colors.primary,
                                     borderWidth: 0,
                                 }]}
                             onPress={() => {
@@ -454,7 +455,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             }}
                             disabled={!(to.isConfirmed && from.isConfirmed)}
                         >
-                            <Text style={[CreateJourneyStyle.publishButtonText, { color: DM("white") }]}>
+                            <Text style={[CreateJourneyStyle.publishButtonText, { color: colors.white }]}>
                                 {isRequest ? "Create Request" : "Search"}
                             </Text>
                         </TouchableOpacity>

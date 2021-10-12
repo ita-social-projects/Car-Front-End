@@ -10,17 +10,17 @@ import ScheduleBottomPopupStyles from "./ScheduleBottomPopupStyles";
 import WeekDay from "./WeekDay";
 
 const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const activeButtonStyle = {
-        backgroundColor: DM("black"),
-        borderColor: DM("black"),
-        color: DM("#FFFFFF"),
+        backgroundColor: colors.primary,
+        borderColor: colors.primary,
+        color: colors.white,
     };
 
     const inactiveButtonStyle = {
-        backgroundColor: DM("gray"),
-        borderColor: DM("gray"),
-        color: DM("#FFFFFF"),
+        backgroundColor: colors.secondaryDark,
+        borderColor: colors.secondaryDark,
+        color: colors.white,
     };
 
     const weekDay = props.weekDay;
@@ -140,15 +140,15 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
             snapPoints={[JOURNEY_MORE_OPTIONS_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
             initialSnap={MIN_POPUP_POSITION}
             renderHeader={
-                <View style={{ backgroundColor: DM("#FFFFFF") }}>
-                    <Text style={[ScheduleBottomPopupStyles.header, { color: DM("black") }]}>
+                <View style={{ backgroundColor: colors.white }}>
+                    <Text style={[ScheduleBottomPopupStyles.header, { color: colors.primary }]}>
                         Schedule a ride
                     </Text>
                 </View>
             }
             enabledInnerScrolling={false}
             renderContent={
-                <View style={[ScheduleBottomPopupStyles.panel, { backgroundColor: DM("#FFFFFF") }]}>
+                <View style={[ScheduleBottomPopupStyles.panel, { backgroundColor: colors.white }]}>
                     <View style={ScheduleBottomPopupStyles.weekDayContainer}>
                         <TouchableOpacity
                             activeOpacity={1}
@@ -202,26 +202,26 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                     </View>
                     <View style={ScheduleBottomPopupStyles.checkboxContainer}>
                         <Switch
-                            trackColor={{ false: DM("gray"), true: DM("#414045") }}
-                            thumbColor={DM("white")}
+                            trackColor={{ false: colors.secondaryDark, true: colors.hover }}
+                            thumbColor={colors.white}
                             value={isWeekdays}
                             style={ScheduleBottomPopupStyles.switch}
                             onValueChange={(value) => { setWeekdays(value); setIsWeekdays(value); }}
                         />
-                        <Text style={{ color: DM("black"), paddingLeft: 11, fontSize: 13 }}>Repeat every workday</Text>
+                        <Text style={{ color: colors.primary, paddingLeft: 11, fontSize: 13 }}>Repeat every workday</Text>
                     </View>
                     <View style={ScheduleBottomPopupStyles.scheduleButtonBlock}>
                         <TouchableOpacity
                             style={[ScheduleBottomPopupStyles.scheduleButton, {
-                                backgroundColor: DM("white"),
-                                borderColor: isEdited ? DM("black") : DM("gray")
+                                backgroundColor: colors.white,
+                                borderColor: isEdited ? colors.primary : colors.secondaryDark
                             }]}
                             onPress={schedule}
                             disabled={!isEdited}
                         >
                             <Text
                                 style={[ScheduleBottomPopupStyles.scheduleButtonText, {
-                                    color: isEdited ? DM("black") : DM("gray") }]}>
+                                    color: isEdited ? colors.primary : colors.secondaryDark }]}>
                                 Save
                             </Text>
                         </TouchableOpacity>

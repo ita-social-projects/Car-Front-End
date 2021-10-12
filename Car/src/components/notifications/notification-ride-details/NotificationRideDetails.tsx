@@ -11,7 +11,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
 
@@ -35,38 +35,38 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
         <View style={style.container}>
             <View>
                 {IsPropertyShown(props.IsDetailsTitleVisible) && <Text
-                    style={{ ...style.header, color: DM("black") }}>Ride details</Text>}
+                    style={{ ...style.header, color: colors.primary }}>Ride details</Text>}
             </View>
 
             {IsPropertyShown(props.IsDepartureTimeVisible) && <View style={style.detailsContainer}>
-                <Text style={{ ...style.label, color: DM("black") }}>Departure time: </Text>
-                <Text style={{ ...style.value, color: DM("black") }}>
+                <Text style={{ ...style.label, color: colors.primary }}>Departure time: </Text>
+                <Text style={{ ...style.value, color: colors.primary }}>
                     {capitalize(moment(new Date(journey?.departureTime!)).calendar())}
                 </Text>
             </View>}
 
             {IsPropertyShown(props.IsFeeVisible) && <View style={style.detailsContainer}>
-                <Text style={{ ...style.label, color: DM("black") }}>Fee: </Text>
-                <Text style={{ ...style.value, color: DM("black") }}>{journey?.isFree ? "free" : "paid"}</Text>
+                <Text style={{ ...style.label, color: colors.primary }}>Fee: </Text>
+                <Text style={{ ...style.value, color: colors.primary }}>{journey?.isFree ? "free" : "paid"}</Text>
             </View>}
 
             {props.withSeats && IsPropertyShown(props.IsAvailableSeatsVisible) && journey?.participants &&
                 <View style={style.detailsContainer}>
-                    <Text style={{ ...style.label, color: DM("black") }}>Available seats: </Text>
-                    <Text style={{ ...style.value, color: DM("black") }}>
+                    <Text style={{ ...style.label, color: colors.primary }}>Available seats: </Text>
+                    <Text style={{ ...style.value, color: colors.primary }}>
                         {journey?.countOfSeats - journey?.participants.length}</Text>
                 </View>
             }
 
             {IsPropertyShown(props.IsBaggageVisible) && <View style={style.detailsContainer}>
-                <Text style={{ ...style.value, color: DM("black") }}>
+                <Text style={{ ...style.value, color: colors.primary }}>
                     {journeyUser?.withBaggage? "With luggage" : "Without luggage"}</Text>
             </View>}
 
             { props.withPassangers &&
                  <View style={style.detailsContainer}>
-                     <Text style={{ ...style.label, color: DM("black") }}>Passangers: </Text>
-                     <Text style={{ ...style.value, color: DM("black") }}>
+                     <Text style={{ ...style.label, color: colors.primary }}>Passangers: </Text>
+                     <Text style={{ ...style.value, color: colors.primary }}>
                          {props.passangersCount ?? DEFAULT_PASSANGERS_COUNT}</Text>
                  </View>
             }

@@ -6,21 +6,21 @@ import SwitchSelectorStyle from "./SwitchSelectorStyle";
 import { useTheme } from "../theme/ThemeProvider";
 
 const SwitchSelector = (props: SwitchSelectorProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={SwitchSelectorStyle.container}>
-            <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>{props.title}</Text>
+            <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>{props.title}</Text>
             <View style={{ flexDirection: "row" }}>
 
                 <TouchableOpacity
                     style={[SwitchSelectorStyle.leftButton, props.disableLeftButton ?
-                        { backgroundColor: DM("#afafaf") } : props.leftButtonStyle]}
+                        { backgroundColor: colors.secondaryDark } : props.leftButtonStyle]}
                     onPress={props.onLeftButtonPress}
                     disabled={props.disableLeftButton}
                 >
                     <Text style={[SwitchSelectorStyle.buttonText, props.disableLeftButton ?
-                        { backgroundColor: DM("#afafaf"), color: DM("white") } : props.leftButtonStyle]}>
+                        { backgroundColor: colors.secondaryDark, color: colors.white } : props.leftButtonStyle]}>
                         {props.leftButtonText}
                     </Text>
                 </TouchableOpacity>

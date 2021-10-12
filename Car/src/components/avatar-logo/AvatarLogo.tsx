@@ -13,12 +13,12 @@ import AvatarLogoStyle from "./AvatarLogoStyle";
 import AvatarLogoProps from "./AvatarLogoProps";
 
 const AvatarLogo = (props: AvatarLogoProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const userAvatarText = props.user ?
         props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
 
     const backgroundColor = props.user ?
-        stc(props.user.name + " " + props.user.surname): DM("#000000");
+        stc(props.user.name + " " + props.user.surname): colors.primary;
 
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
@@ -45,7 +45,7 @@ const AvatarLogo = (props: AvatarLogoProps) => {
                 <ActivityIndicator
                     style={AvatarLogoStyle.spinner}
                     size={size / AVATAR_LOGO_SIZE_TO_SPINER_RATIO}
-                    color={DM("#414045")}
+                    color={colors.hover}
                 />
                 <Image
                     source={{ uri: ImageService.getImageById(props.user?.imageId) }}

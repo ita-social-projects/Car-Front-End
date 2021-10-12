@@ -9,7 +9,7 @@ import { CAR_IMAGE_BORDER_RADIUS, TAXI_IMAGE_BORDER_RADIUS } from "../../../../.
 import JourneyPageStyle from "../../JourneyPageStyle";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const image = car?.imageId ?
         { uri: ImageService.getImageById(car.imageId) } :
         require("../../../../../../../assets/images/journey/taxi2.png");
@@ -28,7 +28,7 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                     <Ionicons
                         name={"car"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 )}
             </View>
@@ -36,15 +36,15 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                 {
                     isOnOwnCar ? (
                         <>
-                            <Text style={[JourneyPageStyle.carName, { color: DM("#000000") }]}>
+                            <Text style={[JourneyPageStyle.carName, { color: colors.primary }]}>
                                 {car?.model?.brand?.name} {car?.model?.name}, {CarColor[car?.color!]}
                             </Text>
-                            <Text style={[JourneyPageStyle.carPlateNumber, { color: DM("#414045") }]}>
+                            <Text style={[JourneyPageStyle.carPlateNumber, { color: colors.hover }]}>
                                 {car?.plateNumber}
                             </Text>
                         </>
                     ) : (
-                        <Text style={[JourneyPageStyle.taxiText, { color: DM("black") }]}>Taxi</Text>
+                        <Text style={[JourneyPageStyle.taxiText, { color: colors.primary }]}>Taxi</Text>
                     )
                 }
             </View>

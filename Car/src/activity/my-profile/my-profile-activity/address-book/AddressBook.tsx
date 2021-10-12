@@ -9,7 +9,7 @@ import AddressBookStyle from "./AddressBookStyle";
 import { ADDRESS_NAME_MAX_LINES_COUNT, ADDRESS_NAME_WIDTH_CUT } from "../../../../constants/AddressConstants";
 
 export default function AddressBook (props: {navigation: any}) {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [locations, setLocations] = useState<Array<Location>>([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -41,19 +41,19 @@ export default function AddressBook (props: {navigation: any}) {
                     <Ionicons
                         name={"add-circle-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
                 angle="0"
             >
-                <Text style={{ fontWeight: "bold", color: DM("#02A2CF") }}>
+                <Text style={{ fontWeight: "bold", color: colors.accentBlue }}>
                     Add New Address
                 </Text>
             </TouchableNavigationCard>
             {locations?.length ? (
                 <></>
             ) : (
-                <Text style={[AddressBookStyle.message, { color: DM("#414045") }]}>
+                <Text style={[AddressBookStyle.message, { color: colors.hover }]}>
                     Currently you don’t have any address in the list. You have
                     to add a address if you want to create or search Journeys
                     with personal one.
@@ -92,18 +92,18 @@ export default function AddressBook (props: {navigation: any}) {
                                                     : "star-outline"
                                             }
                                             size={25}
-                                            color={DM("#414045")}
+                                            color={colors.hover}
                                         />
                                     }
                                 >
                                     <EllipsizedText
                                         text={item!.name}
-                                        style={[AddressBookStyle.name, { color: DM("black") }]}
+                                        style={[AddressBookStyle.name, { color: colors.primary }]}
                                     />
 
                                     <EllipsizedText
                                         text={item!.address!.name}
-                                        style={[AddressBookStyle.address, { color: DM("#414045") }]}
+                                        style={[AddressBookStyle.address, { color: colors.hover }]}
                                     />
                                 </TouchableNavigationCard>
                             </View>
@@ -119,7 +119,7 @@ export default function AddressBook (props: {navigation: any}) {
 
     return (
         <ScrollView
-            style={[AddressBookStyle.container, { backgroundColor: DM("white") }]}
+            style={[AddressBookStyle.container, { backgroundColor: colors.white }]}
             contentContainerStyle={loading && AddressBookStyle.loading}
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
@@ -132,7 +132,7 @@ export default function AddressBook (props: {navigation: any}) {
                 ]}
             >
                 {loading ? (
-                    <ActivityIndicator size={40} color={DM("black")} />
+                    <ActivityIndicator size={40} color={colors.primary} />
                 ) : renderLocations()}
             </View>
         </ScrollView>

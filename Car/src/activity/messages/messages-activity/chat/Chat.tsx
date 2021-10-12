@@ -65,7 +65,7 @@ import appInsights from "../../../../components/telemetry/AppInsights";
 import { getDateWithCorrectUtc } from "../../../../utils/ChatHelperFunctions";
 
 const Chat = (properties: ChatProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [messages, setMessages] = useState<IMessage[]>([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(useContext(AuthContext).user);
@@ -204,15 +204,15 @@ const Chat = (properties: ChatProps) => {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: DM("#F1F1F4"),
+                        backgroundColor: colors.secondaryLight,
                     },
                     right: {
-                        backgroundColor: DM("#EB7A89"),
+                        backgroundColor: colors.navyBlueGradientFrom,
                     }
                 }}
                 textStyle={{
                     left: {
-                        color: DM("#000000"),
+                        color: colors.primary,
                         paddingHorizontal: 8,
                         paddingVertical: 2
                     },
@@ -232,7 +232,7 @@ const Chat = (properties: ChatProps) => {
                 <Icon
                     name="paper-plane"
                     type="font-awesome"
-                    color={isSendDisabled ? DM("grey") : DM("black")}
+                    color={isSendDisabled ? colors.secondaryDark : colors.primary}
                 />
             </View>
         </Send>
@@ -247,15 +247,15 @@ const Chat = (properties: ChatProps) => {
             flex={1}
             primaryStyle={{
                 borderWidth: 2,
-                borderColor: DM("black"),
-                color: DM("black"),
+                borderColor: colors.primary,
+                color: colors.primary,
                 justifyContent: "center",
                 height: "100%",
                 overflow: "scroll",
-                backgroundColor: DM("white"),
+                backgroundColor: colors.white,
             }}
             textInputStyle={{
-                color: DM("black")
+                color: colors.primary
             }}
         />
     );
@@ -387,14 +387,14 @@ const Chat = (properties: ChatProps) => {
 
     return (
         <KeyboardAvoidingView
-            style={[ChatStyle.chatWrapper, { backgroundColor: DM("white"), }]}
+            style={[ChatStyle.chatWrapper, { backgroundColor: colors.white, }]}
             behavior={Platform.OS === "ios" ? "padding" : undefined}>
             <TouchableWithoutFeedback
                 onPress={() => {Keyboard.dismiss(); hidePopup();}}>
                 {isLoading ? (
                     <Indicator
                         size="large"
-                        color={DM("#414045")}
+                        color={colors.hover}
                         text="Loading information..."
                     />
                 ) : (
@@ -439,7 +439,7 @@ const Chat = (properties: ChatProps) => {
                             renderLoadEarlier={() => isLoadingEarlier ?
                                 <Indicator
                                     size="large"
-                                    color={DM("#414045")}
+                                    color={colors.hover}
                                     text="Loading information..."
                                 /> : <View />
                             }
@@ -455,7 +455,7 @@ const Chat = (properties: ChatProps) => {
                 initialSnap={1}
                 renderHeader={<View />}
                 renderContent={
-                    <View style={{ backgroundColor: DM("white") }}>
+                    <View style={{ backgroundColor: colors.white }}>
                         <MenuButton text="Copy text" onPress={() => {
                             moreOptionsRef.current.snapTo(MIN_POPUP_POSITION);
                             Clipboard.setString(selectedMessage.text);

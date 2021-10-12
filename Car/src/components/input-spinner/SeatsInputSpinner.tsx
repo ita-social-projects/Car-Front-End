@@ -15,11 +15,11 @@ interface SeatsInputSpinnerProps {
 }
 
 const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={SeatsInputSpinnerStyle.container}>
-            <Text style={[SeatsInputSpinnerStyle.descriptionText, { color: DM("black") }]}>
+            <Text style={[SeatsInputSpinnerStyle.descriptionText, { color: colors.primary }]}>
                 {props.title}
             </Text>
             <View>
@@ -27,16 +27,16 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
                     max={4}
                     min={Math.max(Number(props.minValue), MIN_AVAILABLE_SEATS_COUNT)}
                     step={1}
-                    style={[SeatsInputSpinnerStyle.spinnerContainer, { borderColor: DM("black") }]}
-                    inputStyle={[SeatsInputSpinnerStyle.input, { borderColor: DM("black") }]}
-                    colorPress={DM("#65656A")}
-                    colorLeft={DM("white")}
-                    colorRight={DM("black")}
-                    background={DM("white")}
-                    textColor={DM("black")}
+                    style={[SeatsInputSpinnerStyle.spinnerContainer, { borderColor: colors.primary }]}
+                    inputStyle={[SeatsInputSpinnerStyle.input, { borderColor: colors.primary }]}
+                    colorPress={colors.hover}
+                    colorLeft={colors.white}
+                    colorRight={colors.primary}
+                    background={colors.white}
+                    textColor={colors.primary}
                     height={44}
-                    buttonLeftImage={<Entypo name="minus" size={20} color={DM("black")} />}
-                    buttonRightImage={<Entypo name="plus" size={20} color={DM("white")} />}
+                    buttonLeftImage={<Entypo name="minus" size={20} color={colors.primary} />}
+                    buttonRightImage={<Entypo name="plus" size={20} color={colors.white} />}
                     fontSize={16}
                     editable={false}
                     rounded={false}

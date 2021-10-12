@@ -25,7 +25,7 @@ export const addMinutesToDate = (date: Date, minutes: number) => {
 };
 
 const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(props.date);
 
@@ -51,15 +51,15 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
             <TouchableOpacity
                 style={[TouchableDateTimePickerStyle.container,
                     {
-                        borderColor: DM("black"),
-                        backgroundColor: DM("white")
+                        borderColor: colors.primary,
+                        backgroundColor: colors.white
                     }]}
                 onPress={() => setShow(true)}>
-                <Text style={[TouchableDateTimePickerStyle.descriptionText, { color: DM("#909095") }]}>
+                <Text style={[TouchableDateTimePickerStyle.descriptionText, { color: colors.secondaryDark }]}>
                     {"Departure time:"}{" "}
                 </Text>
                 <Text style={[TouchableDateTimePickerStyle.dateTimeText,
-                    { color: props.isConfirmed ? DM("black") : DM("#909095") }]}>
+                    { color: props.isConfirmed ? colors.primary : colors.secondaryDark }]}>
                     {
                         props.onlyTime ?
                             moment(props.date).format("HH:mm") :
@@ -74,7 +74,7 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                         ]}
                         name={"time"}
                         size={25}
-                        color={DM("black")}
+                        color={colors.primary}
                     />
                 </View>
                 <Modal
@@ -85,24 +85,24 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                     onRequestClose={() => setShow(!show)}
                 >
                     <View style={TouchableDateTimePickerStyle.centeredView}>
-                        <View style={[TouchableDateTimePickerStyle.modalView, { backgroundColor: DM("white") }]}>
+                        <View style={[TouchableDateTimePickerStyle.modalView, { backgroundColor: colors.white }]}>
                             <View style={TouchableDateTimePickerStyle.btnContainer}>
                                 <TouchableOpacity
                                     onPress={onResetPress}
                                     style={[TouchableDateTimePickerStyle.btnReset,
                                         {
-                                            borderColor: DM("black"),
-                                            backgroundColor: DM("white")
+                                            borderColor: colors.primary,
+                                            backgroundColor: colors.white
 
                                         }]}>
-                                    <Text style={[TouchableDateTimePickerStyle.btnResetText, { color: DM("black") }]}>
+                                    <Text style={[TouchableDateTimePickerStyle.btnResetText, { color: colors.primary }]}>
                                         Reset
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={onDonePress}
-                                    style={[TouchableDateTimePickerStyle.btnDone, { backgroundColor: DM("black") }]}>
-                                    <Text style={[TouchableDateTimePickerStyle.btnDoneText, { color: DM("white") }]}>
+                                    style={[TouchableDateTimePickerStyle.btnDone, { backgroundColor: colors.primary }]}>
+                                    <Text style={[TouchableDateTimePickerStyle.btnDoneText, { color: colors.white }]}>
                                         Done
                                     </Text>
                                 </TouchableOpacity>
@@ -114,8 +114,8 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                                     minimumDate={addMinutesToDate(new Date(), MINUTES_OFFSET)}
                                     locale={"en"}
                                     is24hourSource={"device"}
-                                    textColor={DM("black")}
-                                    fadeToColor={DM("white")}
+                                    textColor={colors.primary}
+                                    fadeToColor={colors.white}
                                     mode={props.onlyTime ? "time" : "datetime"}
                                 />
                             </View>

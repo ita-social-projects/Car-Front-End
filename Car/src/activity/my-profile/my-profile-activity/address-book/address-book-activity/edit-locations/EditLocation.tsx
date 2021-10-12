@@ -31,7 +31,7 @@ import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const EditLocation = (props: EditLocationProps) => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const mapStyle = isThemeDark ? darkMapStyle : lightMapStyle;
     const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>(initialCoordinate);
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
@@ -158,7 +158,7 @@ const EditLocation = (props: EditLocationProps) => {
     return(
         isLoading ? (
             <View
-                style={[AddEditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
+                style={[AddEditCarsStyle.wrapper, { backgroundColor: colors.white }]}
             >
                 <Indicator
                     size="large"
@@ -185,9 +185,9 @@ const EditLocation = (props: EditLocationProps) => {
                         <TextInput
                             style={[AddLocationStyle.textInput,
                                 {
-                                    borderColor: DM("black"),
-                                    backgroundColor: DM("white"),
-                                    color: DM("black")
+                                    borderColor: colors.primary,
+                                    backgroundColor: colors.white,
+                                    color: colors.primary
                                 }]}
                             value={locationName}
                             placeholder={"Name the chosen address"}

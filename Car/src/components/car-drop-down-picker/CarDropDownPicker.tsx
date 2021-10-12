@@ -8,7 +8,7 @@ import CarDropDownPickerProps from "./CarDropDownPickerProps";
 import { useTheme } from "../theme/ThemeProvider";
 
 const CarDropDownPicker = (props: CarDropDownPickerProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <View style={props.required && { justifyContent: "center" }}>
@@ -17,7 +17,7 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => {
                     style={[
                         CarDropDownPickerStyle.requiredPointer,
                         { zIndex: props.zIndex },
-                        { color: DM("red") }
+                        { color: colors.accentRed }
                     ]}
                 >
                     *
@@ -26,46 +26,46 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => {
             <DropDownPicker
                 zIndex={props.zIndex}
                 customArrowDown={() => (
-                    <Ionicons name="caret-down-outline" size={14} color={DM("black")} />
+                    <Ionicons name="caret-down-outline" size={14} color={colors.primary} />
                 )}
                 customArrowUp={() => (
-                    <Ionicons name="caret-up-outline" size={14} color={DM("black")} />
+                    <Ionicons name="caret-up-outline" size={14} color={colors.primary} />
                 )}
                 items={props.items ?? []}
                 searchable={true}
                 searchablePlaceholder="Manual input"
-                searchablePlaceholderTextColor={DM("gray")}
-                searchableError={() => <Text style={{ color: DM("black") }}>Not Found</Text>}
-                searchTextInputProps={{ style: { color: DM("black") } }}
-                searchableStyle={{ color: DM("black") }}
+                searchablePlaceholderTextColor={colors.secondaryDark}
+                searchableError={() => <Text style={{ color: colors.primary }}>Not Found</Text>}
+                searchTextInputProps={{ style: { color: colors.primary } }}
+                searchableStyle={{ color: colors.primary }}
                 placeholder={props.placeHolder}
                 defaultValue={props.defaultValue}
                 style={[
                     CarDropDownPickerStyle.container,
                     {
-                        borderColor: DM("black"),
-                        backgroundColor: DM("white")
+                        borderColor: colors.primary,
+                        backgroundColor: colors.white
                     },
-                    props.disabled && { borderColor: DM("gray") }
+                    props.disabled && { borderColor: colors.secondaryDark }
                 ]}
-                labelStyle={{ color: DM("black") }}
+                labelStyle={{ color: colors.primary }}
                 dropDownStyle={[CarDropDownPickerStyle.dropDownStyle,
                     {
-                        borderColor: DM("black"),
-                        backgroundColor: DM("white"),
+                        borderColor: colors.primary,
+                        backgroundColor: colors.white,
                     }]}
                 containerStyle={[{ height: 48 }, props.style]}
                 placeholderStyle={[
                     CarDropDownPickerStyle.placeholderStyle,
                     props.required && { paddingLeft: 12 },
-                    { color: DM("#909095") }
+                    { color: colors.secondaryDark }
                 ]}
                 selectedLabelStyle={[
                     CarDropDownPickerStyle.placeholderStyle,
-                    { color: DM("black") },
+                    { color: colors.primary },
                     props.required && { paddingLeft: 12 }
                 ]}
-                itemStyle={[CarDropDownPickerStyle.itemStyle, { backgroundColor: DM("#F0F0F0") }]}
+                itemStyle={[CarDropDownPickerStyle.itemStyle, { backgroundColor: colors.secondaryLight }]}
                 onChangeItem={
                     props.selectHandle
                         ? (item) => {

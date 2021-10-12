@@ -50,7 +50,7 @@ import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-mo
 import { useTheme } from "../../../components/theme/ThemeProvider";
 
 const JourneyTabs = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
@@ -104,7 +104,7 @@ const JourneyTabs = () => {
                     component={JourneyStartPage}
                     options={{
                         headerTitle: "Ride",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: () => <View />
                     }}
@@ -115,7 +115,7 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Add a ride",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(createRideMoreOptionsRef) })
@@ -130,11 +130,11 @@ const JourneyTabs = () => {
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
-                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                    { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
 
                                 <Animated.View style={[HeaderStyle.popUp,
-                                    { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
+                                    { opacity: journeyOpacity, backgroundColor: colors.white }
                                 ]}>
                                     <CreateJourney props={{
                                         ...props,
@@ -165,7 +165,7 @@ const JourneyTabs = () => {
                     component={AddressInputPage}
                     options={{
                         headerTitle: "Input Address",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton
                     }}
@@ -175,7 +175,7 @@ const JourneyTabs = () => {
                     name="Journey Details"
                     options={{
                         headerTitle: "Ride Details",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton,
                         headerRight: () => HeaderEllipsis(
@@ -191,7 +191,7 @@ const JourneyTabs = () => {
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
-                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                    { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
 
                                 <JourneyDetailsPage
@@ -220,7 +220,7 @@ const JourneyTabs = () => {
                     component={JourneyInvitationsPage}
                     options={{
                         headerTitle: "Ride Invitations",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: HeaderBackButton
                     }}
@@ -232,7 +232,7 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Search for Ride",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -242,7 +242,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Ride",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(ridePageMoreOptionsRef) })
@@ -253,11 +253,11 @@ const JourneyTabs = () => {
                         return (
                             <Host>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
-                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                    { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
 
                                 <Animated.View style={[HeaderStyle.popUp,
-                                    { opacity: journeyOpacity, backgroundColor: DM("#FFFFFF") }
+                                    { opacity: journeyOpacity, backgroundColor: colors.white }
                                 ]}>
                                     <JourneyPage props={{
                                         ...props,
@@ -275,17 +275,17 @@ const JourneyTabs = () => {
                                         initialSnap={0}
                                         renderHeader={
                                             <View style={[JourneyPageStyle.headerTitleStyle,
-                                                { backgroundColor: DM("white") }
+                                                { backgroundColor: colors.white }
                                             ]}>
                                                 <Text style={[JourneyPageStyle.headerTextStyle,
-                                                    { color: DM("black") }]}>
+                                                    { color: colors.primary }]}>
                                                     MORE OPTIONS
                                                 </Text>
                                             </View>
                                         }
                                         renderContent={
                                             <View style={[JourneyPageStyle.panel,
-                                                { backgroundColor: DM("white") }
+                                                { backgroundColor: colors.white }
                                             ]}>
                                                 <MenuButton
                                                     text="Edit ride route"
@@ -320,7 +320,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Create Ride Request",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                     }}
                 />
@@ -329,7 +329,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search Results",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
@@ -346,7 +346,7 @@ const JourneyTabs = () => {
                                 subtitle="You're about to create a ride request with new filters."
                                 confirmText="Yes, create"
                                 cancelText="No, go back"
-                                confirmColor={DM("black")}
+                                confirmColor={colors.primary}
                                 onConfirm={() => {
                                     setNewRequestModalVisible(false);
                                     (async () => sleep(SLEEP_DURATION))().then(() =>
@@ -360,15 +360,15 @@ const JourneyTabs = () => {
                                 initialSnap={0}
                                 renderHeader={
                                     <View style={[JourneyPageStyle.headerTitleStyle,
-                                        { backgroundColor: DM("white") }
+                                        { backgroundColor: colors.white }
                                     ]}>
-                                        <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                                        <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
                                             REQUEST A RIDE
                                         </Text>
                                     </View>
                                 }
                                 renderContent={
-                                    <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
+                                    <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
                                         <MenuButton
                                             text="With the previous filters"
                                             isIcon={true}
@@ -402,7 +402,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search Results",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                     }}
                 />
@@ -412,7 +412,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "Search Ride",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
@@ -424,7 +424,7 @@ const JourneyTabs = () => {
                     options={{
                         title: "SoftServian",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -435,7 +435,7 @@ const JourneyTabs = () => {
                     options={{
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />

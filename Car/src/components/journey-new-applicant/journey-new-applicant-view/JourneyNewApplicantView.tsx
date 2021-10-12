@@ -34,7 +34,7 @@ interface JourneyNewApplicantViewProps {
 }
 
 const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const params = props.route.params.notification;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
     const [declineModalVisible,setDeclineModalVisible] = useState(false);
@@ -138,9 +138,9 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
     return (
         <>
-            <View style={[JourneyNewApplicantViewStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
-                <ScrollView style = {{ backgroundColor: DM("#FFFFFF") }}>
-                    <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
+            <View style={[JourneyNewApplicantViewStyle.background, { backgroundColor: "rgba(0, 0, 0, 0.5)" }]}>
+                <ScrollView style = {{ backgroundColor: colors.white }}>
+                    <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: colors.white }]}>
                         <View style={[JourneyNewApplicantViewStyle.headerContainer]}>
                             <View style={JourneyNewApplicantViewStyle.avatarLogo}>
                                 <AvatarLogoTitle userToDisplay={params.sender} />
@@ -159,7 +159,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                             passangersCount = {data?.passangersCount}
                             withPassangers
                         />
-                        <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: DM("black") }}>
+                        <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                             {senders} stops in your ride
                         </Text>
                         <View style={JourneyNewApplicantViewStyle.stopsBlock}>

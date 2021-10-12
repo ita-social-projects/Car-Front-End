@@ -80,28 +80,6 @@ const JourneyStartPageStyle = StyleSheet.create({
         paddingBottom: 16
     },
 
-    activeButtonStyle: {
-        backgroundColor: "#FFFFFF",
-        color: "#000000",
-        borderBottomWidth: 2
-    },
-
-    activeButtonTextStyle: {
-        backgroundColor: "#FFFFFF",
-        color: "#000000"
-    },
-
-    inactiveButtonStyle: {
-        backgroundColor: "#FFFFFF",
-        color: "#8C8F8E",
-        borderBottomWidth: 0
-    },
-
-    inactiveButtonTextStyle: {
-        backgroundColor: "#FFFFFF",
-        color: "#8C8F8E",
-    },
-
     scrollViewStyle:{
         width:"100%",
         //flex: 1

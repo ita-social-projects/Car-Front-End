@@ -8,7 +8,7 @@ import JourneyCreationDropDownPickerProps from "./JourneyCreationDropDownPickerP
 import { useTheme } from "../theme/ThemeProvider";
 
 const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const controller = useRef<any>(null);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps
     return (
         <View>
             <View style={{ zIndex: 1 }}>
-                <Text style={[JourneyCreationDropDownPickerStyle.placeholderStyle, { color: DM("gray") }]}>
+                <Text style={[JourneyCreationDropDownPickerStyle.placeholderStyle, { color: colors.secondaryDark }]}>
                     {props.placeholder}
                 </Text>
             </View>
@@ -28,34 +28,34 @@ const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps
                     controller={instance => {
                         controller.current = instance;
                     }}
-                    customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} color={DM("black")} />)}
-                    customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} color={DM("black")} />)}
+                    customArrowDown={() => (<Ionicons name="caret-down-outline" size={18} color={colors.primary} />)}
+                    customArrowUp={() => (<Ionicons name="caret-up-outline" size={18} color={colors.primary} />)}
                     arrowStyle={JourneyCreationDropDownPickerStyle.arrow}
                     searchable={props.searchable}
                     searchablePlaceholder={"Manual input"}
-                    searchableStyle={JourneyCreationDropDownPickerStyle.searchable}
+                    searchableStyle={{ ...JourneyCreationDropDownPickerStyle.searchable, color: colors.primary }}
                     renderSeperator={() => (<Divider style={JourneyCreationDropDownPickerStyle.divider} />)}
                     zIndex={props.zIndex}
                     placeholder={""}
                     style={[JourneyCreationDropDownPickerStyle.style,
                         {
-                            backgroundColor: DM("white"),
-                            borderColor: DM("black")
+                            backgroundColor: colors.white,
+                            borderColor: colors.primary
                         }]}
                     dropDownStyle={[JourneyCreationDropDownPickerStyle.dropDownStyle,
                         {
-                            backgroundColor: DM("white"),
-                            borderColor: DM("black"),
+                            backgroundColor: colors.white,
+                            borderColor: colors.primary,
 
                         }]}
                     selectedLabelStyle={[JourneyCreationDropDownPickerStyle.selectedLabelStyle,
                         {
                             paddingLeft: props.paddingLeft,
-                            color: DM("black"),
-                            backgroundColor: DM("white")
+                            color: colors.primary,
+                            backgroundColor: colors.white
                         }]}
                     itemStyle={{ justifyContent: "flex-start" }}
-                    labelStyle={{ color: DM("black") }}
+                    labelStyle={{ color: colors.primary }}
                     onChangeItem={props.onChangeItem}
                     isVisible={props.isVisible}
                     onOpen={props.onOpen}

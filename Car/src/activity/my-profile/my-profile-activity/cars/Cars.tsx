@@ -11,7 +11,7 @@ import { useTheme } from "../../../../components/theme/ThemeProvider";
 import NavigationAddListener from "../../../../types/NavigationAddListener";
 
 const Cars = (props: NavigationAddListener) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -43,19 +43,19 @@ const Cars = (props: NavigationAddListener) => {
                     <Ionicons
                         name={"add-circle-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
                 angle="0"
             >
-                <Text style={{ fontWeight: "bold", color: DM("#02A2CF") }}>
+                <Text style={{ fontWeight: "bold", color: colors.accentBlue }}>
                     Add a car
                 </Text>
             </TouchableNavigationCard>
             {cars?.length ? (
                 <></>
             ) : (
-                <Text style={[CarsStyle.message, { color: DM("#414045") }]}>
+                <Text style={[CarsStyle.message, { color: colors.hover }]}>
                     For now, you have no cars on the list. Add one or two to create trips of your own.
                 </Text>
             )}
@@ -84,15 +84,15 @@ const Cars = (props: NavigationAddListener) => {
                                             <Ionicons
                                                 name={"car"}
                                                 size={20}
-                                                color={DM("#414045")}
+                                                color={colors.hover}
                                             />
                                         )
                                     }
                                 >
-                                    <Text style={[CarsStyle.brand, { color: DM("black") }]}>
+                                    <Text style={[CarsStyle.brand, { color: colors.primary }]}>
                                         {item!.model?.brand?.name}
                                     </Text>
-                                    <Text style={[CarsStyle.model, { color: DM("#414045") }]}>
+                                    <Text style={[CarsStyle.model, { color: colors.hover }]}>
                                         {item!.model?.name}
                                     </Text>
                                 </TouchableNavigationCard>
@@ -109,7 +109,7 @@ const Cars = (props: NavigationAddListener) => {
 
     return (
         <ScrollView
-            style={[CarsStyle.container, { backgroundColor: DM("white") }]}
+            style={[CarsStyle.container, { backgroundColor: colors.white }]}
             contentContainerStyle={isLoading && CarsStyle.loading}
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>

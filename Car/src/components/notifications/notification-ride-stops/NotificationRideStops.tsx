@@ -13,10 +13,11 @@ import style from "../notification-ride-stops/NotificationRideStopsStyle";
 import NotificationRideStopsProps from "./NotificationRideStopsProps";
 
 const NotificationRideStops = (props: NotificationRideStopsProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [stops, setStops] = useState<Stop[]>();
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
-    const [colors, setColors] = useState({ first: "#00A3CF", second: "#5552A0" });
+    const [stopsColors, setStopsColors] =
+        useState({ first: colors.navyBlueGradientFrom, second: colors.navyBlueGradientFrom });
 
     useEffect(() => {
         JourneyService.getJourney(props.journeyId, true).then(res => {
@@ -24,7 +25,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
             setJourneyPoints(res.data?.journeyPoints);
 
             if (res.data?.stops![FIRST_ELEMENT_INDEX]?.isCancelled) {
-                setColors({ first: "#f20a0a", second: "#a60707" });
+                setStopsColors({ first: "#f20a0a", second: "#a60707" });
             }
         });
     }, []);
@@ -64,7 +65,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
     return (
         <>
             <View style={style.container}>
-                {IsPropertyShown(props.IsStopsTitleVisible) && <Text style={{ ...style.header, color: DM("black") }}>
+                {IsPropertyShown(props.IsStopsTitleVisible) && <Text style={{ ...style.header, color: colors.primary }}>
                     {props.title}</Text>}
 
                 <View style={style.stopsBlock}>
@@ -78,20 +79,20 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                 {index !== FIRST_ELEMENT_INDEX && (
                                     item?.userId === props.stopsOwner?.id ?
                                         <View style={[style.stopCustomLineIcon,
-                                            { backgroundColor: DM("#AAA9AE") }
+                                            { backgroundColor: colors.secondaryLight }
                                         ]}>
                                             <LinearGradient
                                                 style={[style.activeCustomLineIcon,
-                                                    { backgroundColor: DM("#FFFFFF") }
+                                                    { backgroundColor: colors.white }
                                                 ]}
-                                                colors={[colors.first, colors.second]}
+                                                colors={[stopsColors.first, stopsColors.second]}
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
                                             />
                                         </View>
                                         :
                                         <View style={[style.stopCustomLineIcon,
-                                            { backgroundColor: DM("#AAA9AE") }
+                                            { backgroundColor: colors.secondaryLight }
                                         ]} />
                                 )}
 
@@ -107,9 +108,9 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                                     style.circleGrad
                                                     :
                                                     style.intermidiateCircleGrad,
-                                                { backgroundColor: DM("#FFFFFF") }
+                                                { backgroundColor: colors.white }
                                             ]}
-                                            colors={[colors.first, colors.second]}
+                                            colors={[stopsColors.first, stopsColors.second]}
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                         />
@@ -119,7 +120,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                         color="#FFFFFF"
                                         radius="1.3rem"
                                     >
-                                        <Circle color={DM("#C1C1C5")} radius="1rem" />
+                                        <Circle color={colors.secondaryLight} radius="1rem" />
                                     </Circle>
                                 }
                             </View>
@@ -131,10 +132,10 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                     ellipsizeMode={"tail"}
                                 >
                                     <>
-                                        <Text style={[style.activeStopName, { color: DM(colors.first) }]}>
+                                        <Text style={[style.activeStopName, { color: stopsColors.first }]}>
                                             {`${props.stopsOwner?.name}'s Stop `}‏
                                         </Text>
-                                        <Text style={[style.activeStopAddress, { color: DM(colors.first) }]}>
+                                        <Text style={[style.activeStopAddress, { color: stopsColors.first }]}>
                                             {`(${item?.address?.name!})`}‏
                                         </Text>
                                     </>
@@ -142,7 +143,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                 </Text>
                                 :
                                 <Text
-                                    style={[style.stopName, { color: DM("black") }]}
+                                    style={[style.stopName, { color: colors.primary }]}
                                     ellipsizeMode={"tail"}
                                     numberOfLines={1}
                                 >
@@ -156,10 +157,10 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                 <View style={style.stopListItemRow}>
                                     <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                                     <View style={[style.stopCustomLineIcon,
-                                        { backgroundColor: DM("#AAA9AE") }]}
+                                        { backgroundColor: colors.secondaryLight }]}
                                     />
                                 </View>
-                                <Text style={{ color: DM("black") }}>
+                                <Text style={{ color: colors.primary }}>
                                     Location A
                                 </Text>
                             </View>
@@ -167,7 +168,7 @@ const NotificationRideStops = (props: NotificationRideStopsProps) => {
                                 <View style={style.stopListItemRow}>
                                     <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                                 </View>
-                                <Text style={{ color: DM("black") }}>
+                                <Text style={{ color: colors.primary }}>
                                     Location B
                                 </Text>
                             </View>

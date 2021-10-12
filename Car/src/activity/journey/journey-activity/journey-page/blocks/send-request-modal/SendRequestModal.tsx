@@ -8,7 +8,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPicker from "../../../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const userQuantity :{ id: number, name: string }[] = [
         { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }];
     const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
@@ -25,37 +25,37 @@ const SendRequestModal = (props: SendRequestModalProps) => {
             <TouchableWithoutFeedback onPress={props.disableNodal}>
                 <View style={SendRequestModalStyle.background}>
                     <TouchableWithoutFeedback>
-                        <View style={{ ...SendRequestModalStyle.window, backgroundColor: DM("white") }}>
+                        <View style={{ ...SendRequestModalStyle.window, backgroundColor: colors.white }}>
 
                             <View style={SendRequestModalStyle.closeButtonContainer}>
                                 <TouchableOpacity
                                     style={SendRequestModalStyle.closeButton}
                                     onPress={props.disableNodal}
                                 >
-                                    <Ionicons name={"close"} size={30} color={DM("black")}/>
+                                    <Ionicons name={"close"} size={30} color={colors.primary}/>
                                 </TouchableOpacity>
                             </View>
 
-                            <Text style={{ ...SendRequestModalStyle.title, color: DM("black") }}>
+                            <Text style={{ ...SendRequestModalStyle.title, color: colors.primary }}>
                                 Send request to driver
                             </Text>
 
                             <View style={SendRequestModalStyle.commentsContainer}>
-                                <Text style={[SendRequestModalStyle.commentsText, { color: DM("#414045") }]}>
+                                <Text style={[SendRequestModalStyle.commentsText, { color: colors.hover }]}>
                                     Comments
                                 </Text>
                                 <TextInput
                                     style={[SendRequestModalStyle.textInput,
-                                        { borderColor: DM("black"), color: DM("#000000") }]}
+                                        { borderColor: colors.primary, color: colors.primary }]}
                                     multiline={true}
                                     maxLength={100}
                                     numberOfLines={10}
                                     value={props.comments}
                                     placeholder={"Any comments?"}
-                                    placeholderTextColor={DM("#888888")}
+                                    placeholderTextColor={colors.secondaryDark}
                                     onChangeText={props.onCommentsChange}
                                 />
-                                <Text style={[SendRequestModalStyle.hintText, { color: DM("#000000") }]}>
+                                <Text style={[SendRequestModalStyle.hintText, { color: colors.primary }]}>
                                     Up to 100 symbols
                                 </Text>
                             </View>
@@ -93,12 +93,12 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     style={[
                                         SendRequestModalStyle.confirmButton,
                                         {
-                                            backgroundColor: DM("white"),
-                                            borderColor: DM("black")
+                                            backgroundColor: colors.white,
+                                            borderColor: colors.primary
                                         }]}
                                     onPress={props.onConfirmPress}
                                 >
-                                    <Text style={[SendRequestModalStyle.confirmButtonText, { color: DM("black") }]}>
+                                    <Text style={[SendRequestModalStyle.confirmButtonText, { color: colors.primary }]}>
                                     Confirm
                                     </Text>
                                 </TouchableOpacity>

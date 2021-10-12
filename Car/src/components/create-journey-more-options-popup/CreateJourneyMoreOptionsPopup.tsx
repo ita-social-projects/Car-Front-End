@@ -11,7 +11,7 @@ import { useTheme } from "../theme/ThemeProvider";
 import CreateJourneyMoreOptionsPopupProps from "./CreateJourneyMoreOptionsPopupProps";
 
 const CreateJourneyMoreOptionsPopup = (props: CreateJourneyMoreOptionsPopupProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <>
@@ -26,15 +26,15 @@ const CreateJourneyMoreOptionsPopup = (props: CreateJourneyMoreOptionsPopupProps
                 initialSnap={0}
                 renderHeader={
                     <View style={[JourneyPageStyle.headerTitleStyle,
-                        { backgroundColor: DM("white") }
+                        { backgroundColor: colors.white }
                     ]}>
-                        <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                        <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
                             MORE OPTIONS
                         </Text>
                     </View>
                 }
                 renderContent={
-                    <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
+                    <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
                         {props.showAddStop && (
                             <MenuButton
                                 text={`Add Stop (${CreateJourney.numberOfAddedStop}/7)`}

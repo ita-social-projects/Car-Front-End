@@ -13,7 +13,7 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 const StackTabs = createStackNavigator();
 
 const MessagesTabs = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const setIsOpen = () => {
@@ -28,13 +28,13 @@ const MessagesTabs = () => {
                     options={{
                         headerTitle: "Chats",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerRight: () => (
                             <TouchableOpacity
                                 style={{ right: 10 }}
                                 onPress={() => setIsOpen()}
                             >
-                                <Ionicons name={"search"} size={30} color={DM("black")} />
+                                <Ionicons name={"search"} size={30} color={colors.primary} />
                             </TouchableOpacity>
                         ),
                         headerLeft: () => <View />
@@ -53,7 +53,7 @@ const MessagesTabs = () => {
                     options={{
                         headerTitle: "Chat",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -63,7 +63,7 @@ const MessagesTabs = () => {
                     options={{
                         title: "SoftServian",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                     component={JourneyApplicant}

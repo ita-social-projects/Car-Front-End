@@ -12,7 +12,7 @@ import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRe
 import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../../../constants/GeneralConstants";
 
 export default function Preferences (props: NavigationAddAndRemoveListener) {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");
@@ -66,15 +66,15 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
     return (
         <>
             {isLoading ? (
-                <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  DM("white") }]}>
+                <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  colors.white }]}>
                     <Indicator
                         size="large"
-                        color={DM("#414045")}
+                        color={colors.hover}
                         text="Loading information..."
                     />
                 </View>
             ) : (
-                <ScrollView style={[PreferencesStyle.container, { backgroundColor: DM("white") }]}>
+                <ScrollView style={[PreferencesStyle.container, { backgroundColor: colors.white }]}>
                     <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
                             text={"Allow smoking in your car"}
@@ -92,14 +92,14 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                         />
                     </View>
                     <View style={PreferencesStyle.commentsContainer}>
-                        <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
+                        <Text style={[PreferencesStyle.commentsText, { color: colors.hover }]}>
                             Other preferences
                         </Text>
                         <TextInput
                             style={[PreferencesStyle.textInput,
                                 {
-                                    borderColor: DM("black"),
-                                    color: DM("black")
+                                    borderColor: colors.primary,
+                                    color: colors.primary
                                 }]}
                             multiline={true}
                             maxLength={100}
@@ -109,7 +109,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                                 setRemainingSymbolsText(
                                     `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
                         />
-                        <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
+                        <Text style={[PreferencesStyle.hintText, { color: colors.primary }]}>
                             {remainingSymbolsText}
                         </Text>
                         <View style={PreferencesStyle.whitespaceBlock} />

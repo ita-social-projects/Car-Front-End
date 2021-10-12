@@ -4,7 +4,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 import React from "react";
 
 const RequestComment = ({ comments } : {comments?: string}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     if (!comments) {
         return null;
@@ -16,21 +16,21 @@ const RequestComment = ({ comments } : {comments?: string}) => {
                 JourneyNewApplicantStyle.row,
                 JourneyNewApplicantStyle.commentsBox,
                 {
-                    borderColor: DM("rgba(151, 151, 151, 0.3)"),
-                    backgroundColor: DM("#FFFFFF")
+                    borderColor: "rgba(151, 151, 151, 0.3)",
+                    backgroundColor: colors.white
                 }
             ]}
         >
-            <Text style={{ ...JourneyNewApplicantStyle.commentsText, color: DM("black") }} >
+            <Text style={{ ...JourneyNewApplicantStyle.commentsText, color: colors.primary }} >
                 {comments}
             </Text>
             <View style={[JourneyNewApplicantStyle.commentsBoxAfter,
                 {
-                    borderTopColor: DM("rgba(0,0,0,0)"),
-                    borderLeftColor: DM("rgba(0,0,0,0)"),
-                    borderRightColor: DM("rgba(151, 151, 151, 0.3)"),
-                    borderBottomColor: DM("rgba(151, 151, 151, 0.3)"),
-                    backgroundColor: DM("#FFFFFF")
+                    borderTopColor: "rgba(0,0,0,0)",
+                    borderLeftColor: "rgba(0,0,0,0)",
+                    borderRightColor: "rgba(151, 151, 151, 0.3)",
+                    borderBottomColor: "rgba(151, 151, 151, 0.3)",
+                    backgroundColor: colors.white
                 }]} />
         </View>
     );

@@ -66,7 +66,7 @@ const INVALID_ROUTE = "Cant build route. Please chose another way points";
 const ROUTE_UPDATE_ERROR = "Route update is failed";
 
 const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourneyProps }) => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const params = props?.route?.params;
     const journey = params?.journey;
 
@@ -358,7 +358,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <View style={{ height: "85%" }}>
                     <Indicator
                         size="large"
-                        color={DM("#414045")}
+                        color={colors.hover}
                         text={routeIsUpdating ? "Route updating..." : "Loading information..."}
                     />
                 </View>
@@ -457,14 +457,14 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
                         {
-                            backgroundColor: confirmDisabled ? DM("gray") : DM("black"),
+                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.primary,
                             left: Dimensions.get("screen").width -
                             (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
                         }]}
                     onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
                     disabled={confirmDisabled}
                 >
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM("white") }]}>
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
                         {journey ? "Update route" : "Confirm"}
                     </Text>
                 </TouchableOpacity>

@@ -29,7 +29,7 @@ import AddressInput from "../../../../../../components/address-input/AddressInpu
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 
 const AddLocation = () => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const [wayPoint, setWayPoint] = useState<WayPoint>(initialWayPoint);
     const setWayPointsCoordinates = (coordinates: LatLng) => {
         setWayPoint(prevState => ({
@@ -147,13 +147,13 @@ const AddLocation = () => {
                         <TextInput
                             style={[AddLocationStyle.textInput,
                                 {
-                                    borderColor: DM("black"),
-                                    backgroundColor: DM("white"),
-                                    color: DM("black")
+                                    borderColor: colors.primary,
+                                    backgroundColor: colors.white,
+                                    color: colors.primary
                                 }]}
                             value={locationName}
                             placeholder={"Name the chosen address"}
-                            placeholderTextColor={DM("grey")}
+                            placeholderTextColor={colors.secondaryDark}
                             onChangeText={(fromInput) => {
                                 setLocationName(fromInput);
                             }}/>
