@@ -18,7 +18,7 @@ import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
-    MIN_AVAILABLE_SEATS_COUNT,
+    MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
@@ -33,7 +33,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal, invalidJourneyTimeModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -240,7 +240,14 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .then((res) =>{
+                if(res.data.isDepartureTimeValid === true){
+                    setSuccessfullyPublishModalIsVisible(true);
+                }
+                else if (res.data.isDepartureTimeValid === false){
+                    setModal(invalidJourneyTimeModal);
+                }
+            })
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);

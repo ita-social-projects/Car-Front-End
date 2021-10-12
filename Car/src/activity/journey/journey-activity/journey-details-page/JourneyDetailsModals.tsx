@@ -24,3 +24,9 @@ export const updateErrorModal: ConfirmModalProps = {
     title: "Error",
     subtitle: "Ride update is failed",
 };
+
+export const invalidJourneyTimeModal: ConfirmModalProps = {
+    ...commonField,
+    title: "Time error",
+    subtitle: "Sorry but you can't create a ride. You have a journey soon!",
+};
