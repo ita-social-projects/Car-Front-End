@@ -245,7 +245,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         await JourneyService.add(newJourney)
             .then((res) => {
                 const newChat : CreateChat = {
-                    id: res.data.id,
+                    id: res.data.journeyModel.id,
                     name:
                         user?.name + " " +
                         user?.surname + "'s ride"
