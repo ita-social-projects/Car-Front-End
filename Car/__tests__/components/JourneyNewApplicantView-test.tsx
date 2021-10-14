@@ -144,7 +144,7 @@ test("renders correctly", async () =>
             <Text
               style={
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 }
               }
             >

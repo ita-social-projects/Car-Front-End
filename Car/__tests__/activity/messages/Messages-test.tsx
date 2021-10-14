@@ -37,7 +37,7 @@ test("renders correctly", async () =>
               "padding": 15,
             },
             Object {
-              "backgroundColor": "white",
+              "backgroundColor": "#FFFFFF",
             },
           ]
         }
@@ -70,7 +70,7 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
-                    "color": "black",
+                    "color": "#0B171B",
                     "fontFamily": "Milliard Bold",
                     "fontSize": 16,
                     "textAlign": "center",

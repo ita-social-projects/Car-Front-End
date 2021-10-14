@@ -21,7 +21,7 @@ test("renders correctly", async () =>
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "borderBottomColor": "rgba(0,0,0,0.5)",
+            "borderBottomColor": "#AAA9AE",
             "opacity": 1,
           }
         }
@@ -96,7 +96,7 @@ test("renders correctly", async () =>
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "borderBottomColor": "rgba(0,0,0,0.5)",
+            "borderBottomColor": "#AAA9AE",
             "opacity": 1,
           }
         }

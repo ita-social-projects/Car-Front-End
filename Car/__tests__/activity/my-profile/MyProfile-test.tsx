@@ -3,7 +3,8 @@ import renderer from "react-test-renderer";
 import MyProfile from "../../../src/activity/my-profile/MyProfile";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<MyProfile navigation={undefined}/>).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<MyProfile navigation={undefined} />).toJSON())
+        .toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -11,7 +12,7 @@ test("renders correctly", async () =>
             "flex": 1,
           },
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "#FFFFFF",
           },
         ]
       }
@@ -29,7 +30,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -72,7 +73,7 @@ test("renders correctly", async () =>
                         "fontWeight": "bold",
                       },
                       Object {
-                        "color": "black",
+                        "color": "#0B171B",
                       },
                     ]
                   }
@@ -119,7 +120,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -168,7 +169,7 @@ test("renders correctly", async () =>
                         "fontWeight": "bold",
                       },
                       Object {
-                        "color": "black",
+                        "color": "#0B171B",
                       },
                     ]
                   }
@@ -215,7 +216,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -258,7 +259,7 @@ test("renders correctly", async () =>
                         "fontWeight": "bold",
                       },
                       Object {
-                        "color": "black",
+                        "color": "#0B171B",
                       },
                     ]
                   }
@@ -305,7 +306,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -348,7 +349,7 @@ test("renders correctly", async () =>
                         "fontWeight": "bold",
                       },
                       Object {
-                        "color": "black",
+                        "color": "#0B171B",
                       },
                     ]
                   }
@@ -395,7 +396,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -438,7 +439,7 @@ test("renders correctly", async () =>
                         "fontWeight": "bold",
                       },
                       Object {
-                        "color": "black",
+                        "color": "#0B171B",
                       },
                     ]
                   }

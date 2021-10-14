@@ -105,7 +105,7 @@ test("renders correctly", async () =>
                 "top": 1098,
               },
               Object {
-                "backgroundColor": "gray",
+                "backgroundColor": "#909095",
                 "left": 629,
               },
             ]
@@ -121,7 +121,7 @@ test("renders correctly", async () =>
                   "textTransform": "uppercase",
                 },
                 Object {
-                  "color": "white",
+                  "color": "#FFFFFF",
                 },
               ]
             }

@@ -169,7 +169,8 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                                         {currentJourney?.organizer?.surname}'s ride
                                     </Text>
                                     <View style={JourneyRequestPageStyle.userSecondaryInfoBlock}>
-                                        <Text style={[JourneyRequestPageStyle.userRoleText, { color: colors.secondaryDark }]}>
+                                        <Text style={[JourneyRequestPageStyle.userRoleText,
+                                            { color: colors.secondaryDark }]}>
                                             {currentJourney?.organizer?.position}
                                         </Text>
                                     </View>
@@ -186,7 +187,8 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
 
                             <View style={JourneyRequestPageStyle.driverBlockWhiteSpace} />
 
-                            <Divider style={[JourneyRequestPageStyle.separator, { backgroundColor: colors.secondaryLight }]} />
+                            <Divider style={[JourneyRequestPageStyle.separator,
+                                { backgroundColor: colors.secondaryLight }]} />
 
                             {/* Additional Info */}
 
@@ -219,7 +221,8 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                                     }
                                     disabled={isRequested}
                                 >
-                                    <Text style={[JourneyRequestPageStyle.confirmButtonText, { color: colors.primary }]}>
+                                    <Text style={[JourneyRequestPageStyle.confirmButtonText,
+                                        { color: colors.primary }]}>
                                         {isRequested ? "Requested" : "Confirm"}
                                     </Text>
                                 </TouchableOpacity>

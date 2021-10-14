@@ -208,7 +208,8 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                             style={ScheduleBottomPopupStyles.switch}
                             onValueChange={(value) => { setWeekdays(value); setIsWeekdays(value); }}
                         />
-                        <Text style={{ color: colors.primary, paddingLeft: 11, fontSize: 13 }}>Repeat every workday</Text>
+                        <Text style={{ color: colors.primary,
+                            paddingLeft: 11, fontSize: 13 }}>Repeat every workday</Text>
                     </View>
                     <View style={ScheduleBottomPopupStyles.scheduleButtonBlock}>
                         <TouchableOpacity

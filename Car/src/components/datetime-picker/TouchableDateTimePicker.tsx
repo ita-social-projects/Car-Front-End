@@ -95,7 +95,8 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                                             backgroundColor: colors.white
 
                                         }]}>
-                                    <Text style={[TouchableDateTimePickerStyle.btnResetText, { color: colors.primary }]}>
+                                    <Text style={[TouchableDateTimePickerStyle.btnResetText,
+                                        { color: colors.primary }]}>
                                         Reset
                                     </Text>
                                 </TouchableOpacity>

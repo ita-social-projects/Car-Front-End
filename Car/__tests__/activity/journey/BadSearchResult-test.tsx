@@ -36,7 +36,7 @@ test("renders correctly", async () =>
                 "textTransform": "uppercase",
               },
               Object {
-                "color": "#000000",
+                "color": "#0B171B",
               },
             ]
           }
@@ -93,7 +93,7 @@ test("renders correctly", async () =>
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0B171B",
               "height": 48,
               "justifyContent": "center",
               "opacity": 1,

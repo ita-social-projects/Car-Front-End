@@ -28,7 +28,7 @@ test("renders correctly", async () =>
             "paddingHorizontal": 5,
           },
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "#FFFFFF",
           },
         ]
       }
@@ -51,7 +51,7 @@ test("renders correctly", async () =>
           <View
             style={
               Object {
-                "backgroundColor": "white",
+                "backgroundColor": "#FFFFFF",
               }
             }
           >

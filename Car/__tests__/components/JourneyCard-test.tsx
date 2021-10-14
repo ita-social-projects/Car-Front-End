@@ -21,7 +21,7 @@ test("renders correctly", async () =>
                 "marginBottom": 16,
               },
               Object {
-                "borderColor": "black",
+                "borderColor": "#0B171B",
                 "height": 138,
               },
             ]
@@ -79,7 +79,7 @@ test("renders correctly", async () =>
                           "lineHeight": 16,
                         },
                         Object {
-                          "color": "black",
+                          "color": "#0B171B",
                         },
                       ]
                     }

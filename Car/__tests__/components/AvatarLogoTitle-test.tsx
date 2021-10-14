@@ -44,7 +44,7 @@ test("renders correctly", async () =>
                   "marginBottom": 8,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ]
             }
@@ -61,7 +61,7 @@ test("renders correctly", async () =>
                   "opacity": 0.5,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ]
             }
@@ -76,7 +76,7 @@ test("renders correctly", async () =>
                   "opacity": 0.5,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ]
             }

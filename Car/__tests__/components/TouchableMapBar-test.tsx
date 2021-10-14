@@ -18,8 +18,8 @@ test("renders correctly", async () =>
               "padding": 8,
             },
             Object {
-              "backgroundColor": "white",
-              "borderColor": "black",
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "#0B171B",
               "marginBottom": NaN,
               "marginHorizontal": 20,
               "marginTop": NaN,
@@ -51,7 +51,7 @@ test("renders correctly", async () =>
                 "fontSize": 18,
               },
               Object {
-                "color": "black",
+                "color": "#0B171B",
                 "flex": NaN,
               },
             ]
@@ -73,7 +73,7 @@ test("renders correctly", async () =>
                   "marginRight": 5,
                 },
                 Object {
-                  "borderColor": "#EEEEEE",
+                  "borderColor": "#F8F8F8",
                   "transform": Array [
                     Object {
                       "rotate": "0deg",

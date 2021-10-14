@@ -37,7 +37,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -59,7 +59,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -83,7 +83,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -105,7 +105,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -129,7 +129,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -151,7 +151,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -172,7 +172,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "Ride",
@@ -196,7 +196,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "Create Ride Request",
@@ -218,7 +218,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "Search Results",
@@ -242,7 +242,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "Search Results",
@@ -265,7 +265,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "Search Ride",
@@ -287,7 +287,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "SoftServian",
@@ -310,7 +310,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
