@@ -6,7 +6,7 @@ import SendRequestModalStyle from "./SendRequestModalStyle";
 import SendRequestModalProps from "./SendRequestModalProps";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPicker from "../../../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
-import CommentsBlock from "../../../../../../components/commentBlock/CommentBlock";
+import CommentBlock from "../../../../../../components/commentBlock/CommentBlock";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
     const { DM } = useTheme();
@@ -41,7 +41,7 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                 Send request to driver
                             </Text>
 
-                            <CommentsBlock
+                            <CommentBlock
                                 initialComment=""
                                 commentHeader="Comments"
                             />

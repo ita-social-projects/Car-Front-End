@@ -49,7 +49,7 @@ import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
-import CommentsBlock from "../../../../components/commentBlock/CommentBlock";
+import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -429,7 +429,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <CommentsBlock
+                        <CommentBlock
                             initialComment={comment}
                             commentHeader="Comments"
                         />

@@ -9,7 +9,7 @@ import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import PreferencesStyle from "./PreferencesStyle";
 import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
-import CommentsBlock from "../../../../components/commentBlock/CommentBlock";
+import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
 export default function Preferences (props: NavigationAddAndRemoveListener) {
     const { DM } = useTheme();
@@ -87,7 +87,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                             onValueChanged={(value: boolean) => setEatingAllowed(value)}
                         />
                     </View>
-                    <CommentsBlock
+                    <CommentBlock
                         initialComment={comments}
                         commentHeader="Other preferences"
                     />

@@ -1,6 +1,6 @@
-interface CommentsBlockProps{
+interface CommentBlockProps {
     commentHeader?: string
     initialComment?: string
 }
 
-export default CommentsBlockProps;
+export default CommentBlockProps;
