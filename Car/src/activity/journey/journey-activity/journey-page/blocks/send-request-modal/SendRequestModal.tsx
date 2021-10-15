@@ -1,4 +1,4 @@
-import { Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Modal, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import React, { useState } from "react";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
@@ -6,6 +6,7 @@ import SendRequestModalStyle from "./SendRequestModalStyle";
 import SendRequestModalProps from "./SendRequestModalProps";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JourneyCreationDropDownPicker from "../../../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
+import CommentsBlock from "../../../../../../components/commentBlock/CommentBlock";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
     const { DM } = useTheme();
@@ -40,25 +41,10 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                 Send request to driver
                             </Text>
 
-                            <View style={SendRequestModalStyle.commentsContainer}>
-                                <Text style={[SendRequestModalStyle.commentsText, { color: DM("#414045") }]}>
-                                    Comments
-                                </Text>
-                                <TextInput
-                                    style={[SendRequestModalStyle.textInput,
-                                        { borderColor: DM("black"), color: DM("#000000") }]}
-                                    multiline={true}
-                                    maxLength={100}
-                                    numberOfLines={10}
-                                    value={props.comments}
-                                    placeholder={"Any comments?"}
-                                    placeholderTextColor={DM("#888888")}
-                                    onChangeText={props.onCommentsChange}
-                                />
-                                <Text style={[SendRequestModalStyle.hintText, { color: DM("#000000") }]}>
-                                    Up to 100 symbols
-                                </Text>
-                            </View>
+                            <CommentsBlock
+                                initialComment=""
+                                commentHeader="Comments"
+                            />
                             <View style ={SendRequestModalStyle.dropDownContainer}>
                                 <View style ={SendRequestModalStyle.dropDown}>
                                     <JourneyCreationDropDownPicker

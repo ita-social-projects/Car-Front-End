@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import {
     ScrollView,
-    TextInput,
     TouchableOpacity,
     View,
     Text,
@@ -33,7 +32,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal, invalidJourneyTimeModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -48,9 +47,9 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import appInsights from "../../../../components/telemetry/AppInsights";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
+import CommentsBlock from "../../../../components/commentBlock/CommentBlock";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -145,7 +144,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
-    const [comment, setComment] = useState(journey?.comments ?? "");
+    const [comment] = useState(journey?.comments ?? "");
 
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
@@ -430,24 +429,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <View style={CreateJourneyStyle.commentsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Comments</Text>
-                            <TextInput
-                                style={[CreateJourneyStyle.textInputStyle,
-                                    {
-                                        borderColor: DM("black"),
-                                        color: DM("black")
-                                    }]}
-                                multiline={true}
-                                maxLength={100}
-                                numberOfLines={10}
-                                placeholder={"Write your comment"}
-                                placeholderTextColor={DM("#686262")}
-                                onChangeText={text => setComment(text)}
-                                value={comment}
-                            />
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>Up to 100 symbols</Text>
-                        </View>
+                        <CommentsBlock
+                            initialComment={comment}
+                            commentHeader="Comments"
+                        />
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Invited
