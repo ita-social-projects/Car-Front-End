@@ -18,7 +18,7 @@ import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
-    MIN_AVAILABLE_SEATS_COUNT,
+    MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
@@ -48,6 +48,8 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import CreateChat from "../../../../../models/Chat/CreateChat";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -251,7 +253,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .then((res) => {
+                const newChat : CreateChat = {
+                    id: res.data.journeyModel.id,
+                    name:
+                        user?.name + " " +
+                        user?.surname + "'s ride"
+                };
+
+                ChatService.addChat(newChat)
+                    .then(() => setSuccessfullyPublishModalIsVisible(true));
+            })
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);

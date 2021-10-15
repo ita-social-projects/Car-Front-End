@@ -316,6 +316,28 @@ test("renders correctly", async () =>
             }
           }
         />
+        <Screen
+          component={[Function]}
+          name="Preferences"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "Preferences",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
       </StackNavigator>
     </View>
   `));

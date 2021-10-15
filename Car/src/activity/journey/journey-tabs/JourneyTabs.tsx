@@ -48,6 +48,7 @@ import WeekDay from "../../../components/schedule-bottom-popup/WeekDay";
 import JourneyInvitationsPage from "../journey-activity/journey-invitations/JourneyInvitationsPage";
 import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-more-options-popup/CreateJourneyMoreOptionsPopup";
 import { useTheme } from "../../../components/theme/ThemeProvider";
+import Preferences from "../../my-profile/my-profile-activity/preferences/Preferences";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
@@ -434,6 +435,17 @@ const JourneyTabs = () => {
                     component={Chat}
                     options={{
                         headerTitle: "Chat",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Preferences"
+                    component={Preferences}
+                    options={{
+                        headerTitle: "Preferences",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
