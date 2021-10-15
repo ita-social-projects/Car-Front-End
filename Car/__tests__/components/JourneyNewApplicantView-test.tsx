@@ -166,10 +166,12 @@ test("renders correctly", async () =>
             <NotificationButtonGroup>
               <NotificationConfirmButton
                 confirmText="ACCEPT"
+                disabled={false}
                 onConfirm={[Function]}
               />
               <NotificationDeclineButton
                 declineText="Decline"
+                disabled={false}
                 onDecline={[Function]}
               />
             </NotificationButtonGroup>

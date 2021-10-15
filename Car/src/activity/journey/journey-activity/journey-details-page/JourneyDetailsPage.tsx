@@ -17,7 +17,7 @@ import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
-    MIN_AVAILABLE_SEATS_COUNT,
+    MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
@@ -32,7 +32,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal, invalidJourneyTimeModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -48,6 +48,9 @@ import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import CommentsBlock from "../../../../components/commentsBlock/CommentsBlock";
+import appInsights from "../../../../components/telemetry/AppInsights";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import CreateChat from "../../../../../models/Chat/CreateChat";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -240,7 +243,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .then((res) => {
+                const newChat : CreateChat = {
+                    id: res.data.journeyModel.id,
+                    name:
+                        user?.name + " " +
+                        user?.surname + "'s ride"
+                };
+
+                ChatService.addChat(newChat)
+                    .then(() => setSuccessfullyPublishModalIsVisible(true));
+            })
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);

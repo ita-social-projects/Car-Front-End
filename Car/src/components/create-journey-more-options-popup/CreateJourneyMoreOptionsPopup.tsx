@@ -58,8 +58,7 @@ const CreateJourneyMoreOptionsPopup = (props: CreateJourneyMoreOptionsPopupProps
                         <MenuButton
                             text="Change Preferences"
                             isIcon={true}
-                            onPress={() => props.navigation.navigate("MyProfileTabs",
-                                { screen: "Preferences" })}
+                            onPress={() => props.navigation.navigate("Preferences")}
                         />
                     </View>
                 }

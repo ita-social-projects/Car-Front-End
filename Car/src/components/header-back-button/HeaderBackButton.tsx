@@ -5,15 +5,15 @@ import * as navigation from "../navigation/Navigation";
 import { useTheme } from "../theme/ThemeProvider";
 import HeaderBackButtonStyle from "./HeaderBackButtonStyle";
 
-const HeaderBackButton = () => {
+const HeaderBackButton = (props) => {
     const { DM } = useTheme();
 
     return(
         <TouchableOpacity
             style={HeaderBackButtonStyle.backButton}
-            onPress={() => {
+            onPress={props.onPress ?? (() => {
                 navigation.goBack();
-            }}
+            })}
         >
             <Ionicons
                 name={"chevron-back-outline"}

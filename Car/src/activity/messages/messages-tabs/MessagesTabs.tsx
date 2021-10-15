@@ -30,14 +30,16 @@ const MessagesTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
                         headerRight: () => (
-                            <TouchableOpacity
-                                style={{ right: 10 }}
-                                onPress={() => setIsOpen()}
-                            >
-                                <Ionicons name={"search"} size={30} color={DM("black")} />
-                            </TouchableOpacity>
+                            !isOpenFilter ?
+                                <TouchableOpacity
+                                    style={{ right: 10 }}
+                                    onPress={() => setIsOpen()}
+                                >
+                                    <Ionicons name={"search"} size={30} color={DM("black")} />
+                                </TouchableOpacity>
+                                : <View />
                         ),
-                        headerLeft: () => <View />
+                        headerLeft: () => isOpenFilter ? <HeaderBackButton onPress={() => setIsOpen()} /> : <View />
                     }}
                     children={(props) => (
                         <Messages
