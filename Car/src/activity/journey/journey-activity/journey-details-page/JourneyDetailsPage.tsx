@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import {
     ScrollView,
-    TextInput,
     TouchableOpacity,
     View,
     Text,
@@ -22,7 +21,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, PREFERENCES_COMMENTS_MAX_LENGTH, ZERO_ID
+    FIRST_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -48,7 +47,7 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import PreferencesStyle from "../../../my-profile/my-profile-activity/preferences/PreferencesStyle";
+import CommentsBlock from "../../../../components/commentsBlock/CommentsBlock";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -143,8 +142,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
-    const [comment, setComment] = useState(journey?.comments ?? "");
-    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
+    const [comment] = useState(journey?.comments ?? "");
 
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
@@ -420,29 +418,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <View style={CreateJourneyStyle.commentsView}>
-                            <View style={PreferencesStyle.commentsContainer}>
-                                <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
-                                    Comments
-                                </Text>
-                                <TextInput
-                                    style={[PreferencesStyle.textInput,
-                                        {
-                                            borderColor: DM("black"),
-                                            color: DM("black")
-                                        }]}
-                                    multiline={true}
-                                    maxLength={100}
-                                    numberOfLines={10}
-                                    value={comment}
-                                    onChangeText={(text) => { setComment(text);
-                                        setRemainingSymbolsText(
-                                            `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
-                                />
-                                <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
-                                    {remainingSymbolsText}
-                                </Text>
-                                <View style={PreferencesStyle.whitespaceBlock} />
-                            </View>
+                            <CommentsBlock
+                                initialComment={comment}
+                                commentHeader={"Comments"}
+                            />
                         </View>
 
                         <View style={CreateJourneyStyle.invitationsView}>
