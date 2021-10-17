@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import {
     ScrollView,
-    TextInput,
     TouchableOpacity,
     View,
     Text,
@@ -50,6 +49,7 @@ import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
+import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -144,7 +144,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
-    const [comment, setComment] = useState(journey?.comments ?? "");
+    const [comment] = useState(journey?.comments ?? "");
 
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
@@ -429,24 +429,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <View style={CreateJourneyStyle.commentsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Comments</Text>
-                            <TextInput
-                                style={[CreateJourneyStyle.textInputStyle,
-                                    {
-                                        borderColor: DM("black"),
-                                        color: DM("black")
-                                    }]}
-                                multiline={true}
-                                maxLength={100}
-                                numberOfLines={10}
-                                placeholder={"Write your comment"}
-                                placeholderTextColor={DM("#686262")}
-                                onChangeText={text => setComment(text)}
-                                value={comment}
-                            />
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>Up to 100 symbols</Text>
-                        </View>
+                        <CommentBlock
+                            initialComment={comment}
+                            commentHeader="Comments"
+                        />
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Invited
