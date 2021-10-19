@@ -77,7 +77,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
         } else {
             prevOpened?.close();
         }
-    }, [isFocused]);
+    }, [isFocused, notifications]);
 
     useEffect(() => {
         refreshNotification();

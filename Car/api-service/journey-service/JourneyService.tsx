@@ -58,9 +58,12 @@ const JourneyService = {
     addUser: async (journeyApplyModel: JourneyApplyModel) =>
         APIService.put(route + "add-user/", journeyApplyModel),
 
-    getJourneyWithJourneyUser: async (journeyId:number, userId: number, withCancelledStops: boolean = false) =>
+    getJourneyWithJourneyUser: async (journeyId:number,
+        userId: number,
+        withCancelledStops: boolean = false,
+        config: AxiosRequestConfig = {}) =>
         APIService.get<JourneyWithUserModel>(route + "journey-user/"
-        + journeyId + "/" + userId + "/" + withCancelledStops)
+        + journeyId + "/" + userId + "/" + withCancelledStops, config)
 };
 
 export default JourneyService;

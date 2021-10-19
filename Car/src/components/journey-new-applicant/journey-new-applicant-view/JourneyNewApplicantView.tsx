@@ -24,6 +24,7 @@ import JourneyNewApplicantViewStyle from "./JourneyNewApplicantViewStyle";
 import NotificationRideDetails from "../../notifications/notification-ride-details/NotificationRideDetails";
 import { ScrollView } from "react-native-gesture-handler";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
+import Journey from "../../../../models/journey/Journey";
 
 interface JourneyNewApplicantViewProps {
     route: {
@@ -43,6 +44,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const data = JSON.parse(params.notificationData);
     const [stops, setStops] = useState<Stop[]>([]);
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
+    const [journey, setJourney] = useState<Journey>();
     const senders = data?.applicantStops[FIRST_ELEMENT_INDEX]?.address.name
         .slice(FIRST_ELEMENT_INDEX, -" start".length);
     const { user } = useContext(AuthContext);
@@ -55,6 +57,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
     useEffect(() => {
         JourneyService.getJourney(params.journeyId).then(res => {
+            setJourney(res.data);
             setJourneyPoints(res.data!.journeyPoints);
             setJourneyIsFinished(new Date(res.data!.departureTime) < new Date());
             setStops([
@@ -158,6 +161,13 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                             IsBaggageVisible={false}
                             passangersCount = {data?.passangersCount}
                             withPassangers
+                            journey = {journey!}
+                            journeyUser= {{
+                                journeyId: params.journeyId,
+                                userId: params.sender?.id!,
+                                withBaggage: data?.hasLuggage,
+                                passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
+                            }}
                         />
                         <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                             {senders} stops in your ride

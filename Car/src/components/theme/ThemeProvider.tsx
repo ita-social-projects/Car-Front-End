@@ -28,7 +28,7 @@ export const ThemeProvider = (props) => {
             setSelectedTheme(theme);
             setIsThemeDarkState(isThemeDark(theme));
             changeNavigationBarColor(
-                isThemeDark(theme) ? "#121212" : "#FFFFFF",
+                isThemeDark(theme) ? darkColors.white : lightColors.white,
                 !isThemeDark(theme),
                 true
             );
@@ -40,7 +40,7 @@ export const ThemeProvider = (props) => {
         {
             setIsThemeDarkState(colorScheme === "dark");
             changeNavigationBarColor(
-                colorScheme === "dark" ? "#121212" : "#FFFFFF",
+                colorScheme === "dark" ? darkColors.white : lightColors.white,
                 colorScheme !== "dark",
                 true
             );
@@ -53,8 +53,9 @@ export const ThemeProvider = (props) => {
         setScheme: (theme) => {
             setSelectedTheme(theme);
             setIsThemeDarkState(isThemeDark(theme));
+            console.log(!isThemeDark(theme));
             changeNavigationBarColor(
-                isThemeDark(theme) ? "#121212" : "#FFFFFF",
+                isThemeDark(theme) ? darkColors.white : lightColors.white,
                 !isThemeDark(theme),
                 true
             );

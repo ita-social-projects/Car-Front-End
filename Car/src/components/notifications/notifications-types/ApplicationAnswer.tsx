@@ -24,6 +24,8 @@ import { getStopByType } from "../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../models/stop/StopType";
 import { useTheme } from "../../theme/ThemeProvider";
 import axios from "axios";
+import Journey from "../../../../models/journey/Journey";
+import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -37,6 +39,7 @@ interface ApplicationAnswerProps {
     IsAvailableSeatsVisible?: boolean,
     IsBaggageVisible?: boolean,
     IsStopsTitleVisible?: boolean,
+    journeyUserId: number
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
@@ -46,24 +49,34 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
     const user = useContext(AuthContext).user;
     const [stops, setStops] = useState<Stop[]>();
+    const [journey, setJourney] = useState<Journey>();
+    const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const data = JSON.parse(props.notification.notificationData);
     const source = useRef(axios.CancelToken.source());
+    const [wasOpened,setWasOpened] = useState(false);
 
     useEffect(() => {
-        JourneyService.getJourney(props.notification.journeyId, false, { cancelToken: source.current.token })
-            .then(res => {
-                setStops([
-                    getStopByType(res.data, StopType.Start)!,
-                    data?.applicantStops!.filter((stop:Stop) =>
-                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    data?.applicantStops!.filter((stop:Stop) =>
-                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    getStopByType(res.data, StopType.Finish)!
-                ]);
-            });
-
-        return () => source.current.cancel();
-    }, []);
+        if(!wasOpened&&notificationModalVisible)
+        {
+            setWasOpened(true);
+            JourneyService.getJourneyWithJourneyUser(props.notification.journeyId,
+                props.journeyUserId,
+                false,
+                { cancelToken: source.current.token })
+                .then(res => {
+                    setJourney(res.data.item1);
+                    setJourneyUser(res.data.item2);
+                    setStops([
+                        getStopByType(res.data.item1, StopType.Start)!,
+                        data?.applicantStops!.filter((stop:Stop) =>
+                            stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                        data?.applicantStops!.filter((stop:Stop) =>
+                            stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
+                        getStopByType(res.data.item1, StopType.Finish)!
+                    ]);
+                });
+        }
+    }, [notificationModalVisible]);
 
     const onStopPress = (stop:Stop, journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
@@ -116,7 +129,10 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     IsBaggageVisible={props.IsBaggageVisible}
                     IsDepartureTimeVisible={props.IsDepartureTimeVisible}
                     IsDetailsTitleVisible={props.IsDetailsTitleVisible}
-                    IsFeeVisible={props.IsFeeVisible}/>
+                    IsFeeVisible={props.IsFeeVisible}
+                    journey = {journey!}
+                    journeyUser = {journeyUser!}
+                />
                 <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                     {props.notification.sender!.name} {props.notification.sender!.surname}`s stops in your ride
                 </Text>
