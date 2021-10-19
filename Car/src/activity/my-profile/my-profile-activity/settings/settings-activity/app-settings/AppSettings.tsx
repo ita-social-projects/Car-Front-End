@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Platform } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AppSettingsStyle from "./AppSettingsStyle";
@@ -12,7 +12,7 @@ import ChooseOptionStyle from "../../../../../../components/choose-opton/ChooseO
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const AppSettings = (props: {navigation: any}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isDarkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
@@ -22,17 +22,17 @@ const AppSettings = (props: {navigation: any}) => {
     }, []);
 
     return (
-        <View style={[AppSettingsStyle.container, { backgroundColor: DM("white") }]}>
+        <View style={[AppSettingsStyle.container, { backgroundColor: colors.white }]}>
             <TouchableOpacity
                 style={[
                     TouchableNavigationCardStyle.cardContainer,
-                    { borderBottomColor: DM(Platform.OS === "ios" ? "rgba(0,0,0,0.5)" : "#C1C1C5"), }]}
+                    { borderBottomColor: colors.secondaryLight, }]}
             >
                 <ChooseOption
                     picture={<Ionicons
                         name={"moon-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />}
                     text={"Dark Mode"}
                     value={isDarkMode}
@@ -50,7 +50,7 @@ const AppSettings = (props: {navigation: any}) => {
                 picture={<Ionicons
                     name={"globe-outline"}
                     size={20}
-                    color={DM("#414045")}
+                    color={colors.hover}
                 />}
             >
                 <Text style={ChooseOptionStyle.preferenceNameText}>Language</Text>
@@ -63,7 +63,7 @@ const AppSettings = (props: {navigation: any}) => {
                 picture={<Ionicons
                     name={"wallet-outline"}
                     size={20}
-                    color={DM("#414045")}
+                    color={colors.hover}
                 />}
             >
                 <Text style={ChooseOptionStyle.preferenceNameText}>Payment</Text>
@@ -76,7 +76,7 @@ const AppSettings = (props: {navigation: any}) => {
                 picture={<Ionicons
                     name={"help-circle-outline"}
                     size={20}
-                    color={DM("#414045")}
+                    color={colors.hover}
                 />}
             >
                 <Text style={ChooseOptionStyle.preferenceNameText}>Help Center</Text>

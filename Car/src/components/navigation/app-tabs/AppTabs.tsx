@@ -16,7 +16,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 const Tabs = createBottomTabNavigator();
 
 const AppTabs = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
     let [unreadMessagesNumber, setUnreadMessagesNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
@@ -80,10 +80,10 @@ const AppTabs = () => {
             })}
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
-                activeTintColor: DM("#FFFFFF"),
-                inactiveTintColor: DM("#414045"),
-                activeBackgroundColor: DM("#414045"),
-                inactiveBackgroundColor: DM("#FFFFFF"),
+                activeTintColor: colors.white,
+                inactiveTintColor: colors.hover,
+                activeBackgroundColor: colors.hover,
+                inactiveBackgroundColor: colors.white,
             }}
         >
             <Tabs.Screen

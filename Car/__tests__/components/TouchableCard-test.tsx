@@ -11,7 +11,7 @@ test("renders correctly", async () =>
     <View
       style={
         Object {
-          "backgroundColor": "white",
+          "backgroundColor": "#FFFFFF",
         }
       }
     >
@@ -27,9 +27,9 @@ test("renders correctly", async () =>
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "borderBottomColor": "#C1C1C5",
+            "borderBottomColor": "#AAA9AE",
             "borderBottomWidth": 1,
-            "borderTopColor": "#C1C1C5",
+            "borderTopColor": "#AAA9AE",
             "flexDirection": "row",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -97,7 +97,7 @@ test("renders correctly", async () =>
                     "marginTop": 1,
                   },
                   Object {
-                    "color": "black",
+                    "color": "#0B171B",
                   },
                 ]
               }

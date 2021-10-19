@@ -51,10 +51,10 @@ test("renders correctly", async () =>
                       "paddingLeft": 24,
                     },
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                     },
                     Object {
-                      "color": "#000000",
+                      "color": "#0B171B",
                     },
                   ]
                 }
@@ -71,7 +71,7 @@ test("renders correctly", async () =>
                   "width": "100%",
                 },
                 Object {
-                  "backgroundColor": "#C1C1C5",
+                  "backgroundColor": "#AAA9AE",
                 },
               ]
             }

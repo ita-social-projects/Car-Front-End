@@ -64,7 +64,7 @@ test("renders correctly", async () =>
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
-                    "borderColor": "#F0F0F0",
+                    "borderColor": "#AAA9AE",
                   },
                 ]
               }
@@ -87,7 +87,7 @@ test("renders correctly", async () =>
                       "fontWeight": "bold",
                     },
                     Object {
-                      "color": "#000000",
+                      "color": "#0B171B",
                     },
                   ]
                 }
@@ -107,7 +107,7 @@ test("renders correctly", async () =>
                       "fontWeight": "bold",
                     },
                     Object {
-                      "color": "#000000",
+                      "color": "#0B171B",
                     },
                   ]
                 }
@@ -136,7 +136,7 @@ test("renders correctly", async () =>
                       "fontWeight": "bold",
                     },
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                     },
                   ]
                 }
@@ -162,7 +162,11 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 16,
                         "paddingVertical": 6,
                       },
-                      Object {},
+                      Object {
+                        "backgroundColor": "#0B171B",
+                        "borderColor": "#0B171B",
+                        "color": "#FFFFFF",
+                      },
                     ]
                   }
                 >
@@ -175,7 +179,11 @@ test("renders correctly", async () =>
                           "lineHeight": 13,
                           "textTransform": "uppercase",
                         },
-                        Object {},
+                        Object {
+                          "backgroundColor": "#0B171B",
+                          "borderColor": "#0B171B",
+                          "color": "#FFFFFF",
+                        },
                       ]
                     }
                   >
@@ -194,7 +202,11 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 16,
                         "paddingVertical": 6,
                       },
-                      Object {},
+                      Object {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#0B171B",
+                        "color": "#0B171B",
+                      },
                     ]
                   }
                 >
@@ -207,7 +219,11 @@ test("renders correctly", async () =>
                           "lineHeight": 13,
                           "textTransform": "uppercase",
                         },
-                        Object {},
+                        Object {
+                          "backgroundColor": "#FFFFFF",
+                          "borderColor": "#0B171B",
+                          "color": "#0B171B",
+                        },
                       ]
                     }
                   >
@@ -228,7 +244,11 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 16,
                         "paddingVertical": 4,
                       },
-                      Object {},
+                      Object {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#0B171B",
+                        "color": "#0B171B",
+                      },
                     ]
                   }
                 >
@@ -241,7 +261,11 @@ test("renders correctly", async () =>
                           "lineHeight": 13,
                           "textTransform": "uppercase",
                         },
-                        Object {},
+                        Object {
+                          "backgroundColor": "#FFFFFF",
+                          "borderColor": "#0B171B",
+                          "color": "#0B171B",
+                        },
                       ]
                     }
                   >
@@ -295,7 +319,7 @@ test("renders correctly", async () =>
                       "lineHeight": 16,
                     },
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                     },
                   ]
                 }
@@ -325,7 +349,7 @@ test("renders correctly", async () =>
                     "textTransform": "uppercase",
                   },
                   Object {
-                    "color": "black",
+                    "color": "#0B171B",
                   },
                 ]
               }

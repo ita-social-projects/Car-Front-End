@@ -157,7 +157,7 @@ test("renders correctly", async () =>
                   Array [
                     undefined,
                     Object {
-                      "color": "#02a2cf",
+                      "color": "#02A2CF",
                     },
                   ]
                 }
@@ -173,7 +173,7 @@ test("renders correctly", async () =>
               undefined,
               Object {
                 "backgroundColor": "rgba(0,0,0,0)",
-                "borderBottomColor": "#02a2cf",
+                "borderBottomColor": "#02A2CF",
                 "borderLeftColor": "rgba(0,0,0,0)",
                 "borderRightColor": "rgba(0,0,0,0)",
                 "borderTopColor": "rgba(0,0,0,0)",
@@ -336,7 +336,7 @@ test("renders correctly", async () =>
               undefined,
               Object {
                 "backgroundColor": "rgba(0,0,0,0)",
-                "borderBottomColor": "#C1C1C5",
+                "borderBottomColor": "#AAA9AE",
                 "borderLeftColor": "rgba(0,0,0,0)",
                 "borderRightColor": "rgba(0,0,0,0)",
                 "borderTopColor": "rgba(0,0,0,0)",

@@ -4,11 +4,11 @@ import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import NotificationSettingsStyle from "./NotificationSettingsStyle";
 
 const NotificationSettings = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
-        <View style={[NotificationSettingsStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
-            <Text style={{ color: DM("black") }}>
+        <View style={[NotificationSettingsStyle.container, { backgroundColor: colors.white }]}>
+            <Text style={{ color: colors.primary }}>
                 App Settings
             </Text>
         </View>

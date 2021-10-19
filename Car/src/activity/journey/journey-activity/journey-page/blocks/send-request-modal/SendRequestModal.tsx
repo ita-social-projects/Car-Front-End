@@ -9,7 +9,7 @@ import JourneyCreationDropDownPicker from "../../../../../../components/dropdown
 import CommentBlock from "../../../../../../components/commentBlock/CommentBlock";
 
 const SendRequestModal = (props: SendRequestModalProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const userQuantity :{ id: number, name: string }[] = [
         { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }];
     const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
@@ -26,18 +26,18 @@ const SendRequestModal = (props: SendRequestModalProps) => {
             <TouchableWithoutFeedback onPress={props.disableNodal}>
                 <View style={SendRequestModalStyle.background}>
                     <TouchableWithoutFeedback>
-                        <View style={{ ...SendRequestModalStyle.window, backgroundColor: DM("white") }}>
+                        <View style={{ ...SendRequestModalStyle.window, backgroundColor: colors.white }}>
 
                             <View style={SendRequestModalStyle.closeButtonContainer}>
                                 <TouchableOpacity
                                     style={SendRequestModalStyle.closeButton}
                                     onPress={props.disableNodal}
                                 >
-                                    <Ionicons name={"close"} size={30} color={DM("black")}/>
+                                    <Ionicons name={"close"} size={30} color={colors.primary}/>
                                 </TouchableOpacity>
                             </View>
 
-                            <Text style={{ ...SendRequestModalStyle.title, color: DM("black") }}>
+                            <Text style={{ ...SendRequestModalStyle.title, color: colors.primary }}>
                                 Send request to driver
                             </Text>
 
@@ -79,12 +79,12 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                                     style={[
                                         SendRequestModalStyle.confirmButton,
                                         {
-                                            backgroundColor: DM("white"),
-                                            borderColor: DM("black")
+                                            backgroundColor: colors.white,
+                                            borderColor: colors.primary
                                         }]}
                                     onPress={props.onConfirmPress}
                                 >
-                                    <Text style={[SendRequestModalStyle.confirmButtonText, { color: DM("black") }]}>
+                                    <Text style={[SendRequestModalStyle.confirmButtonText, { color: colors.primary }]}>
                                     Confirm
                                     </Text>
                                 </TouchableOpacity>

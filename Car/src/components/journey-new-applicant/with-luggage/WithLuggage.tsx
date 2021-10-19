@@ -4,7 +4,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 import React from "react";
 
 const WithLuggage = ({ hasLuggage } : {hasLuggage?: boolean}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View
@@ -20,11 +20,11 @@ const WithLuggage = ({ hasLuggage } : {hasLuggage?: boolean}) => {
 
             <View style={[JourneyNewApplicantStyle.optionsLine,
                 {
-                    borderTopColor: DM("rgba(0,0,0,0)"),
-                    borderLeftColor: DM("rgba(0,0,0,0)"),
-                    borderRightColor: DM("rgba(0,0,0,0)"),
-                    borderBottomColor: DM("#C1C1C5"),
-                    backgroundColor: DM("#FFFFFF")
+                    borderTopColor: "rgba(0,0,0,0)",
+                    borderLeftColor: "rgba(0,0,0,0)",
+                    borderRightColor: "rgba(0,0,0,0)",
+                    borderBottomColor: colors.secondaryLight,
+                    backgroundColor: colors.white
                 }]} />
         </View>
     );

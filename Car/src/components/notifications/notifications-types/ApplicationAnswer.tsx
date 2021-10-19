@@ -43,7 +43,7 @@ interface ApplicationAnswerProps {
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.notification.visible);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
@@ -133,7 +133,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                     journey = {journey!}
                     journeyUser = {journeyUser!}
                 />
-                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: DM("black") }}>
+                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                     {props.notification.sender!.name} {props.notification.sender!.surname}`s stops in your ride
                 </Text>
                 <View>

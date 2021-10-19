@@ -11,7 +11,7 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 const StackTabs = createStackNavigator();
 
 const NotificationsTabs = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={HeaderStyle.container}>
@@ -22,7 +22,7 @@ const NotificationsTabs = () => {
                     options={{
                         headerTitle: "Notifications",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: () => <View />
                     }}
                 />
@@ -32,7 +32,7 @@ const NotificationsTabs = () => {
                     options={{
                         headerTitle: "View Stops",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -42,7 +42,7 @@ const NotificationsTabs = () => {
                     options={{
                         headerTitle: "New Applicant",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />

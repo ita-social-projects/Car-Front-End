@@ -7,7 +7,7 @@ import { useTheme } from "../../../../components/theme/ThemeProvider";
 import DetailsStyle from "./DetailsStyle";
 
 const Details = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [isLoading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ const Details = () => {
     });
 
     return (
-        <View style={[DetailsStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
+        <View style={[DetailsStyle.container, { backgroundColor: colors.white }]}>
             {isLoading ? (
                 <Indicator
                     size="large"
@@ -29,24 +29,24 @@ const Details = () => {
                 <>
                     <View style={DetailsStyle.detailsContainer}>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={[DetailsStyle.detailNameText, { color: DM("#000000") }]}>
+                            <Text style={[DetailsStyle.detailNameText, { color: colors.primary }]}>
                                 Position
                             </Text>
                         </View>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={[DetailsStyle.detailValueGrayText, { color: DM("#414045") }]}>
+                            <Text style={[DetailsStyle.detailValueGrayText, { color: colors.hover }]}>
                                 {user?.position}
                             </Text>
                         </View>
                     </View>
                     <View style={DetailsStyle.detailsContainer}>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={[DetailsStyle.detailNameText, { color: DM("#000000") }]}>
+                            <Text style={[DetailsStyle.detailNameText, { color: colors.primary }]}>
                                 Location
                             </Text>
                         </View>
                         <View style={DetailsStyle.detailContainer}>
-                            <Text style={[DetailsStyle.detailValueBlueText, { color: DM("#02A2CF") }]}>
+                            <Text style={[DetailsStyle.detailValueBlueText, { color: colors.accentBlue }]}>
                                 {user?.location}
                             </Text>
                         </View>

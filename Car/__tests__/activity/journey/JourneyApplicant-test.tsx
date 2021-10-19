@@ -29,7 +29,7 @@ test("renders correctly", async () =>
       />
       <ConfirmModal
         cancelText="Copy number"
-        confirmColor="#d80056"
+        confirmColor="#D80056"
         confirmText="Call undefined"
         disableModal={[Function]}
         hideCancelButton={false}

@@ -15,10 +15,10 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
-        <View style={[HeaderStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
+        <View style={[HeaderStyle.container, { backgroundColor: colors.white }]}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="MyProfile"
@@ -35,7 +35,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Preferences",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -45,7 +45,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Details",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />

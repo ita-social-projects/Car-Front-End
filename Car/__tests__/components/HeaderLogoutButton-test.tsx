@@ -82,7 +82,7 @@ test("renders correctly", async () =>
             style={
               Object {
                 "alignItems": "center",
-                "backgroundColor": "white",
+                "backgroundColor": "#FFFFFF",
                 "borderRadius": 15,
                 "height": 260,
                 "justifyContent": "space-between",
@@ -96,7 +96,7 @@ test("renders correctly", async () =>
             <Text
               style={
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                   "fontFamily": undefined,
                   "fontSize": 16,
                   "fontWeight": "700",
@@ -108,7 +108,7 @@ test("renders correctly", async () =>
             <Text
               style={
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                   "marginVertical": 20,
                 }
               }
@@ -171,7 +171,7 @@ test("renders correctly", async () =>
               <Text
                 style={
                   Object {
-                    "color": "black",
+                    "color": "#0B171B",
                     "fontFamily": undefined,
                     "fontSize": 16,
                     "fontWeight": "700",

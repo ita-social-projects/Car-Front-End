@@ -4,7 +4,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 import NotificationModalBaseStyle from "./NotificationModalBaseStyle";
 
 const NotificationModalBase = (props: {isVisible: boolean, styles?: StyleProp<ViewStyle>, children?: ReactNode}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <Modal
@@ -13,8 +13,8 @@ const NotificationModalBase = (props: {isVisible: boolean, styles?: StyleProp<Vi
             transparent
             statusBarTranslucent
         >
-            <View style={[NotificationModalBaseStyle.background, { backgroundColor: DM("rgba(0, 0, 0, 0.5)") }]}>
-                <View style={[props.styles, NotificationModalBaseStyle.window, { backgroundColor: DM("#FFFFFF") }]}>
+            <View style={[NotificationModalBaseStyle.background, { backgroundColor: "rgba(0, 0, 0, 0.5)" }]}>
+                <View style={[props.styles, NotificationModalBaseStyle.window, { backgroundColor: colors.white }]}>
                     {props.children}
                 </View>
             </View>

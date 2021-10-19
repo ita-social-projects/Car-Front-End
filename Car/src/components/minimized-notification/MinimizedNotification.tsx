@@ -10,7 +10,7 @@ import NotificationsService from "../../../api-service/notifications-service/Not
 import MinimizedNotificationProps from "./MinimizedNotificationProps";
 
 const MinimizedNotification = (props: MinimizedNotificationProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <TouchableOpacity
@@ -19,7 +19,7 @@ const MinimizedNotification = (props: MinimizedNotificationProps) => {
                 NotificationsService.markAsRead(props.notificationId);
             }}
         >
-            <View style={props.read ? null : { backgroundColor: DM("rgba(0,161,206,0.1)") }}>
+            <View style={props.read ? null : { backgroundColor: "rgba(0,161,206,0.1)" }}>
                 <View
                     style={[
                         ContainerStyle.container,
@@ -31,10 +31,10 @@ const MinimizedNotification = (props: MinimizedNotificationProps) => {
                             <AvatarLogo user={props.user} size={38.5} />
                         </View>
                         <View style={MinimizedNotificationStyle.content}>
-                            <Text style={[MinimizedNotificationStyle.name, { color: DM("#02A2CF") }]}>
+                            <Text style={[MinimizedNotificationStyle.name, { color: colors.accentBlue }]}>
                                 {props.user!.name + " " + props.user!.surname}
                             </Text>
-                            <Text style={[MinimizedNotificationStyle.title, { color: DM("#909095") }]}>
+                            <Text style={[MinimizedNotificationStyle.title, { color: colors.secondaryDark }]}>
                                 {props.notificationTitle}
                             </Text>
                         </View>
@@ -43,9 +43,9 @@ const MinimizedNotification = (props: MinimizedNotificationProps) => {
                                 style={
                                     props.read
                                         ? [MinimizedNotificationStyle.dateRead,
-                                            { color: DM("#909095") }]
+                                            { color: colors.secondaryDark }]
                                         : [MinimizedNotificationStyle.dateUnread,
-                                            { color: DM("#02a2cf") }]
+                                            { color: colors.accentBlue }]
                                 }
                             >
                                 {moment(props.date).fromNow(true)}
@@ -58,19 +58,19 @@ const MinimizedNotification = (props: MinimizedNotificationProps) => {
                         props.read
                             ? [MinimizedNotificationStyle.optionsLineRead,
                                 {
-                                    borderTopColor: DM("rgba(0,0,0,0)"),
-                                    borderLeftColor: DM("rgba(0,0,0,0)"),
-                                    borderRightColor: DM("rgba(0,0,0,0)"),
-                                    borderBottomColor: DM("#C1C1C5"),
-                                    backgroundColor: DM("rgba(0,0,0,0)"),
+                                    borderTopColor: "rgba(0,0,0,0)",
+                                    borderLeftColor: "rgba(0,0,0,0)",
+                                    borderRightColor: "rgba(0,0,0,0)",
+                                    borderBottomColor: colors.secondaryLight,
+                                    backgroundColor: "rgba(0,0,0,0)",
                                 }]
                             : [MinimizedNotificationStyle.optionsLineUnread,
                                 {
-                                    borderTopColor: DM("rgba(0,0,0,0)"),
-                                    borderLeftColor: DM("rgba(0,0,0,0)"),
-                                    borderRightColor: DM("rgba(0,0,0,0)"),
-                                    borderBottomColor: DM("#02a2cf"),
-                                    backgroundColor: DM("rgba(0,0,0,0)"),
+                                    borderTopColor: "rgba(0,0,0,0)",
+                                    borderLeftColor: "rgba(0,0,0,0)",
+                                    borderRightColor: "rgba(0,0,0,0)",
+                                    borderBottomColor: colors.accentBlue,
+                                    backgroundColor: "rgba(0,0,0,0)",
                                 }]
                     }
                 />

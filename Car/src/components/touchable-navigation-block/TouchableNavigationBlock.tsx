@@ -11,7 +11,7 @@ import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle";
 import TouchableNavigationBlockProps from "./TouchableNavigationBlockProps";
 
 const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View>
@@ -19,7 +19,7 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                 onPress={() => props.navigation.navigate(props.navigationName)}
             >
                 <LinearGradient
-                    style={[TouchableNavigationBlockStyle.blockContainer, { borderColor: DM("#FFFFFF"), }]}
+                    style={[TouchableNavigationBlockStyle.blockContainer, { borderColor: colors.white, }]}
                     colors={[props.from, props.to]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}

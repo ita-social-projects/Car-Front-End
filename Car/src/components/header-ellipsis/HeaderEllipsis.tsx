@@ -5,14 +5,14 @@ import { useTheme } from "../theme/ThemeProvider";
 import HeaderEllipsisStyle from "./HeaderEllipsisStyle";
 
 const HeaderEllipsis = (props: any) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <TouchableOpacity onPress={props.onPress}>
             <Ionicons
                 name={"ellipsis-horizontal"}
                 size={30}
-                color={DM("black")}
+                color={colors.primary}
                 style={HeaderEllipsisStyle.moreOptionsIcon}
             />
         </TouchableOpacity>

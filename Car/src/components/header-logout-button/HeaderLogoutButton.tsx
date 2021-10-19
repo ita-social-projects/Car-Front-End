@@ -7,7 +7,7 @@ import ConfirmModal from "../confirm-modal/ConfirmModal";
 import AuthContext from "../auth/AuthContext";
 
 const HeaderLogoutButton = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const { logout } = useContext(AuthContext);
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -17,7 +17,7 @@ const HeaderLogoutButton = () => {
                 style={HeaderLogoutButtonStyle.requestButton}
                 onPress={() => setModalVisible(true)}
             >
-                <Text style={[HeaderLogoutButtonStyle.buttonText, { color: DM("#EC6400") }]}>
+                <Text style={[HeaderLogoutButtonStyle.buttonText, { color: colors.accentOrange }]}>
                     Logout
                 </Text>
             </TouchableOpacity>

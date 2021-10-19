@@ -21,7 +21,7 @@ test("renders correctly", async () =>
             undefined,
             Object {
               "backgroundColor": "#FFFFFF",
-              "borderBottomColor": "#C1C1C5",
+              "borderBottomColor": "#AAA9AE",
               "borderLeftColor": "rgba(0,0,0,0)",
               "borderRightColor": "rgba(0,0,0,0)",
               "borderTopColor": "rgba(0,0,0,0)",

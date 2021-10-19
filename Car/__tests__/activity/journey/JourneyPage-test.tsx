@@ -31,7 +31,7 @@ test("renders correctly", async () =>
               "flex": 1,
             },
             Object {
-              "backgroundColor": "#88FF88",
+              "backgroundColor": "#A5C500",
             },
           ]
         }
@@ -150,7 +150,7 @@ test("renders correctly", async () =>
           }
           style={
             Object {
-              "backgroundColor": "white",
+              "backgroundColor": "#FFFFFF",
             }
           }
         />

@@ -7,7 +7,7 @@ import CarTextInputStyle from "./CarTextInputStyle";
 import CarTextInputProps from "./CarTextInputProps";
 
 const CarTextInput = (props: CarTextInputProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const { control } = useForm();
 
     return (
@@ -18,22 +18,22 @@ const CarTextInput = (props: CarTextInputProps) => {
             defaultValue=""
             render={() => (
                 <>
-                    <View style={[CarTextInputStyle.container, { borderColor: DM("black") }]}>
+                    <View style={[CarTextInputStyle.container, { borderColor: colors.primary }]}>
                         <TextInput
                             onChangeText={(text: string) => props.onChangeText!(text)}
                             placeholder={props.placeHolder}
-                            placeholderTextColor={DM("gray")}
+                            placeholderTextColor={colors.secondaryDark}
                             defaultValue={props.defaultValue}
                             style={[
                                 CarTextInputStyle.textInputStyle,
-                                { color: DM("black") },
-                                props.error && { borderColor: DM("red") }
+                                { color: colors.primary },
+                                props.error && { borderColor: colors.accentRed }
                             ]}
                             onBlur={props.onBlur}
                         />
                     </View>
                     {props.errorText && (
-                        <Text style={{ color: DM("red") }}>
+                        <Text style={{ color: colors.accentRed }}>
                             {props.errorText}
                         </Text>
                     )}

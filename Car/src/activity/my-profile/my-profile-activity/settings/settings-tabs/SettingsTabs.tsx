@@ -17,7 +17,7 @@ import { useTheme } from "../../../../../components/theme/ThemeProvider";
 const StackTabs = createStackNavigator();
 
 const SettingsTabs = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
@@ -28,7 +28,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderLogoutButton
                     }}
@@ -39,7 +39,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "App Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -49,7 +49,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Notifications Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -60,7 +60,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Chats Settings",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -71,7 +71,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Language",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -82,7 +82,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Payment",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}
@@ -93,7 +93,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Help Center",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderEllipsis
                     }}

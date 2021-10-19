@@ -41,7 +41,7 @@ const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses 
 };
 
 const AddressInput = (props: AddressInputProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const ref = useRef<GooglePlacesAutocompleteRef | null>();
 
     const keyboardDidHide = () => ref.current?.blur();
@@ -68,7 +68,7 @@ const AddressInput = (props: AddressInputProps) => {
                 radius: 30000
             }}
             renderLeftButton={() => (
-                <Text style={[AddressInputStyles.placeholder, { color: DM("black") }]}>
+                <Text style={[AddressInputStyles.placeholder, { color: colors.primary }]}>
                     {props.placeholder + ":"}
                 </Text>
             )}
@@ -78,7 +78,7 @@ const AddressInput = (props: AddressInputProps) => {
                         <FontAwesome
                             name={"map-marker"}
                             size={30}
-                            color={DM("#5355fc")}
+                            color={colors.navyBlueGradientFrom}
                         />
                     </View>) :
                     (<TouchableOpacity
@@ -88,7 +88,7 @@ const AddressInput = (props: AddressInputProps) => {
                         <Ionicons
                             name={"close"}
                             size={30}
-                            color={DM("black")}
+                            color={colors.primary}
                         />
                     </TouchableOpacity>))}
             styles={{
@@ -97,18 +97,18 @@ const AddressInput = (props: AddressInputProps) => {
                     textInput: {
                         ...AddressInputStyles.textInput,
                         paddingLeft: props.paddingLeft,
-                        color: DM("black"),
-                        backgroundColor: DM("white"),
-                        borderColor: DM("black")
+                        color: colors.primary,
+                        backgroundColor: colors.white,
+                        borderColor: colors.primary
                     },
                     row: {
-                        backgroundColor: DM("white")
+                        backgroundColor: colors.white
                     },
                     separator: {
-                        backgroundColor: DM("gray")
+                        backgroundColor: colors.secondaryDark
                     },
                     description: {
-                        color: DM("black")
+                        color: colors.primary
                     }
                 }
             }}

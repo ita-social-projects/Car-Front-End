@@ -8,7 +8,7 @@ import { useTheme } from "../../components/theme/ThemeProvider";
 import LoginProps from "./LoginProps";
 
 const Login = (properties: LoginProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const { login } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -57,7 +57,7 @@ const Login = (properties: LoginProps) => {
             <ActivityIndicator
                 style={LoginStyle.loadingIcon}
                 size="large"
-                color={DM("black")}
+                color={colors.primary}
             />
         );
     } else {
@@ -65,13 +65,13 @@ const Login = (properties: LoginProps) => {
     }
 
     return (
-        <View style={[LoginStyle.pageContainer, { backgroundColor: DM("#FFFFFF") }]}>
+        <View style={[LoginStyle.pageContainer, { backgroundColor: colors.white }]}>
             <View style={LoginStyle.greetingTextContainer}>
-                <Text style={[LoginStyle.greetingText, { color: DM("black") }]}>Welcome to</Text>
+                <Text style={[LoginStyle.greetingText, { color: colors.primary }]}>Welcome to</Text>
             </View>
 
             <View style={LoginStyle.applicationNameTextContainer}>
-                <Text style={[LoginStyle.applicationNameText, { color: DM("black") }]}>
+                <Text style={[LoginStyle.applicationNameText, { color: colors.primary }]}>
                     Softserve Journeys
                 </Text>
             </View>
@@ -82,8 +82,8 @@ const Login = (properties: LoginProps) => {
                     <TouchableOpacity
                         style={[
                             LoginStyle.button,
-                            buttonDisabled && { backgroundColor: DM("#888888") },
-                            { backgroundColor: DM("#000000") }
+                            buttonDisabled && { backgroundColor: colors.secondaryDark },
+                            { backgroundColor: colors.primary }
                         ]}
                         disabled={buttonDisabled}
                         activeOpacity={1}
@@ -92,7 +92,7 @@ const Login = (properties: LoginProps) => {
                             loadingProcess(true);
                         }}
                     >
-                        <Text style={[LoginStyle.buttonText, { color: DM("white") }]}>Login</Text>
+                        <Text style={[LoginStyle.buttonText, { color: colors.white }]}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>

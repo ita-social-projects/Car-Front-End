@@ -7,20 +7,20 @@ import { useTheme } from "../theme/ThemeProvider";
 import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../constants/GeneralConstants";
 
 const CommentBlock = (props: CommentBlockProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [comment, setComment] = useState(props.initialComment);
     const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
 
     return (
         <View style={CommentBlockStyle.commentsContainer}>
-            <Text style={[PreferencesStyle.commentsText, { color: DM("#414045") }]}>
+            <Text style={[PreferencesStyle.commentsText, { color: colors.hover }]}>
                 Comments
             </Text>
             <TextInput
                 style={[PreferencesStyle.textInput,
                     {
-                        borderColor: DM("black"),
-                        color: DM("black")
+                        borderColor: colors.primary,
+                        color: colors.primary
                     }]}
                 multiline={true}
                 maxLength={100}
@@ -30,7 +30,7 @@ const CommentBlock = (props: CommentBlockProps) => {
                     setRemainingSymbolsText(
                         `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
             />
-            <Text style={[PreferencesStyle.hintText, { color: DM("black") }]}>
+            <Text style={[PreferencesStyle.hintText, { color: colors.primary }]}>
                 {remainingSymbolsText}
             </Text>
             <View style={PreferencesStyle.whitespaceBlock} />

@@ -5,7 +5,7 @@ import { useTheme } from "../theme/ThemeProvider";
 import HeaderRequestButtonStyle from "./HeaderRequestButtonStyle";
 
 const HeaderRequestButton = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <TouchableOpacity
@@ -15,7 +15,7 @@ const HeaderRequestButton = () => {
                     ShadowedBottomPopup.pressHandle();
             }}
         >
-            <Text style={[HeaderRequestButtonStyle.buttonText, { color: DM("#02A2CF") }]}>
+            <Text style={[HeaderRequestButtonStyle.buttonText, { color: colors.accentBlue }]}>
             Request
             </Text>
         </TouchableOpacity>

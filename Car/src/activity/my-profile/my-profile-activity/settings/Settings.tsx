@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Animated, AppState, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Animated, AppState, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SettingsStyle, { SwitchSelectorStyle } from "./SettingsStyle";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
@@ -30,7 +30,7 @@ import { CreateJourneyStyle } from "../../../journey/journey-activity/create-jou
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 
 const Settings = (props: { navigation: any }) => {
-    const { setScheme, theme, DM, DMStyleObject } = useTheme();
+    const { setScheme, theme, colors } = useTheme();
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
@@ -41,16 +41,34 @@ const Settings = (props: { navigation: any }) => {
 
     const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
 
+    const activeButtonStyle = {
+        backgroundColor: colors.primary,
+        color: colors.white,
+        borderColor: colors.primary
+    };
+
+    const inactiveButtonStyle = {
+        backgroundColor: colors.white,
+        color: colors.primary,
+        borderColor: colors.primary
+    };
+
     const setButtonStyle = (shouldBeHighlighted : boolean) =>{
         if(shouldBeHighlighted)
-            return SwitchSelectorStyle.activeButtonStyle;
+            return activeButtonStyle;
 
-        return SwitchSelectorStyle.inactiveButtonStyle;
+        return inactiveButtonStyle;
     };
 
     const [lightButtonStyle, setLightButtonStyle] = useState(setButtonStyle(theme === "light"));
     const [darkButtonStyle, setDarkButtonStyle] = useState(setButtonStyle(theme === "dark"));
     const [systemButtonStyle, setSystemButtonStyle] = useState(setButtonStyle(theme === "system"));
+
+    useEffect(() => {
+        setLightButtonStyle(setButtonStyle(theme === "light"));
+        setDarkButtonStyle(setButtonStyle(theme === "dark"));
+        setSystemButtonStyle(setButtonStyle(theme === "system"));
+    }, [theme]);
 
     const changeAppScheme = (value) => {
         setScheme(value);
@@ -230,7 +248,7 @@ const Settings = (props: { navigation: any }) => {
                     refForChild={moreOptionsRef}
                     renderContent={
 
-                        <View style={{ backgroundColor: DM("#FFFFFF") }}>
+                        <View style={{ backgroundColor: colors.white }}>
                             {user?.imageId == null ? (
 
                                 <TouchableOpacity
@@ -239,7 +257,7 @@ const Settings = (props: { navigation: any }) => {
                                         pressHandle();
                                         (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                     }}>
-                                    <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
+                                    <Text style={[SettingsStyle.changeAvatarText, { color: colors.primary }]}>
                                         Add photo
                                     </Text>
                                 </TouchableOpacity>
@@ -253,13 +271,13 @@ const Settings = (props: { navigation: any }) => {
                                             pressHandle();
                                             (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
                                         }}>
-                                        <Text style={[SettingsStyle.changeAvatarText, { color: DM("black") }]}>
+                                        <Text style={[SettingsStyle.changeAvatarText, { color: colors.primary }]}>
                                             Change photo
                                         </Text>
                                     </TouchableOpacity>
 
                                     <View style={[SettingsStyle.sepataror,
-                                        { backgroundColor: DM(Platform.OS === "ios" ? "#888888" : "#C1C1C5") }
+                                        { backgroundColor: colors.secondaryDark }
                                     ]} />
 
                                     <TouchableOpacity
@@ -269,7 +287,7 @@ const Settings = (props: { navigation: any }) => {
                                             (async () => sleep(SLEEP_DURATION))()
                                                 .then(() => setDeleteModalVisible(true));
                                         }}>
-                                        <Text style={[SettingsStyle.deleteAvatarText, { color: DM("#EC6400") }]}>
+                                        <Text style={[SettingsStyle.deleteAvatarText, { color: colors.accentOrange }]}>
                                             Delete photo
                                         </Text>
                                     </TouchableOpacity>
@@ -279,8 +297,8 @@ const Settings = (props: { navigation: any }) => {
                     }
                     initialSnap={MIN_POPUP_POSITION}
                     renderHeader={
-                        <View style={{ backgroundColor: DM("#FFFFFF") }}>
-                            <Text style={[SettingsStyle.moreOptionsHeader, { color: DM("black") }]}>
+                        <View style={{ backgroundColor: colors.white }}>
+                            <Text style={[SettingsStyle.moreOptionsHeader, { color: colors.primary }]}>
                                 Edit Profile
                             </Text>
                         </View>}
@@ -295,7 +313,7 @@ const Settings = (props: { navigation: any }) => {
     return (
         <>
             <ScrollView
-                style={[SettingsStyle.mainContainer, { backgroundColor: DM("#FFFFFF") }]}
+                style={[SettingsStyle.mainContainer, { backgroundColor: colors.white }]}
                 refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}>
                 <View style={SettingsStyle.container}>
                     <View style={SettingsStyle.bottomContainer}>
@@ -303,8 +321,8 @@ const Settings = (props: { navigation: any }) => {
                             activeOpacity={1}
                             style={[SettingsStyle.profileInfo,
                                 {
-                                    borderColor: DM("#F0F0F0"),
-                                    backgroundColor: DM("#FFFFFF")
+                                    borderColor: colors.secondaryLight,
+                                    backgroundColor: colors.white
                                 }]}
                             onPress={pressHandle}>
                             <Animated.View style={isSaving && [{ opacity: avatarLogoTitleOpacity }]}>
@@ -316,7 +334,7 @@ const Settings = (props: { navigation: any }) => {
                                 <ActivityIndicator
                                     style={SettingsStyle.spinner}
                                     size={26}
-                                    color={DM("#414045")}
+                                    color={colors.hover}
                                 />
 
                             )}
@@ -327,7 +345,7 @@ const Settings = (props: { navigation: any }) => {
                             cardName="Notifications Settings"
                             angle="0"
                         >
-                            <Text style={[SettingsStyle.cardText, { color: DM("#000000") }]}>
+                            <Text style={[SettingsStyle.cardText, { color: colors.primary }]}>
                                 Notifications Settings
                             </Text>
                         </TouchableNavigationCard>
@@ -337,26 +355,23 @@ const Settings = (props: { navigation: any }) => {
                             cardName="Chats Settings"
                             angle="0"
                         >
-                            <Text style={[SettingsStyle.cardText, { color: DM("#000000") }]}>
+                            <Text style={[SettingsStyle.cardText, { color: colors.primary }]}>
                                 Chats Settings
                             </Text>
                         </TouchableNavigationCard>
                         <View style={SwitchSelectorStyle.container}>
-                            <Text style={[CreateJourneyStyle.text, { color: DM("black") }]}>App theme</Text>
+                            <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>App theme</Text>
                             <View style={{ flexDirection: "row" }}>
                                 <TouchableOpacity
-                                    style={[SwitchSelectorStyle.leftButton, DMStyleObject(lightButtonStyle)]}
-                                    onPress={() => {
-                                        setLightButtonStyle(SwitchSelectorStyle.activeButtonStyle);
-                                        setDarkButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
-                                        setSystemButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
+                                    style={[SwitchSelectorStyle.leftButton, lightButtonStyle]}
+                                    onPress={async () => {
                                         changeAppScheme("light");
                                     }}
                                 >
                                     <Text
                                         style={[
                                             SwitchSelectorStyle.buttonText,
-                                            DMStyleObject(lightButtonStyle),
+                                            lightButtonStyle,
                                         ]}
                                     >
                                     Light
@@ -366,19 +381,16 @@ const Settings = (props: { navigation: any }) => {
                                 <TouchableOpacity
                                     style={[
                                         SwitchSelectorStyle.leftButton,
-                                        DMStyleObject(darkButtonStyle),
+                                        darkButtonStyle,
                                     ]}
                                     onPress={() => {
-                                        setLightButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
-                                        setDarkButtonStyle(SwitchSelectorStyle.activeButtonStyle);
-                                        setSystemButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
                                         changeAppScheme("dark");
                                     }}
                                 >
                                     <Text
                                         style={[
                                             SwitchSelectorStyle.buttonText,
-                                            DMStyleObject(darkButtonStyle),
+                                            darkButtonStyle,
                                         ]}
                                     >
                                     Dark
@@ -387,19 +399,16 @@ const Settings = (props: { navigation: any }) => {
                                 <TouchableOpacity
                                     style={[
                                         SwitchSelectorStyle.rightButton,
-                                        DMStyleObject(systemButtonStyle),
+                                        systemButtonStyle,
                                     ]}
                                     onPress={() => {
-                                        setLightButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
-                                        setDarkButtonStyle(SwitchSelectorStyle.inactiveButtonStyle);
-                                        setSystemButtonStyle(SwitchSelectorStyle.activeButtonStyle);
                                         changeAppScheme("system");
                                     }}
                                 >
                                     <Text
                                         style={[
                                             SwitchSelectorStyle.buttonText,
-                                            DMStyleObject(systemButtonStyle),
+                                            systemButtonStyle,
                                         ]}
                                     >
                                     As system
@@ -409,7 +418,7 @@ const Settings = (props: { navigation: any }) => {
                         </View>
                     </View>
                     <Animated.View
-                        style={isVisible && [SettingsStyle.layout, { opacity, backgroundColor: DM("#000000") }]} />
+                        style={isVisible && [SettingsStyle.layout, { opacity, backgroundColor: colors.primary }]} />
                 </View>
             </ScrollView>
             {renderBottomPopup()}

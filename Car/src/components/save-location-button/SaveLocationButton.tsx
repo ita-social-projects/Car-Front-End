@@ -5,7 +5,7 @@ import { useTheme } from "../theme/ThemeProvider";
 import React from "react";
 
 const SaveLocationButton = (props: SaveLocationButtonProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <TouchableOpacity
@@ -23,7 +23,7 @@ const SaveLocationButton = (props: SaveLocationButtonProps) => {
             <Text
                 style={[
                     AddLocationStyle.saveButtonSaveText,
-                    { color: DM(DM("white")) },
+                    { color: colors.white },
                 ]}
             >
                 Save

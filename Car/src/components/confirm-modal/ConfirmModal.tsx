@@ -5,7 +5,7 @@ import ConfirmModalProps from "./ConfirmModalProps";
 import ConfirmModalStyle from "./ConfirmModalStyle";
 
 const ConfirmModal = ((props: ConfirmModalProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const confirmStyle = props.confirmColor == null ?
         ConfirmModalStyle.confirmButton :
         [ConfirmModalStyle.confirmButton, { backgroundColor: props.confirmColor }];
@@ -20,11 +20,11 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
             <TouchableWithoutFeedback onPress={props.disableModal}>
                 <View style={ConfirmModalStyle.background}>
                     <TouchableWithoutFeedback>
-                        <View style={{ ...ConfirmModalStyle.window, backgroundColor: DM("white") }}>
-                            <Text style={{ ...ConfirmModalStyle.boldText, color: DM("black") }}>
+                        <View style={{ ...ConfirmModalStyle.window, backgroundColor: colors.white }}>
+                            <Text style={{ ...ConfirmModalStyle.boldText, color: colors.primary }}>
                                 {props.title}
                             </Text>
-                            <Text style={{ ...ConfirmModalStyle.subtitleText, color: DM("black") }}>
+                            <Text style={{ ...ConfirmModalStyle.subtitleText, color: colors.primary }}>
                                 {props.subtitle}
                             </Text>
                             <TouchableOpacity
@@ -38,7 +38,7 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
 
                             {!props.hideCancelButton && (
                                 <TouchableOpacity onPress={props.disableModal}>
-                                    <Text style={{ ...ConfirmModalStyle.boldText, color: DM("black") }}>
+                                    <Text style={{ ...ConfirmModalStyle.boldText, color: colors.primary }}>
                                         {props.cancelText}
                                     </Text>
                                 </TouchableOpacity>

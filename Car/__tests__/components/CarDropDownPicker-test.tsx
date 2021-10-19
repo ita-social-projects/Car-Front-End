@@ -35,10 +35,10 @@ test("renders correctly", async () =>
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "white",
+              "backgroundColor": "#FFFFFF",
               "borderBottomLeftRadius": 0,
               "borderBottomRightRadius": 0,
-              "borderColor": "black",
+              "borderColor": "#0B171B",
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "borderWidth": 2,
@@ -54,7 +54,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
                 Array [
                   Object {
@@ -113,7 +113,7 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                       "fontSize": 14,
                     },
                     undefined,
@@ -161,8 +161,8 @@ test("renders correctly", async () =>
                   "paddingHorizontal": 4,
                 },
                 Object {
-                  "backgroundColor": "white",
-                  "borderColor": "black",
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#0B171B",
                 },
               ],
               Object {
@@ -191,11 +191,11 @@ test("renders correctly", async () =>
               defaultValue={null}
               onChangeText={[Function]}
               placeholder="Manual input"
-              placeholderTextColor="gray"
+              placeholderTextColor="#909095"
               rejectResponderTermination={true}
               style={
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 }
               }
               underlineColorAndroid="transparent"
@@ -222,7 +222,7 @@ test("renders correctly", async () =>
                 <Text
                   style={
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                     }
                   }
                 >
@@ -258,7 +258,7 @@ test("renders correctly", async () =>
               "zIndex": undefined,
             },
             Object {
-              "color": "red",
+              "color": "#D80056",
             },
           ]
         }
@@ -294,10 +294,10 @@ test("renders correctly", async () =>
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "white",
+              "backgroundColor": "#FFFFFF",
               "borderBottomLeftRadius": 0,
               "borderBottomRightRadius": 0,
-              "borderColor": "black",
+              "borderColor": "#0B171B",
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "borderWidth": 2,
@@ -313,7 +313,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
                 Array [
                   Object {
@@ -374,7 +374,7 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                       "fontSize": 14,
                     },
                     undefined,
@@ -422,8 +422,8 @@ test("renders correctly", async () =>
                   "paddingHorizontal": 4,
                 },
                 Object {
-                  "backgroundColor": "white",
-                  "borderColor": "black",
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#0B171B",
                 },
               ],
               Object {
@@ -452,11 +452,11 @@ test("renders correctly", async () =>
               defaultValue={null}
               onChangeText={[Function]}
               placeholder="Manual input"
-              placeholderTextColor="gray"
+              placeholderTextColor="#909095"
               rejectResponderTermination={true}
               style={
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 }
               }
               underlineColorAndroid="transparent"
@@ -483,7 +483,7 @@ test("renders correctly", async () =>
                 <Text
                   style={
                     Object {
-                      "color": "black",
+                      "color": "#0B171B",
                     }
                   }
                 >

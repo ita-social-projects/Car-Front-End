@@ -8,7 +8,7 @@ import TouchableMapBarProps from "./TouchableMapBarProps";
 const DEFAULT_MARGIN_HORIZONTAL = 20;
 
 const TouchableMapBar = (props: TouchableMapBarProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     let marginBottom = parseInt(props.marginBottom ?? "");
     let marginTop = parseInt(props.marginTop ?? "");
     let flex = parseInt(props.flex ?? "");
@@ -24,19 +24,19 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                         marginBottom: marginBottom,
                         marginTop: marginTop,
                         marginHorizontal: props.marginHorizontal ?? DEFAULT_MARGIN_HORIZONTAL,
-                        backgroundColor: DM("white"),
-                        borderColor: DM("black")
+                        backgroundColor: colors.white,
+                        borderColor: colors.primary
                     }
                 ]}
             >
                 <Text style={[TouchableMapBarStyle.insideText,
-                    { color: DM("#909095"), }
+                    { color: colors.secondaryDark, }
                 ]}>
                     {props.directionType + ":"}{" "}
                 </Text>
                 <Text
                     style={[TouchableMapBarStyle.directionText,
-                        { flex: flex, color: DM("black"), }]}
+                        { flex: flex, color: colors.primary, }]}
                 >
                     {props.defaultInputValue}{" "}
                 </Text>
@@ -44,7 +44,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                     <Ionicons
                         style={[
                             TouchableMapBarStyle.barIcon,
-                            { transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE") }
+                            { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
                         ]}
                         name={props.iconName}
                         size={22}

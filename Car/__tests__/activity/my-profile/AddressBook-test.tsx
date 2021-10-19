@@ -25,7 +25,7 @@ test("renders correctly", async () =>
             "flex": 1,
           },
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "#FFFFFF",
           },
         ]
       }
@@ -46,7 +46,7 @@ test("renders correctly", async () =>
       >
         <ActivityIndicator
           animating={true}
-          color="black"
+          color="#0B171B"
           hidesWhenStopped={true}
           size={40}
         />

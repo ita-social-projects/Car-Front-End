@@ -22,7 +22,7 @@ import JourneyNewApplicantViewStyle from "../../journey-new-applicant/journey-ne
 import { useTheme } from "../../theme/ThemeProvider";
 
 const PassengerWithdrawal = (props: NotificationProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [modalVisible, setModalVisible] = useState(props.visible);
     const data = JSON.parse(props.notificationData);
     const [stops, setStops] = useState<Stop[]>();
@@ -84,7 +84,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                     journey = {journey!}
                 />
 
-                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: DM("black") }}>
+                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                     {props.sender!.name} {props.sender!.surname}`s stops in your ride
                 </Text>
                 <View>

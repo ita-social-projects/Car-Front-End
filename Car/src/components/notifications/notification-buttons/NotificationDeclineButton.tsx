@@ -4,7 +4,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 import NotificationButtonsStyle from "./NotificationButtonsStyle";
 
 const NotificationDeclineButton = (props: { declineText?: string, onDecline: () => void, disabled?: boolean }) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <TouchableOpacity
@@ -12,7 +12,7 @@ const NotificationDeclineButton = (props: { declineText?: string, onDecline: () 
             onPress={ props.onDecline }
             style={[NotificationButtonsStyle.button]}
         >
-            <Text style={[NotificationButtonsStyle.buttonText, { color: DM("#EC6400") }]}>
+            <Text style={[NotificationButtonsStyle.buttonText, { color: colors.accentOrange }]}>
                 {props.declineText || "Decline"}
             </Text>
         </TouchableOpacity>

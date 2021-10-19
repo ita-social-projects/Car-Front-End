@@ -12,7 +12,7 @@ import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { MAX_USER_FULL_NAME_LENGTH_IN_PROFILE } from "../../constants/JourneyConstants";
 
 const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const contextUser = useContext(AuthContext).user;
 
     const [user, setUser] = useState<User>(props.userToDisplay || contextUser);
@@ -33,16 +33,16 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
             <View style={AvatarLogoTitleStyle.headerContainer}>
                 <AvatarLogo user={user} size={56} />
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
-                    <Text style={[AvatarLogoTitleStyle.headerUserName, { color: DM("black") }]}>
+                    <Text style={[AvatarLogoTitleStyle.headerUserName, { color: colors.primary }]}>
                         {trimTheStringIfTooLong(user?.name + " " + user?.surname, MAX_USER_FULL_NAME_LENGTH_IN_PROFILE)}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
-                        { color: DM("black") }
+                        { color: colors.primary }
                     ]}>
                         {user?.position}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
-                        { color: DM("black") }
+                        { color: colors.primary }
                     ]}>
                         {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
                             ? "1 ride"

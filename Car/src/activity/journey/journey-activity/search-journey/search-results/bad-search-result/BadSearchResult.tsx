@@ -5,12 +5,12 @@ import * as navigation from "../../../../../../components/navigation/Navigation"
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 
 const BadSearchResult = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
-        <View style={[BadSearchResultStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
+        <View style={[BadSearchResultStyle.container, { backgroundColor: colors.white }]}>
             <View style={BadSearchResultStyle.textContainer}>
-                <Text style={[BadSearchResultStyle.text, { color: DM("#000000") }]}>
+                <Text style={[BadSearchResultStyle.text, { color: colors.primary }]}>
                     NO RESULTS MATCHING YOUR {"\n"} SEARCH FILTERS
                 </Text>
             </View>
@@ -22,12 +22,12 @@ const BadSearchResult = () => {
             </View>
             <View style={BadSearchResultStyle.buttonContainer}>
                 <TouchableOpacity
-                    style={[BadSearchResultStyle.button, { backgroundColor: DM("#000000") }]}
+                    style={[BadSearchResultStyle.button, { backgroundColor: colors.primary }]}
                     onPress={() => {
                         navigation.navigate("Journey Request Page", { isRequest: true, isPreviousFilter: true });
                     }}
                 >
-                    <Text style={[BadSearchResultStyle.buttonText, { color: DM("#FFFFFF") }]}>
+                    <Text style={[BadSearchResultStyle.buttonText, { color: colors.white }]}>
                         CREATE RIDE REQUEST
                     </Text>
                 </TouchableOpacity>
