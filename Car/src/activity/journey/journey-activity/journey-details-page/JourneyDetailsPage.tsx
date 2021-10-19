@@ -335,7 +335,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
-                                marginBottom={16}
                             />
                         </View>
 
@@ -345,8 +344,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"Via"}
                                 text={stop.text}
                                 disabled={true}
-                                marginHorizontal={16}
-                                marginBottom={16}
+                                marginHorizontal={20}
+                                marginBottom={24}
                                 key={index}
                             />
                         ))}
