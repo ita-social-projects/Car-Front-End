@@ -19,15 +19,15 @@ const SimpleMessageStyle = StyleSheet.create({
 
     avatarWrapper: {
         paddingLeft: 5,
-        width: 50,
+        width: 38,
         height: "100%",
         justifyContent: "center"
     },
 
     dataWrapper: {
         flex: 1,
-        paddingLeft: 10.75,
-        width: 39,
+        paddingLeft: 16,
+        width: 38,
         height: 39,
         justifyContent: "center",
         marginTop: 15
@@ -107,7 +107,7 @@ const SimpleMessageStyle = StyleSheet.create({
 
     textStyle: {
         fontSize: 11,
-        paddingTop: 10,
+        paddingTop: 4,
         lineHeight: 16,
         fontFamily: Font.OpenSans.SemiBold
     },

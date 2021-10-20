@@ -140,7 +140,7 @@ const Messages = (props: MessagesProps) => {
                                     style={[MessagesStyle.wrapper, { borderColor: colors.primary }]}
                                 >
                                     <View style={MessagesStyle.avatarWrapper}>
-                                        <AvatarLogo user={item?.journeyOrganizer} size={50} />
+                                        <AvatarLogo user={item?.journeyOrganizer} size={38} />
                                     </View>
                                     <View style={MessagesStyle.dataWrapper}>
                                         <LinearTextGradient
@@ -164,7 +164,7 @@ const Messages = (props: MessagesProps) => {
                                                     { color: colors.primary },
                                                 ]}
                                             >
-                                                starts at{" "}
+                                                Starts at{" "}
                                                 {moment(getDateWithCorrectUtc(new Date(item!.journey.departureTime)))
                                                     .format(
                                                         "DD.MM, HH:mm"
