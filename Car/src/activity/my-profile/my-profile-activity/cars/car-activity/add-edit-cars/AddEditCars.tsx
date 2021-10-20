@@ -175,8 +175,14 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             throw error;
         else
         {
-            setSaving(false);
-            setErrorModalVisible(true);
+            if(error.message!="Network Error")
+            {
+                setSaving(false);
+                setErrorModalVisible(true);
+            }
+            else{
+                navigate("Cars");
+            }
         }
     };
 
