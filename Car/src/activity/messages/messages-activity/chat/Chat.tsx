@@ -250,7 +250,6 @@ const Chat = (properties: ChatProps) => {
                 borderColor: colors.primary,
                 color: colors.primary,
                 justifyContent: "center",
-                height: "100%",
                 overflow: "scroll",
                 backgroundColor: colors.white,
             }}
@@ -387,66 +386,63 @@ const Chat = (properties: ChatProps) => {
 
     return (
         <KeyboardAvoidingView
-            style={[ChatStyle.chatWrapper, { backgroundColor: colors.white, }]}
-            behavior={Platform.OS === "ios" ? "padding" : undefined}>
-            <TouchableWithoutFeedback
-                onPress={() => {Keyboard.dismiss(); hidePopup();}}>
-                {isLoading ? (
-                    <Indicator
-                        size="large"
-                        color={colors.hover}
-                        text="Loading information..."
-                    />
-                ) : (
-                    <View style={{ flex: 1 }}>
-                        <GiftedChat
-                            scrollToBottom
-                            listViewProps={listProps}
-                            ref={chatRef}
-                            renderAvatar={(data) => renderUserAvatar(data)}
-                            messagesContainerStyle={{ paddingBottom: 10 }}
-                            timeFormat="HH:mm"
-                            dateFormat="DD.MM"
-                            messages={messages as any[]}
-                            onInputTextChanged={(value) => {
-                                if (value.trim()) {
-                                    setMessage(value);
-                                    setDisabled(false);
-                                } else {
-                                    setMessage(value);
-                                    setDisabled(true);
-                                }
-                            }}
-                            text={message}
-                            onSend={onSend}
-                            alwaysShowSend
-                            user={{
-                                _id: user?.id!,
-                                name: user?.name + "|" + user?.surname
-                            }}
-                            renderBubble={renderBubble}
-                            renderSend={renderSend}
-                            minInputToolbarHeight={44}
-                            minComposerHeight={44}
-                            maxComposerHeight={120}
-                            renderInputToolbar={renderInputToolbar}
-                            maxInputLength={500}
-                            onLongPress={showPopup}
-                            loadEarlier={isLoadMessage}
-                            onLoadEarlier={loadEarlierMessages}
-                            isLoadingEarlier={isLoadingEarlier}
-                            infiniteScroll={true}
-                            renderLoadEarlier={() => isLoadingEarlier ?
-                                <Indicator
-                                    size="large"
-                                    color={colors.hover}
-                                    text="Loading information..."
-                                /> : <View />
+            style={[ChatStyle.chatWrapper, { backgroundColor: colors.white}]}>
+            {isLoading ? (
+                <Indicator
+                    size="large"
+                    color={colors.hover}
+                    text="Loading information..."
+                />
+            ) : (
+                <TouchableWithoutFeedback
+                    onPress={() => {Keyboard.dismiss(); hidePopup();}}>
+                    <GiftedChat
+                        scrollToBottom
+                        listViewProps={listProps}
+                        ref={chatRef}
+                        renderAvatar={(data) => renderUserAvatar(data)}
+                        messagesContainerStyle={{ paddingBottom: 10 }}
+                        timeFormat="HH:mm"
+                        dateFormat="DD.MM"
+                        messages={messages as any[]}
+                        onInputTextChanged={(value) => {
+                            if (value.trim()) {
+                                setMessage(value);
+                                setDisabled(false);
+                            } else {
+                                setMessage(value);
+                                setDisabled(true);
                             }
-                        />
-                    </View>
-                )}
-            </TouchableWithoutFeedback>
+                        }}
+                        text={message}
+                        onSend={onSend}
+                        alwaysShowSend
+                        user={{
+                            _id: user?.id!,
+                            name: user?.name + "|" + user?.surname
+                        }}
+                        renderBubble={renderBubble}
+                        renderSend={renderSend}
+                        minInputToolbarHeight={44}
+                        minComposerHeight={44}
+                        maxComposerHeight={120}
+                        renderInputToolbar={renderInputToolbar}
+                        maxInputLength={500}
+                        onLongPress={showPopup}
+                        loadEarlier={isLoadMessage}
+                        onLoadEarlier={loadEarlierMessages}
+                        isLoadingEarlier={isLoadingEarlier}
+                        infiniteScroll={true}
+                        renderLoadEarlier={() => isLoadingEarlier &&
+                            <Indicator
+                                size="large"
+                                color={colors.hover}
+                                text="Loading information..."
+                            />
+                        }
+                    />
+                </TouchableWithoutFeedback>
+            )}
             <BottomPopup
                 refForChild={(ref) => (moreOptionsRef.current = ref)}
                 snapPoints={[CHAT_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
