@@ -1,15 +1,22 @@
 import JourneyPageStyle from "../../JourneyPageStyle";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { Divider } from "react-native-elements";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as navigation from "../../../../../../components/navigation/Navigation";
-import React from "react";
+import React, { useState } from "react";
 import ButtonBlockProps from "./ButtonBlockProps";
 import CreateChat from "../../../../../../../models/Chat/CreateChat";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
     const { colors } = useTheme();
+
+    const black = colors.primary;
+    const disabledColor = colors.secondaryLight;
+
+    const [colorText, setColorText] = useState(black);
+    const [colorBorder, setColorBorder] = useState(black);
+
     const chat: CreateChat = {
         id: props.journey?.id!,
         name:
@@ -24,6 +31,16 @@ const ButtonBlock = (props: ButtonBlockProps) => {
         });
     };
 
+    const changeColorToDisable = () => {
+        setColorText(disabledColor);
+        setColorBorder(disabledColor);
+    };
+
+    const changeColorToBlack = () => {
+        setColorText(black);
+        setColorBorder(black);
+    };
+
     return (
         <View style={[
             JourneyPageStyle.buttons,
@@ -32,16 +49,18 @@ const ButtonBlock = (props: ButtonBlockProps) => {
             <Divider style={[JourneyPageStyle.separator, { backgroundColor: colors.secondaryLight }]} />
             <View style={JourneyPageStyle.buttonsBlock}>
                 {(props.isDriver || props.isPassenger) && (
-                    <TouchableOpacity
+                    <Pressable
                         style={[JourneyPageStyle.messageAllButton, {
                             backgroundColor: colors.white,
-                            borderColor: colors.primary }]}
+                            borderColor: colorBorder }]}
+                        onPressIn={changeColorToDisable.bind(this)}
+                        onPressOut={changeColorToBlack.bind(this)}
                         onPress={onMessageToAllPress}
                     >
-                        <Text style={[JourneyPageStyle.messageAllButtonText, { color: colors.primary }]}>
+                        <Text style={[JourneyPageStyle.messageAllButtonText, { color: colorText }]}>
                             Message to all
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 )}
                 {!props.isDriver && !props.isPassenger && (
                     <TouchableOpacity
