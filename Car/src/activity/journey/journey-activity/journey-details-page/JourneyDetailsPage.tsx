@@ -109,9 +109,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
     let highlightPaidButton: boolean = !journey || !journey.isFree;
-    const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(highlightPaidButton);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
-    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
+    const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(!highlightPaidButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
+    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(highlightPaidButton));
 
     useEffect(() => {
         setFreeButtonStyle(selectedFeeAsPaid ? inactiveButtonStyle : activeButtonStyle);
