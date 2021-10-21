@@ -435,10 +435,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <CommentBlock
-                            initialComment={comment}
-                            commentHeader="Comments"
-                        />
+                        <View style={CreateJourneyStyle.dropDownPickerContainer}>
+                            <CommentBlock
+                                initialComment={comment}
+                                commentHeader="Comments"
+                            />
+                        </View>
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
