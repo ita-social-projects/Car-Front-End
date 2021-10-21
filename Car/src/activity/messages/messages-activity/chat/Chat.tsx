@@ -423,6 +423,7 @@ const Chat = (properties: ChatProps) => {
                         }}
                         renderBubble={renderBubble}
                         renderSend={renderSend}
+                        bottomOffset={60}
                         minInputToolbarHeight={44}
                         minComposerHeight={44}
                         maxComposerHeight={120}
