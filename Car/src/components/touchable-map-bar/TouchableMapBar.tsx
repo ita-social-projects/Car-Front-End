@@ -25,7 +25,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                         marginTop: marginTop,
                         marginHorizontal: props.marginHorizontal ?? DEFAULT_MARGIN_HORIZONTAL,
                         backgroundColor: colors.white,
-                        borderColor: colors.primary
+                        borderColor: props.disabled ? colors.secondaryLight : colors.primary
                     }
                 ]}
             >
@@ -36,7 +36,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                 </Text>
                 <Text
                     style={[TouchableMapBarStyle.directionText,
-                        { flex: flex, color: colors.primary, }]}
+                        { flex: flex, color: props.disabled ? colors.secondaryLight : colors.primary, }]}
                 >
                     {props.defaultInputValue}{" "}
                 </Text>
