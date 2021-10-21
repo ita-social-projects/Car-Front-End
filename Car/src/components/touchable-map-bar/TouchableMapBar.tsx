@@ -44,7 +44,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                     <Ionicons
                         style={[
                             TouchableMapBarStyle.barIcon,
-                            { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight, color: props.disabled ? colors.secondaryLight : colors.primary }
+                            { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
                         ]}
                         name={props.iconName}
                         size={22}
