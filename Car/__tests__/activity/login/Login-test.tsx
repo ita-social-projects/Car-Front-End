@@ -45,7 +45,7 @@ test("renders correctly", async () =>
                 "textTransform": "uppercase",
               },
               Object {
-                "color": "black",
+                "color": "#0B171B",
               },
             ]
           }
@@ -71,7 +71,7 @@ test("renders correctly", async () =>
                 "textTransform": "uppercase",
               },
               Object {
-                "color": "black",
+                "color": "#0B171B",
               },
             ]
           }
@@ -112,7 +112,7 @@ test("renders correctly", async () =>
                 },
                 false,
                 Object {
-                  "backgroundColor": "#000000",
+                  "backgroundColor": "#0B171B",
                 },
               ]
             }
@@ -126,7 +126,7 @@ test("renders correctly", async () =>
                     "textTransform": "uppercase",
                   },
                   Object {
-                    "color": "white",
+                    "color": "#FFFFFF",
                   },
                 ]
               }

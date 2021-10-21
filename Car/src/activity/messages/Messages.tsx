@@ -33,7 +33,7 @@ import Badge from "../../components/badge/Badge";
 import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
 
 const Messages = (props: MessagesProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
     const [isLoading, setisLoading] = useState(false);
@@ -61,6 +61,11 @@ const Messages = (props: MessagesProps) => {
             props.navigation.removeListener("focus", getChats);
         };
     }, [search]);
+
+    useEffect(() => {
+        if(!props.isOpenFilter)
+            setSearch("");
+    }, [props.isOpenFilter]);
 
     const setSearchFilter = (text: string) => {
         let textTrimmed = text.trim();
@@ -95,7 +100,7 @@ const Messages = (props: MessagesProps) => {
         const chunks = findAll({ textToHighlight, searchWords, autoEscape: true });
 
         return (
-            <Text style={[MessagesStyle.textStyle, { color: DM("black") }]}>
+            <Text style={[MessagesStyle.textStyle, { color: colors.primary }]}>
                 {chunks.map((chunk, index) => {
                     const text = textToHighlight.substr(
                         chunk.start,
@@ -132,20 +137,20 @@ const Messages = (props: MessagesProps) => {
                         >
                             <View style={MessagesStyle.main}>
                                 <View
-                                    style={[MessagesStyle.wrapper, { borderColor: DM("black") }]}
+                                    style={[MessagesStyle.wrapper, { borderColor: colors.primary }]}
                                 >
                                     <View style={MessagesStyle.avatarWrapper}>
-                                        <AvatarLogo user={item?.journeyOrganizer} size={50} />
+                                        <AvatarLogo user={item?.journeyOrganizer} size={38} />
                                     </View>
                                     <View style={MessagesStyle.dataWrapper}>
                                         <LinearTextGradient
                                             locations={[GRADIENT_START, GRADIENT_END]}
-                                            colors={["#00A3CF", "#5552A0"]}
+                                            colors={[colors.navyBlueGradientFrom, colors.navyBlueGradientFrom]}
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 0 }}
                                         >
                                             <Text
-                                                style={[MessagesStyle.fonts, { color: DM("#00A3CF") }]}
+                                                style={[MessagesStyle.fonts, { color: colors.navyBlueGradientFrom }]}
                                             >
                                                 {item?.name}
                                             </Text>
@@ -156,10 +161,10 @@ const Messages = (props: MessagesProps) => {
                                             <Text
                                                 style={[
                                                     MessagesStyle.textStyle,
-                                                    { color: DM("black") },
+                                                    { color: colors.primary },
                                                 ]}
                                             >
-                                                starts at{" "}
+                                                Starts at{" "}
                                                 {moment(getDateWithCorrectUtc(new Date(item!.journey.departureTime)))
                                                     .format(
                                                         "DD.MM, HH:mm"
@@ -193,7 +198,7 @@ const Messages = (props: MessagesProps) => {
                 ) : (
                     <>
                         <View style={MessagesStyle.noMessageContainer}>
-                            <Text style={{ ...MessagesStyle.noMessageStyle, color: DM("black") }}>
+                            <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary }}>
                                 CURRENTLY YOU DO NOT HAVE ANY
                                 {"\n"}
                                 CHATS
@@ -214,21 +219,22 @@ const Messages = (props: MessagesProps) => {
             {props.isOpenFilter ? (
                 <SearchBar
                     maxLength={MESSAGE_SEARCH_INPUT_SYMBOL_LIMIT}
-                    searchIcon={{ color: DM("black"), size: 28 }}
+                    searchIcon={false}
+                    autoFocus={true}
                     onChangeText={(text) => setSearchFilter(text)}
                     onClear={() => setSearchFilter("")}
                     placeholder={"Search in Messages"}
                     value={search}
                     containerStyle={[
                         MessagesStyle.containerStyle,
-                        { backgroundColor: DM("white") },
+                        { backgroundColor: colors.white },
                     ]}
                     inputContainerStyle={[
                         MessagesStyle.inputContainerStyle,
                         {
-                            backgroundColor: DM("white"),
-                            borderColor: DM("black"),
-                            borderBottomColor: DM("black"),
+                            backgroundColor: colors.white,
+                            borderColor: colors.primary,
+                            borderBottomColor: colors.primary,
                         },
                     ]}
                 />
@@ -236,11 +242,11 @@ const Messages = (props: MessagesProps) => {
                 <View />
             )}
 
-            <View style={[MessagesStyle.container, { backgroundColor: DM("white") }]}>
+            <View style={[MessagesStyle.container, { backgroundColor: colors.white }]}>
                 {isLoading ? (
                     <Indicator
                         size="large"
-                        color={DM("#414045")}
+                        color={colors.hover}
                         text="Loading information..."
                     />
                 ) : (

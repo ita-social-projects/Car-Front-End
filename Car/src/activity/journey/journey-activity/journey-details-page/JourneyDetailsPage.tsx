@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import {
     ScrollView,
-    TextInput,
     TouchableOpacity,
     View,
     Text,
@@ -18,7 +17,7 @@ import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
-    MIN_AVAILABLE_SEATS_COUNT,
+    MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
@@ -48,6 +47,9 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
+import ChatService from "../../../../../api-service/chat-service/ChatService";
+import CreateChat from "../../../../../models/Chat/CreateChat";
+import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -56,7 +58,7 @@ const getCarId = (journey?: Journey) => {
 };
 
 const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const params = props.route.params;
     const journey = params.journey;
 
@@ -82,15 +84,15 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
 
     const activeButtonStyle = {
-        backgroundColor: DM("#000000"),
-        color: DM("#FFFFFF"),
-        borderColor: DM("#000000")
+        backgroundColor: colors.primary,
+        color: colors.white,
+        borderColor: colors.primary
     };
 
     const inactiveButtonStyle = {
-        backgroundColor: DM("#FFFFFF"),
-        color: DM("#000000"),
-        borderColor: DM("#000000")
+        backgroundColor: colors.white,
+        color: colors.primary,
+        borderColor: colors.primary
     };
 
     const setButtonStyle = (shouldBeHighlighted: boolean) => {
@@ -100,13 +102,26 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         return inactiveButtonStyle;
     };
 
+    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
+
     let highlightOwnCarButton: boolean = !journey || journey.isOnOwnCar;
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
     let highlightPaidButton: boolean = !journey || !journey.isFree;
-    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
-    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
+    const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(!highlightPaidButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
+    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(highlightPaidButton));
+
+    useEffect(() => {
+        setFreeButtonStyle(selectedFeeAsPaid ? inactiveButtonStyle : activeButtonStyle);
+        setPaidButtonStyle(selectedFeeAsPaid ? activeButtonStyle : inactiveButtonStyle);
+    }, [colors, selectedFeeAsPaid]);
+
+    useEffect(() => {
+        setOwnCarButtonStyle(isOwnCar ? activeButtonStyle: inactiveButtonStyle);
+        setTaxiButtonStyle(isOwnCar ? inactiveButtonStyle: activeButtonStyle);
+    }, [colors, isOwnCar]);
 
     const getNextDay = (date: Date): Date => {
         const dateOffset = date.getDate() - (new Date()).getDate() + DAY_OFFSET;
@@ -137,12 +152,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [departureTime, setDepartureTime] = useState<Date>(getDepartureTime());
     const [departureTimeIsConfirmed, setDepartureTimeIsConfirmed] = useState(Boolean(journey));
 
-    const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
-
     const [availableSeats, setAvailableSeats] = useState(
         journey?.countOfSeats ?? DEFAULT_AVAILABLE_SEATS_COUNT);
 
-    const [comment, setComment] = useState(journey?.comments ?? "");
+    const [comment] = useState(journey?.comments ?? "");
 
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
@@ -228,7 +241,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             comments: comment,
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
+            isFree: !selectedFeeAsPaid,
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
@@ -240,7 +253,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         };
 
         await JourneyService.add(newJourney)
-            .then(() => setSuccessfullyPublishModalIsVisible(true))
+            .then((res) => {
+                const newChat : CreateChat = {
+                    id: res.data.journeyModel.id,
+                    name:
+                        user?.name + " " +
+                        user?.surname + "'s ride"
+                };
+
+                ChatService.addChat(newChat)
+                    .then(() => setSuccessfullyPublishModalIsVisible(true));
+            })
             .catch(() => setModal(publishErrorModal));
 
         setRideIsPublishing(false);
@@ -257,7 +280,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             comments: comment.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
-            isFree: JSON.stringify(freeButtonStyle) === JSON.stringify(activeButtonStyle),
+            isFree: !selectedFeeAsPaid,
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             duration: journey.duration,
             weekDay: weekDay || null,
@@ -300,7 +323,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             {isLoading && (
                 <Indicator
                     size="large"
-                    color={DM("#414045")}
+                    color={colors.hover}
                     text={rideIsPublishing ? "The ride is publishing..." : "Loading information..."}
                 />
             )}
@@ -308,7 +331,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "position"}
                 >
-                    <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: DM("white") }]}>
+                    <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: colors.white }]}>
                         <View style={SearchJourneyStyle.locationContainer}>
                             <AddressInputButton
                                 iconName={"location"}
@@ -323,6 +346,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
+                                marginBottom={16}
                             />
                         </View>
 
@@ -332,8 +356,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"Via"}
                                 text={stop.text}
                                 disabled={true}
-                                marginHorizontal={20}
-                                marginBottom={24}
+                                marginHorizontal={16}
+                                marginBottom={16}
                                 key={index}
                             />
                         ))}
@@ -355,13 +379,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             onLeftButtonPress={() => {
                                 setOwnCar(true);
                                 setIsVisibleCarDropDown(false);
-                                setOwnCarButtonStyle(activeButtonStyle);
-                                setTaxiButtonStyle(inactiveButtonStyle);
                             }}
                             onRightButtonPress={() => {
                                 setOwnCar(false);
-                                setOwnCarButtonStyle(inactiveButtonStyle);
-                                setTaxiButtonStyle(activeButtonStyle);
                             }}
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
@@ -397,13 +417,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
                                 setModal(freeRideModal);
-                                setFreeButtonStyle(activeButtonStyle);
-                                setPaidButtonStyle(inactiveButtonStyle);
+                                setSelectedFeeAsPaid(false);
                             }}
                             onRightButtonPress={() => {
                                 setModal(paidRideModal);
-                                setFreeButtonStyle(inactiveButtonStyle);
-                                setPaidButtonStyle(activeButtonStyle);
+                                setSelectedFeeAsPaid(true);
                             }}
                             title={"Fee"}
                             leftButtonText={"Free"}
@@ -417,27 +435,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <View style={CreateJourneyStyle.commentsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Comments</Text>
-                            <TextInput
-                                style={[CreateJourneyStyle.textInputStyle,
-                                    {
-                                        borderColor: DM("black"),
-                                        color: DM("black")
-                                    }]}
-                                multiline={true}
-                                maxLength={100}
-                                numberOfLines={10}
-                                placeholder={"Write your comment"}
-                                placeholderTextColor={DM("#686262")}
-                                onChangeText={text => setComment(text)}
-                                value={comment}
-                            />
-                            <Text style={{ color: DM("#686262"), paddingTop: 5 }}>Up to 100 symbols</Text>
-                        </View>
+                        <CommentBlock
+                            initialComment={comment}
+                            commentHeader="Comments"
+                        />
 
                         <View style={CreateJourneyStyle.invitationsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: DM("black") }]}>Invited
+                            <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
                                 SoftServians</Text>
                             <TouchableOpacity style={CreateJourneyStyle.invitationsLink}
                                 onPress={() =>
@@ -447,16 +451,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             >
                                 <Ionicons
                                     style={[
-                                        { transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE") }
+                                        { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
                                     ]}
                                     name={"people-circle-outline"}
                                     size={35}
-                                    color={DM("#414045")}
+                                    color={colors.hover}
                                 />
                                 <View style={{ marginLeft: 17 }}>
-                                    <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: DM("black") }}>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invited SoftServians</Text>
-                                    <Text style={{ ...CreateJourneyStyle.invitationsDesctiption, color: DM("black") }}>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
+                                        color: colors.primary }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
                                         for that Ride</Text>
@@ -464,13 +469,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 <Ionicons
                                     style={[
                                         {
-                                            transform: [{ rotate: "0deg" }], borderColor: DM("#EEEEEE"),
+                                            transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight,
                                             marginLeft: 35
                                         }
                                     ]}
                                     name={"chevron-forward-outline"}
                                     size={25}
-                                    color={DM("#414045")}
+                                    color={colors.hover}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -482,7 +487,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 style={[CreateJourneyStyle.discardButton,
                                     {
                                         display: journey ? "flex" : "none",
-                                        borderColor: DM("black")
+                                        borderColor: colors.primary
                                     }]}
                                 onPress={() => setDiscardModalIsVisible(true)}
                             >
@@ -494,8 +499,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     {
-                                        backgroundColor: confirmDisabled ? DM("gray") : DM("black"),
-                                        borderColor: confirmDisabled ? DM("gray") : DM("black")
+                                        backgroundColor: confirmDisabled ? colors.secondaryDark : colors.primary,
+                                        borderColor: confirmDisabled ? colors.secondaryDark : colors.primary
                                     }]}
                                 onPress={journey ?
                                     () => setApplyChangesModalIsVisible(true) :
@@ -505,7 +510,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 <Text style={[CreateJourneyStyle.publishButtonText,
                                     {
                                         fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE,
-                                        color: DM("white")
+                                        color: colors.white
                                     }]}>
                                     {journey ? "Apply changes" : "Publish"}
                                 </Text>

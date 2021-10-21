@@ -118,7 +118,7 @@ test("renders correctly", async () =>
             "justifyContent": "center",
           },
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#0B171B",
             "height": undefined,
             "width": undefined,
           },

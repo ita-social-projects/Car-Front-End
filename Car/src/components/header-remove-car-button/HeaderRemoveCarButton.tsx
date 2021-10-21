@@ -4,14 +4,14 @@ import HeaderRemoveCarButtonStyle from "./HeaderRemoveCarButtonStyle";
 import { useTheme } from "../theme/ThemeProvider";
 
 const HeaderRemoveCarButton = (props: any) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <TouchableOpacity
             style={HeaderRemoveCarButtonStyle.requestButton}
             onPress={props.onPress}
         >
-            <Text style={[HeaderRemoveCarButtonStyle.buttonText, { color: DM("#EC6400") }]}>
+            <Text style={[HeaderRemoveCarButtonStyle.buttonText, { color: colors.accentOrange }]}>
             Remove
             </Text>
         </TouchableOpacity>

@@ -4,79 +4,84 @@ import MenuButton from "../../src/components/menu-button/MenuButton";
 
 test("renders correctly", async () =>
     expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
-    <RNGestureHandlerButton
-      collapsable={false}
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      rippleColor={0}
-    >
-      <View
-        accessible={true}
-        style={
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
           Object {
-            "backgroundColor": "#FFFFFF",
             "flexDirection": "column",
             "height": 44,
             "justifyContent": "center",
             "paddingHorizontal": 12,
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+            }
           }
-        }
-      >
-        <View>
+        >
           <View
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
+                "justifyContent": "center",
               }
             }
           >
-            <View
+            <Text
               style={
-                Object {
-                  "justifyContent": "center",
-                }
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "fontSize": 13,
+                    "fontWeight": "bold",
+                    "lineHeight": 42,
+                    "paddingLeft": 24,
+                  },
+                  Object {
+                    "color": "#0B171B",
+                  },
+                  Object {
+                    "color": "#0B171B",
+                  },
+                ]
               }
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "fontSize": 13,
-                      "fontWeight": "bold",
-                      "lineHeight": 42,
-                      "paddingLeft": 24,
-                    },
-                    Object {
-                      "color": "black",
-                    },
-                    Object {
-                      "color": "#000000",
-                    },
-                  ]
-                }
-              />
-            </View>
-            <View />
+            />
           </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "flexWrap": "wrap",
-                  "height": 1,
-                  "width": "100%",
-                },
-                Object {
-                  "backgroundColor": "#C1C1C5",
-                },
-              ]
-            }
-          />
+          <View />
         </View>
+        <View
+          style={
+            Array [
+              Object {
+                "flexWrap": "wrap",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "#AAA9AE",
+              },
+            ]
+          }
+        />
       </View>
-    </RNGestureHandlerButton>
+    </View>
   `));

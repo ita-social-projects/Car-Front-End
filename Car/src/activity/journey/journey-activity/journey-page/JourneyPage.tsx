@@ -66,7 +66,7 @@ interface JourneyPageComponent {
 }
 
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
     const [currentJourney, setJourney] = useState<Journey>(null);
     const { journeyId } = props.route.params;
@@ -226,7 +226,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     return (
         <>
-            <View style={[JourneyPageStyle.pageContainer, { backgroundColor: DM("#88FF88") }]}>
+            <View style={[JourneyPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
                 <MapView
                     ref={ref => {
                         mapRef.current = ref;
@@ -270,7 +270,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             <Portal>
                 <BottomPopup
                     refForChild={(ref: any) => (moreOptionsRef.current = ref)}
-                    style={{ backgroundColor: DM("white") }}
+                    style={{ backgroundColor: colors.white }}
                     snapPoints={[
                         MAX_JOURNEY_PAGE_POPUP_HEIGHT,
                         isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
@@ -280,12 +280,12 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     enabledInnerScrolling={true}
                     renderHeader={<DriverBlock journey={currentJourney}/>}
                     renderContent={
-                        <View style={{ backgroundColor: DM("#FFFFFF"), width: "100%", height: "100%" }}>
+                        <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
 
                             <View style={JourneyPageStyle.detailsBlock}>
                                 <ScrollView
                                     nestedScrollEnabled={true}
-                                    style={[JourneyPageStyle.contentView, { backgroundColor: DM("#FFFFFF") }]}
+                                    style={[JourneyPageStyle.contentView, { backgroundColor: colors.white }]}
                                 >
                                     <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
                                     <StopsBlock

@@ -6,7 +6,7 @@ import NotificationHeaderProps from "./NotificationHeaderProps";
 import NotificationHeaderStyle from "./NotificationHeaderStyle";
 
 const NotificationHeader = (props: NotificationHeaderProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View>
@@ -14,7 +14,7 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
                 <View style={NotificationHeaderStyle.row}>
                     <View>
                         <Text style={[NotificationHeaderStyle.header,
-                            { color: DM("#000000") }]}
+                            { color: colors.primary }]}
                         >
                             {props.title}
                         </Text>
@@ -24,7 +24,7 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
                             onPress={props.disableModal}
                         >
                             <Text style={[NotificationHeaderStyle.snooze,
-                                { color: DM("#02A2CF") }]} >
+                                { color: colors.accentBlue }]} >
                                 Snooze
                             </Text>
                         </TouchableOpacity>
@@ -36,10 +36,10 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
             </View>
             {!props.withoutMessage &&
             <View style={[NotificationHeaderStyle.messageContainer, {
-                borderTopColor: DM("#C1C1C5"),
-                borderBottomColor: DM("#C1C1C5")
+                borderTopColor: colors.secondaryLight,
+                borderBottomColor: colors.secondaryLight
             }]}>
-                <Text style={[NotificationHeaderStyle.message, { color: DM("black") }]}>
+                <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                     {props.message}
                 </Text>
             </View>

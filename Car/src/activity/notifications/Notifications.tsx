@@ -29,7 +29,7 @@ const CustomDelete = (props: { pressHandler: () => void }) => {
 };
 
 const Notifications = (props: NavigationAddAndRemoveListener) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isLoading, setIsLoading] = useState(false);
     const [notifications, setNotifications] = useState<Array<Notification>>([]);
     const [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(
@@ -77,7 +77,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
         } else {
             prevOpened?.close();
         }
-    }, [isFocused]);
+    }, [isFocused, notifications]);
 
     useEffect(() => {
         refreshNotification();
@@ -103,7 +103,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
             <FlatList
                 style={[
                     NotificationStyle.headerContainer,
-                    { backgroundColor: DM("#FFFFFF") },
+                    { backgroundColor: colors.white },
                 ]}
                 onScroll={() => prevOpened?.close()}
                 data={notifications}
@@ -128,8 +128,8 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
         return(
             <>
                 <View style={[NotificationsStyle.noNotificationsContainer,
-                    { backgroundColor: DM("#FFFFFF") }]}>
-                    <Text style={{ ...NotificationsStyle.noNotificationsStyle, color: DM("black") }}>
+                    { backgroundColor: colors.white }]}>
+                    <Text style={{ ...NotificationsStyle.noNotificationsStyle, color: colors.primary }}>
                         CURRENTLY YOU DO NOT HAVE ANY
                         {"\n"}
                         NOTIFICATIONS
@@ -155,11 +155,11 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     };
 
     return (
-        <View style={[NotificationsStyle.container, { backgroundColor: DM("white") }]}>
+        <View style={[NotificationsStyle.container, { backgroundColor: colors.white }]}>
             {isLoading ?
                 <Indicator
                     size="large"
-                    color={DM("#414045")}
+                    color={colors.hover}
                     text="Loading information..."
                 /> :
                 renderNotificationList()

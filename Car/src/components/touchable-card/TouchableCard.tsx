@@ -6,14 +6,14 @@ import TouchableCardStyle from "./TouchableCardStyle";
 import TouchableCardProps from "./TouchableCardProps";
 
 const TouchableCard = (props: TouchableCardProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
-        <View style={{ backgroundColor: DM("white") }}>
+        <View style={{ backgroundColor: colors.white }}>
             <TouchableOpacity
                 style={[TouchableCardStyle.cardContainer,
-                    { borderBottomColor: DM("#C1C1C5"),
-                        borderTopColor: DM("#C1C1C5"), }
+                    { borderBottomColor: colors.secondaryLight,
+                        borderTopColor: colors.secondaryLight, }
                 ]}
                 onPress={props.onPress}
             >
@@ -22,11 +22,11 @@ const TouchableCard = (props: TouchableCardProps) => {
                         style={[TouchableCardStyle.cardIcon]}
                         name={props?.iconName}
                         size={props?.size}
-                        color={DM(props?.iconColor)}
+                        color={props?.iconColor}
                     />
                     <View style={TouchableCardStyle.cardTextContainer}>
                         <Text style={[TouchableCardStyle.cardName,
-                            { color: DM("black") }]}>
+                            { color: colors.primary }]}>
                             {props.cardName}
                         </Text>
                         <Text

@@ -11,7 +11,7 @@ import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import Clipboard from "@react-native-community/clipboard";
 
 const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const { userId } = props.route.params;
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
         user?.journeyCount == SINGLE_ELEMENT_COLLECTION_LENGTH ? "1 ride" : user?.journeyCount + " rides";
 
     return (
-        <View style={[JourneyApplicantStyle.mainContainer, { backgroundColor: DM("#FFFFFF") }]}>
+        <View style={[JourneyApplicantStyle.mainContainer, { backgroundColor: colors.white }]}>
             {isLoading ? (
                 <Indicator
                     color="#414045"
@@ -41,48 +41,48 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                     </View>
                     <View style={JourneyApplicantStyle.topContainer}>
                         <View >
-                            <Text style={[JourneyApplicantStyle.userName, { color: DM("black") }]}>
+                            <Text style={[JourneyApplicantStyle.userName, { color: colors.primary }]}>
                                 {user?.name + " " + user?.surname}
                             </Text>
                             <Text
-                                style={[JourneyApplicantStyle.userAdditionalData, { color: DM("black") }]}
+                                style={[JourneyApplicantStyle.userAdditionalData, { color: colors.primary }]}
                             >
                                 {user?.position}
                             </Text>
                             <Text
-                                style={[JourneyApplicantStyle.userAdditionalData, { color: DM("black") }]}
+                                style={[JourneyApplicantStyle.userAdditionalData, { color: colors.primary }]}
                             >
                                 {journeys}, 2 badges
                             </Text>
                         </View>
                     </View>
-                    <View style={[JourneyApplicantStyle.separator, { backgroundColor: DM("#F2F2F2") }]} />
-                    <View style={[JourneyApplicantStyle.bottomContainer, { backgroundColor: DM("#FFFFFF") }]}>
-                        <Text style={[JourneyApplicantStyle.detailsText, { color: DM("black") }]}>
+                    <View style={[JourneyApplicantStyle.separator, { backgroundColor: colors.neutralLight }]} />
+                    <View style={[JourneyApplicantStyle.bottomContainer, { backgroundColor: colors.white }]}>
+                        <Text style={[JourneyApplicantStyle.detailsText, { color: colors.primary }]}>
                             Details
                         </Text>
                         <View style={JourneyApplicantStyle.positionContainer}>
-                            <Text style={[JourneyApplicantStyle.positionText, { color: DM("black") }]}>
+                            <Text style={[JourneyApplicantStyle.positionText, { color: colors.primary }]}>
                                 Position:
                             </Text>
-                            <Text style={[JourneyApplicantStyle.positionData, { color: DM("#414045") }]}>
+                            <Text style={[JourneyApplicantStyle.positionData, { color: colors.hover }]}>
                                 {user?.position}
                             </Text>
                         </View>
                         <View style={JourneyApplicantStyle.locationContainer}>
-                            <Text style={[JourneyApplicantStyle.locationText, { color: DM("black") }]}>
+                            <Text style={[JourneyApplicantStyle.locationText, { color: colors.primary }]}>
                                 Location: {user?.location}
                             </Text>
-                            <Text style={[JourneyApplicantStyle.locationData, { color: DM("#02A2CF") }]}>
+                            <Text style={[JourneyApplicantStyle.locationData, { color: colors.accentBlue }]}>
                                 {user?.location}
                             </Text>
                         </View>
                         <View style={[JourneyApplicantStyle.mobileContainer, { marginTop: 10 }]}>
-                            <Text style={[JourneyApplicantStyle.mobileText, { color: DM("black") }]}>
+                            <Text style={[JourneyApplicantStyle.mobileText, { color: colors.primary }]}>
 
                             </Text>
                             <TouchableOpacity onPress={() => setCallingButtonVisible(!isCallingButtonVisible)}>
-                                <Text style={[JourneyApplicantStyle.mobileData, { color: DM("#02A2CF") }]}>
+                                <Text style={[JourneyApplicantStyle.mobileData, { color: colors.accentBlue }]}>
 
                                 </Text>
                             </TouchableOpacity>
@@ -100,7 +100,7 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                 title={user?.name + " " + user?.surname}
                 visible={isCallingButtonVisible}
                 cancelText={"Copy number"}
-                confirmColor={"#d80056"}
+                confirmColor={colors.accentRed}
                 hideCancelButton={false}
                 subtitle={user?.phoneNumber != null ? user?.phoneNumber.toString() : undefined}/>
         </View>

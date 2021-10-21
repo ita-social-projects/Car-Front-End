@@ -35,7 +35,7 @@ import LocationService from "../../../../../../api-service/location-service/Loca
 const StackTabs = createStackNavigator();
 
 export default function AddressBookTabs () {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [modalVisibility, setModalVisibility] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
@@ -92,7 +92,7 @@ export default function AddressBookTabs () {
                     options={{
                         headerTitle: "Address Book",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -102,7 +102,7 @@ export default function AddressBookTabs () {
                     options={{
                         headerTitle: "Add Address",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
                 />
@@ -111,7 +111,7 @@ export default function AddressBookTabs () {
                     options={{
                         headerTitle: "Edit Address",
                         headerTitleAlign: "center",
-                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: DM("black") }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: () => HeaderEllipsis({ onPress: pressHandle })
                     }}
@@ -120,11 +120,11 @@ export default function AddressBookTabs () {
                         return (
                             <>
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
-                                    { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                                    { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
 
                                 <Animated.View style={[HeaderStyle.popUp,
-                                    { opacity: addressOpacity, backgroundColor: DM("#FFFFFF") }
+                                    { opacity: addressOpacity, backgroundColor: colors.white }
                                 ]}>
                                     <EditLocation locationId={props.route.params.carId}/>
                                 </Animated.View>
@@ -136,15 +136,15 @@ export default function AddressBookTabs () {
                                     initialSnap={0}
                                     renderHeader={
                                         <View style={[JourneyPageStyle.headerTitleStyle,
-                                            { backgroundColor: DM("white") }
+                                            { backgroundColor: colors.white }
                                         ]}>
-                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: DM("black") }]}>
+                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
                                                 MORE OPTIONS
                                             </Text>
                                         </View>
                                     }
                                     renderContent={
-                                        <View style={[JourneyPageStyle.panel, { backgroundColor: DM("white") }]}>
+                                        <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
                                             <RemoveAddressButton
                                                 text="Remove the address"
                                                 onPress={() => {

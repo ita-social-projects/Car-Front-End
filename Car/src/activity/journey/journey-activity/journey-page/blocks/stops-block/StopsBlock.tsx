@@ -15,16 +15,16 @@ interface StopsBlockProps {
 }
 
 const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const isHighlightedStop = (index: number) => highlightedStops?.includes(index);
 
     const getDotAndTextColor = (index: number) =>
-        isHighlightedStop(index) ? "#0086cf" : "#AAA9AE";
+        isHighlightedStop(index) ? colors.accentBlue : colors.secondaryLight;
 
     const getLineColor = (index: number) =>
         isHighlightedStop(index) &&
         highlightedStops?.includes(index + NEXT_INDEX_CORRECTION) ?
-            "#0086cf" : "#AAA9AE";
+            colors.accentBlue : colors.secondaryLight;
 
     return (
         <View style={JourneyPageStyle.stopsBlock}>
@@ -42,12 +42,12 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                         />
                         {item?.type !== StopType.Finish && (
                             <View style={[JourneyPageStyle.stopCustomLineIcon,
-                                { backgroundColor: DM(getLineColor(index)) }
+                                { backgroundColor: getLineColor(index) }
                             ]} />
                         )}
                     </View>
                     <Text style={{
-                        color: DM(getDotAndTextColor(index)),
+                        color: getDotAndTextColor(index),
                         textDecorationLine: isHighlightedStop(index) ? "underline" : "none"
                     }}>
                         {item?.address?.name}
@@ -59,10 +59,10 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                         <View style={JourneyPageStyle.stopListItemRow}>
                             <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                             <View style={[JourneyPageStyle.stopCustomLineIcon,
-                                { backgroundColor: DM("#AAA9AE") }]}
+                                { backgroundColor: colors.secondaryLight }]}
                             />
                         </View>
-                        <Text style={{ color: DM("black") }}>
+                        <Text style={{ color: colors.primary }}>
                             Location A
                         </Text>
                     </View>
@@ -70,7 +70,7 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                         <View style={JourneyPageStyle.stopListItemRow}>
                             <Ionicons name={"ellipse"} size={18} color={"#AAA9AE"} />
                         </View>
-                        <Text style={{ color: DM("black") }}>
+                        <Text style={{ color: colors.primary }}>
                             Location B
                         </Text>
                     </View>

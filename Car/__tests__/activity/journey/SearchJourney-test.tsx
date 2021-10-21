@@ -35,7 +35,7 @@ describe("JourneySearch Test", () => {
                 "width": "100%",
               },
               Object {
-                "backgroundColor": "white",
+                "backgroundColor": "#FFFFFF",
               },
             ]
           }
@@ -152,7 +152,7 @@ describe("JourneySearch Test", () => {
                     "fontWeight": "bold",
                   },
                   Object {
-                    "color": "black",
+                    "color": "#0B171B",
                   },
                 ]
               }
@@ -178,7 +178,11 @@ describe("JourneySearch Test", () => {
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
                     },
-                    Object {},
+                    Object {
+                      "backgroundColor": "#0B171B",
+                      "borderColor": "#0B171B",
+                      "color": "#FFFFFF",
+                    },
                   ]
                 }
               >
@@ -191,7 +195,11 @@ describe("JourneySearch Test", () => {
                         "lineHeight": 18,
                         "textTransform": "uppercase",
                       },
-                      Object {},
+                      Object {
+                        "backgroundColor": "#0B171B",
+                        "borderColor": "#0B171B",
+                        "color": "#FFFFFF",
+                      },
                     ]
                   }
                 >
@@ -210,7 +218,11 @@ describe("JourneySearch Test", () => {
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
                     },
-                    Object {},
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderColor": "#0B171B",
+                      "color": "#0B171B",
+                    },
                   ]
                 }
               >
@@ -223,7 +235,11 @@ describe("JourneySearch Test", () => {
                         "lineHeight": 18,
                         "textTransform": "uppercase",
                       },
-                      Object {},
+                      Object {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#0B171B",
+                        "color": "#0B171B",
+                      },
                     ]
                   }
                 >
@@ -244,7 +260,11 @@ describe("JourneySearch Test", () => {
                       "paddingHorizontal": 16,
                       "paddingVertical": 4,
                     },
-                    Object {},
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderColor": "#0B171B",
+                      "color": "#0B171B",
+                    },
                   ]
                 }
               >
@@ -257,7 +277,11 @@ describe("JourneySearch Test", () => {
                         "lineHeight": 18,
                         "textTransform": "uppercase",
                       },
-                      Object {},
+                      Object {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#0B171B",
+                        "color": "#0B171B",
+                      },
                     ]
                   }
                 >
@@ -294,7 +318,7 @@ describe("JourneySearch Test", () => {
                     "paddingVertical": 12,
                   },
                   Object {
-                    "backgroundColor": "gray",
+                    "backgroundColor": "#909095",
                     "borderWidth": 0,
                   },
                 ]
@@ -311,7 +335,7 @@ describe("JourneySearch Test", () => {
                       "textTransform": "uppercase",
                     },
                     Object {
-                      "color": "white",
+                      "color": "#FFFFFF",
                     },
                   ]
                 }

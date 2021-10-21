@@ -9,40 +9,40 @@ import LocationDropDownPickerStyle from "./LocationDropDownPickerStyle";
 import { useTheme } from "../theme/ThemeProvider";
 
 const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const controller = useRef<any>(null);
 
     return (
         <View style={LocationDropDownPickerStyle.container}>
-            <Text style={[LocationDropDownPickerStyle.staticPlaceholder, { color: DM("black") }]}>
+            <Text style={[LocationDropDownPickerStyle.staticPlaceholder, { color: colors.primary }]}>
             </Text>
             <DropDownPicker
                 style={[LocationDropDownPickerStyle.style,
                     {
-                        borderColor: DM("black"),
-                        backgroundColor: DM("white")
+                        borderColor: colors.primary,
+                        backgroundColor: colors.white
                     }]}
                 arrowStyle={LocationDropDownPickerStyle.arrow}
                 customArrowDown={() => (
-                    <Ionicons name="caret-down-outline" size={18} color={DM("black")} />
+                    <Ionicons name="caret-down-outline" size={18} color={colors.primary} />
                 )}
                 customArrowUp={() => (
-                    <Ionicons name="caret-up-outline" size={18} color={DM("black")} />
+                    <Ionicons name="caret-up-outline" size={18} color={colors.primary} />
                 )}
                 renderSeperator={() => (
-                    <Divider style={{ backgroundColor: DM("gray") }} />
+                    <Divider style={{ backgroundColor: colors.secondaryDark }} />
                 )}
                 dropDownStyle={[LocationDropDownPickerStyle.dropDownStyle,
                     {
-                        backgroundColor: DM("white"),
-                        borderColor: DM("black")
+                        backgroundColor: colors.white,
+                        borderColor: colors.primary
                     }]}
-                selectedLabelStyle={[LocationDropDownPickerStyle.selectedLabelStyle, { color: DM("black") }]}
+                selectedLabelStyle={[LocationDropDownPickerStyle.selectedLabelStyle, { color: colors.primary }]}
                 itemStyle={LocationDropDownPickerStyle.itemStyle}
                 items={props.items}
-                placeholderStyle={[LocationDropDownPickerStyle.staticPlaceholder, { color: DM("black") }]}
+                placeholderStyle={[LocationDropDownPickerStyle.staticPlaceholder, { color: colors.primary }]}
                 placeholder={props.placeholder}
-                labelStyle={[LocationDropDownPickerStyle.labelStyle, { color: DM("black") }]}
+                labelStyle={[LocationDropDownPickerStyle.labelStyle, { color: colors.primary }]}
                 onChangeItem={props.onChangeItem}
                 isVisible={props.isVisible}
                 onOpen={props.onOpen}

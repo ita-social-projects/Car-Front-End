@@ -12,6 +12,7 @@ const AcceptedInvitation = (props: NotificationProps) => {
             notificationHeaderMessage = "The passenger has accepted your invitation!"
             IsDepartureTimeVisible={true}
             IsStopsTitleVisible={true}
+            journeyUserId={props.sender?.id!}
         />
     );
 };

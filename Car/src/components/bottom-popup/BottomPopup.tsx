@@ -6,7 +6,7 @@ import BottomPopupProps from "./BottomPopupProps";
 import { useTheme } from "../theme/ThemeProvider";
 
 const BottomPopup = (props: BottomPopupProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return(
         <BottomSheet
@@ -17,11 +17,11 @@ const BottomPopup = (props: BottomPopupProps) => {
                 <>
                     <View style={[BottomPopupStyle.header,
                         {
-                            backgroundColor: DM("white"),
-                            shadowColor: DM("#000000")
+                            backgroundColor: colors.white,
+                            shadowColor: colors.primary
                         }]}>
                         <View style={BottomPopupStyle.panelHeader}>
-                            <View style={[BottomPopupStyle.panelHandle, { backgroundColor: DM("#000000") }]} />
+                            <View style={[BottomPopupStyle.panelHandle, { backgroundColor: colors.primary }]} />
                         </View>
                     </View>
                     {props?.renderHeader}

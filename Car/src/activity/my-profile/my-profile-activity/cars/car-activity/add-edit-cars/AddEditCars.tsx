@@ -33,14 +33,14 @@ import axios from "axios";
 import ConfirmModal from "../../../../../../components/confirm-modal/ConfirmModal";
 
 const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isLoading, setLoading] = useState(props.type === "edit");
     const [isSaving, setSaving] = useState(false);
     const [errorModalVisible, setErrorModalVisible] = useState(false);
 
     const [brands, setBrands] = useState({} as CarBrand[]);
     const [models, setModels] = useState({} as CarModel[]);
-    const [colors] = useState<Array<{ value: string; label: string }>>(
+    const [carColors] = useState<Array<{ value: string; label: string }>>(
         Object.values(CarColor)
             .filter((value) => isNaN(Number(value)))
             .map((item, index) => ({
@@ -110,7 +110,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     label: carModel?.name ?? "",
                     value: carModel?.id.toString() ?? ""
                 };
-                const carColor = colors.find(obj => {
+                const carColor = carColors.find(obj => {
                     return obj.value === car?.color.toString();
                 });
 
@@ -175,8 +175,14 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             throw error;
         else
         {
-            setSaving(false);
-            setErrorModalVisible(true);
+            if(error.message!="Network Error")
+            {
+                setSaving(false);
+                setErrorModalVisible(true);
+            }
+            else{
+                navigate("Cars");
+            }
         }
     };
 
@@ -237,7 +243,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
 
     if (isLoading) return (
         <View
-            style={[AddEditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
+            style={[AddEditCarsStyle.wrapper, { backgroundColor: colors.white }]}
         >
             <Indicator
                 size="large"
@@ -249,9 +255,9 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
 
     return (
         <View
-            style={[AddEditCarsStyle.wrapper, { backgroundColor: DM("white") }]}
+            style={[AddEditCarsStyle.wrapper, { backgroundColor: colors.white }]}
         >
-            <View style={[AddEditCarsStyle.carAvatarContainer, { backgroundColor: DM("#C4C4C4") }]}>
+            <View style={[AddEditCarsStyle.carAvatarContainer, { backgroundColor: colors.secondaryLight }]}>
                 {photo && (
                     <Image
                         source={{ uri: photo.uri }}
@@ -261,15 +267,15 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                 <TouchableOpacity
                     style={[AddEditCarsStyle.carButtonUpload,
                         {
-                            backgroundColor: DM("white"),
-                            borderColor: DM("black")
+                            backgroundColor: colors.white,
+                            borderColor: colors.primary
                         }]
                     }
                     onPress={() =>
                         uploadPhotoHandle()
                     }
                 >
-                    <Text style={[AddEditCarsStyle.carButtonUploadText, { color: DM("black") }]}>
+                    <Text style={[AddEditCarsStyle.carButtonUploadText, { color: colors.primary }]}>
                         {Object.entries(photo).length
                             ? "Change photo"
                             : "Upload photo"
@@ -323,7 +329,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     <CarDropDownPicker
                         style={AddEditCarsStyle.dropDownPicker}
                         placeHolder="Color"
-                        items={colors}
+                        items={carColors}
                         zIndex={1000}
                         required={true}
                         defaultValue={props.type === "edit" ? selectedColor!.value : null}
@@ -345,14 +351,14 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     placeHolder="Plate number"
                 />
                 {!isValidPlateNumber &&
-                    <Text style={{ color: DM("red") }}>
+                    <Text style={{ color: colors.accentRed }}>
                         This field must contain 1-10 characters, including numbers, letters, hyphens, space
                     </Text>
                 }
                 <View style={AddEditCarsStyle.saveButtonContainer}>
-                    <Text style={{ color: DM("red") }}>
+                    <Text style={{ color: colors.accentRed }}>
                         *
-                        <Text style={{ color: DM("gray") }}>
+                        <Text style={{ color: colors.secondaryDark }}>
                             {" "}
                             - required field
                         </Text>
@@ -360,8 +366,8 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     <TouchableOpacity
                         style={
                             (!isValidCar || !isValidPlateNumber) ?
-                                [AddEditCarsStyle.carButtonSave, { backgroundColor: DM("gray") }]
-                                : [AddEditCarsStyle.carButtonSave, { backgroundColor: DM("black") }]
+                                [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.secondaryDark }]
+                                : [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.primary }]
                         }
                         disabled={
                             !isValidCar || !isValidPlateNumber
@@ -370,7 +376,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                             saveCarHandle().then(() => navigate("Cars")).catch(errorHandler);
                         }}
                     >
-                        <Text style={[AddEditCarsStyle.carButtonSaveText, { color: DM("white") }]}>
+                        <Text style={[AddEditCarsStyle.carButtonSaveText, { color: colors.white }]}>
                             Save
                         </Text>
                         {isSaving ? (

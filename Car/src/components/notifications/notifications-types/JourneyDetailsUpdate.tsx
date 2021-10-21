@@ -6,6 +6,7 @@ import NotificationModalBase from "../notification-modal-base/NotificationModalB
 import NotificationProps from "../NotificationProps";
 import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
 import * as navigation from "../../navigation/Navigation";
+import NotificationDeclineButton from "../notification-buttons/NotificationDeclineButton";
 
 const JourneyDetailsUpdate = (props: NotificationProps) => {
     const [modalVisible, setModalVisible] = useState(props.visible);
@@ -39,6 +40,10 @@ const JourneyDetailsUpdate = (props: NotificationProps) => {
                                 isPassenger: true
                             });
                         }}
+                    />
+                    <NotificationDeclineButton
+                        declineText={"Skip"}
+                        onDecline={() => setModalVisible(false)}
                     />
                 </NotificationButtonGroup>
             </NotificationModalBase>

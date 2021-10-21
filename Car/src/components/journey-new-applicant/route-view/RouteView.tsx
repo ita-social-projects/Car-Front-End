@@ -31,7 +31,7 @@ interface RouteViewProps {
 }
 
 const RouteView = (props: RouteViewProps) => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
     const params = props.route.params;
     const [approveModalVisible,setApproveModalVisible] = useState(false);
@@ -111,7 +111,7 @@ const RouteView = (props: RouteViewProps) => {
                 <TouchableOpacity onPress = {approveUser}
                     style={[SearchJourneyStyle.confirmButton, { backgroundColor: "black" }]}
                 >
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: DM(DM("white")) }]}>
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
                     ACCEPT
                     </Text>
                 </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { NavigationContainer, DarkTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect, useState } from "react";
 import AuthParamList from "../auth/AuthParamList";
@@ -15,26 +15,35 @@ import { useTheme } from "../theme/ThemeProvider";
 const Stack = createStackNavigator<AuthParamList>();
 
 const Routes = () => {
-    const { DM, isThemeDark } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
     const { Root } = require("popup-ui");
+
+    const navigationTheme = {
+        dark: true,
+        colors: {
+            primary: colors.primary,
+            background: colors.white,
+            card: colors.white,
+            text: colors.primary,
+            border: colors.secondaryLight,
+            notification: colors.accentRed,
+        },
+    };
 
     useEffect(() => {
         (async () => {
             const currentLogin = new Date();
             const lastLogin = new Date(
-                (await AsyncStorage.getItem("lastLogin")) as string
+        (await AsyncStorage.getItem("lastLogin")) as string
             );
 
             if (
                 Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
-                MILLISECONDS_IN_MONTH
+        MILLISECONDS_IN_MONTH
             ) {
-                await AsyncStorage.setItem(
-                    "lastLogin",
-                    currentLogin.toUTCString()
-                );
+                await AsyncStorage.setItem("lastLogin", currentLogin.toUTCString());
                 await AsyncStorage.removeItem("user");
             }
         })().then(() =>
@@ -58,16 +67,16 @@ const Routes = () => {
         <Root>
             <StatusBar
                 animated={true}
-                backgroundColor={DM("#121212")}
-                barStyle={DM("dark-content") as any}
+                backgroundColor={colors.white}
+                barStyle={!isThemeDark ? "dark-content" : ("light-content" as any)}
             />
             <NavigationContainer
-                theme={isThemeDark ? DarkTheme : undefined}
+                theme={navigationTheme}
                 ref={navigationRef}
             >
                 {isLoading ? (
                     <Indicator
-                        color={DM("#414045")}
+                        color={colors.hover}
                         size="large"
                         text="Loading information..."
                     />

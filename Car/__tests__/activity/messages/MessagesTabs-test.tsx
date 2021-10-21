@@ -38,7 +38,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -62,7 +62,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
             }
@@ -83,7 +83,7 @@ test("renders correctly", async () =>
                   "marginLeft": 20,
                 },
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 },
               ],
               "title": "SoftServian",

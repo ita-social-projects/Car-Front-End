@@ -15,7 +15,7 @@ test("renders correctly", async () =>
             "paddingHorizontal": 5,
           },
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "#FFFFFF",
           },
         ]
       }
@@ -32,7 +32,7 @@ test("renders correctly", async () =>
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "borderBottomColor": "rgba(0,0,0,0.5)",
+            "borderBottomColor": "#AAA9AE",
             "opacity": 1,
           }
         }
@@ -94,7 +94,7 @@ test("renders correctly", async () =>
                     "lineHeight": 16,
                   },
                   Object {
-                    "color": "black",
+                    "color": "#0B171B",
                   },
                 ]
               }
@@ -121,8 +121,8 @@ test("renders correctly", async () =>
                   },
                 ]
               }
-              thumbTintColor="white"
-              tintColor="gray"
+              thumbTintColor="#FFFFFF"
+              tintColor="#909095"
               value={false}
             />
           </View>
@@ -141,7 +141,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -229,7 +229,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }
@@ -317,7 +317,7 @@ test("renders correctly", async () =>
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderBottomColor": "rgba(0,0,0,0.5)",
+              "borderBottomColor": "#AAA9AE",
               "opacity": 1,
             }
           }

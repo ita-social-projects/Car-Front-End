@@ -4,15 +4,15 @@ import { useTheme } from "../../theme/ThemeProvider";
 import NotificationButtonsStyle from "./NotificationButtonsStyle";
 
 const NotificationConfirmButton = (props: { confirmText?: string, onConfirm: () => void, disabled?: boolean }) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <TouchableOpacity
             disabled={props.disabled ?? false}
             onPress={ props.onConfirm }
-            style={[NotificationButtonsStyle.button, { backgroundColor: DM("black") }]}
+            style={[NotificationButtonsStyle.button, { backgroundColor: colors.primary }]}
         >
-            <Text style={[NotificationButtonsStyle.buttonText, { color: DM("white") }]}>
+            <Text style={[NotificationButtonsStyle.buttonText, { color: colors.white }]}>
                 {props.confirmText || "OK"}
             </Text>
         </TouchableOpacity>

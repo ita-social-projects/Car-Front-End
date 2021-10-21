@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PreferencesService from "../../../../../api-service/preferences-service/PreferencesService";
 import UserPreferences from "../../../../../models/user/UserPreferences";
@@ -9,14 +9,13 @@ import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import PreferencesStyle from "./PreferencesStyle";
 import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
-import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../../../constants/GeneralConstants";
+import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
 export default function Preferences (props: NavigationAddAndRemoveListener) {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
     const [comments, setComments] = useState("");
-    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
     const [isLoading, setLoading] = useState(true);
 
     const { user } = useContext(AuthContext);
@@ -46,9 +45,6 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                     setSmokingAllowed(res.data.doAllowSmoking);
                     setEatingAllowed(res.data.doAllowEating);
                     setComments(res.data.comments);
-                    setRemainingSymbolsText(res.data.comments ?
-                        `${PREFERENCES_COMMENTS_MAX_LENGTH - res.data.comments.length} symbols remaining`
-                        : "Up to 100 symbols");
                     setUserPreferences(res.data);
                 }
             })
@@ -66,15 +62,15 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
     return (
         <>
             {isLoading ? (
-                <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  DM("white") }]}>
+                <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  colors.white }]}>
                     <Indicator
                         size="large"
-                        color={DM("#414045")}
+                        color={colors.hover}
                         text="Loading information..."
                     />
                 </View>
             ) : (
-                <ScrollView style={[PreferencesStyle.container, { backgroundColor: DM("white") }]}>
+                <ScrollView style={[PreferencesStyle.container, { backgroundColor: colors.white }]}>
                     <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
                             text={"Allow smoking in your car"}
@@ -115,6 +111,10 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                         </Text>
                         <View style={PreferencesStyle.whitespaceBlock} />
                     </View>
+                    <CommentBlock
+                        initialComment={comments}
+                        commentHeader="Other preferences"
+                    />
                 </ScrollView>
             )}
         </>

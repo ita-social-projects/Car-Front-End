@@ -4,11 +4,11 @@ import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import ChatSettingsStyle from "./ChatSettingsStyle";
 
 const ChatSettings = () => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
-        <View style={[ChatSettingsStyle.container, { backgroundColor: DM("#FFFFFF") }]}>
-            <Text style={{ color: DM("black") }}>
+        <View style={[ChatSettingsStyle.container, { backgroundColor: colors.white }]}>
+            <Text style={{ color: colors.primary }}>
                 App Settings
             </Text>
         </View>

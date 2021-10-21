@@ -5,13 +5,13 @@ import IndicatorStyle from "./IndicatorStyle";
 import IndicatorProps from "./IndicatorProps";
 
 const Indicator = (props: IndicatorProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={[IndicatorStyle.container, {
-            backgroundColor: DM("white") }]}>
+            backgroundColor: colors.white }]}>
             <ActivityIndicator size={props.size} color={props.color} />
-            <Text style={[IndicatorStyle.text, { color: DM("#414045") }]}>
+            <Text style={[IndicatorStyle.text, { color: colors.hover }]}>
                 {props.text ?? ""}
             </Text>
         </View>

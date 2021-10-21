@@ -12,6 +12,7 @@ const RejectedInvitation = (props: NotificationProps) => {
             notificationHeaderMessage = "The passenger has rejected your invitation!"
             IsDepartureTimeVisible={true}
             IsStopsTitleVisible={true}
+            journeyUserId = {props.sender?.id!}
         />
     );
 };

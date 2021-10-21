@@ -11,11 +11,11 @@ import JourneyPageStyle from "../../JourneyPageStyle";
 import * as navigation from "../../../../../../components/navigation/Navigation";
 
 const ParticipantsBlock = ({ journey } : {journey: Journey}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <>
-            <Text style={[JourneyPageStyle.applicantsHeader, { color: DM("black") }]}>
+            <Text style={[JourneyPageStyle.applicantsHeader, { color: colors.primary }]}>
                 SoftServians {journey?.participants?.length}/
                 {journey?.countOfSeats}
             </Text>
@@ -35,19 +35,19 @@ const ParticipantsBlock = ({ journey } : {journey: Journey}) => {
                         <View style={JourneyPageStyle.userInfoBlock}>
                             <LinearTextGradient
                                 locations={[GRADIENT_START, GRADIENT_END]}
-                                colors={["#00A3CF", "#5552A0"]}
+                                colors={[colors.navyBlueGradientFrom, colors.navyBlueGradientFrom]}
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 0 }}
                             >
                                 <Text style={[JourneyPageStyle.applicantNameText,
-                                    { color: DM("#00A3CF") }
+                                    { color: colors.navyBlueGradientFrom }
                                 ]}>
                                     {item?.name} {item?.surname}
                                 </Text>
                             </LinearTextGradient>
                             <View style={JourneyPageStyle.userSecondaryInfoBlock}>
                                 <Text style={[JourneyPageStyle.userRoleText,
-                                    { color: DM("#909095") }]}>
+                                    { color: colors.secondaryDark }]}>
                                     {item?.position}
                                 </Text>
                             </View>
@@ -55,7 +55,7 @@ const ParticipantsBlock = ({ journey } : {journey: Journey}) => {
                     </TouchableOpacity>
 
                     <Divider style={[JourneyPageStyle.separator,
-                        { backgroundColor: DM("#C1C1C5") }]} />
+                        { backgroundColor: colors.secondaryLight }]} />
                 </View>
             ))}
         </>

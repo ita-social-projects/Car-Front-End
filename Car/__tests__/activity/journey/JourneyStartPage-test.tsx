@@ -25,7 +25,7 @@ test("renders correctly", async () =>
             "paddingHorizontal": 14,
           },
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "#FFFFFF",
           },
         ]
       }
@@ -53,7 +53,7 @@ test("renders correctly", async () =>
           }
           navigationName="Search Journey"
           reverse={false}
-          to="#00A977"
+          to="#00A997"
           width={150}
         />
         <TouchableNavigationBlock
@@ -72,7 +72,7 @@ test("renders correctly", async () =>
           }
           navigationName="Create Journey"
           reverse={true}
-          to="#5552A0"
+          to="#00A3CF"
           width={210}
         />
       </View>
@@ -93,7 +93,7 @@ test("renders correctly", async () =>
                 "textTransform": "uppercase",
               },
               Object {
-                "color": "black",
+                "color": "#0B171B",
               },
             ]
           }
@@ -137,9 +137,13 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "13%",
                 },
-                Object {},
                 Object {
-                  "borderColor": "black",
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 2,
+                  "color": "#0B171B",
+                },
+                Object {
+                  "borderColor": "#0B171B",
                 },
               ]
             }
@@ -152,7 +156,10 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {},
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#0B171B",
+                  },
                 ]
               }
             >
@@ -170,9 +177,13 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "13%",
                 },
-                Object {},
                 Object {
-                  "borderColor": "black",
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 0,
+                  "color": "#414045",
+                },
+                Object {
+                  "borderColor": "#0B171B",
                 },
               ]
             }
@@ -185,7 +196,10 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {},
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#414045",
+                  },
                 ]
               }
             >
@@ -203,9 +217,13 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "24%",
                 },
-                Object {},
                 Object {
-                  "borderColor": "black",
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 0,
+                  "color": "#414045",
+                },
+                Object {
+                  "borderColor": "#0B171B",
                 },
               ]
             }
@@ -218,7 +236,10 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {},
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#414045",
+                  },
                 ]
               }
             >
@@ -236,9 +257,13 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": "20%",
                 },
-                Object {},
                 Object {
-                  "borderColor": "black",
+                  "backgroundColor": "#FFFFFF",
+                  "borderBottomWidth": 0,
+                  "color": "#414045",
+                },
+                Object {
+                  "borderColor": "#0B171B",
                 },
               ]
             }
@@ -251,7 +276,10 @@ test("renders correctly", async () =>
                     "fontWeight": "300",
                     "textTransform": "uppercase",
                   },
-                  Object {},
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "color": "#414045",
+                  },
                 ]
               }
             >

@@ -25,7 +25,7 @@ interface ShadowedBottomPopupComponent {
 }
 
 const ShadowedBottomPopup : ShadowedBottomPopupComponent = (props: BottomPopupProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
 
@@ -64,7 +64,7 @@ const ShadowedBottomPopup : ShadowedBottomPopupComponent = (props: BottomPopupPr
     return (
         <>
             <Animated.View style={isVisible && [HeaderStyle.layout,
-                { opacity: layoutOpacity, backgroundColor: DM("#000000") }
+                { opacity: layoutOpacity, backgroundColor: colors.primary }
             ]} />
 
             <BottomPopup

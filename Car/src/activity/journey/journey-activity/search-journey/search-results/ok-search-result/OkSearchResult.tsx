@@ -6,13 +6,13 @@ import ApplicantJourney from "../../../../../../../models/journey/ApplicantJourn
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 
 const OkSearchResult = (props : {journeys: ApplicantJourney[], displayFee: boolean, passangersCount: number}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View
             style={[
                 OkSearchResultStyle.container,
-                { backgroundColor: DM("#FFFFFF") },
+                { backgroundColor: colors.white },
             ]}
         >
             <FlatList

@@ -20,7 +20,7 @@ test("renders correctly", async () =>
             "flex": 1,
           },
           Object {
-            "backgroundColor": "#88FF88",
+            "backgroundColor": "#A5C500",
           },
         ]
       }
@@ -32,7 +32,7 @@ test("renders correctly", async () =>
               "fontFamily": "Proxima Nova Extrabold",
             },
             Object {
-              "color": "#222222",
+              "color": "#414045",
             },
           ]
         }
@@ -58,7 +58,7 @@ test("renders correctly", async () =>
                   "height": 400,
                 },
                 Object {
-                  "backgroundColor": "white",
+                  "backgroundColor": "#FFFFFF",
                 },
               ]
             }
@@ -112,7 +112,7 @@ test("renders correctly", async () =>
                           "fontWeight": "700",
                         },
                         Object {
-                          "color": "black",
+                          "color": "#0B171B",
                         },
                       ]
                     }
@@ -178,7 +178,7 @@ test("renders correctly", async () =>
                         "textAlign": "right",
                       },
                       Object {
-                        "color": "black",
+                        "color": "#0B171B",
                       },
                     ]
                   }
@@ -203,7 +203,7 @@ test("renders correctly", async () =>
                       "width": "100%",
                     },
                     Object {
-                      "backgroundColor": "#C1C1C5",
+                      "backgroundColor": "#AAA9AE",
                     },
                   ]
                 }
@@ -243,7 +243,7 @@ test("renders correctly", async () =>
                         "paddingTop": 4,
                       },
                       Object {
-                        "color": "#000000",
+                        "color": "#0B171B",
                       },
                     ]
                   }
@@ -284,8 +284,8 @@ test("renders correctly", async () =>
                         "paddingHorizontal": 15,
                       },
                       Object {
-                        "backgroundColor": "white",
-                        "borderColor": "black",
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#0B171B",
                       },
                       false,
                     ]
@@ -300,7 +300,7 @@ test("renders correctly", async () =>
                           "textTransform": "uppercase",
                         },
                         Object {
-                          "color": "black",
+                          "color": "#0B171B",
                         },
                       ]
                     }
@@ -321,7 +321,7 @@ test("renders correctly", async () =>
                     "zIndex": -1,
                   },
                   Object {
-                    "backgroundColor": "white",
+                    "backgroundColor": "#FFFFFF",
                   },
                 ]
               }
@@ -337,7 +337,7 @@ test("renders correctly", async () =>
         }
         style={
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "#FFFFFF",
           }
         }
       />

@@ -7,7 +7,7 @@ import ChooseOptionProps from "./ChooseOptionProps";
 import TouchableNavigationCardStyle from "../touchable-navigation-card/TouchableNavigationCardStyle";
 
 const ChooseOption = (props: ChooseOptionProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={ChooseOptionStyle.preferencesContainer}>
@@ -23,14 +23,14 @@ const ChooseOption = (props: ChooseOptionProps) => {
                 </View>
             </View>
             <View style={ChooseOptionStyle.preferenceNameContainer}>
-                <Text style={[ChooseOptionStyle.preferenceNameText, { color: DM("black") }]}>
+                <Text style={[ChooseOptionStyle.preferenceNameText, { color: colors.primary }]}>
                     {props.text}
                 </Text>
             </View>
             <View>
                 <Switch
-                    trackColor={{ false: DM("gray"), true: DM("#414045") }}
-                    thumbColor={DM("white")}
+                    trackColor={{ false: colors.secondaryDark, true: colors.hover }}
+                    thumbColor={colors.white}
                     style={ChooseOptionStyle.switch}
                     value={props.value}
                     onValueChange={(value) => props.onValueChanged(value)}

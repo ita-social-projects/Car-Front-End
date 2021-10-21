@@ -5,23 +5,23 @@ import * as navigation from "../navigation/Navigation";
 import { useTheme } from "../theme/ThemeProvider";
 import HeaderBackButtonStyle from "./HeaderBackButtonStyle";
 
-const HeaderBackButton = () => {
-    const { DM } = useTheme();
+const HeaderBackButton = (props) => {
+    const { colors } = useTheme();
 
     return(
         <TouchableOpacity
             style={HeaderBackButtonStyle.backButton}
-            onPress={() => {
+            onPress={props.onPress ?? (() => {
                 navigation.goBack();
-            }}
+            })}
         >
             <Ionicons
                 name={"chevron-back-outline"}
                 size={35}
-                color={DM("#02A2CF")}
+                color={colors.accentBlue}
             />
             <View style={HeaderBackButtonStyle.backButtonTextContainer}>
-                <Text style={[HeaderBackButtonStyle.backButtonText, { color: DM("#02A2CF") }]}>
+                <Text style={[HeaderBackButtonStyle.backButtonText, { color: colors.accentBlue }]}>
                 Back
                 </Text>
             </View>

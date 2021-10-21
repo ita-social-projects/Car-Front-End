@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../auth/AuthContext";
 import NotificationProps from "../NotificationProps";
 import ApplicationAnswer from "./ApplicationAnswer";
 
 const ApplicationRejection = (props: NotificationProps) => {
+    const user = useContext(AuthContext).user;
 
     return (
         <ApplicationAnswer
@@ -13,6 +15,7 @@ const ApplicationRejection = (props: NotificationProps) => {
             IsDetailsTitleVisible={false}
             IsFeeVisible={false}
             IsBaggageVisible={false}
+            journeyUserId = {user?.id!}
         />
     );
 };

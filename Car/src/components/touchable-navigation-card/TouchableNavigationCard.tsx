@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TouchableNavigationCardStyle from "./TouchableNavigationCardStyle";
 import * as navigation from "../navigation/Navigation";
@@ -7,14 +7,14 @@ import { useTheme } from "../theme/ThemeProvider";
 import TouchableNavigationCardProps from "./TouchableNavigationCardProps";
 
 const TouchableNavigationCard = (props: TouchableNavigationCardProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View>
             <TouchableOpacity
                 style={[
                     TouchableNavigationCardStyle.cardContainer,
-                    { borderBottomColor: DM(Platform.OS === "ios" ? "rgba(0,0,0,0.5)" : "#C1C1C5"), }]}
+                    { borderBottomColor: colors.secondaryLight, }]}
                 onPress={() =>
                     navigation.navigate(props?.navigationName, {
                         carId: props.carId
@@ -38,7 +38,7 @@ const TouchableNavigationCard = (props: TouchableNavigationCardProps) => {
                     <Ionicons
                         name={"chevron-forward-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 </View>
             </TouchableOpacity>

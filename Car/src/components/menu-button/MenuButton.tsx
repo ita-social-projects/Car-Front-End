@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Pressable, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTheme } from "../theme/ThemeProvider";
 import MenuButtonStyle from "./MenuButtonStyle";
 import MenuButtonProps from "./MenuButtonProps";
 
 const MenuButton = (props: MenuButtonProps) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
-    const black = DM("#000000");
-    const white = DM("#FFFFFF");
-    const disabledColor = DM("#B8B8B8");
+    const black = colors.primary;
+    const white = colors.white;
+    const disabledColor = colors.secondaryLight;
 
     const [colorButton, setColorButton] = useState(white);
     const [colorText, setColorText] = useState(black);
     const [colorIcon, setColorIcon] = useState(black);
-    const [colorSeparator, setColorSeparator] = useState(DM("#C1C1C5"));
+    const [colorSeparator, setColorSeparator] = useState(colors.secondaryLight);
     let color = props.disabled ? disabledColor : colorIcon;
 
     const changeColorToBlack = () => {
@@ -30,7 +29,7 @@ const MenuButton = (props: MenuButtonProps) => {
         setColorText(black);
         setColorButton(white);
         setColorIcon(black);
-        setColorSeparator(DM("#C1C1C5"));
+        setColorSeparator(colors.secondaryLight);
     };
 
     useEffect(() => {
@@ -38,7 +37,7 @@ const MenuButton = (props: MenuButtonProps) => {
     });
 
     return (
-        <TouchableWithoutFeedback
+        <Pressable
             style={[
                 MenuButtonStyle.panelButton,
                 { backgroundColor: colorButton }
@@ -54,7 +53,7 @@ const MenuButton = (props: MenuButtonProps) => {
                         <Text
                             style={[
                                 MenuButtonStyle.panelButtonTitle,
-                                { color: DM("black") },
+                                { color: colors.primary },
                                 { color: props.disabled ? disabledColor : colorText }
                             ]}
                         >
@@ -80,7 +79,7 @@ const MenuButton = (props: MenuButtonProps) => {
                     ]}
                 />
             </View>
-        </TouchableWithoutFeedback>
+        </Pressable>
     );
 };
 

@@ -9,7 +9,7 @@ import TouchableNavigationCard from "../../components/touchable-navigation-card/
 import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: { navigation: any }) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const MyProfile = (props: { navigation: any }) => {
     }, [props.navigation]);
 
     return (
-        <View style={[MyProfileStyle.container, { backgroundColor: DM("white") }]}>
+        <View style={[MyProfileStyle.container, { backgroundColor: colors.white }]}>
             <TouchableNavigationCard
                 navigation={props.navigation}
                 navigationName="Details"
@@ -33,11 +33,11 @@ const MyProfile = (props: { navigation: any }) => {
                     <Ionicons
                         name={"person-circle-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Details</Text>
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Details</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -49,11 +49,11 @@ const MyProfile = (props: { navigation: any }) => {
                         name={"options-outline"}
                         size={20}
                         style={MyProfileStyle.optionIcon}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Preferences</Text>
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Preferences</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -64,11 +64,11 @@ const MyProfile = (props: { navigation: any }) => {
                     <Ionicons
                         name={"car"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>My Cars</Text>
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>My Cars</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -79,11 +79,11 @@ const MyProfile = (props: { navigation: any }) => {
                     <Ionicons
                         name={"bookmark-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Address Book</Text>
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Address Book</Text>
             </TouchableNavigationCard>
 
             <TouchableNavigationCard
@@ -94,11 +94,11 @@ const MyProfile = (props: { navigation: any }) => {
                     <Ionicons
                         name={"settings-outline"}
                         size={20}
-                        color={DM("#414045")}
+                        color={colors.hover}
                     />
                 }
             >
-                <Text style={[MyProfileStyle.text, { color: DM("black") }]}>Settings</Text>
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Settings</Text>
             </TouchableNavigationCard>
         </View>
     );

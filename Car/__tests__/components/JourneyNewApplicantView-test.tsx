@@ -138,13 +138,21 @@ test("renders correctly", async () =>
             <NotificationRideDetails
               IsBaggageVisible={false}
               journeyId={0}
+              journeyUser={
+                Object {
+                  "journeyId": 0,
+                  "passangersCount": 1,
+                  "userId": 0,
+                  "withBaggage": undefined,
+                }
+              }
               userId={0}
               withPassangers={true}
             />
             <Text
               style={
                 Object {
-                  "color": "black",
+                  "color": "#0B171B",
                 }
               }
             >

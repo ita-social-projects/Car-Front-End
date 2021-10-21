@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 const AddressInputRow = ({ data }: {data: GooglePlaceData}) => {
-    const { DM } = useTheme();
+    const { colors } = useTheme();
 
     return (
         <View style={styles.row}>
@@ -25,10 +25,10 @@ const AddressInputRow = ({ data }: {data: GooglePlaceData}) => {
                 <Ionicons
                     name={(data as any)?.iconName ?? "location"}
                     size={25}
-                    color={DM("#414045")}
+                    color={colors.hover}
                 />
             </View>
-            <Text style={{ color: DM("black") }}>{data.description || (data as any).vicinity}</Text>
+            <Text style={{ color: colors.primary }}>{data.description || (data as any).vicinity}</Text>
         </View>
     );
 };
