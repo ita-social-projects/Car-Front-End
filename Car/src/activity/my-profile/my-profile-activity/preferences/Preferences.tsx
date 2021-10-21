@@ -96,6 +96,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                             Other preferences
                         </Text>
                         <TextInput
+                            placeholder='Input data'
                             style={[PreferencesStyle.textInput,
                                 {
                                     borderColor: DM("black"),
