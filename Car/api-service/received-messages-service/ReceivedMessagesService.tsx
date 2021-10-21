@@ -6,7 +6,7 @@ const route = APIRoutes.getReceivedMessagesUrl();
 
 const ReceivedMessagesService = {
     markAsRead: async (chatId: number | undefined) =>
-        APIService.put<ReceivedMessages[]>(`${route}/markasread/${chatId}`),
+        APIService.put<ReceivedMessages[]>(`${route}markasread/${chatId}`),
 
     getAllUnreadMessagesNumber: async () =>
         APIService.get(route + "unreadNumber")
