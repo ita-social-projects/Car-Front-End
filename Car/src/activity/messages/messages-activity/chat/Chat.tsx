@@ -385,7 +385,7 @@ const Chat = (properties: ChatProps) => {
     };
 
     return (
-        <KeyboardAvoidingView
+        <View
             style={[ChatStyle.chatWrapper, { backgroundColor: colors.white}]}>
             {isLoading ? (
                 <Indicator
@@ -396,6 +396,7 @@ const Chat = (properties: ChatProps) => {
             ) : (
                 <TouchableWithoutFeedback
                     onPress={() => {Keyboard.dismiss(); hidePopup();}}>
+                        <KeyboardAvoidingView style={{flex: 1}}>
                     <GiftedChat
                         scrollToBottom
                         listViewProps={listProps}
@@ -442,6 +443,7 @@ const Chat = (properties: ChatProps) => {
                             />
                         }
                     />
+                    </KeyboardAvoidingView>
                 </TouchableWithoutFeedback>
             )}
             <BottomPopup
@@ -461,7 +463,7 @@ const Chat = (properties: ChatProps) => {
                     </View>
                 }
             />
-        </KeyboardAvoidingView>
+        </View>
     );
 };
 
