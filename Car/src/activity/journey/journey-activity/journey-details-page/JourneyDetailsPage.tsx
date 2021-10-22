@@ -21,7 +21,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, THIRD_ELEMENT_INDEX, ZERO, ZERO_ID
+    FIRST_ELEMENT_INDEX, BORDER_WIDTH, ZERO, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -487,7 +487,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 style={[CreateJourneyStyle.discardButton,
                                     {
                                         display: journey ? "flex" : "none",
-                                        borderWidth: journey ? THIRD_ELEMENT_INDEX : ZERO,
+                                        borderWidth: journey ? BORDER_WIDTH : ZERO,
                                         borderColor: colors.primary
                                     }]}
                                 onPress={() => setDiscardModalIsVisible(true)}
