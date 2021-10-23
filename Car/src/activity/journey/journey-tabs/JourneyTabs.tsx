@@ -178,7 +178,12 @@ const JourneyTabs = () => {
                         headerTitle: "Ride Details",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
-                        headerLeft: HeaderBackButton,
+                        headerLeft: () => HeaderBackButton({
+                            onPress: () => {
+                                closeMoreOptionPopup(ridePageMoreOptionsRef);
+                                navigation.goBack();
+                            }
+                        }),
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(createRideMoreOptionsRef) })
                     }}
