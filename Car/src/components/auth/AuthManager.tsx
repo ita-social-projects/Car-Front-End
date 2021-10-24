@@ -6,7 +6,6 @@ const AuthManager = {
     signInAsync: async () => {
         const result = await authorize(AuthConfig);
 
-        console.log(result);
         AsyncStorage.setItem("userToken", result.accessToken);
         AsyncStorage.setItem("idToken", result.idToken);
         AsyncStorage.setItem("refreshToken", result.refreshToken);
@@ -14,16 +13,19 @@ const AuthManager = {
     },
 
     refreshAsync: async () => {
-        const result = await refresh(AuthConfig, { refreshToken: (await AsyncStorage.getItem("refreshToken")) ?? "" });
+        if (Date.now() > Date.parse(await AsyncStorage.getItem("expireTime") ?? "")) {
+            const result = await refresh(
+                AuthConfig,
+                { refreshToken: (await AsyncStorage.getItem("refreshToken")) ?? "" });
 
-        console.log(result);
-        AsyncStorage.setItem("userToken", result.accessToken);
-        AsyncStorage.setItem("idToken", result.idToken);
-        if (result.refreshToken) {
-            AsyncStorage.setItem("refreshToken", result.refreshToken);
+            AsyncStorage.setItem("userToken", result.accessToken);
+            AsyncStorage.setItem("idToken", result.idToken);
+            if (result.refreshToken) {
+                AsyncStorage.setItem("refreshToken", result.refreshToken);
+            }
+
+            AsyncStorage.setItem("expireTime", result.accessTokenExpirationDate);
         }
-
-        AsyncStorage.setItem("expireTime", result.accessTokenExpirationDate);
     },
 
     signOutAsync: async () => {

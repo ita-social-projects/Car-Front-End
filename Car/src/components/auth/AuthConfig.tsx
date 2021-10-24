@@ -1,20 +1,16 @@
 import { AuthConfiguration } from "react-native-app-auth";
+import CredentialsManager from "../../../credentials/credentials.json";
 
 const AuthConfig: AuthConfiguration = {
-    clientId: "cb3b5999-b5fc-40c5-9890-15d1c0130b45",
-    redirectUrl: "car://auth/",
-    scopes: [
-        "openid",
-        "offline_access",
-        "profile",
-        "https://ProjectCar.onmicrosoft.com/ProjectCarAPI/ApiAccess"
-    ],
+    clientId: CredentialsManager.clientId,
+    redirectUrl: CredentialsManager.redirectUrl,
+    scopes: CredentialsManager.scopes,
     additionalParameters: { prompt: "select_account" },
     serviceConfiguration: {
         authorizationEndpoint:
-            "https://ProjectCar.b2clogin.com/ProjectCar.onmicrosoft.com/B2C_1_login/oauth2/v2.0/authorize",
+            `https://login.microsoftonline.com/${CredentialsManager.tenantId}/oauth2/v2.0/authorize`,
         tokenEndpoint:
-            "https://ProjectCar.b2clogin.com/ProjectCar.onmicrosoft.com/B2C_1_login/oauth2/v2.0/token"
+            `https://login.microsoftonline.com/${CredentialsManager.tenantId}/oauth2/v2.0/token`
     }
 };
 

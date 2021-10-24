@@ -50,38 +50,7 @@ const AuthProvider = ({ children }: any) => {
                     let accessToken = await AuthManager.getAccessTokenAsync();
 
                     if (accessToken) {
-                        const userGraph = {
-                            mail: "andriidzendzia@gmail.com",
-                            userPrincipalName:"dsffgdghf",
-                            givenName: "asad",
-                            surname: "sdf",
-                            officeLocation: "das",
-                            jobTitle: "ddd"
-                        };//await GraphManager.getUserAsync();
-
-                        if (!userGraph) {
-                            navigateLoginWithResetIndicator();
-
-                            return;
-                        }
-                        const tempUser: User = {
-                            email:
-                                userGraph.mail! || userGraph.userPrincipalName!,
-                            name: userGraph.givenName,
-                            surname: userGraph.surname,
-                            location: userGraph.officeLocation,
-                            position: userGraph.jobTitle,
-                            id: 0,
-                            fcmtoken: null,
-                            imageId: null,
-                            journeyCount: 0,
-                            hireDate: new Date(new Date().getMinutes()),
-                            phoneNumber: null,
-                        };
-
-                        const dbUser = await LoginService.loginUser(tempUser);
-
-                        console.log(dbUser);
+                        const dbUser = await LoginService.loginUser();
 
                         await AsyncStorage.setItem(
                             "user",
