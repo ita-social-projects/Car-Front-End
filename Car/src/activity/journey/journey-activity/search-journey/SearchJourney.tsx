@@ -329,7 +329,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         { backgroundColor: colors.white }]}
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
-                        <AddressInputButton
+                        {isRequest && (<AddressInputButton
+                            disabled
                             iconName={"location"}
                             directionType={"From"}
                             text={from.text}
@@ -341,10 +342,24 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     from
                                 )
                             }
-                        />
+                        />)}
+                        {!isRequest && (<AddressInputButton
+                            iconName={"location"}
+                            directionType={"From"}
+                            text={from.text}
+                            onPress={() =>
+                                onAddressInputButtonPressHandler(
+                                    "From",
+                                    LEFT_PADDING_FOR_FROM_PLACEHOLDER,
+                                    "From",
+                                    from
+                                )
+                            }
+                        />)}
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
-                        <AddressInputButton
+                        {isRequest && (<AddressInputButton
+                            disabled
                             iconName={"location"}
                             directionType={"To"}
                             text={to.text}
@@ -356,7 +371,20 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     to
                                 )
                             }
-                        />
+                        />)}
+                        {!isRequest && (<AddressInputButton
+                            iconName={"location"}
+                            directionType={"To"}
+                            text={to.text}
+                            onPress={() =>
+                                onAddressInputButtonPressHandler(
+                                    "To",
+                                    LEFT_PADDING_FOR_TO_PLACEHOLDER,
+                                    "To",
+                                    to
+                                )
+                            }
+                        />)}
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
                         <TouchableDateTimePicker
