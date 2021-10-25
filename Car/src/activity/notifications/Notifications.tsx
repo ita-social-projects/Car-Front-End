@@ -77,7 +77,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
         } else {
             prevOpened?.close();
         }
-    }, [isFocused, notifications]);
+    }, [isFocused]);
 
     useEffect(() => {
         refreshNotification();
@@ -85,6 +85,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
 
     useEffect(() => {
         SignalRHubConnection.on("sendToReact", refreshNotification);
+        SignalRHubConnection.on("deleteFromReact", refreshNotification);
         SignalRHubConnection.on(
             "updateUnreadNotificationsNumber",
             setUnreadNotificationsNumber
