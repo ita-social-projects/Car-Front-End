@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Pressable, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTheme } from "../theme/ThemeProvider";
 import MenuButtonStyle from "./MenuButtonStyle";
@@ -38,7 +37,7 @@ const MenuButton = (props: MenuButtonProps) => {
     });
 
     return (
-        <TouchableWithoutFeedback
+        <Pressable
             style={[
                 MenuButtonStyle.panelButton,
                 { backgroundColor: colorButton }
@@ -80,7 +79,7 @@ const MenuButton = (props: MenuButtonProps) => {
                     ]}
                 />
             </View>
-        </TouchableWithoutFeedback>
+        </Pressable>
     );
 };
 

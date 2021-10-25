@@ -17,6 +17,7 @@ export const TEN = 10;
 export const PREFERENCES_COMMENTS_MAX_LENGTH = 100;
 export const ZERO_ID = 0;
 export const MIN_DELAY_MS = 1;
+export const BORDER_WIDTH = 2;
 
 export const LESS_THAN_ZERO = -1;
 export const ZERO = 0;

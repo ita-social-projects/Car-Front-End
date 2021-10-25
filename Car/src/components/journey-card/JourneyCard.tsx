@@ -4,7 +4,7 @@ import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import AuthContext from "../auth/AuthContext";
-import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/GeneralConstants";
+import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION, SECOND_ELEMENT_INDEX, ZERO } from "../../constants/GeneralConstants";
 import { useTheme } from "../theme/ThemeProvider";
 import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
@@ -102,7 +102,9 @@ const JourneyCard =
                                 <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
                                     {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
                                         ? trimTheStringIfTooLong(
-                                        journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name!,
+                                        journey?.stops.
+                                            filter(item => item?.userId === user?.id)[ZERO]?.
+                                            address?.name ?? "",
                                         MAX_ADDRESS_NAME_LENGTH)
                                         : "Location A"
                                     }
@@ -121,8 +123,12 @@ const JourneyCard =
                                         ?.address?.name === undefined
                                         ? "Location B"
                                         : trimTheStringIfTooLong(
-                                        [...journey?.stops].pop()?.address?.name!,
-                                        MAX_ADDRESS_NAME_LENGTH)
+                                            journey?.stops.
+                                                filter(item => item?.userId === user?.id)
+                                                [journey?.stops?.filter(item => item?.userId === user?.id).
+                                                    length-SECOND_ELEMENT_INDEX]?.
+                                                address?.name ?? "",
+                                            MAX_ADDRESS_NAME_LENGTH)
                                     }
                                 </Text>
                             </View>

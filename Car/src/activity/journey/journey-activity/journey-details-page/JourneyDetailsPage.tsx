@@ -21,7 +21,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, ZERO_ID
+    FIRST_ELEMENT_INDEX, BORDER_WIDTH, ZERO, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -109,9 +109,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
     let highlightPaidButton: boolean = !journey || !journey.isFree;
-    const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(highlightPaidButton);
-    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(highlightPaidButton));
-    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
+    const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(!highlightPaidButton);
+    const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
+    const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(highlightPaidButton));
 
     useEffect(() => {
         setFreeButtonStyle(selectedFeeAsPaid ? inactiveButtonStyle : activeButtonStyle);
@@ -435,10 +435,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <CommentBlock
-                            initialComment={comment}
-                            commentHeader="Comments"
-                        />
+                        <View style={CreateJourneyStyle.dropDownPickerContainer}>
+                            <CommentBlock
+                                initialComment={comment}
+                                commentHeader="Comments"
+                            />
+                        </View>
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
@@ -487,6 +489,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 style={[CreateJourneyStyle.discardButton,
                                     {
                                         display: journey ? "flex" : "none",
+                                        borderWidth: journey ? BORDER_WIDTH : ZERO,
                                         borderColor: colors.primary
                                     }]}
                                 onPress={() => setDiscardModalIsVisible(true)}
