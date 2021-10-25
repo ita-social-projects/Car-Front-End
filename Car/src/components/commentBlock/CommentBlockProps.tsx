@@ -1,6 +1,6 @@
 interface CommentBlockProps {
     commentHeader?: string
-    initialComment?: string
+    initialComment: string
 }
 
 export default CommentBlockProps;

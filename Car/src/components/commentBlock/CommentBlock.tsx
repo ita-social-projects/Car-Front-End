@@ -9,20 +9,17 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 const CommentBlock = (props: CommentBlockProps) => {
     const { colors } = useTheme();
-    const [comment, setComment] = useState("");
+    const [comment, setComment] = useState(props.initialComment);
     const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
-    
     const saveComment = async () => {
-        
-        await AsyncStorage.setItem('Key',comment);
-    }
+        await AsyncStorage.setItem("Key",comment);
+    };
 
     const loadComment = async () => {
-        const setvalue = await AsyncStorage.getItem('Key')
-        if (setvalue !== null) {
-            setComment(setvalue);
-        }
-    }
+        const setvalue = await AsyncStorage.getItem("Key");
+
+        if (setvalue !== null) {setComment(setvalue);}
+    };
 
     useEffect(() => {
         loadComment();
@@ -31,7 +28,7 @@ const CommentBlock = (props: CommentBlockProps) => {
     useEffect(() => {
         saveComment();
     },[comment]);
-    
+
     return (
         <View style={CommentBlockStyle.commentsContainer}>
             <Text style={[PreferencesStyle.commentsText, { color: colors.hover }]}>
