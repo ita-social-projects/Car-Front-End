@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     ScrollView,
     Text, TextInput, ToastAndroid, TouchableOpacity, View
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import UserService from "../../../../../api-service/user-service/UserService";
 import Invitation from "../../../../../models/invitation/Invitation";
 import InvitationType from "../../../../../models/invitation/InvitationType";
+import AuthContext from "../../../../components/auth/AuthContext";
 import * as navigation from "../../../../components/navigation/Navigation";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { DELETE_COUNT, ZERO } from "../../../../constants/GeneralConstants";
@@ -25,6 +27,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             journey.invitations
             : []
     );
+    const [user, setUser] = useState(useContext(AuthContext).user);
     const [invitedUsers, setInvitedUsers] = useState<{email:string; isCorrect: boolean}[]>(
         params.newInvitations ?? []
     );
@@ -43,7 +46,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     const checkForCorrectEmail = (email: string, invitationIndex: number) => {
         let updatedInvitations = new Array(...invitedUsers);
 
-        if(allUsers.map(u => u?.email).includes(email))
+        if(allUsers.map(u => u?.email).includes(email) && email != user?.email)
         {
             updatedInvitations[invitationIndex] = {
                 email:email, isCorrect:true
@@ -63,6 +66,10 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     const getUserEmail = (id: number) => {
         return (id === ZERO) ? "" : allUsers.find((us) => us?.id === id)!.email;
     };
+
+    useEffect(() => {
+        UserService.getUser(user!.id).then((res) => setUser(res.data));
+    }, []);
 
     return (
         <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: colors.white }]}>
@@ -134,7 +141,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                             : "alert-circle-outline"
                                     }
                                     size={22}
-                                    color={colors.hover}
+                                    color={invitedUsers[index].isCorrect ? colors.hover : colors.accentRed}
                                 />
                             </TouchableOpacity>
                         )}
