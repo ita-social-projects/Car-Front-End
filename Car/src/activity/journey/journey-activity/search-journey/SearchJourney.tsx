@@ -329,7 +329,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         { backgroundColor: colors.white }]}
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
-                        {isRequest && (<AddressInputButton
+                        {isRequest ? (<AddressInputButton
                             disabled
                             iconName={"location"}
                             directionType={"From"}
@@ -342,8 +342,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     from
                                 )
                             }
-                        />)}
-                        {!isRequest && (<AddressInputButton
+                        />) : (<AddressInputButton
                             iconName={"location"}
                             directionType={"From"}
                             text={from.text}
@@ -358,7 +357,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         />)}
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
-                        {isRequest && (<AddressInputButton
+                        {isRequest ? (<AddressInputButton
                             disabled
                             iconName={"location"}
                             directionType={"To"}
@@ -371,8 +370,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                     to
                                 )
                             }
-                        />)}
-                        {!isRequest && (<AddressInputButton
+                        />) : (<AddressInputButton
                             iconName={"location"}
                             directionType={"To"}
                             text={to.text}
