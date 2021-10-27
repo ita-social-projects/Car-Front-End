@@ -330,6 +330,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
+                            disabled = {isRequest}
                             iconName={"location"}
                             directionType={"From"}
                             text={from.text}
@@ -345,6 +346,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
+                            disabled = {isRequest}
                             iconName={"location"}
                             directionType={"To"}
                             text={to.text}
