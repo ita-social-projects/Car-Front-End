@@ -222,6 +222,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const publishJourneyHandler = async () => {
+        if (createAllInvitationsArrayFromNewInvitations().length > availableSeats)
+        {
+            setModal(publishErrorModal);
+
+            return;
+        }
         setRideIsPublishing(true);
 
         for (let location of savedLocations) {
