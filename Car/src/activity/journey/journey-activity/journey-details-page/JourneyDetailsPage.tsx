@@ -78,7 +78,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [selectedCar, setSelectedCar] = useState<{ id: number | null, name: string }>({
         id: getCarId(journey),
-        name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
+        name: journey ? `${journey?.car?.brand} ${carModel}` : ""
     });
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -187,7 +187,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             setUserCars(result.data.map(car => (
                 {
                     id: Number(car?.id),
-                    name: `${car?.model?.brand?.name} ${car?.model?.name}`
+                    name: `${car?.brand} ${car?.model}`
                 }
             )));
             if (result.data.length === EMPTY_COLLECTION_LENGTH) {

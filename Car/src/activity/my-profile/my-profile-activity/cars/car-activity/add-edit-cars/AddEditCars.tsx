@@ -38,8 +38,8 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     const [isSaving, setSaving] = useState(false);
     const [errorModalVisible, setErrorModalVisible] = useState(false);
 
-    const [brands, setBrands] = useState({} as CarBrand[]);
-    const [models, setModels] = useState({} as CarModel[]);
+    const [brands, setBrands] = useState<CarBrand[]>([]);
+    const [models, setModels] = useState<CarModel[]>([]);
     const [carColors] = useState<Array<{ value: string; label: string }>>(
         Object.values(CarColor)
             .filter((value) => isNaN(Number(value)))
@@ -94,42 +94,52 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
     let colorPickerController: any;
 
     useEffect(() => {
-        BrandService.getBrands().then((response) => {
-            setBrands(response.data);
-        });
+        BrandService.getBrands().then((brandsResponse) => {
+            let brandsList = brandsResponse.data;
 
-        if (props.type === "edit") {
-            CarService.getById(props.carId!).then((response) => {
-                const car = response.data;
-                const carModel = car?.model;
-                let carBrandItem: CarDropDownPickerItem = {
-                    label: carModel?.brand?.name ?? "",
-                    value: carModel?.brand?.id.toString() ?? ""
-                };
-                let carModelItem: CarDropDownPickerItem = {
-                    label: carModel?.name ?? "",
-                    value: carModel?.id.toString() ?? ""
-                };
-                const carColor = carColors.find(obj => {
-                    return obj.value === car?.color.toString();
-                });
+            setBrands(brandsList);
 
-                if (car?.imageId !== null &&
-                    car?.imageId.toString() !== undefined) {
-                    const image = ImageService.getImageById(car?.imageId?.toString());
+            if (props.type === "edit") {
+                CarService.getById(props.carId!).then((carResponse) => {
+                    const car = carResponse.data;
 
-                    setPhoto({
-                        name: car?.imageId,
-                        type: "image/jpeg",
-                        uri: image
+                    let carBrandItem: CarDropDownPickerItem = {
+                        label: car?.brand ?? "",
+                        value: brandsList.find(brand => brand?.name == car?.brand)?.id.toString() ?? "0"
+                    };
+
+                    selectBrandHandle(carBrandItem);
+                    setBrand(carBrandItem);
+                    ModelService.getModelsByBrandId(Number(carBrandItem.value)).then((modelsResponse) => {
+                        let modelsList = modelsResponse.data;
+
+                        setModels(modelsList);
+                        let carModelItem: CarDropDownPickerItem = {
+                            label: car?.model ?? "",
+                            value: modelsList.find(model => model?.name == car?.model)?.id.toString() ?? "0"
+                        };
+                        const carColor = carColors.find(obj => {
+                            return obj.value === car?.color.toString();
+                        });
+
+                        if (car?.imageId !== null &&
+                            car?.imageId.toString() !== undefined) {
+                            const image = ImageService.getImageById(car?.imageId?.toString());
+
+                            setPhoto({
+                                name: car?.imageId,
+                                type: "image/jpeg",
+                                uri: image
+                            });
+                        }
+                        setColor(carColor!);
+                        setPlateNumber(car?.plateNumber ?? "");
+                        setModel(carModelItem);
+                        setLoading(false);
                     });
-                }
-                selectBrandHandle(carBrandItem);
-                setColor(carColor!);
-                setPlateNumber(car?.plateNumber ?? "");
-                setModel(carModelItem);
-            });
-        }
+                });
+            }
+        });
     }, [props.type]);
 
     useEffect(() => validateCar(),
@@ -140,9 +150,9 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
 
     const validateCar = () => {
         setValidCar(Boolean(
-            selectedBrand?.value &&
-            selectedModel?.value &&
-            selectedColor?.value
+            selectedBrand &&
+            selectedModel &&
+            selectedColor
         ));
     };
 
@@ -193,7 +203,8 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         const car = new FormData();
 
         car.append("id", Number(props.carId));
-        car.append("modelId", Number(selectedModel?.value));
+        car.append("brand", selectedBrand?.label);
+        car.append("model", selectedModel?.label);
         car.append("color", Number(selectedColor?.value));
         car.append("plateNumber", plateNumber.trim());
         if (photo !== null && photo !== undefined) {
@@ -217,7 +228,6 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         setBrand(brand);
         ModelService.getModelsByBrandId(Number(brand.value)).then((response) => {
             setModels(response.data);
-            setLoading(false);
         });
     };
 
@@ -287,11 +297,12 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                 <View style= {Platform.OS !== "android" ? { zIndex: 3 } : {} }>
                     <CarDropDownPicker
                         style={AddEditCarsStyle.dropDownPicker}
+                        addCustomItem={true}
                         placeHolder="Brand"
                         items={brandItems}
                         zIndex={3000}
                         required={true}
-                        defaultValue={props.type === "edit" ? selectedBrand!.value : null}
+                        defaultItem={props.type === "edit" ? selectedBrand : null}
                         selectHandle={(item: CarDropDownPickerItem) => {
                             selectBrandHandle(item);
                         }}
@@ -307,12 +318,13 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                 <View style= {Platform.OS !== "android" ? { zIndex: 2 } : {} }>
                     <CarDropDownPicker
                         style={AddEditCarsStyle.dropDownPicker}
+                        addCustomItem={true}
                         placeHolder="Model"
                         items={modelItems}
                         zIndex={2000}
                         required={true}
-                        defaultValue={selectedModel ? selectedModel.value : null}
-                        disabled={!modelItems}
+                        defaultItem={selectedModel}
+                        disabled={!selectedBrand}
                         selectHandle={(item: CarDropDownPickerItem) =>
                             setModel(item)
                         }
@@ -332,7 +344,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                         items={carColors}
                         zIndex={1000}
                         required={true}
-                        defaultValue={props.type === "edit" ? selectedColor!.value : null}
+                        defaultItem={props.type === "edit" ? selectedColor : null}
                         selectHandle={(item: CarDropDownPickerItem) =>
                             setColor(item)
                         }

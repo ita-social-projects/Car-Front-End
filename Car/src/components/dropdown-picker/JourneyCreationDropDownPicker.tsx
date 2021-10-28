@@ -34,6 +34,7 @@ const JourneyCreationDropDownPicker = (props: JourneyCreationDropDownPickerProps
                     searchable={props.searchable}
                     searchablePlaceholder={"Manual input"}
                     searchableStyle={{ ...JourneyCreationDropDownPickerStyle.searchable, color: colors.primary }}
+                    searchableError={() => <Text style={{ color: colors.primary }}>Not found</Text>}
                     renderSeperator={() => (<Divider style={JourneyCreationDropDownPickerStyle.divider} />)}
                     zIndex={props.zIndex}
                     placeholder={""}
