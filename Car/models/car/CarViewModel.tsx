@@ -1,8 +1,7 @@
-import CarModel from "./CarModel";
-
 type CarViewModel = null | {
     id: number;
-    model: CarModel;
+    brand: string;
+    model: string;
     color: number;
     plateNumber: string;
     ownerId: number;

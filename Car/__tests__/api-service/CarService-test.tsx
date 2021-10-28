@@ -10,15 +10,8 @@ describe("Location Service test", () => {
         color: 1,
         id: 1,
         imageId: "ABC",
-        model: {
-            brand: {
-                id: 1,
-                models: [],
-                name: "BCD",
-            },
-            id: 1,
-            name: "CDE",
-        },
+        brand: "EFG",
+        model: "CDE",
         ownerId: 1,
         plateNumber: "DEF"
     }];
@@ -26,7 +19,8 @@ describe("Location Service test", () => {
     let updateCarViewModel: UpdateCarViewModel = {
         color: 1,
         id: 1,
-        modelId: 1,
+        brand: "EFG",
+        model: "CDE",
         plateNumber: "DEF",
         photo: {
             name: "Photo",
