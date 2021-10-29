@@ -32,7 +32,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, invitationsErrorModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -224,7 +224,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const publishJourneyHandler = async () => {
         if (createAllInvitationsArrayFromNewInvitations().length > availableSeats)
         {
-            setModal(publishErrorModal);
+            setModal(invitationsErrorModal);
 
             return;
         }
