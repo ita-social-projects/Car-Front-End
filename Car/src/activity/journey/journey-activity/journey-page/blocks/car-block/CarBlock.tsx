@@ -37,7 +37,7 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                     isOnOwnCar ? (
                         <>
                             <Text style={[JourneyPageStyle.carName, { color: colors.primary }]}>
-                                {car?.model?.brand?.name} {car?.model?.name}, {CarColor[car?.color!]}
+                                {car?.brand} {car?.model}, {CarColor[car?.color!]}
                             </Text>
                             <Text style={[JourneyPageStyle.carPlateNumber, { color: colors.hover }]}>
                                 {car?.plateNumber}

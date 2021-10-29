@@ -2,7 +2,8 @@ import CarPhoto from "./CarPhoto";
 
 type CreateCarViewModel = null | {
     ownerId: number;
-    modelId: number;
+    brand: string;
+    model: string;
     color: number;
     plateNumber: string;
     photo: CarPhoto | null

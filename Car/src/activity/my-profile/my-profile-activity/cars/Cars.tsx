@@ -90,10 +90,10 @@ const Cars = (props: NavigationAddListener) => {
                                     }
                                 >
                                     <Text style={[CarsStyle.brand, { color: colors.primary }]}>
-                                        {item!.model?.brand?.name}
+                                        {item!.brand}
                                     </Text>
                                     <Text style={[CarsStyle.model, { color: colors.hover }]}>
-                                        {item!.model?.name}
+                                        {item!.model}
                                     </Text>
                                 </TouchableNavigationCard>
                             </View>
