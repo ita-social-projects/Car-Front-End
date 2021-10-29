@@ -50,6 +50,7 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
+import CommentBlockStyle from "../../../../components/commentBlock/CommentBlockStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -441,7 +442,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <View style={CreateJourneyStyle.dropDownPickerContainer}>
+                        <View style={CommentBlockStyle.commentsContainer}>
                             <CommentBlock
                                 initialComment={comment}
                                 commentHeader="Comments"
