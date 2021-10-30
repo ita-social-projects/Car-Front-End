@@ -1,7 +1,7 @@
 import { ReactNode, RefObject } from "react";
 
 interface BottomPopupProps {
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     refForChild?: (ref: RefObject<any>) => void,
     snapPoints?: (string | number)[],
     renderContent?: ReactNode,

@@ -5,6 +5,7 @@ module.exports = {
         "plugin:react/recommended",
     ],
     plugins: [
+        "@typescript-eslint",
         "unused-imports",
     ],
     rules: {
@@ -60,6 +61,7 @@ module.exports = {
         "unused-imports/no-unused-vars": "error",
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
+        "@typescript-eslint/no-unused-vars": "error",
     },
     "overrides": [{
         "files": ["*Style.tsx", "Constants.tsx", "LocationHelperFunctions.ts", "*-test.tsx", "JourneyConstants.tsx", "StylesConstants.tsx"],

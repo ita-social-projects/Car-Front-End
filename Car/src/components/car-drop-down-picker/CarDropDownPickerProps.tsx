@@ -8,10 +8,10 @@ interface CarDropDownPickerProps {
     required?: boolean,
     disabled?: boolean,
     defaultItem?: CarDropDownPickerItem | null,
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     selectHandle?: (item: CarDropDownPickerItem) => void,
     onOpen?: () => void,
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     controller?: (instance: any) => void,
     style?: object
 }

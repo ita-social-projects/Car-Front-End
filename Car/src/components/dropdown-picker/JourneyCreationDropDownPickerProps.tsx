@@ -4,7 +4,7 @@ interface JourneyCreationDropDownPickerProps {
     searchable: boolean,
     zIndex?: number,
     paddingLeft: number,
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     onChangeItem: (item: {label: string, value: number}, index: number) => void,
     isVisible: boolean,
     onOpen: () => void,

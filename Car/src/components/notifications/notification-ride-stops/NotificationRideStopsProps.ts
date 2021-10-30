@@ -8,7 +8,7 @@ interface NotificationRideStopsProps {
     journeyId: number,
     stopsOwner: User,
     IsStopsTitleVisible?: boolean,
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     onStopPress: (stop: Stop, stops: Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) => void,
     notification: NotificationProps
 }

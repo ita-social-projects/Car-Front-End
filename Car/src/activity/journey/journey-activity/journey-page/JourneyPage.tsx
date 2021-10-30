@@ -61,7 +61,7 @@ interface JourneyPageComponent {
     showCancelRidePopup: () => void,
     editJourneyDetails: () => void,
     editJourneyRoute: () => void,
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     ({ props }: { props: JourneyPageProps }): JSX.Element
 }
 

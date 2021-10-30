@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import CarDropDownPicker from "../../src/components/car-drop-down-picker/CarDropDownPicker";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<CarDropDownPicker />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<CarDropDownPicker />).toJSON())
+        .toMatchInlineSnapshot(`
     <View>
       <View
         style={
@@ -225,8 +225,8 @@ test("renders correctly", async () =>
   `));
 
 test("renders correctly", async () =>
-  expect(renderer.create(<CarDropDownPicker required={true} />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<CarDropDownPicker required={true} />).toJSON())
+        .toMatchInlineSnapshot(`
     <View
       style={
         Object {

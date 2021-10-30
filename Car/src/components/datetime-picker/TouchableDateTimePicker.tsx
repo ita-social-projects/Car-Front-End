@@ -13,7 +13,7 @@ interface TouchableDateTimePickerProps {
     date: Date,
     isConfirmed: boolean,
     setIsConfirmedToTrue?: () => void,
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //
     setDate: (date: Date) => void,
     onlyTime: boolean,
 }

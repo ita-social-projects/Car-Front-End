@@ -5,7 +5,7 @@ import JourneyStartPage from "../../../src/activity/journey/JourneyStartPage";
 const renderer = shallowRenderer.createRenderer();
 
 const navigation = {
-    // eslint-disable-next-line unused-imports/no-unused-vars
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     addListener: (event: string, callback: () => void) => () => void {},
 };
 

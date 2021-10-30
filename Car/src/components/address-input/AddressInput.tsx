@@ -12,7 +12,7 @@ import AddressInputProps from "./AddressInputProps";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import AddressInputStyles from "./AddressInputStyles";
 
-// eslint-disable-next-line unused-imports/no-unused-vars
+//
 const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations => {
     return locations.map((location) => ({
         description: location?.name ?? "Unnamed location",
@@ -26,7 +26,7 @@ const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations 
     }));
 };
 
-// eslint-disable-next-line unused-imports/no-unused-vars
+//
 const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses => {
     return addresses.map(address => ({
         description: address ? address.name : "Unnamed location",
