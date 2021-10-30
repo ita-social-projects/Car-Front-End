@@ -58,7 +58,6 @@ module.exports = {
         "react/no-unescaped-entities": "off",
         "react/no-children-prop": "off",
         "unused-imports/no-unused-imports": "error",
-        "unused-imports/no-unused-vars": "error",
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
         "@typescript-eslint/no-unused-vars": "error",
