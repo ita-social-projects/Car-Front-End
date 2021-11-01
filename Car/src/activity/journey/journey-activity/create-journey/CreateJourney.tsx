@@ -52,7 +52,7 @@ import CredentialsManager from "../../../../../credentials/credentials.json";
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
     numberOfAddedStop: number,
-    //
+    
     ({ props }: { props: CreateJourneyProps }): JSX.Element
 }
 
