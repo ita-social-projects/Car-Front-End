@@ -51,7 +51,6 @@ import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import CommentBlockStyle from "../../../../components/commentBlock/CommentBlockStyle";
-import SwitchSelectorStyle from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -472,7 +471,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians will be 
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians will be
                                         notidied for this Journey</Text>
                                 </View>
                                 <Ionicons

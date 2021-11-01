@@ -5,8 +5,8 @@ import AppSettings from "../../../src/activity/my-profile/my-profile-activity/se
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 
 test("renders correctly", async () =>
-    expect(renderer.create(<AppSettings navigation="" />).toJSON())
-        .toMatchInlineSnapshot(`
+  expect(renderer.create(<AppSettings navigation="" />).toJSON())
+    .toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -22,7 +22,9 @@ test("renders correctly", async () =>
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={false}
+        nativeID="animatedComponent"
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -131,7 +133,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -219,7 +223,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -307,7 +313,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
