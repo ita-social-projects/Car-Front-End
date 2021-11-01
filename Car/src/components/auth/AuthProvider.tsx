@@ -39,8 +39,7 @@ const AuthProvider = ({ children }: any) => {
                 login: async () => {
                     let loginCanceled = false;
 
-                    await AuthManager.signInAsync().catch((e) => {
-                        console.log(e);
+                    await AuthManager.signInAsync().catch(() => {
                         loginCanceled = true;
                         navigateLoginWithResetIndicator();
                     });

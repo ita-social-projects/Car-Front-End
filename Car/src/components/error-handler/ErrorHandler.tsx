@@ -8,7 +8,6 @@ import {
 import axios from "axios";
 
 const JSErrorHandler = (error, isFatal) => {
-    console.log(error);
     appInsights.trackException({ exception: error });
     if(isFatal){
         ErrorAlert("Ups, something went wrong", () => RNRestart.Restart());
@@ -21,8 +20,6 @@ const NativeErrorHandler = error => {
 };
 
 const UnhandledPromiseRejectionErrrorHandler = (id,error) => {
-
-    console.log(error);
     if(!axios.isCancel(error))
     {
         ErrorAlert("Ups, something went wrong", () => RNRestart.Restart());

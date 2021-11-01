@@ -32,7 +32,6 @@ Axios.interceptors.response.use(
     async (error?: AxiosError) => {
         if (!axios.isCancel(error)) {
             appInsights.trackException({ exception: error });
-            console.log(error);
             if (axios.isAxiosError(error)) {
                 error.response?.status === StatusCodes.UNAUTHORIZED &&
                     (async () => { await AuthManager.signOutAsync(); })().then(() => {
