@@ -185,7 +185,7 @@ const JourneyTabs = () => {
                             }
                         }),
                         headerRight: () => HeaderEllipsis(
-                            { onPress: () => pressHandle(createRideMoreOptionsRef) })
+                            { onPress: () => pressHandle(ridePageMoreOptionsRef) })
                     }}
                 >
                     {(props: any) => {
@@ -209,7 +209,7 @@ const JourneyTabs = () => {
                                     pressHandle = {pressHandle}
                                     closeMoreOptionPopup = {closeMoreOptionPopup}
                                     closeHandle = {closeHandle}
-                                    createRideMoreOptionsRef = {createRideMoreOptionsRef}
+                                    createRideMoreOptionsRef = {ridePageMoreOptionsRef}
                                     weekDayRef = {weekDayRef}
                                     scheduleMoreOptionsRef = {scheduleMoreOptionsRef}
                                     isScheduleOpened = {isScheduleOpened}
