@@ -54,10 +54,10 @@ const JourneyCancellation = (props: NotificationProps) => {
         }
     }, [modalVisible]);
 
-    const onStopPress = (stop:Stop, stops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
+    const onStopPress = (stop:Stop, myStops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
     {
         setModalVisible(false);
-        onStopPressHandler(stop,stops,journeyPoints, notification);
+        onStopPressHandler(stop,myStops,journeyPoints, notification);
     };
 
     return (
