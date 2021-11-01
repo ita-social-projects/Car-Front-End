@@ -20,7 +20,6 @@ import HeaderStyle from "../styles/HeaderStyle";
 
 interface ShadowedBottomPopupComponent {
     pressHandle: () => void,
-    //
     (props: BottomPopupProps): JSX.Element
 }
 

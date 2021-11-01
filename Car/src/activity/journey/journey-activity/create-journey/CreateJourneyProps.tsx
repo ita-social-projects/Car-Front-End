@@ -12,9 +12,7 @@ interface CreateJourneyProps {
         }
     },
     navigation?: {
-        //
         setOptions: (option: object) => void,
-        //
         addListener: (eventName: string, callback: () => void) => () => void
     },
     weekDay: MutableRefObject<WeekDay>,

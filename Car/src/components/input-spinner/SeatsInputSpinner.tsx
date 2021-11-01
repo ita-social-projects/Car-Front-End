@@ -10,7 +10,6 @@ interface SeatsInputSpinnerProps {
     value: number,
     title: string,
     minValue?: number,
-    //
     onChange: (value: number) => void
 }
 

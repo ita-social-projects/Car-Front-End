@@ -12,7 +12,6 @@ import AddressInputProps from "./AddressInputProps";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
 import AddressInputStyles from "./AddressInputStyles";
 
-//
 const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations => {
     return locations.map((location) => ({
         description: location?.name ?? "Unnamed location",
@@ -26,7 +25,6 @@ const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations 
     }));
 };
 
-//
 const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses => {
     return addresses.map(address => ({
         description: address ? address.name : "Unnamed location",

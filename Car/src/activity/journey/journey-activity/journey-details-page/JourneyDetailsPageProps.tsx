@@ -19,7 +19,6 @@ interface JourneyDetailsPageProps {
         }
     },
     navigation?: {
-        //
         push: (name: string, params: object) => void
     },
     weekDay?: MutableRefObject<WeekDay>;

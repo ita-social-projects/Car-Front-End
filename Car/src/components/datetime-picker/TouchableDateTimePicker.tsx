@@ -13,7 +13,6 @@ interface TouchableDateTimePickerProps {
     date: Date,
     isConfirmed: boolean,
     setIsConfirmedToTrue?: () => void,
-    //
     setDate: (date: Date) => void,
     onlyTime: boolean,
 }

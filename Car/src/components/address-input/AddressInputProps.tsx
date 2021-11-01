@@ -8,15 +8,12 @@ interface AddressInputProps {
     placeholder: string,
     paddingLeft: number,
     address: string,
-    //
     onChangeText: (text: string) => void,
-    //
     onPress: (data: GooglePlaceData, detail: (GooglePlaceDetail | null)) => void,
     onClearIconPress: () => void,
     savedLocations: Location[],
     recentAddresses: Address[],
     userLocation: LatLng,
-    //
     refFor?: (r: GooglePlacesAutocompleteRef | null) => void
 }
 

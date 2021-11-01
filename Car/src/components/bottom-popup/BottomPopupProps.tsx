@@ -1,7 +1,6 @@
 import { ReactNode, RefObject } from "react";
 
 interface BottomPopupProps {
-    //
     refForChild?: (ref: RefObject<any>) => void,
     snapPoints?: (string | number)[],
     renderContent?: ReactNode,

@@ -11,9 +11,7 @@ interface JourneyPageProps {
         }
     },
     navigation?: {
-        //
         setOptions: (option: object) => void,
-        //
         addListener: (eventName: string, callback: () => void) => () => void
     },
     moreOptionsPopupIsOpen: boolean,

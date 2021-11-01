@@ -1,6 +1,5 @@
 interface CarTextInputProps {
     rules?: any,
-    //
     onChangeText?: (text: string) => void,
     placeHolder?: string,
     defaultValue?: string,

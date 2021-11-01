@@ -8,10 +8,8 @@ interface CarDropDownPickerProps {
     required?: boolean,
     disabled?: boolean,
     defaultItem?: CarDropDownPickerItem | null,
-    //
     selectHandle?: (item: CarDropDownPickerItem) => void,
     onOpen?: () => void,
-    //
     controller?: (instance: any) => void,
     style?: object
 }

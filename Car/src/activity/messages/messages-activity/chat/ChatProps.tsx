@@ -1,6 +1,5 @@
 interface ChatProps {
     navigation: {
-        //
         setOptions: (obj: object) => void
     },
     route: {

@@ -8,7 +8,6 @@ interface NotificationRideStopsProps {
     journeyId: number,
     stopsOwner: User,
     IsStopsTitleVisible?: boolean,
-    //
     onStopPress: (stop: Stop, stops: Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) => void,
     notification: NotificationProps
 }

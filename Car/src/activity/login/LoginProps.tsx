@@ -1,6 +1,5 @@
 interface LoginProps {
     navigation: {
-        //
         addListener: (event: string, callback: () => void) => () => void,
     }
     route: {

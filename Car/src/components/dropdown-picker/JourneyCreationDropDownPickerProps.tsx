@@ -4,7 +4,6 @@ interface JourneyCreationDropDownPickerProps {
     searchable: boolean,
     zIndex?: number,
     paddingLeft: number,
-    //
     onChangeItem: (item: {label: string, value: number}, index: number) => void,
     isVisible: boolean,
     onOpen: () => void,

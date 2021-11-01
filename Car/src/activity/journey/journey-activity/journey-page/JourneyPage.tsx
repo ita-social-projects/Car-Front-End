@@ -61,7 +61,6 @@ interface JourneyPageComponent {
     showCancelRidePopup: () => void,
     editJourneyDetails: () => void,
     editJourneyRoute: () => void,
-    //
     ({ props }: { props: JourneyPageProps }): JSX.Element
 }
 
