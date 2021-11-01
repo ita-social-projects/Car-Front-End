@@ -51,6 +51,7 @@ import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import CommentBlockStyle from "../../../../components/commentBlock/CommentBlockStyle";
+import SwitchSelectorStyle from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -353,7 +354,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
-                                marginBottom={16}
                             />
                         </View>
 
@@ -438,7 +438,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         <SeatsInputSpinner
                             value={availableSeats}
                             onChange={seats => setAvailableSeats(seats)}
-                            title={"Available seats:"}
+                            title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
@@ -472,8 +472,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
-                                        for that Ride</Text>
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians will be notidied for this Journey</Text>
                                 </View>
                                 <Ionicons
                                     style={[
