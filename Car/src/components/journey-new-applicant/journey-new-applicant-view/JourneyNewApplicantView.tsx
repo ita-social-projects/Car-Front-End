@@ -45,8 +45,6 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [stops, setStops] = useState<Stop[]>([]);
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [journey, setJourney] = useState<Journey>();
-    const senders = data?.applicantStops[FIRST_ELEMENT_INDEX]?.address.name
-        .slice(FIRST_ELEMENT_INDEX, -" start".length);
     const { user } = useContext(AuthContext);
     const jsonData = JSON.stringify({
         hasLuggage: data?.hasLuggage,
@@ -170,7 +168,9 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                             }}
                         />
                         <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                            {senders} stops in your ride
+                            {props.route.params.notification.sender!.name +
+                            " " + props.route.params.notification.sender!.surname
+                            + "`s stops in your ride"}
                         </Text>
                         <View style={JourneyNewApplicantViewStyle.stopsBlock}>
                             <StopsBlock

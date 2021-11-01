@@ -77,3 +77,19 @@ export const setAddressByCoordinates = (fn: (s: string, c: LatLng) => void, coor
             fn(resultedAddress, coordinates);
         });
 };
+
+export const getAddressByCoordinatesAsync = async (coordinates: LatLng) => {
+    var address = "";
+
+    address = await fetch(CreateRequestWithCoordinatesToGeocodingApi(coordinates))
+        .then((res) => res.json())
+        .then((json) => {
+            let resultedAddress = json.results[FIRST_ELEMENT_INDEX].formatted_address;
+
+            resultedAddress = removeRegionAndPostalCode(resultedAddress);
+
+            return resultedAddress;
+        });
+
+    return address;
+};
