@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -6,9 +6,21 @@ import { DROP_DOWN_MAX_HEIGHT } from "../../constants/StylesConstants";
 import CarDropDownPickerStyle from "./CarDropDownPickerStyle";
 import CarDropDownPickerProps from "./CarDropDownPickerProps";
 import { useTheme } from "../theme/ThemeProvider";
+import CarDropDownPickerItem from "./CarDropDownItem";
 
 const CarDropDownPicker = (props: CarDropDownPickerProps) => {
+    const [customElement, setCustomElement] = useState<CarDropDownPickerItem | null>(null);
+    const [items, setItems] = useState<CarDropDownPickerItem[]>([]);
+    const [defaultValue, setDefaultValue] = useState<string | null>(null);
     const { colors } = useTheme();
+
+    useEffect(() => {
+        setItems(props.items ?? []);
+
+        if(props.defaultItem?.value === "0")
+            setCustomElement({ label: props.defaultItem.label, value: "0" });
+        setDefaultValue(props.defaultItem?.value ?? null);
+    }, [props.items]);
 
     return(
         <View style={props.required && { justifyContent: "center" }}>
@@ -31,15 +43,21 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => {
                 customArrowUp={() => (
                     <Ionicons name="caret-up-outline" size={14} color={colors.primary} />
                 )}
-                items={props.items ?? []}
+                items={customElement && !(items.map(i => i.label).includes(customElement.label))
+                    ? [...items, customElement]
+                    : items}
                 searchable={true}
                 searchablePlaceholder="Manual input"
                 searchablePlaceholderTextColor={colors.secondaryDark}
-                searchableError={() => <Text style={{ color: colors.primary }}>Not Found</Text>}
+                onSearch={(text) => {
+                    if(props.addCustomItem)
+                        setCustomElement({ label: text, value: "0" });
+                }}
+                searchableError={() => <Text style={{ color: colors.primary }}>Not found</Text>}
                 searchTextInputProps={{ style: { color: colors.primary } }}
                 searchableStyle={{ color: colors.primary }}
                 placeholder={props.placeHolder}
-                defaultValue={props.defaultValue}
+                defaultValue={defaultValue}
                 style={[
                     CarDropDownPickerStyle.container,
                     {

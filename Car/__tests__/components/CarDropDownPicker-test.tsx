@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import CarDropDownPicker from "../../src/components/car-drop-down-picker/CarDropDownPicker";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<CarDropDownPicker />).toJSON())
-        .toMatchInlineSnapshot(`
+  expect(renderer.create(<CarDropDownPicker />).toJSON())
+    .toMatchInlineSnapshot(`
     <View>
       <View
         style={
@@ -24,6 +24,7 @@ test("renders correctly", async () =>
         <View
           accessible={true}
           focusable={true}
+          forwardedRef={[Function]}
           onClick={[Function]}
           onLayout={[Function]}
           onResponderGrant={[Function]}
@@ -54,8 +55,22 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
+                  "color": "#000",
+                },
+                Object {},
+                Object {
+                  "flex": 1,
+                  "opacity": 1,
+                },
+                Object {
+                  "marginLeft": 5,
+                  "marginRight": 0,
+                },
+                [Function],
+                Object {
                   "color": "#0B171B",
                 },
+                false,
                 Array [
                   Object {
                     "fontSize": 16,
@@ -67,18 +82,6 @@ test("renders correctly", async () =>
                     "color": "#909095",
                   },
                 ],
-                Object {
-                  "flex": 1,
-                  "opacity": 1,
-                },
-                Object {
-                  "marginLeft": 5,
-                  "marginRight": 0,
-                },
-                false,
-                Object {
-                  "marginLeft": 5,
-                },
               ]
             }
           >
@@ -136,35 +139,20 @@ test("renders correctly", async () =>
             Array [
               Object {
                 "alignItems": "center",
-                "backgroundColor": "#fff",
+                "backgroundColor": "#FFFFFF",
                 "borderBottomLeftRadius": 5,
                 "borderBottomRightRadius": 5,
-                "borderColor": "#dfdfdf",
-                "borderTopLeftRadius": 5,
-                "borderTopRightRadius": 5,
-                "borderWidth": 1,
-                "paddingHorizontal": 10,
-                "paddingVertical": 5,
-              },
-              Object {
-                "alignItems": "center",
+                "borderColor": "#0B171B",
                 "borderTopLeftRadius": 0,
                 "borderTopRightRadius": 0,
+                "borderTopWidth": 0,
+                "borderWidth": 2,
                 "justifyContent": "center",
+                "paddingHorizontal": 4,
+                "paddingVertical": 5,
                 "position": "absolute",
                 "width": "100%",
               },
-              Array [
-                Object {
-                  "borderTopWidth": 0,
-                  "borderWidth": 2,
-                  "paddingHorizontal": 4,
-                },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderColor": "#0B171B",
-                },
-              ],
               Object {
                 "borderWidth": 0,
                 "display": "none",
@@ -172,7 +160,7 @@ test("renders correctly", async () =>
               },
               Object {
                 "maxHeight": 333.5,
-                "top": undefined,
+                "top": 0,
                 "zIndex": 5000,
               },
             ]
@@ -226,7 +214,7 @@ test("renders correctly", async () =>
                     }
                   }
                 >
-                  Not Found
+                  Not found
                 </Text>
               </View>
             </View>
@@ -237,8 +225,8 @@ test("renders correctly", async () =>
   `));
 
 test("renders correctly", async () =>
-    expect(renderer.create(<CarDropDownPicker required={true} />).toJSON())
-        .toMatchInlineSnapshot(`
+  expect(renderer.create(<CarDropDownPicker required={true} />).toJSON())
+    .toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -283,6 +271,7 @@ test("renders correctly", async () =>
         <View
           accessible={true}
           focusable={true}
+          forwardedRef={[Function]}
           onClick={[Function]}
           onLayout={[Function]}
           onResponderGrant={[Function]}
@@ -313,8 +302,22 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
+                  "color": "#000",
+                },
+                Object {},
+                Object {
+                  "flex": 1,
+                  "opacity": 1,
+                },
+                Object {
+                  "marginLeft": 5,
+                  "marginRight": 0,
+                },
+                [Function],
+                Object {
                   "color": "#0B171B",
                 },
+                false,
                 Array [
                   Object {
                     "fontSize": 16,
@@ -328,18 +331,6 @@ test("renders correctly", async () =>
                     "color": "#909095",
                   },
                 ],
-                Object {
-                  "flex": 1,
-                  "opacity": 1,
-                },
-                Object {
-                  "marginLeft": 5,
-                  "marginRight": 0,
-                },
-                false,
-                Object {
-                  "marginLeft": 5,
-                },
               ]
             }
           >
@@ -397,35 +388,20 @@ test("renders correctly", async () =>
             Array [
               Object {
                 "alignItems": "center",
-                "backgroundColor": "#fff",
+                "backgroundColor": "#FFFFFF",
                 "borderBottomLeftRadius": 5,
                 "borderBottomRightRadius": 5,
-                "borderColor": "#dfdfdf",
-                "borderTopLeftRadius": 5,
-                "borderTopRightRadius": 5,
-                "borderWidth": 1,
-                "paddingHorizontal": 10,
-                "paddingVertical": 5,
-              },
-              Object {
-                "alignItems": "center",
+                "borderColor": "#0B171B",
                 "borderTopLeftRadius": 0,
                 "borderTopRightRadius": 0,
+                "borderTopWidth": 0,
+                "borderWidth": 2,
                 "justifyContent": "center",
+                "paddingHorizontal": 4,
+                "paddingVertical": 5,
                 "position": "absolute",
                 "width": "100%",
               },
-              Array [
-                Object {
-                  "borderTopWidth": 0,
-                  "borderWidth": 2,
-                  "paddingHorizontal": 4,
-                },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderColor": "#0B171B",
-                },
-              ],
               Object {
                 "borderWidth": 0,
                 "display": "none",
@@ -433,7 +409,7 @@ test("renders correctly", async () =>
               },
               Object {
                 "maxHeight": 333.5,
-                "top": undefined,
+                "top": 0,
                 "zIndex": 5000,
               },
             ]
@@ -487,7 +463,7 @@ test("renders correctly", async () =>
                     }
                   }
                 >
-                  Not Found
+                  Not found
                 </Text>
               </View>
             </View>

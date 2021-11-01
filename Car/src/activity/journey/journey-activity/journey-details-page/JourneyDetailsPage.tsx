@@ -32,7 +32,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, invitationsErrorModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -50,6 +50,7 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
+import CommentBlockStyle from "../../../../components/commentBlock/CommentBlockStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -78,7 +79,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [isVisibleCarDropDown, setIsVisibleCarDropDown] = useState(false);
     const [selectedCar, setSelectedCar] = useState<{ id: number | null, name: string }>({
         id: getCarId(journey),
-        name: journey ? `${carModel?.brand?.name} ${carModel?.name}` : ""
+        name: journey ? `${journey?.car?.brand} ${carModel}` : ""
     });
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -187,7 +188,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             setUserCars(result.data.map(car => (
                 {
                     id: Number(car?.id),
-                    name: `${car?.model?.brand?.name} ${car?.model?.name}`
+                    name: `${car?.brand} ${car?.model}`
                 }
             )));
             if (result.data.length === EMPTY_COLLECTION_LENGTH) {
@@ -222,6 +223,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const publishJourneyHandler = async () => {
+        if (createAllInvitationsArrayFromNewInvitations().length > availableSeats)
+        {
+            setModal(invitationsErrorModal);
+
+            return;
+        }
         setRideIsPublishing(true);
 
         for (let location of savedLocations) {
@@ -435,7 +442,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <View style={CreateJourneyStyle.dropDownPickerContainer}>
+                        <View style={CommentBlockStyle.commentsContainer}>
                             <CommentBlock
                                 initialComment={comment}
                                 commentHeader="Comments"
