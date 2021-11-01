@@ -13,7 +13,7 @@ const NotificationsService = {
         APIService.get<Array<Notification>>(route + "notifications"),
 
     getUnreadNotificationsNumber: async () =>
-        APIService.get(route + "unreadNumber"),
+        APIService.get<number>(route + "unreadNumber"),
 
     updateNotification: async (notification: Notification) =>
         APIService.put<Notification>(route, notification),
