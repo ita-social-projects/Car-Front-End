@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import HeaderLogoutButton from "../../src/components/header-logout-button/HeaderLogoutButton";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<HeaderLogoutButton />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<HeaderLogoutButton />).toJSON())
+        .toMatchInlineSnapshot(`
     Array [
       <View
         accessible={true}

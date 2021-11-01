@@ -5,8 +5,8 @@ import TouchableMapBar from "../../src/components/touchable-map-bar/TouchableMap
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-  expect(renderer.render(<TouchableMapBar iconName={"location"} />))
-    .toMatchInlineSnapshot(`
+    expect(renderer.render(<TouchableMapBar iconName={"location"} />))
+        .toMatchInlineSnapshot(`
     <View>
       <TouchableOpacity
         style={

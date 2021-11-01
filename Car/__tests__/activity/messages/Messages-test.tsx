@@ -6,21 +6,21 @@ const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("react-native-localize", () => {
-  return {
-    getTimeZone: jest.fn(),
-  };
+    return {
+        getTimeZone: jest.fn(),
+    };
 });
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(
-      <Messages
-        isOpenFilter={false}
-        component={undefined}
-        navigation={undefined as any}
-      />
-    )
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <Messages
+                isOpenFilter={false}
+                component={undefined}
+                navigation={undefined as any}
+            />
+        )
+    ).toMatchInlineSnapshot(`
     <ForwardRef(SafeAreaView)
       style={
         Object {

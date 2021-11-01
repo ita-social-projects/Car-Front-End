@@ -5,9 +5,9 @@ import renderer from "react-test-renderer";
 import TouchableNavigationCard from "../../src/components/touchable-navigation-card/TouchableNavigationCard";
 
 test("renders correctly", async () =>
-  expect(
-    renderer.create(<TouchableNavigationCard navigationName={""} />).toJSON()
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.create(<TouchableNavigationCard navigationName={""} />).toJSON()
+    ).toMatchInlineSnapshot(`
     <View>
       <View
         accessible={true}
@@ -67,24 +67,24 @@ test("renders correctly", async () =>
   `));
 
 test("renders correctly", async () =>
-  expect(
-    renderer
-      .create(
-        <TouchableNavigationCard
-          navigationName="AddCars"
-          cardName="Add a car"
-          picture={
-            <Ionicons name={"add-circle-outline"} size={20} color={"#414045"} />
-          }
-          angle="0"
-        >
-          <Text style={{ fontWeight: "bold", color: "#02A2CF" }}>
+    expect(
+        renderer
+            .create(
+                <TouchableNavigationCard
+                    navigationName="AddCars"
+                    cardName="Add a car"
+                    picture={
+                        <Ionicons name={"add-circle-outline"} size={20} color={"#414045"} />
+                    }
+                    angle="0"
+                >
+                    <Text style={{ fontWeight: "bold", color: "#02A2CF" }}>
             Add a car
-          </Text>
-        </TouchableNavigationCard>
-      )
-      .toJSON()
-  ).toMatchInlineSnapshot(`
+                    </Text>
+                </TouchableNavigationCard>
+            )
+            .toJSON()
+    ).toMatchInlineSnapshot(`
     <View>
       <View
         accessible={true}

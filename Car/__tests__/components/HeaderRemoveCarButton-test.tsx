@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import HeaderRemoveCarButton from "../../src/components/header-remove-car-button/HeaderRemoveCarButton";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<HeaderRemoveCarButton />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<HeaderRemoveCarButton />).toJSON())
+        .toMatchInlineSnapshot(`
     <View
       accessible={true}
       collapsable={false}

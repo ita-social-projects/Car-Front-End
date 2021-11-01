@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Indicator from "../../src/components/activity-indicator/Indicator";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<Indicator />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<Indicator />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [

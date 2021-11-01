@@ -9,9 +9,9 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(<JourneyRequestPage route={{ params: { journeyId: 1 } }} />)
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Array [

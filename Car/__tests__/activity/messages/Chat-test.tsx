@@ -5,17 +5,17 @@ import Chat from "../../../src/activity/messages/messages-activity/chat/Chat";
 const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-localize", () => {
-  return {
-    getTimeZone: jest.fn(),
-  };
+    return {
+        getTimeZone: jest.fn(),
+    };
 });
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(
-      <Chat route={undefined as any} navigation={undefined as any} />
-    )
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <Chat route={undefined as any} navigation={undefined as any} />
+        )
+    ).toMatchInlineSnapshot(`
     <KeyboardAvoidingView
       behavior="padding"
       style={

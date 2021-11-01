@@ -5,8 +5,8 @@ import CreateJourney from "../../../src/activity/journey/journey-activity/create
 const renderer = shallowRenderer.createRenderer();
 
 test("renders correctly", async () =>
-  expect(renderer.render(<CreateJourney props={undefined as any} />))
-    .toMatchInlineSnapshot(`
+    expect(renderer.render(<CreateJourney props={undefined as any} />))
+        .toMatchInlineSnapshot(`
     <React.Fragment>
       <View
         style={

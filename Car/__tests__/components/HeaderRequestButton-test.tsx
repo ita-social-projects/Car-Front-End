@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import HeaderRequestButton from "../../src/components/header-request-button/HeaderRequestButton";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<HeaderRequestButton />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<HeaderRequestButton />).toJSON())
+        .toMatchInlineSnapshot(`
     <View
       accessible={true}
       collapsable={false}
