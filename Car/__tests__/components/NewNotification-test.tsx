@@ -5,30 +5,30 @@ import shallowRender from "react-test-renderer/shallow";
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(
-        renderer.render(
-            <MinimizedNotification
-                user={{
-                    id: 0,
-                    name: "Abc",
-                    surname: "Abc",
-                    position: "Abc",
-                    location: "Abc",
-                    email: "Abc",
-                    token: "Abc",
-                    fcmtoken: null,
-                    hireDate: new Date("2021-01-01T20:00:00.000Z"),
-                    imageId: null,
-                    journeyCount: 0,
-                    phoneNumber: null,
-                }}
-                notificationId={0}
-                openModal={() => {}}
-                read={true}
-            />
-        )
-    ).toMatchInlineSnapshot(`
-    <ForwardRef
+  expect(
+    renderer.render(
+      <MinimizedNotification
+        user={{
+          id: 0,
+          name: "Abc",
+          surname: "Abc",
+          position: "Abc",
+          location: "Abc",
+          email: "Abc",
+          token: "Abc",
+          fcmtoken: null,
+          hireDate: new Date("2021-01-01T20:00:00.000Z"),
+          imageId: null,
+          journeyCount: 0,
+          phoneNumber: null,
+        }}
+        notificationId={0}
+        openModal={() => {}}
+        read={true}
+      />
+    )
+  ).toMatchInlineSnapshot(`
+    <TouchableOpacity
       onPress={[Function]}
     >
       <View
@@ -126,33 +126,33 @@ test("renders correctly", async () =>
           }
         />
       </View>
-    </ForwardRef>
+    </TouchableOpacity>
   `));
 
 test("renders correctly", async () =>
-    expect(
-        renderer.render(
-            <MinimizedNotification
-                user={{
-                    id: 0,
-                    name: "Abc",
-                    surname: "Abc",
-                    position: "Abc",
-                    location: "Abc",
-                    email: "Abc",
-                    token: "Abc",
-                    fcmtoken: null,
-                    hireDate: new Date("2021-01-01T20:00:00.000Z"),
-                    imageId: null,
-                    journeyCount: 0,
-                    phoneNumber: null,
-                }}
-                notificationId={0}
-                openModal={() => {}}
-            />
-        )
-    ).toMatchInlineSnapshot(`
-    <ForwardRef
+  expect(
+    renderer.render(
+      <MinimizedNotification
+        user={{
+          id: 0,
+          name: "Abc",
+          surname: "Abc",
+          position: "Abc",
+          location: "Abc",
+          email: "Abc",
+          token: "Abc",
+          fcmtoken: null,
+          hireDate: new Date("2021-01-01T20:00:00.000Z"),
+          imageId: null,
+          journeyCount: 0,
+          phoneNumber: null,
+        }}
+        notificationId={0}
+        openModal={() => {}}
+      />
+    )
+  ).toMatchInlineSnapshot(`
+    <TouchableOpacity
       onPress={[Function]}
     >
       <View
@@ -254,5 +254,5 @@ test("renders correctly", async () =>
           }
         />
       </View>
-    </ForwardRef>
+    </TouchableOpacity>
   `));
