@@ -5,7 +5,8 @@ export const SeatsInputSpinnerStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginRight: 20,
+        marginRight: 18,
+        marginLeft: -5,
         marginTop: 24
     },
 
