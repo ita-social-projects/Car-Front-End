@@ -24,6 +24,10 @@ let journeys: Journey[] = [
                 surname: "",
                 position: "",
                 location: "",
+<<<<<<< HEAD
+=======
+                token: "",
+>>>>>>> ce176802f (tests update)
                 fcmtoken: "",
                 email: "",
                 hireDate: new Date(0),
@@ -40,6 +44,10 @@ let journeys: Journey[] = [
             surname: "",
             position: "",
             location: "",
+<<<<<<< HEAD
+=======
+            token: "",
+>>>>>>> ce176802f (tests update)
             fcmtoken: "",
             email: "",
             hireDate: new Date(0),

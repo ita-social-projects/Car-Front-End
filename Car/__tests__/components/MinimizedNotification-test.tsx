@@ -10,6 +10,10 @@ const testUser: User = {
     position: "string",
     location: "string",
     email: "abc@gmail.com",
+<<<<<<< HEAD
+=======
+    token: "string",
+>>>>>>> ce176802f (tests update)
     fcmtoken: null,
     hireDate: new Date(0),
     imageId: "string | null",
