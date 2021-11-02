@@ -95,7 +95,7 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerRight": [Function],
-              "headerTitle": "Ride Details",
+              "headerTitle": "Publish a Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
