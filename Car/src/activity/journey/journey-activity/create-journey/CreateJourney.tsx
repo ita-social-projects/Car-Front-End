@@ -52,7 +52,6 @@ import CredentialsManager from "../../../../../credentials/credentials.json";
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
     numberOfAddedStop: number,
-    // eslint-disable-next-line unused-imports/no-unused-vars
     ({ props }: { props: CreateJourneyProps }): JSX.Element
 }
 

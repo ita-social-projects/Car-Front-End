@@ -83,6 +83,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     });
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
+    const [comments, setComments] = useState("");
 
     const activeButtonStyle = {
         backgroundColor: colors.primary,
@@ -245,7 +246,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const newJourney: JourneyDto = {
             id: 0,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
-            comments: comment,
+            comments: comments,
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: !selectedFeeAsPaid,
@@ -284,7 +285,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
-            comments: comment.trim(),
+            comments: comments.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: !selectedFeeAsPaid,
@@ -446,6 +447,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <CommentBlock
                                 initialComment={comment}
                                 commentHeader="Comments"
+                                setComments={(initialComment:string)=>
+                                    setComments(initialComment)}
                             />
                         </View>
 

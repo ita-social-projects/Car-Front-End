@@ -78,7 +78,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [selectedFee, setSelectedFee] = useState(FeeType.All);
     const [allButtonStyle, setAllButtonStyle] = useState(activeButtonStyle);
     const [freeButtonStyle, setFreeButtonStyle] = useState(inactiveButtonStyle);
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [paidButtonStyle, setPaidButtonStyle] = useState(inactiveButtonStyle);
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);

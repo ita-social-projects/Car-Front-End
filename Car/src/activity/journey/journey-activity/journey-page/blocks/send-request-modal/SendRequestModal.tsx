@@ -44,6 +44,7 @@ const SendRequestModal = (props: SendRequestModalProps) => {
                             <CommentBlock
                                 initialComment=""
                                 commentHeader="Comments"
+                                setComments={()=>""}
                             />
                             <View style ={SendRequestModalStyle.dropDownContainer}>
                                 <View style ={SendRequestModalStyle.dropDown}>

@@ -9,7 +9,6 @@ import JourneyPageStyle from "../../JourneyPageStyle";
 
 interface StopsBlockProps {
     stops: Stop[],
-    // eslint-disable-next-line unused-imports/no-unused-vars
     onStopPress: (stop: Stop) => void,
     highlightedStops: number[]
 }

@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import AsyncStorage from "@react-native-community/async-storage";
 import * as React from "react";
 import { useColorScheme } from "react-native-appearance";
@@ -10,8 +9,8 @@ const returnType: any = {};
 export const ThemeContext = React.createContext({
     isThemeDark: false,
     theme: "light",
-    setScheme: (scheme : any) => returnType,
-    colors: lightColors,
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setScheme: (scheme : any) => returnType, colors: lightColors,
 });
 
 export const ThemeProvider = (props) => {

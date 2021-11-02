@@ -20,7 +20,6 @@ import HeaderStyle from "../styles/HeaderStyle";
 
 interface ShadowedBottomPopupComponent {
     pressHandle: () => void,
-    // eslint-disable-next-line unused-imports/no-unused-vars
     (props: BottomPopupProps): JSX.Element
 }
 
