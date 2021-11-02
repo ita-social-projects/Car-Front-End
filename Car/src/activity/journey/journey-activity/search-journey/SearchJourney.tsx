@@ -182,6 +182,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setFrom(filter.from);
                 setTo(filter.to);
                 setDepartureTime(new Date(filter.departureTime));
+                setSelectedQuantity({ id: filter.quantity, name: filter.quantity.toString() });
             });
         }
     };
