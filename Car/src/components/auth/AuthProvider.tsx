@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import AuthManager from "./AuthManager";
-import GraphManager from "./GraphManager";
 import * as navigation from "../navigation/Navigation";
 import User from "../../../models/user/User";
 import LoginService from "../../../api-service/login-service/LoginService";
@@ -50,40 +49,7 @@ const AuthProvider = ({ children }: any) => {
                     let accessToken = await AuthManager.getAccessTokenAsync();
 
                     if (accessToken) {
-                        const userGraph = await GraphManager.getUserAsync();
-
-                        if (!userGraph) {
-                            navigateLoginWithResetIndicator();
-
-                            return;
-                        }
-                        const tempUser: User = {
-                            email:
-                                userGraph.mail! || userGraph.userPrincipalName!,
-                            name: userGraph.givenName,
-                            surname: userGraph.surname,
-                            location: userGraph.officeLocation,
-                            position: userGraph.jobTitle,
-                            id: 0,
-                            token: "",
-                            fcmtoken: null,
-                            imageId: null,
-                            journeyCount: 0,
-                            hireDate: new Date(new Date().getMinutes()),
-                            phoneNumber: null,
-                        };
-
-                        const dbUser = await LoginService.loginUser(tempUser);
-
-                        if (!dbUser.data?.token) {
-                            navigateLoginWithResetIndicator();
-
-                            return;
-                        }
-
-                        const token: any = dbUser.data?.token;
-
-                        await AuthManager.saveAPIToken(token);
+                        const dbUser = await LoginService.loginUser();
 
                         await AsyncStorage.setItem(
                             "user",

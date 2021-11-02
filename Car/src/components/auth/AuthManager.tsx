@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-community/async-storage";
-import { authorize } from "react-native-app-auth";
+import { authorize, refresh } from "react-native-app-auth";
 import AuthConfig from "./AuthConfig";
 
 const AuthManager = {
@@ -12,6 +12,22 @@ const AuthManager = {
         AsyncStorage.setItem("expireTime", result.accessTokenExpirationDate);
     },
 
+    refreshAsync: async () => {
+        if (Date.now() > Date.parse(await AsyncStorage.getItem("expireTime") ?? "")) {
+            const result = await refresh(
+                AuthConfig,
+                { refreshToken: (await AsyncStorage.getItem("refreshToken")) ?? "" });
+
+            AsyncStorage.setItem("userToken", result.accessToken);
+            AsyncStorage.setItem("idToken", result.idToken);
+            if (result.refreshToken) {
+                AsyncStorage.setItem("refreshToken", result.refreshToken);
+            }
+
+            AsyncStorage.setItem("expireTime", result.accessTokenExpirationDate);
+        }
+    },
+
     signOutAsync: async () => {
         const promises: Promise<void>[] = [];
 
@@ -20,24 +36,15 @@ const AuthManager = {
         promises.push(AsyncStorage.removeItem("expireTime"));
         promises.push(AsyncStorage.removeItem("idToken"));
         promises.push(AsyncStorage.removeItem("user"));
-        promises.push(AsyncStorage.removeItem("APIToken"));
         await Promise.all(promises);
     },
 
-    getIdToken: async () => {
+    getIdTokenAsync: async () => {
         return AsyncStorage.getItem("idToken");
     },
 
     getAccessTokenAsync: async () => {
         return AsyncStorage.getItem("userToken");
-    },
-
-    saveAPIToken: async (token: string) => {
-        AsyncStorage.setItem("APIToken", token);
-    },
-
-    getAPIToken: async () => {
-        return AsyncStorage.getItem("APIToken");
     },
 
     getUser: async () => {
