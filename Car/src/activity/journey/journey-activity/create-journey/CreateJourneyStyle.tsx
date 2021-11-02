@@ -7,7 +7,8 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     dropDownPickerContainer: {
         marginHorizontal: 16,
-        marginTop: 16
+        marginTop: 25,
+        marginBottom: 10
     },
 
     recentJourneyText: {

@@ -354,7 +354,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
-                                marginBottom={16}
                             />
                         </View>
 
@@ -439,7 +438,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         <SeatsInputSpinner
                             value={availableSeats}
                             onChange={seats => setAvailableSeats(seats)}
-                            title={"Available seats:"}
+                            title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
 
@@ -475,8 +474,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
-                                        for that Ride</Text>
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians will be 
+                                        notidied for this Journey</Text>
                                 </View>
                                 <Ionicons
                                     style={[

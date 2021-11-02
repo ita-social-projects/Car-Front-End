@@ -16,6 +16,7 @@ const CommentBlock = (props: CommentBlockProps) => {
                 Comments
             </Text>
             <TextInput
+                placeholder="Write your comments"
                 style={[PreferencesStyle.textInput,
                     {
                         borderColor: colors.primary,
