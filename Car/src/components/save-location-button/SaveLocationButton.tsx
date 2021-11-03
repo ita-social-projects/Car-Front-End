@@ -12,9 +12,7 @@ const SaveLocationButton = (props: SaveLocationButtonProps) => {
             style={[
                 AddLocationStyle.saveButton,
                 {
-                    backgroundColor: props.wayPointConfirmation
-                        ? "black"
-                        : "darkgrey",
+                    backgroundColor: "darkgrey",
                 },
             ]}
             disabled={!props.wayPointConfirmation}
