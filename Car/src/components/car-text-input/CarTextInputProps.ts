@@ -6,6 +6,7 @@ interface CarTextInputProps {
     error?: Error,
     errorText?: string
     onBlur?: () => void
+    isValidField: boolean
 }
 
 export default CarTextInputProps;
