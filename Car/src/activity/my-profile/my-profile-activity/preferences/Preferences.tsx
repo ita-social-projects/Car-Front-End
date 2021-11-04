@@ -90,6 +90,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener){
                         </View>
                     <CommentBlock
                         initialComment={comments}
+                        placeholder = "Input text"
                         commentHeader="Other preferences"
                         setComments={(initialComment:string)=>
                             setComments(initialComment)}
