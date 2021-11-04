@@ -37,23 +37,9 @@ const StackTabs = createStackNavigator();
 export default function AddressBookTabs () {
     const { colors } = useTheme();
     const [modalVisibility, setModalVisibility] = useState(false);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const addressOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
-    const moreOptionsRef = useRef<any>(null);
-
-    const fadeIn = () => {
-        setVisibility(true);
-
-        animateOpacity(layoutOpacity, HALF_OPACITY, ANIMATION_DURATION);
-        animateOpacity(addressOpacity, HALF_OPACITY, ANIMATION_DURATION);
-    };
-
-    const fadeOut = () => {
-        animateOpacity(layoutOpacity, ZERO_OPACITY, ANIMATION_DURATION);
-        animateOpacity(addressOpacity, MAX_OPACITY, ANIMATION_DURATION);
-    };
 
     const deleteLocation = (locationId : any) => {
         LocationService.delete(locationId).then(() => {
