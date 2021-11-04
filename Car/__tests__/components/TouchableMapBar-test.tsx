@@ -12,10 +12,10 @@ test("renders correctly", async () =>
         style={
           Array [
             Object {
-              "borderWidth": 2.3,
+              "borderWidth": 1,
               "flexDirection": "row",
               "fontFamily": "Open Sans Regular",
-              "padding": 8,
+              "padding": 10,
             },
             Object {
               "backgroundColor": "#FFFFFF",
