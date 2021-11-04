@@ -113,7 +113,11 @@ export default function AddressBookTabs () {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
-                        headerRight: () => HeaderEllipsis({ onPress: pressHandle })
+                        headerRight:() => RemoveAddressButton({onPress: ()=> {
+                            (async () => sleep(MODAL_SLEEP_DURATION))().then(
+                                () => setModalVisibility(true)
+                            );
+                        },text: "Remove"})
                     }}
                 >
                     {(props: any) => {
@@ -122,41 +126,11 @@ export default function AddressBookTabs () {
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
                                     { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
-
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: addressOpacity, backgroundColor: colors.white }
                                 ]}>
                                     <EditLocation locationId={props.route.params.carId}/>
                                 </Animated.View>
-                                <BottomPopup
-                                    refForChild={ref => (moreOptionsRef.current = ref)}
-                                    snapPoints={[MIN_POPUP_HEIGHT, EDIT_ADDRESS_MORE_OPTIONS_POPUP_HEIGHT]}
-                                    enabledInnerScrolling={false}
-                                    onCloseEnd={closeHandle}
-                                    initialSnap={0}
-                                    renderHeader={
-                                        <View style={[JourneyPageStyle.headerTitleStyle,
-                                            { backgroundColor: colors.white }
-                                        ]}>
-                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
-                                                MORE OPTIONS
-                                            </Text>
-                                        </View>
-                                    }
-                                    renderContent={
-                                        <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
-                                            <RemoveAddressButton
-                                                text="Remove the address"
-                                                onPress={() => {
-                                                    pressHandle();
-                                                    (async () => sleep(MODAL_SLEEP_DURATION))().then(
-                                                        () => setModalVisibility(true)
-                                                    );
-                                                }}
-                                            />
-                                        </View>
-                                    }
-                                />
                                 <ConfirmModal
                                     disableModal={() => setModalVisibility(false)}
                                     visible={modalVisibility}
