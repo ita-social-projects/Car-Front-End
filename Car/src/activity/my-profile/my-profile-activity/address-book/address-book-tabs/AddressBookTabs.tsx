@@ -62,27 +62,6 @@ export default function AddressBookTabs () {
         });
     };
 
-    const closeHandle = () => {
-        setIsPopupOpen(false);
-        fadeOut();
-        (async () => sleep(SLEEP_DURATION))().then(() => setVisibility(false));
-    };
-
-    const pressHandle = () => {
-        setIsPopupOpen(!isPopupOpen);
-
-        if (isPopupOpen) {
-            fadeOut();
-        } else {
-            fadeIn();
-        }
-
-        moreOptionsRef?.current?.snapTo(
-            isPopupOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
-        );
-
-    };
-
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
             <StackTabs.Navigator>
