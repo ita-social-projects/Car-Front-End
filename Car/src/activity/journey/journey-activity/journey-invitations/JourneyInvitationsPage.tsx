@@ -150,7 +150,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
 
             </View>
             <View style={[CreateJourneyStyle.publishButtonContainer,
-                { flexDirection: "row" }]}>
+                { flexDirection: "row-reverse" }]}>
                 <TouchableOpacity
                     style={[CreateJourneyStyle.publishButton,
                         {

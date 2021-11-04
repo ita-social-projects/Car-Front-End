@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
-        paddingTop: 25
+        paddingTop: 0
     },
 
     dropDownPickerContainer: {
@@ -40,7 +40,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     commentsView: {
-        marginTop: 24,
+        marginTop: 15,
         marginLeft: 20,
         marginRight: 20
     },
@@ -68,7 +68,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     invitationInputStyle: {
         height: 45,
-        borderWidth: 2,
+        borderWidth: 1,
         fontSize: 15,
         paddingLeft: 10,
     },
@@ -76,7 +76,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     commentsCaption: {
         fontSize: 17,
         fontWeight: "bold",
-        marginBottom: 8
+        marginBottom: 5
     },
 
     invitationsCaption: {
@@ -93,7 +93,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         alignItems: "flex-end",
         marginVertical: 24,
         flexDirection: "row",
-        paddingLeft: 20,
+        paddingLeft: 0,
         justifyContent: "space-between"
     },
 
