@@ -21,9 +21,9 @@ const ChooseOptionStyle = StyleSheet.create({
     },
 
     preferenceNameText: {
-        fontFamily: Font.OpenSans.Regular,
+        fontFamily: Font.OpenSans.Bold,
         fontWeight: "700",
-        lineHeight: 18,
+        lineHeight: 16,
         fontSize: 13
     },
 
