@@ -34,7 +34,7 @@ const PreferencesStyle = StyleSheet.create({
 
     textInput: {
         height: 80,
-        borderWidth: 2,
+        borderWidth: 1,
         fontFamily: Font.OpenSans.Regular,
         fontSize: 16,
         lineHeight: 24,
