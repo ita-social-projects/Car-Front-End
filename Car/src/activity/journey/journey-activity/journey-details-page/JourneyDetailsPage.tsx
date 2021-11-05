@@ -15,7 +15,8 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import { DAY_OFFSET, MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
 import {
     CREATING_FONT_SIZE,
-    DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
+    DEFAULT_AVAILABLE_SEATS_COUNT,
+    DEFAULT_TAXI_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
     MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
@@ -386,9 +387,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             onLeftButtonPress={() => {
                                 setOwnCar(true);
                                 setIsVisibleCarDropDown(false);
+                                setAvailableSeats(DEFAULT_AVAILABLE_SEATS_COUNT);
                             }}
                             onRightButtonPress={() => {
                                 setOwnCar(false);
+                                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
                             }}
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
@@ -441,16 +444,15 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
-
-                        <View style={CommentBlockStyle.commentsContainer}>
-                            <CommentBlock
-                                initialComment={comment}
-                                commentHeader="Comments"
-                                placeholder = "Write your comments"
-                                setComments={(initialComment:string)=>
-                                    setComments(initialComment)}
-                            />
-                        </View>
+                        
+                        <CommentBlock
+                            initialComment={comments}
+                            commentHeader="Comments"
+                            placeholder = "Write your comments"
+                            setComments={(initialComment:string)=>
+                                setComments(initialComment)}
+                        />
+                        
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
