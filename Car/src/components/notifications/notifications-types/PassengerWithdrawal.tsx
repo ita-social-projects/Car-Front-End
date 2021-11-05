@@ -29,6 +29,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const [wasOpened, setWasOpened] = useState(false);
+    const [isStopsSet, setIsStopsSet] = useState(false);
     const source = useRef(axios.CancelToken.source());
 
     const onStopPress = (stop:Stop, myStops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
@@ -57,6 +58,24 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 });
         }
     }, [modalVisible]);
+
+    useEffect(() => {
+        if(!isStopsSet&&stops)
+        {
+            setIsStopsSet(true);
+            var tempStops = stops;
+
+            console.log(tempStops);
+            tempStops?.filter((stop) =>
+                stop?.type === StopType.Intermediate)
+                .forEach((stop)=>(stop!.alias =
+                        `${props.sender!.name} ${props.sender!.surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ?
+                            "Start" :
+                            "Finish"}`));
+            console.log(tempStops);
+            setStops(tempStops);
+        }
+    },[stops]);
 
     return (
         <>

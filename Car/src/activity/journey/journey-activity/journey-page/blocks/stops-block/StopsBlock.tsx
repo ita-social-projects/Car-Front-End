@@ -45,11 +45,12 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                             ]} />
                         )}
                     </View>
-                    <Text style={{
+                    <Text style={[{
                         color: getDotAndTextColor(index),
                         textDecorationLine: isHighlightedStop(index) ? "underline" : "none"
-                    }}>
-                        {item?.address?.name}
+                    }]} numberOfLines = {1}>
+                        {item?.alias ==null? item?.address?.name:
+                        item?.alias + " (" + item?.address?.name + ")"}
                     </Text>
                 </TouchableOpacity>
             ) : (

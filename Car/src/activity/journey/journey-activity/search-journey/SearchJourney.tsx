@@ -47,6 +47,8 @@ import TouchableDateTimePicker, { addMinutesToDate } from "../../../../component
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
+import { getAddressByCoordinatesAsync } from "../../../../utils/LocationHelperFunctions";
+import ApplicantJourney from "../../../../../models/journey/ApplicantJourney";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const { colors } = useTheme();
@@ -182,6 +184,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setFrom(filter.from);
                 setTo(filter.to);
                 setDepartureTime(new Date(filter.departureTime));
+                setSelectedQuantity({ id: filter.quantity, name: filter.quantity.toString() });
             });
         }
     };
@@ -266,6 +269,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         let displayFee =
                             allButtonStyle === activeButtonStyle;
 
+                        res.data.forEach(setLocationName);
                         navigation.navigate("OK Search Result", {
                             journeys: res.data,
                             displayFee: displayFee,
@@ -288,6 +292,18 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     setErrorModalVisible(true);
                 });
         }
+    };
+    const setLocationName = (journey: ApplicantJourney) =>
+    {
+        journey.applicantStops.forEach(async (item) =>
+        {
+            let addressName = await getAddressByCoordinatesAsync(
+                { latitude: item?.address?.latitude!,
+                    longitude: item?.address?.longitude! });
+
+            if(item && item.address)
+                item.address.name = addressName;
+        });
     };
 
     const filterRecentAddresses = () =>
