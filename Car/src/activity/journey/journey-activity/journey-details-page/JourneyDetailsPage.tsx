@@ -50,7 +50,6 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
-import CommentBlockStyle from "../../../../components/commentBlock/CommentBlockStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -441,16 +440,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
-
-                        <View style={CommentBlockStyle.commentsContainer}>
-                            <CommentBlock
-                                initialComment={comments}
-                                commentHeader="Comments"
-                                setComments={(initialComment:string)=>
-                                    setComments(initialComment)}
-                            />
-                        </View>
-
+                        <CommentBlock
+                            initialComment={comments}
+                            commentHeader="Comments"
+                            placeholder = "Write your comments"
+                            setComments={(initialComment:string)=>
+                                setComments(initialComment)}
+                        />
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
                                 SoftServians</Text>
@@ -468,7 +464,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     size={35}
                                     color={colors.hover}
                                 />
-                                <View style={{ marginLeft: 17 }}>
+                                <View style={{ marginLeft: 20 }}>
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invited SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,

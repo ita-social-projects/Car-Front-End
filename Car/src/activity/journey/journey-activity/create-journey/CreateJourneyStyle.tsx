@@ -48,15 +48,15 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     invitationsView: {
         marginTop: 24,
-        marginLeft: 20,
+        marginLeft: 16,
         marginRight: 20
     },
 
     invitationsLink: {
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal: 20,
-        paddingVertical: 15
+        paddingHorizontal: 4,
+        paddingVertical: 24
     },
 
     textInputStyle: {
