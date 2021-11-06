@@ -443,6 +443,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             onChange={seats => setAvailableSeats(seats)}
                             title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
+                            maxValue={isOwnCar ? DEFAULT_AVAILABLE_SEATS_COUNT : DEFAULT_TAXI_AVAILABLE_SEATS_COUNT}
                         />
                         
                         <CommentBlock
