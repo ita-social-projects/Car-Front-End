@@ -5,7 +5,6 @@ const PreferencesStyle = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 5,
-        paddingHorizontal: 18
     },
 
     whitespaceBlock: {
@@ -19,7 +18,7 @@ const PreferencesStyle = StyleSheet.create({
     },
 
     commentsContainer: {
-        paddingTop: 40
+        paddingTop: 25,
     },
 
     commentsText: {
@@ -29,7 +28,8 @@ const PreferencesStyle = StyleSheet.create({
     },
 
     chooseOptionContainer: {
-        paddingTop: 46,
+        paddingVertical: 25,
+        paddingHorizontal:16
     },
 
     textInput: {
