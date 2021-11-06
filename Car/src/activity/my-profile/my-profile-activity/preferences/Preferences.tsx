@@ -87,7 +87,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener){
                             onValueChanged={(value: boolean) =>
                                 setEatingAllowed(value)}
                         />
-                        </View>
+                    </View>
                     <CommentBlock
                         initialComment={comments}
                         placeholder = "Input text"
