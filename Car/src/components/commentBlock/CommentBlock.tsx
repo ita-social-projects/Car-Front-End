@@ -16,9 +16,8 @@ const CommentBlock = (props: CommentBlockProps) => {
                 Comments
             </Text>
             <TextInput
-
+                placeholderTextColor = {colors.hover}
                 placeholder={props.placeholder}
-
                 style={[PreferencesStyle.textInput,
                     {
                         borderColor: colors.primary,
