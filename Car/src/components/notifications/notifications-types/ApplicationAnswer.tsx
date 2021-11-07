@@ -103,6 +103,13 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
             props.notification.onDelete(props.notification.notificationId);
     };
 
+    const confirmAndDelete = () =>{
+        setNotificationModalVisible(false);
+        if(props.notification.onDelete)
+            props.notification.onDelete(props.notification.notificationId);
+        NotificationsService.deleteNotification(props.notification.notificationId);
+    };
+
     return (
         <>
             <MinimizedNotification
@@ -145,7 +152,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 </View>
 
                 <NotificationButtonGroup>
-                    <NotificationConfirmButton onConfirm={() => setNotificationModalVisible(false)} />
+                    <NotificationConfirmButton onConfirm={() => confirmAndDelete()} />
                     {props.withWithdraw &&
                     <NotificationDeclineButton
                         declineText={"Withdraw"}
