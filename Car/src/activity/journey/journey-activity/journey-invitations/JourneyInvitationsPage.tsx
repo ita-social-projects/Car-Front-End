@@ -96,8 +96,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         <TextInput
                             style={[CreateJourneyStyle.invitationInputStyle,
                                 {
-                                    borderColor: invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                        colors.primary : colors.accentRed,
+                                    borderColor: colors.primary,
                                     color: colors.primary, marginTop: 5
                                 }]}
                             maxLength={100}
@@ -108,29 +107,22 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         />
 
                         <TouchableOpacity
-                            style={JourneyInvitationsPageStyle.icon}
+                            style={JourneyInvitationsPageStyle.clearIcon}
                             onPress={() => onInvitationDeleteIconPress(index)}
                         >
                             <Ionicons
                                 style={[
                                     { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
                                 ]}
-                                name={
-                                    invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                        "close" : ""
-                                }
+                                name={"close"}
                                 size={22}
                                 color={colors.hover}
                             />
                         </TouchableOpacity>
 
-                        <Text style={[{ color: colors.accentRed }]}>
-                            {invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                "" : "Error"}
-                        </Text>
                         {invitedUsers[index].email !== "" && (
                             <TouchableOpacity
-                                style={JourneyInvitationsPageStyle.icon}
+                                style={JourneyInvitationsPageStyle.statusIcon}
                                 onPress={() =>{
                                     let statusInfo : string = invitedUsers[index].isCorrect ?
                                         "Great! We found user with such an email!"
@@ -145,7 +137,8 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                     ]}
                                     name={
                                         invitedUsers[index].isCorrect ?
-                                            "" : "alert-circle-outline"
+                                            "checkmark-outline"
+                                            : "alert-circle-outline"
                                     }
                                     size={22}
                                     color={invitedUsers[index].isCorrect ? colors.hover : colors.accentRed}

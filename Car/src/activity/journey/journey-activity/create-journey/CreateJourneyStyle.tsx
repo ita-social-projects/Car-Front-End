@@ -68,7 +68,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     invitationInputStyle: {
         height: 45,
-        borderWidth: 1,
+        borderWidth: 2,
         fontSize: 15,
         paddingLeft: 10,
     },
