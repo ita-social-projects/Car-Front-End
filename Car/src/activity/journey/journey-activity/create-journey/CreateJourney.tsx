@@ -376,6 +376,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         onPress={() => onAddressInputButtonPressHandler(
                             "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
                         marginBottom={15}
+                        marginTop={32}
                     />
 
                     <AddressInputButton

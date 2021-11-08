@@ -7,6 +7,7 @@ interface AddressInputButtonProps {
     disabled?: boolean,
     marginHorizontal?: number,
     marginBottom?: number,
+    marginTop?: number,
 }
 
 export default AddressInputButtonProps;
