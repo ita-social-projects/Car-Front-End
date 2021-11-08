@@ -92,7 +92,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     publishButtonContainer: {
         alignItems: "flex-end",
         marginVertical: 24,
-        flexDirection: "row",
+        flexDirection: "row-reverse",
         paddingLeft: 0,
         justifyContent: "space-between"
     },
@@ -103,7 +103,8 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 12,
         flexDirection: "row",
-        borderWidth: 2
+        borderWidth: 2,
+
     },
 
     publishButtonText: {
@@ -119,6 +120,19 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 12,
         borderWidth: 2
+    },
+
+    saveButonContainer:{
+        alignSelf: "flex-end",
+        position: "absolute",
+        fontSize: 14,
+        bottom: 20,
+        right: 20,
+    },
+
+    saveButton:{
+        paddingVertical: 12,
+        paddingHorizontal: 16,
     },
 
     discardButtonText: {

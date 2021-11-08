@@ -4,7 +4,7 @@ export const JourneyInvitationsPageStyle = StyleSheet.create({
     row: {
         flexDirection: "row",
         alignItems: "center",
-        paddingRight: 50,
+        paddingBottom: 22,
         justifyContent: "space-between"
     },
     clearIcon: {
@@ -17,4 +17,10 @@ export const JourneyInvitationsPageStyle = StyleSheet.create({
         top: 15,
         right: 30
     },
+    emailText: {
+        paddingTop: 5,
+    },
+    invitationStatusText: {
+        paddingTop: 5,
+    }
 });
