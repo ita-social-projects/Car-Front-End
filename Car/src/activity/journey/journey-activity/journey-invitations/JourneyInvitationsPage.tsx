@@ -154,8 +154,8 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                 <TouchableOpacity
                     style={[CreateJourneyStyle.publishButton,
                         {
-                            backgroundColor: colors.primary,
-                            borderColor: colors.primary
+                            backgroundColor: colors.hover,
+                            borderColor: colors.hover
                         }]}
                     onPress={addInvitationPressHandler}
                 >
@@ -175,8 +175,8 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                 <TouchableOpacity
                     style={[CreateJourneyStyle.publishButton,
                         {
-                            backgroundColor: colors.primary,
-                            borderColor: colors.primary
+                            backgroundColor: colors.hover,
+                            borderColor: colors.hover
                         }]}
                     onPress={() => navigation.navigate("Journey Details", { newInvitations: invitedUsers })
                     }

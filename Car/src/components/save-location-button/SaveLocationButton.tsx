@@ -9,10 +9,16 @@ const SaveLocationButton = (props: SaveLocationButtonProps) => {
 
     return (
         <TouchableOpacity
-            style={[
-                AddLocationStyle.saveButton,
-                { backgroundColor: colors.hover },
-            ]}
+            //style={[
+           //     AddLocationStyle.saveButton,
+            //    { backgroundColor: colors.hover },
+            //]}
+            style={(props.wayPointConfirmation) ? 
+                [AddLocationStyle.saveButton,
+                {backgroundColor: colors.hover}] :
+                [AddLocationStyle.saveButton,
+                {backgroundColor: colors.secondaryDark}]
+            }
             disabled={!props.wayPointConfirmation}
             onPress={props.onPress}
         >
