@@ -446,7 +446,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <CommentBlock
-                            initialComment={comment}
+                            initialComment={comments}
                             commentHeader="Comments"
                             placeholder = "Write your comments"
                             setComments={(initialComment:string)=>
