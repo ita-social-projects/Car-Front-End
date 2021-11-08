@@ -446,7 +446,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <CommentBlock
-                            initialComment={comment}
+                            initialComment={comments}
                             commentHeader="Comments"
                             placeholder = "Write your comments"
                             setComments={(initialComment:string)=>
@@ -476,10 +476,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-
-                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServian will be
-                                        notified for that Journey</Text>
-
+                                            newInvitations.filter(inv => inv.isCorrect).length}
+                                              SoftServian will be notified for that Journey
+                                    </Text>
                                 </View>
                                 <Ionicons
                                     style={[

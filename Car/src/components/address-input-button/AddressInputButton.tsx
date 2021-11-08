@@ -11,7 +11,7 @@ const AddressInputButton = (props: AddressInputButtonProps) => {
             iconName={props.iconName}
             defaultInputValue={props.text}
             marginBottom={props.marginBottom?.toString() ?? "0"}
-            marginTop="0"
+            marginTop={props.marginTop?.toString() ?? "0"}
             flex="6"
             marginHorizontal={props.marginHorizontal ?? ZERO_MARGIN}
             onIconPress={props.onIconPress}
