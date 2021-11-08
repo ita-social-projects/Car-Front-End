@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import Entypo from "react-native-vector-icons/Entypo";
-import { MIN_AVAILABLE_SEATS_COUNT } from "../../constants/JourneyConstants";
+import { DEFAULT_AVAILABLE_SEATS_COUNT, MIN_AVAILABLE_SEATS_COUNT } from "../../constants/JourneyConstants";
 import { useTheme } from "../theme/ThemeProvider";
 import { SeatsInputSpinnerStyle } from "./SeatsInputSpinnerStyle";
 
@@ -10,6 +10,7 @@ interface SeatsInputSpinnerProps {
     value: number,
     title: string,
     minValue?: number,
+    maxValue?: number,
     onChange: (value: number) => void
 }
 
@@ -23,7 +24,7 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
             </Text>
             <View>
                 <InputSpinner
-                    max={4}
+                    max={props.maxValue}
                     min={Math.max(Number(props.minValue), MIN_AVAILABLE_SEATS_COUNT)}
                     step={1}
                     style={[SeatsInputSpinnerStyle.spinnerContainer, { borderColor: colors.primary }]}

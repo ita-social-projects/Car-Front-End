@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const CarDropDownPickerStyle = StyleSheet.create({
     container: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 0,
@@ -10,7 +10,7 @@ const CarDropDownPickerStyle = StyleSheet.create({
     },
 
     dropDownStyle: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderTopWidth: 0,
         paddingHorizontal: 4
     },

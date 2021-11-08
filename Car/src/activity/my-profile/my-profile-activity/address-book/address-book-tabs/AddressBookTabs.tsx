@@ -67,11 +67,11 @@ export default function AddressBookTabs () {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
-                        headerRight:() => RemoveAddressButton({onPress: ()=> {
+                        headerRight:() => RemoveAddressButton({ onPress: ()=> {
                             (async () => sleep(MODAL_SLEEP_DURATION))().then(
                                 () => setModalVisibility(true)
                             );
-                        },text: "Remove"})
+                        },text: "Remove" })
                     }}
                 >
                     {(props: any) => {
