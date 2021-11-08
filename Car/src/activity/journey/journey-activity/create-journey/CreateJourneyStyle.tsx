@@ -7,8 +7,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     dropDownPickerContainer: {
         marginHorizontal: 16,
-        marginTop: 25,
-        marginBottom: 10
+        marginTop: 16
     },
 
     recentJourneyText: {
@@ -48,15 +47,15 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     invitationsView: {
         marginTop: 24,
-        marginLeft: 20,
+        marginLeft: 16,
         marginRight: 20
     },
 
     invitationsLink: {
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal: 20,
-        paddingVertical: 15
+        paddingHorizontal: 4,
+        paddingVertical: 24
     },
 
     textInputStyle: {
@@ -138,6 +137,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     scrollView: {
         position: "absolute",
+        top: 25,
         zIndex: 1,
         width: "100%",
         paddingHorizontal: 10,

@@ -1,6 +1,7 @@
 interface CommentBlockProps {
     commentHeader?: string
-    initialComment?: string
+    initialComment: string
+    placeholder?: string
     setComments: (value: string) => void,
 }
 

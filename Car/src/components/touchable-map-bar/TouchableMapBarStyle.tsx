@@ -4,8 +4,8 @@ import Font from "../../data/fonts/Font";
 const TouchableMapBarStyle = StyleSheet.create({
     container: {
         flexDirection: "row",
-        borderWidth: 2.3,
-        padding: 8,
+        borderWidth: 1,
+        padding: 10,
         fontFamily: Font.OpenSans.Regular
     },
 

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const CarTextInputStyle = StyleSheet.create({
     container: {
-        borderWidth: 2,
+        borderWidth: 1,
         justifyContent: "center",
         paddingLeft: 24
     },

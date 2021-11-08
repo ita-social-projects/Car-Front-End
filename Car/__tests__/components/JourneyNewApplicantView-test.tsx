@@ -154,8 +154,7 @@ test("renders correctly", async () =>
                 }
               }
             >
-              A
-               stops in your ride
+              Abc Abc\`s stops in your ride
             </Text>
             <View>
               <StopsBlock

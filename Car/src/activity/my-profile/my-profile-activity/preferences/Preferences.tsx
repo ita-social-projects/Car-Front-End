@@ -80,7 +80,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener){
                             }
                         />
                     </View>
-                    <View>
+                    <View style={PreferencesStyle.chooseOptionContainer}>
                         <ChooseOption
                             text={"Allow eating in your car"}
                             value={isEatingAllowed}
@@ -90,6 +90,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener){
                     </View>
                     <CommentBlock
                         initialComment={comments}
+                        placeholder = "Input text"
                         commentHeader="Other preferences"
                         setComments={(initialComment:string)=>
                             setComments(initialComment)}
