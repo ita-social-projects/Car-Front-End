@@ -1,6 +1,5 @@
 interface ChatProps {
     navigation: {
-        // eslint-disable-next-line unused-imports/no-unused-vars
         setOptions: (obj: object) => void
     },
     route: {

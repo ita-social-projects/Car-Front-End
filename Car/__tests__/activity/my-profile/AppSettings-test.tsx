@@ -103,28 +103,72 @@ test("renders correctly", async () =>
             </Text>
           </View>
           <View>
-            <RCTSwitch
-              accessibilityRole="switch"
-              onChange={[Function]}
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              onTintColor="#414045"
               style={
-                Array [
-                  Object {
-                    "height": 31,
-                    "width": 51,
-                  },
-                  Object {
-                    "height": 28,
-                    "width": 36,
-                  },
-                ]
+                Object {
+                  "opacity": 1,
+                }
               }
-              thumbTintColor="#FFFFFF"
-              tintColor="#909095"
-              value={false}
-            />
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "rgba(196, 196, 196, 1)",
+                    "borderColor": "#C4C4C4",
+                    "borderRadius": 12,
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "height": 20,
+                    "padding": 2,
+                    "width": 36,
+                  }
+                }
+              >
+                <View>
+                  <Text />
+                </View>
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(255, 255, 255, 1)",
+                      "borderRadius": 8,
+                      "height": 16,
+                      "transform": Array [
+                        Object {
+                          "translateX": 0,
+                        },
+                      ],
+                      "width": 16,
+                    }
+                  }
+                >
+                  <View>
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text />
+                </View>
+                <View
+                  style={
+                    Object {
+                      "position": "absolute",
+                      "right": 5,
+                    }
+                  }
+                />
+              </View>
+            </View>
           </View>
         </View>
       </View>

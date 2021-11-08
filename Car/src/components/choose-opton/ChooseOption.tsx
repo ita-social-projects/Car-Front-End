@@ -1,11 +1,9 @@
 import React from "react";
 import { Text, View } from "react-native";
-// import { Switch } from "react-native-gesture-handler";
 import { useTheme } from "../theme/ThemeProvider";
 import ChooseOptionStyle from "./ChooseOptionStyle";
 import ChooseOptionProps from "./ChooseOptionProps";
 import TouchableNavigationCardStyle from "../touchable-navigation-card/TouchableNavigationCardStyle";
-// import { Switch } from "react-native-switch";
 import SwitchToggle from "react-native-switch-toggle";
 
 const ChooseOption = (props: ChooseOptionProps) => {

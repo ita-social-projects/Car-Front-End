@@ -11,7 +11,7 @@ import PreferencesStyle from "./PreferencesStyle";
 import NavigationAddAndRemoveListener from "../../../../types/NavigationAddAndRemoveListener";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
-export default function Preferences (props: NavigationAddAndRemoveListener) {
+export default function Preferences (props: NavigationAddAndRemoveListener){
     const { colors } = useTheme();
     const [isSmokingAllowed, setSmokingAllowed] = useState(false);
     const [isEatingAllowed, setEatingAllowed] = useState(false);
@@ -62,7 +62,7 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
     return (
         <>
             {isLoading ? (
-                <View style={[PreferencesStyle.loadingContainer, { backgroundColor:  colors.white }]}>
+                <View style={[PreferencesStyle.loadingContainer, { backgroundColor: colors.white }]}>
                     <Indicator
                         size="large"
                         color={colors.hover}
@@ -84,12 +84,16 @@ export default function Preferences (props: NavigationAddAndRemoveListener) {
                         <ChooseOption
                             text={"Allow eating in your car"}
                             value={isEatingAllowed}
-                            onValueChanged={(value: boolean) => setEatingAllowed(value)}
+                            onValueChanged={(value: boolean) =>
+                                setEatingAllowed(value)}
                         />
                     </View>
                     <CommentBlock
                         initialComment={comments}
+                        placeholder = "Input text"
                         commentHeader="Other preferences"
+                        setComments={(initialComment:string)=>
+                            setComments(initialComment)}
                     />
                 </ScrollView>
             )}

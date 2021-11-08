@@ -361,6 +361,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     defaultValue={plateNumber}
                     onChangeText={setPlateNumber}
                     placeHolder="Plate number"
+                    isValidField={isValidPlateNumber}
                 />
                 {!isValidPlateNumber &&
                     <Text style={{ color: colors.accentRed }}>

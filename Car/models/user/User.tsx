@@ -5,7 +5,6 @@ type User = null | {
     position: string;
     location: string;
     email: string;
-    token: string;
     fcmtoken: string | null;
     hireDate: Date;
     imageId: string | null;

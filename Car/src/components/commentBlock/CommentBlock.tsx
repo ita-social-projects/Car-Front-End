@@ -8,15 +8,16 @@ import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../constants/GeneralConstant
 
 const CommentBlock = (props: CommentBlockProps) => {
     const { colors } = useTheme();
-    const [comment, setComment] = useState(props.initialComment);
-    const [remainingSymbolsText, setRemainingSymbolsText] = useState("Up to 100 symbols");
+    const [remainingSymbolsText,setRemainingSymbolsText]=useState("Up to 100 symbols");
 
-    return (
+    return(
         <View style={CommentBlockStyle.commentsContainer}>
             <Text style={[PreferencesStyle.commentsText, { color: colors.hover }]}>
                 Comments
             </Text>
             <TextInput
+                placeholderTextColor = {colors.hover}
+                placeholder={props.placeholder}
                 style={[PreferencesStyle.textInput,
                     {
                         borderColor: colors.primary,
@@ -25,8 +26,8 @@ const CommentBlock = (props: CommentBlockProps) => {
                 multiline={true}
                 maxLength={100}
                 numberOfLines={10}
-                value={comment}
-                onChangeText={(text) => { setComment(text);
+                value={props.initialComment}
+                onChangeText={(text) => {props.setComments(text);
                     setRemainingSymbolsText(
                         `${PREFERENCES_COMMENTS_MAX_LENGTH - text.length} symbols remaining`);}}
             />

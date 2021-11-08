@@ -47,6 +47,8 @@ import TouchableDateTimePicker, { addMinutesToDate } from "../../../../component
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
+import { getAddressByCoordinatesAsync } from "../../../../utils/LocationHelperFunctions";
+import ApplicantJourney from "../../../../../models/journey/ApplicantJourney";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const { colors } = useTheme();
@@ -78,7 +80,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [selectedFee, setSelectedFee] = useState(FeeType.All);
     const [allButtonStyle, setAllButtonStyle] = useState(activeButtonStyle);
     const [freeButtonStyle, setFreeButtonStyle] = useState(inactiveButtonStyle);
-    // eslint-disable-next-line unused-imports/no-unused-vars
     const [paidButtonStyle, setPaidButtonStyle] = useState(inactiveButtonStyle);
     const [isRequest, setIsRequest] = useState<boolean>(false);
     const [isPreviousFilter, setIsPreviousFilter] = useState<boolean>(false);
@@ -183,6 +184,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setFrom(filter.from);
                 setTo(filter.to);
                 setDepartureTime(new Date(filter.departureTime));
+                setSelectedQuantity({ id: filter.quantity, name: filter.quantity.toString() });
             });
         }
     };
@@ -267,6 +269,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         let displayFee =
                             allButtonStyle === activeButtonStyle;
 
+                        res.data.forEach(setLocationName);
                         navigation.navigate("OK Search Result", {
                             journeys: res.data,
                             displayFee: displayFee,
@@ -289,6 +292,18 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     setErrorModalVisible(true);
                 });
         }
+    };
+    const setLocationName = (journey: ApplicantJourney) =>
+    {
+        journey.applicantStops.forEach(async (item) =>
+        {
+            let addressName = await getAddressByCoordinatesAsync(
+                { latitude: item?.address?.latitude!,
+                    longitude: item?.address?.longitude! });
+
+            if(item && item.address)
+                item.address.name = addressName;
+        });
     };
 
     const filterRecentAddresses = () =>
@@ -330,6 +345,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
+                            disabled = {isRequest}
                             iconName={"location"}
                             directionType={"From"}
                             text={from.text}
@@ -345,6 +361,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
+                            disabled = {isRequest}
                             iconName={"location"}
                             directionType={"To"}
                             text={to.text}

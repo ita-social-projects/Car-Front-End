@@ -117,7 +117,12 @@ const JourneyTabs = () => {
                         headerTitle: "Add a ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
-                        headerLeft: HeaderBackButton,
+                        headerLeft: () => HeaderBackButton({
+                            onPress: () => {
+                                closeMoreOptionPopup(createRideMoreOptionsRef);
+                                navigation.goBack();
+                            }
+                        }),
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(createRideMoreOptionsRef) })
                     }}
@@ -175,12 +180,17 @@ const JourneyTabs = () => {
                 <StackTabs.Screen
                     name="Journey Details"
                     options={{
-                        headerTitle: "Ride Details",
+                        headerTitle: "Publish a Ride",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
-                        headerLeft: HeaderBackButton,
+                        headerLeft: () => HeaderBackButton({
+                            onPress: () => {
+                                closeMoreOptionPopup(ridePageMoreOptionsRef);
+                                navigation.goBack();
+                            }
+                        }),
                         headerRight: () => HeaderEllipsis(
-                            { onPress: () => pressHandle(createRideMoreOptionsRef) })
+                            { onPress: () => pressHandle(ridePageMoreOptionsRef) })
                     }}
                 >
                     {(props: any) => {
@@ -204,7 +214,7 @@ const JourneyTabs = () => {
                                     pressHandle = {pressHandle}
                                     closeMoreOptionPopup = {closeMoreOptionPopup}
                                     closeHandle = {closeHandle}
-                                    createRideMoreOptionsRef = {createRideMoreOptionsRef}
+                                    createRideMoreOptionsRef = {ridePageMoreOptionsRef}
                                     weekDayRef = {weekDayRef}
                                     scheduleMoreOptionsRef = {scheduleMoreOptionsRef}
                                     isScheduleOpened = {isScheduleOpened}

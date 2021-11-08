@@ -19,6 +19,12 @@ export const publishErrorModal: ConfirmModalProps = {
     subtitle: "Ride publishing is failed",
 };
 
+export const invitationsErrorModal: ConfirmModalProps = {
+    ...commonField,
+    title: "Error",
+    subtitle: "You can`t invite more passengers, than you have available seats",
+};
+
 export const updateErrorModal: ConfirmModalProps = {
     ...commonField,
     title: "Error",

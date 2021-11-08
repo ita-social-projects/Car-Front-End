@@ -12,6 +12,7 @@ import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { JOURNEY_CARD_WITH_FEE_HEIGHT, MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
 import Stop from "../../../models/stop/Stop";
 import { getTimeToShow } from "../../utils/JourneyHelperFunctions";
+import StopType from "../../../models/stop/StopType";
 
 const JourneyCard =
     (props: {journey?: Journey, displayFee?: boolean, applicantStops?: Stop[], passangersCount?: number}) => {
@@ -37,6 +38,40 @@ const JourneyCard =
             });
 
         const fullName = `${journey?.organizer?.name} ${journey?.organizer?.surname}`;
+
+        const GetFirstLocation = () =>
+        {
+            let locationName;
+
+            if(journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name)
+            {
+                locationName = journey?.stops.
+                    filter(item => item?.userId === journey.organizer?.id
+                    && item?.type === StopType.Start)[FIRST_ELEMENT_INDEX]?.
+                    address?.name;
+            }
+            locationName = locationName ?? "Location A";
+
+            return locationName;
+        };
+
+        const GetSecondLocation = () =>
+        {
+            let locationName;
+
+            if(journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]?.address?.name)
+            {
+                locationName = journey?.stops.
+                    filter(item => item?.userId === journey.organizer?.id
+                    && item?.type == StopType.Finish)
+                    [FIRST_ELEMENT_INDEX]?.
+                    address?.name;
+
+            }
+            locationName = locationName ?? "Location B";
+
+            return locationName;
+        };
 
         return (
             <View>
@@ -100,12 +135,9 @@ const JourneyCard =
                                         borderColor: colors.white
                                     }]} />
                                 <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
-                                    {journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name
-                                        ? trimTheStringIfTooLong(
-                                        journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name!,
-                                        MAX_ADDRESS_NAME_LENGTH)
-                                        : "Location A"
-                                    }
+                                    {trimTheStringIfTooLong(
+                                        GetFirstLocation(),
+                                        MAX_ADDRESS_NAME_LENGTH)}
                                 </Text>
                             </View>
                             <View style={[JourneyCardStyle.stopStickIcon,
@@ -117,13 +149,9 @@ const JourneyCard =
                                         borderColor: colors.white
                                     }]} />
                                 <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
-                                    {journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]
-                                        ?.address?.name === undefined
-                                        ? "Location B"
-                                        : trimTheStringIfTooLong(
-                                        [...journey?.stops].pop()?.address?.name!,
-                                        MAX_ADDRESS_NAME_LENGTH)
-                                    }
+                                    {trimTheStringIfTooLong(
+                                        GetSecondLocation(),
+                                        MAX_ADDRESS_NAME_LENGTH)}
                                 </Text>
                             </View>
                         </View>

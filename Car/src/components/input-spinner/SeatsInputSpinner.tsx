@@ -10,7 +10,6 @@ interface SeatsInputSpinnerProps {
     value: number,
     title: string,
     minValue?: number,
-    // eslint-disable-next-line unused-imports/no-unused-vars
     onChange: (value: number) => void
 }
 

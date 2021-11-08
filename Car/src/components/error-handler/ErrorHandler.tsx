@@ -23,7 +23,6 @@ const NativeErrorHandler = error => {
 };
 
 const UnhandledPromiseRejectionErrrorHandler = (id,error) => {
-
     if(!axios.isCancel(error))
     {
         if(axios.isAxiosError(error)) {

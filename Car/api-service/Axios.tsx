@@ -8,7 +8,8 @@ const Axios = axios.create({ timeout: 20000 });
 
 Axios.interceptors.request.use(
     async (req: any) => {
-        const token = await AuthManager.getAPIToken();
+        await AuthManager.refreshAsync();
+        const token = await AuthManager.getAccessTokenAsync();
 
         if (token) {
             req.headers.Authorization = "Bearer " + token;

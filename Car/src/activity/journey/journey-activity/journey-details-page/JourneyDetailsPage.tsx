@@ -21,7 +21,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, ZERO_ID
+    FIRST_ELEMENT_INDEX, BORDER_WIDTH, ZERO, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -32,7 +32,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { freeRideModal, invitationsErrorModal, paidRideModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -82,6 +82,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     });
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
+    const [comments, setComments] = useState("");
 
     const activeButtonStyle = {
         backgroundColor: colors.primary,
@@ -222,6 +223,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const publishJourneyHandler = async () => {
+        if (createAllInvitationsArrayFromNewInvitations().length > availableSeats)
+        {
+            setModal(invitationsErrorModal);
+
+            return;
+        }
         setRideIsPublishing(true);
 
         for (let location of savedLocations) {
@@ -238,7 +245,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const newJourney: JourneyDto = {
             id: 0,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
-            comments: comment,
+            comments: comments,
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: !selectedFeeAsPaid,
@@ -277,7 +284,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
-            comments: comment.trim(),
+            comments: comments.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
             isFree: !selectedFeeAsPaid,
@@ -346,7 +353,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
-                                marginBottom={16}
                             />
                         </View>
 
@@ -431,15 +437,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         <SeatsInputSpinner
                             value={availableSeats}
                             onChange={seats => setAvailableSeats(seats)}
-                            title={"Available seats:"}
+                            title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
                         />
-
                         <CommentBlock
                             initialComment={comment}
                             commentHeader="Comments"
+                            placeholder = "Write your comments"
+                            setComments={(initialComment:string)=>
+                                setComments(initialComment)}
                         />
-
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
                                 SoftServians</Text>
@@ -457,14 +464,14 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     size={35}
                                     color={colors.hover}
                                 />
-                                <View style={{ marginLeft: 17 }}>
+                                <View style={{ marginLeft: 20 }}>
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invited SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServians are invited
-                                        for that Ride</Text>
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServian will be
+                                        notified for that Journey</Text>
                                 </View>
                                 <Ionicons
                                     style={[
@@ -487,6 +494,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 style={[CreateJourneyStyle.discardButton,
                                     {
                                         display: journey ? "flex" : "none",
+                                        borderWidth: journey ? BORDER_WIDTH : ZERO,
                                         borderColor: colors.primary
                                     }]}
                                 onPress={() => setDiscardModalIsVisible(true)}

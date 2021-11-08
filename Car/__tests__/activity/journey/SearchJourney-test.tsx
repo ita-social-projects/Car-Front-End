@@ -50,6 +50,7 @@ describe("JourneySearch Test", () => {
           >
             <AddressInputButton
               directionType="From"
+              disabled={false}
               iconName="location"
               onPress={[Function]}
               text=""
@@ -65,6 +66,7 @@ describe("JourneySearch Test", () => {
           >
             <AddressInputButton
               directionType="To"
+              disabled={false}
               iconName="location"
               onPress={[Function]}
               text=""
@@ -138,9 +140,9 @@ describe("JourneySearch Test", () => {
                 "flexDirection": "row",
                 "fontSize": 13,
                 "lineHeight": 16,
-                "marginLeft": 21,
-                "marginRight": 0,
-                "marginTop": 24,
+                "marginLeft": 17,
+                "marginRight": -3,
+                "marginTop": 15,
               }
             }
           >
