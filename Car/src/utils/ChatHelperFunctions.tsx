@@ -4,7 +4,7 @@ import {
 import moment from "moment";
 import "moment-timezone";
 import RNLocalize from "react-native-localize";
-import { Platform, StyleSheet } from 'react-native';
+import { Platform } from "react-native";
 
 // if you have problems with tests, mock getTimeZone function
 export const getDateWithCorrectUtc = (date : Date) => { //used for Ios, Ios doesn't support automatic utc time
