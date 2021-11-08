@@ -15,7 +15,8 @@ import AuthContext from "../../../../components/auth/AuthContext";
 import { DAY_OFFSET, MINUTES_OFFSET } from "../../../../constants/AnimationConstants";
 import {
     CREATING_FONT_SIZE,
-    DEFAULT_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
+    DEFAULT_AVAILABLE_SEATS_COUNT,
+    DEFAULT_TAXI_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
     INITIAL_TIME,
     MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
@@ -50,7 +51,6 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
-import CommentBlockStyle from "../../../../components/commentBlock/CommentBlockStyle";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -386,9 +386,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             onLeftButtonPress={() => {
                                 setOwnCar(true);
                                 setIsVisibleCarDropDown(false);
+                                setAvailableSeats(DEFAULT_AVAILABLE_SEATS_COUNT);
                             }}
                             onRightButtonPress={() => {
                                 setOwnCar(false);
+                                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
                             }}
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
@@ -440,17 +442,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             onChange={seats => setAvailableSeats(seats)}
                             title={"Passengers"}
                             minValue={journey?.participants.length ?? MIN_AVAILABLE_SEATS_COUNT}
+                            maxValue={isOwnCar ? DEFAULT_AVAILABLE_SEATS_COUNT : DEFAULT_TAXI_AVAILABLE_SEATS_COUNT}
                         />
 
-                        <View style={CommentBlockStyle.commentsContainer}>
-                            <CommentBlock
-                                initialComment={comment}
-                                commentHeader="Comments"
-                                placeholder = "Write your comments"
-                                setComments={(initialComment:string)=>
-                                    setComments(initialComment)}
-                            />
-                        </View>
+                        <CommentBlock
+                            initialComment={comments}
+                            commentHeader="Comments"
+                            placeholder = "Write your comments"
+                            setComments={(initialComment:string)=>
+                                setComments(initialComment)}
+                        />
 
                         <View style={CreateJourneyStyle.invitationsView}>
                             <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
@@ -469,14 +470,14 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     size={35}
                                     color={colors.hover}
                                 />
-                                <View style={{ marginLeft: 17 }}>
+                                <View style={{ marginLeft: 20 }}>
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invited SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length}
-                                            SoftServians will be notidied for this Journey
+                                              SoftServian will be notified for that Journey
                                     </Text>
                                 </View>
                                 <Ionicons

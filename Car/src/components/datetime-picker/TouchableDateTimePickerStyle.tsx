@@ -3,7 +3,7 @@ import { Platform, StyleSheet } from "react-native";
 const TouchableDateTimePickerStyle = StyleSheet.create({
     container: {
         flexDirection: "row",
-        borderWidth: 2,
+        borderWidth: 1,
         padding: 5,
         paddingLeft: 8,
         paddingBottom: 8,

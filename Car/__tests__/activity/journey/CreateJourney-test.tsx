@@ -36,6 +36,7 @@ test("renders correctly", async () =>
               "marginTop": 0,
               "paddingHorizontal": 10,
               "position": "absolute",
+              "top": 25,
               "width": "100%",
               "zIndex": 1,
             }
