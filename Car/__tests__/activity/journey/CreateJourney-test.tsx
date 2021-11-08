@@ -36,6 +36,7 @@ test("renders correctly", async () =>
               "marginTop": 0,
               "paddingHorizontal": 10,
               "position": "absolute",
+              "top": 25,
               "width": "100%",
               "zIndex": 1,
             }
@@ -45,6 +46,7 @@ test("renders correctly", async () =>
             directionType="From"
             iconName="location"
             marginBottom={15}
+            marginTop={32}
             onPress={[Function]}
             text=""
           />

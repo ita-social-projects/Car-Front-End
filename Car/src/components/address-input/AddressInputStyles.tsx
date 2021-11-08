@@ -16,7 +16,7 @@ const AddressInputStyles = StyleSheet.create({
     },
     textInput: {
         fontSize: 18,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 0,
         paddingLeft: 58,
         paddingRight: 45,

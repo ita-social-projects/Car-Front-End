@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const JourneyCreationDropDownPickerStyle = StyleSheet.create({
     dropDownStyle: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderTopWidth: 0,
         paddingHorizontal: 4,
         paddingLeft: 10,
@@ -10,7 +10,7 @@ const JourneyCreationDropDownPickerStyle = StyleSheet.create({
     },
 
     style: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 0,
