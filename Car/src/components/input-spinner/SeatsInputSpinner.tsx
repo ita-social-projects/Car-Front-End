@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import Entypo from "react-native-vector-icons/Entypo";
-import { DEFAULT_AVAILABLE_SEATS_COUNT, MIN_AVAILABLE_SEATS_COUNT } from "../../constants/JourneyConstants";
+import { MIN_AVAILABLE_SEATS_COUNT } from "../../constants/JourneyConstants";
 import { useTheme } from "../theme/ThemeProvider";
 import { SeatsInputSpinnerStyle } from "./SeatsInputSpinnerStyle";
 
