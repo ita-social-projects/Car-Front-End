@@ -425,11 +425,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             leftButtonStyle={freeButtonStyle}
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
-                                setModal(freeRideModal);
                                 setSelectedFeeAsPaid(false);
                             }}
                             onRightButtonPress={() => {
-                                setModal(paidRideModal);
                                 setSelectedFeeAsPaid(true);
                             }}
                             title={"Fee"}
