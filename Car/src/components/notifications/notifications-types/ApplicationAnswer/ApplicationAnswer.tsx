@@ -1,46 +1,32 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import MinimizedNotification from "../../minimized-notification/MinimizedNotification";
-import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
-import NotificationButtonGroup from "../notification-buttons/NotificationButtonGroup";
-import NotificationHeader from "../notification-header/NotificationHeader";
-import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
-import NotificationProps from "../NotificationProps";
-import NotificationConfirmButton from "../notification-buttons/NotificationConfirmButton";
-import NotificationDeclineButton from "../notification-buttons/NotificationDeclineButton";
-import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
-import JourneyService from "../../../../api-service/journey-service/JourneyService";
-import AuthContext from "../../auth/AuthContext";
-import ConfirmModal from "../../confirm-modal/ConfirmModal";
-import { HTTP_STATUS_OK } from "../../../constants/Constants";
-import NotificationsService from "../../../../api-service/notifications-service/NotificationsService";
-import Stop from "../../../../models/stop/Stop";
-import JourneyPoint from "../../../../models/journey/JourneyPoint";
+import MinimizedNotification from "../../../minimized-notification/MinimizedNotification";
+import NotificationRideDetails from "../../notification-ride-details/NotificationRideDetails";
+import NotificationButtonGroup from "../../notification-buttons/NotificationButtonGroup";
+import NotificationHeader from "../../notification-header/NotificationHeader";
+import NotificationModalBase from "../../notification-modal-base/NotificationModalBase";
+import NotificationProps from "../../NotificationProps";
+import NotificationConfirmButton from "../../notification-buttons/NotificationConfirmButton";
+import NotificationDeclineButton from "../../notification-buttons/NotificationDeclineButton";
+import { onStopPressHandler } from "../StopNavigationFunction/StopNavigationFunction";
+import JourneyService from "../../../../../api-service/journey-service/JourneyService";
+import AuthContext from "../../../auth/AuthContext";
+import ConfirmModal from "../../../confirm-modal/ConfirmModal";
+import { HTTP_STATUS_OK } from "../../../../constants/Constants";
+import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
+import Stop from "../../../../../models/stop/Stop";
+import JourneyPoint from "../../../../../models/journey/JourneyPoint";
 import { Text, View } from "react-native";
-import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
+import StopsBlock from "../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
 import JourneyNewApplicantViewStyle
-    from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
-import { getStopByType } from "../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../models/stop/StopType";
-import { useTheme } from "../../theme/ThemeProvider";
+    from "../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
+import { getStopByType } from "../../../../utils/JourneyHelperFunctions";
+import StopType from "../../../../../models/stop/StopType";
+import { useTheme } from "../../../theme/ThemeProvider";
 import axios from "axios";
-import Journey from "../../../../models/journey/Journey";
-import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
-
-interface ApplicationAnswerProps {
-    notification: NotificationProps,
-    notificationTittle: string,
-    notificationHeaderTittle: string,
-    notificationHeaderMessage: string,
-    withWithdraw?: boolean,
-    IsDetailsTitleVisible?: boolean,
-    IsDepartureTimeVisible?: boolean,
-    IsFeeVisible?: boolean,
-    IsAvailableSeatsVisible?: boolean,
-    IsBaggageVisible?: boolean,
-    IsStopsTitleVisible?: boolean,
-    journeyUserId: number
-}
+import Journey from "../../../../../models/journey/Journey";
+import JourneyUserDto from "../../../../../models/journey-user/JourneyUserDto";
+import ApplicationAnswerProps from "./ApplicationAnswerProp";
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
     const { colors } = useTheme();

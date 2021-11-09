@@ -1,11 +1,11 @@
 import React from "react";
 import NotificationProps from "../NotificationProps";
-import ApplicationAnswer from "./ApplicationAnswer";
+import InvitationAnswer from "./InvitationAnswer";
 
 const RejectedInvitation = (props: NotificationProps) => {
 
     return (
-        <ApplicationAnswer
+        <InvitationAnswer
             notification = {props}
             notificationTittle = "Passenger rejected your invitation!"
             notificationHeaderTittle = "INVITATION IS REJECTED"

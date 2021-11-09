@@ -1,6 +1,6 @@
 import React from "react";
 import shallowRender from "react-test-renderer/shallow";
-import ApplicationAnswer from "../../src/components/notifications/notifications-types/ApplicationAnswer";
+import ApplicationAnswer from "../../src/components/notifications/notifications-types/ApplicationAnswer/ApplicationAnswer";
 
 const renderer = shallowRender.createRenderer();
 

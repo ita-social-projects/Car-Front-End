@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../../auth/AuthContext";
 import NotificationProps from "../NotificationProps";
-import ApplicationAnswer from "./ApplicationAnswer";
+import ApplicationAnswer from "./ApplicationAnswer/ApplicationAnswer";
 
 const ApplicationApproval = (props: NotificationProps) => {
     const user = useContext(AuthContext).user;
