@@ -98,8 +98,8 @@ describe("JourneySearch Test", () => {
                 },
                 Array [
                   Object {
-                    "paddingRight": 15,
                     "paddingLeft": 16,
+                    "paddingRight": 15,
                     "paddingTop": 16,
                   },
                 ],
