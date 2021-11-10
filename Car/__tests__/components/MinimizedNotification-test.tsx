@@ -4,37 +4,39 @@ import User from "../../models/user/User";
 import MinimizedNotification from "../../src/components/minimized-notification/MinimizedNotification";
 
 const testUser: User = {
-    id: 0,
-    name: "string",
-    surname: "string",
-    position: "string",
-    location: "string",
-    email: "abc@gmail.com",
-    fcmtoken: null,
-    hireDate: new Date(0),
-    imageId: "string | null",
-    journeyCount: 0,
-    phoneNumber: null,
+  id: 0,
+  name: "string",
+  surname: "string",
+  position: "string",
+  location: "string",
+  email: "abc@gmail.com",
+  fcmtoken: null,
+  hireDate: new Date(0),
+  imageId: "string | null",
+  journeyCount: 0,
+  phoneNumber: null,
 };
 
 test("renders correctly", async () =>
-    expect(
-        renderer
-            .create(
-                <MinimizedNotification
-                    notificationId={0}
-                    user={testUser}
-                    notificationTitle={"New applicant"}
-                    read={false}
-                    date={new Date(0)}
-                    openModal={() => {}}
-                />
-            )
-            .toJSON()
-    ).toMatchInlineSnapshot(`
+  expect(
+    renderer
+      .create(
+        <MinimizedNotification
+          notificationId={0}
+          user={testUser}
+          notificationTitle={"New applicant"}
+          read={false}
+          date={new Date(0)}
+          openModal={() => {}}
+        />
+      )
+      .toJSON()
+  ).toMatchInlineSnapshot(`
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
+      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -89,9 +91,7 @@ test("renders correctly", async () =>
                 }
               >
                 <ActivityIndicator
-                  animating={true}
                   color="#414045"
-                  hidesWhenStopped={true}
                   size={17.906976744186046}
                   style={
                     Object {
@@ -185,23 +185,25 @@ test("renders correctly", async () =>
   `));
 
 test("renders correctly", async () =>
-    expect(
-        renderer
-            .create(
-                <MinimizedNotification
-                    notificationId={0}
-                    user={testUser}
-                    notificationTitle={"New applicant"}
-                    read={true}
-                    date={new Date(0)}
-                    openModal={() => {}}
-                />
-            )
-            .toJSON()
-    ).toMatchInlineSnapshot(`
+  expect(
+    renderer
+      .create(
+        <MinimizedNotification
+          notificationId={0}
+          user={testUser}
+          notificationTitle={"New applicant"}
+          read={true}
+          date={new Date(0)}
+          openModal={() => {}}
+        />
+      )
+      .toJSON()
+  ).toMatchInlineSnapshot(`
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
+      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -252,9 +254,7 @@ test("renders correctly", async () =>
                 }
               >
                 <ActivityIndicator
-                  animating={true}
                   color="#414045"
-                  hidesWhenStopped={true}
                   size={17.906976744186046}
                   style={
                     Object {
