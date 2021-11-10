@@ -13,7 +13,7 @@ export const SeatsInputSpinnerStyle = StyleSheet.create({
         borderColor: "#000000",
         borderWidth: 1,
         width: 143,
-        borderRadius: 0
+        borderRadius: 0,
     },
 
     descriptionText: {
