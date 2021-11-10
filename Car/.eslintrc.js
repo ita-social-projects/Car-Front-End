@@ -63,11 +63,19 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": "error",
     },
     "overrides": [{
-        "files": ["*Style.tsx", "Constants.tsx", "LocationHelperFunctions.ts", "*-test.tsx", "JourneyConstants.tsx", "StylesConstants.tsx"],
+        "files": [
+            "*Style.tsx",
+            "Constants.tsx",
+            "LocationHelperFunctions.ts",
+            "*-test.tsx",
+            "JourneyConstants.tsx",
+            "StylesConstants.tsx",
+            ".eslintrc.js"
+        ],
         "rules": {
             "no-magic-numbers": "off",
             "unused-imports/no-unused-vars": "off",
             "max-len": "off",
         },
-    }, ]
+    },]
 };
