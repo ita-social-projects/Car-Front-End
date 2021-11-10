@@ -72,108 +72,112 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     }, []);
 
     return (
-        <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: colors.white }]}>
-            {
-                existingInvitations.length > ZERO && (<View style={CreateJourneyStyle.commentsView}>
-                    <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Existing
+        <View style={{
+            flexDirection: "column",
+            flex: 1
+        }}>
+            <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: colors.white }]}>
+                {
+                    existingInvitations.length > ZERO && (<View style={CreateJourneyStyle.commentsView}>
+                        <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Existing
                         invitation</Text>
-                    {existingInvitations.map((us, index) => (
-                        <View key={index} style={JourneyInvitationsPageStyle.row}>
-                            <Text style={{ color: colors.hover, paddingTop: 5 }}>{
-                                getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
-                            <Text style={{ color: colors.hover, paddingTop: 5 }}>
-                                {InvitationType[existingInvitations[index]!.type]} </Text>
-                        </View>
-                    ))}
+                        {existingInvitations.map((us, index) => (
+                            <View key={index} style={JourneyInvitationsPageStyle.row}>
+                                <Text style={[JourneyInvitationsPageStyle.emailText, { color: colors.hover }]}>{
+                                    getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
+                                <Text style={[JourneyInvitationsPageStyle.invitationStatusText,
+                                    { color: colors.hover }]}>
+                                    {InvitationType[existingInvitations[index]!.type]} </Text>
+                            </View>
+                        ))}
 
-                </View>)
-            }
+                    </View>)
+                }
 
-            <View style={CreateJourneyStyle.commentsView}>
-                <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>New invitations</Text>
-                {invitedUsers.map((us, index) => (
-                    <View key={index}>
-                        <TextInput
-                            style={[CreateJourneyStyle.invitationInputStyle,
-                                {
-                                    borderColor: colors.primary,
-                                    color: colors.primary, marginTop: 5
-                                }]}
-                            maxLength={100}
-                            placeholder={"Enter invited user email"}
-                            placeholderTextColor={colors.hover}
-                            value={invitedUsers[index].email}
-                            onChangeText={text => checkForCorrectEmail(text, index)}
-                        />
-
-                        <TouchableOpacity
-                            style={JourneyInvitationsPageStyle.clearIcon}
-                            onPress={() => onInvitationDeleteIconPress(index)}
-                        >
-                            <Ionicons
-                                style={[
-                                    { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
-                                ]}
-                                name={"close"}
-                                size={22}
-                                color={colors.hover}
+                <View style={CreateJourneyStyle.commentsView}>
+                    <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>New invitations</Text>
+                    {invitedUsers.map((us, index) => (
+                        <View key={index}>
+                            <TextInput
+                                style={[CreateJourneyStyle.invitationInputStyle,
+                                    {
+                                        borderColor: colors.primary,
+                                        color: colors.primary, marginTop: 5
+                                    }]}
+                                maxLength={100}
+                                placeholder={"Enter invited user email"}
+                                placeholderTextColor={colors.hover}
+                                value={invitedUsers[index].email}
+                                onChangeText={text => checkForCorrectEmail(text, index)}
                             />
-                        </TouchableOpacity>
 
-                        {invitedUsers[index].email !== "" && (
                             <TouchableOpacity
-                                style={JourneyInvitationsPageStyle.statusIcon}
-                                onPress={() =>{
-                                    let statusInfo : string = invitedUsers[index].isCorrect ?
-                                        "Great! We found user with such an email!"
-                                        : "There is no user with such an email";
-
-                                    ToastAndroid.show(statusInfo, ToastAndroid.SHORT);
-                                }}
+                                style={JourneyInvitationsPageStyle.clearIcon}
+                                onPress={() => onInvitationDeleteIconPress(index)}
                             >
                                 <Ionicons
                                     style={[
                                         { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
                                     ]}
-                                    name={
-                                        invitedUsers[index].isCorrect ?
-                                            "checkmark-outline"
-                                            : "alert-circle-outline"
-                                    }
+                                    name={"close"}
                                     size={22}
-                                    color={invitedUsers[index].isCorrect ? colors.hover : colors.accentRed}
+                                    color={colors.hover}
                                 />
                             </TouchableOpacity>
-                        )}
-                    </View>
-                ))}
 
-            </View>
-            <View style={[CreateJourneyStyle.publishButtonContainer,
-                { flexDirection: "row" }]}>
+                            {invitedUsers[index].email !== "" && (
+                                <TouchableOpacity
+                                    style={JourneyInvitationsPageStyle.statusIcon}
+                                    onPress={() =>{
+                                        let statusInfo : string = invitedUsers[index].isCorrect ?
+                                            "Great! We found user with such an email!"
+                                            : "There is no user with such an email";
+
+                                        ToastAndroid.show(statusInfo, ToastAndroid.SHORT);
+                                    }}
+                                >
+                                    <Ionicons
+                                        style={[
+                                            { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
+                                        ]}
+                                        name={
+                                            invitedUsers[index].isCorrect ?
+                                                "checkmark-outline"
+                                                : "alert-circle-outline"
+                                        }
+                                        size={22}
+                                        color={invitedUsers[index].isCorrect ? colors.hover : colors.accentRed}
+                                    />
+                                </TouchableOpacity>
+                            )}
+                        </View>
+                    ))}
+
+                </View>
+                <View style={CreateJourneyStyle.publishButtonContainer}>
+                    <TouchableOpacity
+                        style={[CreateJourneyStyle.publishButton,
+                            {
+                                backgroundColor: colors.primary,
+                                borderColor: colors.primary
+                            }]}
+                        onPress={addInvitationPressHandler}
+                    >
+                        <Text style={[CreateJourneyStyle.publishButtonText,
+                            {
+                                fontSize: CREATING_FONT_SIZE,
+                                color: colors.white
+                            }]}>
+                            {"Add invitation"}
+                        </Text>
+                    </TouchableOpacity>
+
+                </View>
+            </ScrollView>
+
+            <View style={CreateJourneyStyle.saveButonContainer}>
                 <TouchableOpacity
-                    style={[CreateJourneyStyle.publishButton,
-                        {
-                            backgroundColor: colors.primary,
-                            borderColor: colors.primary
-                        }]}
-                    onPress={addInvitationPressHandler}
-                >
-                    <Text style={[CreateJourneyStyle.publishButtonText,
-                        {
-                            fontSize: CREATING_FONT_SIZE,
-                            color: colors.white
-                        }]}>
-                        {"Add invitation"}
-                    </Text>
-                </TouchableOpacity>
-
-            </View>
-            <View style={[CreateJourneyStyle.publishButtonContainer,
-                { flexDirection: "column" }]}>
-
-                <TouchableOpacity
-                    style={[CreateJourneyStyle.publishButton,
+                    style={[CreateJourneyStyle.saveButton,
                         {
                             backgroundColor: colors.primary,
                             borderColor: colors.primary
@@ -189,9 +193,8 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         {"Save"}
                     </Text>
                 </TouchableOpacity>
-
             </View>
-        </ScrollView>
+        </View>
     );
 };
 
