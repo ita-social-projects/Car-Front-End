@@ -44,8 +44,8 @@ describe("JourneySearch Test", () => {
             style={
               Object {
                 "paddingRight": 15,
-                    "paddingLeft": 16,
-                    "paddingVertical": 10,
+                "paddingLeft": 16,
+                "paddingVertical": 10,
               }
             }
           >
@@ -60,9 +60,9 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                "paddingRight": 15,
-                    "paddingLeft": 16,
-                    "paddingVertical": 10,
+                "paddingLeft": 16,
+                 "paddingRight": 15,
+                 "paddingTop": 16,
               }
             }
           >
@@ -77,9 +77,9 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                "paddingRight": 15,
-                    "paddingLeft": 16,
-                    "paddingVertical": 10,
+                  "paddingLeft": 16,
+                  "paddingRight": 15,
+                  "paddingTop": 16,
               }
             }
           >
@@ -180,9 +180,8 @@ describe("JourneySearch Test", () => {
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
-                      "paddingRight": 15,
-                      "paddingLeft": 16,
-                      "paddingTop": 16,
+                      "paddingHorizontal": 16,
+                      "paddingVertical": 6,
                     },
                     Object {
                       "backgroundColor": "#0B171B",
@@ -221,9 +220,8 @@ describe("JourneySearch Test", () => {
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
-                      "paddingRight": 15,
-                      "paddingLeft": 16,
-                      "paddingTop": 16,
+                      "paddingHorizontal": 16,
+                      "paddingVertical": 6,
                     },
                     Object {
                       "backgroundColor": "#FFFFFF",
@@ -264,9 +262,8 @@ describe("JourneySearch Test", () => {
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "marginRight": 15,
-                      "paddingRight": 15,
-                      "paddingLeft": 16,
-                      "paddingTop": 16,
+                      "paddingHorizontal": 16,
+                      "paddingVertical": 6,
                     },
                     Object {
                       "backgroundColor": "#FFFFFF",
@@ -318,7 +315,7 @@ describe("JourneySearch Test", () => {
               style={
                 Array [
                   Object {
-                    "borderWidth": 1,
+                    "borderWidth": 2,
                     "flexDirection": "row",
                     "marginBottom": 20,
                     "marginRight": 20,
