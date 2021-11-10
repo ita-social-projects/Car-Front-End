@@ -61,8 +61,8 @@ describe("JourneySearch Test", () => {
             style={
               Object {
                 "paddingLeft": 16,
-                "paddingRight": 15,
-                "paddingTop": 16,
+                 "paddingRight": 15,
+                 "paddingTop": 16,
               }
             }
           >
@@ -98,9 +98,9 @@ describe("JourneySearch Test", () => {
                 },
                 Array [
                   Object {
-                    "paddingLeft": 16,
                     "paddingRight": 15,
-                    "paddingTop": 16,
+                    "paddingLeft": 16,
+                    "paddingVertical": 10,
                   },
                 ],
               ]
