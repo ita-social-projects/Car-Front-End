@@ -43,9 +43,9 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                "paddingRight": 15,
-                "paddingLeft": 16,
-                "paddingVertical": 10,
+                  "paddingLeft": 16,
+                  "paddingRight": 15,
+                  "paddingTop": 16,
               }
             }
           >
@@ -98,9 +98,9 @@ describe("JourneySearch Test", () => {
                 },
                 Array [
                   Object {
-                    "paddingRight": 15,
                     "paddingLeft": 16,
-                    "paddingVertical": 10,
+                    "paddingRight": 15,
+                    "paddingTop": 16,
                   },
                 ],
               ]
