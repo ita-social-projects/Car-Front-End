@@ -180,8 +180,9 @@ describe("JourneySearch Test", () => {
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
-                      "paddingHorizontal": 16,
-                      "paddingVertical": 6,
+                      "paddingRight": 15,
+                      "paddingLeft": 16,
+                      "paddingTop": 16,
                     },
                     Object {
                       "backgroundColor": "#0B171B",
@@ -220,8 +221,9 @@ describe("JourneySearch Test", () => {
                       "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
-                      "paddingHorizontal": 16,
-                      "paddingVertical": 6,
+                      "paddingRight": 15,
+                      "paddingLeft": 16,
+                      "paddingTop": 16,
                     },
                     Object {
                       "backgroundColor": "#FFFFFF",
@@ -262,8 +264,9 @@ describe("JourneySearch Test", () => {
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "marginRight": 15,
-                      "paddingHorizontal": 16,
-                      "paddingVertical": 6,
+                      "paddingRight": 15,
+                      "paddingLeft": 16,
+                      "paddingTop": 16,
                     },
                     Object {
                       "backgroundColor": "#FFFFFF",
@@ -315,7 +318,7 @@ describe("JourneySearch Test", () => {
               style={
                 Array [
                   Object {
-                    "borderWidth": 2,
+                    "borderWidth": 1,
                     "flexDirection": "row",
                     "marginBottom": 20,
                     "marginRight": 20,

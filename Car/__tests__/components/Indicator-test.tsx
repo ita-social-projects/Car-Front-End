@@ -19,12 +19,7 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <ActivityIndicator
-        animating={true}
-        color="#999999"
-        hidesWhenStopped={true}
-        size="small"
-      />
+      <ActivityIndicator />
       <Text
         style={
           Array [
