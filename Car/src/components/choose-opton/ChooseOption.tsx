@@ -1,13 +1,13 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Switch } from "react-native-gesture-handler";
 import { useTheme } from "../theme/ThemeProvider";
 import ChooseOptionStyle from "./ChooseOptionStyle";
 import ChooseOptionProps from "./ChooseOptionProps";
 import TouchableNavigationCardStyle from "../touchable-navigation-card/TouchableNavigationCardStyle";
+import SwitchToggle from "react-native-switch-toggle";
 
 const ChooseOption = (props: ChooseOptionProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
 
     return (
         <View style={ChooseOptionStyle.preferencesContainer}>
@@ -28,12 +28,26 @@ const ChooseOption = (props: ChooseOptionProps) => {
                 </Text>
             </View>
             <View>
-                <Switch
-                    trackColor={{ false: colors.secondaryDark, true: colors.hover }}
-                    thumbColor={colors.white}
-                    style={ChooseOptionStyle.switch}
-                    value={props.value}
-                    onValueChange={(value) => props.onValueChanged(value)}
+                <SwitchToggle
+                    switchOn={props.value}
+                    onPress={() => props.onValueChanged(!props.value)}
+                    circleColorOff={colors.white}
+                    circleColorOn={!isThemeDark ? colors.white : colors.neutralDark}
+                    backgroundColorOn={!isThemeDark ? colors.hover : colors.white}
+                    backgroundColorOff={colors.neutralDark}
+                    containerStyle={{
+                        width: 36,
+                        height: 20,
+                        borderRadius: 12,
+                        padding: 2,
+                        borderWidth: 1,
+                        borderColor: colors.neutralDark
+                    }}
+                    circleStyle={{
+                        width: 16,
+                        height: 16,
+                        borderRadius: 8,
+                    }}
                 />
             </View>
         </View>
