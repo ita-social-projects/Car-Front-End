@@ -6,8 +6,9 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     dropDownPickerContainer: {
-        marginHorizontal: 16,
-        marginTop: 16
+        marginLeft: 16,
+        marginRight: 15,
+        marginTop: 24
     },
 
     recentJourneyText: {
@@ -74,7 +75,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     commentsCaption: {
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: "bold",
         marginBottom: 5
     },
@@ -85,7 +86,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginBottom: 2
     },
 
-    invitationsDesctiption: {
+    invitationsDescription: {
         fontSize: 12,
     },
 

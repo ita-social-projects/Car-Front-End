@@ -344,6 +344,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <AddressInputButton
                                 iconName={"location"}
                                 directionType={"From"}
+                                marginTop={16}
                                 text={params.from.text}
                                 disabled={true}
                             />
@@ -357,17 +358,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             />
                         </View>
 
-                        {params.stops.map((stop, index) => (
-                            <AddressInputButton
-                                iconName={"location"}
-                                directionType={"Via"}
-                                text={stop.text}
-                                disabled={true}
-                                marginHorizontal={16}
-                                marginBottom={16}
-                                key={index}
-                            />
-                        ))}
+                        <View style={SearchJourneyStyle.locationContainer}>
+                            {params.stops.map((stop, index) => (
+                                <AddressInputButton
+                                    iconName={"location"}
+                                    directionType={"Via"}
+                                    text={stop.text}
+                                    disabled={true}
+                                    key={index}
+                                />
+                            ))}
+                        </View>
                         <View style={SearchJourneyStyle.locationContainer}>
                             <TouchableDateTimePicker
                                 date={departureTime}
@@ -454,7 +455,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <View style={CreateJourneyStyle.invitationsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
+                            <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invite
                                 SoftServians</Text>
                             <TouchableOpacity style={CreateJourneyStyle.invitationsLink}
                                 onPress={() =>
@@ -472,19 +473,19 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 />
                                 <View style={{ marginLeft: 20 }}>
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
-                                        Invited SoftServians</Text>
-                                    <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
+                                        Invite SoftServians</Text>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsDescription,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length}
-                                              SoftServian will be notified for that Journey
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServian
+                                        will be notified for that Journey
                                     </Text>
                                 </View>
                                 <Ionicons
                                     style={[
                                         {
                                             transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight,
-                                            marginLeft: 35
+                                            marginLeft: 52
                                         }
                                     ]}
                                     name={"chevron-forward-outline"}

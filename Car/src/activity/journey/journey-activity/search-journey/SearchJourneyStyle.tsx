@@ -7,8 +7,9 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     locationContainer: {
-        paddingVertical: 10,
-        paddingHorizontal: 16,
+        paddingTop: 16,
+        paddingLeft: 16,
+        paddingRight: 15
     },
 
     loadingContainer: {
