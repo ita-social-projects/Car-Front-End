@@ -5,9 +5,9 @@ import JourneyCard from "../../src/components/journey-card/JourneyCard";
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<JourneyCard />)).toMatchInlineSnapshot(`
+  expect(renderer.render(<JourneyCard />)).toMatchInlineSnapshot(`
     <View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       >
         <View
@@ -98,7 +98,7 @@ test("renders correctly", async () =>
                     }
                   }
                 >
-                  <ForwardRef
+                  <TouchableOpacity
                     onPress={[Function]}
                   />
                 </View>
@@ -263,6 +263,6 @@ test("renders correctly", async () =>
             </View>
           </View>
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   `));

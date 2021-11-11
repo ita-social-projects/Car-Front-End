@@ -3,9 +3,10 @@ import renderer from "react-test-renderer";
 import MenuButton from "../../src/components/menu-button/MenuButton";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
+  expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}

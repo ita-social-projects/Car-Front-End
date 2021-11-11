@@ -5,13 +5,13 @@ import JourneyStartPage from "../../../src/activity/journey/JourneyStartPage";
 const renderer = shallowRenderer.createRenderer();
 
 const navigation = {
-    //eslint-disable-next-line @typescript-eslint/no-unused-vars
-    addListener: (event: string, callback: () => void) => () => void {},
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addListener: (event: string, callback: () => void) => () => void {},
 };
 
 test("renders correctly", async () =>
-    expect(renderer.render(<JourneyStartPage navigation={navigation} />))
-        .toMatchInlineSnapshot(`
+  expect(renderer.render(<JourneyStartPage navigation={navigation} />))
+    .toMatchInlineSnapshot(`
     <ScrollView
       refreshControl={
         <RefreshControlMock
@@ -126,7 +126,7 @@ test("renders correctly", async () =>
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -165,8 +165,8 @@ test("renders correctly", async () =>
             >
               All
             </Text>
-          </ForwardRef>
-          <ForwardRef
+          </TouchableOpacity>
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -205,8 +205,8 @@ test("renders correctly", async () =>
             >
               Past
             </Text>
-          </ForwardRef>
-          <ForwardRef
+          </TouchableOpacity>
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -245,8 +245,8 @@ test("renders correctly", async () =>
             >
               Upcoming
             </Text>
-          </ForwardRef>
-          <ForwardRef
+          </TouchableOpacity>
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -285,7 +285,7 @@ test("renders correctly", async () =>
             >
               Regular
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <View

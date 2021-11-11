@@ -5,8 +5,11 @@ import OkSearchResult from "../../../src/activity/journey/journey-activity/searc
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<OkSearchResult journeys={[]} displayFee={false} passangersCount={1} />))
-        .toMatchInlineSnapshot(`
+  expect(
+    renderer.render(
+      <OkSearchResult journeys={[]} displayFee={false} passangersCount={1} />
+    )
+  ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -27,23 +30,13 @@ test("renders correctly", async () =>
           }
         }
         data={Array []}
-        disableVirtualization={false}
-        horizontal={false}
-        initialNumToRender={10}
         keyExtractor={[Function]}
-        maxToRenderPerBatch={10}
-        numColumns={1}
-        onEndReachedThreshold={2}
-        removeClippedSubviews={false}
         renderItem={[Function]}
-        scrollEventThrottle={50}
         style={
           Object {
             "paddingHorizontal": 16,
           }
         }
-        updateCellsBatchingPeriod={50}
-        windowSize={21}
       />
     </View>
   `));

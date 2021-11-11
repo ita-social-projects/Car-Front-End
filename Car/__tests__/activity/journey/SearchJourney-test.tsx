@@ -7,24 +7,24 @@ import WayPoint from "../../../src/types/WayPoint";
 import toJSON from "enzyme-to-json";
 
 const props: SearchJourneyProps = {
-    route: {
-        params: {
-            isRequest: true,
-            isPreviousFilter: true,
-            wayPoint: {} as WayPoint,
-            wayPointId: "",
-        },
+  route: {
+    params: {
+      isRequest: true,
+      isPreviousFilter: true,
+      wayPoint: {} as WayPoint,
+      wayPointId: "",
     },
+  },
 };
 
 describe("JourneySearch Test", () => {
-    let wrapper = shallow(<SearchJourney {...props} />);
+  let wrapper = shallow(<SearchJourney {...props} />);
 
-    it("should match inline snapshot", async () => {
-        const date = new Date(0);
+  it("should match inline snapshot", async () => {
+    const date = new Date(0);
 
-        wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
-        expect(toJSON(wrapper)).toMatchInlineSnapshot(`
+    wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
+    expect(toJSON(wrapper)).toMatchInlineSnapshot(`
       <Fragment>
         <ScrollView
           style={
@@ -43,9 +43,9 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                  "paddingLeft": 16,
-                  "paddingRight": 15,
-                  "paddingTop": 16,
+                "paddingLeft": 16,
+                "paddingRight": 15,
+                "paddingTop": 16,
               }
             }
           >
@@ -77,9 +77,9 @@ describe("JourneySearch Test", () => {
           <View
             style={
               Object {
-                  "paddingLeft": 16,
-                  "paddingRight": 15,
-                  "paddingTop": 16,
+                "paddingLeft": 16,
+                "paddingRight": 15,
+                "paddingTop": 16,
               }
             }
           >
@@ -171,7 +171,7 @@ describe("JourneySearch Test", () => {
                 }
               }
             >
-              <ForwardRef
+              <TouchableOpacity
                 onPress={[Function]}
                 style={
                   Array [
@@ -210,8 +210,8 @@ describe("JourneySearch Test", () => {
                 >
                   All
                 </Text>
-              </ForwardRef>
-              <ForwardRef
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={[Function]}
                 style={
                   Array [
@@ -250,8 +250,8 @@ describe("JourneySearch Test", () => {
                 >
                   Free
                 </Text>
-              </ForwardRef>
-              <ForwardRef
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={[Function]}
                 style={
                   Array [
@@ -292,7 +292,7 @@ describe("JourneySearch Test", () => {
                 >
                   Paid
                 </Text>
-              </ForwardRef>
+              </TouchableOpacity>
             </View>
           </View>
           <View
@@ -309,7 +309,7 @@ describe("JourneySearch Test", () => {
               ]
             }
           >
-            <ForwardRef
+            <TouchableOpacity
               disabled={true}
               onPress={[Function]}
               style={
@@ -347,10 +347,10 @@ describe("JourneySearch Test", () => {
               >
                 Search
               </Text>
-            </ForwardRef>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </Fragment>
     `);
-    });
+  });
 });
