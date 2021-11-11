@@ -188,13 +188,7 @@ const Messages = (props: MessagesProps) => {
                     )}
                 />
                 {filteredDataSource?.length ? (
-                    <View style={MessagesStyle.warningContainer}>
-                        <Text style={MessagesStyle.warningMessageStyle}>
-                            Each chat will be deleted 2 weeks after the trip
-                            {"\n"}
-                            departure time
-                        </Text>
-                    </View>
+                    <View style={MessagesStyle.warningContainer}></View>
                 ) : (
                     <>
                         <View style={MessagesStyle.noMessageContainer}>
