@@ -10,7 +10,7 @@ import JourneyPageStyle from "../../JourneyPageStyle";
 interface StopsBlockProps {
     stops: Stop[],
     onStopPress: (stop: Stop) => void,
-    highlightedStops: number[]
+    highlightedStops?: number[]
 }
 
 const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
