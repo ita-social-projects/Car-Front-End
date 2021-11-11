@@ -27,7 +27,7 @@ test("renders correctly", async () =>
             />
         )
     ).toMatchInlineSnapshot(`
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <View
@@ -124,7 +124,7 @@ test("renders correctly", async () =>
           }
         />
       </View>
-    </ForwardRef>
+    </TouchableOpacity>
   `));
 
 test("renders correctly", async () =>
@@ -149,7 +149,7 @@ test("renders correctly", async () =>
             />
         )
     ).toMatchInlineSnapshot(`
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <View
@@ -250,5 +250,5 @@ test("renders correctly", async () =>
           }
         />
       </View>
-    </ForwardRef>
+    </TouchableOpacity>
   `));
