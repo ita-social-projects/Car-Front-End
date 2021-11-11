@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -53,9 +53,11 @@ import CarBlock from "./blocks/car-block/CarBlock";
 import CommentsBlock from "./blocks/comments-block/CommentsBlock";
 import DriverBlock from "./blocks/driver-block/DriverBlock";
 import ParticipantsBlock from "./blocks/participants-block/ParticipantsBlock";
-import SendRequestModal from "./blocks/send-request-modal/SendRequestModal";
 import StopsBlock from "./blocks/stops-block/StopsBlock";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
+import CommentBlock from "../../../../components/commentBlock/CommentBlock";
+import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
+import ChooseOption from "../../../../components/choose-opton/ChooseOption";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -74,7 +76,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
-    const [requestModalIsVisible, setRequestModalIsVisible] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
     const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false);
@@ -88,6 +89,12 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [requestComments, setRequestComments] = useState("");
     const [passangersCount, setPassangersCount] =
         useState(props.route.params.passangersCount?? DEFAULT_PASSANGERS_COUNT);
+    const [isConfirmationFormVisible, setIsConfirmationFormVisible] = useState(false);
+    const userQuantity :{ id: number, name: string }[] = [
+        { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }];
+    const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
+    const [selectedQuantity, setSelectedQuantity] =
+        useState({ id: passangersCount, name: passangersCount.toString() });
 
     const applicantStops = props.route.params.applicantStops;
 
@@ -187,7 +194,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     await AsyncStorage.setItem("journeyId" + currentJourney?.id, "1");
                 })().then(() => {
                     setRequestSuccessfullySentModalIsVisible(true);
-                    setRequestModalIsVisible(false);
+                    setIsConfirmationFormVisible(false);
                 });
             }
         }).catch(() => setModal(requestSendingFailedModal));
@@ -280,33 +287,95 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     renderHeader={<DriverBlock journey={currentJourney}/>}
                     renderContent={
                         <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
+                            {!isConfirmationFormVisible ? (
+                                <>
+                                    <View style={JourneyPageStyle.detailsBlock}>
+                                        <ScrollView
+                                            nestedScrollEnabled={true}
+                                            style={[JourneyPageStyle.contentView, { backgroundColor: colors.white }]}
+                                        >
+                                            <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
+                                            <StopsBlock
+                                                stops={getStopsForBottomPopup() ?? []}
+                                                onStopPress={onStopPressHandler}
+                                                highlightedStops={isDriver ?
+                                                    [...Array(currentJourney?.stops.length).keys()] :
+                                                    [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                                            />
+                                            <CommentsBlock comments={currentJourney?.comments} />
+                                            <ParticipantsBlock journey={currentJourney}/>
+                                        </ScrollView>
+                                    </View>
 
-                            <View style={JourneyPageStyle.detailsBlock}>
-                                <ScrollView
-                                    nestedScrollEnabled={true}
-                                    style={[JourneyPageStyle.contentView, { backgroundColor: colors.white }]}
-                                >
-                                    <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                    <StopsBlock
-                                        stops={getStopsForBottomPopup() ?? []}
-                                        onStopPress={onStopPressHandler}
-                                        highlightedStops={isDriver ?
-                                            [...Array(currentJourney?.stops.length).keys()] :
-                                            [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                                    <ButtonBlock
+                                        isDriver={isDriver}
+                                        isPassenger={isPassenger}
+                                        isRequested={isRequested}
+                                        journey={currentJourney}
+                                        applicantStops={applicantStops}
+                                        onSendRequestPress={() => {
+                                            setIsConfirmationFormVisible(true);
+                                        }}
                                     />
-                                    <CommentsBlock comments={currentJourney?.comments} />
-                                    <ParticipantsBlock journey={currentJourney}/>
-                                </ScrollView>
-                            </View>
+                                </>
+                            ) : (
+                                <View style={JourneyPageStyle.confirmationFormContainer}>
+                                    <CommentBlock
+                                        placeholder="Any comments?"
+                                        initialComment=""
+                                        commentHeader="Comments"
+                                        setComments={(comment)=>setRequestComments(comment)}
+                                        containerStyle={JourneyPageStyle.commentsBlockContainer}
+                                    />
 
-                            <ButtonBlock
-                                isDriver={isDriver}
-                                isPassenger={isPassenger}
-                                isRequested={isRequested}
-                                journey={currentJourney}
-                                applicantStops={applicantStops}
-                                onSendRequestPress={() => setRequestModalIsVisible(true)}
-                            />
+                                    <View style ={JourneyPageStyle.dropDownContainer}>
+                                        <View style ={JourneyPageStyle.dropDown}>
+                                            <JourneyCreationDropDownPicker
+                                                items={userQuantity.map((car) => ({
+                                                    label: car.name,
+                                                    value: car.id
+                                                }))}
+                                                paddingLeft={100}
+                                                searchable={false}
+                                                placeholder="Passengers:"
+                                                isVisible={isVisibleQuantityDropDown}
+                                                onOpen={() => setIsVisibleQuantityDropDown(true)}
+                                                onChangeItem={(item) => {
+                                                    setSelectedQuantity({ id: item.value, name: item.label });
+                                                    setPassangersCount(item.value);
+                                                    setIsVisibleQuantityDropDown(false);
+                                                }}
+                                                valueId={selectedQuantity.id}
+                                            />
+                                        </View>
+                                    </View>
+                                    <View style={JourneyPageStyle.chooseOptionContainer}>
+                                        <ChooseOption
+                                            text={"Have you got any luggage with you?"}
+                                            value={withLuggage}
+                                            onValueChanged={setWithLuggage}
+                                        />
+                                    </View>
+
+                                    <View style={{ alignItems: "flex-end" }}>
+                                        <TouchableOpacity
+                                            style={[
+                                                JourneyPageStyle.confirmButton,
+                                                {
+                                                    backgroundColor: colors.primary,
+                                                    borderColor: colors.primary
+                                                }]}
+                                            onPress={sendRequest}
+                                        >
+                                            <Text style={[JourneyPageStyle.confirmButtonText,
+                                                { color: colors.white }]}>
+                                                Send Request
+                                            </Text>
+                                        </TouchableOpacity>
+
+                                    </View>
+                                </View>
+                            )}
 
                         </View>
                     }
@@ -365,18 +434,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 {...modal}
                 onConfirm={disableModal}
                 disableModal={disableModal}
-            />
-
-            <SendRequestModal
-                comments={requestComments}
-                onCommentsChange={text => setRequestComments(text)}
-                visible={requestModalIsVisible}
-                disableNodal={() => setRequestModalIsVisible(false)}
-                withLuggage={withLuggage}
-                onWithLuggageChange={value => setWithLuggage(value)}
-                onConfirmPress={sendRequest}
-                passangersCount={passangersCount}
-                onPassangersCountChange={value => setPassangersCount(value)}
             />
         </>
     );

@@ -72,7 +72,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                         disabled={props.isRequested}
                     >
                         <Text style={[JourneyPageStyle.requestButtonText, { color: colors.white }]}>
-                            {props.isRequested ? "Requested" : "Send request"}
+                            {props.isRequested ? "Requested" : "Next"}
                         </Text>
                     </TouchableOpacity>
                 )}

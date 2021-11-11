@@ -14,7 +14,7 @@ const CommentBlock = (props: CommentBlockProps) => {
             :`${PREFERENCES_COMMENTS_MAX_LENGTH - props.initialComment.length} symbols left`);
 
     return(
-        <View style={CommentBlockStyle.commentsContainer}>
+        <View style={[CommentBlockStyle.commentsContainer, props.containerStyle]}>
             <Text style={[PreferencesStyle.commentsText, { color: colors.hover }]}>
                 Comments
             </Text>
