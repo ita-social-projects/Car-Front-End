@@ -271,7 +271,7 @@ test("renders correctly", async () =>
                   }
                 }
               >
-                <TouchableOpacity
+                <ForwardRef
                   disabled={false}
                   onPress={[Function]}
                   style={
@@ -307,7 +307,7 @@ test("renders correctly", async () =>
                   >
                     Confirm
                   </Text>
-                </TouchableOpacity>
+                </ForwardRef>
               </View>
             </View>
             <View

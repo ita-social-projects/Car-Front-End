@@ -97,7 +97,7 @@ test("renders correctly", async () =>
             }
           }
         >
-          <TouchableOpacity
+          <ForwardRef
             activeOpacity={1}
             disabled={false}
             onPress={[Function]}
@@ -133,7 +133,7 @@ test("renders correctly", async () =>
             >
               Login
             </Text>
-          </TouchableOpacity>
+          </ForwardRef>
         </View>
       </View>
     </View>

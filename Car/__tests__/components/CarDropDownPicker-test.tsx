@@ -22,16 +22,9 @@ test("renders correctly", async () =>
         }
       >
         <View
-          accessibilityState={
-            Object {
-              "disabled": false,
-            }
-          }
           accessible={true}
-          collapsable={false}
           focusable={true}
           forwardedRef={[Function]}
-          nativeID="animatedComponent"
           onClick={[Function]}
           onLayout={[Function]}
           onResponderGrant={[Function]}
@@ -182,15 +175,18 @@ test("renders correctly", async () =>
             }
           >
             <TextInput
+              allowFontScaling={true}
               defaultValue={null}
               onChangeText={[Function]}
               placeholder="Manual input"
               placeholderTextColor="#909095"
+              rejectResponderTermination={true}
               style={
                 Object {
                   "color": "#0B171B",
                 }
               }
+              underlineColorAndroid="transparent"
             />
           </View>
           <RCTScrollView
@@ -273,11 +269,6 @@ test("renders correctly", async () =>
         }
       >
         <View
-          accessibilityState={
-            Object {
-              "disabled": false,
-            }
-          }
           accessible={true}
           focusable={true}
           forwardedRef={[Function]}
@@ -433,15 +424,18 @@ test("renders correctly", async () =>
             }
           >
             <TextInput
+              allowFontScaling={true}
               defaultValue={null}
               onChangeText={[Function]}
               placeholder="Manual input"
               placeholderTextColor="#909095"
+              rejectResponderTermination={true}
               style={
                 Object {
                   "color": "#0B171B",
                 }
               }
+              underlineColorAndroid="transparent"
             />
           </View>
           <RCTScrollView

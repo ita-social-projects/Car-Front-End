@@ -8,7 +8,7 @@ test("renders correctly", async () =>
     expect(renderer.render(<TouchableMapBar iconName={"location"} />))
         .toMatchInlineSnapshot(`
     <View>
-      <TouchableOpacity
+      <ForwardRef
         style={
           Array [
             Object {
@@ -59,7 +59,7 @@ test("renders correctly", async () =>
         >
            
         </Text>
-        <TouchableOpacity
+        <ForwardRef
           disabled={true}
         >
           <Icon
@@ -83,7 +83,7 @@ test("renders correctly", async () =>
               ]
             }
           />
-        </TouchableOpacity>
-      </TouchableOpacity>
+        </ForwardRef>
+      </ForwardRef>
     </View>
   `));

@@ -17,9 +17,7 @@ test("renders correctly", async () =>
     >
       <View
         accessible={true}
-        collapsable={false}
         focusable={false}
-        nativeID="animatedComponent"
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}

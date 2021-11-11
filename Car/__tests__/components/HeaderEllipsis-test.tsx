@@ -6,9 +6,7 @@ test("renders correctly", async () =>
     expect(renderer.create(<HeaderEllipsis />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
-      collapsable={false}
       focusable={false}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

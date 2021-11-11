@@ -45,7 +45,9 @@ test("renders correctly", async () =>
         }
       >
         <ActivityIndicator
+          animating={true}
           color="#0B171B"
+          hidesWhenStopped={true}
           size={40}
         />
       </View>

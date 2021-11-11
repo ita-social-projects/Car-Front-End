@@ -44,7 +44,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <TouchableOpacity
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -74,7 +74,7 @@ test("renders correctly", async () =>
               >
                 <AvatarLogoTitle />
               </ForwardRef(AnimatedComponentWrapper)>
-            </TouchableOpacity>
+            </ForwardRef>
             <TouchableNavigationCard
               angle="0"
               cardName="Notifications Settings"
@@ -150,7 +150,7 @@ test("renders correctly", async () =>
                   }
                 }
               >
-                <TouchableOpacity
+                <ForwardRef
                   onPress={[Function]}
                   style={
                     Array [
@@ -189,8 +189,8 @@ test("renders correctly", async () =>
                   >
                     Light
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </ForwardRef>
+                <ForwardRef
                   onPress={[Function]}
                   style={
                     Array [
@@ -229,8 +229,8 @@ test("renders correctly", async () =>
                   >
                     Dark
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </ForwardRef>
+                <ForwardRef
                   onPress={[Function]}
                   style={
                     Array [
@@ -271,7 +271,7 @@ test("renders correctly", async () =>
                   >
                     As system
                   </Text>
-                </TouchableOpacity>
+                </ForwardRef>
               </View>
             </View>
           </View>
@@ -297,7 +297,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <TouchableOpacity
+            <ForwardRef
               onPress={[Function]}
               style={
                 Object {
@@ -326,7 +326,7 @@ test("renders correctly", async () =>
               >
                 Add photo
               </Text>
-            </TouchableOpacity>
+            </ForwardRef>
           </View>
         }
         renderHeader={

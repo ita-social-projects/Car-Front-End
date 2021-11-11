@@ -34,9 +34,7 @@ test("renders correctly", async () =>
     ).toMatchInlineSnapshot(`
     <View
       accessible={true}
-      collapsable={false}
       focusable={true}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -91,7 +89,9 @@ test("renders correctly", async () =>
                 }
               >
                 <ActivityIndicator
+                  animating={true}
                   color="#414045"
+                  hidesWhenStopped={true}
                   size={17.906976744186046}
                   style={
                     Object {
@@ -201,9 +201,7 @@ test("renders correctly", async () =>
     ).toMatchInlineSnapshot(`
     <View
       accessible={true}
-      collapsable={false}
       focusable={true}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -254,7 +252,9 @@ test("renders correctly", async () =>
                 }
               >
                 <ActivityIndicator
+                  animating={true}
                   color="#414045"
+                  hidesWhenStopped={true}
                   size={17.906976744186046}
                   style={
                     Object {

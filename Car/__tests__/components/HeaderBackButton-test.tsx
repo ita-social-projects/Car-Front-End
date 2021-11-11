@@ -6,9 +6,7 @@ test("renders correctly", async () =>
     expect(renderer.create(<HeaderBackButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
-      collapsable={false}
       focusable={true}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

@@ -90,7 +90,7 @@ test("renders correctly", async () =>
             }
           }
         />
-        <TouchableOpacity
+        <ForwardRef
           disabled={true}
           onPress={[Function]}
           style={
@@ -130,7 +130,7 @@ test("renders correctly", async () =>
           >
             Confirm
           </Text>
-        </TouchableOpacity>
+        </ForwardRef>
       </View>
       <ConfirmModal
         cancelText="No, keep it"
