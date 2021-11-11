@@ -113,6 +113,11 @@ const Chat = (properties: ChatProps) => {
             });
             let messageToFocusId = properties.route.params.messageId || ZERO_ID;
             let messageId = ZERO_ID;
+            let systemMessage = {
+                _id: -1,
+                text: "Each chat will be deleted 2 weeks after the trip departure time",
+                system: true,
+            } as IMessage;
 
             if (messageToFocusId) {
                 messageId = messageToFocusId + NUMBER_OF_MESSAGES_BELOW_FOCUSED;
@@ -120,7 +125,7 @@ const Chat = (properties: ChatProps) => {
 
             loadMessages(messageId)
                 .then((res: IMessage[]) => {
-                    setMessages(res);
+                    setMessages(res.concat(systemMessage));
                     setSpinner(false);
                     focusOnMessage(res.find(msg => msg._id === messageToFocusId)!);
                 });

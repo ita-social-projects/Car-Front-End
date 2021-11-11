@@ -21,7 +21,7 @@ const CarTextInput = (props: CarTextInputProps) => {
                     <View style={[CarTextInputStyle.container,
                         { borderColor: colors.primary },
                         !props.isValidField
-                        && {borderColor: colors.accentRed}]}>
+                        && { borderColor: colors.accentRed }]}>
                         <TextInput
                             onChangeText={(text: string) => props.onChangeText!(text)}
                             placeholder={props.placeHolder}
