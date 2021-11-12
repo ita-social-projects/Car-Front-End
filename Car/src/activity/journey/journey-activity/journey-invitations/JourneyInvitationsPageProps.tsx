@@ -5,7 +5,7 @@ interface JourneyInvitationsPageProps {
     route: {
         params: {
             journey?: Journey,
-            newInvitations?: {email:string; isCorrect: boolean}[],
+            newInvitations?: {email:string; id: number | null}[],
             allUsers: User[]
         }
     }

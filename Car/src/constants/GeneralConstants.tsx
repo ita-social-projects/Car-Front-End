@@ -24,3 +24,4 @@ export const ZERO = 0;
 export const MORE_THAN_ZERO = 1;
 
 export const MINUTES_IN_HOUR = 60;
+export const TYPING_TIMEOUT = 1500;

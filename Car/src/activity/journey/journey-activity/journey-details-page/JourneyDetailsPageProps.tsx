@@ -15,7 +15,7 @@ interface JourneyDetailsPageProps {
             duration: string,
             journey?: Journey,
             weekDay: WeekDay,
-            newInvitations?: {email:string; isCorrect: boolean}[]
+            newInvitations?: {email:string; id: number | null}[]
         }
     },
     navigation?: {

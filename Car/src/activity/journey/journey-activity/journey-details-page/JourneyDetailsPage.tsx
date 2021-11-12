@@ -42,8 +42,6 @@ import JourneyCreationDropDownPicker from "../../../../components/dropdown-picke
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UserService from "../../../../../api-service/user-service/UserService";
-import User from "../../../../../models/user/User";
 import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
@@ -82,7 +80,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         name: journey ? `${journey?.car?.brand} ${carModel}` : ""
     });
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
-    const [allUsers, setAllUsers] = useState<User[]>([]);
     const [comments, setComments] = useState("");
 
     const activeButtonStyle = {
@@ -162,8 +159,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
     const [userCarIsLoading, setUserCarIsLoading] = useState(true);
     const [rideIsPublishing, setRideIsPublishing] = useState(false);
-    const [usersIsLoading, setUsersIsLoading] = useState(true);
-    const [newInvitations, setNewInvitations] = useState<{ email: string; isCorrect: boolean }[]>(
+    const [newInvitations, setNewInvitations] = useState<{ email: string; id: number | null }[]>(
         params.newInvitations ?? []
     );
 
@@ -205,18 +201,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 setSavedLocations(res.data);
                 setSavedLocationIsLoading(false);
             });
-
-        UserService.getAllUsers().then((res) => {
-            setAllUsers(res.data);
-            setUsersIsLoading(false);
-        });
     }, []);
 
     const createAllInvitationsArrayFromNewInvitations = (): Invitation[] => {
-        return newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
+        return newInvitations.filter(inv => inv.id != null).map<Invitation>((invitedUser) => {
             return {
                 id: 0,
-                invitedUserId: allUsers.find((us) => us?.email === invitedUser.email)!.id,
+                invitedUserId: Number(invitedUser.id),
                 journeyId: 0,
                 type: 0
             };
@@ -322,7 +313,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const isLoading = userCarIsLoading || rideIsPublishing
-        || successfullyPublishModalIsVisible || savedLocationIsLoading || usersIsLoading;
+        || successfullyPublishModalIsVisible || savedLocationIsLoading;
 
     const confirmDisabled = !departureTimeIsConfirmed || noChanges();
 
@@ -461,7 +452,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <TouchableOpacity style={CreateJourneyStyle.invitationsLink}
                                 onPress={() =>
                                     navigation.navigate("Journey Invitations",
-                                        { journey: journey, newInvitations: newInvitations, allUsers: allUsers })
+                                        { journey: journey, newInvitations: newInvitations })
                                 }
                             >
                                 <Ionicons
@@ -478,7 +469,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServian
+                                            newInvitations.filter(inv => inv.id != null).length} SoftServian
                                         will be notified for that Journey
                                     </Text>
                                 </View>
