@@ -111,9 +111,8 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 16,
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 16,
-        lineHeight: 22,
-        fontFamily: "Milliard"
+        fontSize: 14,
+        lineHeight: 20,
     },
 
     discardButton: {
@@ -138,7 +137,6 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     discardButtonText: {
-        
         color: "#EC6400",
         fontWeight: "bold",
         fontSize: 16,
