@@ -51,7 +51,7 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => {
                 searchablePlaceholderTextColor={colors.secondaryDark}
                 onSearch={(text) => {
                     if(props.addCustomItem)
-                        setCustomElement({ label: text, value: "0" });
+                        setCustomElement({ label: text.trim(), value: "0" });
                 }}
                 searchableError={() => <Text style={{ color: colors.primary }}>Not found</Text>}
                 searchTextInputProps={{ style: { color: colors.primary } }}
