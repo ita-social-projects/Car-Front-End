@@ -454,8 +454,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         />
 
                         <View style={CreateJourneyStyle.invitationsView}>
-                            <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invited
-                                SoftServians</Text>
+                            <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Invite
+                                Softservians</Text>
                             <TouchableOpacity style={CreateJourneyStyle.invitationsLink}
                                 onPress={() =>
                                     navigation.navigate("Journey Invitations",
@@ -476,8 +476,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
                                         color: colors.primary }}>
                                         {existingInvitations.length +
-                                            newInvitations.filter(inv => inv.isCorrect).length}
-                                              SoftServian will be notified for that Journey
+                                            newInvitations.filter(inv => inv.isCorrect).length} SoftServian will
+                                        be notified for that Journey
                                     </Text>
                                 </View>
                                 <Ionicons
@@ -495,19 +495,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         </View>
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
-                            { flexDirection: journey ? "row" : "column" }]}>
+                            { flexDirection: "row"}]}>
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
                                     {
                                         display: journey ? "flex" : "none",
-                                        borderWidth: journey ? BORDER_WIDTH : ZERO,
-                                        borderColor: colors.primary
                                     }]}
                                 onPress={() => setDiscardModalIsVisible(true)}
                             >
                                 <Text style={CreateJourneyStyle.discardButtonText}>
-                                    Discard changes
+                                    Discard Changes
                                 </Text>
                             </TouchableOpacity>
 

@@ -16,6 +16,8 @@ export const lightColors = {
     secondaryDark: "#909095",
     neutralLight: "#F8F8F8",
     secondaryLight: "#AAA9AE",
+    disableBack: "#C4C4C4",
+    disableText: "#FFFFFF"
 };
 
 export const darkColors = {
@@ -26,4 +28,7 @@ export const darkColors = {
     secondaryDark: "#C4C4C4",
     neutralLight: "#414045",
     secondaryLight: "#C4C4C4",
+    disableBack: "#414045",
+    disableText: "#909095"
+
 };
