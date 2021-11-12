@@ -15,7 +15,7 @@ const CommentBlock = (props: CommentBlockProps) => {
 
     return(
         <View style={CommentBlockStyle.commentsContainer}>
-            <Text style={[PreferencesStyle.commentsText, { color: colors.hover }]}>
+            <Text style={[PreferencesStyle.commentsText, { color: colors.primary }]}>
                 Comments
             </Text>
             <TextInput
