@@ -230,6 +230,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         }, { duration: 1000 });
     };
 
+    const getHighlightedStops = () => {
+        return isDriver ? [...Array(currentJourney?.stops.length).keys()] : [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX];
+    };
+
     return (
         <>
             <View style={[JourneyPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
@@ -298,9 +302,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                             <StopsBlock
                                                 stops={getStopsForBottomPopup() ?? []}
                                                 onStopPress={onStopPressHandler}
-                                                highlightedStops={isDriver ?
-                                                    [...Array(currentJourney?.stops.length).keys()] :
-                                                    [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                                                highlightedStops={getHighlightedStops()}
                                             />
                                             <CommentsBlock comments={currentJourney?.comments} />
                                             <ParticipantsBlock journey={currentJourney}/>
@@ -331,9 +333,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     <View style ={JourneyPageStyle.dropDownContainer}>
                                         <View style ={JourneyPageStyle.dropDown}>
                                             <JourneyCreationDropDownPicker
-                                                items={userQuantity.map((car) => ({
-                                                    label: car.name,
-                                                    value: car.id
+                                                items={userQuantity.map((quantity) => ({
+                                                    label: quantity.name,
+                                                    value: quantity.id
                                                 }))}
                                                 paddingLeft={100}
                                                 searchable={false}
