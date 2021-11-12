@@ -7,14 +7,14 @@ import { useTheme } from "../theme/ThemeProvider";
 import TouchableNavigationCardProps from "./TouchableNavigationCardProps";
 
 const TouchableNavigationCard = (props: TouchableNavigationCardProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
 
     return (
         <View>
             <TouchableOpacity
                 style={[
                     TouchableNavigationCardStyle.cardContainer,
-                    { borderBottomColor: colors.secondaryLight, }]}
+                    { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight, }]}
                 onPress={() =>
                     navigation.navigate(props?.navigationName, {
                         carId: props.carId

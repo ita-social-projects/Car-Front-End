@@ -46,7 +46,7 @@ test("renders correctly", async () =>
             directionType="From"
             iconName="location"
             marginBottom={15}
-            marginTop={32}
+            marginTop={7}
             onPress={[Function]}
             text=""
           />

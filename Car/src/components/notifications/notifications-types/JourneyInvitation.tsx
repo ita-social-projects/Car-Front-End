@@ -20,7 +20,6 @@ import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunct
 import { ACCEPTED_INVITATION_TYPE, REJECTED_INVITATION_TYPE } from "../../../constants/NotificationConstants";
 
 import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
-import { SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import StopType from "../../../../models/stop/StopType";
 
 const JourneyInvitation = (props: NotificationProps) => {
@@ -169,7 +168,6 @@ const JourneyInvitation = (props: NotificationProps) => {
                 <StopsBlock
                     stops={journey?.stops ?? []}
                     onStopPress={() => onStopPress}
-                    highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                 />
 
                 <NotificationButtonGroup>

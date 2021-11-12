@@ -4,9 +4,8 @@ const SwitchSelectorStyle = StyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: "center",
-        marginLeft: 17,
-        marginRight: -3,
-        marginTop: 15,
+        marginLeft: 16,
+        marginTop: 24,
         fontSize: 13,
         lineHeight: 16
     },
@@ -17,18 +16,18 @@ const SwitchSelectorStyle = StyleSheet.create({
         backgroundColor: "#000000",
         flexDirection: "row",
         justifyContent: "flex-end",
-        borderWidth: 2
+        borderWidth: 1
     },
 
     rightButton: {
         paddingHorizontal: 16,
-        paddingVertical: 4,
+        paddingVertical: 6,
         backgroundColor: "white",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
-        borderWidth: 2,
-        marginRight: 20,
+        borderWidth: 1,
+        marginRight: 15,
     },
 
     buttonText: {
