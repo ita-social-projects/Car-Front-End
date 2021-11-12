@@ -15,7 +15,8 @@ const SwitchSelector = (props: SwitchSelectorProps) => {
 
                 <TouchableOpacity
                     style={[SwitchSelectorStyle.leftButton, props.disableLeftButton ?
-                        { backgroundColor: colors.disableBack, borderColor: colors.disableBack} : props.leftButtonStyle]}
+                        { backgroundColor: colors.disableBack, borderColor: colors.disableBack } :
+                        props.leftButtonStyle]}
                     onPress={props.onLeftButtonPress}
                     disabled={props.disableLeftButton}
                 >
