@@ -53,9 +53,9 @@ import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import AsyncStorage from "@react-native-community/async-storage";
 import FeeType from "../../../../../models/journey/FeeType";
-import PublishRideFilter from "../../../../../models/journey/publishRideFilter";
 import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
+import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
