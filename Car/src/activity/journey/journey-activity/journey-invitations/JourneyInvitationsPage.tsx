@@ -53,7 +53,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
         if(searchTimeout) clearTimeout(searchTimeout);
         let timeoutId = setTimeout(() => {
             UserService.getUserByEmail(email).then(res => {
-                let updatedInvitations = new Array(...invitedUsers);
+                updatedInvitations = new Array(...invitedUsers);
 
                 if(res.status === HTTP_STATUS_OK)
                 {
