@@ -110,7 +110,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
-    let highlightPaidButton: boolean = !journey || !journey.isFree;
+    let highlightPaidButton: boolean = !journey || journey.isFree;
     const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(!highlightPaidButton);
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(highlightPaidButton));
