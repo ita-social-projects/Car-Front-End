@@ -15,15 +15,22 @@ export const lightColors = {
     hover: "#414045",
     secondaryDark: "#909095",
     neutralLight: "#F8F8F8",
+    neutralDark: "#C4C4C4",
     secondaryLight: "#AAA9AE",
+    disableBack: "#C4C4C4",
+    disableText: "#FFFFFF"
 };
 
 export const darkColors = {
     ...permanentColors,
     primary: "#FFFFFF",
-    white: "#0B171B",
+    white: "#1C2426",
     hover: "#C4C4C4",
     secondaryDark: "#C4C4C4",
     neutralLight: "#414045",
+    neutralDark: "#C4C4C4",
     secondaryLight: "#C4C4C4",
+    disableBack: "#414045",
+    disableText: "#909095"
+
 };

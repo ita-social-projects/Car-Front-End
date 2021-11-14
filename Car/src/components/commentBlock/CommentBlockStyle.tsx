@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 const CommentBlockStyle = StyleSheet.create({
     commentsContainer: {
         paddingTop: 24,
-        paddingHorizontal: 16
+        paddingLeft: 16,
+        paddingRight: 15
     },
 });
 

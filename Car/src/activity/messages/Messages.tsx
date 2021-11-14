@@ -33,7 +33,7 @@ import Badge from "../../components/badge/Badge";
 import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
 
 const Messages = (props: MessagesProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const [filteredDataSource, setFilteredDataSource] = useState<Chat[]>([]);
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
     const [isLoading, setisLoading] = useState(false);
@@ -137,7 +137,8 @@ const Messages = (props: MessagesProps) => {
                         >
                             <View style={MessagesStyle.main}>
                                 <View
-                                    style={[MessagesStyle.wrapper, { borderColor: colors.primary }]}
+                                    style={[MessagesStyle.wrapper,
+                                        { borderColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }]}
                                 >
                                     <View style={MessagesStyle.avatarWrapper}>
                                         <AvatarLogo user={item?.journeyOrganizer} size={38} />
@@ -188,13 +189,7 @@ const Messages = (props: MessagesProps) => {
                     )}
                 />
                 {filteredDataSource?.length ? (
-                    <View style={MessagesStyle.warningContainer}>
-                        <Text style={MessagesStyle.warningMessageStyle}>
-                            Each chat will be deleted 2 weeks after the trip
-                            {"\n"}
-                            departure time
-                        </Text>
-                    </View>
+                    <View style={MessagesStyle.warningContainer}></View>
                 ) : (
                     <>
                         <View style={MessagesStyle.noMessageContainer}>

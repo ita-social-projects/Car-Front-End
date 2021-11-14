@@ -2,12 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
-        paddingTop: 25
+        paddingTop: 0
     },
 
     dropDownPickerContainer: {
-        marginHorizontal: 16,
-        marginTop: 16
+        marginLeft: 16,
+        marginRight: 15,
+        marginTop: 24
     },
 
     recentJourneyText: {
@@ -40,7 +41,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     commentsView: {
-        marginTop: 24,
+        marginTop: 15,
         marginLeft: 20,
         marginRight: 20
     },
@@ -74,9 +75,9 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     commentsCaption: {
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: "bold",
-        marginBottom: 8
+        marginBottom: 5
     },
 
     invitationsCaption: {
@@ -92,18 +93,18 @@ export const CreateJourneyStyle = StyleSheet.create({
     publishButtonContainer: {
         alignItems: "flex-end",
         marginVertical: 24,
-        flexDirection: "row",
-        paddingLeft: 20,
+        flexDirection: "row-reverse",
         justifyContent: "space-between"
     },
 
     publishButton: {
-        marginRight: 20,
+        marginRight: 15,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
         flexDirection: "row",
-        borderWidth: 2
+        borderWidth: 2,
+
     },
 
     publishButtonText: {
@@ -115,19 +116,31 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     discardButton: {
+        marginLeft: 30,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
-        borderWidth: 2
+        flexDirection: "row"
+    },
+
+    saveButonContainer:{
+        alignSelf: "flex-end",
+        position: "absolute",
+        fontSize: 14,
+        bottom: 20,
+        right: 20,
+    },
+
+    saveButton:{
+        paddingVertical: 12,
+        paddingHorizontal: 16,
     },
 
     discardButtonText: {
-        paddingHorizontal: 6,
-        color: "red",
-        textTransform: "uppercase",
+        color: "#EC6400",
         fontWeight: "bold",
-        fontSize: 14,
-        lineHeight: 20,
+        fontSize: 16,
+        lineHeight: 22,
     },
 
     movableMarker: {

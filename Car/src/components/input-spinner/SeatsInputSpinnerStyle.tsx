@@ -5,25 +5,24 @@ export const SeatsInputSpinnerStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginRight: 18,
-        marginLeft: -5,
+        marginRight: 15,
         marginTop: 24
     },
 
     spinnerContainer: {
         borderColor: "#000000",
-        borderWidth: 2,
-        width: 145,
+        borderWidth: 1,
+        width: 143,
         borderRadius: 0
     },
 
     descriptionText: {
-        marginLeft: 22,
+        marginLeft: 16,
         fontWeight: "bold"
     },
 
     input: {
-        borderLeftWidth: 2,
+        borderLeftWidth: 1,
         fontWeight: "bold",
         paddingHorizontal: 15
     }
