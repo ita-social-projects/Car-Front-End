@@ -334,7 +334,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 ChatService.addChat(newChat)
                     .then(() => {
                         setSuccessfullyPublishModalIsVisible(true);
-                        AsyncStorage.removeItem("publishRideFilter");
+                        AsyncStorage.removeItem("publishRideFieldsState");
                     }
                     );
             })
