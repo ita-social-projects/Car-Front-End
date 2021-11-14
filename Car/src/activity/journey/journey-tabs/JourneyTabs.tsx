@@ -35,7 +35,8 @@ import {
     ANIMATION_DURATION,
     SLEEP_DURATION,
     animateOpacity,
-    sleep
+    sleep,
+    MODAL_SLEEP_DURATION
 } from "../../../constants/AnimationConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
@@ -49,12 +50,14 @@ import JourneyInvitationsPage from "../journey-activity/journey-invitations/Jour
 import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-more-options-popup/CreateJourneyMoreOptionsPopup";
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import Preferences from "../../my-profile/my-profile-activity/preferences/Preferences";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
+    const [modalVisibility, setModalVisibility] = useState(false);
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
@@ -97,6 +100,15 @@ const JourneyTabs = () => {
         ref?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
+    const openConfirmModal = () => {
+        setModalVisibility(true);
+    };
+
+    const closeAndGoBack = () => {
+        setModalVisibility(false);
+        (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
+    };
+
     return (
         <View style={JourneyStyle.tabsStyle}>
             <StackTabs.Navigator>
@@ -119,8 +131,7 @@ const JourneyTabs = () => {
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: () => HeaderBackButton({
                             onPress: () => {
-                                closeMoreOptionPopup(createRideMoreOptionsRef);
-                                navigation.goBack();
+                                openConfirmModal();
                             }
                         }),
                         headerRight: () => HeaderEllipsis(
@@ -135,6 +146,19 @@ const JourneyTabs = () => {
 
                         return (
                             <>
+                                <ConfirmModal
+                                    disableModal={() => setModalVisibility(false)}
+                                    visible={modalVisibility}
+                                    title={"ARE YOU SURE?"}
+                                    subtitle={"Information will not be saved, if you leave this page"}
+                                    confirmText={"Yes, leave"}
+                                    cancelText={"No, stay"}
+                                    onConfirm={() => {
+                                        AsyncStorage.removeItem("publishRideFieldsState");
+                                        closeMoreOptionPopup(createRideMoreOptionsRef);
+                                        closeAndGoBack();
+                                    }}
+                                />
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
                                     { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
