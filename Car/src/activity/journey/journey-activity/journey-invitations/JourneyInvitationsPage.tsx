@@ -129,6 +129,11 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                 />
                             </TouchableOpacity>
 
+                            <Text style={[{ color: colors.accentRed }]}>
+                                {invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
+                                    "" : "Error"}
+                            </Text>
+
                             {invitedUsers[index].email !== "" && (
                                 <TouchableOpacity
                                     style={JourneyInvitationsPageStyle.icon}
