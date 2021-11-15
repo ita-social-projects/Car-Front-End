@@ -457,7 +457,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
                         {
-                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.primary,
+                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
                             left: Dimensions.get("screen").width -
                             (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
                         }]}

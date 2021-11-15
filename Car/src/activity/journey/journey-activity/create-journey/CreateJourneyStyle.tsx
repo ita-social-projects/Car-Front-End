@@ -6,8 +6,9 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     dropDownPickerContainer: {
-        marginHorizontal: 16,
-        marginTop: 16
+        marginLeft: 16,
+        marginRight: 15,
+        marginTop: 24
     },
 
     recentJourneyText: {
@@ -74,7 +75,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     commentsCaption: {
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: "bold",
         marginBottom: 5
     },
@@ -93,12 +94,11 @@ export const CreateJourneyStyle = StyleSheet.create({
         alignItems: "flex-end",
         marginVertical: 24,
         flexDirection: "row-reverse",
-        paddingLeft: 0,
         justifyContent: "space-between"
     },
 
     publishButton: {
-        marginRight: 20,
+        marginRight: 15,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
@@ -116,10 +116,11 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     discardButton: {
+        marginLeft: 30,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
-        borderWidth: 2
+        flexDirection: "row"
     },
 
     saveButonContainer:{
@@ -136,12 +137,10 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     discardButtonText: {
-        paddingHorizontal: 6,
-        color: "red",
-        textTransform: "uppercase",
+        color: "#EC6400",
         fontWeight: "bold",
-        fontSize: 14,
-        lineHeight: 20,
+        fontSize: 16,
+        lineHeight: 22,
     },
 
     movableMarker: {
