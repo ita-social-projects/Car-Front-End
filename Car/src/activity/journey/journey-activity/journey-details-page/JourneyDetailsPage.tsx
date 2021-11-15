@@ -370,7 +370,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             ))}
                         </View>
 
-                        <View style={SearchJourneyStyle.locationContainer}>
+                        <View style={SearchJourneyStyle.DepartureContainerLocation}>
                             <TouchableDateTimePicker
                                 date={departureTime}
                                 setDate={(d) => {
@@ -473,8 +473,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 <View style={{ marginLeft: 20 }}>
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invite SoftServians</Text>
-                                    <Text style={{ ...CreateJourneyStyle.invitationsDesctiption,
-                                        color: colors.primary }}>
+                                    <Text style={{ ...CreateJourneyStyle.invitationsDescription,
+                                        color: colors.primary, width: 238}}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
                                         will be notified for that Journey
@@ -485,7 +485,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     style={[
                                         {
                                             transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight,
-                                            marginLeft: 52
+                                            marginLeft: 53
                                         }
                                     ]}
                                     name={"chevron-forward-outline"}
