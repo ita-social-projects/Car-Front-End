@@ -86,7 +86,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [comments, setComments] = useState("");
 
     const activeButtonStyle = {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.hover,
         color: colors.white,
         borderColor: colors.primary
     };
@@ -513,8 +513,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     {
-                                        backgroundColor: confirmDisabled ? colors.secondaryDark : colors.primary,
-                                        borderColor: confirmDisabled ? colors.secondaryDark : colors.primary
+                                        backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
+                                        borderColor: confirmDisabled ? colors.secondaryDark : colors.hover
                                     }]}
                                 onPress={journey ?
                                     () => setApplyChangesModalIsVisible(true) :

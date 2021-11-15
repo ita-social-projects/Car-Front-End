@@ -22,7 +22,7 @@ const BadSearchResult = () => {
             </View>
             <View style={BadSearchResultStyle.buttonContainer}>
                 <TouchableOpacity
-                    style={[BadSearchResultStyle.button, { backgroundColor: colors.primary }]}
+                    style={[BadSearchResultStyle.button, { backgroundColor: colors.hover }]}
                     onPress={() => {
                         navigation.navigate("Journey Request Page", { isRequest: true, isPreviousFilter: true });
                     }}
