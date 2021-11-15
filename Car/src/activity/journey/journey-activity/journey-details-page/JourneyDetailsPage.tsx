@@ -22,7 +22,7 @@ import {
 } from "../../../../constants/JourneyConstants";
 import {
     EMPTY_COLLECTION_LENGTH,
-    FIRST_ELEMENT_INDEX, BORDER_WIDTH, ZERO, ZERO_ID
+    FIRST_ELEMENT_INDEX, ZERO_ID
 } from "../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -496,7 +496,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         </View>
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
-                            { flexDirection: "row"}]}>
+                            { flexDirection: "row" }]}>
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
