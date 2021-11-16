@@ -156,5 +156,12 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 10,
         height: 265,
         marginTop: 0
+    },
+
+    separateLine:{
+        borderBottomColor: '#C4C4C4', 
+        borderBottomWidth: 1,
+        marginLeft: 15.5,
+        marginRight: 15.5
     }
 });
