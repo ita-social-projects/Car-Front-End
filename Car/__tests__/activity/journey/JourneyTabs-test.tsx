@@ -136,6 +136,52 @@ test("renders correctly", async () =>
           }
         />
         <Screen
+          name="Journey Edit"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerRight": [Function],
+              "headerTitle": "Publish the Ride",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        >
+          [Function]
+        </Screen>
+        <Screen
+          component={[Function]}
+          name="Journey Invitations"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "Ride Invitations",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
           component={[Function]}
           name="Search Journey"
           options={

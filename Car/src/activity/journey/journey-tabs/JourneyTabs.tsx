@@ -229,7 +229,7 @@ const JourneyTabs = () => {
                 <StackTabs.Screen
                     name="Journey Edit"
                     options={{
-                        headerTitle: "Edit a Ride",
+                        headerTitle: "Edit the Ride",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: () => HeaderBackButton({
