@@ -11,6 +11,12 @@ const SearchJourneyStyle = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 15
     },
+    
+    DepartureContainerLocation: {
+        paddingLeft: 16,
+        paddingRight: 15
+    },
+    
     viaContainerLocation: {
         paddingLeft: 16,
         paddingRight: 15
