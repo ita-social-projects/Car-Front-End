@@ -136,12 +136,12 @@ test("renders correctly", async () =>
           }
         />
         <Screen
-          name="Journey Edit"
+          name="Journey Details"
           options={
             Object {
               "headerLeft": [Function],
               "headerRight": [Function],
-              "headerTitle": "Publish the Ride",
+              "headerTitle": "Publish a Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -157,6 +157,30 @@ test("renders correctly", async () =>
             }
           }
         >
+        <Screen
+          name="Journey Edit"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerRight": [Function],
+              "headerTitle": "Edit the Ride",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        >
+          [Function]
+        </Screen>
           [Function]
         </Screen>
         <Screen
