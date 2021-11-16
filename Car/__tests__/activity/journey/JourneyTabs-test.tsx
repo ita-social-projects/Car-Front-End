@@ -181,8 +181,6 @@ test("renders correctly", async () =>
         >
           [Function]
         </Screen>
-          [Function]
-        </Screen>
         <Screen
           component={[Function]}
           name="Journey Invitations"
