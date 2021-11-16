@@ -66,7 +66,7 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerRight": [Function],
-              "headerTitle": "Your Car",
+              "headerTitle": "Edit Car Info",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
