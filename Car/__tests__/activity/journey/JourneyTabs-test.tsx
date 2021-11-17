@@ -5,13 +5,13 @@ import JourneyTabs from "../../../src/activity/journey/journey-tabs/JourneyTabs"
 const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-localize", () => {
-    return {
-        getTimeZone: jest.fn(),
-    };
+  return {
+    getTimeZone: jest.fn(),
+  };
 });
 
 test("renders correctly", async () =>
-    expect(renderer.render(<JourneyTabs />)).toMatchInlineSnapshot(`
+  expect(renderer.render(<JourneyTabs />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -113,50 +113,6 @@ test("renders correctly", async () =>
         >
           [Function]
         </Screen>
-        <Screen
-          component={[Function]}
-          name="Journey Invitations"
-          options={
-            Object {
-              "headerLeft": [Function],
-              "headerTitle": "Ride Invitations",
-              "headerTitleAlign": "center",
-              "headerTitleStyle": Array [
-                Object {
-                  "fontFamily": "Open Sans ExtraBold",
-                  "fontSize": 18,
-                  "fontWeight": "700",
-                  "marginLeft": 20,
-                },
-                Object {
-                  "color": "#0B171B",
-                },
-              ],
-            }
-          }
-        />
-        <Screen
-          name="Journey Details"
-          options={
-            Object {
-              "headerLeft": [Function],
-              "headerRight": [Function],
-              "headerTitle": "Publish a Ride",
-              "headerTitleAlign": "center",
-              "headerTitleStyle": Array [
-                Object {
-                  "fontFamily": "Open Sans ExtraBold",
-                  "fontSize": 18,
-                  "fontWeight": "700",
-                  "marginLeft": 20,
-                },
-                Object {
-                  "color": "#0B171B",
-                },
-              ],
-            }
-          }
-        >
         <Screen
           name="Journey Edit"
           options={
