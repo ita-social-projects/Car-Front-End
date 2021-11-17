@@ -227,6 +227,55 @@ const JourneyTabs = () => {
                 </StackTabs.Screen>
 
                 <StackTabs.Screen
+                    name="Journey Edit"
+                    options={{
+                        headerTitle: "Edit the Ride",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerTitleAlign: "center",
+                        headerLeft: () => HeaderBackButton({
+                            onPress: () => {
+                                closeMoreOptionPopup(ridePageMoreOptionsRef);
+                                navigation.goBack();
+                            }
+                        }),
+                        headerRight: () => HeaderEllipsis(
+                            { onPress: () => pressHandle(ridePageMoreOptionsRef) })
+                    }}
+                >
+                    {(props: any) => {
+                        /* eslint-disable */
+                        const weekDayRef = useRef<WeekDay>(WeekDay.None);
+                        const isScheduleOpened = useRef(false);
+                        /* eslint-enable */
+
+                        return (
+                            <>
+                                <Animated.View style={isVisible && [HeaderStyle.layout,
+                                    { opacity: layoutOpacity, backgroundColor: colors.primary }
+                                ]} />
+
+                                <JourneyDetailsPage
+                                    route={props.route}
+                                    weekDay={weekDayRef}
+                                />
+
+                                <CreateJourneyMoreOptionsPopup
+                                    pressHandle = {pressHandle}
+                                    closeMoreOptionPopup = {closeMoreOptionPopup}
+                                    closeHandle = {closeHandle}
+                                    createRideMoreOptionsRef = {ridePageMoreOptionsRef}
+                                    weekDayRef = {weekDayRef}
+                                    scheduleMoreOptionsRef = {scheduleMoreOptionsRef}
+                                    isScheduleOpened = {isScheduleOpened}
+                                    navigation = {navigation}
+                                    showAddStop = {false}
+                                />
+                            </>
+                        );
+                    }}
+                </StackTabs.Screen>
+
+                <StackTabs.Screen
                     name="Journey Invitations"
                     component={JourneyInvitationsPage}
                     options={{
