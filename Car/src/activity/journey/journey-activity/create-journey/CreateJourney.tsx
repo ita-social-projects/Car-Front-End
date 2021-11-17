@@ -51,6 +51,7 @@ import CredentialsManager from "../../../../../credentials/credentials.json";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
+    IsFromToChanged: () => boolean,
     numberOfAddedStop: number,
     ({ props }: { props: CreateJourneyProps }): JSX.Element
 }
@@ -105,6 +106,13 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
     const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
     const [routeIsUpdating, setRouteIsUpdating] = useState(false);
+
+    const [isFromToChanged,setIsFromToChanged] = useState(false);
+
+    useEffect(() => {
+        if(from.text !== "" || to.text !== "")
+            setIsFromToChanged(true);
+    },[from,to]);
 
     useEffect(() => {
         if (params?.wayPoint) {
@@ -226,6 +234,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     useEffect(() => {
         CreateJourney.numberOfAddedStop = stops.length + SECOND_ELEMENT_INDEX;
     });
+    CreateJourney.IsFromToChanged = () => {
+        return isFromToChanged;
+    };
 
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
@@ -528,6 +539,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 };
 
 CreateJourney.addStopPressHandler = () => console.log("Outer Add stop handler");
+CreateJourney.IsFromToChanged = () => false;
 CreateJourney.numberOfAddedStop = 0;
 
 export default CreateJourney;

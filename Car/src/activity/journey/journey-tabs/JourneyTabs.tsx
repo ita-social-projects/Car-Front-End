@@ -131,7 +131,7 @@ const JourneyTabs = () => {
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: () => HeaderBackButton({
                             onPress: () => {
-                                openConfirmModal();
+                                CreateJourney.IsFromToChanged() ? openConfirmModal() : navigation.goBack();
                             }
                         }),
                         headerRight: () => HeaderEllipsis(
