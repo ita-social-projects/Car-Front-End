@@ -160,7 +160,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             }
         };
 
-        navigation.navigate("Journey Details", properties.route.params);
+        navigation.navigate("Journey Details", { ...properties.route.params, headerTitle: "Edit the Ride" });
     };
 
     JourneyPage.editJourneyRoute = () =>
