@@ -158,10 +158,10 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginTop: 0
     },
 
-    separateLine:{
-        borderBottomColor: "#C4C4C4",
-        borderBottomWidth: 1,
-        marginLeft: 15.5,
-        marginRight: 15.5
-    }
+    separator: {
+        height: 1,
+        width: "92%",
+        left: 15,
+        right: 15,
+    },
 });
