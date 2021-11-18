@@ -3,12 +3,14 @@ import renderer from "react-test-renderer";
 import HeaderLogoutButton from "../../src/components/header-logout-button/HeaderLogoutButton";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<HeaderLogoutButton />).toJSON())
-        .toMatchInlineSnapshot(`
+  expect(renderer.create(<HeaderLogoutButton />).toJSON())
+    .toMatchInlineSnapshot(`
     Array [
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
+        nativeID="animatedComponent"
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -83,13 +85,15 @@ test("renders correctly", async () =>
               Object {
                 "alignItems": "center",
                 "backgroundColor": "#FFFFFF",
-                "borderRadius": 15,
-                "height": 260,
-                "justifyContent": "space-between",
+                "borderRadius": 16,
+                "height": 310,
+                "justifyContent": "center",
                 "opacity": 1,
+                "paddingBottom": 24,
                 "paddingHorizontal": 20,
+                "paddingTop": 32,
                 "paddingVertical": 30,
-                "width": "80%",
+                "width": 344,
               }
             }
           >
@@ -98,8 +102,9 @@ test("renders correctly", async () =>
                 Object {
                   "color": "#0B171B",
                   "fontFamily": undefined,
-                  "fontSize": 16,
+                  "fontSize": 14,
                   "fontWeight": "700",
+                  "lineHeight": 18,
                 }
               }
             >
@@ -108,8 +113,11 @@ test("renders correctly", async () =>
             <Text
               style={
                 Object {
-                  "color": "#0B171B",
-                  "marginVertical": 20,
+                  "color": "#909095",
+                  "marginBottom": 40,
+                  "marginHorizontal": 21.5,
+                  "marginTop": 32,
+                  "textAlign": "center",
                 }
               }
             >
@@ -117,7 +125,9 @@ test("renders correctly", async () =>
             </Text>
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
+              nativeID="animatedComponent"
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -128,10 +138,12 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#d80056",
+                  "backgroundColor": "#D80056",
+                  "height": 56,
+                  "marginBottom": 26,
                   "opacity": 1,
-                  "paddingVertical": 10,
-                  "width": "100%",
+                  "paddingVertical": 18,
+                  "width": 304,
                 }
               }
             >
@@ -139,12 +151,14 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
+                      "color": "#0B171B",
                       "fontFamily": undefined,
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700",
+                      "lineHeight": 18,
                     },
                     Object {
-                      "color": "white",
+                      "color": "#FFFFFF",
                     },
                   ]
                 }
@@ -154,7 +168,9 @@ test("renders correctly", async () =>
             </View>
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
+              nativeID="animatedComponent"
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -173,8 +189,9 @@ test("renders correctly", async () =>
                   Object {
                     "color": "#0B171B",
                     "fontFamily": undefined,
-                    "fontSize": 16,
+                    "fontSize": 14,
                     "fontWeight": "700",
+                    "lineHeight": 18,
                   }
                 }
               >
