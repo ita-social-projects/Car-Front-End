@@ -8,9 +8,7 @@ test("renders correctly", async () =>
     Array [
       <View
         accessible={true}
-        collapsable={false}
         focusable={true}
-        nativeID="animatedComponent"
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -125,9 +123,7 @@ test("renders correctly", async () =>
             </Text>
             <View
               accessible={true}
-              collapsable={false}
               focusable={true}
-              nativeID="animatedComponent"
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -168,9 +164,7 @@ test("renders correctly", async () =>
             </View>
             <View
               accessible={true}
-              collapsable={false}
               focusable={true}
-              nativeID="animatedComponent"
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
