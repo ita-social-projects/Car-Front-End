@@ -195,6 +195,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             if (result.data.length === EMPTY_COLLECTION_LENGTH) {
                 setOwnCarButtonStyle(inactiveButtonStyle);
                 setTaxiButtonStyle(activeButtonStyle);
+                setOwnCar(false);
+                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
             }
             setUserCarIsLoading(false);
         });
@@ -474,7 +476,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invite SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDescription,
-                                        color: colors.primary, width: 238}}>
+                                        color: colors.primary, width: 238 }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
                                         will be notified for that Journey
