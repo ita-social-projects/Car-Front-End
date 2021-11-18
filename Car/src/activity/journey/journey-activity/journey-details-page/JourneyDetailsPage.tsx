@@ -474,7 +474,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invite SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDescription,
-                                        color: colors.primary, width: 238}}>
+                                        color: colors.primary, width: 238 }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
                                         will be notified for that Journey
@@ -589,7 +589,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
             <ConfirmModal
                 visible={applyChangesModalIsVisible}
-                confirmColor={"black"}
                 title={"CHANGES"}
                 subtitle={"After the changes is applied, all passengers will get notified. " +
                     "Some of them might withdraw from the ride if change doesn't suit them"}

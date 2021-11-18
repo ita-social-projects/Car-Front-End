@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
+import { lightColors, permanentColors } from "../theme/ThemesColors";
 
 const ConfirmModalStyle = StyleSheet.create({
     background: {
@@ -10,33 +11,42 @@ const ConfirmModalStyle = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
     window: {
-        width: "80%",
-        height: 260,
-        backgroundColor: "white",
-        opacity:1,
+        width: 344,
+        height: 310,
+        backgroundColor: lightColors.white,
+        opacity: 1,
         alignItems: "center",
-        borderRadius: 15,
+        borderRadius: 16,
         paddingVertical: 30,
+        paddingTop: 32,
         paddingHorizontal: 20,
-        justifyContent: "space-between"
+        paddingBottom: 24,
+        justifyContent: "center"
     },
     boldText: {
-        fontSize: 16,
+        color: lightColors.primary,
+        fontSize: 14,
+        lineHeight: 18,
         fontWeight: "700",
-        fontFamily: Font.OpenSans.Extrabold
+        fontFamily: Font.OpenSans.Extrabold,
     },
     white: {
-        color: "white"
+        color: lightColors.white
     },
     confirmButton: {
-        width: "100%",
+        width: 304,
+        height: 56,
         alignItems: "center",
-        backgroundColor: "#d80056",
-        paddingVertical: 10,
+        backgroundColor: permanentColors.accentRed,
+        paddingVertical: 18,
+        marginBottom: 26
     },
     subtitleText: {
-        color: "#AFAEAE",
-        marginVertical: 20,
+        textAlign: "center",
+        color: lightColors.secondaryDark,
+        marginTop: 32,
+        marginBottom: 40,
+        marginHorizontal: 21.5
     }
 }
 );
