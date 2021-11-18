@@ -86,7 +86,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginBottom: 2
     },
 
-    invitationsDesctiption: {
+    invitationsDescription: {
         fontSize: 12,
     },
 
