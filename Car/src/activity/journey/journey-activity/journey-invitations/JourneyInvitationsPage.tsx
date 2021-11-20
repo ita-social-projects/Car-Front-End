@@ -122,7 +122,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                     ]}
                                     name={
                                         invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                            "close" : ""
+                                            "close" : "alert-circle-outline"
                                     }
                                     size={22}
                                     color={colors.hover}
@@ -151,7 +151,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                         ]}
                                         name={
                                             invitedUsers[index].isCorrect ?
-                                                "" : "alert-circle-outline"
+                                                "close" : "alert-circle-outline"
                                         }
                                         size={22}
                                         color={invitedUsers[index].isCorrect ? colors.hover : colors.accentRed}
