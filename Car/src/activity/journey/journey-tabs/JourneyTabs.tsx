@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { RefObject, useRef, useState } from "react";
+import React, { RefObject, useContext, useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
@@ -49,12 +49,53 @@ import JourneyInvitationsPage from "../journey-activity/journey-invitations/Jour
 import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-more-options-popup/CreateJourneyMoreOptionsPopup";
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import Preferences from "../../my-profile/my-profile-activity/preferences/Preferences";
+import AuthContext from "../../../components/auth/AuthContext";
+import RequestService from "../../../../api-service/request-service/RequestService";
+import Request from "../../../../models/request/RequestModel";
+import AsyncStorage from "@react-native-community/async-storage";
+import Filter from "../../../../models/journey/Filter";
+import Indicator from "../../../components/activity-indicator/Indicator";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
     const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
+
+    const { user } = useContext(AuthContext);
+	const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
+	const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const onCreateRideRequest = async () => {
+		AsyncStorage.getItem("searchFilter").then((result) => {
+			let filter: Filter = JSON.parse(result || "{}");
+
+			let request: Request = {
+				from: {
+					latitude: filter.from.coordinates.latitude,
+					longitude: filter.from.coordinates.longitude
+				},
+				to: {
+					latitude: filter.to.coordinates.latitude,
+					longitude: filter.to.coordinates.longitude
+				},
+				fee: filter.fee,
+				passengersCount: filter.quantity,
+				userId: Number(user?.id),
+				departureTime: filter.departureTime
+			};
+			setIsLoading(true);
+
+			RequestService.addRequest(request)
+				.then(() => {
+					setSuccessModalVisible(true);
+				})
+				.catch(() => {
+					setErrorModalVisible(true);
+				});
+		});
+	};
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
@@ -344,66 +385,113 @@ const JourneyTabs = () => {
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
-                    children={(props: any) => (
-                        <>
-                            <OkSearchResult
-                                journeys={props.route.params.journeys}
-                                displayFee={props.route.params.displayFee}
-                                passangersCount = {props.route.params.passangersCount}
-                            />
-                            <ConfirmModal
-                                visible={isNewRequestModalVisible}
-                                title="ARE YOU SURE?"
-                                subtitle="You're about to create a ride request with new filters."
-                                confirmText="Yes, create"
-                                cancelText="No, go back"
-                                confirmColor={colors.primary}
-                                onConfirm={() => {
-                                    setNewRequestModalVisible(false);
-                                    (async () => sleep(SLEEP_DURATION))().then(() =>
-                                        navigation.navigate("Journey Request Page", { isRequest: true }));
-                                }}
-                                disableModal={() => setNewRequestModalVisible(false)}
-                            />
-                            <ShadowedBottomPopup
-                                snapPoints={[MIN_POPUP_HEIGHT, REQUEST_RIDE_POPUP_HEIGHT]}
-                                enabledInnerScrolling={false}
-                                initialSnap={0}
-                                renderHeader={
-                                    <View style={[JourneyPageStyle.headerTitleStyle,
-                                        { backgroundColor: colors.white }
-                                    ]}>
-                                        <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
-                                            REQUEST A RIDE
-                                        </Text>
-                                    </View>
-                                }
-                                renderContent={
-                                    <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
-                                        <MenuButton
-                                            text="With the previous filters"
-                                            isIcon={true}
-                                            onPress={() => {
-                                                navigation.navigate("Journey Request Page",
-                                                    { isRequest: true, isPreviousFilter: true });
-                                                if (ShadowedBottomPopup)
-                                                    ShadowedBottomPopup.pressHandle();
-                                            }}
-                                        />
-                                        <MenuButton
-                                            text="With new filters"
-                                            isIcon={true}
-                                            onPress={() => {
-                                                if (ShadowedBottomPopup)
-                                                    ShadowedBottomPopup.pressHandle();
-                                                setNewRequestModalVisible(true);
-                                            }}
+                    children={(props: any) => { 
+                        const errorModalDisableHandler = () => {
+							setErrorModalVisible(false);
+							setIsLoading(false);
+							navigation.navigate("Journey");
+						};
+						const successModalDisableHandler = () => {
+							setSuccessModalVisible(false);
+							setIsLoading(false);
+							navigation.navigate("Journey");
+						};
+
+                        return (
+                            <>
+                                <OkSearchResult
+                                    journeys={props.route.params.journeys}
+                                    displayFee={props.route.params.displayFee}
+                                    passangersCount = {props.route.params.passangersCount}
+                                />
+                                {isLoading && (
+                                    <View style={{ height: "100%" }}>
+                                        <Indicator
+                                            size="large"
+                                            color={colors.hover}
+                                            text="Creating request..."
                                         />
                                     </View>
-                                }
-                            />
-                        </>
-                    )
+                                )}
+                                <ConfirmModal
+                                    visible={isNewRequestModalVisible}
+                                    title="ARE YOU SURE?"
+                                    subtitle="You're about to create a ride request with new filters."
+                                    confirmText="Yes, create"
+                                    cancelText="No, go back"
+                                    confirmColor={colors.primary}
+                                    onConfirm={() => {
+                                        setNewRequestModalVisible(false);
+                                        (async () => sleep(SLEEP_DURATION))().then(() =>
+                                            navigation.navigate("Journey Request Page", { isRequest: true }));
+                                    }}
+                                    disableModal={() => setNewRequestModalVisible(false)}
+                                />
+                                <ConfirmModal
+                                    visible={successModalVisible}
+                                    title={"Success"}
+                                    subtitle={"Request successfully created!"}
+                                    confirmText={"OK"}
+                                    hideCancelButton={true}
+                                    onConfirm={() => {
+                                        successModalDisableHandler();
+                                    }}
+                                    disableModal={() => {
+                                        successModalDisableHandler();
+                                    }}
+                                />
+                                <ConfirmModal
+                                    visible={errorModalVisible}
+                                    title={"Error"}
+                                    subtitle={"Unexpected error occured :("}
+                                    confirmText={"OK"}
+                                    hideCancelButton={true}
+                                    onConfirm={() => {
+                                        errorModalDisableHandler();
+                                    }}
+                                    disableModal={() => {
+                                        errorModalDisableHandler();
+                                    }}
+                                />
+                                <ShadowedBottomPopup
+                                    snapPoints={[MIN_POPUP_HEIGHT, REQUEST_RIDE_POPUP_HEIGHT]}
+                                    enabledInnerScrolling={false}
+                                    initialSnap={0}
+                                    renderHeader={
+                                        <View style={[JourneyPageStyle.headerTitleStyle,
+                                            { backgroundColor: colors.white }
+                                        ]}>
+                                            <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
+                                                REQUEST A RIDE
+                                            </Text>
+                                        </View>
+                                    }
+                                    renderContent={
+                                        <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
+                                            <MenuButton
+                                                text="With the previous filters"
+                                                isIcon={true}
+                                                onPress={() => {
+                                                    if (ShadowedBottomPopup)
+                                                        ShadowedBottomPopup.pressHandle();
+                                                    onCreateRideRequest();
+                                                }}
+                                            />
+                                            <MenuButton
+                                                text="With new filters"
+                                                isIcon={true}
+                                                onPress={() => {
+                                                    if (ShadowedBottomPopup)
+                                                        ShadowedBottomPopup.pressHandle();
+                                                    setNewRequestModalVisible(true);
+                                                }}
+                                            />
+                                        </View>
+                                    }
+                                />
+                            </>
+                        );
+                    }
                     }
                 />
 
