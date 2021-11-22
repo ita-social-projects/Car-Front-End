@@ -109,7 +109,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     navigation={props.navigation}
                     navigationName="Search Journey"
                     blockImage={require("../../../assets/images/journey/bermuda-searching.png")}
-                    blockName="Search for a Ride"
+                    blockName="Find a Ride"
                     from={colors.greenGradientFrom}
                     to={colors.greenGradientTo}
                     reverse={false}
