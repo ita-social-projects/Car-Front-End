@@ -91,25 +91,7 @@ test("renders correctly", async () =>
         />
         <Screen
           name="Journey Details"
-          options={
-            Object {
-              "headerLeft": [Function],
-              "headerRight": [Function],
-              "headerTitle": "Publish a Ride",
-              "headerTitleAlign": "center",
-              "headerTitleStyle": Array [
-                Object {
-                  "fontFamily": "Open Sans ExtraBold",
-                  "fontSize": 18,
-                  "fontWeight": "700",
-                  "marginLeft": 20,
-                },
-                Object {
-                  "color": "#0B171B",
-                },
-              ],
-            }
-          }
+          options={[Function]}
         >
           [Function]
         </Screen>

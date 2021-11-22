@@ -279,7 +279,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             }
         };
 
-        navigation.navigate("Journey Details", properties.route.params);
+        navigation.navigate("Journey Details", { ...properties.route.params, headerTitle:"Create a Ride" });
     };
 
     const onUpdateRoutePressHandler = async () => {
@@ -457,7 +457,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 <TouchableOpacity
                     style={[SearchJourneyStyle.confirmButton,
                         {
-                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.primary,
+                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
                             left: Dimensions.get("screen").width -
                             (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
                         }]}

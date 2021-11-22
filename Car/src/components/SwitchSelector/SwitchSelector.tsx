@@ -7,7 +7,7 @@ import { useTheme } from "../theme/ThemeProvider";
 
 const SwitchSelector = (props: SwitchSelectorProps) => {
     const { colors } = useTheme();
-    
+
     return (
         <View style={SwitchSelectorStyle.container}>
             <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>{props.title}</Text>

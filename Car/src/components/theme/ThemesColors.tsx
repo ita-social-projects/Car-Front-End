@@ -1,4 +1,4 @@
-const permanentColors = {
+export const permanentColors = {
     accentOrange: "#EC6400",
     accentBlue: "#02A2CF",
     accentRed: "#D80056",

@@ -66,9 +66,9 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [userCoordinates, setUserCoordinates] = useState<LatLng>(initialCoordinate);
 
     const activeButtonStyle = {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.hover,
         color: colors.white,
-        borderColor: colors.primary
+        borderColor: colors.hover
     };
 
     const inactiveButtonStyle = {
@@ -464,7 +464,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             style={[SearchJourneyStyle.publishButton,
                                 {
                                     backgroundColor: !(to.isConfirmed && from.isConfirmed) ?
-                                        colors.secondaryDark : colors.primary,
+                                        colors.secondaryDark : colors.hover,
                                     borderWidth: 0,
                                 }]}
                             onPress={() => {

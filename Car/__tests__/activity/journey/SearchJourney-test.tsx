@@ -184,8 +184,8 @@ describe("JourneySearch Test", () => {
                       "paddingVertical": 6,
                     },
                     Object {
-                      "backgroundColor": "#0B171B",
-                      "borderColor": "#0B171B",
+                      "backgroundColor": "#414045",
+                      "borderColor": "#414045",
                       "color": "#FFFFFF",
                     },
                   ]
@@ -201,8 +201,8 @@ describe("JourneySearch Test", () => {
                         "textTransform": "uppercase",
                       },
                       Object {
-                        "backgroundColor": "#0B171B",
-                        "borderColor": "#0B171B",
+                        "backgroundColor": "#414045",
+                        "borderColor": "#414045",
                         "color": "#FFFFFF",
                       },
                     ]

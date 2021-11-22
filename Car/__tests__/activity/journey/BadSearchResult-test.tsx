@@ -93,7 +93,7 @@ test("renders correctly", async () =>
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#0B171B",
+              "backgroundColor": "#414045",
               "height": 48,
               "justifyContent": "center",
               "opacity": 1,
