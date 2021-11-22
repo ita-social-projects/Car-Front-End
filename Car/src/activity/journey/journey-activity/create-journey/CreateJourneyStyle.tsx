@@ -159,5 +159,12 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 10,
         height: 265,
         marginTop: 0
-    }
+    },
+
+    separator: {
+        height: 1,
+        width: "92%",
+        left: 15,
+        right: 15,
+    },
 });

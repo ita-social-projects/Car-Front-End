@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import { MutableRefObject } from "react";
 import { PermissionsAndroid } from "react-native";
 import MapView, { LatLng } from "react-native-maps";
@@ -33,9 +32,9 @@ export const animateCamera =
     (fn: (coordinates: LatLng) => void, coordinates: LatLng, mapRef: MutableRefObject<MapView | null>) => {
         fn(coordinates);
 
-    mapRef.current?.animateCamera({
-        center: coordinates
-    }, { duration: 1000 });
+        mapRef.current?.animateCamera({
+            center: coordinates
+        }, { duration: 1000 });
     };
 
 export const setCoordinatesByDescription =

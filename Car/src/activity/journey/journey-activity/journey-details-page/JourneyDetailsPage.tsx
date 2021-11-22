@@ -51,11 +51,13 @@ import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
+import { Divider } from "react-native-elements";
 import AsyncStorage from "@react-native-community/async-storage";
 import FeeType from "../../../../../models/journey/FeeType";
 import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
+
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -564,8 +566,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             </TouchableOpacity>
                         </View>
 
+                        <Divider style={[CreateJourneyStyle.separator, { backgroundColor: colors.secondaryLight }]} />
+
                         <View style={[CreateJourneyStyle.publishButtonContainer,
+
                             {  flexDirection: journey ? "row" : "column"}]}>
+
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
