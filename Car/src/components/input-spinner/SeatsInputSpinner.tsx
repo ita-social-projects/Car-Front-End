@@ -34,9 +34,10 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
                     colorRight={colors.hover}
                     background={colors.white}
                     textColor={colors.primary}
-                    height={44}
-                    buttonLeftImage={<Entypo name="minus" size={20} color={colors.primary} />}
+                    height={32}
+                    buttonLeftImage={<Entypo name="minus" size={20} color={colors.white}/>}
                     buttonRightImage={<Entypo name="plus" size={20} color={colors.white} />}
+                    buttonStyle={[SeatsInputSpinnerStyle.button]}
                     fontSize={16}
                     editable={false}
                     rounded={false}
