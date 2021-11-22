@@ -58,7 +58,6 @@ import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
 
-
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
 
@@ -253,7 +252,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             selectedCar: selectedCar,
             rideType: selectedRide,
             passengers: availableSeats,
-            comments: comments
+            comments: comments,
+            newInvitations: newInvitations
         };
 
         AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
@@ -266,24 +266,29 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             switch (filter.fee) {
                 case FeeType.Free:
                     setSelectedFeeAsPaid(false);
+                    setSelectedFee(FeeType.Free);
                     break;
                 case FeeType.Paid:
                     setSelectedFeeAsPaid(true);
+                    setSelectedFee(FeeType.Paid);
                     break;
             }
             switch (filter.rideType) {
                 case RideType.OwnCar:
                     setOwnCar(true);
                     setSelectedCar(filter.selectedCar);
+                    setSelectedRide(RideType.OwnCar);
                     break;
                 case RideType.Taxi:
                     setOwnCar(false);
+                    setSelectedRide(RideType.Taxi);
                     break;
             }
             setDepartureTime(new Date(filter.departureTime));
             setDepartureTimeIsConfirmed(filter.departureTimeIsConfirmed);
             setAvailableSeats(filter.passengers);
             setComments(filter.comments);
+            setNewInvitations(filter.newInvitations ?? []);
         });
     };
 
