@@ -14,6 +14,7 @@ import {
 } from "../../constants/GeneralConstants";
 import NavigationAddListener from "../../types/NavigationAddListener";
 import { useTheme } from "../../components/theme/ThemeProvider";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const JourneyStartPage = (props: NavigationAddListener) => {
     const { colors } = useTheme();
@@ -97,6 +98,10 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     useEffect(() => {
         return props.navigation.addListener("focus", loadJourneys);
     }, [props.navigation]);
+
+    useEffect(()=>{
+        AsyncStorage.removeItem("publishRideFieldsState");
+    });
 
     return (
         <ScrollView

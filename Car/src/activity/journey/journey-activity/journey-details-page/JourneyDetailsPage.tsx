@@ -52,6 +52,12 @@ import ChatService from "../../../../../api-service/chat-service/ChatService";
 import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import { Divider } from "react-native-elements";
+import AsyncStorage from "@react-native-community/async-storage";
+import FeeType from "../../../../../models/journey/FeeType";
+import RideType from "../../../../../models/journey/RideType";
+import { useIsFocused } from "@react-navigation/native";
+import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
+
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -86,6 +92,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [comments, setComments] = useState("");
 
+    const isFocused = useIsFocused();
+
     const activeButtonStyle = {
         backgroundColor: colors.hover,
         color: colors.white,
@@ -104,14 +112,15 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         return inactiveButtonStyle;
     };
-
+    const [selectedFee, setSelectedFee] = useState(FeeType.Free);
+    const [selectedRide, setSelectedRide] = useState(RideType.OwnCar);
     const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
 
     let highlightOwnCarButton: boolean = !journey || journey.isOnOwnCar;
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
-    let highlightPaidButton: boolean = !journey || !journey.isFree;
+    let highlightPaidButton: boolean = !journey || journey.isFree;
     const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(!highlightPaidButton);
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(highlightPaidButton));
@@ -213,6 +222,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
     }, []);
 
+    useEffect(() : any => {
+        AsyncStorage.getItem("publishRideFieldsState")
+            .then((item) => {
+                if (item) loadJourneyState();
+            });
+    }, []);
+
+    useEffect(() : any => {
+        if(!isFocused) saveJourneyState();
+    }, [isFocused]);
+
     const createAllInvitationsArrayFromNewInvitations = (): Invitation[] => {
         return newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
             return {
@@ -222,6 +242,49 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 type: 0
             };
         }).concat(existingInvitations);
+    };
+
+    const saveJourneyState = () => {
+
+        let filterToSave: PublishRideFilter = {
+            departureTime: departureTime,
+            departureTimeIsConfirmed: departureTimeIsConfirmed,
+            fee: selectedFee,
+            selectedCar: selectedCar,
+            rideType: selectedRide,
+            passengers: availableSeats,
+            comments: comments
+        };
+
+        AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
+    };
+
+    const loadJourneyState = async () => {
+        await AsyncStorage.getItem("publishRideFieldsState").then((res) => {
+            let filter: PublishRideFilter = JSON.parse(res || "{}");
+
+            switch (filter.fee) {
+                case FeeType.Free:
+                    setSelectedFeeAsPaid(false);
+                    break;
+                case FeeType.Paid:
+                    setSelectedFeeAsPaid(true);
+                    break;
+            }
+            switch (filter.rideType) {
+                case RideType.OwnCar:
+                    setOwnCar(true);
+                    setSelectedCar(filter.selectedCar);
+                    break;
+                case RideType.Taxi:
+                    setOwnCar(false);
+                    break;
+            }
+            setDepartureTime(new Date(filter.departureTime));
+            setDepartureTimeIsConfirmed(filter.departureTimeIsConfirmed);
+            setAvailableSeats(filter.passengers);
+            setComments(filter.comments);
+        });
     };
 
     const publishJourneyHandler = async () => {
@@ -271,7 +334,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 };
 
                 ChatService.addChat(newChat)
-                    .then(() => setSuccessfullyPublishModalIsVisible(true));
+                    .then(() => {
+                        setSuccessfullyPublishModalIsVisible(true);
+                    }
+                    );
             })
             .catch(() => setModal(publishErrorModal));
 
@@ -388,11 +454,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             rightButtonStyle={taxiButtonStyle}
                             onLeftButtonPress={() => {
                                 setOwnCar(true);
+                                setSelectedRide(RideType.OwnCar);
                                 setIsVisibleCarDropDown(false);
                                 setAvailableSeats(DEFAULT_AVAILABLE_SEATS_COUNT);
                             }}
                             onRightButtonPress={() => {
                                 setOwnCar(false);
+                                setSelectedRide(RideType.Taxi);
                                 setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
                             }}
                             title={"Ride Type"}
@@ -429,9 +497,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
                                 setSelectedFeeAsPaid(false);
+                                setSelectedFee(FeeType.Free);
                             }}
                             onRightButtonPress={() => {
                                 setSelectedFeeAsPaid(true);
+                                setSelectedFee(FeeType.Paid);
                             }}
                             title={"Fee"}
                             leftButtonText={"Free"}
@@ -475,7 +545,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invite SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDescription,
-                                        color: colors.primary, width: 238}}>
+                                        color: colors.primary, width: 238 }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
                                         will be notified for that Journey
@@ -592,7 +662,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
             <ConfirmModal
                 visible={applyChangesModalIsVisible}
-                confirmColor={"black"}
                 title={"CHANGES"}
                 subtitle={"After the changes is applied, all passengers will get notified. " +
                     "Some of them might withdraw from the ride if change doesn't suit them"}
