@@ -498,7 +498,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         </View>
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
-                            { flexDirection: "row"}]}>
+                            {  flexDirection: journey ? "row" : "column"}]}>
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
