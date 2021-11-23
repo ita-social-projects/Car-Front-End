@@ -433,6 +433,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     text={stop.text}
                                     disabled={true}
                                     key={index}
+                                    marginBottom={16}
                                 />
                             ))}
                         </View>
