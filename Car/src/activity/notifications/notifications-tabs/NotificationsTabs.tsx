@@ -7,6 +7,7 @@ import RouteView from "../../../components/journey-new-applicant/route-view/Rout
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import JourneyNewApplicantView from "../../../components/journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantView";
 import { useTheme } from "../../../components/theme/ThemeProvider";
+import StopView from "../../../components/stop-view/StopView";
 
 const StackTabs = createStackNavigator();
 
@@ -29,6 +30,16 @@ const NotificationsTabs = () => {
                 <StackTabs.Screen
                     name="Route View"
                     component={RouteView}
+                    options={{
+                        headerTitle: "View Stops",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Stop View"
+                    component={StopView}
                     options={{
                         headerTitle: "View Stops",
                         headerTitleAlign: "center",

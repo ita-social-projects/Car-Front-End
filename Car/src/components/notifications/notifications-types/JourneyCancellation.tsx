@@ -9,18 +9,18 @@ import NotificationConfirmButton from "../notification-buttons/NotificationConfi
 import NotificationModalBase from "../notification-modal-base/NotificationModalBase";
 import NotificationHeader from "../notification-header/NotificationHeader";
 import NotificationRideDetails from "../notification-ride-details/NotificationRideDetails";
-import { Text, View } from "react-native";
+import { Text, View, } from "react-native";
 import JourneyNewApplicantViewStyle from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
 import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
-import { onStopPressHandler } from "./StopNavigationFunction/StopNavigationFunction";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import axios from "axios";
 import Journey from "../../../../models/journey/Journey";
 import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
-import { getStopByType } from "../../../utils/JourneyHelperFunctions";
+import { getStopByType, getStopCoordinates } from "../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../models/stop/StopType";
 import { colors } from "react-native-elements";
+import * as navigation from "../../../components/navigation/Navigation";
 
 const JourneyCancellation = (props: NotificationProps) => {
     const user = useContext(AuthContext).user;
@@ -30,6 +30,7 @@ const JourneyCancellation = (props: NotificationProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
+    const journeyPoints = useState<JourneyPoint[]>([]);
 
     useEffect(() => {
         if(!wasOpened&&modalVisible)
@@ -54,10 +55,14 @@ const JourneyCancellation = (props: NotificationProps) => {
         }
     }, [modalVisible]);
 
-    const onStopPress = (stop:Stop, myStops:Stop[], journeyPoints: JourneyPoint[], notification: NotificationProps) =>
-    {
+    const onStopPressHandler = (stop:Stop) => {
+        navigation.navigate("Stop View", {
+            stops: stops,
+            journeyPoints: journeyPoints,
+            cameraCoordinates: getStopCoordinates(stop),
+            notification: props
+        }),
         setModalVisible(false);
-        onStopPressHandler(stop,myStops,journeyPoints, notification);
     };
 
     return (
@@ -96,9 +101,10 @@ const JourneyCancellation = (props: NotificationProps) => {
                 <View>
                     <StopsBlock
                         stops={stops ? stops : []}
-                        onStopPress={() => onStopPress}
+                        onStopPress={onStopPressHandler}
                         highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                     />
+
                 </View>
 
                 <NotificationButtonGroup>

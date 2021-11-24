@@ -61,6 +61,28 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
+          name="Stop View"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "View Stops",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
           name="New Applicant"
           options={
             Object {
