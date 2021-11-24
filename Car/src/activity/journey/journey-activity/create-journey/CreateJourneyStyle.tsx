@@ -108,7 +108,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     },
 
-    publishButtonText: {
+       publishButtonText: {
         paddingHorizontal: 6,
         textTransform: "uppercase",
         fontWeight: "bold",
