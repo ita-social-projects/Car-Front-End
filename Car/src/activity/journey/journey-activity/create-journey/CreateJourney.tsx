@@ -279,7 +279,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             }
         };
 
-        navigation.navigate("Journey Details", { ...properties.route.params, headerTitle:"Create a Ride" });
+        navigation.navigate("Journey Details", { ...properties.route.params, headerTitle:"Publish a Ride" });
     };
 
     const onUpdateRoutePressHandler = async () => {
