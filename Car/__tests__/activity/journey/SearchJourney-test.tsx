@@ -168,6 +168,8 @@ describe("JourneySearch Test", () => {
               style={
                 Object {
                   "flexDirection": "row",
+                  "borderWidth": 1,
+                  "marginRight": 15,
                 }
               }
             >
@@ -177,7 +179,6 @@ describe("JourneySearch Test", () => {
                   Array [
                     Object {
                       "backgroundColor": "#000000",
-                      "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "paddingHorizontal": 16,
@@ -217,11 +218,12 @@ describe("JourneySearch Test", () => {
                   Array [
                     Object {
                       "backgroundColor": "#000000",
-                      "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
+                      "borderRightWidth": 1,
+                      "borderLeftWidth": 1,
                     },
                     Object {
                       "backgroundColor": "#FFFFFF",
@@ -258,10 +260,8 @@ describe("JourneySearch Test", () => {
                     Object {
                       "alignItems": "center",
                       "backgroundColor": "white",
-                      "borderWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
-                      "marginRight": 15,
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
                     },
