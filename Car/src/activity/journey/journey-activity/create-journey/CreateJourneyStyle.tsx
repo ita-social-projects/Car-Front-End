@@ -51,8 +51,6 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginTop: 24,
         marginLeft: 16,
         marginRight: 20,
-        borderBottomWidth: 1,
-        borderColor: lightColors.secondaryLight
     },
 
     invitationsLink: {
@@ -110,7 +108,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     },
 
-    publishButtonText: {
+       publishButtonText: {
         paddingHorizontal: 6,
         textTransform: "uppercase",
         fontWeight: "bold",

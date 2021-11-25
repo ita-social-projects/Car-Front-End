@@ -242,7 +242,7 @@ const JourneyTabs = () => {
                     name="Search Journey"
                     component={SearchJourney}
                     options={{
-                        headerTitle: "Search for Ride",
+                        headerTitle: "Find a Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

@@ -85,56 +85,58 @@ test("renders correctly", async () =>
                 }
               }
             >
-              <View
-                style={
-                  Object {
-                    "height": 300,
-                  }
-                }
-              >
-                <ScrollView
-                  nestedScrollEnabled={true}
+              <React.Fragment>
+                <View
                   style={
-                    Array [
-                      Object {
-                        "alignSelf": "center",
-                        "paddingHorizontal": "5%",
-                        "width": "100%",
-                      },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                      },
-                    ]
+                    Object {
+                      "height": 300,
+                    }
                   }
                 >
-                  <CarBlock
-                    car={null}
-                    isOnOwnCar={false}
-                  />
-                  <StopsBlock
-                    highlightedStops={
+                  <ScrollView
+                    nestedScrollEnabled={true}
+                    style={
                       Array [
-                        1,
-                        2,
+                        Object {
+                          "alignSelf": "center",
+                          "paddingHorizontal": "5%",
+                          "width": "100%",
+                        },
+                        Object {
+                          "backgroundColor": "#FFFFFF",
+                        },
                       ]
                     }
-                    onStopPress={[Function]}
-                    stops={Array []}
-                  />
-                  <CommentsBlock />
-                  <ParticipantsBlock
-                    journey={null}
-                  />
-                </ScrollView>
-              </View>
-              <ButtonBlock
-                applicantStops={Array []}
-                isDriver={false}
-                isPassenger={false}
-                isRequested={false}
-                journey={null}
-                onSendRequestPress={[Function]}
-              />
+                  >
+                    <CarBlock
+                      car={null}
+                      isOnOwnCar={false}
+                    />
+                    <StopsBlock
+                      highlightedStops={
+                        Array [
+                          1,
+                          2,
+                        ]
+                      }
+                      onStopPress={[Function]}
+                      stops={Array []}
+                    />
+                    <CommentsBlock />
+                    <ParticipantsBlock
+                      journey={null}
+                    />
+                  </ScrollView>
+                </View>
+                <ButtonBlock
+                  applicantStops={Array []}
+                  isDriver={false}
+                  isPassenger={false}
+                  isRequested={false}
+                  journey={null}
+                  onSendRequestPress={[Function]}
+                />
+              </React.Fragment>
             </View>
           }
           renderHeader={
@@ -190,17 +192,6 @@ test("renders correctly", async () =>
         subtitle="Ride canceling is failed"
         title="Ride canceling"
         visible={false}
-      />
-      <SendRequestModal
-        comments=""
-        disableNodal={[Function]}
-        onCommentsChange={[Function]}
-        onConfirmPress={[Function]}
-        onPassangersCountChange={[Function]}
-        onWithLuggageChange={[Function]}
-        passangersCount={1}
-        visible={false}
-        withLuggage={false}
       />
     </React.Fragment>
   `));

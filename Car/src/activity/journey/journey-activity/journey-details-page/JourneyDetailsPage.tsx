@@ -433,6 +433,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     text={stop.text}
                                     disabled={true}
                                     key={index}
+                                    marginBottom={16}
                                 />
                             ))}
                         </View>
@@ -569,7 +570,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         <Divider style={[CreateJourneyStyle.separator, { backgroundColor: colors.secondaryLight }]} />
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
-                            { flexDirection: "row-reverse" }]}>
+
+                            {  flexDirection: journey ? "row" : "column"}]}>
+
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
