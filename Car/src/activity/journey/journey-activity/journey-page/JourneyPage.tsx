@@ -298,9 +298,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 <>
                                     <View style={JourneyPageStyle.detailsBlock}>
                                         <ScrollView
-                                            nestedScrollEnabled={true}
-                                            style={[JourneyPageStyle.contentView, { backgroundColor: colors.white }]}
-                                        >
+                                            nestedScrollEnabled={true} 
+                                            style={[JourneyPageStyle.contentView, 
+                                                { backgroundColor: colors.white }]}>
                                             <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
                                             <StopsBlock
                                                 stops={getStopsForBottomPopup() ?? []}
