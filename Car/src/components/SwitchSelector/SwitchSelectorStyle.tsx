@@ -16,7 +16,16 @@ const SwitchSelectorStyle = StyleSheet.create({
         backgroundColor: "#000000",
         flexDirection: "row",
         justifyContent: "flex-end",
-        borderWidth: 1
+    },
+
+    middleButton: {
+        paddingHorizontal: 16,
+        paddingVertical: 6,
+        backgroundColor: "#000000",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        borderRightWidth: 1,
+        borderLeftWidth: 1
     },
 
     rightButton: {
@@ -26,8 +35,6 @@ const SwitchSelectorStyle = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
-        borderWidth: 1,
-        marginRight: 15,
     },
 
     buttonText: {

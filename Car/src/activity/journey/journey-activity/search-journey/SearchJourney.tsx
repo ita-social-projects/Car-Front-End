@@ -404,9 +404,12 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View style={SwitchSelectorStyle.container}>
                         <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>Fee</Text>
-                        <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row", borderWidth: 1, marginRight:15 }}>
                             <TouchableOpacity
-                                style={[SwitchSelectorStyle.leftButton, allButtonStyle]}
+                                style={[
+                                    SwitchSelectorStyle.leftButton,
+                                    allButtonStyle
+                                ]}
                                 onPress={() => {
                                     setSelectedFee(FeeType.All);
                                 }}
@@ -423,7 +426,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
 
                             <TouchableOpacity
                                 style={[
-                                    SwitchSelectorStyle.leftButton,
+                                    SwitchSelectorStyle.middleButton,
                                     freeButtonStyle,
                                 ]}
                                 onPress={() => {
