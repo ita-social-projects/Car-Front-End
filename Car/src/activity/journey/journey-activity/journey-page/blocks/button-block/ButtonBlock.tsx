@@ -11,11 +11,12 @@ import CreateChat from "../../../../../../../models/Chat/CreateChat";
 const ButtonBlock = (props: ButtonBlockProps) => {
     const { colors } = useTheme();
 
-    const black = colors.primary;
-    const disabledColor = colors.secondaryLight;
+    //const black = colors.primary;
+    //const disabledColor = colors.secondaryLight;
 
-    const [colorText, setColorText] = useState(black);
-    const [colorBorder, setColorBorder] = useState(black);
+    const [colorText, setColorText] = useState(colors.white);
+    const [colorBorder, setColorBorder] = useState(colors.hover);
+    const [colorBackground, setColorBackground] =useState(colors.hover);
 
     const chat: CreateChat = {
         id: props.journey?.id!,
@@ -32,13 +33,15 @@ const ButtonBlock = (props: ButtonBlockProps) => {
     };
 
     const changeColorToDisable = () => {
-        setColorText(disabledColor);
-        setColorBorder(disabledColor);
+        setColorText(colors.white);
+        setColorBorder(colors.primary);
+        setColorBackground(colors.primary);
     };
 
     const changeColorToBlack = () => {
-        setColorText(black);
-        setColorBorder(black);
+        setColorText(colors.white);
+        setColorBorder(colors.hover);
+        setColorBackground(colors.hover);
     };
 
     return (
@@ -51,7 +54,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                 {(props.isDriver || props.isPassenger) && (
                     <Pressable
                         style={[JourneyPageStyle.messageAllButton, {
-                            backgroundColor: colors.white,
+                            backgroundColor: colorBackground,
                             borderColor: colorBorder }]}
                         onPressIn={changeColorToDisable.bind(this)}
                         onPressOut={changeColorToBlack.bind(this)}
