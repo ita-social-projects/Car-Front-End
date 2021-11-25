@@ -10,10 +10,6 @@ import CreateChat from "../../../../../../../models/Chat/CreateChat";
 
 const ButtonBlock = (props: ButtonBlockProps) => {
     const { colors } = useTheme();
-
-    //const black = colors.primary;
-    //const disabledColor = colors.secondaryLight;
-
     const [colorText, setColorText] = useState(colors.white);
     const [colorBorder, setColorBorder] = useState(colors.hover);
     const [colorBackground, setColorBackground] =useState(colors.hover);
