@@ -58,7 +58,6 @@ import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
 
-
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
 
@@ -572,18 +571,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             { flexDirection: "row-reverse" }]}>
 
                             <TouchableOpacity
-                                style={[CreateJourneyStyle.discardButton,
-                                    {
-                                        display: journey ? "flex" : "none",
-                                    }]}
-                                onPress={() => setDiscardModalIsVisible(true)}
-                            >
-                                <Text style={CreateJourneyStyle.discardButtonText}>
-                                    Discard Changes
-                                </Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     {
                                         backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
@@ -600,6 +587,18 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                         color: colors.white
                                     }]}>
                                     {journey ? "Apply changes" : "Publish"}
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[CreateJourneyStyle.discardButton,
+                                    {
+                                        display: journey ? "flex" : "none",
+                                    }]}
+                                onPress={() => setDiscardModalIsVisible(true)}
+                            >
+                                <Text style={CreateJourneyStyle.discardButtonText}>
+                                    Discard Changes
                                 </Text>
                             </TouchableOpacity>
 
