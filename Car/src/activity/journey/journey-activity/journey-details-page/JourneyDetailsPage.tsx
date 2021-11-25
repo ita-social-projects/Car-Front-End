@@ -570,7 +570,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         <Divider style={[CreateJourneyStyle.separator, { backgroundColor: colors.secondaryLight }]} />
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
-                            { flexDirection: "row-reverse" }]}>
+
+                            {  flexDirection: journey ? "row" : "column"}]}>
+
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
