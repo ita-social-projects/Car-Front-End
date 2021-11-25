@@ -25,9 +25,6 @@ const SendRequestModal = (props: SendRequestModalProps) => {
         >
             <TouchableWithoutFeedback onPress={props.disableNodal}>
                 <View style={SendRequestModalStyle.background}>
-                    <TouchableWithoutFeedback onPress={() => {
-                        Keyboard.dismiss();
-                    }}>
                         <View style={{ ...SendRequestModalStyle.window, backgroundColor: colors.white }}>
 
                             <View style={SendRequestModalStyle.closeButtonContainer}>
@@ -94,7 +91,6 @@ const SendRequestModal = (props: SendRequestModalProps) => {
 
                             </View>
                         </View>
-                    </TouchableWithoutFeedback>
                 </View>
             </TouchableWithoutFeedback>
         </Modal>
