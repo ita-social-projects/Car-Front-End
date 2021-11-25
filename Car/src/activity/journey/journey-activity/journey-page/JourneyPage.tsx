@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import {Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -236,6 +236,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     return (
         <>
+        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
             <View style={[JourneyPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
                 <MapView
                     ref={ref => {
@@ -275,6 +276,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                         </>)}
                 </MapView>
             </View>
+        </TouchableWithoutFeedback>
 
             {!props.moreOptionsPopupIsOpen &&
             <Portal>
@@ -290,14 +292,15 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     enabledInnerScrolling={true}
                     renderHeader={<DriverBlock journey={currentJourney}/>}
                     renderContent={
+                        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
                         <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
                             {!isConfirmationFormVisible ? (
                                 <>
                                     <View style={JourneyPageStyle.detailsBlock}>
                                         <ScrollView
-                                            nestedScrollEnabled={true}
-                                            style={[JourneyPageStyle.contentView, { backgroundColor: colors.white }]}
-                                        >
+                                            nestedScrollEnabled={true} 
+                                            style={[JourneyPageStyle.contentView, 
+                                                { backgroundColor: colors.white }]}>
                                             <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
                                             <StopsBlock
                                                 stops={getStopsForBottomPopup() ?? []}
@@ -380,6 +383,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                             )}
 
                         </View>
+                        </TouchableWithoutFeedback>
                     }
                 />
             </Portal>
