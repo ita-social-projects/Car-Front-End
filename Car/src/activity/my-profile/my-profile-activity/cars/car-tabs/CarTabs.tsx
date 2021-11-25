@@ -64,7 +64,7 @@ const CarTabs = () => {
                 <StackTabs.Screen
                     name="EditCars"
                     options={{
-                        headerTitle: "Your Car",
+                        headerTitle: "Edit Car Info",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,

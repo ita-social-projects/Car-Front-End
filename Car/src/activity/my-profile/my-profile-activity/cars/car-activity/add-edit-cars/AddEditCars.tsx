@@ -380,7 +380,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                         style={
                             (!isValidCar || !isValidPlateNumber) ?
                                 [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.secondaryDark }]
-                                : [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.primary }]
+                                : [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.hover }]
                         }
                         disabled={
                             !isValidCar || !isValidPlateNumber

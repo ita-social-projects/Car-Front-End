@@ -12,8 +12,8 @@ import WeekDay from "./WeekDay";
 const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
     const { colors } = useTheme();
     const activeButtonStyle = {
-        backgroundColor: colors.primary,
-        borderColor: colors.primary,
+        backgroundColor: colors.hover,
+        borderColor: colors.hover,
         color: colors.white,
     };
 
@@ -214,15 +214,15 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                     <View style={ScheduleBottomPopupStyles.scheduleButtonBlock}>
                         <TouchableOpacity
                             style={[ScheduleBottomPopupStyles.scheduleButton, {
-                                backgroundColor: colors.white,
-                                borderColor: isEdited ? colors.primary : colors.secondaryDark
+                                backgroundColor: isEdited ? colors.hover : colors.secondaryDark,
+                                borderColor: isEdited ? colors.hover : colors.secondaryDark
                             }]}
                             onPress={schedule}
                             disabled={!isEdited}
                         >
                             <Text
                                 style={[ScheduleBottomPopupStyles.scheduleButtonText, {
-                                    color: isEdited ? colors.primary : colors.secondaryDark }]}>
+                                    color: colors.white }]}>
                                 Save
                             </Text>
                         </TouchableOpacity>

@@ -29,14 +29,15 @@ const SeatsInputSpinner = (props: SeatsInputSpinnerProps) => {
                     step={1}
                     style={[SeatsInputSpinnerStyle.spinnerContainer, { borderColor: colors.primary }]}
                     inputStyle={[SeatsInputSpinnerStyle.input, { borderColor: colors.primary }]}
-                    colorPress={colors.hover}
+                    colorPress={colors.primary}
                     colorLeft={colors.white}
-                    colorRight={colors.primary}
+                    colorRight={colors.hover}
                     background={colors.white}
                     textColor={colors.primary}
-                    height={44}
-                    buttonLeftImage={<Entypo name="minus" size={20} color={colors.primary} />}
+                    height={32}
+                    buttonLeftImage={<Entypo name="minus" size={20} color={colors.white}/>}
                     buttonRightImage={<Entypo name="plus" size={20} color={colors.white} />}
+                    buttonStyle={[SeatsInputSpinnerStyle.button]}
                     fontSize={16}
                     editable={false}
                     rounded={false}

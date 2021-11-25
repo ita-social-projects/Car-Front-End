@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { lightColors } from "../../../../components/theme/ThemesColors";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
@@ -49,7 +50,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     invitationsView: {
         marginTop: 24,
         marginLeft: 16,
-        marginRight: 20
+        marginRight: 20,
     },
 
     invitationsLink: {
@@ -86,7 +87,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginBottom: 2
     },
 
-    invitationsDesctiption: {
+    invitationsDescription: {
         fontSize: 12,
     },
 
@@ -94,12 +95,11 @@ export const CreateJourneyStyle = StyleSheet.create({
         alignItems: "flex-end",
         marginVertical: 24,
         flexDirection: "row-reverse",
-        paddingLeft: 0,
         justifyContent: "space-between"
     },
 
     publishButton: {
-        marginRight: 20,
+        marginRight: 15,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
@@ -108,7 +108,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     },
 
-    publishButtonText: {
+       publishButtonText: {
         paddingHorizontal: 6,
         textTransform: "uppercase",
         fontWeight: "bold",
@@ -117,10 +117,11 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     discardButton: {
+        marginLeft: 30,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
-        borderWidth: 2
+        flexDirection: "row"
     },
 
     saveButonContainer:{
@@ -137,12 +138,10 @@ export const CreateJourneyStyle = StyleSheet.create({
     },
 
     discardButtonText: {
-        paddingHorizontal: 6,
-        color: "red",
-        textTransform: "uppercase",
+        color: "#EC6400",
         fontWeight: "bold",
-        fontSize: 14,
-        lineHeight: 20,
+        fontSize: 16,
+        lineHeight: 22,
     },
 
     movableMarker: {
@@ -158,5 +157,12 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 10,
         height: 265,
         marginTop: 0
-    }
+    },
+
+    separator: {
+        height: 1,
+        width: "92%",
+        left: 15,
+        right: 15,
+    },
 });

@@ -15,12 +15,13 @@ const SwitchSelector = (props: SwitchSelectorProps) => {
 
                 <TouchableOpacity
                     style={[SwitchSelectorStyle.leftButton, props.disableLeftButton ?
-                        { backgroundColor: colors.secondaryDark } : props.leftButtonStyle]}
+                        { backgroundColor: colors.disableBack, borderColor: colors.disableBack } :
+                        props.leftButtonStyle]}
                     onPress={props.onLeftButtonPress}
                     disabled={props.disableLeftButton}
                 >
                     <Text style={[SwitchSelectorStyle.buttonText, props.disableLeftButton ?
-                        { backgroundColor: colors.secondaryDark, color: colors.white } : props.leftButtonStyle]}>
+                        { color: colors.disableText } : props.leftButtonStyle]}>
                         {props.leftButtonText}
                     </Text>
                 </TouchableOpacity>

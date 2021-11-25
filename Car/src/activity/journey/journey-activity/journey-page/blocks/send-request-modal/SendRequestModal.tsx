@@ -1,4 +1,4 @@
-import { Modal, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Keyboard, Modal, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import React, { useState } from "react";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import ChooseOption from "../../../../../../components/choose-opton/ChooseOption";
@@ -25,7 +25,9 @@ const SendRequestModal = (props: SendRequestModalProps) => {
         >
             <TouchableWithoutFeedback onPress={props.disableNodal}>
                 <View style={SendRequestModalStyle.background}>
-                    <TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => {
+                        Keyboard.dismiss();
+                    }}>
                         <View style={{ ...SendRequestModalStyle.window, backgroundColor: colors.white }}>
 
                             <View style={SendRequestModalStyle.closeButtonContainer}>

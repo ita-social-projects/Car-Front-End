@@ -179,8 +179,9 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Journey Details"
-                    options={{
-                        headerTitle: "Publish a Ride",
+                    options={({ route }: { route:any }) => ({
+                        headerTitle: route.params.headerTitle,
+
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: () => HeaderBackButton({
@@ -191,7 +192,7 @@ const JourneyTabs = () => {
                         }),
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(ridePageMoreOptionsRef) })
-                    }}
+                    })}
                 >
                     {(props: any) => {
                         /* eslint-disable */
@@ -241,7 +242,7 @@ const JourneyTabs = () => {
                     name="Search Journey"
                     component={SearchJourney}
                     options={{
-                        headerTitle: "Search for Ride",
+                        headerTitle: "Find a Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

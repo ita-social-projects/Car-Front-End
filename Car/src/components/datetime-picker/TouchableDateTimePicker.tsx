@@ -101,7 +101,7 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={onDonePress}
-                                    style={[TouchableDateTimePickerStyle.btnDone, { backgroundColor: colors.primary }]}>
+                                    style={[TouchableDateTimePickerStyle.btnDone, { backgroundColor: colors.hover }]}>
                                     <Text style={[TouchableDateTimePickerStyle.btnDoneText, { color: colors.white }]}>
                                         Done
                                     </Text>

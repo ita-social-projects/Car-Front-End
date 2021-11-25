@@ -14,8 +14,8 @@ const RemoveAddressButtonStyle = StyleSheet.create({
     },
 
     panelButtonTitle: {
-        fontSize: 13,
-        lineHeight: 42,
+        fontSize: 20,
+        lineHeight: 40,
         fontWeight: "bold",
         alignItems: "center",
         paddingLeft: 10,

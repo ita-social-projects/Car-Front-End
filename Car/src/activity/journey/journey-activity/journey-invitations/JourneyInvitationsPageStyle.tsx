@@ -7,15 +7,10 @@ export const JourneyInvitationsPageStyle = StyleSheet.create({
         paddingBottom: 22,
         justifyContent: "space-between"
     },
-    clearIcon: {
+    icon: {
         position: "absolute",
         top: 15,
         right: 10
-    },
-    statusIcon: {
-        position: "absolute",
-        top: 15,
-        right: 30
     },
     emailText: {
         paddingTop: 5,

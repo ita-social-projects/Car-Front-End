@@ -10,7 +10,7 @@ import JourneyPageStyle from "../../JourneyPageStyle";
 interface StopsBlockProps {
     stops: Stop[],
     onStopPress: (stop: Stop) => void,
-    highlightedStops: number[]
+    highlightedStops?: number[]
 }
 
 const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
@@ -50,7 +50,7 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                         textDecorationLine: isHighlightedStop(index) ? "underline" : "none"
                     }]} numberOfLines = {1}>
                         {item?.alias ==null? item?.address?.name:
-                        item?.alias + " (" + item?.address?.name + ")"}
+                            item?.alias + " (" + item?.address?.name + ")"}
                     </Text>
                 </TouchableOpacity>
             ) : (
