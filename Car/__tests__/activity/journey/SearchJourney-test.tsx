@@ -167,8 +167,8 @@ describe("JourneySearch Test", () => {
             <View
               style={
                 Object {
-                  "flexDirection": "row",
                   "borderWidth": 1,
+                  "flexDirection": "row",
                   "marginRight": 15,
                 }
               }
@@ -218,12 +218,12 @@ describe("JourneySearch Test", () => {
                   Array [
                     Object {
                       "backgroundColor": "#000000",
+                      "borderLeftWidth": 1,
+                      "borderRightWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "paddingHorizontal": 16,
                       "paddingVertical": 6,
-                      "borderRightWidth": 1,
-                      "borderLeftWidth": 1,
                     },
                     Object {
                       "backgroundColor": "#FFFFFF",
