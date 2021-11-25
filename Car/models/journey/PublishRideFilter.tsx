@@ -8,6 +8,7 @@ interface PublishRideFilter{
     selectedCar: { id: number | null, name: string },
     fee: FeeType,
     passengers: number,
-    comments: string
+    comments: string,
+    newInvitations?: {email:string; isCorrect: boolean}[]
 }
 export default PublishRideFilter;
