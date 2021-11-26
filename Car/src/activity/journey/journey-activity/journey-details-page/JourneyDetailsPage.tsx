@@ -204,6 +204,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             if (result.data.length === EMPTY_COLLECTION_LENGTH) {
                 setOwnCarButtonStyle(inactiveButtonStyle);
                 setTaxiButtonStyle(activeButtonStyle);
+                setOwnCar(false);
+                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
             }
             setUserCarIsLoading(false);
         });
