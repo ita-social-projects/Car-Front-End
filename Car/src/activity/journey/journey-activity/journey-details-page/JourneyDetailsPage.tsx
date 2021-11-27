@@ -57,6 +57,7 @@ import FeeType from "../../../../../models/journey/FeeType";
 import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
+import {lightColors} from "../../../../components/theme/ThemesColors";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -421,6 +422,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 marginTop={16}
                                 text={params.from.text}
                                 disabled={true}
+                                iconColor={lightColors.secondaryLight}
                             />
                         </View>
                         <View style={SearchJourneyStyle.locationContainer}>
@@ -429,6 +431,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
+                                iconColor={lightColors.secondaryLight}
                             />
                         </View>
 
@@ -441,6 +444,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     disabled={true}
                                     key={index}
                                     marginBottom={16}
+                                    iconColor={lightColors.secondaryLight}
                                 />
                             ))}
                         </View>
