@@ -15,7 +15,7 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <View>
-      <TouchableOpacity
+      <ForwardRef
         style={
           Array [
             Object {
@@ -66,7 +66,7 @@ test("renders correctly", async () =>
         >
            
         </Text>
-        <TouchableOpacity
+        <ForwardRef
           disabled={true}
         >
           <Icon
@@ -90,7 +90,7 @@ test("renders correctly", async () =>
               ]
             }
           />
-        </TouchableOpacity>
-      </TouchableOpacity>
+        </ForwardRef>
+      </ForwardRef>
     </View>
   `));

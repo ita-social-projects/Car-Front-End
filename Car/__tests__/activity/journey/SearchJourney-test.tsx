@@ -173,7 +173,7 @@ describe("JourneySearch Test", () => {
                 }
               }
             >
-              <TouchableOpacity
+              <ForwardRef
                 onPress={[Function]}
                 style={
                   Array [
@@ -212,8 +212,8 @@ describe("JourneySearch Test", () => {
                 >
                   All
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </ForwardRef>
+              <ForwardRef
                 onPress={[Function]}
                 style={
                   Array [
@@ -252,8 +252,8 @@ describe("JourneySearch Test", () => {
                 >
                   Free
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </ForwardRef>
+              <ForwardRef
                 onPress={[Function]}
                 style={
                   Array [
@@ -294,7 +294,7 @@ describe("JourneySearch Test", () => {
                 >
                   Paid
                 </Text>
-              </TouchableOpacity>
+              </ForwardRef>
             </View>
           </View>
           <View
@@ -311,7 +311,7 @@ describe("JourneySearch Test", () => {
               ]
             }
           >
-            <TouchableOpacity
+            <ForwardRef
               disabled={true}
               onPress={[Function]}
               style={
@@ -349,7 +349,7 @@ describe("JourneySearch Test", () => {
               >
                 Search
               </Text>
-            </TouchableOpacity>
+            </ForwardRef>
           </View>
         </ScrollView>
       </Fragment>

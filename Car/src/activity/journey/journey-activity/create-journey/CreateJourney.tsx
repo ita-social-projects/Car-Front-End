@@ -48,7 +48,7 @@ import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import Stop from "../../../../../models/stop/Stop";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import CredentialsManager from "../../../../../credentials/credentials.json";
-import {darkColors, lightColors} from "../../../../components/theme/ThemesColors";
+import { darkColors } from "../../../../components/theme/ThemesColors";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,

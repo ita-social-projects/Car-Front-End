@@ -49,7 +49,7 @@ import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import { getAddressByCoordinatesAsync } from "../../../../utils/LocationHelperFunctions";
 import ApplicantJourney from "../../../../../models/journey/ApplicantJourney";
-import {darkColors} from "../../../../components/theme/ThemesColors";
+import { darkColors } from "../../../../components/theme/ThemesColors";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const { colors } = useTheme();
