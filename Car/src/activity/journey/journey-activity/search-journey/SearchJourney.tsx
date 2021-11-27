@@ -49,6 +49,7 @@ import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import { getAddressByCoordinatesAsync } from "../../../../utils/LocationHelperFunctions";
 import ApplicantJourney from "../../../../../models/journey/ApplicantJourney";
+import {darkColors} from "../../../../components/theme/ThemesColors";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const { colors } = useTheme();
@@ -349,6 +350,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             iconName={"location"}
                             directionType={"From"}
                             text={from.text}
+                            iconColor={darkColors.disableBack}
                             onPress={() =>
                                 onAddressInputButtonPressHandler(
                                     "From",
@@ -363,6 +365,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         <AddressInputButton
                             disabled = {isRequest}
                             iconName={"location"}
+                            iconColor={darkColors.disableBack}
                             directionType={"To"}
                             text={to.text}
                             onPress={() =>

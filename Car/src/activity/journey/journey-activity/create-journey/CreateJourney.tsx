@@ -48,6 +48,7 @@ import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import Stop from "../../../../../models/stop/Stop";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import CredentialsManager from "../../../../../credentials/credentials.json";
+import {darkColors, lightColors} from "../../../../components/theme/ThemesColors";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -377,6 +378,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                             "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
                         marginBottom={15}
                         marginTop={7}
+                        iconColor={darkColors.disableBack}
                     />
 
                     <AddressInputButton
@@ -386,6 +388,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         onPress={() => onAddressInputButtonPressHandler(
                             "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
                         marginBottom={15}
+                        iconColor={darkColors.disableBack}
                     />
 
                     {stops.map((stop, index) => (
@@ -398,6 +401,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                             onIconPress={() => onDeleteIconPressHandler(index)}
                             marginBottom={15}
                             key={index}
+                            iconColor={darkColors.disableBack}
                         />
                     ))}
                 </ScrollView>
