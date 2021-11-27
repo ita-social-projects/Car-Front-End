@@ -58,7 +58,6 @@ import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
 
-
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
 
@@ -571,8 +570,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
                         <View style={[CreateJourneyStyle.publishButtonContainer,
 
-                            {  flexDirection: journey ? "row" : "column"}]}>
-
+                            { flexDirection: journey ? "row" : "column" }]}>
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,

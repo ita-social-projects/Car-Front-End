@@ -256,6 +256,7 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
+                        //headerRight: HeaderLeaveButton
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(ridePageMoreOptionsRef) })
                     }}

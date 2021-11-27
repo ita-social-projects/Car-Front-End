@@ -58,6 +58,7 @@ import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import ChooseOption from "../../../../components/choose-opton/ChooseOption";
+import HeaderLeaveButton from "../../../../components/create-journey-more-options-popup/header-leave-button/HeaderLeaveButton";
 
 interface JourneyPageComponent {
     showCancelRidePopup: () => void,
@@ -121,6 +122,11 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         setLoading(false);
         moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
+
+    useEffect(()=>{
+        if(isPassenger===true)
+        props.navigation?.setOptions({ headerRight: () => <HeaderLeaveButton/> });
+    });
 
     useEffect(() => {
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View/> });
