@@ -1,5 +1,6 @@
 interface TouchableMapBarProps {
     iconName: string
+    iconColor: string,
     marginBottom?: string,
     marginTop?: string,
     flex?: string

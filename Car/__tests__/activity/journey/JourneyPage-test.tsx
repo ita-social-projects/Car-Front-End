@@ -9,20 +9,20 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 const props: JourneyPageProps = {
-  route: {
-    params: {
-      journeyId: 1,
-      isDriver: false,
-      isPassenger: false,
-      applicantStops: [],
+    route: {
+        params: {
+            journeyId: 1,
+            isDriver: false,
+            isPassenger: false,
+            applicantStops: [],
+        },
     },
-  },
-  moreOptionsPopupIsOpen: false,
-  closeMoreOptionsPopup: () => 0,
+    moreOptionsPopupIsOpen: false,
+    closeMoreOptionsPopup: () => 0,
 };
 
 test("renders correctly", async () =>
-  expect(renderer.render(<JourneyPage props={props} />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<JourneyPage props={props} />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <TouchableWithoutFeedback
         onPress={[Function]}
