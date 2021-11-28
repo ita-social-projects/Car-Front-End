@@ -362,7 +362,7 @@ const Settings = (props: { navigation: any }) => {
                         </TouchableNavigationCard>
                         <View style={SwitchSelectorStyle.container}>
                             <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>App theme</Text>
-                            <View style={[SwitchSelectorStyle.buttonContainer, {borderColor: colors.primary }]}>
+                            <View style={[SwitchSelectorStyle.buttonContainer, { borderColor: colors.primary }]}>
                                 <TouchableOpacity
                                     style={[SwitchSelectorStyle.leftButton, lightButtonStyle]}
                                     onPress={async () => {

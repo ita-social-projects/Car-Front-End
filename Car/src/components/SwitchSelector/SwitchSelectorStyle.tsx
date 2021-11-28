@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { colors } from "react-native-elements";
 
 const SwitchSelectorStyle = StyleSheet.create({
     container: {
