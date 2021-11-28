@@ -404,7 +404,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View style={SwitchSelectorStyle.container}>
                         <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>Fee</Text>
-                        <View style={{ flexDirection: "row", borderWidth: 1, marginRight:15 }}>
+                        <View style={[SwitchSelectorStyle.buttonContainer, {borderColor: colors.primary }]}>
                             <TouchableOpacity
                                 style={[
                                     SwitchSelectorStyle.leftButton,

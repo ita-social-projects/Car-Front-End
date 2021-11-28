@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "react-native-elements";
 
 const SwitchSelectorStyle = StyleSheet.create({
     container: {
@@ -8,6 +9,12 @@ const SwitchSelectorStyle = StyleSheet.create({
         marginTop: 24,
         fontSize: 13,
         lineHeight: 16
+    },
+
+    buttonContainer: {
+        flexDirection: "row",
+        borderWidth: 1,
+        marginRight: 15
     },
 
     leftButton: {

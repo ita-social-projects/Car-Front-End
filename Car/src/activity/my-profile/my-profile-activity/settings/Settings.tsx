@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Animated, AppState, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import SettingsStyle, { SwitchSelectorStyle } from "./SettingsStyle";
+import SettingsStyle from "./SettingsStyle";
+import SwitchSelectorStyle from "../../../../components/SwitchSelector/SwitchSelectorStyle";
 import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -361,7 +362,7 @@ const Settings = (props: { navigation: any }) => {
                         </TouchableNavigationCard>
                         <View style={SwitchSelectorStyle.container}>
                             <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>App theme</Text>
-                            <View style={{ flexDirection: "row" }}>
+                            <View style={[SwitchSelectorStyle.buttonContainer, {borderColor: colors.primary }]}>
                                 <TouchableOpacity
                                     style={[SwitchSelectorStyle.leftButton, lightButtonStyle]}
                                     onPress={async () => {
@@ -380,7 +381,7 @@ const Settings = (props: { navigation: any }) => {
 
                                 <TouchableOpacity
                                     style={[
-                                        SwitchSelectorStyle.leftButton,
+                                        SwitchSelectorStyle.middleButton,
                                         darkButtonStyle,
                                     ]}
                                     onPress={() => {
