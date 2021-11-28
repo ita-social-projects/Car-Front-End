@@ -7,7 +7,9 @@ test("renders correctly", async () =>
         .toMatchInlineSnapshot(`
     <View
       accessible={true}
+      collapsable={false}
       focusable={false}
+      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

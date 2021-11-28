@@ -45,18 +45,8 @@ test("renders correctly", async () =>
         <View>
           <FlatList
             data={Array []}
-            disableVirtualization={false}
-            horizontal={false}
-            initialNumToRender={10}
             keyExtractor={[Function]}
-            maxToRenderPerBatch={10}
-            numColumns={1}
-            onEndReachedThreshold={2}
-            removeClippedSubviews={false}
             renderItem={[Function]}
-            scrollEventThrottle={50}
-            updateCellsBatchingPeriod={50}
-            windowSize={21}
           />
           <React.Fragment>
             <View

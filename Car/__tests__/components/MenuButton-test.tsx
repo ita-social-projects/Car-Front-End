@@ -6,6 +6,7 @@ test("renders correctly", async () =>
     expect(renderer.create(<MenuButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}

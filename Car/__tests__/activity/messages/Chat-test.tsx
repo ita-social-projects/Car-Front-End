@@ -18,8 +18,6 @@ test("renders correctly", async () =>
     ).toMatchInlineSnapshot(`
     <KeyboardAvoidingView
       behavior="padding"
-      enabled={true}
-      keyboardVerticalOffset={0}
       style={
         Array [
           Object {

@@ -126,7 +126,7 @@ test("renders correctly", async () =>
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -165,8 +165,8 @@ test("renders correctly", async () =>
             >
               All
             </Text>
-          </ForwardRef>
-          <ForwardRef
+          </TouchableOpacity>
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -205,8 +205,8 @@ test("renders correctly", async () =>
             >
               Past
             </Text>
-          </ForwardRef>
-          <ForwardRef
+          </TouchableOpacity>
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -245,8 +245,8 @@ test("renders correctly", async () =>
             >
               Upcoming
             </Text>
-          </ForwardRef>
-          <ForwardRef
+          </TouchableOpacity>
+          <TouchableOpacity
             activeOpacity={1}
             onPress={[Function]}
             style={
@@ -285,7 +285,7 @@ test("renders correctly", async () =>
             >
               Regular
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <View
