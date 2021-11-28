@@ -125,7 +125,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     useEffect(()=>{
         if(isPassenger===true)
-        props.navigation?.setOptions({ headerRight: () => <HeaderLeaveButton/> });
+        props.navigation?.setOptions({ headerRight: () => <HeaderLeaveButton /> });
     });
 
     useEffect(() => {

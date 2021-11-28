@@ -58,6 +58,8 @@ const JourneyTabs = () => {
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
+    //
+    const [modalVisibility, setModalVisibility] = useState(false);
 
     const ridePageMoreOptionsRef = useRef<any>(null);
     const createRideMoreOptionsRef = useRef<any>(null);
@@ -256,9 +258,11 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
-                        //headerRight: HeaderLeaveButton
                         headerRight: () => HeaderEllipsis(
-                            { onPress: () => pressHandle(ridePageMoreOptionsRef) })
+                            {
+                                onPress: () => {pressHandle(ridePageMoreOptionsRef),
+                                setModalVisibility(true);}
+                            })
                     }}
                 >
                     {(props: any) => {
@@ -323,10 +327,22 @@ const JourneyTabs = () => {
                                             </View>
                                         }
                                     />}
+
+                                {props.route.params.isDriver &&
+                                    <ConfirmModal
+                                        disableModal={() => setModalVisibility(false)}
+                                        visible={modalVisibility}
+                                        title={"ARE YOU SURE?"}
+                                        subtitle={"Do you want to leave this ride?"}
+                                        confirmText={"Yes, leave it"}
+                                        cancelText={"No, keep it"}
+                                        onConfirm={()=>{}}
+                                    />}
                             </Host>
                         );
                     }}
                 </StackTabs.Screen>
+
                 <StackTabs.Screen
                     name="Journey Request Page"
                     component={SearchJourney}

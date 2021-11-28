@@ -8,13 +8,14 @@ interface HeaderLeaveButtonProps {
     text?: string
 }
 
-const HeaderLeaveButton = (props: HeaderLeaveButtonProps) => {
+const HeaderLeaveButton = (props:HeaderLeaveButtonProps) => {
     const { colors } = useTheme();
 
     return(
         <TouchableOpacity
             style={HeaderLeaveButtonStyle.leaveButton}
             onPress={()=>{props.onPress;}}
+            //onPress={()=>{ props.console.log("777");}}
         >
             <View style={HeaderLeaveButtonStyle.leaveButtonTextContainer}>
                 <Text style={[HeaderLeaveButtonStyle.leaveButtonText, { color: colors.greenGradientTo }]}>
