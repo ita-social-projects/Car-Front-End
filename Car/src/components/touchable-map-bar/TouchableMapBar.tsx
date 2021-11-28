@@ -48,7 +48,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                         ]}
                         name={props.iconName}
                         size={22}
-                        color={"#414045"}
+                        color={props.iconColor}
                     />
                 </TouchableOpacity>
             </TouchableOpacity>

@@ -52,6 +52,7 @@ describe("JourneySearch Test", () => {
             <AddressInputButton
               directionType="From"
               disabled={false}
+              iconColor="#414045"
               iconName="location"
               onPress={[Function]}
               text=""
@@ -69,6 +70,7 @@ describe("JourneySearch Test", () => {
             <AddressInputButton
               directionType="To"
               disabled={false}
+              iconColor="#414045"
               iconName="location"
               onPress={[Function]}
               text=""
