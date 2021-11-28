@@ -8,8 +8,8 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Settings navigation={undefined} />))
-        .toMatchInlineSnapshot(`
+  expect(renderer.render(<Settings navigation={undefined} />))
+    .toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
         refreshControl={
@@ -44,7 +44,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <ForwardRef
+            <TouchableOpacity
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -74,7 +74,7 @@ test("renders correctly", async () =>
               >
                 <AvatarLogoTitle />
               </ForwardRef(AnimatedComponentWrapper)>
-            </ForwardRef>
+            </TouchableOpacity>
             <TouchableNavigationCard
               angle="0"
               cardName="Notifications Settings"
@@ -122,8 +122,7 @@ test("renders correctly", async () =>
                   "flexDirection": "row",
                   "fontSize": 13,
                   "lineHeight": 16,
-                  "marginLeft": 21,
-                  "marginRight": 0,
+                  "marginLeft": 16,
                   "marginTop": 24,
                 }
               }
@@ -145,18 +144,24 @@ test("renders correctly", async () =>
               </Text>
               <View
                 style={
-                  Object {
-                    "flexDirection": "row",
-                  }
+                  Array [
+                    Object {
+                      "borderWidth": 1,
+                      "flexDirection": "row",
+                      "marginRight": 15,
+                    },
+                    Object {
+                      "borderColor": "#0B171B",
+                    },
+                  ]
                 }
               >
-                <ForwardRef
+                <TouchableOpacity
                   onPress={[Function]}
                   style={
                     Array [
                       Object {
                         "backgroundColor": "#000000",
-                        "borderWidth": 2,
                         "flexDirection": "row",
                         "justifyContent": "flex-end",
                         "paddingHorizontal": 16,
@@ -174,9 +179,9 @@ test("renders correctly", async () =>
                     style={
                       Array [
                         Object {
-                          "fontSize": 12,
+                          "fontSize": 16,
                           "fontWeight": "bold",
-                          "lineHeight": 13,
+                          "lineHeight": 18,
                           "textTransform": "uppercase",
                         },
                         Object {
@@ -189,14 +194,15 @@ test("renders correctly", async () =>
                   >
                     Light
                   </Text>
-                </ForwardRef>
-                <ForwardRef
+                </TouchableOpacity>
+                <TouchableOpacity
                   onPress={[Function]}
                   style={
                     Array [
                       Object {
                         "backgroundColor": "#000000",
-                        "borderWidth": 2,
+                        "borderLeftWidth": 1,
+                        "borderRightWidth": 1,
                         "flexDirection": "row",
                         "justifyContent": "flex-end",
                         "paddingHorizontal": 16,
@@ -214,9 +220,9 @@ test("renders correctly", async () =>
                     style={
                       Array [
                         Object {
-                          "fontSize": 12,
+                          "fontSize": 16,
                           "fontWeight": "bold",
-                          "lineHeight": 13,
+                          "lineHeight": 18,
                           "textTransform": "uppercase",
                         },
                         Object {
@@ -229,20 +235,18 @@ test("renders correctly", async () =>
                   >
                     Dark
                   </Text>
-                </ForwardRef>
-                <ForwardRef
+                </TouchableOpacity>
+                <TouchableOpacity
                   onPress={[Function]}
                   style={
                     Array [
                       Object {
                         "alignItems": "center",
                         "backgroundColor": "white",
-                        "borderWidth": 2,
                         "flexDirection": "row",
                         "justifyContent": "flex-end",
-                        "marginRight": 20,
                         "paddingHorizontal": 16,
-                        "paddingVertical": 4,
+                        "paddingVertical": 6,
                       },
                       Object {
                         "backgroundColor": "#FFFFFF",
@@ -256,9 +260,9 @@ test("renders correctly", async () =>
                     style={
                       Array [
                         Object {
-                          "fontSize": 12,
+                          "fontSize": 16,
                           "fontWeight": "bold",
-                          "lineHeight": 13,
+                          "lineHeight": 18,
                           "textTransform": "uppercase",
                         },
                         Object {
@@ -271,7 +275,7 @@ test("renders correctly", async () =>
                   >
                     As system
                   </Text>
-                </ForwardRef>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -297,7 +301,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <ForwardRef
+            <TouchableOpacity
               onPress={[Function]}
               style={
                 Object {
@@ -326,7 +330,7 @@ test("renders correctly", async () =>
               >
                 Add photo
               </Text>
-            </ForwardRef>
+            </TouchableOpacity>
           </View>
         }
         renderHeader={
