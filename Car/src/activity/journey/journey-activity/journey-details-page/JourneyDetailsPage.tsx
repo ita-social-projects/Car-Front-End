@@ -59,6 +59,7 @@ import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
 import { lightColors } from "../../../../components/theme/ThemesColors";
 
+
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
 

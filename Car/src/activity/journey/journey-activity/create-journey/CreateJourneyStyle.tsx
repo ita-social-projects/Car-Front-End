@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import { lightColors } from "../../../../components/theme/ThemesColors";
+
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
