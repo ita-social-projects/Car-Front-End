@@ -434,7 +434,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 iconColor={lightColors.secondaryLight}
                             />
                         </View>
-
                         <View style={SearchJourneyStyle.DepartureContainerLocation}>
                             <TouchableDateTimePicker
                                 date={departureTime}
