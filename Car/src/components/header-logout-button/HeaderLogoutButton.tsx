@@ -29,7 +29,6 @@ const HeaderLogoutButton = () => {
                 cancelText="No, stay"
                 onConfirm={async () => {
                     await logout();
-                    RNRestart.Restart();
                 }}
                 disableModal={() => setModalVisible(false)}
             />
