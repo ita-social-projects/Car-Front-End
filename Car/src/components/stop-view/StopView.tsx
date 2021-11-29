@@ -25,10 +25,6 @@ const StopView = (props: StopViewProps) => {
     const { isThemeDark } = useTheme();
     const params = props.route.params;
 
-    //const navigateBack = () => {
-    //    navigation.goBack();
-    //};
-
     return (
         <>
             <MapView

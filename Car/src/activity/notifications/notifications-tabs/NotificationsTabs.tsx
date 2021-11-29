@@ -8,6 +8,7 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import JourneyNewApplicantView from "../../../components/journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantView";
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import StopView from "../../../components/stop-view/StopView";
+import JourneyCancellationView from "../../../components/notifications/notifications-types/notifications-views/cancellation-view/JourneyCancellationView";
 
 const StackTabs = createStackNavigator();
 
@@ -44,7 +45,8 @@ const NotificationsTabs = () => {
                         headerTitle: "View Stops",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
-                        headerLeft: HeaderBackButton
+                        headerLeft: HeaderBackButton,
+
                     }}
                 />
                 <StackTabs.Screen
@@ -52,6 +54,16 @@ const NotificationsTabs = () => {
                     component={JourneyNewApplicantView}
                     options={{
                         headerTitle: "New Applicant",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Ride is Canceled"
+                    component={JourneyCancellationView}
+                    options={{
+                        headerTitle: "Ride is Canceled",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

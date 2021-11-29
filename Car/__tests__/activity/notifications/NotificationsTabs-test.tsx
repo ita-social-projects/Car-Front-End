@@ -103,6 +103,28 @@ test("renders correctly", async () =>
             }
           }
         />
+        <Screen
+          component={[Function]}
+          name="Ride is Canceled"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "Ride is Canceled",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
       </StackNavigator>
     </View>
   `));

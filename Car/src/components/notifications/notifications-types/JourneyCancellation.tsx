@@ -73,7 +73,11 @@ const JourneyCancellation = (props: NotificationProps) => {
                 notificationTitle={"Ride is canceled"}
                 read={props.read}
                 date={props.date}
-                openModal={() => setModalVisible(true)}
+                openModal={ () => {
+                    navigation.navigate("Ride is Canceled", {
+                        notification: props
+                    });
+                }}
             />
             <NotificationModalBase isVisible={modalVisible!}>
                 <NotificationHeader
@@ -104,7 +108,6 @@ const JourneyCancellation = (props: NotificationProps) => {
                         onStopPress={onStopPressHandler}
                         highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                     />
-
                 </View>
 
                 <NotificationButtonGroup>
