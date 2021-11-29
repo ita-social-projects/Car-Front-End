@@ -31,7 +31,7 @@ const OkSearchResult = (props: OkSearchResultProps) => {
     const onCreateRideRequest = async () => {
         AsyncStorage.getItem("searchFilter").then((result) => {
             let filter: Filter = JSON.parse(result || "{}");
-            
+
             let request: Request = {
                 from: {
                     latitude: filter.from.coordinates.latitude,
@@ -46,6 +46,7 @@ const OkSearchResult = (props: OkSearchResultProps) => {
                 userId: Number(user?.id),
                 departureTime: filter.departureTime
             };
+
             setIsLoading(true);
 
             RequestService.addRequest(request)

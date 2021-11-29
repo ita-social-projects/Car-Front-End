@@ -5,13 +5,13 @@ import JourneyTabs from "../../../src/activity/journey/journey-tabs/JourneyTabs"
 const renderer = shallowRenderer.createRenderer();
 
 jest.mock("react-native-localize", () => {
-    return {
-        getTimeZone: jest.fn(),
-    };
+  return {
+    getTimeZone: jest.fn(),
+  };
 });
 
 test("renders correctly", async () =>
-    expect(renderer.render(<JourneyTabs />)).toMatchInlineSnapshot(`
+  expect(renderer.render(<JourneyTabs />)).toMatchInlineSnapshot(`
     <View
       style={
         Object {
@@ -204,6 +204,7 @@ test("renders correctly", async () =>
           }
         />
         <Screen
+          component={[Function]}
           name="OK Search Result"
           options={
             Object {
@@ -224,9 +225,7 @@ test("renders correctly", async () =>
               "title": "Search Results",
             }
           }
-        >
-          [Function]
-        </Screen>
+        />
         <Screen
           component={[Function]}
           name="Bad Search Result"
