@@ -16,6 +16,7 @@ const AddressInputButton = (props: AddressInputButtonProps) => {
             marginHorizontal={props.marginHorizontal ?? ZERO_MARGIN}
             onIconPress={props.onIconPress}
             disabled={props.disabled}
+            iconColor={props.iconColor}
         />
     );
 };

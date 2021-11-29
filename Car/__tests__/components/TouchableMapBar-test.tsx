@@ -1,12 +1,19 @@
 import React from "react";
 import shallowRender from "react-test-renderer/shallow";
 import TouchableMapBar from "../../src/components/touchable-map-bar/TouchableMapBar";
+import { lightColors } from "../../src/components/theme/ThemesColors";
 
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-    expect(renderer.render(<TouchableMapBar iconName={"location"} />))
-        .toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <TouchableMapBar
+                iconName={"location"}
+                iconColor={lightColors.secondaryLight}
+            />
+        )
+    ).toMatchInlineSnapshot(`
     <View>
       <ForwardRef
         style={
@@ -64,7 +71,7 @@ test("renders correctly", async () =>
         >
           <Icon
             allowFontScaling={false}
-            color="#414045"
+            color="#AAA9AE"
             name="location"
             size={22}
             style={

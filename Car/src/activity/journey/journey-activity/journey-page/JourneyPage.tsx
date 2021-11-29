@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
+import { Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
@@ -237,47 +237,47 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     return (
         <>
-        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
-            <View style={[JourneyPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
-                <MapView
-                    ref={ref => {
-                        mapRef.current = ref;
-                    }}
-                    style={{ flex: 1 }}
-                    provider={PROVIDER_GOOGLE}
-                    showsUserLocation={true}
-                    customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
-                    showsCompass={false}
-                    showsMyLocationButton={false}
-                >
-                    {currentJourney && (
-                        <>
-                            <Polyline
-                                coordinates={currentJourney.journeyPoints}
-                                strokeWidth={5}
-                                strokeColor={"#027ebd"}
-                            />
+            <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss(); } }>
+                <View style={[JourneyPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
+                    <MapView
+                        ref={ref => {
+                            mapRef.current = ref;
+                        }}
+                        style={{ flex: 1 }}
+                        provider={PROVIDER_GOOGLE}
+                        showsUserLocation={true}
+                        customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
+                        showsCompass={false}
+                        showsMyLocationButton={false}
+                    >
+                        {currentJourney && (
+                            <>
+                                <Polyline
+                                    coordinates={currentJourney.journeyPoints}
+                                    strokeWidth={5}
+                                    strokeColor={"#027ebd"}
+                                />
 
-                            <Marker
-                                title={getStopByType(currentJourney, StopType.Start)?.address?.name}
-                                coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Start))}
-                                image={require("../../../../../assets/images/maps-markers/From.png")}
-                            />
+                                <Marker
+                                    title={getStopByType(currentJourney, StopType.Start)?.address?.name}
+                                    coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Start))}
+                                    image={require("../../../../../assets/images/maps-markers/From.png")}
+                                />
 
-                            <Marker
-                                title={getStopByType(currentJourney, StopType.Finish)?.address?.name}
-                                coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Finish))}
-                                image={require("../../../../../assets/images/maps-markers/To.png")}
-                            />
+                                <Marker
+                                    title={getStopByType(currentJourney, StopType.Finish)?.address?.name}
+                                    coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Finish))}
+                                    image={require("../../../../../assets/images/maps-markers/To.png")}
+                                />
 
-                            {currentJourney.stops.filter(stop => stop?.type === StopType.Intermediate)
-                                .map(mapStopToMarker)}
+                                {currentJourney.stops.filter(stop => stop?.type === StopType.Intermediate)
+                                    .map(mapStopToMarker)}
 
-                            {!isDriver && applicantStops?.map(mapStopToMarker)}
-                        </>)}
-                </MapView>
-            </View>
-        </TouchableWithoutFeedback>
+                                {!isDriver && applicantStops?.map(mapStopToMarker)}
+                            </>)}
+                    </MapView>
+                </View>
+            </TouchableWithoutFeedback>
 
             {!props.moreOptionsPopupIsOpen &&
             <Portal>
@@ -293,25 +293,46 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                     enabledInnerScrolling={true}
                     renderHeader={<DriverBlock journey={currentJourney}/>}
                     renderContent={
-                        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
-                        <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
-                            {!isConfirmationFormVisible ? (
-                                <>
-                                    <View style={JourneyPageStyle.detailsBlock}>
-                                        <ScrollView
-                                            nestedScrollEnabled={true} 
-                                            style={[JourneyPageStyle.contentView, 
-                                                { backgroundColor: colors.white }]}>
-                                            <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                            <StopsBlock
-                                                stops={getStopsForBottomPopup() ?? []}
-                                                onStopPress={onStopPressHandler}
-                                                highlightedStops={getHighlightedStops()}
-                                            />
-                                            <CommentsBlock comments={currentJourney?.comments} />
-                                            <ParticipantsBlock journey={currentJourney}/>
-                                        </ScrollView>
-                                    </View>
+                        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss(); } }>
+                            <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
+                                {!isConfirmationFormVisible ? (
+                                    <>
+                                        <View style={JourneyPageStyle.detailsBlock}>
+                                            <ScrollView
+                                                nestedScrollEnabled={true}
+                                                style={[JourneyPageStyle.contentView,
+                                                    { backgroundColor: colors.white }]}>
+                                                <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
+                                                <StopsBlock
+                                                    stops={getStopsForBottomPopup() ?? []}
+                                                    onStopPress={onStopPressHandler}
+                                                    highlightedStops={getHighlightedStops()}
+                                                />
+                                                <CommentsBlock comments={currentJourney?.comments} />
+                                                <ParticipantsBlock journey={currentJourney}/>
+                                            </ScrollView>
+                                        </View>
+
+                                        <ButtonBlock
+                                            isDriver={isDriver}
+                                            isPassenger={isPassenger}
+                                            isRequested={isRequested}
+                                            journey={currentJourney}
+                                            applicantStops={applicantStops}
+                                            onSendRequestPress={() => {
+                                                setIsConfirmationFormVisible(true);
+                                            }}
+                                        />
+                                    </>
+                                ) : (
+                                    <View style={JourneyPageStyle.confirmationFormContainer}>
+                                        <CommentBlock
+                                            placeholder="Any comments?"
+                                            initialComment=""
+                                            commentHeader="Comments"
+                                            setComments={(comment)=>setRequestComments(comment)}
+                                            containerStyle={JourneyPageStyle.commentsBlockContainer}
+                                        />
 
                                     <ButtonBlock
                                         isDriver={isDriver}
@@ -353,38 +374,57 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                     setIsVisibleQuantityDropDown(false);
                                                 }}
                                                 valueId={selectedQuantity.id}
+
+                                        <View style ={JourneyPageStyle.dropDownContainer}>
+                                            <View style ={JourneyPageStyle.dropDown}>
+                                                <JourneyCreationDropDownPicker
+                                                    items={userQuantity.map((quantity) => ({
+                                                        label: quantity.name,
+                                                        value: quantity.id
+                                                    }))}
+                                                    paddingLeft={100}
+                                                    searchable={false}
+                                                    placeholder="Passengers:"
+                                                    isVisible={isVisibleQuantityDropDown}
+                                                    onOpen={() => setIsVisibleQuantityDropDown(true)}
+                                                    onChangeItem={(item) => {
+                                                        setSelectedQuantity({ id: item.value, name: item.label });
+                                                        setPassangersCount(item.value);
+                                                        setIsVisibleQuantityDropDown(false);
+                                                    }}
+                                                    valueId={selectedQuantity.id}
+                                                />
+                                            </View>
+                                        </View>
+                                        <View style={JourneyPageStyle.chooseOptionContainer}>
+                                            <ChooseOption
+                                                text={"Have you got any luggage with you?"}
+                                                value={withLuggage}
+                                                onValueChanged={setWithLuggage}
                                             />
                                         </View>
-                                    </View>
-                                    <View style={JourneyPageStyle.chooseOptionContainer}>
-                                        <ChooseOption
-                                            text={"Have you got any luggage with you?"}
-                                            value={withLuggage}
-                                            onValueChanged={setWithLuggage}
-                                        />
-                                    </View>
 
-                                    <View style={{ alignItems: "flex-end" }}>
-                                        <TouchableOpacity
-                                            style={[
-                                                JourneyPageStyle.confirmButton,
-                                                {
-                                                    backgroundColor: colors.primary,
-                                                    borderColor: colors.primary
-                                                }]}
-                                            onPress={sendRequest}
-                                        >
-                                            <Text style={[JourneyPageStyle.confirmButtonText,
-                                                { color: colors.white }]}>
+                                        <View style={{ alignItems: "flex-end" }}>
+                                            <TouchableOpacity
+                                                style={[
+                                                    JourneyPageStyle.confirmButton,
+                                                    {
+                                                        backgroundColor: colors.primary,
+                                                        borderColor: colors.primary
+                                                    }]}
+                                                onPress={sendRequest}
+                                            >
+                                                <Text style={[JourneyPageStyle.confirmButtonText,
+                                                    { color: colors.white }]}>
                                                 Send Request
-                                            </Text>
-                                        </TouchableOpacity>
+                                                </Text>
+                                            </TouchableOpacity>
 
+                                        </View>
                                     </View>
-                                </View>
-                            )}
+                                )}
 
-                        </View>
+                            </View>
                         </TouchableWithoutFeedback>
                     }
                 />

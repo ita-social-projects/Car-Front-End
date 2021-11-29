@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { lightColors } from "../../../../components/theme/ThemesColors";
 
+
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
         paddingTop: 0
@@ -108,7 +109,7 @@ export const CreateJourneyStyle = StyleSheet.create({
 
     },
 
-       publishButtonText: {
+    publishButtonText: {
         paddingHorizontal: 6,
         textTransform: "uppercase",
         fontWeight: "bold",
