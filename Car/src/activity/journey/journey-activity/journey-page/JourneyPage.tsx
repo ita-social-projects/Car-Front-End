@@ -87,7 +87,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const mapRef = useRef<MapView | null>(null);
 
     const [withLuggage, setWithLuggage] = useState(false);
-    const [requestComments, setRequestComments] = useState("");
+    const [requestComments] = useState("");
     const [passangersCount, setPassangersCount] =
         useState(props.route.params.passangersCount?? DEFAULT_PASSANGERS_COUNT);
     const [isConfirmationFormVisible, setIsConfirmationFormVisible] = useState(false);
