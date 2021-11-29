@@ -43,7 +43,7 @@ test("renders correctly", async () =>
               "testUri": "../../../assets/images/journey/bermuda-searching.png",
             }
           }
-          blockName="Search for a Ride"
+          blockName="Find a Ride"
           from="#A5C500"
           height={140}
           navigation={

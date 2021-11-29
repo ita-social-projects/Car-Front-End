@@ -44,6 +44,7 @@ test("renders correctly", async () =>
         >
           <AddressInputButton
             directionType="From"
+            iconColor="#414045"
             iconName="location"
             marginBottom={15}
             marginTop={7}
@@ -52,6 +53,7 @@ test("renders correctly", async () =>
           />
           <AddressInputButton
             directionType="To"
+            iconColor="#414045"
             iconName="location"
             marginBottom={15}
             onPress={[Function]}

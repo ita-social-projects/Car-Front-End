@@ -123,7 +123,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Search for Ride",
+              "headerTitle": "Find a Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
