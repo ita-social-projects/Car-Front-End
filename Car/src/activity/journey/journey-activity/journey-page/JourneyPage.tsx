@@ -78,7 +78,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [isRequested, setRequested] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
-    const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false);
+    const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false)
+    const [comments, setComments] = useState("");;
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...rideCancelingErrorModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
@@ -327,9 +328,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 <View style={JourneyPageStyle.confirmationFormContainer}>
                                     <CommentBlock
                                         placeholder="Any comments?"
-                                        initialComment=""
+                                        initialComment={comments}
                                         commentHeader="Comments"
-                                        setComments={(comment)=>setRequestComments(comment)}
+                                        setComments={(initialComment:string)=>
+                                            setComments(initialComment)}
                                         containerStyle={JourneyPageStyle.commentsBlockContainer}
                                     />
 
