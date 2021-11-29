@@ -20,6 +20,7 @@ import StopsBlock from "../../../activity/journey/journey-activity/journey-page/
 import { Text, View } from "react-native";
 import JourneyNewApplicantViewStyle from "../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
 import { useTheme } from "../../theme/ThemeProvider";
+import * as navigation from "../../../components/navigation/Navigation";
 
 const PassengerWithdrawal = (props: NotificationProps) => {
     const { colors } = useTheme();
@@ -85,7 +86,11 @@ const PassengerWithdrawal = (props: NotificationProps) => {
                 notificationTitle={"The passenger has withdrawn your ride!"}
                 read={props.read}
                 date={props.date}
-                openModal={() => setModalVisible(true)}
+                openModal={ () => {
+                    navigation.navigate("Withdrawal", {
+                        notification: props
+                    });
+                }}
             />
 
             <NotificationModalBase isVisible={modalVisible!} styles={[]}>

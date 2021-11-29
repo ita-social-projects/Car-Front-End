@@ -1,6 +1,6 @@
 import EStyleSheet from "react-native-extended-stylesheet";
 
-const JourneyCancellationViewStyle = EStyleSheet.create({
+const PassengerWithdrawalViewStyle = EStyleSheet.create({
 
     window: {
         padding: 20,
@@ -8,4 +8,4 @@ const JourneyCancellationViewStyle = EStyleSheet.create({
     },
 });
 
-export default JourneyCancellationViewStyle;
+export default PassengerWithdrawalViewStyle;
