@@ -21,7 +21,6 @@ import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 import {
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
-    REQUEST_RIDE_POPUP_HEIGHT
 } from "../../../constants/JourneyConstants";
 import {
     HALF_OPACITY,
@@ -41,8 +40,6 @@ import {
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
-import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
-import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import { Host } from "react-native-portalize";
 import AddressInputPage from "../journey-activity/address-input-page/AddressInputPage";
 import WeekDay from "../../../components/schedule-bottom-popup/WeekDay";
@@ -54,7 +51,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
-    const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
     const [modalVisibility, setModalVisibility] = useState(false);
@@ -362,6 +358,7 @@ const JourneyTabs = () => {
                 />
                 <StackTabs.Screen
                     name="OK Search Result"
+                    component={OkSearchResult}
                     options={{
                         title: "Search Results",
                         headerTitleAlign: "center",
@@ -369,69 +366,7 @@ const JourneyTabs = () => {
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
-                    children={(props: any) => (
-                        <>
-                            <OkSearchResult
-                                journeys={props.route.params.journeys}
-                                displayFee={props.route.params.displayFee}
-                                passangersCount = {props.route.params.passangersCount}
-                            />
-                            <ConfirmModal
-                                visible={isNewRequestModalVisible}
-                                title="ARE YOU SURE?"
-                                subtitle="You're about to create a ride request with new filters."
-                                confirmText="Yes, create"
-                                cancelText="No, go back"
-                                confirmColor={colors.primary}
-                                onConfirm={() => {
-                                    setNewRequestModalVisible(false);
-                                    (async () => sleep(SLEEP_DURATION))().then(() =>
-                                        navigation.navigate("Journey Request Page", { isRequest: true }));
-                                }}
-                                disableModal={() => setNewRequestModalVisible(false)}
-                            />
-                            <ShadowedBottomPopup
-                                snapPoints={[MIN_POPUP_HEIGHT, REQUEST_RIDE_POPUP_HEIGHT]}
-                                enabledInnerScrolling={false}
-                                initialSnap={0}
-                                renderHeader={
-                                    <View style={[JourneyPageStyle.headerTitleStyle,
-                                        { backgroundColor: colors.white }
-                                    ]}>
-                                        <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
-                                            REQUEST A RIDE
-                                        </Text>
-                                    </View>
-                                }
-                                renderContent={
-                                    <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
-                                        <MenuButton
-                                            text="With the previous filters"
-                                            isIcon={true}
-                                            onPress={() => {
-                                                navigation.navigate("Journey Request Page",
-                                                    { isRequest: true, isPreviousFilter: true });
-                                                if (ShadowedBottomPopup)
-                                                    ShadowedBottomPopup.pressHandle();
-                                            }}
-                                        />
-                                        <MenuButton
-                                            text="With new filters"
-                                            isIcon={true}
-                                            onPress={() => {
-                                                if (ShadowedBottomPopup)
-                                                    ShadowedBottomPopup.pressHandle();
-                                                setNewRequestModalVisible(true);
-                                            }}
-                                        />
-                                    </View>
-                                }
-                            />
-                        </>
-                    )
-                    }
                 />
-
                 <StackTabs.Screen
                     name="Bad Search Result"
                     component={BadSearchResult}
