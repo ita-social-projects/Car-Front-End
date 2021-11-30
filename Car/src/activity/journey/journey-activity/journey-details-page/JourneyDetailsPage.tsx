@@ -48,8 +48,6 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import ChatService from "../../../../../api-service/chat-service/ChatService";
-import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 
 const getCarId = (journey?: Journey) => {
@@ -81,6 +79,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         id: getCarId(journey),
         name: journey ? `${journey?.car?.brand} ${carModel}` : ""
     });
+
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [comments, setComments] = useState("");
@@ -246,6 +245,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const newJourney: JourneyDto = {
             id: 0,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
+            chatId: null,
             comments: comments,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -262,15 +262,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) => {
-                const newChat : CreateChat = {
-                    id: res.data.journeyModel.id,
-                    name:
-                        user?.name + " " +
-                        user?.surname + "'s ride"
-                };
-
-                ChatService.addChat(newChat)
-                    .then(() => setSuccessfullyPublishModalIsVisible(true));
+                if (res.status === HTTP_STATUS_OK) {
+                    setSuccessfullyPublishModalIsVisible(true);
+                }
+                else {
+                    setModal(publishErrorModal);
+                }
             })
             .catch(() => setModal(publishErrorModal));
 
@@ -285,6 +282,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
+            chatId: journey.chatId,
             comments: comments.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -474,7 +472,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invite SoftServians</Text>
                                     <Text style={{ ...CreateJourneyStyle.invitationsDescription,
-                                        color: colors.primary, width: 238}}>
+                                        color: colors.primary, width: 238 }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
                                         will be notified for that Journey
