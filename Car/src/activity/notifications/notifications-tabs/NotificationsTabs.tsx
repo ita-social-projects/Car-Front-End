@@ -10,6 +10,7 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 import StopView from "../../../components/stop-view/StopView";
 import JourneyCancellationView from "../../../components/notifications/notifications-types/notifications-views/cancellation-view/JourneyCancellationView";
 import PassengerWithdrawalView from "../../../components/notifications/notifications-types/notifications-views/withdrawn-view/PassengerWithdrawalView";
+import InvitationView from "../../../components/notifications/notifications-types/notifications-views/invitation-view/InvitationView";
 
 const StackTabs = createStackNavigator();
 
@@ -75,6 +76,16 @@ const NotificationsTabs = () => {
                     component={PassengerWithdrawalView}
                     options={{
                         headerTitle: "Withdrawal",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Invitation"
+                    component={InvitationView}
+                    options={{
+                        headerTitle: "Invitation",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

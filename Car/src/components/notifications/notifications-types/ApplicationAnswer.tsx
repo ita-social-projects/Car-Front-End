@@ -26,6 +26,7 @@ import { useTheme } from "../../theme/ThemeProvider";
 import axios from "axios";
 import Journey from "../../../../models/journey/Journey";
 import JourneyUserDto from "../../../../models/journey-user/JourneyUserDto";
+import * as navigation from "../../../components/navigation/Navigation";
 
 interface ApplicationAnswerProps {
     notification: NotificationProps,
@@ -118,7 +119,12 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 notificationTitle={props.notificationTittle}
                 read={props.notification.read}
                 date={props.notification.date}
-                openModal={() => setNotificationModalVisible(true)}
+                // openModal={() => setNotificationModalVisible(true)}
+                openModal={ () => {
+                    navigation.navigate("Aproved", {
+                        notification: props
+                    });
+                }}
             />
 
             <NotificationModalBase isVisible={notificationModalVisible!} styles={[{}]}>

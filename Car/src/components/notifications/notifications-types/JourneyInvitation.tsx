@@ -21,6 +21,7 @@ import { ACCEPTED_INVITATION_TYPE, REJECTED_INVITATION_TYPE } from "../../../con
 
 import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import StopType from "../../../../models/stop/StopType";
+import * as navigation from "../../../components/navigation/Navigation";
 
 const JourneyInvitation = (props: NotificationProps) => {
     const [notificationModalVisible, setNotificationModalVisible] = useState(props.visible);
@@ -145,7 +146,11 @@ const JourneyInvitation = (props: NotificationProps) => {
                 notificationTitle={"Journey Invitation"}
                 read={props.read}
                 date={props.date}
-                openModal={() => setNotificationModalVisible(true)}
+                openModal={ () => {
+                    navigation.navigate("Invitation", {
+                        notification: props
+                    });
+                }}
             />
             <NotificationModalBase isVisible={notificationModalVisible!}>
                 <NotificationHeader
