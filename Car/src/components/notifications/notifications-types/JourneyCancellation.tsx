@@ -100,7 +100,7 @@ const JourneyCancellation = (props: NotificationProps) => {
                 />
 
                 <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.black }}>
-                    {props.sender!.name} {props.sender!.surname}`s stops in your ride
+                    {props.sender!.name} {props.sender!.surname}'s ride
                 </Text>
                 <View>
                     <StopsBlock

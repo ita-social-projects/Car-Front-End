@@ -48,9 +48,11 @@ import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import Stop from "../../../../../models/stop/Stop";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import CredentialsManager from "../../../../../credentials/credentials.json";
+import { darkColors } from "../../../../components/theme/ThemesColors";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
+    IsFromToChanged: () => boolean,
     numberOfAddedStop: number,
     ({ props }: { props: CreateJourneyProps }): JSX.Element
 }
@@ -105,6 +107,13 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
     const [userLocationIsLoading, setUserLocationIsLoading] = useState(true);
     const [routeIsUpdating, setRouteIsUpdating] = useState(false);
+
+    const [isFromToChanged,setIsFromToChanged] = useState(false);
+
+    useEffect(() => {
+        if(from.text !== "" || to.text !== "")
+            setIsFromToChanged(true);
+    },[from,to]);
 
     useEffect(() => {
         if (params?.wayPoint) {
@@ -226,6 +235,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     useEffect(() => {
         CreateJourney.numberOfAddedStop = stops.length + SECOND_ELEMENT_INDEX;
     });
+    CreateJourney.IsFromToChanged = () => {
+        return isFromToChanged;
+    };
 
     CreateJourney.addStopPressHandler = () => {
         if (stops.length >= NUMBER_OF_STOPS_LIMIT) return;
@@ -279,7 +291,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             }
         };
 
-        navigation.navigate("Journey Details", { ...properties.route.params, headerTitle:"Create a Ride" });
+        navigation.navigate("Journey Details", { ...properties.route.params, headerTitle:"Publish a Ride" });
     };
 
     const onUpdateRoutePressHandler = async () => {
@@ -377,6 +389,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                             "From", LEFT_PADDING_FOR_FROM_PLACEHOLDER, "From", from)}
                         marginBottom={15}
                         marginTop={7}
+                        iconColor={darkColors.disableBack}
                     />
 
                     <AddressInputButton
@@ -386,6 +399,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         onPress={() => onAddressInputButtonPressHandler(
                             "To", LEFT_PADDING_FOR_TO_PLACEHOLDER, "To", to)}
                         marginBottom={15}
+                        iconColor={darkColors.disableBack}
                     />
 
                     {stops.map((stop, index) => (
@@ -398,6 +412,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                             onIconPress={() => onDeleteIconPressHandler(index)}
                             marginBottom={15}
                             key={index}
+                            iconColor={darkColors.disableBack}
                         />
                     ))}
                 </ScrollView>
@@ -528,6 +543,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 };
 
 CreateJourney.addStopPressHandler = () => console.log("Outer Add stop handler");
+CreateJourney.IsFromToChanged = () => false;
 CreateJourney.numberOfAddedStop = 0;
 
 export default CreateJourney;
