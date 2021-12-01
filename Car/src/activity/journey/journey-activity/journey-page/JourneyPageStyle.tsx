@@ -239,16 +239,19 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     requestButton: {
-        width: 78,
         justifyContent: "center",
         alignItems: "center",
-        height: 51,
     },
 
     requestButtonText: {
         fontWeight: "700",
-        fontSize: 18,
-        textTransform: "uppercase"
+        fontSize: 16,
+        textTransform: "uppercase",
+        lineHeight:20,
+        paddingLeft:16,
+        paddingTop:12,
+        paddingBottom:12,
+        paddingRight:16
     },
 
     journeyDetailBlock: {
