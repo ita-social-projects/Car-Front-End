@@ -78,6 +78,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const carModel = journey?.car?.model;
     const weekDay = props.weekDay!.current;
     const existingInvitations: Invitation[] = journey ? journey.invitations : [];
+    const [schedule, setSchedule] = useState(props.weekDay);
 
     const { user } = useContext(AuthContext);
 
@@ -131,8 +132,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     }, [colors, selectedFeeAsPaid]);
 
     useEffect(() => {
-        setOwnCarButtonStyle(isOwnCar ? activeButtonStyle: inactiveButtonStyle);
-        setTaxiButtonStyle(isOwnCar ? inactiveButtonStyle: activeButtonStyle);
+        setOwnCarButtonStyle(isOwnCar ? activeButtonStyle : inactiveButtonStyle);
+        setTaxiButtonStyle(isOwnCar ? inactiveButtonStyle : activeButtonStyle);
     }, [colors, isOwnCar]);
 
     const getNextDay = (date: Date): Date => {
@@ -189,8 +190,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         setNewInvitations(params.newInvitations ?? []);
     }, [params]);
 
-    useEffect(() =>{
-        if(weekDay)
+    useEffect(() => {
+        if (weekDay)
             setDepartureTime(getDepartureTime());
     }, [weekDay]);
 
@@ -224,15 +225,15 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
     }, []);
 
-    useEffect(() : any => {
+    useEffect((): any => {
         AsyncStorage.getItem("publishRideFieldsState")
             .then((item) => {
-                if (item) loadJourneyState();
+                if (item) loadJourneyStateAsync();
             });
     }, []);
 
-    useEffect(() : any => {
-        if(!isFocused) saveJourneyState();
+    useEffect((): any => {
+        if (!isFocused) saveJourneyStateAsync(schedule);
     }, [isFocused]);
 
     const createAllInvitationsArrayFromNewInvitations = (): Invitation[] => {
@@ -246,7 +247,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         }).concat(existingInvitations);
     };
 
-    const saveJourneyState = () => {
+    const saveJourneyStateAsync = async (schedule) => {
 
         let filterToSave: PublishRideFilter = {
             departureTime: departureTime,
@@ -256,13 +257,14 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             rideType: selectedRide,
             passengers: availableSeats,
             comments: comments,
-            newInvitations: newInvitations
+            newInvitations: newInvitations,
+            schedule: schedule
         };
 
-        AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
+        await AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
     };
 
-    const loadJourneyState = async () => {
+    const loadJourneyStateAsync = async () => {
         await AsyncStorage.getItem("publishRideFieldsState").then((res) => {
             let filter: PublishRideFilter = JSON.parse(res || "{}");
 
@@ -292,12 +294,14 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             setAvailableSeats(filter.passengers);
             setComments(filter.comments);
             setNewInvitations(filter.newInvitations ?? []);
+            setSchedule(filter.schedule ?? undefined);
         });
     };
 
+    JourneyDetailsPage.LoadSchedule = () => schedule?.current ?? WeekDay.None;
+
     const publishJourneyHandler = async () => {
-        if (createAllInvitationsArrayFromNewInvitations().length > availableSeats)
-        {
+        if (createAllInvitationsArrayFromNewInvitations().length > availableSeats) {
             setModal(invitationsErrorModal);
 
             return;
@@ -334,7 +338,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) => {
-                const newChat : CreateChat = {
+                const newChat: CreateChat = {
                     id: res.data.journeyModel.id,
                     name:
                         user?.name + " " +
@@ -531,8 +535,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                         <CommentBlock
                             initialComment={comments}
                             commentHeader="Comments"
-                            placeholder = "Write your comments"
-                            setComments={(initialComment:string)=>
+                            placeholder="Write your comments"
+                            setComments={(initialComment: string) =>
                                 setComments(initialComment)}
                         />
 
@@ -556,8 +560,10 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 <View style={{ marginLeft: 20 }}>
                                     <Text style={{ ...CreateJourneyStyle.invitationsCaption, color: colors.primary }}>
                                         Invite SoftServians</Text>
-                                    <Text style={{ ...CreateJourneyStyle.invitationsDescription,
-                                        color: colors.primary, width: 238 }}>
+                                    <Text style={{
+                                        ...CreateJourneyStyle.invitationsDescription,
+                                        color: colors.primary, width: 238
+                                    }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
                                         will be notified for that Journey
@@ -689,5 +695,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         </>
     );
 };
+
+JourneyDetailsPage.LoadSchedule = () => WeekDay.None;
 
 export default JourneyDetailsPage;

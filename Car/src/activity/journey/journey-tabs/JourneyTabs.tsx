@@ -196,7 +196,7 @@ const JourneyTabs = () => {
                 >
                     {(props: any) => {
                         /* eslint-disable */
-                        const weekDayRef = useRef<WeekDay>(WeekDay.None);
+                        const weekDayRef = useRef<WeekDay>(JourneyDetailsPage.LoadSchedule());
                         const isScheduleOpened = useRef(false);
                         /* eslint-enable */
 
