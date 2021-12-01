@@ -18,7 +18,8 @@ export const lightColors = {
     neutralDark: "#C4C4C4",
     secondaryLight: "#AAA9AE",
     disableBack: "#C4C4C4",
-    disableText: "#FFFFFF"
+    disableText: "#FFFFFF",
+    confirmBack: "#414045"
 };
 
 export const darkColors = {
@@ -31,6 +32,7 @@ export const darkColors = {
     neutralDark: "#C4C4C4",
     secondaryLight: "#C4C4C4",
     disableBack: "#414045",
-    disableText: "#909095"
+    disableText: "#909095",
+    confirmBack: "#F8F8F8"
 
 };
