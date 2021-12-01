@@ -16,7 +16,7 @@ import { DAY_OFFSET, MINUTES_OFFSET } from "../../../../constants/AnimationConst
 import {
     CREATING_FONT_SIZE,
     DEFAULT_AVAILABLE_SEATS_COUNT,
-    DEFAULT_TAXI_AVAILABLE_SEATS_COUNT, EDITING_FONT_SIZE,
+    DEFAULT_TAXI_AVAILABLE_SEATS_COUNT,
     INITIAL_TIME,
     MIN_AVAILABLE_SEATS_COUNT
 } from "../../../../constants/JourneyConstants";
@@ -583,7 +583,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             >
                                 <Text style={[CreateJourneyStyle.publishButtonText,
                                     {
-                                        fontSize: journey ? EDITING_FONT_SIZE : CREATING_FONT_SIZE,
+                                        fontSize: CREATING_FONT_SIZE,
                                         color: colors.white
                                     }]}>
                                     {journey ? "Apply changes" : "Publish"}
