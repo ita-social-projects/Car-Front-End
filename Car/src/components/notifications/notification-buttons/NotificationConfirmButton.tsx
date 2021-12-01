@@ -5,6 +5,7 @@ import NotificationButtonsStyle from "./NotificationButtonsStyle";
 
 const NotificationConfirmButton = (props: { confirmText?: string, onConfirm: () => void, disabled?: boolean }) => {
     const { colors } = useTheme();
+
     return (
         <TouchableOpacity
             disabled={props.disabled ?? false}

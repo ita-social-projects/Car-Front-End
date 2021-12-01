@@ -6,17 +6,17 @@ import OkSearchResultProps from "../../../src/activity/journey/journey-activity/
 const renderer = shallowRender.createRenderer();
 
 const props: OkSearchResultProps = {
-  route: {
-    params: {
-      journeys: [],
-      displayFee: false,
-      passangersCount: 1,
+    route: {
+        params: {
+            journeys: [],
+            displayFee: false,
+            passangersCount: 1,
+        },
     },
-  },
 };
 
 test("renders correctly", async () =>
-  expect(renderer.render(<OkSearchResult {...props} />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<OkSearchResult {...props} />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <View
         style={

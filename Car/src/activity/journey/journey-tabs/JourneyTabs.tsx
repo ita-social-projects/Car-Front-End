@@ -48,6 +48,7 @@ import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-mo
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import Preferences from "../../my-profile/my-profile-activity/preferences/Preferences";
 import AsyncStorage from "@react-native-community/async-storage";
+import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
