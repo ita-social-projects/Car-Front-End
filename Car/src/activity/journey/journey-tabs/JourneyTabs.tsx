@@ -21,7 +21,6 @@ import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
 import {
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
-    REQUEST_RIDE_POPUP_HEIGHT
 } from "../../../constants/JourneyConstants";
 import {
     HALF_OPACITY,
@@ -35,13 +34,12 @@ import {
     ANIMATION_DURATION,
     SLEEP_DURATION,
     animateOpacity,
-    sleep
+    sleep,
+    MODAL_SLEEP_DURATION
 } from "../../../constants/AnimationConstants";
 import { FIRST_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
 import JourneyDetailsPage from "../journey-activity/journey-details-page/JourneyDetailsPage";
 import * as navigation from "../../../components/navigation/Navigation";
-import ShadowedBottomPopup from "../../../components/shadowed-bottom-popup/ShadowedBottomPopup";
-import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import { Host } from "react-native-portalize";
 import AddressInputPage from "../journey-activity/address-input-page/AddressInputPage";
 import WeekDay from "../../../components/schedule-bottom-popup/WeekDay";
@@ -49,12 +47,14 @@ import JourneyInvitationsPage from "../journey-activity/journey-invitations/Jour
 import CreateJourneyMoreOptionsPopup from "../../../components/create-journey-more-options-popup/CreateJourneyMoreOptionsPopup";
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import Preferences from "../../my-profile/my-profile-activity/preferences/Preferences";
+import AsyncStorage from "@react-native-community/async-storage";
+import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
-    const [isNewRequestModalVisible, setNewRequestModalVisible] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
+    const [modalVisibility, setModalVisibility] = useState(false);
 
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
@@ -97,6 +97,15 @@ const JourneyTabs = () => {
         ref?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
+    const openConfirmModal = () => {
+        setModalVisibility(true);
+    };
+
+    const closeAndGoBack = () => {
+        setModalVisibility(false);
+        (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
+    };
+
     return (
         <View style={JourneyStyle.tabsStyle}>
             <StackTabs.Navigator>
@@ -119,8 +128,7 @@ const JourneyTabs = () => {
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: () => HeaderBackButton({
                             onPress: () => {
-                                closeMoreOptionPopup(createRideMoreOptionsRef);
-                                navigation.goBack();
+                                CreateJourney.IsFromToChanged() ? openConfirmModal() : navigation.goBack();
                             }
                         }),
                         headerRight: () => HeaderEllipsis(
@@ -135,6 +143,19 @@ const JourneyTabs = () => {
 
                         return (
                             <>
+                                <ConfirmModal
+                                    disableModal={() => setModalVisibility(false)}
+                                    visible={modalVisibility}
+                                    title={"ARE YOU SURE?"}
+                                    subtitle={"Information will not be saved, if you leave this page"}
+                                    confirmText={"Yes, leave"}
+                                    cancelText={"No, stay"}
+                                    onConfirm={() => {
+                                        AsyncStorage.removeItem("publishRideFieldsState");
+                                        closeMoreOptionPopup(createRideMoreOptionsRef);
+                                        closeAndGoBack();
+                                    }}
+                                />
                                 <Animated.View style={isVisible && [HeaderStyle.layout,
                                     { opacity: layoutOpacity, backgroundColor: colors.primary }
                                 ]} />
@@ -179,8 +200,9 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Journey Details"
-                    options={{
-                        headerTitle: "Publish a Ride",
+                    options={({ route }: { route:any }) => ({
+                        headerTitle: route.params.headerTitle,
+
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerTitleAlign: "center",
                         headerLeft: () => HeaderBackButton({
@@ -191,7 +213,7 @@ const JourneyTabs = () => {
                         }),
                         headerRight: () => HeaderEllipsis(
                             { onPress: () => pressHandle(ridePageMoreOptionsRef) })
-                    }}
+                    })}
                 >
                     {(props: any) => {
                         /* eslint-disable */
@@ -241,7 +263,7 @@ const JourneyTabs = () => {
                     name="Search Journey"
                     component={SearchJourney}
                     options={{
-                        headerTitle: "Search for Ride",
+                        headerTitle: "Find a Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -337,6 +359,7 @@ const JourneyTabs = () => {
                 />
                 <StackTabs.Screen
                     name="OK Search Result"
+                    component={OkSearchResult}
                     options={{
                         title: "Search Results",
                         headerTitleAlign: "center",
@@ -344,69 +367,7 @@ const JourneyTabs = () => {
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderRequestButton
                     }}
-                    children={(props: any) => (
-                        <>
-                            <OkSearchResult
-                                journeys={props.route.params.journeys}
-                                displayFee={props.route.params.displayFee}
-                                passangersCount = {props.route.params.passangersCount}
-                            />
-                            <ConfirmModal
-                                visible={isNewRequestModalVisible}
-                                title="ARE YOU SURE?"
-                                subtitle="You're about to create a ride request with new filters."
-                                confirmText="Yes, create"
-                                cancelText="No, go back"
-                                confirmColor={colors.primary}
-                                onConfirm={() => {
-                                    setNewRequestModalVisible(false);
-                                    (async () => sleep(SLEEP_DURATION))().then(() =>
-                                        navigation.navigate("Journey Request Page", { isRequest: true }));
-                                }}
-                                disableModal={() => setNewRequestModalVisible(false)}
-                            />
-                            <ShadowedBottomPopup
-                                snapPoints={[MIN_POPUP_HEIGHT, REQUEST_RIDE_POPUP_HEIGHT]}
-                                enabledInnerScrolling={false}
-                                initialSnap={0}
-                                renderHeader={
-                                    <View style={[JourneyPageStyle.headerTitleStyle,
-                                        { backgroundColor: colors.white }
-                                    ]}>
-                                        <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
-                                            REQUEST A RIDE
-                                        </Text>
-                                    </View>
-                                }
-                                renderContent={
-                                    <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
-                                        <MenuButton
-                                            text="With the previous filters"
-                                            isIcon={true}
-                                            onPress={() => {
-                                                navigation.navigate("Journey Request Page",
-                                                    { isRequest: true, isPreviousFilter: true });
-                                                if (ShadowedBottomPopup)
-                                                    ShadowedBottomPopup.pressHandle();
-                                            }}
-                                        />
-                                        <MenuButton
-                                            text="With new filters"
-                                            isIcon={true}
-                                            onPress={() => {
-                                                if (ShadowedBottomPopup)
-                                                    ShadowedBottomPopup.pressHandle();
-                                                setNewRequestModalVisible(true);
-                                            }}
-                                        />
-                                    </View>
-                                }
-                            />
-                        </>
-                    )
-                    }
                 />
-
                 <StackTabs.Screen
                     name="Bad Search Result"
                     component={BadSearchResult}

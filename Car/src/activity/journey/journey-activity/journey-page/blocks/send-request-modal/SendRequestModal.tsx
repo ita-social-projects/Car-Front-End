@@ -25,74 +25,72 @@ const SendRequestModal = (props: SendRequestModalProps) => {
         >
             <TouchableWithoutFeedback onPress={props.disableNodal}>
                 <View style={SendRequestModalStyle.background}>
-                    <TouchableWithoutFeedback>
-                        <View style={{ ...SendRequestModalStyle.window, backgroundColor: colors.white }}>
+                    <View style={{ ...SendRequestModalStyle.window, backgroundColor: colors.white }}>
 
-                            <View style={SendRequestModalStyle.closeButtonContainer}>
-                                <TouchableOpacity
-                                    style={SendRequestModalStyle.closeButton}
-                                    onPress={props.disableNodal}
-                                >
-                                    <Ionicons name={"close"} size={30} color={colors.primary}/>
-                                </TouchableOpacity>
-                            </View>
+                        <View style={SendRequestModalStyle.closeButtonContainer}>
+                            <TouchableOpacity
+                                style={SendRequestModalStyle.closeButton}
+                                onPress={props.disableNodal}
+                            >
+                                <Ionicons name={"close"} size={30} color={colors.primary}/>
+                            </TouchableOpacity>
+                        </View>
 
-                            <Text style={{ ...SendRequestModalStyle.title, color: colors.primary }}>
+                        <Text style={{ ...SendRequestModalStyle.title, color: colors.primary }}>
                                 Send request to driver
-                            </Text>
+                        </Text>
 
-                            <CommentBlock
-                                initialComment=""
-                                commentHeader="Comments"
-                                setComments={()=>""}
-                            />
-                            <View style ={SendRequestModalStyle.dropDownContainer}>
-                                <View style ={SendRequestModalStyle.dropDown}>
-                                    <JourneyCreationDropDownPicker
-                                        items={userQuantity.map((car) => ({
-                                            label: car.name,
-                                            value: car.id
-                                        }))}
-                                        paddingLeft={100}
-                                        searchable={false}
-                                        placeholder="Passengers:"
-                                        isVisible={isVisibleQuantityDropDown}
-                                        onOpen={() => setIsVisibleQuantityDropDown(true)}
-                                        onChangeItem={(item) => {
-                                            setSelectedQuantity({ id: item.value, name: item.label });
-                                            props.onPassangersCountChange(item.value);
-                                            setIsVisibleQuantityDropDown(false);
-                                        }}
-                                        valueId={selectedQuantity.id}
-                                    />
-                                </View>
-                            </View>
-                            <View style={SendRequestModalStyle.chooseOptionContainer}>
-                                <ChooseOption
-                                    text={"Have you got any luggage with you?"}
-                                    value={props.withLuggage}
-                                    onValueChanged={props.onWithLuggageChange}
+                        <CommentBlock
+                            initialComment=""
+                            commentHeader="Comments"
+                            setComments={()=>""}
+                        />
+                        <View style ={SendRequestModalStyle.dropDownContainer}>
+                            <View style ={SendRequestModalStyle.dropDown}>
+                                <JourneyCreationDropDownPicker
+                                    items={userQuantity.map((car) => ({
+                                        label: car.name,
+                                        value: car.id
+                                    }))}
+                                    paddingLeft={100}
+                                    searchable={false}
+                                    placeholder="Passengers:"
+                                    isVisible={isVisibleQuantityDropDown}
+                                    onOpen={() => setIsVisibleQuantityDropDown(true)}
+                                    onChangeItem={(item) => {
+                                        setSelectedQuantity({ id: item.value, name: item.label });
+                                        props.onPassangersCountChange(item.value);
+                                        setIsVisibleQuantityDropDown(false);
+                                    }}
+                                    valueId={selectedQuantity.id}
                                 />
                             </View>
-
-                            <View style={{ alignItems: "flex-end" }}>
-                                <TouchableOpacity
-                                    style={[
-                                        SendRequestModalStyle.confirmButton,
-                                        {
-                                            backgroundColor: colors.white,
-                                            borderColor: colors.primary
-                                        }]}
-                                    onPress={props.onConfirmPress}
-                                >
-                                    <Text style={[SendRequestModalStyle.confirmButtonText, { color: colors.primary }]}>
-                                    Confirm
-                                    </Text>
-                                </TouchableOpacity>
-
-                            </View>
                         </View>
-                    </TouchableWithoutFeedback>
+                        <View style={SendRequestModalStyle.chooseOptionContainer}>
+                            <ChooseOption
+                                text={"Have you got any luggage with you?"}
+                                value={props.withLuggage}
+                                onValueChanged={props.onWithLuggageChange}
+                            />
+                        </View>
+
+                        <View style={{ alignItems: "flex-end" }}>
+                            <TouchableOpacity
+                                style={[
+                                    SendRequestModalStyle.confirmButton,
+                                    {
+                                        backgroundColor: colors.white,
+                                        borderColor: colors.primary
+                                    }]}
+                                onPress={props.onConfirmPress}
+                            >
+                                <Text style={[SendRequestModalStyle.confirmButtonText, { color: colors.primary }]}>
+                                    Confirm
+                                </Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
                 </View>
             </TouchableWithoutFeedback>
         </Modal>

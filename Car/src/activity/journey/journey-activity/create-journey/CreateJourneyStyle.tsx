@@ -49,7 +49,7 @@ export const CreateJourneyStyle = StyleSheet.create({
     invitationsView: {
         marginTop: 24,
         marginLeft: 16,
-        marginRight: 20
+        marginRight: 20,
     },
 
     invitationsLink: {
@@ -156,5 +156,12 @@ export const CreateJourneyStyle = StyleSheet.create({
         paddingHorizontal: 10,
         height: 265,
         marginTop: 0
-    }
+    },
+
+    separator: {
+        height: 1,
+        width: "92%",
+        left: 15,
+        right: 15,
+    },
 });

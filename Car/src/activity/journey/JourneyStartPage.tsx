@@ -14,6 +14,7 @@ import {
 } from "../../constants/GeneralConstants";
 import NavigationAddListener from "../../types/NavigationAddListener";
 import { useTheme } from "../../components/theme/ThemeProvider";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const JourneyStartPage = (props: NavigationAddListener) => {
     const { colors } = useTheme();
@@ -98,6 +99,10 @@ const JourneyStartPage = (props: NavigationAddListener) => {
         return props.navigation.addListener("focus", loadJourneys);
     }, [props.navigation]);
 
+    useEffect(()=>{
+        AsyncStorage.removeItem("publishRideFieldsState");
+    });
+
     return (
         <ScrollView
             refreshControl={
@@ -109,7 +114,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     navigation={props.navigation}
                     navigationName="Search Journey"
                     blockImage={require("../../../assets/images/journey/bermuda-searching.png")}
-                    blockName="Search for a Ride"
+                    blockName="Find a Ride"
                     from={colors.greenGradientFrom}
                     to={colors.greenGradientTo}
                     reverse={false}

@@ -91,25 +91,7 @@ test("renders correctly", async () =>
         />
         <Screen
           name="Journey Details"
-          options={
-            Object {
-              "headerLeft": [Function],
-              "headerRight": [Function],
-              "headerTitle": "Publish a Ride",
-              "headerTitleAlign": "center",
-              "headerTitleStyle": Array [
-                Object {
-                  "fontFamily": "Open Sans ExtraBold",
-                  "fontSize": 18,
-                  "fontWeight": "700",
-                  "marginLeft": 20,
-                },
-                Object {
-                  "color": "#0B171B",
-                },
-              ],
-            }
-          }
+          options={[Function]}
         >
           [Function]
         </Screen>
@@ -141,7 +123,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Search for Ride",
+              "headerTitle": "Find a Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -204,6 +186,7 @@ test("renders correctly", async () =>
           }
         />
         <Screen
+          component={[Function]}
           name="OK Search Result"
           options={
             Object {
@@ -224,9 +207,7 @@ test("renders correctly", async () =>
               "title": "Search Results",
             }
           }
-        >
-          [Function]
-        </Screen>
+        />
         <Screen
           component={[Function]}
           name="Bad Search Result"

@@ -87,7 +87,7 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => {
                 onChangeItem={
                     props.selectHandle
                         ? (item) => {
-                        props.selectHandle?.call(props, item);
+                            props.selectHandle?.call(props, item);
                         }
                         : () => <></>
                 }

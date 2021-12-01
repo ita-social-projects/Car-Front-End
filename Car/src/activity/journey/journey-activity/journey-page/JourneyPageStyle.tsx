@@ -239,7 +239,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     requestButton: {
-        width: Dimensions.get("screen").width * 0.45,
+        width: 78,
         justifyContent: "center",
         alignItems: "center",
         height: 51,
@@ -257,6 +257,49 @@ const JourneyPageStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+
+    confirmationFormContainer: {
+        paddingHorizontal: 15,
+    },
+
+    dropDownContainer:
+    {
+        marginBottom: 50,
+        marginTop: 0
+    },
+
+    dropDown:{
+        left: 0,
+        right: 0,
+        marginBottom: 100,
+        position: "absolute",
+    },
+
+    chooseOptionContainer: {
+        paddingVertical: 17,
+    },
+
+    confirmButtonText: {
+        fontWeight: "700",
+        fontSize: 16,
+        textTransform: "uppercase",
+    },
+
+    confirmButton: {
+        width: 159,
+        borderWidth: 3,
+        justifyContent: "center",
+        alignItems: "center",
+        height: 50,
+        paddingHorizontal: 15,
+        marginTop: 40
+    },
+
+    commentsBlockContainer:
+    {
+        paddingLeft: 0,
+        paddingRight: 0
+    }
 });
 
 export default JourneyPageStyle;

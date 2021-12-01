@@ -27,6 +27,7 @@ const JourneyInvitation = (props: NotificationProps) => {
     const [wasOpened, setWasOpened] = useState(false);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
     const [acceptModalVisible, setAcceptModalVisible] = useState(false);
     const [journey, setJourney] = useState<Journey>();
     const user = useContext(AuthContext).user;
@@ -60,7 +61,6 @@ const JourneyInvitation = (props: NotificationProps) => {
         ).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
                 modalToShow();
-                NotificationsService.deleteNotification(props.notificationId);
             }
         });
     };
@@ -85,6 +85,13 @@ const JourneyInvitation = (props: NotificationProps) => {
         setNotificationModalVisible(false);
         if(props.onDelete)
             props.onDelete(props.notificationId);
+    };
+    const deleteNotification = () => {
+        if(props.onDelete)
+        {
+            props.onDelete(props.notificationId);
+        }
+        NotificationsService.deleteNotification(props.notificationId);
     };
 
     const acceptInvitation = () => {
@@ -115,7 +122,7 @@ const JourneyInvitation = (props: NotificationProps) => {
                     })) ?? []
             }
         ).then(addingUserResult => {
-            if (addingUserResult.status == HTTP_STATUS_OK) {
+            if (addingUserResult.status == HTTP_STATUS_OK && addingUserResult.data) {
                 JourneyService.updateInvitation(
                     {
                         id: 0,
@@ -128,8 +135,10 @@ const JourneyInvitation = (props: NotificationProps) => {
                         sendInvitationAnswerNotificationToDriver(ACCEPTED_INVITATION_TYPE,
                             () => setAcceptModalVisible(true));
                     }
-                })
-                ;
+                });
+            }
+            else{
+                setErrorModalVisible(true);
             }
         });
     };
@@ -213,8 +222,31 @@ const JourneyInvitation = (props: NotificationProps) => {
                     subtitle="You were successfully added to the ride!"
                     confirmText="Ok"
                     hideCancelButton={true}
-                    disableModal={() => {setAcceptModalVisible(false); setNotificationModalVisible(false);}}
-                    onConfirm={() => {setAcceptModalVisible(false); setNotificationModalVisible(false);}}
+                    disableModal={() => {
+                        setAcceptModalVisible(false);
+                        setNotificationModalVisible(false);
+                    }}
+                    onConfirm={() => {
+                        setAcceptModalVisible(false);
+                        setNotificationModalVisible(false);
+                        deleteNotification();
+                    }}
+                />
+                <ConfirmModal
+                    visible={errorModalVisible}
+                    title="Error"
+                    subtitle="Failed to accept the invitation!"
+                    confirmText="Ok"
+                    hideCancelButton={true}
+                    disableModal={() => {
+                        setErrorModalVisible(false);
+                    }}
+                    onConfirm={() => {
+                        setErrorModalVisible(false);
+                        setNotificationModalVisible(false);
+                        if(props.onDelete)
+                            props.onDelete(props.notificationId);
+                    }}
                 />
             </>
         </>

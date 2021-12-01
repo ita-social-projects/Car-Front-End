@@ -49,6 +49,13 @@ import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
+import { Divider } from "react-native-elements";
+import AsyncStorage from "@react-native-community/async-storage";
+import FeeType from "../../../../../models/journey/FeeType";
+import RideType from "../../../../../models/journey/RideType";
+import { useIsFocused } from "@react-navigation/native";
+import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
+import { lightColors } from "../../../../components/theme/ThemesColors";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -84,6 +91,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [comments, setComments] = useState("");
 
+    const isFocused = useIsFocused();
+
     const activeButtonStyle = {
         backgroundColor: colors.hover,
         color: colors.white,
@@ -102,14 +111,15 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         return inactiveButtonStyle;
     };
-
+    const [selectedFee, setSelectedFee] = useState(FeeType.Free);
+    const [selectedRide, setSelectedRide] = useState(RideType.OwnCar);
     const [isOwnCar, setOwnCar] = useState(journey?.isOnOwnCar || !journey);
 
     let highlightOwnCarButton: boolean = !journey || journey.isOnOwnCar;
     const [ownCarButtonStyle, setOwnCarButtonStyle] = useState(setButtonStyle(highlightOwnCarButton));
     const [taxiButtonStyle, setTaxiButtonStyle] = useState(setButtonStyle(!highlightOwnCarButton));
 
-    let highlightPaidButton: boolean = !journey || !journey.isFree;
+    let highlightPaidButton: boolean = !journey || journey.isFree;
     const [selectedFeeAsPaid, setSelectedFeeAsPaid] = useState(!highlightPaidButton);
     const [paidButtonStyle, setPaidButtonStyle] = useState(setButtonStyle(!highlightPaidButton));
     const [freeButtonStyle, setFreeButtonStyle] = useState(setButtonStyle(highlightPaidButton));
@@ -194,6 +204,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             if (result.data.length === EMPTY_COLLECTION_LENGTH) {
                 setOwnCarButtonStyle(inactiveButtonStyle);
                 setTaxiButtonStyle(activeButtonStyle);
+                setOwnCar(false);
+                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
             }
             setUserCarIsLoading(false);
         });
@@ -211,6 +223,17 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         });
     }, []);
 
+    useEffect(() : any => {
+        AsyncStorage.getItem("publishRideFieldsState")
+            .then((item) => {
+                if (item) loadJourneyState();
+            });
+    }, []);
+
+    useEffect(() : any => {
+        if(!isFocused) saveJourneyState();
+    }, [isFocused]);
+
     const createAllInvitationsArrayFromNewInvitations = (): Invitation[] => {
         return newInvitations.filter(inv => inv.isCorrect).map<Invitation>((invitedUser) => {
             return {
@@ -220,6 +243,55 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 type: 0
             };
         }).concat(existingInvitations);
+    };
+
+    const saveJourneyState = () => {
+
+        let filterToSave: PublishRideFilter = {
+            departureTime: departureTime,
+            departureTimeIsConfirmed: departureTimeIsConfirmed,
+            fee: selectedFee,
+            selectedCar: selectedCar,
+            rideType: selectedRide,
+            passengers: availableSeats,
+            comments: comments,
+            newInvitations: newInvitations
+        };
+
+        AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
+    };
+
+    const loadJourneyState = async () => {
+        await AsyncStorage.getItem("publishRideFieldsState").then((res) => {
+            let filter: PublishRideFilter = JSON.parse(res || "{}");
+
+            switch (filter.fee) {
+                case FeeType.Free:
+                    setSelectedFeeAsPaid(false);
+                    setSelectedFee(FeeType.Free);
+                    break;
+                case FeeType.Paid:
+                    setSelectedFeeAsPaid(true);
+                    setSelectedFee(FeeType.Paid);
+                    break;
+            }
+            switch (filter.rideType) {
+                case RideType.OwnCar:
+                    setOwnCar(true);
+                    setSelectedCar(filter.selectedCar);
+                    setSelectedRide(RideType.OwnCar);
+                    break;
+                case RideType.Taxi:
+                    setOwnCar(false);
+                    setSelectedRide(RideType.Taxi);
+                    break;
+            }
+            setDepartureTime(new Date(filter.departureTime));
+            setDepartureTimeIsConfirmed(filter.departureTimeIsConfirmed);
+            setAvailableSeats(filter.passengers);
+            setComments(filter.comments);
+            setNewInvitations(filter.newInvitations ?? []);
+        });
     };
 
     const publishJourneyHandler = async () => {
@@ -268,6 +340,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                 else {
                     setModal(publishErrorModal);
                 }
+
             })
             .catch(() => setModal(publishErrorModal));
 
@@ -345,6 +418,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 marginTop={16}
                                 text={params.from.text}
                                 disabled={true}
+                                iconColor={lightColors.secondaryLight}
                             />
                         </View>
                         <View style={SearchJourneyStyle.locationContainer}>
@@ -353,6 +427,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
+                                iconColor={lightColors.secondaryLight}
                             />
                         </View>
 
@@ -364,6 +439,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     text={stop.text}
                                     disabled={true}
                                     key={index}
+                                    marginBottom={16}
+                                    iconColor={lightColors.secondaryLight}
                                 />
                             ))}
                         </View>
@@ -385,11 +462,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             rightButtonStyle={taxiButtonStyle}
                             onLeftButtonPress={() => {
                                 setOwnCar(true);
+                                setSelectedRide(RideType.OwnCar);
                                 setIsVisibleCarDropDown(false);
                                 setAvailableSeats(DEFAULT_AVAILABLE_SEATS_COUNT);
                             }}
                             onRightButtonPress={() => {
                                 setOwnCar(false);
+                                setSelectedRide(RideType.Taxi);
                                 setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
                             }}
                             title={"Ride Type"}
@@ -426,9 +505,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             rightButtonStyle={paidButtonStyle}
                             onLeftButtonPress={() => {
                                 setSelectedFeeAsPaid(false);
+                                setSelectedFee(FeeType.Free);
                             }}
                             onRightButtonPress={() => {
                                 setSelectedFeeAsPaid(true);
+                                setSelectedFee(FeeType.Paid);
                             }}
                             title={"Fee"}
                             leftButtonText={"Free"}
@@ -493,8 +574,11 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             </TouchableOpacity>
                         </View>
 
+                        <Divider style={[CreateJourneyStyle.separator, { backgroundColor: colors.secondaryLight }]} />
+
                         <View style={[CreateJourneyStyle.publishButtonContainer,
-                            { flexDirection: "row" }]}>
+
+                            { flexDirection: journey ? "row" : "column" }]}>
 
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.discardButton,
@@ -587,7 +671,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
             <ConfirmModal
                 visible={applyChangesModalIsVisible}
-                confirmColor={"black"}
                 title={"CHANGES"}
                 subtitle={"After the changes is applied, all passengers will get notified. " +
                     "Some of them might withdraw from the ride if change doesn't suit them"}

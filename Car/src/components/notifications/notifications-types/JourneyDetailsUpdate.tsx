@@ -24,7 +24,7 @@ const JourneyDetailsUpdate = (props: NotificationProps) => {
             <NotificationModalBase isVisible={modalVisible!}>
                 <NotificationHeader
                     title="RIDE DETAILS ARE UPDATED"
-                    message={`The details of the ${props.sender?.name}'s ride have been updated!`}
+                    message={`${props.sender?.name}'s ride details have been updated.`}
                     sender={props.sender}
                     disableModal={() => setModalVisible(false)}
                 />
