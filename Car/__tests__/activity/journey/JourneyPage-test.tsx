@@ -24,51 +24,55 @@ const props: JourneyPageProps = {
 test("renders correctly", async () =>
     expect(renderer.render(<JourneyPage props={props} />)).toMatchInlineSnapshot(`
     <React.Fragment>
-      <View
-        style={
-          Array [
-            Object {
-              "flex": 1,
-            },
-            Object {
-              "backgroundColor": "#A5C500",
-            },
-          ]
-        }
+      <TouchableWithoutFeedback
+        onPress={[Function]}
       >
-        <MapView
-          customMapStyle={
+        <View
+          style={
             Array [
               Object {
-                "featureType": "poi.business",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
+                "flex": 1,
               },
               Object {
-                "elementType": "labels.text",
-                "featureType": "poi.park",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
+                "backgroundColor": "#A5C500",
               },
             ]
           }
-          provider="google"
-          showsCompass={false}
-          showsMyLocationButton={false}
-          showsUserLocation={true}
-          style={
-            Object {
-              "flex": 1,
+        >
+          <MapView
+            customMapStyle={
+              Array [
+                Object {
+                  "featureType": "poi.business",
+                  "stylers": Array [
+                    Object {
+                      "visibility": "off",
+                    },
+                  ],
+                },
+                Object {
+                  "elementType": "labels.text",
+                  "featureType": "poi.park",
+                  "stylers": Array [
+                    Object {
+                      "visibility": "off",
+                    },
+                  ],
+                },
+              ]
             }
-          }
-        />
-      </View>
+            provider="google"
+            showsCompass={false}
+            showsMyLocationButton={false}
+            showsUserLocation={true}
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          />
+        </View>
+      </TouchableWithoutFeedback>
       <Unknown>
         <BottomPopup
           enabledGestureInteraction={true}
@@ -76,66 +80,72 @@ test("renders correctly", async () =>
           initialSnap={1}
           refForChild={[Function]}
           renderContent={
-            <View
-              style={
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "height": "100%",
-                  "width": "100%",
-                }
-              }
+            <TouchableWithoutFeedback
+              onPress={[Function]}
             >
               <View
                 style={
                   Object {
-                    "height": 300,
+                    "backgroundColor": "#FFFFFF",
+                    "height": "100%",
+                    "width": "100%",
                   }
                 }
               >
-                <ScrollView
-                  nestedScrollEnabled={true}
-                  style={
-                    Array [
+                <React.Fragment>
+                  <View
+                    style={
                       Object {
-                        "alignSelf": "center",
-                        "paddingHorizontal": "5%",
-                        "width": "100%",
-                      },
-                      Object {
-                        "backgroundColor": "#FFFFFF",
-                      },
-                    ]
-                  }
-                >
-                  <CarBlock
-                    car={null}
-                    isOnOwnCar={false}
-                  />
-                  <StopsBlock
-                    highlightedStops={
-                      Array [
-                        1,
-                        2,
-                      ]
+                        "height": 300,
+                      }
                     }
-                    onStopPress={[Function]}
-                    stops={Array []}
-                  />
-                  <CommentsBlock />
-                  <ParticipantsBlock
+                  >
+                    <ScrollView
+                      nestedScrollEnabled={true}
+                      style={
+                        Array [
+                          Object {
+                            "alignSelf": "center",
+                            "paddingHorizontal": "5%",
+                            "width": "100%",
+                          },
+                          Object {
+                            "backgroundColor": "#FFFFFF",
+                          },
+                        ]
+                      }
+                    >
+                      <CarBlock
+                        car={null}
+                        isOnOwnCar={false}
+                      />
+                      <StopsBlock
+                        highlightedStops={
+                          Array [
+                            1,
+                            2,
+                          ]
+                        }
+                        onStopPress={[Function]}
+                        stops={Array []}
+                      />
+                      <CommentsBlock />
+                      <ParticipantsBlock
+                        journey={null}
+                      />
+                    </ScrollView>
+                  </View>
+                  <ButtonBlock
+                    applicantStops={Array []}
+                    isDriver={false}
+                    isPassenger={false}
+                    isRequested={false}
                     journey={null}
+                    onSendRequestPress={[Function]}
                   />
-                </ScrollView>
+                </React.Fragment>
               </View>
-              <ButtonBlock
-                applicantStops={Array []}
-                isDriver={false}
-                isPassenger={false}
-                isRequested={false}
-                journey={null}
-                onSendRequestPress={[Function]}
-              />
-            </View>
+            </TouchableWithoutFeedback>
           }
           renderHeader={
             <DriverBlock
@@ -190,17 +200,6 @@ test("renders correctly", async () =>
         subtitle="Ride canceling is failed"
         title="Ride canceling"
         visible={false}
-      />
-      <SendRequestModal
-        comments=""
-        disableNodal={[Function]}
-        onCommentsChange={[Function]}
-        onConfirmPress={[Function]}
-        onPassangersCountChange={[Function]}
-        onWithLuggageChange={[Function]}
-        passangersCount={1}
-        visible={false}
-        withLuggage={false}
       />
     </React.Fragment>
   `));

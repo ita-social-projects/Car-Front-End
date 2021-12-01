@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { lightColors } from "../../../../components/theme/ThemesColors";
 
 export const CreateJourneyStyle = StyleSheet.create({
     container: {
@@ -51,8 +50,6 @@ export const CreateJourneyStyle = StyleSheet.create({
         marginTop: 24,
         marginLeft: 16,
         marginRight: 20,
-        borderBottomWidth: 1,
-        borderColor: lightColors.secondaryLight
     },
 
     invitationsLink: {

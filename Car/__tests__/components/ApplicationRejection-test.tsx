@@ -52,7 +52,7 @@ test("renders correctly", async () =>
         }
       }
       notificationHeaderMessage="The driver has rejected your request!"
-      notificationHeaderTittle="REQUEST IS REJECTED"
+      notificationHeaderTittle="REQUEST APPROVAL"
       notificationTittle="Driver rejected your request!"
     />
   `));
