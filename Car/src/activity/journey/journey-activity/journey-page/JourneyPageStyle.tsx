@@ -223,8 +223,8 @@ const JourneyPageStyle = StyleSheet.create({
         borderWidth: 3,
         justifyContent: "center",
         alignItems: "center",
-        height: 51,
-        width: Dimensions.get("screen").width * 0.45
+        //height: 51,
+        //width: Dimensions.get("screen").width * 0.45
     },
 
     buttons: {
@@ -234,8 +234,12 @@ const JourneyPageStyle = StyleSheet.create({
 
     messageAllButtonText: {
         fontWeight: "700",
-        fontSize: 18,
+        fontSize: 16,
         textTransform: "uppercase",
+        paddingLeft:16,
+        paddingTop:12,
+        paddingBottom:12,
+        paddingRight:16,
     },
 
     requestButton: {
