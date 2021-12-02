@@ -59,7 +59,6 @@ test("renders correctly", async () =>
       </View>
       <ConfirmModal
         cancelText="No, go back"
-        confirmColor="#0B171B"
         confirmText="Yes, create"
         disableModal={[Function]}
         onConfirm={[Function]}
