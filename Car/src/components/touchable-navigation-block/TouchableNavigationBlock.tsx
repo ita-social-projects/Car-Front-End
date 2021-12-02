@@ -37,7 +37,8 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                                 style={{
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: 15
+                                    marginTop: 15,
+                                    scaleX: -1
                                 }}
                                 source={props.blockImage}
                             />

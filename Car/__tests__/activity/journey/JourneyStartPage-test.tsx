@@ -72,7 +72,7 @@ test("renders correctly", async () =>
           }
           navigationName="Create Journey"
           reverse={true}
-          to="#00A3CF"
+          to="#5552A0"
           width={210}
         />
       </View>

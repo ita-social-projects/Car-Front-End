@@ -127,7 +127,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     blockImage={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
                     blockName="Add a ride"
                     from={colors.navyBlueGradientFrom}
-                    to={colors.navyBlueGradientFrom}
+                    to={colors.navyBlueGradientTo}
                     reverse={true}
                     width={210}
                     height={140}
