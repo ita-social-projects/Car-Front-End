@@ -328,7 +328,7 @@ const JourneyTabs = () => {
                                         }
                                     />}
 
-                                {props.route.params.isDriver &&
+                                {props.route.params.isPassenger &&
                                     <ConfirmModal
                                         disableModal={() => setModalVisibility(false)}
                                         visible={modalVisibility}
