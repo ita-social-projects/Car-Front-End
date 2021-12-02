@@ -27,7 +27,6 @@ const SwitchSelectorStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-end",
         borderWidth: 1,
-        marginRight: 15,
     },
 
     buttonText: {
