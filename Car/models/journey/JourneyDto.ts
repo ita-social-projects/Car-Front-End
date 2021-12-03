@@ -13,6 +13,7 @@ interface JourneyDto {
     isFree: boolean,
     organizerId: number,
     carId: number | null,
+    chatId: number | null,
     isOnOwnCar: boolean,
     journeyPoints: JourneyPoint[],
     stops: Stop[],
