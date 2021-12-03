@@ -48,8 +48,6 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import ChatService from "../../../../../api-service/chat-service/ChatService";
-import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import { Divider } from "react-native-elements";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -57,6 +55,7 @@ import FeeType from "../../../../../models/journey/FeeType";
 import RideType from "../../../../../models/journey/RideType";
 import { useIsFocused } from "@react-navigation/native";
 import PublishRideFilter from "../../../../../models/journey/PublishRideFilter";
+import { lightColors } from "../../../../components/theme/ThemesColors";
 
 const getCarId = (journey?: Journey) => {
     if (!journey || journey.car && journey.car.id === ZERO_ID) return null;
@@ -87,6 +86,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         id: getCarId(journey),
         name: journey ? `${journey?.car?.brand} ${carModel}` : ""
     });
+
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [comments, setComments] = useState("");
@@ -204,6 +204,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             if (result.data.length === EMPTY_COLLECTION_LENGTH) {
                 setOwnCarButtonStyle(inactiveButtonStyle);
                 setTaxiButtonStyle(activeButtonStyle);
+                setOwnCar(false);
+                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
             }
             setUserCarIsLoading(false);
         });
@@ -252,7 +254,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             selectedCar: selectedCar,
             rideType: selectedRide,
             passengers: availableSeats,
-            comments: comments
+            comments: comments,
+            newInvitations: newInvitations
         };
 
         AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
@@ -265,24 +268,29 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             switch (filter.fee) {
                 case FeeType.Free:
                     setSelectedFeeAsPaid(false);
+                    setSelectedFee(FeeType.Free);
                     break;
                 case FeeType.Paid:
                     setSelectedFeeAsPaid(true);
+                    setSelectedFee(FeeType.Paid);
                     break;
             }
             switch (filter.rideType) {
                 case RideType.OwnCar:
                     setOwnCar(true);
                     setSelectedCar(filter.selectedCar);
+                    setSelectedRide(RideType.OwnCar);
                     break;
                 case RideType.Taxi:
                     setOwnCar(false);
+                    setSelectedRide(RideType.Taxi);
                     break;
             }
             setDepartureTime(new Date(filter.departureTime));
             setDepartureTimeIsConfirmed(filter.departureTimeIsConfirmed);
             setAvailableSeats(filter.passengers);
             setComments(filter.comments);
+            setNewInvitations(filter.newInvitations ?? []);
         });
     };
 
@@ -309,6 +317,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const newJourney: JourneyDto = {
             id: 0,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
+            chatId: null,
             comments: comments,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -325,18 +334,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) => {
-                const newChat : CreateChat = {
-                    id: res.data.journeyModel.id,
-                    name:
-                        user?.name + " " +
-                        user?.surname + "'s ride"
-                };
+                if (res.status === HTTP_STATUS_OK) {
+                    setSuccessfullyPublishModalIsVisible(true);
+                }
+                else {
+                    setModal(publishErrorModal);
+                }
 
-                ChatService.addChat(newChat)
-                    .then(() => {
-                        setSuccessfullyPublishModalIsVisible(true);
-                    }
-                    );
             })
             .catch(() => setModal(publishErrorModal));
 
@@ -351,6 +355,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
+            chatId: journey.chatId,
             comments: comments.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -413,6 +418,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 marginTop={16}
                                 text={params.from.text}
                                 disabled={true}
+                                iconColor={lightColors.secondaryLight}
                             />
                         </View>
                         <View style={SearchJourneyStyle.locationContainer}>
@@ -421,6 +427,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 directionType={"To"}
                                 text={params.to.text}
                                 disabled={true}
+                                iconColor={lightColors.secondaryLight}
                             />
                         </View>
 
@@ -433,6 +440,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     disabled={true}
                                     key={index}
                                     marginBottom={16}
+                                    iconColor={lightColors.secondaryLight}
                                 />
                             ))}
                         </View>

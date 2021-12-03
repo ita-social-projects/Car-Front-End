@@ -48,6 +48,7 @@ let journeys: Journey[] = [
             phoneNumber: 0,
         },
         car: {} as CarViewModel,
+        chatId: 1,
     },
 ];
 
