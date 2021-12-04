@@ -27,7 +27,8 @@ describe("Journey Service test", () => {
         schedule: null,
         stops: [],
         invitations: [],
-        journeyPoints: []
+        journeyPoints: [],
+        chatId: 1
     }];
 
     let journeyUserData: JourneyUserDto = {
@@ -117,6 +118,7 @@ describe("Journey Service test", () => {
         stops: [],
         weekDay: null,
         invitations: [],
+        chatId: 0,
     };
 
     let filter : FilterJourney = {

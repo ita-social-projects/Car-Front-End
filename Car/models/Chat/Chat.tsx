@@ -11,9 +11,9 @@ type Chat = null | {
     receivedMessages:[{
         unreadMessagesCount: number,
     }],
-    journey: {
+    journeys: [{
         departureTime: Date
-    }
+    }]
 };
 
 export default Chat;

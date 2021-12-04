@@ -308,6 +308,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: journey.car!.id,
+            chatId: journey.chatId,
             organizerId: Number(journey?.organizer?.id),
             duration: duration,
             routeDistance: Math.round(routeDistance),
