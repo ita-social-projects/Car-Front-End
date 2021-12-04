@@ -21,6 +21,7 @@ type Journey = null | {
     invitations: Invitation[];
     organizer: User;
     car: CarViewModel;
+    chatId: number;
 };
 
 export default Journey;

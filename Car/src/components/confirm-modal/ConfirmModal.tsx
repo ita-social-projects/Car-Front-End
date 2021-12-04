@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Modal, Text, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
+import { useTheme } from "../theme/ThemeProvider";
 import ConfirmModalProps from "./ConfirmModalProps";
 import ConfirmModalStyle from "./ConfirmModalStyle";
 
 const ConfirmModal = ((props: ConfirmModalProps) => {
+    const { colors } = useTheme();
     const confirmStyle = props.confirmColor == null ?
         ConfirmModalStyle.confirmButton :
-        [ConfirmModalStyle.confirmButton, { backgroundColor: props.confirmColor }];
+        [ConfirmModalStyle.confirmButton, { backgroundColor: colors.accentRed }];
 
     return (
         <Modal
@@ -18,11 +20,11 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
             <TouchableWithoutFeedback onPress={props.disableModal}>
                 <View style={ConfirmModalStyle.background}>
                     <TouchableWithoutFeedback>
-                        <View style={{ ...ConfirmModalStyle.window }}>
-                            <Text style={{ ...ConfirmModalStyle.boldText }}>
+                        <View style={{ ...ConfirmModalStyle.window, backgroundColor: colors.white }}>
+                            <Text style={{ ...ConfirmModalStyle.boldText, color: colors.primary }}>
                                 {props.title}
                             </Text>
-                            <Text style={{ ...ConfirmModalStyle.subtitleText }}>
+                            <Text style={{ ...ConfirmModalStyle.subtitleText, color: colors.secondaryDark }}>
                                 {props.subtitle}
                             </Text>
                             <TouchableOpacity
@@ -36,7 +38,7 @@ const ConfirmModal = ((props: ConfirmModalProps) => {
 
                             {!props.hideCancelButton && (
                                 <TouchableOpacity onPress={props.disableModal}>
-                                    <Text style={{ ...ConfirmModalStyle.boldText }}>
+                                    <Text style={{ ...ConfirmModalStyle.boldText, color: colors.primary }}>
                                         {props.cancelText}
                                     </Text>
                                 </TouchableOpacity>

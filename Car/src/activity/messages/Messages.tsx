@@ -166,7 +166,8 @@ const Messages = (props: MessagesProps) => {
                                                 ]}
                                             >
                                                 Starts at{" "}
-                                                {moment(getDateWithCorrectUtc(new Date(item!.journey.departureTime)))
+                                                {moment(getDateWithCorrectUtc(
+                                                    new Date(item!.journeys[FIRST_ELEMENT_OF_THE_ARRAY].departureTime)))
                                                     .format(
                                                         "DD.MM, HH:mm"
                                                     )}
