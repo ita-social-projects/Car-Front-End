@@ -247,7 +247,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         }).concat(existingInvitations);
     };
 
-    const saveJourneyStateAsync = async (schedule) => {
+    const saveJourneyStateAsync = async (scheduleToSave) => {
 
         let filterToSave: PublishRideFilter = {
             departureTime: departureTime,
@@ -258,7 +258,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             passengers: availableSeats,
             comments: comments,
             newInvitations: newInvitations,
-            schedule: schedule
+            schedule: scheduleToSave
         };
 
         await AsyncStorage.setItem("publishRideFieldsState", JSON.stringify(filterToSave));
