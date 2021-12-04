@@ -79,6 +79,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
     const [requestSuccessfullySentModalIsVisible, setRequestSuccessfullySentModalIsVisible] = useState(false);
+    const [comments, setComments] = useState("");
 
     const [modal, setModal] = useState<ConfirmModalProps>({ ...rideCancelingErrorModal, visible: false });
     const disableModal = () => setModal(prevState => ({ ...prevState, visible: false }));
@@ -86,7 +87,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const mapRef = useRef<MapView | null>(null);
 
     const [withLuggage, setWithLuggage] = useState(false);
-    const [requestComments, setRequestComments] = useState("");
+    const [requestComments] = useState("");
     const [passangersCount, setPassangersCount] =
         useState(props.route.params.passangersCount?? DEFAULT_PASSANGERS_COUNT);
     const [isConfirmationFormVisible, setIsConfirmationFormVisible] = useState(false);
@@ -327,9 +328,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                     <View style={JourneyPageStyle.confirmationFormContainer}>
                                         <CommentBlock
                                             placeholder="Any comments?"
-                                            initialComment=""
+                                            initialComment={comments}
                                             commentHeader="Comments"
-                                            setComments={(comment)=>setRequestComments(comment)}
+                                            setComments={(initialComment:string)=>
+                                                setComments(initialComment)}
                                             containerStyle={JourneyPageStyle.commentsBlockContainer}
                                         />
 
