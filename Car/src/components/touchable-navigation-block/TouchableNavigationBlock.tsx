@@ -29,7 +29,7 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                             style={TouchableNavigationBlockStyle.viewContainer}
                         >
                             <Text
-                                style={TouchableNavigationBlockStyle.textStyle}
+                                style={[TouchableNavigationBlockStyle.textStyle, TouchableNavigationBlockStyle.textStyleAddRide]}
                             >
                                 {props.blockName}
                             </Text>
@@ -38,7 +38,10 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                                     width: props.width,
                                     height: props.height,
                                     marginTop: 15,
-                                    scaleX: -1
+                                    transform:
+                                        [{
+                                            scaleX: -1
+                                        }]
                                 }}
                                 source={props.blockImage}
                             />
@@ -51,12 +54,14 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                                 style={{
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: 15
+                                    marginTop: 14,
+                                    marginLeft: -10,
+                                    borderBottomLeftRadius: 6
                                 }}
                                 source={props.blockImage}
                             />
                             <Text
-                                style={TouchableNavigationBlockStyle.textStyle}
+                                style={[TouchableNavigationBlockStyle.textStyle, TouchableNavigationBlockStyle.textStyleFindRide]}
                             >
                                 {props.blockName}
                             </Text>
