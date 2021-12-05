@@ -109,29 +109,29 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             style={[JourneyStartPageStyle.page, { backgroundColor: colors.white }]}>
-                <View style={JourneyStartPageStyle.touchableNavigationBlocks}>
-                    <TouchableNavigationBlock
-                        navigation={props.navigation}
-                        navigationName="Search Journey"
-                        blockImage={require("../../../assets/images/journey/bermuda-searching.png")}
-                        blockName="Find a Ride"
-                        from={colors.greenGradientFrom}
-                        to={colors.greenGradientTo}
-                        reverse={false}
-                        width={150}
-                        height={140}
-                    />
-                    <TouchableNavigationBlock
-                        navigation={props.navigation}
-                        navigationName="Create Journey"
-                        blockImage={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
-                        blockName="Add a ride"
-                        from={colors.navyBlueGradientFrom}
-                        to={colors.navyBlueGradientTo}
-                        reverse={true}
-                        width={200}
-                        height={140}
-                    />
+            <View style={JourneyStartPageStyle.touchableNavigationBlocks}>
+                <TouchableNavigationBlock
+                    navigation={props.navigation}
+                    navigationName="Search Journey"
+                    blockImage={require("../../../assets/images/journey/bermuda-searching.png")}
+                    blockName="Find a Ride"
+                    from={colors.greenGradientFrom}
+                    to={colors.greenGradientTo}
+                    reverse={false}
+                    width={150}
+                    height={140}
+                />
+                <TouchableNavigationBlock
+                    navigation={props.navigation}
+                    navigationName="Create Journey"
+                    blockImage={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
+                    blockName="Add a ride"
+                    from={colors.navyBlueGradientFrom}
+                    to={colors.navyBlueGradientTo}
+                    reverse={true}
+                    width={200}
+                    height={140}
+                />
             </View>
             <View style={JourneyStartPageStyle.manageJourneysWrapper }>
                 <View style={JourneyStartPageStyle.manageJourneysContainer}>
@@ -224,7 +224,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                </ScrollView>                   
+                </ScrollView>
                 {selectedIndex === FIRST_ELEMENT_INDEX && (
                     <View style={JourneyStartPageStyle.tabStyle}>
                         {upcomingJourneys.length > EMPTY_COLLECTION_LENGTH && (
@@ -262,7 +262,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                         {<JourneyCardList journey={scheduledJourneys} />}
                     </View>
                 )}
-            </View> 
+            </View>
         </ScrollView>
     );
 };

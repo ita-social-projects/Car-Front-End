@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { withTheme } from "react-native-elements";
 import Font from "../../data/fonts/Font";
 
 const TouchableNavigationBlockStyle = StyleSheet.create({
@@ -12,7 +11,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
         marginVertical: 5,
         elevation: 8,
         marginHorizontal: 7
-        
+
     },
 
     textStyle: {

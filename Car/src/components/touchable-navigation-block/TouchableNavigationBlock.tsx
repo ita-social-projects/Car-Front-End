@@ -29,7 +29,8 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                             style={TouchableNavigationBlockStyle.viewContainer}
                         >
                             <Text
-                                style={[TouchableNavigationBlockStyle.textStyle, TouchableNavigationBlockStyle.textStyleAddRide]}
+                                style={[TouchableNavigationBlockStyle.textStyle,
+                                    TouchableNavigationBlockStyle.textStyleAddRide]}
                             >
                                 {props.blockName}
                             </Text>
@@ -61,7 +62,8 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                                 source={props.blockImage}
                             />
                             <Text
-                                style={[TouchableNavigationBlockStyle.textStyle, TouchableNavigationBlockStyle.textStyleFindRide]}
+                                style={[TouchableNavigationBlockStyle.textStyle,
+                                    TouchableNavigationBlockStyle.textStyleFindRide]}
                             >
                                 {props.blockName}
                             </Text>

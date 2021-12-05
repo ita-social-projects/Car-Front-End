@@ -4,7 +4,7 @@ import Font from "../../data/fonts/Font";
 const JourneyStartPageStyle = StyleSheet.create({
     page: {
         paddingHorizontal: 7,
-        backgroundColor: 'white',
+        backgroundColor: "white",
     },
 
     manageJourneysWrapper: {
@@ -72,7 +72,6 @@ const JourneyStartPageStyle = StyleSheet.create({
         paddingTop: 16
     },
 
- 
     tabStyle: {
         paddingTop: 24
     },
