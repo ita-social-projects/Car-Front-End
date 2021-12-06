@@ -36,7 +36,7 @@ const HeaderLeaveButton = (props) => {
                     setLeaveRideModalIsVisible(false);
                     JourneyService.deleteUser(
                         props.route.params.journeyId,
-                        user?.id!).then;
+                        user?.id!);
                     setLeaveRideSuccessModalIsVisible(true);
 
                 }}
