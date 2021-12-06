@@ -48,8 +48,6 @@ import Invitation from "../../../../../models/invitation/Invitation";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
-import ChatService from "../../../../../api-service/chat-service/ChatService";
-import CreateChat from "../../../../../models/Chat/CreateChat";
 import CommentBlock from "../../../../components/commentBlock/CommentBlock";
 import { Divider } from "react-native-elements";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -88,6 +86,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         id: getCarId(journey),
         name: journey ? `${journey?.car?.brand} ${carModel}` : ""
     });
+
     const [userCars, setUserCars] = useState<{ id: number, name: string }[]>([]);
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [comments, setComments] = useState("");
@@ -318,6 +317,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const newJourney: JourneyDto = {
             id: 0,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
+            chatId: null,
             comments: comments,
             countOfSeats: availableSeats,
             departureTime: departureTime,
@@ -334,18 +334,13 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
 
         await JourneyService.add(newJourney)
             .then((res) => {
-                const newChat : CreateChat = {
-                    id: res.data.journeyModel.id,
-                    name:
-                        user?.name + " " +
-                        user?.surname + "'s ride"
-                };
+                if (res.status === HTTP_STATUS_OK) {
+                    setSuccessfullyPublishModalIsVisible(true);
+                }
+                else {
+                    setModal(publishErrorModal);
+                }
 
-                ChatService.addChat(newChat)
-                    .then(() => {
-                        setSuccessfullyPublishModalIsVisible(true);
-                    }
-                    );
             })
             .catch(() => setModal(publishErrorModal));
 
@@ -360,6 +355,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
         const updatedJourney: JourneyDto = {
             ...journey,
             carId: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle) ? selectedCar.id : null,
+            chatId: journey.chatId,
             comments: comments.trim(),
             countOfSeats: availableSeats,
             departureTime: departureTime,
