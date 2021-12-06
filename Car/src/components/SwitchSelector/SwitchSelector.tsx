@@ -11,7 +11,7 @@ const SwitchSelector = (props: SwitchSelectorProps) => {
     return (
         <View style={SwitchSelectorStyle.container}>
             <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>{props.title}</Text>
-            <View style={[SwitchSelectorStyle.buttonContaier, { borderColor: colors.primary}]}>
+            <View style={[SwitchSelectorStyle.buttonContaier, { borderColor: colors.primary }]}>
 
                 <TouchableOpacity
                     style={[SwitchSelectorStyle.leftButton, props.disableLeftButton ?
