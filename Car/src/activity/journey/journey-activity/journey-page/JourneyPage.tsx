@@ -370,9 +370,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                     JourneyPageStyle.confirmButton,
                                                     {
                                                         backgroundColor: colors.primary,
-                                                        borderColor: colors.primary
-                                                    }]}
+                                                        borderColor: colors.primary,
+                                                        marginTop: 16
+                                                    },
+                                                    isRequested && 
+                                                    { backgroundColor: colors.secondaryDark,borderColor: colors.secondaryDark }]}
                                                 onPress={sendRequest}
+                                                disabled={isRequested}
                                             >
                                                 <Text style={[JourneyPageStyle.confirmButtonText,
                                                     { color: colors.white }]}>
@@ -380,6 +384,14 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                 </Text>
                                             </TouchableOpacity>
 
+                                        </View>
+
+                                        <View>
+                                            {isRequested &&
+                                            <Text style={{ color: colors.secondaryDark, textAlign: 'right',marginTop: 8}}>
+                                            * You already applied for this yourney
+                                            </Text>
+                                            }
                                         </View>
                                     </View>
                                 )}
