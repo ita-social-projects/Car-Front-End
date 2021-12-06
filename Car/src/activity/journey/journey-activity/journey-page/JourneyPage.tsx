@@ -373,8 +373,12 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                         borderColor: colors.primary,
                                                         marginTop: 16
                                                     },
-                                                    isRequested && 
-                                                    { backgroundColor: colors.secondaryDark,borderColor: colors.secondaryDark }]}
+                                                    isRequested &&
+                                                    {
+                                                        backgroundColor: colors.secondaryDark,
+                                                        borderColor: colors.secondaryDark
+                                                    }
+                                                ]}
                                                 onPress={sendRequest}
                                                 disabled={isRequested}
                                             >
@@ -388,7 +392,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
                                         <View>
                                             {isRequested &&
-                                            <Text style={{ color: colors.secondaryDark, textAlign: 'right',marginTop: 8}}>
+                                            <Text style={{ color: colors.secondaryDark,
+                                                textAlign: "right",marginTop: 8
+                                                }}>
                                             * You already applied for this yourney
                                             </Text>
                                             }
