@@ -278,12 +278,7 @@ const JourneyTabs = () => {
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: () => HeaderEllipsis(
-                            {
-                                onPress: () => {
-                                    pressHandle(ridePageMoreOptionsRef),
-                                    setModalVisibility(true);
-                                }
-                            })
+                            { onPress: () => pressHandle(ridePageMoreOptionsRef) })
                     }}
                 >
                     {(props: any) => {
