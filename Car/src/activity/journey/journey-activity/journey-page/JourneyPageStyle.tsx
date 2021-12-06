@@ -91,7 +91,7 @@ const JourneyPageStyle = StyleSheet.create({
         alignItems: "center"
     },
 
-    contentView: {
+    View: {
         width: "100%",
         paddingHorizontal: "5%",
         alignSelf: "center",

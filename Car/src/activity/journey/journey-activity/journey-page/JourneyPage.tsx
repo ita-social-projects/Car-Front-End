@@ -90,9 +90,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [withLuggage, setWithLuggage] = useState(false);
     const [requestComments] = useState("");
     const [passangersCount, setPassangersCount] =
-        useState(props.route.params.passangersCount?? DEFAULT_PASSANGERS_COUNT);
+        useState(props.route.params.passangersCount ?? DEFAULT_PASSANGERS_COUNT);
     const [isConfirmationFormVisible, setIsConfirmationFormVisible] = useState(false);
-    const userQuantity :{ id: number, name: string }[] = [
+    const userQuantity: { id: number, name: string }[] = [
         { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }];
     const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
     const [selectedQuantity, setSelectedQuantity] =
@@ -124,16 +124,26 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
 
-    useEffect(()=>{
-        if(isPassenger===true)
-        props.navigation?.setOptions({ headerRight: () => <HeaderLeaveButton /> });
+    useEffect(() => {
+        if (isPassenger)
+            props.navigation?.setOptions({
+                headerRight: () => <HeaderLeaveButton route={{
+                    params: {
+                        journeyId: props.route.params.journeyId,
+                        isDriver: props.route.params.isDriver,
+                        isPassenger: props.route.params.isPassenger,
+                        applicantStops: props.route.params.applicantStops,
+                        passangersCount: props.route.params.passangersCount
+                    }
+                }} />
+            });
     });
 
     useEffect(() => {
-        !isDriver && props.navigation?.setOptions({ headerRight: () => <View/> });
+        !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
-        applicantStops?.forEach((stop)=>(stop!.alias =
+        applicantStops?.forEach((stop) => (stop!.alias =
             `${user!.name} ${user!.surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ? "Start" : "Finish"}`));
 
         (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
@@ -243,7 +253,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     return (
         <>
-            <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss(); } }>
+            <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
                 <View style={[JourneyPageStyle.pageContainer, { backgroundColor: colors.greenGradientFrom }]}>
                     <MapView
                         ref={ref => {
@@ -286,115 +296,115 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             </TouchableWithoutFeedback>
 
             {!props.moreOptionsPopupIsOpen &&
-            <Portal>
-                <BottomPopup
-                    refForChild={(ref: any) => (moreOptionsRef.current = ref)}
-                    style={{ backgroundColor: colors.white }}
-                    snapPoints={[
-                        MAX_JOURNEY_PAGE_POPUP_HEIGHT,
-                        isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
-                    ]}
-                    initialSnap={MIN_POPUP_POSITION}
-                    enabledGestureInteraction={true}
-                    enabledInnerScrolling={true}
-                    renderHeader={<DriverBlock journey={currentJourney}/>}
-                    renderContent={
-                        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss(); } }>
-                            <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
-                                {!isConfirmationFormVisible ? (
-                                    <>
-                                        <View style={JourneyPageStyle.detailsBlock}>
-                                            <ScrollView
-                                                nestedScrollEnabled={true}
-                                                style={[JourneyPageStyle.contentView,
-                                                    { backgroundColor: colors.white }]}>
-                                                <CarBlock car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)}/>
-                                                <StopsBlock
-                                                    stops={getStopsForBottomPopup() ?? []}
-                                                    onStopPress={onStopPressHandler}
-                                                    highlightedStops={getHighlightedStops()}
-                                                />
-                                                <CommentsBlock comments={currentJourney?.comments} />
-                                                <ParticipantsBlock journey={currentJourney}/>
-                                            </ScrollView>
-                                        </View>
+                <Portal>
+                    <BottomPopup
+                        refForChild={(ref: any) => (moreOptionsRef.current = ref)}
+                        style={{ backgroundColor: colors.white }}
+                        snapPoints={[
+                            MAX_JOURNEY_PAGE_POPUP_HEIGHT,
+                            isLoading ? MIN_JOURNEY_PAGE_POPUP_HEIGHT : MEDIUM_JOURNEY_PAGE_POPUP_HEIGHT,
+                        ]}
+                        initialSnap={MIN_POPUP_POSITION}
+                        enabledGestureInteraction={true}
+                        enabledInnerScrolling={true}
+                        renderHeader={<DriverBlock journey={currentJourney} />}
+                        renderContent={
+                            <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
+                                <View style={{ backgroundColor: colors.white, width: "100%", height: "100%" }}>
+                                    {!isConfirmationFormVisible ? (
+                                        <>
+                                            <View style={JourneyPageStyle.detailsBlock}>
+                                                <ScrollView
+                                                    nestedScrollEnabled={true}
+                                                    style={[JourneyPageStyle.View,{ backgroundColor:colors.white }]}>
+                                                    <CarBlock
+                                                        car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)} />
+                                                    <StopsBlock
+                                                        stops={getStopsForBottomPopup() ?? []}
+                                                        onStopPress={onStopPressHandler}
+                                                        highlightedStops={getHighlightedStops()}
+                                                    />
+                                                    <CommentsBlock comments={currentJourney?.comments} />
+                                                    <ParticipantsBlock journey={currentJourney} />
+                                                </ScrollView>
+                                            </View>
 
-                                        <ButtonBlock
-                                            isDriver={isDriver}
-                                            isPassenger={isPassenger}
-                                            isRequested={isRequested}
-                                            journey={currentJourney}
-                                            applicantStops={applicantStops}
-                                            onSendRequestPress={() => {
-                                                setIsConfirmationFormVisible(true);
-                                            }}
-                                        />
-                                    </>
-                                ) : (
-                                    <View style={JourneyPageStyle.confirmationFormContainer}>
-                                        <CommentBlock
-                                            placeholder="Any comments?"
-                                            initialComment={comments}
-                                            commentHeader="Comments"
-                                            setComments={(initialComment:string)=>
-                                                setComments(initialComment)}
-                                            containerStyle={JourneyPageStyle.commentsBlockContainer}
-                                        />
+                                            <ButtonBlock
+                                                isDriver={isDriver}
+                                                isPassenger={isPassenger}
+                                                isRequested={isRequested}
+                                                journey={currentJourney}
+                                                applicantStops={applicantStops}
+                                                onSendRequestPress={() => {
+                                                    setIsConfirmationFormVisible(true);
+                                                }}
+                                            />
+                                        </>
+                                    ) : (
+                                        <View style={JourneyPageStyle.confirmationFormContainer}>
+                                            <CommentBlock
+                                                placeholder="Any comments?"
+                                                initialComment={comments}
+                                                commentHeader="Comments"
+                                                setComments={(initialComment: string) =>
+                                                    setComments(initialComment)}
+                                                containerStyle={JourneyPageStyle.commentsBlockContainer}
+                                            />
 
-                                        <View style ={JourneyPageStyle.dropDownContainer}>
-                                            <View style ={JourneyPageStyle.dropDown}>
-                                                <JourneyCreationDropDownPicker
-                                                    items={userQuantity.map((quantity) => ({
-                                                        label: quantity.name,
-                                                        value: quantity.id
-                                                    }))}
-                                                    paddingLeft={100}
-                                                    searchable={false}
-                                                    placeholder="Passengers:"
-                                                    isVisible={isVisibleQuantityDropDown}
-                                                    onOpen={() => setIsVisibleQuantityDropDown(true)}
-                                                    onChangeItem={(item) => {
-                                                        setSelectedQuantity({ id: item.value, name: item.label });
-                                                        setPassangersCount(item.value);
-                                                        setIsVisibleQuantityDropDown(false);
-                                                    }}
-                                                    valueId={selectedQuantity.id}
+                                            <View style={JourneyPageStyle.dropDownContainer}>
+                                                <View style={JourneyPageStyle.dropDown}>
+                                                    <JourneyCreationDropDownPicker
+                                                        items={userQuantity.map((quantity) => ({
+                                                            label: quantity.name,
+                                                            value: quantity.id
+                                                        }))}
+                                                        paddingLeft={100}
+                                                        searchable={false}
+                                                        placeholder="Passengers:"
+                                                        isVisible={isVisibleQuantityDropDown}
+                                                        onOpen={() => setIsVisibleQuantityDropDown(true)}
+                                                        onChangeItem={(item) => {
+                                                            setSelectedQuantity({ id: item.value, name: item.label });
+                                                            setPassangersCount(item.value);
+                                                            setIsVisibleQuantityDropDown(false);
+                                                        }}
+                                                        valueId={selectedQuantity.id}
+                                                    />
+                                                </View>
+                                            </View>
+                                            <View style={JourneyPageStyle.chooseOptionContainer}>
+                                                <ChooseOption
+                                                    text={"Have you got any luggage with you?"}
+                                                    value={withLuggage}
+                                                    onValueChanged={setWithLuggage}
                                                 />
                                             </View>
-                                        </View>
-                                        <View style={JourneyPageStyle.chooseOptionContainer}>
-                                            <ChooseOption
-                                                text={"Have you got any luggage with you?"}
-                                                value={withLuggage}
-                                                onValueChanged={setWithLuggage}
-                                            />
-                                        </View>
 
-                                        <View style={{ alignItems: "flex-end" }}>
-                                            <TouchableOpacity
-                                                style={[
-                                                    JourneyPageStyle.confirmButton,
-                                                    {
-                                                        backgroundColor: colors.primary,
-                                                        borderColor: colors.primary
-                                                    }]}
-                                                onPress={sendRequest}
-                                            >
-                                                <Text style={[JourneyPageStyle.confirmButtonText,
-                                                    { color: colors.white }]}>
-                                                Send Request
-                                                </Text>
-                                            </TouchableOpacity>
+                                            <View style={{ alignItems: "flex-end" }}>
+                                                <TouchableOpacity
+                                                    style={[
+                                                        JourneyPageStyle.confirmButton,
+                                                        {
+                                                            backgroundColor: colors.primary,
+                                                            borderColor: colors.primary
+                                                        }]}
+                                                    onPress={sendRequest}
+                                                >
+                                                    <Text style={[JourneyPageStyle.confirmButtonText,
+                                                        { color: colors.white }]}>
+                                                        Send Request
+                                                    </Text>
+                                                </TouchableOpacity>
 
+                                            </View>
                                         </View>
-                                    </View>
-                                )}
+                                    )}
 
-                            </View>
-                        </TouchableWithoutFeedback>
-                    }
-                />
-            </Portal>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        }
+                    />
+                </Portal>
             }
 
             <ConfirmModal
