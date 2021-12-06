@@ -430,21 +430,6 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 iconColor={lightColors.secondaryLight}
                             />
                         </View>
-
-                        <View style={SearchJourneyStyle.locationContainer}>
-                            {params.stops.map((stop, index) => (
-                                <AddressInputButton
-                                    iconName={"location"}
-                                    directionType={"Via"}
-                                    text={stop.text}
-                                    disabled={true}
-                                    key={index}
-                                    marginBottom={16}
-                                    iconColor={lightColors.secondaryLight}
-                                />
-                            ))}
-                        </View>
-
                         <View style={SearchJourneyStyle.DepartureContainerLocation}>
                             <TouchableDateTimePicker
                                 date={departureTime}
