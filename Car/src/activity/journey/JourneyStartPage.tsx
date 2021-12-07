@@ -127,144 +127,142 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     blockImage={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
                     blockName="Add a ride"
                     from={colors.navyBlueGradientFrom}
-                    to={colors.navyBlueGradientFrom}
+                    to={colors.navyBlueGradientTo}
                     reverse={true}
-                    width={210}
+                    width={200}
                     height={140}
                 />
             </View>
-            <View style={JourneyStartPageStyle.manageJourneysContainer}>
-                <Text style={[JourneyStartPageStyle.manageJourneysText, { color: colors.primary }]}>
-                    MANAGE RIDES
-                </Text>
+            <View style={JourneyStartPageStyle.manageJourneysWrapper }>
+                <View style={JourneyStartPageStyle.manageJourneysContainer}>
+                    <Text style={[JourneyStartPageStyle.manageJourneysText, { color: colors.primary }]}>
+                        MANAGE RIDES
+                    </Text>
+                </View>
+                <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    pagingEnabled={true}
+                    contentContainerStyle={{ flexGrow: 10 }}
+                >
+                    <View style={JourneyStartPageStyle.segmentControlContainer}>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[JourneyStartPageStyle.allJourneys, allButtonStyle,
+                                { borderColor: colors.primary }]}
+                            onPress={() => {
+                                setSelectedIndex(FIRST_ELEMENT_INDEX);
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    JourneyStartPageStyle.buttonText,
+                                    allButtonTextStyle
+                                ]}
+                            >
+                                All
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[
+                                JourneyStartPageStyle.pastJourneys,
+                                pastButtonStyle,
+                                { borderColor: colors.primary }
+                            ]}
+                            onPress={() => {
+                                setSelectedIndex(SECOND_ELEMENT_INDEX);
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    JourneyStartPageStyle.buttonText,
+                                    pastButtonTextStyle
+                                ]}
+                            >
+                                Past
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[
+                                JourneyStartPageStyle.upcomingJourneys,
+                                upcomingButtonStyle,
+                                { borderColor: colors.primary }
+                            ]}
+                            onPress={() => {
+                                setSelectedIndex(THIRD_ELEMENT_INDEX);
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    JourneyStartPageStyle.buttonText,
+                                    upcomingButtonTextStyle
+                                ]}
+                            >
+                                Upcoming
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[
+                                JourneyStartPageStyle.scheduledJourneys,
+                                scheduledButtonStyle,
+                                { borderColor: colors.primary }
+                            ]}
+                            onPress={() => {
+                                setSelectedIndex(FOURTH_ELEMENT_INDEX);
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    JourneyStartPageStyle.buttonText,
+                                    scheduledButtonTextStyle
+                                ]}
+                            >
+                                Regular
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+                {selectedIndex === FIRST_ELEMENT_INDEX && (
+                    <View style={JourneyStartPageStyle.tabStyle}>
+                        {upcomingJourneys.length > EMPTY_COLLECTION_LENGTH && (
+                            <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
+                                Upcoming
+                            </Text>
+                        )}
+                        {<JourneyCardList journey={upcomingJourneys} ascending />}
+                        {pastJourneys.length > EMPTY_COLLECTION_LENGTH && (
+                            <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
+                                Past
+                            </Text>
+                        )}
+                        {<JourneyCardList journey={pastJourneys} />}
+                        {scheduledJourneys.length > EMPTY_COLLECTION_LENGTH && (
+                            <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
+                                Regular
+                            </Text>
+                        )}
+                        {<JourneyCardList journey={scheduledJourneys} />}
+                    </View>
+                )}
+                {selectedIndex === SECOND_ELEMENT_INDEX && (
+                    <View style={JourneyStartPageStyle.tabStyle}>
+                        {<JourneyCardList journey={pastJourneys} />}
+                    </View>
+                )}
+                {selectedIndex === THIRD_ELEMENT_INDEX && (
+                    <View style={JourneyStartPageStyle.tabStyle}>
+                        {<JourneyCardList journey={upcomingJourneys} ascending />}
+                    </View>
+                )}
+                {selectedIndex === FOURTH_ELEMENT_INDEX && (
+                    <View style={JourneyStartPageStyle.tabStyle}>
+                        {<JourneyCardList journey={scheduledJourneys} />}
+                    </View>
+                )}
             </View>
-            <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                pagingEnabled={true}
-                contentContainerStyle={{ flexGrow: 10 }}
-            >
-                <View style={JourneyStartPageStyle.segmentControlContainer}>
-
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[JourneyStartPageStyle.allJourneys, allButtonStyle,
-                            { borderColor: colors.primary }]}
-                        onPress={() => {
-                            setSelectedIndex(FIRST_ELEMENT_INDEX);
-                        }}
-                    >
-                        <Text
-                            style={[
-                                JourneyStartPageStyle.buttonText,
-                                allButtonTextStyle
-                            ]}
-                        >
-                            All
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            JourneyStartPageStyle.pastJourneys,
-                            pastButtonStyle,
-                            { borderColor: colors.primary }
-                        ]}
-                        onPress={() => {
-                            setSelectedIndex(SECOND_ELEMENT_INDEX);
-                        }}
-                    >
-                        <Text
-                            style={[
-                                JourneyStartPageStyle.buttonText,
-                                pastButtonTextStyle
-                            ]}
-                        >
-                            Past
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            JourneyStartPageStyle.upcomingJourneys,
-                            upcomingButtonStyle,
-                            { borderColor: colors.primary }
-                        ]}
-                        onPress={() => {
-                            setSelectedIndex(THIRD_ELEMENT_INDEX);
-                        }}
-                    >
-                        <Text
-                            style={[
-                                JourneyStartPageStyle.buttonText,
-                                upcomingButtonTextStyle
-                            ]}
-                        >
-                            Upcoming
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            JourneyStartPageStyle.scheduledJourneys,
-                            scheduledButtonStyle,
-                            { borderColor: colors.primary }
-                        ]}
-                        onPress={() => {
-                            setSelectedIndex(FOURTH_ELEMENT_INDEX);
-                        }}
-                    >
-                        <Text
-                            style={[
-                                JourneyStartPageStyle.buttonText,
-                                scheduledButtonTextStyle
-                            ]}
-                        >
-                            Regular
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-
-            {selectedIndex === FIRST_ELEMENT_INDEX && (
-                <View style={JourneyStartPageStyle.tabStyle}>
-                    {upcomingJourneys.length > EMPTY_COLLECTION_LENGTH && (
-                        <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
-                            Upcoming
-                        </Text>
-                    )}
-                    {<JourneyCardList journey={upcomingJourneys} ascending />}
-
-                    {pastJourneys.length > EMPTY_COLLECTION_LENGTH && (
-                        <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
-                            Past
-                        </Text>
-                    )}
-                    {<JourneyCardList journey={pastJourneys} />}
-
-                    {scheduledJourneys.length > EMPTY_COLLECTION_LENGTH && (
-                        <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
-                            Regular
-                        </Text>
-                    )}
-                    {<JourneyCardList journey={scheduledJourneys} />}
-                </View>
-            )}
-            {selectedIndex === SECOND_ELEMENT_INDEX && (
-                <View style={JourneyStartPageStyle.tabStyle}>
-                    {<JourneyCardList journey={pastJourneys} />}
-                </View>
-            )}
-            {selectedIndex === THIRD_ELEMENT_INDEX && (
-                <View style={JourneyStartPageStyle.tabStyle}>
-                    {<JourneyCardList journey={upcomingJourneys} ascending />}
-                </View>
-            )}
-            {selectedIndex === FOURTH_ELEMENT_INDEX && (
-                <View style={JourneyStartPageStyle.tabStyle}>
-                    {<JourneyCardList journey={scheduledJourneys} />}
-                </View>
-            )}
         </ScrollView>
     );
 };

@@ -22,7 +22,8 @@ test("renders correctly", async () =>
       style={
         Array [
           Object {
-            "paddingHorizontal": 14,
+            "backgroundColor": "white",
+            "paddingHorizontal": 7,
           },
           Object {
             "backgroundColor": "#FFFFFF",
@@ -72,239 +73,247 @@ test("renders correctly", async () =>
           }
           navigationName="Create Journey"
           reverse={true}
-          to="#00A3CF"
-          width={210}
+          to="#5552A0"
+          width={200}
         />
       </View>
       <View
         style={
           Object {
-            "paddingTop": 40,
-          }
-        }
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "fontFamily": "Proxima Nova Black",
-                "fontSize": 25,
-                "fontWeight": "700",
-                "textTransform": "uppercase",
-              },
-              Object {
-                "color": "#0B171B",
-              },
-            ]
-          }
-        >
-          MANAGE RIDES
-        </Text>
-      </View>
-      <ScrollView
-        contentContainerStyle={
-          Object {
-            "flexGrow": 10,
-          }
-        }
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        style={
-          Object {
-            "width": "100%",
+            "paddingHorizontal": 7,
           }
         }
       >
         <View
           style={
             Object {
-              "flexDirection": "row",
-              "height": 56,
-              "paddingTop": 24,
-              "width": 450,
+              "paddingTop": 40,
             }
           }
         >
-          <ForwardRef
-            activeOpacity={1}
-            onPress={[Function]}
+          <Text
             style={
               Array [
                 Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "width": "13%",
+                  "fontFamily": "Proxima Nova Black",
+                  "fontSize": 25,
+                  "fontWeight": "700",
+                  "textTransform": "uppercase",
                 },
                 Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 2,
                   "color": "#0B171B",
                 },
-                Object {
-                  "borderColor": "#0B171B",
-                },
               ]
             }
           >
-            <Text
+            MANAGE RIDES
+          </Text>
+        </View>
+        <ScrollView
+          contentContainerStyle={
+            Object {
+              "flexGrow": 10,
+            }
+          }
+          horizontal={true}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "height": 56,
+                "paddingTop": 24,
+                "width": 450,
+              }
+            }
+          >
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
               style={
                 Array [
                   Object {
-                    "fontFamily": "Proxima Nova Extrabold",
-                    "fontWeight": "300",
-                    "textTransform": "uppercase",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "13%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 2,
                     "color": "#0B171B",
                   },
+                  Object {
+                    "borderColor": "#0B171B",
+                  },
                 ]
               }
             >
-              All
-            </Text>
-          </ForwardRef>
-          <ForwardRef
-            activeOpacity={1}
-            onPress={[Function]}
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "width": "13%",
-                },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#414045",
-                },
-                Object {
-                  "borderColor": "#0B171B",
-                },
-              ]
-            }
-          >
-            <Text
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#0B171B",
+                    },
+                  ]
+                }
+              >
+                All
+              </Text>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
               style={
                 Array [
                   Object {
-                    "fontFamily": "Proxima Nova Extrabold",
-                    "fontWeight": "300",
-                    "textTransform": "uppercase",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "13%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
                     "color": "#414045",
+                  },
+                  Object {
+                    "borderColor": "#0B171B",
                   },
                 ]
               }
             >
-              Past
-            </Text>
-          </ForwardRef>
-          <ForwardRef
-            activeOpacity={1}
-            onPress={[Function]}
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "width": "24%",
-                },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#414045",
-                },
-                Object {
-                  "borderColor": "#0B171B",
-                },
-              ]
-            }
-          >
-            <Text
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Past
+              </Text>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
               style={
                 Array [
                   Object {
-                    "fontFamily": "Proxima Nova Extrabold",
-                    "fontWeight": "300",
-                    "textTransform": "uppercase",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "24%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
                     "color": "#414045",
+                  },
+                  Object {
+                    "borderColor": "#0B171B",
                   },
                 ]
               }
             >
-              Upcoming
-            </Text>
-          </ForwardRef>
-          <ForwardRef
-            activeOpacity={1}
-            onPress={[Function]}
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "width": "20%",
-                },
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                  "borderBottomWidth": 0,
-                  "color": "#414045",
-                },
-                Object {
-                  "borderColor": "#0B171B",
-                },
-              ]
-            }
-          >
-            <Text
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Upcoming
+              </Text>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
               style={
                 Array [
                   Object {
-                    "fontFamily": "Proxima Nova Extrabold",
-                    "fontWeight": "300",
-                    "textTransform": "uppercase",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "20%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
                     "color": "#414045",
+                  },
+                  Object {
+                    "borderColor": "#0B171B",
                   },
                 ]
               }
             >
-              Regular
-            </Text>
-          </ForwardRef>
-        </View>
-      </ScrollView>
-      <View
-        style={
-          Object {
-            "paddingTop": 24,
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Regular
+              </Text>
+            </ForwardRef>
+          </View>
+        </ScrollView>
+        <View
+          style={
+            Object {
+              "paddingTop": 24,
+            }
           }
-        }
-      >
-        <JourneyCardList
-          ascending={true}
-          journey={Array []}
-        />
-        <JourneyCardList
-          journey={Array []}
-        />
-        <JourneyCardList
-          journey={Array []}
-        />
+        >
+          <JourneyCardList
+            ascending={true}
+            journey={Array []}
+          />
+          <JourneyCardList
+            journey={Array []}
+          />
+          <JourneyCardList
+            journey={Array []}
+          />
+        </View>
       </View>
     </ScrollView>
   `));
