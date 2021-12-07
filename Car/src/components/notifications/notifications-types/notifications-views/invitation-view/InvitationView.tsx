@@ -42,7 +42,6 @@ const InvitationView = (props: InvitationViewProps) => {
     const user = useContext(AuthContext).user;
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [stops, setStops] = useState<Stop[]>([]);
-    let notificationId = props.route.params.notification.notificationId;
 
     useEffect(() => {
         if (!wasOpened) {
