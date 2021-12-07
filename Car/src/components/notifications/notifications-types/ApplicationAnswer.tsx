@@ -119,9 +119,8 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 notificationTitle={props.notificationTittle}
                 read={props.notification.read}
                 date={props.notification.date}
-                // openModal={() => setNotificationModalVisible(true)}
                 openModal={ () => {
-                    navigation.navigate("Aproved", {
+                    navigation.navigate("Invitation is Accepted", {
                         notification: props
                     });
                 }}

@@ -87,7 +87,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "New Applicant",
+              "headerTitle": "",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -109,7 +109,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Ride is Canceled",
+              "headerTitle": "",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -131,7 +131,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Withdrawal",
+              "headerTitle": "",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -153,7 +153,29 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Invitation",
+              "headerTitle": "",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
+          name="Invitation is Accepted"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {

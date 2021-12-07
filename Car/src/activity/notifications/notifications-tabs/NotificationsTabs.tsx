@@ -11,6 +11,7 @@ import StopView from "../../../components/stop-view/StopView";
 import JourneyCancellationView from "../../../components/notifications/notifications-types/notifications-views/cancellation-view/JourneyCancellationView";
 import PassengerWithdrawalView from "../../../components/notifications/notifications-types/notifications-views/withdrawn-view/PassengerWithdrawalView";
 import InvitationView from "../../../components/notifications/notifications-types/notifications-views/invitation-view/InvitationView";
+import AprovedView from "../../../components/notifications/notifications-types/notifications-views/request-approved-view/AprovedView";
 
 const StackTabs = createStackNavigator();
 
@@ -55,7 +56,7 @@ const NotificationsTabs = () => {
                     name="New Applicant"
                     component={JourneyNewApplicantView}
                     options={{
-                        headerTitle: "New Applicant",
+                        headerTitle: "",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -65,7 +66,7 @@ const NotificationsTabs = () => {
                     name="Ride is Canceled"
                     component={JourneyCancellationView}
                     options={{
-                        headerTitle: "Ride is Canceled",
+                        headerTitle: "",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -75,7 +76,7 @@ const NotificationsTabs = () => {
                     name="Withdrawal"
                     component={PassengerWithdrawalView}
                     options={{
-                        headerTitle: "Withdrawal",
+                        headerTitle: "",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -85,7 +86,18 @@ const NotificationsTabs = () => {
                     name="Invitation"
                     component={InvitationView}
                     options={{
-                        headerTitle: "Invitation",
+                        headerTitle: "",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Invitation is Accepted"
+                    component={AprovedView}
+                    options={{
+                        headerTitle: "",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

@@ -8,7 +8,7 @@ import NotificationRideDetails from "../../../notification-ride-details/Notifica
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../models/journey/Journey";
-import { getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
+import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../../../models/stop/StopType";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import NotificationsService from "../../../../../../api-service/notifications-service/NotificationsService";
@@ -40,20 +40,27 @@ const InvitationView = (props: InvitationViewProps) => {
     const [acceptModalVisible, setAcceptModalVisible] = useState(false);
     const [journey, setJourney] = useState<Journey>();
     const user = useContext(AuthContext).user;
-    const journeyPoints = useState<JourneyPoint[]>([]);
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
+    const [stops, setStops] = useState<Stop[]>([]);
 
     useEffect(() => {
         if (!wasOpened) {
             setWasOpened(true);
-            JourneyService.getJourney(props.route.params.notification.journeyId, false).then(res => {
+            JourneyService.getJourney(props.route.params.notification.journeyId).then(res => {
                 setJourney(res.data);
+                setJourneyPoints(res.data!.journeyPoints);
+                setStops([
+                getStopByType(res.data, StopType.Start)!,
+
+                getStopByType(res.data, StopType.Finish)!
+                ]);
             });
         }
     }, [notificationModalVisible]);
 
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Stop View", {
-            //stops: stops,
+            stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props
@@ -173,7 +180,7 @@ const InvitationView = (props: InvitationViewProps) => {
 
                 <StopsBlock
                     stops={journey?.stops ?? []}
-                    onStopPress={() => { onStopPressHandler; }}
+                    onStopPress={onStopPressHandler}
                 />
 
                 <NotificationButtonGroup>

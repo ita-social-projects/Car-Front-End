@@ -35,6 +35,8 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
     const source = useRef(axios.CancelToken.source());
     const [isStopsSet, setIsStopsSet] = useState(false);
     const journeyPoints = useState<JourneyPoint[]>([]);
+    let name = props.route.params.notification.sender!.name;
+    let surname =props.route.params.notification.sender!.surname;
 
     useEffect(() => {
         JourneyService.getJourney(props.route.params.notification.journeyId, false,
@@ -65,9 +67,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
             tempStops?.filter((stop) =>
                 stop?.type === StopType.Intermediate)
                 .forEach((stop) => (stop!.alias =
-                    `${props.route.params.notification.sender!.name}
-                    ${props.route.params.notification.sender!.surname}'s
-                    ${stop!.index === FIRST_ELEMENT_INDEX ?
+                    `${name} ${surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ?
                         "Start" :
                         "Finish"}`));
             console.log(tempStops);
@@ -88,6 +88,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
                 <NotificationHeader
+                    title="WITHDRAWAL"
                     message="The passenger has withdrawn your ride!"
                     sender={props.route.params.notification.sender}
                 />
