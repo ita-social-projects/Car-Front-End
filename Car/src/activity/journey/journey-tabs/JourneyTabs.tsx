@@ -172,15 +172,15 @@ const JourneyTabs = () => {
                                 </Animated.View>
 
                                 <CreateJourneyMoreOptionsPopup
-                                    pressHandle = {pressHandle}
-                                    closeMoreOptionPopup = {closeMoreOptionPopup}
-                                    closeHandle = {closeHandle}
-                                    createRideMoreOptionsRef = {createRideMoreOptionsRef}
-                                    weekDayRef = {weekDayRef}
-                                    scheduleMoreOptionsRef = {scheduleMoreOptionsRef}
-                                    isScheduleOpened = {isScheduleOpened}
-                                    navigation = {navigation}
-                                    showAddStop = {true}
+                                    pressHandle={pressHandle}
+                                    closeMoreOptionPopup={closeMoreOptionPopup}
+                                    closeHandle={closeHandle}
+                                    createRideMoreOptionsRef={createRideMoreOptionsRef}
+                                    weekDayRef={weekDayRef}
+                                    scheduleMoreOptionsRef={scheduleMoreOptionsRef}
+                                    isScheduleOpened={isScheduleOpened}
+                                    navigation={navigation}
+                                    showAddStop={true}
                                 />
                             </>
                         );
@@ -200,7 +200,7 @@ const JourneyTabs = () => {
 
                 <StackTabs.Screen
                     name="Journey Details"
-                    options={({ route }: { route:any }) => ({
+                    options={({ route }: { route: any }) => ({
                         headerTitle: route.params.headerTitle,
 
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
@@ -233,15 +233,15 @@ const JourneyTabs = () => {
                                 />
 
                                 <CreateJourneyMoreOptionsPopup
-                                    pressHandle = {pressHandle}
-                                    closeMoreOptionPopup = {closeMoreOptionPopup}
-                                    closeHandle = {closeHandle}
-                                    createRideMoreOptionsRef = {ridePageMoreOptionsRef}
-                                    weekDayRef = {weekDayRef}
-                                    scheduleMoreOptionsRef = {scheduleMoreOptionsRef}
-                                    isScheduleOpened = {isScheduleOpened}
-                                    navigation = {navigation}
-                                    showAddStop = {false}
+                                    pressHandle={pressHandle}
+                                    closeMoreOptionPopup={closeMoreOptionPopup}
+                                    closeHandle={closeHandle}
+                                    createRideMoreOptionsRef={ridePageMoreOptionsRef}
+                                    weekDayRef={weekDayRef}
+                                    scheduleMoreOptionsRef={scheduleMoreOptionsRef}
+                                    isScheduleOpened={isScheduleOpened}
+                                    navigation={navigation}
+                                    showAddStop={false}
                                 />
                             </>
                         );
@@ -347,6 +347,7 @@ const JourneyTabs = () => {
                         );
                     }}
                 </StackTabs.Screen>
+
                 <StackTabs.Screen
                     name="Journey Request Page"
                     component={SearchJourney}

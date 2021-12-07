@@ -209,7 +209,7 @@ const Chat = (properties: ChatProps) => {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: colors.secondaryLight,
+                        backgroundColor: colors.neutralLight,
                     },
                     right: {
                         backgroundColor: colors.navyBlueGradientFrom,

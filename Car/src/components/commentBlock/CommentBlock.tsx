@@ -7,10 +7,9 @@ import { useTheme } from "../theme/ThemeProvider";
 import { PREFERENCES_COMMENTS_MAX_LENGTH } from "../../constants/GeneralConstants";
 
 const CommentBlock = (props: CommentBlockProps) => {
-    const NUMBER_ZERO = 0;
     const { colors } = useTheme();
     const [remainingSymbolsText,setRemainingSymbolsText]=useState(
-        ()=>props.initialComment.length==NUMBER_ZERO ? "Up to 100 symbols"
+        ()=>!props.initialComment ? "Up to 100 symbols"
             :`${PREFERENCES_COMMENTS_MAX_LENGTH - props.initialComment.length} symbols left`);
 
     return(

@@ -11,7 +11,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Filter from "../../../../../../../models/journey/Filter";
 import Indicator from "../../../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../../../components/confirm-modal/ConfirmModal";
-import { sleep, SLEEP_DURATION } from "../../../../../../constants/AnimationConstants";
 import { MIN_POPUP_HEIGHT } from "../../../../../../constants/StylesConstants";
 import { REQUEST_RIDE_POPUP_HEIGHT } from "../../../../../../constants/JourneyConstants";
 import JourneyPageStyle from "../../../journey-page/JourneyPageStyle";
@@ -104,11 +103,12 @@ const OkSearchResult = (props: OkSearchResultProps) => {
                 subtitle="You're about to create a ride request with new filters."
                 confirmText="Yes, create"
                 cancelText="No, go back"
-                confirmColor={colors.primary}
                 onConfirm={() => {
                     setNewRequestModalVisible(false);
-                    (async () => sleep(SLEEP_DURATION))().then(() =>
-                        navigation.navigate("Journey Request Page", { isRequest: true }));
+                    AsyncStorage.removeItem("searchFilter").then(() => {
+                        navigation.goBack();
+                        navigation.replace("Search Journey");
+                    });
                 }}
                 disableModal={() => setNewRequestModalVisible(false)}
             />
