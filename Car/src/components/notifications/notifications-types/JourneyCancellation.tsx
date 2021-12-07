@@ -61,7 +61,7 @@ const JourneyCancellation = (props: NotificationProps) => {
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props
-        }),
+        });
         setModalVisible(false);
     };
 
