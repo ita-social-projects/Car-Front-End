@@ -16,7 +16,7 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
     const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
 
     return (
-        <View style={[JourneyPageStyle.contentView, { backgroundColor: colors.white }]}>
+        <View style={[JourneyPageStyle.View, { backgroundColor: colors.white }]}>
 
             <TouchableOpacity
                 style={JourneyPageStyle.userBlock}
