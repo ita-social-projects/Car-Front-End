@@ -242,9 +242,6 @@ const InvitationView = (props: InvitationViewProps) => {
                         onConfirm={() => {
                             setErrorModalVisible(false);
                             setNotificationModalVisible(false);
-                            if (props.route.params.notification.onDelete)
-                                props.route.params.notification.onDelete
-                                (notificationId);
                         }}
                     />
                 </>
