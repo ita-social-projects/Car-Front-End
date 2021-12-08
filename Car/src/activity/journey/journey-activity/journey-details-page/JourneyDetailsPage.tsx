@@ -94,7 +94,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     const isFocused = useIsFocused();
 
     const activeButtonStyle = {
-        backgroundColor: colors.hover,
+        backgroundColor: colors.buttonBack,
         color: colors.white,
         borderColor: colors.primary
     };
@@ -593,8 +593,8 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                             <TouchableOpacity
                                 style={[CreateJourneyStyle.publishButton,
                                     {
-                                        backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
-                                        borderColor: confirmDisabled ? colors.secondaryDark : colors.hover
+                                        backgroundColor: confirmDisabled ? colors.secondaryDark : colors.buttonBack,
+                                        borderColor: confirmDisabled ? colors.secondaryDark : colors.buttonBack
                                     }]}
                                 onPress={journey ?
                                     () => setApplyChangesModalIsVisible(true) :
