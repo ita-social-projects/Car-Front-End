@@ -25,7 +25,7 @@ interface InvitationAcceptedViewProps {
     }
 }
 
-const InvitationAcceptedView = (props: InvitationAcceptedViewProps) => {
+const AprovedView = (props: InvitationAcceptedViewProps) => {
     const { colors } = useTheme();
     const user = useContext(AuthContext).user;
     const [stops, setStops] = useState<Stop[]>();
@@ -100,4 +100,4 @@ const InvitationAcceptedView = (props: InvitationAcceptedViewProps) => {
     );
 };
 
-export default InvitationAcceptedView;
+export default AprovedView;
