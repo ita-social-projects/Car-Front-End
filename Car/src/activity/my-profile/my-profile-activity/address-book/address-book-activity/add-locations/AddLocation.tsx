@@ -27,6 +27,7 @@ import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
+import { CHOOSE_ADDRESS_LEFT_PADDING, DEFAULT_INPUT_LEFT_PADDING } from "../../../../../../constants/StylesConstants";
 
 const AddLocation = () => {
     const { colors, isThemeDark } = useTheme();
@@ -131,8 +132,8 @@ const AddLocation = () => {
         <View style={{ flex: 1 }}>
             <View style={AddLocationStyle.inputContainer}>
                 <AddressInput
-                    placeholder={"Address"}
-                    paddingLeft={90}
+                    placeholder={wayPoint.isConfirmed ? "" : "Choose address"}
+                    paddingLeft={wayPoint.isConfirmed ? DEFAULT_INPUT_LEFT_PADDING : CHOOSE_ADDRESS_LEFT_PADDING}
                     address={wayPoint.text}
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}

@@ -27,12 +27,12 @@ const AddressInputStyles = StyleSheet.create({
     },
     clearIcon: {
         position: "absolute",
-        top: 5,
-        right: 10
+        top: 10,
+        right: 15
     },
     marker: {
         position: "absolute",
-        top: 8,
+        top: 10,
         right: 15
     }
 });
