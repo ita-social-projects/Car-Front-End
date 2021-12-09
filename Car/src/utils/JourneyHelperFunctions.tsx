@@ -112,5 +112,5 @@ export const getTimeToShow = (journey?: Journey): string =>{
     return journey?.schedule ?
         // eslint-disable-next-line
         `Every ${weekDayToString(journey.schedule.days)} at ${moment(new Date(journey?.departureTime ?? "")).format("HH:mm")}` :
-        capitalize(moment(new Date(journey?.departureTime ?? "")).calendar());
+        capitalize(moment(new Date(journey?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm"));
 };
