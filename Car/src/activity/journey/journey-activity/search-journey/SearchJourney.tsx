@@ -468,7 +468,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                 {
                                     backgroundColor: !(to.isConfirmed && from.isConfirmed) ?
                                         colors.secondaryDark : colors.buttonBack,
-                                    borderColor: !(to.isConfirmed && from.isConfirmed) ? colors.secondaryDark : colors.buttonBack
+                                    borderColor: !(to.isConfirmed && from.isConfirmed) ?
+                                        colors.secondaryDark : colors.buttonBack
                                 }]}
                             onPress={() => {
                                 onConfirmButtonPress();
