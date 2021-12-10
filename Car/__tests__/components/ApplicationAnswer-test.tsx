@@ -29,7 +29,7 @@ test("renders correctly", async () =>
                 notificationHeaderMessage="Header message"
                 notificationHeaderTittle="Header Title"
                 notificationTittle="Tittle"
-                journeyUserId = {1}
+                journeyUserId={1}
                 withWithdraw
                 IsAvailableSeatsVisible
                 IsBaggageVisible
@@ -37,7 +37,6 @@ test("renders correctly", async () =>
                 IsDetailsTitleVisible
                 IsFeeVisible
                 IsStopsTitleVisible
-
             />
         )
     ).toMatchInlineSnapshot(`
@@ -62,94 +61,5 @@ test("renders correctly", async () =>
           }
         }
       />
-      <NotificationModalBase
-        styles={
-          Array [
-            Object {},
-          ]
-        }
-      >
-        <NotificationHeader
-          disableModal={[Function]}
-          message="Header message"
-          sender={
-            Object {
-              "email": "Abc",
-              "fcmtoken": null,
-              "hireDate": 2021-01-01T20:00:00.000Z,
-              "id": 0,
-              "imageId": null,
-              "journeyCount": 0,
-              "location": "Abc",
-              "name": "Abc",
-              "phoneNumber": null,
-              "position": "Abc",
-              "surname": "Abc",
-            }
-          }
-          title="Header Title"
-        />
-        <NotificationRideDetails
-          IsAvailableSeatsVisible={true}
-          IsBaggageVisible={true}
-          IsDepartureTimeVisible={true}
-          IsDetailsTitleVisible={true}
-          IsFeeVisible={true}
-          journeyId={1}
-        />
-        <Text
-          style={
-            Object {
-              "color": "#0B171B",
-            }
-          }
-        >
-          Abc
-           
-          Abc
-          \`s stops in your ride
-        </Text>
-        <View>
-          <StopsBlock
-            highlightedStops={
-              Array [
-                1,
-                2,
-              ]
-            }
-            onStopPress={[Function]}
-            stops={Array []}
-          />
-        </View>
-        <NotificationButtonGroup>
-          <NotificationConfirmButton
-            onConfirm={[Function]}
-          />
-          <NotificationDeclineButton
-            declineText="Withdraw"
-            onDecline={[Function]}
-          />
-        </NotificationButtonGroup>
-      </NotificationModalBase>
-      <React.Fragment>
-        <ConfirmModal
-          cancelText="No, come back"
-          confirmText="Yes, withdraw"
-          disableModal={[Function]}
-          onConfirm={[Function]}
-          subtitle="Are you sure you want to withdraw the ride?"
-          title="ARE YOU SURE?"
-          visible={false}
-        />
-        <ConfirmModal
-          confirmText="Ok"
-          disableModal={[Function]}
-          hideCancelButton={true}
-          onConfirm={[Function]}
-          subtitle="Your withdrawal was successfully sent to the driver"
-          title="Ride is withdrawn"
-          visible={false}
-        />
-      </React.Fragment>
     </React.Fragment>
   `));
