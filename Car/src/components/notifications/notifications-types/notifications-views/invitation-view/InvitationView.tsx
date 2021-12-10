@@ -42,6 +42,7 @@ const InvitationView = (props: InvitationViewProps) => {
     const user = useContext(AuthContext).user;
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [stops, setStops] = useState<Stop[]>([]);
+    let notificationId = props.route.params.notification.notificationId;
 
     useEffect(() => {
         if (!wasOpened) {
@@ -80,7 +81,7 @@ const InvitationView = (props: InvitationViewProps) => {
         ).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
                 modalToShow();
-                NotificationsService.deleteNotification(props.route.params.notification.notificationId);
+                NotificationsService.deleteNotification(notificationId);
             }
         });
     };
@@ -104,7 +105,15 @@ const InvitationView = (props: InvitationViewProps) => {
         setWithdrawModalVisible(false);
         setNotificationModalVisible(false);
         if (props.route.params.notification.onDelete)
-            props.route.params.notification.onDelete(props.route.params.notification.notificationId);
+            props.route.params.notification.onDelete(notificationId);
+    };
+
+    const deleteNotification = () => {
+        if(props.route.params.notification.onDelete)
+        {
+            props.route.params.notification.onDelete(notificationId);
+        }
+        NotificationsService.deleteNotification(notificationId);
     };
 
     const acceptInvitation = () => {
@@ -226,8 +235,15 @@ const InvitationView = (props: InvitationViewProps) => {
                         subtitle="You were successfully added to the ride!"
                         confirmText="Ok"
                         hideCancelButton={true}
-                        disableModal={() => { setAcceptModalVisible(false); setNotificationModalVisible(false); }}
-                        onConfirm={() => { setAcceptModalVisible(false); setNotificationModalVisible(false); }}
+                        disableModal={() => {
+                            setAcceptModalVisible(false);
+                            setNotificationModalVisible(false);
+                        }}
+                        onConfirm={() => {
+                            setAcceptModalVisible(false);
+                            setNotificationModalVisible(false);
+                            deleteNotification();
+                        }}
                     />
                     <ConfirmModal
                         visible={errorModalVisible}
@@ -241,6 +257,8 @@ const InvitationView = (props: InvitationViewProps) => {
                         onConfirm={() => {
                             setErrorModalVisible(false);
                             setNotificationModalVisible(false);
+                            if(props.route.params.notification.onDelete)
+                                props.route.params.notification.onDelete(notificationId);
                         }}
                     />
                 </>
