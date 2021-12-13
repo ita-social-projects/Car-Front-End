@@ -128,6 +128,8 @@ test("renders correctly", async () =>
                         Object {
                           "backgroundColor": "#52bb13",
                           "height": 38.5,
+                          "marginLeft": undefined,
+                          "marginTop": undefined,
                           "width": 38.5,
                         },
                       ]
