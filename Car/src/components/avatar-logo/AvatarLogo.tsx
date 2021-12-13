@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Text, View, ActivityIndicator } from "react-native";
-import stc from "string-to-color";
 import ImageService from "../../../api-service/image-service/ImageService";
 import {
     AVATAR_LOGO_SIZE_TO_PADDING_RATIO,
@@ -12,13 +11,19 @@ import { useTheme } from "../theme/ThemeProvider";
 import AvatarLogoStyle from "./AvatarLogoStyle";
 import AvatarLogoProps from "./AvatarLogoProps";
 
+const GetBackgroundColor = (username: string) => {
+    const hue = (username.charCodeAt(0) - 65) * 13;
+    const backgroundColor = `hsl(${hue}, 80%, 45%)`;
+    return backgroundColor; 
+}
+
 const AvatarLogo = (props: AvatarLogoProps) => {
     const { colors } = useTheme();
     const userAvatarText = props.user ?
         props.user?.name[FIRST_ELEMENT_INDEX] + props.user?.surname[FIRST_ELEMENT_INDEX] : "";
 
     const backgroundColor = props.user ?
-        stc(props.user.name + " " + props.user.surname): colors.primary;
+        GetBackgroundColor(props.user.name + " " + props.user.surname) : colors.primary;
 
     const avatarStyle = [
         AvatarLogoStyle.userAvatar,
