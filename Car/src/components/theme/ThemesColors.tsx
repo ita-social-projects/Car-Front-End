@@ -27,7 +27,7 @@ export const darkColors = {
     ...permanentColors,
     primary: "#FFFFFF",
     white: "#1C2426",
-    hover: "#C4C4C4",
+    hover: "#F8F8F8",
     secondaryDark: "#C4C4C4",
     neutralLight: "#414045",
     neutralDark: "#C4C4C4",
