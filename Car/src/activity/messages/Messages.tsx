@@ -38,12 +38,17 @@ const Messages = (props: MessagesProps) => {
     const [masterDataSource, setMasterDataSource] = useState<Chat[]>([]);
     const [isLoading, setisLoading] = useState(false);
     const [search, setSearch] = useState("");
+    const [isChatsEmpty, setChatsEmpty] = useState(false);
 
     const getChats = () => {
         if (!search) {
             setisLoading(true);
             ChatService.getChat().then((res) => {
                 let chats = res.data;
+
+                if (chats.length === ZERO) {
+                    setChatsEmpty(true);
+                }
 
                 setMasterDataSource(JSON.parse(JSON.stringify(chats)));
 
@@ -189,23 +194,34 @@ const Messages = (props: MessagesProps) => {
                         </TouchableOpacity>
                     )}
                 />
-                {filteredDataSource?.length ? (
-                    <View style={MessagesStyle.warningContainer}></View>
+                {isChatsEmpty ? (
+                    <View style={MessagesStyle.noMessageContainer}>
+                        <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary, lineHeight: 22 }}>
+                            CURRENTLY YOU DO NOT HAVE ANY
+                            {"\n"}
+                            CHATS
+                        </Text>
+                        <Image
+                            style={MessagesStyle.noChatImageStyle}
+                            source={require("../../../assets/images/chat/no-chats.png")}
+                        />
+                    </View>
                 ) : (
-                    <>
+                    filteredDataSource?.length ? (
+                        <View style={MessagesStyle.warningContainer}></View>
+                    ) : (
                         <View style={MessagesStyle.noMessageContainer}>
-                            <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary }}>
-                                CURRENTLY YOU DO NOT HAVE ANY
+                            <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary, lineHeight: 22 }}>
+                                NO RESULTS MATCHING YOUR
                                 {"\n"}
-                                CHATS
+                                SEARCH FILTERS
                             </Text>
                             <Image
                                 style={MessagesStyle.noChatImageStyle}
                                 source={require("../../../assets/images/chat/no-chats.png")}
                             />
                         </View>
-                    </>
-                )}
+                    ))}
             </View>
         );
     };
