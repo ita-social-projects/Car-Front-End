@@ -3,11 +3,11 @@ import renderer from "react-test-renderer";
 import AvatarLogo from "../../src/components/avatar-logo/AvatarLogo";
 
 test("renders correctly", async () =>
-    expect(
-        renderer
-            .create(<AvatarLogo user={{ name: "Abc", surname: "Abc" }} />)
-            .toJSON()
-    ).toMatchInlineSnapshot(`
+  expect(
+    renderer
+      .create(<AvatarLogo user={{ name: "Abc", surname: "Abc" }} />)
+      .toJSON()
+  ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -17,7 +17,7 @@ test("renders correctly", async () =>
             "justifyContent": "center",
           },
           Object {
-            "backgroundColor": "#c3b2b6",
+            "backgroundColor": "hsl(0, 80%, 45%)",
             "height": undefined,
             "width": undefined,
           },
@@ -47,13 +47,13 @@ test("renders correctly", async () =>
   `));
 
 test("renders correctly", async () =>
-    expect(
-        renderer
-            .create(
-                <AvatarLogo user={{ name: "Abc", surname: "Abc", imageId: "AbCdE" }} />
-            )
-            .toJSON()
-    ).toMatchInlineSnapshot(`
+  expect(
+    renderer
+      .create(
+        <AvatarLogo user={{ name: "Abc", surname: "Abc", imageId: "AbCdE" }} />
+      )
+      .toJSON()
+  ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -108,7 +108,7 @@ test("renders correctly", async () =>
   `));
 
 test("renders correctly", async () =>
-    expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
+  expect(renderer.create(<AvatarLogo />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [
