@@ -8,7 +8,7 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 test("renders correctly", async () =>
-    expect(renderer.render(<Settings navigation={undefined} />))
+    expect(renderer.render(<Settings/>))
         .toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
@@ -52,7 +52,7 @@ test("renders correctly", async () =>
                   Object {
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "height": 126,
+                    "height": 142,
                     "left": 0,
                     "marginHorizontal": 14,
                     "marginVertical": 20,
@@ -64,7 +64,8 @@ test("renders correctly", async () =>
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
-                    "borderColor": "#AAA9AE",
+                    "borderColor": "#F8F8F8",
+                    "elevation": 6,
                   },
                 ]
               }
@@ -75,46 +76,6 @@ test("renders correctly", async () =>
                 <AvatarLogoTitle />
               </ForwardRef(AnimatedComponentWrapper)>
             </ForwardRef>
-            <TouchableNavigationCard
-              angle="0"
-              cardName="Notifications Settings"
-              navigationName="NotificationSettings"
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "fontWeight": "bold",
-                    },
-                    Object {
-                      "color": "#0B171B",
-                    },
-                  ]
-                }
-              >
-                Notifications Settings
-              </Text>
-            </TouchableNavigationCard>
-            <TouchableNavigationCard
-              angle="0"
-              cardName="Chats Settings"
-              navigationName="ChatSettings"
-            >
-              <Text
-                style={
-                  Array [
-                    Object {
-                      "fontWeight": "bold",
-                    },
-                    Object {
-                      "color": "#0B171B",
-                    },
-                  ]
-                }
-              >
-                Chats Settings
-              </Text>
-            </TouchableNavigationCard>
             <View
               style={
                 Object {
@@ -122,7 +83,7 @@ test("renders correctly", async () =>
                   "flexDirection": "row",
                   "fontSize": 13,
                   "lineHeight": 16,
-                  "marginLeft": 21,
+                  "marginLeft": 20,
                   "marginRight": 0,
                   "marginTop": 24,
                 }
@@ -156,11 +117,13 @@ test("renders correctly", async () =>
                     Array [
                       Object {
                         "backgroundColor": "#000000",
-                        "borderWidth": 2,
                         "flexDirection": "row",
                         "justifyContent": "flex-end",
                         "paddingHorizontal": 16,
                         "paddingVertical": 6,
+                      },
+                      Object {
+                        "borderWidth": 1,
                       },
                       Object {
                         "backgroundColor": "#0B171B",
@@ -196,11 +159,15 @@ test("renders correctly", async () =>
                     Array [
                       Object {
                         "backgroundColor": "#000000",
-                        "borderWidth": 2,
                         "flexDirection": "row",
                         "justifyContent": "flex-end",
                         "paddingHorizontal": 16,
                         "paddingVertical": 6,
+                      },
+                      Object {
+                        "borderBottomWidth": 1,
+                        "borderRightWidth": 1,
+                        "borderTopWidth": 1,
                       },
                       Object {
                         "backgroundColor": "#FFFFFF",
@@ -235,14 +202,17 @@ test("renders correctly", async () =>
                   style={
                     Array [
                       Object {
-                        "alignItems": "center",
-                        "backgroundColor": "white",
-                        "borderWidth": 2,
+                        "backgroundColor": "#000000",
                         "flexDirection": "row",
                         "justifyContent": "flex-end",
-                        "marginRight": 20,
                         "paddingHorizontal": 16,
-                        "paddingVertical": 4,
+                        "paddingVertical": 6,
+                      },
+                      Object {
+                        "borderBottomWidth": 1,
+                        "borderRightWidth": 1,
+                        "borderTopWidth": 1,
+                        "marginRight": 20,
                       },
                       Object {
                         "backgroundColor": "#FFFFFF",

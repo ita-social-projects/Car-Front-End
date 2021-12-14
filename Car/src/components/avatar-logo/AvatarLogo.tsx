@@ -25,7 +25,9 @@ const AvatarLogo = (props: AvatarLogoProps) => {
         {
             height: props?.size,
             width: props?.size,
-            backgroundColor: props.user?.imageId ? "transparent" : backgroundColor
+            backgroundColor: props.user?.imageId ? "transparent" : backgroundColor,
+            marginTop: props.marginTop,
+            marginLeft: props.marginLeft
         }
     ];
 

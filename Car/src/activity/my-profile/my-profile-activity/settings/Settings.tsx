@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Animated, AppState, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SettingsStyle, { SwitchSelectorStyle } from "./SettingsStyle";
-import TouchableNavigationCard from "../../../../components/touchable-navigation-card/TouchableNavigationCard";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import { ImagePickerResponse, launchImageLibrary } from "react-native-image-picker/src";
@@ -29,7 +28,7 @@ import axios from "axios";
 import { CreateJourneyStyle } from "../../../journey/journey-activity/create-journey/CreateJourneyStyle";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 
-const Settings = (props: { navigation: any }) => {
+const Settings = () => {
     const { setScheme, theme, colors } = useTheme();
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const [isOpen, setOpen] = useState(false);
@@ -321,8 +320,9 @@ const Settings = (props: { navigation: any }) => {
                             activeOpacity={1}
                             style={[SettingsStyle.profileInfo,
                                 {
-                                    borderColor: colors.secondaryLight,
-                                    backgroundColor: colors.white
+                                    borderColor: colors.neutralLight,
+                                    backgroundColor: colors.white,
+                                    elevation: 6,
                                 }]}
                             onPress={pressHandle}>
                             <Animated.View style={isSaving && [{ opacity: avatarLogoTitleOpacity }]}>
@@ -339,31 +339,14 @@ const Settings = (props: { navigation: any }) => {
 
                             )}
                         </TouchableOpacity>
-                        <TouchableNavigationCard
-                            navigation={props.navigation}
-                            navigationName="NotificationSettings"
-                            cardName="Notifications Settings"
-                            angle="0"
-                        >
-                            <Text style={[SettingsStyle.cardText, { color: colors.primary }]}>
-                                Notifications Settings
-                            </Text>
-                        </TouchableNavigationCard>
-                        <TouchableNavigationCard
-                            navigation={props.navigation}
-                            navigationName="ChatSettings"
-                            cardName="Chats Settings"
-                            angle="0"
-                        >
-                            <Text style={[SettingsStyle.cardText, { color: colors.primary }]}>
-                                Chats Settings
-                            </Text>
-                        </TouchableNavigationCard>
                         <View style={SwitchSelectorStyle.container}>
                             <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>App theme</Text>
                             <View style={{ flexDirection: "row" }}>
                                 <TouchableOpacity
-                                    style={[SwitchSelectorStyle.leftButton, lightButtonStyle]}
+                                    style={[
+                                        SwitchSelectorStyle.switchButton,
+                                        SwitchSelectorStyle.leftButtonBorder,
+                                        lightButtonStyle]}
                                     onPress={async () => {
                                         changeAppScheme("light");
                                     }}
@@ -380,7 +363,8 @@ const Settings = (props: { navigation: any }) => {
 
                                 <TouchableOpacity
                                     style={[
-                                        SwitchSelectorStyle.leftButton,
+                                        SwitchSelectorStyle.switchButton,
+                                        SwitchSelectorStyle.middleButtonBorder,
                                         darkButtonStyle,
                                     ]}
                                     onPress={() => {
@@ -398,7 +382,8 @@ const Settings = (props: { navigation: any }) => {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={[
-                                        SwitchSelectorStyle.rightButton,
+                                        SwitchSelectorStyle.switchButton,
+                                        SwitchSelectorStyle.rightButtonBorder,
                                         systemButtonStyle,
                                     ]}
                                     onPress={() => {
