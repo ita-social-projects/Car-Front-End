@@ -12,7 +12,11 @@ import AvatarLogoStyle from "./AvatarLogoStyle";
 import AvatarLogoProps from "./AvatarLogoProps";
 
 const GetBackgroundColor = (username: string) => {
-    const hue = (username.charCodeAt(0) - 65) * 13;
+    const usernameFirstCharPos = 0;
+    const charCodeOfFirstAlpha = 65;
+    const hueSectionRange = 13;
+    const hue =
+        (username.charCodeAt(usernameFirstCharPos) - charCodeOfFirstAlpha) * hueSectionRange;
     const backgroundColor = `hsl(${hue}, 80%, 45%)`;
     return backgroundColor; 
 }
