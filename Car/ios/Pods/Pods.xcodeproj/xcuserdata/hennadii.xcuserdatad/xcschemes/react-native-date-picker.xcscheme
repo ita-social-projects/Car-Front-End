@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F5C619B7AF69366DE35F2742D20F0B1"
-               BuildableName = "libreact-native-date-picker.a"
+               BuildableName = "react-native-date-picker"
                BlueprintName = "react-native-date-picker"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
