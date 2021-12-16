@@ -74,6 +74,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const { journeyId } = props.route.params;
     const { isDriver } = props.route.params;
     const { isPassenger } = props.route.params;
+    const { isPast } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
@@ -123,6 +124,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         setLoading(false);
         moreOptionsRef?.current?.snapTo(MAX_POPUP_POSITION);
     };
+
+    useEffect(() => {
+        if (isPast)
+        props.navigation?.setOptions({
+            headerRight: () => <View />
+        });
+    });
 
     useEffect(() => {
         if (isPassenger)
