@@ -15,7 +15,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
     const [colorBackground, setColorBackground] =useState(colors.hover);
 
     const chat: CreateChat = {
-        id: props.journey?.id!,
+        id: props.journey?.chatId!,
         name:
             props.journey?.organizer?.name + " " +
             props.journey?.organizer?.surname + "'s ride"
