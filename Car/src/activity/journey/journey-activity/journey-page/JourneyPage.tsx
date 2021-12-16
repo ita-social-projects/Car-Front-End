@@ -127,9 +127,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     useEffect(() => {
         if (isPast)
-        props.navigation?.setOptions({
-            headerRight: () => <View />
-        });
+            props.navigation?.setOptions({
+                headerRight: () => <View />
+            });
     });
 
     useEffect(() => {
