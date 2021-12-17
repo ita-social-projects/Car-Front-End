@@ -84,6 +84,7 @@ const OkSearchResult = (props: OkSearchResultProps) => {
                             displayFee={props.route.params.displayFee}
                             applicantStops={item.applicantStops}
                             passangersCount={props.route.params.passangersCount}
+                            isPast={props.route.params.isPast}
                         />
                     )}
                 />

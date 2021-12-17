@@ -238,7 +238,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                                 Past
                             </Text>
                         )}
-                        {<JourneyCardList journey={pastJourneys} />}
+                        {<JourneyCardList journey={pastJourneys} isPast={true} />}
                         {scheduledJourneys.length > EMPTY_COLLECTION_LENGTH && (
                             <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
                                 Regular
@@ -249,7 +249,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 )}
                 {selectedIndex === SECOND_ELEMENT_INDEX && (
                     <View style={JourneyStartPageStyle.tabStyle}>
-                        {<JourneyCardList journey={pastJourneys} />}
+                        {<JourneyCardList journey={pastJourneys} isPast={true} />}
                     </View>
                 )}
                 {selectedIndex === THIRD_ELEMENT_INDEX && (

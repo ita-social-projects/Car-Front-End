@@ -7,7 +7,8 @@ interface JourneyPageProps {
             isDriver: boolean,
             isPassenger: boolean,
             applicantStops?: Stop[],
-            passangersCount?: number
+            passangersCount?: number,
+            isPast: boolean
         }
     },
     navigation?: {
