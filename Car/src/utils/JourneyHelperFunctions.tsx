@@ -2,7 +2,8 @@ import {
     FIRST_ELEMENT_INDEX,
     NUMBER_OF_MINUTES_IN_HOUR,
     SECOND_ELEMENT_INDEX,
-    TEN, ZERO_ID
+    TEN, ZERO_ID,
+    LOCATION_EPSILON_DIAMETER
 } from "../constants/GeneralConstants";
 import Stop from "../../models/stop/Stop";
 import { ZERO_COORDINATE } from "../constants/StylesConstants";
@@ -113,4 +114,9 @@ export const getTimeToShow = (journey?: Journey): string =>{
         // eslint-disable-next-line
         `Every ${weekDayToString(journey.schedule.days)} at ${moment(new Date(journey?.departureTime ?? "")).format("HH:mm")}` :
         capitalize(moment(new Date(journey?.departureTime ?? "")).calendar());
+};
+
+export const areStopsLocationEqual = (stopA: Stop, stopB: Stop): boolean =>{
+    return Math.abs(stopA!.address!.longitude - stopB!.address!.longitude) < LOCATION_EPSILON_DIAMETER &&
+        Math.abs(stopA!.address!.latitude - stopB!.address!.latitude) < LOCATION_EPSILON_DIAMETER;
 };

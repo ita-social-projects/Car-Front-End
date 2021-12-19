@@ -25,6 +25,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import {
+    areStopsLocationEqual,
     getStopByType,
     getStopCoordinates,
     mapStopToMarker,
@@ -34,7 +35,8 @@ import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX,
-    ZERO_ID
+    ZERO_ID,
+    ONLY_PASSENGER_STOPS_LENGTH
 } from "../../../../constants/GeneralConstants";
 import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
@@ -235,14 +237,26 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         }
 
         const stopsSource = isPassenger ? currentJourney.stops : applicantStops;
+        const startStop = getStopByType(currentJourney, StopType.Start)!;
+        const userStartStop = stopsSource!.filter(stop => stop!.userId === user!.id &&
+             stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX];
+        const userFinishStop = stopsSource!.filter(stop => stop!.userId === user!.id &&
+            stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX];
+        const finishStop = getStopByType(currentJourney, StopType.Finish)!;
+
+        if(areStopsLocationEqual(startStop,userStartStop) &&
+            areStopsLocationEqual(finishStop, userFinishStop)){
+            return [
+                userStartStop,
+                userFinishStop
+            ];
+        }
 
         return [
-            getStopByType(currentJourney, StopType.Start)!,
-            stopsSource!.filter(stop => stop!.userId === user!.id &&
-                stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-            stopsSource!.filter(stop => stop!.userId === user!.id &&
-                stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-            getStopByType(currentJourney, StopType.Finish)!
+            startStop,
+            userStartStop,
+            userFinishStop,
+            finishStop
         ];
     };
 
@@ -255,8 +269,16 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         }, { duration: 1000 });
     };
 
+    const stopsForBottomPopUp = getStopsForBottomPopup();
+
     const getHighlightedStops = () => {
-        return isDriver ? [...Array(currentJourney?.stops.length).keys()] : [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX];
+        if(isDriver){
+            return [...Array(currentJourney?.stops.length).keys()];
+        }
+
+        return stopsForBottomPopUp.length === ONLY_PASSENGER_STOPS_LENGTH ?
+            [FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX] :
+            [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX];
     };
 
     return (

@@ -2,7 +2,6 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import React from "react";
 import Stop from "../../../../../../../models/stop/Stop";
-import StopType from "../../../../../../../models/stop/StopType";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { NEXT_INDEX_CORRECTION } from "../../../../../../constants/GeneralConstants";
 import JourneyPageStyle from "../../JourneyPageStyle";
@@ -39,7 +38,7 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                             size={15}
                             color={getDotAndTextColor(index)}
                         />
-                        {item?.type !== StopType.Finish && (
+                        {index < stops.length - NEXT_INDEX_CORRECTION && (
                             <View style={[JourneyPageStyle.stopCustomLineIcon,
                                 { backgroundColor: getLineColor(index) }
                             ]} />
