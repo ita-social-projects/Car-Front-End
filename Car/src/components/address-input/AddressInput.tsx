@@ -25,7 +25,7 @@ const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations 
 };
 
 const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses => {
-    return addresses.map(address => ({
+    return [... new Set(addresses.map(address => ({
         description: address ? address.name : "Unnamed location",
         geometry: {
             location: {
@@ -34,7 +34,7 @@ const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses 
             }
         },
         iconName: "ios-time-outline"
-    }));
+    })))];
 };
 
 const AddressInput = (props: AddressInputProps) => {
