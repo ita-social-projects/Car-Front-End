@@ -230,9 +230,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
         const stopsSource = isPassenger ? currentJourney.stops : applicantStops;
         const startStop = getStopByType(currentJourney, StopType.Start)!;
-        const userStartStop = stopsSource!.filter(stop => stop!.userId === user!.id &&
+        const userStartStop = stopsSource!.filter(stop =>
              stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX];
-        const userFinishStop = stopsSource!.filter(stop => stop!.userId === user!.id &&
+        const userFinishStop = stopsSource!.filter(stop =>
             stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX];
         const finishStop = getStopByType(currentJourney, StopType.Finish)!;
 
