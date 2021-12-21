@@ -15,7 +15,13 @@ import { getTimeToShow } from "../../utils/JourneyHelperFunctions";
 import StopType from "../../../models/stop/StopType";
 
 const JourneyCard =
-    (props: {journey?: Journey, displayFee?: boolean, applicantStops?: Stop[], passangersCount?: number}) => {
+    (props: {
+        journey?: Journey,
+        displayFee?: boolean,
+        applicantStops?: Stop[],
+        passangersCount?: number,
+        isPast: boolean
+            }) => {
         const { colors } = useTheme();
         const journey = props.journey;
         const { user } = useContext(AuthContext);
@@ -34,7 +40,8 @@ const JourneyCard =
                 isDriver,
                 isPassenger,
                 applicantStops: props.applicantStops,
-                passangersCount: props.passangersCount
+                passangersCount: props.passangersCount,
+                isPast: props.isPast
             });
 
         const fullName = `${journey?.organizer?.name} ${journey?.organizer?.surname}`;

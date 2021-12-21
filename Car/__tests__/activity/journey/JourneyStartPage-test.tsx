@@ -308,6 +308,7 @@ test("renders correctly", async () =>
             journey={Array []}
           />
           <JourneyCardList
+            isPast={true}
             journey={Array []}
           />
           <JourneyCardList

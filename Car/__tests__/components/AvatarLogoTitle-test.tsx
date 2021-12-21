@@ -10,7 +10,7 @@ test("renders correctly", async () =>
       style={
         Object {
           "paddingLeft": 17,
-          "paddingTop": 20,
+          "paddingTop": 14,
         }
       }
     >
@@ -23,13 +23,15 @@ test("renders correctly", async () =>
         }
       >
         <AvatarLogo
+          marginLeft={8}
+          marginTop={14}
           size={56}
           user={null}
         />
         <View
           style={
             Object {
-              "marginLeft": 71,
+              "marginLeft": 81,
               "position": "absolute",
             }
           }
@@ -58,10 +60,10 @@ test("renders correctly", async () =>
                   "fontSize": 14,
                   "lineHeight": 14,
                   "marginBottom": 8,
-                  "opacity": 0.5,
                 },
                 Object {
-                  "color": "#0B171B",
+                  "color": "#909095",
+                  "fontWeight": "bold",
                 },
               ]
             }
@@ -73,10 +75,23 @@ test("renders correctly", async () =>
                   "fontSize": 14,
                   "lineHeight": 14,
                   "marginBottom": 8,
-                  "opacity": 0.5,
                 },
                 Object {
-                  "color": "#0B171B",
+                  "color": "#909095",
+                },
+              ]
+            }
+          />
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontSize": 14,
+                  "lineHeight": 14,
+                  "marginBottom": 8,
+                },
+                Object {
+                  "color": "#909095",
                 },
               ]
             }

@@ -21,7 +21,7 @@ const MessagesTabs = () => {
     };
 
     return (
-        <View style={{ ...HeaderStyle.container, backgroundColor: "#fcba03" }}>
+        <View style={{ ...HeaderStyle.container }}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="Messages"
