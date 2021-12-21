@@ -1,7 +1,7 @@
 import Journey from "../../models/journey/Journey";
 import Stop from "../../models/stop/Stop";
 import StopType from "../../models/stop/StopType";
-import { getStopByType } from "../../src/utils/JourneyHelperFunctions";
+import { getStopByType, getStopCoordinates } from "../../src/utils/JourneyHelperFunctions";
 
 const createJourney = (stops: Stop[]) => {
     return {
@@ -29,7 +29,12 @@ const createStop = (type: StopType) =>{
         id: 1,
         type,
         index: 4,
-        address:null,
+        address: {
+            id: 4,
+            name: "string",
+            latitude: 45.555,
+            longitude: 46.565
+        },
         userId: 1,
         journeyId: 5,
         isCancelled: false
@@ -59,4 +64,13 @@ test("journey with finish stop, getStopByType(journey, StopType.Finish), return 
     const actualStop = getStopByType(journey, StopType.Finish);
 
     expect(actualStop).toBe(stop);
+});
+
+test("stop with not null longitude and latitude, getStopCoordinates(stop), return true", async () => {
+    const stop = createStop(StopType.Finish);
+
+    const actualStop = getStopCoordinates(stop);
+
+    expect(actualStop).toHaveProperty("latitude", 45.555);
+    expect(actualStop).toHaveProperty("longitude", 46.565);
 });
