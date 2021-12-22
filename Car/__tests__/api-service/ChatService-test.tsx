@@ -110,4 +110,26 @@ describe("Chat Service test", () => {
                 })
         );
     });
+
+    test("should return all unread messages number in chat", async () => {
+        jest.spyOn(APIService, "post").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<Chat>>(function (resolve) {
+                    resolve({
+                        data: chatsData[0],
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+
+        ChatService.getAllUnreadMessagesNumber().then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(chatsData[0]));
+        });
+    });
 });
