@@ -5,7 +5,7 @@ import UserService from "../../api-service/user-service/UserService";
 import User from "../../models/user/User";
 
 describe("User Service test", () => {
-    const userData: User = {
+    const userData: User[] = [{
         id: 3,
         name: "Tom",
         surname: "Kick",
@@ -17,12 +17,46 @@ describe("User Service test", () => {
         fcmtoken : null,
         journeyCount: 8,
         phoneNumber: null,
-    };
+    },
+    {
+        id: 2,
+        name: "Ted",
+        surname: "Kick",
+        position: "Developer",
+        imageId: "./dd124lam-112_0!1dxxkd",
+        location: "Lviv",
+        hireDate: new Date("2020-04-09"),
+        email: "tom@gmail.com",
+        fcmtoken : null,
+        journeyCount: 8,
+        phoneNumber: null,
+    }];
 
     test("should get user", async () => {
         jest.spyOn(APIService, "get").mockImplementation(
             () =>
                 new Promise<AxiosResponse<User>>(function (resolve) {
+                    resolve({
+                        data: userData[0],
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+        UserService.getUser(3).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(userData[0]));
+        });
+    });
+
+    test("should get all users", async () => {
+        jest.spyOn(APIService, "get").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<User[]>>(function (resolve) {
                     resolve({
                         data: userData,
                         statusText: "Ok",
@@ -34,7 +68,7 @@ describe("User Service test", () => {
                     });
                 })
         );
-        UserService.getUser(userData.id).then((res) => {
+        UserService.getAllUsers().then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(userData));
         });

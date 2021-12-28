@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { Keyboard, Text, View, TouchableOpacity } from "react-native";
+import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef, Place } from "react-native-google-places-autocomplete";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CredentialsManager from "../../../credentials/credentials.json";
 import Address from "../../../models/Address";
@@ -26,7 +25,7 @@ const mapSavedLocationsToPlaces: (locations: Location[]) => Place[] = locations 
 };
 
 const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses => {
-    return addresses.map(address => ({
+    return [... new Set(addresses.map(address => ({
         description: address ? address.name : "Unnamed location",
         geometry: {
             location: {
@@ -35,7 +34,7 @@ const mapRecentAddressesToPlaces: (addresses: Address[]) => Place[] = addresses 
             }
         },
         iconName: "ios-time-outline"
-    }));
+    })))];
 };
 
 const AddressInput = (props: AddressInputProps) => {
@@ -66,17 +65,17 @@ const AddressInput = (props: AddressInputProps) => {
                 radius: 30000
             }}
             renderLeftButton={() => (
-                <Text style={[AddressInputStyles.placeholder, { color: colors.primary }]}>
+                <Text style={[AddressInputStyles.placeholder, { color: colors.secondaryDark }]}>
                     {props.placeholder + ":"}
                 </Text>
             )}
             renderRightButton={() => (
                 props.address === "" ?
                     (<View style={AddressInputStyles.marker}>
-                        <FontAwesome
-                            name={"map-marker"}
-                            size={30}
-                            color={colors.navyBlueGradientFrom}
+                        <Ionicons
+                            name={"location"}
+                            size={20}
+                            color={colors.hover}
                         />
                     </View>) :
                     (<TouchableOpacity
@@ -85,8 +84,8 @@ const AddressInput = (props: AddressInputProps) => {
                     >
                         <Ionicons
                             name={"close"}
-                            size={30}
-                            color={colors.primary}
+                            size={20}
+                            color={colors.hover}
                         />
                     </TouchableOpacity>))}
             styles={{

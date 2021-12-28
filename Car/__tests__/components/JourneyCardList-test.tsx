@@ -126,8 +126,10 @@ test("renders correctly", async () =>
                           "justifyContent": "center",
                         },
                         Object {
-                          "backgroundColor": "#52bb13",
+                          "backgroundColor": "hsl(-429, 80%, 45%)",
                           "height": 38.5,
+                          "marginLeft": undefined,
+                          "marginTop": undefined,
                           "width": 38.5,
                         },
                       ]
@@ -275,7 +277,7 @@ test("renders correctly", async () =>
                     ]
                   }
                 >
-                  01/01/1970
+                  Thursday, 01.01, 3:00
                 </Text>
                 <View>
                   <Text

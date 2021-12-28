@@ -4,7 +4,9 @@ interface AvatarLogoProps {
         surname: string,
         imageId?: string | null
     } | null,
-    size?: number
+    size?: number,
+    marginTop?: number,
+    marginLeft?: number
 }
 
 export default AvatarLogoProps;

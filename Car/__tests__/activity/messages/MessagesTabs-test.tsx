@@ -16,7 +16,6 @@ test("renders correctly", async () =>
       style={
         Object {
           "alignSelf": "stretch",
-          "backgroundColor": "#fcba03",
           "flex": 1,
         }
       }

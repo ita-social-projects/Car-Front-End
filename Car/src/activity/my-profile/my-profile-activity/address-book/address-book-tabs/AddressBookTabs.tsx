@@ -89,7 +89,7 @@ export default function AddressBookTabs () {
                                     disableModal={() => setModalVisibility(false)}
                                     visible={modalVisibility}
                                     title={"ARE YOU SURE?"}
-                                    subtitle={"Do you want to delete your address information?"}
+                                    subtitle={"Are you sure you want to delete your address information?"}
                                     confirmText={"Yes, delete it"}
                                     cancelText={"No, keep it"}
                                     onConfirm={() => deleteLocation(props.route.params.carId)}

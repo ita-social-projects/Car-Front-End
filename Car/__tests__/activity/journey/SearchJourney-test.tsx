@@ -331,7 +331,7 @@ describe("JourneySearch Test", () => {
                   },
                   Object {
                     "backgroundColor": "#909095",
-                    "borderWidth": 0,
+                    "borderColor": "#909095",
                   },
                 ]
               }

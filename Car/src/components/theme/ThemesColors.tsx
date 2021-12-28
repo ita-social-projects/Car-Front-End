@@ -19,7 +19,8 @@ export const lightColors = {
     secondaryLight: "#AAA9AE",
     disableBack: "#C4C4C4",
     disableText: "#FFFFFF",
-    confirmBack: "#414045"
+    buttonBack: "#414045",
+
 };
 
 export const darkColors = {
@@ -33,6 +34,6 @@ export const darkColors = {
     secondaryLight: "#C4C4C4",
     disableBack: "#414045",
     disableText: "#909095",
-    confirmBack: "#F8F8F8"
+    buttonBack: "#F8F8F8"
 
 };

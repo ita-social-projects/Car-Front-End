@@ -10,7 +10,7 @@ const ApplicationApproval = (props: NotificationProps) => {
         <ApplicationAnswer
             notification = {props}
             notificationTittle = "Driver approved your request!"
-            notificationHeaderTittle = "REQUEST APPROVAL"
+            notificationHeaderTittle = "REQUEST IS APPROVED"
             notificationHeaderMessage = "The driver has approved your request!"
             withWithdraw
             journeyUserId = {user?.id!}

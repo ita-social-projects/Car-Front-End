@@ -83,6 +83,8 @@ test("renders correctly", async () =>
                     Object {
                       "backgroundColor": "transparent",
                       "height": 38.5,
+                      "marginLeft": undefined,
+                      "marginTop": undefined,
                       "width": 38.5,
                     },
                   ]
@@ -117,6 +119,8 @@ test("renders correctly", async () =>
                       Object {
                         "backgroundColor": "transparent",
                         "height": 38.5,
+                        "marginLeft": undefined,
+                        "marginTop": undefined,
                         "width": 38.5,
                       },
                     ]
@@ -246,6 +250,8 @@ test("renders correctly", async () =>
                     Object {
                       "backgroundColor": "transparent",
                       "height": 38.5,
+                      "marginLeft": undefined,
+                      "marginTop": undefined,
                       "width": 38.5,
                     },
                   ]
@@ -280,6 +286,8 @@ test("renders correctly", async () =>
                       Object {
                         "backgroundColor": "transparent",
                         "height": 38.5,
+                        "marginLeft": undefined,
+                        "marginTop": undefined,
                         "width": 38.5,
                       },
                     ]

@@ -31,18 +31,23 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
     return (
         <View style={AvatarLogoTitleStyle.container}>
             <View style={AvatarLogoTitleStyle.headerContainer}>
-                <AvatarLogo user={user} size={56} />
+                <AvatarLogo user={user} size={56} marginTop={14} marginLeft={8}/>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
                     <Text style={[AvatarLogoTitleStyle.headerUserName, { color: colors.primary }]}>
                         {trimTheStringIfTooLong(user?.name + " " + user?.surname, MAX_USER_FULL_NAME_LENGTH_IN_PROFILE)}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
-                        { color: colors.primary }
+                        { color: colors.secondaryDark, fontWeight: "bold" }
                     ]}>
                         {user?.position}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
-                        { color: colors.primary }
+                        { color: colors.secondaryDark }
+                    ]}>
+                        {user?.location}
+                    </Text>
+                    <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
+                        { color: colors.secondaryDark }
                     ]}>
                         {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
                             ? "1 ride"

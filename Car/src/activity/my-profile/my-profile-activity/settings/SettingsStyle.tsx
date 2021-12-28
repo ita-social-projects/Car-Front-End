@@ -5,30 +5,34 @@ export const SwitchSelectorStyle = StyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: "center",
-        marginLeft: 21,
+        marginLeft: 20,
         marginRight: 0,
         marginTop: 24,
         fontSize: 13,
         lineHeight: 16
     },
-
-    leftButton: {
+    switchButton:{
         paddingHorizontal: 16,
         paddingVertical: 6,
         backgroundColor: "#000000",
         flexDirection: "row",
         justifyContent: "flex-end",
-        borderWidth: 2
     },
 
-    rightButton: {
-        paddingHorizontal: 16,
-        paddingVertical: 4,
-        backgroundColor: "white",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-end",
-        borderWidth: 2,
+    leftButtonBorder: {
+        borderWidth: 1
+    },
+
+    middleButtonBorder: {
+        borderTopWidth: 1,
+        borderRightWidth: 1,
+        borderBottomWidth: 1,
+    },
+
+    rightButtonBorder: {
+        borderTopWidth: 1,
+        borderRightWidth: 1,
+        borderBottomWidth: 1,
         marginRight: 20,
     },
 
@@ -59,7 +63,7 @@ const SettingsStyle = StyleSheet.create({
         marginVertical: 20,
         borderRadius: 16,
         borderWidth: 1,
-        height: 126,
+        height: 142,
         width: Dimensions.get("screen").width - 28,
         top: 0,
         left: 0,

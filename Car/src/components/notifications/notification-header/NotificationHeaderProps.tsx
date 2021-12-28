@@ -1,12 +1,12 @@
 import User from "../../../../models/user/User";
 
 interface NotificationHeaderProps {
-    title: string,
+    title?: string,
     message?: string,
     sender: User,
     withSnooze?: boolean,
     withoutMessage?: boolean,
-    disableModal: () => void,
+    disableModal?: () => void,
 }
 
 export default NotificationHeaderProps;

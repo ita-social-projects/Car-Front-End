@@ -6,6 +6,7 @@ import ConfirmModal from "../../confirm-modal/ConfirmModal";
 import { useTheme } from "../../theme/ThemeProvider";
 import HeaderLeaveButtonStyle from "./HeaderLeaveButtonStyle";
 import * as navigation from "../../../components/navigation/Navigation";
+import { HTTP_STATUS_OK } from "../../../constants/Constants";
 
 const HeaderLeaveButton = (props) => {
     const { colors } = useTheme();
@@ -36,9 +37,11 @@ const HeaderLeaveButton = (props) => {
                     setLeaveRideModalIsVisible(false);
                     JourneyService.deleteUser(
                         props.route.params.journeyId,
-                        user?.id!);
-                    setLeaveRideSuccessModalIsVisible(true);
-
+                        user?.id!).then((res) => {
+                        if(res.status === HTTP_STATUS_OK) {
+                            setLeaveRideSuccessModalIsVisible(true);
+                        }
+                    });
                 }}
                 disableModal={() => setLeaveRideModalIsVisible(false)}
                 subtitle={"Are you sure you want to leave the ride?"}
