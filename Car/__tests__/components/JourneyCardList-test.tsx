@@ -277,7 +277,7 @@ test("renders correctly", async () =>
                     ]
                   }
                 >
-                  Thursday, 01.01, 3:00
+                  01/01/1970
                 </Text>
                 <View>
                   <Text
