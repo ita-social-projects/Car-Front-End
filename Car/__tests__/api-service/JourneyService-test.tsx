@@ -2,6 +2,8 @@ import { AxiosResponse } from "axios";
 import "react-native";
 import APIService from "../../api-service/APIService";
 import JourneyService from "../../api-service/journey-service/JourneyService";
+import Invitation from "../../models/invitation/Invitation";
+import InvitationType from "../../models/invitation/InvitationType";
 import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
 import JourneyUserDto from "../../models/journey-user/JourneyUserDto";
 import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
@@ -131,6 +133,13 @@ describe("Journey Service test", () => {
         toLongitude: 0,
         hasLuggage: true,
         passengersCount: 1
+    };
+
+    let invitation : Invitation = {
+        id: 0,
+        type: InvitationType.Accepted,
+        invitedUserId: 1,
+        journeyId: 0
     };
 
     test("should return journey", async () => {
@@ -421,6 +430,27 @@ describe("Journey Service test", () => {
         JourneyService.updateDetails(journeyDTO).then((res) => {
             expect(res.status).toBe(200);
             expect(JSON.stringify(res.data)).toBe(JSON.stringify(journeyData[0]));
+        });
+    });
+
+    test("should return updated journey(invitation)", async () => {
+        jest.spyOn(APIService, "put").mockImplementation(
+            () =>
+                new Promise<AxiosResponse<Invitation>>(function (resolve) {
+                    resolve({
+                        data: invitation,
+                        statusText: "Ok",
+                        status: 200,
+                        config: {},
+                        headers: {
+                            "Context-Type": "application/json"
+                        }
+                    });
+                })
+        );
+        JourneyService.updateInvitation(invitation).then((res) => {
+            expect(res.status).toBe(200);
+            expect(JSON.stringify(res.data)).toBe(JSON.stringify(invitation));
         });
     });
 

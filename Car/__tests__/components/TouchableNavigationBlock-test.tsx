@@ -52,8 +52,10 @@ test("renders correctly", async () =>
               Object {
                 "borderRadius": 8,
                 "borderStyle": "solid",
-                "borderWidth": 2,
+                "borderWidth": 3,
+                "elevation": 8,
                 "height": 160,
+                "marginHorizontal": 7,
                 "marginVertical": 5,
               },
               Object {
@@ -76,25 +78,31 @@ test("renders correctly", async () =>
               source={Object {}}
               style={
                 Object {
+                  "borderBottomLeftRadius": 6,
                   "height": undefined,
-                  "marginTop": 15,
+                  "marginLeft": -10,
+                  "marginTop": 14,
                   "width": undefined,
                 }
               }
             />
             <Text
               style={
-                Object {
-                  "color": "#FFFFFF",
-                  "flex": 1,
-                  "fontFamily": "Proxima Nova Rg Bold",
-                  "fontSize": 24,
-                  "justifyContent": "center",
-                  "marginLeft": 20,
-                  "textAlignVertical": "center",
-                  "textTransform": "uppercase",
-                  "width": 250,
-                }
+                Array [
+                  Object {
+                    "color": "#FFFFFF",
+                    "flex": 1,
+                    "fontFamily": "Proxima Nova Rg Bold",
+                    "fontSize": 24,
+                    "justifyContent": "center",
+                    "textAlignVertical": "center",
+                    "textTransform": "uppercase",
+                    "width": 250,
+                  },
+                  Object {
+                    "marginLeft": 40,
+                  },
+                ]
               }
             />
           </View>

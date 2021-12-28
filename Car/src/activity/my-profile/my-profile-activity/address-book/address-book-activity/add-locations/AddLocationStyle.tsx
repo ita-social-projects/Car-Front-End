@@ -18,7 +18,7 @@ const AddLocationStyle = StyleSheet.create({
         top: 10,
         fontSize: 18,
         borderColor: "black",
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 0,
         paddingLeft: 15,
         paddingRight: 45,

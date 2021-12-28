@@ -11,6 +11,7 @@ const props: OkSearchResultProps = {
             journeys: [],
             displayFee: false,
             passangersCount: 1,
+            isPast: false
         },
     },
 };
@@ -59,7 +60,6 @@ test("renders correctly", async () =>
       </View>
       <ConfirmModal
         cancelText="No, go back"
-        confirmColor="#0B171B"
         confirmText="Yes, create"
         disableModal={[Function]}
         onConfirm={[Function]}

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
     container: {
-        paddingTop: 20,
+        paddingTop: 14,
         paddingLeft: 17
     },
 
@@ -12,7 +12,7 @@ const AvatarLogoTitleStyle = StyleSheet.create({
     },
 
     headerUserInformation: {
-        marginLeft: 71,
+        marginLeft: 81,
         position: "absolute"
     },
 
@@ -26,7 +26,6 @@ const AvatarLogoTitleStyle = StyleSheet.create({
     headerUserAdditionalData: {
         lineHeight: 14,
         fontSize: 14,
-        opacity: 0.5,
         marginBottom: 8
     }
 });

@@ -58,47 +58,46 @@ test("renders correctly", async () =>
             updateCellsBatchingPeriod={50}
             windowSize={21}
           />
-          <React.Fragment>
-            <View
+          <View
+            style={
+              Object {
+                "flex": 100,
+                "marginTop": 20,
+              }
+            }
+          >
+            <Text
               style={
                 Object {
-                  "flex": 100,
-                  "marginTop": 20,
+                  "color": "#0B171B",
+                  "fontFamily": "Milliard Bold",
+                  "fontSize": 16,
+                  "lineHeight": 22,
+                  "textAlign": "center",
                 }
               }
             >
-              <Text
-                style={
-                  Object {
-                    "color": "#0B171B",
-                    "fontFamily": "Milliard Bold",
-                    "fontSize": 16,
-                    "textAlign": "center",
-                  }
-                }
-              >
-                CURRENTLY YOU DO NOT HAVE ANY
-                
+              NO RESULTS MATCHING YOUR
+              
 
-                CHATS
-              </Text>
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/chat/no-chats.png",
-                  }
+              SEARCH FILTERS
+            </Text>
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../assets/images/chat/no-chats.png",
                 }
-                style={
-                  Object {
-                    "height": 225,
-                    "marginTop": 45,
-                    "resizeMode": "stretch",
-                    "width": 396,
-                  }
+              }
+              style={
+                Object {
+                  "height": 225,
+                  "marginTop": 45,
+                  "resizeMode": "stretch",
+                  "width": 396,
                 }
-              />
-            </View>
-          </React.Fragment>
+              }
+            />
+          </View>
         </View>
       </View>
     </ForwardRef(SafeAreaView)>

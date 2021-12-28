@@ -6,7 +6,8 @@ interface OkSearchResultProps
         params: {
             journeys: ApplicantJourney[],
             displayFee: boolean,
-            passangersCount: number
+            passangersCount: number,
+            isPast: boolean
         }
     }
 }
