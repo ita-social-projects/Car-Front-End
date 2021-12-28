@@ -110,9 +110,8 @@ test("renders correctly", async () =>
                   "justifyContent": "center",
                   "width": 81,
                 },
-                false,
                 Object {
-                  "backgroundColor": "#0B171B",
+                  "backgroundColor": "#414045",
                 },
               ]
             }
