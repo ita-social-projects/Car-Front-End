@@ -7,6 +7,11 @@ import RouteView from "../../../components/journey-new-applicant/route-view/Rout
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import JourneyNewApplicantView from "../../../components/journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantView";
 import { useTheme } from "../../../components/theme/ThemeProvider";
+import StopView from "../../../components/stop-view/StopView";
+import JourneyCancellationView from "../../../components/notifications/notifications-types/notifications-views/cancellation-view/JourneyCancellationView";
+import PassengerWithdrawalView from "../../../components/notifications/notifications-types/notifications-views/withdrawn-view/PassengerWithdrawalView";
+import InvitationView from "../../../components/notifications/notifications-types/notifications-views/invitation-view/InvitationView";
+import AprovedView from "../../../components/notifications/notifications-types/notifications-views/request-approved-view/AprovedView";
 
 const StackTabs = createStackNavigator();
 
@@ -37,10 +42,62 @@ const NotificationsTabs = () => {
                     }}
                 />
                 <StackTabs.Screen
+                    name="Stop View"
+                    component={StopView}
+                    options={{
+                        headerTitle: "View Stops",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton,
+
+                    }}
+                />
+                <StackTabs.Screen
                     name="New Applicant"
                     component={JourneyNewApplicantView}
                     options={{
-                        headerTitle: "New Applicant",
+                        headerTitle: "",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Ride is Canceled"
+                    component={JourneyCancellationView}
+                    options={{
+                        headerTitle: "",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Withdrawal"
+                    component={PassengerWithdrawalView}
+                    options={{
+                        headerTitle: "",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Invitation"
+                    component={InvitationView}
+                    options={{
+                        headerTitle: "",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Invitation is Accepted"
+                    component={AprovedView}
+                    options={{
+                        headerTitle: "",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

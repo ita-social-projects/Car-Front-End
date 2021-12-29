@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const LocationDropDownPickerStyle = StyleSheet.create({
     dropDownStyle: {
         marginTop: 5,
-        borderWidth: 2,
+        borderWidth: 1,
         borderTopWidth: 0,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0
@@ -15,7 +15,7 @@ const LocationDropDownPickerStyle = StyleSheet.create({
 
     style: {
         alignItems: "center",
-        borderWidth: 2,
+        borderWidth: 1,
         paddingVertical: 3,
         borderTopRightRadius: 0,
         borderTopLeftRadius: 0,

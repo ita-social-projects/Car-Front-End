@@ -19,20 +19,21 @@ export const lightColors = {
     secondaryLight: "#AAA9AE",
     disableBack: "#C4C4C4",
     disableText: "#FFFFFF",
-    confirmBack: "#414045"
+    buttonBack: "#414045",
+
 };
 
 export const darkColors = {
     ...permanentColors,
     primary: "#FFFFFF",
     white: "#1C2426",
-    hover: "#C4C4C4",
+    hover: "#F8F8F8",
     secondaryDark: "#C4C4C4",
     neutralLight: "#414045",
     neutralDark: "#C4C4C4",
     secondaryLight: "#C4C4C4",
     disableBack: "#414045",
     disableText: "#909095",
-    confirmBack: "#F8F8F8"
+    buttonBack: "#F8F8F8"
 
 };
