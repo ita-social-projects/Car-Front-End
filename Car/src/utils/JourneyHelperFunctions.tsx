@@ -15,6 +15,7 @@ import React from "react";
 import WeekDay from "../components/schedule-bottom-popup/WeekDay";
 import moment from "moment";
 import { capitalize } from "./GeneralHelperFunctions";
+import { View } from "react-native";
 
 export const mapStopToWayPoint = (stop?: Stop) => {
     return {
@@ -80,12 +81,15 @@ export const getStopCoordinates = (stop?: Stop) => {
     };
 };
 
-export const mapStopToMarker = (stop: Stop) => (
-    <Marker
-        title={stop?.address?.name}
-        coordinate={getStopCoordinates(stop)}
-        image={require("../../assets/images/maps-markers/Stop.png")}
-    />
+export const mapStopToMarker = (stop: Stop, index) => (
+    <View key={index}>
+        <Marker
+            title={stop?.address?.name}
+            coordinate={getStopCoordinates(stop)}
+            image={require("../../assets/images/maps-markers/Stop.png")}
+        />
+    </View>
+
 );
 
 export const weekDayToString = (weekDay: WeekDay): string => {
@@ -109,14 +113,14 @@ export const weekDayToString = (weekDay: WeekDay): string => {
     return result.join(", ");
 };
 
-export const getTimeToShow = (journey?: Journey): string =>{
+export const getTimeToShow = (journey?: Journey): string => {
     return journey?.schedule ?
         // eslint-disable-next-line
         `Every ${weekDayToString(journey.schedule.days)} at ${moment(new Date(journey?.departureTime ?? "")).format("HH:mm")}` :
         capitalize(moment(new Date(journey?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm"));
 };
 
-export const areStopsLocationEqual = (stopA: Stop, stopB: Stop): boolean =>{
+export const areStopsLocationEqual = (stopA: Stop, stopB: Stop): boolean => {
     return Math.abs(stopA!.address!.longitude - stopB!.address!.longitude) < LOCATION_EPSILON_DIAMETER &&
         Math.abs(stopA!.address!.latitude - stopB!.address!.latitude) < LOCATION_EPSILON_DIAMETER;
 };

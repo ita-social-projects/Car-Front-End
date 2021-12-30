@@ -435,15 +435,15 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
                                             </View>
                                             <View>
-                                            {isRequested &&
+                                                {isRequested &&
                                             <Text style={{ color: colors.secondaryDark,
                                                 textAlign: "right",marginTop: 8
-                                                }}>
+                                            }}>
                                             * You already applied for this yourney
                                             </Text>
-                                            }
+                                                }
+                                            </View>
                                         </View>
-                                    </View>
                                     )}
 
                                 </View>
