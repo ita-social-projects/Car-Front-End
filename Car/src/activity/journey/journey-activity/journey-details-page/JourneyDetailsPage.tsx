@@ -336,6 +336,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             weekDay: weekDay || null,
         };
 
+        if (weekDay === null || weekDay === WeekDay.None) {
+            await addJourneyAsync(newJourney);
+        }
+        else {
+            await addScheduleAsync(newJourney);
+        }
+        setRideIsPublishing(false);
+    };
+
+    const addJourneyAsync = async (newJourney) => {
         await JourneyService.add(newJourney)
             .then((res) => {
                 if (res.status === HTTP_STATUS_OK) {
@@ -345,9 +355,22 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     setModal(publishErrorModal);
                 }
             })
-            .catch(() => setModal(publishErrorModal));
+            .catch(() => {
+                setModal(publishErrorModal);
+            });
+    };
 
-        setRideIsPublishing(false);
+    const addScheduleAsync = async (newJourney) => {
+        await JourneyService.addSchedule(newJourney)
+            .then((res) => {
+                if(res.status === HTTP_STATUS_OK) {
+                    setSuccessfullyPublishModalIsVisible(true);
+                    JourneyService.addScheduledJourney(res.data.scheduleModel);
+                }
+            })
+            .catch(() => {
+                setModal(publishErrorModal);
+            });
     };
 
     const updateJourneyHandler = async () => {

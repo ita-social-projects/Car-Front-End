@@ -6,60 +6,60 @@ import Schedule from "../../models/Schedule";
 import JourneyCardList from "../../src/components/journey-card/JourneyCardList";
 
 let journeys: Journey[] = [
-  {
-    id: 1,
-    routeDistance: 0,
-    duration: "",
-    departureTime: new Date(0),
-    countOfSeats: 0,
-    comments: "",
-    isFree: true,
-    isOnOwnCar: true,
-    schedule: null as Schedule,
-    journeyPoints: [],
-    participants: [
-      {
+    {
         id: 1,
-        name: "",
-        surname: "",
-        position: "",
-        location: "",
-        fcmtoken: "",
-        email: "",
-        hireDate: new Date(0),
-        imageId: "",
-        journeyCount: 0,
-        phoneNumber: 0,
-      },
-    ],
-    stops: [],
-    invitations: [],
-    organizer: {
-      id: 1,
-      name: "",
-      surname: "",
-      position: "",
-      location: "",
-      fcmtoken: "",
-      email: "",
-      hireDate: new Date(0),
-      imageId: "",
-      journeyCount: 0,
-      phoneNumber: 0,
+        routeDistance: 0,
+        duration: "",
+        departureTime: new Date(0),
+        countOfSeats: 0,
+        comments: "",
+        isFree: true,
+        isOnOwnCar: true,
+        schedule: null as Schedule,
+        journeyPoints: [],
+        participants: [
+            {
+                id: 1,
+                name: "",
+                surname: "",
+                position: "",
+                location: "",
+                fcmtoken: "",
+                email: "",
+                hireDate: new Date(0),
+                imageId: "",
+                journeyCount: 0,
+                phoneNumber: 0,
+            },
+        ],
+        stops: [],
+        invitations: [],
+        organizer: {
+            id: 1,
+            name: "",
+            surname: "",
+            position: "",
+            location: "",
+            fcmtoken: "",
+            email: "",
+            hireDate: new Date(0),
+            imageId: "",
+            journeyCount: 0,
+            phoneNumber: 0,
+        },
+        car: {} as CarViewModel,
+        chatId: 1,
     },
-    car: {} as CarViewModel,
-    chatId: 1,
-  },
 ];
 
 test("renders correctly", async () =>
-  expect(
-    renderer.create(<JourneyCardList journey={[]} />).toJSON()
-  ).toMatchInlineSnapshot("<View />"));
+    expect(
+        renderer.create(<JourneyCardList journey={[]} />).toJSON()
+    ).toMatchInlineSnapshot("<View />"));
 
 test("renders correctly", async () =>
-  expect(renderer.create(<JourneyCardList journey={journeys} />).toJSON())
-    .toMatchInlineSnapshot(`
+    expect(renderer.create(<JourneyCardList journey={journeys} />).toJSON())
+        .toMatchInlineSnapshot(`
     <View>
       <View>
         <View>

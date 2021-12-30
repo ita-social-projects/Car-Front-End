@@ -10,6 +10,8 @@ import Invitation from "../../models/invitation/Invitation";
 import { AxiosRequestConfig } from "axios";
 import JourneyTimeModel from "../../models/journey/JoruneyTimeModel";
 import ApplicantJourney from "../../models/journey/ApplicantJourney";
+import ScheduleDto from "../../models/journey/ScheduleDto";
+import ScheduleTimeModel from "../../models/journey/ScheduleTimeModel";
 
 const route = APIRoutes.getJourneyUrl();
 
@@ -31,6 +33,12 @@ const JourneyService = {
 
     add: async (journey: JourneyDto) =>
         APIService.post<JourneyTimeModel>(route, journey),
+
+    addSchedule: async (journey: JourneyDto) =>
+        APIService.post<ScheduleTimeModel>(route + "schedule", journey),
+
+    addScheduledJourney: async (schedule: ScheduleDto) =>
+        APIService.post<JourneyTimeModel>(route + "scheduled-journey", schedule),
 
     getFilteredJourneys: async (filter: FilterJourneyModel) =>
         APIService.get<Array<ApplicantJourney>>(route + "filter/", { params: filter }),
