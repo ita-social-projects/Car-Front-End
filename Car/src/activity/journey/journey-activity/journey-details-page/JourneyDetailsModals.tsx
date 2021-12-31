@@ -19,6 +19,13 @@ export const publishErrorModal: ConfirmModalProps = {
     subtitle: "Ride publishing is failed",
 };
 
+export const departureTimeSorryModal: ConfirmModalProps = {
+    ...commonField,
+    title: "SORRY",
+    subtitle: "You have already made a trip within \nthis time!",
+    confirmText: "Try again",
+};
+
 export const invitationsErrorModal: ConfirmModalProps = {
     ...commonField,
     title: "Error",
