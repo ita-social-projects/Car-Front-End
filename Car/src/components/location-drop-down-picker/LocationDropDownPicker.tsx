@@ -40,7 +40,7 @@ const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
                 selectedLabelStyle={[LocationDropDownPickerStyle.selectedLabelStyle, { color: colors.primary }]}
                 itemStyle={LocationDropDownPickerStyle.itemStyle}
                 items={props.items}
-                placeholderStyle={[LocationDropDownPickerStyle.staticPlaceholder, { color: colors.primary }]}
+                placeholderStyle={[LocationDropDownPickerStyle.staticPlaceholder, { color: colors.secondaryDark }]}
                 placeholder={props.placeholder}
                 labelStyle={[LocationDropDownPickerStyle.labelStyle, { color: colors.primary }]}
                 onChangeItem={props.onChangeItem}
