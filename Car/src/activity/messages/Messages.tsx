@@ -16,10 +16,7 @@ import {
     MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER,
 } from "../../constants/MessageConstants";
 import { GRADIENT_END, GRADIENT_START } from "../../constants/StylesConstants";
-import {
-    NOT_EXISTING_ELEMENT_INDEX,
-    ZERO
-} from "../../constants/GeneralConstants";
+import { ZERO } from "../../constants/GeneralConstants";
 import { useTheme } from "../../components/theme/ThemeProvider";
 import { MessagesProps } from "./MessagesProps";
 import * as navigation from "../../components/navigation/Navigation";
@@ -77,30 +74,17 @@ const Messages = (props: MessagesProps) => {
 
         if (textTrimmed.length > MESSAGE_SEARCH_START_AFTER_SYMBOLS_NUMBER) {
             setisLoading(true);
+            ChatService.getFilteredChats({ searchText: textTrimmed, chats: masterDataSource }).then(res => {
 
-            const arr: Chat[] = JSON.parse(JSON.stringify(masterDataSource));
-
-            const searchInTitle = arr.filter((chat) => {
-                let chatTitle = chat?.name.toUpperCase();
-
-                return chatTitle!.indexOf(textTrimmed.toUpperCase()) > NOT_EXISTING_ELEMENT_INDEX;
+                setFilteredDataSource(res.data);
+                setisLoading(false);
             });
-
-            searchInTitle.length ?
-                setFilteredDataSource(searchInTitle)
-                :
-                ChatService.getFilteredChats({ searchText: textTrimmed, chats: masterDataSource }).then(res => {
-
-                    setFilteredDataSource(res.data);
-                    setisLoading(false);
-                });
             setSearch(text);
         } else {
             setFilteredDataSource(JSON.parse(JSON.stringify(masterDataSource)));
             setSearch(text);
         }
     };
-
     const textHighlight = (textToHighlight: string, searchWords: string[]) => {
         const chunks = findAll({ textToHighlight, searchWords, autoEscape: true });
 
@@ -162,7 +146,7 @@ const Messages = (props: MessagesProps) => {
                                             </Text>
                                         </LinearTextGradient>
                                         {item?.messageText ? (
-                                            textHighlight(item.messageText, search.split(" "))
+                                            textHighlight(item.messageText, search.split("\n"))
                                         ) : (
                                             <Text
                                                 style={[
