@@ -10,7 +10,7 @@ test("renders correctly", async () =>
       style={
         Object {
           "paddingLeft": 17,
-          "paddingTop": 14,
+          "paddingTop": 0,
         }
       }
     >
@@ -46,7 +46,7 @@ test("renders correctly", async () =>
                   "marginBottom": 8,
                 },
                 Object {
-                  "color": "#0B171B",
+                  "color": "#02A2CF",
                 },
               ]
             }
