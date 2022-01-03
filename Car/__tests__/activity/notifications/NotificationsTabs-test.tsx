@@ -87,7 +87,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "",
+              "headerTitle": "New Applicant",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -109,7 +109,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "",
+              "headerTitle": "Canceled Ride",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -131,7 +131,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "",
+              "headerTitle": "Withdrawal",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -153,7 +153,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "",
+              "headerTitle": "Invitation",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -175,7 +175,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "",
+              "headerTitle": "Accepted Invitation",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
