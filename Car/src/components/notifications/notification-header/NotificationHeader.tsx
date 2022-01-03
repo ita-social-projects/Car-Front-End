@@ -12,13 +12,6 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
         <View>
             <View style={NotificationHeaderStyle.headerContainer}>
                 <View style={NotificationHeaderStyle.row}>
-                    <View>
-                        <Text style={[NotificationHeaderStyle.header,
-                            { color: colors.primary }]}
-                        >
-                            {props.title}
-                        </Text>
-                    </View>
                     {props.withSnooze &&
                         <TouchableOpacity
                             onPress={props.disableModal}

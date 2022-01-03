@@ -33,7 +33,7 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
             <View style={AvatarLogoTitleStyle.headerContainer}>
                 <AvatarLogo user={user} size={56} marginTop={14} marginLeft={8}/>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
-                    <Text style={[AvatarLogoTitleStyle.headerUserName, { color: colors.primary }]}>
+                    <Text style={[AvatarLogoTitleStyle.headerUserName, { color: colors.accentBlue }]}>
                         {trimTheStringIfTooLong(user?.name + " " + user?.surname, MAX_USER_FULL_NAME_LENGTH_IN_PROFILE)}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,

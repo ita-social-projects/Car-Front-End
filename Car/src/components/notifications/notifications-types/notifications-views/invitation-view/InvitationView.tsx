@@ -169,7 +169,7 @@ const InvitationView = (props: InvitationViewProps) => {
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
                 <NotificationHeader
-                    title="Invitation"
+                    title=""
                     message="The driver is inviting you to join a ride!"
                     sender={props.route.params.notification.sender}
                 />

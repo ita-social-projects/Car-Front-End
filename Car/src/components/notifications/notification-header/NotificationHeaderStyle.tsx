@@ -8,7 +8,7 @@ const NotificationHeaderStyle = EStyleSheet.create({
 
     messageContainer: {
         paddingVertical: 14,
-        paddingHorizontal: 30,
+        paddingHorizontal: 10,
         borderTopWidth: 1,
         borderBottomWidth: 1,
     },
