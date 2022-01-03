@@ -43,7 +43,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "Add Address",
+              "headerTitle": "Address Book",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
