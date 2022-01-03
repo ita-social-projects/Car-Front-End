@@ -25,7 +25,7 @@ test("renders correctly", async () =>
           "activeBackgroundColor": "#414045",
           "activeTintColor": "#FFFFFF",
           "inactiveBackgroundColor": "#FFFFFF",
-          "inactiveTintColor": "#414045",
+          "inactiveTintColor": "#909095",
           "labelStyle": Object {
             "fontFamily": "Open Sans Bold",
             "fontSize": 10,
