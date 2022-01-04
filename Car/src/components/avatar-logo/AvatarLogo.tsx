@@ -17,9 +17,8 @@ const GetBackgroundColor = (username: string) => {
     const hueSectionRange = 13;
     const hue =
         (username.charCodeAt(usernameFirstCharPos) - charCodeOfFirstAlpha) * hueSectionRange;
-    const backgroundColor = `hsl(${hue}, 80%, 45%)`;
 
-    return backgroundColor;
+    return `hsl(${hue}, 80%, 45%)`;
 };
 
 const AvatarLogo = (props: AvatarLogoProps) => {

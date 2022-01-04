@@ -21,7 +21,7 @@ const AppTabs = () => {
     let [unreadMessagesNumber, setUnreadMessagesNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
     NotificationsService.getUnreadNotificationsNumber().then((result) =>
-        setUnreadNotificationsNumber(result.data as number)
+        setUnreadNotificationsNumber(result.data)
     );
 
     ReceivedMessagesService.getAllUnreadMessagesNumber().then((result) =>
