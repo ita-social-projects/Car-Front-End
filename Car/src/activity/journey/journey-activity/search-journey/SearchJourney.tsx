@@ -18,9 +18,11 @@ import {
     initialCoordinate,
 } from "../../../../constants/AddressConstants";
 import {
+    DEFAULT_AVAILABLE_SEATS_COUNT,
     INITIAL_PASSENGERS_COUNT,
     LEFT_PADDING_FOR_FROM_PLACEHOLDER,
     LEFT_PADDING_FOR_TO_PLACEHOLDER,
+    MIN_AVAILABLE_SEATS_COUNT,
 } from "../../../../constants/JourneyConstants";
 import {
     SECOND_ELEMENT_INDEX,
@@ -44,12 +46,12 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
-import JourneyCreationDropDownPicker from "../../../../components/dropdown-picker/JourneyCreationDropDownPicker";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import { getAddressByCoordinatesAsync } from "../../../../utils/LocationHelperFunctions";
 import ApplicantJourney from "../../../../../models/journey/ApplicantJourney";
 import { darkColors } from "../../../../components/theme/ThemesColors";
+import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 
 const SearchJourney = (props: SearchJourneyProps) => {
     const { colors } = useTheme();
@@ -87,11 +89,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
     const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
-
-    const [userQuantity] = useState<{ id: number, name: string }[]>([
-        { id: 1, name: "1" }, { id: 2, name: "2" }, { id: 3, name: "3" }, { id: 4, name: "4" }]);
-    const [isVisibleQuantityDropDown, setIsVisibleQuantityDropDown] = useState(false);
-    const [selectedQuantity, setSelectedQuantity] = useState<{ id: number | null, name: string }>({ id: 1, name: "1" });
+    const [avaliableSeats, setAvaliableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
 
     useEffect(() => {
         LocationService
@@ -185,7 +183,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 setFrom(filter.from);
                 setTo(filter.to);
                 setDepartureTime(new Date(filter.departureTime));
-                setSelectedQuantity({ id: filter.quantity, name: filter.quantity.toString() });
             });
         }
     };
@@ -223,7 +220,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
             to: to,
             departureTime: departureTime,
             fee: fee,
-            quantity: selectedQuantity.id != null ? selectedQuantity.id : INITIAL_PASSENGERS_COUNT,
+            quantity: avaliableSeats != null ? avaliableSeats : INITIAL_PASSENGERS_COUNT,
         };
 
         AsyncStorage.setItem("searchFilter", JSON.stringify(filterToSave));
@@ -238,7 +235,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 longitude: to.coordinates.longitude
             },
             fee: fee,
-            passengersCount: selectedQuantity.id != null ? selectedQuantity.id : INITIAL_PASSENGERS_COUNT,
+            passengersCount: avaliableSeats != null ? avaliableSeats : INITIAL_PASSENGERS_COUNT,
             userId: Number(user?.id),
             departureTime: departureTime
         };
@@ -262,7 +259,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 toLongitude: to.coordinates.longitude,
                 departureTime: departureTime,
                 hasLuggage: hasLuggage,
-                passengersCount: selectedQuantity.id != null ? selectedQuantity.id : INITIAL_PASSENGERS_COUNT,
+                passengersCount: avaliableSeats != null ? avaliableSeats : INITIAL_PASSENGERS_COUNT,
                 fee: fee,
             })
                 .then((res) => {
@@ -274,7 +271,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                         navigation.navigate("OK Search Result", {
                             journeys: res.data,
                             displayFee: displayFee,
-                            passangersCount: selectedQuantity.id != null ? selectedQuantity.id
+                            passangersCount: avaliableSeats != null ? avaliableSeats
                                 : INITIAL_PASSENGERS_COUNT,
                         });
 
@@ -386,25 +383,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
                             isConfirmed={true}
                         />
                     </View>
-                    <View style = {[Platform.OS !== "android" && { zIndex: 1 },[SearchJourneyStyle.locationContainer]]}>
-                        <JourneyCreationDropDownPicker
-                            items={userQuantity.map((car) => ({
-                                label: car.name,
-                                value: car.id
-                            }))}
-                            paddingLeft={100}
-                            searchable={false}
-                            placeholder="Passengers:"
-                            isVisible={isVisibleQuantityDropDown}
-                            onOpen={() => setIsVisibleQuantityDropDown(true)}
-                            onChangeItem={(item) => {
-                                setSelectedQuantity({ id: item.value, name: item.label });
-                                setIsVisibleQuantityDropDown(false);
-                            }}
-                            valueId={selectedQuantity.id}
-                            zIndex={2}
-                        />
-                    </View>
                     <View style={SwitchSelectorStyle.container}>
                         <Text style={[CreateJourneyStyle.text, { color: colors.primary }]}>Fee</Text>
                         <View style={[SwitchSelectorStyle.buttonContaier, { borderColor: colors.primary }]}>
@@ -461,6 +439,15 @@ const SearchJourney = (props: SearchJourneyProps) => {
                                 </Text>
                             </TouchableOpacity>
                         </View>
+                    </View>
+                    <View>
+                        <SeatsInputSpinner
+                            value={avaliableSeats}
+                            onChange={seats => setAvaliableSeats(seats)}
+                            title={"Passengers"}
+                            minValue={MIN_AVAILABLE_SEATS_COUNT}
+                            maxValue={DEFAULT_AVAILABLE_SEATS_COUNT}
+                        />
                     </View>
                     <View style={[SearchJourneyStyle.publishButtonContainer]}>
                         <TouchableOpacity
