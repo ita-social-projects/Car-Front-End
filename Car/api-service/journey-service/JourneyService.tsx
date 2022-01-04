@@ -26,6 +26,12 @@ const JourneyService = {
     getScheduledJourneys: async () =>
         APIService.get<Array<Journey>>(route + "scheduled"),
 
+    getRequestedJourneys: async () =>
+        APIService.get<Array<Journey>>(route + "requested"),
+
+    getCanceledJourneys: async () =>
+        APIService.get<Array<Journey>>(route + "canceled"),
+
     getRecentJourneyStops: async () =>
         APIService.get<Array<Array<Stop>>>(route + "recent"),
 

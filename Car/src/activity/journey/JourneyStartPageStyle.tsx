@@ -26,25 +26,39 @@ const JourneyStartPageStyle = StyleSheet.create({
     allJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        width: "13%",
+        width: "10%",
         flexDirection:"row",
     },
 
     pastJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        width: "13%",
+        width: "10%",
         flexDirection:"row",
     },
 
     upcomingJourneys: {
         justifyContent: "center",
         alignItems: "center",
-        width: "24%",
+        width: "20%",
         flexDirection:"row",
     },
 
     scheduledJourneys: {
+        justifyContent: "center",
+        alignItems: "center",
+        width: "20%",
+        flexDirection:"row",
+    },
+
+    requestedJourneys: {
+        justifyContent: "center",
+        alignItems: "center",
+        width: "20%",
+        flexDirection:"row",
+    },
+
+    canceledJourneys: {
         justifyContent: "center",
         alignItems: "center",
         width: "20%",
@@ -87,7 +101,7 @@ const JourneyStartPageStyle = StyleSheet.create({
 
     scrollViewStyle:{
         width:"100%",
-        //flex: 1
+        flex: 1
     },
 });
 
