@@ -33,7 +33,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, invitationsErrorModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { departureTimeSorryModal, freeRideModal, invitationsErrorModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -355,9 +355,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     setModal(publishErrorModal);
                 }
             })
-            .catch(() => {
-                setModal(publishErrorModal);
-            });
+            .catch(() => setModal(departureTimeSorryModal));
     };
 
     const addScheduleAsync = async (newJourney) => {
