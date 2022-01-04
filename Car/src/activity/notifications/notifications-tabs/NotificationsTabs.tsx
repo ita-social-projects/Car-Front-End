@@ -86,7 +86,7 @@ const NotificationsTabs = () => {
                     name="Invitation"
                     component={InvitationView}
                     options={{
-                        headerTitle: "",
+                        headerTitle: "Invitation",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

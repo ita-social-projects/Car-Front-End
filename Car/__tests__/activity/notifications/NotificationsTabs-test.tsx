@@ -153,7 +153,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerTitle": "",
+              "headerTitle": "Invitation",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {

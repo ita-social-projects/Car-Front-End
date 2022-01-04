@@ -54,7 +54,7 @@ export default function AddressBookTabs () {
                     name="AddLocation"
                     component={AddLocation}
                     options={{
-                        headerTitle: "Add Address",
+                        headerTitle: "Address Book",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
