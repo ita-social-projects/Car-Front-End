@@ -94,53 +94,6 @@ describe("JourneySearch Test", () => {
           </View>
           <View
             style={
-              Array [
-                Object {
-                  "zIndex": 1,
-                },
-                Array [
-                  Object {
-                    "paddingLeft": 16,
-                    "paddingRight": 15,
-                    "paddingTop": 16,
-                  },
-                ],
-              ]
-            }
-          >
-            <JourneyCreationDropDownPicker
-              isVisible={false}
-              items={
-                Array [
-                  Object {
-                    "label": "1",
-                    "value": 1,
-                  },
-                  Object {
-                    "label": "2",
-                    "value": 2,
-                  },
-                  Object {
-                    "label": "3",
-                    "value": 3,
-                  },
-                  Object {
-                    "label": "4",
-                    "value": 4,
-                  },
-                ]
-              }
-              onChangeItem={[Function]}
-              onOpen={[Function]}
-              paddingLeft={100}
-              placeholder="Passengers:"
-              searchable={false}
-              valueId={1}
-              zIndex={2}
-            />
-          </View>
-          <View
-            style={
               Object {
                 "alignItems": "center",
                 "flexDirection": "row",
@@ -302,6 +255,15 @@ describe("JourneySearch Test", () => {
               </ForwardRef>
             </View>
           </View>
+          <View>
+            <SeatsInputSpinner
+              maxValue={4}
+              minValue={1}
+              onChange={[Function]}
+              title="Passengers"
+              value={4}
+            />
+          </View>
           <View
             style={
               Array [
@@ -311,7 +273,7 @@ describe("JourneySearch Test", () => {
                   "flexDirection": "row",
                   "height": "100%",
                   "justifyContent": "flex-end",
-                  "marginVertical": 24,
+                  "marginVertical": 300,
                 },
               ]
             }
@@ -325,7 +287,7 @@ describe("JourneySearch Test", () => {
                     "borderWidth": 2,
                     "flexDirection": "row",
                     "marginBottom": 20,
-                    "marginRight": 20,
+                    "marginRight": 15,
                     "paddingHorizontal": 16,
                     "paddingVertical": 12,
                   },

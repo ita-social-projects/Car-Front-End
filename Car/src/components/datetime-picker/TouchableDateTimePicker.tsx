@@ -54,9 +54,6 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                         backgroundColor: colors.white
                     }]}
                 onPress={() => setShow(true)}>
-                <Text style={[TouchableDateTimePickerStyle.descriptionText, { color: colors.secondaryDark }]}>
-                    {"Departure time:"}{" "}
-                </Text>
                 <Text style={[TouchableDateTimePickerStyle.dateTimeText,
                     { color: props.isConfirmed ? colors.primary : colors.secondaryDark }]}>
                     {

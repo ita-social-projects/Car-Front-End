@@ -98,7 +98,7 @@ const SearchJourneyStyle = StyleSheet.create({
 
     publishButtonContainer: {
         alignItems: "flex-end",
-        marginVertical: 24,
+        marginVertical: 300,
         flexDirection: "row",
         justifyContent: "flex-end",
         flex: 1,
@@ -106,7 +106,7 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     publishButton: {
-        marginRight: 20,
+        marginRight: 15,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,
