@@ -10,6 +10,7 @@ import Invitation from "../../models/invitation/Invitation";
 import { AxiosRequestConfig } from "axios";
 import JourneyTimeModel from "../../models/journey/JoruneyTimeModel";
 import ApplicantJourney from "../../models/journey/ApplicantJourney";
+import Request from "../../models/request/Request";
 
 const route = APIRoutes.getJourneyUrl();
 
@@ -27,7 +28,7 @@ const JourneyService = {
         APIService.get<Array<Journey>>(route + "scheduled"),
 
     getRequestedJourneys: async () =>
-        APIService.get<Array<Journey>>(route + "requested"),
+        APIService.get<Array<Request>>(route + "requested"),
 
     getCanceledJourneys: async () =>
         APIService.get<Array<Journey>>(route + "canceled"),

@@ -16,6 +16,7 @@ import WeekDay from "../components/schedule-bottom-popup/WeekDay";
 import moment from "moment";
 import { capitalize } from "./GeneralHelperFunctions";
 import { View } from "react-native";
+import Request from "../../models/request/Request";
 
 export const mapStopToWayPoint = (stop?: Stop) => {
     return {

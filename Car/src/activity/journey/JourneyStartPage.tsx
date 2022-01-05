@@ -4,6 +4,7 @@ import JourneyService from "../../../api-service/journey-service/JourneyService"
 import Journey from "../../../models/journey/Journey";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
+import Request from "../../../models/request/Request";
 import TouchableNavigationBlock from "../../components/touchable-navigation-block/TouchableNavigationBlock";
 import {
     FIRST_ELEMENT_INDEX,
@@ -15,6 +16,7 @@ import {
 import NavigationAddListener from "../../types/NavigationAddListener";
 import { useTheme } from "../../components/theme/ThemeProvider";
 import AsyncStorage from "@react-native-community/async-storage";
+import RequestCardList from "../../components/request-card/RequestCardList";
 
 const JourneyStartPage = (props: NavigationAddListener) => {
     const { colors } = useTheme();
@@ -81,7 +83,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>(
         []
     );
-    const [requestedJourneys, setRequestedJourneys] = useState<Array<Journey>>(
+    const [requestedJourneys, setRequestedJourneys] = useState<Array<Request>>(
         []
     );
     const [canceledJourneys, setCanceledJourneys] = useState<Array<Journey>>(
@@ -324,7 +326,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 )}
                 {selectedIndex === FIFTH_ELEMENT_INDEX && (
                     <View style={JourneyStartPageStyle.tabStyle}>
-                        {<JourneyCardList journey={requestedJourneys} />}
+                        {<RequestCardList request={requestedJourneys} />}
                     </View>
                 )}
                 {selectedIndex === SIXTH_ELEMENT_INDEX && (
