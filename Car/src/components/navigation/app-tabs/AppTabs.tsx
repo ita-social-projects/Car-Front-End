@@ -81,7 +81,7 @@ const AppTabs = () => {
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: colors.white,
-                inactiveTintColor: colors.hover,
+                inactiveTintColor: colors.secondaryDark,
                 activeBackgroundColor: colors.hover,
                 inactiveBackgroundColor: colors.white,
             }}

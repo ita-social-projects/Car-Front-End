@@ -28,7 +28,7 @@ const AddressBookStyle = StyleSheet.create({
     message: {
         paddingHorizontal: 24,
         paddingVertical: 16,
-        fontSize: 15,
+        fontSize: 14,
     },
 });
 
