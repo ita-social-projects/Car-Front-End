@@ -49,6 +49,8 @@ import Stop from "../../../../../models/stop/Stop";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import CredentialsManager from "../../../../../credentials/credentials.json";
 import { darkColors } from "../../../../components/theme/ThemesColors";
+import { BottomTabBarHeightContext } from "@react-navigation/bottom-tabs";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -109,6 +111,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const [routeIsUpdating, setRouteIsUpdating] = useState(false);
 
     const [isFromToChanged,setIsFromToChanged] = useState(false);
+
+    const screenHeight = Dimensions.get("screen").height;
+    const windowHeight = Dimensions.get("window").height;
+    const navbarHeight = screenHeight - windowHeight + getStatusBarHeight();
 
     useEffect(() => {
         if(from.text !== "" || to.text !== "")
@@ -376,6 +382,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 </View>
             )}
             <View style={{ flex: 1 }}>
+
                 <ScrollView
                     ref={ref => (scrollViewRef.current = ref)}
                     onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
@@ -469,21 +476,26 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         />
                     )}
                 </MapView>
+                <BottomTabBarHeightContext.Consumer>
+                    { tabBarHeight => (
+                        <TouchableOpacity
+                            style={[SearchJourneyStyle.confirmButton,
+                                {
+                                    backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
+                                    left: Dimensions.get("screen").width -
+                                    (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET),
+                                    bottom: tabBarHeight! + navbarHeight
+                                }]}
+                            onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
+                            disabled={confirmDisabled}
+                        >
+                            <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
+                                {journey ? "Update route" : "Confirm"}
+                            </Text>
+                        </TouchableOpacity>
+                    )}
+                </BottomTabBarHeightContext.Consumer>
 
-                <TouchableOpacity
-                    style={[SearchJourneyStyle.confirmButton,
-                        {
-                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
-                            left: Dimensions.get("screen").width -
-                            (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET)
-                        }]}
-                    onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
-                    disabled={confirmDisabled}
-                >
-                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
-                        {journey ? "Update route" : "Confirm"}
-                    </Text>
-                </TouchableOpacity>
             </View>
 
             <ConfirmModal
