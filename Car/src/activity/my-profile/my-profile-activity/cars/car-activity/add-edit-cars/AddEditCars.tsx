@@ -231,25 +231,19 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         });
     };
 
-    let brandItems: CarDropDownPickerItem[] | null = Object.entries(brands)
-        .length
-        ? brands.map((brand) => ({
-            ...{
-                value: String(brand!.id),
-                label: brand!.name
-            }
-        }))
-        : null;
+    const getCarDropDownPickerItems = (items) =>
+        Object.entries(items).length
+            ? brands.map((item) => ({
+                ...{
+                    value: String(item!.id),
+                    label: item!.name
+                }
+            }))
+            : null;
 
-    let modelItems: CarDropDownPickerItem[] | null = Object.entries(models)
-        .length
-        ? models.map((model) => ({
-            ...{
-                value: String(model!.id),
-                label: model!.name
-            }
-        }))
-        : null;
+    let brandItems: CarDropDownPickerItem[] | null = getCarDropDownPickerItems(brands);
+
+    let modelItems: CarDropDownPickerItem[] | null = getCarDropDownPickerItems(models);
 
     if (isLoading) return (
         <View
@@ -262,6 +256,8 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
             />
         </View>
     );
+
+    const isValidCarOrPlateNumber = !isValidCar || !isValidPlateNumber;
 
     return (
         <View
@@ -378,13 +374,11 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     </Text>
                     <TouchableOpacity
                         style={
-                            (!isValidCar || !isValidPlateNumber) ?
+                            isValidCarOrPlateNumber ?
                                 [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.secondaryDark }]
                                 : [AddEditCarsStyle.carButtonSave, { backgroundColor: colors.hover }]
                         }
-                        disabled={
-                            !isValidCar || !isValidPlateNumber
-                        }
+                        disabled={ isValidCarOrPlateNumber }
                         onPress={() => {
                             saveCarHandle().then(() => navigate("Cars")).catch(errorHandler);
                         }}
