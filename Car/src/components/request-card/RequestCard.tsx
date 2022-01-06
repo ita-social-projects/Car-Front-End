@@ -17,28 +17,28 @@ const RequestCard =
         passangersCount?: number,
         isPast: boolean
     }) => {
-        const { colors } = useTheme();
+        const {colors} = useTheme();
         const request = props.request;
-        const { user } = useContext(AuthContext);
-        
-        
+        const {user} = useContext(AuthContext);
+
+
         const fullName = `${user?.name} ${user?.surname}`;
 
         const GetFirstLocation = () => {
             let locationName;
             const [fetchedData, setFetchedData] = useState([]);
-            
-                useEffect(() => {
-                    const getData = async () => {
-                        locationName = await getAddressByCoordinatesAsync(
-                            {
-                                latitude: request!.from.latitude!,
-                                longitude: request!.from.longitude!
-                            });
-                        setFetchedData(locationName);
-                    };
-                    locationName = getData() ?? "Location A";
-                }, []);
+
+            useEffect(() => {
+                const getData = async () => {
+                    locationName = await getAddressByCoordinatesAsync(
+                        {
+                            latitude: request!.from.latitude!,
+                            longitude: request!.from.longitude!
+                        });
+                    setFetchedData(locationName);
+                };
+                locationName = getData() ?? "Location A";
+            }, []);
             return fetchedData;
         }
 
