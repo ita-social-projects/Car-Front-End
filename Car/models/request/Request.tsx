@@ -8,7 +8,6 @@ type Request = null | {
     from: Point;
     to: Point;
     departureTime: Date;
-    stops: Stop[];
     fee: FeeType;
     passengersCount: number;
     userId: number;

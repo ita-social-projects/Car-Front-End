@@ -5,15 +5,14 @@ import * as navigation from "../navigation/Navigation";
 import { useTheme } from "../theme/ThemeProvider";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { JOURNEY_CARD_WITH_FEE_HEIGHT, MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
-import RequestCardStyle from "./RequestCardStyle";
 import JourneyCardStyle from "../journey-card/JourneyCardStyle";
 import Stop from "../../../models/stop/Stop";
 import AuthContext from "../auth/AuthContext";
-import {FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION} from "../../constants/GeneralConstants";
-import StopType from "../../../models/stop/StopType";
+import {FIRST_ELEMENT_INDEX} from "../../constants/GeneralConstants";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
-import {getTimeToShow} from "../../utils/JourneyHelperFunctions";
+import {getRequestTimeToShow} from "../../utils/JourneyHelperFunctions";
 import {MAX_ADDRESS_NAME_LENGTH} from "../../constants/AddressConstants";
+import {getAddressByCoordinatesAsync} from "../../utils/LocationHelperFunctions";
 
 const RequestCard =
     (props: {
@@ -33,88 +32,105 @@ const RequestCard =
             setIsDriver(request?.organizer?.id == user?.id);
         }, []);
         
-        const fullName = `${request?.organizer?.name} ${request?.organizer?.surname}`;
+        const fullName = `${user?.name} ${user?.surname}`;
 
+        const GetFirstLocation = () =>
+        {
+            let locationName;
+
+            if(request?.from[FIRST_ELEMENT_INDEX]?.address?.name)
+            {
+                debugger;
+                locationName = getAddressByCoordinatesAsync(
+                    { latitude: request?.from!.latitude,
+                        longitude: request?.from.longitude! });
+            }
+            locationName = locationName ?? "Location A";
+
+            return locationName;
+        };
         
         
         return (
             <View>
-                <TouchableOpacity>
-                    <View style={[RequestCardStyle.component,
+                    <View style={[JourneyCardStyle.component,
                         { borderColor: colors.primary,
                             height: JOURNEY_CARD_WITH_FEE_HEIGHT }]}>
-                        <View style={RequestCardStyle.driverInfoBlock}>
-                            <View style={[RequestCardStyle.imageBlock, props.displayFee && { paddingBottom: 5.75 }]}>
-                                <AvatarLogo user={request?.organizer} size={38.5} />
+                        <View style={JourneyCardStyle.driverInfoBlock}>
+                            <View style={[JourneyCardStyle.imageBlock, props.displayFee && { paddingBottom: 5.75 }]}>
+                                <AvatarLogo user={user} size={38.5} />
                             </View>
-                            <View style={RequestCardStyle.driverTextBlock}>
-                                <View style={RequestCardStyle.driverNameBlock}>
+                            <View style={JourneyCardStyle.driverTextBlock}>
+                                <View style={JourneyCardStyle.driverNameBlock}>
                                     <View>
-                                        <Text style={[RequestCardStyle.driverNameText, { color: colors.primary }]} >
+                                        <Text style={[JourneyCardStyle.driverNameText, { color: colors.primary }]} >
                                             {trimTheStringIfTooLong(fullName, MAX_USER_FULL_NAME_LENGTH)}'s ride
                                         </Text>
                                     </View>
-                                    <View style={RequestCardStyle.moreOptionsBlock}>
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                navigation.navigate(
-                                                    "Applicant Page",
-                                                    {
-                                                        userId:
-                                                        request?.userId
-                                                    }
-                                                );
-                                            }}
-                                        >
-                                        </TouchableOpacity>
-                                    </View>
+                                    <View style={JourneyCardStyle.moreOptionsBlock}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            navigation.navigate(
+                                                "Applicant Page",
+                                                {
+                                                    userId:
+                                                    request?.userId
+                                                }
+                                            );
+                                        }}
+                                    >
+                                    </TouchableOpacity>
                                 </View>
-                                <View style={RequestCardStyle.driverPositionBlock}>
-                                    <Text style={[RequestCardStyle.driverPositionText,
+                                </View>
+                                <View style={JourneyCardStyle.driverPositionBlock}>
+                                    <Text style={[JourneyCardStyle.driverPositionText,
                                         { color: colors.secondaryDark }]} >
-                                        {request?.organizer?.position}
+                                        {user?.position}
                                     </Text>
                                 </View>
                             </View>
                         </View>
-                        <View style={RequestCardStyle.journeyDetailBlock}>
-                            <Text style={[RequestCardStyle.timeText, { color: colors.accentBlue }]}>
-                                "1234"
+                        <View style={JourneyCardStyle.journeyDetailBlock}>
+                            <Text style={[JourneyCardStyle.timeText, { color: colors.accentBlue }]}>
+                                {getRequestTimeToShow(request)}
                             </Text>
                             {props.displayFee &&
                                 <View>
-                                    <Text style={{ ...RequestCardStyle.feeText, color: colors.primary }}>
+                                    <Text style={{ ...JourneyCardStyle.feeText, color: colors.primary }}>
                                         {request?.fee ? "Free" : "Paid"}
                                     </Text>
                                 </View>
                             }
                         </View>
-                        <View style={RequestCardStyle.stopsBlock}>
-                            <View style={RequestCardStyle.firstStopBlock}>
-                                <View style={[RequestCardStyle.stopCircleIcon,
+                        <View style={JourneyCardStyle.stopsBlock}>
+                            <View style={JourneyCardStyle.firstStopBlock}>
+                                <View style={[JourneyCardStyle.stopCircleIcon,
                                     {
                                         backgroundColor: colors.secondaryLight,
                                         borderColor: colors.white
                                     }]} />
-                                <Text style={[RequestCardStyle.stopsText, { color: colors.hover }]}>
-                                    "123"
+                                <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
+                                    {trimTheStringIfTooLong(
+                                        GetFirstLocation(),
+                                        MAX_ADDRESS_NAME_LENGTH)}
                                 </Text>
                             </View>
-                            <View style={[RequestCardStyle.stopStickIcon,
+                            <View style={[JourneyCardStyle.stopStickIcon,
                                 { backgroundColor: colors.secondaryLight }]} />
-                            <View style={RequestCardStyle.lastStopBlock}>
-                                <View style={[RequestCardStyle.stopCircleIcon,
+                            <View style={JourneyCardStyle.lastStopBlock}>
+                                <View style={[JourneyCardStyle.stopCircleIcon,
                                     {
                                         backgroundColor: colors.secondaryLight,
                                         borderColor: colors.white
                                     }]} />
-                                <Text style={[RequestCardStyle.stopsText, { color: colors.hover }]}>
-                                    "123"
+                                <Text style={[JourneyCardStyle.stopsText, { color: colors.hover }]}>
+                                    {trimTheStringIfTooLong(
+                                        GetFirstLocation(),
+                                        MAX_ADDRESS_NAME_LENGTH)}
                                 </Text>
                             </View>
                         </View>
                     </View>
-                </TouchableOpacity>
             </View>
         );
     };

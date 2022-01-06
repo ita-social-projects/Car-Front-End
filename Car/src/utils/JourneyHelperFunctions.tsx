@@ -121,6 +121,13 @@ export const getTimeToShow = (journey?: Journey): string => {
         capitalize(moment(new Date(journey?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm"));
 };
 
+export const getRequestTimeToShow = (request?: Request): string => {
+    return request?.departureTime ?
+        // eslint-disable-next-line
+        capitalize(moment(new Date(request?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm")) : "Invalid Time"
+        
+};
+
 export const areStopsLocationEqual = (stopA: Stop, stopB: Stop): boolean => {
     return Math.abs(stopA!.address!.longitude - stopB!.address!.longitude) < LOCATION_EPSILON_DIAMETER &&
         Math.abs(stopA!.address!.latitude - stopB!.address!.latitude) < LOCATION_EPSILON_DIAMETER;
