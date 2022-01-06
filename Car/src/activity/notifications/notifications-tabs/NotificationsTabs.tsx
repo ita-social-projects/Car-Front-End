@@ -56,7 +56,7 @@ const NotificationsTabs = () => {
                     name="New Applicant"
                     component={JourneyNewApplicantView}
                     options={{
-                        headerTitle: "",
+                        headerTitle: "New Applicant",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -66,7 +66,7 @@ const NotificationsTabs = () => {
                     name="Ride is Canceled"
                     component={JourneyCancellationView}
                     options={{
-                        headerTitle: "",
+                        headerTitle: "Canceled Ride",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -76,7 +76,7 @@ const NotificationsTabs = () => {
                     name="Withdrawal"
                     component={PassengerWithdrawalView}
                     options={{
-                        headerTitle: "",
+                        headerTitle: "Withdrawal",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
@@ -97,7 +97,7 @@ const NotificationsTabs = () => {
                     name="Invitation is Accepted"
                     component={AprovedView}
                     options={{
-                        headerTitle: "",
+                        headerTitle: "Accepted Invitation",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
