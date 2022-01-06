@@ -92,47 +92,9 @@ test("renders correctly", async () =>
             }
           }
         />
-        <ForwardRef
-          disabled={true}
-          onPress={[Function]}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#000000",
-                "flexDirection": "row",
-                "justifyContent": "space-around",
-                "left": 629,
-                "paddingHorizontal": 16,
-                "paddingVertical": 14,
-                "position": "absolute",
-                "top": 1098,
-              },
-              Object {
-                "backgroundColor": "#909095",
-                "left": 629,
-              },
-            ]
-          }
-        >
-          <Text
-            style={
-              Array [
-                Object {
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                  "lineHeight": 20,
-                  "textTransform": "uppercase",
-                },
-                Object {
-                  "color": "#FFFFFF",
-                },
-              ]
-            }
-          >
-            Confirm
-          </Text>
-        </ForwardRef>
+        <Context.Consumer>
+          [Function]
+        </Context.Consumer>
       </View>
       <ConfirmModal
         cancelText="No, keep it"

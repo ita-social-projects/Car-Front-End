@@ -80,7 +80,6 @@ const SearchJourneyStyle = StyleSheet.create({
     confirmButton: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        top: Dimensions.get("screen").height - 236,
         left: Dimensions.get("screen").width - 121,
         position: "absolute",
         backgroundColor: "#000000",
@@ -98,7 +97,7 @@ const SearchJourneyStyle = StyleSheet.create({
 
     publishButtonContainer: {
         alignItems: "flex-end",
-        marginVertical: 24,
+        marginVertical: 300,
         flexDirection: "row",
         justifyContent: "flex-end",
         flex: 1,
@@ -106,7 +105,7 @@ const SearchJourneyStyle = StyleSheet.create({
     },
 
     publishButton: {
-        marginRight: 20,
+        marginRight: 15,
         marginBottom: 20,
         paddingHorizontal: 16,
         paddingVertical: 12,

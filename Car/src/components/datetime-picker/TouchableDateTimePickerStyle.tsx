@@ -21,7 +21,6 @@ const TouchableDateTimePickerStyle = StyleSheet.create({
         flex: 2,
         marginLeft: 5,
         fontSize: 16,
-        fontWeight: "bold"
     },
 
     barIcon: {

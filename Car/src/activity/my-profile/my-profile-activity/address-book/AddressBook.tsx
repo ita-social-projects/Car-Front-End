@@ -40,13 +40,13 @@ export default function AddressBook (props: {navigation: any}) {
                 picture={
                     <Ionicons
                         name={"add-circle-outline"}
-                        size={20}
+                        size={26}
                         color={colors.hover}
                     />
                 }
                 angle="0"
             >
-                <Text style={{ fontWeight: "bold", color: colors.accentBlue }}>
+                <Text style={{ fontWeight: "bold", color: colors.primary, paddingVertical: 6 }}>
                     Add New Address
                 </Text>
             </TouchableNavigationCard>
@@ -54,9 +54,8 @@ export default function AddressBook (props: {navigation: any}) {
                 <></>
             ) : (
                 <Text style={[AddressBookStyle.message, { color: colors.hover }]}>
-                    Currently you don’t have any address in the list. You have
-                    to add a address if you want to create or search Journeys
-                    with personal one.
+                    Currently, you don`t have any locations on the list. Add
+                    an address if you want to create journeys of your own.
                 </Text>
             )}
         </View>

@@ -33,7 +33,7 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { freeRideModal, invitationsErrorModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { departureTimeSorryModal, freeRideModal, invitationsErrorModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
 import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
@@ -336,6 +336,16 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             weekDay: weekDay || null,
         };
 
+        if (weekDay === null || weekDay === WeekDay.None) {
+            await addJourneyAsync(newJourney);
+        }
+        else {
+            await addScheduleAsync(newJourney);
+        }
+        setRideIsPublishing(false);
+    };
+
+    const addJourneyAsync = async (newJourney) => {
         await JourneyService.add(newJourney)
             .then((res) => {
                 if (res.status === HTTP_STATUS_OK) {
@@ -345,9 +355,20 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                     setModal(publishErrorModal);
                 }
             })
-            .catch(() => setModal(publishErrorModal));
+            .catch(() => setModal(departureTimeSorryModal));
+    };
 
-        setRideIsPublishing(false);
+    const addScheduleAsync = async (newJourney) => {
+        await JourneyService.addSchedule(newJourney)
+            .then((res) => {
+                if(res.status === HTTP_STATUS_OK) {
+                    setSuccessfullyPublishModalIsVisible(true);
+                    JourneyService.addScheduledJourney(res.data.scheduleModel);
+                }
+            })
+            .catch(() => {
+                setModal(publishErrorModal);
+            });
     };
 
     const updateJourneyHandler = async () => {

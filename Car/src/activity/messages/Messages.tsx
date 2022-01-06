@@ -108,6 +108,42 @@ const Messages = (props: MessagesProps) => {
         );
     };
 
+    const searchMatchingResults = () => {
+        return (
+            filteredDataSource?.length ? (
+                <View style={MessagesStyle.warningContainer}></View>
+            ) : (
+                <View style={MessagesStyle.noMessageContainer}>
+                    <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary, lineHeight: 22 }}>
+                        NO RESULTS MATCHING YOUR
+                        {"\n"}
+                        SEARCH FILTERS
+                    </Text>
+                    <Image
+                        style={MessagesStyle.noChatImageStyle}
+                        source={require("../../../assets/images/chat/no-chats.png")}
+                    />
+                </View>
+            )
+        );
+    };
+
+    const messageWhenUserHasNoChats = () => {
+        return (
+            <View style={MessagesStyle.noMessageContainer}>
+                <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary, lineHeight: 22 }}>
+                    CURRENTLY YOU DO NOT HAVE ANY
+                    {"\n"}
+                    CHATS
+                </Text>
+                <Image
+                    style={MessagesStyle.noChatImageStyle}
+                    source={require("../../../assets/images/chat/no-chats.png")}
+                />
+            </View>
+        );
+    };
+
     const chatsList = () => {
         return (
             <View>
@@ -178,34 +214,7 @@ const Messages = (props: MessagesProps) => {
                         </TouchableOpacity>
                     )}
                 />
-                {isChatsEmpty ? (
-                    <View style={MessagesStyle.noMessageContainer}>
-                        <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary, lineHeight: 22 }}>
-                            CURRENTLY YOU DO NOT HAVE ANY
-                            {"\n"}
-                            CHATS
-                        </Text>
-                        <Image
-                            style={MessagesStyle.noChatImageStyle}
-                            source={require("../../../assets/images/chat/no-chats.png")}
-                        />
-                    </View>
-                ) : (
-                    filteredDataSource?.length ? (
-                        <View style={MessagesStyle.warningContainer}></View>
-                    ) : (
-                        <View style={MessagesStyle.noMessageContainer}>
-                            <Text style={{ ...MessagesStyle.noMessageStyle, color: colors.primary, lineHeight: 22 }}>
-                                NO RESULTS MATCHING YOUR
-                                {"\n"}
-                                SEARCH FILTERS
-                            </Text>
-                            <Image
-                                style={MessagesStyle.noChatImageStyle}
-                                source={require("../../../assets/images/chat/no-chats.png")}
-                            />
-                        </View>
-                    ))}
+                {isChatsEmpty ? messageWhenUserHasNoChats() : searchMatchingResults()}
             </View>
         );
     };

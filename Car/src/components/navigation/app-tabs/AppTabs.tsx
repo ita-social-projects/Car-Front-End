@@ -21,7 +21,7 @@ const AppTabs = () => {
     let [unreadMessagesNumber, setUnreadMessagesNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
     NotificationsService.getUnreadNotificationsNumber().then((result) =>
-        setUnreadNotificationsNumber(result.data as number)
+        setUnreadNotificationsNumber(result.data)
     );
 
     ReceivedMessagesService.getAllUnreadMessagesNumber().then((result) =>
@@ -81,7 +81,7 @@ const AppTabs = () => {
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: colors.white,
-                inactiveTintColor: colors.hover,
+                inactiveTintColor: colors.secondaryDark,
                 activeBackgroundColor: colors.hover,
                 inactiveBackgroundColor: colors.white,
             }}
