@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/journey/Journey";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
@@ -52,6 +52,9 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                                             useState(inactiveButtonTextStyle);
     const [scheduledButtonTextStyle, setScheduledButtonTextStyle] =
                                             useState(inactiveButtonTextStyle);
+    
+    const screenHeight = Dimensions.get('screen').height;
+    const screenWidth = Dimensions.get('screen').width;
 
     useEffect(() => {
         setAllButtonStyle(selectedIndex == FIRST_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
@@ -118,8 +121,8 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     from={colors.greenGradientFrom}
                     to={colors.greenGradientTo}
                     reverse={false}
-                    width={150}
-                    height={140}
+                    width={(screenWidth > 380) ? (150) : (140)}
+                    height={(screenHeight > 600) ? (140) : (108)}
                 />
                 <TouchableNavigationBlock
                     navigation={props.navigation}
@@ -129,8 +132,8 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     from={colors.navyBlueGradientFrom}
                     to={colors.navyBlueGradientTo}
                     reverse={true}
-                    width={200}
-                    height={140}
+                    width={(screenWidth > 380) ? (200) : (150)}
+                    height={(screenHeight > 600) ? (140) : (100)}
                 />
             </View>
             <View style={JourneyStartPageStyle.manageJourneysWrapper }>

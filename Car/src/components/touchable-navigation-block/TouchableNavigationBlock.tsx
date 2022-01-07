@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    Dimensions,
     Image,
     Text,
     TouchableOpacity,
@@ -36,9 +37,10 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                             </Text>
                             <Image
                                 style={{
+                                    flex: 1.5,
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: 15,
+                                    marginTop: (Dimensions.get('screen').height > 600) ? ('3%') : ('3%'),
                                     transform:
                                         [{
                                             scaleX: -1
@@ -53,10 +55,11 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                         >
                             <Image
                                 style={{
+                                    flex: (Dimensions.get('screen').height > 600) ? (1) : (1),
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: 14,
-                                    marginLeft: -10,
+                                    marginTop: (Dimensions.get('screen').height > 600) ? ('3.9%') : ('2.3%'),
+                                    marginLeft: (Dimensions.get('screen').height > 600) ? ('-2.9%') : ('-3.6%'),
                                     borderBottomLeftRadius: 6
                                 }}
                                 source={props.blockImage}
