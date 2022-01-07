@@ -65,7 +65,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                     <TouchableOpacity
                         style={[
                             JourneyPageStyle.requestButton,
-                            { backgroundColor: colors.primary }]}
+                            { backgroundColor: colors.hover }]}
                         onPress={props.onSendRequestPress}
                     >
                         <Text style={[JourneyPageStyle.requestButtonText, { color: colors.white }]}>
