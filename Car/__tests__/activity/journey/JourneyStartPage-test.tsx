@@ -5,13 +5,13 @@ import JourneyStartPage from "../../../src/activity/journey/JourneyStartPage";
 const renderer = shallowRenderer.createRenderer();
 
 const navigation = {
-    //eslint-disable-next-line @typescript-eslint/no-unused-vars
-    addListener: (event: string, callback: () => void) => () => void {},
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addListener: (event: string, callback: () => void) => () => void {},
 };
 
 test("renders correctly", async () =>
-    expect(renderer.render(<JourneyStartPage navigation={navigation} />))
-        .toMatchInlineSnapshot(`
+  expect(renderer.render(<JourneyStartPage navigation={navigation} />))
+    .toMatchInlineSnapshot(`
     <ScrollView
       refreshControl={
         <RefreshControlMock
@@ -116,10 +116,11 @@ test("renders correctly", async () =>
             }
           }
           horizontal={true}
-          pagingEnabled={true}
+          pagingEnabled={false}
           showsHorizontalScrollIndicator={false}
           style={
             Object {
+              "flex": 1,
               "width": "100%",
             }
           }
@@ -134,7 +135,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <ForwardRef
+            <TouchableOpacity
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -143,7 +144,7 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
-                    "width": "13%",
+                    "width": "10%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
@@ -173,8 +174,8 @@ test("renders correctly", async () =>
               >
                 All
               </Text>
-            </ForwardRef>
-            <ForwardRef
+            </TouchableOpacity>
+            <TouchableOpacity
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -183,7 +184,7 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
-                    "width": "13%",
+                    "width": "10%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
@@ -213,8 +214,8 @@ test("renders correctly", async () =>
               >
                 Past
               </Text>
-            </ForwardRef>
-            <ForwardRef
+            </TouchableOpacity>
+            <TouchableOpacity
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -223,7 +224,7 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
-                    "width": "24%",
+                    "width": "20%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
@@ -253,8 +254,8 @@ test("renders correctly", async () =>
               >
                 Upcoming
               </Text>
-            </ForwardRef>
-            <ForwardRef
+            </TouchableOpacity>
+            <TouchableOpacity
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -293,7 +294,81 @@ test("renders correctly", async () =>
               >
                 Regular
               </Text>
-            </ForwardRef>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "20%",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
+                    "color": "#414045",
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Requested
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "20%",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
+                    "color": "#414045",
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Canceled
+              </Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
         <View
