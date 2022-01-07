@@ -31,8 +31,8 @@ const RequestCard =
                 const getData = async () => {
                     locationName = await getAddressByCoordinatesAsync(
                         {
-                            latitude: request!.from.latitude!,
-                            longitude: request!.from.longitude!
+                            latitude: request!.from.latitude,
+                            longitude: request!.from.longitude
                         });
                     setFetchedData(locationName);
                 };
@@ -51,8 +51,8 @@ const RequestCard =
                 const getData = async () => {
                     locationName = await getAddressByCoordinatesAsync(
                         {
-                            latitude: request!.to.latitude!,
-                            longitude: request!.to.longitude!
+                            latitude: request!.to.latitude,
+                            longitude: request!.to.longitude
                         });
                     setFetchedData(locationName);
                 };
