@@ -2,8 +2,7 @@
 import { View } from "react-native";
 import Request from "../../../models/request/Request";
 import RequestCard from "./RequestCard";
-import {LESS_THAN_ZERO, MORE_THAN_ZERO, ZERO} from "../../constants/GeneralConstants";
-
+import { LESS_THAN_ZERO, MORE_THAN_ZERO, ZERO } from "../../constants/GeneralConstants";
 
 interface RequestCardListProps {
     request: Request[],
@@ -27,7 +26,7 @@ const RequestCardList = (props:RequestCardListProps) => {
 
         return ZERO;
     }
-    
+
     return (
         <View>
             {request.map((item) => (

@@ -125,7 +125,7 @@ export const getRequestTimeToShow = (request?: Request): string => {
     return request?.departureTime ?
         // eslint-disable-next-line
         capitalize(moment(new Date(request?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm")) : "Invalid Time"
-        
+
 };
 
 export const areStopsLocationEqual = (stopA: Stop, stopB: Stop): boolean => {

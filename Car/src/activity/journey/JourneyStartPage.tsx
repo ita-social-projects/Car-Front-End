@@ -67,9 +67,9 @@ const JourneyStartPage = (props: NavigationAddListener) => {
         setRequestedButtonStyle(selectedIndex == FIFTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
         setCanceledButtonStyle(selectedIndex == SIXTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
         setAllButtonTextStyle(selectedIndex == FIRST_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
-        setRequestedButtonTextStyle( selectedIndex == 
+        setRequestedButtonTextStyle(selectedIndex ==
         FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
-        setCanceledButtonTextStyle( selectedIndex == 
+        setCanceledButtonTextStyle(selectedIndex ==
         FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setPastButtonTextStyle(selectedIndex == SECOND_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setUpcomingButtonTextStyle(

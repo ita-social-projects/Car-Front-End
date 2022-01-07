@@ -14,7 +14,6 @@ import Request from "../../models/request/Request";
 import ScheduleDto from "../../models/journey/ScheduleDto";
 import ScheduleTimeModel from "../../models/journey/ScheduleTimeModel";
 
-
 const route = APIRoutes.getJourneyUrl();
 
 const JourneyService = {

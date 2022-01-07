@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Details from "../../../src/activity/my-profile/my-profile-activity/details/Details";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<Details />).toJSON()).toMatchInlineSnapshot(`
+  expect(renderer.create(<Details />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -34,9 +34,7 @@ test("renders correctly", async () =>
         }
       >
         <ActivityIndicator
-          animating={true}
           color="#414045"
-          hidesWhenStopped={true}
           size="large"
         />
         <Text

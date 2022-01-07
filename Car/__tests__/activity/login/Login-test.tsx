@@ -5,13 +5,13 @@ import Login from "../../../src/activity/login/Login";
 const renderer = shallowRender.createRenderer();
 
 const navigation = {
-    addListener: () => () => {},
+  addListener: () => () => {},
 };
 
 test("renders correctly", async () =>
-    expect(
-        renderer.render(<Login navigation={navigation} route={undefined as any} />)
-    ).toMatchInlineSnapshot(`
+  expect(
+    renderer.render(<Login navigation={navigation} route={undefined as any} />)
+  ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -97,7 +97,7 @@ test("renders correctly", async () =>
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             activeOpacity={1}
             disabled={false}
             onPress={[Function]}
@@ -132,7 +132,7 @@ test("renders correctly", async () =>
             >
               Login
             </Text>
-          </ForwardRef>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

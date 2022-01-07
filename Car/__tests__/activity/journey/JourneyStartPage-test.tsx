@@ -135,7 +135,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <TouchableOpacity
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -174,8 +174,8 @@ test("renders correctly", async () =>
               >
                 All
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </ForwardRef>
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -214,8 +214,8 @@ test("renders correctly", async () =>
               >
                 Past
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </ForwardRef>
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -254,8 +254,8 @@ test("renders correctly", async () =>
               >
                 Upcoming
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </ForwardRef>
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -294,8 +294,8 @@ test("renders correctly", async () =>
               >
                 Regular
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </ForwardRef>
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -331,8 +331,8 @@ test("renders correctly", async () =>
               >
                 Requested
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </ForwardRef>
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -368,7 +368,7 @@ test("renders correctly", async () =>
               >
                 Canceled
               </Text>
-            </TouchableOpacity>
+            </ForwardRef>
           </View>
         </ScrollView>
         <View

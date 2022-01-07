@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import MyProfile from "../../../src/activity/my-profile/MyProfile";
 
 test("renders correctly", async () =>
-    expect(renderer.create(<MyProfile navigation={undefined} />).toJSON())
-        .toMatchInlineSnapshot(`
+  expect(renderer.create(<MyProfile navigation={undefined} />).toJSON())
+    .toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -20,7 +20,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -110,7 +112,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -206,7 +210,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -296,7 +302,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -386,7 +394,9 @@ test("renders correctly", async () =>
       <View>
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
+          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
