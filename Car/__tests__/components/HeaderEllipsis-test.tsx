@@ -3,12 +3,10 @@ import renderer from "react-test-renderer";
 import HeaderEllipsis from "../../src/components/header-ellipsis/HeaderEllipsis";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<HeaderEllipsis />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<HeaderEllipsis />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
-      collapsable={false}
       focusable={false}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

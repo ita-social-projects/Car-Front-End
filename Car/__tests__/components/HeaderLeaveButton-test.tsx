@@ -11,27 +11,27 @@ const renderer = shallowRenderer.createRenderer();
 let setLeaveRideModalIsVisible = true;
 
 test("modal must be visible", async () => {
-  expect(setLeaveRideModalIsVisible).toBeTruthy();
+    expect(setLeaveRideModalIsVisible).toBeTruthy();
 });
 
 test("shoud be correct", async () =>
-  expect(navigation.navigate("Journey")).toBe(
+    expect(navigation.navigate("Journey")).toBe(
     navigation.navigationRef.current?.navigate("Journey")
-  ));
+    ));
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(
-      <ConfirmModal
-        visible={false}
-        title={""}
-        confirmText={""}
-        onConfirm={() => {}}
-        disableModal={() => {}}
-      />
-    )
-  ).toMatchInlineSnapshot(`
-    <Modal
+    expect(
+        renderer.render(
+            <ConfirmModal
+                visible={false}
+                title={""}
+                confirmText={""}
+                onConfirm={() => {}}
+                disableModal={() => {}}
+            />
+        )
+    ).toMatchInlineSnapshot(`
+    <Component
       animationType="fade"
       hardwareAccelerated={false}
       statusBarTranslucent={true}
@@ -94,7 +94,7 @@ test("renders correctly", async () =>
                   }
                 }
               />
-              <TouchableOpacity
+              <ForwardRef
                 onPress={[Function]}
                 style={
                   Object {
@@ -125,8 +125,8 @@ test("renders correctly", async () =>
                 >
                   
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </ForwardRef>
+              <ForwardRef
                 onPress={[Function]}
               >
                 <Text
@@ -140,40 +140,40 @@ test("renders correctly", async () =>
                     }
                   }
                 />
-              </TouchableOpacity>
+              </ForwardRef>
             </View>
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
-    </Modal>
+    </Component>
   `));
 
 test("should delete user from journey", async () => {
-  jest.spyOn(APIService, "delete").mockImplementation(
-    () =>
-      new Promise<AxiosResponse>(function (resolve) {
-        resolve({
-          data: {},
-          statusText: "Ok",
-          status: 200,
-          config: {},
-          headers: {
-            "Context-Type": "application/json",
-          },
-        });
-      })
-  );
-  JourneyService.deleteUser(0, 0).then((res) => {
-    expect(res.status).toBe(200);
-  });
+    jest.spyOn(APIService, "delete").mockImplementation(
+        () =>
+            new Promise<AxiosResponse>(function (resolve) {
+                resolve({
+                    data: {},
+                    statusText: "Ok",
+                    status: 200,
+                    config: {},
+                    headers: {
+                        "Context-Type": "application/json",
+                    },
+                });
+            })
+    );
+    JourneyService.deleteUser(0, 0).then((res) => {
+        expect(res.status).toBe(200);
+    });
 });
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(<HeaderLeaveButton onPress={setLeaveRideModalIsVisible} />)
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(<HeaderLeaveButton onPress={setLeaveRideModalIsVisible} />)
+    ).toMatchInlineSnapshot(`
     <View>
-      <TouchableOpacity
+      <ForwardRef
         onPress={[Function]}
         style={
           Object {
@@ -210,7 +210,7 @@ test("renders correctly", async () =>
             Leave
           </Text>
         </View>
-      </TouchableOpacity>
+      </ForwardRef>
       <ConfirmModal
         cancelText="No"
         confirmText="Yes"

@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import BadSearchResult from "../../../src/activity/journey/journey-activity/search-journey/search-results/bad-search-result/BadSearchResult";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<BadSearchResult />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -82,9 +82,7 @@ test("renders correctly", async () =>
       >
         <View
           accessible={true}
-          collapsable={false}
           focusable={true}
-          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}

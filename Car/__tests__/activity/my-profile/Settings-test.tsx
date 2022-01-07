@@ -8,7 +8,7 @@ jest.mock("react-native-gesture-handler", () => require("react-native"));
 jest.mock("reanimated-bottom-sheet", () => {});
 
 test("renders correctly", async () =>
-  expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
+    expect(renderer.render(<Settings />)).toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
         refreshControl={
@@ -43,7 +43,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <TouchableOpacity
+            <ForwardRef
               activeOpacity={1}
               onPress={[Function]}
               style={
@@ -74,7 +74,7 @@ test("renders correctly", async () =>
               >
                 <AvatarLogoTitle />
               </ForwardRef(AnimatedComponentWrapper)>
-            </TouchableOpacity>
+            </ForwardRef>
             <View
               style={
                 Object {
@@ -110,7 +110,7 @@ test("renders correctly", async () =>
                   }
                 }
               >
-                <TouchableOpacity
+                <ForwardRef
                   onPress={[Function]}
                   style={
                     Array [
@@ -151,8 +151,8 @@ test("renders correctly", async () =>
                   >
                     Light
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </ForwardRef>
+                <ForwardRef
                   onPress={[Function]}
                   style={
                     Array [
@@ -195,8 +195,8 @@ test("renders correctly", async () =>
                   >
                     Dark
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </ForwardRef>
+                <ForwardRef
                   onPress={[Function]}
                   style={
                     Array [
@@ -240,7 +240,7 @@ test("renders correctly", async () =>
                   >
                     As system
                   </Text>
-                </TouchableOpacity>
+                </ForwardRef>
               </View>
             </View>
           </View>
@@ -266,7 +266,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            <TouchableOpacity
+            <ForwardRef
               onPress={[Function]}
               style={
                 Object {
@@ -295,7 +295,7 @@ test("renders correctly", async () =>
               >
                 Add photo
               </Text>
-            </TouchableOpacity>
+            </ForwardRef>
           </View>
         }
         renderHeader={

@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Indicator from "../../src/components/activity-indicator/Indicator";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<Indicator />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<Indicator />).toJSON()).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -19,7 +19,12 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <ActivityIndicator />
+      <ActivityIndicator
+        animating={true}
+        color="#999999"
+        hidesWhenStopped={true}
+        size="small"
+      />
       <Text
         style={
           Array [

@@ -6,16 +6,16 @@ import { lightColors } from "../../src/components/theme/ThemesColors";
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(
-      <TouchableMapBar
-        iconName={"location"}
-        iconColor={lightColors.secondaryLight}
-      />
-    )
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <TouchableMapBar
+                iconName={"location"}
+                iconColor={lightColors.secondaryLight}
+            />
+        )
+    ).toMatchInlineSnapshot(`
     <View>
-      <TouchableOpacity
+      <ForwardRef
         style={
           Array [
             Object {
@@ -66,7 +66,7 @@ test("renders correctly", async () =>
         >
            
         </Text>
-        <TouchableOpacity
+        <ForwardRef
           disabled={true}
         >
           <Icon
@@ -90,7 +90,7 @@ test("renders correctly", async () =>
               ]
             }
           />
-        </TouchableOpacity>
-      </TouchableOpacity>
+        </ForwardRef>
+      </ForwardRef>
     </View>
   `));

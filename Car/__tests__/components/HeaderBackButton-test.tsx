@@ -3,12 +3,10 @@ import renderer from "react-test-renderer";
 import HeaderBackButton from "../../src/components/header-back-button/HeaderBackButton";
 
 test("renders correctly", async () =>
-  expect(renderer.create(<HeaderBackButton />).toJSON()).toMatchInlineSnapshot(`
+    expect(renderer.create(<HeaderBackButton />).toJSON()).toMatchInlineSnapshot(`
     <View
       accessible={true}
-      collapsable={false}
       focusable={true}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
