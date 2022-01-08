@@ -14,6 +14,9 @@ import TouchableNavigationBlockProps from "./TouchableNavigationBlockProps";
 const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
     const { colors } = useTheme();
 
+    const sizeOfScreenComparerHeight = 600;
+    const screenHeight = Dimensions.get("screen").height;
+
     return (
         <View>
             <TouchableOpacity
@@ -40,7 +43,7 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                                     flex: 1.5,
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: (Dimensions.get('screen').height > 600) ? ('3%') : ('3%'),
+                                    marginTop: (screenHeight > sizeOfScreenComparerHeight) ? ("3%") : ("3%"),
                                     transform:
                                         [{
                                             scaleX: -1
@@ -55,11 +58,11 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                         >
                             <Image
                                 style={{
-                                    flex: (Dimensions.get('screen').height > 600) ? (1) : (1),
+                                    flex: 1,
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: (Dimensions.get('screen').height > 600) ? ('3.9%') : ('2.3%'),
-                                    marginLeft: (Dimensions.get('screen').height > 600) ? ('-2.9%') : ('-3.6%'),
+                                    marginTop: (screenHeight > sizeOfScreenComparerHeight) ? ("3.9%") : ("2.3%"),
+                                    marginLeft: (screenHeight > sizeOfScreenComparerHeight) ? ("-2.9%") : ("-3.6%"),
                                     borderBottomLeftRadius: 6
                                 }}
                                 source={props.blockImage}

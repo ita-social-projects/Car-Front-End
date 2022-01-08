@@ -7,7 +7,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 3,
         borderStyle: "solid",
-        height: (Dimensions.get('screen').height) > 600 ? (160) : (120),
+        height: (Dimensions.get("screen").height) > 600 ? (160) : (120),
         marginVertical: 5,
         elevation: 8,
         marginHorizontal: 7
@@ -16,7 +16,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     textStyle: {
         flex: 1,
         fontFamily: Font.ProximaNova.Bold,
-        fontSize: (Dimensions.get('screen').height) > 600 ? (24) : (18),
+        fontSize: (Dimensions.get("screen").height) > 600 ? (24) : (18),
         justifyContent: "center",
         textTransform: "uppercase",
         textAlignVertical: "center",
@@ -29,8 +29,8 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     },
 
     textStyleFindRide: {
-        marginLeft: (Dimensions.get('screen').height) > 600 ? (40) : (30),
-        marginRight: (Dimensions.get('screen').height) > 600 ? (0) : (-5),
+        marginLeft: (Dimensions.get("screen").height) > 600 ? (40) : (30),
+        marginRight: (Dimensions.get("screen").height) > 600 ? (0) : (-10),
     },
 
     imageStyle: {
