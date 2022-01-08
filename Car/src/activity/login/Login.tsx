@@ -82,8 +82,7 @@ const Login = (properties: LoginProps) => {
                     <TouchableOpacity
                         style={[
                             LoginStyle.button,
-                            buttonDisabled && { backgroundColor: colors.hover },
-                            { backgroundColor: colors.primary }
+                            { backgroundColor: colors.hover }
                         ]}
                         disabled={buttonDisabled}
                         activeOpacity={1}
