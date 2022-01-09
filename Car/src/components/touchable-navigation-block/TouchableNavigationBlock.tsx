@@ -43,7 +43,7 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                                     flex: 1.5,
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: (screenHeight > sizeOfScreenComparerHeight) ? ("3%") : ("3%"),
+                                    marginTop: "3%",
                                     transform:
                                         [{
                                             scaleX: -1
