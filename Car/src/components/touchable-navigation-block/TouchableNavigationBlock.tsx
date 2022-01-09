@@ -6,6 +6,9 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
+import {
+    ZERO_SIZE_INDENT
+} from "../../constants/GeneralConstants";
 import LinearGradient from "react-native-linear-gradient";
 import { useTheme } from "../theme/ThemeProvider";
 import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle";
@@ -15,6 +18,7 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
     const { colors } = useTheme();
 
     const sizeOfScreenComparerHeight = 600;
+    const screenResComparerHeight = 850;
     const screenHeight = Dimensions.get("screen").height;
 
     return (
@@ -59,11 +63,15 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                             <Image
                                 style={{
                                     flex: 1,
+                                    borderBottomLeftRadius: 6,
                                     width: props.width,
-                                    height: props.height,
-                                    marginTop: (screenHeight > sizeOfScreenComparerHeight) ? ("3.9%") : ("2.3%"),
+                                    aspectRatio: 1.17,
+                                    // height: props.height,
+                                    marginTop: (screenHeight > sizeOfScreenComparerHeight) ? ("2.5%") : ("1.9%"),
                                     marginLeft: (screenHeight > sizeOfScreenComparerHeight) ? ("-2.9%") : ("-3.6%"),
-                                    borderBottomLeftRadius: 6
+                                    top: (screenHeight > sizeOfScreenComparerHeight) &&
+                                        (screenHeight < screenResComparerHeight) ?
+                                        ("2.7%") : (ZERO_SIZE_INDENT),
                                 }}
                                 source={props.blockImage}
                             />

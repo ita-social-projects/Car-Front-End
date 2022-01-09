@@ -78,11 +78,12 @@ test("renders correctly", async () =>
               source={Object {}}
               style={
                 Object {
+                  "aspectRatio": 1.17,
                   "borderBottomLeftRadius": 6,
                   "flex": 1,
-                  "height": undefined,
                   "marginLeft": "-2.9%",
-                  "marginTop": "3.9%",
+                  "marginTop": "2.5%",
+                  "top": 0,
                   "width": undefined,
                 }
               }
@@ -101,7 +102,7 @@ test("renders correctly", async () =>
                     "width": 250,
                   },
                   Object {
-                    "marginLeft": 40,
+                    "marginLeft": 30,
                     "marginRight": 0,
                   },
                 ]

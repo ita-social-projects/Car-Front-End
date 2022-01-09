@@ -32,7 +32,7 @@ const TouchableNavigationBlockStyle = StyleSheet.create({
     },
 
     textStyleFindRide: {
-        marginLeft: (screenHeight) > sizeOfScreenComparerHeight ? (40) : (30),
+        marginLeft: (screenHeight) > sizeOfScreenComparerHeight ? (30) : (30),
         marginRight: (screenHeight) > sizeOfScreenComparerHeight ? (0) : (-10),
     },
 

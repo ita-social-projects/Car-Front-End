@@ -27,3 +27,5 @@ export const MORE_THAN_ZERO = 1;
 export const MINUTES_IN_HOUR = 60;
 
 export const LOCATION_EPSILON_DIAMETER = 0.002;
+
+export const ZERO_SIZE_INDENT = 0;
