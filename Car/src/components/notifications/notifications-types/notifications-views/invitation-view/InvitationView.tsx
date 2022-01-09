@@ -43,6 +43,13 @@ const InvitationView = (props: InvitationViewProps) => {
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [stops, setStops] = useState<Stop[]>([]);
     let notificationId = props.route.params.notification.notificationId;
+    const [withLuggage] = useState(false);
+    const [requestComments] = useState("");
+    const jsonData = JSON.stringify({
+        comments: requestComments,
+        hasLuggage: withLuggage,
+        applicantStops: stops,
+    });
 
     useEffect(() => {
         if (!wasOpened) {
@@ -75,8 +82,7 @@ const InvitationView = (props: InvitationViewProps) => {
                 receiverId: journey!.organizer?.id!,
                 journeyId: props.route.params.notification.journeyId,
                 type: notificationType,
-                jsonData:
-                    "{\"title\": \"New Applicant\", \"comments\": \"\", \"hasLuggage\": \"false\"}",
+                jsonData: jsonData,
             }
         ).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
