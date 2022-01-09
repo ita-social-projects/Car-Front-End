@@ -112,4 +112,4 @@ test("renders correctly", async () =>
         </BVLinearGradient>
       </View>
     </View>
-    `));
+  `));
