@@ -415,8 +415,8 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                     style={[
                                                         JourneyPageStyle.confirmButton,
                                                         {
-                                                            backgroundColor: colors.primary,
-                                                            borderColor: colors.primary,
+                                                            backgroundColor: colors.hover,
+                                                            borderColor: colors.hover,
                                                             marginTop: 16
                                                         },
                                                         isRequested &&
