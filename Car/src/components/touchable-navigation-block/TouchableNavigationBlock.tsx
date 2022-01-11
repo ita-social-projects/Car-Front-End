@@ -1,10 +1,14 @@
 import React from "react";
 import {
+    Dimensions,
     Image,
     Text,
     TouchableOpacity,
     View
 } from "react-native";
+import {
+    ZERO_SIZE_INDENT
+} from "../../constants/GeneralConstants";
 import LinearGradient from "react-native-linear-gradient";
 import { useTheme } from "../theme/ThemeProvider";
 import TouchableNavigationBlockStyle from "./TouchableNavigationBlockStyle";
@@ -12,6 +16,10 @@ import TouchableNavigationBlockProps from "./TouchableNavigationBlockProps";
 
 const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
     const { colors } = useTheme();
+
+    const sizeOfScreenComparerHeight = 600;
+    const screenResComparerHeight = 850;
+    const screenHeight = Dimensions.get("screen").height;
 
     return (
         <View>
@@ -36,9 +44,10 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                             </Text>
                             <Image
                                 style={{
+                                    flex: 1.5,
                                     width: props.width,
                                     height: props.height,
-                                    marginTop: 15,
+                                    marginTop: "3%",
                                     transform:
                                         [{
                                             scaleX: -1
@@ -53,11 +62,16 @@ const TouchableNavigationBlock = (props: TouchableNavigationBlockProps) => {
                         >
                             <Image
                                 style={{
+                                    flex: 1,
+                                    borderBottomLeftRadius: 6,
                                     width: props.width,
-                                    height: props.height,
-                                    marginTop: 14,
-                                    marginLeft: -10,
-                                    borderBottomLeftRadius: 6
+                                    aspectRatio: 1.17,
+                                    // height: props.height,
+                                    marginTop: (screenHeight > sizeOfScreenComparerHeight) ? ("2.5%") : ("1.9%"),
+                                    marginLeft: (screenHeight > sizeOfScreenComparerHeight) ? ("-2.9%") : ("-3.6%"),
+                                    top: (screenHeight > sizeOfScreenComparerHeight) &&
+                                        (screenHeight < screenResComparerHeight) ?
+                                        ("2.7%") : (ZERO_SIZE_INDENT),
                                 }}
                                 source={props.blockImage}
                             />
