@@ -7,7 +7,7 @@ const renderer = shallowRenderer.createRenderer();
 test("renders correctly", async () =>
     expect(renderer.render(<CreateJourney props={undefined as any} />))
         .toMatchInlineSnapshot(`
-    <React.Fragment>
+    <View>
       <View
         style={
           Object {
@@ -21,13 +21,7 @@ test("renders correctly", async () =>
           text="Loading information..."
         />
       </View>
-      <View
-        style={
-          Object {
-            "flex": 1,
-          }
-        }
-      >
+      <View>
         <ScrollView
           onContentSizeChange={[Function]}
           style={
@@ -88,13 +82,51 @@ test("renders correctly", async () =>
           showsUserLocation={true}
           style={
             Object {
-              "flex": 1,
+              "height": "100%",
+              "zIndex": -2,
             }
           }
         />
-        <Context.Consumer>
-          [Function]
-        </Context.Consumer>
+        <ForwardRef
+          disabled={true}
+          onPress={[Function]}
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#000000",
+                "bottom": 24,
+                "flexDirection": "row",
+                "justifyContent": "space-around",
+                "paddingHorizontal": 16,
+                "paddingVertical": 14,
+                "position": "absolute",
+                "right": 15,
+              },
+              Object {
+                "backgroundColor": "#909095",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "lineHeight": 20,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "#FFFFFF",
+                },
+              ]
+            }
+          >
+            Confirm
+          </Text>
+        </ForwardRef>
       </View>
       <ConfirmModal
         cancelText="No, keep it"
@@ -133,5 +165,5 @@ test("renders correctly", async () =>
         title="CHANGES"
         visible={false}
       />
-    </React.Fragment>
+    </View>
   `));

@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
 const HeaderStyle = StyleSheet.create({
@@ -8,15 +8,15 @@ const HeaderStyle = StyleSheet.create({
     },
 
     layout: {
-        height: Dimensions.get("screen").height,
-        width: Dimensions.get("screen").width,
+        height: "100%",
+        width: "100%",
         position: "absolute",
         zIndex: 50,
     },
 
     popUp: {
-        height: Dimensions.get("screen").height,
-        width: Dimensions.get("screen").width,
+        height: "100%",
+        width: "100%",
         position: "absolute",
     },
 

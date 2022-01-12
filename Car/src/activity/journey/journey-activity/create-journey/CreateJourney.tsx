@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Dimensions, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
@@ -38,7 +38,6 @@ import {
     minutesToTimeString
 } from "../../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../../models/stop/StopType";
-import { CONFIRM_ROUTE_BUTTON_OFFSET, UPDATE_ROUTE_BUTTON_OFFSET } from "../../../../constants/StylesConstants";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
@@ -49,8 +48,7 @@ import Stop from "../../../../../models/stop/Stop";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import CredentialsManager from "../../../../../credentials/credentials.json";
 import { darkColors } from "../../../../components/theme/ThemesColors";
-import { BottomTabBarHeightContext } from "@react-navigation/bottom-tabs";
-import { getStatusBarHeight } from "react-native-status-bar-height";
+import AddressInputPageStyle from "../address-input-page/AddressInputPageStyle";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -111,10 +109,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const [routeIsUpdating, setRouteIsUpdating] = useState(false);
 
     const [isFromToChanged,setIsFromToChanged] = useState(false);
-
-    const screenHeight = Dimensions.get("screen").height;
-    const windowHeight = Dimensions.get("window").height;
-    const navbarHeight = screenHeight - windowHeight + getStatusBarHeight();
 
     useEffect(() => {
         if(from.text !== "" || to.text !== "")
@@ -371,7 +365,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const confirmDisabled = !routeIsConfirmed || noChanges();
 
     return (
-        <>
+        <View>
             {isLoading && (
                 <View style={{ height: "85%" }}>
                     <Indicator
@@ -381,8 +375,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     />
                 </View>
             )}
-            <View style={{ flex: 1 }}>
-
+            <View>
                 <ScrollView
                     ref={ref => (scrollViewRef.current = ref)}
                     onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
@@ -429,7 +422,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                     ref={ref => {
                         mapRef.current = ref;
                     }}
-                    style={{ flex: 1 }}
+                    style={ AddressInputPageStyle.mapContainer }
                     provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
                     customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
@@ -476,25 +469,19 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                         />
                     )}
                 </MapView>
-                <BottomTabBarHeightContext.Consumer>
-                    { tabBarHeight => (
-                        <TouchableOpacity
-                            style={[SearchJourneyStyle.confirmButton,
-                                {
-                                    backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
-                                    left: Dimensions.get("screen").width -
-                                    (journey ? UPDATE_ROUTE_BUTTON_OFFSET : CONFIRM_ROUTE_BUTTON_OFFSET),
-                                    bottom: tabBarHeight! + navbarHeight
-                                }]}
-                            onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
-                            disabled={confirmDisabled}
-                        >
-                            <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
-                                {journey ? "Update route" : "Confirm"}
-                            </Text>
-                        </TouchableOpacity>
-                    )}
-                </BottomTabBarHeightContext.Consumer>
+
+                <TouchableOpacity
+                    style={[SearchJourneyStyle.confirmButton,
+                        {
+                            backgroundColor: confirmDisabled ? colors.secondaryDark : colors.hover,
+                        }]}
+                    onPress={journey ? () => setApplyChangesModalIsVisible(true) : onConfirmPressHandler}
+                    disabled={confirmDisabled}
+                >
+                    <Text style={[SearchJourneyStyle.confirmButtonSaveText, { color: colors.white }]}>
+                        {journey ? "Update route" : "Confirm"}
+                    </Text>
+                </TouchableOpacity>
 
             </View>
 
@@ -551,7 +538,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                 }}
                 disableModal={() => setApplyChangesModalIsVisible(false)}
             />
-        </>
+        </View>
     );
 };
 
