@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
 const SearchJourneyStyle = StyleSheet.create({
@@ -80,7 +80,8 @@ const SearchJourneyStyle = StyleSheet.create({
     confirmButton: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        left: Dimensions.get("screen").width - 121,
+        bottom: 24,
+        right: 15,
         position: "absolute",
         backgroundColor: "#000000",
         flexDirection: "row",
