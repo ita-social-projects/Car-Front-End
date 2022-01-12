@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import LocationService from "../../../../../api-service/location-service/LocationService";
 import SearchJourneyStyle from "./SearchJourneyStyle";
-import Stop from "../../../../../models/stop/Stop";
 import Location from "../../../../../models/location/Location";
 import AuthContext from "../../../../components/auth/AuthContext";
 import JourneyService from "../../../../../api-service/journey-service/JourneyService";
@@ -16,6 +15,7 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import {
     initialWayPoint,
     initialCoordinate,
+    RECENT_ADDRESSES_COUNT_LIMIT,
 } from "../../../../constants/AddressConstants";
 import {
     DEFAULT_AVAILABLE_SEATS_COUNT,
@@ -25,9 +25,9 @@ import {
     MIN_AVAILABLE_SEATS_COUNT,
 } from "../../../../constants/JourneyConstants";
 import {
-    SECOND_ELEMENT_INDEX,
     EMPTY_COLLECTION_LENGTH,
     MIN_DELAY_MS,
+    FIRST_ELEMENT_INDEX,
 } from "../../../../constants/GeneralConstants";
 import WayPoint from "../../../../types/WayPoint";
 import Address from "../../../../../models/Address";
@@ -90,18 +90,52 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
     const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
     const [avaliableSeats, setAvaliableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
+    const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
+    const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
 
     useEffect(() => {
         LocationService
             .getAll()
-            .then((res: any) => setSavedLocations(res.data));
+            .then((res) => {
+                setSavedLocations(res.data);
+                setSavedLocationIsLoading(false);
+            });
 
         JourneyService
             .getRecentJourneyStops()
-            .then((res: any) => setRecentAddresses(res.data[SECOND_ELEMENT_INDEX]
-                .map((stop: Stop) => stop?.address)));
+            .then((res) => {
+                setRecentAddresses(([] as Address[]).concat(
+                    ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
+                setRecentAddressesIsLoading(false);
+            });
 
     }, []);
+
+    const filterRecentAddresses = () => {
+        const withoutAddressBook = recentAddresses.filter(address =>
+            savedLocations.every(location =>
+                location?.address?.longitude !== address?.longitude &&
+                location?.address?.latitude !== address?.latitude));
+
+        const result: Address[] = [];
+
+        withoutAddressBook.forEach(address => {
+            if (result.every(value => value?.latitude !== address?.latitude ||
+                value?.longitude !== address?.longitude))
+                result.push(address);
+        });
+
+        return result.length > RECENT_ADDRESSES_COUNT_LIMIT ?
+            result.slice(FIRST_ELEMENT_INDEX, RECENT_ADDRESSES_COUNT_LIMIT) :
+            result;
+
+    };
+
+    useEffect(() => {
+        if (!recentAddressesIsLoading && !savedLocationIsLoading) {
+            setRecentAddresses(filterRecentAddresses());
+        }
+    }, [recentAddressesIsLoading, savedLocationIsLoading]);
 
     useEffect(() => {
         setAllButtonStyle(selectedFee === FeeType.All ? activeButtonStyle : inactiveButtonStyle);
@@ -197,7 +231,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
             placeholder: placeholder,
             paddingLeft: paddingLeft,
             savedLocations: savedLocations,
-            recentAddresses: filterRecentAddresses(),
+            recentAddresses: recentAddresses,
             previousScreen: isRequest ? "Journey Request Page" : "Search Journey",
             wayPointId: wayPointId,
             wayPoint: wayPoint,
@@ -291,27 +325,18 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 });
         }
     };
-    const setLocationName = (journey: ApplicantJourney) =>
-    {
-        journey.applicantStops.forEach(async (item) =>
-        {
+    const setLocationName = (journey: ApplicantJourney) => {
+        journey.applicantStops.forEach(async (item) => {
             let addressName = await getAddressByCoordinatesAsync(
-                { latitude: item?.address?.latitude!,
-                    longitude: item?.address?.longitude! });
+                {
+                    latitude: item?.address?.latitude!,
+                    longitude: item?.address?.longitude!
+                });
 
-            if(item && item.address)
+            if (item && item.address)
                 item.address.name = addressName;
         });
     };
-
-    const filterRecentAddresses = () =>
-        recentAddresses.filter((address) =>
-            savedLocations.every(
-                (location) =>
-                    location?.address?.longitude !== address?.longitude &&
-                    location?.address?.latitude !== address?.latitude
-            )
-        );
 
     const errorModalDisableHandler = () => {
         setErrorModalVisible(false);
@@ -343,7 +368,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 >
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
-                            disabled = {isRequest}
+                            disabled={isRequest}
                             iconName={"location"}
                             directionType={"From"}
                             text={from.text}
@@ -360,7 +385,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View style={SearchJourneyStyle.locationContainer}>
                         <AddressInputButton
-                            disabled = {isRequest}
+                            disabled={isRequest}
                             iconName={"location"}
                             iconColor={darkColors.disableBack}
                             directionType={"To"}
