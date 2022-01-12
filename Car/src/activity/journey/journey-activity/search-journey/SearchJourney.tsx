@@ -90,7 +90,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
     const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
     const [avaliableSeats, setAvaliableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
-    const [recentAddressesIsLoading, setRecentAddressesIsLoading] = useState(true);
+    const [recentLocationsIsLoading, setRecentLocationsIsLoading] = useState(true);
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
 
     useEffect(() => {
@@ -106,20 +106,20 @@ const SearchJourney = (props: SearchJourneyProps) => {
             .then((res) => {
                 setRecentAddresses(([] as Address[]).concat(
                     ...res.data.map(recentStops => recentStops.map(stop => stop!.address))));
-                setRecentAddressesIsLoading(false);
+                setRecentLocationsIsLoading(false);
             });
 
     }, []);
 
     const filterRecentAddresses = () => {
-        const withoutAddressBook = recentAddresses.filter(address =>
+        const result: Address[] = [];
+
+        const LocationWithoutAddressBook = recentAddresses.filter(address =>
             savedLocations.every(location =>
                 location?.address?.longitude !== address?.longitude &&
                 location?.address?.latitude !== address?.latitude));
 
-        const result: Address[] = [];
-
-        withoutAddressBook.forEach(address => {
+        LocationWithoutAddressBook.forEach(address => {
             if (result.every(value => value?.latitude !== address?.latitude ||
                 value?.longitude !== address?.longitude))
                 result.push(address);
@@ -132,10 +132,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
     };
 
     useEffect(() => {
-        if (!recentAddressesIsLoading && !savedLocationIsLoading) {
-            setRecentAddresses(filterRecentAddresses());
-        }
-    }, [recentAddressesIsLoading, savedLocationIsLoading]);
+        setRecentAddresses(filterRecentAddresses());
+    }, [recentLocationsIsLoading,savedLocationIsLoading]);
 
     useEffect(() => {
         setAllButtonStyle(selectedFee === FeeType.All ? activeButtonStyle : inactiveButtonStyle);
