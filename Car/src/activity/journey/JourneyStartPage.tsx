@@ -4,17 +4,19 @@ import JourneyService from "../../../api-service/journey-service/JourneyService"
 import Journey from "../../../models/journey/Journey";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
 import JourneyStartPageStyle from "./JourneyStartPageStyle";
+import Request from "../../../models/request/Request";
 import TouchableNavigationBlock from "../../components/touchable-navigation-block/TouchableNavigationBlock";
 import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX,
     FOURTH_ELEMENT_INDEX,
-    EMPTY_COLLECTION_LENGTH
+    EMPTY_COLLECTION_LENGTH, FIFTH_ELEMENT_INDEX, SIXTH_ELEMENT_INDEX
 } from "../../constants/GeneralConstants";
 import NavigationAddListener from "../../types/NavigationAddListener";
 import { useTheme } from "../../components/theme/ThemeProvider";
 import AsyncStorage from "@react-native-community/async-storage";
+import RequestCardList from "../../components/request-card/RequestCardList";
 
 const JourneyStartPage = (props: NavigationAddListener) => {
     const { colors } = useTheme();
@@ -46,8 +48,12 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const [pastButtonStyle, setPastButtonStyle] = useState(inactiveButtonStyle);
     const [upcomingButtonStyle, setUpcomingButtonStyle] = useState(inactiveButtonStyle);
     const [scheduledButtonStyle, setScheduledButtonStyle] = useState(inactiveButtonStyle);
+    const [requestedButtonStyle, setRequestedButtonStyle] = useState(inactiveButtonStyle);
+    const [canceledButtonStyle, setCanceledButtonStyle] = useState(inactiveButtonStyle);
     const [allButtonTextStyle, setAllButtonTextStyle] = useState(activeButtonTextStyle);
     const [pastButtonTextStyle, setPastButtonTextStyle] = useState(inactiveButtonTextStyle);
+    const [requestedButtonTextStyle, setRequestedButtonTextStyle] = useState(inactiveButtonTextStyle);
+    const [canceledButtonTextStyle, setCanceledButtonTextStyle] = useState(inactiveButtonTextStyle);
     const [upcomingButtonTextStyle, setUpcomingButtonTextStyle] =
                                             useState(inactiveButtonTextStyle);
     const [scheduledButtonTextStyle, setScheduledButtonTextStyle] =
@@ -66,7 +72,13 @@ const JourneyStartPage = (props: NavigationAddListener) => {
         setPastButtonStyle(selectedIndex == SECOND_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
         setUpcomingButtonStyle(selectedIndex == THIRD_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
         setScheduledButtonStyle(selectedIndex == FOURTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setRequestedButtonStyle(selectedIndex == FIFTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setCanceledButtonStyle(selectedIndex == SIXTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
         setAllButtonTextStyle(selectedIndex == FIRST_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
+        setRequestedButtonTextStyle(selectedIndex ==
+        FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
+        setCanceledButtonTextStyle(selectedIndex ==
+        FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setPastButtonTextStyle(selectedIndex == SECOND_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setUpcomingButtonTextStyle(
             selectedIndex == THIRD_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
@@ -79,6 +91,12 @@ const JourneyStartPage = (props: NavigationAddListener) => {
         []
     );
     const [scheduledJourneys, setScheduledJourneys] = useState<Array<Journey>>(
+        []
+    );
+    const [requestedJourneys, setRequestedJourneys] = useState<Array<Request>>(
+        []
+    );
+    const [canceledJourneys, setCanceledJourneys] = useState<Array<Journey>>(
         []
     );
 
@@ -100,6 +118,14 @@ const JourneyStartPage = (props: NavigationAddListener) => {
 
         JourneyService.getScheduledJourneys().then((res2) =>
             setScheduledJourneys(res2.data)
+        ).then(() => setRefreshing(false));
+
+        JourneyService.getRequestedJourneys().then((res3) =>
+            setRequestedJourneys(res3.data)
+        ).then(() => setRefreshing(false));
+
+        JourneyService.getCanceledJourneys().then((res4) =>
+            setCanceledJourneys(res4.data)
         ).then(() => setRefreshing(false));
     };
 
@@ -150,7 +176,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    pagingEnabled={true}
+                    pagingEnabled={false}
                     contentContainerStyle={{ flexGrow: 10 }}
                 >
                     <View style={JourneyStartPageStyle.segmentControlContainer}>
@@ -231,6 +257,44 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                                 Regular
                             </Text>
                         </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[
+                                JourneyStartPageStyle.requestedJourneys,
+                                requestedButtonStyle
+                            ]}
+                            onPress={() => {
+                                setSelectedIndex(FIFTH_ELEMENT_INDEX);
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    JourneyStartPageStyle.buttonText,
+                                    requestedButtonTextStyle
+                                ]}
+                            >
+                                Requested
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[
+                                JourneyStartPageStyle.canceledJourneys,
+                                canceledButtonStyle
+                            ]}
+                            onPress={() => {
+                                setSelectedIndex(SIXTH_ELEMENT_INDEX);
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    JourneyStartPageStyle.buttonText,
+                                    canceledButtonTextStyle
+                                ]}
+                            >
+                                Canceled
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
                 {selectedIndex === FIRST_ELEMENT_INDEX && (
@@ -268,6 +332,16 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 {selectedIndex === FOURTH_ELEMENT_INDEX && (
                     <View style={JourneyStartPageStyle.tabStyle}>
                         {<JourneyCardList journey={scheduledJourneys} />}
+                    </View>
+                )}
+                {selectedIndex === FIFTH_ELEMENT_INDEX && (
+                    <View style={JourneyStartPageStyle.tabStyle}>
+                        {<RequestCardList request={requestedJourneys} />}
+                    </View>
+                )}
+                {selectedIndex === SIXTH_ELEMENT_INDEX && (
+                    <View style={JourneyStartPageStyle.tabStyle}>
+                        {<JourneyCardList journey={canceledJourneys} />}
                     </View>
                 )}
             </View>

@@ -116,10 +116,11 @@ test("renders correctly", async () =>
             }
           }
           horizontal={true}
-          pagingEnabled={true}
+          pagingEnabled={false}
           showsHorizontalScrollIndicator={false}
           style={
             Object {
+              "flex": 1,
               "width": "100%",
             }
           }
@@ -143,7 +144,7 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
-                    "width": "13%",
+                    "width": "10%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
@@ -183,7 +184,7 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
-                    "width": "13%",
+                    "width": "10%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
@@ -223,7 +224,7 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
-                    "width": "24%",
+                    "width": "20%",
                   },
                   Object {
                     "backgroundColor": "#FFFFFF",
@@ -292,6 +293,80 @@ test("renders correctly", async () =>
                 }
               >
                 Regular
+              </Text>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "20%",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
+                    "color": "#414045",
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Requested
+              </Text>
+            </ForwardRef>
+            <ForwardRef
+              activeOpacity={1}
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "width": "20%",
+                  },
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderBottomWidth": 0,
+                    "color": "#414045",
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontFamily": "Proxima Nova Extrabold",
+                      "fontWeight": "300",
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#414045",
+                    },
+                  ]
+                }
+              >
+                Canceled
               </Text>
             </ForwardRef>
           </View>

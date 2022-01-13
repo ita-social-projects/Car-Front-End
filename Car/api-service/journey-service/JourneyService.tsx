@@ -10,6 +10,7 @@ import Invitation from "../../models/invitation/Invitation";
 import { AxiosRequestConfig } from "axios";
 import JourneyTimeModel from "../../models/journey/JoruneyTimeModel";
 import ApplicantJourney from "../../models/journey/ApplicantJourney";
+import Request from "../../models/request/Request";
 import ScheduleDto from "../../models/journey/ScheduleDto";
 import ScheduleTimeModel from "../../models/journey/ScheduleTimeModel";
 
@@ -27,6 +28,12 @@ const JourneyService = {
 
     getScheduledJourneys: async () =>
         APIService.get<Array<Journey>>(route + "scheduled"),
+
+    getRequestedJourneys: async () =>
+        APIService.get<Array<Request>>(route + "requested"),
+
+    getCanceledJourneys: async () =>
+        APIService.get<Array<Journey>>(route + "canceled"),
 
     getRecentJourneyStops: async () =>
         APIService.get<Array<Array<Stop>>>(route + "recent"),

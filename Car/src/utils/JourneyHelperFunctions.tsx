@@ -16,6 +16,7 @@ import WeekDay from "../components/schedule-bottom-popup/WeekDay";
 import moment from "moment";
 import { capitalize } from "./GeneralHelperFunctions";
 import { View } from "react-native";
+import Request from "../../models/request/Request";
 
 export const mapStopToWayPoint = (stop?: Stop) => {
     return {
@@ -118,6 +119,13 @@ export const getTimeToShow = (journey?: Journey): string => {
         // eslint-disable-next-line
         `Every ${weekDayToString(journey.schedule.days)} at ${moment(new Date(journey?.departureTime ?? "")).format("HH:mm")}` :
         capitalize(moment(new Date(journey?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm"));
+};
+
+export const getRequestTimeToShow = (request?: Request): string => {
+    return request?.departureTime ?
+        // eslint-disable-next-line
+        capitalize(moment(new Date(request?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm")) : "Invalid Time"
+
 };
 
 export const areStopsLocationEqual = (stopA: Stop, stopB: Stop): boolean => {

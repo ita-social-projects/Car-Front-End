@@ -29,7 +29,8 @@ test("renders correctly", async () =>
                 onConfirm={() => {}}
                 disableModal={() => {}}
             />
-        )).toMatchInlineSnapshot(`
+        )
+    ).toMatchInlineSnapshot(`
     <Component
       animationType="fade"
       hardwareAccelerated={false}
