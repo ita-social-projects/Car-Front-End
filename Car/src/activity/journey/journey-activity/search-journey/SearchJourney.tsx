@@ -361,6 +361,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
             )}
             {!isLoading && (
                 <ScrollView
+                    contentContainerStyle={{ flexGrow: 1, height: "100%" }}
                     style={[SearchJourneyStyle.screenContainer,
                         { backgroundColor: colors.white }]}
                 >

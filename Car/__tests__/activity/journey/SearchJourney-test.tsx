@@ -27,6 +27,12 @@ describe("JourneySearch Test", () => {
         expect(toJSON(wrapper)).toMatchInlineSnapshot(`
       <Fragment>
         <ScrollView
+          contentContainerStyle={
+            Object {
+              "flexGrow": 1,
+              "height": "100%",
+            }
+          }
           style={
             Array [
               Object {
@@ -273,7 +279,7 @@ describe("JourneySearch Test", () => {
                   "flexDirection": "row",
                   "height": "100%",
                   "justifyContent": "flex-end",
-                  "marginVertical": 300,
+                  "top": 16,
                 },
               ]
             }
