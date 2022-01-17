@@ -87,6 +87,7 @@ test("renders correctly", async () =>
                 style={
                   Object {
                     "color": "#909095",
+                    "fontSize": 16,
                     "marginBottom": 40,
                     "marginHorizontal": 21.5,
                     "marginTop": 32,
@@ -212,12 +213,12 @@ test("renders correctly", async () =>
         </View>
       </ForwardRef>
       <ConfirmModal
-        cancelText="No"
-        confirmText="Yes"
+        cancelText="No, stay"
+        confirmText="Yes, leave"
         disableModal={[Function]}
         onConfirm={[Function]}
-        subtitle="Are you sure you want to leave the ride?"
-        title="Leave Ride"
+        subtitle="Do you really want to leave the journey?"
+        title="ARE YOU SURE?"
         visible={false}
       />
       <ConfirmModal
