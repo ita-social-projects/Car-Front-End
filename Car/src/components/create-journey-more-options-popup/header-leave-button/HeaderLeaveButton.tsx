@@ -15,7 +15,7 @@ const HeaderLeaveButton = (props) => {
     const [LeaveRideSuccessModalIsVisible, setLeaveRideSuccessModalIsVisible] = useState(false);
 
     return (
-        <View>
+        <View >
 
             <TouchableOpacity
                 style={HeaderLeaveButtonStyle.leaveButton}
@@ -30,9 +30,9 @@ const HeaderLeaveButton = (props) => {
 
             <ConfirmModal
                 visible={LeaveRideModalIsVisible}
-                title={"Leave Ride"}
-                confirmText={"Yes"}
-                cancelText={"No"}
+                title={"ARE YOU SURE?"}
+                confirmText={"Yes, leave"}
+                cancelText={"No, stay"}
                 onConfirm={() => {
                     setLeaveRideModalIsVisible(false);
                     JourneyService.deleteUser(
@@ -44,7 +44,7 @@ const HeaderLeaveButton = (props) => {
                     });
                 }}
                 disableModal={() => setLeaveRideModalIsVisible(false)}
-                subtitle={"Are you sure you want to leave the ride?"}
+                subtitle={"Do you really want to leave the journey?"}
             />
 
             <ConfirmModal
