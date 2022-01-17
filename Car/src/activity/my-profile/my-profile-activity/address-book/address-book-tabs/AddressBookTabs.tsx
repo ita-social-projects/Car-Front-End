@@ -45,6 +45,7 @@ export default function AddressBookTabs () {
                     component={AddressBook}
                     options={{
                         headerTitle: "Address Book",
+                        headerStyle: HeaderStyle.border,
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

@@ -35,6 +35,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Preferences",
                         headerTitleAlign: "center",
+                        headerStyle: HeaderStyle.border,
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
@@ -45,6 +46,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Details",
                         headerTitleAlign: "center",
+                        headerStyle: HeaderStyle.border,
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}

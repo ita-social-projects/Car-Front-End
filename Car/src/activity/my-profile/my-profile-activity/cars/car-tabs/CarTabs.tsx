@@ -46,6 +46,7 @@ const CarTabs = () => {
                     options={{
                         headerTitle: "My Cars",
                         headerTitleAlign: "center",
+                        headerStyle: HeaderStyle.border,
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}

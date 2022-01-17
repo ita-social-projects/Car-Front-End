@@ -28,6 +28,7 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Settings",
                         headerTitleAlign: "center",
+                        headerStyle: HeaderStyle.border,
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderLogoutButton
