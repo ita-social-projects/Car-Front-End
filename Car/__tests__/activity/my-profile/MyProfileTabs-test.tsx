@@ -26,11 +26,15 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerStyle": Object {
-                "borderBottomColor": "#414045",
-                "borderBottomWidth": 1,
-                "height": 144,
-              },
+              "headerStyle": Array [
+                Object {
+                  "borderBottomWidth": 1,
+                  "height": 144,
+                },
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
               "headerTitle": "",
             }
           }
@@ -41,10 +45,14 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerStyle": Object {
-                "borderBottomColor": "#414045",
-                "borderBottomWidth": 1,
-              },
+              "headerStyle": Array [
+                Object {
+                  "borderBottomWidth": 1,
+                },
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
               "headerTitle": "Preferences",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
@@ -67,10 +75,14 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerStyle": Object {
-                "borderBottomColor": "#414045",
-                "borderBottomWidth": 1,
-              },
+              "headerStyle": Array [
+                Object {
+                  "borderBottomWidth": 1,
+                },
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
               "headerTitle": "Details",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [

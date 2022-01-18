@@ -15,7 +15,7 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 const StackTabs = createStackNavigator();
 
 const MyProfileTabs = () => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
 
     return (
         <View style={[HeaderStyle.container, { backgroundColor: colors.white }]}>
@@ -25,7 +25,8 @@ const MyProfileTabs = () => {
                     component={MyProfile}
                     options={{
                         headerTitle: "",
-                        headerStyle: HeaderStyle.myProfileHeaderStyle,
+                        headerStyle: [HeaderStyle.myProfileHeaderStyle,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerLeft: () => <AvatarLogoTitle />
                     }}
                 />
@@ -35,7 +36,8 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Preferences",
                         headerTitleAlign: "center",
-                        headerStyle: HeaderStyle.border,
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
@@ -46,7 +48,8 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "Details",
                         headerTitleAlign: "center",
-                        headerStyle: HeaderStyle.border,
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}

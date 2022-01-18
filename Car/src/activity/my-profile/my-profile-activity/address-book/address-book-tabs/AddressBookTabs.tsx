@@ -24,7 +24,7 @@ import LocationService from "../../../../../../api-service/location-service/Loca
 const StackTabs = createStackNavigator();
 
 export default function AddressBookTabs () {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const [modalVisibility, setModalVisibility] = useState(false);
     const [isVisible] = useState(false);
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
@@ -45,7 +45,8 @@ export default function AddressBookTabs () {
                     component={AddressBook}
                     options={{
                         headerTitle: "Address Book",
-                        headerStyle: HeaderStyle.border,
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

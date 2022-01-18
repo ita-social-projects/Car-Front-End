@@ -17,7 +17,7 @@ import { useTheme } from "../../../../../components/theme/ThemeProvider";
 const StackTabs = createStackNavigator();
 
 const SettingsTabs = () => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
 
     return (
         <View style={{ flex: 1, alignSelf: "stretch" }}>
@@ -28,7 +28,8 @@ const SettingsTabs = () => {
                     options={{
                         headerTitle: "Settings",
                         headerTitleAlign: "center",
-                        headerStyle: HeaderStyle.border,
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
                         headerRight: HeaderLogoutButton

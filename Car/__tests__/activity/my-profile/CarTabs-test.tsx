@@ -21,10 +21,14 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
-              "headerStyle": Object {
-                "borderBottomColor": "#414045",
-                "borderBottomWidth": 1,
-              },
+              "headerStyle": Array [
+                Object {
+                  "borderBottomWidth": 1,
+                },
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
               "headerTitle": "My Cars",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [

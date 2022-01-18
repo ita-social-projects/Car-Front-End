@@ -16,7 +16,7 @@ import AddEditCars from "../car-activity/add-edit-cars/AddEditCars";
 const StackTabs = createStackNavigator();
 
 const CarTabs = () => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const [modalVisibility, setModalVisibility] = useState(false);
     const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
     const pressHandler = () => {
@@ -46,7 +46,8 @@ const CarTabs = () => {
                     options={{
                         headerTitle: "My Cars",
                         headerTitleAlign: "center",
-                        headerStyle: HeaderStyle.border,
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}

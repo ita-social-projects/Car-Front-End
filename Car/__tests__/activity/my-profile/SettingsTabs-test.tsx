@@ -22,10 +22,14 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerRight": [Function],
-              "headerStyle": Object {
-                "borderBottomColor": "#414045",
-                "borderBottomWidth": 1,
-              },
+              "headerStyle": Array [
+                Object {
+                  "borderBottomWidth": 1,
+                },
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
               "headerTitle": "Settings",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
