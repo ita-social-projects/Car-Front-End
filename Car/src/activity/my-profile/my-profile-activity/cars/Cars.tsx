@@ -42,13 +42,13 @@ const Cars = (props: NavigationAddListener) => {
                 picture={
                     <Ionicons
                         name={"add-circle-outline"}
-                        size={20}
+                        size={26}
                         color={colors.hover}
                     />
                 }
                 angle="0"
             >
-                <Text style={{ fontWeight: "bold", color: colors.accentBlue }}>
+                <Text style={{ top:3,fontWeight: "bold", color: colors.hover }}>
                     Add a car
                 </Text>
             </TouchableNavigationCard>

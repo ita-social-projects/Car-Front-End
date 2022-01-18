@@ -7,6 +7,11 @@ const HeaderStyle = StyleSheet.create({
         alignSelf: "stretch",
     },
 
+    border: {
+        borderBottomWidth: 1,
+        //borderBottomColor:"#414045"
+    },
+
     layout: {
         height: "100%",
         width: "100%",
@@ -21,14 +26,15 @@ const HeaderStyle = StyleSheet.create({
     },
 
     myProfileHeaderStyle: {
-        height: Platform.OS === "ios" ? 144 : 120
+        height: Platform.OS === "ios" ? 144 : 120,
+        borderBottomWidth:1,
     },
 
     headerTitleStyle: {
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",
         fontSize: 18,
-        marginLeft: 20
+        marginLeft: 20,
     },
 
     messages: {
