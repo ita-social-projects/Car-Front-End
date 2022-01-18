@@ -112,6 +112,7 @@ test("renders correctly", async () =>
               style={
                 Object {
                   "color": "#909095",
+                  "fontSize": 16,
                   "marginBottom": 40,
                   "marginHorizontal": 21.5,
                   "marginTop": 32,

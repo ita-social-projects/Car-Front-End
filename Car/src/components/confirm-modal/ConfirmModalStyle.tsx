@@ -46,6 +46,7 @@ const ConfirmModalStyle = StyleSheet.create({
         color: lightColors.secondaryDark,
         marginTop: 32,
         marginBottom: 40,
+        fontSize: 16,
         marginHorizontal: 21.5
     }
 }
