@@ -231,18 +231,17 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         });
     };
 
-    const getCarDropDownPickerItems = (items) =>
+    const getCarDropDownPickerItems = (items: CarBrand[] | CarModel []) =>
         Object.entries(items).length
-            ? brands.map((item) => ({
+            ? items.map((item) => ({
                 ...{
-                    value: String(item!.id),
-                    label: item!.name
+                    value: String(item.id),
+                    label: item.name
                 }
             }))
             : null;
 
     let brandItems: CarDropDownPickerItem[] | null = getCarDropDownPickerItems(brands);
-
     let modelItems: CarDropDownPickerItem[] | null = getCarDropDownPickerItems(models);
 
     if (isLoading) return (
