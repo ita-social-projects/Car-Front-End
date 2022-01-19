@@ -231,9 +231,9 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         });
     };
 
-    const getCarDropDownPickerItems = (items) =>
+    const getCarDropDownPickerItems = (items: CarBrand[] | CarModel[]) =>
         Object.entries(items).length
-            ? brands.map((item) => ({
+            ? items.map((item) => ({
                 ...{
                     value: String(item!.id),
                     label: item!.name
