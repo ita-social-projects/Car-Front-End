@@ -267,7 +267,7 @@ describe("JourneySearch Test", () => {
               minValue={1}
               onChange={[Function]}
               title="Passengers"
-              value={4}
+              value={1}
             />
           </View>
           <View
