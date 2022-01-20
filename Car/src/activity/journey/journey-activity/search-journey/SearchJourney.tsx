@@ -466,7 +466,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View>
                         <SeatsInputSpinner
-                            value={avaliableSeats}
+                            value={MIN_AVAILABLE_SEATS_COUNT}
                             onChange={seats => setAvaliableSeats(seats)}
                             title={"Passengers"}
                             minValue={MIN_AVAILABLE_SEATS_COUNT}
