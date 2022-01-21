@@ -107,7 +107,7 @@ const SearchJourneyStyle = StyleSheet.create({
 
     publishButton: {
         marginRight: 15,
-        marginBottom: 20,
+        marginBottom: 21,
         paddingHorizontal: 16,
         paddingVertical: 12,
         flexDirection: "row",
