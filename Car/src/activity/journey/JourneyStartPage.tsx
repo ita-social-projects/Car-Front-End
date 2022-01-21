@@ -319,13 +319,13 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                         {<JourneyCardList journey={scheduledJourneys} />}
                         {requestedJourneys.length > EMPTY_COLLECTION_LENGTH && (
                             <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
-                                Upcoming
+                                Requested
                             </Text>
                         )}
                         {<RequestCardList request={requestedJourneys} />}
                         {canceledJourneys.length > EMPTY_COLLECTION_LENGTH && (
                             <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
-                                Upcoming
+                                Canceled
                             </Text>
                         )}
                         {<JourneyCardList journey={canceledJourneys} />}
