@@ -165,7 +165,8 @@ describe("JourneySearch Test", () => {
                       Object {
                         "fontSize": 16,
                         "fontWeight": "bold",
-                        "lineHeight": 18,
+                        "letterSpacing": 0.25,
+                        "lineHeight": 20,
                         "textTransform": "uppercase",
                       },
                       Object {
@@ -205,7 +206,8 @@ describe("JourneySearch Test", () => {
                       Object {
                         "fontSize": 16,
                         "fontWeight": "bold",
-                        "lineHeight": 18,
+                        "letterSpacing": 0.25,
+                        "lineHeight": 20,
                         "textTransform": "uppercase",
                       },
                       Object {
@@ -245,7 +247,8 @@ describe("JourneySearch Test", () => {
                       Object {
                         "fontSize": 16,
                         "fontWeight": "bold",
-                        "lineHeight": 18,
+                        "letterSpacing": 0.25,
+                        "lineHeight": 20,
                         "textTransform": "uppercase",
                       },
                       Object {
@@ -292,7 +295,7 @@ describe("JourneySearch Test", () => {
                   Object {
                     "borderWidth": 2,
                     "flexDirection": "row",
-                    "marginBottom": 20,
+                    "marginBottom": 21,
                     "marginRight": 15,
                     "paddingHorizontal": 16,
                     "paddingVertical": 12,
@@ -308,8 +311,9 @@ describe("JourneySearch Test", () => {
                 style={
                   Array [
                     Object {
-                      "fontSize": 14,
+                      "fontSize": 16,
                       "fontWeight": "bold",
+                      "letterSpacing": 0.25,
                       "lineHeight": 20,
                       "paddingHorizontal": 6,
                       "textTransform": "uppercase",
