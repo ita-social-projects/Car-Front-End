@@ -317,6 +317,18 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             </Text>
                         )}
                         {<JourneyCardList journey={scheduledJourneys} />}
+                        {requestedJourneys.length > EMPTY_COLLECTION_LENGTH && (
+                            <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
+                                Upcoming
+                            </Text>
+                        )}
+                        {<RequestCardList request={requestedJourneys} />}
+                        {canceledJourneys.length > EMPTY_COLLECTION_LENGTH && (
+                            <Text style={[JourneyStartPageStyle.tabTextStyle, { color: colors.primary }]}>
+                                Upcoming
+                            </Text>
+                        )}
+                        {<JourneyCardList journey={canceledJourneys} />}
                     </View>
                 )}
                 {selectedIndex === SECOND_ELEMENT_INDEX && (
