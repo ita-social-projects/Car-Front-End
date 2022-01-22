@@ -37,7 +37,8 @@ const SwitchSelectorStyle = StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,
-        lineHeight: 18,
+        lineHeight: 20,
+        letterSpacing: 0.25
     },
 
     inactiveButton: {
