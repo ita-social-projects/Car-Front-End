@@ -10,6 +10,7 @@ import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyH
 import StopType from "../../../../../../models/stop/StopType";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
@@ -67,35 +68,37 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-                <NotificationHeader
-                    title={props.route.params.notification.notificationHeaderTittle}
-                    message={props.route.params.notification.notificationHeaderMessage}
-                    sender={props.route.params.notification.notification.sender}
-                />
-
-                <NotificationRideDetails
-                    journeyId={props.route.params.notification.notification.journeyId}
-                    userId={user?.id!}
-                    IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
-                    IsBaggageVisible={props.route.params.notification.IsBaggageVisible}
-                    IsDepartureTimeVisible={props.route.params.notification.routeIsDepartureTimeVisible}
-                    IsDetailsTitleVisible={props.route.params.notification.IsDetailsTitleVisible}
-                    IsFeeVisible={props.route.params.notification.IsFeeVisible}
-                    journey={journey!}
-                    journeyUser={journeyUser!}
-                />
-                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                    {name} {surname}`s stops in your ride
-                </Text>
-                <View>
-                    <StopsBlock
-                        stops={stops ? stops : []}
-                        onStopPress={onStopPressHandler}
-                        highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+            <ScrollView style = {{ flexGrow: 1 }}>
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+                    <NotificationHeader
+                        title={props.route.params.notification.notificationHeaderTittle}
+                        message={props.route.params.notification.notificationHeaderMessage}
+                        sender={props.route.params.notification.notification.sender}
                     />
+
+                    <NotificationRideDetails
+                        journeyId={props.route.params.notification.notification.journeyId}
+                        userId={user?.id!}
+                        IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
+                        IsBaggageVisible={props.route.params.notification.IsBaggageVisible}
+                        IsDepartureTimeVisible={props.route.params.notification.routeIsDepartureTimeVisible}
+                        IsDetailsTitleVisible={props.route.params.notification.IsDetailsTitleVisible}
+                        IsFeeVisible={props.route.params.notification.IsFeeVisible}
+                        journey={journey!}
+                        journeyUser={journeyUser!}
+                    />
+                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
+                        {name} {surname}`s stops in your ride
+                    </Text>
+                    <View>
+                        <StopsBlock
+                            stops={stops ? stops : []}
+                            onStopPress={onStopPressHandler}
+                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                        />
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </>
     );
 };
