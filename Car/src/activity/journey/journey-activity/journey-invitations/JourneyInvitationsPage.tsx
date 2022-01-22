@@ -15,6 +15,7 @@ import { CREATING_FONT_SIZE } from "../../../../constants/JourneyConstants";
 import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import JourneyInvitationsPageProps from "./JourneyInvitationsPageProps";
 import { JourneyInvitationsPageStyle } from "./JourneyInvitationsPageStyle";
+import { RideInvitation } from "../../../../../models/journey/RideInvitation";
 
 const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     const { colors } = useTheme();
@@ -28,25 +29,27 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             : []
     );
     const [user, setUser] = useState(useContext(AuthContext).user);
-    const [invitedUsers, setInvitedUsers] = useState<{email:string; isCorrect: boolean}[]>(
+    const [invitedUsers, setInvitedUsers] = useState<RideInvitation[]>(
         params.newInvitations ?? []
     );
 
-    const addInvitationPressHandler = () => {
-        setInvitedUsers(prevState => [...prevState, { email:"", isCorrect:false }]);
+    const addInvitationPressHandler = (): void => {
+        setInvitedUsers(prevState => [...prevState, new RideInvitation({ email: "", isCorrect: false })]);
     };
 
-    const onInvitationDeleteIconPress = (invitationIndex : number) => {
+    const onInvitationDeleteIconPress = (invitationIndex : number): void => {
         let updatedInvitations = new Array(...invitedUsers);
 
         updatedInvitations.splice(invitationIndex, DELETE_COUNT);
         setInvitedUsers(updatedInvitations);
     };
 
-    const checkForCorrectEmail = (email: string, invitationIndex: number) => {
+    const checkForCorrectEmail = (email: string, invitationIndex: number): void => {
         let updatedInvitations = new Array(...invitedUsers);
 
-        if(allUsers.map(u => u?.email).includes(email) && email != user?.email)
+        if(allUsers.map(u => u?.email).includes(email)
+            && email !== user?.email
+            && !invitedUsers?.some((x: RideInvitation) => x.email === email))
         {
             updatedInvitations[invitationIndex] = {
                 email:email, isCorrect:true
@@ -63,7 +66,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
         }
     };
 
-    const getUserEmail = (id: number) => {
+    const getUserEmail = (id: number): string => {
         return (id === ZERO) ? "" : allUsers.find((us) => us?.id === id)!.email;
     };
 
@@ -131,7 +134,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
 
                             <Text style={[{ color: colors.accentRed }]}>
                                 {invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                    "" : "Error"}
+                                    "" : "This email is incorrect, or already exists"}
                             </Text>
 
                             {invitedUsers[index].email !== "" && (
@@ -165,10 +168,14 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                 <View style={CreateJourneyStyle.publishButtonContainer}>
                     <TouchableOpacity
                         style={[CreateJourneyStyle.publishButton,
-                            {
-                                backgroundColor: colors.hover,
-                                borderColor: colors.hover
-                            }]}
+                            // eslint-disable-next-line no-magic-numbers
+                            !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect ?
+                                { backgroundColor: colors.disable, borderColor: colors.disable }
+                                :
+                                { backgroundColor: colors.hover, borderColor: colors.hover }
+                        ]}
+                        // eslint-disable-next-line no-magic-numbers
+                        disabled={ !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect }
                         onPress={addInvitationPressHandler}
                     >
                         <Text style={[CreateJourneyStyle.publishButtonText,
