@@ -7,17 +7,15 @@ const AddEditCarsStyle = StyleSheet.create({
 
     carAvatarContainer: {
         height: "40%",
-        alignItems: "flex-end",
-        justifyContent: "flex-end"
+        alignItems: "center",
+        justifyContent: "center"
     },
 
     carButtonUpload: {
         paddingHorizontal: 16,
         paddingVertical: 14,
         alignItems: "center",
-        borderWidth: 2,
-        marginRight: 24,
-        marginBottom: 19
+        borderWidth: 2
     },
 
     carButtonUploadText: {
