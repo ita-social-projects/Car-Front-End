@@ -33,7 +33,8 @@ interface InvitationViewProps {
 }
 
 const InvitationView = (props: InvitationViewProps) => {
-    const [notificationModalVisible, setNotificationModalVisible] = useState(props.route.params.notification.visible);
+    const params = props.route.params.notification;
+    const [notificationModalVisible, setNotificationModalVisible] = useState(params.visible);
     const [wasOpened, setWasOpened] = useState(false);
     const [confirmationModalVisible, setConfirmationModalVisible] = useState(false);
     const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
@@ -43,7 +44,7 @@ const InvitationView = (props: InvitationViewProps) => {
     const user = useContext(AuthContext).user;
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [stops, setStops] = useState<Stop[]>([]);
-    let notificationId = props.route.params.notification.notificationId;
+    let notificationId = params.notificationId;
     const [withLuggage] = useState(false);
     const [requestComments] = useState("");
     const jsonData = JSON.stringify({
@@ -55,13 +56,13 @@ const InvitationView = (props: InvitationViewProps) => {
     useEffect(() => {
         if (!wasOpened) {
             setWasOpened(true);
-            JourneyService.getJourney(props.route.params.notification.journeyId).then(res => {
+            JourneyService.getJourney(params.journeyId).then(res => {
                 setJourney(res.data);
                 setJourneyPoints(res.data!.journeyPoints);
                 setStops([
-                getStopByType(res.data, StopType.Start)!,
+                    getStopByType(res.data, StopType.Start)!,
 
-                getStopByType(res.data, StopType.Finish)!
+                    getStopByType(res.data, StopType.Finish)!
                 ]);
             });
         }
@@ -80,8 +81,8 @@ const InvitationView = (props: InvitationViewProps) => {
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
-                receiverId: journey!.organizer?.id!,
-                journeyId: props.route.params.notification.journeyId,
+                receiverId: params.sender?.id!,
+                journeyId: params.journeyId,
                 type: notificationType,
                 jsonData: jsonData,
             }
@@ -98,8 +99,8 @@ const InvitationView = (props: InvitationViewProps) => {
             {
                 id: 0,
                 type: InvitationType.Rejected,
-                invitedUserId: user!.id,
-                journeyId: props.route.params.notification.journeyId,
+                invitedUserId: params.sender!.id,
+                journeyId: params.journeyId,
             }
         ).then((updatingInvitationResult) => {
             if (updatingInvitationResult.status === HTTP_STATUS_OK) {
@@ -111,14 +112,13 @@ const InvitationView = (props: InvitationViewProps) => {
     const closeAndDelete = () => {
         setWithdrawModalVisible(false);
         setNotificationModalVisible(false);
-        if (props.route.params.notification.onDelete)
-            props.route.params.notification.onDelete(notificationId);
+        if (params.onDelete)
+            params.onDelete(notificationId);
     };
 
     const deleteNotification = () => {
-        if(props.route.params.notification.onDelete)
-        {
-            props.route.params.notification.onDelete(notificationId);
+        if (params.onDelete) {
+            params.onDelete(notificationId);
         }
         NotificationsService.deleteNotification(notificationId);
     };
@@ -127,8 +127,8 @@ const InvitationView = (props: InvitationViewProps) => {
         JourneyService.addUser(
             {
                 journeyUser: {
-                    journeyId: props.route.params.notification.journeyId,
-                    userId: user!.id,
+                    journeyId: params.journeyId,
+                    userId: params.sender!.id,
                     withBaggage: false,
                     passangersCount: 1
                 },
@@ -144,8 +144,8 @@ const InvitationView = (props: InvitationViewProps) => {
                             index: index,
                             type: StopType.Intermediate,
                             id: 0,
-                            journeyId: props.route.params.notification.journeyId,
-                            userId: user!.id,
+                            journeyId: params.journeyId,
+                            userId: params.sender!.id,
                             isCancelled: false,
                         };
                     })) ?? []
@@ -156,8 +156,8 @@ const InvitationView = (props: InvitationViewProps) => {
                     {
                         id: 0,
                         type: InvitationType.Accepted,
-                        invitedUserId: user!.id,
-                        journeyId: props.route.params.notification.journeyId,
+                        invitedUserId: params.sender!.id,
+                        journeyId: params.journeyId,
                     }
                 ).then((updatingInvitationResult) => {
                     if (updatingInvitationResult.status == HTTP_STATUS_OK) {
@@ -179,17 +179,17 @@ const InvitationView = (props: InvitationViewProps) => {
                     <NotificationHeader
                         title=""
                         message="The driver is inviting you to join a ride!"
-                        sender={props.route.params.notification.sender}
+                        sender={params.sender}
                     />
 
                     <NotificationRideDetails
-                        userId={user!.id}
-                        journeyId={props.route.params.notification.journeyId}
+                        userId={params.sender!.id}
+                        journeyId={params.journeyId}
                         withSeats={true}
                         journey={journey!}
                         journeyUser={{
-                            journeyId: props.route.params.notification.journeyId,
-                            userId: user!.id,
+                            journeyId: params.journeyId,
+                            userId: params.sender!.id,
                             withBaggage: false,
                             passangersCount: 1
                         }}
