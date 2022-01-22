@@ -389,6 +389,12 @@ test("renders correctly", async () =>
           <JourneyCardList
             journey={Array []}
           />
+          <RequestCardList
+            request={Array []}
+          />
+          <JourneyCardList
+            journey={Array []}
+          />
         </View>
       </View>
     </ScrollView>
