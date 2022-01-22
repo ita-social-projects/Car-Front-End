@@ -83,7 +83,7 @@ const CarDropDownPicker = (props: CarDropDownPickerProps) => {
                     { color: colors.primary },
                     props.required && { paddingLeft: 12 }
                 ]}
-                itemStyle={[CarDropDownPickerStyle.itemStyle, { backgroundColor: colors.secondaryLight }]}
+                itemStyle={[CarDropDownPickerStyle.itemStyle, { backgroundColor: colors.neutralLight }]}
                 onChangeItem={
                     props.selectHandle
                         ? (item) => {
