@@ -14,6 +14,7 @@ export const OpenSans = {
 };
 
 export const Milliard = {
+    Milliard: "Milliard",
     Regular: "Milliard-Hairline",
     ExtraBold: "Milliard-ExtraBold",
     SemiBold: "Milliard-SemiBold",

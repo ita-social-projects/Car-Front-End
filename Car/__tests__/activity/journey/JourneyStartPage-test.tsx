@@ -149,10 +149,8 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                     "borderBottomWidth": 2,
-                    "color": "#0B171B",
-                  },
-                  Object {
                     "borderColor": "#0B171B",
+                    "color": "#0B171B",
                   },
                 ]
               }
@@ -161,8 +159,8 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Proxima Nova Extrabold",
-                      "fontWeight": "300",
+                      "fontFamily": "Milliard",
+                      "fontWeight": "200",
                       "textTransform": "uppercase",
                     },
                     Object {
@@ -189,10 +187,8 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                     "borderBottomWidth": 0,
-                    "color": "#414045",
-                  },
-                  Object {
                     "borderColor": "#0B171B",
+                    "color": "#414045",
                   },
                 ]
               }
@@ -201,8 +197,8 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Proxima Nova Extrabold",
-                      "fontWeight": "300",
+                      "fontFamily": "Milliard",
+                      "fontWeight": "200",
                       "textTransform": "uppercase",
                     },
                     Object {
@@ -229,10 +225,8 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                     "borderBottomWidth": 0,
-                    "color": "#414045",
-                  },
-                  Object {
                     "borderColor": "#0B171B",
+                    "color": "#414045",
                   },
                 ]
               }
@@ -241,8 +235,8 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Proxima Nova Extrabold",
-                      "fontWeight": "300",
+                      "fontFamily": "Milliard",
+                      "fontWeight": "200",
                       "textTransform": "uppercase",
                     },
                     Object {
@@ -269,10 +263,8 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                     "borderBottomWidth": 0,
-                    "color": "#414045",
-                  },
-                  Object {
                     "borderColor": "#0B171B",
+                    "color": "#414045",
                   },
                 ]
               }
@@ -281,8 +273,8 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Proxima Nova Extrabold",
-                      "fontWeight": "300",
+                      "fontFamily": "Milliard",
+                      "fontWeight": "200",
                       "textTransform": "uppercase",
                     },
                     Object {
@@ -309,6 +301,7 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                     "borderBottomWidth": 0,
+                    "borderColor": "#0B171B",
                     "color": "#414045",
                   },
                 ]
@@ -318,8 +311,8 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Proxima Nova Extrabold",
-                      "fontWeight": "300",
+                      "fontFamily": "Milliard",
+                      "fontWeight": "200",
                       "textTransform": "uppercase",
                     },
                     Object {
@@ -346,6 +339,7 @@ test("renders correctly", async () =>
                   Object {
                     "backgroundColor": "#FFFFFF",
                     "borderBottomWidth": 0,
+                    "borderColor": "#0B171B",
                     "color": "#414045",
                   },
                 ]
@@ -355,8 +349,8 @@ test("renders correctly", async () =>
                 style={
                   Array [
                     Object {
-                      "fontFamily": "Proxima Nova Extrabold",
-                      "fontWeight": "300",
+                      "fontFamily": "Milliard",
+                      "fontWeight": "200",
                       "textTransform": "uppercase",
                     },
                     Object {
