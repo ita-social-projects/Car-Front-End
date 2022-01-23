@@ -72,6 +72,7 @@ export const CreateJourneyStyle = StyleSheet.create({
         borderWidth: 1,
         fontSize: 15,
         paddingLeft: 10,
+        paddingRight: '12%',
     },
 
     commentsCaption: {
