@@ -24,7 +24,8 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const activeButtonStyle = {
         backgroundColor: colors.white,
         color: colors.primary,
-        borderBottomWidth: 2
+        borderBottomWidth: 2,
+        borderColor: colors.primary
     };
 
     const activeButtonTextStyle = {
@@ -35,7 +36,8 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const inactiveButtonStyle = {
         backgroundColor: colors.white,
         color: colors.hover,
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
+        borderColor: colors.primary
     };
 
     const inactiveButtonTextStyle = {
@@ -78,7 +80,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
         setRequestedButtonTextStyle(selectedIndex ==
         FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setCanceledButtonTextStyle(selectedIndex ==
-        FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
+        SIXTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setPastButtonTextStyle(selectedIndex == SECOND_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setUpcomingButtonTextStyle(
             selectedIndex == THIRD_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
@@ -182,8 +184,10 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                     <View style={JourneyStartPageStyle.segmentControlContainer}>
                         <TouchableOpacity
                             activeOpacity={1}
-                            style={[JourneyStartPageStyle.allJourneys, allButtonStyle,
-                                { borderColor: colors.primary }]}
+                            style={[
+                                JourneyStartPageStyle.allJourneys,
+                                allButtonStyle
+                            ]}
                             onPress={() => {
                                 setSelectedIndex(FIRST_ELEMENT_INDEX);
                             }}
@@ -201,8 +205,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             activeOpacity={1}
                             style={[
                                 JourneyStartPageStyle.pastJourneys,
-                                pastButtonStyle,
-                                { borderColor: colors.primary }
+                                pastButtonStyle
                             ]}
                             onPress={() => {
                                 setSelectedIndex(SECOND_ELEMENT_INDEX);
@@ -221,8 +224,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             activeOpacity={1}
                             style={[
                                 JourneyStartPageStyle.upcomingJourneys,
-                                upcomingButtonStyle,
-                                { borderColor: colors.primary }
+                                upcomingButtonStyle
                             ]}
                             onPress={() => {
                                 setSelectedIndex(THIRD_ELEMENT_INDEX);
@@ -241,8 +243,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                             activeOpacity={1}
                             style={[
                                 JourneyStartPageStyle.scheduledJourneys,
-                                scheduledButtonStyle,
-                                { borderColor: colors.primary }
+                                scheduledButtonStyle
                             ]}
                             onPress={() => {
                                 setSelectedIndex(FOURTH_ELEMENT_INDEX);

@@ -67,8 +67,8 @@ const JourneyStartPageStyle = StyleSheet.create({
 
     buttonText: {
         textTransform: "uppercase",
-        fontFamily: Font.ProximaNova.ExtraBold,
-        fontWeight: "300",
+        fontFamily: Font.Milliard.Milliard,
+        fontWeight: "200",
     },
 
     manageJourneysContainer: {
