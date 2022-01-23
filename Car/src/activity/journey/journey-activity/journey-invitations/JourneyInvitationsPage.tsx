@@ -98,7 +98,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                 }
 
                 <View style={CreateJourneyStyle.commentsView}>
-                    <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>New invitations</Text>
+                    <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>New invitation</Text>
                     {invitedUsers.map((us, index) => (
                         <View key={index}>
                             <TextInput
