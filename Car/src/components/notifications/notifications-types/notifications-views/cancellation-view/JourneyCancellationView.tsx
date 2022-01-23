@@ -15,6 +15,7 @@ import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto
 import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../../../models/stop/StopType";
 import { colors } from "react-native-elements";
+import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
@@ -65,35 +66,37 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-                <NotificationHeader
-                    title="RIDE IS CANCELED"
-                    message={"The driver has canceled \nyour ride!"}
-                    sender={props.route.params.notification.sender}
-                />
-                <NotificationRideDetails
-                    journeyId={props.route.params.notification.journeyId}
-                    userId={user?.id!}
-                    IsBaggageVisible={true}
-                    IsDetailsTitleVisible={true}
-                    IsFeeVisible={true}
-                    IsAvailableSeatsVisible={true}
-                    withSeats
-                    journey={journey!}
-                    journeyUser={journeyUser!}
-                />
-                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                    {props.route.params.notification.sender?.name}
-                    {props.route.params.notification.sender?.surname}`s stops
-                </Text>
-                <View>
-                    <StopsBlock
-                        stops={stops ? stops : []}
-                        onStopPress={onStopPressHandler}
-                        highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+            <ScrollView style={{ flexGrow: 1 }}>
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+                    <NotificationHeader
+                        title="RIDE IS CANCELED"
+                        message={"The driver has canceled \nyour ride!"}
+                        sender={props.route.params.notification.sender}
                     />
+                    <NotificationRideDetails
+                        journeyId={props.route.params.notification.journeyId}
+                        userId={user?.id!}
+                        IsBaggageVisible={true}
+                        IsDetailsTitleVisible={true}
+                        IsFeeVisible={true}
+                        IsAvailableSeatsVisible={true}
+                        withSeats
+                        journey={journey!}
+                        journeyUser={journeyUser!}
+                    />
+                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
+                        {props.route.params.notification.sender?.name}
+                        {props.route.params.notification.sender?.surname}`s stops
+                    </Text>
+                    <View>
+                        <StopsBlock
+                            stops={stops ? stops : []}
+                            onStopPress={onStopPressHandler}
+                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                        />
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </>
     );
 };
