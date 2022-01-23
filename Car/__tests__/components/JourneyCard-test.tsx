@@ -159,6 +159,22 @@ test("renders correctly", async () =>
             >
               Invalid date
             </Text>
+            <View>
+              <Text
+                style={
+                  Object {
+                    "color": "#0B171B",
+                    "fontFamily": "Open Sans Regular",
+                    "fontSize": 11,
+                    "lineHeight": 16,
+                    "paddingTop": 0,
+                    "textAlign": "right",
+                  }
+                }
+              >
+                Paid
+              </Text>
+            </View>
           </View>
           <View
             style={

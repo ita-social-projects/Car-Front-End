@@ -126,13 +126,11 @@ const JourneyCard =
                             <Text style={[JourneyCardStyle.timeText, { color: colors.accentBlue }]}>
                                 {getTimeToShow(journey)}
                             </Text>
-                            {props.displayFee &&
                             <View>
                                 <Text style={{ ...JourneyCardStyle.feeText, color: colors.primary }}>
                                     {journey?.isFree ? "Free" : "Paid"}
                                 </Text>
                             </View>
-                            }
                         </View>
                         <View style={JourneyCardStyle.stopsBlock}>
                             <View style={JourneyCardStyle.firstStopBlock}>
