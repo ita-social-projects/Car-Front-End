@@ -81,8 +81,8 @@ test("renders correctly", async () =>
         disableModal={[Function]}
         hideCancelButton={true}
         onConfirm={[Function]}
-        title={"Ride Requested"}
-        subtitle={"Your ride request is created!"}
+        subtitle="Your Ride Request is created!"
+        title="Ride Requested"
         visible={false}
       />
       <ShadowedBottomPopup
