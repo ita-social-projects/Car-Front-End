@@ -87,7 +87,7 @@ test("renders correctly", async () =>
             Array [
               undefined,
               Object {
-                "backgroundColor": "#ffffff",
+                "color": "#0B171B",
               },
             ]
           }
