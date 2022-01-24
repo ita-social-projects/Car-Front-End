@@ -2,13 +2,13 @@ import { StyleSheet } from "react-native";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
     container: {
-        paddingTop: 0,
-        paddingLeft: 17
+        paddingTop: 10,
+        paddingLeft: 17,
     },
 
     headerContainer: {
         flex: 1,
-        flexDirection: "row"
+        flexDirection: "row",
     },
 
     headerUserInformation: {

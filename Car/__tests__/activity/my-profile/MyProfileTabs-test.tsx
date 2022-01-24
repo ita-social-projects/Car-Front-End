@@ -28,11 +28,16 @@ test("renders correctly", async () =>
               "headerLeft": [Function],
               "headerStyle": Array [
                 Object {
-                  "borderBottomWidth": 1,
+                  "borderBottomWidth": 0.4,
+                  "borderLeftWidth": 1,
+                  "borderRadius": 16,
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 0.7,
+                  "elevation": 6,
                   "height": 144,
                 },
                 Object {
-                  "borderBottomColor": "#AAA9AE",
+                  "borderColor": "#AAA9AE",
                 },
               ],
               "headerTitle": "",

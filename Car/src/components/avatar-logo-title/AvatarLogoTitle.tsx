@@ -51,8 +51,7 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
                     ]}>
                         {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
                             ? "1 ride"
-                            : user?.journeyCount + " rides"}
-                        , 2 badges
+                            : user?.journeyCount + " rides as driver 0 rides as passanger"}
                     </Text>
                 </View>
             </View>

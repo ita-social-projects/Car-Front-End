@@ -27,7 +27,12 @@ const HeaderStyle = StyleSheet.create({
 
     myProfileHeaderStyle: {
         height: Platform.OS === "ios" ? 144 : 120,
-        borderBottomWidth:1,
+        borderBottomWidth:0.4,
+        borderRadius:16,
+        borderTopWidth:0.7,
+        borderLeftWidth:1,
+        borderRightWidth:1,
+        elevation:6
     },
 
     headerTitleStyle: {

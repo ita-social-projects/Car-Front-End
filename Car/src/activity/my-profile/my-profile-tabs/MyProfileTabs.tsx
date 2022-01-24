@@ -26,7 +26,7 @@ const MyProfileTabs = () => {
                     options={{
                         headerTitle: "",
                         headerStyle: [HeaderStyle.myProfileHeaderStyle,
-                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
+                            { borderColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerLeft: () => <AvatarLogoTitle />
                     }}
                 />

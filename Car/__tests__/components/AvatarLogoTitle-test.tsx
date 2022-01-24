@@ -10,7 +10,7 @@ test("renders correctly", async () =>
       style={
         Object {
           "paddingLeft": 17,
-          "paddingTop": 0,
+          "paddingTop": 10,
         }
       }
     >
@@ -96,8 +96,7 @@ test("renders correctly", async () =>
               ]
             }
           >
-            undefined rides
-            , 2 badges
+            undefined rides as driver 0 rides as passanger
           </Text>
         </View>
       </View>
