@@ -22,7 +22,7 @@ import ConfirmModal from "../../../../confirm-modal/ConfirmModal";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
-import { colors } from "react-native-elements";
+import { useTheme } from "../../../../theme/ThemeProvider";
 
 interface InvitationViewProps {
     route: {
@@ -33,6 +33,7 @@ interface InvitationViewProps {
 }
 
 const InvitationView = (props: InvitationViewProps) => {
+    const { colors } = useTheme();
     const params = props.route.params.notification;
     const [notificationModalVisible, setNotificationModalVisible] = useState(params.visible);
     const [wasOpened, setWasOpened] = useState(false);
@@ -175,7 +176,11 @@ const InvitationView = (props: InvitationViewProps) => {
     return (
         <>
             <ScrollView style = {{ flexGrow: 1 }}>
-                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+                <View style={[
+                    PassengerWithdrawalViewStyle.window,
+                    { color: colors.primary }
+                ]}
+                >
                     <NotificationHeader
                         title=""
                         message="The driver is inviting you to join a ride!"

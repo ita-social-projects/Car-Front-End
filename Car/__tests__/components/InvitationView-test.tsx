@@ -6,74 +6,74 @@ import Address from "../../models/Address";
 
 const renderer = shallowRender.createRenderer();
 const address: Address = {
-  id: 1,
-  name: "Address",
-  latitude: 1,
-  longitude: 1,
+    id: 1,
+    name: "Address",
+    latitude: 1,
+    longitude: 1,
 };
 const stops: Stop[] = [
-  {
-    address: address,
-    id: 1,
-    journeyId: 1,
-    type: 0,
-    userId: 0,
-    index: 0,
-    isCancelled: false,
-  },
-  {
-    address: address,
-    id: 2,
-    journeyId: 1,
-    type: 1,
-    userId: 0,
-    index: 1,
-    isCancelled: false,
-  },
-  {
-    address: address,
-    id: 3,
-    journeyId: 1,
-    type: 2,
-    userId: 0,
-    index: 2,
-    isCancelled: false,
-  },
+    {
+        address: address,
+        id: 1,
+        journeyId: 1,
+        type: 0,
+        userId: 0,
+        index: 0,
+        isCancelled: false,
+    },
+    {
+        address: address,
+        id: 2,
+        journeyId: 1,
+        type: 1,
+        userId: 0,
+        index: 1,
+        isCancelled: false,
+    },
+    {
+        address: address,
+        id: 3,
+        journeyId: 1,
+        type: 2,
+        userId: 0,
+        index: 2,
+        isCancelled: false,
+    },
 ];
 const jsonData = JSON.stringify({
-  journeyId: 1,
-  applicantStops: stops,
+    journeyId: 1,
+    applicantStops: stops,
 });
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(
-      <InvitationView
-        route={{
-          params: {
-            notification: {
-              sender: {
-                id: 0,
-                name: "Abc",
-                surname: "Abc",
-                position: "Abc",
-                location: "Abc",
-                email: "Abc",
-                fcmtoken: null,
-                hireDate: new Date("2021-01-01T20:00:00.000Z"),
-                imageId: null,
-                journeyCount: 0,
-                phoneNumber: null,
-              },
-              journeyId: 0,
-              notificationData: jsonData,
-              notificationId: 0,
-            },
-          },
-        }}
-      />
-    )
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <InvitationView
+                route={{
+                    params: {
+                        notification: {
+                            sender: {
+                                id: 0,
+                                name: "Abc",
+                                surname: "Abc",
+                                position: "Abc",
+                                location: "Abc",
+                                email: "Abc",
+                                fcmtoken: null,
+                                hireDate: new Date("2021-01-01T20:00:00.000Z"),
+                                imageId: null,
+                                journeyCount: 0,
+                                phoneNumber: null,
+                            },
+                            journeyId: 0,
+                            notificationData: jsonData,
+                            notificationId: 0,
+                        },
+                    },
+                }}
+            />
+        )
+    ).toMatchInlineSnapshot(`
     <React.Fragment>
       <ScrollView
         style={
@@ -87,7 +87,7 @@ test("renders correctly", async () =>
             Array [
               undefined,
               Object {
-                "backgroundColor": "#ffffff",
+                "color": "#0B171B",
               },
             ]
           }
@@ -179,4 +179,4 @@ test("renders correctly", async () =>
         </View>
       </ScrollView>
     </React.Fragment>
-  `));
+    `));

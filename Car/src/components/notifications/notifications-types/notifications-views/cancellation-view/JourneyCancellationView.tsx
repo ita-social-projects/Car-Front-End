@@ -15,6 +15,7 @@ import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto
 import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../../../models/stop/StopType";
 import { colors } from "react-native-elements";
+import { useTheme } from "../../../../theme/ThemeProvider";
 import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
@@ -29,6 +30,7 @@ interface JourneyCancellationViewProps {
 }
 
 const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
+    const { colors : themeColors } = useTheme();
     const user = useContext(AuthContext).user;
     const source = useRef(axios.CancelToken.source());
     const [stops, setStops] = useState<Stop[]>();
@@ -67,7 +69,11 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
     return (
         <>
             <ScrollView style={{ flexGrow: 1 }}>
-                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+                <View style={[
+                    PassengerWithdrawalViewStyle.window,
+                    { color: themeColors.primary }
+                ]}
+                >
                     <NotificationHeader
                         title="RIDE IS CANCELED"
                         message={"The driver has canceled \nyour ride!"}
