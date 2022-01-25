@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Keyboard, Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, Text, TouchableOpacity } from "react-native";
 import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef, Place } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CredentialsManager from "../../../credentials/credentials.json";
@@ -71,13 +71,16 @@ const AddressInput = (props: AddressInputProps) => {
             )}
             renderRightButton={() => (
                 props.address === "" ?
-                    (<View style={AddressInputStyles.marker}>
+                    (<TouchableOpacity
+                        style={AddressInputStyles.marker}
+                        onPress={props.onShowLocationIconPress}
+                    >
                         <Ionicons
                             name={"location"}
                             size={20}
                             color={colors.hover}
                         />
-                    </View>) :
+                    </TouchableOpacity>) :
                     (<TouchableOpacity
                         style={AddressInputStyles.clearIcon}
                         onPress={props.onClearIconPress}

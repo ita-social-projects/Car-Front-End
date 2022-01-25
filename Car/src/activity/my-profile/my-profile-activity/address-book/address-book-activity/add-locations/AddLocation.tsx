@@ -138,6 +138,7 @@ const AddLocation = () => {
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
                     onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
+                    onShowLocationIconPress={()=>animateCameraAndMoveMarker}
                     savedLocations={[]}
                     userLocation={userCoordinates}
                     recentAddresses={[]}
@@ -181,6 +182,7 @@ const AddLocation = () => {
                 customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
+                showsMyLocationButton={false}
             >
                 <Marker
                     title={"Address"}
