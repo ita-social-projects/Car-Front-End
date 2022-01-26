@@ -24,7 +24,7 @@ export const addMinutesToDate = (date: Date, minutes: number) => {
 };
 
 const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(props.date);
 
@@ -70,7 +70,7 @@ const TouchableDateTimePicker = (props: TouchableDateTimePickerProps) => {
                         ]}
                         name={"time"}
                         size={25}
-                        color={colors.primary}
+                        color={isThemeDark ? colors.secondaryLight : colors.hover}
                     />
                 </View>
                 <Modal
