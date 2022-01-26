@@ -30,8 +30,8 @@ test("renders correctly", async () =>
             "fontFamily": "Open Sans Bold",
             "fontSize": 10,
             "fontStyle": "normal",
-            "fontWeight": "800",
-            "lineHeight": 16,
+            "fontWeight": "bold",
+            "lineHeight": 12,
           },
         }
       }
