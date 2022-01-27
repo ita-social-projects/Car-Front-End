@@ -12,6 +12,7 @@ const props: OkSearchResultProps = {
             displayFee: false,
             passangersCount: 1,
             isPast: false,
+            isCanceled: false
         },
     },
 };

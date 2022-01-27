@@ -329,7 +329,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                                 Canceled
                             </Text>
                         )}
-                        {<JourneyCardList journey={canceledJourneys} />}
+                        {<JourneyCardList journey={canceledJourneys} isCanceled={true}/>}
                     </View>
                 )}
                 {selectedIndex === SECOND_ELEMENT_INDEX && (
@@ -354,7 +354,7 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                 )}
                 {selectedIndex === SIXTH_ELEMENT_INDEX && (
                     <View style={JourneyStartPageStyle.tabStyle}>
-                        {<JourneyCardList journey={canceledJourneys} />}
+                        {<JourneyCardList journey={canceledJourneys} isCanceled={true}/>}
                     </View>
                 )}
             </View>

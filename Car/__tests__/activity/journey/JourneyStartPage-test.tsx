@@ -387,6 +387,7 @@ test("renders correctly", async () =>
             request={Array []}
           />
           <JourneyCardList
+            isCanceled={true}
             journey={Array []}
           />
         </View>
