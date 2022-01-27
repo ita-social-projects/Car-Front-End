@@ -20,7 +20,9 @@ export const lightColors = {
     disableBack: "#C4C4C4",
     disableText: "#FFFFFF",
     buttonBack: "#414045",
-    disable: "#C4C4C4"
+    disable: "#C4C4C4",
+    weekdaysActive: "#414045",
+    weekdaysInactive: "#AAA9AE"
 };
 
 export const darkColors = {
@@ -35,5 +37,7 @@ export const darkColors = {
     disableBack: "#414045",
     disableText: "#909095",
     buttonBack: "#F8F8F8",
-    disable: "#C4C4C4"
+    disable: "#C4C4C4",
+    weekdaysActive: "#909095",
+    weekdaysInactive: "#F8F8F8"
 };
