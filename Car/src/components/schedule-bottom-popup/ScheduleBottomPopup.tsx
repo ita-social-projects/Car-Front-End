@@ -5,6 +5,7 @@ import { JOURNEY_MORE_OPTIONS_POPUP_HEIGHT } from "../../constants/JourneyConsta
 import { MAX_POPUP_POSITION, MIN_POPUP_HEIGHT, MIN_POPUP_POSITION } from "../../constants/StylesConstants";
 import BottomPopup from "../bottom-popup/BottomPopup";
 import { useTheme } from "../theme/ThemeProvider";
+import { darkColors, lightColors } from "../theme/ThemesColors";
 import ScheduleBottomPopupProps from "./ScheduleBottomPopupProps";
 import ScheduleBottomPopupStyles from "./ScheduleBottomPopupStyles";
 import WeekDay from "./WeekDay";
@@ -206,10 +207,10 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                                 switchOn={isWeekdays}
                                 onPress={() => isWeekdays ? (setWeekdays(false), setIsWeekdays(false))
                                     : (setWeekdays(true), setIsWeekdays(true)) }
-                                circleColorOff={!isThemeDark ? colors.white : colors.white}
-                                circleColorOn={!isThemeDark ? colors.neutralDark : colors.neutralDark }
-                                backgroundColorOn={!isThemeDark ? colors.hover : colors.white }
-                                backgroundColorOff={!isThemeDark ? colors.neutralDark : colors.neutralDark }
+                                circleColorOff={!isThemeDark ? lightColors.white : darkColors.white}
+                                circleColorOn={!isThemeDark ? lightColors.neutralDark : darkColors.neutralDark }
+                                backgroundColorOn={!isThemeDark ? lightColors.hover : darkColors.white }
+                                backgroundColorOff={!isThemeDark ? lightColors.neutralDark : darkColors.neutralDark }
                                 containerStyle={{
                                     width: 36,
                                     height: 20,
