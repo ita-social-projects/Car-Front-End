@@ -10,6 +10,7 @@ interface AddressInputProps {
     address: string,
     onChangeText: (text: string) => void,
     onPress: (data: GooglePlaceData, detail: (GooglePlaceDetail | null)) => void,
+    onShowLocationIconPress: () => void,
     onClearIconPress: () => void,
     savedLocations: Location[],
     recentAddresses: Address[],

@@ -124,6 +124,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}
                     onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
+                    onShowLocationIconPress={() => animateCameraAndMoveMarker(centerCoordinates)}
                     savedLocations={params.savedLocations}
                     recentAddresses={params.recentAddresses}
                     userLocation={params.userCoordinates}
@@ -139,6 +140,7 @@ const AddressInputPage = (props: AddressInputPageProps) => {
                 customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
                 onLongPress={mapEventHandler}
                 showsCompass={false}
+                showsMyLocationButton={false}
             >
                 <Marker
                     style={CreateJourneyStyle.movableMarker}

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const AddressInputPageStyle = StyleSheet.create({
     inputContainer: {
         position: "absolute",
-        top: 32,
+        top: 22,
         left: 10,
         right: 10,
     },

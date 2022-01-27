@@ -28,6 +28,7 @@ test("renders correctly", async () =>
           onChangeText={[Function]}
           onClearIconPress={[Function]}
           onPress={[Function]}
+          onShowLocationIconPress={[Function]}
           paddingLeft={155}
           placeholder="Choose address"
           recentAddresses={Array []}
@@ -78,6 +79,7 @@ test("renders correctly", async () =>
         onLongPress={[Function]}
         provider="google"
         showsCompass={false}
+        showsMyLocationButton={false}
         showsUserLocation={true}
         style={
           Object {

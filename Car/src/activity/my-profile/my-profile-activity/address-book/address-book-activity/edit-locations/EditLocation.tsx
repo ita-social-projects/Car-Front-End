@@ -177,6 +177,7 @@ const EditLocation = (props: EditLocationProps) => {
                             onChangeText={addressInputOnChangeTextHandler}
                             onPress={addressInputOnPressHandler}
                             onClearIconPress={() => setWayPointsTextAndIsConfirmed("", false)}
+                            onShowLocationIconPress={()=>animateCameraAndMoveMarker}
                             savedLocations={[]}
                             userLocation={userCoordinates}
                             recentAddresses={[]}
