@@ -116,10 +116,6 @@ test("renders correctly", async () =>
                         ]
                       }
                     >
-                      <CarBlock
-                        car={null}
-                        isOnOwnCar={false}
-                      />
                       <StopsBlock
                         highlightedStops={
                           Array [
@@ -130,7 +126,10 @@ test("renders correctly", async () =>
                         onStopPress={[Function]}
                         stops={Array []}
                       />
-                      <CommentsBlock />
+                      <CarBlock
+                        car={null}
+                        isOnOwnCar={false}
+                      />
                       <ParticipantsBlock
                         journey={null}
                       />

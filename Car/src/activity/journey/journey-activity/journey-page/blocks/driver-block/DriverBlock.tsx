@@ -16,7 +16,7 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
     const fullName = journey?.organizer?.name + " " + journey?.organizer?.surname;
 
     return (
-        <View style={[JourneyPageStyle.View, { backgroundColor: colors.white }]}>
+        <View style={[JourneyPageStyle.View, { backgroundColor: colors.white, marginTop: -1 }]}>
 
             <TouchableOpacity
                 style={JourneyPageStyle.userBlock}
@@ -38,18 +38,19 @@ const DriverBlock = ({ journey } : {journey: Journey}) => {
                             {journey?.organizer?.position}
                         </Text>
                     </View>
+                    <View style={JourneyPageStyle.journeyDetailBlock}>
+                        <Text style={[JourneyPageStyle.dateText, { color: colors.accentBlue }]}>
+                            {getTimeToShow(journey)}
+                        </Text>
+                        <Text style={[JourneyPageStyle.feeText, { color: colors.primary }]}>
+                            {journey?.isFree ? "Free" : "Paid"}
+                        </Text>
+                    </View>
                 </View>
             </TouchableOpacity>
-            <View style={JourneyPageStyle.journeyDetailBlock}>
-                <Text style={[JourneyPageStyle.dateText, { color: colors.accentBlue }]}>
-                    {getTimeToShow(journey)}
-                </Text>
-                <Text style={[JourneyPageStyle.feeText, { color: colors.primary }]}>
-                    {journey?.isFree ? "Free" : "Paid"}
-                </Text>
-            </View>
             <View style={JourneyPageStyle.driverBlockWhiteSpace} />
-            <Divider style={[JourneyPageStyle.separator, { backgroundColor: colors.secondaryLight }]} />
+            <Divider style={[JourneyPageStyle.separator,
+                { backgroundColor: useTheme().isThemeDark? colors.neutralLight:colors.neutralDark }]} />
         </View>
     );
 };

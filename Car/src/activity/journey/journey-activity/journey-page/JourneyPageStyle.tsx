@@ -12,7 +12,7 @@ const JourneyPageStyle = StyleSheet.create({
 
     carContainer: {
         paddingTop: 22,
-        paddingLeft: 16,
+        paddingBottom: 20,
         flexDirection: "row"
     },
 
@@ -101,11 +101,6 @@ const JourneyPageStyle = StyleSheet.create({
         height: 300
     },
 
-    commentsBlock: {
-        paddingBottom: 15,
-        fontSize: 15
-    },
-
     commentsLabel: {
         fontWeight: "bold"
     },
@@ -121,6 +116,8 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     feeText: {
+        fontSize: 11,
+        lineHeight: 15,
         textAlign: "right"
     },
 
@@ -138,6 +135,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     userInfoBlock: {
+        paddingLeft: "3%",
         flexDirection: "column",
         justifyContent: "space-around",
         flex: 5
@@ -167,7 +165,7 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     dateText: {
-        fontSize: 13,
+        fontSize: 11,
         fontWeight: "700",
         fontFamily: Font.OpenSans.ExtraBold
     },
@@ -183,18 +181,19 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     applicantsHeader: {
-        fontFamily: Font.ProximaNova.Bold,
-        fontWeight: "bold",
-        fontSize: 16,
+        fontFamily: "Milliard-Bold",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        fontSize: 14,
         justifyContent: "flex-start",
         marginBottom: 10,
+        textTransform: "uppercase"
     },
 
     stopsBlock: {
         width: "95%",
         justifyContent: "space-around",
         marginTop: 20,
-        marginLeft: 14,
         paddingBottom: 15,
     },
 
@@ -248,10 +247,10 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     requestButtonText: {
-        fontWeight: "700",
         fontSize: 16,
+        letterSpacing: 0.25,
+        fontFamily: Font.Milliard.Bold,
         textTransform: "uppercase",
-        lineHeight:20,
         paddingLeft:16,
         paddingTop:12,
         paddingBottom:12,
@@ -259,7 +258,6 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     journeyDetailBlock: {
-        paddingLeft: 60,
         paddingRight: 16,
         flexDirection: "row",
         justifyContent: "space-between"

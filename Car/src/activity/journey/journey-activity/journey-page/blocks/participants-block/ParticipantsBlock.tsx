@@ -12,6 +12,7 @@ import * as navigation from "../../../../../../components/navigation/Navigation"
 
 const ParticipantsBlock = ({ journey } : {journey: Journey}) => {
     const { colors } = useTheme();
+    const iTD = useTheme().isThemeDark;
 
     return (
         <>
@@ -55,7 +56,7 @@ const ParticipantsBlock = ({ journey } : {journey: Journey}) => {
                     </TouchableOpacity>
 
                     <Divider style={[JourneyPageStyle.separator,
-                        { backgroundColor: colors.secondaryLight }]} />
+                        { backgroundColor: iTD ? colors.neutralLight:colors.neutralDark }]} />
                 </View>
             ))}
         </>

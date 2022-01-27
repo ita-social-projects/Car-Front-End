@@ -45,7 +45,8 @@ const ButtonBlock = (props: ButtonBlockProps) => {
             JourneyPageStyle.buttons,
             { backgroundColor: colors.white }
         ]}>
-            <Divider style={[JourneyPageStyle.separator, { backgroundColor: colors.secondaryLight }]} />
+            <Divider style={[JourneyPageStyle.separator,
+                { backgroundColor: useTheme().isThemeDark? colors.neutralLight:colors.neutralDark }]} />
             <View style={JourneyPageStyle.buttonsBlock}>
                 {(props.isDriver || props.isPassenger) && (
                     <Pressable
