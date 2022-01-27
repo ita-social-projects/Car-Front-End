@@ -1,5 +1,4 @@
 import { Image, Text, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import React from "react";
 import ImageService from "../../../../../../../api-service/image-service/ImageService";
 import CarColor from "../../../../../../../models/car/CarColor";
@@ -10,9 +9,12 @@ import JourneyPageStyle from "../../JourneyPageStyle";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
     const { colors } = useTheme();
+    const iTD = useTheme().isThemeDark;
     const image = car?.imageId ?
         { uri: ImageService.getImageById(car.imageId) } :
-        require("../../../../../../../assets/images/journey/taxi2.png");
+        iTD ?
+            require("../../../../../../../assets/images/journey/lightTaxi.png"):
+            require("../../../../../../../assets/images/journey/darkTaxi.png");
 
     return (
         <View style={JourneyPageStyle.carContainer}>
@@ -25,10 +27,12 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                                 resizeMode: car?.imageId ? "cover" : "contain" }]}
                     />
                 ) : (
-                    <Ionicons
-                        name={"car"}
-                        size={20}
-                        color={colors.hover}
+                    <Image
+                        source = {
+                            iTD ?
+                                require("../../../../../../../assets/images/journey/lightCar.png")
+                                :require("../../../../../../../assets/images/journey/darkCar.png")
+                        }
                     />
                 )}
             </View>

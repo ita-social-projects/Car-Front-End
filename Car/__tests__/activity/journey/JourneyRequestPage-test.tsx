@@ -150,7 +150,6 @@ test("renders correctly", async () =>
                   Object {
                     "flexDirection": "row",
                     "justifyContent": "space-between",
-                    "paddingLeft": 60,
                     "paddingRight": 16,
                   }
                 }
@@ -160,7 +159,7 @@ test("renders correctly", async () =>
                     Array [
                       Object {
                         "fontFamily": "Open Sans ExtraBold",
-                        "fontSize": 13,
+                        "fontSize": 11,
                         "fontWeight": "700",
                       },
                       Object {
@@ -175,6 +174,8 @@ test("renders correctly", async () =>
                   style={
                     Array [
                       Object {
+                        "fontSize": 11,
+                        "lineHeight": 15,
                         "textAlign": "right",
                       },
                       Object {

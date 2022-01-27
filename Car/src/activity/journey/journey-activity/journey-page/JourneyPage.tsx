@@ -52,7 +52,6 @@ import { initialCamera } from "../../../../constants/AddressConstants";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import CarBlock from "./blocks/car-block/CarBlock";
-import CommentsBlock from "./blocks/comments-block/CommentsBlock";
 import DriverBlock from "./blocks/driver-block/DriverBlock";
 import ParticipantsBlock from "./blocks/participants-block/ParticipantsBlock";
 import StopsBlock from "./blocks/stops-block/StopsBlock";
@@ -348,14 +347,13 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                 <ScrollView
                                                     nestedScrollEnabled={true}
                                                     style={[JourneyPageStyle.View,{ backgroundColor:colors.white }]}>
-                                                    <CarBlock
-                                                        car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)} />
                                                     <StopsBlock
                                                         stops={getStopsForBottomPopup() ?? []}
                                                         onStopPress={onStopPressHandler}
                                                         highlightedStops={getHighlightedStops()}
                                                     />
-                                                    <CommentsBlock comments={currentJourney?.comments} />
+                                                    <CarBlock
+                                                        car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)} />
                                                     <ParticipantsBlock journey={currentJourney} />
                                                 </ScrollView>
                                             </View>
