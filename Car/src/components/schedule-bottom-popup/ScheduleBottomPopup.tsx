@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Switch } from "react-native-gesture-handler";
+import SwitchToggle from "react-native-switch-toggle";
 import { JOURNEY_MORE_OPTIONS_POPUP_HEIGHT } from "../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_HEIGHT, MIN_POPUP_POSITION } from "../../constants/StylesConstants";
 import BottomPopup from "../bottom-popup/BottomPopup";
 import { useTheme } from "../theme/ThemeProvider";
+import { darkColors, lightColors } from "../theme/ThemesColors";
 import ScheduleBottomPopupProps from "./ScheduleBottomPopupProps";
 import ScheduleBottomPopupStyles from "./ScheduleBottomPopupStyles";
 import WeekDay from "./WeekDay";
 
 const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const activeButtonStyle = {
-        backgroundColor: colors.hover,
-        borderColor: colors.hover,
+        backgroundColor: colors.weekdaysActive,
+        borderColor: colors.weekdaysActive,
         color: colors.white,
     };
 
     const inactiveButtonStyle = {
-        backgroundColor: colors.secondaryDark,
-        borderColor: colors.secondaryDark,
+        backgroundColor: colors.weekdaysInactive,
+        borderColor: colors.weekdaysInactive,
         color: colors.white,
     };
 
@@ -201,28 +202,45 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
                         </TouchableOpacity>
                     </View>
                     <View style={ScheduleBottomPopupStyles.checkboxContainer}>
-                        <Switch
-                            trackColor={{ false: colors.secondaryDark, true: colors.hover }}
-                            thumbColor={colors.white}
-                            value={isWeekdays}
-                            style={ScheduleBottomPopupStyles.switch}
-                            onValueChange={(value) => { setWeekdays(value); setIsWeekdays(value); }}
-                        />
+                        <View style={ScheduleBottomPopupStyles.switch}>
+                            <SwitchToggle
+                                switchOn={isWeekdays}
+                                onPress={() => isWeekdays ? (setWeekdays(false), setIsWeekdays(false))
+                                    : (setWeekdays(true), setIsWeekdays(true)) }
+                                circleColorOff={!isThemeDark ? lightColors.white : darkColors.white}
+                                circleColorOn={!isThemeDark ? lightColors.neutralDark : darkColors.neutralDark }
+                                backgroundColorOn={!isThemeDark ? lightColors.hover : darkColors.white }
+                                backgroundColorOff={!isThemeDark ? lightColors.neutralDark : darkColors.neutralDark }
+                                containerStyle={{
+                                    width: 36,
+                                    height: 20,
+                                    borderRadius: 12,
+                                    padding: 3,
+                                    borderWidth: 1,
+                                    borderColor: colors.neutralDark,
+                                }}
+                                circleStyle={{
+                                    width: 16,
+                                    height: 16,
+                                    borderRadius: 8,
+                                }}
+                            />
+                        </View>
                         <Text style={{ color: colors.primary,
                             paddingLeft: 11, fontSize: 13 }}>Repeat every workday</Text>
                     </View>
                     <View style={ScheduleBottomPopupStyles.scheduleButtonBlock}>
                         <TouchableOpacity
                             style={[ScheduleBottomPopupStyles.scheduleButton, {
-                                backgroundColor: isEdited ? colors.hover : colors.secondaryDark,
-                                borderColor: isEdited ? colors.hover : colors.secondaryDark
+                                backgroundColor: isEdited ? colors.hover : colors.disableBack,
+                                borderColor: isEdited ? colors.hover : colors.disableBack
                             }]}
                             onPress={schedule}
                             disabled={!isEdited}
                         >
                             <Text
                                 style={[ScheduleBottomPopupStyles.scheduleButtonText, {
-                                    color: colors.white }]}>
+                                    color: isEdited ? colors.white : colors.disableText }]}>
                                 Save
                             </Text>
                         </TouchableOpacity>

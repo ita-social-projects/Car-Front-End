@@ -45,7 +45,7 @@ const ScheduleBottomPopupStyles = EStyleSheet.create({
     },
 
     switch: {
-        height: 32,
+        height: 20,
         width: 40
     },
 
@@ -67,7 +67,7 @@ const ScheduleBottomPopupStyles = EStyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 44,
-        width: 120,
+        width: 76,
     },
 
     scheduleButtonText: {
