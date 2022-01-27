@@ -7,7 +7,8 @@ interface OkSearchResultProps
             journeys: ApplicantJourney[],
             displayFee: boolean,
             passangersCount: number,
-            isPast: boolean
+            isPast: boolean,
+            isCanceled: boolean
         }
     }
 }

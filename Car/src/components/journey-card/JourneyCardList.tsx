@@ -7,12 +7,14 @@ import JourneyCard from "./JourneyCard";
 interface JourneyCardListProps {
     journey: Journey[],
     ascending?: boolean,
-    isPast?: boolean
+    isPast?: boolean,
+    isCanceled?: boolean
 }
 
 const JourneyCardList = (props:JourneyCardListProps) => {
     const journey: Journey[] = props.journey;
     const isPast: boolean = props.isPast ?? false;
+    const isCanceled: boolean = props.isCanceled ?? false;
 
     journey.sort((a: Journey, b: Journey) => compare(a,b, props.ascending));
 
@@ -31,7 +33,7 @@ const JourneyCardList = (props:JourneyCardListProps) => {
         <View>
             {journey.map((item) => (
                 <View key={item?.id}>
-                    <JourneyCard journey={item} displayFee={true} isPast={isPast}/>
+                    <JourneyCard journey={item} displayFee={true} isPast={isPast} isCanceled={isCanceled}/>
                 </View>
             ))}
         </View>

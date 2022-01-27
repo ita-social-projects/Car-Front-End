@@ -77,6 +77,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const { isDriver } = props.route.params;
     const { isPassenger } = props.route.params;
     const { isPast } = props.route.params;
+    const { isCanceled } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [car, setCar] = useState<CarViewModel>(null);
     const [isRequested, setRequested] = useState(false);
@@ -104,7 +105,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const applicantStops = props.route.params.applicantStops;
 
     const onFocusHandler = () => {
-        JourneyService.getJourney(journeyId).then((res) => {
+        JourneyService.getJourney(journeyId, isCanceled).then((res) => {
             setJourney(res.data);
             mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
                 { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });

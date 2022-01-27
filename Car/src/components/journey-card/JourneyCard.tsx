@@ -20,7 +20,8 @@ const JourneyCard =
         displayFee?: boolean,
         applicantStops?: Stop[],
         passangersCount?: number,
-        isPast: boolean
+        isPast: boolean,
+        isCanceled: boolean
             }) => {
         const { colors } = useTheme();
         const journey = props.journey;
@@ -41,7 +42,8 @@ const JourneyCard =
                 isPassenger,
                 applicantStops: props.applicantStops,
                 passangersCount: props.passangersCount,
-                isPast: props.isPast
+                isPast: props.isPast,
+                isCanceled: props.isCanceled
             });
 
         const fullName = `${journey?.organizer?.name} ${journey?.organizer?.surname}`;
