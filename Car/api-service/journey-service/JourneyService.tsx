@@ -4,7 +4,7 @@ import APIRoutes from "../APIRoutes";
 import Stop from "../../models/stop/Stop";
 import JourneyDto from "../../models/journey/JourneyDto";
 import FilterJourneyModel from "../../models/journey/FilterJourneyModel";
-import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
+import AcceptedInvitationModel from "../../models/journey-user/AcceptedInvitationModel";
 import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
 import Invitation from "../../models/invitation/Invitation";
 import { AxiosRequestConfig } from "axios";
@@ -71,8 +71,9 @@ const JourneyService = {
     deleteUser: async (journeyId: number, userId: number) =>
         APIService.delete(route + "delete-user/" + journeyId + "/" + userId),
 
-    addUser: async (journeyApplyModel: JourneyApplyModel) =>
-        APIService.put(route + "add-user/", journeyApplyModel),
+    addUser: async (acceptedInvitation: AcceptedInvitationModel) => {
+        return APIService.put(route + "add-user/", acceptedInvitation);
+    },
 
     getJourneyWithJourneyUser: async (journeyId:number,
         userId: number,

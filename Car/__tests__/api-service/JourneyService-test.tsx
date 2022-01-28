@@ -4,7 +4,7 @@ import APIService from "../../api-service/APIService";
 import JourneyService from "../../api-service/journey-service/JourneyService";
 import Invitation from "../../models/invitation/Invitation";
 import InvitationType from "../../models/invitation/InvitationType";
-import JourneyApplyModel from "../../models/journey-user/JourneyApplyModel";
+import AcceptedInvitationModel from "../../models/journey-user/AcceptedInvitationModel";
 import JourneyUserDto from "../../models/journey-user/JourneyUserDto";
 import JourneyWithUserModel from "../../models/journey-user/JourneyWithUserModel";
 import FeeType from "../../models/journey/FeeType";
@@ -95,7 +95,7 @@ describe("Journey Service test", () => {
         isCancelled: false
     }]];
 
-    let journeyApplyData: JourneyApplyModel = {
+    let journeyApplyData: AcceptedInvitationModel = {
         journeyUser: journeyUserData,
         ApplicantStops: stopsData[0]
     };
