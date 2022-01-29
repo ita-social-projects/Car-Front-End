@@ -1,9 +1,9 @@
 import Stop from "../stop/Stop";
 import JourneyUserDto from "./JourneyUserDto";
 
-interface JourneyApplyModel {
+interface AcceptedInvitationModel {
     journeyUser: JourneyUserDto,
     ApplicantStops: Stop []
 }
 
-export default JourneyApplyModel;
+export default AcceptedInvitationModel;

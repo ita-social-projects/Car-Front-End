@@ -129,7 +129,7 @@ const InvitationView = (props: InvitationViewProps) => {
             {
                 journeyUser: {
                     journeyId: params.journeyId,
-                    userId: params.sender!.id,
+                    userId: params.receiver!.id,
                     withBaggage: false,
                     passangersCount: 1
                 },
@@ -146,7 +146,7 @@ const InvitationView = (props: InvitationViewProps) => {
                             type: StopType.Intermediate,
                             id: 0,
                             journeyId: params.journeyId,
-                            userId: params.sender!.id,
+                            userId: params.receiver!.id,
                             isCancelled: false,
                         };
                     })) ?? []

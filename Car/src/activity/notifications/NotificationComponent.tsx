@@ -36,6 +36,7 @@ const NotificationComponent = (props: any) => {
                 notificationId: props.item!.id,
                 notificationData: props.item!.jsonData,
                 sender: props.item!.sender,
+                receiver: props.item!.receiver,
                 visible: isModalVisible,
                 read: props.item!.isRead,
                 date: new Date(props.item!.createdAt),

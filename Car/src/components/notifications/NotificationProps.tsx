@@ -5,6 +5,7 @@ interface NotificationProps {
     notificationId: number,
     notificationData: string,
     sender: User,
+    receiver: User,
     read?: boolean,
     date?: Date,
     journeyId: number
