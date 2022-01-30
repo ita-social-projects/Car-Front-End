@@ -129,8 +129,8 @@ const OkSearchResult = (props: OkSearchResultProps) => {
             />
             <ConfirmModal
                 visible={successModalViewVisible}
-                title={"Success"}
-                subtitle={"Request successfully created!"}
+                title={"Ride Requested"}
+                subtitle={"Your Ride Request is created!"}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => {
