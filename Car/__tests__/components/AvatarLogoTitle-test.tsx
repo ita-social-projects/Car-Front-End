@@ -46,7 +46,7 @@ test("renders correctly", async () =>
                   "marginBottom": 8,
                 },
                 Object {
-                  "color": "#02A2CF",
+                  "color": "#0B171B",
                 },
               ]
             }
@@ -62,7 +62,7 @@ test("renders correctly", async () =>
                   "marginBottom": 8,
                 },
                 Object {
-                  "color": "#909095",
+                  "color": "#414045",
                   "fontWeight": "bold",
                 },
               ]
@@ -96,8 +96,23 @@ test("renders correctly", async () =>
               ]
             }
           >
-            undefined rides
-            , 2 badges
+            undefined rides as driver
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontSize": 14,
+                  "lineHeight": 14,
+                  "marginBottom": 8,
+                },
+                Object {
+                  "color": "#909095",
+                },
+              ]
+            }
+          >
+            undefined rides as passanger
           </Text>
         </View>
       </View>

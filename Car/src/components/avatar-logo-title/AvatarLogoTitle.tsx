@@ -33,11 +33,11 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
             <View style={AvatarLogoTitleStyle.headerContainer}>
                 <AvatarLogo user={user} size={56} marginTop={14} marginLeft={8}/>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
-                    <Text style={[AvatarLogoTitleStyle.headerUserName, { color: colors.accentBlue }]}>
+                    <Text style={[AvatarLogoTitleStyle.headerUserName, { color: colors.primary }]}>
                         {trimTheStringIfTooLong(user?.name + " " + user?.surname, MAX_USER_FULL_NAME_LENGTH_IN_PROFILE)}
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
-                        { color: colors.secondaryDark, fontWeight: "bold" }
+                        { color: colors.hover, fontWeight: "bold" }
                     ]}>
                         {user?.position}
                     </Text>
@@ -49,10 +49,16 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
                     <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
                         { color: colors.secondaryDark }
                     ]}>
-                        {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
-                            ? "1 ride"
-                            : user?.journeyCount + " rides"}
-                        , 2 badges
+                        {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH // is used quantity of rides as driver
+                            ? "1 ride as driver"
+                            : user?.journeyCount + " rides as driver"}
+                    </Text>
+                    <Text style={[AvatarLogoTitleStyle.headerUserAdditionalData,
+                        { color: colors.secondaryDark }
+                    ]}>
+                        {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH // quantity of rides as passanger
+                            ? "1 ride as passanger"
+                            : user?.journeyCount + " rides as passanger"}
                     </Text>
                 </View>
             </View>

@@ -28,7 +28,8 @@ test("renders correctly", async () =>
               "headerLeft": [Function],
               "headerStyle": Array [
                 Object {
-                  "borderBottomWidth": 1,
+                  "borderBottomWidth": 0,
+                  "elevation": 0,
                   "height": 144,
                 },
                 Object {
@@ -46,9 +47,7 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerStyle": Array [
-                Object {
-                  "borderBottomWidth": 1,
-                },
+                Object {},
                 Object {
                   "borderBottomColor": "#AAA9AE",
                 },
@@ -76,9 +75,7 @@ test("renders correctly", async () =>
             Object {
               "headerLeft": [Function],
               "headerStyle": Array [
-                Object {
-                  "borderBottomWidth": 1,
-                },
+                Object {},
                 Object {
                   "borderBottomColor": "#AAA9AE",
                 },
