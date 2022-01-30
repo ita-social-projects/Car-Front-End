@@ -1,8 +1,4 @@
-import React from "react";
-import { Image } from "react-native";
-import ErrorAlertStyle from "./ErrorAlertStyle";
-
-const { Popup } = require("popup-ui");
+const { Popup } = require("../popup-ui");
 
 let IsAlertShowing = false;
 
@@ -11,18 +7,7 @@ const ErrorAlert = (message?: string, func?: () => void) => {
         IsAlertShowing = true;
 
         Popup.show({
-            type: "Warning",
-            title: "Error",
-            button: true,
-            textBody: message,
-            buttonText: "Retry",
-            icon: (
-                <Image
-                    source={require("../../../assets/images/surprised-car.png")}
-                    style={ErrorAlertStyle.icon}
-                    resizeMode="contain"
-                />
-            ),
+            isShowing: true,
             callback: () => {
                 if (func != null) {
                     func();
