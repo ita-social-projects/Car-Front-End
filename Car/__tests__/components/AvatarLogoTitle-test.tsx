@@ -10,7 +10,7 @@ test("renders correctly", async () =>
       style={
         Object {
           "paddingLeft": 17,
-          "paddingTop": 0,
+          "paddingTop": 5,
         }
       }
     >
