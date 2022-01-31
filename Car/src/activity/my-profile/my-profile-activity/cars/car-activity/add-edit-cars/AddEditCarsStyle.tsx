@@ -15,7 +15,7 @@ const AddEditCarsStyle = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 14,
         alignItems: "center",
-        borderWidth: 2
+        borderWidth: 1
     },
 
     carButtonUploadText: {

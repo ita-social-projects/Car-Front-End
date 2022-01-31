@@ -262,7 +262,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
         <View
             style={[AddEditCarsStyle.wrapper, { backgroundColor: colors.white }]}
         >
-            <View style={[AddEditCarsStyle.carAvatarContainer, { backgroundColor: colors.secondaryLight }]}>
+            <View style={[AddEditCarsStyle.carAvatarContainer, { backgroundColor: colors.disableBack }]}>
                 {photo && (
                     <Image
                         source={{ uri: photo.uri }}
@@ -273,7 +273,7 @@ const AddEditCars = (props: { type: "add" | "edit", carId?: number }) => {
                     style={[AddEditCarsStyle.carButtonUpload,
                         {
                             backgroundColor: colors.white,
-                            borderColor: colors.primary
+                            borderColor: colors.hover
                         }]
                     }
                     onPress={() =>
