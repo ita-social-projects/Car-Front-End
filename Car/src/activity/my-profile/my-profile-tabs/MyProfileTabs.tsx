@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { View } from "react-native";
+import { Animated, TouchableOpacity, View } from "react-native";
 import AvatarLogoTitle from "../../../components/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
@@ -11,6 +11,7 @@ import AddressBookTabs from "../my-profile-activity/address-book/address-book-ta
 import SettingsTabs from "../my-profile-activity/settings/settings-tabs/SettingsTabs";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import { useTheme } from "../../../components/theme/ThemeProvider";
+import MyProfileTabsStyle from "./MyProfileTabsStyle";
 
 const StackTabs = createStackNavigator();
 
@@ -18,6 +19,7 @@ const MyProfileTabs = () => {
     const { colors, isThemeDark } = useTheme();
 
     return (
+
         <View style={[HeaderStyle.container, { backgroundColor: colors.white }]}>
             <StackTabs.Navigator>
                 <StackTabs.Screen
@@ -27,7 +29,22 @@ const MyProfileTabs = () => {
                         headerTitle: "",
                         headerStyle: [HeaderStyle.myProfileHeaderStyle,
                             { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
-                        headerLeft: () => <AvatarLogoTitle />
+                        headerLeft: () =>
+
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={[MyProfileTabsStyle.profileInfo,
+                                    {
+                                        borderColor: colors.neutralLight,
+                                        backgroundColor: colors.white,
+                                        elevation: 7,
+                                    }]}
+                            >
+                                <Animated.View >
+                                    <AvatarLogoTitle />
+                                </Animated.View>
+                            </TouchableOpacity>
+
                     }}
                 />
                 <StackTabs.Screen

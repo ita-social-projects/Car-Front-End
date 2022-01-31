@@ -23,9 +23,7 @@ test("renders correctly", async () =>
               "headerLeft": [Function],
               "headerRight": [Function],
               "headerStyle": Array [
-                Object {
-                  "borderBottomWidth": 1,
-                },
+                Object {},
                 Object {
                   "borderBottomColor": "#AAA9AE",
                 },

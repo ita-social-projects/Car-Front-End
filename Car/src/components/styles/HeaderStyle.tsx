@@ -8,8 +8,6 @@ const HeaderStyle = StyleSheet.create({
     },
 
     border: {
-        borderBottomWidth: 1,
-        //borderBottomColor:"#414045"
     },
 
     layout: {
@@ -26,8 +24,9 @@ const HeaderStyle = StyleSheet.create({
     },
 
     myProfileHeaderStyle: {
-        height: Platform.OS === "ios" ? 144 : 120,
-        borderBottomWidth:1,
+        height: Platform.OS === "ios" ? 144 : 150,
+        borderBottomWidth:0,
+        elevation:0
     },
 
     headerTitleStyle: {
