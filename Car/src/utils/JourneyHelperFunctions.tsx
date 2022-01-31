@@ -118,13 +118,13 @@ export const getTimeToShow = (journey?: Journey): string => {
     return journey?.schedule ?
         // eslint-disable-next-line
         `Every ${weekDayToString(journey.schedule.days)} at ${moment(new Date(journey?.departureTime ?? "")).format("HH:mm")}` :
-        capitalize(moment(new Date(journey?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm"));
+        capitalize(moment(new Date(journey?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]HH:mm"));
 };
 
 export const getRequestTimeToShow = (request?: Request): string => {
     return request?.departureTime ?
         // eslint-disable-next-line
-        capitalize(moment(new Date(request?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]h:mm")) : "Invalid Time"
+        capitalize(moment(new Date(request?.departureTime ?? "")).format("dddd[, ]MM[.]DD[, ]HH:mm")) : "Invalid Time"
 
 };
 
