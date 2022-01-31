@@ -3,9 +3,9 @@ import EStyleSheet from "react-native-extended-stylesheet";
 const TouchableNavigationCardStyle = EStyleSheet.create({
     cardContainer: {
         paddingBottom: 26,
-        paddingLeft: 10,
+        paddingLeft: 0,
         paddingTop: 26,
-        paddingRight: 10,
+        paddingRight: 0,
         marginLeft: 8,
         marginRight: 8,
         borderBottomWidth: 1,
@@ -24,9 +24,10 @@ const TouchableNavigationCardStyle = EStyleSheet.create({
     },
 
     pictureContainer: {
-        width: 55,
+        width: 32,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginRight: 20
     },
 
     cardName: {

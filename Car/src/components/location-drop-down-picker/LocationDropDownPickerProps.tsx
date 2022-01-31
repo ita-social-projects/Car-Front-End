@@ -2,7 +2,7 @@ import LocationDropDownItem from "./LocationDropDownItem";
 
 interface LocationDropDownPickerProps {
     placeholder: string,
-    items: LocationDropDownItem[],
+    items: (isThemeDark: boolean) => LocationDropDownItem[],
     defaultValue?: number | null,
     onChangeItem: (item: {label: string, value: number}) => void,
     isVisible: boolean,

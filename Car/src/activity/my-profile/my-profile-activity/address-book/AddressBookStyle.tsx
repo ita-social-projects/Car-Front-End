@@ -17,12 +17,14 @@ const AddressBookStyle = StyleSheet.create({
 
     name: {
         fontWeight: "bold",
+        fontSize: 13,
+        lineHeight: 18
     },
 
     address: {
-        fontWeight: "bold",
         fontSize: 11,
-        lineHeight: 16,
+        fontWeight: "normal",
+        lineHeight: 15
     },
 
     message: {
