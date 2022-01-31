@@ -14,6 +14,7 @@ import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import { mapStyle } from "../search-journey-map/SearchJourneyMapStyle";
 import SearchJourneyStyle from "../search-journey/SearchJourneyStyle";
 import * as navigation from "../../../../components/navigation/Navigation";
+import { DEFAULT_INPUT_LEFT_PADDING } from "../../../../constants/StylesConstants";
 
 const AddressInputPage = (props: AddressInputPageProps) => {
     const { colors, isThemeDark } = useTheme();
@@ -118,8 +119,8 @@ const AddressInputPage = (props: AddressInputPageProps) => {
         <View>
             <View style={AddressInputPageStyle.inputContainer}>
                 <AddressInput
-                    placeholder={params.placeholder}
-                    paddingLeft={params.paddingLeft}
+                    placeholder={wayPoint.isConfirmed ? "" : params.placeholder}
+                    paddingLeft={wayPoint.isConfirmed ? DEFAULT_INPUT_LEFT_PADDING : params.paddingLeft}
                     address={wayPoint.text}
                     onChangeText={addressInputOnChangeTextHandler}
                     onPress={addressInputOnPressHandler}

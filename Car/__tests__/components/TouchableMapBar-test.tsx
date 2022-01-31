@@ -48,8 +48,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          undefined:
-           
+          
         </Text>
         <Text
           style={
