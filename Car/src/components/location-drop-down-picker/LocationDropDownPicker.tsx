@@ -9,7 +9,7 @@ import LocationDropDownPickerStyle from "./LocationDropDownPickerStyle";
 import { useTheme } from "../theme/ThemeProvider";
 
 const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const controller = useRef<any>(null);
 
     return (
@@ -39,7 +39,7 @@ const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
                     }]}
                 selectedLabelStyle={[LocationDropDownPickerStyle.selectedLabelStyle, { color: colors.primary }]}
                 itemStyle={LocationDropDownPickerStyle.itemStyle}
-                items={props.items}
+                items={props.items(isThemeDark)}
                 placeholderStyle={[LocationDropDownPickerStyle.staticPlaceholder, { color: colors.secondaryDark }]}
                 placeholder={props.placeholder}
                 labelStyle={[LocationDropDownPickerStyle.labelStyle, { color: colors.primary }]}
