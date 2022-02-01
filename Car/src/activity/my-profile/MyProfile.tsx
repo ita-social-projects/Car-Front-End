@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { useContext, useEffect } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import UserService from "../../../api-service/user-service/UserService";
 import AuthContext from "../../components/auth/AuthContext";
@@ -10,6 +10,7 @@ import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: { navigation: any }) => {
     const { colors } = useTheme();
+    const isThemeDark = useTheme().isThemeDark;
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -61,10 +62,15 @@ const MyProfile = (props: { navigation: any }) => {
                 navigationName="CarTabs"
                 cardName="Your cars"
                 picture={
-                    <Ionicons
-                        name={"car"}
-                        size={20}
-                        color={colors.hover}
+                    <Image
+                        style={{ width: 20, height: 20,
+                            borderRadius:0,
+                            resizeMode: "contain" }}
+                        source = {
+                            isThemeDark ?
+                                require("../../../assets/images/icons/lightCar.png")
+                                :require("../../../assets/images/icons/darkCar.png")
+                        }
                     />
                 }
             >

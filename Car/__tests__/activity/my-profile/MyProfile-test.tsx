@@ -230,26 +230,21 @@ test("renders correctly", async () =>
               }
             >
               <View>
-                <Text
-                  allowFontScaling={false}
-                  style={
-                    Array [
-                      Object {
-                        "color": "#414045",
-                        "fontSize": 20,
-                      },
-                      undefined,
-                      Object {
-                        "fontFamily": "Ionicons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      Object {},
-                    ]
+                <Image
+                  source={
+                    Object {
+                      "testUri": "../../../assets/images/icons/darkCar.png",
+                    }
                   }
-                >
-                  
-                </Text>
+                  style={
+                    Object {
+                      "borderRadius": 0,
+                      "height": 20,
+                      "resizeMode": "contain",
+                      "width": 20,
+                    }
+                  }
+                />
               </View>
               <View>
                 <Text
