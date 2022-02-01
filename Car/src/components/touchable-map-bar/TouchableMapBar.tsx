@@ -32,7 +32,7 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                 <Text style={[TouchableMapBarStyle.insideText,
                     { color: colors.secondaryDark, }
                 ]}>
-                    {props.directionType + ":"}{" "}
+                    {props.defaultInputValue == "" ? props.directionType + ":": ""}
                 </Text>
                 <Text
                     style={[TouchableMapBarStyle.directionText,
