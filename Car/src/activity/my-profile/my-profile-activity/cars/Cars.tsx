@@ -12,6 +12,7 @@ import NavigationAddListener from "../../../../types/NavigationAddListener";
 
 const Cars = (props: NavigationAddListener) => {
     const { colors } = useTheme();
+    const isThemeDark = useTheme().isThemeDark;
     const [cars, setCars] = useState<Array<CarViewModel>>([]);
     const [isLoading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -81,10 +82,15 @@ const Cars = (props: NavigationAddListener) => {
                                                 style={CarsStyle.carAvatar}
                                             />
                                         ) : (
-                                            <Ionicons
-                                                name={"car"}
-                                                size={20}
-                                                color={colors.hover}
+                                            <Image
+                                                style={{ width: 20, height: 20,
+                                                    borderRadius:0,
+                                                    resizeMode: "contain" }}
+                                                source = {
+                                                    isThemeDark ?
+                                                        require("../../../../../assets/images/icons/lightCar.png")
+                                                        :require("../../../../../assets/images/icons/darkCar.png")
+                                                }
                                             />
                                         )
                                     }
