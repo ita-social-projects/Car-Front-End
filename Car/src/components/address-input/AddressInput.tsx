@@ -66,7 +66,7 @@ const AddressInput = (props: AddressInputProps) => {
             }}
             renderLeftButton={() => (
                 <Text style={[AddressInputStyles.placeholder, { color: colors.secondaryDark }]}>
-                    {props.placeholder + ":"}
+                    {props.address == "" ? props.placeholder + ":": ""}
                 </Text>
             )}
             renderRightButton={() => (
