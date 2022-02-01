@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { useContext, useEffect } from "react";
-import { ScrollView, Text, View } from "react-native";
+import {ScrollView, Image, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import UserService from "../../../api-service/user-service/UserService";
 import AuthContext from "../../components/auth/AuthContext";
@@ -10,6 +10,7 @@ import MyProfileStyle from "./MyProfileStyle";
 
 const MyProfile = (props: { navigation: any }) => {
     const { colors } = useTheme();
+    const isThemeDark = useTheme().isThemeDark;
     const { user, loadStorageUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -57,20 +58,25 @@ const MyProfile = (props: { navigation: any }) => {
                     <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Preferences</Text>
                 </TouchableNavigationCard>
 
-                <TouchableNavigationCard
-                    navigation={props.navigation}
-                    navigationName="CarTabs"
-                    cardName="Your cars"
-                    picture={
-                        <Ionicons
-                            name={"car"}
-                            size={20}
-                            color={colors.hover}
-                        />
-                    }
-                >
-                    <Text style={[MyProfileStyle.text, { color: colors.primary }]}>My Cars</Text>
-                </TouchableNavigationCard>
+            <TouchableNavigationCard
+                navigation={props.navigation}
+                navigationName="CarTabs"
+                cardName="Your cars"
+                picture={
+                    <Image
+                        style={{ width: 20, height: 20,
+                            borderRadius:0,
+                            resizeMode: "contain" }}
+                        source = {
+                            isThemeDark ?
+                                require("../../../assets/images/icons/lightCar.png")
+                                :require("../../../assets/images/icons/darkCar.png")
+                        }
+                    />
+                }
+            >
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>My Cars</Text>
+            </TouchableNavigationCard>
 
                 <TouchableNavigationCard
                     navigation={props.navigation}

@@ -12,11 +12,12 @@ import ReceivedMessagesService from "../../../../api-service/received-messages-s
 import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import updateLocale from "../../styles/DTFormat";
 import { useTheme } from "../../theme/ThemeProvider";
+import { Image } from "react-native";
 
 const Tabs = createBottomTabNavigator();
-
 const AppTabs = () => {
     const { colors } = useTheme();
+    const isThemeDark = useTheme().isThemeDark;
     let [unreadNotificationsNumber, setUnreadNotificationsNumber] = useState(EMPTY_COLLECTION_LENGTH);
     let [unreadMessagesNumber, setUnreadMessagesNumber] = useState(EMPTY_COLLECTION_LENGTH);
 
@@ -60,13 +61,13 @@ const AppTabs = () => {
 
                     switch (route.name) {
                         case "MessagesTabs":
-                            iconName = "chatbubbles";
+                            iconName = "useImage";
                             break;
                         case "MyProfileTabs":
                             iconName = "person";
                             break;
                         case "JourneyTabs":
-                            iconName = "car";
+                            iconName = "useImage";
                             break;
                         case "NotificationsTabs":
                             iconName = "notifications";
@@ -74,7 +75,31 @@ const AppTabs = () => {
                     }
 
                     return (
-                        <Ionicons name={iconName!} size={size} color={color} />
+                        route.name == "MessagesTabs" || route.name == "JourneyTabs"?
+                            <Image
+                                style={{ width: 30, height: 30,
+                                    borderRadius:0,
+                                    resizeMode: "contain" }}
+                                source = {
+                                    route.name == "MessagesTabs"?
+                                        isThemeDark?
+                                            color == colors.neutralDark?
+                                                require("../../../../assets/images/icons/grayComments.png"):
+                                                require("../../../../assets/images/icons/darkComments.png"):
+                                            color == colors.white?
+                                                require("../../../../assets/images/icons/lightComments.png"):
+                                                require("../../../../assets/images/icons/grayComments.png"):
+                                        isThemeDark?
+                                            color == colors.neutralDark?
+                                                require("../../../../assets/images/icons/grayCar.png"):
+                                                require("../../../../assets/images/icons/darkCar.png"):
+                                            color == colors.white?
+                                                require("../../../../assets/images/icons/lightCar.png"):
+                                                require("../../../../assets/images/icons/grayCar.png")
+
+                                }
+                            />:
+                            <Ionicons name={iconName!} size={size} color={color} />
                     );
                 }
             })}

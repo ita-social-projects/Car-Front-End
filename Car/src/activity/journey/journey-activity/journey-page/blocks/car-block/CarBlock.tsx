@@ -9,12 +9,12 @@ import JourneyPageStyle from "../../JourneyPageStyle";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
     const { colors } = useTheme();
-    const iTD = useTheme().isThemeDark;
+    const isThemeDark = useTheme().isThemeDark;
     const image = car?.imageId ?
         { uri: ImageService.getImageById(car.imageId) } :
-        iTD ?
-            require("../../../../../../../assets/images/journey/lightTaxi.png"):
-            require("../../../../../../../assets/images/journey/darkTaxi.png");
+        isThemeDark ?
+            require("../../../../../../../assets/images/icons/grayTaxi.png"):
+            require("../../../../../../../assets/images/icons/darkTaxi.png");
 
     return (
         <View style={JourneyPageStyle.carContainer}>
@@ -27,11 +27,15 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                                 resizeMode: car?.imageId ? "cover" : "contain" }]}
                     />
                 ) : (
+
                     <Image
+                        style={[JourneyPageStyle.carAvatar, { width: 30, height: 30 },
+                            { borderRadius:TAXI_IMAGE_BORDER_RADIUS,
+                                resizeMode: "contain" }]}
                         source = {
-                            iTD ?
-                                require("../../../../../../../assets/images/journey/lightCar.png")
-                                :require("../../../../../../../assets/images/journey/darkCar.png")
+                            isThemeDark ?
+                                require("../../../../../../../assets/images/icons/grayCar.png")
+                                :require("../../../../../../../assets/images/icons/darkCar.png")
                         }
                     />
                 )}

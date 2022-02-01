@@ -224,73 +224,36 @@ test("renders correctly", async () =>
               }
             >
               <View>
-                <View
-                  style={
+                <Image
+                  source={
                     Object {
-                      "flexDirection": "row",
+                      "testUri": "../../../assets/images/icons/darkCar.png",
                     }
                   }
-                >
-                  <View>
-                    <Text
-                      allowFontScaling={false}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#414045",
-                            "fontSize": 20,
-                          },
-                          undefined,
-                          Object {
-                            "fontFamily": "Ionicons",
-                            "fontStyle": "normal",
-                            "fontWeight": "normal",
-                          },
-                          Object {},
-                        ]
-                      }
-                    >
-                      
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={
-                        Array [
-                          Object {
-                            "fontWeight": "bold",
-                          },
-                          Object {
-                            "color": "#0B171B",
-                          },
-                        ]
-                      }
-                    >
-                      My Cars
-                    </Text>
-                  </View>
-                </View>
+                  style={
+                    Object {
+                      "borderRadius": 0,
+                      "height": 20,
+                      "resizeMode": "contain",
+                      "width": 20,
+                    }
+                  }
+                />
               </View>
               <View>
                 <Text
-                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
-                        "color": "#414045",
-                        "fontSize": 20,
+                        "fontWeight": "bold",
                       },
-                      undefined,
                       Object {
-                        "fontFamily": "Ionicons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
+                        "color": "#0B171B",
                       },
-                      Object {},
                     ]
                   }
                 >
-                  
+                  My Cars
                 </Text>
               </View>
             </View>
