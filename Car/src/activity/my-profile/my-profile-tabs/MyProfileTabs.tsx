@@ -12,6 +12,7 @@ import SettingsTabs from "../my-profile-activity/settings/settings-tabs/Settings
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import MyProfileTabsStyle from "./MyProfileTabsStyle";
+import Badges from "../my-profile-activity/badges/Badges";
 
 const StackTabs = createStackNavigator();
 
@@ -84,6 +85,11 @@ const MyProfileTabs = () => {
                 <StackTabs.Screen
                     name="SettingsTabs"
                     component={SettingsTabs}
+                    options={{ headerShown: false }}
+                />
+                <StackTabs.Screen
+                    name="Badges"
+                    component={Badges}
                     options={{ headerShown: false }}
                 />
             </StackTabs.Navigator>

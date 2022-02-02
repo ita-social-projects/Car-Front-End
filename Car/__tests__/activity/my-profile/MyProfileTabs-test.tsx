@@ -123,6 +123,15 @@ test("renders correctly", async () =>
             }
           }
         />
+        <Screen
+          component={[Function]}
+          name="Badges"
+          options={
+            Object {
+              "headerShown": false,
+            }
+          }
+        />
       </StackNavigator>
     </View>
   `));

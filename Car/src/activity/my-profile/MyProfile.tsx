@@ -96,21 +96,36 @@ const MyProfile = (props: { navigation: any }) => {
                     <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Address Book</Text>
                 </TouchableNavigationCard>
 
-                <TouchableNavigationCard
-                    navigation={props.navigation}
-                    navigationName="SettingsTabs"
-                    cardName="Settings"
-                    picture={
-                        <Ionicons
-                            name={"settings-outline"}
-                            size={20}
-                            color={colors.hover}
-                        />
-                    }
-                >
-                    <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Settings</Text>
-                </TouchableNavigationCard>
-            </View>
+            <TouchableNavigationCard
+                navigation={props.navigation}
+                navigationName="SettingsTabs"
+                cardName="Settings"
+                picture={
+                    <Ionicons
+                        name={"settings-outline"}
+                        size={20}
+                        color={colors.hover}
+                    />
+                }
+            >
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Settings</Text>
+            </TouchableNavigationCard>
+
+            <TouchableNavigationCard
+                navigation={props.navigation}
+                navigationName="Badges"
+                cardName="Badges"
+                picture={
+                    <Ionicons
+                        name={"trophy"}
+                        size={20}
+                        color={colors.hover}
+                    />
+                }
+            >
+                <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Badges</Text>
+            </TouchableNavigationCard>
+        </View> 
         </ScrollView>
     );
 };
