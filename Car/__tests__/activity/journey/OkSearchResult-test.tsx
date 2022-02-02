@@ -83,7 +83,7 @@ test("renders correctly", async () =>
         hideCancelButton={true}
         onConfirm={[Function]}
         subtitle="Your Ride Request is created!"
-        title="Ride Requested"
+        title="Ride Request"
         visible={false}
       />
       <ShadowedBottomPopup
