@@ -16,13 +16,13 @@ class Root extends Component {
                 {this.props.children}
                 <Popup
                     ref={c => {
-                        if (c) Popup.popupInstance = c
+                        if (c) Popup.popupInstance = c;
                     }}
                 />
 
                 <BadgePopup
                     ref={k => {
-                        if (k) BadgePopup.popupInstance = k
+                        if (k) BadgePopup.popupInstance = k;
                     }}
                 />
             </View>

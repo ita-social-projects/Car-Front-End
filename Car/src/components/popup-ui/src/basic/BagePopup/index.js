@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
+import React, { Component } from "react";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import ModalPoup from "../../../../ErrorModal/ModalPoup";
 import ModalPoupStyle from "../../../../ErrorModal/ModalPoupStyle";
 import BadgePopupStyles from "./PopupStyles";
@@ -28,9 +28,9 @@ class BadgePopup extends Component {
 	}
 
 	hidePopup () {
-		this.setState({
-			isShowing:false
-		})
+	    this.setState({
+	        isShowing:false
+	    });
 	}
 
 	defaultCallback () {
@@ -52,7 +52,7 @@ class BadgePopup extends Component {
                		 <Text style = {BadgePopupStyles.headerText}>OOPS!</Text>
            		</View>
 	            <View style={{ alignItems: "center" }}>
-				
+
 	            </View>
 	            <Text style={BadgePopupStyles.bodyText}>Something went wrong.</Text>
 	            <Text style={BadgePopupStyles.bodyText}>Please, try again.</Text>
