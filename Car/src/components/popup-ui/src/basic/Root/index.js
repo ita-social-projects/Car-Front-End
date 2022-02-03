@@ -3,6 +3,7 @@ import { View, ViewPropTypes } from "react-native";
 import PropTypes from "prop-types";
 
 import Popup from "../Popup";
+import BadgePopup from "../BagePopup";
 
 class Root extends Component {
     render () {
@@ -15,7 +16,13 @@ class Root extends Component {
                 {this.props.children}
                 <Popup
                     ref={c => {
-                        if (c) Popup.popupInstance = c;
+                        if (c) Popup.popupInstance = c
+                    }}
+                />
+
+                <BadgePopup
+                    ref={k => {
+                        if (k) BadgePopup.popupInstance = k
                     }}
                 />
             </View>

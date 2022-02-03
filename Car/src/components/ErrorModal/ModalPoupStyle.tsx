@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const ModalPoupStyle = StyleSheet.create ({
     modalBackGround: {
@@ -9,7 +9,7 @@ const ModalPoupStyle = StyleSheet.create ({
     },
 
     modalContainer: {
-        width: 344,
+        width: Dimensions.get("screen").width - 65,
         height: 374,
         paddingHorizontal: 20,
         borderRadius: 16,
