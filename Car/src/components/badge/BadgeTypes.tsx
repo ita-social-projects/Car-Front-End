@@ -1,3 +1,3 @@
-enum BadgeTypes { passangerRides, DriverRides, DriverKm };
+enum BadgeTypes { passangerRides, DriverRides, DriverKm }
 
 export default BadgeTypes;
