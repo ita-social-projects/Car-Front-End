@@ -1,10 +1,11 @@
+import BadgeTypes from "./BadgeTypes";
+
 interface BadgeProps{
     name: string
+    type: BadgeTypes
     description: string
-    pathLocked: string
-    pathUnlocked: string
     points: number
-    isAchived: boolean
+    isReached: boolean
 }
 
 export default BadgeProps;
