@@ -1,5 +1,10 @@
 interface BadgeProps{
-    value: number | undefined
+    name: string
+    description: string
+    pathLocked: string
+    pathUnlocked: string
+    points: number
+    isAchived: boolean
 }
 
 export default BadgeProps;
