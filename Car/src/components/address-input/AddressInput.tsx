@@ -6,6 +6,7 @@ import CredentialsManager from "../../../credentials/credentials.json";
 import Address from "../../../models/Address";
 import Location from "../../../models/location/Location";
 import { INITIAL_LATITUDE, INITIAL_LONGITUDE } from "../../constants/AddressConstants";
+import { DEFAULT_INPUT_LEFT_PADDING } from "../../constants/StylesConstants";
 import { useTheme } from "../theme/ThemeProvider";
 import AddressInputProps from "./AddressInputProps";
 import AddressInputRow from "./AddressInputRow/AddressInputRow";
@@ -96,7 +97,7 @@ const AddressInput = (props: AddressInputProps) => {
                 ...{
                     textInput: {
                         ...AddressInputStyles.textInput,
-                        paddingLeft: props.paddingLeft,
+                        paddingLeft: props.address == "" ? props.paddingLeft : DEFAULT_INPUT_LEFT_PADDING,
                         color: colors.primary,
                         backgroundColor: colors.white,
                         borderColor: colors.primary
