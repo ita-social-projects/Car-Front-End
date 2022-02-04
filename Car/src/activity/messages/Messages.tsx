@@ -26,7 +26,6 @@ import moment from "moment";
 import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
 import Indicator from "../../components/activity-indicator/Indicator";
-import Badge from "../../components/badge/Badge";
 import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
 
 const Messages = (props: MessagesProps) => {
@@ -199,16 +198,7 @@ const Messages = (props: MessagesProps) => {
                                             </Text>
                                         )}
                                     </View>
-                                    <View>
-                                        {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
-                                            .unreadMessagesCount !== ZERO &&
-                                            <View>
-                                                <Badge
-                                                    value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
-                                                        .unreadMessagesCount }/>
-                                            </View>
-                                        }
-                                    </View>
+
                                 </View>
                             </View>
                         </TouchableOpacity>
