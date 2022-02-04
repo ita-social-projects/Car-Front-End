@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
-import ModalPoup from "../../../../ErrorModal/ModalPoup";
-import ModalPoupStyle from "../../../../ErrorModal/ModalPoupStyle";
-import BadgePopupStyles from "./PopupStyles";
+import { View, Text, TouchableOpacity } from "react-native";
+import { navigate } from "../../../../navigation/Navigation";
+import ModalBadge from "./ModalBadge";
+import BadgePopupStyles from "./BadgePopupStyles";
 
 class BadgePopup extends Component {
 	static popupInstance;
 
 	static show ({ ...config }) {
 	    this.popupInstance.start(config);
+	}
+
+	static close () {
+	    this.popupInstance.closePopup();
 	}
 
 	static hide () {
@@ -21,53 +25,59 @@ class BadgePopup extends Component {
 	start ({ ...config }) {
 	    this.setState({
 	        textBody: config.textBody,
-	        callback: config.callback !== undefined ? config.callback : this.defaultCallback(),
+	        callback: config.callback !== undefined ? config.callback : this.hidePopup,
+	        close: config.close !== undefined ? config.close : this.closePopup,
 	        background: config.background || "rgba(0, 0, 0, 0.5)",
-	        isShowing: config.isShowing
+	        isShowing: config.isShowing,
+	        ThemeColorWhite: config.ThemeColorWhite,
+	        ThemeColorDark: config.ThemeColorDark,
+	        ThemeColorPrimary: config.ThemeColorPrimary
 	    });
+	}
+
+	closePopup () {
+	    this.setState({ isShowing:false });
 	}
 
 	hidePopup () {
 	    this.setState({
 	        isShowing:false
 	    });
-	}
-
-	defaultCallback () {
-	    return Alert.alert(
-	        "Callback!",
-	        "Callback complete!",
-	        [
-	            { text: "Ok", onPress: () => this.hidePopup() }
-	        ]
-	    );
+	    navigate("MyProfileTabs", { screen: "AddressBookTabs" });
+	    navigate("AddressBookTabs");
 	}
 
 	render () {
-	    const { callback, isShowing } = this.state;
+	    const { isShowing, callback, close, ThemeColorWhite, ThemeColorDark, ThemeColorPrimary } = this.state;
 
 	    return (
-	        <ModalPoup visible={isShowing}>
+	        <ModalBadge visible={isShowing}>
 	            <View style={{ marginTop:32 }}>
-               		 <Text style = {BadgePopupStyles.headerText}>OOPS!</Text>
+               		 <Text style = {[BadgePopupStyles.headerText, { color: ThemeColorPrimary }]}>CONGRATULATIONS!</Text>
            		</View>
 	            <View style={{ alignItems: "center" }}>
 
 	            </View>
-	            <Text style={BadgePopupStyles.bodyText}>Something went wrong.</Text>
-	            <Text style={BadgePopupStyles.bodyText}>Please, try again.</Text>
-
-	            <View style={{ alignItems: "center", marginTop: 45 }}>
-	                <View style={ModalPoupStyle.header}>
-	                    <TouchableOpacity
-	                        style={BadgePopupStyles.button}
-	                        onPress={callback}
-	                    >
-	                        <Text style={BadgePopupStyles.buttonText}>Try again</Text>
-	                    </TouchableOpacity>
+	            <View style={{ alignItems: "center", marginTop: 166 }}>
+	                <Text style = {[BadgePopupStyles.messageText, { color: ThemeColorDark }]}>
+						You have a new badge!
+	                </Text>
+	                	<View style={[BadgePopupStyles.header, { marginTop:50 }]}>
+	                   		 <TouchableOpacity
+	                      		  style={[BadgePopupStyles.button]}
+	                        	  onPress={callback}
+	                         >
+	                     		<Text style={BadgePopupStyles.buttonText}>See more</Text>
+	                         </TouchableOpacity>
+							 <TouchableOpacity
+	                      		  style={[BadgePopupStyles.button, { backgroundColor: ThemeColorWhite, marginTop: 5 }]}
+	                        	  onPress={close}
+	                         >
+	                     		<Text style={[BadgePopupStyles.buttonText, { color: ThemeColorPrimary }]}>Close</Text>
+	                         </TouchableOpacity>
 	                </View>
 	            </View>
-	        </ModalPoup>
+	        </ModalBadge>
 	    );
 	}
 }

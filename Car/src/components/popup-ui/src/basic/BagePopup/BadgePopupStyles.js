@@ -2,12 +2,44 @@ import { StyleSheet } from "react-native";
 import Font from "../../../../../data/fonts/Font";
 
 const BadgePopupStyles = StyleSheet.create({
+
+    modalBackGround: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    modalContainer: {
+        width: 344,
+        height: 398,
+        paddingHorizontal: 20,
+        borderRadius: 16,
+        elevation: 20
+    },
+
+    header: {
+        width: "100%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
     headerText: {
         textAlign:"center",
-        fontSize:24,
-        color: "#D80056",
+        fontSize:14,
         fontWeight:"bold",
-        fontFamily: Font.Milliard.Milliard
+        fontFamily: Font.Milliard.Milliard,
+        letterSpacing: 0.25
+    },
+
+    messageText: {
+        textAlign:"center",
+        fontSize: 16,
+        fontWeight: "normal",
+        fontFamily: Font.OpenSans.OpenSans,
+        letterSpacing: 0.25,
+        lineHeight: 22
     },
 
     image: {
