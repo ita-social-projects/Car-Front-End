@@ -70,6 +70,12 @@ const BadgePopupStyles = StyleSheet.create({
         color:"white",
         fontWeight: "bold",
         fontFamily: Font.Milliard.Milliard
+    },
+
+    image: {
+        width: 137,
+        height: 150,
+        position: "absolute"
     }
 });
 
