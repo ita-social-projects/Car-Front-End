@@ -79,7 +79,7 @@ const JourneyPageStyle = StyleSheet.create({
 
     headerTitleStyle: {
         paddingLeft: 24,
-        paddingBottom: 20
+        paddingBottom: 21
     },
 
     headerTextStyle: {

@@ -15,7 +15,7 @@ const MenuButton = (props: MenuButtonProps) => {
     const [colorButton, setColorButton] = useState(white);
     const [colorText, setColorText] = useState(black);
     const [colorIcon, setColorIcon] = useState(black);
-    const [colorSeparator, setColorSeparator] = useState(colors.secondaryLight);
+    const [colorSeparator, setColorSeparator] = useState(colors.neutralDark);
     let color = props.disabled ? disabledColor : colorIcon;
 
     const changeColorToBlack = () => {
@@ -77,7 +77,8 @@ const MenuButton = (props: MenuButtonProps) => {
                         MenuButtonStyle.separator,
                         { backgroundColor: colorSeparator }
                     ]}
-                />
+                ></View>
+
             </View>
         </Pressable>
     );

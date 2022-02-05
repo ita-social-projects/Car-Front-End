@@ -1,8 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
-import CreateJourney from "../../activity/journey/journey-activity/create-journey/CreateJourney";
 import JourneyPageStyle from "../../activity/journey/journey-activity/journey-page/JourneyPageStyle";
-import { CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT, NUMBER_OF_STOPS_LIMIT } from "../../constants/JourneyConstants";
+import { CREATE_JOURNEY_MORE_OPTIONS_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT } from "../../constants/JourneyConstants";
 import { MAX_POPUP_POSITION, MIN_POPUP_HEIGHT } from "../../constants/StylesConstants";
 import BottomPopup from "../bottom-popup/BottomPopup";
 import MenuButton from "../menu-button/MenuButton";
@@ -35,20 +34,8 @@ const CreateJourneyMoreOptionsPopup = (props: CreateJourneyMoreOptionsPopupProps
                 }
                 renderContent={
                     <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
-                        {props.showAddStop && (
-                            <MenuButton
-                                text={`Add Stop (${CreateJourney.numberOfAddedStop}/7)`}
-                                isIcon={true}
-                                iconName={"add-circle-outline"}
-                                onPress={() => {
-                                    CreateJourney.addStopPressHandler();
-                                    props.pressHandle(props.createRideMoreOptionsRef);
-                                }}
-                                disabled={CreateJourney.numberOfAddedStop === NUMBER_OF_STOPS_LIMIT}
-                            />
-                        )}
                         <MenuButton
-                            text="Schedule a ride"
+                            text="Schedule This ride"
                             isIcon={true}
                             onPress={() => {
                                 props.scheduleMoreOptionsRef.current?.snapTo(MAX_POPUP_POSITION);

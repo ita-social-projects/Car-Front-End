@@ -8,9 +8,9 @@ const MenuButtonStyle = StyleSheet.create({
 
     panelButton: {
         paddingHorizontal: 12,
-        height: 44,
+        height: 48,
         justifyContent: "center",
-        flexDirection: "column"
+        flexDirection: "column",
     },
 
     panelButtonTitle: {
@@ -18,11 +18,13 @@ const MenuButtonStyle = StyleSheet.create({
         lineHeight: 42,
         fontWeight: "bold",
         alignItems: "center",
-        paddingLeft: 24
+        paddingLeft: 12,
+        marginBottom: 4
     },
 
     Icon: {
-        paddingRight: 12
+        paddingRight: 12,
+        marginBottom: 4
     },
 
     container: {
@@ -30,9 +32,10 @@ const MenuButtonStyle = StyleSheet.create({
     },
 
     separator: {
+        marginLeft: 12,
         flexWrap: "wrap",
-        width: "100%",
-        height: 1
+        width: "92%",
+        height: 1,
     }
 });
 

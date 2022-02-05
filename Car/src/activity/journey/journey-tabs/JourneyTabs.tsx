@@ -49,6 +49,7 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 import Preferences from "../../my-profile/my-profile-activity/preferences/Preferences";
 import AsyncStorage from "@react-native-community/async-storage";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
+import HeaderAddStopButton from "../../../components/header-add-stop-button/HeaderAddStopButton";
 
 const JourneyTabs = () => {
     const { colors } = useTheme();
@@ -131,8 +132,8 @@ const JourneyTabs = () => {
                                 CreateJourney.IsFromToChanged() ? openConfirmModal() : navigation.goBack();
                             }
                         }),
-                        headerRight: () => HeaderEllipsis(
-                            { onPress: () => pressHandle(createRideMoreOptionsRef) })
+                        headerRight: () => HeaderAddStopButton(
+                            { onPress: () => CreateJourney.addStopPressHandler() })
                     }}
                 >
                     {(props: any) => {
