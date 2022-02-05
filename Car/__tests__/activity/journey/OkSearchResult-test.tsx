@@ -12,7 +12,7 @@ const props: OkSearchResultProps = {
             displayFee: false,
             passangersCount: 1,
             isPast: false,
-            isCanceled: false
+            isCanceled: false,
         },
     },
 };
@@ -119,7 +119,7 @@ test("renders correctly", async () =>
             style={
               Array [
                 Object {
-                  "paddingBottom": 20,
+                  "paddingBottom": 21,
                   "paddingLeft": 24,
                 },
                 Object {

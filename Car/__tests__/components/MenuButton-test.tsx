@@ -20,7 +20,7 @@ test("renders correctly", async () =>
         Array [
           Object {
             "flexDirection": "column",
-            "height": 44,
+            "height": 48,
             "justifyContent": "center",
             "paddingHorizontal": 12,
           },
@@ -54,7 +54,8 @@ test("renders correctly", async () =>
                     "fontSize": 13,
                     "fontWeight": "bold",
                     "lineHeight": 42,
-                    "paddingLeft": 24,
+                    "marginBottom": 4,
+                    "paddingLeft": 12,
                   },
                   Object {
                     "color": "#0B171B",
@@ -74,10 +75,11 @@ test("renders correctly", async () =>
               Object {
                 "flexWrap": "wrap",
                 "height": 1,
-                "width": "100%",
+                "marginLeft": 12,
+                "width": "92%",
               },
               Object {
-                "backgroundColor": "#AAA9AE",
+                "backgroundColor": "#C4C4C4",
               },
             ]
           }
