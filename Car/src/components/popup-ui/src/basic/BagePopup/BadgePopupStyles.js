@@ -42,13 +42,6 @@ const BadgePopupStyles = StyleSheet.create({
         lineHeight: 22
     },
 
-    image: {
-        height: 150,
-        width: 136,
-        paddingTop: 40,
-        resizeMode:"contain"
-    },
-
     bodyText: {
         fontSize: 16,
         textAlign: "center",
