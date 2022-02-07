@@ -11,7 +11,6 @@ const SwitchSelectorStyle = StyleSheet.create({
     },
     buttonContaier: {
         flexDirection: "row",
-        borderWidth: 1,
         marginRight: 15
     },
 
@@ -22,6 +21,9 @@ const SwitchSelectorStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-end",
         borderRightWidth: 1,
+        borderLeftWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1
     },
 
     rightButton: {
@@ -31,6 +33,9 @@ const SwitchSelectorStyle = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1
     },
 
     buttonText: {
