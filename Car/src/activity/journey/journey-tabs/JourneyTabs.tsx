@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { RefObject, useRef, useState } from "react";
-import { Animated, Text, View } from "react-native";
+import React, { RefObject, useEffect, useRef, useState } from "react";
+import { Animated, BackHandler, Text, View } from "react-native";
 import JourneyStartPage from "../JourneyStartPage";
 import CreateJourney from "../journey-activity/create-journey/CreateJourney";
 import SearchJourney from "../journey-activity/search-journey/SearchJourney";
@@ -52,6 +52,21 @@ import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import HeaderAddStopButton from "../../../components/header-add-stop-button/HeaderAddStopButton";
 
 const JourneyTabs = () => {
+    useEffect(() => {
+        const backAction = () => {
+            CreateJourney.IsFromToChanged() ? openConfirmModal() : navigation.goBack();
+
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
+
     const { colors } = useTheme();
     const [isOpen, setOpen] = useState(false);
     const [isVisible, setVisibility] = useState(false);
