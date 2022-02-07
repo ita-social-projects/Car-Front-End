@@ -7,24 +7,24 @@ import WayPoint from "../../../src/types/WayPoint";
 import toJSON from "enzyme-to-json";
 
 const props: SearchJourneyProps = {
-    route: {
-        params: {
-            isRequest: true,
-            isPreviousFilter: true,
-            wayPoint: {} as WayPoint,
-            wayPointId: "",
-        },
+  route: {
+    params: {
+      isRequest: true,
+      isPreviousFilter: true,
+      wayPoint: {} as WayPoint,
+      wayPointId: "",
     },
+  },
 };
 
 describe("JourneySearch Test", () => {
-    let wrapper = shallow(<SearchJourney {...props} />);
+  let wrapper = shallow(<SearchJourney {...props} />);
 
-    it("should match inline snapshot", async () => {
-        const date = new Date(0);
+  it("should match inline snapshot", async () => {
+    const date = new Date(0);
 
-        wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
-        expect(toJSON(wrapper)).toMatchInlineSnapshot(`
+    wrapper.find("TouchableDateTimePicker").prop("setDate")(date);
+    expect(toJSON(wrapper)).toMatchInlineSnapshot(`
       <Fragment>
         <ScrollView
           contentContainerStyle={
@@ -129,7 +129,6 @@ describe("JourneySearch Test", () => {
               style={
                 Array [
                   Object {
-                    "borderWidth": 1,
                     "flexDirection": "row",
                     "marginRight": 15,
                   },
@@ -145,7 +144,10 @@ describe("JourneySearch Test", () => {
                   Array [
                     Object {
                       "backgroundColor": "#000000",
+                      "borderBottomWidth": 1,
+                      "borderLeftWidth": 1,
                       "borderRightWidth": 1,
+                      "borderTopWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "paddingHorizontal": 16,
@@ -186,7 +188,10 @@ describe("JourneySearch Test", () => {
                   Array [
                     Object {
                       "backgroundColor": "#000000",
+                      "borderBottomWidth": 1,
+                      "borderLeftWidth": 1,
                       "borderRightWidth": 1,
+                      "borderTopWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "paddingHorizontal": 16,
@@ -228,6 +233,9 @@ describe("JourneySearch Test", () => {
                     Object {
                       "alignItems": "center",
                       "backgroundColor": "white",
+                      "borderBottomWidth": 1,
+                      "borderRightWidth": 1,
+                      "borderTopWidth": 1,
                       "flexDirection": "row",
                       "justifyContent": "flex-end",
                       "paddingHorizontal": 16,
@@ -331,5 +339,5 @@ describe("JourneySearch Test", () => {
         </ScrollView>
       </Fragment>
     `);
-    });
+  });
 });
