@@ -5,7 +5,10 @@ interface BadgeProps{
     type: BadgeTypes
     description: string
     points: number
-    isReached: boolean
+    isReached: boolean,
+    scale: number,
+    pathLocked: any,
+    pathUnlocked: any
 }
 
 export default BadgeProps;
