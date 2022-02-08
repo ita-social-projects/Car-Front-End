@@ -11,7 +11,7 @@ const navigation = {
 
 test("renders correctly", async () =>
     expect(renderer.render(<JourneyStartPage navigation={navigation} />))
-        .toMatchSnapshot(`
+        .toMatchInlineSnapshot(`
     <ScrollView
       refreshControl={
         <RefreshControlMock
@@ -110,148 +110,148 @@ test("renders correctly", async () =>
           </Text>
         </View>
         <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "height": 56,
+              "paddingTop": 24,
+              "width": "100%",
+            }
+          }
+        >
+          <FlatList
+            data={
+              Array [
+                Object {
+                  "name": "All",
+                  "textStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#0B171B",
+                      "marginHorizontal": 8,
+                      "marginVertical": 8,
+                    },
+                  ],
+                  "touchableStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomWidth": 2,
+                      "borderColor": "#0B171B",
+                    },
+                  ],
+                },
+                Object {
+                  "name": "Past",
+                  "textStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#909095",
+                      "marginHorizontal": 8,
+                      "marginVertical": 8,
+                    },
+                  ],
+                  "touchableStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#0B171B",
+                    },
+                  ],
+                },
+                Object {
+                  "name": "Upcoming",
+                  "textStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#909095",
+                      "marginHorizontal": 8,
+                      "marginVertical": 8,
+                    },
+                  ],
+                  "touchableStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#0B171B",
+                    },
+                  ],
+                },
+                Object {
+                  "name": "Regular",
+                  "textStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#909095",
+                      "marginHorizontal": 8,
+                      "marginVertical": 8,
+                    },
+                  ],
+                  "touchableStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#0B171B",
+                    },
+                  ],
+                },
+                Object {
+                  "name": "Requested",
+                  "textStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#909095",
+                      "marginHorizontal": 8,
+                      "marginVertical": 8,
+                    },
+                  ],
+                  "touchableStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#0B171B",
+                    },
+                  ],
+                },
+                Object {
+                  "name": "Canceled",
+                  "textStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "color": "#909095",
+                      "marginHorizontal": 8,
+                      "marginVertical": 8,
+                    },
+                  ],
+                  "touchableStyles": Array [
+                    Object {
+                      "backgroundColor": "#FFFFFF",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#0B171B",
+                    },
+                  ],
+                },
+              ]
+            }
+            disableVirtualization={false}
+            horizontal={true}
+            initialNumToRender={10}
+            keyExtractor={[Function]}
+            maxToRenderPerBatch={10}
+            numColumns={1}
+            onEndReachedThreshold={2}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            showsHorizontalScrollIndicator={false}
             style={
               Object {
-                "flexDirection": "row",
-                "height": 56,
-                "paddingTop": 24,
+                "flex": 1,
                 "width": "100%",
               }
             }
-          >
-            <FlatList
-              data={
-                    Array [
-                      Object {
-                        "name": "All",
-                        "textStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "color": "#0B171B",
-                            "marginHorizontal": 8,
-                            "marginVertical": 8,
-                          },
-                        ],
-                        "touchableStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "borderBottomWidth": 2,
-                            "borderColor": "#0B171B",
-                          },
-                        ],
-                      },
-                      Object {
-                        "name": "Past",
-                        "textStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "color": "#909095",
-                            "marginHorizontal": 8,
-                            "marginVertical": 8,
-                          },
-                        ],
-                        "touchableStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "borderBottomWidth": 0,
-                            "borderColor": "#0B171B",
-                          },
-                        ],
-                      },
-                      Object {
-                        "name": "Upcoming",
-                        "textStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "color": "#909095",
-                            "marginHorizontal": 8,
-                            "marginVertical": 8,
-                          },
-                        ],
-                        "touchableStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "borderBottomWidth": 0,
-                            "borderColor": "#0B171B",
-                          },
-                        ],
-                      },
-                      Object {
-                        "name": "Regular",
-                        "textStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "color": "#909095",
-                            "marginHorizontal": 8,
-                            "marginVertical": 8,
-                          },
-                        ],
-                        "touchableStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "borderBottomWidth": 0,
-                            "borderColor": "#0B171B",
-                          },
-                        ],
-                      },
-                      Object {
-                        "name": "Requested",
-                        "textStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "color": "#909095",
-                            "marginHorizontal": 8,
-                            "marginVertical": 8,
-                          },
-                        ],
-                        "touchableStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "borderBottomWidth": 0,
-                            "borderColor": "#0B171B",
-                          },
-                        ],
-                      },
-                      Object {
-                        "name": "Canceled",
-                        "textStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "color": "#909095",
-                            "marginHorizontal": 8,
-                            "marginVertical": 8,
-                          },
-                        ],
-                        "touchableStyles": Array [
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                            "borderBottomWidth": 0,
-                            "borderColor": "#0B171B",
-                          },
-                        ],
-                      },
-                    ]
-                  }
-                disableVirtualization={false}
-                horizontal={true}
-                initialNumToRender={10}
-                keyExtractor={[Function]}
-                maxToRenderPerBatch={10}
-                numColumns={1}
-                onEndReachedThreshold={2}
-                removeClippedSubviews={false}
-                renderItem={[Function]}
-                scrollEventThrottle={50}
-                showsHorizontalScrollIndicator={false}
-                style={
-                    Object {
-                      "flex": 1,
-                      "width": "100%",
-                    }
-                }
-                updateCellsBatchingPeriod={50}
-                windowSize={21}
-            />
+            updateCellsBatchingPeriod={50}
+            windowSize={21}
+          />
         </View>
         <View
           style={
