@@ -5,6 +5,7 @@ import AuthParamList from "../auth/AuthParamList";
 import AuthContext from "../auth/AuthContext";
 import Login from "../../activity/login/Login";
 import AppTabs from "./app-tabs/AppTabs";
+import PrivacyPolicy from "../../activity/login/PrivacyPolicy";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -36,12 +37,12 @@ const Routes = () => {
         (async () => {
             const currentLogin = new Date();
             const lastLogin = new Date(
-        (await AsyncStorage.getItem("lastLogin")) as string
+                (await AsyncStorage.getItem("lastLogin")) as string
             );
 
             if (
                 Math.abs(currentLogin.getTime() - lastLogin.getTime()) >
-        MILLISECONDS_IN_MONTH
+                MILLISECONDS_IN_MONTH
             ) {
                 await AsyncStorage.setItem("lastLogin", currentLogin.toUTCString());
                 await AsyncStorage.removeItem("user");
@@ -52,13 +53,21 @@ const Routes = () => {
     }, []);
 
     const navigator = user ? (
-        <Stack.Screen
-            name="AppTabs"
-            component={AppTabs}
-            options={{
-                headerShown: false,
-            }}
-        />
+        true ?// zahlushka
+            <Stack.Screen
+                name="PrivacyPolicy"
+                component={PrivacyPolicy}
+                options={{
+                    headerShown: false,
+                }}
+            /> :
+            <Stack.Screen
+                name="AppTabs"
+                component={AppTabs}
+                options={{
+                    headerShown: false,
+                }}
+            />
     ) : (
         <Stack.Screen name="Login" component={Login} />
     );
