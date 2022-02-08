@@ -25,7 +25,7 @@ export const ONLY_PASSENGER_STOPS_LENGTH = 2;
 export const LESS_THAN_ZERO = -1;
 export const ZERO = 0;
 export const MORE_THAN_ZERO = 1;
-
+export const ONE = 1;
 export const MINUTES_IN_HOUR = 60;
 
 export const LOCATION_EPSILON_DIAMETER = 0.002;
