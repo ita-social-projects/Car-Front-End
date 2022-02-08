@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Dimensions, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, FlatList, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import JourneyService from "../../../api-service/journey-service/JourneyService";
 import Journey from "../../../models/journey/Journey";
 import JourneyCardList from "../../components/journey-card/JourneyCardList";
@@ -7,6 +7,7 @@ import JourneyStartPageStyle from "./JourneyStartPageStyle";
 import Request from "../../../models/request/Request";
 import TouchableNavigationBlock from "../../components/touchable-navigation-block/TouchableNavigationBlock";
 import {
+    ONE,
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX,
@@ -18,31 +19,38 @@ import { useTheme } from "../../components/theme/ThemeProvider";
 import AsyncStorage from "@react-native-community/async-storage";
 import RequestCardList from "../../components/request-card/RequestCardList";
 
+interface Tab {
+    name: string,
+    touchableStyles: Array<object>,
+    textStyles: Array<object>
+}
+
 const JourneyStartPage = (props: NavigationAddListener) => {
     const { colors } = useTheme();
-
     const activeButtonStyle = {
         backgroundColor: colors.white,
-        color: colors.primary,
         borderBottomWidth: 2,
         borderColor: colors.primary
     };
 
     const activeButtonTextStyle = {
         backgroundColor: colors.white,
+        marginHorizontal: 8,
+        marginVertical: 8,
         color: colors.primary
     };
 
     const inactiveButtonStyle = {
         backgroundColor: colors.white,
-        color: colors.hover,
         borderBottomWidth: 0,
         borderColor: colors.primary
     };
 
     const inactiveButtonTextStyle = {
         backgroundColor: colors.white,
-        color: colors.hover,
+        marginHorizontal: 8,
+        marginVertical: 8,
+        color: colors.secondaryDark,
     };
 
     const [selectedIndex, setSelectedIndex] = useState(FIRST_ELEMENT_INDEX);
@@ -61,6 +69,39 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     const [scheduledButtonTextStyle, setScheduledButtonTextStyle] =
                                             useState(inactiveButtonTextStyle);
 
+    const tabs: Array<Tab> = [
+        {
+            name: "All",
+            touchableStyles: [allButtonStyle],
+            textStyles: [allButtonTextStyle]
+        },
+        {
+            name: "Past",
+            touchableStyles: [pastButtonStyle],
+            textStyles: [pastButtonTextStyle]
+        },
+        {
+            name: "Upcoming",
+            touchableStyles: [upcomingButtonStyle],
+            textStyles: [upcomingButtonTextStyle]
+        },
+        {
+            name: "Regular",
+            touchableStyles: [scheduledButtonStyle],
+            textStyles: [scheduledButtonTextStyle]
+        },
+        {
+            name: "Requested",
+            touchableStyles: [requestedButtonStyle],
+            textStyles: [requestedButtonTextStyle]
+        },
+        {
+            name: "Canceled",
+            touchableStyles: [canceledButtonStyle],
+            textStyles: [canceledButtonTextStyle]
+        }
+    ];
+
     const screenHeight = Dimensions.get("screen").height;
     const screenWidth = Dimensions.get("screen").width;
     const sizeOfScreenComparerWidth = 380;
@@ -70,22 +111,22 @@ const JourneyStartPage = (props: NavigationAddListener) => {
     };
 
     useEffect(() => {
-        setAllButtonStyle(selectedIndex == FIRST_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
-        setPastButtonStyle(selectedIndex == SECOND_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
-        setUpcomingButtonStyle(selectedIndex == THIRD_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
-        setScheduledButtonStyle(selectedIndex == FOURTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
-        setRequestedButtonStyle(selectedIndex == FIFTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
-        setCanceledButtonStyle(selectedIndex == SIXTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
-        setAllButtonTextStyle(selectedIndex == FIRST_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
-        setRequestedButtonTextStyle(selectedIndex ==
+        setAllButtonStyle(selectedIndex === FIRST_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setPastButtonStyle(selectedIndex === SECOND_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setUpcomingButtonStyle(selectedIndex === THIRD_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setScheduledButtonStyle(selectedIndex === FOURTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setRequestedButtonStyle(selectedIndex === FIFTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setCanceledButtonStyle(selectedIndex === SIXTH_ELEMENT_INDEX ? activeButtonStyle : inactiveButtonStyle);
+        setAllButtonTextStyle(selectedIndex === FIRST_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
+        setRequestedButtonTextStyle(selectedIndex ===
         FIFTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
-        setCanceledButtonTextStyle(selectedIndex ==
+        setCanceledButtonTextStyle(selectedIndex ===
         SIXTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setPastButtonTextStyle(selectedIndex == SECOND_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setUpcomingButtonTextStyle(
-            selectedIndex == THIRD_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
+            selectedIndex === THIRD_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
         setScheduledButtonTextStyle(
-            selectedIndex == FOURTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
+            selectedIndex === FOURTH_ELEMENT_INDEX ? activeButtonTextStyle : inactiveButtonTextStyle);
     }, [colors, selectedIndex]);
 
     const [pastJourneys, setPastJourneys] = useState<Array<Journey>>([]);
@@ -175,129 +216,36 @@ const JourneyStartPage = (props: NavigationAddListener) => {
                         MANAGE RIDES
                     </Text>
                 </View>
-                <ScrollView style={JourneyStartPageStyle.scrollViewStyle}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled={false}
-                    contentContainerStyle={{ flexGrow: 10 }}
-                >
-                    <View style={JourneyStartPageStyle.segmentControlContainer}>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={[
-                                JourneyStartPageStyle.allJourneys,
-                                allButtonStyle
-                            ]}
-                            onPress={() => {
-                                setSelectedIndex(FIRST_ELEMENT_INDEX);
-                            }}
-                        >
-                            <Text
+                <View style={JourneyStartPageStyle.segmentControlContainer}>
+                    <FlatList style={JourneyStartPageStyle.scrollViewStyle}
+                        horizontal={true}
+                        data={tabs}
+                        keyExtractor={(item, index) => `${index}_${item.name}`}
+                        renderItem={({ item, index }) =>
+                            <TouchableOpacity
+                                activeOpacity={1}
                                 style={[
-                                    JourneyStartPageStyle.buttonText,
-                                    allButtonTextStyle
+                                    JourneyStartPageStyle.journeysTabs,
+                                    ...item.touchableStyles,
+                                    index === tabs.length - ONE ?
+                                        { marginRight: 0 } :
+                                        { marginRight: 16 }
                                 ]}
+                                onPress={() => setSelectedIndex(index)}
                             >
-                                All
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={[
-                                JourneyStartPageStyle.pastJourneys,
-                                pastButtonStyle
-                            ]}
-                            onPress={() => {
-                                setSelectedIndex(SECOND_ELEMENT_INDEX);
-                            }}
-                        >
-                            <Text
-                                style={[
-                                    JourneyStartPageStyle.buttonText,
-                                    pastButtonTextStyle
-                                ]}
-                            >
-                                Past
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={[
-                                JourneyStartPageStyle.upcomingJourneys,
-                                upcomingButtonStyle
-                            ]}
-                            onPress={() => {
-                                setSelectedIndex(THIRD_ELEMENT_INDEX);
-                            }}
-                        >
-                            <Text
-                                style={[
-                                    JourneyStartPageStyle.buttonText,
-                                    upcomingButtonTextStyle
-                                ]}
-                            >
-                                Upcoming
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={[
-                                JourneyStartPageStyle.scheduledJourneys,
-                                scheduledButtonStyle
-                            ]}
-                            onPress={() => {
-                                setSelectedIndex(FOURTH_ELEMENT_INDEX);
-                            }}
-                        >
-                            <Text
-                                style={[
-                                    JourneyStartPageStyle.buttonText,
-                                    scheduledButtonTextStyle
-                                ]}
-                            >
-                                Regular
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={[
-                                JourneyStartPageStyle.requestedJourneys,
-                                requestedButtonStyle
-                            ]}
-                            onPress={() => {
-                                setSelectedIndex(FIFTH_ELEMENT_INDEX);
-                            }}
-                        >
-                            <Text
-                                style={[
-                                    JourneyStartPageStyle.buttonText,
-                                    requestedButtonTextStyle
-                                ]}
-                            >
-                                Requested
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={[
-                                JourneyStartPageStyle.canceledJourneys,
-                                canceledButtonStyle
-                            ]}
-                            onPress={() => {
-                                setSelectedIndex(SIXTH_ELEMENT_INDEX);
-                            }}
-                        >
-                            <Text
-                                style={[
-                                    JourneyStartPageStyle.buttonText,
-                                    canceledButtonTextStyle
-                                ]}
-                            >
-                                Canceled
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
+                                <Text
+                                    style={[
+                                        JourneyStartPageStyle.buttonText,
+                                        ...item.textStyles
+                                    ]}
+                                >
+                                    {item.name}
+                                </Text>
+                            </TouchableOpacity>
+                        }
+                        showsHorizontalScrollIndicator={false}
+                    />
+                </View>
                 {selectedIndex === FIRST_ELEMENT_INDEX && (
                     <View style={JourneyStartPageStyle.tabStyle}>
                         {upcomingJourneys.length > EMPTY_COLLECTION_LENGTH && (
