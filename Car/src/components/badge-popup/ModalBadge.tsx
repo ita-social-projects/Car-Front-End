@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Modal, Animated, Text, Image, TouchableOpacity } from "react-native";
 import { navigate } from "../navigation/Navigation";
 import { useTheme } from "../theme/ThemeProvider";
-import BadgePopupStyles from "./ModalBadgeStyles";
+import BadgePopupStyles from "./BadgePopupStyles";
 
 const ModalBadge = ({ visible, image, closeFunc }) => {
 
