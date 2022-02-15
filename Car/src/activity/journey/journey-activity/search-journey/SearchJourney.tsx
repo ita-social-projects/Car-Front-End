@@ -89,7 +89,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
     const [errorModalVisible, setErrorModalVisible] = useState<boolean>(false);
-    const [avaliableSeats, setAvaliableSeats] = useState(DEFAULT_AVAILABLE_SEATS_COUNT);
+    const [avaliableSeats, setAvaliableSeats] = useState(MIN_AVAILABLE_SEATS_COUNT);
     const [recentLocationsIsLoading, setRecentLocationsIsLoading] = useState(true);
     const [savedLocationIsLoading, setSavedLocationIsLoading] = useState(true);
 
@@ -466,7 +466,7 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     </View>
                     <View>
                         <SeatsInputSpinner
-                            value={MIN_AVAILABLE_SEATS_COUNT}
+                            value={avaliableSeats}
                             onChange={seats => setAvaliableSeats(seats)}
                             title={"Passengers"}
                             minValue={MIN_AVAILABLE_SEATS_COUNT}
