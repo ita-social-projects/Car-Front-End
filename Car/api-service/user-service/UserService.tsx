@@ -16,6 +16,8 @@ const UserService = {
         user,
         config),
 
+    acceptPrivacyPolicy: async () => APIService.post(route + "accept-policy/"),
+
     addUserFcmtoken: async (token: FormData) => APIService.post<FormData>(route + "fcmtoken/", token),
 
     deleteUserFcmtoken: async (token: string) => APIService.delete(route + "fcmtoken/" + token)
