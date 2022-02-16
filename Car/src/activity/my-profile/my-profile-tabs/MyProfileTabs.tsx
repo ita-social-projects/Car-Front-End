@@ -19,7 +19,7 @@ const MyProfileTabs = () => {
     return (
 
         <View style={[MyProfileTabsStyle.container, { backgroundColor: colors.white }]}>
-            <View style={[MyProfileTabsStyle.header, { borderColor: colors.neutralDark }]}>
+            <View style={[MyProfileTabsStyle.header, { borderColor: colors.neutralLight }]}>
                 <Text style={[MyProfileTabsStyle.headerText, { color: colors.primary }]}>My Profile</Text>
             </View>
 

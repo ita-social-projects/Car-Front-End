@@ -22,8 +22,8 @@ const MyProfileTabsStyle = StyleSheet.create({
     },
     header:{
         width: "100%",
-        height: 51,
-        borderBottomWidth:1,
+        height: 57,
+        borderBottomWidth:2,
         marginBottom: 16
     },
     headerText: {

@@ -23,13 +23,13 @@ test("renders correctly", async () =>
         style={
           Array [
             Object {
-              "borderBottomWidth": 1,
-              "height": 51,
+              "borderBottomWidth": 2,
+              "height": 57,
               "marginBottom": 16,
               "width": "100%",
             },
             Object {
-              "borderColor": "#C4C4C4",
+              "borderColor": "#F8F8F8",
             },
           ]
         }
