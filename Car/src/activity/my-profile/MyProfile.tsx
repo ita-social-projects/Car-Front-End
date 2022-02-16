@@ -1,17 +1,52 @@
 import AsyncStorage from "@react-native-community/async-storage";
-import React, { useContext, useEffect } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { useContext, useEffect, useState } from "react";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import UserService from "../../../api-service/user-service/UserService";
 import AuthContext from "../../components/auth/AuthContext";
 import { useTheme } from "../../components/theme/ThemeProvider";
 import TouchableNavigationCard from "../../components/touchable-navigation-card/TouchableNavigationCard";
 import MyProfileStyle from "./MyProfileStyle";
+import HeaderLogoutButton from "../../components/header-logout-button/HeaderLogoutButton";
 
 const MyProfile = (props: { navigation: any }) => {
-    const { colors } = useTheme();
+
+    const { setScheme, theme, colors } = useTheme();
     const isThemeDark = useTheme().isThemeDark;
     const { user, loadStorageUser } = useContext(AuthContext);
+
+    const activeButtonStyle = {
+        backgroundColor: colors.primary,
+        color: colors.white,
+        borderColor: colors.primary
+    };
+
+    const inactiveButtonStyle = {
+        backgroundColor: colors.white,
+        color: colors.primary,
+        borderColor: colors.primary
+    };
+
+    const setButtonStyle = (shouldBeHighlighted : boolean) =>{
+        if(shouldBeHighlighted)
+            return activeButtonStyle;
+
+        return inactiveButtonStyle;
+    };
+
+    const [lightButtonStyle, setLightButtonStyle] = useState(setButtonStyle(theme === "light"));
+    const [darkButtonStyle, setDarkButtonStyle] = useState(setButtonStyle(theme === "dark"));
+    const [systemButtonStyle, setSystemButtonStyle] = useState(setButtonStyle(theme === "system"));
+
+    useEffect(() => {
+        setLightButtonStyle(setButtonStyle(theme === "light"));
+        setDarkButtonStyle(setButtonStyle(theme === "dark"));
+        setSystemButtonStyle(setButtonStyle(theme === "system"));
+    }, [theme]);
+
+    const changeAppScheme = (value) => {
+        setScheme(value);
+        AsyncStorage.setItem("theme", value);
+    };
 
     useEffect(() => {
         if (props.navigation)
@@ -27,19 +62,83 @@ const MyProfile = (props: { navigation: any }) => {
     return (
         <ScrollView>
             <View style={[MyProfileStyle.container, { backgroundColor: colors.white }]}>
+                <View style={MyProfileStyle.switchSelector}>
+                    <View style={{ flexDirection: "row" }}>
+                        <TouchableOpacity
+                            style={[
+                                MyProfileStyle.switchButton,
+                                MyProfileStyle.leftButtonBorder,
+                                lightButtonStyle]}
+                            onPress={async () => {
+                                changeAppScheme("light");
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    MyProfileStyle.buttonText,
+                                    lightButtonStyle,
+                                ]}
+                            >
+                                    Light
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[
+                                MyProfileStyle.switchButton,
+                                MyProfileStyle.middleButtonBorder,
+                                darkButtonStyle,
+                            ]}
+                            onPress={() => {
+                                changeAppScheme("dark");
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    MyProfileStyle.buttonText,
+                                    darkButtonStyle,
+                                ]}
+                            >
+                                    Dark
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[
+                                MyProfileStyle.switchButton,
+                                MyProfileStyle.rightButtonBorder,
+                                systemButtonStyle,
+                            ]}
+                            onPress={() => {
+                                changeAppScheme("system");
+                            }}
+                        >
+                            <Text
+                                style={[
+                                    MyProfileStyle.buttonText,
+                                    systemButtonStyle,
+                                ]}
+                            >
+                                    As system
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <TouchableNavigationCard
                     navigation={props.navigation}
-                    navigationName="Details"
-                    cardName="Details"
+                    navigationName="Badges"
+                    cardName="Badges"
                     picture={
-                        <Ionicons
-                            name={"person-circle-outline"}
-                            size={20}
-                            color={colors.hover}
+                        <Image
+                            style={MyProfileStyle.image}
+                            source={
+                                isThemeDark ?
+                                    require("../../../assets/images/icons/my-profile/darkBadges.png")
+                                    : require("../../../assets/images/icons/my-profile/lightBadges.png")
+                            }
                         />
                     }
                 >
-                    <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Details</Text>
+                    <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Badges</Text>
                 </TouchableNavigationCard>
 
                 <TouchableNavigationCard
@@ -47,11 +146,13 @@ const MyProfile = (props: { navigation: any }) => {
                     navigationName="Preferences"
                     cardName="Preferences"
                     picture={
-                        <Ionicons
-                            name={"options-outline"}
-                            size={20}
-                            style={MyProfileStyle.optionIcon}
-                            color={colors.hover}
+                        <Image
+                            style={MyProfileStyle.image}
+                            source={
+                                isThemeDark ?
+                                    require("../../../assets/images/icons/my-profile/darkPreferences.png")
+                                    : require("../../../assets/images/icons/my-profile/lightPreferences.png")
+                            }
                         />
                     }
                 >
@@ -64,15 +165,11 @@ const MyProfile = (props: { navigation: any }) => {
                     cardName="Your cars"
                     picture={
                         <Image
-                            style={{
-                                width: 20, height: 20,
-                                borderRadius: 0,
-                                resizeMode: "contain"
-                            }}
+                            style={MyProfileStyle.image}
                             source={
                                 isThemeDark ?
-                                    require("../../../assets/images/icons/lightCar.png")
-                                    : require("../../../assets/images/icons/darkCar.png")
+                                    require("../../../assets/images/icons/my-profile/darkCars.png")
+                                    : require("../../../assets/images/icons/my-profile/lightCars.png")
                             }
                         />
                     }
@@ -85,45 +182,39 @@ const MyProfile = (props: { navigation: any }) => {
                     navigationName="AddressBookTabs"
                     cardName="Address book"
                     picture={
-                        <Ionicons
-                            name={"bookmark-outline"}
-                            size={20}
-                            color={colors.hover}
+                        <Image
+                            style={MyProfileStyle.image}
+                            source={
+                                isThemeDark ?
+                                    require("../../../assets/images/icons/my-profile/darkAddress.png")
+                                    : require("../../../assets/images/icons/my-profile/lightAddress.png")
+                            }
                         />
                     }
                 >
                     <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Address Book</Text>
                 </TouchableNavigationCard>
 
-                <TouchableNavigationCard
-                    navigation={props.navigation}
-                    navigationName="SettingsTabs"
-                    cardName="Settings"
-                    picture={
-                        <Ionicons
-                            name={"settings-outline"}
-                            size={20}
-                            color={colors.hover}
-                        />
-                    }
-                >
-                    <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Settings</Text>
-                </TouchableNavigationCard>
+                <View style={MyProfileStyle.buttonLogout}>
+                    <HeaderLogoutButton/>
+                </View>
 
-                <TouchableNavigationCard
-                    navigation={props.navigation}
-                    navigationName="Badges"
-                    cardName="Badges"
-                    picture={
-                        <Ionicons
-                            name={"trophy"}
-                            size={20}
-                            color={colors.hover}
-                        />
-                    }
-                >
-                    <Text style={[MyProfileStyle.text, { color: colors.primary }]}>Badges</Text>
-                </TouchableNavigationCard>
+                <View style={MyProfileStyle.footerContainer}>
+                    <TouchableOpacity>
+                        <Text style={[MyProfileStyle.foterLeftRef, { color: colors.secondaryDark }]}>
+                            Privacy Policy
+                        </Text>
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={{ color: colors.secondaryDark }}>•</Text>
+                    </View>
+                    <TouchableOpacity>
+                        <Text style={[MyProfileStyle.footerRightRef, { color: colors.secondaryDark }]}>
+                            Terms of Service
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         </ScrollView>
     );

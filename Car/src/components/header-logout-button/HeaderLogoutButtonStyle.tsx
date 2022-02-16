@@ -10,8 +10,11 @@ const HeaderLogoutButtonStyle = StyleSheet.create({
 
     buttonText: {
         fontFamily: Font.OpenSans.ExtraBold,
-        fontSize: 20,
-        fontWeight: "700"
+        fontSize: 16,
+        fontWeight: "bold",
+        fontStyle:"normal",
+        letterSpacing: 0.25,
+        width: 62,
     }
 });
 

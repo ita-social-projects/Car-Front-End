@@ -17,7 +17,7 @@ const HeaderLogoutButton = () => {
                 onPress={() => setModalVisible(true)}
             >
                 <Text style={[HeaderLogoutButtonStyle.buttonText, { color: colors.accentOrange }]}>
-                    Logout
+                    Log out
                 </Text>
             </TouchableOpacity>
             <ConfirmModal
