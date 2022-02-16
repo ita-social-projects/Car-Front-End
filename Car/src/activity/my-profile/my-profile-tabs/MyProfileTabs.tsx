@@ -90,7 +90,14 @@ const MyProfileTabs = () => {
                 <StackTabs.Screen
                     name="Badges"
                     component={Badges}
-                    options={{ headerShown: false }}
+                    options={{
+                        headerTitle: "Badges",
+                        headerTitleAlign: "center",
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
                 />
             </StackTabs.Navigator>
         </View>

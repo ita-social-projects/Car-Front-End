@@ -1,14 +1,14 @@
 import BadgeTypes from "./BadgeTypes";
 
-interface BadgeProps{
-    name: string
-    type: BadgeTypes
+interface BadgeProps {
+    name: string,
     description: string
-    points: number
-    isReached: boolean,
+    points: number,
     scale: number,
-    pathLocked: any,
-    pathUnlocked: any
+    isReached: boolean,
+    pathUnlocked: any,
+    pathLocked: any
+    type: BadgeTypes
 }
 
 export default BadgeProps;
