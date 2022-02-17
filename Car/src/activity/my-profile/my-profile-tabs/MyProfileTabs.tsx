@@ -10,6 +10,7 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import MyProfileTabsStyle from "./MyProfileTabsStyle";
 import Badges from "../my-profile-activity/badges/Badges";
+import HeaderStyle from "../../../components/styles/HeaderStyle";
 
 const StackTabs = createStackNavigator();
 
@@ -56,7 +57,7 @@ const MyProfileTabs = () => {
                         headerTitle: "Badges",
                         headerTitleAlign: "center",
                         headerStyle: [HeaderStyle.border,
-                        { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
                     }}
@@ -83,8 +84,7 @@ const MyProfileTabs = () => {
                     component={AddressBookTabs}
                     options={{ headerShown: false }}
                 />
-               
-                
+
             </StackTabs.Navigator>
         </View>
     );

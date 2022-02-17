@@ -73,7 +73,7 @@ test("renders correctly", async () =>
             }
           }
         />
-         <Screen
+        <Screen
           component={[Function]}
           name="Badges"
           options={
