@@ -100,7 +100,7 @@ const InvitationView = (props: InvitationViewProps) => {
             {
                 id: 0,
                 type: InvitationType.Rejected,
-                invitedUserId: params.sender!.id,
+                invitedUserId: params.receiver!.id,
                 journeyId: params.journeyId,
             }
         ).then((updatingInvitationResult) => {
@@ -157,7 +157,7 @@ const InvitationView = (props: InvitationViewProps) => {
                     {
                         id: 0,
                         type: InvitationType.Accepted,
-                        invitedUserId: params.sender!.id,
+                        invitedUserId: params.receiver!.id,
                         journeyId: params.journeyId,
                     }
                 ).then((updatingInvitationResult) => {
