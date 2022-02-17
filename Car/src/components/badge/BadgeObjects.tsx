@@ -188,8 +188,8 @@ var allBadges = [
         points: 500,
         isReached: false,
         scale: 1,
-        pathLocked: require("../../../assets/Badges/Locked/santa_2_500.png"),
-        pathUnlocked: require("../../../assets/Badges/Unlocked/santa_2_500.png")
+        pathLocked: require("../../../assets/Badges/Locked/Santa_2_500.png"),
+        pathUnlocked: require("../../../assets/Badges/Unlocked/Santa_2_500.png")
     }
 ];
 
