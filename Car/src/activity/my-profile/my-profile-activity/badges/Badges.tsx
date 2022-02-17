@@ -19,11 +19,12 @@ const Badges = () => {
 
     useEffect(() => {
         allBadges.forEach(item => {
-             if(item.type == BadgeTypes.passengerRides)
-              passengerBadges.push(item)
+            if(item.type == BadgeTypes.passengerRides)
+                passengerBadges.push(item);
             else if(item.type == BadgeTypes.driverRides)
-              driverBadges.push(item)
-            distanceBadges.push(item)
+                driverBadges.push(item);
+            else
+                distanceBadges.push(item);
         });
     }, []);
 
