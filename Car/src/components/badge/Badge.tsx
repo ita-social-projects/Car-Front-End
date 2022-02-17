@@ -1,10 +1,15 @@
 import React from "react";
-import { View } from "react-native";
-import BadgeStyle from "./BadgeStyle";
+import { Image, TouchableOpacity, View } from "react-native";
+import BadgeProps from "./BadgeProps";
 
-const Badge = () => {
+const Badge = (props: BadgeProps) => {
     return (
-        <View style={BadgeStyle.container}>
+        <View style = {[{ transform: [{ scale: props.scale }] }]}>
+            <TouchableOpacity>
+                <Image
+                    source = {props.isReached ? props.pathUnlocked : props.pathLocked}
+                />
+            </TouchableOpacity>
         </View>
     );
 };

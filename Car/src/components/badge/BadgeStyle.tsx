@@ -1,19 +1,40 @@
 import { StyleSheet } from "react-native";
 
 const BadgeStyle = StyleSheet.create({
-    text:{
-        color:"white",
-        fontSize:10
+    text: {
+        color: "#0B171B",
+        fontFamily: "Open Sans",
+        fontStyle: "normal",
+        fontWeight: "bold",
+        fontSize: 16,
+        lineHeight: 18,
+        textAlign: "center",
+        marginBottom: 10,
+        paddingTop: 10,
+    },
+
+    textContainer: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: 0,
+        width: 400,
+        height: 18,
+        top: 16,
+        paddingBottom: 5,
+        alignSelf: "stretch",
     },
 
     container: {
-        width:22,
-        height:22,
-        borderRadius: 11,
-        backgroundColor:"#FF5104",
-        alignItems:"center",
-        justifyContent:"center",
-        marginVertical: 24
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        paddingBottom: 16,
+        paddingTop: 16,
+        left: 8,
+        right: 8,
+        top: 145,
     }
 });
 
