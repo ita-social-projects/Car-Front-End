@@ -1,7 +1,12 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
+import Font from "../../../data/fonts/Font";
 
 const MyProfileTabsStyle = StyleSheet.create({
 
+    container: {
+        flex: 1,
+        alignSelf: "stretch",
+    },
     profileInfo: {
         marginHorizontal: 14,
         marginVertical: 3,
@@ -14,6 +19,29 @@ const MyProfileTabsStyle = StyleSheet.create({
         paddingTop: 10,
         zIndex: 100,
         position: "absolute",
+    },
+    header:{
+        width: "100%",
+        height: 57,
+        borderBottomWidth:2,
+        marginBottom: 16
+    },
+    headerText: {
+        textAlign: "center",
+        fontSize: 16,
+        fontWeight: "bold",
+        paddingTop: 16
+    },
+    myProfileHeaderStyle: {
+        height: Platform.OS === "ios" ? 144 : 150,
+        borderBottomWidth:0,
+        elevation:0
+    },
+    headerTitleStyle: {
+        fontFamily: Font.OpenSans.ExtraBold,
+        fontWeight: "700",
+        fontSize: 18,
+        marginLeft: 20,
     },
 });
 

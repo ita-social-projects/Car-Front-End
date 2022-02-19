@@ -19,6 +19,39 @@ test("renders correctly", async () =>
         ]
       }
     >
+      <View
+        style={
+          Array [
+            Object {
+              "borderBottomWidth": 2,
+              "height": 57,
+              "marginBottom": 16,
+              "width": "100%",
+            },
+            Object {
+              "borderColor": "#F8F8F8",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "paddingTop": 16,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "#0B171B",
+              },
+            ]
+          }
+        >
+          My Profile
+        </Text>
+      </View>
       <StackNavigator>
         <Screen
           component={[Function]}
@@ -42,7 +75,7 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="Preferences"
+          name="Badges"
           options={
             Object {
               "headerLeft": [Function],
@@ -52,7 +85,7 @@ test("renders correctly", async () =>
                   "borderBottomColor": "#AAA9AE",
                 },
               ],
-              "headerTitle": "Preferences",
+              "headerTitle": "Badges",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -70,17 +103,16 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="Details"
+          name="Preferences"
           options={
             Object {
               "headerLeft": [Function],
               "headerStyle": Array [
-                Object {},
                 Object {
                   "borderBottomColor": "#AAA9AE",
                 },
               ],
-              "headerTitle": "Details",
+              "headerTitle": "Preferences",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -111,43 +143,6 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerShown": false,
-            }
-          }
-        />
-        <Screen
-          component={[Function]}
-          name="SettingsTabs"
-          options={
-            Object {
-              "headerShown": false,
-            }
-          }
-        />
-        <Screen
-          component={[Function]}
-          name="Badges"
-          options={
-            Object {
-              "headerLeft": [Function],
-              "headerStyle": Array [
-                Object {},
-                Object {
-                  "borderBottomColor": "#AAA9AE",
-                },
-              ],
-              "headerTitle": "Badges",
-              "headerTitleAlign": "center",
-              "headerTitleStyle": Array [
-                Object {
-                  "fontFamily": "Open Sans ExtraBold",
-                  "fontSize": 18,
-                  "fontWeight": "700",
-                  "marginLeft": 20,
-                },
-                Object {
-                  "color": "#0B171B",
-                },
-              ],
             }
           }
         />
