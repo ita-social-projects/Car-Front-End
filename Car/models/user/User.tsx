@@ -10,6 +10,7 @@ type User = null | {
     imageId: string | null;
     journeyCount: number;
     phoneNumber: number | null;
+    isPolicyAccepted: boolean;
 };
 
 export default User;

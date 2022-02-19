@@ -128,7 +128,26 @@ test("renders correctly", async () =>
           name="Badges"
           options={
             Object {
-              "headerShown": false,
+              "headerLeft": [Function],
+              "headerStyle": Array [
+                Object {},
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
+              "headerTitle": "Badges",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                  "marginLeft": 20,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
             }
           }
         />
