@@ -181,6 +181,16 @@ var allBadges = [
         pathLocked: require("../../../assets/Badges/Locked/007_2_300.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/007_2_300.png")
     },
+    {
+        name: "santa",
+        description: "Yay, you've rided 300 km!",
+        type: BadgeTypes.driverDistance,
+        points: 500,
+        isReached: false,
+        scale: 1,
+        pathLocked: require("../../../assets/Badges/Locked/Santa_2_500.png"),
+        pathUnlocked: require("../../../assets/Badges/Unlocked/Santa_2_500.png")
+    }
 ];
 
 export default allBadges;
