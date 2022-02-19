@@ -63,6 +63,7 @@ import AndroidKeyboardAdjust from "react-native-android-keyboard-adjust";
 import ReceivedMessagesService from "../../../../../api-service/received-messages-service/ReceivedMessagesService";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import { getDateWithCorrectUtc } from "../../../../utils/ChatHelperFunctions";
+import AuthManager from "../../../../components/auth/AuthManager";
 
 const Chat = (properties: ChatProps) => {
     const { colors } = useTheme();
@@ -80,12 +81,18 @@ const Chat = (properties: ChatProps) => {
 
     useEffect(() => {
         (() => {
-            const newConnection = new HubConnectionBuilder()
-                .withUrl(APIConfig.URL + "signalr/")
-                .withAutomaticReconnect()
-                .build();
+            AuthManager.refreshAsync().then(() => {
+                return AuthManager.getAccessTokenAsync().then(token => {
+                    const newConnection = new HubConnectionBuilder()
+                        .withUrl(APIConfig.URL + "signalr/", {
+                            accessTokenFactory: () => `${token}`
+                        })
+                        .withAutomaticReconnect()
+                        .build();
 
-            setConnection(newConnection);
+                    setConnection(newConnection);
+                });
+            });
         })();
 
         properties.navigation.setOptions({ headerTitle: properties.route.params.header });

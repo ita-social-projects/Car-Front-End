@@ -30,15 +30,16 @@ const AppTabs = () => {
     );
 
     useEffect(() => {
-        SignalRHubConnection.on(
-            "updateUnreadNotificationsNumber",
-            setUnreadNotificationsNumber
-        );
-
-        SignalRHubConnection.on(
-            "updateUnreadMessagesNumber",
-            setUnreadMessagesNumber
-        );
+        SignalRHubConnection.then(connection => {
+            connection.on(
+                "updateUnreadNotificationsNumber",
+                setUnreadNotificationsNumber
+            );
+            connection.on(
+                "updateUnreadMessagesNumber",
+                setUnreadMessagesNumber
+            );
+        });
 
         updateLocale();
     });

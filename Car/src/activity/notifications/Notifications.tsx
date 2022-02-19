@@ -84,12 +84,14 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     }, [unreadNotificationsNumber]);
 
     useEffect(() => {
-        SignalRHubConnection.on("sendToReact", refreshNotification);
-        SignalRHubConnection.on("deleteFromReact", refreshNotification);
-        SignalRHubConnection.on(
-            "updateUnreadNotificationsNumber",
-            setUnreadNotificationsNumber
-        );
+        SignalRHubConnection.then(connection => {
+            connection.on("sendToReact", refreshNotification);
+            connection.on("deleteFromReact", refreshNotification);
+            connection.on(
+                "updateUnreadNotificationsNumber",
+                setUnreadNotificationsNumber
+            );
+        });
         props.navigation.addListener("focus", refreshNotification);
 
         return () => {
