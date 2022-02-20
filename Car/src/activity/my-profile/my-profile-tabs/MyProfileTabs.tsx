@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Animated, Text, TouchableOpacity, View } from "react-native";
-import AvatarLogoTitle from "../../../components/avatar-logo-title/AvatarLogoTitle";
+import { View } from "react-native";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Preferences from "../my-profile-activity/preferences/Preferences";
 import MyProfile from "../MyProfile";
@@ -20,10 +19,6 @@ const MyProfileTabs = () => {
     return (
 
         <View style={[MyProfileTabsStyle.container, { backgroundColor: colors.white }]}>
-            <View style={[MyProfileTabsStyle.header, { borderColor: colors.neutralLight }]}>
-                <Text style={[MyProfileTabsStyle.headerText, { color: colors.primary }]}>My Profile</Text>
-            </View>
-
             <StackTabs.Navigator>
                 <StackTabs.Screen
                     name="MyProfile"
@@ -32,22 +27,6 @@ const MyProfileTabs = () => {
                         headerTitle: "",
                         headerStyle: [MyProfileTabsStyle.myProfileHeaderStyle,
                             { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
-                        headerLeft: () =>
-
-                            <TouchableOpacity
-                                activeOpacity={1}
-                                style={[MyProfileTabsStyle.profileInfo,
-                                    {
-                                        borderColor: colors.neutralLight,
-                                        backgroundColor: colors.white,
-                                        elevation: 7,
-                                    }]}
-                            >
-                                <Animated.View >
-                                    <AvatarLogoTitle />
-                                </Animated.View>
-                            </TouchableOpacity>
-
                     }}
                 />
                 <StackTabs.Screen

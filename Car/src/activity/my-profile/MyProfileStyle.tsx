@@ -4,6 +4,7 @@ import Font from "../../data/fonts/Font";
 const MyProfileStyle = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop:150
     },
 
     optionIcon: {

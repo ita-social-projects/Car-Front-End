@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../data/fonts/Font";
 
 const MyProfileTabsStyle = StyleSheet.create({
@@ -33,7 +33,7 @@ const MyProfileTabsStyle = StyleSheet.create({
         paddingTop: 16
     },
     myProfileHeaderStyle: {
-        height: Platform.OS === "ios" ? 144 : 150,
+        height: 0,
         borderBottomWidth:0,
         elevation:0
     },

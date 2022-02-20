@@ -19,51 +19,17 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <View
-        style={
-          Array [
-            Object {
-              "borderBottomWidth": 2,
-              "height": 57,
-              "marginBottom": 16,
-              "width": "100%",
-            },
-            Object {
-              "borderColor": "#F8F8F8",
-            },
-          ]
-        }
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "paddingTop": 16,
-                "textAlign": "center",
-              },
-              Object {
-                "color": "#0B171B",
-              },
-            ]
-          }
-        >
-          My Profile
-        </Text>
-      </View>
       <StackNavigator>
         <Screen
           component={[Function]}
           name="MyProfile"
           options={
             Object {
-              "headerLeft": [Function],
               "headerStyle": Array [
                 Object {
                   "borderBottomWidth": 0,
                   "elevation": 0,
-                  "height": 144,
+                  "height": 0,
                 },
                 Object {
                   "borderBottomColor": "#AAA9AE",
