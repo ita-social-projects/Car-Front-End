@@ -151,7 +151,7 @@ test("renders correctly", async () =>
         disableModal={[Function]}
         hideCancelButton={true}
         onConfirm={[Function]}
-        subtitle="Ride route successfully updated"
+        subtitle="Your ride route is updated"
         title="Success"
         visible={false}
       />

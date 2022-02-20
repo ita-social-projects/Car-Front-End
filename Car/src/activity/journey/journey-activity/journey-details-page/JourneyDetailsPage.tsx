@@ -651,7 +651,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             <ConfirmModal
                 visible={successfullyPublishModalIsVisible}
                 title={"Success"}
-                subtitle={"Ride successfully published"}
+                subtitle={"Your ride is published!"}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => {
@@ -667,7 +667,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             <ConfirmModal
                 visible={successfullyUpdateModalIsVisible}
                 title={"Success"}
-                subtitle={"Ride details successfully updated"}
+                subtitle={"Your ride details is updated"}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => {

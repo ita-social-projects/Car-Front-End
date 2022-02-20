@@ -120,7 +120,7 @@ test("renders correctly", async () =>
                 }
               }
             >
-              You are about to logout from the App
+              You are about to log out from the App
             </Text>
             <View
               accessible={true}
