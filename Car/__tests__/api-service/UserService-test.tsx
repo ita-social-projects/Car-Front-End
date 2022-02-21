@@ -17,6 +17,7 @@ describe("User Service test", () => {
         fcmtoken : null,
         journeyCount: 8,
         phoneNumber: null,
+        isPolicyAccepted: true,
     },
     {
         id: 2,
@@ -30,6 +31,7 @@ describe("User Service test", () => {
         fcmtoken : null,
         journeyCount: 8,
         phoneNumber: null,
+        isPolicyAccepted: true,
     }];
 
     test("should get user", async () => {

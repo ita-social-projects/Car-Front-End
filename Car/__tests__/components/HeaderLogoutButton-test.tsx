@@ -30,8 +30,11 @@ test("renders correctly", async () =>
             Array [
               Object {
                 "fontFamily": "Open Sans ExtraBold",
-                "fontSize": 20,
-                "fontWeight": "700",
+                "fontSize": 16,
+                "fontStyle": "normal",
+                "fontWeight": "bold",
+                "letterSpacing": 0.25,
+                "width": 62,
               },
               Object {
                 "color": "#EC6400",
@@ -39,7 +42,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Logout
+          Log out
         </Text>
       </View>,
       <Modal

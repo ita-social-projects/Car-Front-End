@@ -20,6 +20,7 @@ test("renders correctly", async () =>
                     imageId: null,
                     journeyCount: 0,
                     phoneNumber: null,
+                    isPolicyAccepted: true,
                 }}
                 notificationId={0}
                 openModal={() => {}}
@@ -59,6 +60,7 @@ test("renders correctly", async () =>
                     "hireDate": 2021-01-01T20:00:00.000Z,
                     "id": 0,
                     "imageId": null,
+                    "isPolicyAccepted": true,
                     "journeyCount": 0,
                     "location": "Abc",
                     "name": "Abc",
@@ -143,6 +145,7 @@ test("renders correctly", async () =>
                     imageId: null,
                     journeyCount: 0,
                     phoneNumber: null,
+                    isPolicyAccepted: true,
                 }}
                 notificationId={0}
                 openModal={() => {}}
@@ -185,6 +188,7 @@ test("renders correctly", async () =>
                     "hireDate": 2021-01-01T20:00:00.000Z,
                     "id": 0,
                     "imageId": null,
+                    "isPolicyAccepted": true,
                     "journeyCount": 0,
                     "location": "Abc",
                     "name": "Abc",

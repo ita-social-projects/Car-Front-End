@@ -25,12 +25,11 @@ test("renders correctly", async () =>
           name="MyProfile"
           options={
             Object {
-              "headerLeft": [Function],
               "headerStyle": Array [
                 Object {
                   "borderBottomWidth": 0,
                   "elevation": 0,
-                  "height": 144,
+                  "height": 0,
                 },
                 Object {
                   "borderBottomColor": "#AAA9AE",
@@ -42,7 +41,7 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="Preferences"
+          name="Badges"
           options={
             Object {
               "headerLeft": [Function],
@@ -52,7 +51,7 @@ test("renders correctly", async () =>
                   "borderBottomColor": "#AAA9AE",
                 },
               ],
-              "headerTitle": "Preferences",
+              "headerTitle": "Badges",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -70,17 +69,16 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
-          name="Details"
+          name="Preferences"
           options={
             Object {
               "headerLeft": [Function],
               "headerStyle": Array [
-                Object {},
                 Object {
                   "borderBottomColor": "#AAA9AE",
                 },
               ],
-              "headerTitle": "Details",
+              "headerTitle": "Preferences",
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
@@ -108,24 +106,6 @@ test("renders correctly", async () =>
         <Screen
           component={[Function]}
           name="AddressBookTabs"
-          options={
-            Object {
-              "headerShown": false,
-            }
-          }
-        />
-        <Screen
-          component={[Function]}
-          name="SettingsTabs"
-          options={
-            Object {
-              "headerShown": false,
-            }
-          }
-        />
-        <Screen
-          component={[Function]}
-          name="Badges"
           options={
             Object {
               "headerShown": false,
