@@ -17,7 +17,7 @@ var allBadges = [
         type: BadgeTypes.passengerRides,
         points: 5,
         isReached: false,
-        scale: 1,
+        scale: 0.9,
         pathLocked: require("../../../assets/Badges/Locked/freelancer_0_5.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/freelancer_0_5.png")
     },
@@ -27,7 +27,7 @@ var allBadges = [
         type: BadgeTypes.passengerRides,
         points: 10,
         isReached: false,
-        scale: 1,
+        scale: 0.5,
         pathLocked: require("../../../assets/Badges/Locked/turist_0_10.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/turist_0_10.png")
     },
@@ -47,7 +47,7 @@ var allBadges = [
         type: BadgeTypes.passengerRides,
         points: 50,
         isReached: false,
-        scale: 1,
+        scale: 0.5,
         pathLocked: require("../../../assets/Badges/Locked/frog_traveler_0_50.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/frog_traveler_0_50.png")
     },
@@ -57,7 +57,7 @@ var allBadges = [
         type: BadgeTypes.passengerRides,
         points: 100,
         isReached: false,
-        scale: 1,
+        scale: 0.9,
         pathLocked: require("../../../assets/Badges/Locked/travel_guru_0_100.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/travel_guru_0_100.png")
     },
@@ -77,7 +77,7 @@ var allBadges = [
         type: BadgeTypes.driverRides,
         points: 5,
         isReached: false,
-        scale: 1,
+        scale: 0.9,
         pathLocked: require("../../../assets/Badges/Locked/freelancer_1_5.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/freelancer_1_5.png")
     },
@@ -87,7 +87,7 @@ var allBadges = [
         type: BadgeTypes.driverRides,
         points: 10,
         isReached: false,
-        scale: 1,
+        scale: 0.5,
         pathLocked: require("../../../assets/Badges/Locked/ridoholic_1_10.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/ridoholic_1_10.png")
     },
@@ -117,7 +117,7 @@ var allBadges = [
         type: BadgeTypes.driverRides,
         points: 100,
         isReached: false,
-        scale: 1,
+        scale: 0.5,
         pathLocked: require("../../../assets/Badges/Locked/jet_driver_1_100.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/jet_driver_1_100.png")
     },
@@ -127,7 +127,7 @@ var allBadges = [
         type: BadgeTypes.driverRides,
         points: 200,
         isReached: false,
-        scale: 1,
+        scale: 0.9,
         pathLocked: require("../../../assets/Badges/Locked/spacex_driver_1_200.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/spacex_driver_1_200.png")
     },
@@ -147,7 +147,7 @@ var allBadges = [
         type: BadgeTypes.driverDistance,
         points: 50,
         isReached: false,
-        scale: 1,
+        scale: 0.9,
         pathLocked: require("../../../assets/Badges/Locked/sprinter_2_50.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/sprinter_2_50.png")
     },
@@ -157,7 +157,7 @@ var allBadges = [
         type: BadgeTypes.driverDistance,
         points: 100,
         isReached: false,
-        scale: 1,
+        scale: 0.5,
         pathLocked: require("../../../assets/Badges/Locked/marathon_driver_2_100.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/marathon_driver_2_100.png")
     },
@@ -167,7 +167,7 @@ var allBadges = [
         type: BadgeTypes.driverDistance,
         points: 200,
         isReached: false,
-        scale: 1,
+        scale: 0.5,
         pathLocked: require("../../../assets/Badges/Locked/scorcher_2_200.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/scorcher_2_200.png")
     },
@@ -177,7 +177,7 @@ var allBadges = [
         type: BadgeTypes.driverDistance,
         points: 300,
         isReached: false,
-        scale: 1,
+        scale: 0.9,
         pathLocked: require("../../../assets/Badges/Locked/007_2_300.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/007_2_300.png")
     },

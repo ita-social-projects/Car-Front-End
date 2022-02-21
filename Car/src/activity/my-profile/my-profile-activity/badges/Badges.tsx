@@ -9,6 +9,7 @@ import BadgeSliderStyle from "../../../../components/badge-slider/BadgeSliderSty
 import allBadges from "../../../../components/badge/BadgeObjects";
 import BadgeTypes from "../../../../components/badge/BadgeTypes";
 import BadgeProps from "../../../../components/badge/BadgeProps";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Badges = () => {
 
@@ -40,14 +41,13 @@ const Badges = () => {
             >
                 <AvatarLogoTitle/>
             </TouchableOpacity>
-
-            <View style = {BadgeStyle.container}>
+            <ScrollView style = {BadgeStyle.container}>
                 <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
                 <BadgeSlider style = {BadgeSliderStyle.slider} badges = {passengerBadges}></BadgeSlider>
                 <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
                 <BadgeSlider style = {BadgeSliderStyle.slider} badges = {driverBadges}></BadgeSlider>
                 <BadgeSlider style = {BadgeSliderStyle.slider} badges = {distanceBadges}></BadgeSlider>
-            </View>
+            </ScrollView>
         </View>
     );
 };
