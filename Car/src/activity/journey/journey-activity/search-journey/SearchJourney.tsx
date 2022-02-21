@@ -498,8 +498,8 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 <>
                     <ConfirmModal
                         visible={successModalVisible}
-                        title={"Success"}
-                        subtitle={"Request successfully created!"}
+                        title={"RIDE REQUEST"}
+                        subtitle={"Your Ride Request is created!"}
                         confirmText={"OK"}
                         hideCancelButton={true}
                         onConfirm={() => {

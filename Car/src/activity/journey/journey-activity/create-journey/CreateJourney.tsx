@@ -511,7 +511,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             <ConfirmModal
                 visible={successfullyUpdateModalIsVisible}
                 title={"Success"}
-                subtitle={"Ride route successfully updated"}
+                subtitle={"Your ride route is updated"}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => {
