@@ -133,7 +133,8 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props.route.params.notification
+            notification: props.route.params.notification,
+            currentStop: Number(stops.findIndex(stp=>stp?.address?.name == stop?.address?.name))
         });
     };
 
