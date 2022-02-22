@@ -29,7 +29,6 @@ const BadgeStyle = StyleSheet.create({
     container: {
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         paddingBottom: 16,
         paddingTop: 16,
         left: 8,
