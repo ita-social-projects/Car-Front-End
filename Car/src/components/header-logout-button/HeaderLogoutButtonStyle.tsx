@@ -3,9 +3,8 @@ import Font from "../../data/fonts/Font";
 
 const HeaderLogoutButtonStyle = StyleSheet.create({
     requestButton: {
-        paddingRight: 17,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
 
     buttonText: {
