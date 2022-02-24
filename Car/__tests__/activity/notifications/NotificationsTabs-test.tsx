@@ -28,7 +28,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -50,7 +49,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -72,7 +70,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -94,7 +91,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -116,7 +112,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -138,7 +133,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -160,7 +154,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
@@ -182,7 +175,6 @@ test("renders correctly", async () =>
                   "fontFamily": "Open Sans ExtraBold",
                   "fontSize": 18,
                   "fontWeight": "700",
-                  "marginLeft": 20,
                 },
                 Object {
                   "color": "#0B171B",
