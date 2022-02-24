@@ -18,6 +18,7 @@ describe("Login Service test", () => {
         fcmtoken : null,
         journeyCount: 8,
         phoneNumber: null,
+        isPolicyAccepted: true,
     };
 
     test("should login user", async () => {

@@ -15,6 +15,7 @@ const testUser: User = {
     imageId: "string | null",
     journeyCount: 0,
     phoneNumber: null,
+    isPolicyAccepted: true,
 };
 
 test("renders correctly", async () =>

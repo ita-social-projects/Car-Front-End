@@ -5,7 +5,7 @@ import AuthParamList from "../auth/AuthParamList";
 import AuthContext from "../auth/AuthContext";
 import Login from "../../activity/login/Login";
 import AppTabs from "./app-tabs/AppTabs";
-import PrivacyPolicy from "../../activity/login/PrivacyPolicy";
+import PrivacyPolicyPage from "../../activity/privacy-policy/PrivacyPolicy";
 import { navigationRef } from "./Navigation";
 import Indicator from "../activity-indicator/Indicator";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -53,10 +53,10 @@ const Routes = () => {
     }, []);
 
     const navigator = user ? (
-        true ?// zahlushka
+        !user?.isPolicyAccepted ?
             <Stack.Screen
                 name="PrivacyPolicy"
-                component={PrivacyPolicy}
+                component={PrivacyPolicyPage}
                 options={{
                     headerShown: false,
                 }}

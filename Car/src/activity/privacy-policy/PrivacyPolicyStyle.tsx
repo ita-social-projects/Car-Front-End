@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { permanentColors } from "../../components/theme/ThemesColors";
 import Font from "../../data/fonts/Font";
 
 const PrivacyPolicyStyle = StyleSheet.create({
@@ -32,6 +33,25 @@ const PrivacyPolicyStyle = StyleSheet.create({
         letterSpacing: 0.25,
     },
 
+    importantText: {
+        fontFamily: Font.Milliard.ExtraBold,
+        fontWeight: "400",
+        fontStyle: "normal",
+        fontSize: 16,
+        lineHeight: 22,
+        letterSpacing: 0.25,
+    },
+
+    attentionText: {
+        fontFamily: Font.Milliard.ExtraBold,
+        fontWeight: "400",
+        fontStyle: "normal",
+        fontSize: 18,
+        lineHeight: 22,
+        letterSpacing: 0.25,
+        color: permanentColors.accentOrange,
+    },
+
     descriptionText: {
         fontFamily: Font.OpenSans.Regular,
         fontWeight: "400",
@@ -46,6 +66,7 @@ const PrivacyPolicyStyle = StyleSheet.create({
         height: 56,
         fontSize: 16,
         paddingHorizontal: 36,
+        marginBottom: 22,
         alignItems: "center",
         justifyContent: "center"
     },
@@ -60,13 +81,9 @@ const PrivacyPolicyStyle = StyleSheet.create({
         position: "absolute",
         left: 0,
         right: 0,
-        top: "75%",
-        height: "11%",
+        top: "60%",
+        height: "23%",
     },
-
-    whitespace: {
-
-    }
 
 });
 
