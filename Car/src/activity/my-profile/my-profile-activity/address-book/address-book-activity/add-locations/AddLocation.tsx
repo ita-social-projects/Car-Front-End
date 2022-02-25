@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Platform, TextInput, View } from "react-native";
+import { Platform, Text, TextInput, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
 import {
     initialWayPoint,
@@ -28,6 +28,8 @@ import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 import { CHOOSE_ADDRESS_LEFT_PADDING, DEFAULT_INPUT_LEFT_PADDING } from "../../../../../../constants/StylesConstants";
+import Location from "../../../../../../../models/location/Location";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const AddLocation = () => {
     const { colors, isThemeDark } = useTheme();
@@ -128,6 +130,28 @@ const AddLocation = () => {
         });
     };
 
+    const [userLocations, setUserLocations] = useState<Location[]>();
+    const [isLocationAvailable, setIsLocationAvailable] = useState<boolean>(true);
+    
+    useEffect(() => {
+        loadLocations();
+    }, [])
+
+    const loadLocations = async () =>{
+        await LocationService.getAll().then(response => {
+            setUserLocations(response.data)
+        });
+    }
+
+    const checkForAvailability = (name : string) => {
+        setIsLocationAvailable(true);
+        userLocations?.forEach((item : Location) => {
+            if(item?.name == name){
+                setIsLocationAvailable(false);
+            }
+        });
+    }
+
     return (
         <View style={{ flex: 1 }}>
             <View style={AddLocationStyle.inputContainer}>
@@ -146,19 +170,50 @@ const AddLocation = () => {
                 />
                 {wayPoint.isConfirmed && (
                     <>
-                        <TextInput
-                            style={[AddLocationStyle.textInput,
-                                {
-                                    borderColor: colors.primary,
-                                    backgroundColor: colors.white,
-                                    color: colors.primary
-                                }]}
-                            value={locationName}
-                            placeholder={"Name the chosen address"}
-                            placeholderTextColor={colors.secondaryDark}
-                            onChangeText={(fromInput) => {
-                                setLocationName(fromInput);
-                            }}/>
+                        <View>
+                            <TextInput
+                                    style={[AddLocationStyle.textInput,
+                                        {
+                                            borderColor: isLocationAvailable
+                                                ? colors.primary
+                                                : colors.accentRed,
+                                            backgroundColor: colors.white,
+                                            color: colors.primary,
+                                        }]}
+                                    value={locationName}
+                                    placeholder={"Name the chosen address"}
+                                    placeholderTextColor={colors.secondaryDark}
+                                    onChangeText={(fromInput) => {
+                                        setLocationName(fromInput);
+                                        checkForAvailability(fromInput);
+                                    }}/>
+                                {isLocationAvailable
+                                ? <></>
+                                :(
+                                    <>
+                                        <View
+                                        style={[{position: "absolute", top:20, right:14}]}
+                                        >
+                                                <Ionicons
+                                                name="alert-circle-outline"
+                                                size={20}
+                                                style={[{color: colors.accentRed,
+                                                    transform: [{ rotate: "0deg" }],
+                                                    borderColor: colors.neutralLight
+                                                }]}>
+                                                </Ionicons>
+                                        </View>
+                                        <Text
+                                        style={[{ 
+                                            color: colors.accentRed,
+                                            marginTop: 10, 
+                                        }]}>
+                                            You already have an address with this name
+                                        </Text>
+                                    </>
+                                )}
+                                
+                        </View>
 
                         <LocationDropDownPicker
                             fast-food-outline
@@ -169,7 +224,8 @@ const AddLocation = () => {
                             onChangeItem={(item) => {
                                 setLocationType({ id: item.value, name: item.label });
                                 setIsVisibleLocationDropDown(false);
-                            }}/></>
+                            }}/>
+                    </>
                 )}
             </View>
 
@@ -194,7 +250,7 @@ const AddLocation = () => {
                 />
             </MapView>
             <SaveLocationButton
-                wayPointConfirmation={wayPoint.isConfirmed}
+                wayPointConfirmation={wayPoint.isConfirmed && isLocationAvailable}
                 onPress={() => saveLocationHandle().then(() => navigation.goBack())}
             />
         </View>
