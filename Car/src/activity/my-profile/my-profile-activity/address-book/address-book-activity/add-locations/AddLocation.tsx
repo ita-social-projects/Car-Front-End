@@ -132,16 +132,16 @@ const AddLocation = () => {
 
     const [userLocations, setUserLocations] = useState<Location[]>();
     const [isLocationAvailable, setIsLocationAvailable] = useState<boolean>(true);
-    
+
     useEffect(() => {
         loadLocations();
-    }, [])
+    }, []);
 
     const loadLocations = async () =>{
         await LocationService.getAll().then(response => {
-            setUserLocations(response.data)
+            setUserLocations(response.data);
         });
-    }
+    };
 
     const checkForAvailability = (name : string) => {
         setIsLocationAvailable(true);
@@ -150,7 +150,7 @@ const AddLocation = () => {
                 setIsLocationAvailable(false);
             }
         });
-    }
+    };
 
     return (
         <View style={{ flex: 1 }}>
@@ -172,47 +172,46 @@ const AddLocation = () => {
                     <>
                         <View>
                             <TextInput
-                                    style={[AddLocationStyle.textInput,
-                                        {
-                                            borderColor: isLocationAvailable
-                                                ? colors.primary
-                                                : colors.accentRed,
-                                            backgroundColor: colors.white,
-                                            color: colors.primary,
-                                        }]}
-                                    value={locationName}
-                                    placeholder={"Name the chosen address"}
-                                    placeholderTextColor={colors.secondaryDark}
-                                    onChangeText={(fromInput) => {
-                                        setLocationName(fromInput);
-                                        checkForAvailability(fromInput);
-                                    }}/>
-                                {isLocationAvailable
+                                style={[AddLocationStyle.textInput,
+                                    {
+                                        borderColor: isLocationAvailable
+                                            ? colors.primary
+                                            : colors.accentRed,
+                                        backgroundColor: colors.white,
+                                        color: colors.primary,
+                                    }]}
+                                value={locationName}
+                                placeholder={"Name the chosen address"}
+                                placeholderTextColor={colors.secondaryDark}
+                                onChangeText={(fromInput) => {
+                                    setLocationName(fromInput);
+                                    checkForAvailability(fromInput);
+                                }}/>
+                            { isLocationAvailable
                                 ? <></>
                                 :(
                                     <>
                                         <View
-                                        style={[{position: "absolute", top:20, right:14}]}
+                                            style={[{ position: "absolute", top:20, right:14 }]}
                                         >
-                                                <Ionicons
+                                            <Ionicons
                                                 name="alert-circle-outline"
                                                 size={20}
-                                                style={[{color: colors.accentRed,
+                                                style={[{ color: colors.accentRed,
                                                     transform: [{ rotate: "0deg" }],
                                                     borderColor: colors.neutralLight
                                                 }]}>
-                                                </Ionicons>
+                                            </Ionicons>
                                         </View>
                                         <Text
-                                        style={[{ 
-                                            color: colors.accentRed,
-                                            marginTop: 10, 
-                                        }]}>
+                                            style={[{
+                                                color: colors.accentRed,
+                                                marginTop: 10,
+                                            }]}>
                                             You already have an address with this name
                                         </Text>
                                     </>
                                 )}
-                                
                         </View>
 
                         <LocationDropDownPicker
