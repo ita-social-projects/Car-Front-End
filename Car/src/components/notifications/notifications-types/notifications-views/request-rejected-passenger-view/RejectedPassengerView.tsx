@@ -29,7 +29,7 @@ interface InvitationAcceptedViewProps {
     }
 }
 
-const AprovedView = (props: InvitationAcceptedViewProps) => {
+const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
     const { colors } = useTheme();
     const user = useContext(AuthContext).user;
     const [stops, setStops] = useState<Stop[]>();
@@ -72,21 +72,21 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
     return (
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-
-                <NotificationHeader
-                    sender={props.route.params.notification.notification.sender}
-                />
-
                 <ScrollView style = {{ flexGrow: 1 }}>
+                    <NotificationHeader
+                        sender={props.route.params.notification.notification.sender}
+                    />
+
                     {!(props.route.params.notification.notificationHeaderMessage == "") &&
-                    <View style={[NotificationHeaderStyle.messageContainer, {
-                        borderTopColor: colors.secondaryLight,
-                        borderBottomColor: colors.secondaryLight
-                    }]}>
-                        <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
-                            {props.route.params.notification.notificationHeaderMessage}
-                        </Text>
-                    </View>}
+                        <View style={[NotificationHeaderStyle.messageContainer, {
+                            borderTopColor: colors.secondaryLight,
+                            borderBottomColor: colors.secondaryLight
+                        }]}>
+                            <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
+                                {props.route.params.notification.notificationHeaderMessage}
+                            </Text>
+                        </View>
+                    }
 
                     <NotificationRideDetails
                         journeyId={props.route.params.notification.notification.journeyId}
@@ -99,11 +99,9 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                         journey={journey!}
                         journeyUser={journeyUser!}
                     />
-
                     <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                         {name} {surname}`s stops in your ride
                     </Text>
-
                     <View>
                         <StopsBlock
                             stops={stops ? stops : []}
@@ -111,7 +109,6 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-
                 </ScrollView>
 
                 <NotificationButtonGroup>
@@ -121,10 +118,9 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                             navigation.goBack();
                         }} />
                 </NotificationButtonGroup>
-
             </View>
         </>
     );
 };
 
-export default AprovedView;
+export default RejectedPassengerView;
