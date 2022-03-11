@@ -21,9 +21,8 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
         const month = dateTime.toLocaleDateString().split("/")[indexMonthInDateTime] + ";";
         const dayOfWeek = dateTime.toDateString().split(" ")[indexDayOfWeekInDateTime] +";";
         const time = dateTime.toLocaleTimeString().substring(indexStartTime,indexEndTime);
-        const format = day + month + dayOfWeek + time;
 
-        return format;
+        return day + month + dayOfWeek + time;
     };
 
     return (

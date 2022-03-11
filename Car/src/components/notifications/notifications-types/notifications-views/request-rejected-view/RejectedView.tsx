@@ -29,7 +29,7 @@ interface InvitationAcceptedViewProps {
     }
 }
 
-const RejectView = (props: InvitationAcceptedViewProps) => {
+const RejectedView = (props: InvitationAcceptedViewProps) => {
     const { colors } = useTheme();
     const user = useContext(AuthContext).user;
     const [stops, setStops] = useState<Stop[]>();
@@ -78,7 +78,7 @@ const RejectView = (props: InvitationAcceptedViewProps) => {
 
                 <ScrollView style = {{ flexGrow: 1 }}>
 
-                    {!(props.route.params.notification.notificationHeaderMessage == "") &&
+                    {props.route.params.notification.notificationHeaderMessage !== "" &&
                         <View style={[NotificationHeaderStyle.messageContainer, {
                             borderTopColor: colors.secondaryLight,
                             borderBottomColor: colors.secondaryLight
@@ -127,4 +127,4 @@ const RejectView = (props: InvitationAcceptedViewProps) => {
     );
 };
 
-export default RejectView;
+export default RejectedView;

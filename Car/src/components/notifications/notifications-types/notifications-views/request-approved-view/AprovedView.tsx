@@ -78,7 +78,7 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                 />
 
                 <ScrollView style = {{ flexGrow: 1 }}>
-                    {!(props.route.params.notification.notificationHeaderMessage == "") &&
+                    {props.route.params.notification.notificationHeaderMessage !== "" &&
                     <View style={[NotificationHeaderStyle.messageContainer, {
                         borderTopColor: colors.secondaryLight,
                         borderBottomColor: colors.secondaryLight
