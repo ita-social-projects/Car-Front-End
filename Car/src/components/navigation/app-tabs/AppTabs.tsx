@@ -83,15 +83,15 @@ const AppTabs = () => {
                                 source = {
                                     route.name == "MessagesTabs"?
                                         isThemeDark?
-                                            color == colors.neutralDark?
-                                                require("../../../../assets/images/icons/grayComments.png"):
+                                            color == colors.weekdaysInactive?
+                                                require("../../../../assets/images/icons/lightComments.png"):
                                                 require("../../../../assets/images/icons/darkComments.png"):
                                             color == colors.white?
                                                 require("../../../../assets/images/icons/lightComments.png"):
                                                 require("../../../../assets/images/icons/grayComments.png"):
                                         isThemeDark?
-                                            color == colors.neutralDark?
-                                                require("../../../../assets/images/icons/grayCar.png"):
+                                            color == colors.weekdaysInactive?
+                                                require("../../../../assets/images/icons/lightCar.png"):
                                                 require("../../../../assets/images/icons/darkCar.png"):
                                             color == colors.white?
                                                 require("../../../../assets/images/icons/lightCar.png"):
@@ -106,7 +106,7 @@ const AppTabs = () => {
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
                 activeTintColor: colors.white,
-                inactiveTintColor: colors.secondaryDark,
+                inactiveTintColor: colors.weekdaysInactive,
                 activeBackgroundColor: colors.hover,
                 inactiveBackgroundColor: colors.white,
             }}
