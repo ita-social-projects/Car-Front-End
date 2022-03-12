@@ -6,7 +6,7 @@ import * as navigation from "../../../components/navigation/Navigation";
 interface ApplicationAnswerProps {
     notification: NotificationProps,
     notificationTittle: string,
-    notificationHeaderTittle: string,
+    notificationHeaderTittle?: string,
     notificationHeaderMessage: string,
     withWithdraw?: boolean,
     IsDetailsTitleVisible?: boolean,
@@ -15,7 +15,8 @@ interface ApplicationAnswerProps {
     IsAvailableSeatsVisible?: boolean,
     IsBaggageVisible?: boolean,
     IsStopsTitleVisible?: boolean,
-    journeyUserId: number
+    journeyUserId: number,
+    navigationToView?: string
 }
 
 const ApplicationAnswer = (props: ApplicationAnswerProps) => {
@@ -29,7 +30,7 @@ const ApplicationAnswer = (props: ApplicationAnswerProps) => {
                 read={props.notification.read}
                 date={props.notification.date}
                 openModal={ () => {
-                    navigation.navigate("Invitation is Accepted", {
+                    navigation.navigate(props.navigationToView!, {
                         notification: props
                     });
                 }}

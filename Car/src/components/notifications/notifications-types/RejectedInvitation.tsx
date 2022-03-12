@@ -8,8 +8,8 @@ const RejectedInvitation = (props: NotificationProps) => {
         <ApplicationAnswer
             notification = {props}
             notificationTittle = "Passenger rejected your invitation!"
-            notificationHeaderTittle = "INVITATION IS REJECTED"
             notificationHeaderMessage = "The passenger has rejected your invitation!"
+            navigationToView = "Invitation is Rejected"
             IsDepartureTimeVisible={true}
             IsStopsTitleVisible={true}
             journeyUserId = {props.sender?.id!}

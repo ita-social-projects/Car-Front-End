@@ -8,8 +8,8 @@ const AcceptedInvitation = (props: NotificationProps) => {
         <ApplicationAnswer
             notification = {props}
             notificationTittle = "Passenger accepted your invitation!"
-            notificationHeaderTittle = "INVITATION IS ACCEPTED"
             notificationHeaderMessage = "The passenger has accepted your invitation!"
+            navigationToView = "Invitation is Accepted"
             IsDepartureTimeVisible={true}
             IsStopsTitleVisible={true}
             journeyUserId={props.sender?.id!}
