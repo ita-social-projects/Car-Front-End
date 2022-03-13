@@ -82,8 +82,7 @@ test("renders correctly", async () =>
                   "borderBottomLeftRadius": 6,
                   "flex": 1,
                   "marginLeft": "-2.9%",
-                  "marginTop": "2.5%",
-                  "top": 0,
+                  "marginTop": "2.7%",
                   "width": undefined,
                 }
               }
