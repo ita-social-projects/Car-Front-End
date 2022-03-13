@@ -46,6 +46,7 @@ test("renders correctly", async () =>
       IsBaggageVisible={false}
       IsDetailsTitleVisible={false}
       IsFeeVisible={false}
+      navigationToView="Request is Rejected"
       notification={
         Object {
           "journeyId": 0,
@@ -82,7 +83,6 @@ test("renders correctly", async () =>
         }
       }
       notificationHeaderMessage="The driver has rejected your request!"
-      notificationHeaderTittle="REQUEST APPROVAL"
       notificationTittle="Driver rejected your request!"
     />
   `));

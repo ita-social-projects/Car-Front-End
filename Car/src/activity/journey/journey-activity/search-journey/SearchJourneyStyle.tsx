@@ -96,6 +96,20 @@ const SearchJourneyStyle = StyleSheet.create({
         lineHeight: 20
     },
 
+    moveToStopButton: {
+        paddingHorizontal: 16,
+        paddingVertical: 14,
+        bottom: 350,
+        display: "flex",
+        width:52,
+        height:44,
+        position: "absolute",
+        backgroundColor: "#414045",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
+    },
+
     publishButtonContainer: {
         alignItems: "flex-end",
         flexDirection: "row",

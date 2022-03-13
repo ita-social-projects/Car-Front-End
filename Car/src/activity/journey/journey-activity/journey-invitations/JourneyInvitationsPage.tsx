@@ -46,10 +46,13 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
 
     const checkForCorrectEmail = (email: string, invitationIndex: number): void => {
         let updatedInvitations = new Array(...invitedUsers);
+        const invitedEmails = invitedUsers.map(x => x.email!);
+        const existingEmails = existingInvitations.map((invitation) =>
+            getUserEmail(invitation!.invitedUserId)).concat(invitedEmails);
 
         if(allUsers.map(u => u?.email).includes(email)
             && email !== user?.email
-            && !invitedUsers?.some((x: RideInvitation) => x.email === email))
+            && !existingEmails?.some(existing => existing === email))
         {
             updatedInvitations[invitationIndex] = {
                 email:email, isCorrect:true
@@ -93,7 +96,6 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                                     {InvitationType[existingInvitations[index]!.type]} </Text>
                             </View>
                         ))}
-
                     </View>)
                 }
 

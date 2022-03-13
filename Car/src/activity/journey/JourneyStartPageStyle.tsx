@@ -20,55 +20,21 @@ const JourneyStartPageStyle = StyleSheet.create({
         height: 56,
         flexDirection: "row",
         paddingTop: 24,
-        width: 450, // scrollview doesn't work with %
+        width: "100%"
     },
 
-    allJourneys: {
+    journeysTabs: {
         justifyContent: "center",
         alignItems: "center",
-        width: "10%",
-        flexDirection:"row",
-    },
-
-    pastJourneys: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: "10%",
-        flexDirection:"row",
-    },
-
-    upcomingJourneys: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: "20%",
-        flexDirection:"row",
-    },
-
-    scheduledJourneys: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: "20%",
-        flexDirection:"row",
-    },
-
-    requestedJourneys: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: "20%",
-        flexDirection:"row",
-    },
-
-    canceledJourneys: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: "20%",
-        flexDirection:"row",
     },
 
     buttonText: {
         textTransform: "uppercase",
         fontFamily: Font.Milliard.Milliard,
         fontWeight: "200",
+        letterSpacing: 0.25,
+        lineHeight: 15,
+        fontSize: 14
     },
 
     manageJourneysContainer: {

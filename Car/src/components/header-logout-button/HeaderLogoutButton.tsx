@@ -17,13 +17,13 @@ const HeaderLogoutButton = () => {
                 onPress={() => setModalVisible(true)}
             >
                 <Text style={[HeaderLogoutButtonStyle.buttonText, { color: colors.accentOrange }]}>
-                    Logout
+                    Log out
                 </Text>
             </TouchableOpacity>
             <ConfirmModal
                 visible={isModalVisible}
                 title="ARE YOU SURE?"
-                subtitle="You are about to logout from the App"
+                subtitle="You are about to log out from the App"
                 confirmText="Yes, log out"
                 cancelText="No, stay"
                 onConfirm={async () => {

@@ -21,7 +21,6 @@ test("renders correctly", async () =>
             "alignItems": "center",
             "justifyContent": "center",
             "opacity": 1,
-            "paddingRight": 17,
           }
         }
       >
@@ -30,8 +29,11 @@ test("renders correctly", async () =>
             Array [
               Object {
                 "fontFamily": "Open Sans ExtraBold",
-                "fontSize": 20,
-                "fontWeight": "700",
+                "fontSize": 16,
+                "fontStyle": "normal",
+                "fontWeight": "bold",
+                "letterSpacing": 0.25,
+                "width": 62,
               },
               Object {
                 "color": "#EC6400",
@@ -39,7 +41,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Logout
+          Log out
         </Text>
       </View>,
       <Modal
@@ -120,7 +122,7 @@ test("renders correctly", async () =>
                 }
               }
             >
-              You are about to logout from the App
+              You are about to log out from the App
             </Text>
             <View
               accessible={true}

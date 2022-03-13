@@ -17,6 +17,9 @@ import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto
 import axios from "axios";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
 import { useTheme } from "../../../../theme/ThemeProvider";
+import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
+import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
+import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
 
 interface InvitationAcceptedViewProps {
     route: {
@@ -68,13 +71,22 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
 
     return (
         <>
-            <ScrollView style = {{ flexGrow: 1 }}>
-                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-                    <NotificationHeader
-                        title={props.route.params.notification.notificationHeaderTittle}
-                        message={props.route.params.notification.notificationHeaderMessage}
-                        sender={props.route.params.notification.notification.sender}
-                    />
+            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+
+                <NotificationHeader
+                    sender={props.route.params.notification.notification.sender}
+                />
+
+                <ScrollView style = {{ flexGrow: 1 }}>
+                    {props.route.params.notification.notificationHeaderMessage !== "" &&
+                    <View style={[NotificationHeaderStyle.messageContainer, {
+                        borderTopColor: colors.secondaryLight,
+                        borderBottomColor: colors.secondaryLight
+                    }]}>
+                        <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
+                            {props.route.params.notification.notificationHeaderMessage}
+                        </Text>
+                    </View>}
 
                     <NotificationRideDetails
                         journeyId={props.route.params.notification.notification.journeyId}
@@ -87,9 +99,11 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                         journey={journey!}
                         journeyUser={journeyUser!}
                     />
+
                     <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
                         {name} {surname}`s stops in your ride
                     </Text>
+
                     <View>
                         <StopsBlock
                             stops={stops ? stops : []}
@@ -97,8 +111,18 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-                </View>
-            </ScrollView>
+
+                </ScrollView>
+
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        confirmText={"Ok"}
+                        onConfirm={() => {
+                            navigation.goBack();
+                        }} />
+                </NotificationButtonGroup>
+
+            </View>
         </>
     );
 };

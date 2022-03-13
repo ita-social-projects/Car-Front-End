@@ -486,12 +486,12 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                 setOwnCar(true);
                                 setSelectedRide(RideType.OwnCar);
                                 setIsVisibleCarDropDown(false);
-                                setAvailableSeats(DEFAULT_AVAILABLE_SEATS_COUNT);
                             }}
                             onRightButtonPress={() => {
                                 setOwnCar(false);
                                 setSelectedRide(RideType.Taxi);
-                                setAvailableSeats(DEFAULT_TAXI_AVAILABLE_SEATS_COUNT);
+                                setAvailableSeats(availableSeats === DEFAULT_AVAILABLE_SEATS_COUNT ?
+                                    DEFAULT_TAXI_AVAILABLE_SEATS_COUNT : availableSeats);
                             }}
                             title={"Ride Type"}
                             leftButtonText={"Own car"}
@@ -651,7 +651,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             <ConfirmModal
                 visible={successfullyPublishModalIsVisible}
                 title={"Success"}
-                subtitle={"Ride successfully published"}
+                subtitle={"Your ride is published!"}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => {
@@ -667,7 +667,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             <ConfirmModal
                 visible={successfullyUpdateModalIsVisible}
                 title={"Success"}
-                subtitle={"Ride details successfully updated"}
+                subtitle={"Your ride details is updated"}
                 confirmText={"OK"}
                 hideCancelButton={true}
                 onConfirm={() => {

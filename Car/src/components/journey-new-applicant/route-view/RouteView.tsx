@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import JourneyPoint from "../../../../models/journey/JourneyPoint";
 import Stop from "../../../../models/stop/Stop";
 import MapView, { LatLng, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
@@ -17,12 +17,14 @@ import NotificationProps from "../../notifications/NotificationProps";
 import * as navigation from "../../../components/navigation/Navigation";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 interface RouteViewProps {
     route: {
         params: {
             journeyPoints: JourneyPoint[],
             stops: Stop[],
+            currentStop: number,
             cameraCoordinates: LatLng,
             notification: NotificationProps,
             withoutAccept?: boolean
@@ -42,6 +44,42 @@ const RouteView = (props: RouteViewProps) => {
         applicantStops: data?.applicantStops,
         passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
     });
+    const [currentStop, setCurrentStop] = useState(params.currentStop);
+    const mapRef = useRef<MapView | null>(null);
+    const singleIndent = 1;
+    const leftBorder = 0;
+
+    const moveToNextStop = () : void => {
+        if(currentStop == params.stops.length - singleIndent)
+            moveCamera(currentStop);
+        else
+            moveToStop(currentStop, singleIndent);
+    };
+
+    const moveToPreviousStop = () : void => {
+        if(currentStop == leftBorder)
+            moveCamera(currentStop);
+        else
+            moveToStop(currentStop, -singleIndent);
+    };
+
+    const moveToStop = (stop : number, indent : number) : void => {
+        moveCamera(stop + indent);
+        setCurrentStop(stop + indent);
+    };
+
+    const moveCamera = (stop: number) : void => {
+        mapRef.current?.animateCamera({
+            center: getCoordinates(stop)
+        }, { duration: 1000 });
+    };
+
+    const getCoordinates = (stop: number) : LatLng => {
+        return {
+            latitude: Number(params.stops[stop]?.address?.latitude),
+            longitude: Number(params.stops[stop]?.address?.longitude)
+        };
+    };
 
     const sendApprove = () => {
         NotificationsService.addNotification(
@@ -90,6 +128,7 @@ const RouteView = (props: RouteViewProps) => {
     return (
         <>
             <MapView
+                ref = {mapRef}
                 style={{ flex: 1 }}
                 initialCamera={{ ...initialCamera, center: params.cameraCoordinates }}
                 provider={PROVIDER_GOOGLE}
@@ -106,6 +145,23 @@ const RouteView = (props: RouteViewProps) => {
 
                 {params.stops.map(mapStopToMarker)}
             </MapView>
+
+            {
+                <TouchableOpacity onPress = {moveToNextStop}
+                    style={[SearchJourneyStyle.moveToStopButton, { right: 15 }]}
+                >
+                    <Ionicons name = "arrow-forward" color = {colors.white} size = {20}/>
+                </TouchableOpacity>
+            }
+
+            {
+                <TouchableOpacity onPress = {moveToPreviousStop}
+                    style = {[SearchJourneyStyle.moveToStopButton, { left: 15 }]}
+                >
+                    <Ionicons name = "arrow-back" color = {colors.white} size = {20}/>
+                </TouchableOpacity>
+            }
+
             {!props.route.params.withoutAccept &&
             <>
                 <TouchableOpacity onPress = {approveUser}
