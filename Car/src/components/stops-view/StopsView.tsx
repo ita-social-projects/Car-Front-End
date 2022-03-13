@@ -30,8 +30,8 @@ const StopsView = (props: StopsViewProps) => {
     const zero = 0;
     const singleIndent = 1;
     const doubleIndent = 2;
-    const [firstStop, setFirstStop] = useState<Number>();
-    const [lastStop, setLastStop] = useState<Number>();
+    const [firstStop, setFirstStop] = useState<number>();
+    const [lastStop, setLastStop] = useState<number>();
 
     useEffect(() => {
         if(props.useOnlyIntermediateStops) {
