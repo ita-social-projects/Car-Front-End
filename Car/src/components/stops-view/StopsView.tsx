@@ -124,7 +124,7 @@ const StopsView = (props: StopsViewProps) => {
                     style = {[SearchJourneyStyle.moveToStopButton,
                         { right: 15, backgroundColor: isThemeDark? "#FFFFFF" : "#414045" }]}
                 >
-                    <Ionicons name = "arrow-forward" color = {isThemeDark? colors.white: colors.white} size = {20}/>
+                    <Ionicons name = "arrow-forward" color = {colors.white} size = {20}/>
                 </TouchableOpacity>
             }
 
@@ -133,7 +133,7 @@ const StopsView = (props: StopsViewProps) => {
                     style = {[SearchJourneyStyle.moveToStopButton,
                         { left: 15, backgroundColor: isThemeDark? "#FFFFFF" : "#414045" }]}
                 >
-                    <Ionicons name = "arrow-back" color = {isThemeDark? colors.white: colors.white} size = {20}/>
+                    <Ionicons name = "arrow-back" color = {colors.white} size = {20}/>
                 </TouchableOpacity>
             }
         </>
