@@ -33,7 +33,6 @@ const HeaderStyle = StyleSheet.create({
         fontFamily: Font.OpenSans.ExtraBold,
         fontWeight: "700",
         fontSize: 18,
-        marginLeft: 20,
     },
 
     messages: {
