@@ -62,7 +62,7 @@ const InvitationView = (props: InvitationViewProps) => {
                 setJourneyPoints(res.data!.journeyPoints);
                 setStops([
                     getStopByType(res.data, StopType.Start)!,
-
+                    getStopByType(res.data, StopType.Intermediate)!,
                     getStopByType(res.data, StopType.Finish)!
                 ]);
             });
@@ -74,7 +74,9 @@ const InvitationView = (props: InvitationViewProps) => {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
+            currentStop: Number(stops?.findIndex(stp=>stp?.address?.name == stop?.address?.name)),
+            user: props.route.params.notification.sender
         });
     };
 

@@ -29,7 +29,7 @@ export const mapStopToWayPoint = (stop?: Stop) => {
     };
 };
 
-export const getStopByType = (journey: Journey, stopType: (StopType.Start | StopType.Finish)) => {
+export const getStopByType=(journey: Journey, stopType: (StopType.Start|StopType.Intermediate|StopType.Finish)) => {
     return journey?.stops.filter(stop => stop?.type === stopType)[FIRST_ELEMENT_INDEX];
 };
 
