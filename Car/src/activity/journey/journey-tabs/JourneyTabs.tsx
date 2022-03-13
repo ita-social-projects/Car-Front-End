@@ -393,6 +393,7 @@ const JourneyTabs = () => {
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
+                        headerRight: HeaderRequestButton
                     }}
                 />
                 <StackTabs.Screen

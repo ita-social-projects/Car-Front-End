@@ -206,6 +206,7 @@ test("renders correctly", async () =>
           options={
             Object {
               "headerLeft": [Function],
+              "headerRight": [Function],
               "headerTitleAlign": "center",
               "headerTitleStyle": Array [
                 Object {
