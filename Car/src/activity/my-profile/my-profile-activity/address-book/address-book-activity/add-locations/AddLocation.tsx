@@ -191,27 +191,27 @@ const AddLocation = () => {
                                 ? <></>
                                 :(
                                     <>
-                                        <View
-                                            style={[{ position: "absolute", top:20, right:14 }]}
-                                        >
+                                        <View style={[AddLocationStyle.addressErrorBlock]} >
                                             <Ionicons
                                                 name="alert-circle-outline"
                                                 size={20}
-                                                style={[{ color: colors.accentRed,
+                                                style={[{
+                                                    color: colors.accentRed,
                                                     transform: [{ rotate: "0deg" }],
                                                     borderColor: colors.neutralLight
                                                 }]}>
                                             </Ionicons>
                                         </View>
                                         <Text
-                                            style={[{
-                                                color: colors.accentRed,
-                                                marginTop: 10,
-                                            }]}>
+                                            style={[
+                                                AddLocationStyle.addressErrorText,
+                                                { color: colors.accentRed, }
+                                            ]}>
                                             You already have an address with this name
                                         </Text>
                                     </>
-                                )}
+                                )
+                            }
                         </View>
 
                         <LocationDropDownPicker

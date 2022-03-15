@@ -29,6 +29,16 @@ const AddLocationStyle = StyleSheet.create({
         marginBottom: 16
     },
 
+    addressErrorBlock: {
+        position: "absolute",
+        top:20,
+        right:14,
+    },
+
+    addressErrorText: {
+        marginTop: 10,
+    },
+
     saveButton: {
         paddingHorizontal: 16,
         paddingVertical: 14,

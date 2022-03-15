@@ -1,4 +1,4 @@
-import { Platform, TextInput, View } from "react-native";
+import { Platform, TextInput, View, Text } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import EditLocationProps from "./EditLocationProps";
 import {
@@ -29,6 +29,8 @@ import AddressInput from "../../../../../../components/address-input/AddressInpu
 import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Location from "../../../../../../../models/location/Location";
 
 const EditLocation = (props: EditLocationProps) => {
     const { colors, isThemeDark } = useTheme();
@@ -47,6 +49,7 @@ const EditLocation = (props: EditLocationProps) => {
     const [locationType, setLocationType] = useState<{id: number, name: string}>(
         { id: DEFAULT_LOCATION_ICON_ID, name: "Other" }
     );
+    const [currentLocationName, setCurrentLocationName] = useState<string>("");
 
     const mapRef = useRef<MapView | null>(null);
     const addressInputRef = useRef<GooglePlacesAutocompleteRef | null>();
@@ -59,6 +62,8 @@ const EditLocation = (props: EditLocationProps) => {
         }
         LocationService.getById(props.locationId).then((response) => {
             const location = response.data;
+
+            setCurrentLocationName(String(location?.name));
 
             setLocationName(String(location?.name));
             setLocationType({
@@ -155,6 +160,28 @@ const EditLocation = (props: EditLocationProps) => {
             typeId: locationType.id
         });};
 
+    const [userLocations, setUserLocations] = useState<Location[]>();
+    const [isLocationAvailable, setIsLocationAvailable] = useState<boolean>(true);
+
+    useEffect(() => {
+        loadLocations();
+    }, []);
+
+    const loadLocations = async () =>{
+        await LocationService.getAll().then(response => {
+            setUserLocations(response.data);
+        });
+    };
+
+    const checkForAvailability = (name : string) => {
+        setIsLocationAvailable(true);
+            userLocations?.forEach((item : Location) => {
+                if(item?.name == name && item?.name != currentLocationName){
+                    setIsLocationAvailable(false);
+                }
+            });
+    };
+
     return(
         isLoading ? (
             <View
@@ -183,19 +210,49 @@ const EditLocation = (props: EditLocationProps) => {
                             recentAddresses={[]}
                             refFor={(ref) => (addressInputRef.current = ref)}
                         />
-                        <TextInput
-                            style={[AddLocationStyle.textInput,
-                                {
-                                    borderColor: colors.primary,
-                                    backgroundColor: colors.white,
-                                    color: colors.primary
-                                }]}
-                            value={locationName}
-                            placeholder={"Name the chosen address"}
-                            placeholderTextColor={"grey"}
-                            onChangeText={(fromInput) => {
-                                setLocationName(fromInput);
-                            }}/>
+                        <View>
+                            <TextInput
+                                style={[AddLocationStyle.textInput,
+                                    {
+                                        borderColor: colors.primary,
+                                        backgroundColor: colors.white,
+                                        color: colors.primary
+                                    }]}
+                                value={locationName}
+                                placeholder={"Name the chosen address"}
+                                placeholderTextColor={"grey"}
+                                onChangeText={(fromInput) => {
+                                    setLocationName(fromInput);
+                                    checkForAvailability(fromInput);
+                                }}/>
+
+                            { isLocationAvailable
+                                ? <></>
+                                :(
+                                    <>
+                                        <View style={[AddLocationStyle.addressErrorBlock]} >
+                                            <Ionicons
+                                                name="alert-circle-outline"
+                                                size={20}
+                                                style={[{
+                                                    color: colors.accentRed,
+                                                    transform: [{ rotate: "0deg" }],
+                                                    borderColor: colors.neutralLight,
+                                                }]}>
+                                            </Ionicons>
+                                        </View>
+                                        <Text
+                                            style={[
+                                                AddLocationStyle.addressErrorText,
+                                                { color: colors.accentRed, }
+                                            ]}>
+                                            You already have an address with this name
+                                        </Text>
+                                    </>
+                                )
+                            }
+                        </View>
+
                         <LocationDropDownPicker
                             fast-food-outline
                             items={LOCATION_TYPES}
