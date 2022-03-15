@@ -8,9 +8,6 @@ const NotificationButtonGroupStyle = StyleSheet.create({
         marginLeft:20,
         width:"100%",
         borderTopWidth: 1,
-        borderTopColor: "#C4C4C4",
-        backgroundColor: "#FFFFFF"
-
     }
 });
 

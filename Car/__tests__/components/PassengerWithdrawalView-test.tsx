@@ -132,8 +132,8 @@ test("renders correctly", async () =>
               Array [
                 undefined,
                 Object {
-                  "borderBottomColor": "#AAA9AE",
-                  "borderTopColor": "#AAA9AE",
+                  "borderBottomColor": "#C4C4C4",
+                  "borderTopColor": "#C4C4C4",
                 },
               ]
             }

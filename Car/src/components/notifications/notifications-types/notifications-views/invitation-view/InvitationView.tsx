@@ -189,8 +189,8 @@ const InvitationView = (props: InvitationViewProps) => {
                 <ScrollView style = {{ flexGrow: 1 }}>
 
                     <View style={[NotificationHeaderStyle.messageContainer, {
-                        borderTopColor: colors.secondaryLight,
-                        borderBottomColor: colors.secondaryLight }]}>
+                        borderTopColor: colors.disableBack,
+                        borderBottomColor: colors.disableBack }]}>
 
                         <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                             The driver is inviting you to join a ride!
