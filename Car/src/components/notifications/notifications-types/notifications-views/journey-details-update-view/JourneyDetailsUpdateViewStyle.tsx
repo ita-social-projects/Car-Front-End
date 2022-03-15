@@ -13,6 +13,7 @@ const JourneyDetailsUpdateViewStyle = EStyleSheet.create({
     },
 
     messageContainer: {
+        marginTop: 24,
         paddingVertical: 16,
         paddingHorizontal: 10,
         borderTopWidth: 1,
