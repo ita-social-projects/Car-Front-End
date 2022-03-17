@@ -10,6 +10,8 @@ import { useTheme } from "../../../components/theme/ThemeProvider";
 import MyProfileTabsStyle from "./MyProfileTabsStyle";
 import Badges from "../my-profile-activity/badges/Badges";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
+import PrivacyPolicy from "../my-profile-activity/privacy-policy/PrivacyPolicy";
+import TermsOfUse from "../my-profile-activity/privacy-policy/TermsOfUse";
 
 const StackTabs = createStackNavigator();
 
@@ -62,6 +64,30 @@ const MyProfileTabs = () => {
                     name="AddressBookTabs"
                     component={AddressBookTabs}
                     options={{ headerShown: false }}
+                />
+                <StackTabs.Screen
+                    name="PrivacyPolicy"
+                    component={PrivacyPolicy}
+                    options={{
+                        headerTitle: "Privacy Policy",
+                        headerTitleAlign: "center",
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+                <StackTabs.Screen
+                    name="TermsOfUse"
+                    component={TermsOfUse}
+                    options={{
+                        headerTitle: "Terms of Service",
+                        headerTitleAlign: "center",
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
                 />
 
             </StackTabs.Navigator>
