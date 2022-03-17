@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '9.7.1'
+    versionSpec: '14.0.0'
   displayName: 'Install Node'
 - script: |
    cd Car
