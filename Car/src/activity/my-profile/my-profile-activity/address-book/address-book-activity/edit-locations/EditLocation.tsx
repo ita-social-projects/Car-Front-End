@@ -210,22 +210,26 @@ const EditLocation = (props: EditLocationProps) => {
                             recentAddresses={[]}
                             refFor={(ref) => (addressInputRef.current = ref)}
                         />
-                        <View>
+                        <View style={[isLocationAvailable
+                            ? AddLocationStyle.textInputBlock
+                            : AddLocationStyle.textInputBlockOnError,
+                        ]}>
                             <TextInput
                                 style={[AddLocationStyle.textInput,
                                     {
-                                        borderColor: colors.primary,
+                                        borderColor: isLocationAvailable
+                                            ? colors.primary
+                                            : colors.accentRed,
                                         backgroundColor: colors.white,
-                                        color: colors.primary
+                                        color: colors.primary,
                                     }]}
                                 value={locationName}
                                 placeholder={"Name the chosen address"}
-                                placeholderTextColor={"grey"}
+                                placeholderTextColor={colors.secondaryDark}
                                 onChangeText={(fromInput) => {
                                     setLocationName(fromInput);
                                     checkForAvailability(fromInput);
                                 }}/>
-
                             { isLocationAvailable
                                 ? <></>
                                 :(
@@ -233,7 +237,7 @@ const EditLocation = (props: EditLocationProps) => {
                                         <View style={[AddLocationStyle.addressErrorBlock]} >
                                             <Ionicons
                                                 name="alert-circle-outline"
-                                                size={20}
+                                                size={19.5}
                                                 style={[{
                                                     color: colors.accentRed,
                                                     transform: [{ rotate: "0deg" }],
@@ -244,7 +248,10 @@ const EditLocation = (props: EditLocationProps) => {
                                         <Text
                                             style={[
                                                 AddLocationStyle.addressErrorText,
-                                                { color: colors.accentRed, }
+                                                {
+                                                    color: colors.accentRed,
+                                                    fontSize: 13,
+                                                }
                                             ]}>
                                             You already have an address with this name
                                         </Text>

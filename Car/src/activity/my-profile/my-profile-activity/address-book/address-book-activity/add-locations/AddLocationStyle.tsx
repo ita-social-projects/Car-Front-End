@@ -29,6 +29,14 @@ const AddLocationStyle = StyleSheet.create({
         marginBottom: 16
     },
 
+    textInputBlockOnError: {
+        marginBottom: 13,
+    },
+
+    textInputBlock: {
+        marginBottom: 25,
+    },
+
     addressErrorBlock: {
         position: "absolute",
         top:20,
@@ -36,6 +44,7 @@ const AddLocationStyle = StyleSheet.create({
     },
 
     addressErrorText: {
+        fontSize: 13,
         marginTop: 10,
     },
 

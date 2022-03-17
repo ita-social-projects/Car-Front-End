@@ -170,7 +170,10 @@ const AddLocation = () => {
                 />
                 {wayPoint.isConfirmed && (
                     <>
-                        <View>
+                        <View style={[isLocationAvailable
+                            ? AddLocationStyle.textInputBlock
+                            : AddLocationStyle.textInputBlockOnError,
+                        ]}>
                             <TextInput
                                 style={[AddLocationStyle.textInput,
                                     {
@@ -194,18 +197,21 @@ const AddLocation = () => {
                                         <View style={[AddLocationStyle.addressErrorBlock]} >
                                             <Ionicons
                                                 name="alert-circle-outline"
-                                                size={20}
+                                                size={19.5}
                                                 style={[{
                                                     color: colors.accentRed,
                                                     transform: [{ rotate: "0deg" }],
-                                                    borderColor: colors.neutralLight
+                                                    borderColor: colors.neutralLight,
                                                 }]}>
                                             </Ionicons>
                                         </View>
                                         <Text
                                             style={[
                                                 AddLocationStyle.addressErrorText,
-                                                { color: colors.accentRed, }
+                                                {
+                                                    color: colors.accentRed,
+                                                    fontSize: 13,
+                                                }
                                             ]}>
                                             You already have an address with this name
                                         </Text>
