@@ -1,23 +1,17 @@
 name: CI
 
 on:
-
   push:
-
-    branches: [ develop ]
+    branches: [develop]
 
   pull_request:
-
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
-
   install-and-test:
-
     runs-on: ubuntu-latest
 
-    steps: 
-
+    steps:
       - uses: actions/checkout@v2
 
       - name: create-credentials-manager
@@ -26,7 +20,7 @@ jobs:
         with:
           name: "credentials.json"
           json: ${{ secrets.CREDENTIALS }}
-          dir: './Car/credentials'
+          dir: "./Car/credentials"
 
       - name: Install npm dependencies
 
@@ -34,27 +28,27 @@ jobs:
           cd Car
           npm install
       - name: Run tests
-
         run: |
           cd Car
           npm test -- --coverage
   sonarcloud:
-
     runs-on: ubuntu-latest
 
     needs: [install-and-test]
 
     steps:
-
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
 
       - name: create-credentials-manager
         id: create-credentials-manager
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "credentials.json"
-          json: '${{ secrets.CREDENTIALS }}'
-          dir: './Car/credentials'
+          json: "${{ secrets.CREDENTIALS }}"
+          dir: "./Car/credentials"
 
       - name: Install npm dependencies
 
@@ -63,17 +57,14 @@ jobs:
           npm install
            npm test -- --coverage
       - name: SonarCloudScan
-
         uses: SonarSource/sonarcloud-github-action@v1.4
 
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
         with:
-
           args: >
             -Dsonar.organization=ita-social-projects
             -Dsonar.projectKey=ita-social-projects_Car-Front-End
@@ -85,4 +76,4 @@ jobs:
             -Dsonar.c.file.suffixes=-
             -Dsonar.cpp.file.suffixes=-
             -Dsonar.objc.file.suffixes=-
-            -Dsonar.java.file.suffixes=-  
+            -Dsonar.java.file.suffixes=-
