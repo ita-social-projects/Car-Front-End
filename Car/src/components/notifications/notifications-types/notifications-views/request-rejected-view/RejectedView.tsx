@@ -80,8 +80,8 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
 
                     {props.route.params.notification.notificationHeaderMessage !== "" &&
                         <View style={[NotificationHeaderStyle.messageContainer, {
-                            borderTopColor: colors.secondaryLight,
-                            borderBottomColor: colors.secondaryLight
+                            borderTopColor: colors.disableBack,
+                            borderBottomColor: colors.disableBack
                         }]}>
                             <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                                 {props.route.params.notification.notificationHeaderMessage}
