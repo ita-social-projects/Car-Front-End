@@ -29,10 +29,9 @@ const LocationDropDownPickerStyle = StyleSheet.create({
 
     staticPlaceholder: {
         fontSize: 18,
-        lineHeight: 10,
-        top:-1,
         left:-4,
         zIndex: 10,
+        marginBottom:5
     },
 
     itemStyle: {

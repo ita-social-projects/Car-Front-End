@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Platform, Text, TextInput, View } from "react-native";
+import { Platform, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
 import {
     initialWayPoint,
@@ -29,7 +29,7 @@ import AddressInput from "../../../../../../components/address-input/AddressInpu
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 import { CHOOSE_ADDRESS_LEFT_PADDING, DEFAULT_INPUT_LEFT_PADDING } from "../../../../../../constants/StylesConstants";
 import Location from "../../../../../../../models/location/Location";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import AddressNameInput from "../../../../../../components/address-name-input/AddressNameInput";
 
 const AddLocation = () => {
     const { colors, isThemeDark } = useTheme();
@@ -93,6 +93,13 @@ const AddLocation = () => {
         setWayPointsTextAndIsConfirmed(text, false);
     };
 
+    const AddressNameInputOnChangeTextHandler = (name: string, availability: boolean) =>{
+        setIsLocationAvailable(availability);
+        if(isLocationAvailable){
+            setLocationName(name);
+        }
+    };
+
     const mapEventHandler = (event: MapEvent) => {
         addressInputRef.current?.blur();
         setAddressByCoordinates(setAddress, event.nativeEvent.coordinate);
@@ -143,15 +150,6 @@ const AddLocation = () => {
         });
     };
 
-    const checkForAvailability = (name : string) => {
-        setIsLocationAvailable(true);
-        userLocations?.forEach((item : Location) => {
-            if(item?.name == name){
-                setIsLocationAvailable(false);
-            }
-        });
-    };
-
     return (
         <View style={{ flex: 1 }}>
             <View style={AddLocationStyle.inputContainer}>
@@ -170,55 +168,13 @@ const AddLocation = () => {
                 />
                 {wayPoint.isConfirmed && (
                     <>
-                        <View style={[isLocationAvailable
-                            ? AddLocationStyle.textInputBlock
-                            : AddLocationStyle.textInputBlockOnError,
-                        ]}>
-                            <TextInput
-                                style={[AddLocationStyle.textInput,
-                                    {
-                                        borderColor: isLocationAvailable
-                                            ? colors.primary
-                                            : colors.accentRed,
-                                        backgroundColor: colors.white,
-                                        color: colors.primary,
-                                    }]}
-                                value={locationName}
-                                placeholder={"Name the chosen address"}
-                                placeholderTextColor={colors.secondaryDark}
-                                onChangeText={(fromInput) => {
-                                    setLocationName(fromInput);
-                                    checkForAvailability(fromInput);
-                                }}/>
-                            { isLocationAvailable
-                                ? <></>
-                                :(
-                                    <>
-                                        <View style={[AddLocationStyle.addressErrorBlock]} >
-                                            <Ionicons
-                                                name="alert-circle-outline"
-                                                size={19.5}
-                                                style={[{
-                                                    color: colors.accentRed,
-                                                    transform: [{ rotate: "0deg" }],
-                                                    borderColor: colors.neutralLight,
-                                                }]}>
-                                            </Ionicons>
-                                        </View>
-                                        <Text
-                                            style={[
-                                                AddLocationStyle.addressErrorText,
-                                                {
-                                                    color: colors.accentRed,
-                                                    fontSize: 13,
-                                                }
-                                            ]}>
-                                            You already have an address with this name
-                                        </Text>
-                                    </>
-                                )
-                            }
-                        </View>
+                        <AddressNameInput
+                            currentLocationName={""}
+                            userLocations={userLocations}
+                            placeholder={"Name the chosen address"}
+                            placeholderColor={colors.secondaryDark}
+                            onTextChange={AddressNameInputOnChangeTextHandler}
+                        />
 
                         <LocationDropDownPicker
                             fast-food-outline
