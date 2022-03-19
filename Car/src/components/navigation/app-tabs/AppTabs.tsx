@@ -117,7 +117,7 @@ const AppTabs = () => {
                 options={() => ({
                     tabBarLabel: "Chats",
                     tabBarBadge : tabBarUnreadMessages,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: "#ffffff" }
+                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
                 })}
             />
             <Tabs.Screen
@@ -138,7 +138,7 @@ const AppTabs = () => {
                 options={{
                     tabBarLabel: "Notifications",
                     tabBarBadge: tabBarBadge,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: "#ffffff" }
+                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
                 }}
                 name="NotificationsTabs"
                 component={NotificationsTabs}
