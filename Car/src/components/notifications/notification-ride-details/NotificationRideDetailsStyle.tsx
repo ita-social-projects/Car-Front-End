@@ -2,30 +2,42 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 const NotificationRideDetailsStyle = EStyleSheet.create({
     container: {
+        alignItems: "center",
+        justifyContent: "space-around",
+        flexDirection: "row",
         marginTop: 24,
     },
 
-    header: {
-        marginBottom: "1rem",
-        fontSize: "1.1rem",
-        fontWeight: "700",
-    },
-
     detailsContainer: {
-        marginBottom: "0.7rem",
-        flexDirection: "row",
+        marginBottom: 11,
+        justifyContent: "center",
+        alignItems: "center",
     },
 
-    label: {
-        fontSize: "1rem",
-        fontWeight: "700",
-        lineHeight: 16,
+    luggageContainer:
+    {
+        marginTop: 20,
+        justifyContent: "center",
+        alignItems: "center",
     },
 
     value: {
-        fontSize: "0.9rem",
-        fontWeight: "400",
+        fontSize: 14,
+        fontWeight: "bold",
         lineHeight: 16,
+    },
+
+    icon:
+    {
+        width: 80,
+        height: 90,
+    },
+
+    separator: {
+        flexWrap: "wrap",
+        width: "100%",
+        height: 1,
+        marginTop: 7
     }
 });
 

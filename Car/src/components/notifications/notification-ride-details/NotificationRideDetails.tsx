@@ -1,55 +1,78 @@
-import moment from "moment";
 import React from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import style from "./NotificationRideDetailsStyle";
 import NotificationRideDetailsProps from "./NotificationRideDetailsProps";
-import { capitalize } from "../../../utils/GeneralHelperFunctions";
 import { useTheme } from "../../theme/ThemeProvider";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 
 const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
     const { colors } = useTheme();
     const IsPropertyShown = (value: any) => value !== false;
+    const dateTime : Date = new Date(props.journey?.departureTime!);
+
+    const formatDate = () =>
+    {
+        const indexDayInDateTime = 1;
+        const indexMonthInDateTime = 0;
+        const indexDayOfWeekInDateTime = 0;
+        const indexStartTime = 0;
+        const indexEndTime = 5;
+        const day = dateTime.toLocaleDateString().split("/")[indexDayInDateTime] + "/";
+        const month = dateTime.toLocaleDateString().split("/")[indexMonthInDateTime] + ";";
+        const dayOfWeek = dateTime.toDateString().split(" ")[indexDayOfWeekInDateTime] +";";
+        const time = dateTime.toLocaleTimeString().substring(indexStartTime,indexEndTime);
+
+        return day + month + dayOfWeek + time;
+    };
 
     return (
-        <View style={style.container}>
-            <View>
-                {IsPropertyShown(props.IsDetailsTitleVisible) && <Text
-                    style={{ ...style.header, color: colors.primary }}>Ride details</Text>}
+        <View>
+            <View style={style.container}>
+                {IsPropertyShown(props.IsDepartureTimeVisible) &&
+                <View style={style.detailsContainer}>
+                    <Image
+                        style = {{ ...style.icon }}
+                        source={require("../../../../assets/images/notifications/icons/departure.png")}
+                    />
+                    <Text style={{ ...style.value, color: colors.primary }}>
+                        {formatDate()}
+                    </Text>
+                </View>}
+
+                <View style={style.detailsContainer}>
+                    <Image
+                        style = {{ ...style.icon }}
+                        source={require("../../../../assets/images/notifications/icons/fee.png")}
+                    />
+                    <Text style={{ ...style.value, color: colors.primary }}>{props.journey?.isFree ?
+                        "Free" : "Paid"}
+                    </Text>
+                </View>
+
+                <View style={style.detailsContainer}>
+                    <Image
+                        style = {{ ...style.icon }}
+                        source={require("../../../../assets/images/notifications/icons/passangers.png")}
+                    />
+                    <Text style={{ ...style.value, color: colors.primary }}>
+                        {props.journey?.participants.length + " Passanger" ??
+                        DEFAULT_PASSANGERS_COUNT + " Passanger"}
+                    </Text>
+                </View>
             </View>
 
-            {IsPropertyShown(props.IsDepartureTimeVisible) && <View style={style.detailsContainer}>
-                <Text style={{ ...style.label, color: colors.primary }}>Departure time: </Text>
+            {IsPropertyShown(props.IsBaggageVisible) && (props.journeyUser?.withBaggage) &&
+            <View style={style.luggageContainer}>
                 <Text style={{ ...style.value, color: colors.primary }}>
-                    {capitalize(moment(new Date(props.journey?.departureTime!)).calendar())}
+                    I'm travelling with luggage.
                 </Text>
+                <View
+                    style={[
+                        style.separator,
+                        { backgroundColor: colors.secondaryLight }
+                    ]}
+                ></View>
             </View>}
-
-            {IsPropertyShown(props.IsFeeVisible) && <View style={style.detailsContainer}>
-                <Text style={{ ...style.label, color: colors.primary }}>Fee: </Text>
-                <Text style={{ ...style.value, color: colors.primary }}>{props.journey?.isFree ? "free" : "paid"}</Text>
-            </View>}
-
-            {props.withSeats && IsPropertyShown(props.IsAvailableSeatsVisible) && props.journey?.participants &&
-                <View style={style.detailsContainer}>
-                    <Text style={{ ...style.label, color: colors.primary }}>Available seats: </Text>
-                    <Text style={{ ...style.value, color: colors.primary }}>
-                        {props.journey.countOfSeats - props.journey.participants.length}</Text>
-                </View>
-            }
-
-            {IsPropertyShown(props.IsBaggageVisible) && <View style={style.detailsContainer}>
-                <Text style={{ ...style.value, color: colors.primary }}>
-                    {props.journeyUser?.withBaggage? "With luggage" : "Without luggage"}</Text>
-            </View>}
-
-            { props.withPassangers &&
-                 <View style={style.detailsContainer}>
-                     <Text style={{ ...style.label, color: colors.primary }}>Passangers: </Text>
-                     <Text style={{ ...style.value, color: colors.primary }}>
-                         {props.journeyUser?.passangersCount ?? DEFAULT_PASSANGERS_COUNT}</Text>
-                 </View>
-            }
         </View>
     );
 };

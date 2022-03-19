@@ -14,12 +14,14 @@ import Journey from "../../../../../../models/journey/Journey";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
 import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import StopType from "../../../../../../models/stop/StopType";
-import { colors } from "react-native-elements";
 import { useTheme } from "../../../../theme/ThemeProvider";
 import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
+import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
+import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
+import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
 
 interface JourneyCancellationViewProps {
     route: {
@@ -30,7 +32,7 @@ interface JourneyCancellationViewProps {
 }
 
 const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
-    const { colors : themeColors } = useTheme();
+    const { colors } = useTheme();
     const user = useContext(AuthContext).user;
     const source = useRef(axios.CancelToken.source());
     const [stops, setStops] = useState<Stop[]>();
@@ -68,17 +70,25 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
 
     return (
         <>
-            <ScrollView style={{ flexGrow: 1 }}>
-                <View style={[
-                    PassengerWithdrawalViewStyle.window,
-                    { color: themeColors.primary }
-                ]}
-                >
-                    <NotificationHeader
-                        title="RIDE IS CANCELED"
-                        message={"The driver has canceled \nyour ride!"}
-                        sender={props.route.params.notification.sender}
-                    />
+            <View style={[
+                PassengerWithdrawalViewStyle.window,
+                { color: colors.primary }
+            ]}
+            >
+                <NotificationHeader
+                    sender={props.route.params.notification.sender}
+                />
+
+                <ScrollView style={{ flexGrow: 1 }}>
+                    <View style={[NotificationHeaderStyle.messageContainer, {
+                        borderTopColor: colors.secondaryLight,
+                        borderBottomColor: colors.secondaryLight
+                    }]}>
+                        <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
+                            The driver has canceled {"\n"}your ride!
+                        </Text>
+                    </View>
+
                     <NotificationRideDetails
                         journeyId={props.route.params.notification.journeyId}
                         userId={user?.id!}
@@ -94,6 +104,7 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                         {props.route.params.notification.sender?.name}
                         {props.route.params.notification.sender?.surname}`s stops
                     </Text>
+
                     <View>
                         <StopsBlock
                             stops={stops ? stops : []}
@@ -101,8 +112,16 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        confirmText={"Ok"}
+                        onConfirm={() => {
+                            navigation.goBack();
+                        }} />
+                </NotificationButtonGroup>
+            </View>
         </>
     );
 };

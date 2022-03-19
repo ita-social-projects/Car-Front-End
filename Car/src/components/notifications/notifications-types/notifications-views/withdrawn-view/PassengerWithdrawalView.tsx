@@ -4,7 +4,7 @@ import Stop from "../../../../../../models/stop/Stop";
 import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 import NotificationHeader from "../../../notification-header/NotificationHeader";
 import NotificationRideDetails from "../../../notification-ride-details/NotificationRideDetails";
-import { Text, View, } from "react-native";
+import { ScrollView, Text, View, } from "react-native";
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
@@ -17,6 +17,9 @@ import * as navigation from "../../../../navigation/Navigation";
 import { useTheme } from "../../../../theme/ThemeProvider";
 import PassengerWithdrawalViewStyle from "./PassengerWithdrawalViewStyle";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
+import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
+import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
+import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
 
 interface PassengerWithdrawalViewProps {
     route: {
@@ -88,27 +91,43 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
                 <NotificationHeader
-                    title="WITHDRAWAL"
-                    message="The passenger has withdrawn your ride!"
                     sender={props.route.params.notification.sender}
                 />
-                <NotificationRideDetails
-                    journeyId={props.route.params.notification.journeyId}
-                    userId={props.route.params.notification.sender?.id!}
-                    journeyUser={journeyUser!}
-                    journey={journey!}
-                />
-                <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                    {props.route.params.notification.sender?.name}
-                    {props.route.params.notification.sender?.surname}`s stops
-                </Text>
-                <View>
-                    <StopsBlock
-                        stops={stops ? stops : []}
-                        onStopPress={onStopPressHandler}
-                        highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                <ScrollView style={{ flexGrow: 1 }}>
+                    <View style={[NotificationHeaderStyle.messageContainer, {
+                        borderTopColor: colors.secondaryLight,
+                        borderBottomColor: colors.secondaryLight
+                    }]}>
+                        <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
+                                The passenger has withdrawn your ride!
+                        </Text>
+                    </View>
+
+                    <NotificationRideDetails
+                        journeyId={props.route.params.notification.journeyId}
+                        userId={props.route.params.notification.sender?.id!}
+                        journeyUser={journeyUser!}
+                        journey={journey!}
                     />
-                </View>
+                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
+                        {props.route.params.notification.sender?.name}
+                        {props.route.params.notification.sender?.surname}`s stops
+                    </Text>
+                    <View>
+                        <StopsBlock
+                            stops={stops ? stops : []}
+                            onStopPress={onStopPressHandler}
+                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                        />
+                    </View>
+                </ScrollView>
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        confirmText={"Ok"}
+                        onConfirm={() => {
+                            navigation.goBack();
+                        }} />
+                </NotificationButtonGroup>
             </View>
         </>
     );

@@ -19,10 +19,11 @@ import NotificationButtonGroup from "../../../notification-buttons/NotificationB
 import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
 import NotificationDeclineButton from "../../../notification-buttons/NotificationDeclineButton";
 import ConfirmModal from "../../../../confirm-modal/ConfirmModal";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
 import { useTheme } from "../../../../theme/ThemeProvider";
+import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
 
 interface InvitationViewProps {
     route: {
@@ -62,7 +63,7 @@ const InvitationView = (props: InvitationViewProps) => {
                 setJourneyPoints(res.data!.journeyPoints);
                 setStops([
                     getStopByType(res.data, StopType.Start)!,
-
+                    getStopByType(res.data, StopType.Intermediate)!,
                     getStopByType(res.data, StopType.Finish)!
                 ]);
             });
@@ -74,7 +75,9 @@ const InvitationView = (props: InvitationViewProps) => {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
+            currentStop: Number(stops?.findIndex(stp=>stp?.address?.name == stop?.address?.name)),
+            user: props.route.params.notification.sender
         });
     };
 
@@ -175,17 +178,24 @@ const InvitationView = (props: InvitationViewProps) => {
 
     return (
         <>
-            <ScrollView style = {{ flexGrow: 1 }}>
-                <View style={[
-                    PassengerWithdrawalViewStyle.window,
-                    { color: colors.primary }
-                ]}
-                >
-                    <NotificationHeader
-                        title=""
-                        message="The driver is inviting you to join a ride!"
-                        sender={params.sender}
-                    />
+            <View style={[
+                PassengerWithdrawalViewStyle.window,
+                { color: colors.primary }]}
+            >
+                <NotificationHeader
+                    sender={params.sender}
+                />
+
+                <ScrollView style = {{ flexGrow: 1 }}>
+
+                    <View style={[NotificationHeaderStyle.messageContainer, {
+                        borderTopColor: colors.secondaryLight,
+                        borderBottomColor: colors.secondaryLight }]}>
+
+                        <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
+                            The driver is inviting you to join a ride!
+                        </Text>
+                    </View>
 
                     <NotificationRideDetails
                         userId={params.sender!.id}
@@ -196,8 +206,7 @@ const InvitationView = (props: InvitationViewProps) => {
                             journeyId: params.journeyId,
                             userId: params.sender!.id,
                             withBaggage: false,
-                            passangersCount: 1
-                        }}
+                            passangersCount: 1 }}
                     />
 
                     <StopsBlock
@@ -205,78 +214,82 @@ const InvitationView = (props: InvitationViewProps) => {
                         onStopPress={onStopPressHandler}
                     />
 
-                    <NotificationButtonGroup>
-                        <NotificationConfirmButton
-                            confirmText={"Ok"}
-                            onConfirm={() => {
-                                acceptInvitation();
-                            }} />
-                        <NotificationDeclineButton
-                            declineText={"Decline"}
-                            onDecline={() => {
-                                setConfirmationModalVisible(true);
-                            }}
-                        />
-                    </NotificationButtonGroup>
+                </ScrollView>
 
-                    <>
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        confirmText={"Ok"}
+                        onConfirm={() => {
+                            acceptInvitation();
+                        }} />
+                    <NotificationDeclineButton
+                        declineText={"Decline"}
+                        onDecline={() => {
+                            setConfirmationModalVisible(true);
+                        }}
+                    />
+                </NotificationButtonGroup>
+                <>
 
-                        <ConfirmModal
-                            visible={confirmationModalVisible}
-                            title="ARE YOU SURE?"
-                            subtitle="Are you sure you want to decline the invite?"
-                            confirmText="Yes, decline"
-                            cancelText="No, keep it"
-                            disableModal={() => setConfirmationModalVisible(false)}
-                            onConfirm={() => {
-                                setConfirmationModalVisible(false);
-                                sendDecline();
-                            }}
-                        />
-                        <ConfirmModal
-                            visible={withdrawModalVisible}
-                            title="Invitation is rejected"
-                            subtitle="Your refusal was successfully sent to the driver"
-                            confirmText="Ok"
-                            hideCancelButton={true}
-                            disableModal={closeAndDelete}
-                            onConfirm={closeAndDelete}
-                        />
-                        <ConfirmModal
-                            visible={acceptModalVisible}
-                            title="Invitation is accepted!"
-                            subtitle="You were successfully added to the ride!"
-                            confirmText="Ok"
-                            hideCancelButton={true}
-                            disableModal={() => {
-                                setAcceptModalVisible(false);
-                                setNotificationModalVisible(false);
-                            }}
-                            onConfirm={() => {
-                                setAcceptModalVisible(false);
-                                setNotificationModalVisible(false);
-                                deleteNotification();
-                            }}
-                        />
-                        <ConfirmModal
-                            visible={errorModalVisible}
-                            title="Error"
-                            subtitle="Failed to accept the invitation!"
-                            confirmText="Ok"
-                            hideCancelButton={true}
-                            disableModal={() => {
-                                setErrorModalVisible(false);
-                            }}
-                            onConfirm={() => {
-                                setErrorModalVisible(false);
-                                setNotificationModalVisible(false);
-                                if(props.route.params.notification.onDelete)
-                                    props.route.params.notification.onDelete(notificationId);
-                            }}
-                        />
-                    </>
-                </View>
-            </ScrollView>
+                    <ConfirmModal
+                        visible={confirmationModalVisible}
+                        title="ARE YOU SURE?"
+                        subtitle="Are you sure you want to decline the invite?"
+                        confirmText="Yes, decline"
+                        cancelText="No, keep it"
+                        disableModal={() => setConfirmationModalVisible(false)}
+                        onConfirm={() => {
+                            setConfirmationModalVisible(false);
+                            sendDecline();
+                        }}
+                    />
+
+                    <ConfirmModal
+                        visible={withdrawModalVisible}
+                        title="Invitation is rejected"
+                        subtitle="Your refusal was successfully sent to the driver"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={closeAndDelete}
+                        onConfirm={closeAndDelete}
+                    />
+
+                    <ConfirmModal
+                        visible={acceptModalVisible}
+                        title="Invitation is accepted!"
+                        subtitle="You were successfully added to the ride!"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={() => {
+                            setAcceptModalVisible(false);
+                            setNotificationModalVisible(false);
+                        }}
+                        onConfirm={() => {
+                            setAcceptModalVisible(false);
+                            setNotificationModalVisible(false);
+                            deleteNotification();
+                        }}
+                    />
+
+                    <ConfirmModal
+                        visible={errorModalVisible}
+                        title="Error"
+                        subtitle="Failed to accept the invitation!"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={() => {
+                            setErrorModalVisible(false);
+                        }}
+                        onConfirm={() => {
+                            setErrorModalVisible(false);
+                            setNotificationModalVisible(false);
+                            if(props.route.params.notification.onDelete)
+                                props.route.params.notification.onDelete(notificationId);
+                        }}
+                    />
+                </>
+
+            </View>
         </>
     );
 };

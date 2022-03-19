@@ -27,16 +27,6 @@ const NotificationHeader = (props: NotificationHeaderProps) => {
                     <AvatarLogoTitle userToDisplay={props.sender} />
                 </View>
             </View>
-            {!props.withoutMessage &&
-            <View style={[NotificationHeaderStyle.messageContainer, {
-                borderTopColor: colors.secondaryLight,
-                borderBottomColor: colors.secondaryLight
-            }]}>
-                <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
-                    {props.message}
-                </Text>
-            </View>
-            }
         </View>
     );
 };

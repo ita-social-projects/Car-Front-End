@@ -103,7 +103,6 @@ test("renders correctly", async () =>
         }
       >
         <NotificationHeader
-          message="The passenger has withdrawn your ride!"
           sender={
             Object {
               "email": "Abc",
@@ -120,35 +119,72 @@ test("renders correctly", async () =>
               "surname": "Abc",
             }
           }
-          title="WITHDRAWAL"
         />
-        <NotificationRideDetails
-          journeyId={0}
-          userId={0}
-        />
-        <Text
+        <ScrollView
           style={
             Object {
-              "color": "#0B171B",
+              "flexGrow": 1,
             }
           }
         >
-          Abc
-          Abc
-          \`s stops
-        </Text>
-        <View>
-          <StopsBlock
-            highlightedStops={
+          <View
+            style={
               Array [
-                1,
-                2,
+                undefined,
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                  "borderTopColor": "#AAA9AE",
+                },
               ]
             }
-            onStopPress={[Function]}
-            stops={Array []}
+          >
+            <Text
+              style={
+                Array [
+                  undefined,
+                  Object {
+                    "color": "#0B171B",
+                  },
+                ]
+              }
+            >
+              The passenger has withdrawn your ride!
+            </Text>
+          </View>
+          <NotificationRideDetails
+            journeyId={0}
+            userId={0}
           />
-        </View>
+          <Text
+            style={
+              Object {
+                "color": "#0B171B",
+              }
+            }
+          >
+            Abc
+            Abc
+            \`s stops
+          </Text>
+          <View>
+            <StopsBlock
+              highlightedStops={
+                Array [
+                  1,
+                  2,
+                ]
+              }
+              onStopPress={[Function]}
+              stops={Array []}
+            />
+          </View>
+        </ScrollView>
+        <NotificationButtonGroup>
+          <NotificationConfirmButton
+            confirmText="Ok"
+            onConfirm={[Function]}
+          />
+        </NotificationButtonGroup>
       </View>
     </React.Fragment>
   `));

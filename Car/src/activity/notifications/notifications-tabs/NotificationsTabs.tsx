@@ -12,6 +12,9 @@ import JourneyCancellationView from "../../../components/notifications/notificat
 import PassengerWithdrawalView from "../../../components/notifications/notifications-types/notifications-views/withdrawn-view/PassengerWithdrawalView";
 import InvitationView from "../../../components/notifications/notifications-types/notifications-views/invitation-view/InvitationView";
 import AprovedView from "../../../components/notifications/notifications-types/notifications-views/request-approved-view/AprovedView";
+import RejectedView from "../../../components/notifications/notifications-types/notifications-views/request-rejected-view/RejectedView";
+import AprovedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-approved-passenger-view/AprovedPassengerView";
+import RejectedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-rejected-passenger-view/RejectedPassengerView";
 
 const StackTabs = createStackNavigator();
 
@@ -97,7 +100,40 @@ const NotificationsTabs = () => {
                     name="Invitation is Accepted"
                     component={AprovedView}
                     options={{
-                        headerTitle: "Accepted Invitation",
+                        headerTitle: "Invitation is Accepted",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Invitation is Rejected"
+                    component={RejectedView}
+                    options={{
+                        headerTitle: "Invitation is Rejected",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Request is Approved"
+                    component={AprovedPassengerView}
+                    options={{
+                        headerTitle: "Request is Approved",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Request is Rejected"
+                    component={RejectedPassengerView}
+                    options={{
+                        headerTitle: "Request is Rejected",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton

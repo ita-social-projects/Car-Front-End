@@ -770,7 +770,6 @@ test("renders correctly", async () =>
                     "alignItems": "center",
                     "justifyContent": "center",
                     "opacity": 1,
-                    "paddingRight": 17,
                   }
                 }
               >
