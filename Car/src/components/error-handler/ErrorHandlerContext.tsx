@@ -2,7 +2,7 @@ import React from "react";
 
 const ErrorHandlerContext = React.createContext({
     show: false,
-    setShowPopup: (action: boolean) => {action;}
+    setShowPopup: (a: boolean) => {a!=undefined;}
 });
 
 export default ErrorHandlerContext;
