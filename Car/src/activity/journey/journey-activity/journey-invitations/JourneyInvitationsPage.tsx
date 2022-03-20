@@ -16,6 +16,8 @@ import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import JourneyInvitationsPageProps from "./JourneyInvitationsPageProps";
 import { JourneyInvitationsPageStyle } from "./JourneyInvitationsPageStyle";
 import { RideInvitation } from "../../../../../models/journey/RideInvitation";
+import { LinearTextGradient } from "react-native-text-gradient";
+import { GRADIENT_END, GRADIENT_START } from "../../../../constants/StylesConstants";
 
 const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     const { colors } = useTheme();
@@ -28,10 +30,24 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             journey.invitations
             : []
     );
+
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [invitedUsers, setInvitedUsers] = useState<RideInvitation[]>(
         params.newInvitations ?? []
     );
+
+    let invitationData = { status: "", iconName: "" };
+    const getinvitationData = (invitationType: InvitationType | undefined): void => {
+        if(invitationType == InvitationType.Accepted){
+            invitationData = { status: "Accepted", iconName: "checkmark-circle" };
+        }
+        else if(invitationType == InvitationType.Rejected){
+            invitationData = { status: "Declined", iconName: "close-circle" };
+        }
+        else{
+            invitationData = { status: "Sent", iconName: "chevron-forward-circle" };
+        }
+    };
 
     const addInvitationPressHandler = (): void => {
         setInvitedUsers(prevState => [...prevState, new RideInvitation({ email: "", isCorrect: false })]);
@@ -85,17 +101,51 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: colors.white }]}>
                 {
                     existingInvitations.length > ZERO && (<View style={CreateJourneyStyle.commentsView}>
-                        <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Existing
-                        invitation</Text>
+                        <Text
+                            style={[
+                                CreateJourneyStyle.commentsCaption,
+                                { color: colors.primary }
+                            ]}>
+                                Existing invitation
+                        </Text>
                         {existingInvitations.map((us, index) => (
+                            getinvitationData(existingInvitations[index]?.type),
                             <View key={index} style={JourneyInvitationsPageStyle.row}>
-                                <Text style={[JourneyInvitationsPageStyle.emailText, { color: colors.hover }]}>{
-                                    getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
-                                <Text style={[JourneyInvitationsPageStyle.invitationStatusText,
-                                    { color: colors.hover }]}>
-                                    {InvitationType[existingInvitations[index]!.type]} </Text>
+                                <Text
+                                    style={[
+                                        JourneyInvitationsPageStyle.emailText,
+                                        { color: colors.hover }
+                                    ]}>
+                                    {getUserEmail(existingInvitations[index]!.invitedUserId)}
+                                </Text>
+                                <View style={JourneyInvitationsPageStyle.invitationStatus}>
+                                    <LinearTextGradient
+                                        style={JourneyInvitationsPageStyle.invtiationStatusWrapper}
+                                        locations={[GRADIENT_START, GRADIENT_END]}
+                                        colors={[colors.navyBlueGradientFrom, colors.navyBlueGradientTo]}
+                                    >
+                                        <Text
+                                            style={[
+                                                JourneyInvitationsPageStyle.invitationStatusText,
+                                                { color: colors.hover, }
+                                            ]}>
+                                            {invitationData.status}
+                                        </Text>
+                                    </LinearTextGradient>
+                                    <LinearTextGradient
+                                        locations={[GRADIENT_START, GRADIENT_END]}
+                                        colors={[colors.navyBlueGradientFrom, colors.navyBlueGradientTo]}
+                                    >
+                                        <Ionicons
+                                            name={invitationData.iconName}
+                                            size={19.5}
+                                            style={JourneyInvitationsPageStyle.invitationStatusIcon}>
+                                        </Ionicons>
+                                    </LinearTextGradient>
+                                </View>
                             </View>
-                        ))}
+                        ))
+                        }
                     </View>)
                 }
 

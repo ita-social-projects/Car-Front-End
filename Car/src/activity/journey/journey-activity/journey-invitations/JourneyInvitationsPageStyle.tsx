@@ -15,7 +15,20 @@ export const JourneyInvitationsPageStyle = StyleSheet.create({
     emailText: {
         paddingTop: 5,
     },
+    invitationStatus: {
+        display: "flex",
+        flexDirection: "row",
+        top: 3,
+    },
+    invtiationStatusWrapper: {
+        marginRight:5,
+    },
     invitationStatusText: {
         paddingTop: 5,
+        fontSize: 15,
+        fontWeight: "bold",
+    },
+    invitationStatusIcon: {
+        top: 3,
     }
 });
