@@ -38,8 +38,6 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
     const [isLoading, setLoading] = useState(true);
     const [isRequested, setRequested] = useState(false);
 
-    const { Popup } = require("popup-ui");
-
     let isLuggage = false;
     let comments = "";
 
@@ -72,21 +70,7 @@ const JourneyRequestPage = (props: { route: { params: { journeyId: number } } })
                         "journeyId" + currentJourney?.id,
                         "1"
                     );
-                })().then(() => showCongratulations());
-            }
-        });
-    };
-
-    const showCongratulations = () => {
-        Popup.show({
-            type: "Success",
-            title: "Complete!",
-            button: true,
-            textBody: "Your request has been sent to the driver",
-            buttonText: "Ok",
-            callback: () => {
-                Popup.hide();
-                navigation.goBack();
+                })().then(() => navigation.goBack());
             }
         });
     };
