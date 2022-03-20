@@ -12,7 +12,7 @@ import NetInfo from "@react-native-community/netinfo";
 const ErrorHandler = ({ children }) => {
     const [show, setShowPopup] = useState(false);
     const value1 = useMemo(
-        () => ({ show, setShowPopup }),
+        () => ({ show }),
         [show]
     );
 
