@@ -185,6 +185,27 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
+          name="Ride details have been updated"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitle": "Ride Details are Updated",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
           name="Invitation is Rejected"
           options={
             Object {

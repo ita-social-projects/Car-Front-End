@@ -15,6 +15,7 @@ import AprovedView from "../../../components/notifications/notifications-types/n
 import RejectedView from "../../../components/notifications/notifications-types/notifications-views/request-rejected-view/RejectedView";
 import AprovedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-approved-passenger-view/AprovedPassengerView";
 import RejectedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-rejected-passenger-view/RejectedPassengerView";
+import JourneyDetailsUpdateView from "../../../components/notifications/notifications-types/notifications-views/journey-details-update-view/JourneyDetailsUpdateView";
 
 const StackTabs = createStackNavigator();
 
@@ -101,6 +102,17 @@ const NotificationsTabs = () => {
                     component={AprovedView}
                     options={{
                         headerTitle: "Invitation is Accepted",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
+                />
+
+                <StackTabs.Screen
+                    name="Ride details have been updated"
+                    component={JourneyDetailsUpdateView}
+                    options={{
+                        headerTitle: "Ride Details are Updated",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton
