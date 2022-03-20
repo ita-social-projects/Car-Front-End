@@ -5,6 +5,7 @@ import Stop from "../../../../../../../models/stop/Stop";
 import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import { NEXT_INDEX_CORRECTION } from "../../../../../../constants/GeneralConstants";
 import JourneyPageStyle from "../../JourneyPageStyle";
+import StopType from "../../../../../../../models/stop/StopType";
 
 interface StopsBlockProps {
     stops: Stop[],
@@ -15,6 +16,8 @@ interface StopsBlockProps {
 const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) => {
     const { colors } = useTheme();
     const isHighlightedStop = (index: number) => highlightedStops?.includes(index);
+    const maxHighlight = 1;
+    const minHighlight = 0.1;
 
     const getDotAndTextColor = (index: number) =>
         isHighlightedStop(index) ? colors.accentBlue : colors.secondaryLight;
@@ -31,6 +34,7 @@ const StopsBlock = ({ stops, onStopPress, highlightedStops }: StopsBlockProps) =
                     key={index}
                     style={JourneyPageStyle.stopListItem}
                     onPress={() => onStopPress(item)}
+                    activeOpacity = {item?.type != StopType.Intermediate ? maxHighlight: minHighlight}
                 >
                     <View style={JourneyPageStyle.stopListItemRow}>
                         <Ionicons

@@ -129,12 +129,15 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     };
 
     const onStopPressHandler = (stop: Stop) => {
+        if(stop?.type != StopType.Intermediate)
+            return;
         navigation.navigate("Route View", {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,
-            currentStop: Number(stops.findIndex(stp=>stp?.address?.name == stop?.address?.name))
+            currentStop: Number(stops.findIndex(stp=>stp?.address?.name == stop?.address?.name)),
+            user: props.route.params.notification.sender
         });
     };
 

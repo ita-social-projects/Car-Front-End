@@ -95,8 +95,8 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                 />
                 <ScrollView style={{ flexGrow: 1 }}>
                     <View style={[NotificationHeaderStyle.messageContainer, {
-                        borderTopColor: colors.secondaryLight,
-                        borderBottomColor: colors.secondaryLight
+                        borderTopColor: colors.disableBack,
+                        borderBottomColor: colors.disableBack
                     }]}>
                         <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                                 The passenger has withdrawn your ride!
