@@ -1,36 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AuthProvider from "../auth/AuthProvider";
-import ErrorAlert from "../error-alert/ErrorAlert";
 import Routes from "./Routes";
-import NetInfo from "@react-native-community/netinfo";
 import { AppearanceProvider } from "react-native-appearance";
 import { ThemeProvider } from "../theme/ThemeProvider";
+import ErrorHandler from "../error-handler/ErrorHandler";
 
 const Providers = () => {
-    async function GetConnection () {
-        const connection = await NetInfo.fetch();
-
-        if (connection.isInternetReachable === null)
-            setTimeout(GetConnection);
-        else if (!connection.isInternetReachable)
-            ErrorAlert("No internet connection");
-    }
-
-    useEffect(() => {
-        GetConnection();
-
-        return () => {
-            GetConnection();
-        };
-    });
 
     return (
+
         <AppearanceProvider>
-            <ThemeProvider>
-                <AuthProvider>
-                    <Routes />
-                </AuthProvider>
-            </ThemeProvider>
+            <ErrorHandler>
+                <ThemeProvider>
+                    <AuthProvider>
+                        <Routes />
+                    </AuthProvider>
+                </ThemeProvider>
+            </ErrorHandler>
         </AppearanceProvider>
     );
 };

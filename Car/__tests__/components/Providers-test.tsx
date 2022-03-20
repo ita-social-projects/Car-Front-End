@@ -15,10 +15,12 @@ jest.mock("react-native-localize", () => {
 test("renders correctly", async () =>
     expect(renderer.render(<Providers />)).toMatchInlineSnapshot(`
     <AppearanceProvider>
-      <ThemeProvider>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
-      </ThemeProvider>
+      <ErrorHandler>
+        <ThemeProvider>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+        </ThemeProvider>
+      </ErrorHandler>
     </AppearanceProvider>
   `));

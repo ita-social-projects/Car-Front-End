@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { MILLISECONDS_IN_MONTH } from "../../constants/DimensionConstants";
 import { StatusBar } from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
+import { Root } from "../popup-error/ExportComponents";
 
 const Stack = createStackNavigator<AuthParamList>();
 
@@ -19,7 +20,6 @@ const Routes = () => {
     const { colors, isThemeDark } = useTheme();
     const { user, loadStorageUser } = useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
-    const { Root } = require("popup-ui");
 
     const navigationTheme = {
         dark: true,
