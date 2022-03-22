@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import React, { useRef } from "react";
 import LocationDropDownPickerProps from "./LocationDropDownPickerProps";
@@ -14,8 +14,6 @@ const LocationDropDownPicker = (props: LocationDropDownPickerProps) => {
 
     return (
         <View style={LocationDropDownPickerStyle.container}>
-            <Text style={[LocationDropDownPickerStyle.staticPlaceholder, { color: colors.primary }]}>
-            </Text>
             <DropDownPicker
                 style={[LocationDropDownPickerStyle.style,
                     {

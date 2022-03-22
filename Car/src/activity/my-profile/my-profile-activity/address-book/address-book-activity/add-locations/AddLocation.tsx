@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Platform, TextInput, View } from "react-native";
+import { Platform, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng, MapEvent } from "react-native-maps";
 import {
     initialWayPoint,
@@ -28,6 +28,8 @@ import { useTheme } from "../../../../../../components/theme/ThemeProvider";
 import AddressInput from "../../../../../../components/address-input/AddressInput";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 import { CHOOSE_ADDRESS_LEFT_PADDING, DEFAULT_INPUT_LEFT_PADDING } from "../../../../../../constants/StylesConstants";
+import Location from "../../../../../../../models/location/Location";
+import AddressNameInput from "../../../../../../components/address-name-input/AddressNameInput";
 
 const AddLocation = () => {
     const { colors, isThemeDark } = useTheme();
@@ -91,6 +93,13 @@ const AddLocation = () => {
         setWayPointsTextAndIsConfirmed(text, false);
     };
 
+    const AddressNameInputOnChangeTextHandler = (name: string, availability: boolean) =>{
+        setIsLocationAvailable(availability);
+        if(isLocationAvailable){
+            setLocationName(name);
+        }
+    };
+
     const mapEventHandler = (event: MapEvent) => {
         addressInputRef.current?.blur();
         setAddressByCoordinates(setAddress, event.nativeEvent.coordinate);
@@ -128,6 +137,19 @@ const AddLocation = () => {
         });
     };
 
+    const [userLocations, setUserLocations] = useState<Location[]>();
+    const [isLocationAvailable, setIsLocationAvailable] = useState<boolean>(true);
+
+    useEffect(() => {
+        loadLocations();
+    }, []);
+
+    const loadLocations = async () =>{
+        await LocationService.getAll().then(response => {
+            setUserLocations(response.data);
+        });
+    };
+
     return (
         <View style={{ flex: 1 }}>
             <View style={AddLocationStyle.inputContainer}>
@@ -146,19 +168,13 @@ const AddLocation = () => {
                 />
                 {wayPoint.isConfirmed && (
                     <>
-                        <TextInput
-                            style={[AddLocationStyle.textInput,
-                                {
-                                    borderColor: colors.primary,
-                                    backgroundColor: colors.white,
-                                    color: colors.primary
-                                }]}
-                            value={locationName}
+                        <AddressNameInput
+                            currentLocationName={""}
+                            userLocations={userLocations}
                             placeholder={"Name the chosen address"}
-                            placeholderTextColor={colors.secondaryDark}
-                            onChangeText={(fromInput) => {
-                                setLocationName(fromInput);
-                            }}/>
+                            placeholderColor={colors.secondaryDark}
+                            onTextChange={AddressNameInputOnChangeTextHandler}
+                        />
 
                         <LocationDropDownPicker
                             fast-food-outline
@@ -169,7 +185,8 @@ const AddLocation = () => {
                             onChangeItem={(item) => {
                                 setLocationType({ id: item.value, name: item.label });
                                 setIsVisibleLocationDropDown(false);
-                            }}/></>
+                            }}/>
+                    </>
                 )}
             </View>
 
@@ -194,7 +211,7 @@ const AddLocation = () => {
                 />
             </MapView>
             <SaveLocationButton
-                wayPointConfirmation={wayPoint.isConfirmed}
+                wayPointConfirmation={wayPoint.isConfirmed && isLocationAvailable}
                 onPress={() => saveLocationHandle().then(() => navigation.goBack())}
             />
         </View>
