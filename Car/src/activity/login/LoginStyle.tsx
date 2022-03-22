@@ -10,11 +10,19 @@ const LoginStyle = StyleSheet.create({
     },
 
     greetingTextContainer: {
-        alignItems: "center"
+        alignItems: "center",
+        top:190
+    },
+
+    greetingPicture: {
+        width:300,
+        height:300,
+        left:42,
+        top:160
     },
 
     greetingText: {
-        fontFamily: Font.ProximaNova.Bold,
+        fontFamily: Font.Milliard.Bold,
         fontSize: 14,
         lineHeight: 16,
         textTransform: "uppercase",
@@ -27,10 +35,11 @@ const LoginStyle = StyleSheet.create({
     },
 
     applicationNameText: {
-        fontFamily: Font.ProximaNova.Bold,
+        fontFamily: Font.Milliard.Bold,
         fontSize: 20,
         textTransform: "uppercase",
-        letterSpacing: 0.2
+        letterSpacing: 0.2,
+        top:10
     },
 
     loginContainer: {
@@ -46,8 +55,9 @@ const LoginStyle = StyleSheet.create({
     },
 
     button: {
-        width: 81,
-        height: 48,
+        width: 304,
+        height: 56,
+        right:37,
         fontSize: 16,
         alignItems: "center",
         justifyContent: "center"
@@ -56,7 +66,6 @@ const LoginStyle = StyleSheet.create({
     buttonText: {
         fontFamily: Font.ProximaNova.Bold,
         fontSize: 16,
-        textTransform: "uppercase"
     },
 
     loadingIcon: {

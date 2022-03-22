@@ -27,10 +27,26 @@ test("renders correctly", async () =>
         ]
       }
     >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/journey/bermuda-delivery-car-service.png",
+          }
+        }
+        style={
+          Object {
+            "height": 300,
+            "left": 42,
+            "top": 160,
+            "width": 300,
+          }
+        }
+      />
       <View
         style={
           Object {
             "alignItems": "center",
+            "top": 190,
           }
         }
       >
@@ -38,7 +54,7 @@ test("renders correctly", async () =>
           style={
             Array [
               Object {
-                "fontFamily": "Proxima Nova Rg Bold",
+                "fontFamily": "Milliard Bold",
                 "fontSize": 14,
                 "letterSpacing": 0.2,
                 "lineHeight": 16,
@@ -52,23 +68,15 @@ test("renders correctly", async () =>
         >
           Welcome to
         </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "paddingTop": 18,
-          }
-        }
-      >
         <Text
           style={
             Array [
               Object {
-                "fontFamily": "Proxima Nova Rg Bold",
+                "fontFamily": "Milliard Bold",
                 "fontSize": 20,
                 "letterSpacing": 0.2,
                 "textTransform": "uppercase",
+                "top": 10,
               },
               Object {
                 "color": "#0B171B",
@@ -76,7 +84,7 @@ test("renders correctly", async () =>
             ]
           }
         >
-          Softserve Journeys
+          Car Application
         </Text>
       </View>
       <View
@@ -106,9 +114,10 @@ test("renders correctly", async () =>
                 Object {
                   "alignItems": "center",
                   "fontSize": 16,
-                  "height": 48,
+                  "height": 56,
                   "justifyContent": "center",
-                  "width": 81,
+                  "right": 37,
+                  "width": 304,
                 },
                 Object {
                   "backgroundColor": "#414045",
@@ -122,7 +131,6 @@ test("renders correctly", async () =>
                   Object {
                     "fontFamily": "Proxima Nova Rg Bold",
                     "fontSize": 16,
-                    "textTransform": "uppercase",
                   },
                   Object {
                     "color": "#FFFFFF",
@@ -130,7 +138,7 @@ test("renders correctly", async () =>
                 ]
               }
             >
-              Login
+              Log In
             </Text>
           </ForwardRef>
         </View>

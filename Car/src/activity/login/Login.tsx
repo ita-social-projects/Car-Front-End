@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from "react-native";
 import AuthManager from "../../components/auth/AuthManager";
 import AuthContext from "../../components/auth/AuthContext";
 import LoginStyle from "./LoginStyle";
@@ -66,14 +66,12 @@ const Login = (properties: LoginProps) => {
 
     return (
         <View style={[LoginStyle.pageContainer, { backgroundColor: colors.white }]}>
+            <Image style = {LoginStyle.greetingPicture}
+                source={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
+            />
             <View style={LoginStyle.greetingTextContainer}>
                 <Text style={[LoginStyle.greetingText, { color: colors.primary }]}>Welcome to</Text>
-            </View>
-
-            <View style={LoginStyle.applicationNameTextContainer}>
-                <Text style={[LoginStyle.applicationNameText, { color: colors.primary }]}>
-                    Softserve Journeys
-                </Text>
+                <Text style={[LoginStyle.applicationNameText, { color: colors.primary }]}>Car Application</Text>
             </View>
 
             <View style={LoginStyle.loginContainer}>
@@ -91,7 +89,7 @@ const Login = (properties: LoginProps) => {
                             loadingProcess(true);
                         }}
                     >
-                        <Text style={[LoginStyle.buttonText, { color: colors.white }]}>Login</Text>
+                        <Text style={[LoginStyle.buttonText, { color: colors.white }]}>Log In</Text>
                     </TouchableOpacity>
                 </View>
             </View>
