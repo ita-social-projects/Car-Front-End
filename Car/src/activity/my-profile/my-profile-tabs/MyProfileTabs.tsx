@@ -11,7 +11,7 @@ import MyProfileTabsStyle from "./MyProfileTabsStyle";
 import Badges from "../my-profile-activity/badges/Badges";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import PrivacyPolicySheet from "../my-profile-activity/privacy-policy/PrivacyPolicySheet";
-import TermsOfUseSheet from "../my-profile-activity/privacy-policy/TermOfUseSheet";
+import TermsOfUseSheet from "../my-profile-activity/privacy-policy/TermsOfUseSheet";
 
 const StackTabs = createStackNavigator();
 
