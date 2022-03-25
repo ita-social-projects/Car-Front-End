@@ -33,7 +33,9 @@ const PrivacyPolicy = () => {
     };
 
     useEffect(() => {
-        yOffset > MAXSCROLLSCREEN ? setUnScrolled(false) : null;
+        if(yOffset > MAXSCROLLSCREEN) {
+            setUnScrolled(false);
+        }
     }, [yOffset]);
 
     return (
