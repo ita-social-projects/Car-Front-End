@@ -2,13 +2,13 @@ import BadgeTypes from "./BadgeTypes";
 
 interface BadgeProps {
     name: string,
+    type: BadgeTypes,
     description: string
     points: number,
-    scale: number,
     isReached: boolean,
+    scale: number,
     pathUnlocked: any,
     pathLocked: any
-    type: BadgeTypes
 }
 
 export default BadgeProps;
