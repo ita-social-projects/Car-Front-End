@@ -13,7 +13,6 @@ import { MILLISECONDS_IN_MONTH } from "../../constants/DimensionConstants";
 import { StatusBar } from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
 import { Root } from "../popup-error/ExportComponents";
-import CheckAchiev from "../check-achievements/CheckAchiev";
 
 const Stack = createStackNavigator<AuthParamList>();
 
@@ -75,29 +74,27 @@ const Routes = () => {
 
     return (
         <Root>
-            <CheckAchiev>
-                <StatusBar
-                    animated={true}
-                    backgroundColor={colors.white}
-                    barStyle={!isThemeDark ? "dark-content" : ("light-content" as any)}
-                />
-                <NavigationContainer
-                    theme={navigationTheme}
-                    ref={navigationRef}
-                >
-                    {isLoading ? (
-                        <Indicator
-                            color={colors.hover}
-                            size="large"
-                            text="Loading information..."
-                        />
-                    ) : (
-                        <Stack.Navigator screenOptions={{ headerShown: false }}>
-                            {navigator}
-                        </Stack.Navigator>
-                    )}
-                </NavigationContainer>
-            </CheckAchiev>
+            <StatusBar
+                animated={true}
+                backgroundColor={colors.white}
+                barStyle={!isThemeDark ? "dark-content" : ("light-content" as any)}
+            />
+            <NavigationContainer
+                theme={navigationTheme}
+                ref={navigationRef}
+            >
+                {isLoading ? (
+                    <Indicator
+                        color={colors.hover}
+                        size="large"
+                        text="Loading information..."
+                    />
+                ) : (
+                    <Stack.Navigator screenOptions={{ headerShown: false }}>
+                        {navigator}
+                    </Stack.Navigator>
+                )}
+            </NavigationContainer>
         </Root>
     );
 };

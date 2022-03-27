@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import UserStatisticService from "../../../api-service/user-service/UserStatisticService";
 import UserStatistic from "../../../models/user/UserStatistic";
@@ -9,40 +9,36 @@ import CheckAchievContext from "./CheckAchievContext";
 import BadgeProps from "../badge/BadgeProps";
 import allBadges from "../badge/BadgeObjects";
 import BadgeTypes from "../badge/BadgeTypes";
+import SignalRHubConnection from "../../../api-service/SignalRHubConnection";
 
 const CheckAchiev = ({ children }) => {
 
     const { user } = useContext(AuthContext);
-    const [currentAchiev, setCurrentAchiev] = useState<UserStatistic>();
     const [allowCheckAchiev, setAllowCheckAchiev] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [badgesArray] = useState(Array<BadgeProps>());
     const [currentBadge] = useState(Array<BadgeProps>());
 
     let storageAchieve: UserStatistic;
+    let currentAchieve: UserStatistic;
     let curent: number = 0;
 
-    (user?.isPolicyAccepted && allowCheckAchiev) ? (
-        UserStatisticService.getUserStatisticById(user.id as number).then((result) =>
+    allowCheckAchiev ? (
+        UserStatisticService.getUserStatisticById(user!.id as number).then((result) =>
         {
-            setCurrentAchiev(result.data);
+            currentAchieve = result.data as UserStatistic;
             setAllowCheckAchiev(false);
-            currentAchiev ? (
+            currentAchieve ? (
                 AsyncStorage.getItem("achiev").then((res)=>
                 {
                     res ? (
                         storageAchieve = JSON.parse(res),
-                        console.log(res),
                         Check(),
-                        AsyncStorage.setItem("achiev", JSON.stringify(currentAchiev)),
+                        AsyncStorage.setItem("achiev", JSON.stringify(currentAchieve))
 
-                        currentBadge[curent] ? (
-                            setShowModal(true)
-                        ):(null)
                     ):(
-                        AsyncStorage.setItem("achiev", JSON.stringify(currentAchiev)),
-                        storageAchieve = currentAchiev as UserStatistic,
-                        console.log("setStorage from backend"),
+                        AsyncStorage.setItem("achiev", JSON.stringify(currentAchieve)),
+                        storageAchieve = currentAchieve as UserStatistic,
                         Check()
                     );
                 })
@@ -53,7 +49,7 @@ const CheckAchiev = ({ children }) => {
         for (let index = 0; index < allBadges.length; index++){
 
             if (allBadges[index].type === BadgeTypes.passengerRides) {
-                (currentAchiev!.passangerJourneysAmount >= allBadges[index].points) ?
+                (currentAchieve!.passangerJourneysAmount >= allBadges[index].points) ?
                     (
                         allBadges[index].isReached = true,
                         (storageAchieve!.passangerJourneysAmount < allBadges[index].points) ?
@@ -65,7 +61,7 @@ const CheckAchiev = ({ children }) => {
             }
             else
             if (allBadges[index].type === BadgeTypes.driverRides) {
-                (currentAchiev!.driverJourneysAmount >= allBadges[index].points) ?
+                (currentAchieve!.driverJourneysAmount >= allBadges[index].points) ?
                     (
                         allBadges[index].isReached = true,
                         (storageAchieve!.driverJourneysAmount < allBadges[index].points) ?
@@ -77,7 +73,7 @@ const CheckAchiev = ({ children }) => {
             }
             else
             if (allBadges[index].type === BadgeTypes.driverDistance) {
-                (currentAchiev!.totalKm >= allBadges[index].points) ?
+                (currentAchieve!.totalKm >= allBadges[index].points) ?
                     (
                         allBadges[index].isReached = true,
                         (storageAchieve!.totalKm < allBadges[index].points) ?
@@ -88,7 +84,22 @@ const CheckAchiev = ({ children }) => {
                 badgesArray.push(allBadges[index]);
             }
         }
+
+        currentBadge[curent] ? (
+            setShowModal(true)
+        ):(null);
     }
+
+    useEffect(() => {
+        SignalRHubConnection.on("RecieveStats", (stat: UserStatistic) => {
+            stat ? (
+                currentAchieve = stat as UserStatistic,
+                Check(),
+                AsyncStorage.setItem("achiev", JSON.stringify(currentAchieve)),
+                storageAchieve = currentAchieve as UserStatistic
+            ):(null);
+        });
+    },[]);
 
     return (
         <View style={{ flex: 1 }}>

@@ -13,6 +13,7 @@ import { EMPTY_COLLECTION_LENGTH } from "../../../constants/GeneralConstants";
 import updateLocale from "../../styles/DTFormat";
 import { useTheme } from "../../theme/ThemeProvider";
 import { Image } from "react-native";
+import CheckAchiev from "../../check-achievements/CheckAchiev";
 
 const Tabs = createBottomTabNavigator();
 const AppTabs = () => {
@@ -52,98 +53,100 @@ const AppTabs = () => {
         :undefined;
 
     return (
-        <Tabs.Navigator
-            initialRouteName="JourneyTabs"
-            sceneContainerStyle={AppTabsStyle.navigator}
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
-                    let iconName: string;
+        <CheckAchiev>
+            <Tabs.Navigator
+                initialRouteName="JourneyTabs"
+                sceneContainerStyle={AppTabsStyle.navigator}
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ color, size }) => {
+                        let iconName: string;
 
-                    switch (route.name) {
-                        case "MessagesTabs":
-                            iconName = "useImage";
-                            break;
-                        case "MyProfileTabs":
-                            iconName = "person";
-                            break;
-                        case "JourneyTabs":
-                            iconName = "useImage";
-                            break;
-                        case "NotificationsTabs":
-                            iconName = "notifications";
-                            break;
+                        switch (route.name) {
+                            case "MessagesTabs":
+                                iconName = "useImage";
+                                break;
+                            case "MyProfileTabs":
+                                iconName = "person";
+                                break;
+                            case "JourneyTabs":
+                                iconName = "useImage";
+                                break;
+                            case "NotificationsTabs":
+                                iconName = "notifications";
+                                break;
+                        }
+
+                        return (
+                            route.name == "MessagesTabs" || route.name == "JourneyTabs"?
+                                <Image
+                                    style={{ width: 30, height: 30,
+                                        borderRadius:0,
+                                        resizeMode: "contain" }}
+                                    source = {
+                                        route.name == "MessagesTabs"?
+                                            isThemeDark?
+                                                color == colors.weekdaysInactive?
+                                                    require("../../../../assets/images/icons/lightComments.png"):
+                                                    require("../../../../assets/images/icons/darkComments.png"):
+                                                color == colors.white?
+                                                    require("../../../../assets/images/icons/lightComments.png"):
+                                                    require("../../../../assets/images/icons/grayComments.png"):
+                                            isThemeDark?
+                                                color == colors.weekdaysInactive?
+                                                    require("../../../../assets/images/icons/lightCar.png"):
+                                                    require("../../../../assets/images/icons/darkCar.png"):
+                                                color == colors.white?
+                                                    require("../../../../assets/images/icons/lightCar.png"):
+                                                    require("../../../../assets/images/icons/grayCar.png")
+
+                                    }
+                                />:
+                                <Ionicons name={iconName!} size={size} color={color} />
+                        );
                     }
-
-                    return (
-                        route.name == "MessagesTabs" || route.name == "JourneyTabs"?
-                            <Image
-                                style={{ width: 30, height: 30,
-                                    borderRadius:0,
-                                    resizeMode: "contain" }}
-                                source = {
-                                    route.name == "MessagesTabs"?
-                                        isThemeDark?
-                                            color == colors.weekdaysInactive?
-                                                require("../../../../assets/images/icons/lightComments.png"):
-                                                require("../../../../assets/images/icons/darkComments.png"):
-                                            color == colors.white?
-                                                require("../../../../assets/images/icons/lightComments.png"):
-                                                require("../../../../assets/images/icons/grayComments.png"):
-                                        isThemeDark?
-                                            color == colors.weekdaysInactive?
-                                                require("../../../../assets/images/icons/lightCar.png"):
-                                                require("../../../../assets/images/icons/darkCar.png"):
-                                            color == colors.white?
-                                                require("../../../../assets/images/icons/lightCar.png"):
-                                                require("../../../../assets/images/icons/grayCar.png")
-
-                                }
-                            />:
-                            <Ionicons name={iconName!} size={size} color={color} />
-                    );
-                }
-            })}
-            tabBarOptions={{
-                labelStyle: AppTabsStyle.labelStyle,
-                activeTintColor: colors.white,
-                inactiveTintColor: colors.weekdaysInactive,
-                activeBackgroundColor: colors.hover,
-                inactiveBackgroundColor: colors.white,
-            }}
-        >
-            <Tabs.Screen
-                name="MessagesTabs"
-                component={MessagesTabs}
-                options={() => ({
-                    tabBarLabel: "Chats",
-                    tabBarBadge : tabBarUnreadMessages,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
                 })}
-            />
-            <Tabs.Screen
-                options={() => ({
-                    tabBarLabel: "My Profile",
-                })}
-                name="MyProfileTabs"
-                component={MyProfileTabs}
-            />
-            <Tabs.Screen
-                options={() => ({
-                    tabBarLabel: "Ride",
-                })}
-                name="JourneyTabs"
-                component={JourneyTabs}
-            />
-            <Tabs.Screen
-                options={{
-                    tabBarLabel: "Notifications",
-                    tabBarBadge: tabBarBadge,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
+                tabBarOptions={{
+                    labelStyle: AppTabsStyle.labelStyle,
+                    activeTintColor: colors.white,
+                    inactiveTintColor: colors.weekdaysInactive,
+                    activeBackgroundColor: colors.hover,
+                    inactiveBackgroundColor: colors.white,
                 }}
-                name="NotificationsTabs"
-                component={NotificationsTabs}
-            />
-        </Tabs.Navigator>
+            >
+                <Tabs.Screen
+                    name="MessagesTabs"
+                    component={MessagesTabs}
+                    options={() => ({
+                        tabBarLabel: "Chats",
+                        tabBarBadge : tabBarUnreadMessages,
+                        tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
+                    })}
+                />
+                <Tabs.Screen
+                    options={() => ({
+                        tabBarLabel: "My Profile",
+                    })}
+                    name="MyProfileTabs"
+                    component={MyProfileTabs}
+                />
+                <Tabs.Screen
+                    options={() => ({
+                        tabBarLabel: "Ride",
+                    })}
+                    name="JourneyTabs"
+                    component={JourneyTabs}
+                />
+                <Tabs.Screen
+                    options={{
+                        tabBarLabel: "Notifications",
+                        tabBarBadge: tabBarBadge,
+                        tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
+                    }}
+                    name="NotificationsTabs"
+                    component={NotificationsTabs}
+                />
+            </Tabs.Navigator>
+        </CheckAchiev>
     );
 };
 
