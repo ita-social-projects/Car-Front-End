@@ -13,7 +13,7 @@ import NavigationAddListener from "../../../../../types/NavigationAddListener";
 import PhoneNumberInput from "../../../../../components/phonenumber-input-button/PhoneNumberInput";
 
 const PhoneNumber = (props: NavigationAddListener) => {
-    const { colors, isThemeDark } = useTheme();
+    const { colors } = useTheme();
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const { loadStorageUser } = useContext(AuthContext);
 
@@ -70,7 +70,6 @@ const PhoneNumber = (props: NavigationAddListener) => {
                     onValueChanged={ (value) => {
                         setVisibility(value);
                     }}
-                    fontColor={ isThemeDark ? colors.neutralLight : colors.neutralDark}
                 />
             </View>
             <View style={ PhoneNumberStyle.container }>
