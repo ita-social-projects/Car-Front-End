@@ -17,7 +17,7 @@ const PhoneNumber = (props: NavigationAddListener) => {
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
     const { loadStorageUser } = useContext(AuthContext);
 
-    const [isNumberVisible, setVisibility] = useState(user!.isNumberVisible);
+    const [isNumberVisible, setVisibility] = useState(user?.isNumberVisible);
 
     const [number, setNumber] = useState(user?.phoneNumber ?? "");
 
