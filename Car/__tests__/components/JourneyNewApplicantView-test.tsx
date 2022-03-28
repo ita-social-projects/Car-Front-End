@@ -95,145 +95,121 @@ test("renders correctly", async () =>
           Array [
             undefined,
             Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.5)",
+              "backgroundColor": "#FFFFFF",
             },
           ]
         }
       >
+        <NotificationHeader
+          sender={
+            Object {
+              "email": "Abc",
+              "fcmtoken": null,
+              "hireDate": 2021-01-01T20:00:00.000Z,
+              "id": 0,
+              "imageId": null,
+              "isPolicyAccepted": true,
+              "journeyCount": 0,
+              "location": "Abc",
+              "name": "Abc",
+              "phoneNumber": null,
+              "position": "Abc",
+              "surname": "Abc",
+            }
+          }
+        />
+        <RequestComment />
         <ScrollView
           style={
             Object {
-              "backgroundColor": "#FFFFFF",
+              "flexGrow": 1,
             }
           }
         >
-          <View
+          <NotificationRideDetails
+            IsBaggageVisible={false}
+            journeyId={0}
+            journeyUser={
+              Object {
+                "journeyId": 0,
+                "passangersCount": 1,
+                "userId": 0,
+                "withBaggage": undefined,
+              }
+            }
+            userId={0}
+            withPassangers={true}
+          />
+          <Text
             style={
-              Array [
-                undefined,
-                Object {
-                  "backgroundColor": "#FFFFFF",
-                },
-              ]
+              Object {
+                "color": "#0B171B",
+              }
             }
           >
-            <View
-              style={
-                Array [
-                  undefined,
-                ]
-              }
-            >
-              <View>
-                <AvatarLogoTitle
-                  userToDisplay={
-                    Object {
-                      "email": "Abc",
-                      "fcmtoken": null,
-                      "hireDate": 2021-01-01T20:00:00.000Z,
-                      "id": 0,
-                      "imageId": null,
-                      "isPolicyAccepted": true,
-                      "journeyCount": 0,
-                      "location": "Abc",
-                      "name": "Abc",
-                      "phoneNumber": null,
-                      "position": "Abc",
-                      "surname": "Abc",
-                    }
-                  }
-                />
-              </View>
-            </View>
-            <View>
-              <RequestComment />
-            </View>
-            <WithLuggage />
-            <NotificationRideDetails
-              IsBaggageVisible={false}
-              journeyId={0}
-              journeyUser={
-                Object {
-                  "journeyId": 0,
-                  "passangersCount": 1,
-                  "userId": 0,
-                  "withBaggage": undefined,
-                }
-              }
-              userId={0}
-              withPassangers={true}
-            />
-            <Text
-              style={
-                Object {
-                  "color": "#0B171B",
-                }
-              }
-            >
-              Abc Abc\`s stops in your ride
-            </Text>
-            <View>
-              <StopsBlock
-                highlightedStops={
-                  Array [
-                    1,
-                    2,
-                  ]
-                }
-                onStopPress={[Function]}
-                stops={Array []}
-              />
-            </View>
-            <NotificationButtonGroup>
-              <NotificationConfirmButton
-                confirmText="ACCEPT"
-                disabled={false}
-                onConfirm={[Function]}
-              />
-              <NotificationDeclineButton
-                declineText="Decline"
-                disabled={false}
-                onDecline={[Function]}
-              />
-            </NotificationButtonGroup>
-            <ConfirmModal
-              confirmText="Ok"
-              disableModal={[Function]}
-              hideCancelButton={true}
-              onConfirm={[Function]}
-              subtitle="Your approvement was successfully sent to the applicant!"
-              title="Request is approved"
-              visible={false}
-            />
-            <ConfirmModal
-              confirmText="Ok"
-              disableModal={[Function]}
-              hideCancelButton={true}
-              onConfirm={[Function]}
-              subtitle="Your rejection was successfully sent to the applicant!"
-              title="Request is declined"
-              visible={false}
-            />
-            <ConfirmModal
-              cancelText="No, keep it"
-              confirmText="Yes, decline"
-              disableModal={[Function]}
-              onConfirm={[Function]}
-              subtitle="Are you sure you want to decline passanger's request?"
-              title="ARE YOU SURE?"
-              visible={false}
-            />
-            <ConfirmModal
-              confirmText="Ok"
-              disableModal={[Function]}
-              hideCancelButton={true}
-              onConfirm={[Function]}
-              subtitle="Failed to add the user to the ride!"
-              title="Error"
-              visible={false}
-            />
-          </View>
+            Abc\`s stops
+          </Text>
+          <StopsBlock
+            highlightedStops={
+              Array [
+                1,
+                2,
+              ]
+            }
+            onStopPress={[Function]}
+            stops={Array []}
+          />
         </ScrollView>
+        <NotificationButtonGroup>
+          <NotificationConfirmButton
+            confirmText="ACCEPT"
+            disabled={false}
+            onConfirm={[Function]}
+          />
+          <NotificationDeclineButton
+            declineText="Decline"
+            disabled={false}
+            onDecline={[Function]}
+          />
+        </NotificationButtonGroup>
+        <React.Fragment>
+          <ConfirmModal
+            confirmText="Ok"
+            disableModal={[Function]}
+            hideCancelButton={true}
+            onConfirm={[Function]}
+            subtitle="Your approvement was successfully sent to the applicant!"
+            title="Request is approved"
+            visible={false}
+          />
+          <ConfirmModal
+            confirmText="Ok"
+            disableModal={[Function]}
+            hideCancelButton={true}
+            onConfirm={[Function]}
+            subtitle="Your rejection was successfully sent to the applicant!"
+            title="Request is declined"
+            visible={false}
+          />
+          <ConfirmModal
+            cancelText="No, keep it"
+            confirmText="Yes, decline"
+            disableModal={[Function]}
+            onConfirm={[Function]}
+            subtitle="Are you sure you want to decline passanger's request?"
+            title="ARE YOU SURE?"
+            visible={false}
+          />
+          <ConfirmModal
+            confirmText="Ok"
+            disableModal={[Function]}
+            hideCancelButton={true}
+            onConfirm={[Function]}
+            subtitle="Failed to add the user to the ride!"
+            title="Error"
+            visible={false}
+          />
+        </React.Fragment>
       </View>
     </React.Fragment>
   `));

@@ -5,7 +5,6 @@ import NotificationButtonGroup from "../../notifications/notification-buttons/No
 import NotificationConfirmButton from "../../notifications/notification-buttons/NotificationConfirmButton";
 import NotificationDeclineButton from "../../notifications/notification-buttons/NotificationDeclineButton";
 import RequestComment from "../request-comments/RequestComment";
-import WithLuggage from "../with-luggage/WithLuggage";
 import Stop from "../../../../models/stop/Stop";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
 import { getStopByType, getStopCoordinates } from "../../../utils/JourneyHelperFunctions";
@@ -18,13 +17,13 @@ import NotificationsService from "../../../../api-service/notifications-service/
 import AuthContext from "../../../components/auth/AuthContext";
 import { HTTP_STATUS_OK } from "../../../constants/Constants";
 import ConfirmModal from "../../confirm-modal/ConfirmModal";
-import AvatarLogoTitle from "../../avatar-logo-title/AvatarLogoTitle";
 import { useTheme } from "../../theme/ThemeProvider";
 import JourneyNewApplicantViewStyle from "./JourneyNewApplicantViewStyle";
 import NotificationRideDetails from "../../notifications/notification-ride-details/NotificationRideDetails";
 import { ScrollView } from "react-native-gesture-handler";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 import Journey from "../../../../models/journey/Journey";
+import NotificationHeader from "../../notifications/notification-header/NotificationHeader";
 
 interface JourneyNewApplicantViewProps {
     route: {
@@ -47,6 +46,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [journey, setJourney] = useState<Journey>();
     const { user } = useContext(AuthContext);
     const jsonData = JSON.stringify({
+        comments: data?.comments,
         hasLuggage: data?.hasLuggage,
         applicantStops: data?.applicantStops,
         passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
@@ -143,123 +143,119 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
     return (
         <>
-            <View style={[JourneyNewApplicantViewStyle.background, { backgroundColor: "rgba(0, 0, 0, 0.5)" }]}>
-                <ScrollView style = {{ backgroundColor: colors.white }}>
-                    <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: colors.white }]}>
-                        <View style={[JourneyNewApplicantViewStyle.headerContainer]}>
-                            <View style={JourneyNewApplicantViewStyle.avatarLogo}>
-                                <AvatarLogoTitle userToDisplay={params.sender} />
-                            </View>
-                        </View>
+            <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: colors.white }]}>
 
-                        <View>
-                            <RequestComment comments={data?.comments?.trim()}/>
-                        </View>
-                        <WithLuggage hasLuggage={data?.hasLuggage}/>
+                <NotificationHeader
+                    sender={params.sender}
+                />
 
-                        <NotificationRideDetails
-                            journeyId = {params.journeyId}
-                            userId = {params.sender!.id}
-                            IsBaggageVisible={false}
-                            passangersCount = {data?.passangersCount}
-                            withPassangers
-                            journey = {journey!}
-                            journeyUser= {{
-                                journeyId: params.journeyId,
-                                userId: params.sender?.id!,
-                                withBaggage: data?.hasLuggage,
-                                passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
-                            }}
-                        />
-                        <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                            {props.route.params.notification.sender!.name +
-                            " " + props.route.params.notification.sender!.surname
-                            + "`s stops in your ride"}
-                        </Text>
-                        <View style={JourneyNewApplicantViewStyle.stopsBlock}>
-                            <StopsBlock
-                                stops={stops}
-                                onStopPress={onStopPressHandler}
-                                highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
-                            />
-                        </View>
+                <RequestComment comments={data?.comments}/>
 
-                        <NotificationButtonGroup>
-                            <NotificationConfirmButton
-                                disabled={journeyIsFinished}
-                                confirmText={"ACCEPT"}
-                                onConfirm={approveUser}
-                            />
+                <ScrollView style = {{ flexGrow: 1 }}>
+                    <NotificationRideDetails
+                        journeyId = {params.journeyId}
+                        userId = {params.sender!.id}
+                        IsBaggageVisible={false}
+                        passangersCount = {data?.passangersCount}
+                        withPassangers
+                        journey = {journey!}
+                        journeyUser= {{
+                            journeyId: params.journeyId,
+                            userId: params.sender?.id!,
+                            withBaggage: data?.hasLuggage,
+                            passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
+                        }}
+                    />
 
-                            <NotificationDeclineButton
-                                disabled={journeyIsFinished}
-                                declineText={"Decline"}
-                                onDecline={() => setConfirmationModalVisible(true)}
-                            />
-                        </NotificationButtonGroup>
+                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
+                        {props.route.params.notification.sender!.name + "`s stops"}
+                    </Text>
 
-                        <ConfirmModal
-                            visible={approveModalVisible}
-                            title="Request is approved"
-                            subtitle="Your approvement was successfully sent to the applicant!"
-                            confirmText="Ok"
-                            hideCancelButton={true}
-                            disableModal={() => {
-                                setApproveModalVisible(false);
-                                navigation.goBack();
-                            }}
-                            onConfirm={() => {
-                                setApproveModalVisible(false);
-                                navigation.goBack();
-                            }}
-                        />
-                        <ConfirmModal
-                            visible={declineModalVisible}
-                            title="Request is declined"
-                            subtitle="Your rejection was successfully sent to the applicant!"
-                            confirmText="Ok"
-                            hideCancelButton={true}
-                            disableModal={() => {
-                                setDeclineModalVisible(false);
-                                navigation.goBack();
-                            }}
-                            onConfirm={() => {
-                                setDeclineModalVisible(false);
-                                navigation.goBack();
-                            }}
-                        />
+                    <StopsBlock
+                        stops={stops}
+                        onStopPress={onStopPressHandler}
+                        highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                    />
 
-                        <ConfirmModal
-                            visible={confirmationModalVisible}
-
-                            title="ARE YOU SURE?"
-                            subtitle="Are you sure you want to decline passanger's request?"
-                            confirmText="Yes, decline"
-                            cancelText="No, keep it"
-                            disableModal={() => setConfirmationModalVisible(false)}
-                            onConfirm={() => {
-                                setConfirmationModalVisible(false);
-                                sendRejection();
-                            }}
-                        />
-
-                        <ConfirmModal
-                            visible={errorModalVisible}
-                            title="Error"
-                            subtitle="Failed to add the user to the ride!"
-                            confirmText="Ok"
-                            hideCancelButton={true}
-                            disableModal={() => {
-                                setErrorModalVisible(false);
-                            }}
-                            onConfirm={() => {
-                                setErrorModalVisible(false);
-                            }}
-                        />
-                    </View>
                 </ScrollView>
+
+                <NotificationButtonGroup>
+                    <NotificationConfirmButton
+                        disabled={journeyIsFinished}
+                        confirmText={"ACCEPT"}
+                        onConfirm={approveUser}
+                    />
+
+                    <NotificationDeclineButton
+                        disabled={journeyIsFinished}
+                        declineText={"Decline"}
+                        onDecline={() => setConfirmationModalVisible(true)}
+                    />
+                </NotificationButtonGroup>
+
+                <>
+                    <ConfirmModal
+                        visible={approveModalVisible}
+                        title="Request is approved"
+                        subtitle="Your approvement was successfully sent to the applicant!"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={() => {
+                            setApproveModalVisible(false);
+                            navigation.goBack();
+                        }}
+                        onConfirm={() => {
+                            setApproveModalVisible(false);
+                            navigation.goBack();
+                        }}
+                    />
+
+                    <ConfirmModal
+                        visible={declineModalVisible}
+                        title="Request is declined"
+                        subtitle="Your rejection was successfully sent to the applicant!"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={() => {
+                            setDeclineModalVisible(false);
+                            navigation.goBack();
+                        }}
+                        onConfirm={() => {
+                            setDeclineModalVisible(false);
+                            navigation.goBack();
+                        }}
+                    />
+
+                    <ConfirmModal
+                        visible={confirmationModalVisible}
+                        title="ARE YOU SURE?"
+                        subtitle="Are you sure you want to decline passanger's request?"
+                        confirmText="Yes, decline"
+                        cancelText="No, keep it"
+                        disableModal={() => setConfirmationModalVisible(false)}
+                        onConfirm={() => {
+                            setConfirmationModalVisible(false);
+                            sendRejection();
+                        }}
+                    />
+
+                    <ConfirmModal
+                        visible={errorModalVisible}
+                        title="Error"
+                        subtitle="Failed to add the user to the ride!"
+                        confirmText="Ok"
+                        hideCancelButton={true}
+                        disableModal={() => {
+                            setErrorModalVisible(false);
+                        }}
+                        onConfirm={() => {
+                            setErrorModalVisible(false);
+                        }}
+                    />
+                </>
             </View>
-        </>);
+        </>
+    );
 };
 
 export default JourneyNewApplicantView;
