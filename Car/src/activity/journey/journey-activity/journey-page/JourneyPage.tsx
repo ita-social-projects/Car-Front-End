@@ -91,7 +91,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const mapRef = useRef<MapView | null>(null);
 
     const [withLuggage, setWithLuggage] = useState(false);
-    const [requestComments] = useState("");
     const [passangersCount, setPassangersCount] =
         useState(props.route.params.passangersCount ?? DEFAULT_PASSANGERS_COUNT);
     const [isConfirmationFormVisible, setIsConfirmationFormVisible] = useState(false);
@@ -202,7 +201,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const sendRequest = () => {
         const jsonData = JSON.stringify({
-            comments: requestComments,
+            comments: comments,
             hasLuggage: withLuggage,
             applicantStops: applicantStops,
             passangersCount: passangersCount

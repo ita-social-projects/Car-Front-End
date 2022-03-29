@@ -72,11 +72,12 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
     return (
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-                <ScrollView style = {{ flexGrow: 1 }}>
-                    <NotificationHeader
-                        sender={props.route.params.notification.notification.sender}
-                    />
 
+                <NotificationHeader
+                    sender={props.route.params.notification.notification.sender}
+                />
+
+                <ScrollView style = {{ flexGrow: 1 }}>
                     {props.route.params.notification.notificationHeaderMessage !== "" &&
                         <View style={[NotificationHeaderStyle.messageContainer, {
                             borderTopColor: colors.disableBack,

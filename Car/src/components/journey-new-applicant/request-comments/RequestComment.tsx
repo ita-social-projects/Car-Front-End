@@ -13,10 +13,9 @@ const RequestComment = ({ comments } : {comments?: string}) => {
     return (
         <View
             style={[
-                JourneyNewApplicantStyle.row,
                 JourneyNewApplicantStyle.commentsBox,
                 {
-                    borderColor: "rgba(151, 151, 151, 0.3)",
+                    borderColor: colors.disableBack,
                     backgroundColor: colors.white
                 }
             ]}
@@ -28,8 +27,8 @@ const RequestComment = ({ comments } : {comments?: string}) => {
                 {
                     borderTopColor: "rgba(0,0,0,0)",
                     borderLeftColor: "rgba(0,0,0,0)",
-                    borderRightColor: "rgba(151, 151, 151, 0.3)",
-                    borderBottomColor: "rgba(151, 151, 151, 0.3)",
+                    borderRightColor: colors.disableBack,
+                    borderBottomColor: colors.disableBack,
                     backgroundColor: colors.white
                 }]} />
         </View>
