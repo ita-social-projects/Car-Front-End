@@ -46,7 +46,6 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [journey, setJourney] = useState<Journey>();
     const { user } = useContext(AuthContext);
     const jsonData = JSON.stringify({
-        comments: data?.comments,
         hasLuggage: data?.hasLuggage,
         applicantStops: data?.applicantStops,
         passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
