@@ -100,25 +100,6 @@ test("renders correctly", async () =>
           ]
         }
       >
-        <NotificationHeader
-          sender={
-            Object {
-              "email": "Abc",
-              "fcmtoken": null,
-              "hireDate": 2021-01-01T20:00:00.000Z,
-              "id": 0,
-              "imageId": null,
-              "isPolicyAccepted": true,
-              "journeyCount": 0,
-              "location": "Abc",
-              "name": "Abc",
-              "phoneNumber": null,
-              "position": "Abc",
-              "surname": "Abc",
-            }
-          }
-        />
-        <RequestComment />
         <ScrollView
           style={
             Object {
@@ -126,6 +107,25 @@ test("renders correctly", async () =>
             }
           }
         >
+          <NotificationHeader
+            sender={
+              Object {
+                "email": "Abc",
+                "fcmtoken": null,
+                "hireDate": 2021-01-01T20:00:00.000Z,
+                "id": 0,
+                "imageId": null,
+                "isPolicyAccepted": true,
+                "journeyCount": 0,
+                "location": "Abc",
+                "name": "Abc",
+                "phoneNumber": null,
+                "position": "Abc",
+                "surname": "Abc",
+              }
+            }
+          />
+          <RequestComment />
           <NotificationRideDetails
             IsBaggageVisible={false}
             journeyId={0}
@@ -159,57 +159,57 @@ test("renders correctly", async () =>
             onStopPress={[Function]}
             stops={Array []}
           />
+          <NotificationButtonGroup>
+            <NotificationConfirmButton
+              confirmText="ACCEPT"
+              disabled={false}
+              onConfirm={[Function]}
+            />
+            <NotificationDeclineButton
+              declineText="Decline"
+              disabled={false}
+              onDecline={[Function]}
+            />
+          </NotificationButtonGroup>
+          <React.Fragment>
+            <ConfirmModal
+              confirmText="Ok"
+              disableModal={[Function]}
+              hideCancelButton={true}
+              onConfirm={[Function]}
+              subtitle="Your approvement was successfully sent to the applicant!"
+              title="Request is approved"
+              visible={false}
+            />
+            <ConfirmModal
+              confirmText="Ok"
+              disableModal={[Function]}
+              hideCancelButton={true}
+              onConfirm={[Function]}
+              subtitle="Your rejection was successfully sent to the applicant!"
+              title="Request is declined"
+              visible={false}
+            />
+            <ConfirmModal
+              cancelText="No, keep it"
+              confirmText="Yes, decline"
+              disableModal={[Function]}
+              onConfirm={[Function]}
+              subtitle="Are you sure you want to decline passanger's request?"
+              title="ARE YOU SURE?"
+              visible={false}
+            />
+            <ConfirmModal
+              confirmText="Ok"
+              disableModal={[Function]}
+              hideCancelButton={true}
+              onConfirm={[Function]}
+              subtitle="Failed to add the user to the ride!"
+              title="Error"
+              visible={false}
+            />
+          </React.Fragment>
         </ScrollView>
-        <NotificationButtonGroup>
-          <NotificationConfirmButton
-            confirmText="ACCEPT"
-            disabled={false}
-            onConfirm={[Function]}
-          />
-          <NotificationDeclineButton
-            declineText="Decline"
-            disabled={false}
-            onDecline={[Function]}
-          />
-        </NotificationButtonGroup>
-        <React.Fragment>
-          <ConfirmModal
-            confirmText="Ok"
-            disableModal={[Function]}
-            hideCancelButton={true}
-            onConfirm={[Function]}
-            subtitle="Your approvement was successfully sent to the applicant!"
-            title="Request is approved"
-            visible={false}
-          />
-          <ConfirmModal
-            confirmText="Ok"
-            disableModal={[Function]}
-            hideCancelButton={true}
-            onConfirm={[Function]}
-            subtitle="Your rejection was successfully sent to the applicant!"
-            title="Request is declined"
-            visible={false}
-          />
-          <ConfirmModal
-            cancelText="No, keep it"
-            confirmText="Yes, decline"
-            disableModal={[Function]}
-            onConfirm={[Function]}
-            subtitle="Are you sure you want to decline passanger's request?"
-            title="ARE YOU SURE?"
-            visible={false}
-          />
-          <ConfirmModal
-            confirmText="Ok"
-            disableModal={[Function]}
-            hideCancelButton={true}
-            onConfirm={[Function]}
-            subtitle="Failed to add the user to the ride!"
-            title="Error"
-            visible={false}
-          />
-        </React.Fragment>
       </View>
     </React.Fragment>
   `));
