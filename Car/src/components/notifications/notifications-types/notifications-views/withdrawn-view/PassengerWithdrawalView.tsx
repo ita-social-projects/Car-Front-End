@@ -90,10 +90,13 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
     return (
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-                <NotificationHeader
-                    sender={props.route.params.notification.sender}
-                />
+
                 <ScrollView style={{ flexGrow: 1 }}>
+
+                    <NotificationHeader
+                        sender={props.route.params.notification.sender}
+                    />
+
                     <View style={[NotificationHeaderStyle.messageContainer, {
                         borderTopColor: colors.disableBack,
                         borderBottomColor: colors.disableBack
@@ -120,14 +123,17 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
+
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                    </NotificationButtonGroup>
+
                 </ScrollView>
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                </NotificationButtonGroup>
+
             </View>
         </>
     );
