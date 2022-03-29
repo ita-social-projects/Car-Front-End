@@ -75,11 +75,11 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                 { color: colors.primary }
             ]}
             >
-                <NotificationHeader
-                    sender={props.route.params.notification.sender}
-                />
-
                 <ScrollView style={{ flexGrow: 1 }}>
+                    <NotificationHeader
+                        sender={props.route.params.notification.sender}
+                    />
+
                     <View style={[NotificationHeaderStyle.messageContainer, {
                         borderTopColor: colors.disableBack,
                         borderBottomColor: colors.disableBack
@@ -112,15 +112,15 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-                </ScrollView>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                </NotificationButtonGroup>
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                    </NotificationButtonGroup>
+                </ScrollView>
             </View>
         </>
     );

@@ -100,24 +100,6 @@ test("renders correctly", async () =>
           ]
         }
       >
-        <NotificationHeader
-          sender={
-            Object {
-              "email": "Abc",
-              "fcmtoken": null,
-              "hireDate": 2021-01-01T20:00:00.000Z,
-              "id": 0,
-              "imageId": null,
-              "isPolicyAccepted": true,
-              "journeyCount": 0,
-              "location": "Abc",
-              "name": "Abc",
-              "phoneNumber": null,
-              "position": "Abc",
-              "surname": "Abc",
-            }
-          }
-        />
         <ScrollView
           style={
             Object {
@@ -125,6 +107,24 @@ test("renders correctly", async () =>
             }
           }
         >
+          <NotificationHeader
+            sender={
+              Object {
+                "email": "Abc",
+                "fcmtoken": null,
+                "hireDate": 2021-01-01T20:00:00.000Z,
+                "id": 0,
+                "imageId": null,
+                "isPolicyAccepted": true,
+                "journeyCount": 0,
+                "location": "Abc",
+                "name": "Abc",
+                "phoneNumber": null,
+                "position": "Abc",
+                "surname": "Abc",
+              }
+            }
+          />
           <View
             style={
               Array [
@@ -183,13 +183,13 @@ test("renders correctly", async () =>
               stops={Array []}
             />
           </View>
+          <NotificationButtonGroup>
+            <NotificationConfirmButton
+              confirmText="Ok"
+              onConfirm={[Function]}
+            />
+          </NotificationButtonGroup>
         </ScrollView>
-        <NotificationButtonGroup>
-          <NotificationConfirmButton
-            confirmText="Ok"
-            onConfirm={[Function]}
-          />
-        </NotificationButtonGroup>
       </View>
     </React.Fragment>
   `));

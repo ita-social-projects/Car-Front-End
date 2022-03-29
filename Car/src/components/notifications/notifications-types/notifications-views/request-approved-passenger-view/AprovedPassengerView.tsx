@@ -78,11 +78,11 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
         <>
             <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
 
-                <NotificationHeader
-                    sender={props.route.params.notification.notification.sender}
-                />
-
                 <ScrollView style = {{ flexGrow: 1 }}>
+
+                    <NotificationHeader
+                        sender={props.route.params.notification.notification.sender}
+                    />
 
                     {props.route.params.notification.notificationHeaderMessage !== "" &&
                         <View style={[NotificationHeaderStyle.messageContainer, {
@@ -116,19 +116,21 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
+
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                        <NotificationDeclineButton
+                            declineText={"Withdraw"}
+                            onDecline={()=>setLeaveRideModalIsVisible(true)}
+                        />
+                    </NotificationButtonGroup>
+
                 </ScrollView>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                    <NotificationDeclineButton
-                        declineText={"Withdraw"}
-                        onDecline={()=>setLeaveRideModalIsVisible(true)}
-                    />
-                </NotificationButtonGroup>
             </View>
 
             <ConfirmModal
