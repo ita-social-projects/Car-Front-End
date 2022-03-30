@@ -70,12 +70,13 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
 
     return (
         <>
-            <View style={[
-                PassengerWithdrawalViewStyle.window,
-                { color: colors.primary }
-            ]}
-            >
-                <ScrollView style={{ flexGrow: 1 }}>
+            <ScrollView style={{ flexGrow: 1 }}>
+
+                <View style={[
+                    PassengerWithdrawalViewStyle.window,
+                    { color: colors.primary }
+                ]}
+                >
                     <NotificationHeader
                         sender={props.route.params.notification.sender}
                     />
@@ -120,8 +121,10 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                                 navigation.goBack();
                             }} />
                     </NotificationButtonGroup>
-                </ScrollView>
-            </View>
+
+                </View>
+
+            </ScrollView>
         </>
     );
 };

@@ -92,21 +92,21 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <React.Fragment>
-      <View
+      <ScrollView
         style={
-          Array [
-            undefined,
-            Object {
-              "backgroundColor": "#FFFFFF",
-            },
-          ]
+          Object {
+            "flexGrow": 1,
+          }
         }
       >
-        <ScrollView
+        <View
           style={
-            Object {
-              "flexGrow": 1,
-            }
+            Array [
+              undefined,
+              Object {
+                "backgroundColor": "#FFFFFF",
+              },
+            ]
           }
         >
           <NotificationHeader
@@ -184,7 +184,7 @@ test("renders correctly", async () =>
               onConfirm={[Function]}
             />
           </NotificationButtonGroup>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </React.Fragment>
   `));

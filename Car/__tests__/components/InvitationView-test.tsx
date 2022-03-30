@@ -90,21 +90,21 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <React.Fragment>
-      <View
+      <ScrollView
         style={
-          Array [
-            undefined,
-            Object {
-              "color": "#0B171B",
-            },
-          ]
+          Object {
+            "flexGrow": 1,
+          }
         }
       >
-        <ScrollView
+        <View
           style={
-            Object {
-              "flexGrow": 1,
-            }
+            Array [
+              undefined,
+              Object {
+                "color": "#0B171B",
+              },
+            ]
           }
         >
           <NotificationHeader
@@ -214,7 +214,7 @@ test("renders correctly", async () =>
               visible={false}
             />
           </React.Fragment>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </React.Fragment>
   `));

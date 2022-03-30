@@ -76,9 +76,9 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+            <ScrollView style = {{ flexGrow: 1 }}>
 
-                <ScrollView style = {{ flexGrow: 1 }}>
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
 
                     <NotificationHeader
                         sender={props.route.params.notification.notification.sender}
@@ -128,10 +128,9 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                             onDecline={()=>setLeaveRideModalIsVisible(true)}
                         />
                     </NotificationButtonGroup>
+                </View>
 
-                </ScrollView>
-
-            </View>
+            </ScrollView>
 
             <ConfirmModal
                 visible={LeaveRideModalIsVisible}
