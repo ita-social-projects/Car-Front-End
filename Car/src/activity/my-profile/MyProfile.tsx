@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { useContext, useEffect, useState } from "react";
-import { Animated, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import UserService from "../../../api-service/user-service/UserService";
 import AuthContext from "../../components/auth/AuthContext";
 import { useTheme } from "../../components/theme/ThemeProvider";
@@ -67,21 +67,8 @@ const MyProfile = (props: { navigation: any }) => {
                 <Text style={[MyProfileTabsStyle.headerText, { color: colors.primary }]}>My Profile</Text>
             </View>
             <ScrollView>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={[MyProfileTabsStyle.profileInfo,
-                        {
-                            borderColor: colors.neutralLight,
-                            backgroundColor: colors.white,
-                            elevation: 7,
-                        }]}
-                >
-                    <Animated.View >
-                        <AvatarLogoTitle />
-                    </Animated.View>
-                </TouchableOpacity>
-
                 <View style={[MyProfileStyle.container, { backgroundColor: colors.white }]}>
+                    <AvatarLogoTitle />
                     <View style={MyProfileStyle.switchSelector}>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity

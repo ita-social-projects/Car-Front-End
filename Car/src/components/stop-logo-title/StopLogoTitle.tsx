@@ -25,7 +25,7 @@ const StopLogoTitle = (props : {userToDisplay: User, stopToDisplay: Stop, route:
     });
 
     return (
-        <View style={AvatarLogoTitleStyle.container}>
+        <View style={AvatarLogoTitleStyle.mainContainer}>
             <View style={AvatarLogoTitleStyle.headerContainer}>
                 <AvatarLogo user={user} size={56} marginTop={14} marginLeft={8}/>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
