@@ -30,26 +30,14 @@ const Badges = () => {
     return (
         <ScrollView style = {{ flexGrow: 1 }}>
             <View style = {[BadgeStyle.window]}>
-
-                <View style = {{
-                    height:136,
-                    width: "100%",
-                    marginBottom: 16,
-                    borderRadius: 16,
-                    borderColor:"grey",
-                    borderWidth:1 }}>
-                    <AvatarLogoTitle/>
+                <AvatarLogoTitle/>
+                <View style = {[BadgeStyle.caruselContainer]}>
+                    <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
+                    <BadgeSlider badges = {passengerBadges}></BadgeSlider>
+                    <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
+                    <BadgeSlider badges = {driverBadges}></BadgeSlider>
+                    <BadgeSlider badges = {distanceBadges}></BadgeSlider>
                 </View>
-
-                <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
-
-                <BadgeSlider badges = {passengerBadges}></BadgeSlider>
-
-                <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
-
-                <BadgeSlider badges = {driverBadges}></BadgeSlider>
-
-                <BadgeSlider badges = {distanceBadges}></BadgeSlider>
             </View>
         </ScrollView>
     );
