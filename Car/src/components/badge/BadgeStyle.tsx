@@ -8,6 +8,10 @@ const BadgeStyle = StyleSheet.create({
         height: "100%"
     },
 
+    caruselContainer: {
+        marginTop: 32
+    },
+
     text: {
         fontFamily: "Open Sans",
         fontStyle: "normal",

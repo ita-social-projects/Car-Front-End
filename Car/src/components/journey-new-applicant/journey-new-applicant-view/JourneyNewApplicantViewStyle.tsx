@@ -3,7 +3,7 @@ import Font from "../../../data/fonts/Font";
 
 const JourneyNewApplicantStyle = EStyleSheet.create({
     window: {
-        padding: 20,
+        padding: 16,
         height: "100%",
     },
 
