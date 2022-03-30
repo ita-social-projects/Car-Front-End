@@ -142,10 +142,9 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
 
     return (
         <>
-            <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: colors.white }]}>
+            <ScrollView style = {{ flexGrow: 1 }}>
 
-                <ScrollView style = {{ flexGrow: 1 }}>
-
+                <View style={[JourneyNewApplicantViewStyle.window, { backgroundColor: colors.white }]}>
                     <NotificationHeader
                         sender={params.sender}
                     />
@@ -251,9 +250,10 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                             }}
                         />
                     </>
-                </ScrollView>
 
-            </View>
+                </View>
+
+            </ScrollView>
         </>
     );
 };

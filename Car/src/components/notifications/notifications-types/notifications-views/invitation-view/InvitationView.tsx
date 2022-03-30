@@ -178,11 +178,12 @@ const InvitationView = (props: InvitationViewProps) => {
 
     return (
         <>
-            <View style={[
-                PassengerWithdrawalViewStyle.window,
-                { color: colors.primary }]}
-            >
-                <ScrollView style = {{ flexGrow: 1 }}>
+            <ScrollView style = {{ flexGrow: 1 }}>
+
+                <View style={[
+                    PassengerWithdrawalViewStyle.window,
+                    { color: colors.primary }]}
+                >
 
                     <NotificationHeader
                         sender={params.sender}
@@ -287,9 +288,9 @@ const InvitationView = (props: InvitationViewProps) => {
                         />
                     </>
 
-                </ScrollView>
+                </View>
 
-            </View>
+            </ScrollView>
         </>
     );
 };

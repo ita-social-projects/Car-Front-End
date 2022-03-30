@@ -89,9 +89,9 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+            <ScrollView style={{ flexGrow: 1 }}>
 
-                <ScrollView style={{ flexGrow: 1 }}>
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
 
                     <NotificationHeader
                         sender={props.route.params.notification.sender}
@@ -102,7 +102,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                         borderBottomColor: colors.disableBack
                     }]}>
                         <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
-                                The passenger has withdrawn your ride!
+                                    The passenger has withdrawn your ride!
                         </Text>
                     </View>
 
@@ -131,10 +131,9 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                                 navigation.goBack();
                             }} />
                     </NotificationButtonGroup>
+                </View>
 
-                </ScrollView>
-
-            </View>
+            </ScrollView>
         </>
     );
 };
