@@ -16,6 +16,8 @@ import { CreateJourneyStyle } from "../create-journey/CreateJourneyStyle";
 import JourneyInvitationsPageProps from "./JourneyInvitationsPageProps";
 import { JourneyInvitationsPageStyle } from "./JourneyInvitationsPageStyle";
 import { RideInvitation } from "../../../../../models/journey/RideInvitation";
+import { LinearTextGradient } from "react-native-text-gradient";
+import { GRADIENT_END, GRADIENT_START } from "../../../../constants/StylesConstants";
 
 const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
     const { colors } = useTheme();
@@ -28,6 +30,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             journey.invitations
             : []
     );
+
     const [user, setUser] = useState(useContext(AuthContext).user);
     const [invitedUsers, setInvitedUsers] = useState<RideInvitation[]>(
         params.newInvitations ?? []
@@ -37,7 +40,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
         setInvitedUsers(prevState => [...prevState, new RideInvitation({ email: "", isCorrect: false })]);
     };
 
-    const onInvitationDeleteIconPress = (invitationIndex : number): void => {
+    const onInvitationDeleteIconPress = (invitationIndex: number): void => {
         let updatedInvitations = new Array(...invitedUsers);
 
         updatedInvitations.splice(invitationIndex, DELETE_COUNT);
@@ -50,22 +53,41 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
         const existingEmails = existingInvitations.map((invitation) =>
             getUserEmail(invitation!.invitedUserId)).concat(invitedEmails);
 
-        if(allUsers.map(u => u?.email).includes(email)
+        if (allUsers.map(u => u?.email).includes(email)
             && email !== user?.email
-            && !existingEmails?.some(existing => existing === email))
-        {
+            && !existingEmails?.some(existing => existing === email)) {
             updatedInvitations[invitationIndex] = {
-                email:email, isCorrect:true
+                email: email, isCorrect: true
             };
             setInvitedUsers(updatedInvitations);
         }
-        else
-        {
+        else {
             updatedInvitations[invitationIndex] = {
                 email: email,
-                isCorrect:false
+                isCorrect: false
             };
             setInvitedUsers(updatedInvitations);
+        }
+    };
+
+    const getInvitationStatus = (invitation: Invitation) => {
+        if (invitation?.type == InvitationType.Accepted) {
+            return {
+                status: "Accepted",
+                iconName: "checkmark-circle",
+            };
+        }
+        else if (invitation?.type == InvitationType.Rejected) {
+            return {
+                status: "Declined",
+                iconName: "close-circle",
+            };
+        }
+        else {
+            return {
+                status: "Sent",
+                iconName: "chevron-forward-circle",
+            }
         }
     };
 
@@ -85,17 +107,50 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             <ScrollView style={[CreateJourneyStyle.container, { backgroundColor: colors.white }]}>
                 {
                     existingInvitations.length > ZERO && (<View style={CreateJourneyStyle.commentsView}>
-                        <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>Existing
-                        invitation</Text>
+                        <Text
+                            style={[
+                                CreateJourneyStyle.commentsCaption,
+                                { color: colors.primary }
+                            ]}>
+                            Existing invitation
+                        </Text>
                         {existingInvitations.map((us, index) => (
                             <View key={index} style={JourneyInvitationsPageStyle.row}>
-                                <Text style={[JourneyInvitationsPageStyle.emailText, { color: colors.hover }]}>{
-                                    getUserEmail(existingInvitations[index]!.invitedUserId)}</Text>
-                                <Text style={[JourneyInvitationsPageStyle.invitationStatusText,
-                                    { color: colors.hover }]}>
-                                    {InvitationType[existingInvitations[index]!.type]} </Text>
+                                <Text
+                                    style={[
+                                        JourneyInvitationsPageStyle.emailText,
+                                        { color: colors.hover }
+                                    ]}>
+                                    {getUserEmail(existingInvitations[index]!.invitedUserId)}
+                                </Text>
+                                <View style={JourneyInvitationsPageStyle.invitationStatus}>
+                                    <LinearTextGradient
+                                        style={JourneyInvitationsPageStyle.invtiationStatusWrapper}
+                                        locations={[GRADIENT_START, GRADIENT_END]}
+                                        colors={[colors.navyBlueGradientFrom, colors.navyBlueGradientTo]}
+                                    >
+                                        <Text
+                                            style={[
+                                                JourneyInvitationsPageStyle.invitationStatusText,
+                                                { color: colors.hover, }
+                                            ]}>
+                                            {getInvitationStatus(existingInvitations[index]).status}
+                                        </Text>
+                                    </LinearTextGradient>
+                                    <LinearTextGradient
+                                        locations={[GRADIENT_START, GRADIENT_END]}
+                                        colors={[colors.navyBlueGradientFrom, colors.navyBlueGradientTo]}
+                                    >
+                                        <Ionicons
+                                            name={getInvitationStatus(existingInvitations[index]).iconName}
+                                            size={19.5}
+                                            style={JourneyInvitationsPageStyle.invitationStatusIcon}>
+                                        </Ionicons>
+                                    </LinearTextGradient>
+                                </View>
                             </View>
-                        ))}
+                        ))
+                        }
                     </View>)
                 }
 
@@ -105,11 +160,11 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         <View key={index}>
                             <TextInput
                                 style={[CreateJourneyStyle.invitationInputStyle,
-                                    {
-                                        borderColor: invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                            colors.primary : colors.accentRed,
-                                        color: colors.primary, marginTop: 5
-                                    }]}
+                                {
+                                    borderColor: invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
+                                        colors.primary : colors.accentRed,
+                                    color: colors.primary, marginTop: 5
+                                }]}
                                 maxLength={100}
                                 placeholder={"Enter invited user email"}
                                 placeholderTextColor={colors.hover}
@@ -142,8 +197,8 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                             {invitedUsers[index].email !== "" && (
                                 <TouchableOpacity
                                     style={JourneyInvitationsPageStyle.icon}
-                                    onPress={() =>{
-                                        let statusInfo : string = invitedUsers[index].isCorrect ?
+                                    onPress={() => {
+                                        let statusInfo: string = invitedUsers[index].isCorrect ?
                                             "Great! We found user with such an email!"
                                             : "There is no user with such an email";
 
@@ -170,21 +225,21 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                 <View style={CreateJourneyStyle.publishButtonContainer}>
                     <TouchableOpacity
                         style={[CreateJourneyStyle.publishButton,
-                            // eslint-disable-next-line no-magic-numbers
-                            !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect ?
-                                { backgroundColor: colors.disable, borderColor: colors.disable }
-                                :
-                                { backgroundColor: colors.hover, borderColor: colors.hover }
+                        // eslint-disable-next-line no-magic-numbers
+                        !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect ?
+                            { backgroundColor: colors.disable, borderColor: colors.disable }
+                            :
+                            { backgroundColor: colors.hover, borderColor: colors.hover }
                         ]}
                         // eslint-disable-next-line no-magic-numbers
-                        disabled={ !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect }
+                        disabled={!!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect}
                         onPress={addInvitationPressHandler}
                     >
                         <Text style={[CreateJourneyStyle.publishButtonText,
-                            {
-                                fontSize: CREATING_FONT_SIZE,
-                                color: colors.white
-                            }]}>
+                        {
+                            fontSize: CREATING_FONT_SIZE,
+                            color: colors.white
+                        }]}>
                             {"Add invitation"}
                         </Text>
                     </TouchableOpacity>
@@ -195,18 +250,18 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             <View style={CreateJourneyStyle.saveButonContainer}>
                 <TouchableOpacity
                     style={[CreateJourneyStyle.saveButton,
-                        {
-                            backgroundColor: colors.hover,
-                            borderColor: colors.hover
-                        }]}
+                    {
+                        backgroundColor: colors.hover,
+                        borderColor: colors.hover
+                    }]}
                     onPress={() => navigation.navigate("Journey Details", { newInvitations: invitedUsers })
                     }
                 >
                     <Text style={[CreateJourneyStyle.publishButtonText,
-                        {
-                            fontSize: CREATING_FONT_SIZE,
-                            color: colors.white
-                        }]}>
+                    {
+                        fontSize: CREATING_FONT_SIZE,
+                        color: colors.white
+                    }]}>
                         {"Save"}
                     </Text>
                 </TouchableOpacity>
