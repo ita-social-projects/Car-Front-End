@@ -71,13 +71,14 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+            <ScrollView style = {{ flexGrow: 1 }}>
 
-                <NotificationHeader
-                    sender={props.route.params.notification.notification.sender}
-                />
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
 
-                <ScrollView style = {{ flexGrow: 1 }}>
+                    <NotificationHeader
+                        sender={props.route.params.notification.notification.sender}
+                    />
+
                     {props.route.params.notification.notificationHeaderMessage !== "" &&
                     <View style={[NotificationHeaderStyle.messageContainer, {
                         borderTopColor: colors.disableBack,
@@ -112,17 +113,17 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
                         />
                     </View>
 
-                </ScrollView>
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                    </NotificationButtonGroup>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                </NotificationButtonGroup>
+                </View>
 
-            </View>
+            </ScrollView>
         </>
     );
 };

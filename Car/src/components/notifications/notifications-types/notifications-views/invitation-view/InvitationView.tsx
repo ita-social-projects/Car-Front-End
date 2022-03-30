@@ -178,15 +178,16 @@ const InvitationView = (props: InvitationViewProps) => {
 
     return (
         <>
-            <View style={[
-                PassengerWithdrawalViewStyle.window,
-                { color: colors.primary }]}
-            >
-                <NotificationHeader
-                    sender={params.sender}
-                />
+            <ScrollView style = {{ flexGrow: 1 }}>
 
-                <ScrollView style = {{ flexGrow: 1 }}>
+                <View style={[
+                    PassengerWithdrawalViewStyle.window,
+                    { color: colors.primary }]}
+                >
+
+                    <NotificationHeader
+                        sender={params.sender}
+                    />
 
                     <View style={[NotificationHeaderStyle.messageContainer, {
                         borderTopColor: colors.disableBack,
@@ -214,82 +215,82 @@ const InvitationView = (props: InvitationViewProps) => {
                         onStopPress={onStopPressHandler}
                     />
 
-                </ScrollView>
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                acceptInvitation();
+                            }} />
+                        <NotificationDeclineButton
+                            declineText={"Decline"}
+                            onDecline={() => {
+                                setConfirmationModalVisible(true);
+                            }}
+                        />
+                    </NotificationButtonGroup>
+                    <>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            acceptInvitation();
-                        }} />
-                    <NotificationDeclineButton
-                        declineText={"Decline"}
-                        onDecline={() => {
-                            setConfirmationModalVisible(true);
-                        }}
-                    />
-                </NotificationButtonGroup>
-                <>
+                        <ConfirmModal
+                            visible={confirmationModalVisible}
+                            title="ARE YOU SURE?"
+                            subtitle="Are you sure you want to decline the invite?"
+                            confirmText="Yes, decline"
+                            cancelText="No, keep it"
+                            disableModal={() => setConfirmationModalVisible(false)}
+                            onConfirm={() => {
+                                setConfirmationModalVisible(false);
+                                sendDecline();
+                            }}
+                        />
 
-                    <ConfirmModal
-                        visible={confirmationModalVisible}
-                        title="ARE YOU SURE?"
-                        subtitle="Are you sure you want to decline the invite?"
-                        confirmText="Yes, decline"
-                        cancelText="No, keep it"
-                        disableModal={() => setConfirmationModalVisible(false)}
-                        onConfirm={() => {
-                            setConfirmationModalVisible(false);
-                            sendDecline();
-                        }}
-                    />
+                        <ConfirmModal
+                            visible={withdrawModalVisible}
+                            title="Invitation is rejected"
+                            subtitle="Your refusal was successfully sent to the driver"
+                            confirmText="Ok"
+                            hideCancelButton={true}
+                            disableModal={closeAndDelete}
+                            onConfirm={closeAndDelete}
+                        />
 
-                    <ConfirmModal
-                        visible={withdrawModalVisible}
-                        title="Invitation is rejected"
-                        subtitle="Your refusal was successfully sent to the driver"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={closeAndDelete}
-                        onConfirm={closeAndDelete}
-                    />
+                        <ConfirmModal
+                            visible={acceptModalVisible}
+                            title="Invitation is accepted!"
+                            subtitle="You were successfully added to the ride!"
+                            confirmText="Ok"
+                            hideCancelButton={true}
+                            disableModal={() => {
+                                setAcceptModalVisible(false);
+                                setNotificationModalVisible(false);
+                            }}
+                            onConfirm={() => {
+                                setAcceptModalVisible(false);
+                                setNotificationModalVisible(false);
+                                deleteNotification();
+                            }}
+                        />
 
-                    <ConfirmModal
-                        visible={acceptModalVisible}
-                        title="Invitation is accepted!"
-                        subtitle="You were successfully added to the ride!"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={() => {
-                            setAcceptModalVisible(false);
-                            setNotificationModalVisible(false);
-                        }}
-                        onConfirm={() => {
-                            setAcceptModalVisible(false);
-                            setNotificationModalVisible(false);
-                            deleteNotification();
-                        }}
-                    />
+                        <ConfirmModal
+                            visible={errorModalVisible}
+                            title="Error"
+                            subtitle="Failed to accept the invitation!"
+                            confirmText="Ok"
+                            hideCancelButton={true}
+                            disableModal={() => {
+                                setErrorModalVisible(false);
+                            }}
+                            onConfirm={() => {
+                                setErrorModalVisible(false);
+                                setNotificationModalVisible(false);
+                                if(props.route.params.notification.onDelete)
+                                    props.route.params.notification.onDelete(notificationId);
+                            }}
+                        />
+                    </>
 
-                    <ConfirmModal
-                        visible={errorModalVisible}
-                        title="Error"
-                        subtitle="Failed to accept the invitation!"
-                        confirmText="Ok"
-                        hideCancelButton={true}
-                        disableModal={() => {
-                            setErrorModalVisible(false);
-                        }}
-                        onConfirm={() => {
-                            setErrorModalVisible(false);
-                            setNotificationModalVisible(false);
-                            if(props.route.params.notification.onDelete)
-                                props.route.params.notification.onDelete(notificationId);
-                        }}
-                    />
-                </>
+                </View>
 
-            </View>
+            </ScrollView>
         </>
     );
 };
