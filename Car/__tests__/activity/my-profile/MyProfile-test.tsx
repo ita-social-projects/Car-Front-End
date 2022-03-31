@@ -1691,7 +1691,7 @@ test("renders correctly", async () =>
             >
               <View
                 accessible={true}
-                focusable={false}
+                focusable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -1737,7 +1737,7 @@ test("renders correctly", async () =>
               </View>
               <View
                 accessible={true}
-                focusable={false}
+                focusable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}

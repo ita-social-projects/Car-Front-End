@@ -9,6 +9,7 @@ import MyProfileStyle from "./MyProfileStyle";
 import HeaderLogoutButton from "../../components/header-logout-button/HeaderLogoutButton";
 import MyProfileTabsStyle from "./my-profile-tabs/MyProfileTabsStyle";
 import AvatarLogoTitle from "../../components/avatar-logo-title/AvatarLogoTitle";
+import * as navigation from "../../components/navigation/Navigation";
 
 const MyProfile = (props: { navigation: any }) => {
 
@@ -207,7 +208,10 @@ const MyProfile = (props: { navigation: any }) => {
                     </View>
 
                     <View style={MyProfileStyle.footerContainer}>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={()=>
+                                navigation.navigate("PrivacyPolicySheet")
+                            }>
                             <Text style={[MyProfileStyle.foterLeftRef, { color: colors.secondaryDark }]}>
                             Privacy Policy
                             </Text>
@@ -215,7 +219,10 @@ const MyProfile = (props: { navigation: any }) => {
                         <View>
                             <Text style={{ color: colors.secondaryDark }}>•</Text>
                         </View>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={()=>
+                                navigation.navigate("TermsOfUseSheet")
+                            }>
                             <Text style={[MyProfileStyle.footerRightRef, { color: colors.secondaryDark }]}>
                             Terms of Service
                             </Text>
