@@ -63,7 +63,6 @@ const InvitationView = (props: InvitationViewProps) => {
                 setJourneyPoints(res.data!.journeyPoints);
                 setStops([
                     getStopByType(res.data, StopType.Start)!,
-                    getStopByType(res.data, StopType.Intermediate)!,
                     getStopByType(res.data, StopType.Finish)!
                 ]);
             });
@@ -72,7 +71,7 @@ const InvitationView = (props: InvitationViewProps) => {
 
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Stop View", {
-            stops: stops,
+            stops: journey!.stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,

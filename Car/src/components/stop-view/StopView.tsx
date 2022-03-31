@@ -21,8 +21,6 @@ interface RouteViewProps {
 }
 
 const StopView = (props: RouteViewProps) => {
-    console.log(props.route.params.stops);
-
     return (
         <>
             <StopsView
