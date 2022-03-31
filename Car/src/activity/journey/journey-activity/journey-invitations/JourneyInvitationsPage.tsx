@@ -87,7 +87,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             return {
                 status: "Sent",
                 iconName: "chevron-forward-circle",
-            }
+            };
         }
     };
 
@@ -160,11 +160,11 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                         <View key={index}>
                             <TextInput
                                 style={[CreateJourneyStyle.invitationInputStyle,
-                                {
-                                    borderColor: invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
-                                        colors.primary : colors.accentRed,
-                                    color: colors.primary, marginTop: 5
-                                }]}
+                                    {
+                                        borderColor: invitedUsers[index].isCorrect || invitedUsers[index].email === "" ?
+                                            colors.primary : colors.accentRed,
+                                        color: colors.primary, marginTop: 5
+                                    }]}
                                 maxLength={100}
                                 placeholder={"Enter invited user email"}
                                 placeholderTextColor={colors.hover}
@@ -226,20 +226,20 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                     <TouchableOpacity
                         style={[CreateJourneyStyle.publishButton,
                         // eslint-disable-next-line no-magic-numbers
-                        !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect ?
-                            { backgroundColor: colors.disable, borderColor: colors.disable }
-                            :
-                            { backgroundColor: colors.hover, borderColor: colors.hover }
+                            !!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect ?
+                                { backgroundColor: colors.disable, borderColor: colors.disable }
+                                :
+                                { backgroundColor: colors.hover, borderColor: colors.hover }
                         ]}
                         // eslint-disable-next-line no-magic-numbers
                         disabled={!!invitedUsers?.length && !invitedUsers[invitedUsers?.length - 1].isCorrect}
                         onPress={addInvitationPressHandler}
                     >
                         <Text style={[CreateJourneyStyle.publishButtonText,
-                        {
-                            fontSize: CREATING_FONT_SIZE,
-                            color: colors.white
-                        }]}>
+                            {
+                                fontSize: CREATING_FONT_SIZE,
+                                color: colors.white
+                            }]}>
                             {"Add invitation"}
                         </Text>
                     </TouchableOpacity>
@@ -250,18 +250,18 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
             <View style={CreateJourneyStyle.saveButonContainer}>
                 <TouchableOpacity
                     style={[CreateJourneyStyle.saveButton,
-                    {
-                        backgroundColor: colors.hover,
-                        borderColor: colors.hover
-                    }]}
+                        {
+                            backgroundColor: colors.hover,
+                            borderColor: colors.hover
+                        }]}
                     onPress={() => navigation.navigate("Journey Details", { newInvitations: invitedUsers })
                     }
                 >
                     <Text style={[CreateJourneyStyle.publishButtonText,
-                    {
-                        fontSize: CREATING_FONT_SIZE,
-                        color: colors.white
-                    }]}>
+                        {
+                            fontSize: CREATING_FONT_SIZE,
+                            color: colors.white
+                        }]}>
                         {"Save"}
                     </Text>
                 </TouchableOpacity>
