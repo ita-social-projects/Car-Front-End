@@ -10,7 +10,7 @@ const PhoneNumberStyle = StyleSheet.create({
         marginRight: 10,
         left: 8,
         right: 8,
-        top: 145,
+        top: 145
     }
 });
 

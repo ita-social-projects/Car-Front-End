@@ -4,7 +4,7 @@ interface PhoneNumberInputProps {
     onClearPress: () => void,
     onBlur?: () => void,
     onFocus?: () => void,
-    isVisible: boolean,
+    isVisible: boolean
 }
 
 export default PhoneNumberInputProps;

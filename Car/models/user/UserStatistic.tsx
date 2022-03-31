@@ -4,5 +4,4 @@ type UserStatistic = null | {
     driverJourneysAmount: number;
     passangerJourneysAmount: number;
 };
-
 export default UserStatistic;

@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import PhoneNumber from "../../../src/activity/my-profile/my-profile-activity/details/phonenumber/PhoneNumber";
 
 test("renders correctly", async () =>
-  expect(
-    renderer.create(<PhoneNumber navigation={undefined as any} />).toJSON()
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.create(<PhoneNumber navigation={undefined as any}/>).toJSON()
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Object {

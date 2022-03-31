@@ -5,16 +5,16 @@ import PhoneNumberInput from "../../src/components/phonenumber-input-button/Phon
 const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(
-      <PhoneNumberInput
-        number={""}
-        onChangeText={() => {}}
-        onClearPress={() => {}}
-        isVisible={true}
-      />
-    )
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(
+            <PhoneNumberInput
+                number={""}
+                onChangeText={() => {}}
+                onClearPress={() => {}}
+                isVisible={true}
+            />
+        )
+    ).toMatchInlineSnapshot(`
     <View>
       <Component
         allowFontScaling={true}

@@ -63,6 +63,7 @@ const PhoneNumber = (props: NavigationAddListener) => {
             >
                 <AvatarLogoTitle />
             </TouchableOpacity>
+
             <View style={ PhoneNumberStyle.container }>
                 <ChooseOption
                     text="Do you agree to show your phone number to other registered users to contact you?"
@@ -72,6 +73,7 @@ const PhoneNumber = (props: NavigationAddListener) => {
                     }}
                 />
             </View>
+
             <View style={ PhoneNumberStyle.container }>
                 <PhoneNumberInput
                     number={ number }

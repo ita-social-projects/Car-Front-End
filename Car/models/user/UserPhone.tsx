@@ -3,5 +3,4 @@ type UserPhone = null | {
     phoneNumber: string | null;
     isNumberVisible: boolean;
 };
-
 export default UserPhone;

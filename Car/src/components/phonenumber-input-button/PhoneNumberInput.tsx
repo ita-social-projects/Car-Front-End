@@ -61,8 +61,7 @@ const PhoneNumberInput = (props: PhoneNumberInputButtonProps) => {
                             color={colors.hover}
                         />
                     </TouchableOpacity>
-                </View>
-                : <View></View>
+                </View> : <View></View>
             }
             { !numberValid ?
                 <Text style={{ color: colors.accentOrange, fontSize: 14 }}>

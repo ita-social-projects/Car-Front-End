@@ -5,24 +5,24 @@ const PhoneNumberInputStyle = StyleSheet.create({
     phoneNumberText: {
         borderWidth: 2,
         paddingLeft: DEFAULT_INPUT_LEFT_PADDING,
-        fontSize: 18,
+        fontSize: 18
     },
 
     closeButtonImage: {
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
     },
 
     closeButton: {
         justifyContent: "center",
         alignItems: "center",
         height: 50,
-        width: 50,
+        width: 50
     },
 
     closeButtonParrent: {
         position: "absolute",
-        right: 0,
+        right: 0
     }
 });
 

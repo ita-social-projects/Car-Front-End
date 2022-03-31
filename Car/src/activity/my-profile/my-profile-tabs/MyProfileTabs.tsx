@@ -4,7 +4,6 @@ import { Animated, TouchableOpacity, View } from "react-native";
 import AvatarLogoTitle from "../../../components/avatar-logo-title/AvatarLogoTitle";
 import CarTabs from "../my-profile-activity/cars/car-tabs/CarTabs";
 import Details from "../my-profile-activity/details/Details";
-import Preferences from "../my-profile-activity/preferences/Preferences";
 import MyProfile from "../MyProfile";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import AddressBookTabs from "../my-profile-activity/address-book/address-book-tabs/AddressBookTabs";
@@ -13,6 +12,7 @@ import HeaderBackButton from "../../../components/header-back-button/HeaderBackB
 import { useTheme } from "../../../components/theme/ThemeProvider";
 import MyProfileTabsStyle from "./MyProfileTabsStyle";
 import Badges from "../my-profile-activity/badges/Badges";
+import PhoneNumber from "../my-profile-activity/details/phonenumber/PhoneNumber";
 
 const StackTabs = createStackNavigator();
 
@@ -50,7 +50,7 @@ const MyProfileTabs = () => {
                 />
                 <StackTabs.Screen
                     name="Preferences"
-                    component={Preferences}
+                    component={PhoneNumber}
                     options={{
                         headerTitle: "Preferences",
                         headerTitleAlign: "center",
