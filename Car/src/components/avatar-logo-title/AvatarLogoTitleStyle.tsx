@@ -11,6 +11,13 @@ const AvatarLogoTitleStyle = StyleSheet.create({
         paddingVertical: 24,
     },
 
+    container: {
+        minHeight: 48,
+        width: Dimensions.get("screen").width - 32,
+        left:20,
+        top:10
+    },
+
     headerContainer: {
         flex: 1,
         flexDirection: "row",

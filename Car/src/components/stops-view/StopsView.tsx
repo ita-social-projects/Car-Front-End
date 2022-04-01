@@ -38,9 +38,9 @@ const StopsView = (props: StopsViewProps) => {
     const [visibilityOfNextButton, setVisibilityOfNextButton] = useState<boolean>();
     const [visibilityOfPreviousButton, setVisibilityOfPreviousButton] = useState<boolean>();
 
-    const fixedHeightOfLogoTitle = 105;
+    const fixedHeightOfLogoTitle = 110;
     const maxLengthOfRow = 42;
-    const heightOfRow = 20;
+    const heightOfRow = 10;
     const [numberOfRows, setNumberOfRows] = useState<number>(zero);
 
     useEffect(() => {

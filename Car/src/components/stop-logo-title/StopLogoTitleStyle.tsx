@@ -9,6 +9,7 @@ const StopLogoTitleStyle = StyleSheet.create({
         fontFamily: "Open Sans",
         fontStyle: "normal",
         width:275,
+        top:5,
     }
 });
 
