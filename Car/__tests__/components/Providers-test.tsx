@@ -18,7 +18,9 @@ test("renders correctly", async () =>
       <ErrorHandler>
         <ThemeProvider>
           <AuthProvider>
-            <Routes />
+            <CheckAchieve>
+              <Routes />
+            </CheckAchieve>
           </AuthProvider>
         </ThemeProvider>
       </ErrorHandler>

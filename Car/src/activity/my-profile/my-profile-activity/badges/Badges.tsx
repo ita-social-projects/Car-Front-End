@@ -9,45 +9,43 @@ import BadgeSliderStyle from "../../../../components/badge-slider/BadgeSliderSty
 import BadgeTypes from "../../../../components/badge/BadgeTypes";
 import BadgeProps from "../../../../components/badge/BadgeProps";
 import { ScrollView } from "react-native-gesture-handler";
-import CheckAchievContext from "../../../../components/check-achievements/CheckAchievContext";
+import CheckAchieveContext from "../../../../components/check-achievements/CheckAchieveContext";
 
 const Badges = () => {
-
     const { colors } = useTheme();
-    const { badges } = useContext(CheckAchievContext);
+    const { badges } = useContext(CheckAchieveContext);
     const [passengerBadges] = useState(Array<BadgeProps>());
     const [driverBadges] = useState(Array<BadgeProps>());
     const [distanceBadges] = useState(Array<BadgeProps>());
 
     useEffect(() => {
-        badges.forEach(item => {
-            if(item.type == BadgeTypes.passengerRides)
-                passengerBadges.push(item);
-            else if(item.type == BadgeTypes.driverRides)
-                driverBadges.push(item);
-            else
-                distanceBadges.push(item);
+        badges.forEach((item) => {
+            if (item.type == BadgeTypes.passengerRides) passengerBadges.push(item);
+            else if (item.type == BadgeTypes.driverRides) driverBadges.push(item);
+            else distanceBadges.push(item);
         });
     }, []);
 
     return (
-        <View style = {{ paddingHorizontal: 9 }}>
+        <View style={{ paddingHorizontal: 9 }}>
             <TouchableOpacity
-                style={[MyProfileTabsStyle.profileInfo,
+                style={[
+                    MyProfileTabsStyle.profileInfo,
                     {
                         borderColor: colors.neutralLight,
                         backgroundColor: colors.white,
                         elevation: 7,
-                    }]}
+                    },
+                ]}
             >
-                <AvatarLogoTitle/>
+                <AvatarLogoTitle />
             </TouchableOpacity>
-            <ScrollView style = {BadgeStyle.container}>
-                <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
-                <BadgeSlider style = {BadgeSliderStyle.slider} badges = {passengerBadges}></BadgeSlider>
-                <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
-                <BadgeSlider style = {BadgeSliderStyle.slider} badges = {driverBadges}></BadgeSlider>
-                <BadgeSlider style = {BadgeSliderStyle.slider} badges = {distanceBadges}></BadgeSlider>
+            <ScrollView style={BadgeStyle.container}>
+                <Text style={[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
+                <BadgeSlider style={BadgeSliderStyle.slider} badges={passengerBadges}></BadgeSlider>
+                <Text style={[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
+                <BadgeSlider style={BadgeSliderStyle.slider} badges={driverBadges}></BadgeSlider>
+                <BadgeSlider style={BadgeSliderStyle.slider} badges={distanceBadges}></BadgeSlider>
             </ScrollView>
         </View>
     );

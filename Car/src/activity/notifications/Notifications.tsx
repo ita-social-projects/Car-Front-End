@@ -15,15 +15,8 @@ import Indicator from "../../components/activity-indicator/Indicator";
 
 const CustomDelete = (props: { pressHandler: () => void }) => {
     return (
-        <TouchableOpacity
-            style={NotificationsStyle.deleteButton}
-            onPress={props.pressHandler}
-        >
-            <Ionicons
-                name={"trash-outline"}
-                color={"#ffffff"}
-                size={30}
-            />
+        <TouchableOpacity style={NotificationsStyle.deleteButton} onPress={props.pressHandler}>
+            <Ionicons name={"trash-outline"} color={"#ffffff"} size={30} />
         </TouchableOpacity>
     );
 };
@@ -41,7 +34,6 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     let rows: Array<Swipeable> = [];
 
     const refreshNotification = () => {
-
         NotificationsService.getNotifications().then((res) => {
             if (res.data) {
                 setNotifications(res.data);
@@ -53,10 +45,10 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
         return (
             <CustomDelete
                 pressHandler={() => {
-                    prevOpened?.close();
-                    NotificationsService.deleteNotification(id).then(() => {
-                        refreshNotification();
-                    });
+          prevOpened?.close();
+          NotificationsService.deleteNotification(id).then(() => {
+              refreshNotification();
+          });
                 }}
             />
         );
@@ -75,7 +67,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
             refreshNotification();
             setIsLoading(false);
         } else {
-            prevOpened?.close();
+      prevOpened?.close();
         }
     }, [isFocused]);
 
@@ -84,28 +76,25 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     }, [unreadNotificationsNumber]);
 
     useEffect(() => {
-        SignalRHubConnection.on("sendToReact", refreshNotification);
-        SignalRHubConnection.on("deleteFromReact", refreshNotification);
-        SignalRHubConnection.on(
-            "updateUnreadNotificationsNumber",
-            setUnreadNotificationsNumber
-        );
+        SignalRHubConnection.then((connection) => {
+            connection.on("sendToReact", refreshNotification);
+            connection.on("deleteFromReact", refreshNotification);
+            connection.on("updateUnreadNotificationsNumber", setUnreadNotificationsNumber);
+        });
+
         props.navigation.addListener("focus", refreshNotification);
 
         return () => {
             props.navigation.removeListener("focus", refreshNotification);
         };
     }, []);
-    const handleDelete = (id:number) =>{
-        setNotifications(notifications.filter(x => x?.id != id));
+    const handleDelete = (id: number) => {
+        setNotifications(notifications.filter((x) => x?.id != id));
     };
     const renderNotifications = () => {
-        return(
+        return (
             <FlatList
-                style={[
-                    NotificationStyle.headerContainer,
-                    { backgroundColor: colors.white },
-                ]}
+                style={[NotificationStyle.headerContainer, { backgroundColor: colors.white }]}
                 onScroll={() => prevOpened?.close()}
                 data={notifications}
                 keyExtractor={(item, key) => "" + key + item}
@@ -113,12 +102,10 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
                     <Swipeable
                         renderRightActions={() => renderActions(item.id)}
                         ref={(ref: any) => (rows[notifications.indexOf(item)] = ref!)}
-                        onSwipeableWillOpen={() =>
-                            closeRow(notifications.indexOf(item))
-                        }
+                        onSwipeableWillOpen={() => closeRow(notifications.indexOf(item))}
                         overshootRight={false}
                     >
-                        <NotificationComponent item={item} onDelete ={handleDelete} />
+                        <NotificationComponent item={item} onDelete={handleDelete} />
                     </Swipeable>
                 )}
             />
@@ -126,14 +113,15 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
     };
 
     const renderNoNotificationsImage = () => {
-        return(
+        return (
             <>
-                <View style={[NotificationsStyle.noNotificationsContainer,
-                    { backgroundColor: colors.white }]}>
+                <View
+                    style={[NotificationsStyle.noNotificationsContainer, { backgroundColor: colors.white }]}
+                >
                     <Text style={{ ...NotificationsStyle.noNotificationsStyle, color: colors.primary }}>
-                        CURRENTLY YOU DO NOT HAVE ANY
+            CURRENTLY YOU DO NOT HAVE ANY
                         {"\n"}
-                        NOTIFICATIONS
+            NOTIFICATIONS
                     </Text>
                     <Image
                         style={NotificationsStyle.noNotificationsImageStyle}
@@ -142,29 +130,19 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
                 </View>
             </>
         );
-
     };
 
     const renderNotificationList = () => {
-        return (
-            <>
-                { notifications?.length ?
-                    renderNotifications() : renderNoNotificationsImage()
-                }
-            </>
-        );
+        return <>{notifications?.length ? renderNotifications() : renderNoNotificationsImage()}</>;
     };
 
     return (
         <View style={[NotificationsStyle.container, { backgroundColor: colors.white }]}>
-            {isLoading ?
-                <Indicator
-                    size="large"
-                    color={colors.hover}
-                    text="Loading information..."
-                /> :
+            {isLoading ? (
+                <Indicator size="large" color={colors.hover} text="Loading information..." />
+            ) : (
                 renderNotificationList()
-            }
+            )}
         </View>
     );
 };
