@@ -10,7 +10,7 @@ import Stop from "../../../models/stop/Stop";
 import StopLogoTitleStyle from "./StopLogoTitleStyle";
 import AuthContext from "../auth/AuthContext";
 
-const StopLogoTitle = (props : {userToDisplay: User, stopToDisplay: Stop, route: string}) => {
+const StopLogoTitle = (props: {userToDisplay: User, stopToDisplay: Stop}) => {
     const isThemeDark = useTheme().isThemeDark;
     const [user, setUser] = useState<User>(props.userToDisplay);
     const [stop, setStop] = useState<Stop>(props.stopToDisplay);
@@ -18,14 +18,14 @@ const StopLogoTitle = (props : {userToDisplay: User, stopToDisplay: Stop, route:
 
     useEffect(() => {
         setUser(props.userToDisplay || contextUser);
-    },[]);
+    }, []);
 
     useEffect(() => {
         setStop(props.stopToDisplay);
     });
 
     return (
-        <View style={AvatarLogoTitleStyle.container}>
+        <View style={AvatarLogoTitleStyle.mainContainer}>
             <View style={AvatarLogoTitleStyle.headerContainer}>
                 <AvatarLogo user={user} size={56} marginTop={14} marginLeft={8}/>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
@@ -35,9 +35,6 @@ const StopLogoTitle = (props : {userToDisplay: User, stopToDisplay: Stop, route:
                     </Text>
                     <Text style={[AvatarLogoTitleStyle.headerUserName, { color: "#00A3CF" }]}>
                         {(user?.position)}
-                    </Text>
-                    <Text style={[StopLogoTitleStyle.headerStopData, { color: "#909095" }]}>
-                        {(props.route)}
                     </Text>
                     <Text style={[StopLogoTitleStyle.headerStopData, { color: "#909095" }]}>
                         {(stop?.address?.name)}

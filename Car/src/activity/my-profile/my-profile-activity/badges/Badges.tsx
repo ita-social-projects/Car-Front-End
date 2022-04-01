@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
-import MyProfileTabsStyle from "../../my-profile-tabs/MyProfileTabsStyle";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import BadgeStyle from "../../../../components/badge/BadgeStyle";
 import BadgeSlider from "../../../../components/badge-slider/BadgeSlider";
@@ -27,27 +26,18 @@ const Badges = () => {
     }, []);
 
     return (
-        <View style={{ paddingHorizontal: 9 }}>
-            <TouchableOpacity
-                style={[
-                    MyProfileTabsStyle.profileInfo,
-                    {
-                        borderColor: colors.neutralLight,
-                        backgroundColor: colors.white,
-                        elevation: 7,
-                    },
-                ]}
-            >
-                <AvatarLogoTitle />
-            </TouchableOpacity>
-            <ScrollView style={BadgeStyle.container}>
-                <Text style={[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
-                <BadgeSlider style={BadgeSliderStyle.slider} badges={passengerBadges}></BadgeSlider>
-                <Text style={[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
-                <BadgeSlider style={BadgeSliderStyle.slider} badges={driverBadges}></BadgeSlider>
-                <BadgeSlider style={BadgeSliderStyle.slider} badges={distanceBadges}></BadgeSlider>
-            </ScrollView>
-        </View>
+        <ScrollView style = {{ flexGrow: 1 }}>
+            <View style = {[BadgeStyle.window]}>
+                <AvatarLogoTitle/>
+                <View style = {[BadgeStyle.caruselContainer]}>
+                    <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
+                    <BadgeSlider badges = {passengerBadges}></BadgeSlider>
+                    <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
+                    <BadgeSlider badges = {driverBadges}></BadgeSlider>
+                    <BadgeSlider badges = {distanceBadges}></BadgeSlider>
+                </View>
+            </View>
+        </ScrollView>
     );
 };
 

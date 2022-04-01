@@ -8,6 +8,7 @@ const StopLogoTitleStyle = StyleSheet.create({
         marginBottom: 8,
         fontFamily: "Open Sans",
         fontStyle: "normal",
+        width:275,
     }
 });
 

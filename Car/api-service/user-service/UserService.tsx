@@ -3,6 +3,7 @@ import APIService from "../APIService";
 import APIRoutes from "../APIRoutes";
 import Axios from "../Axios";
 import { AxiosRequestConfig } from "axios";
+import UserPhone from "../../models/user/UserPhone";
 
 const route = APIRoutes.getUserUrl();
 
@@ -20,7 +21,9 @@ const UserService = {
 
     addUserFcmtoken: async (token: FormData) => APIService.post<FormData>(route + "fcmtoken/", token),
 
-    deleteUserFcmtoken: async (token: string) => APIService.delete(route + "fcmtoken/" + token)
+    deleteUserFcmtoken: async (token: string) => APIService.delete(route + "fcmtoken/" + token),
+
+    updateUserPhone: async (userPhone: UserPhone) => Axios.put<UserPhone>(route + "update/", userPhone)
 };
 
 export default UserService;

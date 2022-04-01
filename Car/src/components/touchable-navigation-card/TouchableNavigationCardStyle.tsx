@@ -6,8 +6,6 @@ const TouchableNavigationCardStyle = EStyleSheet.create({
         paddingLeft: 0,
         paddingTop: 26,
         paddingRight: 0,
-        marginLeft: 8,
-        marginRight: 8,
         borderBottomWidth: 1,
         fontSize: 13,
         fontWeight: "bold",

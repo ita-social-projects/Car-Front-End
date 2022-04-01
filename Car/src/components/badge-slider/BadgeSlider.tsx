@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import { View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import Badge from "../badge/Badge";
 import BadgeSliderProps from "./BadgeSliderProps";
-
+import BadgeSliderStyle from "./BadgeSliderStyle";
 const BadgeSlider = React.memo((props:BadgeSliderProps) => {
     const state = useRef(Carousel.prototype);
     const leftBorder = 0;
@@ -39,54 +40,58 @@ const BadgeSlider = React.memo((props:BadgeSliderProps) => {
         const next = calculateRightPosition(current, singleIndent);
         const afterNext = calculateRightPosition(current, doubleIndent);
 
-        negativeBadges[beforePrevious].scale = 0.5;
+        negativeBadges[beforePrevious].scale = 0.7;
         negativeBadges[previous].scale = 0.9;
         props.badges[current].scale = 1;
         props.badges[next].scale = 0.9;
-        props.badges[afterNext].scale = 0.5;
+        props.badges[afterNext].scale = 0.7;
 
         state.current.forceUpdate();
     };
 
     const renderItem = ({ item }) => {
         return (
-            <Badge
-                key = {item.name}
-                name = {item.name}
-                scale = {item.scale}
-                description = {item.description}
-                points = {item.points}
-                isReached = {item.isReached}
-                pathUnlocked = {item.pathUnlocked}
-                pathLocked = {item.pathLocked}
-                type = {item.type}
-            />
+            <View style={[BadgeSliderStyle.container]}>
+                <Badge
+                    key = {item.name}
+                    name = {item.name}
+                    scale = {item.scale}
+                    description = {item.description}
+                    points = {item.points}
+                    isReached = {item.isReached}
+                    pathUnlocked = {item.pathUnlocked}
+                    pathLocked = {item.pathLocked}
+                    type = {item.type}
+                />
+            </View>
         );
     };
 
     return (
-        <Carousel
-            ref = {state}
-            data = {props.badges}
-            activeSlideAlignment = {"center"}
-            horizontal = {true}
-            enableSnap = {true}
-            enableMomentum = {true}
-            showsHorizontalScrollIndicator = {false}
-            loop = {true}
-            loopClonesPerSide = {8}
-            snapToInterval = {80}
-            firstItem = {0}
-            sliderWidth = {400}
-            itemWidth = {80}
-            windowSize = {16}
-            scrollEventThrottle = {20}
-            inactiveSlideScale = {0.7}
-            inactiveSlideOpacity = {0.6}
-            renderItem = {renderItem }
-            onScroll = {onScroll}
-            maxToRenderPerBatch = {100}
-        />
+        <View style = {[BadgeSliderStyle.container]}>
+            <Carousel
+                ref = {state}
+                data = {props.badges}
+                activeSlideAlignment = {"center"}
+                horizontal = {true}
+                enableSnap = {true}
+                enableMomentum = {true}
+                showsHorizontalScrollIndicator = {false}
+                loop = {true}
+                loopClonesPerSide = {8}
+                snapToInterval = {80}
+                firstItem = {0}
+                sliderWidth = {350}
+                itemWidth = {70}
+                windowSize = {16}
+                scrollEventThrottle = {20}
+                inactiveSlideScale = {0.7}
+                inactiveSlideOpacity = {0.6}
+                renderItem = {renderItem}
+                onScroll = {onScroll}
+                maxToRenderPerBatch = {100}
+            />
+        </View>
     );
 });
 
