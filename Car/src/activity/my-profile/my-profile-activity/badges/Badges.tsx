@@ -4,7 +4,6 @@ import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogo
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import BadgeStyle from "../../../../components/badge/BadgeStyle";
 import BadgeSlider from "../../../../components/badge-slider/BadgeSlider";
-import BadgeSliderStyle from "../../../../components/badge-slider/BadgeSliderStyle";
 import BadgeTypes from "../../../../components/badge/BadgeTypes";
 import BadgeProps from "../../../../components/badge/BadgeProps";
 import { ScrollView } from "react-native-gesture-handler";
@@ -26,15 +25,15 @@ const Badges = () => {
     }, []);
 
     return (
-        <ScrollView style = {{ flexGrow: 1 }}>
-            <View style = {[BadgeStyle.window]}>
-                <AvatarLogoTitle/>
-                <View style = {[BadgeStyle.caruselContainer]}>
-                    <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
-                    <BadgeSlider badges = {passengerBadges}></BadgeSlider>
-                    <Text style = {[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
-                    <BadgeSlider badges = {driverBadges}></BadgeSlider>
-                    <BadgeSlider badges = {distanceBadges}></BadgeSlider>
+        <ScrollView style={{ flexGrow: 1 }}>
+            <View style={[BadgeStyle.window]}>
+                <AvatarLogoTitle />
+                <View style={[BadgeStyle.caruselContainer]}>
+                    <Text style={[BadgeStyle.text, { color: colors.primary }]}>Passenger</Text>
+                    <BadgeSlider badges={passengerBadges}></BadgeSlider>
+                    <Text style={[BadgeStyle.text, { color: colors.primary }]}>Driver</Text>
+                    <BadgeSlider badges={driverBadges}></BadgeSlider>
+                    <BadgeSlider badges={distanceBadges}></BadgeSlider>
                 </View>
             </View>
         </ScrollView>

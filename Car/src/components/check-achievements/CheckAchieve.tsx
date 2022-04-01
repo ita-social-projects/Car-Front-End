@@ -24,7 +24,7 @@ const CheckAchieve = ({ children }) => {
     const [currentAchieve, setCurrentAchieve] = useState<UserStatistic>(null);
 
     if (user && allowCheckAchiev) {
-        UserStatisticService.getUserStatisticById(user!.id).then((result) => {
+        UserStatisticService.getUserStatisticById(user.id).then((result) => {
             setCurrentAchieve(result.data);
             setAllowCheckAchiev(false);
             AsyncStorage.getItem("achiev").then((res) => {
@@ -42,33 +42,14 @@ const CheckAchieve = ({ children }) => {
             badgesArray.length = 0;
             for (let badge of allBadges) {
                 if (badge.type === BadgeTypes.passengerRides) {
-                    if (currentAchieve.passangerJourneysAmount >= badge.points) {
-                        badge.isReached = true;
-                        if (storageAchieve.passangerJourneysAmount < badge.points) {
-                            setCurrentBadge(badge);
-                            setShowModal(true);
-                        }
-                    }
+                    checkPassangerAmount(badge);
                 }
                 if (badge.type === BadgeTypes.driverRides) {
-                    if (currentAchieve.driverJourneysAmount >= badge.points) {
-                        badge.isReached = true;
-                        if (storageAchieve!.driverJourneysAmount < badge.points) {
-                            setCurrentBadge(badge);
-                            setShowModal(true);
-                        }
-                    }
+                    checkDriverAmount(badge);
                 }
                 if (badge.type === BadgeTypes.driverDistance) {
-                    if (currentAchieve.totalKm >= badge.points) {
-                        badge.isReached = true;
-                        if (storageAchieve.totalKm < badge.points) {
-                            setCurrentBadge(badge);
-                            setShowModal(true);
-                        }
-                    }
+                    checkDriverDistance(badge);
                 }
-                badgesArray.push(badge);
             }
             AsyncStorage.setItem("achiev", JSON.stringify(currentAchieve));
         }
@@ -90,6 +71,39 @@ const CheckAchieve = ({ children }) => {
             });
         }
     }, [storageAchieve]);
+
+    const checkPassangerAmount = (badge: BadgeProps) => {
+        if (currentAchieve!.passangerJourneysAmount >= badge.points) {
+            badge.isReached = true;
+            if (storageAchieve!.passangerJourneysAmount < badge.points) {
+                setCurrentBadge(badge);
+                setShowModal(true);
+            }
+        }
+        badgesArray.push(badge);
+    };
+
+    const checkDriverAmount = (badge: BadgeProps) => {
+        if (currentAchieve!.driverJourneysAmount >= badge.points) {
+            badge.isReached = true;
+            if (storageAchieve!.driverJourneysAmount < badge.points) {
+                setCurrentBadge(badge);
+                setShowModal(true);
+            }
+        }
+        badgesArray.push(badge);
+    };
+
+    const checkDriverDistance = (badge: BadgeProps) => {
+        if (currentAchieve!.totalKm >= badge.points) {
+            badge.isReached = true;
+            if (storageAchieve!.totalKm < badge.points) {
+                setCurrentBadge(badge);
+                setShowModal(true);
+            }
+        }
+        badgesArray.push(badge);
+    };
 
     const closePopup = () => {
         setShowModal(false);
