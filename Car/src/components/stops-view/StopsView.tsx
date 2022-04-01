@@ -13,6 +13,7 @@ import { darkMapStyle } from "../../constants/DarkMapStyleConstant";
 import { mapStopToMarker } from "../../utils/JourneyHelperFunctions";
 import StopLogoTitle from "../stop-logo-title/StopLogoTitle";
 import { useTheme } from "../theme/ThemeProvider";
+import * as navigation from "../../components/navigation/Navigation";
 
 interface StopsViewProps {
     journeyPoints: JourneyPoint[],
@@ -25,6 +26,7 @@ interface StopsViewProps {
 
 const StopsView = (props: StopsViewProps) => {
     const { colors, isThemeDark } = useTheme();
+
     const [currentStop, setCurrentStop] = useState(props.currentStop);
     const mapRef = useRef<MapView | null>(null);
     const zero = 0;
@@ -32,6 +34,18 @@ const StopsView = (props: StopsViewProps) => {
     const doubleIndent = 2;
     const [firstStop, setFirstStop] = useState<number>();
     const [lastStop, setLastStop] = useState<number>();
+
+    const [visibilityOfNextButton, setVisibilityOfNextButton] = useState<boolean>();
+    const [visibilityOfPreviousButton, setVisibilityOfPreviousButton] = useState<boolean>();
+
+    const fixedHeightOfLogoTitle = 105;
+    const maxLengthOfRow = 42;
+    const heightOfRow = 20;
+    const [numberOfRows, setNumberOfRows] = useState<number>(zero);
+
+    useEffect(() => {
+        setNumberOfRows(getHeightOfAddressRow(props.stops[currentStop]?.address?.name.length!));
+    });
 
     useEffect(() => {
         if(props.useOnlyIntermediateStops) {
@@ -44,22 +58,31 @@ const StopsView = (props: StopsViewProps) => {
         }
     }, []);
 
-    const getRoute = (): string => {
-        return `${props.stops[zero]?.address?.name} - ${props.stops[props.stops.length - singleIndent]?.address?.name}`;
+    useEffect(() => {
+        if(currentStop == lastStop) {
+            setVisibilityOfNextButton(true);
+        }
+        else {
+            setVisibilityOfNextButton(false);
+        }
+        if(currentStop == firstStop) {
+            setVisibilityOfPreviousButton(true);
+        }
+        else {
+            setVisibilityOfPreviousButton(false);
+        }
+    });
+
+    const getHeightOfAddressRow = (length: number): number => {
+        return Math.ceil(length / maxLengthOfRow);
     };
 
     const moveToNextStop = (): void => {
-        if(currentStop == lastStop)
-            moveCamera(currentStop);
-        else
-            moveToStop(currentStop, singleIndent);
+        moveToStop(currentStop, singleIndent);
     };
 
     const moveToPreviousStop = (): void => {
-        if(currentStop == firstStop)
-            moveCamera(currentStop);
-        else
-            moveToStop(currentStop, -singleIndent);
+        moveToStop(currentStop, -singleIndent);
     };
 
     const moveToStop = (stop: number, indent: number): void => {
@@ -102,24 +125,28 @@ const StopsView = (props: StopsViewProps) => {
 
             {
                 <TouchableOpacity
+                    onPress={() =>
+                        navigation.navigate("Applicant Page", {
+                            userId: props.user?.id
+                        })
+                    }
                     style={[MyProfileTabsStyle.profileInfo,
                         {
                             borderColor: colors.neutralLight,
                             backgroundColor: colors.white,
                             elevation: 7,
-                            height: 136,
+                            height: fixedHeightOfLogoTitle + (numberOfRows - singleIndent) * heightOfRow,
                             top: 17
                         }]}
                 >
                     <StopLogoTitle
                         stopToDisplay = {props.stops[currentStop]}
                         userToDisplay = {props.user}
-                        route = {getRoute()}
                     />
                 </TouchableOpacity>
             }
 
-            {
+            {visibilityOfNextButton ||
                 <TouchableOpacity onPress = {moveToNextStop}
                     style = {[SearchJourneyStyle.moveToStopButton,
                         { right: 15, backgroundColor: isThemeDark? "#FFFFFF" : "#414045" }]}
@@ -128,7 +155,7 @@ const StopsView = (props: StopsViewProps) => {
                 </TouchableOpacity>
             }
 
-            {
+            {visibilityOfPreviousButton ||
                 <TouchableOpacity onPress = {moveToPreviousStop}
                     style = {[SearchJourneyStyle.moveToStopButton,
                         { left: 15, backgroundColor: isThemeDark? "#FFFFFF" : "#414045" }]}
