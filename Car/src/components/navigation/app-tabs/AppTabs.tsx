@@ -30,26 +30,45 @@ const AppTabs = () => {
     );
 
     useEffect(() => {
-        SignalRHubConnection.on(
-            "updateUnreadNotificationsNumber",
-            setUnreadNotificationsNumber
-        );
-
-        SignalRHubConnection.on(
-            "updateUnreadMessagesNumber",
-            setUnreadMessagesNumber
-        );
+        SignalRHubConnection.then((connection) => {
+            connection.on("updateUnreadNotificationsNumber", setUnreadNotificationsNumber);
+            connection.on("updateUnreadMessagesNumber", setUnreadMessagesNumber);
+        });
 
         updateLocale();
     });
 
-    const tabBarBadge = unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH
+    const tabBarBadge =
+    unreadNotificationsNumber > EMPTY_COLLECTION_LENGTH
         ? unreadNotificationsNumber.toString()
         : undefined;
 
-    const tabBarUnreadMessages = unreadMessagesNumber > EMPTY_COLLECTION_LENGTH
-        ? unreadMessagesNumber.toString()
-        :undefined;
+    const tabBarUnreadMessages =
+    unreadMessagesNumber > EMPTY_COLLECTION_LENGTH ? unreadMessagesNumber.toString() : undefined;
+
+    const imageSourceMessageTabs = (themeColor: string) => {
+        if (isThemeDark) {
+            return themeColor == colors.weekdaysInactive
+                ? require("../../../../assets/images/icons/lightComments.png")
+                : require("../../../../assets/images/icons/darkComments.png");
+        }
+
+        return themeColor == colors.white
+            ? require("../../../../assets/images/icons/lightComments.png")
+            : require("../../../../assets/images/icons/grayComments.png");
+    };
+
+    const imageSourceJourneyTabs = (themeColor: string) => {
+        if (isThemeDark) {
+            return themeColor == colors.weekdaysInactive
+                ? require("../../../../assets/images/icons/lightCar.png")
+                : require("../../../../assets/images/icons/darkCar.png");
+        }
+
+        return themeColor == colors.white
+            ? require("../../../../assets/images/icons/lightCar.png")
+            : require("../../../../assets/images/icons/grayCar.png");
+    };
 
     return (
         <Tabs.Navigator
@@ -74,34 +93,21 @@ const AppTabs = () => {
                             break;
                     }
 
-                    return (
-                        route.name == "MessagesTabs" || route.name == "JourneyTabs"?
+                    if (route.name == "MessagesTabs" || route.name == "JourneyTabs") {
+                        return (
                             <Image
-                                style={{ width: 30, height: 30,
-                                    borderRadius:0,
-                                    resizeMode: "contain" }}
-                                source = {
-                                    route.name == "MessagesTabs"?
-                                        isThemeDark?
-                                            color == colors.weekdaysInactive?
-                                                require("../../../../assets/images/icons/lightComments.png"):
-                                                require("../../../../assets/images/icons/darkComments.png"):
-                                            color == colors.white?
-                                                require("../../../../assets/images/icons/lightComments.png"):
-                                                require("../../../../assets/images/icons/grayComments.png"):
-                                        isThemeDark?
-                                            color == colors.weekdaysInactive?
-                                                require("../../../../assets/images/icons/lightCar.png"):
-                                                require("../../../../assets/images/icons/darkCar.png"):
-                                            color == colors.white?
-                                                require("../../../../assets/images/icons/lightCar.png"):
-                                                require("../../../../assets/images/icons/grayCar.png")
-
+                                style={{ width: 30, height: 30, borderRadius: 0, resizeMode: "contain" }}
+                                source={
+                                    route.name == "MessagesTabs"
+                                        ? imageSourceMessageTabs(color)
+                                        : imageSourceJourneyTabs(color)
                                 }
-                            />:
-                            <Ionicons name={iconName!} size={size} color={color} />
-                    );
-                }
+                            />
+                        );
+                    } else {
+                        return <Ionicons name={iconName!} size={size} color={color} />;
+                    }
+                },
             })}
             tabBarOptions={{
                 labelStyle: AppTabsStyle.labelStyle,
@@ -116,8 +122,8 @@ const AppTabs = () => {
                 component={MessagesTabs}
                 options={() => ({
                     tabBarLabel: "Chats",
-                    tabBarBadge : tabBarUnreadMessages,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
+                    tabBarBadge: tabBarUnreadMessages,
+                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize: 8 },
                 })}
             />
             <Tabs.Screen
@@ -138,7 +144,7 @@ const AppTabs = () => {
                 options={{
                     tabBarLabel: "Notifications",
                     tabBarBadge: tabBarBadge,
-                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize:8 }
+                    tabBarBadgeStyle: { backgroundColor: "#EC6400", color: colors.white, fontSize: 8 },
                 }}
                 name="NotificationsTabs"
                 component={NotificationsTabs}
