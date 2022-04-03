@@ -91,9 +91,9 @@ const Messages = (props: MessagesProps) => {
         return (
             <Text style={[MessagesStyle.textStyle, { color: colors.primary }]}>
                 {chunks.map((chunk, index) => {
-                    const text = textToHighlight.substr(
+                    const text = textToHighlight.substring(
                         chunk.start,
-                        chunk.end - chunk.start
+                        chunk.end - chunk.start + chunk.start
                     );
 
                     return !chunk.highlight ? (

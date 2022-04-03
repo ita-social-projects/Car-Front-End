@@ -10,7 +10,7 @@ export const ThemeContext = React.createContext({
     isThemeDark: false,
     theme: "light",
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setScheme: (scheme : any) => returnType, colors: lightColors,
+    setScheme: (_scheme : any) => returnType, colors: lightColors,
 });
 
 export const ThemeProvider = (props) => {

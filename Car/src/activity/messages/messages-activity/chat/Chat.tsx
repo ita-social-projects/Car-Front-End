@@ -285,7 +285,7 @@ const Chat = (properties: ChatProps) => {
     let selectedMessage: any;
     let isOpen: boolean = false;
 
-    const showPopup = (context: any, myMessage: any) => {
+    const showPopup = (_context: any, myMessage: any) => {
         isOpen = !isOpen;
         selectedMessage = myMessage;
 

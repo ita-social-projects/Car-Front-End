@@ -52,8 +52,10 @@ const Routes = () => {
         );
     }, []);
 
-    const navigator = user ? (
-        !user?.isPolicyAccepted ?
+    let navigator: JSX.Element;
+
+    if (user) {
+        navigator = !user?.isPolicyAccepted ?
             <Stack.Screen
                 name="PrivacyPolicy"
                 component={PrivacyPolicyPage}
@@ -67,10 +69,12 @@ const Routes = () => {
                 options={{
                     headerShown: false,
                 }}
-            />
-    ) : (
-        <Stack.Screen name="Login" component={Login} />
-    );
+            />;
+    }
+    else
+    {
+        navigator = <Stack.Screen name="Login" component={Login} />;
+    }
 
     return (
         <Root>
