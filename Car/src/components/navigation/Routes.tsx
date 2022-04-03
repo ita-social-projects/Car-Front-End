@@ -52,29 +52,33 @@ const Routes = () => {
         );
     }, []);
 
-    let navigator: JSX.Element;
+    const getPrivacyPolicyOrAppTabs = ()=>{
+        if (!user?.isPolicyAccepted)
+        {
+            return(
+                <Stack.Screen
+                    name="PrivacyPolicy"
+                    component={PrivacyPolicyPage}
+                    options={{
+                        headerShown: false,
+                    }}
+                />);
+        }
 
-    if (user) {
-        navigator = !user?.isPolicyAccepted ?
-            <Stack.Screen
-                name="PrivacyPolicy"
-                component={PrivacyPolicyPage}
-                options={{
-                    headerShown: false,
-                }}
-            /> :
+        return(
             <Stack.Screen
                 name="AppTabs"
                 component={AppTabs}
                 options={{
                     headerShown: false,
                 }}
-            />;
-    }
-    else
-    {
-        navigator = <Stack.Screen name="Login" component={Login} />;
-    }
+            />
+        );
+    };
+
+    const navigator = user ?
+        getPrivacyPolicyOrAppTabs():
+        <Stack.Screen name="Login" component={Login} />;
 
     return (
         <Root>
