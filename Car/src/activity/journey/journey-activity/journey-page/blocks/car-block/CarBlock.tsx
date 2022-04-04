@@ -8,13 +8,28 @@ import { CAR_IMAGE_BORDER_RADIUS, TAXI_IMAGE_BORDER_RADIUS } from "../../../../.
 import JourneyPageStyle from "../../JourneyPageStyle";
 
 const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean}) => {
+    const getTaxiIcon = () =>{
+        if(isThemeDark)
+        {
+            return (require("../../../../../../../assets/images/icons/grayTaxi.png"));
+        }
+
+        return (require("../../../../../../../assets/images/icons/darkTaxi.png"));
+    };
+    const getCarIcon = () =>{
+        if(isThemeDark)
+        {
+            return (require("../../../../../../../assets/images/icons/grayCar.png"));
+        }
+
+        return (require("../../../../../../../assets/images/icons/darkCar.png"));
+    };
+
     const { colors } = useTheme();
     const isThemeDark = useTheme().isThemeDark;
     const image = car?.imageId ?
         { uri: ImageService.getImageById(car.imageId) } :
-        isThemeDark ?
-            require("../../../../../../../assets/images/icons/grayTaxi.png"):
-            require("../../../../../../../assets/images/icons/darkTaxi.png");
+        getTaxiIcon();
 
     return (
         <View style={JourneyPageStyle.carContainer}>
@@ -33,9 +48,7 @@ const CarBlock = ({ car, isOnOwnCar }: {car: CarViewModel, isOnOwnCar: boolean})
                             { borderRadius:TAXI_IMAGE_BORDER_RADIUS,
                                 resizeMode: "contain" }]}
                         source = {
-                            isThemeDark ?
-                                require("../../../../../../../assets/images/icons/grayCar.png")
-                                :require("../../../../../../../assets/images/icons/darkCar.png")
+                            getCarIcon()
                         }
                     />
                 )}

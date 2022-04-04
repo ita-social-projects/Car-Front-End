@@ -114,7 +114,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
                             ]}>
                             Existing invitation
                         </Text>
-                        {existingInvitations.map((us, index) => (
+                        {existingInvitations.map((_us, index) => (
                             <View key={index} style={JourneyInvitationsPageStyle.row}>
                                 <Text
                                     style={[
@@ -156,7 +156,7 @@ const JourneyInvitationsPage = (props: JourneyInvitationsPageProps) => {
 
                 <View style={CreateJourneyStyle.commentsView}>
                     <Text style={[CreateJourneyStyle.commentsCaption, { color: colors.primary }]}>New invitation</Text>
-                    {invitedUsers.map((us, index) => (
+                    {invitedUsers.map((_us, index) => (
                         <View key={index}>
                             <TextInput
                                 style={[CreateJourneyStyle.invitationInputStyle,

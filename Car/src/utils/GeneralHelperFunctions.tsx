@@ -5,7 +5,7 @@ import {
 export const trimTheStringIfTooLong = (str: string, maxLength: number) => {
     return str.length <= maxLength ?
         str :
-        str.substr(FIRST_ELEMENT_INDEX, maxLength - THREE_DOTS_LENGTH) + "...";
+        str.substring(FIRST_ELEMENT_INDEX, maxLength - THREE_DOTS_LENGTH + FIRST_ELEMENT_INDEX) + "...";
 };
 
 export const capitalize = (str: string): string => {

@@ -62,8 +62,8 @@ export const removeRegionAndPostalCode = (json: string) => {
 };
 
 export const addressNameSubstring = (addressName: string) => {
-    return addressName.substr(FIRST_ELEMENT_INDEX,
-        MAX_LOCATION_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH) + "...";
+    return addressName.substring(FIRST_ELEMENT_INDEX,
+        MAX_LOCATION_NAME_LENGTH - THREE_ELEMENT_COLLECTION_LENGTH + FIRST_ELEMENT_INDEX) + "...";
 };
 
 export const setAddressByCoordinates = (fn: (s: string, c: LatLng) => void, coordinates: LatLng) => {

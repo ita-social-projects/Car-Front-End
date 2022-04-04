@@ -30,6 +30,15 @@ const Cars = (props: NavigationAddListener) => {
         });
     };
 
+    const getCarIcon = () =>{
+        if(isThemeDark)
+        {
+            return (require("../../../../../assets/images/icons/lightCar.png"));
+        }
+
+        return (require("../../../../../assets/images/icons/darkCar.png"));
+    };
+
     useEffect(() => {
         return props.navigation.addListener("focus", loadCars);
     }, [props.navigation]);
@@ -87,9 +96,7 @@ const Cars = (props: NavigationAddListener) => {
                                                     borderRadius:0,
                                                     resizeMode: "contain" }}
                                                 source = {
-                                                    isThemeDark ?
-                                                        require("../../../../../assets/images/icons/lightCar.png")
-                                                        :require("../../../../../assets/images/icons/darkCar.png")
+                                                    getCarIcon()
                                                 }
                                             />
                                         )

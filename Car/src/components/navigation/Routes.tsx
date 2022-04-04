@@ -52,15 +52,20 @@ const Routes = () => {
         );
     }, []);
 
-    const navigator = user ? (
-        !user?.isPolicyAccepted ?
-            <Stack.Screen
-                name="PrivacyPolicy"
-                component={PrivacyPolicyPage}
-                options={{
-                    headerShown: false,
-                }}
-            /> :
+    const getPrivacyPolicyOrAppTabs = ()=>{
+        if (!user?.isPolicyAccepted)
+        {
+            return(
+                <Stack.Screen
+                    name="PrivacyPolicy"
+                    component={PrivacyPolicyPage}
+                    options={{
+                        headerShown: false,
+                    }}
+                />);
+        }
+
+        return(
             <Stack.Screen
                 name="AppTabs"
                 component={AppTabs}
@@ -68,9 +73,12 @@ const Routes = () => {
                     headerShown: false,
                 }}
             />
-    ) : (
-        <Stack.Screen name="Login" component={Login} />
-    );
+        );
+    };
+
+    const navigator = user ?
+        getPrivacyPolicyOrAppTabs():
+        <Stack.Screen name="Login" component={Login} />;
 
     return (
         <Root>
