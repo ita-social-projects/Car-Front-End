@@ -1,32 +1,50 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const AvatarLogoTitleStyle = StyleSheet.create({
-    container: {
-        paddingTop: 5,
-        paddingLeft: 17,
+
+    mainContainer:{
+        borderRadius: 16,
+        borderWidth: 1,
+        minHeight: 48,
+        width: Dimensions.get("screen").width - 32,
+        paddingHorizontal: 26,
+        paddingVertical: 24,
     },
 
     headerContainer: {
         flex: 1,
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center",
+        minHeight: 98,
     },
 
     headerUserInformation: {
-        marginLeft: 81,
-        position: "absolute"
+        marginLeft: 20
     },
 
     headerUserName: {
-        lineHeight: 21,
+        lineHeight: 22,
         fontSize: 18,
-        marginBottom: 8,
+        marginBottom: 4,
         fontWeight: "bold"
     },
 
-    headerUserAdditionalData: {
-        lineHeight: 14,
+    headerUserPosition: {
+        lineHeight: 18,
         fontSize: 14,
-        marginBottom: 8
+        marginBottom: 4,
+        color: "rgba(0, 163, 207, 1)"
+    },
+
+    headerUserLocation: {
+        lineHeight: 18,
+        fontSize: 14,
+        marginBottom: 4
+    },
+
+    headerUserRides: {
+        lineHeight: 18,
+        fontSize: 13
     }
 });
 

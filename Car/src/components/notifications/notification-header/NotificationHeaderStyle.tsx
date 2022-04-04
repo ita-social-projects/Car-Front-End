@@ -2,11 +2,9 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../../data/fonts/Font";
 
 const NotificationHeaderStyle = EStyleSheet.create({
-    profileContainer: {
-        width: "80%"
-    },
 
     messageContainer: {
+        marginTop: 24,
         paddingVertical: 14,
         paddingHorizontal: 10,
         borderTopWidth: 1,
@@ -20,12 +18,8 @@ const NotificationHeaderStyle = EStyleSheet.create({
         fontWeight: "700"
     },
 
-    avatarLogo: {
-        marginLeft: -16
-    },
-
     headerContainer: {
-        height:120
+        minHeight:120
     },
 
     row: {

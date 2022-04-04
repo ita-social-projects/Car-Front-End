@@ -1,4 +1,4 @@
-import { Platform, TextInput, View } from "react-native";
+import { Platform, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import EditLocationProps from "./EditLocationProps";
 import {
@@ -29,6 +29,8 @@ import AddressInput from "../../../../../../components/address-input/AddressInpu
 import AddEditCarsStyle from "../../../cars/car-activity/add-edit-cars/AddEditCarsStyle";
 import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
+import Location from "../../../../../../../models/location/Location";
+import AddressNameInput from "../../../../../../components/address-name-input/AddressNameInput";
 
 const EditLocation = (props: EditLocationProps) => {
     const { colors, isThemeDark } = useTheme();
@@ -47,6 +49,7 @@ const EditLocation = (props: EditLocationProps) => {
     const [locationType, setLocationType] = useState<{id: number, name: string}>(
         { id: DEFAULT_LOCATION_ICON_ID, name: "Other" }
     );
+    const [currentLocationName, setCurrentLocationName] = useState<string>("");
 
     const mapRef = useRef<MapView | null>(null);
     const addressInputRef = useRef<GooglePlacesAutocompleteRef | null>();
@@ -59,6 +62,8 @@ const EditLocation = (props: EditLocationProps) => {
         }
         LocationService.getById(props.locationId).then((response) => {
             const location = response.data;
+
+            setCurrentLocationName(String(location?.name));
 
             setLocationName(String(location?.name));
             setLocationType({
@@ -143,6 +148,13 @@ const EditLocation = (props: EditLocationProps) => {
         setWayPointsTextAndIsConfirmed(data.description, true);
     };
 
+    const AddressNameInputOnChangeTextHandler = (name: string, availability: boolean) =>{
+        setIsLocationAvailable(availability);
+        if(isLocationAvailable){
+            setLocationName(name);
+        }
+    };
+
     const updateLocation = async () => {
         await LocationService.update({
             id: props.locationId,
@@ -154,6 +166,19 @@ const EditLocation = (props: EditLocationProps) => {
             },
             typeId: locationType.id
         });};
+
+    const [userLocations, setUserLocations] = useState<Location[]>();
+    const [isLocationAvailable, setIsLocationAvailable] = useState<boolean>(true);
+
+    useEffect(() => {
+        loadLocations();
+    }, []);
+
+    const loadLocations = async () =>{
+        await LocationService.getAll().then(response => {
+            setUserLocations(response.data);
+        });
+    };
 
     return(
         isLoading ? (
@@ -183,19 +208,15 @@ const EditLocation = (props: EditLocationProps) => {
                             recentAddresses={[]}
                             refFor={(ref) => (addressInputRef.current = ref)}
                         />
-                        <TextInput
-                            style={[AddLocationStyle.textInput,
-                                {
-                                    borderColor: colors.primary,
-                                    backgroundColor: colors.white,
-                                    color: colors.primary
-                                }]}
-                            value={locationName}
+
+                        <AddressNameInput
+                            currentLocationName={currentLocationName}
+                            userLocations={userLocations}
                             placeholder={"Name the chosen address"}
-                            placeholderTextColor={"grey"}
-                            onChangeText={(fromInput) => {
-                                setLocationName(fromInput);
-                            }}/>
+                            placeholderColor={colors.secondaryDark}
+                            onTextChange={AddressNameInputOnChangeTextHandler}
+                        />
+
                         <LocationDropDownPicker
                             fast-food-outline
                             items={LOCATION_TYPES}
@@ -229,7 +250,7 @@ const EditLocation = (props: EditLocationProps) => {
                         />
                     </MapView>
                     <SaveLocationButton
-                        wayPointConfirmation={wayPoint.isConfirmed}
+                        wayPointConfirmation={wayPoint.isConfirmed && isLocationAvailable}
                         onPress={() => updateLocation().then(() => navigation.goBack())}
                     />
                 </View>

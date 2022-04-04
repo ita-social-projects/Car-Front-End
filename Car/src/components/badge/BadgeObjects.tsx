@@ -136,7 +136,7 @@ var allBadges = [
         description: "Yay, you've rided 10 km!",
         type: BadgeTypes.driverDistance,
         points: 10,
-        isReached: true,
+        isReached: false,
         scale: 1,
         pathLocked: require("../../../assets/Badges/Locked/elusive_joe_2_10.png"),
         pathUnlocked: require("../../../assets/Badges/Unlocked/elusive_joe_2_10.png")

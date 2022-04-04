@@ -27,6 +27,7 @@ import { findAll } from "highlight-words-core";
 import Chat from "../../../models/Chat/Chat";
 import Indicator from "../../components/activity-indicator/Indicator";
 import { getDateWithCorrectUtc } from "../../utils/ChatHelperFunctions";
+import UnreadMessages from "../../components/unread-messages/UnreadMessages";
 
 const Messages = (props: MessagesProps) => {
     const { colors, isThemeDark } = useTheme();
@@ -198,7 +199,16 @@ const Messages = (props: MessagesProps) => {
                                             </Text>
                                         )}
                                     </View>
-
+                                    <View>
+                                        {item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                            .unreadMessagesCount !== ZERO &&
+                                            <View>
+                                                <UnreadMessages
+                                                    value={item?.receivedMessages[FIRST_ELEMENT_OF_THE_ARRAY]
+                                                        .unreadMessagesCount}/>
+                                            </View>
+                                        }
+                                    </View>
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -236,7 +246,6 @@ const Messages = (props: MessagesProps) => {
             ) : (
                 <View />
             )}
-
             <View style={[MessagesStyle.container, { backgroundColor: colors.white }]}>
                 {isLoading ? (
                     <Indicator

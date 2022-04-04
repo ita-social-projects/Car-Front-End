@@ -70,19 +70,20 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
 
     return (
         <>
-            <View style={[
-                PassengerWithdrawalViewStyle.window,
-                { color: colors.primary }
-            ]}
-            >
-                <NotificationHeader
-                    sender={props.route.params.notification.sender}
-                />
+            <ScrollView style={{ flexGrow: 1 }}>
 
-                <ScrollView style={{ flexGrow: 1 }}>
+                <View style={[
+                    PassengerWithdrawalViewStyle.window,
+                    { color: colors.primary }
+                ]}
+                >
+                    <NotificationHeader
+                        sender={props.route.params.notification.sender}
+                    />
+
                     <View style={[NotificationHeaderStyle.messageContainer, {
-                        borderTopColor: colors.secondaryLight,
-                        borderBottomColor: colors.secondaryLight
+                        borderTopColor: colors.disableBack,
+                        borderBottomColor: colors.disableBack
                     }]}>
                         <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                             The driver has canceled {"\n"}your ride!
@@ -112,16 +113,18 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-                </ScrollView>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                </NotificationButtonGroup>
-            </View>
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                    </NotificationButtonGroup>
+
+                </View>
+
+            </ScrollView>
         </>
     );
 };

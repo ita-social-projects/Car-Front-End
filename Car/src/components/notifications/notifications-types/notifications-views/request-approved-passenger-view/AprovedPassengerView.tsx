@@ -76,18 +76,18 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+            <ScrollView style = {{ flexGrow: 1 }}>
 
-                <NotificationHeader
-                    sender={props.route.params.notification.notification.sender}
-                />
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
 
-                <ScrollView style = {{ flexGrow: 1 }}>
+                    <NotificationHeader
+                        sender={props.route.params.notification.notification.sender}
+                    />
 
                     {props.route.params.notification.notificationHeaderMessage !== "" &&
                         <View style={[NotificationHeaderStyle.messageContainer, {
-                            borderTopColor: colors.secondaryLight,
-                            borderBottomColor: colors.secondaryLight
+                            borderTopColor: colors.disableBack,
+                            borderBottomColor: colors.disableBack
                         }]}>
                             <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                                 {props.route.params.notification.notificationHeaderMessage}
@@ -116,20 +116,21 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-                </ScrollView>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                    <NotificationDeclineButton
-                        declineText={"Withdraw"}
-                        onDecline={()=>setLeaveRideModalIsVisible(true)}
-                    />
-                </NotificationButtonGroup>
-            </View>
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                        <NotificationDeclineButton
+                            declineText={"Withdraw"}
+                            onDecline={()=>setLeaveRideModalIsVisible(true)}
+                        />
+                    </NotificationButtonGroup>
+                </View>
+
+            </ScrollView>
 
             <ConfirmModal
                 visible={LeaveRideModalIsVisible}

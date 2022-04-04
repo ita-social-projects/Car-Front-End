@@ -2,6 +2,11 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import Font from "../../../data/fonts/Font";
 
 const JourneyNewApplicantStyle = EStyleSheet.create({
+    window: {
+        padding: 16,
+        height: "100%",
+    },
+
     row: {
         flex: 0,
         flexDirection: "row",
@@ -62,13 +67,6 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
         fontSize: 16,
         paddingTop: 15
     },
-    window: {
-        padding: 20,
-        height: "100%",
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-    },
 
     background: {
         flex: 1,
@@ -83,9 +81,6 @@ const JourneyNewApplicantStyle = EStyleSheet.create({
     headerContainer: {
         flex: 0.5
     },
-    stopsBlock: {
-        flex: 1
-    }
 });
 
 export default JourneyNewApplicantStyle;

@@ -71,21 +71,23 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
 
     return (
         <>
-            <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
-                <ScrollView style = {{ flexGrow: 1 }}>
+            <ScrollView style = {{ flexGrow: 1 }}>
+
+                <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+
                     <NotificationHeader
                         sender={props.route.params.notification.notification.sender}
                     />
 
                     {props.route.params.notification.notificationHeaderMessage !== "" &&
-                        <View style={[NotificationHeaderStyle.messageContainer, {
-                            borderTopColor: colors.secondaryLight,
-                            borderBottomColor: colors.secondaryLight
-                        }]}>
-                            <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
-                                {props.route.params.notification.notificationHeaderMessage}
-                            </Text>
-                        </View>
+                            <View style={[NotificationHeaderStyle.messageContainer, {
+                                borderTopColor: colors.disableBack,
+                                borderBottomColor: colors.disableBack
+                            }]}>
+                                <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
+                                    {props.route.params.notification.notificationHeaderMessage}
+                                </Text>
+                            </View>
                     }
 
                     <NotificationRideDetails
@@ -109,16 +111,18 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
                             highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
                         />
                     </View>
-                </ScrollView>
 
-                <NotificationButtonGroup>
-                    <NotificationConfirmButton
-                        confirmText={"Ok"}
-                        onConfirm={() => {
-                            navigation.goBack();
-                        }} />
-                </NotificationButtonGroup>
-            </View>
+                    <NotificationButtonGroup>
+                        <NotificationConfirmButton
+                            confirmText={"Ok"}
+                            onConfirm={() => {
+                                navigation.goBack();
+                            }} />
+                    </NotificationButtonGroup>
+
+                </View>
+
+            </ScrollView>
         </>
     );
 };

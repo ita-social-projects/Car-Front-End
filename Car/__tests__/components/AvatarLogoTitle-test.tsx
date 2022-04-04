@@ -6,115 +6,137 @@ const renderer = shallowRender.createRenderer();
 
 test("renders correctly", async () =>
     expect(renderer.render(<AvatarLogoTitle />)).toMatchInlineSnapshot(`
-    <View
-      style={
-        Object {
-          "paddingLeft": 17,
-          "paddingTop": 5,
-        }
+    <Shadow
+      distance={8}
+      offset={
+        Array [
+          0,
+          3,
+        ]
       }
+      startColor="#e5e5e5"
     >
       <View
         style={
-          Object {
-            "flex": 1,
-            "flexDirection": "row",
-          }
+          Array [
+            Object {
+              "borderRadius": 16,
+              "borderWidth": 1,
+              "minHeight": 48,
+              "paddingHorizontal": 26,
+              "paddingVertical": 24,
+              "width": 718,
+            },
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "#F8F8F8",
+            },
+          ]
         }
       >
-        <AvatarLogo
-          marginLeft={8}
-          marginTop={14}
-          size={56}
-          user={null}
-        />
-        <View
-          style={
-            Object {
-              "marginLeft": 81,
-              "position": "absolute",
-            }
-          }
-        >
-          <Text
+        <ScrollView>
+          <View
             style={
-              Array [
-                Object {
-                  "fontSize": 18,
-                  "fontWeight": "bold",
-                  "lineHeight": 21,
-                  "marginBottom": 8,
-                },
-                Object {
-                  "color": "#0B171B",
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "minHeight": 98,
+              }
             }
           >
-            undefined undefined
-          </Text>
-          <Text
-            style={
-              Array [
+            <AvatarLogo
+              marginTop={0}
+              size={56}
+              user={null}
+            />
+            <View
+              style={
                 Object {
-                  "fontSize": 14,
-                  "lineHeight": 14,
-                  "marginBottom": 8,
-                },
-                Object {
-                  "color": "#414045",
-                  "fontWeight": "bold",
-                },
-              ]
-            }
-          />
-          <Text
-            style={
-              Array [
-                Object {
-                  "fontSize": 14,
-                  "lineHeight": 14,
-                  "marginBottom": 8,
-                },
-                Object {
-                  "color": "#909095",
-                },
-              ]
-            }
-          />
-          <Text
-            style={
-              Array [
-                Object {
-                  "fontSize": 14,
-                  "lineHeight": 14,
-                  "marginBottom": 8,
-                },
-                Object {
-                  "color": "#909095",
-                },
-              ]
-            }
-          >
-            undefined rides as driver
-          </Text>
-          <Text
-            style={
-              Array [
-                Object {
-                  "fontSize": 14,
-                  "lineHeight": 14,
-                  "marginBottom": 8,
-                },
-                Object {
-                  "color": "#909095",
-                },
-              ]
-            }
-          >
-            undefined rides as passanger
-          </Text>
-        </View>
+                  "marginLeft": 20,
+                }
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 18,
+                      "fontWeight": "bold",
+                      "lineHeight": 22,
+                      "marginBottom": 4,
+                    },
+                    Object {
+                      "color": "#0B171B",
+                    },
+                  ]
+                }
+              >
+                undefined undefined
+              </Text>
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 163, 207, 1)",
+                      "fontSize": 14,
+                      "lineHeight": 18,
+                      "marginBottom": 4,
+                    },
+                    Object {
+                      "color": "#414045",
+                      "fontWeight": "bold",
+                    },
+                  ]
+                }
+              />
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 14,
+                      "lineHeight": 18,
+                      "marginBottom": 4,
+                    },
+                    Object {
+                      "color": "#909095",
+                    },
+                  ]
+                }
+              />
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 13,
+                      "lineHeight": 18,
+                    },
+                    Object {
+                      "color": "#909095",
+                    },
+                  ]
+                }
+              >
+                undefined rides as driver
+              </Text>
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 13,
+                      "lineHeight": 18,
+                    },
+                    Object {
+                      "color": "#909095",
+                    },
+                  ]
+                }
+              >
+                undefined rides as passanger
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
-    </View>
+    </Shadow>
   `));

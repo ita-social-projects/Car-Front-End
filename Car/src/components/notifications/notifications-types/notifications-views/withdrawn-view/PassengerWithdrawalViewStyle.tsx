@@ -3,7 +3,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 const PassengerWithdrawalViewStyle = EStyleSheet.create({
 
     window: {
-        padding: 20,
+        padding: 16,
         height: "100%",
     },
 });

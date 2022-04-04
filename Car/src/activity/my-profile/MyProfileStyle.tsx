@@ -4,7 +4,8 @@ import Font from "../../data/fonts/Font";
 const MyProfileStyle = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop:150
+        paddingHorizontal: 16,
+        paddingVertical: 16
     },
 
     optionIcon: {
@@ -70,7 +71,7 @@ const MyProfileStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         paddingTop: 40,
-        paddingBottom: 35
+        paddingBottom: 19
     },
     foterLeftRef:{
         paddingRight: 16,

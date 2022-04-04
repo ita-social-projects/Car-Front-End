@@ -9,7 +9,7 @@ import {
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import {
@@ -38,13 +38,13 @@ import {
     MAX_OPACITY,
     MAX_POPUP_POSITION,
     MIN_POPUP_HEIGHT,
-    MIN_POPUP_POSITION
+    MIN_POPUP_POSITION,
 } from "../../../../constants/StylesConstants";
 import {
     FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
     THIRD_ELEMENT_INDEX,
-    ZERO_ID
+    ZERO_ID,
 } from "../../../../constants/GeneralConstants";
 import UserService from "../../../../../api-service/user-service/UserService";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
@@ -91,14 +91,13 @@ const Chat = (properties: ChatProps) => {
         properties.navigation.setOptions({ headerTitle: properties.route.params.header });
 
         UserService.getUser(user!.id).then((res) => setUser(res.data));
-
     }, []);
 
     const invokeConncetion = () => {
-        connection?.invoke(
-            "EnterToGroup",
-            properties.route.params.chatId.toString()
-        ).catch((e) => appInsights.trackException({ exception: e }));
+    connection
+        ?.invoke("EnterToGroup", properties.route.params.chatId.toString())
+        .catch((e) => appInsights.trackException({ exception: e }));
+    console.log(connection?.connectionId);
     };
 
     useEffect(() => {
@@ -106,8 +105,7 @@ const Chat = (properties: ChatProps) => {
             connection.start().then(() => {
                 invokeConncetion();
 
-                if (Platform.OS === "android")
-                    AndroidKeyboardAdjust.setAdjustResize();
+                if (Platform.OS === "android") AndroidKeyboardAdjust.setAdjustResize();
 
                 ReceivedMessagesService.markAsRead(properties.route.params.chatId);
             });
@@ -123,12 +121,11 @@ const Chat = (properties: ChatProps) => {
                 messageId = messageToFocusId + NUMBER_OF_MESSAGES_BELOW_FOCUSED;
             }
 
-            loadMessages(messageId)
-                .then((res: IMessage[]) => {
-                    setMessages(res.concat(systemMessage));
-                    setSpinner(false);
-                    focusOnMessage(res.find(msg => msg._id === messageToFocusId)!);
-                });
+            loadMessages(messageId).then((res: IMessage[]) => {
+                setMessages(res.concat(systemMessage));
+                setSpinner(false);
+                focusOnMessage(res.find((msg) => msg._id === messageToFocusId)!);
+            });
 
             connection.onreconnected(() => {
                 invokeConncetion();
@@ -139,18 +136,21 @@ const Chat = (properties: ChatProps) => {
 
                 setMessages((previousMessages) =>
                     GiftedChat.append(
-                        previousMessages as any,
-                        {
-                            _id: receivedMessage.id,
-                            text: receivedMessage.text,
-                            createdAt: new Date(creationMessageDate),
-                            user: {
-                                _id: receivedMessage.senderId,
-                                name: receivedMessage?.sender?.name + "|"
-                                    + receivedMessage?.sender?.surname + "|"
-                                    + receivedMessage?.sender?.imageId
-                            }
-                        } as any
+            previousMessages as any,
+            {
+                _id: receivedMessage.id,
+                text: receivedMessage.text,
+                createdAt: new Date(creationMessageDate),
+                user: {
+                    _id: receivedMessage.senderId,
+                    name:
+                  receivedMessage?.sender?.name +
+                  "|" +
+                  receivedMessage?.sender?.surname +
+                  "|" +
+                  receivedMessage?.sender?.imageId,
+                },
+            } as any
                     )
                 );
                 ReceivedMessagesService.markAsRead(properties.route.params.chatId);
@@ -158,13 +158,9 @@ const Chat = (properties: ChatProps) => {
             setMessage("");
 
             return () => {
-                if (Platform.OS === "android")
-                    AndroidKeyboardAdjust.setAdjustPan();
+                if (Platform.OS === "android") AndroidKeyboardAdjust.setAdjustPan();
 
-                connection?.invoke(
-                    "LeaveTheGroup",
-                    properties.route.params.chatId.toString()
-                );
+        connection?.invoke("LeaveTheGroup", properties.route.params.chatId.toString());
             };
         }
     }, [connection]);
@@ -178,7 +174,7 @@ const Chat = (properties: ChatProps) => {
                     .invoke("SendMessageToGroup", {
                         Text: messageToSend,
                         SenderId: user?.id,
-                        ChatId: properties.route.params.chatId
+                        ChatId: properties.route.params.chatId,
                     })
                     .catch((e) => appInsights.trackException({ exception: e }));
                 setMessage("");
@@ -189,20 +185,18 @@ const Chat = (properties: ChatProps) => {
     };
 
     React.useEffect(() => {
-        Animated.timing(
-            fadeAnim,
-            {
-                toValue: 1,
-                duration: 5000,
-                useNativeDriver: true
-            }
-        ).start();
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 5000,
+            useNativeDriver: true,
+        }).start();
     }, [fadeAnim]);
 
     const renderBubble = (props: BubbleProps<IMessage>) => (
         <Animated.View
             style={{
-                opacity: props.currentMessage?._id === properties.route.params.messageId ? fadeAnim : MAX_OPACITY,
+                opacity:
+          props.currentMessage?._id === properties.route.params.messageId ? fadeAnim : MAX_OPACITY,
             }}
         >
             <Bubble
@@ -213,19 +207,19 @@ const Chat = (properties: ChatProps) => {
                     },
                     right: {
                         backgroundColor: colors.navyBlueGradientFrom,
-                    }
+                    },
                 }}
                 textStyle={{
                     left: {
                         color: colors.primary,
                         paddingHorizontal: 8,
-                        paddingVertical: 2
+                        paddingVertical: 2,
                     },
                     right: {
                         color: "#FFFFFF",
                         paddingHorizontal: 8,
-                        paddingVertical: 2
-                    }
+                        paddingVertical: 2,
+                    },
                 }}
             />
         </Animated.View>
@@ -260,7 +254,7 @@ const Chat = (properties: ChatProps) => {
                 backgroundColor: colors.white,
             }}
             textInputStyle={{
-                color: colors.primary
+                color: colors.primary,
             }}
         />
     );
@@ -269,16 +263,18 @@ const Chat = (properties: ChatProps) => {
         <TouchableOpacity
             onPress={() =>
                 navigation.navigate("Applicant Page", {
-                    userId: data.currentMessage.user._id as number
+                    userId: data.currentMessage.user._id as number,
                 })
             }
         >
             <AvatarLogo
                 size={36}
                 user={{
-                    imageId: data.currentMessage.user.name.replace("null", "").split("|")[THIRD_ELEMENT_INDEX],
+                    imageId: data.currentMessage.user.name.replace("null", "").split("|")[
+                        THIRD_ELEMENT_INDEX
+                    ],
                     name: data.currentMessage.user.name.split("|")[FIRST_ELEMENT_INDEX],
-                    surname: data.currentMessage.user.name.split("|")[SECOND_ELEMENT_INDEX]
+                    surname: data.currentMessage.user.name.split("|")[SECOND_ELEMENT_INDEX],
                 }}
             />
         </TouchableOpacity>
@@ -293,41 +289,37 @@ const Chat = (properties: ChatProps) => {
         isOpen = !isOpen;
         selectedMessage = myMessage;
 
-        moreOptionsRef?.current?.snapTo(
-            isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION
-        );
+    moreOptionsRef?.current?.snapTo(isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION);
     };
 
     const hidePopup = () => {
-        moreOptionsRef?.current?.snapTo(MIN_POPUP_POSITION);
+    moreOptionsRef?.current?.snapTo(MIN_POPUP_POSITION);
     };
 
     const loadMessages = (messageId: number): Promise<any> => {
         let tempChat: IMessage[] = [];
 
-        return ChatService.getCertainChat(
-            properties?.route.params.chatId, messageId)
+        return ChatService.getCertainChat(properties?.route.params.chatId, messageId)
             .then((res: any) => {
-                res.data?.forEach((data: Message) => {
-                    const messageToAdd: IMessage = {
-                        _id: data?.id!,
-                        text: data?.text!,
-                        createdAt: Platform.OS === "ios"// no automatic Utc time offset for Ios
-                            ? getDateWithCorrectUtc(new Date(data!.createdAt))
-                            : new Date(data!.createdAt),
-                        user: {
-                            _id: data?.senderId!,
-                            name: data?.senderName + "|"
-                                + data?.senderSurname + "|"
-                                + data?.imageId
-                        }
-                    };
+        res.data?.forEach((data: Message) => {
+            const messageToAdd: IMessage = {
+                _id: data?.id!,
+                text: data?.text!,
+                createdAt:
+              Platform.OS === "ios" // no automatic Utc time offset for Ios
+                  ? getDateWithCorrectUtc(new Date(data!.createdAt))
+                  : new Date(data!.createdAt),
+                user: {
+                    _id: data?.senderId!,
+                    name: data?.senderName + "|" + data?.senderSurname + "|" + data?.imageId,
+                },
+            };
 
-                    tempChat.push(messageToAdd);
-                });
-                if (tempChat.length < COUNT_OF_MESSAGES_TO_LOAD) {
-                    setLoadMessage(false);
-                }
+            tempChat.push(messageToAdd);
+        });
+        if (tempChat.length < COUNT_OF_MESSAGES_TO_LOAD) {
+            setLoadMessage(false);
+        }
             })
             .then(() => tempChat);
     };
@@ -336,16 +328,10 @@ const Chat = (properties: ChatProps) => {
         setLoadingEarlier(true);
         let oldestMessageId = Math.min(...messages.map((u: any) => u._id));
 
-        loadMessages(oldestMessageId)
-            .then((res) => {
-                setMessages((previousMessages) =>
-                    GiftedChat.append(
-                        res,
-                        previousMessages as any
-                    )
-                );
-                setLoadingEarlier(false);
-            });
+        loadMessages(oldestMessageId).then((res) => {
+            setMessages((previousMessages) => GiftedChat.append(res, previousMessages as any));
+            setLoadingEarlier(false);
+        });
     };
 
     const loadNewerMessages = () => {
@@ -355,15 +341,12 @@ const Chat = (properties: ChatProps) => {
 
         loadMessages(id).then((res: IMessage[]) => {
             setMessages((previousMessages) => {
-                let temp = GiftedChat.append(
-                    res,
-                    previousMessages as any
-                );
+                let temp = GiftedChat.append(res, previousMessages as any);
 
                 const onlyUniqueMessages = (arr: IMessage[]) =>
-                    arr.filter((value, index, array) =>
-                        array.map(obj => obj._id)
-                            .indexOf(value._id) === index);
+                    arr.filter(
+                        (value, index, array) => array.map((obj) => obj._id).indexOf(value._id) === index
+                    );
 
                 temp.sort((a, b) => Number(b._id) - Number(a._id));
 
@@ -375,9 +358,11 @@ const Chat = (properties: ChatProps) => {
 
     const focusOnMessage = (msg: IMessage) => {
         setTimeout(() => {
-            chatRef.current?._messageContainerRef?.current?.scrollToItem({
-                animated: false, item: msg, viewPosition: 0.1
-            });
+      chatRef.current?._messageContainerRef?.current?.scrollToItem({
+          animated: false,
+          item: msg,
+          viewPosition: 0.1,
+      });
         }, MILLISECONDS);
     };
 
@@ -392,16 +377,17 @@ const Chat = (properties: ChatProps) => {
 
     return (
         <KeyboardAvoidingView
-            style={[ChatStyle.chatWrapper, { backgroundColor: colors.white, }]}
-            behavior={Platform.OS === "ios" ? "padding" : undefined}>
+            style={[ChatStyle.chatWrapper, { backgroundColor: colors.white }]}
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
             <TouchableWithoutFeedback
-                onPress={() => {Keyboard.dismiss(); hidePopup();}}>
+                onPress={() => {
+                    Keyboard.dismiss();
+                    hidePopup();
+                }}
+            >
                 {isLoading ? (
-                    <Indicator
-                        size="large"
-                        color={colors.hover}
-                        text="Loading information..."
-                    />
+                    <Indicator size="large" color={colors.hover} text="Loading information..." />
                 ) : (
                     <View style={{ flex: 1 }}>
                         <GiftedChat
@@ -427,7 +413,7 @@ const Chat = (properties: ChatProps) => {
                             alwaysShowSend
                             user={{
                                 _id: user?.id!,
-                                name: user?.name + "|" + user?.surname
+                                name: user?.name + "|" + user?.surname,
                             }}
                             renderBubble={renderBubble}
                             renderSend={renderSend}
@@ -441,12 +427,12 @@ const Chat = (properties: ChatProps) => {
                             onLoadEarlier={loadEarlierMessages}
                             isLoadingEarlier={isLoadingEarlier}
                             infiniteScroll={true}
-                            renderLoadEarlier={() => isLoadingEarlier ?
-                                <Indicator
-                                    size="large"
-                                    color={colors.hover}
-                                    text="Loading information..."
-                                /> : <View />
+                            renderLoadEarlier={() =>
+                                isLoadingEarlier ? (
+                                    <Indicator size="large" color={colors.hover} text="Loading information..." />
+                                ) : (
+                                    <View />
+                                )
                             }
                         />
                     </View>
@@ -461,10 +447,13 @@ const Chat = (properties: ChatProps) => {
                 renderHeader={<View />}
                 renderContent={
                     <View style={{ backgroundColor: colors.white }}>
-                        <MenuButton text="Copy text" onPress={() => {
-                            moreOptionsRef.current.snapTo(MIN_POPUP_POSITION);
-                            Clipboard.setString(selectedMessage.text);
-                        }}/>
+                        <MenuButton
+                            text="Copy text"
+                            onPress={() => {
+                                moreOptionsRef.current.snapTo(MIN_POPUP_POSITION);
+                                Clipboard.setString(selectedMessage.text);
+                            }}
+                        />
                         <MenuButton text="Cancel" onPress={hidePopup} />
                     </View>
                 }

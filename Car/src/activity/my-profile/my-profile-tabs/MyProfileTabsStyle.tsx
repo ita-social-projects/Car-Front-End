@@ -23,8 +23,7 @@ const MyProfileTabsStyle = StyleSheet.create({
     header:{
         width: "100%",
         height: 57,
-        borderBottomWidth:2,
-        marginBottom: 16
+        borderBottomWidth:2
     },
     headerText: {
         textAlign: "center",

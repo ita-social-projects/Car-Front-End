@@ -9,7 +9,8 @@ type User = null | {
     hireDate: Date;
     imageId: string | null;
     journeyCount: number;
-    phoneNumber: number | null;
+    phoneNumber?: string | null;
+    isNumberVisible?: boolean;
     isPolicyAccepted: boolean;
 };
 

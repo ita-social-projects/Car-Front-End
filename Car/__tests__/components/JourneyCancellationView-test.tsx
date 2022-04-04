@@ -90,48 +90,48 @@ test("renders correctly", async () =>
         )
     ).toMatchInlineSnapshot(`
     <React.Fragment>
-      <View
+      <ScrollView
         style={
-          Array [
-            undefined,
-            Object {
-              "color": "#0B171B",
-            },
-          ]
+          Object {
+            "flexGrow": 1,
+          }
         }
       >
-        <NotificationHeader
-          sender={
-            Object {
-              "email": "Abc",
-              "fcmtoken": null,
-              "hireDate": 2021-01-01T20:00:00.000Z,
-              "id": 0,
-              "imageId": null,
-              "isPolicyAccepted": true,
-              "journeyCount": 0,
-              "location": "Abc",
-              "name": "Abc",
-              "phoneNumber": null,
-              "position": "Abc",
-              "surname": "Abc",
-            }
-          }
-        />
-        <ScrollView
+        <View
           style={
-            Object {
-              "flexGrow": 1,
-            }
+            Array [
+              undefined,
+              Object {
+                "color": "#0B171B",
+              },
+            ]
           }
         >
+          <NotificationHeader
+            sender={
+              Object {
+                "email": "Abc",
+                "fcmtoken": null,
+                "hireDate": 2021-01-01T20:00:00.000Z,
+                "id": 0,
+                "imageId": null,
+                "isPolicyAccepted": true,
+                "journeyCount": 0,
+                "location": "Abc",
+                "name": "Abc",
+                "phoneNumber": null,
+                "position": "Abc",
+                "surname": "Abc",
+              }
+            }
+          />
           <View
             style={
               Array [
                 undefined,
                 Object {
-                  "borderBottomColor": "#AAA9AE",
-                  "borderTopColor": "#AAA9AE",
+                  "borderBottomColor": "#C4C4C4",
+                  "borderTopColor": "#C4C4C4",
                 },
               ]
             }
@@ -183,13 +183,13 @@ test("renders correctly", async () =>
               stops={Array []}
             />
           </View>
-        </ScrollView>
-        <NotificationButtonGroup>
-          <NotificationConfirmButton
-            confirmText="Ok"
-            onConfirm={[Function]}
-          />
-        </NotificationButtonGroup>
-      </View>
+          <NotificationButtonGroup>
+            <NotificationConfirmButton
+              confirmText="Ok"
+              onConfirm={[Function]}
+            />
+          </NotificationButtonGroup>
+        </View>
+      </ScrollView>
     </React.Fragment>
   `));

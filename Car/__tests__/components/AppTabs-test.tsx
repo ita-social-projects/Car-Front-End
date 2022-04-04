@@ -59,7 +59,8 @@ test("renders correctly", async () =>
             "tabBarBadge": undefined,
             "tabBarBadgeStyle": Object {
               "backgroundColor": "#EC6400",
-              "color": "#ffffff",
+              "color": "#FFFFFF",
+              "fontSize": 8,
             },
             "tabBarLabel": "Notifications",
           }

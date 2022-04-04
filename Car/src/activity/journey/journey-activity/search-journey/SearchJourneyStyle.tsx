@@ -99,7 +99,7 @@ const SearchJourneyStyle = StyleSheet.create({
     moveToStopButton: {
         paddingHorizontal: 16,
         paddingVertical: 14,
-        bottom: 350,
+        bottom: 35,
         display: "flex",
         width:52,
         height:44,
