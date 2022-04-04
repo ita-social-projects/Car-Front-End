@@ -1,5 +1,7 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import HeaderEllipsisStyle from "../header-ellipsis/HeaderEllipsisStyle";
 import ShadowedBottomPopup from "../shadowed-bottom-popup/ShadowedBottomPopup";
 import { useTheme } from "../theme/ThemeProvider";
 import HeaderRequestButtonStyle from "./HeaderRequestButtonStyle";
@@ -15,9 +17,12 @@ const HeaderRequestButton = () => {
                     ShadowedBottomPopup.pressHandle();
             }}
         >
-            <Text style={[HeaderRequestButtonStyle.buttonText, { color: colors.accentBlue }]}>
-            Request
-            </Text>
+            <Ionicons
+                name={"ellipsis-horizontal"}
+                size={30}
+                color={colors.primary}
+                style={HeaderEllipsisStyle.moreOptionsIcon}
+            />
         </TouchableOpacity>
     );
 };

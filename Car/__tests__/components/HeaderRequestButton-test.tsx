@@ -25,20 +25,26 @@ test("renders correctly", async () =>
       }
     >
       <Text
+        allowFontScaling={false}
         style={
           Array [
             Object {
-              "fontFamily": "Open Sans ExtraBold",
-              "fontSize": 20,
-              "fontWeight": "700",
+              "color": "#0B171B",
+              "fontSize": 30,
             },
             Object {
-              "color": "#02A2CF",
+              "paddingRight": 12,
             },
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
           ]
         }
       >
-        Request
+        
       </Text>
     </View>
   `));
