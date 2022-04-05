@@ -9,16 +9,20 @@ const LoginStyle = StyleSheet.create({
         paddingBottom: 22,
     },
 
-    greetingTextContainer: {
+    greetingContainer: {
         alignItems: "center",
-        top:190
+        flex: 6,
+        justifyContent: "space-evenly",
+    },
+
+    greetingTextContainer: {
+        alignItems: "center"
     },
 
     greetingPicture: {
-        width:300,
-        height:300,
-        left:42,
-        top:160
+        width: 275,
+        height: 275,
+        transform: [{ scaleX: -1 }],
     },
 
     greetingText: {
@@ -27,11 +31,6 @@ const LoginStyle = StyleSheet.create({
         lineHeight: 16,
         textTransform: "uppercase",
         letterSpacing: 0.2
-    },
-
-    applicationNameTextContainer: {
-        paddingTop: 18,
-        alignItems: "center"
     },
 
     applicationNameText: {
@@ -45,19 +44,17 @@ const LoginStyle = StyleSheet.create({
     loginContainer: {
         flex: 1,
         justifyContent: "flex-end",
-        alignItems: "flex-end"
     },
 
     buttonContainer: {
         alignItems: "center",
-        paddingHorizontal: Platform.OS === "ios" ? 16 : 0,
-        paddingBottom: Platform.OS === "ios" ? 22 : 0
+        paddingHorizontal: Platform.OS === "ios" ? 16 : 3,
+        paddingBottom: Platform.OS === "ios" ? 22 : 3
     },
 
     button: {
         width: 304,
         height: 56,
-        right:37,
         fontSize: 16,
         alignItems: "center",
         justifyContent: "center"
@@ -70,7 +67,8 @@ const LoginStyle = StyleSheet.create({
 
     loadingIcon: {
         width: 56,
-        height: 56
+        height: 56,
+        alignSelf: "center"
     }
 });
 
