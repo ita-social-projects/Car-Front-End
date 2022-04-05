@@ -19,6 +19,7 @@ import Chat from "../../messages/messages-activity/chat/Chat";
 import HeaderBackButton from "../../../components/header-back-button/HeaderBackButton";
 import HeaderEllipsis from "../../../components/header-ellipsis/HeaderEllipsis";
 import HeaderRequestButton from "../../../components/header-request-button/HeaderRequestButton";
+import CredentialsManager from "../../../../credentials/credentials.json";
 import {
     JOURNEY_MORE_OPTIONS_POPUP_HEIGHT,
 } from "../../../constants/JourneyConstants";
@@ -50,6 +51,12 @@ import Preferences from "../../my-profile/my-profile-activity/preferences/Prefer
 import AsyncStorage from "@react-native-community/async-storage";
 import ConfirmModal from "../../../components/confirm-modal/ConfirmModal";
 import HeaderAddStopButton from "../../../components/header-add-stop-button/HeaderAddStopButton";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
+import { darkMapStyle } from "../../../constants/DarkMapStyleConstant";
+import { mapStyle } from "../journey-activity/search-journey-map/SearchJourneyMapStyle";
+import RequestService from "../../../../api-service/request-service/RequestService";
+import EditJourneyRequest from "../journey-activity/journey-request-page/edit-journey-request/EditJourneyRequest";
 
 const JourneyTabs = () => {
     useEffect(() => {
@@ -72,6 +79,9 @@ const JourneyTabs = () => {
     const [isVisible, setVisibility] = useState(false);
     const [modalVisibility, setModalVisibility] = useState(false);
 
+    const [cancelRequestModalIsVisible, setCancelRequestModalIsVisible] = useState(false);
+    const [cancelRequestSuccessModalIsVisible, setCancelRequestSuccessModalIsVisible] = useState(false);
+
     const layoutOpacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
     const journeyOpacity = useState(new Animated.Value(MAX_OPACITY))[FIRST_ELEMENT_INDEX];
 
@@ -80,6 +90,9 @@ const JourneyTabs = () => {
     const scheduleMoreOptionsRef = useRef<any>(null);
 
     const StackTabs = createStackNavigator();
+
+    const mapRef = useRef<MapView | null>(null);
+    const { isThemeDark } = useTheme();
 
     const fadeIn = () => {
         setVisibility(true);
@@ -121,6 +134,9 @@ const JourneyTabs = () => {
         setModalVisibility(false);
         (async () => sleep(MODAL_SLEEP_DURATION))().then(() => navigation.goBack());
     };
+
+    const showCancelRidePopup = () =>
+        setCancelRequestModalIsVisible(true);
 
     return (
         <View style={JourneyStyle.tabsStyle}>
@@ -365,10 +381,147 @@ const JourneyTabs = () => {
                 </StackTabs.Screen>
 
                 <StackTabs.Screen
+                    name="Request Page"
+                    options={{
+                        title: "Request",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton,
+                        headerRight: () => HeaderEllipsis(
+                            { onPress: () => pressHandle(ridePageMoreOptionsRef) }
+                        )
+                    }}
+                >
+                    {(props: any) => {
+                        return (
+                            <Host>
+                                <Animated.View style={isVisible && [HeaderStyle.layout,
+                                    { opacity: layoutOpacity, backgroundColor: colors.primary }
+                                ]}/>
+
+                                <Animated.View style={[HeaderStyle.popUp,
+                                    { opacity: journeyOpacity, backgroundColor: colors.white }
+                                ]}>
+                                    {<MapView
+                                        ref={ref => {
+                                            mapRef.current = ref;
+                                        }}
+                                        style={{ flex: 1 }}
+                                        provider={PROVIDER_GOOGLE}
+                                        showsUserLocation={true}
+                                        customMapStyle={isThemeDark ? darkMapStyle : mapStyle}
+                                        showsCompass={false}
+                                        showsMyLocationButton={false}
+                                    >
+                                        {
+                                            <>
+                                                <MapViewDirections
+                                                    origin={props.route.params.request.from}
+                                                    destination={props.route.params.request.to}
+                                                    apikey={CredentialsManager.mapApiKey}
+                                                    strokeWidth={5}
+                                                    strokeColor={"#027ebd"}
+                                                />
+                                                <Marker
+                                                    coordinate={props.route.params.request.from}
+                                                    image={require("../../../../assets/images/maps-markers/From.png")}
+                                                />
+                                                <Marker
+                                                    coordinate={props.route.params.request.to}
+                                                    image={require("../../../../assets/images/maps-markers/From.png")}
+                                                />
+                                            </>
+                                        }
+                                    </MapView>}
+                                </Animated.View>
+
+                                {<BottomPopup
+                                    refForChild={ref => (ridePageMoreOptionsRef.current = ref)}
+                                    snapPoints={[MIN_POPUP_HEIGHT, JOURNEY_MORE_OPTIONS_POPUP_HEIGHT]}
+                                    enabledInnerScrolling={false}
+                                    onCloseEnd={closeHandle}
+                                    initialSnap={0}
+                                    renderHeader={
+                                        <View style={[JourneyPageStyle.headerTitleStyle,
+                                            { backgroundColor: colors.white }
+                                        ]}>
+                                            <Text style={[JourneyPageStyle.headerTextStyle,
+                                                { color: colors.primary }]}>
+                                                MORE OPTIONS
+                                            </Text>
+                                        </View>
+                                    }
+                                    renderContent={
+                                        <View style={[JourneyPageStyle.panel,
+                                            { backgroundColor: colors.white }
+                                        ]}>
+                                            <MenuButton
+                                                text="Edit ride route"
+                                                isIcon={true}
+                                                onPress={() => {
+                                                    navigation.navigate("Edit Request Page",
+                                                        { isRequest: true, isPreviousFilter: false,
+                                                            request: props.route.params.request });
+                                                }}
+                                            />
+                                            <MenuButton
+                                                text="Cancel ride"
+                                                isIcon={true}
+                                                onPress={showCancelRidePopup}
+                                            />
+                                        </View>
+                                    }
+                                />}
+
+                                <ConfirmModal
+                                    visible={cancelRequestModalIsVisible}
+                                    title={"Request canceling"}
+                                    confirmText={"Yes, cancel it"}
+                                    cancelText={"No, keep it"}
+                                    onConfirm={() => {
+                                        setCancelRequestModalIsVisible(false);
+                                        RequestService.delete(props.route.params.request.id)
+                                            .then(() => setCancelRequestSuccessModalIsVisible(true));
+                                    }}
+                                    disableModal={() => setCancelRequestModalIsVisible(false)}
+                                    subtitle={"Are you sure you want to cancel the request?"}
+                                />
+
+                                <ConfirmModal
+                                    visible={cancelRequestSuccessModalIsVisible}
+                                    title={"Request canceling"}
+                                    confirmText={"Ok"}
+                                    hideCancelButton={true}
+                                    onConfirm={() => {
+                                        setCancelRequestSuccessModalIsVisible(false);
+                                        navigation.navigate("Journey");
+                                    }}
+                                    disableModal={() => {
+                                        setCancelRequestSuccessModalIsVisible(false);
+                                        navigation.navigate("Journey");
+                                    }}
+                                    subtitle={"Request was successfully canceled"}
+                                />
+                            </Host>
+                        );
+                    }}
+                </StackTabs.Screen>
+
+                <StackTabs.Screen
                     name="Journey Request Page"
                     component={SearchJourney}
                     options={{
                         title: "Create Ride Request",
+                        headerTitleAlign: "center",
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton,
+                    }}
+                />
+                <StackTabs.Screen
+                    name="Edit Request Page"
+                    component={EditJourneyRequest}
+                    options={{
+                        title: "Edit Ride Request",
                         headerTitleAlign: "center",
                         headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
                         headerLeft: HeaderBackButton,
