@@ -5,13 +5,13 @@ import PhoneNumber from "../../../src/activity/my-profile/my-profile-activity/de
 const renderer = shallowRenderer.createRenderer();
 
 const navigation = {
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  addListener: (event: string, callback: () => void) => () => void {},
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
+    addListener: (event: string, callback: () => void) => () => void {},
 };
 
 test("renders correctly", async () =>
-  expect(renderer.render(<PhoneNumber navigation={navigation} />))
-    .toMatchInlineSnapshot(`
+    expect(renderer.render(<PhoneNumber navigation={navigation} />))
+        .toMatchInlineSnapshot(`
     <View
       style={
         Array [

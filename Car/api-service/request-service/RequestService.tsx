@@ -10,6 +10,12 @@ const RequestService = {
 
     addRequest: async (request: Request) =>
         APIService.post<Request>(route,request),
+
+    updateRequest: async (request:Request) =>
+        APIService.put<Request>(route + "update-request/", request),
+
+    delete: async (id: number) =>
+        APIService.delete(route + id)
 };
 
 export default RequestService;

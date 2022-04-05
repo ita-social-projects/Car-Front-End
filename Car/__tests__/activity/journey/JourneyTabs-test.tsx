@@ -158,6 +158,29 @@ test("renders correctly", async () =>
           [Function]
         </Screen>
         <Screen
+          name="Request Page"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerRight": [Function],
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+              "title": "Request",
+            }
+          }
+        >
+          [Function]
+        </Screen>
+        <Screen
           component={[Function]}
           name="Journey Request Page"
           options={
@@ -175,6 +198,27 @@ test("renders correctly", async () =>
                 },
               ],
               "title": "Create Ride Request",
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
+          name="Edit Request Page"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+              "title": "Edit Ride Request",
             }
           }
         />
