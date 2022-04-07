@@ -25,10 +25,10 @@ const StopLogoTitle = (props: {userToDisplay: User, stopToDisplay: Stop}) => {
     });
 
     return (
-        <View style={AvatarLogoTitleStyle.container}>
+        <View style={StopLogoTitleStyle.container}>
             <View style={AvatarLogoTitleStyle.headerContainer}>
                 <View style = {{ bottom:25 }}>
-                    <AvatarLogo user={user} size={56} marginTop={20} marginLeft={8}/>
+                    <AvatarLogo user={user} size={56} marginTop={20} marginLeft={20}/>
                 </View>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
                     <Text style={[AvatarLogoTitleStyle.headerUserName, { color: isThemeDark ? "#FFFFFF" : "#0B171B" }]}>
