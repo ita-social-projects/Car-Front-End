@@ -25,9 +25,11 @@ const StopLogoTitle = (props: {userToDisplay: User, stopToDisplay: Stop}) => {
     });
 
     return (
-        <View style={AvatarLogoTitleStyle.mainContainer}>
+        <View style={StopLogoTitleStyle.container}>
             <View style={AvatarLogoTitleStyle.headerContainer}>
-                <AvatarLogo user={user} size={56} marginTop={14} marginLeft={8}/>
+                <View style = {{ bottom:25 }}>
+                    <AvatarLogo user={user} size={56} marginTop={20} marginLeft={20}/>
+                </View>
                 <View style={AvatarLogoTitleStyle.headerUserInformation}>
                     <Text style={[AvatarLogoTitleStyle.headerUserName, { color: isThemeDark ? "#FFFFFF" : "#0B171B" }]}>
                         {trimTheStringIfTooLong(user?.name + " " + user?.surname + "'s stop"
@@ -36,9 +38,11 @@ const StopLogoTitle = (props: {userToDisplay: User, stopToDisplay: Stop}) => {
                     <Text style={[AvatarLogoTitleStyle.headerUserName, { color: "#00A3CF" }]}>
                         {(user?.position)}
                     </Text>
-                    <Text style={[StopLogoTitleStyle.headerStopData, { color: "#909095" }]}>
-                        {(stop?.address?.name)}
-                    </Text>
+                    <View>
+                        <Text style={[StopLogoTitleStyle.headerStopData, { color: "#909095" }]}>
+                            {(stop?.address?.name)}
+                        </Text>
+                    </View>
                 </View>
             </View>
         </View>

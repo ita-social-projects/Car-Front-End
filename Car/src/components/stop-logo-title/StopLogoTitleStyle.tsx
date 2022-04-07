@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const StopLogoTitleStyle = StyleSheet.create({
 
@@ -9,7 +9,13 @@ const StopLogoTitleStyle = StyleSheet.create({
         fontFamily: "Open Sans",
         fontStyle: "normal",
         width:275,
-    }
+    },
+
+    container: {
+        minHeight: 48,
+        width: Dimensions.get("screen").width - 28,
+        paddingTop:7,
+    },
 });
 
 export default StopLogoTitleStyle;
