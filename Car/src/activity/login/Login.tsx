@@ -66,12 +66,14 @@ const Login = (properties: LoginProps) => {
 
     return (
         <View style={[LoginStyle.pageContainer, { backgroundColor: colors.white }]}>
-            <Image style = {LoginStyle.greetingPicture}
-                source={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
-            />
-            <View style={LoginStyle.greetingTextContainer}>
-                <Text style={[LoginStyle.greetingText, { color: colors.primary }]}>Welcome to</Text>
-                <Text style={[LoginStyle.applicationNameText, { color: colors.primary }]}>Car Application</Text>
+            <View style={[LoginStyle.greetingContainer]}>
+                <Image style = {LoginStyle.greetingPicture}
+                    source={require("../../../assets/images/journey/bermuda-delivery-car-service.png")}
+                />
+                <View style={[LoginStyle.greetingTextContainer]}>
+                    <Text style={[LoginStyle.greetingText, { color: colors.primary }]}>Welcome to</Text>
+                    <Text style={[LoginStyle.applicationNameText, { color: colors.primary }]}>Car Application</Text>
+                </View>
             </View>
 
             <View style={LoginStyle.loginContainer}>

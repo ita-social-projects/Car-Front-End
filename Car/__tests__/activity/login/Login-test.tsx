@@ -5,13 +5,13 @@ import Login from "../../../src/activity/login/Login";
 const renderer = shallowRender.createRenderer();
 
 const navigation = {
-    addListener: () => () => {},
+  addListener: () => () => {},
 };
 
 test("renders correctly", async () =>
-    expect(
-        renderer.render(<Login navigation={navigation} route={undefined as any} />)
-    ).toMatchInlineSnapshot(`
+  expect(
+    renderer.render(<Login navigation={navigation} route={undefined as any} />)
+  ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -27,70 +27,85 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <Image
-        source={
-          Object {
-            "testUri": "../../../assets/images/journey/bermuda-delivery-car-service.png",
-          }
-        }
-        style={
-          Object {
-            "height": 300,
-            "left": 42,
-            "top": 160,
-            "width": 300,
-          }
-        }
-      />
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "top": 190,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "flex": 6,
+              "justifyContent": "space-evenly",
+            },
+          ]
         }
       >
-        <Text
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/images/journey/bermuda-delivery-car-service.png",
+            }
+          }
+          style={
+            Object {
+              "height": 275,
+              "transform": Array [
+                Object {
+                  "scaleX": -1,
+                },
+              ],
+              "width": 275,
+            }
+          }
+        />
+        <View
           style={
             Array [
               Object {
-                "fontFamily": "Milliard Bold",
-                "fontSize": 14,
-                "letterSpacing": 0.2,
-                "lineHeight": 16,
-                "textTransform": "uppercase",
-              },
-              Object {
-                "color": "#0B171B",
+                "alignItems": "center",
               },
             ]
           }
         >
-          Welcome to
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "fontFamily": "Milliard Bold",
-                "fontSize": 20,
-                "letterSpacing": 0.2,
-                "textTransform": "uppercase",
-                "top": 10,
-              },
-              Object {
-                "color": "#0B171B",
-              },
-            ]
-          }
-        >
-          Car Application
-        </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Milliard Bold",
+                  "fontSize": 14,
+                  "letterSpacing": 0.2,
+                  "lineHeight": 16,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ]
+            }
+          >
+            Welcome to
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontFamily": "Milliard Bold",
+                  "fontSize": 20,
+                  "letterSpacing": 0.2,
+                  "textTransform": "uppercase",
+                  "top": 10,
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ]
+            }
+          >
+            Car Application
+          </Text>
+        </View>
       </View>
       <View
         style={
           Object {
-            "alignItems": "flex-end",
             "flex": 1,
             "justifyContent": "flex-end",
           }
@@ -116,7 +131,6 @@ test("renders correctly", async () =>
                   "fontSize": 16,
                   "height": 56,
                   "justifyContent": "center",
-                  "right": 37,
                   "width": 304,
                 },
                 Object {
