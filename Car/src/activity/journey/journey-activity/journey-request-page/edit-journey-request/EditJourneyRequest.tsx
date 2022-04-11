@@ -59,6 +59,8 @@ const EditJourneyRequest = (props: EditJourneyRequestProps) => {
 
     const [from, setFrom] = useState<WayPoint>(initialWayPoint);
     const [to, setTo] = useState<WayPoint>(initialWayPoint);
+    const [addresNameFrom, setAddresNameFrom] = useState<string>("");
+    const [addresNameTo, setAddresNameTo] = useState<string>("");
     const [departureTime, setDepartureTime] = useState<Date>(addMinutesToDate(new Date(), MINUTES_OFFSET));
     const [savedLocations, setSavedLocations] = useState<Array<Location>>([]);
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
@@ -116,6 +118,8 @@ const EditJourneyRequest = (props: EditJourneyRequestProps) => {
             } else if (params.wayPointId === "To") {
                 setTo(params.wayPoint);
             }
+
+            setAddresNameFromAndTo();
 
             if (!isRequest) {
                 setIsRequest(Boolean(params?.isRequest));
@@ -306,6 +310,22 @@ const EditJourneyRequest = (props: EditJourneyRequestProps) => {
         });
     };
 
+    const setAddresNameFromAndTo = async () => {
+        let addressNameFrom = await getAddressByCoordinatesAsync(
+            {
+                latitude: params.request?.from.latitude!,
+                longitude: params.request?.from.longitude!
+            });
+        let addressNameTo = await getAddressByCoordinatesAsync(
+            {
+                latitude: params.request?.to.latitude!,
+                longitude: params.request?.to.longitude!
+            });
+
+        setAddresNameFrom(addressNameFrom);
+        setAddresNameTo(addressNameTo);
+    };
+
     const errorModalDisableHandler = () => {
         setErrorModalVisible(false);
         setIsLoading(false);
@@ -331,7 +351,7 @@ const EditJourneyRequest = (props: EditJourneyRequestProps) => {
                             disabled={!isRequest}
                             iconName={"location"}
                             directionType={"From"}
-                            text={from.text}
+                            text={from.text == "" ? addresNameFrom : from.text}
                             iconColor={darkColors.disableBack}
                             onPress={() =>
                                 onAddressInputButtonPressHandler(
@@ -349,7 +369,7 @@ const EditJourneyRequest = (props: EditJourneyRequestProps) => {
                             iconName={"location"}
                             iconColor={darkColors.disableBack}
                             directionType={"To"}
-                            text={to.text}
+                            text={to.text == "" ? addresNameTo : to.text}
                             onPress={() =>
                                 onAddressInputButtonPressHandler(
                                     "To",
