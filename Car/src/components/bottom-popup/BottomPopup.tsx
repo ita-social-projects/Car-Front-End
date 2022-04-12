@@ -4,6 +4,7 @@ import BottomSheet from "reanimated-bottom-sheet";
 import BottomPopupStyle from "./BottomPopupStyle";
 import BottomPopupProps from "./BottomPopupProps";
 import { useTheme } from "../theme/ThemeProvider";
+import { Shadow } from "react-native-shadow-2";
 
 const BottomPopup = (props: BottomPopupProps) => {
     const { colors } = useTheme();
@@ -15,15 +16,17 @@ const BottomPopup = (props: BottomPopupProps) => {
             renderContent={() => props.renderContent}
             renderHeader={() => (
                 <>
-                    <View style={[BottomPopupStyle.header,
-                        {
-                            backgroundColor: colors.white,
-                            shadowColor: colors.primary
-                        }]}>
-                        <View style={BottomPopupStyle.panelHeader}>
-                            <View style={[BottomPopupStyle.panelHandle, { backgroundColor: colors.primary }]} />
+                    <Shadow distance={8} startColor={colors.shadow}>
+                        <View style={[BottomPopupStyle.header,
+                            {
+                                backgroundColor: colors.white,
+                                shadowColor: colors.primary
+                            }]}>
+                            <View style={BottomPopupStyle.panelHeader}>
+                                <View style={[BottomPopupStyle.panelHandle, { backgroundColor: colors.primary }]} />
+                            </View>
                         </View>
-                    </View>
+                    </Shadow>
                     {props?.renderHeader}
                 </>
             )}
@@ -32,6 +35,7 @@ const BottomPopup = (props: BottomPopupProps) => {
             onCloseEnd={props.onCloseEnd}
         />
     );
+
 };
 
 export default BottomPopup;
