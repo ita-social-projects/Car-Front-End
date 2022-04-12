@@ -22,7 +22,7 @@ import { HALF_OPACITY,
 } from "../../constants/StylesConstants";
 import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
 import axios from "axios";
-import { ANIMATION_DURATION, SLEEP_DURATION } from "../../constants/AnimationConstants";
+import { ANIMATION_DURATION } from "../../constants/AnimationConstants";
 import { BottomSheet } from "react-native-elements";
 import ConfirmModal from "../../components/confirm-modal/ConfirmModal";
 
@@ -130,10 +130,6 @@ const MyProfile = (props: { navigation: any }) => {
         }).start();
     };
 
-    const sleep = (milliseconds: number) =>{
-        new Promise(resolve => setTimeout(resolve, milliseconds));
-    };
-
     const closeHandle = () => {
         fadeOut();
         setOpen(true);
@@ -180,7 +176,7 @@ const MyProfile = (props: { navigation: any }) => {
                         <TouchableOpacity
                             style={MyProfileStyle.moreOptionsButton}
                             onPress={() => {
-                                (async () => sleep(SLEEP_DURATION))().then(() => uploadPhotoHandle());
+                                uploadPhotoHandle();
                             }}>
                             <Text style={[MyProfileStyle.changeAvatarText, { color: colors.primary }]}>
                                 {user?.imageId == null ? "Add photo" : "Change photo"}
@@ -205,8 +201,7 @@ const MyProfile = (props: { navigation: any }) => {
                                     style={MyProfileStyle.moreOptionsButton}
                                     onPress={() => {
                                         pressHandle();
-                                        (async () => sleep(SLEEP_DURATION))()
-                                            .then(() => setDeleteModalVisible(true));
+                                        setDeleteModalVisible(true);
                                     }}>
                                     <Text style={[MyProfileStyle.deleteAvatarText, { color: colors.accentOrange }]}>
                                         Delete photo
