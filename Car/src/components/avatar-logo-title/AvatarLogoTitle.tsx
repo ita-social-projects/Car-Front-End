@@ -4,7 +4,6 @@ import AvatarLogo from "../avatar-logo/AvatarLogo";
 import AuthContext from "../auth/AuthContext";
 import AvatarLogoTitleStyle from "./AvatarLogoTitleStyle";
 import { USER_STATE_CHANGE_EVENT_NAME } from "../../constants/ProfileConstants";
-import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/GeneralConstants";
 import User from "../../../models/user/User";
 import { useTheme } from "../theme/ThemeProvider";
 import { EventRegister } from "react-native-event-listeners";
@@ -12,15 +11,24 @@ import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { MAX_USER_FULL_NAME_LENGTH_IN_PROFILE } from "../../constants/JourneyConstants";
 import { ScrollView } from "react-native-gesture-handler";
 import { Shadow } from "react-native-shadow-2";
+import UserStatisticService from "../../../api-service/user-service/UserStatisticService";
+import UserStatistic from "../../../models/user/UserStatistic";
 
-const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
+const AvatarLogoTitle = (props : { userToDisplay? : User}) => {
     const { colors } = useTheme();
     const contextUser = useContext(AuthContext).user;
     const shadowXPosition = 0;
     const shadowYPosition = 3;
     const [user, setUser] = useState<User>(props.userToDisplay || contextUser);
+    const [currentAchieve, setCurrentAchieve] = useState<UserStatistic>(null);
 
     useEffect(() => {
+        if (user !== null) {
+            UserStatisticService.getUserStatisticById(user.id).then((result) => {
+                setCurrentAchieve(result.data);
+            });
+        }
+
         const changeEvent = EventRegister.addEventListener(
             USER_STATE_CHANGE_EVENT_NAME,
             u => setUser(props.userToDisplay || u)
@@ -60,16 +68,12 @@ const AvatarLogoTitle = (props : { userToDisplay? : User }) => {
                             <Text style={[AvatarLogoTitleStyle.headerUserRides,
                                 { color: colors.secondaryDark }
                             ]}>
-                                {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
-                                    ? "1 ride as driver"
-                                    : user?.journeyCount + " rides as driver"}
+                                {currentAchieve?.driverJourneysAmount + " rides as driver"}
                             </Text>
                             <Text style={[AvatarLogoTitleStyle.headerUserRides,
                                 { color: colors.secondaryDark }
                             ]}>
-                                {user?.journeyCount === SINGLE_ELEMENT_COLLECTION_LENGTH
-                                    ? "1 ride as passanger"
-                                    : user?.journeyCount + " rides as passanger"}
+                                {currentAchieve?.passangerJourneysAmount + " rides as passanger"}
                             </Text>
                         </View>
                     </View>
