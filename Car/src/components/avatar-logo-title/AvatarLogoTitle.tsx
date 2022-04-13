@@ -13,6 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Shadow } from "react-native-shadow-2";
 import UserStatisticService from "../../../api-service/user-service/UserStatisticService";
 import UserStatistic from "../../../models/user/UserStatistic";
+import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/GeneralConstants";
 
 const AvatarLogoTitle = (props : { userToDisplay? : User}) => {
     const { colors } = useTheme();
@@ -68,12 +69,16 @@ const AvatarLogoTitle = (props : { userToDisplay? : User}) => {
                             <Text style={[AvatarLogoTitleStyle.headerUserRides,
                                 { color: colors.secondaryDark }
                             ]}>
-                                {currentAchieve?.driverJourneysAmount + " rides as driver"}
+                                {currentAchieve?.driverJourneysAmount === SINGLE_ELEMENT_COLLECTION_LENGTH ?
+                                    "1 ride as driver"
+                                    : currentAchieve?.driverJourneysAmount + " rides as driver"}
                             </Text>
                             <Text style={[AvatarLogoTitleStyle.headerUserRides,
                                 { color: colors.secondaryDark }
                             ]}>
-                                {currentAchieve?.passangerJourneysAmount + " rides as passanger"}
+                                {currentAchieve?.passangerJourneysAmount === SINGLE_ELEMENT_COLLECTION_LENGTH ?
+                                    "1 ride as passanger"
+                                    : currentAchieve?.passangerJourneysAmount + " rides as passanger"}
                             </Text>
                         </View>
                     </View>
