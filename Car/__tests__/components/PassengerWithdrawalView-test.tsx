@@ -162,7 +162,7 @@ test("renders correctly", async () =>
               }
             }
           >
-            Abc
+            Abc 
             Abc
             \`s stops
           </Text>
@@ -170,8 +170,8 @@ test("renders correctly", async () =>
             <StopsBlock
               highlightedStops={
                 Array [
+                  0,
                   1,
-                  2,
                 ]
               }
               onStopPress={[Function]}

@@ -12,7 +12,11 @@ import * as navigation from "../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
+import {
+    FIRST_ELEMENT_INDEX,
+    SECOND_ELEMENT_INDEX,
+    THIRD_ELEMENT_INDEX,
+} from "../../../../../constants/GeneralConstants";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
 import axios from "axios";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
@@ -23,13 +27,14 @@ import NotificationConfirmButton from "../../../notification-buttons/Notificatio
 import NotificationDeclineButton from "../../../notification-buttons/NotificationDeclineButton";
 import { HTTP_STATUS_OK } from "../../../../../constants/Constants";
 import ConfirmModal from "../../../../confirm-modal/ConfirmModal";
+import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 
 interface InvitationAcceptedViewProps {
-    route: {
-        params: {
-            notification:any
-        }
-    }
+  route: {
+    params: {
+      notification: any;
+    };
+  };
 }
 
 const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
@@ -40,60 +45,66 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const [LeaveRideModalIsVisible, setLeaveRideModalIsVisible] = useState(false);
     const [LeaveRideSuccessModalIsVisible, setLeaveRideSuccessModalIsVisible] = useState(false);
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
     const data = JSON.parse(props.route.params.notification.notification.notificationData);
     const source = useRef(axios.CancelToken.source());
     let name = props.route.params.notification.notification.sender!.name;
     let surname = props.route.params.notification.notification.sender!.surname;
 
     useEffect(() => {
-        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.notification.journeyId,
+        JourneyService.getJourneyWithJourneyUser(
+            props.route.params.notification.notification.journeyId,
             props.route.params.notification.journeyUserId,
             false,
-            { cancelToken: source.current.token })
-            .then(res => {
-                setJourney(res.data.item1);
-                setJourneyUser(res.data.item2);
-                setStops([
-                    getStopByType(res.data.item1, StopType.Start)!,
-                    data?.applicantStops!.filter((stop: Stop) =>
-                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    data?.applicantStops!.filter((stop: Stop) =>
-                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    getStopByType(res.data.item1, StopType.Finish)!
-                ]);
-            });
-
+            { cancelToken: source.current.token }
+        ).then((res) => {
+            setJourney(res.data.item1);
+            setJourneyUser(res.data.item2);
+            setJourneyPoints(res.data!.item1?.journeyPoints);
+            setStops([
+        getStopByType(res.data.item1, StopType.Start)!,
+        data?.applicantStops!.filter((stop: Stop) => stop!.index === FIRST_ELEMENT_INDEX)[
+            FIRST_ELEMENT_INDEX
+        ],
+        data?.applicantStops!.filter((stop: Stop) => stop!.index === SECOND_ELEMENT_INDEX)[
+            FIRST_ELEMENT_INDEX
+        ],
+        getStopByType(res.data.item1, StopType.Finish)!,
+            ]);
+        });
     }, []);
 
     const onStopPressHandler = (stop: Stop) => {
-        navigation.navigate("Stop View", {
+        navigation.navigate("Route View", {
             stops: stops,
-            journeyPoints: props.route.params.notification.journeyPoints,
+            journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
+            currentStop: Number(stops?.findIndex((stp) => stp?.address?.name == stop?.address?.name)),
         });
     };
 
     return (
         <>
-            <ScrollView style = {{ flexGrow: 1 }}>
-
+            <ScrollView style={{ flexGrow: 1 }}>
                 <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+                    <NotificationHeader sender={user} />
 
-                    <NotificationHeader
-                        sender={props.route.params.notification.notification.sender}
-                    />
-
-                    {props.route.params.notification.notificationHeaderMessage !== "" &&
-                        <View style={[NotificationHeaderStyle.messageContainer, {
-                            borderTopColor: colors.disableBack,
-                            borderBottomColor: colors.disableBack
-                        }]}>
+                    {props.route.params.notification.notificationHeaderMessage !== "" && (
+                        <View
+                            style={[
+                                NotificationHeaderStyle.messageContainer,
+                                {
+                                    borderTopColor: colors.disableBack,
+                                    borderBottomColor: colors.disableBack,
+                                },
+                            ]}
+                        >
                             <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                                 {props.route.params.notification.notificationHeaderMessage}
                             </Text>
                         </View>
-                    }
+                    )}
 
                     <NotificationRideDetails
                         journeyId={props.route.params.notification.notification.journeyId}
@@ -106,7 +117,9 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                         journey={journey!}
                         journeyUser={journeyUser!}
                     />
-                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
+                    <Text
+                        style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}
+                    >
                         {name} {surname}`s stops in your ride
                     </Text>
                     <View>
@@ -122,14 +135,14 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                             confirmText={"Ok"}
                             onConfirm={() => {
                                 navigation.goBack();
-                            }} />
+                            }}
+                        />
                         <NotificationDeclineButton
                             declineText={"Withdraw"}
-                            onDecline={()=>setLeaveRideModalIsVisible(true)}
+                            onDecline={() => setLeaveRideModalIsVisible(true)}
                         />
                     </NotificationButtonGroup>
                 </View>
-
             </ScrollView>
 
             <ConfirmModal
@@ -141,8 +154,9 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                     setLeaveRideModalIsVisible(false);
                     JourneyService.deleteUser(
                         props.route.params.notification.notification.journeyId,
-                        user?.id!).then((res) => {
-                        if(res.status === HTTP_STATUS_OK) {
+            user?.id!
+                    ).then((res) => {
+                        if (res.status === HTTP_STATUS_OK) {
                             setLeaveRideSuccessModalIsVisible(true);
                         }
                     });
