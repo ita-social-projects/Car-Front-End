@@ -60,7 +60,7 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
         ).then((res) => {
             setJourney(res.data.item1);
             setJourneyUser(res.data.item2);
-            setJourneyPoints(res.data!.item1?.journeyPoints);
+            setJourneyPoints(res.data.item1?.journeyPoints);
             setStops([
         getStopByType(res.data.item1, StopType.Start)!,
         data?.applicantStops!.filter((stop: Stop) => stop!.index === FIRST_ELEMENT_INDEX)[
