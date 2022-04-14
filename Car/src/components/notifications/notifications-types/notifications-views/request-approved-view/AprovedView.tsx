@@ -49,7 +49,7 @@ const AprovedView = (props: InvitationAcceptedViewProps) => {
             { cancelToken: source.current.token })
             .then(res => {
                 setJourney(res.data.item1);
-                setJourneyPoints(res.data!.item1?.journeyPoints);
+                setJourneyPoints(res.data.item1?.journeyPoints);
                 setJourneyUser(res.data.item2);
                 setStops([
                     getStopByType(res.data.item1, StopType.Start)!,
