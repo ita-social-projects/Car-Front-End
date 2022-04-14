@@ -23,6 +23,7 @@ import NotificationConfirmButton from "../../../notification-buttons/Notificatio
 import NotificationDeclineButton from "../../../notification-buttons/NotificationDeclineButton";
 import { HTTP_STATUS_OK } from "../../../../../constants/Constants";
 import ConfirmModal from "../../../../confirm-modal/ConfirmModal";
+import NotificationsService from "../../../../../../api-service/notifications-service/NotificationsService";
 
 interface InvitationAcceptedViewProps {
     route: {
@@ -74,6 +75,10 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
         });
     };
 
+    const deleteNotification = (id: number) => {
+        NotificationsService.deleteNotification(id);
+    };
+
     return (
         <>
             <ScrollView style = {{ flexGrow: 1 }}>
@@ -121,11 +126,15 @@ const AprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                         <NotificationConfirmButton
                             confirmText={"Ok"}
                             onConfirm={() => {
+                                deleteNotification(props.route.params.notification.notification.notificationId);
                                 navigation.goBack();
                             }} />
                         <NotificationDeclineButton
-                            declineText={"Withdraw"}
-                            onDecline={()=>setLeaveRideModalIsVisible(true)}
+                            declineText={"Withdrawer"}
+                            onDecline={() => {
+                                setLeaveRideModalIsVisible(true);
+                                deleteNotification(props.route.params.notification.notification.notificationId);
+                            }}
                         />
                     </NotificationButtonGroup>
                 </View>
