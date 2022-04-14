@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../data/fonts/Font";
 
 const MyProfileStyle = StyleSheet.create({
@@ -87,7 +87,44 @@ const MyProfileStyle = StyleSheet.create({
         fontSize: 13,
         lineHeight: 18,
         fontWeight:"normal"
-    }
+    },
+
+    moreOptionsHeader: {
+        textTransform: "uppercase",
+        fontFamily: Font.Milliard.Bold,
+        letterSpacing: 0.25,
+        paddingLeft: 16,
+        paddingBottom: 24,
+        fontSize: 14,
+        lineHeight: 18
+    },
+
+    moreOptionsButton: {
+        height: 54,
+        width: Dimensions.get("window").width,
+        alignItems: "flex-start",
+        justifyContent: "center",
+        paddingLeft: 16
+    },
+
+    changeAvatarText: {
+        fontFamily: Font.OpenSans.OpenSans,
+        fontWeight: "700",
+        fontSize: 13,
+        lineHeight: 18
+    },
+
+    separator: {
+        height: 1,
+        marginHorizontal: 16
+    },
+
+    deleteAvatarText: {
+        fontFamily: Font.OpenSans.normal,
+        fontWeight: "700",
+        fontSize: 13,
+        lineHeight: 18
+    },
 
 });
 
