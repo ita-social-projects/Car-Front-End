@@ -14,6 +14,7 @@ import UserStatistic from "../../../../../models/user/UserStatistic";
 import allBadges from "../../../../components/badge/BadgeObjects";
 import BadgeTypes from "../../../../components/badge/BadgeTypes";
 import { SIX, TEN, THIRTEEN, ZERO } from "../../../../constants/GeneralConstants";
+import BadgeProps from "../../../../components/badge/BadgeProps";
 
 const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
     const shadowXPosition = 0;
@@ -46,29 +47,40 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
         {
             if(badge.type === BadgeTypes.passengerRides)
             {
-                if(currentAchieve?.passangerJourneysAmount! >= badge.points)
-                {
-                    setcurrentBadgeAsPassanger(badge);
-                }
+                checkPassangerAmount(badge);
             }
-
             if(badge.type === BadgeTypes.driverRides)
             {
-                if(currentAchieve?.driverJourneysAmount! >= badge.points)
-                {
-                    setcurrentBadgeAsDriver(badge);
-                }
+                checkDriverAmount(badge);
             }
             if(badge.type === BadgeTypes.driverDistance)
             {
-                if(currentAchieve?.totalKm! >= badge.points)
-                {
-                    setcurrentBadgeAsTotalKm(badge);
-                }
+                checkDriverDistance(badge);
             }
         }
 
     }, [currentAchieve]);
+
+    const checkPassangerAmount = (badge: BadgeProps) => {
+        if(currentAchieve?.passangerJourneysAmount! >= badge.points)
+        {
+            setcurrentBadgeAsPassanger(badge);
+        }
+    };
+
+    const checkDriverAmount = (badge: BadgeProps) => {
+        if(currentAchieve?.driverJourneysAmount! >= badge.points)
+        {
+            setcurrentBadgeAsDriver(badge);
+        }
+    };
+
+    const checkDriverDistance = (badge: BadgeProps) => {
+        if(currentAchieve?.totalKm! >= badge.points)
+        {
+            setcurrentBadgeAsTotalKm(badge);
+        }
+    };
 
     return (
         <View style={[JourneyApplicantStyle.mainContainer, { backgroundColor: colors.white }]}>
