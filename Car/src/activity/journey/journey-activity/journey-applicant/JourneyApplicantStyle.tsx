@@ -1,114 +1,70 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import Font from "../../../../data/fonts/Font";
 
 const JourneyApplicantStyle = StyleSheet.create({
     mainContainer: {
-        flex: 1,
-        paddingHorizontal: 23,
-        paddingTop: 22.5,
-    },
-
-    topContainer: {
-        height: 116,
-        flexDirection: "row"
-    },
-
-    avatarContainer: {
-        paddingBottom: 23.5,
         alignItems: "center",
+        paddingTop: 16,
+
+    },
+
+    indicator:
+    {
+        height: "100%",
         justifyContent: "center",
+        alignItems:"center"
     },
 
-    userName: {
-        lineHeight: 21,
-        fontFamily: Font.ProximaNova.Bold,
-        fontSize: 18,
-        marginBottom: 8,
-        fontWeight: "bold"
+    textAchievements:
+    {
+        fontFamily: Font.OpenSans.Bold,
+        fontStyle: "normal",
+        fontWeight: "700",
+        fontSize: 13,
+        textAlign: "center",
+        marginTop: 16,
+        marginBottom: 16,
     },
 
-    userAdditionalData: {
-        lineHeight: 14,
+    textNotification:
+    {
+        fontFamily: Font.Milliard.Bold,
         fontSize: 14,
-        opacity: 0.5,
-        fontFamily: Font.ProximaNova.Regular,
-        marginBottom: 8
+        textAlign: "center",
+        textTransform: "uppercase",
+        marginTop: 32
+
     },
 
-    separator: {
-        height: 1
-    },
-
-    bottomContainer: {
-        paddingTop: 13,
-        width: "70%",
-    },
-
-    positionContainer: {
+    containerBadge:
+    {
+        borderRadius: 16,
+        borderWidth: 1,
+        minHeight: 152,
+        width: Dimensions.get("screen").width - 32,
         flexDirection: "row",
-        paddingBottom: 16
+        justifyContent: "space-evenly",
     },
 
-    locationContainer: {
-        flexDirection: "row"
+    badges:
+    {
+        marginHorizontal:14,
+        marginVertical: 8,
+        alignItems: "center"
     },
 
-    mobileText: {
-        flex: 133,
-        fontFamily: Font.OpenSans.Bold,
-        fontWeight: "bold",
-        fontSize: 13,
+    image:
+    {
+        width: 85,
+        height: 120
     },
 
-    mobileData: {
-
-    },
-
-    mobileContainer: {
-        flexDirection: "row",
-        paddingBottom: 16,
-        justifyContent: "space-between",
-    },
-
-    detailsText: {
-        fontFamily: Font.OpenSans.Bold,
-        fontWeight: "bold",
-        fontSize: 18
-    },
-
-    positionText: {
-        flex: 133,
-        fontFamily: Font.OpenSans.Bold,
-        fontWeight: "bold",
-        fontSize: 13,
-        paddingTop: 16
-    },
-
-    locationText: {
-        flex: 133,
-        fontFamily: Font.OpenSans.Bold,
-        fontWeight: "bold",
-        fontSize: 13,
-    },
-
-    positionData: {
-        flex: 194,
-        fontFamily: Font.OpenSans.Bold,
-        fontSize: 13,
-        lineHeight: 18,
-        paddingTop: 16
-    },
-
-    locationData: {
-        flex: 194,
-        fontFamily: Font.OpenSans.Bold,
-        fontWeight: "bold",
-        fontSize: 13
-    },
-
-    whitespaceBlock: {
-        height: 16
+    speceBetweenContainer:
+    {
+        marginTop: 8,
+        marginBottom:8,
     }
+
 });
 
 export default JourneyApplicantStyle;

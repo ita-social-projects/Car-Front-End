@@ -12,9 +12,8 @@ test("renders correctly", async () =>
       style={
         Array [
           Object {
-            "flex": 1,
-            "paddingHorizontal": 23,
-            "paddingTop": 22.5,
+            "alignItems": "center",
+            "paddingTop": 16,
           },
           Object {
             "backgroundColor": "#FFFFFF",
@@ -22,11 +21,23 @@ test("renders correctly", async () =>
         ]
       }
     >
-      <Indicator
-        color="#414045"
-        size="large"
-        text="Loading information..."
-      />
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "height": "100%",
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Indicator
+          color="#414045"
+          size="large"
+          text="Loading information..."
+        />
+      </View>
       <ConfirmModal
         cancelText="Copy number"
         confirmColor="#D80056"

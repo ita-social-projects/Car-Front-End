@@ -84,7 +84,7 @@ test("renders correctly", async () =>
                       "marginBottom": 4,
                     },
                     Object {
-                      "color": "#414045",
+                      "color": "#00A3CF",
                       "fontWeight": "bold",
                     },
                   ]
