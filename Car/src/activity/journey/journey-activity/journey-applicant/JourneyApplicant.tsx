@@ -96,9 +96,9 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                 <>
                     <AvatarLogoTitle userToDisplay={user}/>
                     {
-                        currentAchieve?.passangerJourneysAmount! !== ZERO ||
+                        (currentAchieve?.passangerJourneysAmount! !== ZERO ||
                         currentAchieve?.driverJourneysAmount! !== ZERO ||
-                        currentAchieve?.totalKm! >= TEN ?
+                        currentAchieve?.totalKm! >= TEN) &&
                             <>
                                 <View style = {[JourneyApplicantStyle.speceBetweenContainer]}></View>
                                 <Shadow
@@ -125,12 +125,18 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                                         }
                                     </View>
                                 </Shadow>
-                            </> : <>
-                                <Text style = {[JourneyApplicantStyle.textNotification, { color: colors.primary }]}>
-                                    {"After the first completed trip, \nyou’ll get the first badge."}
-                                </Text>
-                                <Image source = {require("../../../../../assets/images/badges/nobadges.png")} />
                             </>
+                    }
+                    {
+                        (currentAchieve?.passangerJourneysAmount! === ZERO &&
+                        currentAchieve?.driverJourneysAmount! === ZERO &&
+                        currentAchieve?.totalKm! <= TEN) &&
+                        <>
+                            <Text style = {[JourneyApplicantStyle.textNotification, { color: colors.primary }]}>
+                                {"After the first completed trip, \nyou’ll get the first badge."}
+                            </Text>
+                            <Image source = {require("../../../../../assets/images/badges/nobadges.png")} />
+                        </>
                     }
                 </>
             )}
