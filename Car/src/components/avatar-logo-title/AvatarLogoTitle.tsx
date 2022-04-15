@@ -13,7 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Shadow } from "react-native-shadow-2";
 import UserStatisticService from "../../../api-service/user-service/UserStatisticService";
 import UserStatistic from "../../../models/user/UserStatistic";
-import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../constants/GeneralConstants";
+import { SINGLE_ELEMENT_COLLECTION_LENGTH, ZERO } from "../../constants/GeneralConstants";
 
 const AvatarLogoTitle = (props : { userToDisplay? : User}) => {
     const { colors } = useTheme();
@@ -57,7 +57,7 @@ const AvatarLogoTitle = (props : { userToDisplay? : User}) => {
                                     user?.surname, MAX_USER_FULL_NAME_LENGTH_IN_PROFILE)}
                             </Text>
                             <Text style={[AvatarLogoTitleStyle.headerUserPosition,
-                                { color: colors.hover, fontWeight: "bold" }
+                                { color: colors.navyBlueGradientFrom, fontWeight: "bold" }
                             ]}>
                                 {user?.position}
                             </Text>
@@ -66,20 +66,24 @@ const AvatarLogoTitle = (props : { userToDisplay? : User}) => {
                             ]}>
                                 {user?.location}
                             </Text>
-                            <Text style={[AvatarLogoTitleStyle.headerUserRides,
-                                { color: colors.secondaryDark }
-                            ]}>
-                                {currentAchieve?.driverJourneysAmount === SINGLE_ELEMENT_COLLECTION_LENGTH ?
-                                    "1 ride as driver"
-                                    : currentAchieve?.driverJourneysAmount + " rides as driver"}
-                            </Text>
-                            <Text style={[AvatarLogoTitleStyle.headerUserRides,
-                                { color: colors.secondaryDark }
-                            ]}>
-                                {currentAchieve?.passangerJourneysAmount === SINGLE_ELEMENT_COLLECTION_LENGTH ?
-                                    "1 ride as passanger"
-                                    : currentAchieve?.passangerJourneysAmount + " rides as passanger"}
-                            </Text>
+                            {currentAchieve?.driverJourneysAmount !== ZERO &&
+                                <Text style={[AvatarLogoTitleStyle.headerUserRides,
+                                    { color: colors.secondaryDark }
+                                ]}>
+                                    {currentAchieve?.driverJourneysAmount === SINGLE_ELEMENT_COLLECTION_LENGTH ?
+                                        "1 ride as driver"
+                                        : currentAchieve?.driverJourneysAmount + " rides as driver"}
+                                </Text>
+                            }
+                            {currentAchieve?.passangerJourneysAmount !== ZERO &&
+                                <Text style={[AvatarLogoTitleStyle.headerUserRides,
+                                    { color: colors.secondaryDark }
+                                ]}>
+                                    {currentAchieve?.passangerJourneysAmount === SINGLE_ELEMENT_COLLECTION_LENGTH ?
+                                        "1 ride as passanger"
+                                        : currentAchieve?.passangerJourneysAmount + " rides as passanger"}
+                                </Text>
+                            }
                         </View>
                     </View>
                 </ScrollView>
