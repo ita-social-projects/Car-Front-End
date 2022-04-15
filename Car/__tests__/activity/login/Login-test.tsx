@@ -128,10 +128,11 @@ test("renders correctly", async () =>
               Array [
                 Object {
                   "alignItems": "center",
+                  "alignSelf": "center",
                   "fontSize": 16,
                   "height": 56,
                   "justifyContent": "center",
-                  "width": 304,
+                  "width": "85%",
                 },
                 Object {
                   "backgroundColor": "#414045",

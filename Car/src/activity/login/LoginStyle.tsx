@@ -53,10 +53,11 @@ const LoginStyle = StyleSheet.create({
     },
 
     button: {
-        width: 304,
+        width: "85%",
         height: 56,
         fontSize: 16,
         alignItems: "center",
+        alignSelf: "center",
         justifyContent: "center"
     },
 
@@ -68,7 +69,7 @@ const LoginStyle = StyleSheet.create({
     loadingIcon: {
         width: 56,
         height: 56,
-        alignSelf: "center"
+        alignSelf: "center",
     }
 });
 
