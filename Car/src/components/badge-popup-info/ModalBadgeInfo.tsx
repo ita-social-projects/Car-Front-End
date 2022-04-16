@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Modal, Animated, Text, Image, TouchableOpacity } from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
-import BadgePopupStyles from "./ModalBadgeInfoStyles";
+import ModalBadgeInfoStyle from "./ModalBadgeInfoStyles";
 import ModalProps from "./ModalProps";
 
 const ModalBadgeInfo = (props: ModalProps) => {
@@ -35,10 +35,10 @@ const ModalBadgeInfo = (props: ModalProps) => {
 
     return (
         <Modal transparent visible={showModal}>
-            <View style={[BadgePopupStyles.modalBackGround]}>
+            <View style={[ModalBadgeInfoStyle.modalBackGround]}>
                 <Animated.View
                     style={[
-                        BadgePopupStyles.modalContainer,
+                        ModalBadgeInfoStyle.modalContainer,
                         { transform: [{ scale: scaleValue }], backgroundColor: colors.white },
                     ]}
                 >
@@ -47,16 +47,16 @@ const ModalBadgeInfo = (props: ModalProps) => {
                             props.closeFunc();
                         }}
                     >
-                        <Text style={[BadgePopupStyles.headerText, { color: colors.primary }]}>
+                        <Text style={[ModalBadgeInfoStyle.headerText, { color: colors.primary }]}>
                             {props.badgeProps.name}
                         </Text>
 
                         <Image
                             source={props.badgeProps.pathUnlocked}
                             resizeMode="contain"
-                            style={BadgePopupStyles.image}
+                            style={ModalBadgeInfoStyle.image}
                         />
-                        <Text style={[BadgePopupStyles.messageText, { color: colors.secondaryDark }]}>
+                        <Text style={[ModalBadgeInfoStyle.messageText, { color: colors.secondaryDark }]}>
                             {props.badgeProps.description}
                         </Text>
                     </TouchableOpacity>

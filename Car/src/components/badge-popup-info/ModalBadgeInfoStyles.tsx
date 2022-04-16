@@ -3,7 +3,7 @@ import Font from "../../data/fonts/Font";
 
 const KOEF_SCREEN: number = 32;
 
-const BadgePopupStyles = StyleSheet.create({
+const ModalBadgeInfoStyle = StyleSheet.create({
     modalBackGround: {
         flex: 1,
         backgroundColor: "rgba(0,0,0,0.5)",
@@ -49,4 +49,4 @@ const BadgePopupStyles = StyleSheet.create({
     },
 });
 
-export default BadgePopupStyles;
+export default ModalBadgeInfoStyle;
