@@ -20,6 +20,7 @@ import { useTheme } from "../../../../theme/ThemeProvider";
 import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
 import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
 import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
+import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 
 interface InvitationAcceptedViewProps {
     route: {
@@ -35,6 +36,7 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
     const data = JSON.parse(props.route.params.notification.notification.notificationData);
     const source = useRef(axios.CancelToken.source());
     let name = props.route.params.notification.notification.sender!.name;
@@ -48,6 +50,7 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
             .then(res => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
+                setJourneyPoints(res.data.item1?.journeyPoints);
                 setStops([
                     getStopByType(res.data.item1, StopType.Start)!,
                     data?.applicantStops!.filter((stop: Stop) =>
@@ -63,9 +66,10 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Stop View", {
             stops: stops,
-            journeyPoints: props.route.params.notification.journeyPoints,
+            journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
+            currentStop: Number(stops?.findIndex((stp) => stp?.address?.name == stop?.address?.name)),
         });
     };
 

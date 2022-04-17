@@ -6,7 +6,7 @@ import NotificationHeader from "../../../notification-header/NotificationHeader"
 import NotificationRideDetails from "../../../notification-ride-details/NotificationRideDetails";
 import { ScrollView, Text, View, } from "react-native";
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import axios from "axios";
 import Journey from "../../../../../../models/journey/Journey";
@@ -35,11 +35,8 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
     const [stops, setStops] = useState<Stop[]>();
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
     const source = useRef(axios.CancelToken.source());
-    const [isStopsSet, setIsStopsSet] = useState(false);
-    const journeyPoints = useState<JourneyPoint[]>([]);
-    let name = props.route.params.notification.sender!.name;
-    let surname =props.route.params.notification.sender!.surname;
 
     useEffect(() => {
         JourneyService.getJourney(props.route.params.notification.journeyId, false,
@@ -47,43 +44,21 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
             .then(res => {
                 setJourney(res.data);
                 setJourneyUser(data.journeyUser);
-
+                setJourneyPoints(res.data?.journeyPoints);
                 setStops([
                     getStopByType(res.data, StopType.Start)!,
-                    res.data!.stops.filter((stop: Stop) =>
-                        stop!.index === FIRST_ELEMENT_INDEX && stop!.userId ===
-                        props.route.params.notification.sender?.id)[FIRST_ELEMENT_INDEX],
-                    res.data!.stops.filter((stop: Stop) =>
-                        stop!.index === SECOND_ELEMENT_INDEX && stop!.userId ===
-                        props.route.params.notification.sender?.id)[FIRST_ELEMENT_INDEX],
                     getStopByType(res.data, StopType.Finish)!
                 ]);
             });
     }, []);
-
-    useEffect(() => {
-        if (!isStopsSet && stops) {
-            setIsStopsSet(true);
-            var tempStops = stops;
-
-            console.log(tempStops);
-            tempStops?.filter((stop) =>
-                stop?.type === StopType.Intermediate)
-                .forEach((stop) => (stop!.alias =
-                    `${name} ${surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ?
-                        "Start" :
-                        "Finish"}`));
-            console.log(tempStops);
-            setStops(tempStops);
-        }
-    }, [stops]);
 
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Stop View", {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
+            currentStop: Number(stops?.findIndex((stp) => stp?.address?.name == stop?.address?.name)),
         });
     };
 
@@ -113,14 +88,14 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                         journey={journey!}
                     />
                     <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                        {props.route.params.notification.sender?.name}
+                        {props.route.params.notification.sender?.name + " "}
                         {props.route.params.notification.sender?.surname}`s stops
                     </Text>
                     <View>
                         <StopsBlock
                             stops={stops ? stops : []}
                             onStopPress={onStopPressHandler}
-                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                            highlightedStops={[FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX]}
                         />
                     </View>
 
