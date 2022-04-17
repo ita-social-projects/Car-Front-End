@@ -143,7 +143,7 @@ const ScheduleBottomPopup = (props: ScheduleBottomPopupProps) => {
             renderHeader={
                 <View style={{ backgroundColor: colors.white }}>
                     <Text style={[ScheduleBottomPopupStyles.header, { color: colors.primary }]}>
-                        Schedule This ride
+                        SCHEDULE A RIDE
                     </Text>
                 </View>
             }

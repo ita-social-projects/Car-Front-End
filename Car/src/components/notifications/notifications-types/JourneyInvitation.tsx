@@ -10,7 +10,7 @@ const JourneyInvitation = (props: NotificationProps) => {
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"Journey Invitation"}
+                notificationTitle={"Has invited you to join the ride!"}
                 read={props.read}
                 date={props.date}
                 openModal={ () => {

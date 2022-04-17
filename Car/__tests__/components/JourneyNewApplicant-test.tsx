@@ -45,7 +45,7 @@ test("renders correctly", async () =>
     <React.Fragment>
       <MinimizedNotification
         notificationId={0}
-        notificationTitle="New applicant"
+        notificationTitle="Has asked to join your ride!"
         openModal={[Function]}
         user={
           Object {

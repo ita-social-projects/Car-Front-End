@@ -10,7 +10,7 @@ const JourneyCancellation = (props: NotificationProps) => {
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"Ride is canceled"}
+                notificationTitle={"Has canceled the ride!"}
                 read={props.read}
                 date={props.date}
                 openModal={ () => {

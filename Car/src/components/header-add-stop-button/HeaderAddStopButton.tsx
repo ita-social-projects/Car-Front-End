@@ -12,7 +12,7 @@ const HeaderAddStopButton = (props: any) => {
             onPress={props.onPress}
         >
             <Text style={[HeaderAddStopButtonStyle.buttonText, { color: colors.accentBlue }]}>
-            Add a Stop
+                Add a stop
             </Text>
         </TouchableOpacity>
     );

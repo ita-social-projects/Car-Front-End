@@ -140,14 +140,14 @@ const BadSearchResult = () => {
                         { backgroundColor: colors.white }
                     ]}>
                         <Text style={[JourneyPageStyle.headerTextStyle, { color: colors.primary }]}>
-                            REQUEST A RIDE
+                            CREATE RIDE REQUEST
                         </Text>
                     </View>
                 }
                 renderContent={
                     <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
                         <MenuButton
-                            text="With the previous filters"
+                            text="With the Previous Filters"
                             isIcon={true}
                             onPress={() => {
                                 if (ShadowedBottomPopup)
@@ -156,7 +156,7 @@ const BadSearchResult = () => {
                             }}
                         />
                         <MenuButton
-                            text="With new filters"
+                            text="With New Filters"
                             isIcon={true}
                             onPress={() => {
                                 if (ShadowedBottomPopup)

@@ -7,7 +7,7 @@ const AcceptedInvitation = (props: NotificationProps) => {
     return (
         <ApplicationAnswer
             notification = {props}
-            notificationTittle = "Passenger accepted your invitation!"
+            notificationTittle = "Has accepted your invitation!"
             notificationHeaderMessage = "The passenger has accepted your invitation!"
             navigationToView = "Invitation is Accepted"
             IsDepartureTimeVisible={true}

@@ -9,7 +9,7 @@ const JourneyDetailsUpdate = (props: NotificationProps) => {
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"Ride details have been updated"}
+                notificationTitle={"Ride details have been updated!"}
                 read={props.read}
                 date={props.date}
                 openModal={ () => {

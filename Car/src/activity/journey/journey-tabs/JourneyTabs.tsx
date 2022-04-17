@@ -353,7 +353,7 @@ const JourneyTabs = () => {
                                                 { backgroundColor: colors.white }
                                             ]}>
                                                 <MenuButton
-                                                    text="Edit ride route"
+                                                    text="Edit Ride Route"
                                                     isIcon={true}
                                                     onPress={() => {
                                                         pressHandle(ridePageMoreOptionsRef);
@@ -361,14 +361,14 @@ const JourneyTabs = () => {
                                                     }}
                                                 />
                                                 <MenuButton
-                                                    text="Edit ride details"
+                                                    text="Edit Ride Details"
                                                     isIcon={true}
                                                     onPress={() => {
                                                         JourneyPage.editJourneyDetails();
                                                         pressHandle(ridePageMoreOptionsRef);
                                                     }} />
                                                 <MenuButton
-                                                    text="Cancel ride"
+                                                    text="Cancel Ride"
                                                     isIcon={true}
                                                     onPress={JourneyPage.showCancelRidePopup}
                                                 />
@@ -456,7 +456,7 @@ const JourneyTabs = () => {
                                             { backgroundColor: colors.white }
                                         ]}>
                                             <MenuButton
-                                                text="Edit ride route"
+                                                text="Edit Ride Request"
                                                 isIcon={true}
                                                 onPress={() => {
                                                     navigation.navigate("Edit Request Page",
@@ -465,7 +465,7 @@ const JourneyTabs = () => {
                                                 }}
                                             />
                                             <MenuButton
-                                                text="Cancel ride"
+                                                text="Cancel Ride"
                                                 isIcon={true}
                                                 onPress={showCancelRidePopup}
                                             />

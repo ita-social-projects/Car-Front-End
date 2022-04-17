@@ -9,7 +9,7 @@ const ApplicationRejection = (props: NotificationProps) => {
     return (
         <ApplicationAnswer
             notification = {props}
-            notificationTittle = "Driver rejected your request!"
+            notificationTittle = "Has rejected your request!"
             notificationHeaderMessage = "The driver has rejected your request!"
             navigationToView = "Request is Rejected"
             IsDetailsTitleVisible={false}

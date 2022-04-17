@@ -9,7 +9,7 @@ const ApplicationApproval = (props: NotificationProps) => {
     return (
         <ApplicationAnswer
             notification = {props}
-            notificationTittle = "Driver approved your request!"
+            notificationTittle = "Has approved your request!"
             notificationHeaderMessage = "The driver has approved your request!"
             navigationToView = "Request is Approved"
             withWithdraw

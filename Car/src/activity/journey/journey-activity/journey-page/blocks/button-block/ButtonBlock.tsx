@@ -58,7 +58,7 @@ const ButtonBlock = (props: ButtonBlockProps) => {
                         onPress={onMessageToAllPress}
                     >
                         <Text style={[JourneyPageStyle.messageAllButtonText, { color: colorText }]}>
-                            Message all
+                            MESSAGE TO ALL
                         </Text>
                     </Pressable>
                 )}
