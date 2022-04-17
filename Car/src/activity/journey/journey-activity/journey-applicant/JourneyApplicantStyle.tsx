@@ -8,11 +8,32 @@ const JourneyApplicantStyle = StyleSheet.create({
 
     },
 
-    indicator:
+    containerBadge:
     {
-        height: "100%",
-        justifyContent: "center",
-        alignItems:"center"
+        borderRadius: 16,
+        borderWidth: 1,
+        minHeight: 152,
+        width: Dimensions.get("screen").width - 32,
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+    },
+
+    containerPhone:
+    {
+        borderRadius: 16,
+        borderWidth: 1,
+        minHeight: 50,
+        width: Dimensions.get("screen").width - 32,
+        padding: 16,
+        flexDirection: "row",
+        justifyContent: "space-between",
+
+    },
+
+    speceBetweenContainer:
+    {
+        marginTop: 8,
+        marginBottom:8,
     },
 
     textAchievements:
@@ -36,14 +57,12 @@ const JourneyApplicantStyle = StyleSheet.create({
 
     },
 
-    containerBadge:
+    textMobileAndPhoneNumber:
     {
-        borderRadius: 16,
-        borderWidth: 1,
-        minHeight: 152,
-        width: Dimensions.get("screen").width - 32,
-        flexDirection: "row",
-        justifyContent: "space-evenly",
+        fontFamily: Font.OpenSans.Bold,
+        fontStyle: "normal",
+        fontWeight: "700",
+        fontSize: 13,
     },
 
     badges:
@@ -59,11 +78,12 @@ const JourneyApplicantStyle = StyleSheet.create({
         height: 120
     },
 
-    speceBetweenContainer:
+    indicator:
     {
-        marginTop: 8,
-        marginBottom:8,
-    }
+        height: "100%",
+        justifyContent: "center",
+        alignItems:"center"
+    },
 
 });
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Linking, Text, View } from "react-native";
+import { Image, Linking, Text, TouchableOpacity, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
@@ -25,7 +25,7 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
     const [isCallingButtonVisible, setCallingButtonVisible] = useState(false);
-
+    const [isNumberVisible] = useState(true);
     const [currentAchieve, setCurrentAchieve] = useState<UserStatistic>(null);
     const [currentBadgeAsPassanger, setcurrentBadgeAsPassanger] = useState(allBadges[ZERO]);
     const [currentBadgeAsDriver, setcurrentBadgeAsDriver] = useState(allBadges[SIX]);
@@ -95,6 +95,34 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
             ) : (
                 <>
                     <AvatarLogoTitle userToDisplay={user}/>
+                    <View style = {[JourneyApplicantStyle.speceBetweenContainer]}></View>
+                    {
+                        (isNumberVisible && user?.phoneNumber !== null) &&
+                        <Shadow
+                            distance={8}
+                            startColor={colors.shadow}
+                            offset={[shadowXPosition, shadowYPosition]}
+                        >
+                            <TouchableOpacity
+                                style = {[JourneyApplicantStyle.containerPhone,
+                                    {
+                                        borderColor: colors.neutralLight,
+                                        backgroundColor: colors.white
+                                    }]}
+                                onPress={() => setCallingButtonVisible(true)}>
+                                <Text style = {
+                                    [JourneyApplicantStyle.textMobileAndPhoneNumber,
+                                        { color: colors.secondaryDark }]}>
+                                    Mobile
+                                </Text>
+                                <Text style = {
+                                    [JourneyApplicantStyle.textMobileAndPhoneNumber,
+                                        { color: colors.accentBlue }]}>
+                                    {user?.phoneNumber}
+                                </Text>
+                            </TouchableOpacity>
+                        </Shadow>
+                    }
                     {
                         (currentAchieve?.passangerJourneysAmount! !== ZERO ||
                         currentAchieve?.driverJourneysAmount! !== ZERO ||
