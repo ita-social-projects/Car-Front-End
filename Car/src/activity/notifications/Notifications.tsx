@@ -119,9 +119,7 @@ const Notifications = (props: NavigationAddAndRemoveListener) => {
                     style={[NotificationsStyle.noNotificationsContainer, { backgroundColor: colors.white }]}
                 >
                     <Text style={{ ...NotificationsStyle.noNotificationsStyle, color: colors.primary }}>
-            CURRENTLY YOU DO NOT HAVE ANY
-                        {"\n"}
-            NOTIFICATIONS
+                        {"No Notifications so far".toUpperCase()}
                     </Text>
                     <Image
                         style={NotificationsStyle.noNotificationsImageStyle}

@@ -137,7 +137,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
         if (journey) {
             fitCameraToCoordinates(journey.journeyPoints, false);
-            props.navigation?.setOptions({ headerTitle: "Edit ride route" });
+            props.navigation?.setOptions({ headerTitle: "Edit the Ride" });
         }
 
         LocationService

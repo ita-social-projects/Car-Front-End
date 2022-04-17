@@ -9,7 +9,7 @@ const JourneyNewApplicant = (props: NotificationProps) => {
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"New applicant"}
+                notificationTitle={"Has asked to join your ride!"}
                 read={props.read}
                 date={props.date}
                 openModal={ () => {

@@ -77,7 +77,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                         borderBottomColor: colors.disableBack
                     }]}>
                         <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
-                                    The passenger has withdrawn your ride!
+                            The passenger has withdrawn your ride!
                         </Text>
                     </View>
 

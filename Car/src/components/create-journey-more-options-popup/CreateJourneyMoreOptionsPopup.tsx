@@ -35,7 +35,7 @@ const CreateJourneyMoreOptionsPopup = (props: CreateJourneyMoreOptionsPopupProps
                 renderContent={
                     <View style={[JourneyPageStyle.panel, { backgroundColor: colors.white }]}>
                         <MenuButton
-                            text="Schedule This ride"
+                            text="Schedule This Ride"
                             isIcon={true}
                             onPress={() => {
                                 props.scheduleMoreOptionsRef.current?.snapTo(MAX_POPUP_POSITION);
