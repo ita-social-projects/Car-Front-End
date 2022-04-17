@@ -48,7 +48,7 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
             .then(res => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
-                setJourneyPoints(res.data!.item1?.journeyPoints);
+                setJourneyPoints(res.data.item1?.journeyPoints);
                 setStops([
                     getStopByType(res.data.item1, StopType.Start)!,
                     res.data.item1!.stops.filter((stop) =>
