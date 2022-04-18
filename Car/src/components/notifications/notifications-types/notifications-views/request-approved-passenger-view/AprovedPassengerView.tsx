@@ -30,7 +30,6 @@ import ConfirmModal from "../../../../confirm-modal/ConfirmModal";
 import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 import NotificationsService from "../../../../../../api-service/notifications-service/NotificationsService";
 
-
 interface InvitationAcceptedViewProps {
   route: {
     params: {

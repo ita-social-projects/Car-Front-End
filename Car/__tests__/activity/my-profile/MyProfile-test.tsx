@@ -398,7 +398,9 @@ test("renders correctly", async () =>
               }
             }
           >
-            <ForwardRef>
+            <ForwardRef
+              onPress={[Function]}
+            >
               <Text
                 style={
                   Array [
@@ -429,7 +431,9 @@ test("renders correctly", async () =>
                 •
               </Text>
             </View>
-            <ForwardRef>
+            <ForwardRef
+              onPress={[Function]}
+            >
               <Text
                 style={
                   Array [
