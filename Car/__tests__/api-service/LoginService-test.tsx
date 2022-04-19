@@ -19,6 +19,7 @@ describe("Login Service test", () => {
         journeyCount: 8,
         phoneNumber: null,
         isPolicyAccepted: true,
+        isNumberVisible: false
     };
 
     test("should login user", async () => {

@@ -18,6 +18,7 @@ describe("User Service test", () => {
         journeyCount: 8,
         phoneNumber: null,
         isPolicyAccepted: true,
+        isNumberVisible: false
     },
     {
         id: 2,
@@ -32,6 +33,7 @@ describe("User Service test", () => {
         journeyCount: 8,
         phoneNumber: null,
         isPolicyAccepted: true,
+        isNumberVisible: false
     }];
 
     test("should get user", async () => {

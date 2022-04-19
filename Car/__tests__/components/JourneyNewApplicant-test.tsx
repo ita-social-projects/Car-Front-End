@@ -21,6 +21,7 @@ test("renders correctly", async () =>
                     journeyCount: 0,
                     phoneNumber: null,
                     isPolicyAccepted: true,
+                    isNumberVisible: false,
                 }}
                 receiver={{
                     id: 1,
@@ -35,6 +36,7 @@ test("renders correctly", async () =>
                     journeyCount: 0,
                     phoneNumber: null,
                     isPolicyAccepted: true,
+                    isNumberVisible: false,
                 }}
                 notificationData={`{"title": "New Applicant", "comments": "${"Abc"}", "hasLuggage": "${true}"}`}
                 notificationId={0}
@@ -54,6 +56,7 @@ test("renders correctly", async () =>
             "hireDate": 2021-01-01T20:00:00.000Z,
             "id": 0,
             "imageId": null,
+            "isNumberVisible": false,
             "isPolicyAccepted": true,
             "journeyCount": 0,
             "location": "Abc",

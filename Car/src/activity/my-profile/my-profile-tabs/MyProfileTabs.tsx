@@ -12,6 +12,7 @@ import Badges from "../my-profile-activity/badges/Badges";
 import HeaderStyle from "../../../components/styles/HeaderStyle";
 import PrivacyPolicySheet from "../my-profile-activity/privacy-policy/PrivacyPolicySheet";
 import TermsOfUseSheet from "../my-profile-activity/privacy-policy/TermsOfUseSheet";
+import PhoneNumber from "../my-profile-activity/details/phonenumber/PhoneNumber";
 
 const StackTabs = createStackNavigator();
 
@@ -64,6 +65,19 @@ const MyProfileTabs = () => {
                     name="AddressBookTabs"
                     component={AddressBookTabs}
                     options={{ headerShown: false }}
+                />
+
+                <StackTabs.Screen
+                    name="Phone Number"
+                    component={PhoneNumber}
+                    options={{
+                        headerTitle: "SoftServian",
+                        headerTitleAlign: "center",
+                        headerStyle: [HeaderStyle.border,
+                            { borderBottomColor: !isThemeDark ? colors.secondaryLight : colors.neutralLight }],
+                        headerTitleStyle: [HeaderStyle.headerTitleStyle, { color: colors.primary }],
+                        headerLeft: HeaderBackButton
+                    }}
                 />
 
                 <StackTabs.Screen

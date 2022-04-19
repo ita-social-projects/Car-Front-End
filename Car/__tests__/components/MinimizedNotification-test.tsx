@@ -16,6 +16,7 @@ const testUser: User = {
     journeyCount: 0,
     phoneNumber: null,
     isPolicyAccepted: true,
+    isNumberVisible: false
 };
 
 test("renders correctly", async () =>

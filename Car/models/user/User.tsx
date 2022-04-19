@@ -10,7 +10,7 @@ type User = null | {
     imageId: string | null;
     journeyCount: number;
     phoneNumber?: string | null;
-    isNumberVisible?: boolean;
+    isNumberVisible: boolean;
     isPolicyAccepted: boolean;
 };
 
