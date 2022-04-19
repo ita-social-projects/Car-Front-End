@@ -25,7 +25,6 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
     const [isCallingButtonVisible, setCallingButtonVisible] = useState(false);
-    const [isNumberVisible] = useState(true);
     const [currentAchieve, setCurrentAchieve] = useState<UserStatistic>(null);
     const [currentBadgeAsPassanger, setcurrentBadgeAsPassanger] = useState(allBadges[ZERO]);
     const [currentBadgeAsDriver, setcurrentBadgeAsDriver] = useState(allBadges[SIX]);
@@ -97,7 +96,7 @@ const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
                     <AvatarLogoTitle userToDisplay={user}/>
                     <View style = {[JourneyApplicantStyle.speceBetweenContainer]}></View>
                     {
-                        (isNumberVisible && user?.phoneNumber !== null) &&
+                        (user?.isNumberVisible) &&
                         <Shadow
                             distance={8}
                             startColor={colors.shadow}

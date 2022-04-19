@@ -26,6 +26,7 @@ import axios from "axios";
 import { ANIMATION_DURATION } from "../../constants/AnimationConstants";
 import { BottomSheet } from "react-native-elements";
 import ConfirmModal from "../../components/confirm-modal/ConfirmModal";
+import * as navigation from "../../components/navigation/Navigation";
 
 const MyProfile = (props: { navigation: any }) => {
     const { setScheme, theme, colors } = useTheme();
@@ -187,9 +188,15 @@ const MyProfile = (props: { navigation: any }) => {
                             </Text>
                         </TouchableOpacity>
                         <View style={[MyProfileStyle.separator, { backgroundColor: colors.secondaryDark }]} />
-                        <TouchableOpacity style={MyProfileStyle.moreOptionsButton}>
+                        <TouchableOpacity
+                            style={MyProfileStyle.moreOptionsButton}
+                            onPress={() => {
+                                navigation.navigate("Phone Number");
+                                pressHandle();
+                            }
+                            }>
                             <Text style={[MyProfileStyle.changeAvatarText, { color: colors.primary }]}>
-                My number
+                                My number
                             </Text>
                         </TouchableOpacity>
                         <View style={[MyProfileStyle.separator, { backgroundColor: colors.secondaryDark }]} />
@@ -203,7 +210,7 @@ const MyProfile = (props: { navigation: any }) => {
                                     }}
                                 >
                                     <Text style={[MyProfileStyle.deleteAvatarText, { color: colors.accentOrange }]}>
-                    Delete photo
+                                        Delete photo
                                     </Text>
                                 </TouchableOpacity>
                                 <View

@@ -9,6 +9,7 @@ import User from "../../../../../../models/user/User";
 import UserPhone from "../../../../../../models/user/UserPhone";
 import NavigationAddListener from "../../../../../types/NavigationAddListener";
 import PhoneNumberInput from "../../../../../components/phonenumber-input-button/PhoneNumberInput";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const PhoneNumber = (props: NavigationAddListener) => {
     const [user, setUser] = useState<User>(useContext(AuthContext).user);
@@ -18,19 +19,22 @@ const PhoneNumber = (props: NavigationAddListener) => {
 
     const [number, setNumber] = useState(user?.phoneNumber ?? "");
 
-    const updateUserNumber = () => {
-        const updatedUser: UserPhone = {
+    const updateUserNumberAsync = async () => {
+        const updatedUserPhoneNumber: UserPhone = {
             id: user!.id,
             phoneNumber: number,
             isNumberVisible: isNumberVisible!,
         };
 
-        UserService.updateUserPhone(updatedUser);
-        UserService.getUser(user!.id)
-            .then((res) => {
-                setUser(res.data);
-            })
-            .then(() => loadStorageUser());
+        await UserService.updateUserPhone(updatedUserPhoneNumber).then((res) => {
+            AsyncStorage.setItem("user", JSON.stringify(res.data));
+        });
+        await AsyncStorage.getItem("user").then((res) => {
+            const updatedUser = JSON.parse(res!);
+
+            setUser(updatedUser);
+            loadStorageUser();
+        });
     };
 
     useEffect(() => {
@@ -45,8 +49,8 @@ const PhoneNumber = (props: NavigationAddListener) => {
     }, [props.navigation]);
 
     useEffect(() => {
-        return props.navigation.addListener("blur", updateUserNumber);
-    }, [updateUserNumber]);
+        return props.navigation.addListener("blur", updateUserNumberAsync);
+    }, [updateUserNumberAsync]);
 
     return (
         <View style= {[PhoneNumberStyle.window]}>

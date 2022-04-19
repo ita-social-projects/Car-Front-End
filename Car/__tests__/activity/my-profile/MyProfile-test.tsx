@@ -520,6 +520,7 @@ test("renders correctly", async () =>
               }
             />
             <ForwardRef
+              onPress={[Function]}
               style={
                 Object {
                   "alignItems": "flex-start",

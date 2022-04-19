@@ -23,7 +23,7 @@ const UserService = {
 
     deleteUserFcmtoken: async (token: string) => APIService.delete(route + "fcmtoken/" + token),
 
-    updateUserPhone: async (userPhone: UserPhone) => Axios.put<UserPhone>(route + "update/", userPhone)
+    updateUserPhone: async (userPhone: UserPhone) => APIService.put<UserPhone>(route + "update-number/", userPhone)
 };
 
 export default UserService;
