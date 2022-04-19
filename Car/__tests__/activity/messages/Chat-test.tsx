@@ -43,16 +43,17 @@ test("renders correctly", async () =>
         />
       </TouchableWithoutFeedback>
       <BottomPopup
-        enabledGestureInteraction={false}
         enabledInnerScrolling={false}
         initialSnap={1}
         refForChild={[Function]}
         renderContent={
           <View
             style={
-              Object {
-                "backgroundColor": "#FFFFFF",
-              }
+              Array [
+                Object {
+                  "width": 750,
+                },
+              ]
             }
           >
             <MenuButton
@@ -65,11 +66,10 @@ test("renders correctly", async () =>
             />
           </View>
         }
-        renderHeader={<View />}
         snapPoints={
           Array [
             135,
-            0,
+            -340,
           ]
         }
       />

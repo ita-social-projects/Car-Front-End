@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const ChatStyle = StyleSheet.create({
     messageField: {
@@ -11,6 +11,13 @@ const ChatStyle = StyleSheet.create({
         paddingHorizontal: 5
     },
 
+    sendIcon: {
+        width: 27,
+        height: 27,
+        borderRadius: 0,
+        resizeMode: "contain"
+    },
+
     button: {
         width: 41,
         height: "100%",
@@ -18,6 +25,10 @@ const ChatStyle = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingBottom: 10
+    },
+
+    popupButtonsWrapper: {
+        width: Dimensions.get("window").width,
     },
 });
 

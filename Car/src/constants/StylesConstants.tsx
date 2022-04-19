@@ -12,6 +12,7 @@ export const MAX_OPACITY = 1;
 export const MAX_POPUP_POSITION = 0;
 export const MIN_POPUP_POSITION = 1;
 export const MIN_POPUP_HEIGHT = 0;
+export const CHAT_MIN_POPUP_HEIGHT = -340;
 export const POPUP_HEIGHT_WITH_USER_IMAGE = 264;
 export const POPUP_HEIGHT_WITHOUT_USER_IMAGE = 210;
 export const POPUP_POSITION_WHEN_CLOSED = -50;

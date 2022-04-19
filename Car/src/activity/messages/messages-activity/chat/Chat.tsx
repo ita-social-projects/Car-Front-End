@@ -10,8 +10,8 @@ import {
     Platform,
     TouchableWithoutFeedback,
     Keyboard,
+    Image,
 } from "react-native";
-import { Icon } from "react-native-elements";
 import {
     AvatarProps,
     Bubble,
@@ -34,10 +34,10 @@ import {
     COUNT_OF_MESSAGES_TO_LOAD,
 } from "../../../../constants/MessageConstants";
 import {
+    CHAT_MIN_POPUP_HEIGHT,
     HALF_OPACITY,
     MAX_OPACITY,
     MAX_POPUP_POSITION,
-    MIN_POPUP_HEIGHT,
     MIN_POPUP_POSITION,
 } from "../../../../constants/StylesConstants";
 import {
@@ -65,7 +65,7 @@ import appInsights from "../../../../components/telemetry/AppInsights";
 import { getDateWithCorrectUtc } from "../../../../utils/ChatHelperFunctions";
 
 const Chat = (properties: ChatProps) => {
-    const { colors } = useTheme();
+    const { colors, isThemeDark } = useTheme();
     const [messages, setMessages] = useState<IMessage[]>([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(useContext(AuthContext).user);
@@ -98,6 +98,17 @@ const Chat = (properties: ChatProps) => {
         ?.invoke("EnterToGroup", properties.route.params.chatId.toString())
         .catch((e) => appInsights.trackException({ exception: e }));
     console.log(connection?.connectionId);
+    };
+
+    const getSendIcon = () =>{
+        if(isSendDisabled){
+            return require("../../../../../assets/images/icons/chat/graySend.png");
+        }
+        if(isThemeDark){
+            return require("../../../../../assets/images/icons/chat/lightSend.png");
+        }
+
+        return require("../../../../../assets/images/icons/chat/darkSend.png");
     };
 
     useEffect(() => {
@@ -228,10 +239,10 @@ const Chat = (properties: ChatProps) => {
     const renderSend = (props: any) => (
         <Send disabled={isSendDisabled} {...props} style={{ flex: 1, width: "100%" }}>
             <View style={ChatStyle.button}>
-                <Icon
-                    name="paper-plane"
-                    type="font-awesome"
-                    color={isSendDisabled ? colors.secondaryDark : colors.primary}
+                <Image
+                    fadeDuration={0}
+                    source={getSendIcon()}
+                    style={[ChatStyle.sendIcon]}
                 />
             </View>
         </Send>
@@ -440,13 +451,11 @@ const Chat = (properties: ChatProps) => {
             </TouchableWithoutFeedback>
             <BottomPopup
                 refForChild={(ref) => (moreOptionsRef.current = ref)}
-                snapPoints={[CHAT_POPUP_HEIGHT, MIN_POPUP_HEIGHT]}
+                snapPoints={[CHAT_POPUP_HEIGHT, CHAT_MIN_POPUP_HEIGHT]}
                 enabledInnerScrolling={false}
-                enabledGestureInteraction={false}
                 initialSnap={1}
-                renderHeader={<View />}
                 renderContent={
-                    <View style={{ backgroundColor: colors.white }}>
+                    <View style={[ChatStyle.popupButtonsWrapper]}>
                         <MenuButton
                             text="Copy text"
                             onPress={() => {
