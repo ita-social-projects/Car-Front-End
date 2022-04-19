@@ -20,13 +20,13 @@ const PhoneNumber = (props: NavigationAddListener) => {
     const [number, setNumber] = useState(user?.phoneNumber ?? "");
 
     const updateUserNumberAsync = async () => {
-        const updatedUser: UserPhone = {
+        const updatedUserPhoneNumber: UserPhone = {
             id: user!.id,
             phoneNumber: number,
             isNumberVisible: isNumberVisible!,
         };
 
-        await UserService.updateUserPhone(updatedUser).then((res) => {
+        await UserService.updateUserPhone(updatedUserPhoneNumber).then((res) => {
             AsyncStorage.setItem("user", JSON.stringify(res.data));
         });
         await AsyncStorage.getItem("user").then((res) => {
