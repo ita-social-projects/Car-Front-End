@@ -43,6 +43,7 @@ test("renders correctly", async () =>
         />
       </TouchableWithoutFeedback>
       <BottomPopup
+        enabledGestureInteraction={false}
         enabledInnerScrolling={false}
         initialSnap={1}
         refForChild={[Function]}

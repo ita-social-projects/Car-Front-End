@@ -453,6 +453,7 @@ const Chat = (properties: ChatProps) => {
                 refForChild={(ref) => (moreOptionsRef.current = ref)}
                 snapPoints={[CHAT_POPUP_HEIGHT, CHAT_MIN_POPUP_HEIGHT]}
                 enabledInnerScrolling={false}
+                enabledGestureInteraction={false}
                 initialSnap={1}
                 renderContent={
                     <View style={[ChatStyle.popupButtonsWrapper]}>
