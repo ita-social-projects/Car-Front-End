@@ -105,12 +105,12 @@ test("renders correctly", async () =>
             <MenuButton
               isIcon={true}
               onPress={[Function]}
-              text="With the previous filters"
+              text="With the Previous Filters"
             />
             <MenuButton
               isIcon={true}
               onPress={[Function]}
-              text="With new filters"
+              text="With New Filters"
             />
           </View>
         }
@@ -145,7 +145,7 @@ test("renders correctly", async () =>
                 ]
               }
             >
-              REQUEST A RIDE
+              CREATE RIDE REQUEST
             </Text>
           </View>
         }

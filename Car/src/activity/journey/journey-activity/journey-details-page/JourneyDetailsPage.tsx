@@ -578,7 +578,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
                                     }}>
                                         {existingInvitations.length +
                                             newInvitations.filter(inv => inv.isCorrect).length} SoftServian
-                                        will be notified for that Journey
+                                        will be notified for the Ride
 
                                     </Text>
                                 </View>

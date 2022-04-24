@@ -18,11 +18,13 @@ import { useTheme } from "../../../../theme/ThemeProvider";
 import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
 import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
 import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
+import { ApplicationAnswerProps } from "../../ApplicationAnswer";
+import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 
 interface InvitationAcceptedViewProps {
     route: {
         params: {
-            notification:any
+            notification: ApplicationAnswerProps
         }
     }
 }
@@ -32,27 +34,29 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
     const user = useContext(AuthContext).user;
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
-    const data = JSON.parse(props.route.params.notification.notificationData);
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
+    const data = JSON.parse(props.route.params.notification.notification.notificationData);
     const stops: Stop[] = data.stopsRepresentation;
     const source = useRef(axios.CancelToken.source());
-    let name = props.route.params.notification.sender!.name;
-    let surname = props.route.params.notification.sender!.surname;
+    let name = props.route.params.notification.notification.sender!.name;
+    let surname = props.route.params.notification.notification.sender!.surname;
 
     useEffect(() => {
-        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.journeyId,
+        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.notification.journeyId,
             props.route.params.notification.journeyUserId,
             false,
             { cancelToken: source.current.token })
             .then(res => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
+                setJourneyPoints(res.data.item1!.journeyPoints);
             });
     }, []);
 
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Stop View", {
             stops: stops,
-            journeyPoints: props.route.params.notification.journeyPoints,
+            journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,
         });
@@ -80,11 +84,11 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
                     }
 
                     <NotificationRideDetails
-                        journeyId={props.route.params.notification.journeyId}
+                        journeyId={props.route.params.notification.notification.journeyId}
                         userId={user?.id!}
                         IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
                         IsBaggageVisible={props.route.params.notification.IsBaggageVisible}
-                        IsDepartureTimeVisible={props.route.params.notification.routeIsDepartureTimeVisible}
+                        IsDepartureTimeVisible={props.route.params.notification.IsDepartureTimeVisible}
                         IsDetailsTitleVisible={props.route.params.notification.IsDetailsTitleVisible}
                         IsFeeVisible={props.route.params.notification.IsFeeVisible}
                         journey={journey!}

@@ -113,6 +113,33 @@ test("renders correctly", async () =>
         />
         <Screen
           component={[Function]}
+          name="Phone Number"
+          options={
+            Object {
+              "headerLeft": [Function],
+              "headerStyle": Array [
+                Object {},
+                Object {
+                  "borderBottomColor": "#AAA9AE",
+                },
+              ],
+              "headerTitle": "SoftServian",
+              "headerTitleAlign": "center",
+              "headerTitleStyle": Array [
+                Object {
+                  "fontFamily": "Open Sans ExtraBold",
+                  "fontSize": 18,
+                  "fontWeight": "700",
+                },
+                Object {
+                  "color": "#0B171B",
+                },
+              ],
+            }
+          }
+        />
+        <Screen
+          component={[Function]}
           name="PrivacyPolicySheet"
           options={
             Object {

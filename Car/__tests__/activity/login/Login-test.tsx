@@ -5,13 +5,13 @@ import Login from "../../../src/activity/login/Login";
 const renderer = shallowRender.createRenderer();
 
 const navigation = {
-  addListener: () => () => {},
+    addListener: () => () => {},
 };
 
 test("renders correctly", async () =>
-  expect(
-    renderer.render(<Login navigation={navigation} route={undefined as any} />)
-  ).toMatchInlineSnapshot(`
+    expect(
+        renderer.render(<Login navigation={navigation} route={undefined as any} />)
+    ).toMatchInlineSnapshot(`
     <View
       style={
         Array [
@@ -128,10 +128,11 @@ test("renders correctly", async () =>
               Array [
                 Object {
                   "alignItems": "center",
+                  "alignSelf": "center",
                   "fontSize": 16,
                   "height": 56,
                   "justifyContent": "center",
-                  "width": 304,
+                  "width": "85%",
                 },
                 Object {
                   "backgroundColor": "#414045",

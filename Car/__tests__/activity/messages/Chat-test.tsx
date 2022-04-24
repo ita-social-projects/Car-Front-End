@@ -50,9 +50,11 @@ test("renders correctly", async () =>
         renderContent={
           <View
             style={
-              Object {
-                "backgroundColor": "#FFFFFF",
-              }
+              Array [
+                Object {
+                  "width": 750,
+                },
+              ]
             }
           >
             <MenuButton
@@ -65,11 +67,10 @@ test("renders correctly", async () =>
             />
           </View>
         }
-        renderHeader={<View />}
         snapPoints={
           Array [
             135,
-            0,
+            -340,
           ]
         }
       />

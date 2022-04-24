@@ -18,11 +18,13 @@ import { useTheme } from "../../../../theme/ThemeProvider";
 import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
 import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
 import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
+import { ApplicationAnswerProps } from "../../ApplicationAnswer";
+import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 
 interface InvitationAcceptedViewProps {
     route: {
         params: {
-            notification:any
+            notification: ApplicationAnswerProps
         }
     }
 }
@@ -33,6 +35,7 @@ const ApprovedView = (props: InvitationAcceptedViewProps) => {
     const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const source = useRef(axios.CancelToken.source());
     const sender = props.route.params.notification.notification.sender!;
     const name = sender.name;
@@ -47,13 +50,14 @@ const ApprovedView = (props: InvitationAcceptedViewProps) => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
                 setStops(res.data.item1!.stops);
+                setJourneyPoints(res.data.item1!.journeyPoints);
             });
     }, []);
 
     const onStopPressHandler = (stop: Stop) => {
         navigation.navigate("Stop View", {
             stops: stops,
-            journeyPoints: props.route.params.notification.journeyPoints,
+            journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,
         });
@@ -84,7 +88,7 @@ const ApprovedView = (props: InvitationAcceptedViewProps) => {
                         userId={user?.id!}
                         IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
                         IsBaggageVisible={props.route.params.notification.IsBaggageVisible}
-                        IsDepartureTimeVisible={props.route.params.notification.routeIsDepartureTimeVisible}
+                        IsDepartureTimeVisible={props.route.params.notification.IsDepartureTimeVisible}
                         IsDetailsTitleVisible={props.route.params.notification.IsDetailsTitleVisible}
                         IsFeeVisible={props.route.params.notification.IsFeeVisible}
                         journey={journey!}

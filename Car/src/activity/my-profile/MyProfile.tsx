@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
-import React, { useContext, useEffect, useState } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Animated, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import UserService from "../../../api-service/user-service/UserService";
 import AuthContext from "../../components/auth/AuthContext";
 import { useTheme } from "../../components/theme/ThemeProvider";
@@ -9,29 +9,52 @@ import MyProfileStyle from "./MyProfileStyle";
 import HeaderLogoutButton from "../../components/header-logout-button/HeaderLogoutButton";
 import MyProfileTabsStyle from "./my-profile-tabs/MyProfileTabsStyle";
 import AvatarLogoTitle from "../../components/avatar-logo-title/AvatarLogoTitle";
+import BottomPopup from "../../components/bottom-popup/BottomPopup";
+import { ImagePickerResponse, launchImageLibrary } from "react-native-image-picker/src";
+import User from "../../../models/user/User";
+import {
+    HALF_OPACITY,
+    MAX_POPUP_POSITION,
+    MIN_POPUP_POSITION,
+    POPUP_HEIGHT_WITHOUT_USER_IMAGE,
+    POPUP_HEIGHT_WITH_USER_IMAGE,
+    POPUP_POSITION_WHEN_CLOSED,
+    ZERO_OPACITY,
+} from "../../constants/StylesConstants";
+import { FIRST_ELEMENT_INDEX } from "../../constants/GeneralConstants";
+import axios from "axios";
+import { ANIMATION_DURATION } from "../../constants/AnimationConstants";
+import { BottomSheet } from "react-native-elements";
+import ConfirmModal from "../../components/confirm-modal/ConfirmModal";
 import * as navigation from "../../components/navigation/Navigation";
 
 const MyProfile = (props: { navigation: any }) => {
-
     const { setScheme, theme, colors } = useTheme();
     const isThemeDark = useTheme().isThemeDark;
-    const { user, loadStorageUser } = useContext(AuthContext);
+    const { loadStorageUser } = useContext(AuthContext);
+    const [user, setUser] = useState<User>(useContext(AuthContext).user);
+    const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [isOpen, setOpen] = useState(false);
+    const opacity = useState(new Animated.Value(ZERO_OPACITY))[FIRST_ELEMENT_INDEX];
+
+    const moreOptionsRef = useRef<BottomSheet>(null) as any;
+    const source = useRef(axios.CancelToken.source());
+    const photoTmp = useRef(null as ImagePickerResponse | null);
 
     const activeButtonStyle = {
         backgroundColor: colors.primary,
         color: colors.white,
-        borderColor: colors.primary
+        borderColor: colors.primary,
     };
 
     const inactiveButtonStyle = {
         backgroundColor: colors.white,
         color: colors.primary,
-        borderColor: colors.primary
+        borderColor: colors.primary,
     };
 
-    const setButtonStyle = (shouldBeHighlighted : boolean) =>{
-        if(shouldBeHighlighted)
-            return activeButtonStyle;
+    const setButtonStyle = (shouldBeHighlighted: boolean) => {
+        if (shouldBeHighlighted) return activeButtonStyle;
 
         return inactiveButtonStyle;
     };
@@ -62,6 +85,158 @@ const MyProfile = (props: { navigation: any }) => {
             });
     }, [props.navigation]);
 
+    const saveUser = async (photo: ImagePickerResponse) => {
+        const updatedUser = new FormData();
+
+        updatedUser.append("id", user?.id);
+
+        if (photo !== null && photo !== undefined) {
+            updatedUser.append("image", {
+                name: photo.fileName,
+                type: photo.type,
+                uri: photo?.uri,
+            });
+            pressHandle();
+        }
+
+        await UserService.updateUserImage(updatedUser, { cancelToken: source.current.token }).then(
+            (res) => {
+                AsyncStorage.setItem("user", JSON.stringify(res.data));
+                photoTmp.current = null;
+            }
+        );
+
+        await AsyncStorage.getItem("user").then((res) => {
+            const newUser = JSON.parse(res!);
+
+            setUser(newUser);
+            loadStorageUser();
+        });
+        if (user?.imageId == null) {
+            pressHandle();
+        }
+    };
+
+    const fadeIn = () => {
+        Animated.timing(opacity, {
+            toValue: HALF_OPACITY,
+            duration: ANIMATION_DURATION,
+            useNativeDriver: true,
+        }).start();
+    };
+
+    const fadeOut = () => {
+        Animated.timing(opacity, {
+            toValue: ZERO_OPACITY,
+            duration: ANIMATION_DURATION,
+            useNativeDriver: true,
+        }).start();
+    };
+
+    const closeHandle = () => {
+        fadeOut();
+        setOpen(true);
+    };
+
+    const pressHandle = () => {
+        if (isOpen) {
+            fadeOut();
+            setOpen(false);
+        } else {
+            fadeIn();
+            setOpen(true);
+        }
+
+    moreOptionsRef?.current?.snapTo(isOpen ? MAX_POPUP_POSITION : MIN_POPUP_POSITION);
+    };
+
+    const uploadPhotoHandle = () => {
+        launchImageLibrary({ mediaType: "photo" }, (response) => {
+            if (!response.didCancel) {
+                photoTmp.current = response;
+                saveUser(response);
+            }
+        });
+    };
+
+    const renderBottomPopup = () => {
+        return (
+            <BottomPopup
+                snapPoints={[
+          user?.imageId != null ? POPUP_HEIGHT_WITH_USER_IMAGE : POPUP_HEIGHT_WITHOUT_USER_IMAGE,
+          POPUP_POSITION_WHEN_CLOSED,
+                ]}
+                refForChild={moreOptionsRef}
+                renderContent={
+                    <View
+                        style={{
+                            backgroundColor: colors.white,
+                            height:
+                user?.imageId == null
+                    ? POPUP_HEIGHT_WITHOUT_USER_IMAGE
+                    : POPUP_HEIGHT_WITH_USER_IMAGE,
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={MyProfileStyle.moreOptionsButton}
+                            onPress={() => {
+                                uploadPhotoHandle();
+                            }}
+                        >
+                            <Text style={[MyProfileStyle.changeAvatarText, { color: colors.primary }]}>
+                                {user?.imageId == null ? "Add photo" : "Change photo"}
+                            </Text>
+                        </TouchableOpacity>
+                        <View style={[MyProfileStyle.separator, { backgroundColor: colors.secondaryDark }]} />
+                        <TouchableOpacity
+                            style={MyProfileStyle.moreOptionsButton}
+                            onPress={() => {
+                                navigation.navigate("Phone Number");
+                                pressHandle();
+                            }
+                            }>
+                            <Text style={[MyProfileStyle.changeAvatarText, { color: colors.primary }]}>
+                                My number
+                            </Text>
+                        </TouchableOpacity>
+                        <View style={[MyProfileStyle.separator, { backgroundColor: colors.secondaryDark }]} />
+                        {user?.imageId != null ? (
+                            <>
+                                <TouchableOpacity
+                                    style={MyProfileStyle.moreOptionsButton}
+                                    onPress={() => {
+                                        pressHandle();
+                                        setDeleteModalVisible(true);
+                                    }}
+                                >
+                                    <Text style={[MyProfileStyle.deleteAvatarText, { color: colors.accentOrange }]}>
+                                        Delete photo
+                                    </Text>
+                                </TouchableOpacity>
+                                <View
+                                    style={[MyProfileStyle.separator, { backgroundColor: colors.secondaryDark }]}
+                                />
+                            </>
+                        ) : (
+                            <></>
+                        )}
+                    </View>
+                }
+                initialSnap={MIN_POPUP_POSITION}
+                renderHeader={
+                    <View style={{ backgroundColor: colors.white }}>
+                        <Text style={[MyProfileStyle.moreOptionsHeader, { color: colors.primary }]}>
+              Edit Profile
+                        </Text>
+                    </View>
+                }
+                enabledInnerScrolling={false}
+                onCloseEnd={closeHandle}
+                enabledGestureInteraction={false}
+            />
+        );
+    };
+
     return (
         <View style={[MyProfileTabsStyle.container, { backgroundColor: colors.white }]}>
             <View style={[MyProfileTabsStyle.header, { borderColor: colors.neutralLight }]}>
@@ -69,26 +244,22 @@ const MyProfile = (props: { navigation: any }) => {
             </View>
             <ScrollView>
                 <View style={[MyProfileStyle.container, { backgroundColor: colors.white }]}>
-                    <AvatarLogoTitle />
+                    <TouchableOpacity onPress={pressHandle}>
+                        <AvatarLogoTitle />
+                    </TouchableOpacity>
                     <View style={MyProfileStyle.switchSelector}>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity
                                 style={[
                                     MyProfileStyle.switchButton,
                                     MyProfileStyle.leftButtonBorder,
-                                    lightButtonStyle]}
+                                    lightButtonStyle,
+                                ]}
                                 onPress={async () => {
                                     changeAppScheme("light");
                                 }}
                             >
-                                <Text
-                                    style={[
-                                        MyProfileStyle.buttonText,
-                                        lightButtonStyle,
-                                    ]}
-                                >
-                                    Light
-                                </Text>
+                                <Text style={[MyProfileStyle.buttonText, lightButtonStyle]}>Light</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity
@@ -101,15 +272,9 @@ const MyProfile = (props: { navigation: any }) => {
                                     changeAppScheme("dark");
                                 }}
                             >
-                                <Text
-                                    style={[
-                                        MyProfileStyle.buttonText,
-                                        darkButtonStyle,
-                                    ]}
-                                >
-                                    Dark
-                                </Text>
+                                <Text style={[MyProfileStyle.buttonText, darkButtonStyle]}>Dark</Text>
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={[
                                     MyProfileStyle.switchButton,
@@ -120,14 +285,7 @@ const MyProfile = (props: { navigation: any }) => {
                                     changeAppScheme("system");
                                 }}
                             >
-                                <Text
-                                    style={[
-                                        MyProfileStyle.buttonText,
-                                        systemButtonStyle,
-                                    ]}
-                                >
-                                    As system
-                                </Text>
+                                <Text style={[MyProfileStyle.buttonText, systemButtonStyle]}>As system</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -139,8 +297,8 @@ const MyProfile = (props: { navigation: any }) => {
                             <Image
                                 style={MyProfileStyle.image}
                                 source={
-                                    isThemeDark ?
-                                        require("../../../assets/images/icons/my-profile/darkBadges.png")
+                                    isThemeDark
+                                        ? require("../../../assets/images/icons/my-profile/darkBadges.png")
                                         : require("../../../assets/images/icons/my-profile/lightBadges.png")
                                 }
                             />
@@ -157,8 +315,8 @@ const MyProfile = (props: { navigation: any }) => {
                             <Image
                                 style={MyProfileStyle.image}
                                 source={
-                                    isThemeDark ?
-                                        require("../../../assets/images/icons/my-profile/darkPreferences.png")
+                                    isThemeDark
+                                        ? require("../../../assets/images/icons/my-profile/darkPreferences.png")
                                         : require("../../../assets/images/icons/my-profile/lightPreferences.png")
                                 }
                             />
@@ -175,8 +333,8 @@ const MyProfile = (props: { navigation: any }) => {
                             <Image
                                 style={MyProfileStyle.image}
                                 source={
-                                    isThemeDark ?
-                                        require("../../../assets/images/icons/my-profile/darkCars.png")
+                                    isThemeDark
+                                        ? require("../../../assets/images/icons/my-profile/darkCars.png")
                                         : require("../../../assets/images/icons/my-profile/lightCars.png")
                                 }
                             />
@@ -193,8 +351,8 @@ const MyProfile = (props: { navigation: any }) => {
                             <Image
                                 style={MyProfileStyle.image}
                                 source={
-                                    isThemeDark ?
-                                        require("../../../assets/images/icons/my-profile/darkAddress.png")
+                                    isThemeDark
+                                        ? require("../../../assets/images/icons/my-profile/darkAddress.png")
                                         : require("../../../assets/images/icons/my-profile/lightAddress.png")
                                 }
                             />
@@ -204,33 +362,39 @@ const MyProfile = (props: { navigation: any }) => {
                     </TouchableNavigationCard>
 
                     <View style={MyProfileStyle.buttonLogout}>
-                        <HeaderLogoutButton/>
+                        <HeaderLogoutButton />
                     </View>
 
                     <View style={MyProfileStyle.footerContainer}>
-                        <TouchableOpacity
-                            onPress={()=>
-                                navigation.navigate("PrivacyPolicySheet")
-                            }>
+                        <TouchableOpacity onPress={() => props.navigation.navigate("PrivacyPolicySheet")}>
                             <Text style={[MyProfileStyle.foterLeftRef, { color: colors.secondaryDark }]}>
-                            Privacy Policy
+                Privacy Policy
                             </Text>
                         </TouchableOpacity>
                         <View>
                             <Text style={{ color: colors.secondaryDark }}>•</Text>
                         </View>
-                        <TouchableOpacity
-                            onPress={()=>
-                                navigation.navigate("TermsOfUseSheet")
-                            }>
+                        <TouchableOpacity onPress={() => props.navigation.navigate("TermsOfUseSheet")}>
                             <Text style={[MyProfileStyle.footerRightRef, { color: colors.secondaryDark }]}>
-                            Terms of Service
+                Terms of Service
                             </Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             </ScrollView>
+            {renderBottomPopup()}
+            <ConfirmModal
+                visible={isDeleteModalVisible}
+                title="ARE YOU SURE?"
+                subtitle="Are you sure you want to delete your profile photo?"
+                confirmText="Yes, delete it"
+                cancelText="No, keep it"
+                onConfirm={() => {
+                    saveUser((null as unknown) as ImagePickerResponse);
+                    setDeleteModalVisible(false);
+                }}
+                disableModal={() => setDeleteModalVisible(false)}
+            />
         </View>
     );
 };

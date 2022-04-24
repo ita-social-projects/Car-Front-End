@@ -1,95 +1,171 @@
 import React, { useEffect, useState } from "react";
-import { Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, Text, TouchableOpacity, View } from "react-native";
 import UserService from "../../../../../api-service/user-service/UserService";
 import User from "../../../../../models/user/User";
-import AvatarLogo from "../../../../components/avatar-logo/AvatarLogo";
 import JourneyApplicantStyle from "./JourneyApplicantStyle";
 import Indicator from "../../../../components/activity-indicator/Indicator";
-import { SINGLE_ELEMENT_COLLECTION_LENGTH } from "../../../../constants/GeneralConstants";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import Clipboard from "@react-native-community/clipboard";
+import AvatarLogoTitle from "../../../../components/avatar-logo-title/AvatarLogoTitle";
+import { Shadow } from "react-native-shadow-2";
+import UserStatisticService from "../../../../../api-service/user-service/UserStatisticService";
+import UserStatistic from "../../../../../models/user/UserStatistic";
+import allBadges from "../../../../components/badge/BadgeObjects";
+import BadgeTypes from "../../../../components/badge/BadgeTypes";
+import { SIX, TEN, THIRTEEN, ZERO } from "../../../../constants/GeneralConstants";
+import BadgeProps from "../../../../components/badge/BadgeProps";
 
 const JourneyApplicant = (props: {route: {params: { userId: number }}}) => {
+    const shadowXPosition = 0;
+    const shadowYPosition = 3;
+
     const { colors } = useTheme();
     const { userId } = props.route.params;
     const [user, setUser] = useState({} as User);
     const [isLoading, setLoading] = useState(true);
     const [isCallingButtonVisible, setCallingButtonVisible] = useState(false);
+    const [currentAchieve, setCurrentAchieve] = useState<UserStatistic>(null);
+    const [currentBadgeAsPassanger, setcurrentBadgeAsPassanger] = useState(allBadges[ZERO]);
+    const [currentBadgeAsDriver, setcurrentBadgeAsDriver] = useState(allBadges[SIX]);
+    const [currentBadgeAsTotalKm, setcurrentBadgeAsTotalKm] = useState(allBadges[THIRTEEN]);
 
     useEffect(() => {
         UserService.getUser(userId).then((res) =>
             (async () => setUser(res.data))().then(() => setLoading(false))
         );
+
+        UserStatisticService.getUserStatisticById(userId).then((result) => {
+            setCurrentAchieve(result.data);
+        });
+
     }, []);
 
-    const journeys =
-        user?.journeyCount == SINGLE_ELEMENT_COLLECTION_LENGTH ? "1 ride" : user?.journeyCount + " rides";
+    useEffect(() => {
+        for(let badge of allBadges)
+        {
+            if(badge.type === BadgeTypes.passengerRides)
+            {
+                checkPassangerAmount(badge);
+            }
+            if(badge.type === BadgeTypes.driverRides)
+            {
+                checkDriverAmount(badge);
+            }
+            if(badge.type === BadgeTypes.driverDistance)
+            {
+                checkDriverDistance(badge);
+            }
+        }
+
+    }, [currentAchieve]);
+
+    const checkPassangerAmount = (badge: BadgeProps) => {
+        if(currentAchieve?.passangerJourneysAmount! >= badge.points)
+        {
+            setcurrentBadgeAsPassanger(badge);
+        }
+    };
+
+    const checkDriverAmount = (badge: BadgeProps) => {
+        if(currentAchieve?.driverJourneysAmount! >= badge.points)
+        {
+            setcurrentBadgeAsDriver(badge);
+        }
+    };
+
+    const checkDriverDistance = (badge: BadgeProps) => {
+        if(currentAchieve?.totalKm! >= badge.points)
+        {
+            setcurrentBadgeAsTotalKm(badge);
+        }
+    };
 
     return (
         <View style={[JourneyApplicantStyle.mainContainer, { backgroundColor: colors.white }]}>
             {isLoading ? (
-                <Indicator
-                    color="#414045"
-                    size="large"
-                    text="Loading information..."
-                />
+                <View style = {[JourneyApplicantStyle.indicator]}>
+                    <Indicator
+                        color="#414045"
+                        size="large"
+                        text="Loading information..."
+                    />
+                </View>
             ) : (
-                <ScrollView>
-                    <View style={JourneyApplicantStyle.avatarContainer}>
-                        <AvatarLogo user={user} size={105} />
-                    </View>
-                    <View style={JourneyApplicantStyle.topContainer}>
-                        <View >
-                            <Text style={[JourneyApplicantStyle.userName, { color: colors.primary }]}>
-                                {user?.name + " " + user?.surname}
-                            </Text>
-                            <Text
-                                style={[JourneyApplicantStyle.userAdditionalData, { color: colors.primary }]}
-                            >
-                                {user?.position}
-                            </Text>
-                            <Text
-                                style={[JourneyApplicantStyle.userAdditionalData, { color: colors.primary }]}
-                            >
-                                {journeys}, 2 badges
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={[JourneyApplicantStyle.separator, { backgroundColor: colors.neutralLight }]} />
-                    <View style={[JourneyApplicantStyle.bottomContainer, { backgroundColor: colors.white }]}>
-                        <Text style={[JourneyApplicantStyle.detailsText, { color: colors.primary }]}>
-                            Details
-                        </Text>
-                        <View style={JourneyApplicantStyle.positionContainer}>
-                            <Text style={[JourneyApplicantStyle.positionText, { color: colors.primary }]}>
-                                Position:
-                            </Text>
-                            <Text style={[JourneyApplicantStyle.positionData, { color: colors.hover }]}>
-                                {user?.position}
-                            </Text>
-                        </View>
-                        <View style={JourneyApplicantStyle.locationContainer}>
-                            <Text style={[JourneyApplicantStyle.locationText, { color: colors.primary }]}>
-                                Location: {user?.location}
-                            </Text>
-                            <Text style={[JourneyApplicantStyle.locationData, { color: colors.accentBlue }]}>
-                                {user?.location}
-                            </Text>
-                        </View>
-                        <View style={[JourneyApplicantStyle.mobileContainer, { marginTop: 10 }]}>
-                            <Text style={[JourneyApplicantStyle.mobileText, { color: colors.primary }]}>
-
-                            </Text>
-                            <TouchableOpacity onPress={() => setCallingButtonVisible(!isCallingButtonVisible)}>
-                                <Text style={[JourneyApplicantStyle.mobileData, { color: colors.accentBlue }]}>
-
+                <>
+                    <AvatarLogoTitle userToDisplay={user}/>
+                    <View style = {[JourneyApplicantStyle.speceBetweenContainer]}></View>
+                    {
+                        (user?.isNumberVisible) &&
+                        <Shadow
+                            distance={8}
+                            startColor={colors.shadow}
+                            offset={[shadowXPosition, shadowYPosition]}
+                        >
+                            <TouchableOpacity
+                                style = {[JourneyApplicantStyle.containerPhone,
+                                    {
+                                        borderColor: colors.neutralLight,
+                                        backgroundColor: colors.white
+                                    }]}
+                                onPress={() => setCallingButtonVisible(true)}>
+                                <Text style = {
+                                    [JourneyApplicantStyle.textMobileAndPhoneNumber,
+                                        { color: colors.secondaryDark }]}>
+                                    Mobile
+                                </Text>
+                                <Text style = {
+                                    [JourneyApplicantStyle.textMobileAndPhoneNumber,
+                                        { color: colors.accentBlue }]}>
+                                    {user?.phoneNumber}
                                 </Text>
                             </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={JourneyApplicantStyle.whitespaceBlock} />
-                </ScrollView>
+                        </Shadow>
+                    }
+                    {
+                        (currentAchieve?.passangerJourneysAmount! !== ZERO ||
+                        currentAchieve?.driverJourneysAmount! !== ZERO ||
+                        currentAchieve?.totalKm! >= TEN) &&
+                            <>
+                                <View style = {[JourneyApplicantStyle.speceBetweenContainer]}></View>
+                                <Shadow
+                                    distance={8}
+                                    startColor={colors.shadow}
+                                    offset={[shadowXPosition, shadowYPosition]}
+                                >
+                                    <View style = {[JourneyApplicantStyle.containerBadge,
+                                        {
+                                            borderColor: colors.neutralLight,
+                                            backgroundColor: colors.white
+                                        }]}>
+                                        {
+                                            currentAchieve?.passangerJourneysAmount !== ZERO &&
+                                                <Image source = {currentBadgeAsPassanger.pathUnlocked}/>
+                                        }
+                                        {
+                                            currentAchieve?.driverJourneysAmount! !== ZERO &&
+                                                <Image source = {currentBadgeAsDriver.pathUnlocked}/>
+                                        }
+                                        {
+                                            currentAchieve?.totalKm! >= TEN &&
+                                                <Image source = {currentBadgeAsTotalKm.pathUnlocked}/>
+                                        }
+                                    </View>
+                                </Shadow>
+                            </>
+                    }
+                    {
+                        (currentAchieve?.passangerJourneysAmount! === ZERO &&
+                        currentAchieve?.driverJourneysAmount! === ZERO &&
+                        currentAchieve?.totalKm! <= TEN) &&
+                        <>
+                            <Text style = {[JourneyApplicantStyle.textNotification, { color: colors.primary }]}>
+                                {"After the first completed trip, \nyou’ll get the first badge."}
+                            </Text>
+                            <Image source = {require("../../../../../assets/images/badges/nobadges.png")} />
+                        </>
+                    }
+                </>
             )}
             <ConfirmModal
                 confirmText={"Call " + user?.name}

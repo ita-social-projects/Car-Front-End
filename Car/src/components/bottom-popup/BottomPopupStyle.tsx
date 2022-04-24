@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const BottomPopupStyle = StyleSheet.create({
     header: {
         paddingTop: 20,
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20
+        borderTopRightRadius: 20,
+        width: Dimensions.get("window").width
     },
 
     panelHeader: {
