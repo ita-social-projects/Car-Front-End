@@ -4,21 +4,17 @@ import JourneyCardStyle from "./JourneyCardStyle";
 import * as navigation from "../navigation/Navigation";
 import AvatarLogo from "../avatar-logo/AvatarLogo";
 import AuthContext from "../auth/AuthContext";
-import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../constants/GeneralConstants";
 import { useTheme } from "../theme/ThemeProvider";
 import Journey from "../../../models/journey/Journey";
 import { MAX_ADDRESS_NAME_LENGTH } from "../../constants/AddressConstants";
 import { trimTheStringIfTooLong } from "../../utils/GeneralHelperFunctions";
 import { JOURNEY_CARD_WITH_FEE_HEIGHT, MAX_USER_FULL_NAME_LENGTH } from "../../constants/JourneyConstants";
-import Stop from "../../../models/stop/Stop";
-import { getTimeToShow } from "../../utils/JourneyHelperFunctions";
-import StopType from "../../../models/stop/StopType";
+import { getJourneyFinishStop, getJourneyStartStop, getTimeToShow } from "../../utils/JourneyHelperFunctions";
 
 const JourneyCard =
     (props: {
         journey?: Journey,
         displayFee?: boolean,
-        applicantStops?: Stop[],
         passangersCount?: number,
         isPast: boolean,
         isCanceled: boolean
@@ -37,10 +33,9 @@ const JourneyCard =
 
         const navigateJourney = () =>
             navigation.navigate("Journey Page", {
-                journeyId: journey?.id,
+                journey,
                 isDriver,
                 isPassenger,
-                applicantStops: props.applicantStops,
                 passangersCount: props.passangersCount,
                 isPast: props.isPast,
                 isCanceled: props.isCanceled
@@ -51,15 +46,16 @@ const JourneyCard =
         const GetFirstLocation = () =>
         {
             let locationName;
+            const startAddressName = getJourneyStartStop(journey!)?.address?.name;
 
-            if(journey?.stops[FIRST_ELEMENT_INDEX]?.address?.name)
+            if(startAddressName)
             {
-                locationName = journey?.stops.
-                    filter(item => item?.userId === journey.organizer?.id
-                    && item?.type === StopType.Start)[FIRST_ELEMENT_INDEX]?.
-                    address?.name;
+                locationName = startAddressName;
             }
-            locationName = locationName ?? "Location A";
+            else
+            {
+                locationName = "Location A";
+            }
 
             return locationName;
         };
@@ -67,17 +63,16 @@ const JourneyCard =
         const GetSecondLocation = () =>
         {
             let locationName;
+            const finishAddressName = getJourneyFinishStop(journey!)?.address?.name;
 
-            if(journey?.stops[journey?.stops?.length - LAST_INDEX_CORRECTION]?.address?.name)
+            if(finishAddressName)
             {
-                locationName = journey?.stops.
-                    filter(item => item?.userId === journey.organizer?.id
-                    && item?.type == StopType.Finish)
-                    [FIRST_ELEMENT_INDEX]?.
-                    address?.name;
-
+                locationName = finishAddressName;
             }
-            locationName = locationName ?? "Location B";
+            else
+            {
+                locationName = "Location B";
+            }
 
             return locationName;
         };

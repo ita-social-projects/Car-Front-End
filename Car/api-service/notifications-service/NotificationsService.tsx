@@ -22,7 +22,7 @@ const NotificationsService = {
         APIService.put(route + notificationId),
 
     addNotification: async (notification: CreateNotificationModel) =>
-        APIService.post(route, notification),
+        APIService.post<Notification>(route, notification),
 
     deleteNotification: async (id: number) =>
         APIService.delete(route + id),

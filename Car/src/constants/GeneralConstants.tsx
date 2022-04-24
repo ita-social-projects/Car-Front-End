@@ -22,6 +22,12 @@ export const MIN_DELAY_MS = 1;
 export const BORDER_WIDTH = 2;
 export const ONLY_PASSENGER_STOPS_LENGTH = 2;
 
+export const BIGGER_STOP_SIZE = 16;
+export const SMALLER_STOP_SIZE = 10;
+export const LONGER_LINE = 35;
+export const SHORTER_LINE = 30;
+export const ADDRESS_MAX_LENGTH = 48;
+
 export const LESS_THAN_ZERO = -1;
 export const ZERO = 0;
 export const MORE_THAN_ZERO = 1;

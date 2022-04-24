@@ -36,12 +36,14 @@ const HeaderLeaveButton = (props) => {
                 onConfirm={() => {
                     setLeaveRideModalIsVisible(false);
                     JourneyService.deleteUser(
-                        props.route.params.journeyId,
-                        user?.id!).then((res) => {
-                        if(res.status === HTTP_STATUS_OK) {
-                            setLeaveRideSuccessModalIsVisible(true);
-                        }
-                    });
+                        props.route.params.journey.id,
+                        user!.id!
+                    )
+                        .then((res) => {
+                            if(res.status === HTTP_STATUS_OK) {
+                                setLeaveRideSuccessModalIsVisible(true);
+                            }
+                        });
                 }}
                 disableModal={() => setLeaveRideModalIsVisible(false)}
                 subtitle={"Do you really want to leave the journey?"}

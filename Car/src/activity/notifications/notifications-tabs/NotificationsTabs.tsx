@@ -11,9 +11,9 @@ import StopView from "../../../components/stop-view/StopView";
 import JourneyCancellationView from "../../../components/notifications/notifications-types/notifications-views/cancellation-view/JourneyCancellationView";
 import PassengerWithdrawalView from "../../../components/notifications/notifications-types/notifications-views/withdrawn-view/PassengerWithdrawalView";
 import InvitationView from "../../../components/notifications/notifications-types/notifications-views/invitation-view/InvitationView";
-import AprovedView from "../../../components/notifications/notifications-types/notifications-views/request-approved-view/AprovedView";
+import ApprovedView from "../../../components/notifications/notifications-types/notifications-views/request-approved-view/ApprovedView";
 import RejectedView from "../../../components/notifications/notifications-types/notifications-views/request-rejected-view/RejectedView";
-import AprovedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-approved-passenger-view/AprovedPassengerView";
+import ApprovedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-approved-passenger-view/ApprovedPassengerView";
 import RejectedPassengerView from "../../../components/notifications/notifications-types/notifications-views/request-rejected-passenger-view/RejectedPassengerView";
 import JourneyDetailsUpdateView from "../../../components/notifications/notifications-types/notifications-views/journey-details-update-view/JourneyDetailsUpdateView";
 
@@ -99,7 +99,7 @@ const NotificationsTabs = () => {
 
                 <StackTabs.Screen
                     name="Invitation is Accepted"
-                    component={AprovedView}
+                    component={ApprovedView}
                     options={{
                         headerTitle: "Invitation is Accepted",
                         headerTitleAlign: "center",
@@ -132,7 +132,7 @@ const NotificationsTabs = () => {
 
                 <StackTabs.Screen
                     name="Request is Approved"
-                    component={AprovedPassengerView}
+                    component={ApprovedPassengerView}
                     options={{
                         headerTitle: "Request is Approved",
                         headerTitleAlign: "center",

@@ -40,17 +40,21 @@ const TouchableMapBar = (props: TouchableMapBarProps) => {
                 >
                     {props.defaultInputValue}{" "}
                 </Text>
-                <TouchableOpacity disabled={!props.onIconPress} onPress={props.onIconPress}>
-                    <Ionicons
-                        style={[
-                            TouchableMapBarStyle.barIcon,
-                            { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
-                        ]}
-                        name={props.iconName}
-                        size={22}
-                        color={props.iconColor}
-                    />
-                </TouchableOpacity>
+                {
+                    !!props.iconName ?? (
+                        <TouchableOpacity disabled={!props.onIconPress} onPress={props.onIconPress}>
+                            <Ionicons
+                                style={[
+                                    TouchableMapBarStyle.barIcon,
+                                    { transform: [{ rotate: "0deg" }], borderColor: colors.neutralLight }
+                                ]}
+                                name={props.iconName!}
+                                size={22}
+                                color={props.iconColor}
+                            />
+                        </TouchableOpacity>
+                    )
+                }
             </TouchableOpacity>
         </View>
     );

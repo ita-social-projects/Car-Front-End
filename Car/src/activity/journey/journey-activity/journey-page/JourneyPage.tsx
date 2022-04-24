@@ -5,8 +5,6 @@ import JourneyService from "../../../../../api-service/journey-service/JourneySe
 import BottomPopup from "../../../../components/bottom-popup/BottomPopup";
 import JourneyPageStyle from "./JourneyPageStyle";
 import Journey from "../../../../../models/journey/Journey";
-import StopType from "../../../../../models/stop/StopType";
-import CarService from "../../../../../api-service/car-service/CarService";
 import CarViewModel from "../../../../../models/car/CarViewModel";
 import AsyncStorage from "@react-native-community/async-storage";
 import {
@@ -25,18 +23,14 @@ import * as navigation from "../../../../components/navigation/Navigation";
 import { Portal } from "react-native-portalize";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import {
-    areStopsLocationEqual,
-    getStopByType,
+    getHighlightedStops,
+    getIntermediateJourneyStops, getJourneyFinishStop, getJourneyStartStop,
     getStopCoordinates,
     mapStopToMarker,
     mapStopToWayPoint
 } from "../../../../utils/JourneyHelperFunctions";
 import {
-    FIRST_ELEMENT_INDEX,
     SECOND_ELEMENT_INDEX,
-    THIRD_ELEMENT_INDEX,
-    ZERO_ID,
-    ONLY_PASSENGER_STOPS_LENGTH
 } from "../../../../constants/GeneralConstants";
 import NotificationsService from "../../../../../api-service/notifications-service/NotificationsService";
 import { HTTP_STATUS_OK } from "../../../../constants/Constants";
@@ -71,14 +65,12 @@ interface JourneyPageComponent {
 const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps }) => {
     const { colors, isThemeDark } = useTheme();
     const { user } = useContext(AuthContext);
-    const [currentJourney, setJourney] = useState<Journey>(null);
-    const { journeyId } = props.route.params;
+    const currentJourney: Journey = props.route.params.journey;
     const { isDriver } = props.route.params;
     const { isPassenger } = props.route.params;
     const { isPast } = props.route.params;
-    const { isCanceled } = props.route.params;
     const [isLoading, setLoading] = useState(true);
-    const [car, setCar] = useState<CarViewModel>(null);
+    const car : CarViewModel | undefined = props.route.params.journey?.car;
     const [isRequested, setRequested] = useState(false);
     const [cancelRideModalIsVisible, setCancelRideModalIsVisible] = useState(false);
     const [cancelRideSuccessModalIsVisible, setCancelRideSuccessModalIsVisible] = useState(false);
@@ -100,25 +92,11 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     const [selectedQuantity, setSelectedQuantity] =
         useState({ id: passangersCount, name: passangersCount.toString() });
 
-    const applicantStops = props.route.params.applicantStops;
-
     const onFocusHandler = () => {
-        JourneyService.getJourney(journeyId, isCanceled).then((res) => {
-            setJourney(res.data);
-            mapRef.current?.fitToCoordinates(res.data?.journeyPoints,
-                { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
+        mapRef.current?.fitToCoordinates(currentJourney?.journeyPoints,
+            { edgePadding: { top: 20, right: 20, left: 20, bottom: 800 } });
 
-            if (res.data?.car?.id === ZERO_ID) {
-                endLoading();
-
-                return;
-            }
-
-            CarService.getById(res.data?.car?.id!).then((carRes) => {
-                setCar(carRes.data);
-                endLoading();
-            });
-        });
+        endLoading();
     };
 
     const endLoading = () => {
@@ -138,10 +116,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             props.navigation?.setOptions({
                 headerRight: () => <HeaderLeaveButton route={{
                     params: {
-                        journeyId: props.route.params.journeyId,
-                        isDriver: props.route.params.isDriver,
-                        isPassenger: props.route.params.isPassenger,
-                        applicantStops: props.route.params.applicantStops,
+                        journey: currentJourney,
+                        isDriver,
+                        isPassenger,
                         passangersCount: props.route.params.passangersCount
                     }
                 }} />
@@ -152,13 +129,10 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
         !isDriver && props.navigation?.setOptions({ headerRight: () => <View /> });
         !isDriver && !isPassenger && props.navigation?.setOptions({ headerTitle: "Request to Driver" });
 
-        applicantStops?.forEach((stop) => (stop!.alias =
-            `${user!.name} ${user!.surname}'s ${stop!.index === FIRST_ELEMENT_INDEX ? "Start" : "Finish"}`));
-
-        (async () => AsyncStorage.getItem("journeyId" + journeyId))().then((isReq) => {
+        (async () => AsyncStorage.getItem("journeyId" + currentJourney?.id))().then((isReq) => {
             if (isReq == "1") {
                 setRequested(true);
-                (async () => (isDriver || isPassenger) && AsyncStorage.removeItem("journeyId" + journeyId))();
+                (async () => (isDriver || isPassenger) && AsyncStorage.removeItem("journeyId" + currentJourney?.id))();
             }
         });
 
@@ -181,10 +155,9 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             route: {
                 params: {
                     journey: currentJourney,
-                    from: mapStopToWayPoint(getStopByType(currentJourney, StopType.Start)),
-                    to: mapStopToWayPoint(getStopByType(currentJourney, StopType.Finish)),
-                    stops: currentJourney?.stops.filter(stop =>
-                        stop?.type === StopType.Intermediate).map(mapStopToWayPoint),
+                    from: mapStopToWayPoint(getJourneyStartStop(currentJourney!)),
+                    to: mapStopToWayPoint(getJourneyFinishStop(currentJourney!)),
+                    stops: getIntermediateJourneyStops(currentJourney)!.map(mapStopToWayPoint),
                     duration: currentJourney.duration,
                     routeDistance: currentJourney.routeDistance,
                     routePoints: currentJourney.journeyPoints,
@@ -199,25 +172,25 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
     JourneyPage.editJourneyRoute = () =>
         navigation.navigate("Create Journey", { journey: currentJourney });
 
-    const sendRequest = () => {
+    const sendRequest = async () => {
         const jsonData = JSON.stringify({
             comments: comments,
-            hasLuggage: withLuggage,
-            applicantStops: applicantStops,
+            withLuggage,
+            stopsRepresentation: currentJourney!.stops,
             passangersCount: passangersCount
         });
 
         NotificationsService.addNotification({
             senderId: user!.id,
-            receiverId: currentJourney?.organizer?.id!,
+            receiverId: currentJourney!.organizer!.id,
             type: NotificationType.PassengerApply,
             jsonData: jsonData,
-            journeyId: currentJourney?.id!
+            journeyId: currentJourney!.id
         }).then((res) => {
             if (res.status == HTTP_STATUS_OK) {
                 setRequested(true);
                 (async () => {
-                    await AsyncStorage.setItem("journeyId" + currentJourney?.id, "1");
+                    await AsyncStorage.setItem("journeyId" + currentJourney!.id, "1");
                 })().then(() => {
                     setRequestSuccessfullySentModalIsVisible(true);
                     setIsConfirmationFormVisible(false);
@@ -228,37 +201,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
 
     const moreOptionsRef = useRef<any>(null);
 
-    const getStopsForBottomPopup: () => Stop[] = () => {
-        if (!currentJourney) return [];
-
-        if (isDriver) {
-            return currentJourney.stops.filter(stop => stop!.userId === user!.id);
-        }
-
-        const stopsSource = isPassenger ? currentJourney.stops : applicantStops;
-        const startStop = getStopByType(currentJourney, StopType.Start)!;
-        const userStartStop = stopsSource!.filter(stop =>
-             stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX];
-        const userFinishStop = stopsSource!.filter(stop =>
-            stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX];
-        const finishStop = getStopByType(currentJourney, StopType.Finish)!;
-
-        if(areStopsLocationEqual(startStop,userStartStop) &&
-            areStopsLocationEqual(finishStop, userFinishStop)){
-            return [
-                userStartStop,
-                userFinishStop
-            ];
-        }
-
-        return [
-            startStop,
-            userStartStop,
-            userFinishStop,
-            finishStop
-        ];
-    };
-
     const onStopPressHandler = (stop: Stop) => {
         moreOptionsRef.current?.snapTo(SECOND_ELEMENT_INDEX);
 
@@ -266,18 +208,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
             ...initialCamera,
             center: { latitude: stop!.address!.latitude, longitude: stop!.address!.longitude }
         }, { duration: 1000 });
-    };
-
-    const stopsForBottomPopUp = getStopsForBottomPopup();
-
-    const getHighlightedStops = () => {
-        if(isDriver){
-            return [...Array(currentJourney?.stops.length).keys()];
-        }
-
-        return stopsForBottomPopUp.length === ONLY_PASSENGER_STOPS_LENGTH ?
-            [FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX] :
-            [SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX];
     };
 
     return (
@@ -304,21 +234,19 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                 />
 
                                 <Marker
-                                    title={getStopByType(currentJourney, StopType.Start)?.address?.name}
-                                    coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Start))}
+                                    title={getJourneyStartStop(currentJourney)?.address?.name}
+                                    coordinate={getStopCoordinates(getJourneyStartStop(currentJourney))}
                                     image={require("../../../../../assets/images/maps-markers/From.png")}
                                 />
 
                                 <Marker
-                                    title={getStopByType(currentJourney, StopType.Finish)?.address?.name}
-                                    coordinate={getStopCoordinates(getStopByType(currentJourney, StopType.Finish))}
+                                    title={getJourneyFinishStop(currentJourney)?.address?.name}
+                                    coordinate={getStopCoordinates(getJourneyFinishStop(currentJourney))}
                                     image={require("../../../../../assets/images/maps-markers/To.png")}
                                 />
 
-                                {currentJourney.stops.filter(stop => stop?.type === StopType.Intermediate)
+                                {getIntermediateJourneyStops(currentJourney)!
                                     .map(mapStopToMarker)}
-
-                                {!isDriver && applicantStops?.map(mapStopToMarker)}
                             </>)}
                     </MapView>
                 </View>
@@ -347,12 +275,14 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                     nestedScrollEnabled={true}
                                                     style={[JourneyPageStyle.View,{ backgroundColor:colors.white }]}>
                                                     <StopsBlock
-                                                        stops={getStopsForBottomPopup() ?? []}
+                                                        stops={currentJourney?.stops ?? []}
                                                         onStopPress={onStopPressHandler}
-                                                        highlightedStops={getHighlightedStops()}
+                                                        highlightedStops={getHighlightedStops(
+                                                            currentJourney!.stops, user!.id
+                                                        )}
                                                     />
                                                     <CarBlock
-                                                        car={car} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)} />
+                                                        car={car!} isOnOwnCar={Boolean(currentJourney?.isOnOwnCar)} />
                                                     <ParticipantsBlock journey={currentJourney} />
                                                 </ScrollView>
                                             </View>
@@ -362,7 +292,6 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                                 isPassenger={isPassenger}
                                                 isRequested={isRequested}
                                                 journey={currentJourney}
-                                                applicantStops={applicantStops}
                                                 onSendRequestPress={() => {
                                                     setIsConfirmationFormVisible(true);
                                                 }}
@@ -437,7 +366,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                                             <Text style={{ color: colors.secondaryDark,
                                                 textAlign: "right",marginTop: 8
                                             }}>
-                                            * You already applied for this yourney
+                                            * You already applied for this journey
                                             </Text>
                                                 }
                                             </View>
@@ -458,7 +387,7 @@ const JourneyPage: JourneyPageComponent = ({ props }: { props: JourneyPageProps 
                 cancelText={"No, keep it"}
                 onConfirm={() => {
                     setCancelRideModalIsVisible(false);
-                    JourneyService.cancel(props.route.params.journeyId)
+                    JourneyService.cancel(props.route.params.journey!.id)
                         .then(() => setCancelRideSuccessModalIsVisible(true))
                         .catch(() => setModal(rideCancelingErrorModal));
                 }}

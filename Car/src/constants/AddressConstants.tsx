@@ -1,5 +1,6 @@
 import { LatLng } from "react-native-maps";
 import WayPoint from "../types/WayPoint";
+import { ZERO } from "./GeneralConstants";
 
 export const EDIT_ADDRESS_MORE_OPTIONS_POPUP_HEIGHT = 150;
 export const INITIAL_LATITUDE = 49.843844;
@@ -26,5 +27,7 @@ export const initialCamera = {
 export const initialWayPoint: WayPoint = {
     text: "",
     isConfirmed: false,
-    coordinates: { latitude: 0, longitude: 0 }
+    coordinates: { latitude: 0, longitude: 0 },
+    stopId: ZERO,
+    changeable: true
 };

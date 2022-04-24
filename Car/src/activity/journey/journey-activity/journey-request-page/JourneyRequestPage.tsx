@@ -29,6 +29,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { getTimeToShow } from "../../../../utils/JourneyHelperFunctions";
 import JourneyPageStyle from "../journey-page/JourneyPageStyle";
 
+// Is not used anywhere
 const JourneyRequestPage = (props: { route: { params: { journeyId: number } } }) => {
 
     const { colors } = useTheme();

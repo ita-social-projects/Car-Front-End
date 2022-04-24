@@ -1,7 +1,7 @@
 interface AddressInputButtonProps {
     directionType: string,
     text: string,
-    iconName: string,
+    iconName?: string,
     iconColor: string,
     onPress?: () => void,
     onIconPress?: () => void,

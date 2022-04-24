@@ -33,8 +33,8 @@ import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import moment from "moment";
 import ConfirmModalProps from "../../../../components/confirm-modal/ConfirmModalProps";
-import { departureTimeSorryModal, freeRideModal, invitationsErrorModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
-import { createStopArrayFromWayPoint } from "../../../../utils/JourneyHelperFunctions";
+import { freeRideModal, invitationsErrorModal, publishErrorModal, updateErrorModal } from "./JourneyDetailsModals";
+import { mapWayPointsIntoStopsForNewJourney } from "../../../../utils/JourneyHelperFunctions";
 import Journey from "../../../../../models/journey/Journey";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
@@ -329,7 +329,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             isOnOwnCar: JSON.stringify(ownCarButtonStyle) === JSON.stringify(activeButtonStyle),
             organizerId: Number(user?.id),
             journeyPoints: params.routePoints.map((point, index) => ({ ...point, index: index })),
-            stops: createStopArrayFromWayPoint(params.from, params.to, params.stops, Number(user?.id)),
+            stops: mapWayPointsIntoStopsForNewJourney(params.from, params.to, params.stops, user!.id),
             invitations: createAllInvitationsArrayFromNewInvitations(),
             duration: params.duration,
             routeDistance: Math.round(params.routeDistance),
@@ -346,16 +346,14 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
     };
 
     const addJourneyAsync = async (newJourney) => {
-        await JourneyService.add(newJourney)
-            .then((res) => {
-                if (res.status === HTTP_STATUS_OK) {
-                    setSuccessfullyPublishModalIsVisible(true);
-                }
-                else {
-                    setModal(publishErrorModal);
-                }
-            })
-            .catch(() => setModal(departureTimeSorryModal));
+        let response = await JourneyService.add(newJourney);
+
+        if (response.status === HTTP_STATUS_OK) {
+            setSuccessfullyPublishModalIsVisible(true);
+        }
+        else {
+            setModal(publishErrorModal);
+        }
     };
 
     const addScheduleAsync = async (newJourney) => {
@@ -371,9 +369,9 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             });
     };
 
-    const updateJourneyHandler = async () => {
+    const updateJourneyHandler = () => {
         if (!journey) return;
-
+        console.log(journey);
         setRideIsPublishing(true);
 
         const updatedJourney: JourneyDto = {
@@ -391,7 +389,7 @@ const JourneyDetailsPage = (props: JourneyDetailsPageProps) => {
             organizerId: Number(journey.organizer?.id),
         };
 
-        await JourneyService.updateDetails(updatedJourney)
+        JourneyService.updateDetails(updatedJourney)
             .then((res) => {
                 if (res.status === HTTP_STATUS_OK) {
                     setSuccessfullyUpdateModalIsVisible(true);

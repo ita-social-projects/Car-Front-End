@@ -1,15 +1,16 @@
 import Address from "../Address";
-import StopType from "./StopType";
+import User from "../user/User";
+import { UserStop } from "../user/UserStop";
 
 type Stop = null | {
     id: number;
-    type: StopType;
     index: number;
     address: Address;
-    userId: number;
     journeyId: number;
     isCancelled: boolean;
-    alias?: string
+    alias?: string;
+    users?: Array<User>;
+    userStops?: Array<UserStop>;
 };
 
 export default Stop;

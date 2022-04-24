@@ -7,13 +7,11 @@ import NotificationHeader from "../../../notification-header/NotificationHeader"
 import NotificationRideDetails from "../../../notification-ride-details/NotificationRideDetails";
 import { Text, View, } from "react-native";
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import axios from "axios";
 import Journey from "../../../../../../models/journey/Journey";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
-import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../../../models/stop/StopType";
+import { getHighlightedStops, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import { useTheme } from "../../../../theme/ThemeProvider";
 import { ScrollView } from "react-native-gesture-handler";
 import * as navigation from "../../../../../components/navigation/Navigation";
@@ -35,7 +33,7 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
     const { colors } = useTheme();
     const user = useContext(AuthContext).user;
     const source = useRef(axios.CancelToken.source());
-    const [stops, setStops] = useState<Stop[]>();
+    const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const journeyPoints = useState<JourneyPoint[]>([]);
@@ -48,14 +46,7 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
             .then(res => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
-                setStops([
-                    getStopByType(res.data.item1, StopType.Start)!,
-                    res.data.item1!.stops.filter((stop) =>
-                        stop!.userId == user?.id && stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    res.data.item1!.stops.filter((stop) =>
-                        stop!.userId == user?.id && stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    getStopByType(res.data.item1, StopType.Finish)!
-                ]);
+                setStops(res.data.item1!.stops);
             });
     }, []);
 
@@ -110,7 +101,7 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                         <StopsBlock
                             stops={stops ? stops : []}
                             onStopPress={onStopPressHandler}
-                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                            highlightedStops={getHighlightedStops(stops, user!.id)}
                         />
                     </View>
 

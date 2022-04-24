@@ -6,13 +6,15 @@ import NotificationRideDetails from "../../../notification-ride-details/Notifica
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../models/journey/Journey";
-import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../../../models/stop/StopType";
+import { getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
+import {
+    FIRST_ELEMENT_INDEX,
+    LAST_INDEX_CORRECTION,
+} from "../../../../../constants/GeneralConstants";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
 import axios from "axios";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
@@ -32,10 +34,9 @@ interface InvitationAcceptedViewProps {
 const RejectedView = (props: InvitationAcceptedViewProps) => {
     const { colors } = useTheme();
     const user = useContext(AuthContext).user;
-    const [stops, setStops] = useState<Stop[]>();
+    const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
-    const data = JSON.parse(props.route.params.notification.notification.notificationData);
     const source = useRef(axios.CancelToken.source());
     let name = props.route.params.notification.notification.sender!.name;
     let surname = props.route.params.notification.notification.sender!.surname;
@@ -48,14 +49,7 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
             .then(res => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
-                setStops([
-                    getStopByType(res.data.item1, StopType.Start)!,
-                    data?.applicantStops!.filter((stop: Stop) =>
-                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    data?.applicantStops!.filter((stop: Stop) =>
-                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    getStopByType(res.data.item1, StopType.Finish)!
-                ]);
+                setStops(res.data.item1!.stops);
             });
 
     }, []);
@@ -109,7 +103,7 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
                         <StopsBlock
                             stops={stops ? stops : []}
                             onStopPress={onStopPressHandler}
-                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                            highlightedStops={[FIRST_ELEMENT_INDEX, stops.length - LAST_INDEX_CORRECTION]}
                         />
                     </View>
 

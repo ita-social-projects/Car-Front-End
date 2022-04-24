@@ -4,6 +4,8 @@ import Schedule from "../Schedule";
 import Stop from "../stop/Stop";
 import User from "../user/User";
 import JourneyPoint from "./JourneyPoint";
+import Notification from "../notification/Notification";
+import JourneyUserDto from "../journey-user/JourneyUserDto";
 
 type Journey = null | {
     id: number;
@@ -14,14 +16,18 @@ type Journey = null | {
     comments: string;
     isFree: boolean;
     isOnOwnCar: boolean;
+    parentId?: number;
+    isMarkedAsFinished: boolean;
     schedule: Schedule;
     journeyPoints: JourneyPoint[];
     participants: User[];
     stops: Stop[];
     invitations: Invitation[];
     organizer: User;
+    journeyUsers: JourneyUserDto[];
     car: CarViewModel;
     chatId: number;
+    notifications: Notification[];
 };
 
 export default Journey;

@@ -31,6 +31,7 @@ import { darkMapStyle } from "../../../../../../constants/DarkMapStyleConstant";
 import appInsights from "../../../../../../components/telemetry/AppInsights";
 import Location from "../../../../../../../models/location/Location";
 import AddressNameInput from "../../../../../../components/address-name-input/AddressNameInput";
+import { ZERO } from "../../../../../../constants/GeneralConstants";
 
 const EditLocation = (props: EditLocationProps) => {
     const { colors, isThemeDark } = useTheme();
@@ -76,7 +77,9 @@ const EditLocation = (props: EditLocationProps) => {
                 coordinates: {
                     latitude: Number(location?.address?.latitude),
                     longitude: Number(location?.address?.longitude)
-                }
+                },
+                changeable: true,
+                stopId: ZERO
             });
         });
     }, []);

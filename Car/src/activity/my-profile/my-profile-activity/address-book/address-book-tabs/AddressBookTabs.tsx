@@ -85,7 +85,7 @@ export default function AddressBookTabs () {
                                 <Animated.View style={[HeaderStyle.popUp,
                                     { opacity: addressOpacity, backgroundColor: colors.white }
                                 ]}>
-                                    <EditLocation locationId={props.route.params.carId}/>
+                                    <EditLocation locationId={props.route.params.locationId}/>
                                 </Animated.View>
                                 <ConfirmModal
                                     disableModal={() => setModalVisibility(false)}

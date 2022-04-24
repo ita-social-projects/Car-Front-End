@@ -1,12 +1,11 @@
-import Stop from "../../../../../models/stop/Stop";
+import Journey from "../../../../../models/journey/Journey";
 
 interface JourneyPageProps {
     route: {
         params: {
-            journeyId: number,
+            journey: Journey,
             isDriver: boolean,
             isPassenger: boolean,
-            applicantStops?: Stop[],
             passangersCount?: number,
             isPast: boolean,
             isCanceled: boolean

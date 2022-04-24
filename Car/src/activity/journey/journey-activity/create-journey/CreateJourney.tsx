@@ -16,7 +16,11 @@ import {
     LEFT_PADDING_FOR_VIA_PLACEHOLDER,
     NUMBER_OF_STOPS_LIMIT
 } from "../../../../constants/JourneyConstants";
-import { DELETE_COUNT, FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../constants/GeneralConstants";
+import {
+    DELETE_COUNT,
+    FIRST_ELEMENT_INDEX,
+    SECOND_ELEMENT_INDEX,
+} from "../../../../constants/GeneralConstants";
 import MapViewDirections from "react-native-maps-directions";
 import Geolocation from "@react-native-community/geolocation";
 import LocationService from "../../../../../api-service/location-service/LocationService";
@@ -31,24 +35,23 @@ import Address from "../../../../../models/Address";
 import Indicator from "../../../../components/activity-indicator/Indicator";
 import ConfirmModal from "../../../../components/confirm-modal/ConfirmModal";
 import {
-    createStopArrayFromWayPoint,
-    getJourneyStops,
-    getStopByType,
-    mapStopToWayPoint,
+    getIntermediateJourneyStops,
+    getJourneyFinishStop,
+    getJourneyStartStop,
+    mapStopToWayPoint, mapWayPointsIntoStopsForUpdatedJourney,
     minutesToTimeString
 } from "../../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../../models/stop/StopType";
 import JourneyDto from "../../../../../models/journey/JourneyDto";
 import JourneyDetailsPageProps from "../journey-details-page/JourneyDetailsPageProps";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import { darkMapStyle } from "../../../../constants/DarkMapStyleConstant";
 import AddressInputButton from "../../../../components/address-input-button/AddressInputButton";
 import WeekDay from "../../../../components/schedule-bottom-popup/WeekDay";
-import Stop from "../../../../../models/stop/Stop";
 import appInsights from "../../../../components/telemetry/AppInsights";
 import CredentialsManager from "../../../../../credentials/credentials.json";
 import { darkColors, lightColors } from "../../../../components/theme/ThemesColors";
 import AddressInputPageStyle from "../address-input-page/AddressInputPageStyle";
+import Stop from "../../../../../models/stop/Stop";
 
 interface CreateJourneyComponent {
     addStopPressHandler: () => void,
@@ -82,11 +85,12 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     const [recentAddresses, setRecentAddresses] = useState<Array<Address>>([]);
 
     const [from, setFrom] = useState<WayPoint>(
-        journey ? mapStopToWayPoint(getStopByType(journey, StopType.Start)) : initialWayPoint);
+        journey ? mapStopToWayPoint(getJourneyStartStop(journey), user!.id) : initialWayPoint);
     const [to, setTo] = useState<WayPoint>(
-        journey ? mapStopToWayPoint(getStopByType(journey, StopType.Finish)) : initialWayPoint);
+        journey ? mapStopToWayPoint(getJourneyFinishStop(journey), user!.id) : initialWayPoint);
     const [stops, setStops] = useState<WayPoint[]>(
-        journey ? getJourneyStops(journey)!.filter(stop => stop!.userId === user!.id).map(mapStopToWayPoint) : []);
+        journey ? getIntermediateJourneyStops(journey)!.map((stop: Stop) => mapStopToWayPoint(stop, user!.id)) : []
+    );
     const [duration, setDuration] = useState(journey ? journey.duration : "");
     const [routeDistance, setRouteDistance] = useState<number>(journey?.routeDistance ?? INITIAL_ROUTE_DISTANCE);
     const [routePoints, setRoutePoints] = useState<LatLng[]>(journey?.journeyPoints ?? []);
@@ -133,7 +137,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
     }, [params]);
 
     useEffect(() => {
-        CreateJourney.numberOfAddedStop = journey ? getJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
+        CreateJourney.numberOfAddedStop = journey ? getIntermediateJourneyStops(journey)!.length : INITIAL_STOPS_COUNT;
 
         if (journey) {
             fitCameraToCoordinates(journey.journeyPoints, false);
@@ -177,7 +181,6 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         return result.length > RECENT_ADDRESSES_COUNT_LIMIT ?
             result.slice(FIRST_ELEMENT_INDEX, RECENT_ADDRESSES_COUNT_LIMIT) :
             result;
-
     };
 
     useEffect(() => {
@@ -244,9 +247,9 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
         setStops(prevState => [...prevState, initialWayPoint]);
     };
+
     const onAddressInputButtonPressHandler = (placeholder: string,
         paddingLeft: number, wayPointId: string, wayPoint: WayPoint) => {
-
         mapRef.current?.getCamera().then(camera => {
             navigation.navigate("Address Input", {
                 placeholder: placeholder,
@@ -294,16 +297,10 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
         navigation.navigate("Journey Details", { ...properties.route.params, headerTitle:"Publish a Ride" });
     };
 
-    const onUpdateRoutePressHandler = async () => {
+    const onUpdateRoutePressHandler = () => {
         if (!journey) return;
 
         setRouteIsUpdating(true);
-
-        let arrayOfPassengerStops = journey.stops.filter(stop => stop!.userId !== user!.id);
-
-        arrayOfPassengerStops.forEach((item) => {
-            item!.id = 0; item!.address!.id = 0;
-        });
 
         const updatedJourney: JourneyDto = {
             ...journey,
@@ -314,12 +311,11 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
             routeDistance: Math.round(routeDistance),
             journeyPoints: routePoints.map((point, index) =>
                 ({ ...point, index: index, journeyId: journey?.id })),
-            stops: (createStopArrayFromWayPoint(from, to, stops, Number(user?.id), journey.id) as Stop[]).
-                concat(arrayOfPassengerStops),
+            stops: mapWayPointsIntoStopsForUpdatedJourney(journey, from, to, stops)!,
             weekDay: weekDay?.current || null,
         };
 
-        await JourneyService.updateRoute(updatedJourney)
+        JourneyService.updateRoute(updatedJourney)
             .then(() => setSuccessfullyUpdateModalIsVisible(true))
             .catch(() => {
                 setErrorModalIsVisible(true);
@@ -405,7 +401,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
 
                     {stops.map((stop, index) => (
                         <AddressInputButton
-                            iconName={"close"}
+                            iconName={stop.changeable ? "close" : ""}
                             directionType={"Via"}
                             text={stop.text}
                             onPress={() => onAddressInputButtonPressHandler(
@@ -413,6 +409,7 @@ const CreateJourney: CreateJourneyComponent = ({ props }: { props: CreateJourney
                             onIconPress={() => onDeleteIconPressHandler(index)}
                             marginBottom={15}
                             key={index}
+                            disabled={!stop.changeable}
                             iconColor={darkColors.disableBack}
                         />
                     ))}
