@@ -53,7 +53,7 @@ const PassengerWithdrawal = (props: NotificationProps) => {
             <MinimizedNotification
                 notificationId={props.notificationId}
                 user={props.sender}
-                notificationTitle={"The passenger has withdrawn from your ride!"}
+                notificationTitle={"Has withdrawn from the ride!"}
                 read={props.read}
                 date={props.date}
                 openModal={ () => {

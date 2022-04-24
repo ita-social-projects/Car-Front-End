@@ -6,7 +6,7 @@ import NotificationHeader from "../../../notification-header/NotificationHeader"
 import NotificationRideDetails from "../../../notification-ride-details/NotificationRideDetails";
 import { ScrollView, Text, View, } from "react-native";
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
-import { SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
+import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import axios from "axios";
 import Journey from "../../../../../../models/journey/Journey";
@@ -34,8 +34,8 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
     const stops: Stop[] = data.stopsRepresentation;
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
     const source = useRef(axios.CancelToken.source());
-    const journeyPoints = useState<JourneyPoint[]>([]);
 
     useEffect(() => {
         JourneyService.getJourney(props.route.params.notification.journeyId, false,
@@ -43,6 +43,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
             .then(res => {
                 setJourney(res.data);
                 setJourneyUser(data.journeyUser);
+                setJourneyPoints(res.data?.journeyPoints);
             });
     }, []);
 
@@ -51,7 +52,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
         });
     };
 
@@ -70,7 +71,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                         borderBottomColor: colors.disableBack
                     }]}>
                         <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
-                                    The passenger has withdrawn your ride!
+                            The passenger has withdrawn your ride!
                         </Text>
                     </View>
 
@@ -81,14 +82,14 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                         journey={journey!}
                     />
                     <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                        {props.route.params.notification.sender?.name}
+                        {props.route.params.notification.sender?.name + " "}
                         {props.route.params.notification.sender?.surname}`s stops
                     </Text>
                     <View>
                         <StopsBlock
                             stops={stops ?? []}
                             onStopPress={onStopPressHandler}
-                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                            highlightedStops={[FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX]}
                         />
                     </View>
 

@@ -38,8 +38,8 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const source = useRef(axios.CancelToken.source());
-    let name = props.route.params.notification.notification.sender!.name;
-    let surname = props.route.params.notification.notification.sender!.surname;
+    let name = props.route.params.notification.sender!.name;
+    let surname = props.route.params.notification.sender!.surname;
 
     useEffect(() => {
         JourneyService.getJourneyWithJourneyUser(props.route.params.notification.notification.journeyId,
@@ -59,7 +59,7 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
             stops: stops,
             journeyPoints: props.route.params.notification.journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
         });
     };
 

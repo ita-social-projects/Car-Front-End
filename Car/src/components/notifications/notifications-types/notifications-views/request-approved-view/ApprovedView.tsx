@@ -55,7 +55,7 @@ const ApprovedView = (props: InvitationAcceptedViewProps) => {
             stops: stops,
             journeyPoints: props.route.params.notification.journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
         });
     };
 
@@ -92,7 +92,7 @@ const ApprovedView = (props: InvitationAcceptedViewProps) => {
                     />
 
                     <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
-                        {name} {surname}`s stops in your ride
+                        {name} {surname}`s stops in your rideee
                     </Text>
 
                     <View>

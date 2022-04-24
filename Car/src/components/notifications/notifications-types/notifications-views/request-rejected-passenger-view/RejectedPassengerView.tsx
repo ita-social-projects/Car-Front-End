@@ -32,14 +32,14 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
     const user = useContext(AuthContext).user;
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
-    const data = JSON.parse(props.route.params.notification.notification.notificationData);
+    const data = JSON.parse(props.route.params.notification.notificationData);
     const stops: Stop[] = data.stopsRepresentation;
     const source = useRef(axios.CancelToken.source());
-    let name = props.route.params.notification.notification.sender!.name;
-    let surname = props.route.params.notification.notification.sender!.surname;
+    let name = props.route.params.notification.sender!.name;
+    let surname = props.route.params.notification.sender!.surname;
 
     useEffect(() => {
-        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.notification.journeyId,
+        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.journeyId,
             props.route.params.notification.journeyUserId,
             false,
             { cancelToken: source.current.token })
@@ -54,7 +54,7 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
             stops: stops,
             journeyPoints: props.route.params.notification.journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
         });
     };
 
@@ -80,7 +80,7 @@ const RejectedPassengerView = (props: InvitationAcceptedViewProps) => {
                     }
 
                     <NotificationRideDetails
-                        journeyId={props.route.params.notification.notification.journeyId}
+                        journeyId={props.route.params.notification.journeyId}
                         userId={user?.id!}
                         IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
                         IsBaggageVisible={props.route.params.notification.IsBaggageVisible}

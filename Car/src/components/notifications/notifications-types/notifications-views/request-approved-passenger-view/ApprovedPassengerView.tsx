@@ -21,13 +21,14 @@ import NotificationConfirmButton from "../../../notification-buttons/Notificatio
 import NotificationDeclineButton from "../../../notification-buttons/NotificationDeclineButton";
 import { HTTP_STATUS_OK } from "../../../../../constants/Constants";
 import ConfirmModal from "../../../../confirm-modal/ConfirmModal";
+import NotificationsService from "../../../../../../api-service/notifications-service/NotificationsService";
 
 interface InvitationAcceptedViewProps {
-    route: {
-        params: {
-            notification:any
-        }
-    }
+  route: {
+    params: {
+      notification: any;
+    };
+  };
 }
 
 const ApprovedPassengerView = (props: InvitationAcceptedViewProps) => {
@@ -37,14 +38,15 @@ const ApprovedPassengerView = (props: InvitationAcceptedViewProps) => {
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const [LeaveRideModalIsVisible, setLeaveRideModalIsVisible] = useState(false);
     const [LeaveRideSuccessModalIsVisible, setLeaveRideSuccessModalIsVisible] = useState(false);
-    const data = JSON.parse(props.route.params.notification.notification.notificationData);
+    const data = JSON.parse(props.route.params.notification.notificationData);
     const stops: Stop[] = data.stopsRepresentation;
     const source = useRef(axios.CancelToken.source());
-    let name = props.route.params.notification.notification.sender!.name;
-    let surname = props.route.params.notification.notification.sender!.surname;
+    let name = props.route.params.notification.sender!.name;
+    let surname = props.route.params.notification.sender!.surname;
 
     useEffect(() => {
-        JourneyService.getJourneyWithJourneyUser(props.route.params.notification.notification.journeyId,
+        JourneyService.getJourneyWithJourneyUser(
+            props.route.params.notification.journeyId,
             props.route.params.notification.journeyUserId,
             false,
             { cancelToken: source.current.token })
@@ -55,37 +57,42 @@ const ApprovedPassengerView = (props: InvitationAcceptedViewProps) => {
     }, []);
 
     const onStopPressHandler = (stop: Stop) => {
-        navigation.navigate("Stop View", {
+        navigation.navigate("Route View", {
             stops: stops,
             journeyPoints: props.route.params.notification.journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification.notification,
         });
+    };
+
+    const deleteNotification = (id: number) => {
+        NotificationsService.deleteNotification(id);
     };
 
     return (
         <>
-            <ScrollView style = {{ flexGrow: 1 }}>
-
+            <ScrollView style={{ flexGrow: 1 }}>
                 <View style={[PassengerWithdrawalViewStyle.window, { backgroundColor: colors.white }]}>
+                    <NotificationHeader sender={user} />
 
-                    <NotificationHeader
-                        sender={props.route.params.notification.notification.sender}
-                    />
-
-                    {props.route.params.notification.notificationHeaderMessage !== "" &&
-                        <View style={[NotificationHeaderStyle.messageContainer, {
-                            borderTopColor: colors.disableBack,
-                            borderBottomColor: colors.disableBack
-                        }]}>
+                    {props.route.params.notification.notificationHeaderMessage !== "" && (
+                        <View
+                            style={[
+                                NotificationHeaderStyle.messageContainer,
+                                {
+                                    borderTopColor: colors.disableBack,
+                                    borderBottomColor: colors.disableBack,
+                                },
+                            ]}
+                        >
                             <Text style={[NotificationHeaderStyle.message, { color: colors.primary }]}>
                                 {props.route.params.notification.notificationHeaderMessage}
                             </Text>
                         </View>
-                    }
+                    )}
 
                     <NotificationRideDetails
-                        journeyId={props.route.params.notification.notification.journeyId}
+                        journeyId={props.route.params.notification.journeyId}
                         userId={user?.id!}
                         passangersCount={data?.passangersCount}
                         IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
@@ -96,7 +103,9 @@ const ApprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                         journey={journey!}
                         journeyUser={journeyUser!}
                     />
-                    <Text style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}>
+                    <Text
+                        style={{ ...JourneyNewApplicantViewStyle.applicantStopsText, color: colors.primary }}
+                    >
                         {name} {surname}`s stops in your ride
                     </Text>
                     <View>
@@ -111,15 +120,19 @@ const ApprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                         <NotificationConfirmButton
                             confirmText={"Ok"}
                             onConfirm={() => {
+                                deleteNotification(props.route.params.notification.notification.notificationId);
                                 navigation.goBack();
-                            }} />
+                            }}
+                        />
                         <NotificationDeclineButton
                             declineText={"Withdraw"}
-                            onDecline={()=>setLeaveRideModalIsVisible(true)}
+                            onDecline={() => {
+                                setLeaveRideModalIsVisible(true);
+                                deleteNotification(props.route.params.notification.notification.notificationId);
+                            }}
                         />
                     </NotificationButtonGroup>
                 </View>
-
             </ScrollView>
 
             <ConfirmModal
@@ -131,8 +144,9 @@ const ApprovedPassengerView = (props: InvitationAcceptedViewProps) => {
                     setLeaveRideModalIsVisible(false);
                     JourneyService.deleteUser(
                         props.route.params.notification.notification.journeyId,
-                        user?.id!).then((res) => {
-                        if(res.status === HTTP_STATUS_OK) {
+            user?.id!
+                    ).then((res) => {
+                        if (res.status === HTTP_STATUS_OK) {
                             setLeaveRideSuccessModalIsVisible(true);
                         }
                     });

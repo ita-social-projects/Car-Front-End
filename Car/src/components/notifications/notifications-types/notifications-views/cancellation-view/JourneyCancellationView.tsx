@@ -36,7 +36,7 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
     const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
-    const journeyPoints = useState<JourneyPoint[]>([]);
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
 
     useEffect(() => {
         JourneyService.getJourneyWithJourneyUser(props.route.params.notification.journeyId,
@@ -47,15 +47,16 @@ const JourneyCancellationView = (props: JourneyCancellationViewProps) => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
                 setStops(res.data.item1!.stops);
+                setJourneyPoints(res.data.item1!.journeyPoints);
             });
     }, []);
 
     const onStopPressHandler = (stop: Stop) => {
-        navigation.navigate("Stop View", {
+        navigation.navigate("Route View", {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
-            notification: props
+            notification: props.route.params.notification,
         });
     };
 
