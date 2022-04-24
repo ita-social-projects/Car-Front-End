@@ -6,13 +6,15 @@ import NotificationRideDetails from "../../../notification-ride-details/Notifica
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../models/journey/Journey";
-import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../../../models/stop/StopType";
+import { getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../../../constants/GeneralConstants";
+import {
+    FIRST_ELEMENT_INDEX,
+    LAST_INDEX_CORRECTION,
+} from "../../../../../constants/GeneralConstants";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
 import axios from "axios";
 import JourneyNewApplicantViewStyle from "../../../../journey-new-applicant/journey-new-applicant-view/JourneyNewApplicantViewStyle";
@@ -20,12 +22,13 @@ import { useTheme } from "../../../../theme/ThemeProvider";
 import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
 import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
 import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
+import { ApplicationAnswerProps } from "../../ApplicationAnswer";
 import JourneyPoint from "../../../../../../models/journey/JourneyPoint";
 
 interface InvitationAcceptedViewProps {
     route: {
         params: {
-            notification:any
+            notification: ApplicationAnswerProps
         }
     }
 }
@@ -33,11 +36,10 @@ interface InvitationAcceptedViewProps {
 const RejectedView = (props: InvitationAcceptedViewProps) => {
     const { colors } = useTheme();
     const user = useContext(AuthContext).user;
-    const [stops, setStops] = useState<Stop[]>();
+    const [stops, setStops] = useState<Stop[]>([]);
     const [journey, setJourney] = useState<Journey>();
+    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
-    const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
-    const data = JSON.parse(props.route.params.notification.notification.notificationData);
     const source = useRef(axios.CancelToken.source());
     let name = props.route.params.notification.notification.sender!.name;
     let surname = props.route.params.notification.notification.sender!.surname;
@@ -50,15 +52,8 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
             .then(res => {
                 setJourney(res.data.item1);
                 setJourneyUser(res.data.item2);
+                setStops(res.data.item1!.stops);
                 setJourneyPoints(res.data.item1!.journeyPoints);
-                setStops([
-                    getStopByType(res.data.item1, StopType.Start)!,
-                    data?.applicantStops!.filter((stop: Stop) =>
-                        stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    data?.applicantStops!.filter((stop: Stop) =>
-                        stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                    getStopByType(res.data.item1, StopType.Finish)!
-                ]);
             });
 
     }, []);
@@ -69,7 +64,6 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,
-            currentStop: Number(stops?.findIndex((stp) => stp?.address?.name == stop?.address?.name)),
         });
     };
 
@@ -99,7 +93,7 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
                         userId={user?.id!}
                         IsAvailableSeatsVisible={props.route.params.notification.IsAvailableSeatsVisible}
                         IsBaggageVisible={props.route.params.notification.IsBaggageVisible}
-                        IsDepartureTimeVisible={props.route.params.notification.routeIsDepartureTimeVisible}
+                        IsDepartureTimeVisible={props.route.params.notification.IsDepartureTimeVisible}
                         IsDetailsTitleVisible={props.route.params.notification.IsDetailsTitleVisible}
                         IsFeeVisible={props.route.params.notification.IsFeeVisible}
                         journey={journey!}
@@ -113,7 +107,7 @@ const RejectedView = (props: InvitationAcceptedViewProps) => {
                         <StopsBlock
                             stops={stops ? stops : []}
                             onStopPress={onStopPressHandler}
-                            highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                            highlightedStops={[FIRST_ELEMENT_INDEX, stops.length - LAST_INDEX_CORRECTION]}
                         />
                     </View>
 

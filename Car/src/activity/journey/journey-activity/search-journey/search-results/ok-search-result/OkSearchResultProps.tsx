@@ -1,10 +1,10 @@
-import ApplicantJourney from "../../../../../../../models/journey/ApplicantJourney";
+import Journey from "../../../../../../../models/journey/Journey";
 
 interface OkSearchResultProps
 {
     route: {
         params: {
-            journeys: ApplicantJourney[],
+            journeys: Journey[],
             displayFee: boolean,
             passangersCount: number,
             isPast: boolean,

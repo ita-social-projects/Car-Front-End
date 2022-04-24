@@ -80,9 +80,8 @@ const OkSearchResult = (props: OkSearchResultProps) => {
                     keyExtractor={(item, index) => "" + item + index}
                     renderItem={({ item }) => (
                         <JourneyCard
-                            journey={item.journey}
+                            journey={item}
                             displayFee={props.route.params.displayFee}
-                            applicantStops={item.applicantStops}
                             passangersCount={props.route.params.passangersCount}
                             isPast={props.route.params.isPast}
                             isCanceled={props.route.params.isCanceled}

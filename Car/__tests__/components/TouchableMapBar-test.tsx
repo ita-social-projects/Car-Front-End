@@ -65,31 +65,7 @@ test("renders correctly", async () =>
         >
            
         </Text>
-        <ForwardRef
-          disabled={true}
-        >
-          <Icon
-            allowFontScaling={false}
-            color="#AAA9AE"
-            name="location"
-            size={22}
-            style={
-              Array [
-                Object {
-                  "marginRight": 5,
-                },
-                Object {
-                  "borderColor": "#F8F8F8",
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
-            }
-          />
-        </ForwardRef>
+        true
       </ForwardRef>
     </View>
   `));

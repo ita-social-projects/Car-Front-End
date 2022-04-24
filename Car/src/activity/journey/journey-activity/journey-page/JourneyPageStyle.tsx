@@ -6,6 +6,17 @@ const JourneyPageStyle = StyleSheet.create({
         flex: 1
     },
 
+    lineBlock: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        paddingLeft: 6
+    },
+
+    stopBlock: {
+        flexDirection: "row",
+        alignItems: "center"
+    },
+
     pageText: {
         fontFamily: Font.ProximaNova.ExtraBold,
     },
@@ -198,16 +209,24 @@ const JourneyPageStyle = StyleSheet.create({
     },
 
     stopListItem: {
-        flexDirection: "row"
+        flexDirection: "row",
+    },
+
+    addressInfo: {
+        marginLeft: 10,
+        flexShrink: 1
+    },
+
+    usersList: {
+        marginTop: 4,
+        marginLeft: 28
     },
 
     stopListItemRow: {
         flexDirection: "column",
-        alignItems: "center"
     },
 
     stopCustomLineIcon: {
-        height: 12,
         width: 2
     },
 

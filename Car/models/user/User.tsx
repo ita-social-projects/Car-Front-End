@@ -5,7 +5,6 @@ type User = null | {
     position: string;
     location: string;
     email: string;
-    fcmtoken: string | null;
     hireDate: Date;
     imageId: string | null;
     journeyCount: number;

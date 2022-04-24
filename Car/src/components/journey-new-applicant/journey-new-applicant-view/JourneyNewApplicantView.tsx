@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import NotificationProps from "../../notifications/NotificationProps";
 import NotificationButtonGroup from "../../notifications/notification-buttons/NotificationButtonGroup";
@@ -7,9 +7,11 @@ import NotificationDeclineButton from "../../notifications/notification-buttons/
 import RequestComment from "../request-comments/RequestComment";
 import Stop from "../../../../models/stop/Stop";
 import JourneyService from "../../../../api-service/journey-service/JourneyService";
-import { getStopByType, getStopCoordinates } from "../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../models/stop/StopType";
-import { FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX } from "../../../constants/GeneralConstants";
+import {
+    getApplicantStops,
+    getHighlightedStops,
+    getStopCoordinates,
+} from "../../../utils/JourneyHelperFunctions";
 import JourneyPoint from "../../../../models/journey/JourneyPoint";
 import * as navigation from "../../../components/navigation/Navigation";
 import StopsBlock from "../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
@@ -24,6 +26,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { DEFAULT_PASSANGERS_COUNT } from "../../../constants/JourneyConstants";
 import Journey from "../../../../models/journey/Journey";
 import NotificationHeader from "../../notifications/notification-header/NotificationHeader";
+import NotificationType from "../../../../models/notification/NotificationType";
 
 interface JourneyNewApplicantViewProps {
     route: {
@@ -41,13 +44,13 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     const [confirmationModalVisible,setConfirmationModalVisible] = useState(false);
     const [errorModalVisible, setErrorModalVisible] = useState(false);
     const data = JSON.parse(params.notificationData);
-    const [stops, setStops] = useState<Stop[]>([]);
+    const stops: Stop[] = data?.stopsRepresentation ?? [];
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>([]);
     const [journey, setJourney] = useState<Journey>();
     const { user } = useContext(AuthContext);
     const jsonData = JSON.stringify({
         hasLuggage: data?.hasLuggage,
-        applicantStops: data?.applicantStops,
+        stopsRepresentation: data?.stopsRepresentation,
         passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
     });
     const [journeyIsFinished, setJourneyIsFinished] = useState(false);
@@ -57,25 +60,16 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
             setJourney(res.data);
             setJourneyPoints(res.data!.journeyPoints);
             setJourneyIsFinished(new Date(res.data!.departureTime) < new Date());
-            setStops([
-                getStopByType(res.data, StopType.Start)!,
-                data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
-                    stop!.index === FIRST_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                data?.applicantStops!.filter((stop:Stop) => stop!.userId === params.sender?.id &&
-                    stop!.index === SECOND_ELEMENT_INDEX)[FIRST_ELEMENT_INDEX],
-                getStopByType(res.data, StopType.Finish)!
-            ]);
         });
     }, []);
 
     const sendRejection = () => {
-
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
                 journeyId: params.journeyId,
-                type: 12,
+                type: NotificationType.ApplicationRejection,
                 jsonData: jsonData,
             }
         ).then((res)=> {
@@ -87,13 +81,12 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
     };
 
     const sendApprove = () => {
-
         NotificationsService.addNotification(
             {
                 senderId: user?.id!,
                 receiverId:params.sender?.id!,
                 journeyId: params.journeyId,
-                type:2,
+                type: NotificationType.ApplicationApproval,
                 jsonData: jsonData,
             }
         ).then((res)=> {
@@ -107,35 +100,38 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
         });
     };
     const approveUser = () => {
+        const applicantStops = getApplicantStops(stops, params.sender!.id);
+
         JourneyService.addUser(
             {
                 journeyUser: {
                     journeyId: params.journeyId,
-                    userId: params.sender?.id!,
+                    userId: params.sender!.id,
                     withBaggage: data?.hasLuggage,
                     passangersCount: data?.passangersCount ?? DEFAULT_PASSANGERS_COUNT
                 },
-                ApplicantStops: data?.applicantStops
+                applicantStops: applicantStops
             }
-        ).then((res) => {
-            if(res.status === HTTP_STATUS_OK && res.data) {
-                sendApprove();
-            }
-            else{
-                setErrorModalVisible(true);
-            }
-        });
+        )
+            .then((res) => {
+                if(res.status === HTTP_STATUS_OK && res.data) {
+                    sendApprove();
+                }
+                else
+                {
+                    setErrorModalVisible(true);
+                }
+            })
+            .catch(() => setErrorModalVisible(true));
     };
 
     const onStopPressHandler = (stop: Stop) => {
-        if(stop?.type != StopType.Intermediate)
-            return;
         navigation.navigate("Route View", {
             stops: stops,
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,
-            currentStop: Number(stops.findIndex(stp=>stp?.address?.name == stop?.address?.name)),
+            currentStop: Number(stops.findIndex((stp: Stop) => stp?.address?.name == stop?.address?.name)),
             user: props.route.params.notification.sender
         });
     };
@@ -173,7 +169,7 @@ const JourneyNewApplicantView = (props: JourneyNewApplicantViewProps) => {
                     <StopsBlock
                         stops={stops}
                         onStopPress={onStopPressHandler}
-                        highlightedStops={[SECOND_ELEMENT_INDEX, THIRD_ELEMENT_INDEX]}
+                        highlightedStops={getHighlightedStops(stops, params!.sender!.id)}
                     />
 
                     <NotificationButtonGroup>

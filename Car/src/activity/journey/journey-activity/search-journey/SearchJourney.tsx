@@ -48,8 +48,6 @@ import AddressInputButton from "../../../../components/address-input-button/Addr
 import TouchableDateTimePicker, { addMinutesToDate } from "../../../../components/datetime-picker/TouchableDateTimePicker";
 import { useTheme } from "../../../../components/theme/ThemeProvider";
 import appInsights from "../../../../components/telemetry/AppInsights";
-import { getAddressByCoordinatesAsync } from "../../../../utils/LocationHelperFunctions";
-import ApplicantJourney from "../../../../../models/journey/ApplicantJourney";
 import { darkColors } from "../../../../components/theme/ThemesColors";
 import SeatsInputSpinner from "../../../../components/input-spinner/SeatsInputSpinner";
 
@@ -295,13 +293,12 @@ const SearchJourney = (props: SearchJourneyProps) => {
                 fee: fee,
             })
                 .then((res) => {
-                    if (res.data.length > EMPTY_COLLECTION_LENGTH) {
+                    if (res.data.item2.length > EMPTY_COLLECTION_LENGTH) {
                         let displayFee =
                             allButtonStyle === activeButtonStyle;
 
-                        res.data.forEach(setLocationName);
                         navigation.navigate("OK Search Result", {
-                            journeys: res.data,
+                            journeys: res.data!.item2,
                             displayFee: displayFee,
                             passangersCount: avaliableSeats != null ? avaliableSeats
                                 : INITIAL_PASSENGERS_COUNT,
@@ -322,18 +319,6 @@ const SearchJourney = (props: SearchJourneyProps) => {
                     setErrorModalVisible(true);
                 });
         }
-    };
-    const setLocationName = (journey: ApplicantJourney) => {
-        journey.applicantStops.forEach(async (item) => {
-            let addressName = await getAddressByCoordinatesAsync(
-                {
-                    latitude: item?.address?.latitude!,
-                    longitude: item?.address?.longitude!
-                });
-
-            if (item && item.address)
-                item.address.name = addressName;
-        });
     };
 
     const errorModalDisableHandler = () => {

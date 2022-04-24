@@ -3,7 +3,7 @@ import MinimizedNotification from "../../minimized-notification/MinimizedNotific
 import NotificationProps from "../NotificationProps";
 import * as navigation from "../../../components/navigation/Navigation";
 
-interface ApplicationAnswerProps {
+export interface ApplicationAnswerProps {
     notification: NotificationProps,
     notificationTittle: string,
     notificationHeaderTittle?: string,

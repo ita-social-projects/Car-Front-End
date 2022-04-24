@@ -11,8 +11,7 @@ import JourneyService from "../../../../../../api-service/journey-service/Journe
 import axios from "axios";
 import Journey from "../../../../../../models/journey/Journey";
 import JourneyUserDto from "../../../../../../models/journey-user/JourneyUserDto";
-import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../../../models/stop/StopType";
+import { getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
 import * as navigation from "../../../../navigation/Navigation";
 import { useTheme } from "../../../../theme/ThemeProvider";
 import PassengerWithdrawalViewStyle from "./PassengerWithdrawalViewStyle";
@@ -32,7 +31,7 @@ interface PassengerWithdrawalViewProps {
 const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
     const { colors } = useTheme();
     const data = JSON.parse(props.route.params.notification.notificationData);
-    const [stops, setStops] = useState<Stop[]>();
+    const stops: Stop[] = data.stopsRepresentation;
     const [journey, setJourney] = useState<Journey>();
     const [journeyUser, setJourneyUser] = useState<JourneyUserDto>();
     const [journeyPoints, setJourneyPoints] = useState<JourneyPoint[]>();
@@ -45,10 +44,6 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                 setJourney(res.data);
                 setJourneyUser(data.journeyUser);
                 setJourneyPoints(res.data?.journeyPoints);
-                setStops([
-                    getStopByType(res.data, StopType.Start)!,
-                    getStopByType(res.data, StopType.Finish)!
-                ]);
             });
     }, []);
 
@@ -58,7 +53,6 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
             journeyPoints: journeyPoints,
             cameraCoordinates: getStopCoordinates(stop),
             notification: props.route.params.notification,
-            currentStop: Number(stops?.findIndex((stp) => stp?.address?.name == stop?.address?.name)),
         });
     };
 
@@ -93,7 +87,7 @@ const PassengerWithdrawalView = (props: PassengerWithdrawalViewProps) => {
                     </Text>
                     <View>
                         <StopsBlock
-                            stops={stops ? stops : []}
+                            stops={stops ?? []}
                             onStopPress={onStopPressHandler}
                             highlightedStops={[FIRST_ELEMENT_INDEX, SECOND_ELEMENT_INDEX]}
                         />

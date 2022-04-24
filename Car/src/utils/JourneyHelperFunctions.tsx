@@ -1,9 +1,11 @@
 import {
     FIRST_ELEMENT_INDEX,
+    LAST_INDEX_CORRECTION,
+    LOCATION_EPSILON_DIAMETER,
     NUMBER_OF_MINUTES_IN_HOUR,
     SECOND_ELEMENT_INDEX,
-    TEN, ZERO_ID,
-    LOCATION_EPSILON_DIAMETER
+    TEN,
+    ZERO,
 } from "../constants/GeneralConstants";
 import Stop from "../../models/stop/Stop";
 import { ZERO_COORDINATE } from "../constants/StylesConstants";
@@ -17,24 +19,55 @@ import moment from "moment";
 import { capitalize } from "./GeneralHelperFunctions";
 import { View } from "react-native";
 import Request from "../../models/request/Request";
+import { UserStop } from "../../models/user/UserStop";
+import { StopModel } from "../../models/stop/StopModel";
+import { AddressModel } from "../../models/address/AddressModel";
+import { getAddressByCoordinatesAsync } from "./LocationHelperFunctions";
 
-export const mapStopToWayPoint = (stop?: Stop) => {
+export const mapStopToWayPoint = (stop?: Stop, organizerId?: number): WayPoint => {
     return {
         coordinates: {
             latitude: stop?.address?.latitude ?? ZERO_COORDINATE,
             longitude: stop?.address?.longitude ?? ZERO_COORDINATE
         },
         text: stop?.address?.name ?? "",
-        isConfirmed: true
+        isConfirmed: true,
+        stopId: stop?.id || ZERO,
+        changeable: !stop?.userStops?.some(
+            (us: UserStop) =>
+                (us.stopType === StopType.Start || us.stopType === StopType.Finish) && us.userId !== organizerId
+        ) ?? true
     };
 };
 
-export const getStopByType=(journey: Journey, stopType: (StopType.Start|StopType.Intermediate|StopType.Finish)) => {
-    return journey?.stops.filter(stop => stop?.type === stopType)[FIRST_ELEMENT_INDEX];
+export const getJourneyStartStop = (journey: Journey): Stop | undefined => {
+    return journey?.stops?.find((x: Stop) => x!.index === ZERO);
 };
 
-export const getJourneyStops = (journey: Journey) => {
-    return journey?.stops.filter(stop => stop?.type === StopType.Intermediate);
+export const getJourneyFinishStop = (journey: Journey): Stop | undefined => {
+    return journey?.stops?.find((x: Stop) => x!.index === journey!.stops.length - LAST_INDEX_CORRECTION);
+};
+
+export const getIntermediateJourneyStops = (journey: Journey): Array<Stop> | undefined => {
+    return journey?.stops?.filter((x: Stop) =>
+        ZERO < x!.index && x!.index < journey!.stops.length - LAST_INDEX_CORRECTION
+    );
+};
+
+export const getUserStartStop = (stops: Stop[], userId: number): Stop | undefined => {
+    return stops.find((stop: Stop) =>
+        stop?.userStops?.find((us: UserStop) => us.userId == userId)?.stopType === StopType.Start);
+};
+
+export const getUserFinishStop = (stops: Stop[], userId: number): Stop | undefined => {
+    return stops.find((stop: Stop) =>
+        stop?.userStops?.find((us: UserStop) => us.userId == userId)?.stopType === StopType.Finish);
+};
+
+export const getUserIntermediateStops = (stops: Stop[], userId: number): Stop[] => {
+    return stops.filter((stop: Stop) =>
+        getUserStartStop(stops, userId)!.index < stop!.index &&
+        stop!.index < getUserFinishStop(stops, userId)!.index);
 };
 
 export const minutesToTimeString = (totalMinutes: number) => {
@@ -52,28 +85,97 @@ export const timeStringToMinutes = (timeString: string) => {
         + Number(parts[SECOND_ELEMENT_INDEX]);
 };
 
-export const createStopArrayFromWayPoint =
-    (from: WayPoint, to: WayPoint, stops: WayPoint[], userId: number, journeyId: number = ZERO_ID) => {
-        return [{ ...from, stopType: StopType.Start },
-            ...stops.filter(stop => stop.isConfirmed).map(stop => ({ ...stop, stopType: StopType.Intermediate })),
-            { ...to, stopType: StopType.Finish }]
+// eslint-disable-next-line max-len
+export const mapWayPointsIntoStopsForUpdatedJourney = (journey: Journey, from: WayPoint, to: WayPoint, wayPoints: WayPoint[]) : Stop[] => {
+    const updatedStops = new Array<Stop>();
+
+    [from, ...wayPoints, to].forEach((wp: WayPoint, index: number) => {
+        const stop = journey!.stops.find((stop: Stop) => stop!.id === wp.stopId);
+
+        updatedStops.push({
+            id: 0,
+            index,
+            journeyId: journey!.id,
+            userStops: stop ?
+                stop!.userStops?.map((us: UserStop): UserStop => ({ ...us, stopId: ZERO })) :
+                [new UserStop({ userId: journey!.organizer!.id })],
+            isCancelled: false,
+            address: {
+                id: 0,
+                name: wp.text,
+                latitude: wp.coordinates.latitude,
+                longitude: wp.coordinates.longitude
+            }
+        });
+    });
+
+    return updatedStops;
+};
+
+export const setLocationName = (stops: Stop[]) : void => {
+    stops!.forEach((stop) => {
+        if(!stop?.address?.name) {
+            getAddressByCoordinatesAsync(
+                {
+                    latitude: stop?.address?.latitude!,
+                    longitude: stop?.address?.longitude!
+                })
+                .then((res: string) => {
+                    stop!.address!.name = res;
+                    // make a request to add an address
+                });
+        }
+    });
+};
+
+export const getApplicantStops = (stops: Stop[], applicantId: number): Array<StopModel> => {
+    return stops.filter((stop: Stop) =>
+        stop!.userStops!.some((us: UserStop) => us.userId === applicantId)
+    ).map((stop: Stop) =>
+        new StopModel(
+            {
+                address: new AddressModel({
+                    name: stop!.address!.name,
+                    latitude: stop!.address!.latitude,
+                    longitude: stop!.address!.longitude
+                }),
+                stopType: stop!.userStops!.find((us: UserStop) => us.userId === applicantId)!.stopType
+            })
+    );
+};
+
+export const mapWayPointsIntoStopsForNewJourney =
+    (from: WayPoint, to: WayPoint, stops: WayPoint[], organizerId: number) => {
+        return [{ ...from, userStops: [new UserStop({ userId: organizerId, stopType: StopType.Start })] },
+            ...stops.filter(stop => stop.isConfirmed).map(stop => ({
+                ...stop,
+                userStops: [new UserStop({ userId: organizerId })]
+            })),
+            { ...to, userStops: [new UserStop({ userId: organizerId, stopType: StopType.Finish })] }]
             .map((stop, index) => {
                 return {
                     address: {
-                        id: 0,
+                        id: ZERO,
                         latitude: stop.coordinates.latitude,
                         longitude: stop.coordinates.longitude,
                         name: stop.text
                     },
                     index: index,
-                    type: stop.stopType,
-                    id: 0,
-                    journeyId: journeyId,
-                    userId: userId,
+                    id: ZERO,
+                    journeyId: ZERO,
+                    userStops: stop.userStops,
                     isCancelled: false,
                 };
             });
     };
+
+export const getHighlightedStops = (stops: Stop[], userId: number): Array<number> => {
+    return [
+        getUserStartStop(stops, userId)!.index,
+        ...getUserIntermediateStops(stops, userId).map(stop => stop!.index),
+        getUserFinishStop(stops, userId)!.index
+    ];
+};
 
 export const getStopCoordinates = (stop?: Stop) => {
     return {

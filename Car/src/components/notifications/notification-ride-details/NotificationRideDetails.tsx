@@ -55,7 +55,7 @@ const NotificationRideDetails = (props: NotificationRideDetailsProps) => {
                         source={require("../../../../assets/images/notifications/icons/passangers.png")}
                     />
                     <Text style={{ ...style.value, color: colors.primary }}>
-                        {props.journey?.participants.length + " Passanger" ??
+                        {props?.passangersCount + " Passanger" ??
                         DEFAULT_PASSANGERS_COUNT + " Passanger"}
                     </Text>
                 </View>

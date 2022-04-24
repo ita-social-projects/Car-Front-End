@@ -8,13 +8,15 @@ import NotificationRideDetails from "../../../notification-ride-details/Notifica
 import StopsBlock from "../../../../../activity/journey/journey-activity/journey-page/blocks/stops-block/StopsBlock";
 import JourneyService from "../../../../../../api-service/journey-service/JourneyService";
 import Journey from "../../../../../../models/journey/Journey";
-import { getStopByType, getStopCoordinates } from "../../../../../utils/JourneyHelperFunctions";
-import StopType from "../../../../../../models/stop/StopType";
+import {
+    getJourneyFinishStop,
+    getJourneyStartStop,
+    getStopCoordinates
+} from "../../../../../utils/JourneyHelperFunctions";
 import * as navigation from "../../../../../components/navigation/Navigation";
 import NotificationsService from "../../../../../../api-service/notifications-service/NotificationsService";
 import { HTTP_STATUS_OK } from "../../../../../constants/Constants";
 import InvitationType from "../../../../../../models/invitation/InvitationType";
-import { ACCEPTED_INVITATION_TYPE, REJECTED_INVITATION_TYPE } from "../../../../../constants/NotificationConstants";
 import NotificationButtonGroup from "../../../notification-buttons/NotificationButtonGroup";
 import NotificationConfirmButton from "../../../notification-buttons/NotificationConfirmButton";
 import NotificationDeclineButton from "../../../notification-buttons/NotificationDeclineButton";
@@ -24,6 +26,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import PassengerWithdrawalViewStyle from "../withdrawn-view/PassengerWithdrawalViewStyle";
 import { useTheme } from "../../../../theme/ThemeProvider";
 import NotificationHeaderStyle from "../../../notification-header/NotificationHeaderStyle";
+import NotificationType from "../../../../../../models/notification/NotificationType";
+import { FIRST_ELEMENT_INDEX, LAST_INDEX_CORRECTION } from "../../../../../constants/GeneralConstants";
+import { StopModel } from "../../../../../../models/stop/StopModel";
+import stopType from "../../../../../../models/stop/StopType";
+import { AddressModel } from "../../../../../../models/address/AddressModel";
 
 interface InvitationViewProps {
     route: {
@@ -51,8 +58,7 @@ const InvitationView = (props: InvitationViewProps) => {
     const [requestComments] = useState("");
     const jsonData = JSON.stringify({
         comments: requestComments,
-        hasLuggage: withLuggage,
-        applicantStops: stops,
+        hasLuggage: withLuggage
     });
 
     useEffect(() => {
@@ -61,10 +67,7 @@ const InvitationView = (props: InvitationViewProps) => {
             JourneyService.getJourney(params.journeyId).then(res => {
                 setJourney(res.data);
                 setJourneyPoints(res.data!.journeyPoints);
-                setStops([
-                    getStopByType(res.data, StopType.Start)!,
-                    getStopByType(res.data, StopType.Finish)!
-                ]);
+                setStops(res.data!.stops);
             });
         }
     }, [notificationModalVisible]);
@@ -107,7 +110,9 @@ const InvitationView = (props: InvitationViewProps) => {
             }
         ).then((updatingInvitationResult) => {
             if (updatingInvitationResult.status === HTTP_STATUS_OK) {
-                sendInvitationAnswerNotificationToDriver(REJECTED_INVITATION_TYPE, () => setWithdrawModalVisible(true));
+                sendInvitationAnswerNotificationToDriver(
+                    NotificationType.RejectedInvitation,
+                    () => setWithdrawModalVisible(true));
             }
         });
     };
@@ -127,31 +132,35 @@ const InvitationView = (props: InvitationViewProps) => {
     };
 
     const acceptInvitation = () => {
+        const journeyStartStop = getJourneyStartStop(journey!);
+        const journeyFinishStop = getJourneyFinishStop(journey!);
+
         JourneyService.addUser(
             {
                 journeyUser: {
-                    journeyId: params.journeyId,
+                    journeyId: journey!.id,
                     userId: params.receiver!.id,
                     withBaggage: false,
                     passangersCount: 1
                 },
-                ApplicantStops: (journey?.stops.
-                    map((stop, index) => {
-                        return {
-                            address: {
-                                id: 0,
-                                latitude: stop!.address!.latitude,
-                                longitude: stop!.address!.longitude,
-                                name: stop!.address!.name
-                            },
-                            index: index,
-                            type: StopType.Intermediate,
-                            id: 0,
-                            journeyId: params.journeyId,
-                            userId: params.receiver!.id,
-                            isCancelled: false,
-                        };
-                    })) ?? []
+                applicantStops: [
+                    new StopModel({
+                        stopType: stopType.Start,
+                        address: new AddressModel({
+                            name: journeyStartStop?.address?.name,
+                            latitude: journeyStartStop?.address?.latitude,
+                            longitude: journeyStartStop?.address?.longitude
+                        })
+                    }),
+                    new StopModel({
+                        stopType: stopType.Finish,
+                        address: new AddressModel({
+                            name: journeyFinishStop?.address?.name,
+                            latitude: journeyFinishStop?.address?.latitude,
+                            longitude: journeyFinishStop?.address?.longitude
+                        })
+                    }),
+                ]
             }
         ).then(addingUserResult => {
             if (addingUserResult.status == HTTP_STATUS_OK && addingUserResult.data) {
@@ -164,7 +173,7 @@ const InvitationView = (props: InvitationViewProps) => {
                     }
                 ).then((updatingInvitationResult) => {
                     if (updatingInvitationResult.status == HTTP_STATUS_OK) {
-                        sendInvitationAnswerNotificationToDriver(ACCEPTED_INVITATION_TYPE,
+                        sendInvitationAnswerNotificationToDriver(NotificationType.AcceptedInvitation,
                             () => setAcceptModalVisible(true));
                     }
                 });
@@ -210,8 +219,9 @@ const InvitationView = (props: InvitationViewProps) => {
                     />
 
                     <StopsBlock
-                        stops={journey?.stops ?? []}
+                        stops={stops ?? []}
                         onStopPress={onStopPressHandler}
+                        highlightedStops={[FIRST_ELEMENT_INDEX, stops.length - LAST_INDEX_CORRECTION]}
                     />
 
                     <NotificationButtonGroup>
