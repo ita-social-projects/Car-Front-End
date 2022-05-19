@@ -33,7 +33,7 @@ android/build/
 .classpath
 
 # Watchman
-.watchmanconfig
+
 
 # Android
 .idea/
@@ -57,7 +57,7 @@ coverage/
 third-party/
 
 # Root dir shouldn't have Xcode project
-/*.xcodeproj
+
 
 # ReactCommon subdir shouldn't have Xcode project
 /ReactCommon//*.xcodeproj
@@ -65,18 +65,12 @@ third-party/
 /packages/rn-tester/android/app/build/*
 
 # Libs that shouldn't have Xcode project
-/Libraries/FBLazyVector//*.xcodeproj
-/Libraries/RCTRequired//*.xcodeproj
-/React/CoreModules//*.xcodeproj
-/React/FBReactNativeSpec//*.xcodeproj
-/packages/react-native-codegen/**/*.xcodeproj
 
-# CocoaPods
-Pods/
+
+
 
 # Ignore RNTester specific Pods, but keep the offline_mirrors here.
-/packages/rn-tester/Pods/*
-!/packages/rn-tester/Pods/offline_mirrors
+
 
 # react-native-codegen
 /React/FBReactNativeSpec/FBReactNativeSpec
@@ -106,9 +100,7 @@ Pods/
 *.pbxuser
 
 # Xcode
-xcuserdata/
-project.xcworkspace/
-DerivedData/
+
 
 # build products
 build/
